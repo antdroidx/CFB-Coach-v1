@@ -14,7 +14,7 @@ public class Injury {
     private String description; // What the injury is
     private Player player; // Player that has this injury
 
-    private static final String[] injuries = {"Knee", "Head", "Shoulder", "Wrist", "Ankle", "Foot", "Arm", "Back", "Brain"};
+    private static final String[] injuries = {"Knee", "Thigh", "Shoulder", "Wrist", "Ankle", "Foot", "Arm", "Back", "Concussion"};
     private static final Random rando = new Random();
 
     public Injury(int dur, String descrip, Player p) {

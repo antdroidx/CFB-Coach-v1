@@ -81,11 +81,11 @@
                 android:textSize="9sp" />
 
             <Button
-                android:id="@+id/newsButton"
+                android:id="@+id/standingsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="News"
+                android:text="Standings"
                 android:textSize="9sp" />
 
             <Button

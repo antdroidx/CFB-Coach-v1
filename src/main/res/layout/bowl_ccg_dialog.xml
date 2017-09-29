@@ -9,7 +9,7 @@
     android:paddingTop="5dp">
 
     <Spinner
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/spinnerBowlCCG"
         android:layout_gravity="center_horizontal" />

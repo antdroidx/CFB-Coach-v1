@@ -38,6 +38,7 @@ public class TeamRankingsListArrayAdapter extends ArrayAdapter<String> {
         TextView textCenter = (TextView) rowView.findViewById(R.id.textTeamRankingsCenter);
         TextView textRight = (TextView) rowView.findViewById(R.id.textTeamRankingsRight);
 
+
         String[] teamStat = values.get(position).split(",");
         textLeft.setText(teamStat[0]);
         textCenter.setText(teamStat[1]);

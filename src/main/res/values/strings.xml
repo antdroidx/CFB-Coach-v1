@@ -11,7 +11,7 @@
     <string name="action_news_stories">News Stories</string>
     <string name="action_bowlgame_watch">Bowl Games</string>
     <string name="action_ccg_watch">Conf Championships</string>
-    <string name="action_ccg_bowl_watch">CCGs / Bowl Games</string>
+    <string name="action_ccg_bowl_watch">Post-Season</string>
     <string name="action_save_league">Save League</string>
     <string name="action_return_main_menu">Return to Main Menu</string>
     <string name="action_change_team_name">Settings/Change Name</string>

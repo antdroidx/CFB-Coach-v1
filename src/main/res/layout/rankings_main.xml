@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textRankLeft"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.49"
+        android:gravity="left"
+        android:paddingRight="10dp"
+        android:text="Rank"
+        android:textAlignment="textEnd"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textRankCenter"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.79"
+        android:gravity="left"
+        android:text="Team"
+        android:textAlignment="gravity"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textRankRight"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.46"
+        android:gravity="left"
+        android:text="Value"
+        android:textAlignment="textEnd"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</LinearLayout>

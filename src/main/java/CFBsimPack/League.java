@@ -37,9 +37,6 @@ public class League {
     public TeamStreak yearStartLongestWinStreak;
     public TeamStreak longestActiveWinStreak;
 
-    public  ArrayList<String> confStandings = new ArrayList<>();
-
-
     // News Story Variables
     public Team saveBless;
     public Team saveCurse;
@@ -75,7 +72,7 @@ public class League {
     private String allAmericanStr;
 
     public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl",
-            "Liberty Bowl", "Cotton Bowl", "Holiday Bowl", "Citrus Bowl", "Alamo Bowl", "Aloha Bowl", "Indepdence Bowl"};
+            "Liberty Bowl", "Cotton Bowl", "Holiday Bowl", "Citrus Bowl", "Alamo Bowl", "Aloha Bowl", "Independence Bowl", "Vegas Bowl","Cactus Bowl"};
 
     public static final String[] donationNames = {"Mark Eeslee", "Lee Sin", "Brent Uttwipe", "Gabriel Kemble",
             "Jon Stupak", "Kiergan Ren", "Dean Steinkuhler", "Declan Greally", "Parks Wilson", "Darren Ryder"};
@@ -90,7 +87,7 @@ public class League {
         isHardMode = difficulty;
         heismanDecided = false;
         hasScheduledBowls = false;
-        bowlGames = new Game[12];
+        bowlGames = new Game[14];
         leagueHistory = new ArrayList<String[]>();
         heismanHistory = new ArrayList<String>();
         currentWeek = 0;
@@ -286,7 +283,7 @@ public class League {
         hasScheduledBowls = false;
         blessDevelopingStory = false;
         curseDevelopingStory = false;
-        bowlGames = new Game[12];
+        bowlGames = new Game[14];
         // This will reference one line at a time
         String line = null;
         currentWeek = 0;
@@ -1060,13 +1057,21 @@ public class League {
         teamList.get(19).gameSchedule.add(bowlGames[9]);
         teamList.get(23).gameSchedule.add(bowlGames[9]);
 
-        bowlGames[10] = new Game( teamList.get(24), teamList.get(26), bowlNames[10] );
+        bowlGames[10] = new Game( teamList.get(24), teamList.get(28), bowlNames[10] );
         teamList.get(24).gameSchedule.add(bowlGames[10]);
-        teamList.get(26).gameSchedule.add(bowlGames[10]);
+        teamList.get(28).gameSchedule.add(bowlGames[10]);
 
-        bowlGames[11] = new Game( teamList.get(25), teamList.get(27), bowlNames[11] );
+        bowlGames[11] = new Game( teamList.get(25), teamList.get(30), bowlNames[11] );
         teamList.get(25).gameSchedule.add(bowlGames[11]);
-        teamList.get(27).gameSchedule.add(bowlGames[11]);
+        teamList.get(30).gameSchedule.add(bowlGames[11]);
+
+        bowlGames[12] = new Game( teamList.get(26), teamList.get(29), bowlNames[12] );
+        teamList.get(26).gameSchedule.add(bowlGames[12]);
+        teamList.get(29).gameSchedule.add(bowlGames[12]);
+
+        bowlGames[13] = new Game( teamList.get(27), teamList.get(32), bowlNames[13] );
+        teamList.get(27).gameSchedule.add(bowlGames[13]);
+        teamList.get(32).gameSchedule.add(bowlGames[13]);
         hasScheduledBowls = true;
 
     }
@@ -1942,31 +1947,13 @@ public class League {
 
         return rankings;
     }
-//Main Standings Display
-    public ArrayList<String> getConfStandingsMain() {
-        ArrayList<String> confStandings = new ArrayList<>();
-        ArrayList<Team> confTeams = new ArrayList<>();
-        for (Conference c : conferences) {
-            confTeams.addAll(c.confTeams);
-            Collections.sort(confTeams, new TeamCompConfWins());
-            confStandings.add(c.confName+" Conference");
-            Team t;
-            for (int i = 0; i < confTeams.size(); ++i) {
-                t = confTeams.get(i);
-                confStandings.add(t.getRankStrStarUser(i+1) + " | " + t.strRepWithBowlResults() + " " + t.getConfWins()+"-"+t.getConfLosses());
-            }
-            confTeams.clear();
-        }
-        return confStandings;
-    }
-
 
     /**
      * Get conference standings in an list of Strings.
      * Must be CSV form: Rank,Team,Num
      */
     public ArrayList<String> getConfStandings() {
-        //ArrayList<String> confStandings = new ArrayList<>();
+        ArrayList<String> confStandings = new ArrayList<>();
         ArrayList<Team> confTeams = new ArrayList<>();
         for (Conference c : conferences) {
             confTeams.addAll(c.confTeams);
@@ -2076,13 +2063,24 @@ public class League {
 
             sb.append(bowlNames[10]+":\n\t\t");
             t1 = teamList.get(24);
-            t2 = teamList.get(26);
+            t2 = teamList.get(28);
             sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
 
             sb.append(bowlNames[11]+":\n\t\t");
             t1 = teamList.get(25);
-            t2 = teamList.get(27);
+            t2 = teamList.get(30);
             sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+            sb.append(bowlNames[12]+":\n\t\t");
+            t1 = teamList.get(26);
+            t2 = teamList.get(29);
+            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+            sb.append(bowlNames[13]+":\n\t\t");
+            t1 = teamList.get(27);
+            t2 = teamList.get(32);
+            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
             return sb.toString();
 
         } else {
