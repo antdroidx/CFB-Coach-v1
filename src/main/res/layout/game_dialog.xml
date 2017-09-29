@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:id="@+id/scrollerGameDialog"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp">
+                <TextView
+                    android:text="XX"
+                    android:id="@+id/gameDialogScoreAway"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="40sp"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0" />
+                <TextView
+                    android:text="-"
+                    android:id="@+id/gameDialogScoreDash"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="40sp"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+                <TextView
+                    android:text="XX"
+                    android:id="@+id/gameDialogScoreHome"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="40sp"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp">
+                <TextView
+                    android:text="ATL"
+                    android:id="@+id/gameDialogScoreAwayName"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0" />
+                <TextView
+                    android:text="\@"
+                    android:id="@+id/gameDialogScoreDashName"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+                <TextView
+                    android:text="BUF"
+                    android:id="@+id/gameDialogScoreHomeName"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10sp">
+                <TextView
+                    android:text="ha1"
+                    android:id="@+id/gameDialogLeft"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAlignment="gravity"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="90.0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0" />
+                <TextView
+                    android:text="ha3"
+                    android:id="@+id/gameDialogCenter"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAlignment="gravity"
+                    android:gravity="center"
+                    android:layout_width="110.0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:layout_toRightOf="@id/gameDialogLeft"/>
+                <TextView
+                    android:text="ha3"
+                    android:id="@+id/gameDialogRight"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAlignment="gravity"
+                    android:gravity="center"
+                    android:layout_width="110.0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:layout_toRightOf="@id/gameDialogCenter"/>
+            </RelativeLayout>
+            <TextView
+                android:text="ha3"
+                android:id="@+id/gameDialogBottom"
+                android:textAlignment="gravity"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
