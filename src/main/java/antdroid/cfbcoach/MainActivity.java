@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> dataAdapterTeam;
     Spinner examineConfSpinner;
     ArrayAdapter<String> dataAdapterConf;
-    ArrayAdapter<String> dataAdapterStandings;
+    //ArrayAdapter<String> dataAdapterStandings;
     ListView mainList;
     ExpandableListView expListPlayerStats;
 
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
         final Button teamStatsButton = (Button) findViewById(R.id.teamStatsButton);
         final Button playerStatsButton = (Button) findViewById(R.id.playerStatsButton);
         final Button teamScheduleButton = (Button) findViewById(R.id.teamScheduleButton);
-        final Button standingsButton = (Button) findViewById(R.id.newsButton);
+        final Button standingsButton = (Button) findViewById(R.id.standingsButton);
         final Button rankingsButton = (Button) findViewById(R.id.rankingsButton);
 
 
@@ -358,8 +358,8 @@ public class MainActivity extends AppCompatActivity {
         standingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                currTab = 3;
-                updateNews();
+                //currTab = 3;
+                updateStandings();
             }
         });
 
@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
         rankingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                currTab = 4;
+                //currTab = 4;
                 updateRankings();
             }
         });
@@ -620,39 +620,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // WORK IN PROGRESS!!!
-    private void updateNews() {
-        //showTeamRankingsDialog();
-        showNewsStoriesDialog();
-       /*mainList.setVisibility(View.VISIBLE);
+    // Shows Conference Standings
+    private void updateStandings() {
+        mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
 
-        dataAdapterStandings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, teamList);
-        dataAdapterStandings.clear();
-
         ArrayList<String> standings;
-        for (int i = 0; i < 110; i++) {
-            dataAdapterStandings.add(simLeague.getConfStandings().get(i));
-        }
-       mainList.setAdapter(dataAdapterStandings);*/
+        standings = simLeague.getConfStandings();
 
+        final MainRankings teamRankings = new MainRankings(this, standings, userTeam.strRepWithBowlResults());
+        mainList.setAdapter(teamRankings);
     }
 
 
-    // WORK IN PROGRESS!!!
+    // Shows AP Polls
     private void updateRankings() {
-        showTeamRankingsDialog();
 
-        /* mainList.setVisibility(View.VISIBLE);
+        mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
 
-        dataAdapterStandings = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, teamList);
-        dataAdapterStandings.clear();
+        ArrayList<String> standings;
+        standings = simLeague.getTeamRankingsStr(0);
 
-        for (int i = 0; i < 100; i++) {
-            dataAdapterStandings.add(simLeague.getTeamRankingsStr(0).get(i));
-        }
-       mainList.setAdapter(dataAdapterStandings); */
+        final MainRankings teamRankings = new MainRankings(this, standings, userTeam.strRepWithBowlResults());
+        mainList.setAdapter(teamRankings);
     }
 
 
@@ -1033,7 +1024,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showBowlCCGDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("CCGs / Bowl Games")
+        builder.setTitle("Post-Season")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
