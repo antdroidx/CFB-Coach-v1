@@ -319,13 +319,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        final Button homeButton = (Button) findViewById(R.id.buttonHome);
+        final Button newsButton = (Button) findViewById(R.id.buttonNews);
         final Button teamStatsButton = (Button) findViewById(R.id.teamStatsButton);
         final Button playerStatsButton = (Button) findViewById(R.id.playerStatsButton);
         final Button teamScheduleButton = (Button) findViewById(R.id.teamScheduleButton);
         final Button standingsButton = (Button) findViewById(R.id.standingsButton);
         final Button rankingsButton = (Button) findViewById(R.id.rankingsButton);
+        final Button depthchartButton = (Button) findViewById(R.id.buttonDepthChart);
+        final Button strategyButton = (Button) findViewById(R.id.buttonStrategy);
 
+        //News
+        newsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                showNewsStoriesDialog();
+            }
+        });
 
         //Set up "Team Stats" Button
         teamStatsButton.setOnClickListener(new View.OnClickListener() {
@@ -348,7 +358,6 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Schedule" Button
         teamScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
                 currTab = 2;
                 updateSchedule();
             }
@@ -357,8 +366,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Conf Standings" Button
         standingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
-                //currTab = 3;
+                currTab = 3;
                 updateStandings();
             }
         });
@@ -366,12 +374,38 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Polls" Button
         rankingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
-                //currTab = 4;
+                currTab = 4;
                 updateRankings();
             }
         });
 
+        //Set up "home button""
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                currentTeam = userTeam;
+                updateCurrTeam();
+            }
+        });
+
+        //Set up "depthchart"
+        depthchartButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                //currTab = 3;
+                currentTeam = userTeam;
+                showTeamLineupDialog();
+            }
+        });
+
+        //Set up "strategy"
+        strategyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                //currTab = 3;
+                currentTeam = userTeam;
+                showTeamStrategyDialog();
+            }
+        });
 
         if (loadedLeague) {
             // Set rankings so that not everyone is rank #0
