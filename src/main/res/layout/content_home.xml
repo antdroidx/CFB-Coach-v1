@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="achijones.footballcoach.Home"
+    tools:showIn="@layout/activity_home">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="5"
+        android:layout_marginTop="0dp"
+        android:id="@+id/imageLogo"
+        android:adjustViewBounds="true"
+        android:maxWidth="300dp"
+        android:maxHeight="400dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center"
+        android:padding="5dp" />
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center" >
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="New"
+            android:id="@+id/buttonNewGame" />
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="Load"
+            android:id="@+id/buttonLoadGame" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:text="How to Play"
+        android:id="@+id/buttonTutorial"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp">
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="Reddit"
+            android:id="@+id/buttonSubreddit" />
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="Antdroid"
+            android:id="@+id/buttonDonate" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="0dip"
+        android:layout_weight="0.8"
+        android:text="Pro Football Coach"
+        android:id="@+id/buttonProFootballCoach"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_shape_fc"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Copyright Achi Jones, 2016 \n [Modded by Antdroid]"
+        />
+
+
+</LinearLayout>

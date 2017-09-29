@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="achijones.footballcoach.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="15dp"
+        android:minHeight="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5sp"
+            android:paddingStart="5sp"
+            android:paddingEnd="5sp">
+
+            <Spinner
+                android:layout_height="wrap_content"
+                android:id="@+id/examineConfSpinner"
+                android:layout_width="0dip"
+                android:layout_weight="4.70" />
+            <Spinner
+                android:layout_height="wrap_content"
+                android:id="@+id/examineTeamSpinner"
+                android:layout_width="0dip"
+                android:layout_weight="4.80" />
+        </LinearLayout>
+        <TextView
+            android:text="Current Team (W - L) "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAlignment="gravity"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/currentTeamText"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="5sp">
+
+            <Button
+                android:id="@+id/teamStatsButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Stats"
+                android:textSize="9sp" />
+
+            <Button
+                android:id="@+id/playerStatsButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Roster"
+                android:textSize="9sp" />
+
+            <Button
+                android:id="@+id/teamScheduleButton"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Schedule"
+                android:textSize="9sp" />
+
+            <Button
+                android:id="@+id/newsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="News"
+                android:textSize="9sp" />
+
+            <Button
+                android:id="@+id/rankingsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rankings"
+                android:textSize="9sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="0dip"
+            android:layout_weight="6">
+
+            <ListView
+                android:id="@+id/mainList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"></ListView>
+
+            <ExpandableListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/playerStatsExpandList"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical" >
+            <Button
+                android:text="Play Week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/simGameButton"
+                android:background="@drawable/button_shape_fc"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

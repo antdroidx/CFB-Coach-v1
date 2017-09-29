@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="3dp">
+    <TextView
+        android:id="@+id/textTeamRankingsLeft"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="gravity"
+        android:gravity="center"
+        android:layout_width="75.0dp"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="175.0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeCenter"
+        android:gravity="center"
+        android:layout_toRightOf="@id/textTeamRankingsLeft">
+        <TextView
+            android:id="@+id/textTeamRankingsCenter"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAlignment="gravity"
+            android:gravity="left"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/textTeamRankingsRight"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="gravity"
+        android:gravity="center"
+        android:layout_width="75.0dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/relativeCenter"/>
+
+</RelativeLayout>
