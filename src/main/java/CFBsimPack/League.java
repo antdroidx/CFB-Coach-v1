@@ -1996,7 +1996,7 @@ public class League {
     public String[] getTeamListStr() {
         String[] teams = new String[teamList.size()];
         for (int i = 0; i < teamList.size(); ++i){
-            teams[i] = teamList.get(i).name + "  [" + teamList.get(i).conference + "]";
+            teams[i] = teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]";
         }
         return teams;
     }
