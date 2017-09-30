@@ -1294,7 +1294,7 @@ public class Team {
                 teamStrengthOfWins)/10;
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
-            teamPollScore += 50;
+            teamPollScore += 40;
         }
         if ( "NCW".equals(natChampWL) ) {
             //bonus for winning champ game

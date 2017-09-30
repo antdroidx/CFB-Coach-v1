@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> dataAdapterTeam;
     Spinner examineConfSpinner;
     ArrayAdapter<String> dataAdapterConf;
-    //ArrayAdapter<String> dataAdapterStandings;
+    ArrayList<String> scoreboard;
     ListView mainList;
     ExpandableListView expListPlayerStats;
 
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         recruitingStage = -1;
         wantUpdateConf = 2; // 0 and 1, don't update, 2 update
-        showToasts = true;
+        showToasts = false;
         showInjuryReport = true;
 
         if (!loadedLeague) {
@@ -183,11 +183,11 @@ public class MainActivity extends AppCompatActivity {
         }
         dataAdapterTeam = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, teamList);
-        dataAdapterTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            dataAdapterTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         examineTeamSpinner.setAdapter(dataAdapterTeam);
         examineTeamSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(
+                        public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         currentTeam = simLeague.findTeam(parent.getItemAtPosition(position).toString());
                         updateCurrTeam();
@@ -293,17 +293,22 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (simLeague.currentWeek < 12) {
+                            simGameButton.setTextSize(14);
                             simGameButton.setText("Play Week");
                         } else if (simLeague.currentWeek == 12) {
+                            simGameButton.setTextSize(11);
                             simGameButton.setText("Play Conf Championships");
                             examineTeam(currentTeam.name);
                         } else if (simLeague.currentWeek == 13) {
                             heismanCeremony();
+                            simGameButton.setTextSize(12);
                             simGameButton.setText("Play Bowl Games");
                             examineTeam(currentTeam.name);
                         } else if (simLeague.currentWeek == 14) {
+                            simGameButton.setTextSize(10);
                             simGameButton.setText("Play National Championship");
                         } else {
+                            simGameButton.setTextSize(14);
                             simGameButton.setText("Begin Recruiting");
                             simLeague.curePlayers(); // get rid of all injuries
                         }
@@ -1245,9 +1250,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         final EditText changeNameEditText = (EditText) dialog.findViewById(R.id.editTextChangeName);
-        changeNameEditText.setText(userTeam.name);
+        changeNameEditText.setText(currentTeam.name);  //updated from userTeam to currentTeam
         final EditText changeAbbrEditText = (EditText) dialog.findViewById(R.id.editTextChangeAbbr);
-        changeAbbrEditText.setText(userTeam.abbr);
+        changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
 
         final TextView invalidNameText = (TextView) dialog.findViewById(R.id.textViewChangeName);
         final TextView invalidAbbrText = (TextView) dialog.findViewById(R.id.textViewChangeAbbr);
@@ -1346,14 +1351,14 @@ public class MainActivity extends AppCompatActivity {
                 String newAbbr = changeAbbrEditText.getText().toString().trim().toUpperCase();
 
                 if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr)) {
-                    simLeague.changeAbbrHistoryRecords(userTeam.abbr, newAbbr);
-                    userTeam.name = newName;
-                    userTeam.abbr = newAbbr;
-                    getSupportActionBar().setTitle(userTeam.name + " " + season + " Season");
+                    simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
+                    currentTeam.name = newName;
+                    currentTeam.abbr = newAbbr;
+                    getSupportActionBar().setTitle(currentTeam.name + " " + season + " Season");
                     // Have to update rival's rival too!
-                    Team rival = simLeague.findTeamAbbr(userTeam.rivalTeam);
-                    rival.rivalTeam = userTeam.abbr;
-                    examineTeam(userTeam.name);
+                    Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);
+                    rival.rivalTeam = currentTeam.abbr;
+                    examineTeam(currentTeam.name);
                 } else {
                     if (showToasts)
                         Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
@@ -1361,7 +1366,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
-                userTeam.showPopups = showToasts;
+                currentTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
         });

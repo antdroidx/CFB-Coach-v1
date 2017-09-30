@@ -52,6 +52,7 @@ public class League {
 
     //Current week, 1-14
     public int currentWeek;
+    public int randgm;
 
     //Bowl Games
     public boolean hasScheduledBowls;
@@ -59,6 +60,7 @@ public class League {
     public Game semiG23;
     public Game ncg;
     public Game[] bowlGames;
+    public Game weeklyScores;
 
     //User Team
     public Team userTeam;
@@ -74,9 +76,6 @@ public class League {
     public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl",
             "Liberty Bowl", "Cotton Bowl", "Holiday Bowl", "Citrus Bowl", "Alamo Bowl", "Aloha Bowl", "Independence Bowl", "Vegas Bowl","Cactus Bowl"};
 
-    public static final String[] donationNames = {"Mark Eeslee", "Lee Sin", "Brent Uttwipe", "Gabriel Kemble",
-            "Jon Stupak", "Kiergan Ren", "Dean Steinkuhler", "Declan Greally", "Parks Wilson", "Darren Ryder"};
-
     private boolean isHardMode;
 
     /**
@@ -84,6 +83,9 @@ public class League {
      * Also schedules games for every team.
      */
     public League(String namesCSV, String lastNamesCSV, boolean difficulty) {
+        int max = 8;
+        int min = 5;
+        randgm = (int)Math.random()*((max - min)+1) + min;
         isHardMode = difficulty;
         heismanDecided = false;
         hasScheduledBowls = false;
@@ -426,6 +428,9 @@ public class League {
             for (int i = 0; i < conferences.size(); ++i ) {
                 conferences.get(i).setUpSchedule();
             }
+            int max = 8;
+            int min = 5;
+            randgm = (int)(Math.random()*((max - min)+1) + min);
             for (int i = 0; i < conferences.size(); ++i ) {
                 conferences.get(i).setUpOOCSchedule();
             }
@@ -825,6 +830,7 @@ public class League {
         if ( currentWeek <= 12 ) {
             for (int i = 0; i < conferences.size(); ++i) {
                 conferences.get(i).playWeek();
+                //weekScores.add(i, weeklyScores.getResults());
             }
         }
 
@@ -1200,7 +1206,12 @@ public class League {
      */
     public void advanceSeason() {
         currentWeek = 0;
-        //updateTeamHistories();
+        /*int max = 8;
+        int min = 5;
+        randgm = (int)Math.random()*((max - min)+1) + min;*/
+
+        updateTeamHistories();
+
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceSeason();
         }
@@ -1212,13 +1223,11 @@ public class League {
         blessTeam.teamPrestige += 25;
         saveBless = blessTeam;
         if (blessTeam.teamPrestige > 99) blessTeam.teamPrestige = 99;
-//        }
-//        else saveBless = null;
 
         //Curse a good team
         int curseNumber = (int)(Math.random()*7);
         Team curseTeam = teamList.get(3 + curseNumber);
-        if (/*!curseTeam.userControlled && */curseTeam.teamPrestige > 80) {
+        if (curseTeam.teamPrestige > 80) {
             curseTeam.teamPrestige -= 25;
             saveCurse = curseTeam;
         }
@@ -2217,7 +2226,7 @@ public class League {
      * @return true if valid, false if not
      */
     public boolean isAbbrValid(String abbr) {
-        if (abbr.length() > 3 || abbr.length() == 0) {
+        if (abbr.length() > 4 || abbr.length() == 0) {
             // Only 3 letter abbr allowed
             return false;
         }
