@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.lang.StringBuilder;
 
-
 /**
  * Class for conferences, which each have 10 teams.
  * @author Achi
@@ -120,7 +119,6 @@ public class Conference {
     public void setUpOOCSchedule() {
         //schedule OOC games
         int confNum = -1;
-
         if ( "ACC".equals(confName) ) {
             confNum = 0;
         } else if ( "American".equals(confName) ) {
@@ -134,7 +132,7 @@ public class Conference {
         }
 
         if ( confNum != -1 ) {
-            for ( int offsetOOC = 5; offsetOOC < 11; ++offsetOOC ) {
+            for ( int offsetOOC = league.randgm; offsetOOC < 11; ++offsetOOC ) {
                 ArrayList<Team> availTeams = new ArrayList<Team>();
                 int selConf = confNum + offsetOOC;
                 if (selConf == 10) selConf = 5;
@@ -158,15 +156,15 @@ public class Conference {
                         gm = new Game( b, a, b.conference + " v " + a.conference );
                     }
 
-                    if ( offsetOOC == 5 ) {
+                    if ( offsetOOC == league.randgm) {
                         a.gameOOCSchedule0 = gm;
                         b.gameOOCSchedule0 = gm;
                         availTeams.remove(selTeam);
-                    } else if ( offsetOOC == 6 ) {
+                    } else if ( offsetOOC == league.randgm + 1) {
                         a.gameOOCSchedule4 = gm;
                         b.gameOOCSchedule4 = gm;
                         availTeams.remove(selTeam);
-                    } else if ( offsetOOC == 7 ) {
+                    } else if ( offsetOOC == league.randgm + 2) {
                         a.gameOOCSchedule9 = gm;
                         b.gameOOCSchedule9 = gm;
                         availTeams.remove(selTeam);
