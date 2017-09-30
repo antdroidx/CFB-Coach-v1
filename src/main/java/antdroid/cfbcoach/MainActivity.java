@@ -650,6 +650,7 @@ public class MainActivity extends AppCompatActivity {
             games[i] = currentTeam.gameSchedule.get(i);
         }
         mainList.setAdapter(new GameScheduleListArrayAdapter(this, this, currentTeam, games));
+        mainList.setSelection(currentTeam.numGames() - 3);
     }
 
     private void scrollToLatestGame() {
@@ -1063,7 +1064,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showBowlCCGDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Post-Season")
+        builder.setTitle("Post-Season Games")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

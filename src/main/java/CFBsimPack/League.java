@@ -216,8 +216,8 @@ public class League {
         conferences.get(6).confTeams.add( new Team( "Hawaii", "HAW", "Mt West", this, 42, "FRES" ));
         conferences.get(6).confTeams.add( new Team( "San Diego State", "SDSU", "Mt West", this, 75, "BOIS" ));
         conferences.get(6).confTeams.add( new Team( "Utah", "UTAH", "Mt West", this, 72, "BYU" ));
-        conferences.get(6).confTeams.add( new Team( "Utah State", "UTSt", "Mt West", this, 48, "WYOM" ));
-        conferences.get(6).confTeams.add( new Team( "Wyoming", "WYOM", "Mt West", this, 49, "UTSt" ));
+        conferences.get(6).confTeams.add( new Team( "Utah State", "UTST", "Mt West", this, 48, "WYOM" ));
+        conferences.get(6).confTeams.add( new Team( "Wyoming", "WYOM", "Mt West", this, 49, "UTST" ));
 
         //PAC-10 - done
         conferences.get(7).confTeams.add( new Team( "Arizona", "ARIZ", "PAC-10", this, 60, "ASU" ));
@@ -254,6 +254,7 @@ public class League {
         conferences.get(9).confTeams.add( new Team( "South Carolina", "SC", "Sun Belt", this, 61, "ECU" ));
         conferences.get(9).confTeams.add( new Team( "Troy", "TROY", "Sun Belt", this, 40, "SMIS" ));
         conferences.get(9).confTeams.add( new Team( "Vanderbilt", "VAND", "Sun Belt", this, 30, "MTSU" ));
+
 
 
         //set teamList
@@ -1995,10 +1996,17 @@ public class League {
     public String[] getTeamListStr() {
         String[] teams = new String[teamList.size()];
         for (int i = 0; i < teamList.size(); ++i){
-            teams[i] = teamList.get(i).conference + ": " +
-                    teamList.get(i).name + ", Pres: " + teamList.get(i).teamPrestige;
+            teams[i] = teamList.get(i).name + "  [" + teamList.get(i).conference + "]";
         }
         return teams;
+    }
+
+    public int getConfPrestige() {
+        int CPSum = 0;
+        for (int i = 0; i < teamList.size(); ++i) {
+            CPSum = CPSum + teamList.get(i).teamPrestige;
+        }
+        return CPSum;
     }
 
     /**

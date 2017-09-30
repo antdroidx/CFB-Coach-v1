@@ -91,12 +91,13 @@
         android:textColor="#ffffff"/>
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Copyright Achi Jones, 2016 \n [Modded by Antdroid]"
-        />
+        android:text="(c) Achi Jones, 2016 \n (c) Anthony Nguyen [v1.5]"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
 </LinearLayout>
