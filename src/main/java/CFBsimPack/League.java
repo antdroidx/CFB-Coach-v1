@@ -1206,10 +1206,6 @@ public class League {
      */
     public void advanceSeason() {
         currentWeek = 0;
-        /*int max = 8;
-        int min = 5;
-        randgm = (int)Math.random()*((max - min)+1) + min;*/
-
         updateTeamHistories();
 
         for (int t = 0; t < teamList.size(); ++t) {
@@ -1219,16 +1215,15 @@ public class League {
         // Bless a random team with lots of prestige
         int blessNumber = (int)(Math.random()*9);
         Team blessTeam = teamList.get(50 + blessNumber);
-//        if (!blessTeam.userControlled && !blessTeam.name.equals("American Samoa")) {
-        blessTeam.teamPrestige += 25;
+        blessTeam.teamPrestige += 20;
         saveBless = blessTeam;
-        if (blessTeam.teamPrestige > 99) blessTeam.teamPrestige = 99;
+        if (blessTeam.teamPrestige > 99) {blessTeam.teamPrestige = 99;}
 
         //Curse a good team
         int curseNumber = (int)(Math.random()*7);
         Team curseTeam = teamList.get(3 + curseNumber);
         if (curseTeam.teamPrestige > 80) {
-            curseTeam.teamPrestige -= 25;
+            curseTeam.teamPrestige -= 20;
             saveCurse = curseTeam;
         }
         else saveCurse = null;
