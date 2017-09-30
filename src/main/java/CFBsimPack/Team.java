@@ -374,8 +374,8 @@ public class Team {
 
         if (teamPrestige > 99) teamPrestige = 99;
         if (teamPrestige < 15) teamPrestige = 15;
-
-/*        if (league.findTeamAbbr(rivalTeam).userControlled && league.isHardMode()) {
+/*
+        if (league.findTeamAbbr(rivalTeam).userControlled && league.isHardMode()) {
             // My rival is the user team, lock my prestige if it is Hard Mode
             Team rival = league.findTeamAbbr(rivalTeam);
             if (teamPrestige < rival.teamPrestige - 10) {

@@ -29,6 +29,17 @@ public class Conference {
     public String allConfStr;
     public ArrayList<Player> allConfPlayers;
 
+
+    //Conference Prestige Calculation (WIP)
+/*    public calcConfPrestige (int) {
+        int sum = 0;
+        for (int i = 0; i < confTeams.size(); ++i) {
+            sum = sum + Team.teamPrestige;
+        }
+        sum = sum / confTeams.size();
+        return sum;
+    } */
+
     /**
      * Sets up Conference with empty list of teams.
      * @param name
