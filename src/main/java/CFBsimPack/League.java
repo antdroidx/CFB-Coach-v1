@@ -101,7 +101,7 @@ public class League {
         conferences.add( new Conference("Conf USA", this) );
         conferences.add( new Conference("MAC", this) );
         conferences.add( new Conference("Mt West", this) );
-        conferences.add( new Conference("PAC-10", this) );
+        conferences.add( new Conference("Pac-10", this) );
         conferences.add( new Conference("SEC", this) );
         conferences.add( new Conference("Sun Belt", this) );
         allAmericans = new ArrayList<Player>();
@@ -219,17 +219,17 @@ public class League {
         conferences.get(6).confTeams.add( new Team( "Utah State", "UTST", "Mt West", this, 48, "WYOM" ));
         conferences.get(6).confTeams.add( new Team( "Wyoming", "WYOM", "Mt West", this, 49, "UTST" ));
 
-        //PAC-10 - done
-        conferences.get(7).confTeams.add( new Team( "Arizona", "ARIZ", "PAC-10", this, 60, "ASU" ));
-        conferences.get(7).confTeams.add( new Team( "Arizona State", "ASU", "PAC-10", this, 65, "ARIZ" ));
-        conferences.get(7).confTeams.add( new Team( "California", "CAL", "PAC-10", this, 60, "STAN" ));
-        conferences.get(7).confTeams.add( new Team( "Oregon", "OREG", "PAC-10", this, 72, "ORST" ));
-        conferences.get(7).confTeams.add( new Team( "Oregon State", "ORST", "PAC-10", this, 40, "OREG" ));
-        conferences.get(7).confTeams.add( new Team( "Stanford", "STAN", "PAC-10", this, 76, "CAL" ));
-        conferences.get(7).confTeams.add( new Team( "UCLA", "UCLA", "PAC-10", this, 71, "USC" ));
-        conferences.get(7).confTeams.add( new Team( "USC", "USC", "PAC-10", this, 87, "UCLA" ));
-        conferences.get(7).confTeams.add( new Team( "Washington", "WASH", "PAC-10", this, 84, "WSU" ));
-        conferences.get(7).confTeams.add( new Team( "Wash State", "WSU", "PAC-10", this, 74, "WASH" ));
+        //Pac-10 - done
+        conferences.get(7).confTeams.add( new Team( "Arizona", "ARIZ", "Pac-10", this, 60, "ASU" ));
+        conferences.get(7).confTeams.add( new Team( "Arizona State", "ASU", "Pac-10", this, 65, "ARIZ" ));
+        conferences.get(7).confTeams.add( new Team( "California", "CAL", "Pac-10", this, 60, "STAN" ));
+        conferences.get(7).confTeams.add( new Team( "Oregon", "OREG", "Pac-10", this, 72, "ORST" ));
+        conferences.get(7).confTeams.add( new Team( "Oregon State", "ORST", "Pac-10", this, 40, "OREG" ));
+        conferences.get(7).confTeams.add( new Team( "Stanford", "STAN", "Pac-10", this, 76, "CAL" ));
+        conferences.get(7).confTeams.add( new Team( "UCLA", "UCLA", "Pac-10", this, 71, "USC" ));
+        conferences.get(7).confTeams.add( new Team( "USC", "USC", "Pac-10", this, 87, "UCLA" ));
+        conferences.get(7).confTeams.add( new Team( "Washington", "WASH", "Pac-10", this, 84, "WSU" ));
+        conferences.get(7).confTeams.add( new Team( "Wash State", "WSU", "Pac-10", this, 74, "WASH" ));
 
         //SEC - done
         conferences.get(8).confTeams.add( new Team( "Alabama", "BAMA", "SEC", this, 95, "AUB" ));
@@ -324,12 +324,12 @@ public class League {
 
             conferences.add( new Conference("ACC", this) );
             conferences.add( new Conference("American", this) );
-            conferences.add( new Conference("Conf USA", this) );
             conferences.add( new Conference("Big Ten", this) );
             conferences.add( new Conference("Big 12", this) );
+            conferences.add( new Conference("Conf USA", this) );
             conferences.add( new Conference("MAC", this) );
             conferences.add( new Conference("Mt West", this) );
-            conferences.add( new Conference("PAC-10", this) );
+            conferences.add( new Conference("Pac-10", this) );
             conferences.add( new Conference("SEC", this) );
             conferences.add( new Conference("SunBelt", this) );
             allAmericans = new ArrayList<Player>();
@@ -543,7 +543,7 @@ public class League {
                                     networkName = "Big 12 Championship Channel";
                                     break;
                                 case 7:
-                                    networkName = "PAC-10 Network";
+                                    networkName = "Pac-10 Network";
                                     break;
                                 case 1:
                                     networkName = "American Sports";
@@ -818,7 +818,7 @@ public class League {
         if (conf.equals("Conf USA")) return 4;
         if (conf.equals("MAC")) return 5;
         if (conf.equals("Mt West")) return 6;
-        if (conf.equals("PAC-10")) return 7;
+        if (conf.equals("Pac-10")) return 7;
         if (conf.equals("SEC")) return 8;
         if (conf.equals("Sun Belt")) return 9;
         return 0;
@@ -1022,8 +1022,7 @@ public class League {
         teamList.get(2).gameSchedule.add(semiG23);
 
         //other bowl games
-        //bowlNames = {"Lilac Bowl", "Apple Bowl", "Salty Bowl", "Salsa Bowl", "Mango Bowl",
-        //             "Patriot Bowl", "Salad Bowl", "Frost Bowl", "Tropical Bowl", "Music Bowl"};
+
         bowlGames[0] = new Game( teamList.get(4), teamList.get(6), bowlNames[0] );
         teamList.get(4).gameSchedule.add(bowlGames[0]);
         teamList.get(6).gameSchedule.add(bowlGames[0]);
@@ -1216,15 +1215,15 @@ public class League {
         // Bless a random team with lots of prestige
         int blessNumber = (int)(Math.random()*9);
         Team blessTeam = teamList.get(50 + blessNumber);
-        blessTeam.teamPrestige += 20;
+        blessTeam.teamPrestige += 15;
         saveBless = blessTeam;
         if (blessTeam.teamPrestige > 99) {blessTeam.teamPrestige = 99;}
 
         //Curse a good team
         int curseNumber = (int)(Math.random()*7);
         Team curseTeam = teamList.get(3 + curseNumber);
-        if (curseTeam.teamPrestige > 80) {
-            curseTeam.teamPrestige -= 20;
+        if (curseTeam.teamPrestige > 75) {
+            curseTeam.teamPrestige -= 25;
             saveCurse = curseTeam;
         }
         else saveCurse = null;
