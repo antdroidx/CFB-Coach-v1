@@ -358,9 +358,9 @@ public class Team {
         if (this != league.saveBless && this != league.saveCurse) {
             // Don't add/subtract prestige if they are a blessed/cursed team from last season
             if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige < 20)) {
-                teamPrestige += 3;
+                teamPrestige += 2;
             } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20)) {
-                teamPrestige -= 3;
+                teamPrestige -= 2;
             }
         }
 
@@ -369,17 +369,17 @@ public class Team {
         oldPrestige = teamPrestige;
 
         if ((teamPrestige > 55) && diffExpected > 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1500);// + diffExpected/2500);
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1500); //teams that do well gain more prestige
         }
         if ((teamPrestige > 55) && diffExpected < 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000);// + diffExpected/2500);
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //average+ teams that perform poor lose prestige
         }
 
         if ((teamPrestige <= 55) && diffExpected > 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750);// + diffExpected/2500);
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //poor teams that do well gain some prestige
         }
         if ((teamPrestige <= 55) && diffExpected < 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000);// + diffExpected/2500);
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2500); //poor teams that do well lose a little more prestige
         }
 
         if (rankTeamPollScore == 1) {
