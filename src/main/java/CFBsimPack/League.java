@@ -446,6 +446,8 @@ public class League {
             }
             newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
                     "on your mind, or just a winning season, good luck!");
+            //newsStories.get(0).add("Blessed Team: " + saveBless.name + "/nCursed Team: " + saveCurse.name);
+
 
             // Set up offseason news to be randomly added to Week 0, set up names to be used if random names are needed, and make first and last names available for later in the story
 
@@ -464,7 +466,7 @@ public class League {
 
                         case 1:
                             //Rich Sports Apparel CEO alum giving flashy uniforms to the school
-                            newsStories.get(0).add("Fashion Speaks Louder Than Words>Renowned sports apparel mogul and " + saveBless.name + " alumnus " + storyFullName + " has declared war on boring uniforms. " + storyLastName + " has pledged his company's services to \"ensure that the university's football team never wears the same uniform twice.\" Recruits are already abuzz on social media declaring their newly found interest in playing for the school.");
+                            newsStories.get(0).add("New uniforms kick off a new era!>Renowned sports apparel mogul and " + saveBless.name + " alumnus " + storyFullName + " has declared war on boring uniforms. " + storyLastName + " has pledged his company's services to \"ensure that the university's football team never wears the same uniform twice.\" Recruits are already abuzz on social media declaring their newly found interest in playing for the school.");
                             break;
 
                         case 2:
@@ -494,7 +496,7 @@ public class League {
                             }
 
                             playerLastName = storyPlayer.replaceAll(".* ", ""); // For referencing last name all news like
-                            newsStories.get(0).add("The Hit That Keeps On Giving>For the 50th consecutive day, " + saveBless.name + " star " + storyPlayer + "'s explosive hit against " + saveBless.rivalTeam + " sits atop the CFB News Top Plays list. " + playerLastName + " credits Coach " + getRandName() + " with providing him the inspiration to stay in the weight room late and think clearly during plays. During its reign, \"The Hit\" has dethroned and outlasted the " + teamList.get((int) (Math.random() * 60)).name + " Baseball Team's \"Puppies in the Park\" viral video, and " + teamList.get((int) (Math.random() * 60)).name + "'s Make-A-Wish TD on the Top Plays list.");
+                            newsStories.get(0).add("The Hit That Keeps On Giving>For the 50th consecutive day, " + saveBless.name + " star " + storyPlayer + "'s explosive hit against " + saveBless.rivalTeam + " sits atop the CFB News Top Plays list.");
                             break;
 
                         case 3:
@@ -678,7 +680,7 @@ public class League {
                 String storyPlayer;
 
                 for (int i = 0; i < 1; i++){
-                    switch((int)(Math.random() * 7)) { //Change the number Math.random is multiplied by to the number of cases (so last case # + 1)
+                    switch((int)(Math.random() * 6)) { //Change the number Math.random is multiplied by to the number of cases (so last case # + 1)
                         case 0:
                             //Team broke the rules, placed on probation and it's harder to recruit (-prestige)
                             newsStories.get(0).add(saveCurse.name + " Rocked by Infractions Scandal!>After an investigation during the offseason, " + saveCurse.name + " has been placed on probation and assigned on-campus vistation limits for recruits. Athletic Director " + storyFullName + " released a statment vowing that the institution would work to repair the damage done to its prestige.");
@@ -690,36 +692,6 @@ public class League {
                             break;
 
                         case 2:
-                            //Get the first offensive position player that isn't a Freshman and is good enough to be a decent starter and use their name to describe them pulling a reverse catfish...literally
-                            //If no suitable players, decrement i and break so that the loop can try again to find a good story
-                            String playerGFSchool;
-                            if (saveCurse.getQB(0).year >= 2 && saveCurse.getQB(0).ratOvr > 85)
-                                storyPlayer = saveCurse.getQB(0).name;
-                            else if (saveCurse.getRB(0).year >= 2 && saveCurse.getRB(0).ratOvr > 79)
-                                storyPlayer = saveCurse.getRB(0).name;
-                            else if (saveCurse.getWR(0).year >= 2 && saveCurse.getWR(0).ratOvr > 79)
-                                storyPlayer = saveCurse.getWR(0).name;
-                            else if (saveCurse.getRB(1).year >= 2 && saveCurse.getRB(1).ratOvr > 79)
-                                storyPlayer = saveCurse.getRB(1).name;
-                            else if (saveCurse.getWR(1).year >= 2 && saveCurse.getWR(1).ratOvr > 79)
-                                storyPlayer = saveCurse.getWR(1).name;
-                            else if (saveCurse.getWR(2).year >= 2 && saveCurse.getWR(2).ratOvr > 79)
-                                storyPlayer = saveCurse.getWR(2).name;
-                            else {
-                                i--;
-                                break;
-                            }
-
-                            //If the cursed team is Indiana, the gf's school was American Samoa and vice versa, otherwise gf school is random (and potentially the same as cursed school)
-                            if (saveCurse.abbr.equals("KAN")) playerGFSchool = "Indiana";
-                            else if (saveCurse.abbr.equals("IND")) playerGFSchool = "Kansas";
-                            else playerGFSchool = teamList.get((int) (Math.random() * 60)).name;
-                            String storyPlayerLast = storyPlayer.replaceAll(".* ", "");
-
-                            newsStories.get(0).add(saveCurse.name + " Star Demonstrates The Rare \"Reverse Catfish\">After winning the nation's heart by finishing out the " + (getYear() - 1) + " season despite losing his girlfriend to a freak fishing accident, " + saveCurse.name + " star " + storyPlayer + " now faces intense scrutiny from national media for allegedly making the whole thing up. " + storyPlayerLast + " originally claimed his girlfriend was a student at " + playerGFSchool + ", until internet message board users discovered a private blog run by the player that revealed the truth; the girlfriend was fake, and her name was actually the name of his pet catfish. The university's athletics department officially declined to comment, citing an ongoing internal investigation.");
-                            break;
-
-                        case 3:
                             //Hazing rituals by upperclassmen reported by underclassmen and scared off recruits -- Curse Developing #1
 
                             //Figure out if the recruit scared off was a RS (if the cursed team is rivals with the user team) or a FR
@@ -746,12 +718,12 @@ public class League {
                             curseDevelopingCase = 1; // First developing curse story
                             break;
 
-                        case 4:
+                        case 3:
                             //Coach angers boosters -- Inspired a little bit by Sark, a little bit by "I'M A MAN, I'M 40", and also a little bit by how much Chip hated the political game
                             newsStories.get(0).add("Coach Tries, Fails, to Shield Team from Booster Politics>" + saveCurse.name + " Head Coach " + storyFullName + " is making headlines this week for launching into an expletive filled tirade directed at athletics boosters at a private \"Boosters Only\" event. " + storyLastName + " was set off when a particular booster asked for star quarterback " + saveCurse.getQB(0).name + "'s phone number and began chastising the audience for \"caring too much about a bunch of kids playing football.\" Athletic Director " + getRandName() + " released a statement stating \"The Athletics Department appreciates the support of all fans of all " + saveCurse.name + " sports, and we will be working with " + storyFirstName + " to help him understand that.\"");
                             break;
 
-                        case 5:
+                        case 4:
                             //Huge team fight that coaches were slow to dispel and now is bleeding over into the season -- Curse Developing #2
 
                             String saveCurseGameOneOpp = null;
@@ -771,7 +743,7 @@ public class League {
 
                             break;
 
-                        case 6:
+                        case 5:
                             //Academic Scandal -- Uni was falsifying grades (you-can't-do-that clap, clap, clapclapclap)
                             newsStories.get(0).add(saveCurse.name + "'s Reputation Shaken by Fake Grading Scandal>" + saveCurse.name + " has announced the suspension of several university administrators pending an internal investigation into the falsification of grades for student athletes that were on the border of academic eligibility. Third party investigators uncovered the grading scheme after being asked to look into why several graduating players could not read the instructions provided with their Wonderlic Tests. Recruits from as far out as the class of " + (getYear() + 2) + " have rescinded verbal commitments, citing their desire to explore their options further. Currently, no academic or athletic sactions have been announced for the school.");
                             break;

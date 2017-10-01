@@ -9,10 +9,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Team class.
- * @author Achi
+/* TEAM class
+
  */
+
 public class Team {
 
     public League league;
@@ -168,7 +168,7 @@ public class Team {
         natChampWL = "";
 
         teamPrestige = prestige;
-        recruitPlayers(2,4,6,2,10,2,6,14);
+        recruitPlayers(2, 4, 6, 2, 10, 2, 6, 14);
 
         //set stats
         totalWins = 0;
@@ -202,11 +202,14 @@ public class Team {
 
         teamStratOff = new TeamStrategy();
         teamStratDef = new TeamStrategy();
-        teamStratOffNum = 1; // 1 is the default strats
-        teamStratDefNum = 1;
+        //Sets CPU Strategy!
+        teamStratOffNum = getCPUOffense();
+        teamStratDefNum = getCPUDefense();
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
     }
+
+
 
     /**
      * Constructor for team that is being loaded from file.
@@ -331,6 +334,8 @@ public class Team {
         wonRivalryGame = false;
         teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
         teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
+
+
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
     }
@@ -357,20 +362,31 @@ public class Team {
             } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20)) {
                 teamPrestige -= 3;
             }
+        }
 
-            int expectedPollFinish = 100 - teamPrestige;
-            int diffExpected = expectedPollFinish - rankTeamPollScore;
-            oldPrestige = teamPrestige;
+        int expectedPollFinish = 100 - teamPrestige;
+        int diffExpected = expectedPollFinish - rankTeamPollScore;
+        oldPrestige = teamPrestige;
 
-            if ((teamPrestige > 45) || diffExpected > 0) {
-                teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1500);// + diffExpected/2500);
-            }
+        if ((teamPrestige > 50) && diffExpected > 0) {
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1500);// + diffExpected/2500);
+        }
+        if ((teamPrestige > 50) && diffExpected < 0) {
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000);// + diffExpected/2500);
+        }
 
-            if (rankTeamPollScore == 1) {
+        if ((teamPrestige < 50) && diffExpected > 0) {
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750);// + diffExpected/2500);
+        }
+        if ((teamPrestige < 50) && diffExpected < 0) {
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000);// + diffExpected/2500);
+        }
+
+        if (rankTeamPollScore == 1) {
                 // NCW
                 teamPrestige += 3;
-            }
         }
+
 
         if (teamPrestige > 99) teamPrestige = 99;
         if (teamPrestige < 10) teamPrestige = 10;
@@ -397,6 +413,12 @@ public class Team {
         if (league.userTeam == this) checkCareerRecords(league.userTeamRecords);
 
         advanceSeasonPlayers();
+
+        //Sets CPU Strategy!
+        if(!userControlled){
+            teamStratOffNum = getCPUOffense();
+            teamStratDefNum = getCPUDefense();
+        }
 
     }
 
@@ -494,7 +516,7 @@ public class Team {
 
             // Juniors more likely to leave in Hard mode and if you won NCG
             double hardBonus = 0;
-            if (userControlled && league.isHardMode()) hardBonus = 0.2;
+            if (userControlled && league.isHardMode()) hardBonus = 0.15;
             if (natChampWL.equals("NCW")) {
                 hardBonus += 0.2;
             }
@@ -2479,6 +2501,30 @@ public class Team {
         return ts;
     }
 
+    // Generate CPU Strategy
+    public int getCPUOffense() {
+        int OP, OR, OS = 0;
+        OP = getPassProf();
+        OR = getRushProf();
+        if(OP > (OR + 2)) {
+            OS = 0;
+        } else if(OR > (OP + 2)) {
+            OS = 2;
+        } else OS = 1;
+        return OS;
+    }
+
+    public int getCPUDefense() {
+        int DP, DR, DS = 0;
+        DP = getPassProf();
+        DR = getRushProf();
+        if(DR > (DP + 2)) {
+            DS = 0;
+        } else if(DP > (DR + 2)) {
+            DS = 2;
+        } else DS = 1;
+        return DS;
+    }
     /**
      * Generate all the defense team strategies that can be selected
      * @return array of all the defense team strats
@@ -2492,12 +2538,13 @@ public class Team {
         ts[1] = new TeamStrategy("No Preference",
                 "Will play a normal defense with no bonus either way, but no penalties either.", 0, 0, 0, 0);
 
-        ts[2] = new TeamStrategy("No Fly Zone",
+        ts[2] = new TeamStrategy("Nickel Zone",
                 "Focus on stopping the pass. Will give up less yards on catches and will be more likely to intercept passes, " +
                         "but will allow more rushing yards.", -1, 0, 1, 1);
 
         return ts;
     }
+
 
     /**
      * Set the starters for a particular position.
