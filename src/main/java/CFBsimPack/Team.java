@@ -373,7 +373,7 @@ public class Team {
         }
 
         if (teamPrestige > 99) teamPrestige = 99;
-        if (teamPrestige < 15) teamPrestige = 15;
+        if (teamPrestige < 10) teamPrestige = 10;
 /*
         if (league.findTeamAbbr(rivalTeam).userControlled && league.isHardMode()) {
             // My rival is the user team, lock my prestige if it is Hard Mode
@@ -1286,12 +1286,12 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 8 - (wins + losses);
+        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*200 + 3*(teamPoints-teamOppPoints) +
                 (teamYards-teamOppYards)/40 +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/10;
+                teamStrengthOfWins)/8; // change 10 to 7 on SOW
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
             teamPollScore += 40;
