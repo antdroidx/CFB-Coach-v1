@@ -368,17 +368,17 @@ public class Team {
         int diffExpected = expectedPollFinish - rankTeamPollScore;
         oldPrestige = teamPrestige;
 
-        if ((teamPrestige > 50) && diffExpected > 0) {
+        if ((teamPrestige > 55) && diffExpected > 0) {
             teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1500);// + diffExpected/2500);
         }
-        if ((teamPrestige > 50) && diffExpected < 0) {
+        if ((teamPrestige > 55) && diffExpected < 0) {
             teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000);// + diffExpected/2500);
         }
 
-        if ((teamPrestige < 50) && diffExpected > 0) {
+        if ((teamPrestige <= 55) && diffExpected > 0) {
             teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750);// + diffExpected/2500);
         }
-        if ((teamPrestige < 50) && diffExpected < 0) {
+        if ((teamPrestige <= 55) && diffExpected < 0) {
             teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000);// + diffExpected/2500);
         }
 
