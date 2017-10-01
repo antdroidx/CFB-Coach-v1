@@ -331,7 +331,7 @@ public class League {
             conferences.add( new Conference("Mt West", this) );
             conferences.add( new Conference("Pac-10", this) );
             conferences.add( new Conference("SEC", this) );
-            conferences.add( new Conference("SunBelt", this) );
+            conferences.add( new Conference("Sun Belt", this) );
             allAmericans = new ArrayList<Player>();
             String[] splits;
             for(int i = 0; i < 100; ++i) { //Do for every team (60)
