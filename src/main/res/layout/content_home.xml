@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="achijones.footballcoach.Home"
+    tools:context="antdroid.cfbcoach.Home"
     tools:showIn="@layout/activity_home">
 
     <ImageView
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="(c) Achi Jones, 2016 \n (c) Anthony Nguyen [v1.5]"
+        android:text="(c) Achi Jones, 2016 \n (c) Anthony Nguyen [v1.5a]"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
