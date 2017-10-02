@@ -26,12 +26,13 @@ android {
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
     defaultConfig {
-        applicationId 'antdroid.cfbcoach'
+        applicationId "antdroid.cfbcoach"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 23
         versionCode 30
         versionName '2.0'
         testApplicationId '2.0'
+        versionNameSuffix 'BETA'
     }
     buildTypes {
         release {
@@ -40,6 +41,13 @@ android {
         }
     }
     productFlavors {
+        Antdroid {
+            minSdkVersion 23
+            applicationId 'antdroid.cfbcoach'
+            targetSdkVersion 25
+            versionCode 30
+            versionName '2.00'
+        }
     }
 }
 
