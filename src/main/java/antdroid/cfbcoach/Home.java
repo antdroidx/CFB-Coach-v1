@@ -44,7 +44,7 @@ public class Home extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                 builder.setMessage("What difficulty would you like?\n\n" +
                         "Easy Mode has no injuries, normal rivalry mechanics, and a 50% chance your good players will leave early for the NFL.\n\n" +
-                        "Hard Mode has injuries enabled, harder rivalry games, and a 70% chance your good players will leave early for the NFL.\n\n" +
+                        "Hard Mode has injuries enabled, harder rivalry games, and a greater chance your good players will leave early for the NFL.\n\n" +
                         "This cannot be changed later.")
                         .setTitle("Choose Difficulty:")
                         .setPositiveButton("EASY", new DialogInterface.OnClickListener() {
@@ -101,8 +101,9 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button donateButton = (Button) findViewById(R.id.buttonDonate);
-        donateButton.setOnClickListener(new View.OnClickListener() {
+
+        Button antdroidButton = (Button) findViewById(R.id.buttonAntdroid);
+        antdroidButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
@@ -123,6 +124,16 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button CollegeHoopsCoachButton = (Button) findViewById(R.id.buttonCollegeHoopsCoach);
+        CollegeHoopsCoachButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=io.coachapps.collegebasketballcoach")));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=io.coachapps.collegebasketballcoach")));
+                }
+            }
+        });
 
     }
 

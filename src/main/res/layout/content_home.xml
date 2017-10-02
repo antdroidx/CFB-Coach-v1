@@ -50,45 +50,64 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/buttonTutorial"
         android:layout_width="250dp"
         android:layout_height="0dip"
-        android:layout_weight="1"
-        android:text="How to Play"
-        android:id="@+id/buttonTutorial"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:text="How to Play" />
 
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="0dip"
-        android:layout_weight="1"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp">
-        <Button
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:text="Reddit"
-            android:id="@+id/buttonSubreddit" />
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1">
 
         <Button
+            android:id="@+id/buttonSubreddit"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="Antdroid"
-            android:id="@+id/buttonDonate" />
+            android:text="Reddit" />
+
+        <Button
+            android:id="@+id/buttonAntdroid"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="Antdroid" />
+
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="250dp"
         android:layout_height="0dip"
-        android:layout_weight="0.8"
-        android:text="Pro Football Coach"
-        android:id="@+id/buttonProFootballCoach"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/button_shape_fc"
-        android:textColor="#ffffff"/>
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonProFootballCoach"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="?attr/colorControlActivated"
+            android:text="Pro Football Coach"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/buttonCollegeHoopsCoach"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_orange_light"
+            android:text="College Hoops Coach" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"

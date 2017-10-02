@@ -91,6 +91,7 @@ public class Team {
     public int diffPrestige;
     public int diffOffTalent;
     public int diffDefTalent;
+    //public int confPrestige;
 
     //players on team
     //offense
@@ -261,8 +262,11 @@ public class Team {
         teamOffTalent = 0;
         teamDefTalent = 0;
         teamPollScore = 0;
-        teamStratOffNum = 1; // 1 is the default strats
-        teamStratDefNum = 1;
+
+        teamStratOffNum = getCPUOffense();
+        teamStratDefNum = getCPUDefense();
+        //teamStratOffNum = 1; // 1 is the default strats
+        //teamStratDefNum = 1;
         teamTVDeal = false;
         confTVDeal = false;
 
@@ -334,7 +338,6 @@ public class Team {
         wonRivalryGame = false;
         teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
         teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
-
 
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
@@ -1308,12 +1311,12 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 8 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*200 + 3*(teamPoints-teamOppPoints) +
                 (teamYards-teamOppYards)/40 +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/8; // change 10 to 7 on SOW
+                teamStrengthOfWins)/7 + (teamPrestige/2); // change 10 to 7 on SOW
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
             teamPollScore += 40;
