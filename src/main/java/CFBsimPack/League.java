@@ -138,7 +138,7 @@ public class League {
         //ACC - done
         conferences.get(0).confTeams.add( new Team( "Clemson", "CLEM", "ACC", this, 90, "WAKE" ));
         conferences.get(0).confTeams.add( new Team( "Duke", "DUKE", "ACC", this, 60, "UNC" ));
-        conferences.get(0).confTeams.add( new Team( "Florida St", "FSU", "ACC", this, 73, "MIA" ));
+        conferences.get(0).confTeams.add( new Team( "Florida St", "FSU", "ACC", this, 72, "MIA" ));
         conferences.get(0).confTeams.add( new Team( "Louisville", "LOUI", "ACC", this, 75, "NCST" ));
         conferences.get(0).confTeams.add( new Team( "Miami", "MIA", "ACC", this, 73, "FSU" ));
         conferences.get(0).confTeams.add( new Team( "North Carolina", "UNC", "ACC", this, 47, "DUKE" ));
@@ -154,7 +154,7 @@ public class League {
         conferences.get(1).confTeams.add( new Team( "Memphis", "MEMP", "American", this, 67, "CINN" ));
         conferences.get(1).confTeams.add( new Team( "Notre Dame", "ND", "American", this, 74, "WVU" ));
         conferences.get(1).confTeams.add( new Team( "Rutgers", "RUT", "American", this, 40, "SYR" ));
-        conferences.get(1).confTeams.add( new Team( "South Florida", "USF", "American", this, 70, "UCF" ));
+        conferences.get(1).confTeams.add( new Team( "South Florida", "USF", "American", this, 69, "UCF" ));
         conferences.get(1).confTeams.add( new Team( "Syracuse", "SYR", "American", this, 47, "RUT" ));
         conferences.get(1).confTeams.add( new Team( "Temple", "TEM", "American", this, 46, "BC" ));
         conferences.get(1).confTeams.add( new Team( "West Virginia", "WVU", "American", this, 72, "ND" ));
@@ -214,7 +214,7 @@ public class League {
         conferences.get(6).confTeams.add( new Team( "Colorado St", "CSU", "Mt West", this, 47, "COL" ));
         conferences.get(6).confTeams.add( new Team( "Fresno St", "FRES", "Mt West", this, 40, "HAW" ));
         conferences.get(6).confTeams.add( new Team( "Hawaii", "HAW", "Mt West", this, 42, "FRES" ));
-        conferences.get(6).confTeams.add( new Team( "San Diego State", "SDSU", "Mt West", this, 74, "BOIS" ));
+        conferences.get(6).confTeams.add( new Team( "San Diego State", "SDSU", "Mt West", this, 73, "BOIS" ));
         conferences.get(6).confTeams.add( new Team( "Utah", "UTAH", "Mt West", this, 71, "BYU" ));
         conferences.get(6).confTeams.add( new Team( "Utah State", "UTST", "Mt West", this, 43, "WYOM" ));
         conferences.get(6).confTeams.add( new Team( "Wyoming", "WYOM", "Mt West", this, 49, "UTST" ));
