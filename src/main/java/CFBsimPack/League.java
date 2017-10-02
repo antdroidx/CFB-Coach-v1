@@ -499,14 +499,14 @@ public class League {
             newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "");
 
             if (saveCurse != null) {
-                newsStories.get(0).add("Major NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " was found violating several recruiting policies over the past couple years. The team prestige has dropped 25 points.");
+                newsStories.get(0).add("Major NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " was found violating several recruiting and academic policies over the past couple years. The team prestige has dropped 25 points.");
             }
 
             if (saveCurse2 != null) {
-                newsStories.get(0).add("Minor NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was found violating recruiting policies over the past off-season. The team prestige has dropped 10 points.");
+                newsStories.get(0).add("Minor NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was found violating recruiting policies over the past off-season. The team prestige has dropped 12 points.");
             }
             if (saveCurse3 != null) {
-                newsStories.get(0).add("Minor NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found violating recruiting policies over the past off-season. The team prestige has dropped 5 points.");
+                newsStories.get(0).add("Incidental NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found a violating recruiting policy over the past off-season. The team prestige has dropped 5 points.");
             }
 
             // Set up offseason news to be randomly added to Week 0, set up names to be used if random names are needed, and make first and last names available for later in the story
@@ -1239,7 +1239,7 @@ public class League {
         int blessNumber = (int)(Math.random()*25);
         Team blessTeam = teamList.get(35 + blessNumber);
         int coach = (int)(Math.random()*15);
-        blessTeam.teamPrestige += coach + 5;
+        blessTeam.teamPrestige += coach + 4;
         saveBless = blessTeam;
         if (blessTeam.teamPrestige > 99) {blessTeam.teamPrestige = 99;}
 
@@ -1247,7 +1247,7 @@ public class League {
         blessNumber = (int)(Math.random()*21);
         Team blessTeam2 = teamList.get(59 + blessNumber);
         coach = (int)(Math.random()*15);
-        blessTeam2.teamPrestige += coach + 3;
+        blessTeam2.teamPrestige += coach + 4;
         saveBless2 = blessTeam2;
         if (blessTeam2.teamPrestige > 99) {blessTeam2.teamPrestige = 99;}
 
@@ -1256,14 +1256,14 @@ public class League {
         if (blessNumber > 20) blessNumber = 20;
         Team blessTeam3 = teamList.get(79 + blessNumber);
         coach = (int)(Math.random()*15);
-        blessTeam3.teamPrestige += coach + 3;
+        blessTeam3.teamPrestige += coach + 4;
         saveBless3 = blessTeam3;
         if (blessTeam3.teamPrestige > 99) {blessTeam3.teamPrestige = 99;}
 
         //Major Infraction to a good team
         int x = (int)(Math.random()*11);
         if (x > 7 ){
-            int curseNumber = (int)(Math.random()*25);
+            int curseNumber = (int)(Math.random()*20);
             Team curseTeam = teamList.get(curseNumber);
             if (curseTeam.teamPrestige > 75) {
                 curseTeam.teamPrestige -= 25;
@@ -1273,17 +1273,17 @@ public class League {
 
         //Minor infraction to an avg team
         x = (int)(Math.random()*10);
-        if (x > 7 ) {
-            int curseNumber = (int) (Math.random()*40);
+        if (x > 6 ) {
+            int curseNumber = (int) (Math.random()*35);
             Team curseTeam2 = teamList.get(curseNumber);
-                curseTeam2.teamPrestige -= 10;
+                curseTeam2.teamPrestige -= 12;
                 saveCurse2 = curseTeam2;
         } else saveCurse2 = null;
 
         //Discipline a team
         x = (int)(Math.random()*10);
         if (x > 5 ) {
-            int curseNumber = (int) (Math.random()*55);
+            int curseNumber = (int) (Math.random()*50);
             Team curseTeam3 = teamList.get(curseNumber);
             curseTeam3.teamPrestige -= 5;
             saveCurse3 = curseTeam3;
