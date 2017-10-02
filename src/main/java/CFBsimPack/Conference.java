@@ -161,12 +161,12 @@ public class Conference {
                         b.gameOOCSchedule0 = gm;
                         availTeams.remove(selTeam);
                     } else if ( offsetOOC == league.randgm + 1) {
-                        a.gameOOCSchedule4 = gm;
-                        b.gameOOCSchedule4 = gm;
+                        a.gameOOCSchedule1 = gm;
+                        b.gameOOCSchedule1 = gm;
                         availTeams.remove(selTeam);
                     } else if ( offsetOOC == league.randgm + 2) {
-                        a.gameOOCSchedule9 = gm;
-                        b.gameOOCSchedule9 = gm;
+                        a.gameOOCSchedule2 = gm;
+                        b.gameOOCSchedule2 = gm;
                         availTeams.remove(selTeam);
                     }
                 }
@@ -180,8 +180,8 @@ public class Conference {
     public void insertOOCSchedule() {
         for (int i = 0; i < confTeams.size(); ++i) {
             confTeams.get(i).gameSchedule.add(0, confTeams.get(i).gameOOCSchedule0);
-            confTeams.get(i).gameSchedule.add(1, confTeams.get(i).gameOOCSchedule4);
-            confTeams.get(i).gameSchedule.add(2, confTeams.get(i).gameOOCSchedule9);
+            confTeams.get(i).gameSchedule.add(1, confTeams.get(i).gameOOCSchedule1);
+            confTeams.get(i).gameSchedule.add(2, confTeams.get(i).gameOOCSchedule2);
         }
     }
 
