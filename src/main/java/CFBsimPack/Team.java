@@ -47,8 +47,8 @@ public class Team {
     //Game Log variables
     public ArrayList<Game> gameSchedule;
     public Game gameOOCSchedule0;
-    public Game gameOOCSchedule4;
-    public Game gameOOCSchedule9;
+    public Game gameOOCSchedule1;
+    public Game gameOOCSchedule2;
     public ArrayList<String> gameWLSchedule;
     public ArrayList<Team> gameWinsAgainst;
     public String confChampion;
@@ -160,8 +160,8 @@ public class Team {
 
         gameSchedule = new ArrayList<Game>();
         gameOOCSchedule0 = null;
-        gameOOCSchedule4 = null;
-        gameOOCSchedule9 = null;
+        gameOOCSchedule1 = null;
+        gameOOCSchedule2 = null;
         gameWinsAgainst = new ArrayList<Team>();
         gameWLSchedule = new ArrayList<String>();
         confChampion = "";
@@ -240,8 +240,8 @@ public class Team {
 
         gameSchedule = new ArrayList<Game>();
         gameOOCSchedule0 = null;
-        gameOOCSchedule4 = null;
-        gameOOCSchedule9 = null;
+        gameOOCSchedule1 = null;
+        gameOOCSchedule2 = null;
         gameWinsAgainst = new ArrayList<Team>();
         gameWLSchedule = new ArrayList<String>();
         confChampion = "";
@@ -1279,8 +1279,8 @@ public class Team {
         //reset stats
         gameSchedule = new ArrayList<Game>();
         gameOOCSchedule0 = null;
-        gameOOCSchedule4 = null;
-        gameOOCSchedule9 = null;
+        gameOOCSchedule1 = null;
+        gameOOCSchedule2 = null;
         gameWinsAgainst = new ArrayList<Team>();
         gameWLSchedule = new ArrayList<String>();
         confChampion = "";
