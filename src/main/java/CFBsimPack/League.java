@@ -930,7 +930,7 @@ public class League {
             }
         }
 
-        if (curseDevelopingStory){
+/*        if (curseDevelopingStory){
             switch (curseDevelopingCase){ //Which story was triggered?
                 case 1: //Lack of punishment for hazing underclassmen
                     Player srCurseTeam;
@@ -1018,7 +1018,7 @@ public class League {
             }
 
 
-        }
+        } */
 
         currentWeek++;
     }
@@ -1244,8 +1244,8 @@ public class League {
         if (blessTeam.teamPrestige > 99) {blessTeam.teamPrestige = 99;}
 
         // Hire Coach for medicore team
-        blessNumber = (int)(Math.random()*20);
-        Team blessTeam2 = teamList.get(69 + blessNumber);
+        blessNumber = (int)(Math.random()*21);
+        Team blessTeam2 = teamList.get(59 + blessNumber);
         coach = (int)(Math.random()*15);
         blessTeam2.teamPrestige += coach + 3;
         saveBless2 = blessTeam2;
