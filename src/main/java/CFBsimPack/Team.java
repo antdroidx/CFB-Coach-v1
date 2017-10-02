@@ -91,6 +91,7 @@ public class Team {
     public int diffPrestige;
     public int diffOffTalent;
     public int diffDefTalent;
+    public int newPrestige;
     //public int confPrestige;
 
     //players on team
@@ -352,59 +353,8 @@ public class Team {
      * Advance season, hiring new coach if needed and calculating new prestige level.
      */
     public void advanceSeason() {
-        // subtract for rivalry first
-        int oldPrestige = teamPrestige;
-        if (this != league.saveBless && this != league.saveCurse) {
-            // Don't add/subtract prestige if they are a blessed/cursed team from last season
-            if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige < 20)) {
-                teamPrestige += 2;
-            } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20)) {
-                teamPrestige -= 2;
-            }
-        }
 
-        int expectedPollFinish = 100 - teamPrestige;
-        int diffExpected = expectedPollFinish - rankTeamPollScore;
-        oldPrestige = teamPrestige;
-
-        if ((teamPrestige > 55) && diffExpected > 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //teams that do well gain more prestige
-        }
-        if ((teamPrestige > 55) && diffExpected < 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //average+ teams that perform poor lose prestige
-        }
-
-        if ((teamPrestige <= 55) && diffExpected > 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
-        }
-        if ((teamPrestige <= 55) && diffExpected < 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2500); //poor teams that do well lose a little more prestige
-        }
-
-        if (rankTeamPollScore == 1) {
-                // NCW
-                teamPrestige += 3;
-        }
-
-
-        if (teamPrestige > 99) teamPrestige = 99;
-        if (teamPrestige < 10) teamPrestige = 10;
-/*
-        if (league.findTeamAbbr(rivalTeam).userControlled && league.isHardMode()) {
-            // My rival is the user team, lock my prestige if it is Hard Mode
-            Team rival = league.findTeamAbbr(rivalTeam);
-            if (teamPrestige < rival.teamPrestige - 10) {
-                teamPrestige = rival.teamPrestige - 10;
-            }
-        } else if (userControlled && league.isHardMode()) {
-            // I am the user team, lock my rivals prestige
-            Team rival = league.findTeamAbbr(rivalTeam);
-            if (rival.teamPrestige < teamPrestige - 10) {
-                rival.teamPrestige = teamPrestige - 10;
-            }
-        } */
-
-        diffPrestige = teamPrestige - oldPrestige;
+        teamPrestige = calcSeasonPrestige();
 
         if (userControlled) checkHallofFame();
 
@@ -420,6 +370,42 @@ public class Team {
         }
 
     }
+
+    //Calculates Prestige Change at end of season
+    public int calcSeasonPrestige() {
+        int expectedPollFinish = 100 - teamPrestige;
+        int diffExpected = expectedPollFinish - rankTeamPollScore;
+        //int oldPrestige = teamPrestige;
+        int newPrestige = teamPrestige;
+
+        if (this != league.saveBless && this != league.saveCurse) {
+            // Don't add/subtract prestige if they are a blessed/cursed team from last season
+            if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige < 20)) {
+                newPrestige = teamPrestige + 2;
+            } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20)) {
+                newPrestige = teamPrestige - 2;
+            }
+        }
+        if ((teamPrestige > 55) && diffExpected > 0) {
+            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //teams that do well gain more prestige
+        }
+        if ((teamPrestige > 55) && diffExpected < 0) {
+            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //average+ teams that perform poor lose prestige
+        }
+
+        if ((teamPrestige <= 55) && diffExpected > 0) {
+            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
+        }
+        if ((teamPrestige <= 55) && diffExpected < 0) {
+            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well lose a little more prestige
+        }
+
+        if (teamPrestige > 99) teamPrestige = 99;
+        if (teamPrestige < 10) teamPrestige = 10;
+
+        return newPrestige;
+    }
+
 
     /**
      * Checks all the players leaving to see if they should be inducted to the hall of fame.
@@ -1864,36 +1850,35 @@ public class Team {
      * @return String of season summary
      */
     public String seasonSummaryStr() {
+        int newPrestige = calcSeasonPrestige();
+
         String summary = "Your team, " + name + ", finished the season ranked #" + rankTeamPollScore + " with " + wins + " wins and " + losses + " losses.";
-        int expectedPollFinish = 100 - teamPrestige;
-        int diffExpected = expectedPollFinish - rankTeamPollScore;
-        int oldPrestige = teamPrestige;
-        int newPrestige = oldPrestige;
-        if ( teamPrestige > 45 || diffExpected > 0 ) {
-            newPrestige = (int)Math.pow(teamPrestige, 1 + (float)diffExpected/1500);// + diffExpected/2500);
-        }
 
         if ( natChampWL.equals("NCW") ) {
             summary += "\n\nYou won the National Championship! Recruits want to play for winners and you have proved that you are one. You gain +3 prestige!";
         }
 
-        if ((newPrestige - oldPrestige) > 0) {
-            summary += "\n\nGreat job coach! You exceeded expectations and gained " + (newPrestige - oldPrestige) + " prestige! This will help your recruiting.";
-        } else if ((newPrestige - oldPrestige) < 0) {
-            summary += "\n\nA bit of a down year, coach? You fell short expectations and lost " + (oldPrestige - newPrestige) + " prestige. This will hurt your recruiting.";
-        } else {
-            summary += "\n\nWell, your team performed exactly how many expected. This won't hurt or help recruiting, but try to improve next year!";
-        }
-
         if ( wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige < 20) ) {
             summary += "\n\nFuture recruits were impressed that you won your rivalry game. You gained 2 prestige.";
-        } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20 || name.equals("American Samoa"))) {
+        } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20)) {
             summary += "\n\nSince you couldn't win your rivalry game, recruits aren't excited to attend your school. You lost 2 prestige.";
         } else if ( wonRivalryGame ) {
             summary += "\n\nGood job winning your rivalry game, but it was expected given the state of their program. You gain no prestige for this.";
         } else {
             summary += "\n\nYou lost your rivalry game, but this was expected given your rebuilding program. You lost no prestige for this.";
         }
+
+        if ((newPrestige - teamPrestige) > 0) {
+            summary += "\n\nGreat job coach! You exceeded expectations and gained " + (newPrestige - teamPrestige) + " prestige! This will help your recruiting.";
+        } else if ((newPrestige - teamPrestige) < 0) {
+            summary += "\n\nA bit of a down year, coach? You fell short expectations and lost " + (teamPrestige - newPrestige) + " prestige. This will hurt your recruiting.";
+        } else {
+            summary += "\n\nWell, your team performed exactly how many expected. This won't hurt or help recruiting, but try to improve next year!";
+        }
+
+
+
+        summary += "\n\nSeason Prestige: " + teamPrestige + " New Prestige: " + newPrestige;
 
         return summary;
     }

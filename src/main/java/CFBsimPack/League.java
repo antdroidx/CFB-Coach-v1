@@ -39,7 +39,11 @@ public class League {
 
     // News Story Variables
     public Team saveBless;
+    public Team saveBless2;
+    public Team saveBless3;
     public Team saveCurse;
+    public Team saveCurse2;
+    public Team saveCurse3;
     public boolean blessDevelopingStory;
     public int blessDevelopingWeek;
     public int blessDevelopingCase;
@@ -149,15 +153,15 @@ public class League {
 
         //American - done
         conferences.get(1).confTeams.add( new Team( "Boston College", "BC", "American", this, 35, "TEM" ));
-        conferences.get(1).confTeams.add( new Team( "Central Florida", "UCF", "American", this, 61, "USF" ));
+        conferences.get(1).confTeams.add( new Team( "Central Florida", "UCF", "American", this, 60, "USF" ));
         conferences.get(1).confTeams.add( new Team( "Cinncinati", "CINN", "American", this, 46, "MEMP" ));
         conferences.get(1).confTeams.add( new Team( "Memphis", "MEMP", "American", this, 67, "CINN" ));
-        conferences.get(1).confTeams.add( new Team( "Notre Dame", "ND", "American", this, 74, "WVU" ));
+        conferences.get(1).confTeams.add( new Team( "Notre Dame", "ND", "American", this, 73, "WVU" ));
         conferences.get(1).confTeams.add( new Team( "Rutgers", "RUT", "American", this, 40, "SYR" ));
-        conferences.get(1).confTeams.add( new Team( "South Florida", "USF", "American", this, 69, "UCF" ));
+        conferences.get(1).confTeams.add( new Team( "South Florida", "USF", "American", this, 67, "UCF" ));
         conferences.get(1).confTeams.add( new Team( "Syracuse", "SYR", "American", this, 47, "RUT" ));
         conferences.get(1).confTeams.add( new Team( "Temple", "TEM", "American", this, 46, "BC" ));
-        conferences.get(1).confTeams.add( new Team( "West Virginia", "WVU", "American", this, 72, "ND" ));
+        conferences.get(1).confTeams.add( new Team( "West Virginia", "WVU", "American", this, 71, "ND" ));
 
         //Big Ten - done
         conferences.get(2).confTeams.add( new Team( "Iowa", "IOW", "Big Ten", this, 63, "NEB" ));
@@ -369,6 +373,29 @@ public class League {
             } else {saveBless = null;
             }
 
+            StringBuilder sbBless2 = new StringBuilder();
+            while((line = bufferedReader.readLine()) != null && !line.equals("END_BLESS2_TEAM")) {
+                sbBless2.append(line);
+            }
+            if (!sbBless2.toString().equals("NULL")) {
+                saveBless2 = findTeamAbbr(sbBless2.toString());
+                saveBless2.sortPlayers();
+                findTeamAbbr(saveBless2.rivalTeam).sortPlayers();
+            } else {saveBless2 = null;
+            }
+
+            StringBuilder sbBless3 = new StringBuilder();
+            while((line = bufferedReader.readLine()) != null && !line.equals("END_BLESS3_TEAM")) {
+                sbBless3.append(line);
+            }
+            if (!sbBless.toString().equals("NULL")) {
+                saveBless3 = findTeamAbbr(sbBless3.toString());
+                saveBless3.sortPlayers();
+                findTeamAbbr(saveBless3.rivalTeam).sortPlayers();
+            } else {saveBless3 = null;
+            }
+
+
             StringBuilder sbCurse = new StringBuilder();
             while((line = bufferedReader.readLine()) != null && !line.equals("END_CURSE_TEAM")) {
                 sbCurse.append(line);
@@ -378,6 +405,26 @@ public class League {
                 saveCurse.sortPlayers();
                 findTeamAbbr(saveCurse.rivalTeam).sortPlayers();
             } else {saveCurse = null;}
+
+            StringBuilder sbCurse2 = new StringBuilder();
+            while((line = bufferedReader.readLine()) != null && !line.equals("END_CURSE2_TEAM")) {
+                sbCurse2.append(line);
+            }
+            if (!sbCurse2.toString().equals("NULL")) {
+                saveCurse2 = findTeamAbbr(sbCurse2.toString());
+                saveCurse2.sortPlayers();
+                findTeamAbbr(saveCurse2.rivalTeam).sortPlayers();
+            } else {saveCurse2 = null;}
+
+            StringBuilder sbCurse3 = new StringBuilder();
+            while((line = bufferedReader.readLine()) != null && !line.equals("END_CURSE3_TEAM")) {
+                sbCurse3.append(line);
+            }
+            if (!sbCurse3.toString().equals("NULL")) {
+                saveCurse3 = findTeamAbbr(sbCurse3.toString());
+                saveCurse3.sortPlayers();
+                findTeamAbbr(saveCurse3.rivalTeam).sortPlayers();
+            } else {saveCurse3 = null;}
 
             String[] record;
             while((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
@@ -446,27 +493,40 @@ public class League {
             }
             newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
                     "on your mind, or just a winning season, good luck!");
-            //newsStories.get(0).add("Blessed Team: " + saveBless.name + "/nCursed Team: " + saveCurse.name);
 
+            //newsStories.get(0).add("test test> testing testing 1, 2 3");
+
+            newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "");
+
+            if (saveCurse != null) {
+                newsStories.get(0).add("Major NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " was found violating several recruiting policies over the past couple years. The team prestige has dropped 25 points.");
+            }
+
+            if (saveCurse2 != null) {
+                newsStories.get(0).add("Minor NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was found violating recruiting policies over the past off-season. The team prestige has dropped 10 points.");
+            }
+            if (saveCurse3 != null) {
+                newsStories.get(0).add("Minor NCAA Infraction:>NCAA investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found violating recruiting policies over the past off-season. The team prestige has dropped 5 points.");
+            }
 
             // Set up offseason news to be randomly added to Week 0, set up names to be used if random names are needed, and make first and last names available for later in the story
 
-            if (saveBless != null){
+/*            if (saveBless != null){
                 storyFullName = getRandName();
                 storyFirstName = storyFullName.replaceAll(" .*", "");
                 storyLastName = storyFullName.replaceAll(".* ", "");
                 String storyPlayer;
 
                 for(int i = 0; i < 1; i++){
-                    switch((int)(Math.random() * 8)) { //Change the number Math.random is multiplied by to the number of cases (so last case # + 1)
+                    switch((int)(Math.random() * 6)) { //Change the number Math.random is multiplied by to the number of cases (so last case # + 1)
                         case 0:
                             //Hired a shiny new coach who used to play for the school (feed those Vol fans wishing for Peyton something to dream on)
-                            newsStories.get(0).add("Blue Chip hire for Bad Break University>" + saveBless.name + " announced the hire of alumnus and former professional coach " + getRandName() + ", today. It was long rumored that the highly touted coach considered the position a \"dream job\", but talks between the two didn't heat up until this offseason. The hire certainly helps boost the prestige of the University's football program, which has fallen on hard times as of late.");
+                            newsStories.get(0).add("New Head Coach at " + saveBless.name + ">" + saveBless.name + " announced the hire of " + getRandName() + ", today. It was long rumored that the highly touted coach considered the position a \"dream job\", but talks between the two didn't heat up until this offseason. The hire certainly helps boost the prestige of the University's football program as it enters a new era of football.");
                             break;
 
                         case 1:
                             //Rich Sports Apparel CEO alum giving flashy uniforms to the school
-                            newsStories.get(0).add("New uniforms kick off a new era!>Renowned sports apparel mogul and " + saveBless.name + " alumnus " + storyFullName + " has declared war on boring uniforms. " + storyLastName + " has pledged his company's services to \"ensure that the university's football team never wears the same uniform twice.\" Recruits are already abuzz on social media declaring their newly found interest in playing for the school.");
+                            newsStories.get(0).add("New uniforms kick off a new era at " + saveBless.name +">Renowned sports apparel mogul and " + saveBless.name + " alumnus " + storyFullName + " has declared war on boring uniforms. " + storyLastName + " has pledged his company's services to \"ensure that the university's football team never wears the same uniform twice.\" Recruits are already abuzz on social media declaring their newly found interest in playing for the school.");
                             break;
 
                         case 2:
@@ -496,7 +556,7 @@ public class League {
                             }
 
                             playerLastName = storyPlayer.replaceAll(".* ", ""); // For referencing last name all news like
-                            newsStories.get(0).add("The Hit That Keeps On Giving>For the 50th consecutive day, " + saveBless.name + " star " + storyPlayer + "'s explosive hit against " + saveBless.rivalTeam + " sits atop the CFB News Top Plays list.");
+                            newsStories.get(0).add(saveBless.name + ": The Hit That Keeps On Giving>For the 50th consecutive day, " + saveBless.name + " star " + storyPlayer + "'s explosive hit against " + saveBless.rivalTeam + " sits atop the CFB News Top Plays list.");
                             break;
 
                         case 3:
@@ -509,23 +569,11 @@ public class League {
                             break;
 
                         case 4:
-                            //Inspired by that time Kliff did the stanky leg in a circle of Tech players)
-                            newsStories.get(0).add("Just Call Him Coach Dougie>When a cell phone recording of Coach " + storyFullName + " out dancing his players at the end of a Spring practice was uploaded to the internet, " + storyLastName + " thought nothing of it. When it hit one million views over night, Coach took notice. In response to wild popularity his moves have received, " + storyLastName + " has made it a new tradition at " + saveBless.name + " to have a dance off with all prospective recruits, much to the delight of fans and students, who have turned out in large numbers to watch the competitions.");
+                            //Increase academic standards have yielded an overall stronger group of recruits for saveBless.name
+                            newsStories.get(0).add("Success in the " + saveBless.name + " Spilling Onto the Field>" + saveBless.name + " find themselves in an unusual, but agreeable, position. The university, which has been slowly increasing admissions standards and taking strives to improve it's academic offerings, has begun to find itself counted among the Top 100 schools nationwide. As a result, the football Program program is finding itself with a new breed of recruit: smarter, more driven, and more capable of learning complex schemes. " + saveBless.name + " also finds itself with increased overall attention, as its name is beginning to have association with some of the most academically rigorous institutions in the country. As the school's mission to improve its academic standing continues, it stands to reason that it will enjoy an increased level of prestige.");
                             break;
-
 
                         case 5:
-                            //Originally pitched as a story about the team partying hard, and getting positive recruiting as a result, before homecoming despite losing the game, I couldn't think of a good way to turn that into a preseason story directly. As a result this one is inspired by that.
-                            //And if the sarcasm/humor in this story isn't obvious, I've done something wrong
-                            newsStories.get(0).add("Breaking News: College Athletes Love Partying>A stunning development out of " + saveBless.name + " today, as it's being reported that college athletes, and athletic recruits for that matter, love to \"party and just have a good time.\" This surprising development grew out of reports on social media that " + saveBless.name + " fall practices were drawing large crowds. These stories eventually led to more reports that full fledged parties, complete with beer and music, were taking place after each practice. Recruits have been abuzz on social media declaring their intent to check out these parties and their desire to play for a school that \"knows how to have a good time.\" Coaching staffs around the country are scratching their collective heads in bewilderment while " + saveBless.name + " enjoys their sudden and unexpected recruiting boon.");
-                            break;
-
-                        case 6:
-                            //Increase academic standards have yielded an overall stronger group of recruits for saveBless.name
-                            newsStories.get(0).add("Success in the Classroom Spilling Onto the Field>" + saveBless.name + " find themselves in an unusual, but agreeable, position. The university, which has been slowly increasing admissions standards and taking strives to improve it's academic offerings, has begun to find itself counted among the Top 100 schools nationwide. As a result, the football Program program is finding itself with a new breed of recruit: smarter, more driven, and more capable of learning complex schemes. " + saveBless.name + " also finds itself with increased overall attention, as its name is beginning to have association with some of the most academically rigorous institutions in the country. As the school's mission to improve its academic standing continues, it stands to reason that it will enjoy an increased level of prestige.");
-                            break;
-
-                        case 7:
                             //TV Deal -- Each conf will have it's own network name and a story about a network getting a TV deal can't be posted more than once (same for individual tv deals)
                             //If the conference doesn't get a TV deal, saveBless will get an individual deal which alters the story if/when the conference gets their own network
 
@@ -756,6 +804,7 @@ public class League {
                 }
 
             }
+*/
 
         }
         catch(FileNotFoundException ex) {
@@ -1047,9 +1096,9 @@ public class League {
         teamList.get(26).gameSchedule.add(bowlGames[12]);
         teamList.get(29).gameSchedule.add(bowlGames[12]);
 
-        bowlGames[13] = new Game( teamList.get(27), teamList.get(32), bowlNames[13] );
+        bowlGames[13] = new Game( teamList.get(27), teamList.get(31), bowlNames[13] );
         teamList.get(27).gameSchedule.add(bowlGames[13]);
-        teamList.get(32).gameSchedule.add(bowlGames[13]);
+        teamList.get(31).gameSchedule.add(bowlGames[13]);
         hasScheduledBowls = true;
 
     }
@@ -1184,21 +1233,64 @@ public class League {
             teamList.get(t).advanceSeason();
         }
 
-        // Bless a random team with lots of prestige
-        int blessNumber = (int)(Math.random()*9);
-        Team blessTeam = teamList.get(50 + blessNumber);
-        blessTeam.teamPrestige += 15;
+        //COACH HIRES & INFRACTIONS
+
+        // Hire Coach for avg team
+        int blessNumber = (int)(Math.random()*25);
+        Team blessTeam = teamList.get(35 + blessNumber);
+        int coach = (int)(Math.random()*15);
+        blessTeam.teamPrestige += coach + 5;
         saveBless = blessTeam;
         if (blessTeam.teamPrestige > 99) {blessTeam.teamPrestige = 99;}
 
-        //Curse a good team
-        int curseNumber = (int)(Math.random()*7);
-        Team curseTeam = teamList.get(3 + curseNumber);
-        if (curseTeam.teamPrestige > 75) {
-            curseTeam.teamPrestige -= 25;
-            saveCurse = curseTeam;
-        }
-        else saveCurse = null;
+        // Hire Coach for medicore team
+        blessNumber = (int)(Math.random()*20);
+        Team blessTeam2 = teamList.get(69 + blessNumber);
+        coach = (int)(Math.random()*15);
+        blessTeam2.teamPrestige += coach + 3;
+        saveBless2 = blessTeam2;
+        if (blessTeam2.teamPrestige > 99) {blessTeam2.teamPrestige = 99;}
+
+        // Hire Coach for very bad team
+        blessNumber = (int)(Math.random()*20);
+        if (blessNumber > 20) blessNumber = 20;
+        Team blessTeam3 = teamList.get(79 + blessNumber);
+        coach = (int)(Math.random()*15);
+        blessTeam3.teamPrestige += coach + 3;
+        saveBless3 = blessTeam3;
+        if (blessTeam3.teamPrestige > 99) {blessTeam3.teamPrestige = 99;}
+
+        //Major Infraction to a good team
+        int x = (int)(Math.random()*11);
+        if (x > 7 ){
+            int curseNumber = (int)(Math.random()*25);
+            Team curseTeam = teamList.get(curseNumber);
+            if (curseTeam.teamPrestige > 75) {
+                curseTeam.teamPrestige -= 25;
+                saveCurse = curseTeam;
+            }  else saveCurse = null;
+        } else saveCurse = null;
+
+        //Minor infraction to an avg team
+        x = (int)(Math.random()*10);
+        if (x > 7 ) {
+            int curseNumber = (int) (Math.random()*40);
+            Team curseTeam2 = teamList.get(curseNumber);
+                curseTeam2.teamPrestige -= 10;
+                saveCurse2 = curseTeam2;
+        } else saveCurse2 = null;
+
+        //Discipline a team
+        x = (int)(Math.random()*10);
+        if (x > 5 ) {
+            int curseNumber = (int) (Math.random()*50);
+            Team curseTeam3 = teamList.get(curseNumber);
+            curseTeam3.teamPrestige -= 5;
+            saveCurse3 = curseTeam3;
+        } else saveCurse3 = null;
+
+
+
 
         // Advance win streaks
         advanceSeasonWinStreaks();
@@ -2061,7 +2153,7 @@ public class League {
 
             sb.append(bowlNames[13]+":\n\t\t");
             t1 = teamList.get(27);
-            t2 = teamList.get(32);
+            t2 = teamList.get(31);
             sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
 
             return sb.toString();
@@ -2309,6 +2401,20 @@ public class League {
             sb.append("NULL\n");
             sb.append("END_BLESS_TEAM\n");
         }
+        if (saveBless2 != null) {
+            sb.append(saveBless2.abbr + "\n");
+            sb.append("END_BLESS2_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_BLESS2_TEAM\n");
+        }
+        if (saveBless3 != null) {
+            sb.append(saveBless3.abbr + "\n");
+            sb.append("END_BLESS3_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_BLESS3_TEAM\n");
+        }
         if (saveCurse != null) {
             sb.append(saveCurse.abbr + "\n");
             sb.append("END_CURSE_TEAM\n");
@@ -2316,6 +2422,21 @@ public class League {
             sb.append("NULL\n");
             sb.append("END_CURSE_TEAM\n");
         }
+        if (saveCurse2 != null) {
+            sb.append(saveCurse2.abbr + "\n");
+            sb.append("END_CURSE2_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_CURSE2_TEAM\n");
+        }
+        if (saveCurse3 != null) {
+            sb.append(saveCurse3.abbr + "\n");
+            sb.append("END_CURSE3_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_CURSE3_TEAM\n");
+        }
+
 
         // Save league records
         sb.append(leagueRecords.getRecordsStr());
