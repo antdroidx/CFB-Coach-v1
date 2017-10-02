@@ -1302,9 +1302,9 @@ public class Team {
         int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*200 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 + (teamStrengthOfWins/3) +
+                (teamYards-teamOppYards)/40 + (teamStrengthOfWins/2) +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/8 + (teamPrestige/4);
+                teamStrengthOfWins)/11 + (teamPrestige/4);
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
             teamPollScore += 25;
