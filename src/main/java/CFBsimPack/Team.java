@@ -386,22 +386,28 @@ public class Team {
                 newPrestige = teamPrestige - 2;
             }
         }
-        if ((teamPrestige > 55) && diffExpected > 0) {
-            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //teams that do well gain more prestige
+        if ((teamPrestige > 50) && diffExpected > 0) {
+            newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //teams that do well gain more prestige
         }
-        if ((teamPrestige > 55) && diffExpected < 0) {
-            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //average+ teams that perform poor lose prestige
-        }
-
-        if ((teamPrestige <= 55) && diffExpected > 0) {
-            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
-        }
-        if ((teamPrestige <= 55) && diffExpected < 0) {
-            newPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well lose a little more prestige
+        if ((teamPrestige > 50) && diffExpected < 0) {
+            newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //average+ teams that perform poor lose prestige
         }
 
-        if (teamPrestige > 99) teamPrestige = 99;
-        if (teamPrestige < 10) teamPrestige = 10;
+        if ((teamPrestige <= 50) && diffExpected > 0) {
+            newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
+        }
+        if ((teamPrestige <= 50) && diffExpected < 0) {
+            newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2500); //poor teams that do well lose a little more prestige
+        }
+        if (rankTeamPollScore == 1) {
+            newPrestige += 3;
+        }
+        if ( "CC".equals(confChampion) ) {
+            //bonus for winning conference
+            newPrestige += 1;
+        }
+        if (newPrestige > 99) newPrestige = 99;
+        if (newPrestige  < 15) newPrestige = 15;
 
         return newPrestige;
     }

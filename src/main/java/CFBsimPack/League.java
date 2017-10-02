@@ -1283,7 +1283,7 @@ public class League {
         //Discipline a team
         x = (int)(Math.random()*10);
         if (x > 5 ) {
-            int curseNumber = (int) (Math.random()*50);
+            int curseNumber = (int) (Math.random()*55);
             Team curseTeam3 = teamList.get(curseNumber);
             curseTeam3.teamPrestige -= 5;
             saveCurse3 = curseTeam3;
