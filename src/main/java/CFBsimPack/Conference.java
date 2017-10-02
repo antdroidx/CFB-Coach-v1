@@ -151,9 +151,9 @@ public class Conference {
 
                     Game gm;
                     if ( Math.random() > 0.5 ) {
-                        gm = new Game( a, b, a.conference + " v " + b.conference );
+                        gm = new Game( a, b, a.conference + " vs " + b.conference );
                     } else {
-                        gm = new Game( b, a, b.conference + " v " + a.conference );
+                        gm = new Game( b, a, b.conference + " vs " + a.conference );
                     }
 
                     if ( offsetOOC == league.randgm) {
@@ -322,7 +322,7 @@ public class Conference {
                     loser = ccg.homeTeam;
                     sb.append(winner.strRep() + " W ");
                     sb.append(ccg.awayScore + "-" + ccg.homeScore + " ");
-                    sb.append("@ " + loser.strRep());
+                    sb.append("at " + loser.strRep());
                     return sb.toString();
                 }
             }

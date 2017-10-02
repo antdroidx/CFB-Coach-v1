@@ -203,8 +203,8 @@ public class Team {
 
         teamStratOff = new TeamStrategy();
         teamStratDef = new TeamStrategy();
-        teamStratOffNum = 1; // 1 is the default strats
-        teamStratDefNum = 1;
+        teamStratOffNum = getCPUOffense(); // 1 is the default strats
+        teamStratDefNum = getCPUDefense();
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
     }
@@ -261,8 +261,8 @@ public class Team {
         teamOffTalent = 0;
         teamDefTalent = 0;
         teamPollScore = 0;
-        teamStratOffNum = 1; // 1 is the default strats
-        teamStratDefNum = 1;
+        teamStratOffNum = 1; //do not change
+        teamStratDefNum = 1; //do not change
         teamTVDeal = false;
         confTVDeal = false;
 
@@ -368,14 +368,14 @@ public class Team {
         oldPrestige = teamPrestige;
 
         if ((teamPrestige > 55) && diffExpected > 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1500); //teams that do well gain more prestige
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //teams that do well gain more prestige
         }
         if ((teamPrestige > 55) && diffExpected < 0) {
             teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //average+ teams that perform poor lose prestige
         }
 
         if ((teamPrestige <= 55) && diffExpected > 0) {
-            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 1750); //poor teams that do well gain some prestige
+            teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
         }
         if ((teamPrestige <= 55) && diffExpected < 0) {
             teamPrestige = (int) Math.pow(teamPrestige, 1 + (float) diffExpected / 2500); //poor teams that do well lose a little more prestige
@@ -1307,19 +1307,23 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 8 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*200 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 +
+                (teamYards-teamOppYards)/40 + (teamStrengthOfWins/3) +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/7 + (teamPrestige/2); // change 10 to 7 on SOW
+                teamStrengthOfWins)/8 + (teamPrestige/4);
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
-            teamPollScore += 40;
+            teamPollScore += 25;
         }
         if ( "NCW".equals(natChampWL) ) {
             //bonus for winning champ game
             teamPollScore += 100;
+        }
+        if ( "NCL".equals(natChampWL) ) {
+            //bonus for winning champ game
+            teamPollScore += 15;
         }
         if ( losses == 0 ) {
             teamPollScore += 30;
@@ -2215,7 +2219,7 @@ public class Team {
         if (g.homeTeam == this) {
             return g.homeScore + " - " + g.awayScore + " vs " + g.awayTeam.name + " #" + g.awayTeam.rankTeamPollScore;
         } else {
-            return g.awayScore + " - " + g.homeScore + " @ " + g.homeTeam.name + " #" + g.homeTeam.rankTeamPollScore;
+            return g.awayScore + " - " + g.homeScore + " at " + g.homeTeam.name + " #" + g.homeTeam.rankTeamPollScore;
         }
     }
 
@@ -2241,7 +2245,7 @@ public class Team {
         if (g.homeTeam == this) {
             return "vs " + g.awayTeam.name + " #" + g.awayTeam.rankTeamPollScore;
         } else {
-            return "@ " + g.homeTeam.name + " #" + g.homeTeam.rankTeamPollScore;
+            return "at " + g.homeTeam.name + " #" + g.homeTeam.rankTeamPollScore;
         }
     }
 
