@@ -203,9 +203,8 @@ public class Team {
 
         teamStratOff = new TeamStrategy();
         teamStratDef = new TeamStrategy();
-        //Sets CPU Strategy!
-        teamStratOffNum = getCPUOffense();
-        teamStratDefNum = getCPUDefense();
+        teamStratOffNum = 1; // 1 is the default strats
+        teamStratDefNum = 1;
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
     }
@@ -262,11 +261,8 @@ public class Team {
         teamOffTalent = 0;
         teamDefTalent = 0;
         teamPollScore = 0;
-
-        teamStratOffNum = getCPUOffense();
-        teamStratDefNum = getCPUDefense();
-        //teamStratOffNum = 1; // 1 is the default strats
-        //teamStratDefNum = 1;
+        teamStratOffNum = 1; // 1 is the default strats
+        teamStratDefNum = 1;
         teamTVDeal = false;
         confTVDeal = false;
 
