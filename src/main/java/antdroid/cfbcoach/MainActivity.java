@@ -85,11 +85,8 @@ public class MainActivity extends AppCompatActivity {
         boolean loadedLeague = false;
         if (extras != null) {
             String saveFileStr = extras.getString("SAVE_FILE");
-            if (saveFileStr.equals("NEW_LEAGUE_EASY")) {
-                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
-                season = 2017;
-            } else if (saveFileStr.equals("NEW_LEAGUE_HARD")) {
-                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true);
+            if (saveFileStr.equals("NEW_LEAGUE")) {
+                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
                 season = 2017;
             } else if (saveFileStr.equals("DONE_RECRUITING")) {
                 File saveFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     loadedLeague = true;
                 } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
                     season = 2017;
                 }
             } else {
@@ -117,12 +114,12 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     loadedLeague = true;
                 } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
                     season = 2017;
                 }
             }
         } else {
-            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
             season = 2017;
         }
 
@@ -173,56 +170,9 @@ public class MainActivity extends AppCompatActivity {
         TextView currentTeamText = (TextView) findViewById(R.id.currentTeamText);
         currentTeamText.setText(currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ")");
 
-        /**
-         * Set up spinner for examining team.
-         */
-        examineTeamSpinner = (Spinner) findViewById(R.id.examineTeamSpinner);
-        teamList = new ArrayList<String>();
-        for (int i = 0; i < 12; i++) {
-            teamList.add(simLeague.teamList.get(i).strRep());
-        }
-        dataAdapterTeam = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, teamList);
-                            dataAdapterTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        examineTeamSpinner.setAdapter(dataAdapterTeam);
-        examineTeamSpinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                        public void onItemSelected(
-                            AdapterView<?> parent, View view, int position, long id) {
-                        currentTeam = simLeague.findTeam(parent.getItemAtPosition(position).toString());
-                        updateCurrTeam();
-                    }
+        //Set up spinner for examining team.
+        reloadSpinner();
 
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        //heh
-                        //updateCurrTeam();
-                    }
-                });
-
-        /**
-         * Set up spinner for examining conference.
-         */
-        examineConfSpinner = (Spinner) findViewById(R.id.examineConfSpinner);
-        confList = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            confList.add(simLeague.conferences.get(i).confName);
-        }
-        dataAdapterConf = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, confList);
-        dataAdapterConf.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        examineConfSpinner.setAdapter(dataAdapterConf);
-        examineConfSpinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(
-                            AdapterView<?> parent, View view, int position, long id) {
-                        currentConference = simLeague.findConference(parent.getItemAtPosition(position).toString());
-                        updateCurrConference();
-                    }
-
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        //heh
-                    }
-                });
 
         /**
          * Set up "Play Week" button
@@ -240,8 +190,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.playWeek();
 
                         // Get injury report if there are injuries and just played a game
-                        if (simLeague.currentWeek != 15 && showInjuryReport && simLeague.isHardMode()
-                                && userTeam.gameWLSchedule.size() > numGamesPlayed)
+                        if (simLeague.currentWeek != 15 && showInjuryReport && userTeam.gameWLSchedule.size() > numGamesPlayed)
                             showInjuryReportDialog();
 
                         if (simLeague.currentWeek == 15) {
@@ -1245,7 +1194,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void changeTeamNameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Settings / Change Name")
+        builder.setTitle("Settings / Editor")
                 .setView(getLayoutInflater().inflate(R.layout.change_team_name_dialog, null));
         final AlertDialog dialog = builder.create();
         dialog.show();
@@ -1254,9 +1203,12 @@ public class MainActivity extends AppCompatActivity {
         changeNameEditText.setText(currentTeam.name);  //updated from userTeam to currentTeam
         final EditText changeAbbrEditText = (EditText) dialog.findViewById(R.id.editTextChangeAbbr);
         changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
+        final EditText changeConfEditText = (EditText) dialog.findViewById(R.id.editTextChangeConf);
+        changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
 
         final TextView invalidNameText = (TextView) dialog.findViewById(R.id.textViewChangeName);
         final TextView invalidAbbrText = (TextView) dialog.findViewById(R.id.textViewChangeAbbr);
+        final TextView invalidConfText = (TextView) dialog.findViewById(R.id.textViewChangeConf);
 
         changeNameEditText.addTextChangedListener(new TextWatcher() {
             String newName;
@@ -1326,6 +1278,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        changeConfEditText.addTextChangedListener(new TextWatcher() {
+            String newConf;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                newConf = s.toString().trim();
+                if (!simLeague.isNameValid(newConf)) {
+                    invalidNameText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidNameText.setText("");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                newConf = s.toString().trim();
+                if (!simLeague.isNameValid(newConf)) {
+                    invalidNameText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidNameText.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                newConf = s.toString().trim();
+                if (!simLeague.isNameValid(newConf)) {
+                    invalidNameText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidNameText.setText("");
+                }
+            }
+        });
+
         final CheckBox checkboxShowPopup = (CheckBox) dialog.findViewById(R.id.checkboxShowPopups);
         checkboxShowPopup.setChecked(showToasts);
 
@@ -1350,15 +1336,20 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 String newName = changeNameEditText.getText().toString().trim();
                 String newAbbr = changeAbbrEditText.getText().toString().trim().toUpperCase();
+                String newConf = changeConfEditText.getText().toString().trim();
 
-                if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr)) {
+                if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr) && simLeague.isNameValid(newConf)) {
                     simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
                     currentTeam.name = newName;
                     currentTeam.abbr = newAbbr;
+                    currentConference.confName = newConf;
                     getSupportActionBar().setTitle(currentTeam.name + " " + season + " Season");
                     // Have to update rival's rival too!
                     Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);
                     rival.rivalTeam = currentTeam.abbr;
+                    updateCurrConference();
+                    updateCurrTeam();
+                    reloadSpinner();
                     examineTeam(currentTeam.name);
                 } else {
                     if (showToasts)
@@ -1777,6 +1768,52 @@ public class MainActivity extends AppCompatActivity {
         return infos;
     }
 
+    //RELOAD SPINNERZ
+    private void reloadSpinner() {
+        examineConfSpinner = (Spinner) findViewById(R.id.examineConfSpinner);
+        confList = new ArrayList<String>();
+        for (int i = 0; i < 10; i++) {
+            confList.add(simLeague.conferences.get(i).confName);
+        }
+        dataAdapterConf = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, confList);
+        dataAdapterConf.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        examineConfSpinner.setAdapter(dataAdapterConf);
+        examineConfSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        currentConference = simLeague.findConference(parent.getItemAtPosition(position).toString());
+                        updateCurrConference();
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        //heh
+                    }
+                });
+
+        examineTeamSpinner = (Spinner) findViewById(R.id.examineTeamSpinner);
+        teamList = new ArrayList<String>();
+        for (int i = 0; i < 12; i++) {
+            teamList.add(simLeague.teamList.get(i).strRep());
+        }
+        dataAdapterTeam = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, teamList);
+        dataAdapterTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        examineTeamSpinner.setAdapter(dataAdapterTeam);
+        examineTeamSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        currentTeam = simLeague.findTeam(parent.getItemAtPosition(position).toString());
+                        updateCurrTeam();
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        //heh
+                        //updateCurrTeam();
+                    }
+                });
+    }
 
 }
-

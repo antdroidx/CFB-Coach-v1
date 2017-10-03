@@ -80,17 +80,15 @@ public class League {
     public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl",
             "Liberty Bowl", "Cotton Bowl", "Holiday Bowl", "Citrus Bowl", "Alamo Bowl", "Aloha Bowl", "Independence Bowl", "Vegas Bowl","Cactus Bowl"};
 
-    private boolean isHardMode;
 
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
      * Also schedules games for every team.
      */
-    public League(String namesCSV, String lastNamesCSV, boolean difficulty) {
+    public League(String namesCSV, String lastNamesCSV) {
         int max = 8;
         int min = 5;
         randgm = (int)Math.random()*((max - min)+1) + min;
-        isHardMode = difficulty;
         heismanDecided = false;
         hasScheduledBowls = false;
         bowlGames = new Game[14];
@@ -309,7 +307,7 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             // [EASY]%    [HARD]%
-            isHardMode = line.substring(line.length() - 7, line.length()).equals("[HARD]%");
+            //isHardMode = line.substring(line.length() - 7, line.length()).equals("[HARD]%");
 
             //Next get league history
             leagueHistory = new ArrayList<String[]>();
@@ -520,15 +518,6 @@ public class League {
             System.out.println(
                     "Error reading file");
         }
-    }
-
-    /**
-     * Gets whether it is hard mode.
-     * Returns true is hard, false if normal.
-     * @return difficulty
-     */
-    public boolean isHardMode() {
-        return isHardMode;
     }
 
     /**
@@ -1925,13 +1914,9 @@ public class League {
         StringBuilder sb = new StringBuilder();
 
         // Save information about the save file, user team info
-        if (isHardMode) {
             sb.append((2017 + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
-                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[HARD]%\n");
-        } else {
-            sb.append((2017 + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
-                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[EASY]%\n");
-        }
+                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>\n");
+
 
         // Save league history of who was #1 each year
         for (int i = 0; i < leagueHistory.size(); ++i) {

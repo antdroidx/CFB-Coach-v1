@@ -32205,6 +32205,7 @@ Cushion ,
 Brooks,
 McGough,
 Bowes,
+        Nguyen,
 Sattinger,
 Borregales,
 Jones,
@@ -32422,6 +32423,7 @@ Patterson,
 Appouh,
 Duhart,
 Byrum,
+Nguyen,
 Woods,
 Miskel,
 LaRussa,
@@ -32513,7 +32515,7 @@ Waitman,
 Fisher,
 Woods,
 Gipson,
-Nguyen
+Nguyen,
     </string>
     <string name="tutBasics">
         In College Football Coach, you take the role of a newly hired coach at your college of choice.
@@ -32528,7 +32530,7 @@ Nguyen
         At the end of the regular season, the Conference Championship is played between the two teams with the best in-conference record.
         If two teams have the same record, a head-to-head tiebreaker is used. If three or more teams have the same record, the one with the highest poll ranking is chosen.
         After the Conference Championships, Bowl Games are played.\n\n
-        Only the top 24 teams get chosen for a bowl, with the most important being the National Semifinals between the #1 and #4 team, and the #2 and #3 team.
+        The top 32 teams get chosen for a bowl, with the most important being the National Semifinals between the #1 and #4 team, and the #2 and #3 team.
         The winner of these two games advance to the National Championship where an undisputed champion is crowned.\n\n
         After the season, your team will have gained or lost prestige based on their results versus their expectations, and you move onto recruiting.
     </string>
@@ -32609,7 +32611,7 @@ Nguyen
         - Defensive scheme with emphasis on stopping the run.\n
         - Will give up more big passing plays but will allow less rushing yards and big plays from rushing.\n
         \n
-        [Defense] No Fly Zone:\n
+        [Defense] Nickel Zone:\n
         - Defensive scheme with emphasis on limiting the pass.\n
         - Will give up less yards on catches and be more likely to intercept passes.\n
         - However, rushing plays will go for more yards.\n

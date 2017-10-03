@@ -40,36 +40,9 @@ public class Home extends AppCompatActivity {
         Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
-                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage("What difficulty would you like?\n\n" +
-                        "Easy Mode has no injuries, normal rivalry mechanics, and a 50% chance your good players will leave early for the NFL.\n\n" +
-                        "Hard Mode has injuries enabled, harder rivalry games, and a greater chance your good players will leave early for the NFL.\n\n" +
-                        "This cannot be changed later.")
-                        .setTitle("Choose Difficulty:")
-                        .setPositiveButton("EASY", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //do nothing?
-                                Intent myIntent = new Intent(Home.this, MainActivity.class);
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_EASY");
-                                Home.this.startActivity(myIntent);
-                            }
-                        })
-                        .setNegativeButton("HARD", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //do nothing?
-                                Intent myIntent = new Intent(Home.this, MainActivity.class);
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_HARD");
-                                Home.this.startActivity(myIntent);
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                TextView msgTxt = (TextView) dialog.findViewById(android.R.id.message);
-                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
+                Intent myIntent = new Intent(Home.this, MainActivity.class);
+                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE");
+                Home.this.startActivity(myIntent);
             }
         });
 
