@@ -375,7 +375,6 @@ public class Team {
     public int calcSeasonPrestige() {
         int expectedPollFinish = 100 - teamPrestige;
         int diffExpected = expectedPollFinish - rankTeamPollScore;
-        //int oldPrestige = teamPrestige;
         int newPrestige = teamPrestige;
 
         // Don't add/subtract prestige if they are a blessed/cursed team from last season
