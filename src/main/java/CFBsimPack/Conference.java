@@ -93,7 +93,7 @@ public class Conference {
 
                 if ( (evenYear && a.evenYearHomeOpp.contains(b.abbr)) || (evenYear && !b.evenYearHomeOpp.contains(a.abbr)) || (!evenYear && !a.evenYearHomeOpp.contains((b.abbr))) || (!evenYear && b.evenYearHomeOpp.contains((a.abbr))) ) {
                     if (a.rivalTeam.equals(b.abbr)) {
-                        gm = new Game( a, b, "Rivalry");}
+                        gm = new Game( a, b, "Rivalry Game");}
                     else {
                         gm = new Game(a, b, "Conference");
                     }
@@ -102,14 +102,14 @@ public class Conference {
                 // Basically check all the reverse scenarios above, anything that would cause B to be the home team.
                 else if((evenYear && b.evenYearHomeOpp.contains(a.abbr) || (evenYear && !a.evenYearHomeOpp.contains(b.abbr)) || (!evenYear && a.evenYearHomeOpp.contains((b.abbr))) || (!evenYear && !b.evenYearHomeOpp.contains(a.abbr)))) {
                         if (a.rivalTeam.equals(b.abbr)) {
-                            gm = new Game( b, a, "Rivalry");}
+                            gm = new Game( b, a, "Rivalry Game");}
                         else {
                             gm = new Game(b, a, "Conference");
                         }
                 }
                 else{ // I'm 99.9% sure all scenarios and possibilities are covered above, but lets not break the game if I'm wrong
                         if (a.rivalTeam.equals(b.abbr)) {
-                            gm = new Game(b, a, "Rivalry");
+                            gm = new Game(b, a, "Rivalry Game");
                         }
                         else {
                             gm = new Game(b, a, "Conference");
