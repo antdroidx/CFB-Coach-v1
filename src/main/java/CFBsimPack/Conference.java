@@ -71,7 +71,7 @@ public class Conference {
             for (int x = 0; x < evenHomeGames.length; x++) {
                 StringBuilder sb = new StringBuilder();
                 for (int y = 0; y < evenHomeGames[x].length; y++) {
-                   sb.append(confTeams.get(evenHomeGames[x][y]).name + ",");  //change abbr to name
+                   sb.append(confTeams.get(evenHomeGames[x][y]).abbr + ",");  //change abbr to name
                 }
                 confTeams.get(x).evenYearHomeOpp = sb.toString();
             }
@@ -92,19 +92,26 @@ public class Conference {
                 // Check whether it's an even year and if team B appears in team A's even year home game list, or if it's not an even year and team A appears in team B's list
 
                 if ( (evenYear && a.evenYearHomeOpp.contains(b.abbr)) || (evenYear && !b.evenYearHomeOpp.contains(a.abbr)) || (!evenYear && !a.evenYearHomeOpp.contains((b.abbr))) || (!evenYear && b.evenYearHomeOpp.contains((a.abbr))) ) {
-                    if (a.rivalTeam == b.abbr) gm = new Game( a, b, "Rivalry"); else {
+                    if (a.rivalTeam.equals(b.abbr)) {
+                        gm = new Game( a, b, "Rivalry");}
+                    else {
                         gm = new Game(a, b, "Conference");
                     }
                 }
 
                 // Basically check all the reverse scenarios above, anything that would cause B to be the home team.
                 else if((evenYear && b.evenYearHomeOpp.contains(a.abbr) || (evenYear && !a.evenYearHomeOpp.contains(b.abbr)) || (!evenYear && a.evenYearHomeOpp.contains((b.abbr))) || (!evenYear && !b.evenYearHomeOpp.contains(a.abbr)))) {
-                        if (b.rivalTeam == a.abbr) gm = new Game( b, a, "Rivalry"); else {
+                        if (a.rivalTeam.equals(b.abbr)) {
+                            gm = new Game( b, a, "Rivalry");}
+                        else {
                             gm = new Game(b, a, "Conference");
                         }
                 }
                 else{ // I'm 99.9% sure all scenarios and possibilities are covered above, but lets not break the game if I'm wrong
-                        if (b.rivalTeam == a.abbr) gm = new Game( b, a, "Rivalry"); else {
+                        if (a.rivalTeam.equals(b.abbr)) {
+                            gm = new Game(b, a, "Rivalry");
+                        }
+                        else {
                             gm = new Game(b, a, "Conference");
                         }
                 }
