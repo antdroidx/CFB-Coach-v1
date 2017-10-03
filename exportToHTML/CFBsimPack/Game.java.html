@@ -1,0 +1,1512 @@
+<html>
+<head>
+<title>Game.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+.s4 { color: rgb(0,0,255); }
+.s5 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Game.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">CFBsimPack; 
+ 
+</span><span class="s0">import </span><span class="s1">java.io.Serializable; 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+</span><span class="s0">import </span><span class="s1">java.util.Collections; 
+ 
+</span><span class="s2">/** 
+ * Class for storing games. Has all stats for the game. 
+ * Also is responsible for simming the game. 
+ * </span><span class="s3">@author </span><span class="s2">Achi 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Game </span><span class="s0">implements </span><span class="s1">Serializable { 
+ 
+    </span><span class="s0">public </span><span class="s1">Team homeTeam; 
+    </span><span class="s0">public </span><span class="s1">Team awayTeam; 
+ 
+    </span><span class="s0">public boolean </span><span class="s1">hasPlayed; 
+ 
+    </span><span class="s0">public </span><span class="s1">String gameName; 
+ 
+    </span><span class="s0">public int </span><span class="s1">homeScore; 
+    </span><span class="s0">public int</span><span class="s1">[] homeQScore; 
+    </span><span class="s0">public int </span><span class="s1">awayScore; 
+    </span><span class="s0">public int</span><span class="s1">[] awayQScore; 
+    </span><span class="s0">public int </span><span class="s1">homeYards; 
+    </span><span class="s0">public int </span><span class="s1">awayYards; 
+    </span><span class="s0">public int </span><span class="s1">numOT; 
+    </span><span class="s0">public int </span><span class="s1">homeTOs; 
+    </span><span class="s0">public int </span><span class="s1">awayTOs; 
+ 
+    </span><span class="s0">public int</span><span class="s1">[] HomeQBStats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayQBStats; 
+ 
+    </span><span class="s0">public int</span><span class="s1">[] HomeRB1Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] HomeRB2Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayRB1Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayRB2Stats; 
+ 
+    </span><span class="s0">public int</span><span class="s1">[] HomeWR1Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] HomeWR2Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] HomeWR3Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayWR1Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayWR2Stats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayWR3Stats; 
+ 
+    </span><span class="s0">public int</span><span class="s1">[] HomeKStats; 
+    </span><span class="s0">public int</span><span class="s1">[] AwayKStats; 
+ 
+    </span><span class="s2">// Store reference to players, in case starters are changed later       </span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">PlayerQB homeQB;         
+    </span><span class="s0">private </span><span class="s1">PlayerRB[] homeRBs;      
+    </span><span class="s0">private </span><span class="s1">PlayerWR[] homeWRs;      
+    </span><span class="s0">private </span><span class="s1">PlayerK homeK;       
+    </span><span class="s0">private </span><span class="s1">PlayerQB awayQB;         
+    </span><span class="s0">private </span><span class="s1">PlayerRB[] awayRBs;      
+    </span><span class="s0">private </span><span class="s1">PlayerWR[] awayWRs;      
+    </span><span class="s0">private </span><span class="s1">PlayerK awayK; 
+ 
+    String gameEventLog; 
+    String tdInfo; 
+ 
+    </span><span class="s2">//private variables used when simming games</span><span class="s1"> 
+    </span><span class="s0">private int </span><span class="s1">gameTime; 
+    </span><span class="s0">private boolean </span><span class="s1">gamePoss; </span><span class="s2">//1 if home, 0 if away</span><span class="s1"> 
+    </span><span class="s0">private int </span><span class="s1">gameYardLine; 
+    </span><span class="s0">private int </span><span class="s1">gameDown; 
+    </span><span class="s0">private int </span><span class="s1">gameYardsNeed; 
+    </span><span class="s0">private boolean </span><span class="s1">playingOT; 
+    </span><span class="s0">private boolean </span><span class="s1">bottomOT; 
+ 
+    </span><span class="s2">/** 
+     * Create game with a name (likely a bowl game). 
+     * </span><span class="s3">@param </span><span class="s2">home 
+     * </span><span class="s3">@param </span><span class="s2">away 
+     * </span><span class="s3">@param </span><span class="s2">name 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Game( Team home, Team away, String name ) { 
+        homeTeam = home; 
+        awayTeam = away; 
+ 
+        gameName = name; 
+ 
+        homeScore = </span><span class="s4">0</span><span class="s1">; 
+        homeQScore = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]; 
+        awayScore = </span><span class="s4">0</span><span class="s1">; 
+        awayQScore = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]; 
+        numOT = </span><span class="s4">0</span><span class="s1">; 
+ 
+        homeTOs = </span><span class="s4">0</span><span class="s1">; 
+        awayTOs = </span><span class="s4">0</span><span class="s1">; 
+ 
+        </span><span class="s2">//initialize arrays, set everything to zero</span><span class="s1"> 
+        HomeQBStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayQBStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+ 
+        HomeRB1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+        HomeRB2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+        AwayRB1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+        AwayRB2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+ 
+        HomeWR1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        HomeWR2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        HomeWR3Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayWR1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayWR2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayWR3Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+ 
+        HomeKStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayKStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+ 
+        </span><span class="s2">//playGame();</span><span class="s1"> 
+        hasPlayed = </span><span class="s0">false</span><span class="s1">; 
+ 
+        </span><span class="s0">if </span><span class="s1">(gameName.equals(</span><span class="s5">&quot;In Conf&quot;</span><span class="s1">) &amp;&amp; (homeTeam.rivalTeam.equals(awayTeam.abbr) || awayTeam.rivalTeam.equals(homeTeam.abbr))) { 
+            </span><span class="s2">// Rivalry game!</span><span class="s1"> 
+            gameName = </span><span class="s5">&quot;Rivalry Game&quot;</span><span class="s1">; 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Create a game without a name (regular season game). 
+     * </span><span class="s3">@param </span><span class="s2">home  home team playing 
+     * </span><span class="s3">@param </span><span class="s2">away  away team playing 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Game( Team home, Team away ) { 
+        homeTeam = home; 
+        awayTeam = away; 
+        numOT = </span><span class="s4">0</span><span class="s1">; 
+        homeTOs = </span><span class="s4">0</span><span class="s1">; 
+        awayTOs = </span><span class="s4">0</span><span class="s1">; 
+ 
+        gameName = </span><span class="s5">&quot;&quot;</span><span class="s1">; 
+ 
+        homeScore = </span><span class="s4">0</span><span class="s1">; 
+        homeQScore = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]; 
+        awayScore = </span><span class="s4">0</span><span class="s1">; 
+        awayQScore = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]; 
+ 
+        </span><span class="s2">//initialize arrays, set everything to zero</span><span class="s1"> 
+        HomeQBStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayQBStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+ 
+        HomeRB1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+        HomeRB2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+        AwayRB1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+        AwayRB2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">4</span><span class="s1">]; 
+ 
+        HomeWR1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        HomeWR2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        HomeWR3Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayWR1Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayWR2Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayWR3Stats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+ 
+        HomeKStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+        AwayKStats = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">6</span><span class="s1">]; 
+ 
+        </span><span class="s2">//playGame();</span><span class="s1"> 
+        hasPlayed = </span><span class="s0">false</span><span class="s1">; 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Gets the game summary, along with all the stats and the game log, to be used by the UI. 
+     * </span><span class="s3">@return </span><span class="s2">A String array of the left, center, right, and logs. 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String[] getGameSummaryStr() { 
+        </span><span class="s2">/** 
+         * [0] is left side 
+         * [1] is center 
+         * [2] is right 
+         * [3] is bottom (game log) 
+         */</span><span class="s1"> 
+        String[] gameSum = </span><span class="s0">new </span><span class="s1">String[</span><span class="s4">4</span><span class="s1">]; 
+        StringBuilder gameL = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+        StringBuilder gameC = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+        StringBuilder gameR = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+ 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">Points</span><span class="s0">\n</span><span class="s5">Yards</span><span class="s0">\n</span><span class="s5">Pass Yards</span><span class="s0">\n</span><span class="s5">Rush Yards</span><span class="s0">\n</span><span class="s5">TOs</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(</span><span class="s5">&quot;#&quot;</span><span class="s1">+awayTeam.rankTeamPollScore+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayScore+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayYards+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                getPassYards(</span><span class="s0">true</span><span class="s1">)+</span><span class="s5">&quot; pyds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+getRushYards(</span><span class="s0">true</span><span class="s1">)+</span><span class="s5">&quot; ryds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayTOs+</span><span class="s5">&quot; TOs</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(</span><span class="s5">&quot;#&quot;</span><span class="s1">+homeTeam.rankTeamPollScore+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeScore+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeYards+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                getPassYards(</span><span class="s0">false</span><span class="s1">)+</span><span class="s5">&quot; pyds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+getRushYards(</span><span class="s0">false</span><span class="s1">)+</span><span class="s5">&quot; ryds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeTOs+</span><span class="s5">&quot; TOs</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">); 
+ 
+        </span><span class="s2">/** 
+         * QBs 
+         */</span><span class="s1"> 
+        gameL.append(</span><span class="s5">&quot;QBs</span><span class="s0">\n</span><span class="s5">Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">TD/Int</span><span class="s0">\n</span><span class="s5">Pass Yards</span><span class="s0">\n</span><span class="s5">Comp/Att</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayQB.getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayQB.getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayQB.ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayQB.ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayQBStats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayQBStats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/int</span><span class="s1"> 
+        gameC.append(AwayQBStats[</span><span class="s4">4</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//pass yards</span><span class="s1"> 
+        gameC.append(AwayQBStats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayQBStats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//pass comp/att</span><span class="s1"> 
+        gameR.append(homeTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeQB.getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeQB.getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeQB.ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeQB.ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeQBStats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeQBStats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/int</span><span class="s1"> 
+        gameR.append(HomeQBStats[</span><span class="s4">4</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//pass yards</span><span class="s1"> 
+        gameR.append(HomeQBStats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeQBStats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//pass comp/att</span><span class="s1"> 
+ 
+        </span><span class="s2">/** 
+         * RBs 
+         */</span><span class="s1"> 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">RBs</span><span class="s0">\n</span><span class="s5">RB1 Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">TD/Fum</span><span class="s0">\n</span><span class="s5">Rush Yards</span><span class="s0">\n</span><span class="s5">Yds/Att</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayRBs[</span><span class="s4">0</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayRBs[</span><span class="s4">0</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayRBs[</span><span class="s4">0</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayRBs[</span><span class="s4">0</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayRB1Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayRB1Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameC.append(AwayRB1Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rush yards</span><span class="s1"> 
+        gameC.append(((</span><span class="s0">double</span><span class="s1">)(</span><span class="s4">10</span><span class="s1">*AwayRB1Stats[</span><span class="s4">1</span><span class="s1">]/AwayRB1Stats[</span><span class="s4">0</span><span class="s1">])/</span><span class="s4">10</span><span class="s1">)+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeRBs[</span><span class="s4">0</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeRBs[</span><span class="s4">0</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeRBs[</span><span class="s4">0</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeRBs[</span><span class="s4">0</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeRB1Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeRB1Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameR.append(HomeRB1Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rush yards</span><span class="s1"> 
+        gameR.append(((</span><span class="s0">double</span><span class="s1">)(</span><span class="s4">10</span><span class="s1">*HomeRB1Stats[</span><span class="s4">1</span><span class="s1">]/HomeRB1Stats[</span><span class="s4">0</span><span class="s1">])/</span><span class="s4">10</span><span class="s1">)+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); gameC.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); gameR.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameL.append(</span><span class="s5">&quot;RB2 Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">TD/Fum</span><span class="s0">\n</span><span class="s5">Rush Yards</span><span class="s0">\n</span><span class="s5">Yds/Att</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayRBs[</span><span class="s4">1</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayRBs[</span><span class="s4">1</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayRBs[</span><span class="s4">1</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayRBs[</span><span class="s4">1</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayRB2Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayRB2Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameC.append(AwayRB2Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rush yards</span><span class="s1"> 
+        gameC.append(((</span><span class="s0">double</span><span class="s1">)(</span><span class="s4">10</span><span class="s1">*AwayRB2Stats[</span><span class="s4">1</span><span class="s1">]/AwayRB2Stats[</span><span class="s4">0</span><span class="s1">])/</span><span class="s4">10</span><span class="s1">)+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeRBs[</span><span class="s4">1</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeRBs[</span><span class="s4">1</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeRBs[</span><span class="s4">1</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeRBs[</span><span class="s4">1</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeRB2Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeRB2Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameR.append(HomeRB2Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rush yards</span><span class="s1"> 
+        gameR.append(((</span><span class="s0">double</span><span class="s1">)(</span><span class="s4">10</span><span class="s1">*HomeRB2Stats[</span><span class="s4">1</span><span class="s1">]/HomeRB2Stats[</span><span class="s4">0</span><span class="s1">])/</span><span class="s4">10</span><span class="s1">)+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+ 
+        </span><span class="s2">/** 
+         * WRs 
+         */</span><span class="s1"> 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">WRs</span><span class="s0">\n</span><span class="s5">WR1 Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">TD/Fum</span><span class="s0">\n</span><span class="s5">Rec Yards</span><span class="s0">\n</span><span class="s5">Rec/Tgts</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayWRs[</span><span class="s4">0</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayWRs[</span><span class="s4">0</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayWRs[</span><span class="s4">0</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayWRs[</span><span class="s4">0</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayWR1Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayWR1Stats[</span><span class="s4">5</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameC.append(AwayWR1Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec yards</span><span class="s1"> 
+        gameC.append(AwayWR1Stats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayWR1Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec/targets</span><span class="s1"> 
+        gameR.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeWRs[</span><span class="s4">0</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeWRs[</span><span class="s4">0</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeWRs[</span><span class="s4">0</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeWRs[</span><span class="s4">0</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeWR1Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeWR1Stats[</span><span class="s4">5</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameR.append(HomeWR1Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec yards</span><span class="s1"> 
+        gameR.append(HomeWR1Stats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeWR1Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec/targets</span><span class="s1"> 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); gameC.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); gameR.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameL.append(</span><span class="s5">&quot;WR2 Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">TD/Fum</span><span class="s0">\n</span><span class="s5">Rec Yards</span><span class="s0">\n</span><span class="s5">Rec/Tgts</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayWRs[</span><span class="s4">1</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayWRs[</span><span class="s4">1</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayWRs[</span><span class="s4">1</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayWRs[</span><span class="s4">1</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayWR2Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayWR2Stats[</span><span class="s4">5</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameC.append(AwayWR2Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec yards</span><span class="s1"> 
+        gameC.append(AwayWR2Stats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayWR2Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec/targets</span><span class="s1"> 
+        gameR.append(homeWRs[</span><span class="s4">1</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeWRs[</span><span class="s4">1</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeWRs[</span><span class="s4">1</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeWRs[</span><span class="s4">1</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeWR2Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeWR2Stats[</span><span class="s4">5</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameR.append(HomeWR2Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec yards</span><span class="s1"> 
+        gameR.append(HomeWR2Stats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeWR2Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec/targets</span><span class="s1"> 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); gameC.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); gameR.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameL.append(</span><span class="s5">&quot;WR3 Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">TD/Fum</span><span class="s0">\n</span><span class="s5">Rec Yards</span><span class="s0">\n</span><span class="s5">Rec/Tgts</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayWRs[</span><span class="s4">2</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayWRs[</span><span class="s4">2</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayWRs[</span><span class="s4">2</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayWRs[</span><span class="s4">2</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayWR3Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayWR3Stats[</span><span class="s4">5</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameC.append(AwayWR3Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec yards</span><span class="s1"> 
+        gameC.append(AwayWR3Stats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayWR3Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec/targets</span><span class="s1"> 
+        gameR.append(homeWRs[</span><span class="s4">2</span><span class="s1">].getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeWRs[</span><span class="s4">2</span><span class="s1">].getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeWRs[</span><span class="s4">2</span><span class="s1">].ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeWRs[</span><span class="s4">2</span><span class="s1">].ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeWR3Stats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeWR3Stats[</span><span class="s4">5</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//td/fum</span><span class="s1"> 
+        gameR.append(HomeWR3Stats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot; yds</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec yards</span><span class="s1"> 
+        gameR.append(HomeWR3Stats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeWR3Stats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); </span><span class="s2">//rec/targets</span><span class="s1"> 
+ 
+        </span><span class="s2">/** 
+         * Ks 
+         */</span><span class="s1"> 
+        gameL.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">Ks</span><span class="s0">\n</span><span class="s5">Name</span><span class="s0">\n</span><span class="s5">Yr Ovr/Pot</span><span class="s0">\n</span><span class="s5">FGM/FGA</span><span class="s0">\n</span><span class="s5">XPM/XPA</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+awayK.getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(awayK.getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayK.ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+awayK.ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameC.append(AwayKStats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayKStats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot; FG</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+AwayKStats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+AwayKStats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot; XP</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeTeam.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+homeK.getInitialName()+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(homeK.getYrStr()+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeK.ratOvr+</span><span class="s5">&quot;/&quot;</span><span class="s1">+homeK.ratPot+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        gameR.append(HomeKStats[</span><span class="s4">2</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeKStats[</span><span class="s4">3</span><span class="s1">]+</span><span class="s5">&quot; FG</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+HomeKStats[</span><span class="s4">0</span><span class="s1">]+</span><span class="s5">&quot;/&quot;</span><span class="s1">+HomeKStats[</span><span class="s4">1</span><span class="s1">]+</span><span class="s5">&quot; XP</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+ 
+        gameSum[</span><span class="s4">0</span><span class="s1">] = gameL.toString(); 
+        gameSum[</span><span class="s4">1</span><span class="s1">] = gameC.toString(); 
+        gameSum[</span><span class="s4">2</span><span class="s1">] = gameR.toString(); 
+        gameSum[</span><span class="s4">3</span><span class="s1">] = gameEventLog; 
+ 
+        </span><span class="s0">return </span><span class="s1">gameSum; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Gets a scouting summary of a game that is yet to be played. 
+     * </span><span class="s3">@return </span><span class="s2">a String array with the left, right, center, and &quot;SCOUTING REPORT&quot; 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String[] getGameScoutStr() { 
+        </span><span class="s2">/** 
+         * [0] is left side 
+         * [1] is center 
+         * [2] is right 
+         * [3] is bottom (will be empty for scouting) 
+         */</span><span class="s1"> 
+        String[] gameSum = </span><span class="s0">new </span><span class="s1">String[</span><span class="s4">4</span><span class="s1">]; 
+        StringBuilder gameL = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+        StringBuilder gameC = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+        StringBuilder gameR = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+ 
+        gameL.append(</span><span class="s5">&quot;Ranking</span><span class="s0">\n</span><span class="s5">Record</span><span class="s0">\n</span><span class="s5">PPG</span><span class="s0">\n</span><span class="s5">Opp PPG</span><span class="s0">\n</span><span class="s5">YPG</span><span class="s0">\n</span><span class="s5">Opp YPG</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">Pass YPG</span><span class="s0">\n</span><span class="s5">Rush YPG</span><span class="s0">\n</span><span class="s5">Opp PYPG</span><span class="s0">\n</span><span class="s5">Opp RYPG</span><span class="s0">\n\n</span><span class="s5">Off Talent</span><span class="s0">\n</span><span class="s5">Def Talent</span><span class="s0">\n</span><span class="s5">Prestige&quot;</span><span class="s1">); 
+        </span><span class="s0">int </span><span class="s1">g = awayTeam.numGames(); 
+        Team t = awayTeam; 
+        gameC.append(</span><span class="s5">&quot;#&quot;</span><span class="s1">+t.rankTeamPollScore+</span><span class="s5">&quot; &quot;</span><span class="s1">+t.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.wins+</span><span class="s5">&quot;-&quot;</span><span class="s1">+t.losses+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamPoints/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamPoints+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamOppPoints/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppPoints+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamOppYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppYards+</span><span class="s5">&quot;)</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamPassYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamPassYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamRushYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamRushYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamOppPassYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppPassYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamOppRushYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppRushYards+</span><span class="s5">&quot;)</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamOffTalent+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOffTalent+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamDefTalent+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamDefTalent+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamPrestige+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamPrestige+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+        g = homeTeam.numGames(); 
+        t = homeTeam; 
+        gameR.append(</span><span class="s5">&quot;#&quot;</span><span class="s1">+t.rankTeamPollScore+</span><span class="s5">&quot; &quot;</span><span class="s1">+t.abbr+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.wins+</span><span class="s5">&quot;-&quot;</span><span class="s1">+t.losses+</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamPoints/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamPoints+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamOppPoints/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppPoints+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamOppYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppYards+</span><span class="s5">&quot;)</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamPassYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamPassYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamRushYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamRushYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamOppPassYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppPassYards+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamOppRushYards/g+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOppRushYards+</span><span class="s5">&quot;)</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamOffTalent+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamOffTalent+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+t.teamDefTalent+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamDefTalent+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">+ 
+                t.teamPrestige+</span><span class="s5">&quot; (&quot;</span><span class="s1">+t.rankTeamPrestige+</span><span class="s5">&quot;)</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+ 
+        gameSum[</span><span class="s4">0</span><span class="s1">] = gameL.toString(); 
+        gameSum[</span><span class="s4">1</span><span class="s1">] = gameC.toString(); 
+        gameSum[</span><span class="s4">2</span><span class="s1">] = gameR.toString(); 
+ 
+        StringBuilder gameScout = </span><span class="s0">new </span><span class="s1">StringBuilder(); 
+        </span><span class="s0">if </span><span class="s1">(awayTeam.playersInjuredAll != </span><span class="s0">null </span><span class="s1">&amp;&amp; !awayTeam.playersInjuredAll.isEmpty()) { 
+            Collections.sort(awayTeam.playersInjuredAll, </span><span class="s0">new </span><span class="s1">PlayerPositionComparator()); 
+            gameScout.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ awayTeam.abbr + </span><span class="s5">&quot; Injury Report:</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+            </span><span class="s0">for </span><span class="s1">(Player p : awayTeam.playersInjuredAll) { 
+                gameScout.append(p.getPosNameYrOvrPot_OneLine() + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+            } 
+        } 
+        </span><span class="s0">if </span><span class="s1">(homeTeam.playersInjuredAll != </span><span class="s0">null </span><span class="s1">&amp;&amp; !homeTeam.playersInjuredAll.isEmpty()) { 
+            Collections.sort(homeTeam.playersInjuredAll, </span><span class="s0">new </span><span class="s1">PlayerPositionComparator()); 
+            gameScout.append(</span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ homeTeam.abbr + </span><span class="s5">&quot; Injury Report:</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+            </span><span class="s0">for </span><span class="s1">(Player p : homeTeam.playersInjuredAll) { 
+                gameScout.append(p.getPosNameYrOvrPot_OneLine() + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">); 
+            } 
+        } 
+ 
+        gameSum[</span><span class="s4">3</span><span class="s1">] = gameScout.toString(); 
+ 
+        </span><span class="s0">return </span><span class="s1">gameSum; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Gets the amount of pass yards by a certain team for this game. 
+     * </span><span class="s3">@param </span><span class="s2">ha home/away bool, false for home 
+     * </span><span class="s3">@return </span><span class="s2">number of pass yards by specified team 
+     */</span><span class="s1"> 
+    </span><span class="s0">public int </span><span class="s1">getPassYards( </span><span class="s0">boolean </span><span class="s1">ha ) { 
+        </span><span class="s2">//ha = home/away, false for home, true for away</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(!ha) </span><span class="s0">return </span><span class="s1">HomeQBStats[</span><span class="s4">4</span><span class="s1">]; 
+        </span><span class="s0">else return </span><span class="s1">AwayQBStats[</span><span class="s4">4</span><span class="s1">]; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Gets the amount of rush yards by a certain team for this game. 
+     * </span><span class="s3">@param </span><span class="s2">ha home/away bool, false for home 
+     * </span><span class="s3">@return </span><span class="s2">number of rush yards by speicifed team 
+     */</span><span class="s1"> 
+    </span><span class="s0">public int </span><span class="s1">getRushYards( </span><span class="s0">boolean </span><span class="s1">ha ) { 
+        </span><span class="s2">//ha = home/away, false for home, true for away</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(!ha) </span><span class="s0">return </span><span class="s1">HomeRB1Stats[</span><span class="s4">1</span><span class="s1">] + HomeRB2Stats[</span><span class="s4">1</span><span class="s1">]; 
+        </span><span class="s0">else return </span><span class="s1">AwayRB1Stats[</span><span class="s4">1</span><span class="s1">] + AwayRB2Stats[</span><span class="s4">1</span><span class="s1">]; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Gets home field advantage, which is a +3 bonus to certain things for the home team 
+     * </span><span class="s3">@return </span><span class="s2">3 if for home, 0 for away 
+     */</span><span class="s1"> 
+    </span><span class="s0">private int </span><span class="s1">getHFadv() { 
+        </span><span class="s2">//home field advantage</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">footIQadv = (homeTeam.getCompositeFootIQ() - awayTeam.getCompositeFootIQ())/</span><span class="s4">5</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">(footIQadv &gt; </span><span class="s4">3</span><span class="s1">) footIQadv = </span><span class="s4">3</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">(footIQadv &lt; -</span><span class="s4">3</span><span class="s1">) footIQadv = -</span><span class="s4">3</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { 
+            </span><span class="s0">return </span><span class="s4">3 </span><span class="s1">+ footIQadv; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s0">return </span><span class="s1">-footIQadv; 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Gets the even prefix for events that happen in the log. 
+     * Will be of type ALA 3 - 3 GEO, Time: Q2 X:XX, 1st and goal at 95 yard line. 
+     * </span><span class="s3">@return </span><span class="s2">String of the event prefix. 
+     */</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String getEventPrefix() { 
+        String possStr; 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) possStr = homeTeam.abbr; 
+        </span><span class="s0">else </span><span class="s1">possStr = awayTeam.abbr; 
+        String yardsNeedAdj = </span><span class="s5">&quot;&quot; </span><span class="s1">+ gameYardsNeed; 
+        </span><span class="s0">if </span><span class="s1">(gameYardLine + gameYardsNeed &gt;= </span><span class="s4">100</span><span class="s1">) yardsNeedAdj = </span><span class="s5">&quot;Goal&quot;</span><span class="s1">; 
+        </span><span class="s0">int </span><span class="s1">gameDownAdj; 
+        </span><span class="s0">if </span><span class="s1">(gameDown &gt; </span><span class="s4">4</span><span class="s1">) { 
+            gameDownAdj = </span><span class="s4">4</span><span class="s1">; 
+        } </span><span class="s0">else</span><span class="s1"> 
+        { 
+            gameDownAdj = gameDown; 
+        } 
+        </span><span class="s0">return </span><span class="s5">&quot;</span><span class="s0">\n\n</span><span class="s5">&quot; </span><span class="s1">+ homeTeam.abbr + </span><span class="s5">&quot; &quot; </span><span class="s1">+ homeScore + </span><span class="s5">&quot; - &quot; </span><span class="s1">+ awayScore + </span><span class="s5">&quot; &quot; </span><span class="s1">+ awayTeam.abbr + </span><span class="s5">&quot;, Time: &quot; </span><span class="s1">+ convGameTime() + 
+                </span><span class="s5">&quot;</span><span class="s0">\n\t</span><span class="s5">&quot; </span><span class="s1">+ possStr + </span><span class="s5">&quot; &quot; </span><span class="s1">+ gameDownAdj + </span><span class="s5">&quot; and &quot; </span><span class="s1">+ yardsNeedAdj + </span><span class="s5">&quot; at &quot; </span><span class="s1">+ gameYardLine + </span><span class="s5">&quot; yard line.&quot; </span><span class="s1">+ </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Converts the game time, which is 0-3600, into readable time, i.e. Q1 12:50 
+     * </span><span class="s3">@return </span><span class="s2">String of the converted game time 
+     */</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String convGameTime() { 
+        </span><span class="s0">if </span><span class="s1">(!playingOT) { 
+            </span><span class="s0">int </span><span class="s1">qNum = (</span><span class="s4">3600 </span><span class="s1">- gameTime) / </span><span class="s4">900 </span><span class="s1">+ </span><span class="s4">1</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">minTime; 
+            </span><span class="s0">int </span><span class="s1">secTime; 
+            String secStr; 
+            </span><span class="s0">if </span><span class="s1">(gameTime &lt;= </span><span class="s4">0 </span><span class="s1">&amp;&amp; numOT &lt;= </span><span class="s4">0</span><span class="s1">) { </span><span class="s2">// Prevent Q5 1X:XX from displaying in the game log</span><span class="s1"> 
+                </span><span class="s0">return </span><span class="s5">&quot;0:00 Q4&quot;</span><span class="s1">; 
+            } 
+            </span><span class="s0">else </span><span class="s1">{ 
+                minTime = (gameTime - </span><span class="s4">900 </span><span class="s1">* (</span><span class="s4">4 </span><span class="s1">- qNum)) / </span><span class="s4">60</span><span class="s1">; 
+                secTime = (gameTime - </span><span class="s4">900 </span><span class="s1">* (</span><span class="s4">4 </span><span class="s1">- qNum)) - </span><span class="s4">60 </span><span class="s1">* minTime; 
+                </span><span class="s0">if </span><span class="s1">(secTime &lt; </span><span class="s4">10</span><span class="s1">) secStr = </span><span class="s5">&quot;0&quot; </span><span class="s1">+ secTime; 
+                </span><span class="s0">else </span><span class="s1">secStr = </span><span class="s5">&quot;&quot; </span><span class="s1">+ secTime; 
+                </span><span class="s0">return </span><span class="s1">minTime + </span><span class="s5">&quot;:&quot; </span><span class="s1">+ secStr + </span><span class="s5">&quot; Q&quot; </span><span class="s1">+ qNum; 
+            } 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s0">if </span><span class="s1">(!bottomOT) { 
+                </span><span class="s0">return </span><span class="s5">&quot;TOP OT&quot; </span><span class="s1">+ numOT; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s0">return </span><span class="s5">&quot;BOT OT&quot; </span><span class="s1">+ numOT; 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Plays game. Home team starts with ball, run plays till time expires. 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">playGame() { 
+        </span><span class="s0">if </span><span class="s1">( !hasPlayed ) { 
+            gameEventLog = </span><span class="s5">&quot;LOG: #&quot; </span><span class="s1">+ awayTeam.rankTeamPollScore + </span><span class="s5">&quot; &quot; </span><span class="s1">+ awayTeam.abbr + </span><span class="s5">&quot; (&quot; </span><span class="s1">+ awayTeam.wins + </span><span class="s5">&quot;-&quot; </span><span class="s1">+ awayTeam.losses + </span><span class="s5">&quot;) @ #&quot; </span><span class="s1">+ 
+                    homeTeam.rankTeamPollScore + </span><span class="s5">&quot; &quot; </span><span class="s1">+ homeTeam.abbr + </span><span class="s5">&quot; (&quot; </span><span class="s1">+ homeTeam.wins + </span><span class="s5">&quot;-&quot; </span><span class="s1">+ homeTeam.losses + </span><span class="s5">&quot;)&quot; </span><span class="s1">+ </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ 
+                    </span><span class="s5">&quot;---------------------------------------------------------</span><span class="s0">\n\n</span><span class="s5">&quot; </span><span class="s1">+ 
+                    awayTeam.abbr + </span><span class="s5">&quot; Off Strategy: &quot; </span><span class="s1">+ awayTeam.teamStratOff.getStratName() + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ 
+                    awayTeam.abbr + </span><span class="s5">&quot; Def Strategy: &quot; </span><span class="s1">+ awayTeam.teamStratDef.getStratName() + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ 
+                    homeTeam.abbr + </span><span class="s5">&quot; Off Strategy: &quot; </span><span class="s1">+ homeTeam.teamStratOff.getStratName() + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ 
+                    homeTeam.abbr + </span><span class="s5">&quot; Def Strategy: &quot; </span><span class="s1">+ homeTeam.teamStratDef.getStratName() + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot;</span><span class="s1">; 
+            </span><span class="s2">//probably establish some home field advantage before playing</span><span class="s1"> 
+            gameTime = </span><span class="s4">3600</span><span class="s1">; 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            gamePoss = </span><span class="s0">true</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            gameYardLine = </span><span class="s4">20</span><span class="s1">; 
+ 
+            </span><span class="s2">// Regulation</span><span class="s1"> 
+            </span><span class="s0">while </span><span class="s1">( gameTime &gt; </span><span class="s4">0 </span><span class="s1">) { 
+                </span><span class="s2">//play ball!</span><span class="s1"> 
+                </span><span class="s0">if </span><span class="s1">(gamePoss) runPlay(homeTeam, awayTeam); 
+                </span><span class="s0">else </span><span class="s1">runPlay(awayTeam, homeTeam); 
+            } 
+ 
+            </span><span class="s2">// Add last play</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(homeScore != awayScore) { 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot;Time has expired! The game is over.&quot;</span><span class="s1">; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot;OVERTIME!</span><span class="s0">\n</span><span class="s5">Tie game at 0:00, overtime begins!&quot;</span><span class="s1">; 
+            } 
+ 
+            </span><span class="s2">//Overtime (if needed)</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(gameTime &lt;= </span><span class="s4">0 </span><span class="s1">&amp;&amp; homeScore == awayScore) { 
+                playingOT = </span><span class="s0">true</span><span class="s1">; 
+                gamePoss = </span><span class="s0">false</span><span class="s1">; 
+                gameYardLine = </span><span class="s4">75</span><span class="s1">; 
+                numOT++; 
+                gameTime = -</span><span class="s4">1</span><span class="s1">; 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+ 
+                </span><span class="s0">while </span><span class="s1">(playingOT) { 
+                    </span><span class="s0">if </span><span class="s1">(gamePoss) runPlay(homeTeam, awayTeam); 
+                    </span><span class="s0">else </span><span class="s1">runPlay(awayTeam, homeTeam); 
+                } 
+            } 
+ 
+            </span><span class="s2">//game over, add wins</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(homeScore &gt; awayScore) { 
+                homeTeam.wins++; 
+                homeTeam.totalWins++; 
+                homeTeam.gameWLSchedule.add(</span><span class="s5">&quot;W&quot;</span><span class="s1">); 
+                awayTeam.losses++; 
+                awayTeam.totalLosses++; 
+                awayTeam.gameWLSchedule.add(</span><span class="s5">&quot;L&quot;</span><span class="s1">); 
+                homeTeam.gameWinsAgainst.add(awayTeam); 
+                homeTeam.winStreak.addWin(homeTeam.league.getYear()); 
+                homeTeam.league.checkLongestWinStreak(homeTeam.winStreak); 
+                awayTeam.winStreak.resetStreak(awayTeam.league.getYear()); 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                homeTeam.losses++; 
+                homeTeam.totalLosses++; 
+                homeTeam.gameWLSchedule.add(</span><span class="s5">&quot;L&quot;</span><span class="s1">); 
+                awayTeam.wins++; 
+                awayTeam.totalWins++; 
+                awayTeam.gameWLSchedule.add(</span><span class="s5">&quot;W&quot;</span><span class="s1">); 
+                awayTeam.gameWinsAgainst.add(homeTeam); 
+                awayTeam.winStreak.addWin(awayTeam.league.getYear()); 
+                awayTeam.league.checkLongestWinStreak(awayTeam.winStreak); 
+                homeTeam.winStreak.resetStreak(homeTeam.league.getYear()); 
+            } 
+ 
+            </span><span class="s2">// Add points/opp points</span><span class="s1"> 
+            homeTeam.addGamePlayedPlayers(homeScore &gt; awayScore); 
+            awayTeam.addGamePlayedPlayers(awayScore &gt; homeScore); 
+ 
+            homeTeam.teamPoints += homeScore; 
+            awayTeam.teamPoints += awayScore; 
+ 
+            homeTeam.teamOppPoints += awayScore; 
+            awayTeam.teamOppPoints += homeScore; 
+ 
+            homeTeam.teamYards += homeYards; 
+            awayTeam.teamYards += awayYards; 
+ 
+            homeTeam.teamOppYards += awayYards; 
+            awayTeam.teamOppYards += homeYards; 
+ 
+            homeTeam.teamOppPassYards += getPassYards(</span><span class="s0">true</span><span class="s1">); 
+            awayTeam.teamOppPassYards += getPassYards(</span><span class="s0">false</span><span class="s1">); 
+            homeTeam.teamOppRushYards += getRushYards(</span><span class="s0">true</span><span class="s1">); 
+            awayTeam.teamOppRushYards += getRushYards(</span><span class="s0">false</span><span class="s1">); 
+ 
+            homeTeam.teamTODiff += awayTOs-homeTOs; 
+            awayTeam.teamTODiff += homeTOs-awayTOs; 
+ 
+            hasPlayed = </span><span class="s0">true</span><span class="s1">; 
+ 
+            addNewsStory(); 
+ 
+            </span><span class="s0">if </span><span class="s1">(homeTeam.rivalTeam.equals(awayTeam.abbr) || awayTeam.rivalTeam.equals(homeTeam.abbr)) { 
+                </span><span class="s0">if </span><span class="s1">(homeScore &gt; awayScore) { 
+                    homeTeam.wonRivalryGame = </span><span class="s0">true</span><span class="s1">; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    awayTeam.wonRivalryGame = </span><span class="s0">true</span><span class="s1">; 
+                } 
+            } 
+ 
+            </span><span class="s2">// Set reference to right players</span><span class="s1"> 
+            homeQB = homeTeam.getQB(</span><span class="s4">0</span><span class="s1">); 
+            homeRBs = </span><span class="s0">new </span><span class="s1">PlayerRB[</span><span class="s4">2</span><span class="s1">]; 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; </span><span class="s4">2</span><span class="s1">; ++i) { 
+                homeRBs[i] = homeTeam.getRB(i); 
+            } 
+            homeWRs = </span><span class="s0">new </span><span class="s1">PlayerWR[</span><span class="s4">3</span><span class="s1">]; 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; </span><span class="s4">3</span><span class="s1">; ++i) { 
+                homeWRs[i] = homeTeam.getWR(i); 
+            } 
+            homeK = homeTeam.getK(</span><span class="s4">0</span><span class="s1">); 
+ 
+            awayQB = awayTeam.getQB(</span><span class="s4">0</span><span class="s1">); 
+            awayRBs = </span><span class="s0">new </span><span class="s1">PlayerRB[</span><span class="s4">2</span><span class="s1">]; 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; </span><span class="s4">2</span><span class="s1">; ++i) { 
+                awayRBs[i] = awayTeam.getRB(i); 
+            } 
+            awayWRs = </span><span class="s0">new </span><span class="s1">PlayerWR[</span><span class="s4">3</span><span class="s1">]; 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; </span><span class="s4">3</span><span class="s1">; ++i) { 
+                awayWRs[i] = awayTeam.getWR(i); 
+            } 
+            awayK = awayTeam.getK(</span><span class="s4">0</span><span class="s1">); 
+ 
+            homeTeam.checkForInjury(); 
+            awayTeam.checkForInjury(); 
+ 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Add news story to the league depending on the games outcome. 
+     * Only if it is big upset, or undefeated team goes down, or there are 3+ OTs. 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">addNewsStory() { 
+        </span><span class="s0">if </span><span class="s1">(numOT &gt;= </span><span class="s4">3</span><span class="s1">) { 
+            </span><span class="s2">// Thriller in OT</span><span class="s1"> 
+            Team winner, loser; 
+            </span><span class="s0">int </span><span class="s1">winScore, loseScore; 
+            </span><span class="s0">if </span><span class="s1">(awayScore &gt; homeScore) { 
+                winner = awayTeam; 
+                loser = homeTeam; 
+                winScore = awayScore; 
+                loseScore = homeScore; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                winner = homeTeam; 
+                loser = awayTeam; 
+                winScore = homeScore; 
+                loseScore = awayScore; 
+            } 
+            homeTeam.league.newsStories.get(homeTeam.league.currentWeek+</span><span class="s4">1</span><span class="s1">).add( 
+                    numOT+</span><span class="s5">&quot;OT Thriller!&gt;&quot;</span><span class="s1">+winner.strRep()+</span><span class="s5">&quot; and &quot;</span><span class="s1">+loser.strRep()+</span><span class="s5">&quot; played an absolutely thrilling game &quot;</span><span class="s1">+ 
+                            </span><span class="s5">&quot;that went to &quot;</span><span class="s1">+numOT+</span><span class="s5">&quot; overtimes, with &quot;</span><span class="s1">+winner.name+</span><span class="s5">&quot; finally emerging victorious &quot;</span><span class="s1">+winScore+</span><span class="s5">&quot; to &quot;</span><span class="s1">+loseScore+</span><span class="s5">&quot;.&quot;</span><span class="s1">); 
+        } 
+        </span><span class="s0">else if </span><span class="s1">(homeScore &gt; awayScore &amp;&amp; awayTeam.losses == </span><span class="s4">1 </span><span class="s1">&amp;&amp; awayTeam.league.currentWeek &gt; </span><span class="s4">5</span><span class="s1">) { 
+            </span><span class="s2">// 5-0 or better team given first loss</span><span class="s1"> 
+            awayTeam.league.newsStories.get(homeTeam.league.currentWeek+</span><span class="s4">1</span><span class="s1">).add( 
+                    </span><span class="s5">&quot;Undefeated no more! &quot;</span><span class="s1">+awayTeam.name+</span><span class="s5">&quot; suffers first loss!&quot; </span><span class="s1">+ 
+                            </span><span class="s5">&quot;&gt;&quot;</span><span class="s1">+homeTeam.strRep()+</span><span class="s5">&quot; hands &quot;</span><span class="s1">+awayTeam.strRep()+ 
+                            </span><span class="s5">&quot; their first loss of the season, winning &quot;</span><span class="s1">+homeScore+</span><span class="s5">&quot; to &quot;</span><span class="s1">+awayScore+</span><span class="s5">&quot;.&quot;</span><span class="s1">); 
+        } 
+        </span><span class="s0">else if </span><span class="s1">(awayScore &gt; homeScore &amp;&amp; homeTeam.losses == </span><span class="s4">1 </span><span class="s1">&amp;&amp; homeTeam.league.currentWeek &gt; </span><span class="s4">5</span><span class="s1">) { 
+            </span><span class="s2">// 5-0 or better team given first loss</span><span class="s1"> 
+            homeTeam.league.newsStories.get(homeTeam.league.currentWeek+</span><span class="s4">1</span><span class="s1">).add( 
+                    </span><span class="s5">&quot;Undefeated no more! &quot;</span><span class="s1">+homeTeam.name+</span><span class="s5">&quot; suffers first loss!&quot; </span><span class="s1">+ 
+                            </span><span class="s5">&quot;&gt;&quot;</span><span class="s1">+awayTeam.strRep()+</span><span class="s5">&quot; hands &quot;</span><span class="s1">+homeTeam.strRep()+ 
+                            </span><span class="s5">&quot; their first loss of the season, winning &quot;</span><span class="s1">+awayScore+</span><span class="s5">&quot; to &quot;</span><span class="s1">+homeScore+</span><span class="s5">&quot;.&quot;</span><span class="s1">); 
+        } 
+        </span><span class="s0">else if </span><span class="s1">(awayScore &gt; homeScore &amp;&amp; homeTeam.rankTeamPollScore &lt; </span><span class="s4">20 </span><span class="s1">&amp;&amp; 
+                (awayTeam.rankTeamPollScore - homeTeam.rankTeamPollScore) &gt; </span><span class="s4">20</span><span class="s1">) { 
+            </span><span class="s2">// Upset!</span><span class="s1"> 
+            awayTeam.league.newsStories.get(awayTeam.league.currentWeek+</span><span class="s4">1</span><span class="s1">).add( 
+                    </span><span class="s5">&quot;Upset! &quot; </span><span class="s1">+ awayTeam.strRep() + </span><span class="s5">&quot; beats &quot; </span><span class="s1">+ homeTeam.strRep() + 
+                            </span><span class="s5">&quot;&gt;#&quot; </span><span class="s1">+ awayTeam.rankTeamPollScore + </span><span class="s5">&quot; &quot; </span><span class="s1">+ awayTeam.name + </span><span class="s5">&quot; was able to pull off the upset on the road against #&quot; </span><span class="s1">+ 
+                            homeTeam.rankTeamPollScore + </span><span class="s5">&quot; &quot; </span><span class="s1">+ homeTeam.name + </span><span class="s5">&quot;, winning &quot; </span><span class="s1">+ awayScore + </span><span class="s5">&quot; to &quot; </span><span class="s1">+ homeScore + </span><span class="s5">&quot;.&quot;</span><span class="s1">); 
+        } 
+        </span><span class="s0">else if </span><span class="s1">(homeScore &gt; awayScore &amp;&amp; awayTeam.rankTeamPollScore &lt; </span><span class="s4">20 </span><span class="s1">&amp;&amp; 
+                (homeTeam.rankTeamPollScore - awayTeam.rankTeamPollScore) &gt; </span><span class="s4">20</span><span class="s1">) { 
+            </span><span class="s2">// Upset!</span><span class="s1"> 
+            homeTeam.league.newsStories.get(homeTeam.league.currentWeek+</span><span class="s4">1</span><span class="s1">).add( 
+                    </span><span class="s5">&quot;Upset! &quot;</span><span class="s1">+homeTeam.strRep()+</span><span class="s5">&quot; beats &quot;</span><span class="s1">+awayTeam.strRep()+ 
+                            </span><span class="s5">&quot;&gt;#&quot;</span><span class="s1">+homeTeam.rankTeamPollScore+</span><span class="s5">&quot; &quot;</span><span class="s1">+homeTeam.name+</span><span class="s5">&quot; was able to pull off the upset at home against #&quot;</span><span class="s1">+ 
+                            awayTeam.rankTeamPollScore+</span><span class="s5">&quot; &quot;</span><span class="s1">+awayTeam.name+</span><span class="s5">&quot;, winning &quot;</span><span class="s1">+homeScore+</span><span class="s5">&quot; to &quot;</span><span class="s1">+awayScore+</span><span class="s5">&quot;.&quot;</span><span class="s1">); 
+        } 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Run play. Type of play run determined by offensive strengths and type of situation. 
+     * </span><span class="s3">@param </span><span class="s2">offense offense running the play 
+     * </span><span class="s3">@param </span><span class="s2">defense defense defending the play 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">runPlay( Team offense, Team defense ) { 
+ 
+        </span><span class="s0">if </span><span class="s1">( gameDown &gt; </span><span class="s4">4 </span><span class="s1">) { 
+            </span><span class="s0">if </span><span class="s1">(!playingOT) { 
+                </span><span class="s2">//Log the turnover on downs, reset down and distance, give possession to the defense, exit this runPlay()</span><span class="s1"> 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot;TURNOVER ON DOWNS!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; failed to convert on &quot; </span><span class="s1">+ (gameDown - </span><span class="s4">1</span><span class="s1">) + </span><span class="s5">&quot;th down. &quot; </span><span class="s1">+ defense.abbr + </span><span class="s5">&quot; takes over possession on downs.&quot;</span><span class="s1">; 
+ 
+                </span><span class="s2">//Turn over on downs, change possession, set to first down and 10 yards to go</span><span class="s1"> 
+                gamePoss = !gamePoss; 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+                </span><span class="s2">//and flip which direction the ball is moving in</span><span class="s1"> 
+                gameYardLine = </span><span class="s4">100 </span><span class="s1">- gameYardLine; 
+ 
+            } 
+            </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s2">//OT is over for the offense, log the turnover on downs, run resetForOT().</span><span class="s1"> 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot;TURNOVER ON DOWNS!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; failed to convert on &quot; </span><span class="s1">+ (gameDown - </span><span class="s4">1</span><span class="s1">) + </span><span class="s5">&quot;th down in OT and their possession is over.&quot;</span><span class="s1">; 
+                resetForOT(); 
+ 
+            } 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s0">double </span><span class="s1">preferPass = (offense.getPassProf()*</span><span class="s4">2 </span><span class="s1">- defense.getPassDef()) * Math.random() - </span><span class="s4">10</span><span class="s1">; 
+            </span><span class="s0">double </span><span class="s1">preferRush = (offense.getRushProf()*</span><span class="s4">2 </span><span class="s1">- defense.getRushDef()) * Math.random() + offense.teamStratOff.getRYB(); 
+ 
+            </span><span class="s2">// If it's 1st and Goal to go, adjust yards needed to reflect distance for a TD so that play selection reflects actual yards to go</span><span class="s1"> 
+            </span><span class="s2">// If we don't do this, gameYardsNeed may be higher than the actually distance for a TD and suboptimal plays may be chosen</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(gameDown == </span><span class="s4">1 </span><span class="s1">&amp;&amp; gameYardLine &gt;= </span><span class="s4">91</span><span class="s1">) gameYardsNeed = </span><span class="s4">100 </span><span class="s1">- gameYardLine; 
+ 
+            </span><span class="s2">//Under 30 seconds to play, check that the team with the ball is trailing or tied, do something based on the score difference</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">( gameTime &lt;= </span><span class="s4">30 </span><span class="s1">&amp;&amp; !playingOT &amp;&amp; ((gamePoss &amp;&amp; (awayScore &gt;= homeScore)) || (!gamePoss &amp;&amp; (homeScore &gt;= awayScore)))) { 
+                </span><span class="s2">//Down by 3 or less, or tied, and you have the ball</span><span class="s1"> 
+                </span><span class="s0">if </span><span class="s1">( ((gamePoss &amp;&amp; (awayScore - homeScore) &lt;= </span><span class="s4">3</span><span class="s1">) || (!gamePoss &amp;&amp; (homeScore - awayScore) &lt;= </span><span class="s4">3</span><span class="s1">)) &amp;&amp; gameYardLine &gt; </span><span class="s4">60 </span><span class="s1">) { 
+                    </span><span class="s2">//last second FGA</span><span class="s1"> 
+                    fieldGoalAtt( offense, defense ); 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    </span><span class="s2">//hail mary</span><span class="s1"> 
+                    passingPlay( offense, defense ); 
+                } 
+            } 
+            </span><span class="s0">else if </span><span class="s1">( gameDown &gt;= </span><span class="s4">4 </span><span class="s1">) { 
+                </span><span class="s0">if </span><span class="s1">( ((gamePoss &amp;&amp; (awayScore - homeScore) &gt; </span><span class="s4">3</span><span class="s1">) || (!gamePoss &amp;&amp; (homeScore - awayScore) &gt; </span><span class="s4">3</span><span class="s1">)) &amp;&amp; gameTime &lt; </span><span class="s4">300 </span><span class="s1">) { 
+                    </span><span class="s2">//go for it since we need 7 to win -- This also forces going for it if down by a TD in BOT OT</span><span class="s1"> 
+                    </span><span class="s0">if </span><span class="s1">( gameYardsNeed &lt; </span><span class="s4">3 </span><span class="s1">) { 
+                        rushingPlay( offense, defense ); 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        passingPlay( offense, defense ); 
+                    } 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    </span><span class="s2">//4th down</span><span class="s1"> 
+                    </span><span class="s0">if </span><span class="s1">( gameYardsNeed &lt; </span><span class="s4">3 </span><span class="s1">) { 
+                        </span><span class="s0">if </span><span class="s1">( gameYardLine &gt; </span><span class="s4">65 </span><span class="s1">) { 
+                            </span><span class="s2">//fga</span><span class="s1"> 
+                            fieldGoalAtt( offense, defense ); 
+                        } </span><span class="s0">else if </span><span class="s1">( gameYardLine &gt; </span><span class="s4">55 </span><span class="s1">) { 
+                            </span><span class="s2">// run play, go for it!</span><span class="s1"> 
+                            rushingPlay( offense, defense ); 
+                        } </span><span class="s0">else </span><span class="s1">{ 
+                            </span><span class="s2">//punt</span><span class="s1"> 
+                            puntPlay( offense ); 
+                        } 
+                    } </span><span class="s0">else if </span><span class="s1">( gameYardLine &gt; </span><span class="s4">60 </span><span class="s1">) { 
+                        </span><span class="s2">//fga</span><span class="s1"> 
+                        fieldGoalAtt( offense, defense ); 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        </span><span class="s2">//punt</span><span class="s1"> 
+                        puntPlay( offense ); 
+                    } 
+                } 
+            } </span><span class="s0">else if </span><span class="s1">( (gameDown == </span><span class="s4">3 </span><span class="s1">&amp;&amp; gameYardsNeed &gt; </span><span class="s4">4</span><span class="s1">) || ((gameDown==</span><span class="s4">1 </span><span class="s1">|| gameDown==</span><span class="s4">2</span><span class="s1">) &amp;&amp; (preferPass &gt;= preferRush)) ) { 
+                </span><span class="s2">// pass play</span><span class="s1"> 
+                passingPlay(offense, defense); 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s2">//run play</span><span class="s1"> 
+                rushingPlay( offense, defense ); 
+            } 
+        } 
+ 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Give ball to correct team and reset yard line/down for new team. 
+     * In top OT frame, give the other team the ball, reset down, distance and yard line, and move to bottom OT frame 
+     * In bottom OT frame, if score is tied, keep playing. 
+     * If not, the game is over. 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">resetForOT() { 
+        </span><span class="s0">if </span><span class="s1">(bottomOT &amp;&amp; homeScore == awayScore) { 
+            gameYardLine = </span><span class="s4">75</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            numOT++; 
+            gamePoss = (numOT % </span><span class="s4">2</span><span class="s1">) == </span><span class="s4">0</span><span class="s1">; 
+            gameTime = -</span><span class="s4">1</span><span class="s1">; 
+            bottomOT = </span><span class="s0">false</span><span class="s1">; 
+            </span><span class="s2">//runPlay( awayTeam, homeTeam );</span><span class="s1"> 
+        } </span><span class="s0">else if </span><span class="s1">(!bottomOT) { 
+            gamePoss = !gamePoss; 
+            gameYardLine = </span><span class="s4">75</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            gameTime = -</span><span class="s4">1</span><span class="s1">; 
+            bottomOT = </span><span class="s0">true</span><span class="s1">; 
+            </span><span class="s2">//runPlay( homeTeam, awayTeam );</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">// game is not tied after both teams had their chance</span><span class="s1"> 
+            playingOT = </span><span class="s0">false</span><span class="s1">; 
+        } 
+    } 
+    </span><span class="s2">/** 
+     * Passing play. 
+     * </span><span class="s3">@param </span><span class="s2">offense throwing the ball 
+     * </span><span class="s3">@param </span><span class="s2">defense defending the pass 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">passingPlay( Team offense, Team defense ) { 
+        </span><span class="s0">int </span><span class="s1">yardsGain = </span><span class="s4">0</span><span class="s1">; 
+        </span><span class="s0">boolean </span><span class="s1">gotTD = </span><span class="s0">false</span><span class="s1">; 
+        </span><span class="s0">boolean </span><span class="s1">gotFumble = </span><span class="s0">false</span><span class="s1">; 
+        </span><span class="s2">//choose WR to throw to, better WRs more often</span><span class="s1"> 
+        </span><span class="s0">double </span><span class="s1">WR1pref = Math.pow( offense.getWR(</span><span class="s4">0</span><span class="s1">).ratOvr , </span><span class="s4">1 </span><span class="s1">) * Math.random(); 
+        </span><span class="s0">double </span><span class="s1">WR2pref = Math.pow( offense.getWR(</span><span class="s4">1</span><span class="s1">).ratOvr , </span><span class="s4">1 </span><span class="s1">) * Math.random(); 
+        </span><span class="s0">double </span><span class="s1">WR3pref = Math.pow( offense.getWR(</span><span class="s4">2</span><span class="s1">).ratOvr , </span><span class="s4">1 </span><span class="s1">) * Math.random(); 
+ 
+        PlayerWR selWR; 
+        PlayerCB selCB; 
+        </span><span class="s0">int </span><span class="s1">[] selWRStats; 
+        </span><span class="s0">if </span><span class="s1">( WR1pref &gt; WR2pref &amp;&amp; WR1pref &gt; WR3pref ) { 
+            selWR = offense.getWR(</span><span class="s4">0</span><span class="s1">); 
+            selCB = defense.getCB(</span><span class="s4">0</span><span class="s1">); 
+            </span><span class="s0">if </span><span class="s1">(gamePoss) { 
+                selWRStats = HomeWR1Stats; 
+            } </span><span class="s0">else </span><span class="s1">selWRStats = AwayWR1Stats; 
+        } </span><span class="s0">else if </span><span class="s1">( WR2pref &gt; WR1pref &amp;&amp; WR2pref &gt; WR3pref ) { 
+            selWR = offense.getWR(</span><span class="s4">1</span><span class="s1">); 
+            selCB = defense.getCB(</span><span class="s4">1</span><span class="s1">); 
+            </span><span class="s0">if </span><span class="s1">(gamePoss) { 
+                selWRStats = HomeWR2Stats; 
+            } </span><span class="s0">else </span><span class="s1">selWRStats = AwayWR2Stats; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            selWR = offense.getWR(</span><span class="s4">2</span><span class="s1">); 
+            selCB = defense.getCB(</span><span class="s4">2</span><span class="s1">); 
+            </span><span class="s0">if </span><span class="s1">(gamePoss) { 
+                selWRStats = HomeWR3Stats; 
+            } </span><span class="s0">else </span><span class="s1">selWRStats = AwayWR3Stats; 
+        } 
+ 
+        </span><span class="s2">//get how much pressure there is on qb, check if sack</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">pressureOnQB = defense.getCompositeF7Pass()*</span><span class="s4">2 </span><span class="s1">- offense.getCompositeOLPass() - getHFadv(); 
+        </span><span class="s0">if </span><span class="s1">( Math.random()*</span><span class="s4">100 </span><span class="s1">&lt; pressureOnQB/</span><span class="s4">8 </span><span class="s1">) { 
+            </span><span class="s2">//sacked!</span><span class="s1"> 
+            qbSack(offense); 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s2">//check for int</span><span class="s1"> 
+        </span><span class="s0">double </span><span class="s1">intChance = (pressureOnQB + defense.getS(</span><span class="s4">0</span><span class="s1">).ratOvr - (offense.getQB(</span><span class="s4">0</span><span class="s1">).ratPassAcc+offense.getQB(</span><span class="s4">0</span><span class="s1">).ratFootIQ+</span><span class="s4">100</span><span class="s1">)/</span><span class="s4">3</span><span class="s1">)/</span><span class="s4">18</span><span class="s1"> 
+                + offense.teamStratOff.getPAB() + defense.teamStratDef.getPAB(); 
+        </span><span class="s0">if </span><span class="s1">(intChance &lt; </span><span class="s4">0.015</span><span class="s1">) intChance = </span><span class="s4">0.015</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">( </span><span class="s4">100</span><span class="s1">*Math.random() &lt; intChance ) { 
+            </span><span class="s2">//Interception</span><span class="s1"> 
+            qbInterception( offense ); 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s2">//throw ball, check for completion</span><span class="s1"> 
+        </span><span class="s0">double </span><span class="s1">completion = ( getHFadv() + normalize(offense.getQB(</span><span class="s4">0</span><span class="s1">).ratPassAcc) + normalize(selWR.ratRecCat) 
+                - normalize(selCB.ratCBCov) )/</span><span class="s4">2 </span><span class="s1">+ </span><span class="s4">18.25 </span><span class="s1">- pressureOnQB/</span><span class="s4">16.8 </span><span class="s1">- offense.teamStratOff.getPAB() - defense.teamStratDef.getPAB(); 
+        </span><span class="s0">if </span><span class="s1">( </span><span class="s4">100</span><span class="s1">*Math.random() &lt; completion ) { 
+            </span><span class="s0">if </span><span class="s1">( </span><span class="s4">100</span><span class="s1">*Math.random() &lt; (</span><span class="s4">100 </span><span class="s1">- selWR.ratRecCat)/</span><span class="s4">3 </span><span class="s1">) { 
+                </span><span class="s2">//drop</span><span class="s1"> 
+                gameDown++; 
+                selWRStats[</span><span class="s4">4</span><span class="s1">]++; 
+                selWR.statsDrops++; 
+                passAttempt(offense, selWR, selWRStats, yardsGain); 
+                </span><span class="s2">//Drop ball = inc pass, so run time for the play, stop clock until next play, move on (aka return;)</span><span class="s1"> 
+                gameTime -= </span><span class="s4">15</span><span class="s1">*Math.random(); 
+                </span><span class="s0">return</span><span class="s1">; 
+ 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s2">//no drop</span><span class="s1"> 
+                yardsGain = (</span><span class="s0">int</span><span class="s1">) (( normalize(offense.getQB(</span><span class="s4">0</span><span class="s1">).ratPassPow) + normalize(selWR.ratRecSpd) - normalize(selCB.ratCBSpd) )*Math.random()/</span><span class="s4">3.7</span><span class="s1"> 
+                        + offense.teamStratOff.getPYB()/</span><span class="s4">2 </span><span class="s1">- defense.teamStratDef.getPYB()); 
+                </span><span class="s2">//see if receiver can get yards after catch</span><span class="s1"> 
+                </span><span class="s0">double </span><span class="s1">escapeChance = (normalize(selWR.ratRecEva)*</span><span class="s4">3 </span><span class="s1">- selCB.ratCBTkl - defense.getS(</span><span class="s4">0</span><span class="s1">).ratOvr)*Math.random() 
+                        + offense.teamStratOff.getPYB() - defense.teamStratDef.getPAB(); 
+                </span><span class="s0">if </span><span class="s1">( escapeChance &gt; </span><span class="s4">92 </span><span class="s1">|| Math.random() &gt; </span><span class="s4">0.95 </span><span class="s1">) { 
+                    yardsGain += </span><span class="s4">3 </span><span class="s1">+ selWR.ratRecSpd*Math.random()/</span><span class="s4">3</span><span class="s1">; 
+                } 
+                </span><span class="s0">if </span><span class="s1">( escapeChance &gt; </span><span class="s4">75 </span><span class="s1">&amp;&amp; Math.random() &lt; (</span><span class="s4">0.1 </span><span class="s1">+ (offense.teamStratOff.getPAB()-defense.teamStratDef.getPAB())/</span><span class="s4">200</span><span class="s1">)) { 
+                    </span><span class="s2">//wr escapes for TD</span><span class="s1"> 
+                    yardsGain += </span><span class="s4">100</span><span class="s1">; 
+                } 
+ 
+                </span><span class="s2">//add yardage</span><span class="s1"> 
+                gameYardLine += yardsGain; 
+                </span><span class="s0">if </span><span class="s1">( gameYardLine &gt;= </span><span class="s4">100 </span><span class="s1">) { </span><span class="s2">//TD!</span><span class="s1"> 
+                    yardsGain -= gameYardLine - </span><span class="s4">100</span><span class="s1">; 
+                    gameYardLine = </span><span class="s4">100 </span><span class="s1">- yardsGain; 
+                    addPointsQuarter(</span><span class="s4">6</span><span class="s1">); 
+                    passingTD(offense, selWR, selWRStats, yardsGain); 
+                    </span><span class="s2">//offense.teamPoints += 6;</span><span class="s1"> 
+                    </span><span class="s2">//defense.teamOppPoints += 6;</span><span class="s1"> 
+                    gotTD = </span><span class="s0">true</span><span class="s1">; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    </span><span class="s2">//check for fumble</span><span class="s1"> 
+                    </span><span class="s0">double </span><span class="s1">fumChance = (defense.getS(</span><span class="s4">0</span><span class="s1">).ratSTkl + selCB.ratCBTkl)/</span><span class="s4">2</span><span class="s1">; 
+                    </span><span class="s0">if </span><span class="s1">( </span><span class="s4">100</span><span class="s1">*Math.random() &lt; fumChance/</span><span class="s4">50 </span><span class="s1">) { 
+                        </span><span class="s2">//Fumble!</span><span class="s1"> 
+                        gotFumble = </span><span class="s0">true</span><span class="s1">; 
+                    } 
+                } 
+ 
+                </span><span class="s0">if </span><span class="s1">(!gotTD &amp;&amp; !gotFumble) { 
+                    </span><span class="s2">//check downs if there wasnt fumble or TD</span><span class="s1"> 
+                    gameYardsNeed -= yardsGain; 
+                    </span><span class="s0">if </span><span class="s1">( gameYardsNeed &lt;= </span><span class="s4">0 </span><span class="s1">) { 
+                        </span><span class="s2">// Only set new down and distance if there wasn't a TD</span><span class="s1"> 
+                        gameDown = </span><span class="s4">1</span><span class="s1">; 
+                        gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+                    } </span><span class="s0">else </span><span class="s1">gameDown++; 
+                } 
+ 
+                </span><span class="s2">//stats management</span><span class="s1"> 
+                passCompletion(offense, defense, selWR, selWRStats, yardsGain); 
+            } 
+ 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">//no completion, advance downs</span><span class="s1"> 
+            passAttempt(offense, selWR, selWRStats, yardsGain); 
+            gameDown++; 
+            </span><span class="s2">//Incomplete pass stops the clock, so just run time for how long the play took, then move on</span><span class="s1"> 
+            gameTime -= </span><span class="s4">15</span><span class="s1">*Math.random(); 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        passAttempt(offense, selWR, selWRStats, yardsGain); 
+ 
+ 
+        </span><span class="s0">if </span><span class="s1">( gotFumble ) { 
+            gameEventLog += getEventPrefix() + </span><span class="s5">&quot;TURNOVER!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; WR &quot; </span><span class="s1">+ selWR.name + </span><span class="s5">&quot; fumbled the ball after a catch.&quot;</span><span class="s1">; 
+            selWRStats[</span><span class="s4">5</span><span class="s1">]++; 
+            selWR.statsFumbles++; 
+            </span><span class="s0">if </span><span class="s1">(gamePoss) { </span><span class="s2">// home possession</span><span class="s1"> 
+                homeTOs++; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                awayTOs++; 
+            } 
+            </span><span class="s0">if </span><span class="s1">(!playingOT) { 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+                gamePoss = !gamePoss; 
+                gameYardLine = </span><span class="s4">100 </span><span class="s1">- gameYardLine; 
+                gameTime -= </span><span class="s4">15 </span><span class="s1">* Math.random(); 
+                </span><span class="s0">return</span><span class="s1">; 
+            } 
+            </span><span class="s0">else </span><span class="s1">{ 
+                resetForOT(); 
+                </span><span class="s0">return</span><span class="s1">; 
+            } 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">( gotTD ) { 
+            gameTime -= </span><span class="s4">15</span><span class="s1">*Math.random(); 
+            kickXP( offense, defense ); 
+            </span><span class="s0">if </span><span class="s1">(!playingOT) kickOff( offense ); 
+            </span><span class="s0">else </span><span class="s1">resetForOT(); 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        gameTime -= </span><span class="s4">15 </span><span class="s1">+ </span><span class="s4">15</span><span class="s1">*Math.random(); 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Rushing Play using running backs. 
+     * </span><span class="s3">@param </span><span class="s2">offense running the ball 
+     * </span><span class="s3">@param </span><span class="s2">defense defending the run 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">rushingPlay( Team offense, Team defense ) { 
+        </span><span class="s0">boolean </span><span class="s1">gotTD = </span><span class="s0">false</span><span class="s1">; 
+        </span><span class="s2">//pick RB to run</span><span class="s1"> 
+        PlayerRB selRB; 
+        </span><span class="s0">double </span><span class="s1">RB1pref = Math.pow( offense.getRB(</span><span class="s4">0</span><span class="s1">).ratOvr , </span><span class="s4">1.5 </span><span class="s1">) * Math.random(); 
+        </span><span class="s0">double </span><span class="s1">RB2pref = Math.pow( offense.getRB(</span><span class="s4">1</span><span class="s1">).ratOvr , </span><span class="s4">1.5 </span><span class="s1">) * Math.random(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+            selRB = offense.getRB(</span><span class="s4">0</span><span class="s1">); 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            selRB = offense.getRB(</span><span class="s4">1</span><span class="s1">); 
+        } 
+ 
+        </span><span class="s0">int </span><span class="s1">blockAdv = offense.getCompositeOLRush() - defense.getCompositeF7Rush(); 
+        </span><span class="s0">int </span><span class="s1">yardsGain = (</span><span class="s0">int</span><span class="s1">) ((selRB.ratRushSpd + blockAdv + getHFadv()) * Math.random() / </span><span class="s4">10 </span><span class="s1">+ (</span><span class="s0">double</span><span class="s1">)offense.teamStratOff.getRYB()/</span><span class="s4">2 </span><span class="s1">- (</span><span class="s0">double</span><span class="s1">)defense.teamStratDef.getRYB()/</span><span class="s4">2</span><span class="s1">); 
+        </span><span class="s0">if </span><span class="s1">(yardsGain &lt; </span><span class="s4">2</span><span class="s1">) { 
+            yardsGain += selRB.ratRushPow/</span><span class="s4">20 </span><span class="s1">- </span><span class="s4">3 </span><span class="s1">- (</span><span class="s0">double</span><span class="s1">)defense.teamStratDef.getRYB()/</span><span class="s4">2</span><span class="s1">; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">//break free from tackles</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(Math.random() &lt; ( </span><span class="s4">0.28 </span><span class="s1">+ ( offense.teamStratOff.getRAB() - (</span><span class="s0">double</span><span class="s1">)defense.teamStratDef.getRYB()/</span><span class="s4">2 </span><span class="s1">)/</span><span class="s4">50 </span><span class="s1">)) { 
+                yardsGain += selRB.ratRushEva/</span><span class="s4">5 </span><span class="s1">* Math.random(); 
+            } 
+        } 
+ 
+        </span><span class="s2">//add yardage</span><span class="s1"> 
+        gameYardLine += yardsGain; 
+        </span><span class="s0">if </span><span class="s1">( gameYardLine &gt;= </span><span class="s4">100 </span><span class="s1">) { </span><span class="s2">//TD!</span><span class="s1"> 
+            addPointsQuarter(</span><span class="s4">6</span><span class="s1">); 
+            yardsGain -= gameYardLine - </span><span class="s4">100</span><span class="s1">; 
+            gameYardLine = </span><span class="s4">100 </span><span class="s1">- yardsGain; 
+            </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+                homeScore += </span><span class="s4">6</span><span class="s1">; 
+                </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+                    HomeRB1Stats[</span><span class="s4">2</span><span class="s1">]++; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    HomeRB2Stats[</span><span class="s4">2</span><span class="s1">]++; 
+                } 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                awayScore += </span><span class="s4">6</span><span class="s1">; 
+                </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+                    AwayRB1Stats[</span><span class="s4">2</span><span class="s1">]++; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    AwayRB2Stats[</span><span class="s4">2</span><span class="s1">]++; 
+                } 
+            } 
+            tdInfo = offense.abbr + </span><span class="s5">&quot; RB &quot; </span><span class="s1">+ selRB.name + </span><span class="s5">&quot; rushed &quot; </span><span class="s1">+ yardsGain + </span><span class="s5">&quot; yards for a TD.&quot;</span><span class="s1">; 
+            selRB.statsTD++; 
+            </span><span class="s2">//offense.teamPoints += 6;</span><span class="s1"> 
+            </span><span class="s2">//defense.teamOppPoints += 6;</span><span class="s1"> 
+ 
+            gotTD = </span><span class="s0">true</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s2">//check downs if there wasn't TD</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(!gotTD) { 
+            </span><span class="s2">//check downs </span><span class="s1"> 
+            gameYardsNeed -= yardsGain; 
+            </span><span class="s0">if </span><span class="s1">( gameYardsNeed &lt;= </span><span class="s4">0 </span><span class="s1">) { 
+                </span><span class="s2">// Only set new down and distance if there wasn't a TD</span><span class="s1"> 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            } </span><span class="s0">else </span><span class="s1">gameDown++; 
+        } 
+ 
+        </span><span class="s2">//stats management</span><span class="s1"> 
+        rushAttempt(offense, defense, selRB, RB1pref, RB2pref, yardsGain); 
+ 
+        </span><span class="s0">if </span><span class="s1">( gotTD ) { 
+            gameTime -= </span><span class="s4">5 </span><span class="s1">+ </span><span class="s4">15</span><span class="s1">*Math.random(); </span><span class="s2">// Clock stops for the TD, just burn time for the play</span><span class="s1"> 
+            kickXP( offense, defense ); 
+            </span><span class="s0">if </span><span class="s1">(!playingOT) kickOff( offense ); 
+            </span><span class="s0">else </span><span class="s1">resetForOT(); 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            gameTime -= </span><span class="s4">25 </span><span class="s1">+ </span><span class="s4">15</span><span class="s1">*Math.random(); 
+            </span><span class="s2">//check for fumble</span><span class="s1"> 
+            </span><span class="s0">double </span><span class="s1">fumChance = (defense.getS(</span><span class="s4">0</span><span class="s1">).ratSTkl + defense.getCompositeF7Rush() - getHFadv())/</span><span class="s4">2 </span><span class="s1">+ offense.teamStratOff.getRAB(); 
+            </span><span class="s0">if </span><span class="s1">( </span><span class="s4">100</span><span class="s1">*Math.random() &lt; fumChance/</span><span class="s4">50 </span><span class="s1">) { 
+                </span><span class="s2">//Fumble!</span><span class="s1"> 
+                </span><span class="s0">if </span><span class="s1">( gamePoss ) { 
+                    homeTOs++; 
+                    </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+                        HomeRB1Stats[</span><span class="s4">3</span><span class="s1">]++; 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        HomeRB2Stats[</span><span class="s4">3</span><span class="s1">]++; 
+                    } 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    awayTOs++; 
+                    </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+                        AwayRB1Stats[</span><span class="s4">3</span><span class="s1">]++; 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        AwayRB2Stats[</span><span class="s4">3</span><span class="s1">]++; 
+                    } 
+                } 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot;TURNOVER!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; RB &quot; </span><span class="s1">+ selRB.name + </span><span class="s5">&quot; fumbled the ball while rushing.&quot;</span><span class="s1">; 
+                selRB.statsFumbles++; 
+                </span><span class="s0">if </span><span class="s1">(!playingOT) { 
+                    gameDown = </span><span class="s4">1</span><span class="s1">; 
+                    gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+                    gamePoss = !gamePoss; 
+                    gameYardLine = </span><span class="s4">100 </span><span class="s1">- gameYardLine; 
+                } 
+                </span><span class="s0">else </span><span class="s1">resetForOT(); 
+            } 
+        } 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Attempt a field goal using the offense's kicker. 
+     * If successful, add 3 points and kick off. 
+     * If not, turn the ball over. 
+     * </span><span class="s3">@param </span><span class="s2">offense kicking the ball 
+     * </span><span class="s3">@param </span><span class="s2">defense defending the kick 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">fieldGoalAtt( Team offense, Team defense ) { 
+        </span><span class="s0">double </span><span class="s1">fgDistRatio = Math.pow((</span><span class="s4">110 </span><span class="s1">- gameYardLine)/</span><span class="s4">50</span><span class="s1">,</span><span class="s4">2</span><span class="s1">); 
+        </span><span class="s0">double </span><span class="s1">fgAccRatio = Math.pow((</span><span class="s4">110 </span><span class="s1">- gameYardLine)/</span><span class="s4">50</span><span class="s1">,</span><span class="s4">1.25</span><span class="s1">); 
+        </span><span class="s0">double </span><span class="s1">fgDistChance = ( getHFadv() + offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickPow - fgDistRatio*</span><span class="s4">80 </span><span class="s1">); 
+        </span><span class="s0">double </span><span class="s1">fgAccChance = ( getHFadv() + offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickAcc - fgAccRatio*</span><span class="s4">80 </span><span class="s1">); 
+        </span><span class="s0">if </span><span class="s1">( fgDistChance &gt; </span><span class="s4">20 </span><span class="s1">&amp;&amp; fgAccChance*Math.random() &gt; </span><span class="s4">15 </span><span class="s1">) { 
+            </span><span class="s2">// made the fg</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+                homeScore += </span><span class="s4">3</span><span class="s1">; 
+                HomeKStats[</span><span class="s4">3</span><span class="s1">]++; 
+                HomeKStats[</span><span class="s4">2</span><span class="s1">]++; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                awayScore += </span><span class="s4">3</span><span class="s1">; 
+                AwayKStats[</span><span class="s4">3</span><span class="s1">]++; 
+                AwayKStats[</span><span class="s4">2</span><span class="s1">]++; 
+            } 
+            gameEventLog += getEventPrefix() + offense.abbr + </span><span class="s5">&quot; K &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; made the &quot; </span><span class="s1">+ (</span><span class="s4">110</span><span class="s1">-gameYardLine) + </span><span class="s5">&quot; yard FG.&quot;</span><span class="s1">; 
+            addPointsQuarter(</span><span class="s4">3</span><span class="s1">); 
+            offense.getK(</span><span class="s4">0</span><span class="s1">).statsFGMade++; 
+            offense.getK(</span><span class="s4">0</span><span class="s1">).statsFGAtt++; 
+            </span><span class="s0">if </span><span class="s1">(!playingOT) kickOff( offense ); 
+            </span><span class="s0">else </span><span class="s1">resetForOT(); 
+ 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">//miss</span><span class="s1"> 
+            gameEventLog += getEventPrefix() + offense.abbr + </span><span class="s5">&quot; K &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; missed the &quot; </span><span class="s1">+ (</span><span class="s4">110</span><span class="s1">-gameYardLine) + </span><span class="s5">&quot; yard FG.&quot;</span><span class="s1">; 
+            offense.getK(</span><span class="s4">0</span><span class="s1">).statsFGAtt++; 
+            </span><span class="s0">if </span><span class="s1">(!playingOT) { 
+                gameYardLine = Math.max(</span><span class="s4">100 </span><span class="s1">- gameYardLine, </span><span class="s4">20</span><span class="s1">); </span><span class="s2">//Misses inside the 20 = defense takes over on the 20</span><span class="s1"> 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+                </span><span class="s0">if </span><span class="s1">(gamePoss) { </span><span class="s2">// home possession</span><span class="s1"> 
+                    HomeKStats[</span><span class="s4">3</span><span class="s1">]++; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    AwayKStats[</span><span class="s4">3</span><span class="s1">]++; 
+                } 
+                gamePoss = !gamePoss; 
+            } 
+            </span><span class="s0">else </span><span class="s1">resetForOT(); 
+ 
+ 
+        } 
+ 
+        gameTime -= </span><span class="s4">20</span><span class="s1">; 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Kick the extra point after the touchdown. 
+     * Will decide to go for 2 under certain circumstances. 
+     * </span><span class="s3">@param </span><span class="s2">offense going for the point after 
+     * </span><span class="s3">@param </span><span class="s2">defense defending the point after 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">kickXP( Team offense, Team defense ) { 
+        </span><span class="s2">// No XP/2pt try if the TD puts the bottom OT offense ahead (aka wins the game)</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(playingOT &amp;&amp; bottomOT &amp;&amp; (((numOT % </span><span class="s4">2 </span><span class="s1">== </span><span class="s4">0</span><span class="s1">) &amp;&amp; awayScore &gt; homeScore) || ((numOT % </span><span class="s4">2 </span><span class="s1">!= </span><span class="s4">0</span><span class="s1">) &amp;&amp; homeScore &gt; awayScore))) 
+        { 
+            gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; wins on a walk-off touchdown!&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s2">// If a TD is scored as time expires, there is no XP/2pt if the score difference is greater than 2</span><span class="s1"> 
+        </span><span class="s0">else if </span><span class="s1">(!playingOT &amp;&amp; gameTime &lt;= </span><span class="s4">0 </span><span class="s1">&amp;&amp; ((homeScore - awayScore &gt; </span><span class="s4">2</span><span class="s1">) || (awayScore - homeScore &gt; </span><span class="s4">2</span><span class="s1">))) { 
+            </span><span class="s2">//Walkoff TD!</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">((Math.abs(homeScore - awayScore) &lt; </span><span class="s4">7</span><span class="s1">) &amp;&amp; ((gamePoss &amp;&amp; homeScore &gt; awayScore) || (!gamePoss &amp;&amp; awayScore &gt; homeScore))) gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot;</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; wins on a walk-off touchdown!&quot;</span><span class="s1">; 
+            </span><span class="s2">//Just rubbing in the win or saving some pride</span><span class="s1"> 
+            </span><span class="s0">else </span><span class="s1">gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+        </span><span class="s0">if </span><span class="s1">( (numOT &gt;= </span><span class="s4">3</span><span class="s1">) || (((gamePoss &amp;&amp; (awayScore - homeScore) == </span><span class="s4">2</span><span class="s1">) || (!gamePoss &amp;&amp; (homeScore - awayScore) == </span><span class="s4">2</span><span class="s1">)) &amp;&amp; gameTime &lt; </span><span class="s4">300 </span><span class="s1">)) { 
+            </span><span class="s2">//go for 2</span><span class="s1"> 
+            </span><span class="s0">boolean </span><span class="s1">successConversion = </span><span class="s0">false</span><span class="s1">; 
+            </span><span class="s0">if </span><span class="s1">( Math.random() &lt;= </span><span class="s4">0.50 </span><span class="s1">) { 
+                </span><span class="s2">//rushing</span><span class="s1"> 
+                </span><span class="s0">int </span><span class="s1">blockAdv = offense.getCompositeOLRush() - defense.getCompositeF7Rush(); 
+                </span><span class="s0">int </span><span class="s1">yardsGain = (</span><span class="s0">int</span><span class="s1">) ((offense.getRB(</span><span class="s4">0</span><span class="s1">).ratRushSpd + blockAdv) * Math.random() / </span><span class="s4">6</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">( yardsGain &gt; </span><span class="s4">5 </span><span class="s1">) { 
+                    successConversion = </span><span class="s0">true</span><span class="s1">; 
+                    </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+                        homeScore += </span><span class="s4">2</span><span class="s1">; 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        awayScore += </span><span class="s4">2</span><span class="s1">; 
+                    } 
+                    addPointsQuarter(</span><span class="s4">2</span><span class="s1">); 
+                    gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot; &quot; </span><span class="s1">+ offense.getRB(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; rushed for the 2pt conversion.&quot;</span><span class="s1">; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot; &quot; </span><span class="s1">+ offense.getRB(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; stopped at the line of scrimmage, failed the 2pt conversion.&quot;</span><span class="s1">; 
+                } 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s0">int </span><span class="s1">pressureOnQB = defense.getCompositeF7Pass()*</span><span class="s4">2 </span><span class="s1">- offense.getCompositeOLPass(); 
+                </span><span class="s0">double </span><span class="s1">completion = ( normalize(offense.getQB(</span><span class="s4">0</span><span class="s1">).ratPassAcc) + offense.getWR(</span><span class="s4">0</span><span class="s1">).ratRecCat - defense.getCB(</span><span class="s4">0</span><span class="s1">).ratCBCov )/</span><span class="s4">2 </span><span class="s1">+ </span><span class="s4">25 </span><span class="s1">- pressureOnQB/</span><span class="s4">20</span><span class="s1">; 
+                </span><span class="s0">if </span><span class="s1">( </span><span class="s4">100</span><span class="s1">*Math.random() &lt; completion ) { 
+                    successConversion = </span><span class="s0">true</span><span class="s1">; 
+                    </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+                        homeScore += </span><span class="s4">2</span><span class="s1">; 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        awayScore += </span><span class="s4">2</span><span class="s1">; 
+                    } 
+                    addPointsQuarter(</span><span class="s4">2</span><span class="s1">); 
+                    gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot; &quot; </span><span class="s1">+ offense.getQB(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; completed the pass to &quot; </span><span class="s1">+ offense.getWR(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; for the 2pt conversion.&quot;</span><span class="s1">; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot; &quot; </span><span class="s1">+ offense.getQB(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot;'s pass incomplete to &quot; </span><span class="s1">+ offense.getWR(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; for the failed 2pt conversion.&quot;</span><span class="s1">; 
+                } 
+            } 
+ 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">//kick XP</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">( Math.random()*</span><span class="s4">100 </span><span class="s1">&lt; </span><span class="s4">23 </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickAcc &amp;&amp; Math.random() &gt; </span><span class="s4">0.01 </span><span class="s1">) { 
+                </span><span class="s2">//made XP</span><span class="s1"> 
+                </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+                    homeScore += </span><span class="s4">1</span><span class="s1">; 
+                    HomeKStats[</span><span class="s4">0</span><span class="s1">]++; 
+                    HomeKStats[</span><span class="s4">1</span><span class="s1">]++; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    awayScore += </span><span class="s4">1</span><span class="s1">; 
+                    AwayKStats[</span><span class="s4">0</span><span class="s1">]++; 
+                    AwayKStats[</span><span class="s4">1</span><span class="s1">]++; 
+                } 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot; &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; made the XP.&quot;</span><span class="s1">; 
+                addPointsQuarter(</span><span class="s4">1</span><span class="s1">); 
+                offense.getK(</span><span class="s4">0</span><span class="s1">).statsXPMade++; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                gameEventLog += getEventPrefix() + </span><span class="s5">&quot; &quot; </span><span class="s1">+ tdInfo + </span><span class="s5">&quot; &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; missed the XP.&quot;</span><span class="s1">; 
+                </span><span class="s2">// missed XP</span><span class="s1"> 
+                </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+                    HomeKStats[</span><span class="s4">1</span><span class="s1">]++; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    AwayKStats[</span><span class="s4">1</span><span class="s1">]++; 
+                } 
+            } 
+            offense.getK(</span><span class="s4">0</span><span class="s1">).statsXPAtt++; 
+        } 
+    } 
+} 
+    </span><span class="s2">/** 
+     * Kick the ball off, turning the ball over to the other team. 
+     * </span><span class="s3">@param </span><span class="s2">offense kicking the ball off 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">kickOff( Team offense ) { 
+        </span><span class="s0">if </span><span class="s1">(gameTime &lt;= </span><span class="s4">0</span><span class="s1">) </span><span class="s0">return</span><span class="s1">; 
+        </span><span class="s0">else </span><span class="s1">{ 
+        </span><span class="s2">//Decide whether to onside kick. Only if losing but within 8 points with &lt; 3 min to go</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">( gameTime &lt; </span><span class="s4">180 </span><span class="s1">&amp;&amp; ((gamePoss &amp;&amp; (awayScore - homeScore) &lt;= </span><span class="s4">8 </span><span class="s1">&amp;&amp; (awayScore - homeScore) &gt; </span><span class="s4">0</span><span class="s1">) 
+                || (!gamePoss &amp;&amp; (homeScore - awayScore) &lt;=</span><span class="s4">8 </span><span class="s1">&amp;&amp; (homeScore - awayScore) &gt; </span><span class="s4">0</span><span class="s1">))) { 
+            </span><span class="s2">// Yes, do onside</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickFum * Math.random() &gt; </span><span class="s4">60 </span><span class="s1">|| Math.random() &lt; </span><span class="s4">0.1</span><span class="s1">) { 
+                </span><span class="s2">//Success!</span><span class="s1"> 
+                gameEventLog += getEventPrefix() + offense.abbr + </span><span class="s5">&quot; K &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; successfully executes onside kick! &quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; has possession!&quot;</span><span class="s1">; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s2">// Fail</span><span class="s1"> 
+                gameEventLog += getEventPrefix() + offense.abbr + </span><span class="s5">&quot; K &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; failed the onside kick and lost possession.&quot;</span><span class="s1">; 
+                gamePoss = !gamePoss; 
+            } 
+            gameYardLine = </span><span class="s4">50</span><span class="s1">; 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+ 
+            gameTime -= </span><span class="s4">4 </span><span class="s1">+ </span><span class="s4">5</span><span class="s1">*Math.random(); </span><span class="s2">//Onside kicks are very fast, unless there's a weird fight for the ball. Chance to burn a lot of time, odds are you'll burn a little time.</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">// Just regular kick off</span><span class="s1"> 
+            gameYardLine = (</span><span class="s0">int</span><span class="s1">) (</span><span class="s4">100 </span><span class="s1">- ( offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickPow + </span><span class="s4">20 </span><span class="s1">- </span><span class="s4">40</span><span class="s1">*Math.random() )); 
+            </span><span class="s0">if </span><span class="s1">( gameYardLine &lt;= </span><span class="s4">0 </span><span class="s1">) gameYardLine = </span><span class="s4">25</span><span class="s1">; 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            gamePoss = !gamePoss; 
+        } 
+ 
+        gameTime -= </span><span class="s4">15</span><span class="s1">*Math.random(); 
+    } 
+} 
+    </span><span class="s2">/** 
+     * Kick the ball off following a safety, turning the ball over to the other team. 
+     * Safety free kicks happen from the 20 instead of the 35, so start the kicker from further back. 
+     * </span><span class="s3">@param </span><span class="s2">offense kicking the ball off 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">freeKick( Team offense ) { 
+        </span><span class="s0">if </span><span class="s1">(gameTime &lt;= </span><span class="s4">0</span><span class="s1">) </span><span class="s0">return</span><span class="s1">; 
+        </span><span class="s0">else </span><span class="s1">{ 
+        </span><span class="s2">//Decide whether to onside kick. Only if losing but within 8 points with &lt; 3 min to go</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">( gameTime &lt; </span><span class="s4">180 </span><span class="s1">&amp;&amp; ((gamePoss &amp;&amp; (awayScore - homeScore) &lt;= </span><span class="s4">8 </span><span class="s1">&amp;&amp; (awayScore - homeScore) &gt; </span><span class="s4">0</span><span class="s1">) 
+                || (!gamePoss &amp;&amp; (homeScore - awayScore) &lt;=</span><span class="s4">8 </span><span class="s1">&amp;&amp; (homeScore - awayScore) &gt; </span><span class="s4">0</span><span class="s1">))) { 
+            </span><span class="s2">// Yes, do onside</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickFum * Math.random() &gt; </span><span class="s4">60 </span><span class="s1">|| Math.random() &lt; </span><span class="s4">0.1</span><span class="s1">) { 
+                </span><span class="s2">//Success!</span><span class="s1"> 
+                gameEventLog += getEventPrefix() + offense.abbr + </span><span class="s5">&quot; K &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; successfully executes onside kick! &quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; has possession!&quot;</span><span class="s1">; 
+                gameYardLine = </span><span class="s4">35</span><span class="s1">; 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s2">// Fail</span><span class="s1"> 
+                gameEventLog += getEventPrefix() + offense.abbr + </span><span class="s5">&quot; K &quot; </span><span class="s1">+ offense.getK(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; failed the onside kick and lost possession.&quot;</span><span class="s1">; 
+                gamePoss = !gamePoss; 
+                gameYardLine = </span><span class="s4">65</span><span class="s1">; 
+                gameDown = </span><span class="s4">1</span><span class="s1">; 
+                gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            } 
+ 
+            gameTime -= </span><span class="s4">4 </span><span class="s1">+ </span><span class="s4">4</span><span class="s1">*Math.random(); </span><span class="s2">//Onside kicks are very fast, unless there's a weird fight for the ball. Chance to burn a lot of time, odds are you'll burn a little time.</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">// Just regular kick off</span><span class="s1"> 
+            gameYardLine = (</span><span class="s0">int</span><span class="s1">) (</span><span class="s4">115 </span><span class="s1">- ( offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickPow + </span><span class="s4">20 </span><span class="s1">- </span><span class="s4">40</span><span class="s1">*Math.random() )); 
+            </span><span class="s0">if </span><span class="s1">( gameYardLine &lt;= </span><span class="s4">0 </span><span class="s1">) gameYardLine = </span><span class="s4">25</span><span class="s1">; 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            gamePoss = !gamePoss; 
+            gameTime -= </span><span class="s4">15</span><span class="s1">*Math.random(); 
+         
+            } 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Punt the ball if it is a 4th down and decided not to go for it. 
+     * Will turnover possession. 
+     * </span><span class="s3">@param </span><span class="s2">offense kicking the punt 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">puntPlay( Team offense ) { 
+        gameYardLine = (</span><span class="s0">int</span><span class="s1">) (</span><span class="s4">100 </span><span class="s1">- ( gameYardLine + offense.getK(</span><span class="s4">0</span><span class="s1">).ratKickPow/</span><span class="s4">3 </span><span class="s1">+ </span><span class="s4">20 </span><span class="s1">- </span><span class="s4">10</span><span class="s1">*Math.random() )); 
+        </span><span class="s0">if </span><span class="s1">( gameYardLine &lt; </span><span class="s4">0 </span><span class="s1">) { 
+            gameYardLine = </span><span class="s4">20</span><span class="s1">; 
+        } 
+        gameDown = </span><span class="s4">1</span><span class="s1">; 
+        gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+        gamePoss = !gamePoss; 
+ 
+        gameTime -= </span><span class="s4">20 </span><span class="s1">+ </span><span class="s4">15</span><span class="s1">*Math.random(); 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Sack the offense's QB. If it is past 0 yard line, call for a safety. 
+     * </span><span class="s3">@param </span><span class="s2">offense offense that is gettign sacked 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">qbSack( Team offense ) { 
+        offense.getQB(</span><span class="s4">0</span><span class="s1">).statsSacked++; 
+        gameYardsNeed += </span><span class="s4">3</span><span class="s1">; 
+        gameYardLine -= </span><span class="s4">3</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+            HomeQBStats[</span><span class="s4">5</span><span class="s1">]++; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            AwayQBStats[</span><span class="s4">5</span><span class="s1">]++; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(gameYardLine &lt; </span><span class="s4">0</span><span class="s1">) { 
+            </span><span class="s2">// Safety!</span><span class="s1"> 
+            </span><span class="s2">// Eat some time up for the play that was run, stop it once play is over</span><span class="s1"> 
+            gameTime -= </span><span class="s4">10</span><span class="s1">*Math.random(); 
+            safety(); 
+            </span><span class="s0">return</span><span class="s1">; </span><span class="s2">// Run safety then get out of qbSack (safety() will take care of free kick)</span><span class="s1"> 
+        } 
+ 
+        gameDown++; </span><span class="s2">// Advance gameDown after checking for Safety, otherwise game log reports Safety occurring one down later than it did</span><span class="s1"> 
+ 
+        </span><span class="s2">//Similar amount of time as rushing, minus some in-play time -- sacks are faster (usually)</span><span class="s1"> 
+        gameTime -= </span><span class="s4">25 </span><span class="s1">+ </span><span class="s4">10</span><span class="s1">*Math.random(); 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Perform safety. Will add 2 to the correct team and give the ball over via a free kick. 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">safety() { 
+        </span><span class="s2">//addPointsQuarter(2);</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(gamePoss) { 
+            awayScore += </span><span class="s4">2</span><span class="s1">; 
+            gameEventLog += getEventPrefix() + </span><span class="s5">&quot;SAFETY!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ homeTeam.abbr + </span><span class="s5">&quot; QB &quot; </span><span class="s1">+ homeTeam.getQB(</span><span class="s4">0</span><span class="s1">).name + 
+                    </span><span class="s5">&quot; was tackled in the endzone! Result is a safety and &quot; </span><span class="s1">+ awayTeam.abbr + </span><span class="s5">&quot; will get possession.&quot;</span><span class="s1">; 
+            freeKick(homeTeam); 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            homeScore += </span><span class="s4">2</span><span class="s1">; 
+            gameEventLog += getEventPrefix() + </span><span class="s5">&quot;SAFETY!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ awayTeam.abbr + </span><span class="s5">&quot; QB &quot; </span><span class="s1">+ awayTeam.getQB(</span><span class="s4">0</span><span class="s1">).name + 
+                    </span><span class="s5">&quot; was tackled in the endzone! Result is a safety and &quot; </span><span class="s1">+ homeTeam.abbr + </span><span class="s5">&quot; will get possession.&quot;</span><span class="s1">; 
+            freeKick(awayTeam); 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Perform an interception on the offense's QB. Will turn the ball over and add the needed stats. 
+     * </span><span class="s3">@param </span><span class="s2">offense offense that has been intercepted. 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">qbInterception( Team offense ) { 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+            HomeQBStats[</span><span class="s4">3</span><span class="s1">]++; 
+            HomeQBStats[</span><span class="s4">1</span><span class="s1">]++; 
+            homeTOs++; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            AwayQBStats[</span><span class="s4">3</span><span class="s1">]++; 
+            AwayQBStats[</span><span class="s4">1</span><span class="s1">]++; 
+            awayTOs++; 
+        } 
+ 
+        </span><span class="s2">//Log the event before decreasing the time, in keeping with the standard of other logged plays (TD, Fumble, etc.)</span><span class="s1"> 
+        gameEventLog += getEventPrefix() + </span><span class="s5">&quot;TURNOVER!</span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s1">+ offense.abbr + </span><span class="s5">&quot; QB &quot; </span><span class="s1">+ offense.getQB(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; was intercepted.&quot;</span><span class="s1">; 
+        </span><span class="s2">//Clock stops after a pick, so just run time off the clock for the play that occurred</span><span class="s1"> 
+        </span><span class="s2">//NOTE: If the ability to run an interception back is ever added, this should be changed to be more time</span><span class="s1"> 
+        gameTime -= </span><span class="s4">15</span><span class="s1">*Math.random(); 
+        offense.getQB(</span><span class="s4">0</span><span class="s1">).statsInt++; 
+        </span><span class="s0">if </span><span class="s1">(!playingOT) { 
+            gameDown = </span><span class="s4">1</span><span class="s1">; 
+            gameYardsNeed = </span><span class="s4">10</span><span class="s1">; 
+            gamePoss = !gamePoss; 
+            gameYardLine = </span><span class="s4">100 </span><span class="s1">- gameYardLine; 
+        } 
+        </span><span class="s0">else </span><span class="s1">resetForOT(); 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Passing touchdown stat tracking. Add 6 points and yards for QB/WR. 
+     * </span><span class="s3">@param </span><span class="s2">offense offense who got the TD 
+     * </span><span class="s3">@param </span><span class="s2">selWR WR who caught the TD 
+     * </span><span class="s3">@param </span><span class="s2">selWRStats stats array for that WR 
+     * </span><span class="s3">@param </span><span class="s2">yardsGain number of yards gained by the TD 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">passingTD( Team offense, PlayerWR selWR, </span><span class="s0">int</span><span class="s1">[] selWRStats, </span><span class="s0">int </span><span class="s1">yardsGain ){ 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+            homeScore += </span><span class="s4">6</span><span class="s1">; 
+            HomeQBStats[</span><span class="s4">2</span><span class="s1">]++; 
+            selWRStats[</span><span class="s4">3</span><span class="s1">]++; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            awayScore += </span><span class="s4">6</span><span class="s1">; 
+            AwayQBStats[</span><span class="s4">2</span><span class="s1">]++; 
+            selWRStats[</span><span class="s4">3</span><span class="s1">]++; 
+        } 
+        tdInfo = offense.abbr + </span><span class="s5">&quot; QB &quot; </span><span class="s1">+ offense.getQB(</span><span class="s4">0</span><span class="s1">).name + </span><span class="s5">&quot; threw a &quot; </span><span class="s1">+ yardsGain + </span><span class="s5">&quot; yard TD to &quot; </span><span class="s1">+ selWR.name + </span><span class="s5">&quot;.&quot;</span><span class="s1">; 
+        offense.getQB(</span><span class="s4">0</span><span class="s1">).statsTD++; 
+        selWR.statsTD++; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Pass completion stat tracking. used for team mostly. 
+     * </span><span class="s3">@param </span><span class="s2">offense offense who threw the pass 
+     * </span><span class="s3">@param </span><span class="s2">defense defense who defended the pass 
+     * </span><span class="s3">@param </span><span class="s2">selWR WR who caught the pass 
+     * </span><span class="s3">@param </span><span class="s2">selWRStats stat array for that WR 
+     * </span><span class="s3">@param </span><span class="s2">yardsGain number of yards gained by that pass 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">passCompletion( Team offense, Team defense, PlayerWR selWR, </span><span class="s0">int</span><span class="s1">[] selWRStats, </span><span class="s0">int </span><span class="s1">yardsGain ) { 
+        offense.getQB(</span><span class="s4">0</span><span class="s1">).statsPassComp++; 
+        offense.getQB(</span><span class="s4">0</span><span class="s1">).statsPassYards += yardsGain; 
+        selWR.statsReceptions++; 
+        selWR.statsRecYards += yardsGain; 
+        offense.teamPassYards += yardsGain; 
+        </span><span class="s2">//offense.teamYards += yardsGain;</span><span class="s1"> 
+        </span><span class="s2">//defense.teamOppYards += yardsGain;</span><span class="s1"> 
+ 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+            HomeQBStats[</span><span class="s4">0</span><span class="s1">]++; 
+            selWRStats[</span><span class="s4">0</span><span class="s1">]++; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            AwayQBStats[</span><span class="s4">0</span><span class="s1">]++; 
+            selWRStats[</span><span class="s4">0</span><span class="s1">]++; 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Stat tracking for a pass attempt (not necessarily completion). Used for QB mostly. 
+     * </span><span class="s3">@param </span><span class="s2">offense offense who threw the pass 
+     * </span><span class="s3">@param </span><span class="s2">selWR WR who tries to catch the pass 
+     * </span><span class="s3">@param </span><span class="s2">selWRStats stat array for that WR 
+     * </span><span class="s3">@param </span><span class="s2">yardsGain yards 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">passAttempt( Team offense, PlayerWR selWR, </span><span class="s0">int</span><span class="s1">[] selWRStats, </span><span class="s0">int </span><span class="s1">yardsGain ) { 
+        offense.getQB(</span><span class="s4">0</span><span class="s1">).statsPassAtt++; 
+        selWR.statsTargets++; 
+ 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+            homeYards += yardsGain; 
+            HomeQBStats[</span><span class="s4">4</span><span class="s1">] += yardsGain; 
+            HomeQBStats[</span><span class="s4">1</span><span class="s1">]++; 
+            selWRStats[</span><span class="s4">2</span><span class="s1">] += yardsGain; 
+            selWRStats[</span><span class="s4">1</span><span class="s1">]++; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            awayYards += yardsGain; 
+            AwayQBStats[</span><span class="s4">4</span><span class="s1">] += yardsGain; 
+            AwayQBStats[</span><span class="s4">1</span><span class="s1">]++; 
+            selWRStats[</span><span class="s4">2</span><span class="s1">] += yardsGain; 
+            selWRStats[</span><span class="s4">1</span><span class="s1">]++; 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Rush attempt stat tracking 
+     * </span><span class="s3">@param </span><span class="s2">offense offense who ran the run play 
+     * </span><span class="s3">@param </span><span class="s2">defense defense who defended the play 
+     * </span><span class="s3">@param </span><span class="s2">selRB RB who ran the ball 
+     * </span><span class="s3">@param </span><span class="s2">RB1pref number to compare to see who was chosen 
+     * </span><span class="s3">@param </span><span class="s2">RB2pref number to compare to see who was chosen 
+     * </span><span class="s3">@param </span><span class="s2">yardsGain yards gained by the rush 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">rushAttempt( Team offense, Team defense, PlayerRB selRB, </span><span class="s0">double </span><span class="s1">RB1pref, </span><span class="s0">double </span><span class="s1">RB2pref, </span><span class="s0">int </span><span class="s1">yardsGain ) { 
+        selRB.statsRushAtt++; 
+        selRB.statsRushYards += yardsGain; 
+        offense.teamRushYards += yardsGain; 
+        </span><span class="s2">//offense.teamYards += yardsGain;</span><span class="s1"> 
+        </span><span class="s2">//defense.teamOppYards += yardsGain;</span><span class="s1"> 
+ 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { </span><span class="s2">// home possession</span><span class="s1"> 
+            homeYards += yardsGain; 
+            </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+                HomeRB1Stats[</span><span class="s4">0</span><span class="s1">]++; 
+                HomeRB1Stats[</span><span class="s4">1</span><span class="s1">] += yardsGain; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                HomeRB2Stats[</span><span class="s4">0</span><span class="s1">]++; 
+                HomeRB2Stats[</span><span class="s4">1</span><span class="s1">] += yardsGain; 
+            } 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            awayYards += yardsGain; 
+            </span><span class="s0">if </span><span class="s1">(RB1pref &gt; RB2pref) { 
+                AwayRB1Stats[</span><span class="s4">0</span><span class="s1">]++; 
+                AwayRB1Stats[</span><span class="s4">1</span><span class="s1">] += yardsGain; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                AwayRB2Stats[</span><span class="s4">0</span><span class="s1">]++; 
+                AwayRB2Stats[</span><span class="s4">1</span><span class="s1">] += yardsGain; 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Add points to the correct quarter (not used anymore?) 
+     * </span><span class="s3">@param </span><span class="s2">points points added 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">addPointsQuarter( </span><span class="s0">int </span><span class="s1">points ) { 
+        </span><span class="s0">if </span><span class="s1">( gamePoss ) { 
+            </span><span class="s2">//home poss</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">( gameTime &gt; </span><span class="s4">2700 </span><span class="s1">) { 
+                homeQScore[</span><span class="s4">0</span><span class="s1">] += points; 
+            } </span><span class="s0">else if </span><span class="s1">( gameTime &gt; </span><span class="s4">1800 </span><span class="s1">) { 
+                homeQScore[</span><span class="s4">1</span><span class="s1">] += points; 
+            } </span><span class="s0">else if </span><span class="s1">( gameTime &gt; </span><span class="s4">900 </span><span class="s1">) { 
+                homeQScore[</span><span class="s4">2</span><span class="s1">] += points; 
+            } </span><span class="s0">else if </span><span class="s1">( numOT == </span><span class="s4">0 </span><span class="s1">) { 
+                homeQScore[</span><span class="s4">3</span><span class="s1">] += points; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s0">if </span><span class="s1">( </span><span class="s4">3</span><span class="s1">+numOT &lt; </span><span class="s4">10 </span><span class="s1">) homeQScore[</span><span class="s4">3</span><span class="s1">+numOT] += points; 
+                </span><span class="s0">else </span><span class="s1">homeQScore[</span><span class="s4">9</span><span class="s1">] += points; 
+            } 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">//away</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">( gameTime &gt; </span><span class="s4">2700 </span><span class="s1">) { 
+                awayQScore[</span><span class="s4">0</span><span class="s1">] += points; 
+            } </span><span class="s0">else if </span><span class="s1">( gameTime &gt; </span><span class="s4">1800 </span><span class="s1">) { 
+                awayQScore[</span><span class="s4">1</span><span class="s1">] += points; 
+            } </span><span class="s0">else if </span><span class="s1">( gameTime &gt; </span><span class="s4">900 </span><span class="s1">) { 
+                awayQScore[</span><span class="s4">2</span><span class="s1">] += points; 
+            } </span><span class="s0">else if </span><span class="s1">( numOT == </span><span class="s4">0 </span><span class="s1">) { 
+                awayQScore[</span><span class="s4">3</span><span class="s1">] += points; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                </span><span class="s0">if </span><span class="s1">( </span><span class="s4">3</span><span class="s1">+numOT &lt; </span><span class="s4">10 </span><span class="s1">) awayQScore[</span><span class="s4">3</span><span class="s1">+numOT] += points; 
+                </span><span class="s0">else </span><span class="s1">awayQScore[</span><span class="s4">9</span><span class="s1">] += points; 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * Normalize a rating to make it more even. 80-&gt;90, 90-&gt;95, etc 
+     * </span><span class="s3">@param </span><span class="s2">rating rating to be normalized 
+     * </span><span class="s3">@return </span><span class="s2">normalized rating 
+     */</span><span class="s1"> 
+    </span><span class="s0">private int </span><span class="s1">normalize(</span><span class="s0">int </span><span class="s1">rating) { 
+        </span><span class="s0">return </span><span class="s1">(</span><span class="s4">100 </span><span class="s1">+ rating)/</span><span class="s4">2</span><span class="s1">; 
+    } 
+} 
+</span></pre>
+</body>
+</html>
