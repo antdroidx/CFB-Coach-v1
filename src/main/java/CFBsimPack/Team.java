@@ -363,12 +363,6 @@ public class Team {
 
         advanceSeasonPlayers();
 
-        //Sets CPU Strategy!  Performed after CPU recruiting completed.
-      /*if(!userControlled){
-            teamStratOffNum = getCPUOffense();
-            teamStratDefNum = getCPUDefense();
-        } */
-
     }
 
     //Calculates Prestige Change at end of season
@@ -1908,15 +1902,9 @@ public class Team {
             summary += "\n\nYou won the National Championship! Recruits want to play for winners and you have proved that you are one. You gain +3 prestige!";
         }
 
-        if ( wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige < 20) ) {
-            summary += "\n\nFuture recruits were impressed that you won your rivalry game. You gained 2 prestige.";
-        } else if (!wonRivalryGame && (league.findTeamAbbr(rivalTeam).teamPrestige - teamPrestige < 20)) {
-            summary += "\n\nSince you couldn't win your rivalry game, recruits aren't excited to attend your school. You lost prestige.";
-        } else if ( wonRivalryGame ) {
-            summary += "\n\nGood job winning your rivalry game, but it was expected given the state of their program. You gain no prestige for this.";
-        } else {
-            summary += "\n\nYou lost your rivalry game, but this was expected given your rebuilding program. You lost no prestige for this.";
-        }
+        if (wonRivalryGame) {
+            summary += "\n\n Congrats on beating your rival, " + rivalTeam + "! You may see a gain in prestige in the off-season!";
+        }   summary += "\n\n Unfortunately you lost to your rival, " + rivalTeam + "! You may lose some prestige this off-season!";
 
         if ((newPrestige - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (newPrestige - teamPrestige) + " prestige! This will help your recruiting.";
@@ -1925,8 +1913,6 @@ public class Team {
         } else {
             summary += "\n\nWell, your team performed exactly how many expected. This won't hurt or help recruiting, but try to improve next year!";
         }
-
-
 
         summary += "\n\nCurrent Prestige: " + teamPrestige + " New Prestige: " + newPrestige;
 
