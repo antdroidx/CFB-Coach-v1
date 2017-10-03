@@ -126,7 +126,7 @@ public class Team {
     public boolean teamTVDeal;
 
     private static final int NFL_OVR = 90;
-    private static final double NFL_CHANCE = 0.5;
+    private static final double NFL_CHANCE = 0.66;
 
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
@@ -541,15 +541,20 @@ public class Team {
         if (playersLeaving.isEmpty()) {
             int i = 0;
 
-            // Juniors more likely to leave in Hard mode and if you won NCG
-            double hardBonus = 0;
-            if (userControlled && league.isHardMode()) hardBonus = 0.15;
+            // Juniors more likely to leave if you won NCG
+            double champsBonus = 0;
             if (natChampWL.equals("NCW")) {
-                hardBonus += 0.2;
+                champsBonus += 0.2;
+            }
+            if (natChampWL.equals("NCL")) {
+                champsBonus += 0.15;
+            }
+            if (natChampWL.equals("SFL || SFW")) {
+                champsBonus += 0.1;
             }
 
             while (i < teamQBs.size()) {
-                if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamQBs.get(i));
                 }
                 ++i;
@@ -557,7 +562,7 @@ public class Team {
 
             i = 0;
             while (i < teamRBs.size()) {
-                if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamRBs.get(i));
                 }
                 ++i;
@@ -565,7 +570,7 @@ public class Team {
 
             i = 0;
             while (i < teamWRs.size()) {
-                if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamWRs.get(i));
                 }
                 ++i;
@@ -581,7 +586,7 @@ public class Team {
 
             i = 0;
             while (i < teamOLs.size()) {
-                if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamOLs.get(i));
                 }
                 ++i;
@@ -589,7 +594,7 @@ public class Team {
 
             i = 0;
             while (i < teamSs.size()) {
-                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamSs.get(i));
                 }
                 ++i;
@@ -597,7 +602,7 @@ public class Team {
 
             i = 0;
             while (i < teamCBs.size()) {
-                if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamCBs.get(i));
                 }
                 ++i;
@@ -605,7 +610,7 @@ public class Team {
 
             i = 0;
             while (i < teamF7s.size()) {
-                if (teamF7s.get(i).year == 4 || (teamF7s.get(i).year == 3 && teamF7s.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + hardBonus)) {
+                if (teamF7s.get(i).year == 4 || (teamF7s.get(i).year == 3 && teamF7s.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamF7s.get(i));
                 }
                 ++i;
@@ -1462,7 +1467,6 @@ public class Team {
     public void checkForInjury() {
         playersInjured = new ArrayList<>();
         playersRecovered = new ArrayList<>();
-        if (league.isHardMode()) {
             checkInjuryPosition(teamQBs, 1);
             checkInjuryPosition(teamRBs, 2);
             checkInjuryPosition(teamWRs, 3);
@@ -1471,7 +1475,6 @@ public class Team {
             checkInjuryPosition(teamSs, 1);
             checkInjuryPosition(teamCBs, 3);
             checkInjuryPosition(teamF7s, 1);
-        }
     }
 
     private void checkInjuryPosition(ArrayList<? extends Player> players, int numStarters) {

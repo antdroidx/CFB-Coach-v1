@@ -38,19 +38,6 @@ public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
         TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
         itemL.setPadding(5, 0, 5, 0);
         itemL.setText(detailSplit[0]);
-        if (detailSplit.length >= 2) {
-            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
-            itemR.setPadding(5, 0, 5, 0);
-            itemR.setText(detailSplit[1]);
-            if (detailSplit[1].equals("[HARD]"))
-                itemR.setTextColor(Color.RED);
-            else itemR.setTextColor(Color.parseColor("#008066"));
-        } else {
-            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
-            itemR.setPadding(5, 0, 5, 0);
-            itemR.setText("[EASY]");
-            itemR.setTextColor(Color.parseColor("#008066"));
-        }
 
         return rowView;
     }
