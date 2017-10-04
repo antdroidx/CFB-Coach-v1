@@ -132,15 +132,15 @@ public class Conference {
     public void setUpOOCSchedule() {
         //schedule OOC games
         int confNum = -1;
-        if ( "ACC".equals(confName) ) {
+        if ( league.conferences.get(0).confName.equals(confName) ) {
             confNum = 0;
-        } else if ( "American".equals(confName) ) {
+        } else if ( league.conferences.get(1).confName.equals(confName) ) {
             confNum = 1;
-        } else if ( "Big Ten".equals(confName) ) {
+        } else if ( league.conferences.get(2).confName.equals(confName) ) {
             confNum = 2;
-        } else if ( "Big 12".equals(confName) ) {
+        } else if ( league.conferences.get(3).confName.equals(confName) ) {
             confNum = 3;
-        } else if ( "Conf USA".equals(confName) ) {
+        } else if ( league.conferences.get(4).confName.equals(confName) ) {
             confNum = 4;
         }
 
