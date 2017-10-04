@@ -1907,7 +1907,9 @@ public class Team {
 
         if (wonRivalryGame) {
             summary += "\n\n Congrats on beating your rival, " + rivalTeam + "! You may see a gain in prestige in the off-season!";
-        }   summary += "\n\n Unfortunately you lost to your rival, " + rivalTeam + "! You may lose some prestige this off-season!";
+        }  else {
+            summary += "\n\n Unfortunately you lost to your rival, " + rivalTeam + "! You may lose some prestige this off-season!";
+        }
 
         if ((newPrestige - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (newPrestige - teamPrestige) + " prestige! This will help your recruiting.";
