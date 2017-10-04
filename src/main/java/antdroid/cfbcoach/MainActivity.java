@@ -65,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
     int wantUpdateConf;
     boolean showToasts;
     boolean showInjuryReport;
+    
+    //Universe Settings
+    int teamsStart = 10;
+    int confStart = 10;
+    int seasonStart = 2017;
 
 
     @Override
@@ -89,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             String saveFileStr = extras.getString("SAVE_FILE");
             if (saveFileStr.equals("NEW_LEAGUE")) {
                 simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
-                season = 2017;
+                season = seasonStart;
             } else if (saveFileStr.equals("DONE_RECRUITING")) {
                 File saveFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
                 if (saveFile.exists()) {
@@ -103,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     loadedLeague = true;
                 } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
-                    season = 2017;
+                    season = seasonStart;
                 }
             } else {
                 File saveFile = new File(getFilesDir(), saveFileStr);
@@ -117,12 +122,12 @@ public class MainActivity extends AppCompatActivity {
                     loadedLeague = true;
                 } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
-                    season = 2017;
+                    season = seasonStart;
                 }
             }
         } else {
             simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
-            season = 2017;
+            season = seasonStart;
         }
 
         recruitingStage = -1;
@@ -138,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             userTeamStr = userTeam.name;
             currentTeam = userTeam;
             // Set toolbar text to '2017 Season' etc
-            getSupportActionBar().setTitle(season + " | " + userTeam.name);
+            updateTeamUI();
 
             currentTeam = simLeague.teamList.get(0);
             currentConference = simLeague.conferences.get(0);
@@ -158,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     // set rankings so that not everyone is rank #0
                     simLeague.setTeamRanks();
                     // Set toolbar text to '2017 Season' etc
-                    getSupportActionBar().setTitle(season + " | " + userTeam.name);
+                    updateTeamUI();
                     examineTeam(currentTeam.name);
                 }
             });
@@ -166,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             alert.show();
         } else {
             // Set toolbar text to '2017 Season' etc
-            getSupportActionBar().setTitle(season + " | " + userTeam.name);
+            updateTeamUI();
         }
 
         final TextView currentTeamText = (TextView) findViewById(R.id.currentTeamText);
@@ -175,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up spinner for examining team.
         examineConfSpinner = (Spinner) findViewById(R.id.examineConfSpinner);
         confList = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < confStart; i++) {
             confList.add(simLeague.conferences.get(i).confName);
         }
         dataAdapterConf = new ArrayAdapter<String>(this,
@@ -198,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         examineTeamSpinner = (Spinner) findViewById(R.id.examineTeamSpinner);
         teamList = new ArrayList<String>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < teamsStart; i++) {
             teamList.add(simLeague.teamList.get(i).strRep());
         }
         dataAdapterTeam = new ArrayAdapter<String>(this,
@@ -244,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
                             simLeague.checkLeagueRecords();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage(simLeague.seasonSummaryStr())
-                                    .setTitle((2017 + userTeam.teamHistory.size()) + " Season Summary")
+                                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Summary")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -414,7 +419,7 @@ public class MainActivity extends AppCompatActivity {
             showToasts = userTeam.showPopups;
         }
 
-        if (simLeague.getYear() != 2017) {
+        if (simLeague.getYear() != seasonStart) {
             // Only show recruiting classes if it aint 2017
             showRecruitingClassDialog();
         }
@@ -515,7 +520,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void examineTeam(String teamName) {
-        //wantUpdateConf = 0;
+        wantUpdateConf = 0;
         // Find team
         Team tempT = simLeague.teamList.get(0);
         for (Team t : simLeague.teamList) {
@@ -568,7 +573,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateCurrTeam() {
         teamList = new ArrayList<String>();
         dataAdapterTeam.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < teamsStart; i++) {
             teamList.add(currentConference.confTeams.get(i).strRep());
             dataAdapterTeam.add(teamList.get(i));
         }
@@ -588,7 +593,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateCurrConference() {
         confList.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < confStart; i++) {
             confList.add(simLeague.conferences.get(i).confName);
         }
         dataAdapterConf.notifyDataSetChanged();
@@ -596,10 +601,11 @@ public class MainActivity extends AppCompatActivity {
        if (wantUpdateConf >= 1) {
             teamList = new ArrayList<String>();
             dataAdapterTeam.clear();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < teamsStart; i++) {
                 teamList.add(currentConference.confTeams.get(i).strRep());
                 dataAdapterTeam.add(teamList.get(i));
             }
+            dataAdapterTeam.notifyDataSetChanged();
             examineTeamSpinner.setSelection(0);
             currentTeam = currentConference.confTeams.get(0);
             updateCurrTeam();
@@ -708,7 +714,7 @@ public class MainActivity extends AppCompatActivity {
             selection = new String[12];
             selection[0] = "Player of the Year";
             selection[1] = "All Americans";
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < confStart; ++i) {
                 selection[i + 2] = "All " + simLeague.conferences.get(i).confName + " Team";
             }
         }
@@ -723,8 +729,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get all american and all conf
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
-        final String[][] allConference = new String[10][];
-        for (int i = 0; i < 10; ++i) {
+        final String[][] allConference = new String[confStart][];
+        for (int i = 0; i < confStart; ++i) {
             allConference[i] = simLeague.getAllConfStr(i).split(">");
         }
 
@@ -1410,7 +1416,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
-                currentTeam.showPopups = showToasts;
+                userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
         });
@@ -1820,4 +1826,9 @@ public class MainActivity extends AppCompatActivity {
         return infos;
     }
 
+    
+    public void updateTeamUI() {
+        getSupportActionBar().setTitle(season + " | " + userTeam.name);
+    }
 }
+

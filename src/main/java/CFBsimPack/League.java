@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import antdroid.cfbcoach.MainActivity;
+
 /**
  * League class. Has 6 conferences of 10 teams each.
  * @author Achi
@@ -57,6 +59,7 @@ public class League {
     //Current week, 1-14
     public int currentWeek;
     public int randgm;
+    int seasonStart = 2017;
 
     //Bowl Games
     public boolean hasScheduledBowls;
@@ -296,9 +299,9 @@ public class League {
 
         leagueRecords = new LeagueRecords();
         userTeamRecords = new LeagueRecords();
-        longestWinStreak = new TeamStreak(2017, 2017, 0, "XXX");
-        yearStartLongestWinStreak = new TeamStreak(2017, 2017, 0, "XXX");
-        longestActiveWinStreak = new TeamStreak(2017, 2017, 0, "XXX");
+        longestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
+        yearStartLongestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
+        longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -978,7 +981,7 @@ public class League {
      * @return the current year
      */
     public int getYear() {
-        return 2017 + leagueHistory.size();
+        return seasonStart + leagueHistory.size();
     }
 
     /**
@@ -1597,7 +1600,7 @@ public class League {
     public String getLeagueHistoryStr() {
         String hist = "";
         for (int i = 0; i < leagueHistory.size(); ++i) {
-            hist += (2017+i) + ":\n";
+            hist += (seasonStart+i) + ":\n";
             hist += "\tChampions: " + leagueHistory.get(i)[0] + "\n";
             hist += "\tPOTY: " + heismanHistory.get(i) + "\n%";
         }
@@ -1912,7 +1915,7 @@ public class League {
         StringBuilder sb = new StringBuilder();
 
         // Save information about the save file, user team info
-            sb.append((2017 + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
+            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
                     userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>\n");
 
 
