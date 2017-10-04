@@ -96,16 +96,16 @@ public class League {
         heismanHistory = new ArrayList<String>();
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
-        conferences.add( new Conference("ACC", this) );
-        conferences.add( new Conference("American", this) );
-        conferences.add( new Conference("Big Ten", this) );
-        conferences.add( new Conference("Big 12", this) );
-        conferences.add( new Conference("Conf USA", this) );
-        conferences.add( new Conference("MAC", this) );
-        conferences.add( new Conference("Mt West", this) );
-        conferences.add( new Conference("Pac-10", this) );
-        conferences.add( new Conference("SEC", this) );
-        conferences.add( new Conference("Sun Belt", this) );
+        conferences.add(new Conference("ACC", this));
+        conferences.add(new Conference("American", this));
+        conferences.add(new Conference("Big Ten", this));
+        conferences.add(new Conference("Big 12", this));
+        conferences.add(new Conference("Conf USA", this));
+        conferences.add(new Conference("MAC", this));
+        conferences.add(new Conference("Mt West", this));
+        conferences.add(new Conference("Pac-10", this));
+        conferences.add(new Conference("SEC", this));
+        conferences.add(new Conference("Sun Belt", this));
         allAmericans = new ArrayList<Player>();
 
         // Initialize new stories lists
@@ -136,7 +136,8 @@ public class League {
             lastNameList.add(n.trim());
         }
 
-        //Set up conferences
+        //Set up conference
+        // FUTURE: READ FROM XML OR CSV FILE
 
         //ACC - done
         conferences.get(0).confTeams.add( new Team( "Clemson", "CLEM", "ACC", this, 90, "WAKE" ));
@@ -259,7 +260,6 @@ public class League {
         conferences.get(9).confTeams.add( new Team( "Vanderbilt", "VAND", "Sun Belt", this, 45, "MTSU" ));
 
 
-
         //set teamList
         teamList = new ArrayList<Team>();
         for (int i = 0; i < conferences.size(); ++i ) {
@@ -280,7 +280,7 @@ public class League {
         }
     }
 
-    /**
+    /* LOAD A SAVE FILE
      * Create League from saved file.
      * @param saveFile file that league is saved in
      */
@@ -321,23 +321,17 @@ public class League {
                 heismanHistory.add(line);
             }
 
-            //Next make all the teams
+            //Next make all the conferences & teams
             conferences = new ArrayList<Conference>();
             teamList = new ArrayList<Team>();
 
-            conferences.add( new Conference("ACC", this) );
-            conferences.add( new Conference("American", this) );
-            conferences.add( new Conference("Big Ten", this) );
-            conferences.add( new Conference("Big 12", this) );
-            conferences.add( new Conference("Conf USA", this) );
-            conferences.add( new Conference("MAC", this) );
-            conferences.add( new Conference("Mt West", this) );
-            conferences.add( new Conference("Pac-10", this) );
-            conferences.add( new Conference("SEC", this) );
-            conferences.add( new Conference("Sun Belt", this) );
+            while((line = bufferedReader.readLine()) != null && !line.equals("END_CONFERENCES")) {
+                conferences.add(new Conference(line, this));
+            }
+
             allAmericans = new ArrayList<Player>();
             String[] splits;
-            for(int i = 0; i < 100; ++i) { //Do for every team (60)
+            for(int i = 0; i < 100; ++i) { //Do for every team
                 StringBuilder sbTeam = new StringBuilder();
                 while((line = bufferedReader.readLine()) != null && !line.equals("END_PLAYERS")) {
                     sbTeam.append(line);
@@ -498,14 +492,13 @@ public class League {
             newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "");
 
             if (saveCurse != null) {
-                newsStories.get(0).add("Major NCAA Infraction: " + saveCurse.name + ">NCAA investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " was found violating several recruiting and academic policies over the past couple years. The team prestige has dropped 25 points.");
+                newsStories.get(0).add("Major Infraction: " + saveCurse.name + ">Investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " has had several recruiting violations and academic issues over the past couple years. The team prestige has dropped 25 points.");
             }
-
             if (saveCurse2 != null) {
-                newsStories.get(0).add("Minor NCAA Infraction: " + saveCurse2.name + ">NCAA investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was found violating recruiting policies over the past off-season. The team prestige has dropped 12 points.");
+                newsStories.get(0).add("Minor Infraction: " + saveCurse2.name + ">Investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was violating recruiting policies over the past off-season. The team prestige has dropped 12 points.");
             }
             if (saveCurse3 != null) {
-                newsStories.get(0).add("Incidental NCAA Infraction: " + saveCurse3.name + ">NCAA investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found a violating recruiting policy over the past off-season. The team prestige has dropped 5 points.");
+                newsStories.get(0).add("Incidental Infraction: " + saveCurse3.name + ">Investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found violating a recruiting policy over the past off-season. The team prestige has dropped 5 points.");
             }
 
 
@@ -521,21 +514,21 @@ public class League {
     }
 
     /**
-     * Get conference nmber from string
+     * Get conference number from string
      * @param conf conference name
      * @return int of number 0-5
      */
     public int getConfNumber(String conf) {
-        if (conf.equals("ACC")) return 0;
-        if (conf.equals("American")) return 1;
-        if (conf.equals("Big Ten")) return 2;
-        if (conf.equals("Big 12")) return 3;
-        if (conf.equals("Conf USA")) return 4;
-        if (conf.equals("MAC")) return 5;
-        if (conf.equals("Mt West")) return 6;
-        if (conf.equals("Pac-10")) return 7;
-        if (conf.equals("SEC")) return 8;
-        if (conf.equals("Sun Belt")) return 9;
+        if (conf.equals(conferences.get(0).confName)) return 0;
+        if (conf.equals(conferences.get(1).confName)) return 1;
+        if (conf.equals(conferences.get(2).confName)) return 2;
+        if (conf.equals(conferences.get(3).confName)) return 3;
+        if (conf.equals(conferences.get(4).confName)) return 4;
+        if (conf.equals(conferences.get(5).confName)) return 5;
+        if (conf.equals(conferences.get(6).confName)) return 6;
+        if (conf.equals(conferences.get(7).confName)) return 7;
+        if (conf.equals(conferences.get(8).confName)) return 8;
+        if (conf.equals(conferences.get(9).confName)) return 9;
         return 0;
     }
 
@@ -1020,13 +1013,9 @@ public class League {
      * @return random name
      */
     public String getRandName() {
-        //       if (Math.random() > 0.0025) {
         int fn = (int) (Math.random() * nameList.size());
         int ln = (int) (Math.random() * lastNameList.size());
         return nameList.get(fn) + " " + lastNameList.get(ln);
-        //      } else {
-        //          return donationNames[ (int)(Math.random()*donationNames.length) ];
-        //      }
     }
 
     /**
@@ -1823,6 +1812,15 @@ public class League {
         return conferences.get(0);
     }
 
+    public void updateTeamConf(String newConf, String oldConf, int x) {
+        for (int i = 0; i  < teamList.size(); i++) {
+            if (teamList.get(i).conference.equals(oldConf)) {
+                teamList.get(i).conference = newConf;
+            }
+        }
+            conferences.get(x).confName = newConf;
+    }
+
     /**
      * See if team name is in use, or has illegal characters.
      * @param name team name
@@ -1838,14 +1836,14 @@ public class League {
             return false;
         }
 
-        for (int i = 0; i < teamList.size(); i++) {
+/*        for (int i = 0; i < teamList.size(); i++) {
             // compare using all lower case so no dumb duplicates
             if (teamList.get(i).name.toLowerCase().equals(name.toLowerCase()) &&
                     !teamList.get(i).userControlled) {
                 return false;
             }
         }
-
+*/
         return true;
     }
 
@@ -1856,7 +1854,7 @@ public class League {
      */
     public boolean isAbbrValid(String abbr) {
         if (abbr.length() > 4 || abbr.length() == 0) {
-            // Only 3 letter abbr allowed
+            // Only 4 letter abbr allowed
             return false;
         }
 
@@ -1864,14 +1862,14 @@ public class League {
             // Illegal character!
             return false;
         }
-
+/*
         for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i).abbr.equals(abbr) &&
                     !teamList.get(i).userControlled) {
                 return false;
             }
         }
-
+*/
         return true;
     }
 
@@ -1933,6 +1931,13 @@ public class League {
             sb.append(heismanHistory.get(i) + "\n");
         }
         sb.append("END_HEISMAN_HIST\n");
+
+
+        //Save Conference Names
+        for (int i = 0; i < conferences.size(); ++i) {
+            sb.append(conferences.get(i).confName + "\n");
+        }
+        sb.append("END_CONFERENCES\n");
 
         // Save information about each team like W-L records, as well as all the players
         for (Team t : teamList) {
@@ -2013,6 +2018,7 @@ public class League {
             sb.append(s + "\n");
         }
         sb.append("END_HALL_OF_FAME\n");
+
 
         // Actually write to the file
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
