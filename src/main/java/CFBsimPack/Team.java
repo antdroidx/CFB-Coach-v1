@@ -126,7 +126,7 @@ public class Team {
     public boolean teamTVDeal;
 
     private static final int NFL_OVR = 90;
-    private static final double NFL_CHANCE = 0.66;
+    private static final double NFL_CHANCE = 0.67;
 
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
@@ -1342,15 +1342,15 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 6 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
-        teamPollScore = (wins*200 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 + (teamStrengthOfWins/2) +
+        teamPollScore = (wins*215 + 3*(teamPoints-teamOppPoints) +
+                (teamYards-teamOppYards)/40 + 3*teamStrengthOfWins/9  +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/11 + (teamPrestige/5);
+                teamStrengthOfWins)/8;
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
-            teamPollScore += 25;
+            teamPollScore += 20;
         }
         if ( "NCW".equals(natChampWL) ) {
             //bonus for winning champ game
@@ -1364,6 +1364,9 @@ public class Team {
             teamPollScore += 30;
         } else if ( losses == 1 ) {
             teamPollScore += 15;
+        }
+        if (wins == 0) {
+            teamPollScore -= 10;
         }
 
         teamOffTalent = getOffTalent();
@@ -2202,14 +2205,14 @@ public class Team {
      * @return ranking abbr (w-l)
      */
     public String strRep() {
-        return "#" + rankTeamPollScore + " " + abbr + " (" + wins + "-" + losses + ")";  //changing to name messes up home screen order
+        return /*"#" + rankTeamPollScore + " " + */abbr + " (" + wins + "-" + losses + ")";  //changing to name messes up home screen order
     }
     /**
      * Str rep of team, with bowl results
      * @return ranking abbr (w-l) BW
      */
     public String strRepWithBowlResults() {
-        return /*"#" + rankTeamPollScore + " " +*/ name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
+        return "#" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
     }
 
     /**
