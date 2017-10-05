@@ -2205,14 +2205,14 @@ public class Team {
      * @return ranking abbr (w-l)
      */
     public String strRep() {
-        return /*"#" + rankTeamPollScore + " " + */abbr + " (" + wins + "-" + losses + ")";  //changing to name messes up home screen order
+        return "#" + rankTeamPollScore + " " + abbr + " (" + wins + "-" + losses + ")";  //changing to name messes up home screen order
     }
     /**
      * Str rep of team, with bowl results
      * @return ranking abbr (w-l) BW
      */
     public String strRepWithBowlResults() {
-        return "#" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
+        return /*"#" + rankTeamPollScore + " " + */name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
     }
 
     /**
