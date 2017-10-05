@@ -4,49 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_material_dark_1"
     android:orientation="vertical"
     android:paddingBottom="8dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="antdroid.cfbcoach.Home"
     tools:showIn="@layout/activity_home">
 
     <ImageView
+        android:id="@+id/imageLogo"
         android:layout_width="wrap_content"
         android:layout_height="0dip"
-        android:layout_weight="5"
-        android:layout_marginTop="0dp"
-        android:id="@+id/imageLogo"
-        android:adjustViewBounds="true"
-        android:maxWidth="300dp"
-        android:maxHeight="400dp"
-        android:scaleType="fitCenter"
         android:layout_gravity="center"
-        android:padding="5dp" />
+        android:layout_marginTop="0dp"
+        android:layout_weight="5"
+        android:adjustViewBounds="true"
+        android:maxHeight="400dp"
+        android:maxWidth="300dp"
+        android:padding="5dp"
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="0dip"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="8dp"
-        android:layout_gravity="center" >
-        <Button
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:text="New"
-            android:id="@+id/buttonNewGame" />
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/buttonNewGame"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="Load"
-            android:id="@+id/buttonLoadGame" />
+            android:text="New" />
+
+        <Button
+            android:id="@+id/buttonLoadGame"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="Load" />
     </LinearLayout>
 
     <Button
@@ -114,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="[v2.00 BETA - 2017-10-04-A]\n© Achi Jones, 2016 | Anthony Nguyen, 2017"
+        android:text="[v2.00 BETA - 2017-10-03-A]\n© Achi Jones, 2016 | Anthony Nguyen, 2017"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
