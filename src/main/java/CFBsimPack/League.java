@@ -490,19 +490,18 @@ public class League {
             newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
                     "on your mind, or just a winning season, good luck!");
 
-            //newsStories.get(0).add("test test> testing testing 1, 2 3");
 
             if (saveBless != null) {
                 newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "");
             }
             if (saveCurse != null) {
-                newsStories.get(0).add("Major Infraction: " + saveCurse.name + ">Investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " has had several recruiting violations and academic issues over the past couple years. The team prestige has dropped 25 points.");
+                newsStories.get(0).add("Major Infraction: " + saveCurse.name + ">Investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " has had several recruiting violations and academic issues over the past couple years. The team prestige has dropped 30 points.");
             }
             if (saveCurse2 != null) {
-                newsStories.get(0).add("Minor Infraction: " + saveCurse2.name + ">Investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was violating recruiting policies over the past off-season. The team prestige has dropped 12 points.");
+                newsStories.get(0).add("Minor Infraction: " + saveCurse2.name + ">Investigations have led to the discovery that " + saveCurse2.name + "'s head coach " + getRandName() + " was violating recruiting policies over the past off-season. The team prestige has dropped 15 points.");
             }
             if (saveCurse3 != null) {
-                newsStories.get(0).add("Incidental Infraction: " + saveCurse3.name + ">Investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found violating a recruiting policy over the past off-season. The team prestige has dropped 5 points.");
+                newsStories.get(0).add("Incidental Infraction: " + saveCurse3.name + ">Investigations have led to the discovery that " + saveCurse3.name + "'s head coach " + getRandName() + " was found violating a recruiting policy over the past off-season. The team prestige has dropped 7 points.");
             }
 
 
@@ -803,10 +802,10 @@ public class League {
 
     public void advanceSeason() {
         currentWeek = 0;
-        //updateTeamHistories(); - do not use
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceSeason();
         }
+
 
         //COACH HIRES & INFRACTIONS
 
@@ -821,16 +820,16 @@ public class League {
         // Hire Coach for medicore team
         blessNumber = (int)(Math.random()*21);
         Team blessTeam2 = teamList.get(59 + blessNumber);
-        coach = (int)(Math.random()*15);
+        coach = (int)(Math.random()*18);
         blessTeam2.teamPrestige += coach + 4;
         saveBless2 = blessTeam2;
         if (blessTeam2.teamPrestige > 99) {blessTeam2.teamPrestige = 99;}
 
         // Hire Coach for very bad team
-        blessNumber = (int)(Math.random()*20);
+        blessNumber = (int)(Math.random()*25);
         if (blessNumber > 20) blessNumber = 20;
         Team blessTeam3 = teamList.get(79 + blessNumber);
-        coach = (int)(Math.random()*15);
+        coach = (int)(Math.random()*20);
         blessTeam3.teamPrestige += coach + 4;
         saveBless3 = blessTeam3;
         if (blessTeam3.teamPrestige > 99) {blessTeam3.teamPrestige = 99;}
@@ -841,7 +840,7 @@ public class League {
             int curseNumber = (int)(Math.random()*20);
             Team curseTeam = teamList.get(curseNumber);
             if (curseTeam.teamPrestige > 75) {
-                curseTeam.teamPrestige -= 25;
+                curseTeam.teamPrestige -= 30;
                 saveCurse = curseTeam;
             }  else saveCurse = null;
         } else saveCurse = null;
@@ -851,7 +850,7 @@ public class League {
         if (x > 6 ) {
             int curseNumber = (int) (Math.random()*35);
             Team curseTeam2 = teamList.get(curseNumber);
-                curseTeam2.teamPrestige -= 12;
+                curseTeam2.teamPrestige -= 15;
                 saveCurse2 = curseTeam2;
         } else saveCurse2 = null;
 
@@ -860,11 +859,9 @@ public class League {
         if (x > 5 ) {
             int curseNumber = (int) (Math.random()*50);
             Team curseTeam3 = teamList.get(curseNumber);
-            curseTeam3.teamPrestige -= 5;
+            curseTeam3.teamPrestige -= 7;
             saveCurse3 = curseTeam3;
         } else saveCurse3 = null;
-
-
 
 
         advanceSeasonWinStreaks();
@@ -1623,14 +1620,6 @@ public class League {
         return teams;
     }
 
-    public int getConfPrestige() {
-        int CPSum = 0;
-        for (int i = 0; i < teamList.size(); ++i) {
-            CPSum = CPSum + teamList.get(i).teamPrestige;
-        }
-        return CPSum;
-    }
-
     /**
      * Get list of all bowl games and their predicted teams
      * @return string of all the bowls and their predictions
@@ -1843,14 +1832,6 @@ public class League {
             return false;
         }
 
-/*        for (int i = 0; i < teamList.size(); i++) {
-            // compare using all lower case so no dumb duplicates
-            if (teamList.get(i).name.toLowerCase().equals(name.toLowerCase()) &&
-                    !teamList.get(i).userControlled) {
-                return false;
-            }
-        }
-*/
         return true;
     }
 
@@ -1869,14 +1850,7 @@ public class League {
             // Illegal character!
             return false;
         }
-/*
-        for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i).abbr.equals(abbr) &&
-                    !teamList.get(i).userControlled) {
-                return false;
-            }
-        }
-*/
+
         return true;
     }
 

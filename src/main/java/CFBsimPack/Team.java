@@ -417,18 +417,18 @@ public class Team {
         }
 
         //Team Prestige change for every team based on ranking
-        if ((teamPrestige > 50) && diffExpected > 0) {
-                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1800); //teams that do well gain more prestige
+        if ((teamPrestige > 55) && diffExpected > 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //teams that do well gain more prestige
             }
-            if ((teamPrestige > 50) && diffExpected < 0) {
+            if ((teamPrestige > 55) && diffExpected < 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //average+ teams that perform poor lose prestige
             }
             //Bad Teams: If you're the underdog, you get more points, unless you lose ;)
-            if ((teamPrestige <= 50) && diffExpected > 0) {
+            if ((teamPrestige <= 55) && diffExpected > 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
             }
-            if ((teamPrestige <= 50) && diffExpected < 0) {
-                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2750); //poor teams that do well lose a little more prestige
+            if ((teamPrestige <= 55) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 3000); //poor teams that do well lose a little more prestige
             }
 
             //National Title Winner
@@ -442,8 +442,9 @@ public class Team {
             }
 
             //Sets the bounds for Prestige
-            if (newPrestige > 99) newPrestige = 99;
-            if (newPrestige < 15) newPrestige = 15;
+            if (newPrestige > 95) newPrestige = 95;
+            if (newPrestige < 20) newPrestige = 20;
+
         }
         return newPrestige;
     }
@@ -1607,17 +1608,22 @@ public class Team {
     public int getRecruitingClassRat() {
         int classStrength = 0;
         int numFreshman = 0;
+        int numRedshirt = 0;
         ArrayList<Player> allPlayers = getAllPlayers();
         for (Player p : allPlayers) {
-            if (p.year == 1 && p.ratOvr > 65) {
+            if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
                 // Is freshman
                 classStrength += p.ratOvr - 30;
                 numFreshman++;
             }
-        }
+            if (p.year == 0 && p.ratOvr > 65) {
+                classStrength += p.ratOvr - 35;
+                numRedshirt++;
+            }
+      }
 
-        if (numFreshman > 0)
-            return classStrength * (classStrength/numFreshman) / 100;
+        if (numFreshman > 0 || numRedshirt > 0)
+            return classStrength * (classStrength/(numFreshman + numRedshirt)) / 100;
         else return 0;
     }
 
@@ -1927,6 +1933,20 @@ public class Team {
         return summary;
     }
 
+/*
+    public String coachingChange() {
+        int rankGoal = 100 - teamPrestige;
+        int x = (int)Math.random()*100;
+        String returnName = name;
+        if (teamPrestige <= 60 && ((rankGoal - rankTeamPollScore) < (teamPrestige/1.5)) && x > 66) {
+            teamPrestige += (int)Math.random()*21;
+            return "YES";
+        }
+        return "NO";
+    }*/
+
+
+
     /**
      * Gets player name or detail strings for displaying in the roster tab via expandable list.
      * Should be separated by a '>' from left text and right text.
@@ -2198,14 +2218,14 @@ public class Team {
 
     //Team Names for main display spinner
     public String mainTeam() {
-        return "["+ rankTeamPollScore + "]" + name + "(" + wins + "-" + losses +")";
+        return "["+ rankTeamPollScore + "]" + name;
     }
     /**
      * Str rep of team, no bowl results
      * @return ranking abbr (w-l)
      */
     public String strRep() {
-        return "#" + rankTeamPollScore + " " + abbr + " (" + wins + "-" + losses + ")";  //changing to name messes up home screen order
+        return "[" + rankTeamPollScore + "] " + abbr;
     }
     /**
      * Str rep of team, with bowl results
@@ -2519,17 +2539,16 @@ public class Team {
     public TeamStrategy[] getTeamStrategiesOff() {
         TeamStrategy[] ts = new TeamStrategy[3];
 
-        ts[0] = new TeamStrategy("Aggressive",
-                "Play a more aggressive offense. Will pass with lower completion percentage and higher chance of interception." +
+        ts[0] = new TeamStrategy("Spread",
+                "Will pass with lower completion percentage and higher chance of interception." +
                         " However, catches will go for more yards.", -1, 2, 3, 1);
 
-        ts[1] = new TeamStrategy("No Preference",
+        ts[1] = new TeamStrategy("Pro-Style",
                 "Will play a normal offense with no bonus either way, but no penalties either.", 0, 0, 0, 0);
 
-        ts[2] = new TeamStrategy("Conservative",
+        ts[2] = new TeamStrategy("Smash Mouth",
                 "Play a more conservative offense, running a bit more and passing slightly less. Passes are more accurate but shorter." +
                         " Rushes are more likely to gain yards but less likely to break free for big plays.", 1, -2, -3, -1);
-
         return ts;
     }
 
@@ -2538,9 +2557,9 @@ public class Team {
         int OP, OR, OS = 0;
         OP = getPassProf();
         OR = getRushProf();
-        if(OP > (OR + 2)) {
+        if(OP > (OR + 3)) {
             OS = 0;
-        } else if(OR > (OP + 2)) {
+        } else if(OR > (OP + 3)) {
             OS = 2;
         } else OS = 1;
         return OS;
@@ -2550,9 +2569,9 @@ public class Team {
         int DP, DR, DS = 0;
         DP = getPassProf();
         DR = getRushProf();
-        if(DR > (DP + 2)) {
+        if(DR < (DP + 3)) {
             DS = 0;
-        } else if(DP > (DR + 2)) {
+        } else if(DP < (DR + 3)) {
             DS = 2;
         } else DS = 1;
         return DS;
@@ -2564,13 +2583,13 @@ public class Team {
     public TeamStrategy[] getTeamStrategiesDef() {
         TeamStrategy[] ts = new TeamStrategy[3];
 
-        ts[0] = new TeamStrategy("Stack the Box",
+        ts[0] = new TeamStrategy("46 Defense",
                 "Focus on stopping the run. Will give up more big passing plays but will allow less rushing yards and far less big plays from rushing.", 1, 0, -1, -1);
 
-        ts[1] = new TeamStrategy("No Preference",
+        ts[1] = new TeamStrategy("4-3",
                 "Will play a normal defense with no bonus either way, but no penalties either.", 0, 0, 0, 0);
 
-        ts[2] = new TeamStrategy("Nickel Zone",
+        ts[2] = new TeamStrategy("Cover 2",
                 "Focus on stopping the pass. Will give up less yards on catches and will be more likely to intercept passes, " +
                         "but will allow more rushing yards.", -1, 0, 1, 1);
 
@@ -2745,7 +2764,7 @@ class PlayerComparator implements Comparator<Player> {
  */
 class PlayerPositionComparator implements Comparator<Player> {
     @Override
-    public int compare( Player a, Player b ) {
+    public int compare(Player a, Player b) {
         int aPos = Player.getPosNumber(a.position);
         int bPos = Player.getPosNumber(b.position);
         return aPos < bPos ? -1 : aPos == bPos ? 0 : 1;
