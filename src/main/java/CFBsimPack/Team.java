@@ -1345,7 +1345,7 @@ public class Team {
         int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*215 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 + 3*teamStrengthOfWins/9  +
+                (teamYards-teamOppYards)/40 + 3*teamStrengthOfWins/11  +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
                 teamStrengthOfWins)/8;
         if ( "CC".equals(confChampion) ) {

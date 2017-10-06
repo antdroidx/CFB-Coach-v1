@@ -492,8 +492,9 @@ public class League {
 
             //newsStories.get(0).add("test test> testing testing 1, 2 3");
 
-            newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "");
-
+            if (saveBless != null) {
+                newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "");
+            }
             if (saveCurse != null) {
                 newsStories.get(0).add("Major Infraction: " + saveCurse.name + ">Investigations have led to the discovery that " + saveCurse.name + "'s head coach " + getRandName() + " has had several recruiting violations and academic issues over the past couple years. The team prestige has dropped 25 points.");
             }
@@ -542,7 +543,10 @@ public class League {
         if ( currentWeek <= 12 ) {
             for (int i = 0; i < conferences.size(); ++i) {
                 conferences.get(i).playWeek();
+                //
+                //GET WEEKLY SCOREBOARD - WIP
                 //weekScores.add(i, weeklyScores.getResults());
+                //idea - create a csv to collect weekly scores and then display in the main activity somewhere.
             }
         }
 
