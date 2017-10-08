@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
+import android.os.Environment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     boolean showInjuryReport;
     
     //Universe Settings
-    int teamsStart = 10;
+    int teamsStart = 12;
     int confStart = 10;
     int seasonStart = 2017;
 
@@ -441,12 +442,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_team_strategy) {
-            /**
-             * Clicked Team Strategy. Bring up team strat dialog
-             */
-            showTeamStrategyDialog();
-        } else if (id == R.id.action_heisman) {
+         if (id == R.id.action_heisman) {
             /**
              * Clicked Heisman watch in drop down menu
              */
@@ -474,11 +470,11 @@ public class MainActivity extends AppCompatActivity {
              * Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
-        } else if (id == R.id.action_news_stories) {
+        } else if (id == R.id.action_current_team_history) {
             /**
              * Clicked News Stories in drop down menu
              */
-            showNewsStoriesDialog();
+            showCurrTeamHistoryDialog();
         } else if (id == R.id.action_league_history) {
             /**
              * Clicked League History in drop down menu
@@ -486,9 +482,9 @@ public class MainActivity extends AppCompatActivity {
             showLeagueHistoryDialog();
         } else if (id == R.id.action_team_history) {
             /**
-             * Clicked Team History in drop down menu
+             * Clicked User Team History in drop down menu
              */
-            showTeamHistoryDialog();
+            showUserTeamHistoryDialog();
         } else if (id == R.id.action_ccg_bowl_watch) {
             /**
              * Clicked CCG / Bowl Watch in drop down menu
@@ -509,11 +505,6 @@ public class MainActivity extends AppCompatActivity {
              * Let user change their team name and abbr
              */
             changeTeamNameDialog();
-        } else if (id == R.id.action_team_lineup) {
-            /**
-             * Let user set their team's lineup
-             */
-            showTeamLineupDialog();
         }
 
         return super.onOptionsItemSelected(item);
@@ -1017,9 +1008,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showTeamHistoryDialog() {
+    public void showUserTeamHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Team History")
+        builder.setTitle("My Team History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1067,6 +1058,44 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public void showCurrTeamHistoryDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Team History")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        String[] selection = {"Team History"};
+        Spinner teamHistSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, selection);
+        teamHistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamHistSpinner.setAdapter(teamHistAdapter);
+
+        final ListView teamHistoryList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+
+        teamHistSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                            TeamHistoryListArrayAdapter teamHistoryAdapter =
+                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getTeamHistoryList());
+                            teamHistoryList.setAdapter(teamHistoryAdapter);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+    }
+
 
     public void showBowlCCGDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
