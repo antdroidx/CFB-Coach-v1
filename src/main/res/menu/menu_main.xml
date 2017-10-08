@@ -13,6 +13,11 @@
         android:title="@string/action_league_history"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_current_team_history"
+        android:orderInCategory="100"
+        android:title="@string/action_current_team_history"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_team_history"
         android:orderInCategory="100"
         android:title="@string/action_team_history"
@@ -31,21 +36,6 @@
         android:id="@+id/action_heisman"
         android:orderInCategory="100"
         android:title="@string/action_heisman"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_news_stories"
-        android:orderInCategory="100"
-        android:title="@string/action_news_stories"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_team_lineup"
-        android:orderInCategory="100"
-        android:title="@string/action_team_lineup"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_team_strategy"
-        android:orderInCategory="100"
-        android:title="@string/action_team_strategy"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_save_league"

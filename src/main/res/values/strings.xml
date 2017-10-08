@@ -5,6 +5,7 @@
     <string name="action_team_lineup">Set Team Lineup</string>
     <string name="action_league_history">League History/Records</string>
     <string name="action_league_records">League Records</string>
+    <string name="action_current_team_history">Team History</string>
     <string name="action_team_history">My Team History</string>
     <string name="action_rankings">Team Rankings</string>
     <string name="action_heisman">Post Season Awards</string>
@@ -14,7 +15,7 @@
     <string name="action_ccg_bowl_watch">Post-Season Watch</string>
     <string name="action_save_league">Save League</string>
     <string name="action_return_main_menu">Return to Main Menu</string>
-    <string name="action_change_team_name">Settings/Change Name</string>
+    <string name="action_change_team_name">Settings/Editor</string>
     <string name="title_activity_recruiting">RecruitingActivity</string>
     <string name="league_player_names">
 A.J.,

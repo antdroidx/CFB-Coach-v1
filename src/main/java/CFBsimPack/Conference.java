@@ -25,6 +25,7 @@ public class Conference {
 
     public int week;
     public int robinWeek;
+    int teamCount = 12;
 
     public String allConfStr;
     public ArrayList<Player> allConfPlayers;
@@ -56,36 +57,38 @@ public class Conference {
         // Set up int arrays for each team's home/away rotation.
         // Theoretically every year you should change off between having 5 home games and 4 away games in conference
         if (league.leagueHistory.size() == 0 || confTeams.get(0).evenYearHomeOpp == null) {
-            int[][] evenHomeGames = new int[10][];
-            evenHomeGames[0] = new int[]{7, 4, 8, 3};
-            evenHomeGames[1] = new int[]{8, 9, 5, 0, 4};
-            evenHomeGames[2] = new int[]{5, 0, 6, 1};
-            evenHomeGames[3] = new int[]{6, 1, 9, 7, 2};
-            evenHomeGames[4] = new int[]{3, 7, 2, 8};
-            evenHomeGames[5] = new int[]{4, 8, 3, 9, 0};
-            evenHomeGames[6] = new int[]{4, 0, 1, 5};
-            evenHomeGames[7] = new int[]{2, 6, 1, 5, 9};
-            evenHomeGames[8] = new int[]{9, 3, 7, 2, 6};
-            evenHomeGames[9] = new int[]{0, 2, 4, 6};
+            int[][] evenHomeGames = new int[12][];
+            evenHomeGames[0] = new int[]{11, 7, 3, 10, 6};
+            evenHomeGames[1] = new int[]{8, 4, 0, 9};
+            evenHomeGames[2] = new int[]{9, 5, 1, 8, 10};
+            evenHomeGames[3] = new int[]{6, 2, 10, 7};
+            evenHomeGames[4] = new int[]{7, 3, 11, 6};
+            evenHomeGames[5] = new int[]{4, 0, 8, 11};
+            evenHomeGames[6] = new int[]{5, 1, 9, 2};
+            evenHomeGames[7] = new int[]{2, 10, 6, 5, 1};
+            evenHomeGames[8] = new int[]{3, 11, 7, 0};
+            evenHomeGames[9] = new int[]{0, 8, 4, 3, 5};
+            evenHomeGames[10] = new int[]{1, 9, 5, 4};
+            evenHomeGames[11] = new int[]{10, 6, 2, 1, 3};
+
 
             for (int x = 0; x < evenHomeGames.length; x++) {
                 StringBuilder sb = new StringBuilder();
                 for (int y = 0; y < evenHomeGames[x].length; y++) {
-                   sb.append(confTeams.get(evenHomeGames[x][y]).abbr + ",");  //change abbr to name
+                   sb.append(confTeams.get(evenHomeGames[x][y]).abbr + ",");
                 }
                 confTeams.get(x).evenYearHomeOpp = sb.toString();
             }
         }
         for (int r = 0; r < 9; ++r) {
-            for (int g = 0; g < 5; ++g) {
-                Team a = confTeams.get((robinWeek + g) % 9);
+            for (int g = 0; g < ((teamCount+1)/2); ++g) {
+                Team a = confTeams.get((robinWeek + g) % (teamCount-1));
                 Team b;
                 if ( g == 0 ) {
-                    b = confTeams.get(9);
+                    b = confTeams.get((teamCount-1));
                 } else {
-                    b = confTeams.get((9 - g + robinWeek) % 9);
+                    b = confTeams.get(((teamCount-1) - g + robinWeek) % (teamCount-1));
                 }
-
 
                 Game gm;
 
@@ -132,19 +135,40 @@ public class Conference {
     public void setUpOOCSchedule() {
         //schedule OOC games
         int confNum = -1;
-        if ( league.conferences.get(0).confName.equals(confName) ) {
-            confNum = 0;
-        } else if ( league.conferences.get(1).confName.equals(confName) ) {
-            confNum = 1;
-        } else if ( league.conferences.get(2).confName.equals(confName) ) {
-            confNum = 2;
-        } else if ( league.conferences.get(3).confName.equals(confName) ) {
-            confNum = 3;
-        } else if ( league.conferences.get(4).confName.equals(confName) ) {
-            confNum = 4;
+        if ( league.conferences.get(0 + league.randconf).confName.equals(confName) ) {
+            confNum = 0 + league.randconf;
+        } else if ( league.conferences.get(1 + 2*league.randconf).confName.equals(confName) ) {
+            confNum = 1 + 2*league.randconf;
+        } else if ( league.conferences.get(2 + 3*league.randconf).confName.equals(confName) ) {
+            confNum = 2 + 3*league.randconf;
+        } else if ( league.conferences.get(3 + 4*league.randconf).confName.equals(confName) ) {
+            confNum = 3 + 4*league.randconf;
+        } else if ( league.conferences.get(4 + 5*league.randconf).confName.equals(confName) ) {
+            confNum = 4 + 5*league.randconf;
         }
 
-        if ( confNum != -1 ) {
+        if ( confNum != -1 && league.randconf == 1) {
+            for ( int offsetOOC = 5; offsetOOC < 11; ++offsetOOC ) {
+                ArrayList<Team> availTeams = new ArrayList<Team>();
+                int selConf = confNum + offsetOOC*2;
+                if (selConf == 11) selConf = 0;
+                if (selConf == 13) selConf = 2;
+                if (selConf == 15) selConf = 4;
+                if (selConf == 17) selConf = 6;
+                if (selConf == 19) selConf = 8;
+                if (selConf == 21) selConf = 0;
+                if (selConf == 23) selConf = 2;
+                if (selConf == 25) selConf = 4;
+                if (selConf == 27) selConf = 6;
+                if (selConf == 29) selConf = 8;
+                if (selConf == 31) selConf = 0;
+                if (selConf == 33) selConf = 2;
+                if (selConf == 35) selConf = 4;
+                if (selConf == 37) selConf = 6;
+                if (selConf == 39) selConf = 8;
+                scheduleOOC(offsetOOC, selConf, availTeams);
+            }
+        }  else if(confNum != -1 && league.randconf == 0) {
             for ( int offsetOOC = 5; offsetOOC < 11; ++offsetOOC ) {
                 ArrayList<Team> availTeams = new ArrayList<Team>();
                 int selConf = confNum + offsetOOC;
@@ -153,36 +177,40 @@ public class Conference {
                 if (selConf == 12) selConf = 7;
                 if (selConf == 13) selConf = 8;
                 if (selConf == 14) selConf = 9;
-                for (int i = 0; i < 10; ++i) {
-                    availTeams.add( league.conferences.get(selConf).confTeams.get(i) );
-                }
+                scheduleOOC(offsetOOC, selConf, availTeams);
+            }
+        }
 
-                for (int i = 0; i < 10; ++i) {
-                    int selTeam = (int)( availTeams.size() * Math.random() );
-                    Team a = confTeams.get(i);
-                    Team b = availTeams.get( selTeam );
+    }
 
-                    Game gm;
-                    if ( Math.random() > 0.5 ) {
-                        gm = new Game( a, b, a.conference + " vs " + b.conference );
-                    } else {
-                        gm = new Game( b, a, b.conference + " vs " + a.conference );
-                    }
+    public void scheduleOOC(int offsetOOC,int selConf, ArrayList<Team> availTeams) {
+        for (int i = 0; i < teamCount; ++i) {
+            availTeams.add( league.conferences.get(selConf).confTeams.get(i) );
+        }
+        for (int i = 0; i < teamCount; ++i) {
+            int selTeam = (int)( availTeams.size() * Math.random() );
+            Team a = confTeams.get(i);
+            Team b = availTeams.get( selTeam );
 
-                    if ( offsetOOC == league.randgm) {
-                        a.gameOOCSchedule0 = gm;
-                        b.gameOOCSchedule0 = gm;
-                        availTeams.remove(selTeam);
-                    } else if ( offsetOOC == league.randgm + 1) {
-                        a.gameOOCSchedule1 = gm;
-                        b.gameOOCSchedule1 = gm;
-                        availTeams.remove(selTeam);
-                    } else if ( offsetOOC == league.randgm + 2) {
-                        a.gameOOCSchedule2 = gm;
-                        b.gameOOCSchedule2 = gm;
-                        availTeams.remove(selTeam);
-                    }
-                }
+            Game gm;
+            if ( Math.random() > 0.5 ) {
+                gm = new Game( a, b, a.conference + " vs " + b.conference );
+            } else {
+                gm = new Game( b, a, b.conference + " vs " + a.conference );
+            }
+
+            if ( offsetOOC == league.randgm) {
+                a.gameOOCSchedule0 = gm;
+                b.gameOOCSchedule0 = gm;
+                availTeams.remove(selTeam);
+            } else if ( offsetOOC == league.randgm + 1) {
+                a.gameOOCSchedule1 = gm;
+                b.gameOOCSchedule1 = gm;
+                availTeams.remove(selTeam);
+            } else if ( offsetOOC == league.randgm + 2) {
+                a.gameOOCSchedule2 = gm;
+                b.gameOOCSchedule2 = gm;
+                availTeams.remove(selTeam);
             }
         }
     }

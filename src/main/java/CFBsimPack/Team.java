@@ -70,6 +70,7 @@ public class Team {
     public int teamPrestige;
     public int teamPollScore;
     public int teamStrengthOfWins;
+    public int teamSOS;
 
     public int rankTeamPoints;
     public int rankTeamOppPoints;
@@ -86,6 +87,9 @@ public class Team {
     public int rankTeamRecruitClass;
     public int rankTeamPollScore;
     public int rankTeamStrengthOfWins;
+    public int rankTeamSOS;
+    public int teamCount = 12;
+    public int totalTeamCount = teamCount * 10;
 
     //prestige/talent improvements
     public int diffPrestige;
@@ -377,41 +381,50 @@ public class Team {
             //RIVALRY POINTS!
             //Only call it if there's not a huge difference in team strength
         if (Math.abs(teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 20) {
-            if (teamPrestige > 80) {
+            if (teamPrestige > 75) {
                 //Good Teams: favorite teams get no points, only penalties
                 if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
                     newPrestige = newPrestige + 0;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige = newPrestige - 2;
-                    //If you're the underdog, you get points, unless you lose ;)
-                } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                }
+//                else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+//                    newPrestige = newPrestige - 2;
+//                }
+                //If you're the underdog, you get points, unless you lose ;)
+                else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
                     newPrestige = newPrestige + 1;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige = newPrestige - 1;
+//                }
+//                else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+//                    newPrestige = newPrestige - 1;
                 }
             } else if (teamPrestige > 50) {
                 //Average Teams: If you're the favorite, you get some points.
                 if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
                     newPrestige = newPrestige + 1;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige = newPrestige - 1;
-                    //If you're the underdog, you get more points, unless you lose ;)
-                } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                }
+//                else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+//                    newPrestige = newPrestige - 1;
+//                    //If you're the underdog, you get more points, unless you lose ;)
+//                }
+                else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
                     newPrestige = newPrestige + 2;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige = newPrestige - 1;
+//                }
+//                else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+//                    newPrestige = newPrestige - 1;
                 }
             } else {
                 //Bad Teams: If you're the favorite, you get some points.
                 if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
                     newPrestige = newPrestige + 1;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige = newPrestige - 1;
-                    //If you're the underdog, you get more points, unless you lose ;)
-                } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                }
+//                else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+//                    newPrestige = newPrestige - 1;
+//                    //If you're the underdog, you get more points, unless you lose ;)
+//                }
+                else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
                     newPrestige = newPrestige + 2;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige = newPrestige - 0;
+//                }
+//                else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+//                    newPrestige = newPrestige - 0;
                 }
             }
         }
@@ -424,11 +437,17 @@ public class Team {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //average+ teams that perform poor lose prestige
             }
             //Bad Teams: If you're the underdog, you get more points, unless you lose ;)
-            if ((teamPrestige <= 55) && diffExpected > 0) {
+            if ((teamPrestige <= 55 && teamPrestige > 35) && diffExpected > 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //poor teams that do well gain some prestige
             }
-            if ((teamPrestige <= 55) && diffExpected < 0) {
-                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 3000); //poor teams that do well lose a little more prestige
+            if ((teamPrestige <= 55 && teamPrestige > 35) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2800); //poor teams that do well lose a little more prestige
+            }
+            if ((teamPrestige <= 35) && diffExpected > 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2150); //poor teams that do well gain some prestige
+            }
+            if ((teamPrestige <= 35) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 4000); //poor teams that do well lose a little more prestige
             }
 
             //National Title Winner
@@ -443,7 +462,7 @@ public class Team {
 
             //Sets the bounds for Prestige
             if (newPrestige > 95) newPrestige = 95;
-            if (newPrestige < 20) newPrestige = 20;
+            if (newPrestige < 25) newPrestige = 25;
 
         }
         return newPrestige;
@@ -1343,15 +1362,16 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
+        updateSOS();
+        int preseasonBias = 6 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
-        teamPollScore = (wins*215 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 + 3*teamStrengthOfWins/11  +
+        teamPollScore = (wins*220 + 3*(teamPoints-teamOppPoints) +
+                (teamYards-teamOppYards)/40 + 3*teamStrengthOfWins/11 +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/8;
+                teamStrengthOfWins)/9;
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
-            teamPollScore += 20;
+            teamPollScore += 25;
         }
         if ( "NCW".equals(natChampWL) ) {
             //bonus for winning champ game
@@ -1359,14 +1379,14 @@ public class Team {
         }
         if ( "NCL".equals(natChampWL) ) {
             //bonus for winning champ game
-            teamPollScore += 15;
+            teamPollScore += 25;
         }
         if ( losses == 0 ) {
-            teamPollScore += 30;
+            teamPollScore += 35;
         } else if ( losses == 1 ) {
             teamPollScore += 15;
         }
-        if (wins == 0) {
+       if (wins == 0) {
             teamPollScore -= 10;
         }
 
@@ -1432,14 +1452,26 @@ public class Team {
         for ( int i = 0; i < 12; ++i ) {
             Game g = gameSchedule.get(i);
             if (g.homeTeam == this) {
-                strWins += Math.pow(100 - g.awayTeam.rankTeamPollScore,2); //Changed 60 to 100
+                strWins += Math.pow(totalTeamCount - g.awayTeam.rankTeamPollScore,2);
             } else {
-                strWins += Math.pow(100 - g.homeTeam.rankTeamPollScore,2); //changed 60 to 100
+                strWins += Math.pow(totalTeamCount - g.homeTeam.rankTeamPollScore,2);
             }
         }
         teamStrengthOfWins = strWins/50;
         for (Team t : gameWinsAgainst) {
             teamStrengthOfWins += Math.pow(t.wins,2);
+        }
+    }
+
+    public void updateSOS() {
+        teamSOS = 0;
+        for ( int i = 0; i < 12; ++i ) {
+            Game g = gameSchedule.get(i);
+            if (g.homeTeam == this) {
+                teamSOS += totalTeamCount - g.awayTeam.rankTeamPollScore;
+            } else {
+                teamSOS += totalTeamCount - g.homeTeam.rankTeamPollScore;
+            }
         }
     }
 
@@ -1820,8 +1852,12 @@ public class Team {
         ts0.append("AP Votes" + ",");
         ts0.append(getRankStr(rankTeamPollScore) + "%\n");
 
+        ts0.append(teamSOS + ",");
+        ts0.append("Strength of Schedule" + ",");
+        ts0.append(getRankStr(rankTeamSOS) + "%\n");
+
         ts0.append(teamStrengthOfWins + ",");
-        ts0.append("SOS" + ",");
+        ts0.append("Strength of Wins" + ",");
         ts0.append(getRankStr(rankTeamStrengthOfWins) + "%\n");
 
         ts0.append(teamPoints/numGames() + ",");
@@ -1916,9 +1952,12 @@ public class Team {
 
         if (wonRivalryGame) {
             summary += "\n\n Congrats on beating your rival, " + rivalTeam + "! You may see a gain in prestige in the off-season!";
-        }  else {
-            summary += "\n\n Unfortunately you lost to your rival, " + rivalTeam + "! You may lose some prestige this off-season!";
         }
+
+        //REMOVED due to 12 team conferences messing with rivalry games
+/*        else {
+            summary += "\n\n Unfortunately you lost to your rival, " + rivalTeam + "! You may lose some prestige this off-season!";
+        }*/
 
         if ((newPrestige - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (newPrestige - teamPrestige) + " prestige! This will help your recruiting.";

@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Environment;
+import android.content.Context;
+import android.util.Log;
 
 import antdroid.cfbcoach.R;
 
@@ -23,6 +26,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
@@ -163,10 +168,11 @@ public class Home extends AppCompatActivity {
      * Get info of the 10 save files for printing in the save file list
      */
     private String[] getSaveFileInfos() {
-        String[] infos = new String[10];
+        String[] infos = new String[7];
         String fileInfo;
         File saveFile;
-        for (int i = 0; i < 10; ++i) {
+        File extFile;
+        for (int i = 0; i < 7; ++i) {
             saveFile = new File(getFilesDir(), "saveFile" + i + ".cfb");
             if (saveFile.exists()) {
                 try {
@@ -187,6 +193,53 @@ public class Home extends AppCompatActivity {
                 infos[i] = "EMPTY";
             }
         }
+       /* for (int i = 0; i < 3; ++i) {
+            isExternalStorageReadable();
+
+            extFile = new File(getExternalFilesDir(
+            if (extFile.exists()) {
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(extFile));
+                    fileInfo = bufferedReader.readLine();
+                    infos[i] = fileInfo.substring(0, fileInfo.length() - 1); //gets rid of % at end
+                } catch (FileNotFoundException ex) {
+                    System.out.println(
+                            "Unable to open file");
+                } catch (IOException ex) {
+                    System.out.println(
+                            "Error reading file");
+                } catch (NullPointerException ex) {
+                    System.out.println(
+                            "Null pointer exception!");
+                }
+            } else {
+                infos[i] = "EMPTY";
+            }
+        }*/
         return infos;
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+    }
+    /* Creates external Save directory */
+
+    public File getExtSaveDir(Context context, String cfbCoach) {
+        // Get the directory for the app's private pictures directory.
+        File file = new File(context.getExternalFilesDir(
+                Environment.DIRECTORY_DOCUMENTS), cfbCoach);
+        if (!file.mkdirs()) {
+            Log.e(cfbCoach, "Directory not created");
+        }
+        return file;
     }
 }
