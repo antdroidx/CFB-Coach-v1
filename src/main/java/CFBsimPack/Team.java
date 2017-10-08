@@ -1352,8 +1352,11 @@ public class Team {
         teamOppPassYards = 0;
         teamOppRushYards = 0;
         teamTODiff = 0;
-        teamStratOffNum = getCPUOffense();
-        teamStratDefNum = getCPUDefense();
+
+        if(!userControlled) {
+            teamStratOffNum = getCPUOffense();
+            teamStratDefNum = getCPUDefense();
+        }
 
     }
 
