@@ -932,7 +932,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
-                        if (position == 15) {
+                        if (position == 16) {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
                         } else {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
@@ -963,7 +963,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamRankingsList = (ListView) dialog.findViewById(R.id.listViewDialog);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, simLeague.getTeamRankingsStr(15), userTeam.strRepWithPrestige());
+                new TeamRankingsListArrayAdapter(this, simLeague.getTeamRankingsStr(16), userTeam.strRepWithPrestige());
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 
@@ -980,7 +980,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] historySelection = {"League History", "League Records"};
+        String[] historySelection = {"League History", "League Records", "Top 25 History"};
         Spinner leagueHistorySpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, historySelection);
@@ -997,6 +997,10 @@ public class MainActivity extends AppCompatActivity {
                             final LeagueRecordsListArrayAdapter leagueRecordsAdapter =
                                     new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
+                        } else if (position == 2) {
+                            final LeagueHistoryListArrayAdapter leagueTop25Adapter =
+                                    new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueTop25History(0).split("%"), userTeam.abbr);
+                            leagueHistoryList.setAdapter(leagueTop25Adapter);
                         } else {
                             final LeagueHistoryListArrayAdapter leagueHistoryAdapter =
                                     new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
