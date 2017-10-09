@@ -468,7 +468,7 @@ public class Team {
                }
            }
 
-           if (players > 2); newPrestige += 1;
+           if (players > 2); newPrestige += 2;
            if (players > 0); newPrestige += 2;
 
             //Sets the bounds for Prestige
