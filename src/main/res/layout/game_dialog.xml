@@ -103,6 +103,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
@@ -120,7 +121,7 @@
 
                         <TextView
                             android:id="@+id/scoreboard"
-                            android:layout_width="100dp"
+                            android:layout_width="60dp"
                             android:layout_height="match_parent"
                             android:paddingBottom="2dp"
                             android:paddingLeft="2dp"
@@ -130,7 +131,7 @@
 
                         <TextView
                             android:id="@+id/scoreQT1"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -142,7 +143,7 @@
 
                         <TextView
                             android:id="@+id/scoreQT2"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -154,7 +155,7 @@
 
                         <TextView
                             android:id="@+id/scoreQT3"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -166,7 +167,7 @@
 
                         <TextView
                             android:id="@+id/scoreQT4"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -178,7 +179,7 @@
 
                         <TextView
                             android:id="@+id/scoreOT"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -202,7 +203,7 @@
 
                         <TextView
                             android:id="@+id/teamAway"
-                            android:layout_width="100dp"
+                            android:layout_width="60dp"
                             android:layout_height="match_parent"
                             android:paddingBottom="2dp"
                             android:paddingLeft="2dp"
@@ -213,7 +214,7 @@
 
                         <TextView
                             android:id="@+id/awayQT1"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -225,7 +226,7 @@
 
                         <TextView
                             android:id="@+id/awayQT2"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -237,7 +238,7 @@
 
                         <TextView
                             android:id="@+id/awayQT3"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -249,7 +250,7 @@
 
                         <TextView
                             android:id="@+id/awayQT4"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -261,7 +262,7 @@
 
                         <TextView
                             android:id="@+id/awayOT"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -285,7 +286,7 @@
 
                         <TextView
                             android:id="@+id/teamHome"
-                            android:layout_width="100dp"
+                            android:layout_width="60dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -297,7 +298,7 @@
 
                         <TextView
                             android:id="@+id/homeQT1"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -309,7 +310,7 @@
 
                         <TextView
                             android:id="@+id/homeQT2"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -321,7 +322,7 @@
 
                         <TextView
                             android:id="@+id/homeQT3"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -333,7 +334,7 @@
 
                         <TextView
                             android:id="@+id/homeQT4"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
@@ -345,7 +346,7 @@
 
                         <TextView
                             android:id="@+id/homeOT"
-                            android:layout_width="50dp"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="2dp"
