@@ -780,6 +780,44 @@ public class MainActivity extends AppCompatActivity {
             gameAwayScoreName.setText(g.awayTeam.getStrAbbrWL_2Lines());
             gameHomeScoreName.setText(g.homeTeam.getStrAbbrWL_2Lines());
 
+
+            final TextView awayTeam = (TextView) dialog.findViewById(R.id.teamAway);
+            final TextView awayQT1 = (TextView) dialog.findViewById(R.id.awayQT1);
+            final TextView awayQT2 = (TextView) dialog.findViewById(R.id.awayQT2);
+            final TextView awayQT3 = (TextView) dialog.findViewById(R.id.awayQT3);
+            final TextView awayQT4 = (TextView) dialog.findViewById(R.id.awayQT4);
+            final TextView awayOT = (TextView) dialog.findViewById(R.id.awayOT);
+            final TextView homeTeam = (TextView) dialog.findViewById(R.id.teamHome);
+            final TextView homeQT1 = (TextView) dialog.findViewById(R.id.homeQT1);
+            final TextView homeQT2 = (TextView) dialog.findViewById(R.id.homeQT2);
+            final TextView homeQT3 = (TextView) dialog.findViewById(R.id.homeQT3);
+            final TextView homeQT4 = (TextView) dialog.findViewById(R.id.homeQT4);
+            final TextView homeOT = (TextView) dialog.findViewById(R.id.homeOT);
+            final TextView scoreOT = (TextView) dialog.findViewById(R.id.scoreOT);
+
+
+            awayTeam.setText(g.awayTeam.abbr);
+            awayQT1.setText(Integer.toString(g.awayQScore[0]));
+            awayQT2.setText(Integer.toString(g.awayQScore[1]));
+            awayQT3.setText(Integer.toString(g.awayQScore[2]));
+            awayQT4.setText(Integer.toString(g.awayQScore[3]));
+
+            homeTeam.setText(g.homeTeam.abbr);
+            homeQT1.setText(Integer.toString(g.homeQScore[0]));
+            homeQT2.setText(Integer.toString(g.homeQScore[1]));
+            homeQT3.setText(Integer.toString(g.homeQScore[2]));
+            homeQT4.setText(Integer.toString(g.homeQScore[3]));
+
+            if (g.numOT > 0) {
+                awayOT.setText(Integer.toString(g.awayQScore[3 + g.numOT]));
+                homeOT.setText(Integer.toString(g.homeQScore[3 + g.numOT]));
+            } else {
+                awayOT.setText("");
+                homeOT.setText("");
+                scoreOT.setText("");
+            }
+
+
             final TextView gameDialogScoreDashName = (TextView) dialog.findViewById(R.id.gameDialogScoreDashName);
             if (g.numOT > 0) {
                 gameDialogScoreDashName.setText(g.numOT + "OT");
