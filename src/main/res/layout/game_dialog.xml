@@ -3,145 +3,416 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/scrollerGameDialog"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scrollbars="vertical"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
+                android:paddingEnd="30dp"
                 android:paddingStart="30dp"
-                android:paddingEnd="30dp">
+                android:paddingTop="10dp">
+
                 <TextView
-                    android:text="XX"
                     android:id="@+id/gameDialogScoreAway"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="40sp"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0" />
-                <TextView
-                    android:text="-"
-                    android:id="@+id/gameDialogScoreDash"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="40sp"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
+                    android:layout_weight="1.0"
                     android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5" />
-                <TextView
                     android:text="XX"
-                    android:id="@+id/gameDialogScoreHome"
+                    android:textAlignment="gravity"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="40sp"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
-                    android:gravity="center"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gameDialogScoreDash"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0" />
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textAlignment="gravity"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gameDialogScoreHome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="XX"
+                    android:textAlignment="gravity"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp">
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp">
+
                 <TextView
-                    android:text="ATL"
                     android:id="@+id/gameDialogScoreAwayName"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0" />
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="AWAY TEAM"
+                    android:textAlignment="gravity"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:text="\@"
                     android:id="@+id/gameDialogScoreDashName"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5" />
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="\@"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <TextView
-                    android:text="BUF"
                     android:id="@+id/gameDialogScoreHomeName"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0" />
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="HOME TEAM"
+                    android:textAlignment="gravity"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
             </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="5dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/scoreboard"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/scoreQT1"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="1"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/scoreQT2"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="2"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/scoreQT3"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="3"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/scoreQT4"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="4"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/scoreOT"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="OT"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/teamAway"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="Away Team"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/awayQT1"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/awayQT2"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/awayQT3"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/awayQT4"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/awayOT"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="N/A"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/teamHome"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="Home Team"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/homeQT1"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/homeQT2"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/homeQT3"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/homeQT4"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="X"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/homeOT"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="2dp"
+                            android:text="N/A"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+            </TableLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:padding="10sp">
+
                 <TextView
-                    android:text="ha1"
                     android:id="@+id/gameDialogLeft"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textAlignment="gravity"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:layout_width="90.0dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="1.0" />
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="ha1"
+                    android:textAlignment="gravity"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:text="ha3"
                     android:id="@+id/gameDialogCenter"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textAlignment="gravity"
-                    android:gravity="center"
                     android:layout_width="110.0dp"
                     android:layout_height="fill_parent"
+                    android:layout_toRightOf="@id/gameDialogLeft"
                     android:layout_weight="1.0"
-                    android:layout_toRightOf="@id/gameDialogLeft"/>
-                <TextView
+                    android:gravity="center"
                     android:text="ha3"
-                    android:id="@+id/gameDialogRight"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textAlignment="gravity"
-                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/gameDialogRight"
                     android:layout_width="110.0dp"
                     android:layout_height="fill_parent"
+                    android:layout_toRightOf="@id/gameDialogCenter"
                     android:layout_weight="1.0"
-                    android:layout_toRightOf="@id/gameDialogCenter"/>
+                    android:gravity="center"
+                    android:text="ha3"
+                    android:textAlignment="gravity"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </RelativeLayout>
+
             <TextView
-                android:text="ha3"
                 android:id="@+id/gameDialogBottom"
-                android:textAlignment="gravity"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
+                android:gravity="center"
+                android:paddingEnd="3dp"
                 android:paddingStart="3dp"
-                android:paddingEnd="3dp" />
+                android:text="ha3"
+                android:textAlignment="gravity"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

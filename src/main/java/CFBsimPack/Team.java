@@ -1405,28 +1405,28 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 6 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*220 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 + 3*teamStrengthOfWins/11 +
+                (teamYards-teamOppYards)/40 + 1*teamStrengthOfWins/4 +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/9;
+                teamStrengthOfWins)/10;
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
             teamPollScore += 25;
         }
         if ( "NCW".equals(natChampWL) ) {
             //bonus for winning champ game
-            teamPollScore += 100;
+            teamPollScore += 125;
         }
         if ( "NCL".equals(natChampWL) ) {
             //bonus for winning champ game
             teamPollScore += 25;
         }
         if ( losses == 0 ) {
-            teamPollScore += 35;
+            teamPollScore += 50;
         } else if ( losses == 1 ) {
-            teamPollScore += 15;
+            teamPollScore += 25;
         }
        if (wins == 0) {
             teamPollScore -= 10;
