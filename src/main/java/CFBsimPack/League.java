@@ -1754,6 +1754,15 @@ public class League {
         return hist;
     }
 
+    public String getLeagueTop25History(int year) {
+        String hist = "";
+        hist += (seasonStart+year) + ":\n";
+        for (int i = 0; i < 25; ++i) {
+            hist += "#" + i +" " + leagueHistory.get(year)[i] + "\n";
+        }
+        return hist;
+    }
+
     /**
      * Get list of teams and their prestige, used for selecting when a new game is started
      * @return array of all the teams
