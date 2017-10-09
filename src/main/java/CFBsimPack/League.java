@@ -874,7 +874,7 @@ public class League {
     }
 
     /**
-     * At the end of the year, record the top 10 teams for the League's History.
+     * At the end of the year, record the top 25 teams for the League's History.
      */
     public void updateLeagueHistory() {
         //update league history
@@ -883,7 +883,7 @@ public class League {
         Team tt;
         for (int i = 0; i < 25; ++i) {
             tt = teamList.get(i);
-            yearTop25[i] = tt.abbr + " (" + tt.wins + "-" + tt.losses + ")";
+            yearTop25[i] = tt.name + " (" + tt.wins + "-" + tt.losses + ")";
         }
         leagueHistory.add(yearTop25);
     }
@@ -1756,10 +1756,15 @@ public class League {
 
     public String getLeagueTop25History(int year) {
         String hist = "";
-        hist += (seasonStart+year) + ":\n";
+        hist += (seasonStart+year) + " Top 25 Rankings:\n";
         for (int i = 0; i < 25; ++i) {
-            hist += "#" + i +" " + leagueHistory.get(year)[i] + "\n";
-        }
+            if ( i < 9) {
+                hist += "\t 0" + (i+1) + ":  " + leagueHistory.get(year)[i] + "\n";
+            } else {
+                hist += "\t " + (i+1) + ":  " + leagueHistory.get(year)[i] + "\n";
+            }
+
+            }
         return hist;
     }
 

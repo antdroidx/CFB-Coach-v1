@@ -473,7 +473,7 @@ public class MainActivity extends AppCompatActivity {
             showTeamRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
             /**
-             * Clicked News Stories in drop down menu
+             * Current selected team history
              */
             showCurrTeamHistoryDialog();
         } else if (id == R.id.action_league_history) {
@@ -481,6 +481,11 @@ public class MainActivity extends AppCompatActivity {
              * Clicked League History in drop down menu
              */
             showLeagueHistoryDialog();
+         } else if (id == R.id.action_top_25_history) {
+             /**
+              * Clicked Top 25 History
+              */
+             showTop25History();
         } else if (id == R.id.action_team_history) {
             /**
              * Clicked User Team History in drop down menu
@@ -980,7 +985,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] historySelection = {"League History", "League Records", "Top 25 History"};
+        String[] historySelection = {"League History", "League Records"};
         Spinner leagueHistorySpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, historySelection);
@@ -997,10 +1002,6 @@ public class MainActivity extends AppCompatActivity {
                             final LeagueRecordsListArrayAdapter leagueRecordsAdapter =
                                     new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
-                        } else if (position == 2) {
-                            final LeagueHistoryListArrayAdapter leagueTop25Adapter =
-                                    new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueTop25History(0).split("%"), userTeam.abbr);
-                            leagueHistoryList.setAdapter(leagueTop25Adapter);
                         } else {
                             final LeagueHistoryListArrayAdapter leagueHistoryAdapter =
                                     new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
@@ -1014,7 +1015,52 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showUserTeamHistoryDialog() {
+    public void showTop25History() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("AP Poll History")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.bowl_ccg_dialog, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        if (season == seasonStart) {
+            String[] selection = {"No History to Display"};
+            Spinner top25hisSpinner = (Spinner) dialog.findViewById(R.id.spinnerBowlCCG);
+            final ArrayAdapter<String> top25Adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, selection);
+            top25Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            top25hisSpinner.setAdapter(top25Adapter);
+        } else {
+            String[] selection = new String[simLeague.leagueHistory.size()];
+                for (int i = 0; i < simLeague.leagueHistory.size(); ++i) {
+                    selection[i] = Integer.toString(seasonStart + i);
+                }
+            Spinner top25hisSpinner = (Spinner) dialog.findViewById(R.id.spinnerBowlCCG);
+            final ArrayAdapter<String> top25Adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, selection);
+            top25Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            top25hisSpinner.setAdapter(top25Adapter);
+
+            final TextView top25his = (TextView) dialog.findViewById(R.id.textViewBowlCCGDialog);
+
+            top25hisSpinner.setOnItemSelectedListener(
+                    new AdapterView.OnItemSelectedListener() {
+                        public void onItemSelected(
+                                AdapterView<?> parent, View view, int position, long id) {
+                            top25his.setText(simLeague.getLeagueTop25History(position));
+                        }
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            // do nothing
+                        }
+                    });
+        }
+    }
+
+public void showUserTeamHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("My Team History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
