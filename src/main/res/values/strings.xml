@@ -5,10 +5,11 @@
     <string name="action_team_lineup">Set Team Lineup</string>
     <string name="action_league_history">League History/Records</string>
     <string name="action_league_records">League Records</string>
+    <string name="action_top_25_history">Poll History</string>
     <string name="action_current_team_history">Team History</string>
     <string name="action_team_history">My Team History</string>
     <string name="action_rankings">Team Rankings</string>
-    <string name="action_heisman">Post Season Awards</string>
+    <string name="action_heisman">Post-Season Awards</string>
     <string name="action_news_stories">News Stories</string>
     <string name="action_bowlgame_watch">Bowl Games</string>
     <string name="action_ccg_watch">Conf Championships</string>

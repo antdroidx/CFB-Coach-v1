@@ -13,6 +13,11 @@
         android:title="@string/action_league_history"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_top_25_history"
+        android:orderInCategory="100"
+        android:title="@string/action_top_25_history"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_current_team_history"
         android:orderInCategory="100"
         android:title="@string/action_current_team_history"
