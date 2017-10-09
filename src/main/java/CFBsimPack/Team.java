@@ -1365,7 +1365,6 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        updateSOS();
         int preseasonBias = 6 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*220 + 3*(teamPoints-teamOppPoints) +

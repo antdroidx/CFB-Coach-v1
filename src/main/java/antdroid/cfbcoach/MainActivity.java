@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     userTeamStr = userTeam.name;
                     userTeam.recruitPlayersFromStr(extras.getString("RECRUITS"));
                     simLeague.updateTeamTalentRatings();
+                    simLeague.updateTeamTalentRatings();
                     season = simLeague.getYear();
                     currentTeam = userTeam;
                     loadedLeague = true;
@@ -638,7 +639,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateSchedule() {
+   private void updateSchedule() {
         mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
 
@@ -656,6 +657,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
     // Shows Conference Standings
     private void updateStandings() {
@@ -911,7 +913,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
         String[] rankingsSelection =
-                {"Poll Votes", "Conference Standings", "Strength of Sched", "Points Per Game", "Opp Points Per Game",
+                {"Poll Votes", "Conference Standings", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
                         "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class"};
         Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);

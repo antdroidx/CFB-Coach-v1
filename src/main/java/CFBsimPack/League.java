@@ -343,8 +343,6 @@ public class League {
 
             //First ignore the save file info
             line = bufferedReader.readLine();
-            // [EASY]%    [HARD]%
-            //isHardMode = line.substring(line.length() - 7, line.length()).equals("[HARD]%");
 
             //Next get league history
             leagueHistory = new ArrayList<String[]>();
@@ -1169,14 +1167,18 @@ public class League {
             teamList.get(t).rankTeamPollScore = t+1;
         }
 
-        Collections.sort( teamList, new TeamCompSoW() );
-        for (int t = 0; t < teamList.size(); ++t) {
-            teamList.get(t).rankTeamStrengthOfWins = t+1;
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).updateSOS();
         }
 
         Collections.sort( teamList, new TeamCompSoS() );
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamSOS = t+1;
+        }
+
+        Collections.sort( teamList, new TeamCompSoW() );
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).rankTeamStrengthOfWins = t+1;
         }
 
         Collections.sort( teamList, new TeamCompPPG() );
@@ -1614,86 +1616,92 @@ public class League {
                 }
                 break;
             case 1: return getConfStandings();
-            case 2: Collections.sort( teams, new TeamCompSoW() );
+            case 2: Collections.sort( teams, new TeamCompSoS() );
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamSOS);
+                }
+                break;
+            case 3: Collections.sort( teams, new TeamCompSoW() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamStrengthOfWins);
                 }
                 break;
-            case 3: Collections.sort( teams, new TeamCompPPG() );
+            case 4: Collections.sort( teams, new TeamCompPPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamPoints/t.numGames()));
                 }
                 break;
-            case 4: Collections.sort( teams, new TeamCompOPPG() );
+            case 5: Collections.sort( teams, new TeamCompOPPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppPoints/t.numGames()));
                 }
                 break;
-            case 5: Collections.sort( teams, new TeamCompYPG() );
+            case 6: Collections.sort( teams, new TeamCompYPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamYards/t.numGames()));
                 }
                 break;
-            case 6: Collections.sort( teams, new TeamCompOYPG() );
+            case 7: Collections.sort( teams, new TeamCompOYPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppYards/t.numGames()));
                 }
                 break;
-            case 7: Collections.sort( teams, new TeamCompPYPG() );
+            case 8: Collections.sort( teams, new TeamCompPYPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamPassYards/t.numGames()));
                 }
                 break;
-            case 8: Collections.sort( teams, new TeamCompRYPG() );
+            case 9: Collections.sort( teams, new TeamCompRYPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamRushYards/t.numGames()));
                 }
                 break;
-            case 9: Collections.sort( teams, new TeamCompOPYPG() );
+            case 10: Collections.sort( teams, new TeamCompOPYPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppPassYards/t.numGames()));
                 }
                 break;
-            case 10: Collections.sort( teams, new TeamCompORYPG() );
+            case 11: Collections.sort( teams, new TeamCompORYPG() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppRushYards/t.numGames()));
                 }
                 break;
-            case 11: Collections.sort( teams, new TeamCompTODiff() );
+            case 12: Collections.sort( teams, new TeamCompTODiff() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     if (t.teamTODiff > 0) rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + ",+" + t.teamTODiff);
                     else rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamTODiff);
                 }
                 break;
-            case 12: Collections.sort( teams, new TeamCompOffTalent() );
+            case 13: Collections.sort( teams, new TeamCompOffTalent() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamOffTalent);
                 }
                 break;
-            case 13: Collections.sort( teams, new TeamCompDefTalent() );
+            case 14: Collections.sort( teams, new TeamCompDefTalent() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamDefTalent);
                 }
                 break;
-            case 14: Collections.sort( teams, new TeamCompPrestige() );
+            case 15: Collections.sort( teams, new TeamCompPrestige() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamPrestige);
                 }
                 break;
-            case 15: Collections.sort( teams, new TeamCompRecruitClass() );
+            case 16: Collections.sort( teams, new TeamCompRecruitClass() );
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + t.getRecruitingClassRat());
@@ -1703,12 +1711,6 @@ public class League {
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamPollScore);
-                }
-                break;
-            case 16: Collections.sort( teams, new TeamCompSoS() );
-                for (int i = 0; i < teams.size(); ++i) {
-                    t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i+1) + "," + t.strRepWithBowlResults() + "," + t.teamSOS);
                 }
                 break;
         }
@@ -2162,6 +2164,8 @@ public class League {
             sb.append(s + "\n");
         }
         sb.append("END_HALL_OF_FAME\n");
+
+
 
 
         // Actually write to the file
