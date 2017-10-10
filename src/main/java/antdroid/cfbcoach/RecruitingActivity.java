@@ -46,31 +46,38 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> teamQBs;
     private ArrayList<String> teamRBs;
     private ArrayList<String> teamWRs;
+    private ArrayList<String> teamTEs;
     private ArrayList<String> teamOLs;
     private ArrayList<String> teamKs;
-    private ArrayList<String> teamSs;
+    private ArrayList<String> teamDLs;
+    private ArrayList<String> teamLBs;
     private ArrayList<String> teamCBs;
-    private ArrayList<String> teamF7s;
+    private ArrayList<String> teamSs;
+
     private ArrayList<String> teamPlayers; //all players
 
     private ArrayList<String> availQBs;
     private ArrayList<String> availRBs;
     private ArrayList<String> availWRs;
+    private ArrayList<String> availTEs;
     private ArrayList<String> availOLs;
     private ArrayList<String> availKs;
-    private ArrayList<String> availSs;
+    private ArrayList<String> availDLs;
+    private ArrayList<String> availLBs;
     private ArrayList<String> availCBs;
-    private ArrayList<String> availF7s;
+    private ArrayList<String> availSs;
     private ArrayList<String> availAll;
 
     private int needQBs;
     private int needRBs;
     private int needWRs;
+    private int needTEs;
     private int needOLs;
     private int needKs;
-    private int needSs;
+    private int needDLs;
+    private int needLBs;
     private int needCBs;
-    private int needF7s;
+    private int needSs;
 
     // Whether to show pop ups every recruit
     private boolean showPopUp;
@@ -102,20 +109,25 @@ public class RecruitingActivity extends AppCompatActivity {
         teamQBs = new ArrayList<String>();
         teamRBs = new ArrayList<String>();
         teamWRs = new ArrayList<String>();
+        teamTEs = new ArrayList<String>();
         teamOLs = new ArrayList<String>();
         teamKs = new ArrayList<String>();
-        teamSs = new ArrayList<String>();
+        teamDLs = new ArrayList<String>();
+        teamLBs = new ArrayList<String>();
         teamCBs = new ArrayList<String>();
-        teamF7s = new ArrayList<String>();
+        teamSs = new ArrayList<String>();
         teamPlayers = new ArrayList<String>();
         availQBs = new ArrayList<String>();
         availRBs = new ArrayList<String>();
         availWRs = new ArrayList<String>();
+        availTEs = new ArrayList<String>();
         availOLs = new ArrayList<String>();
         availKs = new ArrayList<String>();
-        availSs = new ArrayList<String>();
+        availDLs = new ArrayList<String>();
+        availLBs = new ArrayList<String>();
         availCBs = new ArrayList<String>();
-        availF7s = new ArrayList<String>();
+        availSs = new ArrayList<String>();
+
         availAll = new ArrayList<String>();
 
         // Get User Team's player info and team info for recruiting
@@ -151,16 +163,20 @@ public class RecruitingActivity extends AppCompatActivity {
                     teamRBs.add(getReadablePlayerInfo(lines[i]));
                 } else if (playerInfo[0].equals("WR")) {
                     teamWRs.add(getReadablePlayerInfo(lines[i]));
-                } else if (playerInfo[0].equals("K")) {
-                    teamKs.add(getReadablePlayerInfo(lines[i]));
+                } else if (playerInfo[0].equals("TE")) {
+                    teamTEs.add(getReadablePlayerInfo(lines[i]));
                 } else if (playerInfo[0].equals("OL")) {
                     teamOLs.add(getReadablePlayerInfo(lines[i]));
-                } else if (playerInfo[0].equals("S")) {
-                    teamSs.add(getReadablePlayerInfo(lines[i]));
+                } else if (playerInfo[0].equals("K")) {
+                    teamKs.add(getReadablePlayerInfo(lines[i]));
+                } else if (playerInfo[0].equals("DL")) {
+                    teamDLs.add(getReadablePlayerInfo(lines[i]));
+                } else if (playerInfo[0].equals("LB")) {
+                    teamLBs.add(getReadablePlayerInfo(lines[i]));
                 } else if (playerInfo[0].equals("CB")) {
                     teamCBs.add(getReadablePlayerInfo(lines[i]));
-                } else if (playerInfo[0].equals("F7")) {
-                    teamF7s.add(getReadablePlayerInfo(lines[i]));
+                } else if (playerInfo[0].equals("S")) {
+                    teamSs.add(getReadablePlayerInfo(lines[i]));
                 }
             }
             ++i; // go to next line
@@ -181,21 +197,25 @@ public class RecruitingActivity extends AppCompatActivity {
                 availRBs.add(lines[i]);
             } else if (playerInfo[0].equals("WR")) {
                 availWRs.add(lines[i]);
+            } else if (playerInfo[0].equals("TE")) {
+                availTEs.add(lines[i]);
             } else if (playerInfo[0].equals("K")) {
                 availKs.add(lines[i]);
             } else if (playerInfo[0].equals("OL")) {
                 availOLs.add(lines[i]);
-            } else if (playerInfo[0].equals("S")) {
-                availSs.add(lines[i]);
+            } else if (playerInfo[0].equals("DL")) {
+                availDLs.add(lines[i]);
+            } else if (playerInfo[0].equals("LB")) {
+                availLBs.add(lines[i]);
             } else if (playerInfo[0].equals("CB")) {
                 availCBs.add(lines[i]);
-            } else if (playerInfo[0].equals("F7")) {
-                availF7s.add(lines[i]);
+            } else if (playerInfo[0].equals("S")) {
+                availSs.add(lines[i]);
             }
             ++i;
         }
 
-        // Sort to get top 50 overall players
+        // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
         availAll = new ArrayList<String>(availAll.subList(0, 100));
 
@@ -217,11 +237,13 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("QB (Need: " + needQBs + ")");
         positions.add("RB (Need: " + needRBs + ")");
         positions.add("WR (Need: " + needWRs + ")");
+        positions.add("TE (Need: " + needTEs + ")");
         positions.add("OL (Need: " + needOLs + ")");
         positions.add("K (Need: " + needKs + ")");
-        positions.add("S (Need: " + needSs + ")");
+        positions.add("DL (Need: " + needDLs + ")");
+        positions.add("LB (Need: " + needLBs + ")");
         positions.add("CB (Need: " + needCBs + ")");
-        positions.add("F7 (Need: " + needF7s + ")");
+        positions.add("S (Need: " + needSs + ")");
         positions.add("Top 100 Recruits");
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -299,12 +321,13 @@ public class RecruitingActivity extends AppCompatActivity {
                             removeUnaffordable(availQBs);
                             removeUnaffordable(availRBs);
                             removeUnaffordable(availWRs);
+                            removeUnaffordable(availTEs);
                             removeUnaffordable(availOLs);
                             removeUnaffordable(availKs);
-                            removeUnaffordable(availSs);
+                            removeUnaffordable(availDLs);
+                            removeUnaffordable(availLBs);
                             removeUnaffordable(availCBs);
-                            removeUnaffordable(availF7s);
-
+                            removeUnaffordable(availSs);
                             // Notify that players were removed
                             expListAdapter.notifyDataSetChanged();
                         }
@@ -381,16 +404,20 @@ public class RecruitingActivity extends AppCompatActivity {
             players = availRBs;
         } else if (pos.equals("WR")) {
             players = availWRs;
+        } else if (pos.equals("TE")) {
+            players = availTEs;
         } else if (pos.equals("OL")) {
             players = availOLs;
         } else if (pos.equals("K")) {
             players = availKs;
-        } else if (pos.equals("S")) {
-            players = availSs;
+        } else if (pos.equals("DL")) {
+            players = availDLs;
+        } else if (pos.equals("LB")) {
+            players = availLBs;
         } else if (pos.equals("CB")) {
             players = availCBs;
-        } else if (pos.equals("F7")) {
-            players = availF7s;
+        } else if (pos.equals("S")) {
+            players = availSs;
         }
     }
 
@@ -434,6 +461,11 @@ public class RecruitingActivity extends AppCompatActivity {
                     ", Catching: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     ", Evasion: " + getLetterGrade(ps[7]);
+        } else if (pos.equals("TE")) {
+            return "Football IQ: " + getLetterGradePot(ps[4]) +
+                    ", Catching: " + getLetterGrade(ps[5]) +
+                    "\nRush Blk: " + getLetterGrade(ps[6]) +
+                    ", Evasion: " + getLetterGrade(ps[7]);
         } else if (pos.equals("OL")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Strength: " + getLetterGrade(ps[5]) +
@@ -444,21 +476,26 @@ public class RecruitingActivity extends AppCompatActivity {
                     ", Kick Power: " + getLetterGrade(ps[5]) +
                     "\nAccuracy: " + getLetterGrade(ps[6]) +
                     ", Clumsiness: " + getLetterGrade(ps[7]);
-        } else if (pos.equals("S")) {
+        } else if (pos.equals("DL")) {
+            return "Football IQ: " + getLetterGradePot(ps[4]) +
+                    ", Strength: " + getLetterGrade(ps[5]) +
+                    "\nRun Stop: " + getLetterGrade(ps[6]) +
+                    ", Pass Press: " + getLetterGrade(ps[7]);
+        } else if (pos.equals("LB")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +
-                    "\nSpeed: " + getLetterGrade(ps[6]) +
+                    "\nRun Stop: " + getLetterGrade(ps[6]) +
                     ", Tackling: " + getLetterGrade(ps[7]);
         } else if (pos.equals("CB")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     ", Tackling: " + getLetterGrade(ps[7]);
-        } else if (pos.equals("F7")) {
+        } else if (pos.equals("S")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Strength: " + getLetterGrade(ps[5]) +
-                    "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    ", Pass Press: " + getLetterGrade(ps[7]);
+                    ", Coverage: " + getLetterGrade(ps[5]) +
+                    "\nSpeed: " + getLetterGrade(ps[6]) +
+                    ", Tackling: " + getLetterGrade(ps[7]);
         }
         return "ERROR";
     }
@@ -564,21 +601,27 @@ public class RecruitingActivity extends AppCompatActivity {
         needQBs = 2 - teamQBs.size();
         needRBs = 4 - teamRBs.size();
         needWRs = 6 - teamWRs.size();
+        needTEs = 2 - teamTEs.size();
         needOLs = 10 - teamOLs.size();
         needKs = 2 - teamKs.size();
-        needSs = 2 - teamSs.size();
+        needDLs = 8 - teamDLs.size();
+        needLBs = 6 - teamLBs.size();
         needCBs = 6 - teamCBs.size();
-        needF7s = 14 - teamF7s.size();
+        needSs = 2 - teamSs.size();
+
         if (dataAdapterPosition != null) {
             positions = new ArrayList<String>();
             positions.add("QB (Need: " + needQBs + ")");
             positions.add("RB (Need: " + needRBs + ")");
             positions.add("WR (Need: " + needWRs + ")");
+            positions.add("TE (Need: " + needTEs + ")");
             positions.add("OL (Need: " + needOLs + ")");
             positions.add("K (Need: " + needKs + ")");
-            positions.add("S (Need: " + needSs + ")");
+            positions.add("DL (Need: " + needDLs + ")");
+            positions.add("LB (Need: " + needLBs + ")");
             positions.add("CB (Need: " + needCBs + ")");
-            positions.add("F7 (Need: " + needF7s + ")");
+            positions.add("S (Need: " + needSs + ")");
+
             positions.add("Top 100 Recruits");
             dataAdapterPosition.clear();
             for (String p : positions) {
@@ -606,20 +649,26 @@ public class RecruitingActivity extends AppCompatActivity {
         sb.append("\nWRs (Need: " + needWRs + ")\n");
         appendPlayers(sb, teamWRs, 3);
 
+        sb.append("\nTEs (Need: " + needTEs + ")\n");
+        appendPlayers(sb, teamTEs, 1);
+
         sb.append("\nOLs (Need: " + needOLs + ")\n");
         appendPlayers(sb, teamOLs, 5);
 
         sb.append("\nKs (Need: " + needKs + ")\n");
         appendPlayers(sb, teamKs, 1);
 
-        sb.append("\nSs (Need: " + needSs + ")\n");
-        appendPlayers(sb, teamSs, 1);
+        sb.append("\nDLs (Need: " + needDLs + ")\n");
+        appendPlayers(sb, teamDLs, 4);
+
+        sb.append("\nLBs (Need: " + needLBs + ")\n");
+        appendPlayers(sb, teamLBs, 3);
 
         sb.append("\nCBs (Need: " + needCBs + ")\n");
         appendPlayers(sb, teamCBs, 3);
 
-        sb.append("\nF7s (Need: " + needF7s + ")\n");
-        appendPlayers(sb, teamF7s, 7);
+        sb.append("\nSs (Need: " + needSs + ")\n");
+        appendPlayers(sb, teamSs, 1);
 
         sb.append("\nRedshirted Players:\n");
         for (String rp : playersRedshirted) {
@@ -834,6 +883,10 @@ public class RecruitingActivity extends AppCompatActivity {
             availWRs.remove(player);
             teamWRs.add(getReadablePlayerInfo(player));
             Collections.sort(teamWRs, new PlayerTeamStrCompOverall());
+        } else if (ps[0].equals("TE")) {
+            availTEs.remove(player);
+            teamTEs.add(getReadablePlayerInfo(player));
+            Collections.sort(teamTEs, new PlayerTeamStrCompOverall());
         } else if (ps[0].equals("OL")) {
             availOLs.remove(player);
             teamOLs.add(getReadablePlayerInfo(player));
@@ -842,18 +895,22 @@ public class RecruitingActivity extends AppCompatActivity {
             availKs.remove(player);
             teamKs.add(getReadablePlayerInfo(player));
             Collections.sort(teamKs, new PlayerTeamStrCompOverall());
-        } else if (ps[0].equals("S")) {
-            availSs.remove(player);
-            teamSs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamSs, new PlayerTeamStrCompOverall());
+        } else if (ps[0].equals("DL")) {
+            availDLs.remove(player);
+            teamDLs.add(getReadablePlayerInfo(player));
+            Collections.sort(teamDLs, new PlayerTeamStrCompOverall());
+        } else if (ps[0].equals("LB")) {
+            availLBs.remove(player);
+            teamLBs.add(getReadablePlayerInfo(player));
+            Collections.sort(teamLBs, new PlayerTeamStrCompOverall());
         } else if (ps[0].equals("CB")) {
             availCBs.remove(player);
             teamCBs.add(getReadablePlayerInfo(player));
             Collections.sort(teamCBs, new PlayerTeamStrCompOverall());
-        } else if (ps[0].equals("F7")) {
-            availF7s.remove(player);
-            teamF7s.add(getReadablePlayerInfo(player));
-            Collections.sort(teamF7s, new PlayerTeamStrCompOverall());
+        } else if (ps[0].equals("S")) {
+            availSs.remove(player);
+            teamSs.add(getReadablePlayerInfo(player));
+            Collections.sort(teamSs, new PlayerTeamStrCompOverall());
         }
 
         players.remove(player);
@@ -1007,16 +1064,20 @@ public class RecruitingActivity extends AppCompatActivity {
             availRBs.remove(player);
         } else if (ps[0].equals("WR")) {
             availWRs.remove(player);
+        } else if (ps[0].equals("TE")) {
+            availTEs.remove(player);
         } else if (ps[0].equals("OL")) {
             availOLs.remove(player);
         } else if (ps[0].equals("K")) {
             availKs.remove(player);
-        } else if (ps[0].equals("S")) {
-            availSs.remove(player);
+        } else if (ps[0].equals("DL")) {
+            availDLs.remove(player);
+        } else if (ps[0].equals("LB")) {
+            availLBs.remove(player);
         } else if (ps[0].equals("CB")) {
             availCBs.remove(player);
-        } else if (ps[0].equals("F7")) {
-            availF7s.remove(player);
+        } else if (ps[0].equals("S")) {
+            availSs.remove(player);
         }
 
         players.remove(player);
@@ -1055,16 +1116,20 @@ public class RecruitingActivity extends AppCompatActivity {
                 availRBs.set(availRBs.indexOf(player), player.substring(0, player.length() - 1) + "1");
             } else if (ps[0].equals("WR") && availWRs.contains(player)) {
                 availWRs.set(availWRs.indexOf(player), player.substring(0, player.length() - 1) + "1");
+            } else if (ps[0].equals("TE") && availTEs.contains(player)) {
+                availTEs.set(availTEs.indexOf(player), player.substring(0, player.length() - 1) + "1");
             } else if (ps[0].equals("OL") && availOLs.contains(player)) {
                 availOLs.set(availOLs.indexOf(player), player.substring(0, player.length() - 1) + "1");
             } else if (ps[0].equals("K") && availKs.contains(player)) {
                 availKs.set(availKs.indexOf(player), player.substring(0, player.length() - 1) + "1");
-            } else if (ps[0].equals("S") && availSs.contains(player)) {
-                availSs.set(availSs.indexOf(player), player.substring(0, player.length() - 1) + "1");
+            } else if (ps[0].equals("DL") && availDLs.contains(player)) {
+                availDLs.set(availDLs.indexOf(player), player.substring(0, player.length() - 1) + "1");
+            } else if (ps[0].equals("LB") && availLBs.contains(player)) {
+                availLBs.set(availLBs.indexOf(player), player.substring(0, player.length() - 1) + "1");
             } else if (ps[0].equals("CB") && availCBs.contains(player)) {
                 availCBs.set(availCBs.indexOf(player), player.substring(0, player.length() - 1) + "1");
-            } else if (ps[0].equals("F7") && availF7s.contains(player)) {
-                availF7s.set(availF7s.indexOf(player), player.substring(0, player.length() - 1) + "1");
+            } else if (ps[0].equals("S") && availSs.contains(player)) {
+                availSs.set(availSs.indexOf(player), player.substring(0, player.length() - 1) + "1");
             }
 
             Toast.makeText(this, "Scouted " + ps[0] + " " + ps[1], Toast.LENGTH_SHORT).show();

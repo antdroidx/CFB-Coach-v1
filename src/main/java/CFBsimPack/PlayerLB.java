@@ -29,10 +29,11 @@ public class PlayerLB extends Player{
     public int ratLBRsh;
     //LB Tackle Ability
     public int ratLBTkl;
+    //public int ratCBSpd;
 
     //public Vector ratingsVector;
 
-    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur ) {
+    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl/*, int spd*/, boolean rs, int dur ) {
         team = t;
         name = nm;
         year = yr;
@@ -45,6 +46,7 @@ public class PlayerLB extends Player{
         ratLBCov = cov;
         ratLBRsh = rsh;
         ratLBTkl = tkl;
+        //ratCBSpd = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "LB";
@@ -59,6 +61,7 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratLBCov);
         ratingsVector.addElement(ratLBRsh);
         ratingsVector.addElement(ratLBTkl);
+        //ratingsVector.addElement(ratCBSpd);
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -73,7 +76,7 @@ public class PlayerLB extends Player{
 
     }
 
-    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur,
+    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl/*, int spd*/, boolean rs, int dur,
                      int cGamesPlayed, int cHeismans, int cAA, int cAC, int cWins ) {
         team = t;
         name = nm;
@@ -87,6 +90,7 @@ public class PlayerLB extends Player{
         ratLBCov = cov;
         ratLBRsh = rsh;
         ratLBTkl = tkl;
+        //ratCBSpd = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "LB";
@@ -101,6 +105,7 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratLBCov);
         ratingsVector.addElement(ratLBRsh);
         ratingsVector.addElement(ratLBTkl);
+        //ratingsVector.addElement(ratCBSpd);
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -127,6 +132,7 @@ public class PlayerLB extends Player{
         ratLBCov = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratLBRsh = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratLBTkl = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        //ratCBSpd = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratLBCov + ratLBRsh*2 + ratLBTkl*2)/5;
         position = "LB";
 
@@ -140,6 +146,8 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratLBCov);
         ratingsVector.addElement(ratLBRsh);
         ratingsVector.addElement(ratLBTkl);
+        //ratingsVector.addElement(ratCBSpd);
+
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -162,6 +170,7 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratLBCov);
         ratingsVector.addElement(ratLBRsh);
         ratingsVector.addElement(ratLBTkl);
+        //ratingsVector.addElement(ratCBSpd);
         return ratingsVector;
     }
 
@@ -173,11 +182,13 @@ public class PlayerLB extends Player{
         ratLBCov += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratLBRsh += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratLBTkl += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        //ratCBSpd += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         if ( Math.random()*100 < ratPot ) {
             //breakthrough
             ratLBCov += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
             ratLBRsh += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
             ratLBTkl += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            //ratCBSpd += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
         }
         ratOvr = (ratLBCov + ratLBRsh*2 + ratLBTkl*2)/5;
         ratImprovement = ratOvr - oldOvr;

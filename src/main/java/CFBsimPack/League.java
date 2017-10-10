@@ -1414,11 +1414,13 @@ public class League {
             ArrayList<PlayerQB> qbs = new ArrayList<>();
             ArrayList<PlayerRB> rbs = new ArrayList<>();
             ArrayList<PlayerWR> wrs = new ArrayList<>();
+            ArrayList<PlayerTE> tes = new ArrayList<>();
             ArrayList<PlayerOL> ols = new ArrayList<>();
             ArrayList<PlayerK> ks = new ArrayList<>();
-            ArrayList<PlayerS> ss = new ArrayList<>();
+            ArrayList<PlayerDL> dls = new ArrayList<>();
+            ArrayList<PlayerLB> lbs = new ArrayList<>();
             ArrayList<PlayerCB> cbs = new ArrayList<>();
-            ArrayList<PlayerF7> f7s = new ArrayList<>();
+            ArrayList<PlayerS> ss = new ArrayList<>();
 
             for (Conference c : conferences) {
                 c.getAllConfPlayers();
@@ -1428,27 +1430,33 @@ public class League {
                 wrs.add((PlayerWR) c.allConfPlayers.get(3));
                 wrs.add((PlayerWR) c.allConfPlayers.get(4));
                 wrs.add((PlayerWR) c.allConfPlayers.get(5));
-                for (int i = 6; i < 11; ++i) {
+                tes.add((PlayerTE) c.allConfPlayers.get(6));
+                for (int i = 7; i < 12; ++i) {
                     ols.add((PlayerOL) c.allConfPlayers.get(i));
                 }
-                ks.add((PlayerK) c.allConfPlayers.get(11));
-                ss.add((PlayerS) c.allConfPlayers.get(12));
+                ks.add((PlayerK) c.allConfPlayers.get(12));
                 for (int i = 13; i < 16; ++i) {
+                    dls.add((PlayerDL) c.allConfPlayers.get(i));
+                }
+                for (int i = 17; i < 20; ++i) {
+                    lbs.add((PlayerLB) c.allConfPlayers.get(i));
+                }
+                for (int i = 20; i < 23; ++i) {
                     cbs.add((PlayerCB) c.allConfPlayers.get(i));
                 }
-                for (int i = 16; i < 23; ++i) {
-                    f7s.add((PlayerF7) c.allConfPlayers.get(i));
-                }
+                ss.add((PlayerS) c.allConfPlayers.get(23));
             }
 
             Collections.sort(qbs, new PlayerHeismanComp());
             Collections.sort(rbs, new PlayerHeismanComp());
             Collections.sort(wrs, new PlayerHeismanComp());
+            Collections.sort(tes, new PlayerHeismanComp());
             Collections.sort(ols, new PlayerHeismanComp());
             Collections.sort(ks, new PlayerHeismanComp());
-            Collections.sort(ss, new PlayerHeismanComp());
+            Collections.sort(dls, new PlayerHeismanComp());
+            Collections.sort(lbs, new PlayerHeismanComp());
             Collections.sort(cbs, new PlayerHeismanComp());
-            Collections.sort(f7s, new PlayerHeismanComp());
+            Collections.sort(ss, new PlayerHeismanComp());
 
             allAmericans.add(qbs.get(0));
             qbs.get(0).wonAllAmerican = true;
@@ -1460,22 +1468,28 @@ public class League {
                 allAmericans.add(wrs.get(i));
                 wrs.get(i).wonAllAmerican = true;
             }
+            allAmericans.add(tes.get(0));
+            tes.get(0).wonAllAmerican = true;
             for (int i = 0; i < 5; ++i) {
                 allAmericans.add(ols.get(i));
                 ols.get(i).wonAllAmerican = true;
             }
             allAmericans.add(ks.get(0));
             ks.get(0).wonAllAmerican = true;
-            allAmericans.add(ss.get(0));
-            ss.get(0).wonAllAmerican = true;
+            for (int i = 0; i < 4; ++i) {
+                allAmericans.add(dls.get(i));
+                dls.get(i).wonAllAmerican = true;
+            }
+            for (int i = 0; i < 3; ++i) {
+                allAmericans.add(lbs.get(i));
+                lbs.get(i).wonAllAmerican = true;
+            }
             for (int i = 0; i < 3; ++i) {
                 allAmericans.add(cbs.get(i));
                 cbs.get(i).wonAllAmerican = true;
             }
-            for (int i = 0; i < 7; ++i) {
-                allAmericans.add(f7s.get(i));
-                f7s.get(i).wonAllAmerican = true;
-            }
+            allAmericans.add(ss.get(0));
+            ss.get(0).wonAllAmerican = true;
         }
 
         StringBuilder allAmerican = new StringBuilder();
@@ -1486,19 +1500,28 @@ public class League {
                 PlayerQB pqb = (PlayerQB) p;
                 allAmerican.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
                         pqb.statsTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
-            } else if (p instanceof PlayerRB) {
+            }
+            else if (p instanceof PlayerRB) {
                 PlayerRB prb = (PlayerRB) p;
                 allAmerican.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
                         prb.statsTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
-            } else if (p instanceof PlayerWR) {
+            }
+            else if (p instanceof PlayerWR) {
                 PlayerWR pwr = (PlayerWR) p;
                 allAmerican.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
                         pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds\n");
-            } else if (p instanceof PlayerK) {
+            }
+            else if (p instanceof PlayerTE) {
+                PlayerTE pte = (PlayerTE) p;
+                allAmerican.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
+                        pte.statsTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
+            }
+            else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 allAmerican.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
                         "FGs: " + pk.statsFGMade + "/" + pk.statsFGAtt + ", XPs: " + pk.statsXPMade + "/" + pk.statsXPAtt + "\n");
-            } else {
+            }
+            else {
                 allAmerican.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
             allAmerican.append(" \t\tOverall: " + p.ratOvr + ", Potential: " + p.getLetterGrade(p.ratPot) + "\n\n>");
@@ -1523,19 +1546,28 @@ public class League {
                 PlayerQB pqb = (PlayerQB) p;
                 sb.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
                         pqb.statsTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
-            } else if (p instanceof PlayerRB) {
+            }
+            else if (p instanceof PlayerRB) {
                 PlayerRB prb = (PlayerRB) p;
                 sb.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
                         prb.statsTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
-            } else if (p instanceof PlayerWR) {
+            }
+            else if (p instanceof PlayerWR) {
                 PlayerWR pwr = (PlayerWR) p;
                 sb.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
                         pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds\n");
-            } else if (p instanceof PlayerK) {
+            }
+            else if (p instanceof PlayerTE) {
+                PlayerTE pte = (PlayerTE) p;
+                sb.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
+                        pte.statsTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
+            }
+            else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 sb.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
                         "FGs: " + pk.statsFGMade + "/" + pk.statsFGAtt + ", XPs: " + pk.statsXPMade + "/" + pk.statsXPAtt + "\n");
-            } else {
+            }
+            else {
                 sb.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
             sb.append(" \t\tOverall: " + p.ratOvr + ", Potential: " + p.getLetterGrade(p.ratPot) + "\n\n>");
