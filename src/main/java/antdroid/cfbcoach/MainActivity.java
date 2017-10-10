@@ -809,8 +809,10 @@ public class MainActivity extends AppCompatActivity {
             homeQT4.setText(Integer.toString(g.homeQScore[3]));
 
             if (g.numOT > 0) {
-                awayOT.setText(Integer.toString(g.awayQScore[3 + g.numOT]));
-                homeOT.setText(Integer.toString(g.homeQScore[3 + g.numOT]));
+                int awayOTscore = g.awayScore - (g.awayQScore[0] + g.awayQScore[1] + g.awayQScore[2] + g.awayQScore[3]);
+                int homeOTscore = g.homeScore - (g.homeQScore[0] + g.homeQScore[1] + g.homeQScore[2] + g.homeQScore[3]);
+                awayOT.setText(Integer.toString(awayOTscore));
+                homeOT.setText(Integer.toString(homeOTscore));
             } else {
                 awayOT.setText("");
                 homeOT.setText("");
