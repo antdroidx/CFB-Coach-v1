@@ -32,6 +32,7 @@ public class Injury {
         description = injuries[ (int)(Math.random() * injuries.length) ];
         player = p;
         player.isInjured = true;
+        player.ratPot -= duration;
     }
 
     public int getDuration() {

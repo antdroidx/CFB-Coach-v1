@@ -2224,9 +2224,9 @@ public class Team {
             summary += "\n\nYou have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
         }
 
-        if (this == league.saveBless && this == league.saveBless2 && this == league.saveBless3 && this == league.saveBless4 && this == league.saveBless5) {
+        if (this == league.saveBless || this == league.saveBless2 || this == league.saveBless3 || this == league.saveBless4 || this == league.saveBless5) {
             summary += "\n\nThere was a major shake-up on your coaching staff this season. This fresh start hopefully will guide you to success in the future!";
-        } else if (this == league.saveCurse && this == league.saveCurse2 && this == league.saveCurse3 && this == league.saveCurse4 && this == league.saveCurse5) {
+        } else if (this == league.saveCurse || this == league.saveCurse2 || this == league.saveCurse3 || this == league.saveCurse4 || this == league.saveCurse5) {
             summary += "\n\n our team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[0] - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (prestigePts[0] - teamPrestige) + " prestige points! This will help your recruiting.";
