@@ -23,37 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_23.xml" afterPath="$PROJECT_DIR$/.idea/libraries/android_android_25.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CFB-Coach.iml" afterPath="$PROJECT_DIR$/CFB-Coach.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,21 +88,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-96">
-              <caret line="2215" column="32" selection-start-line="2215" selection-start-column="32" selection-end-line="2215" selection-end-column="32" />
+            <state relative-caret-position="-1394">
+              <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+      <file leaf-file-name="Conference.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Conference.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="713" column="0" selection-start-line="713" selection-start-column="0" selection-end-line="713" selection-end-column="0" />
+            <state relative-caret-position="6406">
+              <caret line="453" column="0" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -897,7 +875,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$" value="1506906354505" />
-        <entry key="C:\Users\ahngu\AndroidStudioProjects\CFB-Coach" value="1507664612854" />
+        <entry key="C:\Users\ahngu\AndroidStudioProjects\CFB-Coach" value="1507666807763" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1195,7 +1173,6 @@
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
@@ -1204,8 +1181,9 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
       </list>
     </option>
   </component>
@@ -1631,11 +1609,11 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.111358576" sideWeight="0.44658118" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.111358576" sideWeight="0.4402985" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21801706" sideWeight="0.15256125" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.389755" sideWeight="0.4184435" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.111358576" sideWeight="0.5597015" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.47403562" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
@@ -1650,7 +1628,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24893162" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.389755" sideWeight="0.5815565" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.389755" sideWeight="0.5815565" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.12666667" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2087,14 +2065,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9631">
-          <caret line="964" column="50" selection-start-line="964" selection-start-column="50" selection-end-line="964" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2709">
@@ -2107,14 +2077,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="2235" column="6" selection-start-line="2235" selection-start-column="6" selection-end-line="2235" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -2143,14 +2105,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2315">
-          <caret line="453" column="0" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
@@ -2161,8 +2115,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
+        <state relative-caret-position="57">
           <caret line="2215" column="32" selection-start-line="2215" selection-start-column="32" selection-end-line="2215" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6406">
+          <caret line="453" column="0" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1394">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
           <folding />
         </state>
       </provider>

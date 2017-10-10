@@ -124,7 +124,7 @@ public class Game implements Serializable {
         //playGame();
         hasPlayed = false;
 
-        if (gameName.equals("In Conf") && (homeTeam.rivalTeam.equals(awayTeam.abbr) || awayTeam.rivalTeam.equals(homeTeam.abbr))) {
+        if (gameName.equals("Conference") && (homeTeam.rivalTeam.equals(awayTeam.abbr) || awayTeam.rivalTeam.equals(homeTeam.abbr))) {
             // Rivalry game!
             gameName = "Rivalry Game";
         }
@@ -1129,6 +1129,10 @@ public class Game implements Serializable {
         PlayerRB selRB;
         double RB1pref = Math.pow(offense.getRB(0).ratOvr, 1.5) * Math.random();
         double RB2pref = Math.pow(offense.getRB(1).ratOvr, 1.5) * Math.random();
+        int playerLB = rand.nextInt((3 - 1) + 1) + 1;
+        PlayerTE selTE = offense.getTE(0);
+        PlayerLB selLB = defense.getLB(playerLB - 1);
+
 
         if (RB1pref > RB2pref) {
             selRB = offense.getRB(0);
@@ -1198,7 +1202,7 @@ public class Game implements Serializable {
         } else {
             gameTime -= 25 + 15 * Math.random();
             //check for fumble
-            double fumChance = (defense.getS(0).ratSTkl + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.teamStratOff.getRAB();
+            double fumChance = ((defense.getS(0).ratSTkl + selLB.ratLBTkl)/2 + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.teamStratOff.getRAB();
             if (100 * Math.random() < fumChance / 50) {
                 //Fumble!
                 if (gamePoss) {
