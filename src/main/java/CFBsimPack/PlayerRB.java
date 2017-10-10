@@ -242,7 +242,7 @@ public class PlayerRB extends Player {
     
     @Override
     public int getHeismanScore() {
-        return statsTD * 100 - statsFumbles * 80 + (int)(statsRushYards * 2.35);
+        return statsTD * 100 - statsFumbles * 80 + (int)(statsRushYards * 2.4);
     }
 
     @Override
