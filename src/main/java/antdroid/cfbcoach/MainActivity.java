@@ -1715,12 +1715,13 @@ public void showUserTeamHistoryDialog() {
                 break;
             case 8:
                 textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, Spd, Tack)");
-                positionPlayers.addAll(userTeam.teamSs);
+                positionPlayers.addAll(userTeam.teamCBs);
                 break;
             case 9:
                 textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, Spd, Tack)");
-                positionPlayers.addAll(userTeam.teamCBs);
+                positionPlayers.addAll(userTeam.teamSs);
                 break;
+
         }
 
         // Change starters to correct starters
