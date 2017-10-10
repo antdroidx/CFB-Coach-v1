@@ -1,2 +1,6 @@
 /build
-
+/captures
+/exportToHTML
+/gradle
+/.gradle
+/.git

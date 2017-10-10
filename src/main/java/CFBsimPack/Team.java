@@ -399,87 +399,82 @@ public class Team {
         }
 
         // Don't add/subtract prestige if they are a blessed/cursed team from last season
-        if (this != league.saveBless && this != league.saveCurse) {
+        if (this != league.saveBless && this != league.saveBless2 && this != league.saveBless3 && this != league.saveBless4 && this != league.saveBless5
+                && this != league.saveCurse && this != league.saveCurse2 && this != league.saveCurse3 && this != league.saveCurse4 && this != league.saveCurse5) {
 
             //RIVALRY POINTS!
             //Only call it if there's not a huge difference in team strength
             if (Math.abs(teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 20 && rgameplayed == 1) {
                 if (teamPrestige >= 75) {
-                //Good Teams: favorite teams get no points, only penalties
-                if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige += 0;
-                    rivalryPts += 0;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige -= 2;
-                    rivalryPts -= 2;
-                    //If you're the underdog, you get points, unless you lose ;)
-                } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige += 1;
-                    rivalryPts += 1;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige -= 1;
-                    rivalryPts -= 1;
+                    //Good Teams: favorite teams get no points, only penalties
+                    if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+                        newPrestige += 0;
+                        rivalryPts += 0;
+                    } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+                        newPrestige -= 2;
+                        rivalryPts -= 2;
+                        //If you're the underdog, you get points, unless you lose ;)
+                    } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                        newPrestige += 1;
+                        rivalryPts += 1;
+                    } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                        newPrestige -= 1;
+                        rivalryPts -= 1;
+                    }
+                } else if (teamPrestige >= 50 && teamPrestige < 75) {
+                    //Average Teams: If you're the favorite, you get some points.
+                    if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+                        newPrestige += 1;
+                        rivalryPts += 1;
+                    } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+                        newPrestige -= 1;
+                        rivalryPts -= 1;
+                        //If you're the underdog, you get more points, unless you lose ;)
+                    } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                        newPrestige += 2;
+                        rivalryPts += 2;
+                    } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                        newPrestige -= 1;
+                        rivalryPts -= 1;
+                    }
+                } else {
+                    //Bad Teams: If you're the favorite, you get some points.
+                    if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+                        newPrestige += 1;
+                        rivalryPts += 1;
+                    } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
+                        newPrestige -= 1;
+                        rivalryPts -= 1;
+                        //If you're the underdog, you get more points, unless you lose ;)
+                    } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                        newPrestige += 2;
+                        rivalryPts += 2;
+                    } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
+                        newPrestige -= 0;
+                        rivalryPts -= 0;
+                    }
                 }
-            } else if (teamPrestige >= 50 && teamPrestige < 75) {
-                //Average Teams: If you're the favorite, you get some points.
-                if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige +=1;
-                    rivalryPts +=1;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige -= 1;
-                    rivalryPts -=1;
-                    //If you're the underdog, you get more points, unless you lose ;)
-                } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige += 2;
-                    rivalryPts += 2;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige -= 1;
-                    rivalryPts -= 1;
-                }
-            } else {
-                //Bad Teams: If you're the favorite, you get some points.
-                if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige += 1;
-                    rivalryPts += 1;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                    newPrestige -= 1;
-                    rivalryPts -= 1;
-                    //If you're the underdog, you get more points, unless you lose ;)
-                } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige += 2;
-                    rivalryPts += 2;
-                } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                    newPrestige -= 0;
-                    rivalryPts -= 0;
-                }
-             }
             }
 
-                //Team Prestige change for every team based on ranking
+            //Team Prestige change for every team based on ranking
             if ((teamPrestige >= 80) && diffExpected > 0) {
-                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2300); //Top teams: gain little prestige if success
-            }
-            else if ((teamPrestige >= 80) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2250); //Top teams: gain little prestige if success
+            } else if ((teamPrestige >= 80) && diffExpected < 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1650); //Top teams: lose significant prestige for poor seasons
+            } else if ((teamPrestige < 80 && teamPrestige >= 60) && diffExpected > 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1850); //Above avg teams: gain prestige faster
+            } else if ((teamPrestige < 80 && teamPrestige >= 60) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //Above avg team: lose prestige at normal rate
+            } else if ((teamPrestige < 60 && teamPrestige >= 40) && diffExpected > 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //below avg teams: gain prestige fastest
+            } else if ((teamPrestige < 60 && teamPrestige >= 40) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2200); //below avg teams: lose prestige slower
+            } else if ((teamPrestige < 40) && diffExpected > 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //Bad teams: gain prestige at normal rate
+            } else if ((teamPrestige < 40) && diffExpected < 0) {
+                newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 3500); //Bad teams: can't get much worse!
             }
-            else if ((teamPrestige < 80 && teamPrestige >= 60) && diffExpected > 0) {
-                    newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1850); //Above avg teams: gain prestige faster
-            }
-            else if ((teamPrestige < 80 && teamPrestige >= 60) && diffExpected < 0) {
-                    newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //Above avg team: lose prestige at normal rate
-            }
-            else if ((teamPrestige < 60 && teamPrestige >= 40) && diffExpected > 0) {
-                    newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //below avg teams: gain prestige fastest
-            }
-            else if ((teamPrestige < 60 && teamPrestige >= 40) && diffExpected < 0) {
-                    newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2500); //below avg teams: lose prestige slower
-            }
-            else if ((teamPrestige < 40) && diffExpected > 0) {
-                    newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //Bad teams: gain prestige at normal rate
-            }
-            else if ((teamPrestige < 40) && diffExpected < 0) {
-                    newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 4000); //Bad teams: can't get much worse!
-            }
+        }
 
             //National Title Winner
             if (rankTeamPollScore == 1) {
@@ -511,7 +506,7 @@ public class Team {
                 //Sets the bounds for Prestige
                 if (newPrestige > 95) newPrestige = 95;
                 if (newPrestige < 25) newPrestige = 25;
-        }
+
         int PrestigeScore[] = {newPrestige, rivalryPts, ccPts, ncwPts, nflPts, rgameplayed};
         return PrestigeScore;
     }
@@ -1590,7 +1585,7 @@ public class Team {
         updateStrengthOfWins();
         int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
-        teamPollScore = (wins*220 + 3*(teamPoints-teamOppPoints) +
+        teamPollScore = (wins*223 + 3*(teamPoints-teamOppPoints) +
                 (teamYards-teamOppYards)/40 + 1*teamStrengthOfWins/4 +
                 3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
                 teamStrengthOfWins)/10;
@@ -1856,15 +1851,15 @@ public class Team {
         for (int i = 0; i < 5; ++i) {
             comp += getOL(i).ratFootIQ/5;
         }
-        comp += getS(0).ratFootIQ * 5;
+        comp += getS(0).ratFootIQ * 4;
         comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ;
         for (int i = 0; i < 4; ++i) {
             comp += getDL(i).ratFootIQ/4;
         }
         for (int i = 0; i < 3; ++i) {
-            comp += getLB(i).ratFootIQ/3;
+            comp += getLB(i).ratFootIQ;
         }
-        return comp / 21;
+        return comp / 23;
     }
 
     /**
@@ -2226,8 +2221,11 @@ public class Team {
             summary += "\n\n You have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
         }
 
-
-        if ((prestigePts[0] - teamPrestige) > 0) {
+        if (this == league.saveBless && this == league.saveBless2 && this == league.saveBless3 && this == league.saveBless4 && this == league.saveBless5) {
+            summary += "\n\n There was a major shake-up on your coaching staff this season. This fresh start hopefully will guide you to success in the future!";
+        } else if (this == league.saveCurse && this == league.saveCurse2 && this == league.saveCurse3 && this == league.saveCurse4 && this == league.saveCurse5) {
+            summary += "\n\n Your team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
+        } else if ((prestigePts[0] - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (prestigePts[0] - teamPrestige) + " prestige points! This will help your recruiting.";
         } else if ((prestigePts[0] - teamPrestige) < 0) {
             summary += "\n\nA bit of a down year, coach? You fell short expectations and lost " + (teamPrestige - prestigePts[0]) + " prestige points. This will hurt your recruiting.";

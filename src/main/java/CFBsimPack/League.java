@@ -1822,6 +1822,7 @@ public class League {
 
             for (int i = 0; i < teamList.size(); ++i) {
                 teamList.get(i).updatePollScore();
+                if (teamList.get(i) == saveCurse) teamList.get(i).teamPollScore = 0;
             }
             Collections.sort(teamList, new TeamCompPoll());
 
