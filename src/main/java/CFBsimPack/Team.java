@@ -490,17 +490,20 @@ public class Team {
 
             //Bonus for NFL Prospects if team is medicore
             if (teamPrestige < 50) {
+                getPlayersLeaving();
                 for (int i = 0; i < playersLeaving.size(); ++i) {
                     if (playersLeaving.get(i).ratOvr > 90 && !playersLeaving.get(i).position.equals("K")) {
                         players++;
                     }
                 }
-                if (players > 2) ;
-                newPrestige += 2;
-                nflPts += 2;
-                if (players > 0) ;
-                newPrestige += 2;
-                nflPts += 2;
+                if (players > 2) {
+                    newPrestige += 2;
+                    nflPts += 2;
+                }
+                if (players > 0) {
+                    newPrestige += 2;
+                    nflPts += 2;
+                }
             }
 
                 //Sets the bounds for Prestige
@@ -2208,9 +2211,9 @@ public class Team {
 
         if (prestigePts[5] > 0) {
             if (wonRivalryGame) {
-                summary += "\n\n Congrats on beating your rival, " + rivalTeam + "! You may see a gain of " + prestigePts[1] + " prestige points in the off-season!";
+                summary += "\n\nCongrats on beating your rival, " + rivalTeam + "! You may see a gain of " + prestigePts[1] + " prestige points in the off-season!";
             } else {
-                summary += "\n\n Unfortunately you lost to your rival, " + rivalTeam + "! You lose " + prestigePts[1] + " prestige points this off-season!";
+                summary += "\n\nUnfortunately you lost to your rival, " + rivalTeam + "! You lose " + prestigePts[1] + " prestige points this off-season!";
             }
         }
 
@@ -2218,13 +2221,13 @@ public class Team {
             summary += "\n\nSince you won your conference championship, your team gained " + prestigePts[2] + " prestige points!";
         }
         if (prestigePts[4] > 0) {
-            summary += "\n\n You have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
+            summary += "\n\nYou have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
         }
 
         if (this == league.saveBless && this == league.saveBless2 && this == league.saveBless3 && this == league.saveBless4 && this == league.saveBless5) {
-            summary += "\n\n There was a major shake-up on your coaching staff this season. This fresh start hopefully will guide you to success in the future!";
+            summary += "\n\nThere was a major shake-up on your coaching staff this season. This fresh start hopefully will guide you to success in the future!";
         } else if (this == league.saveCurse && this == league.saveCurse2 && this == league.saveCurse3 && this == league.saveCurse4 && this == league.saveCurse5) {
-            summary += "\n\n Your team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
+            summary += "\n\n our team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[0] - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (prestigePts[0] - teamPrestige) + " prestige points! This will help your recruiting.";
         } else if ((prestigePts[0] - teamPrestige) < 0) {
