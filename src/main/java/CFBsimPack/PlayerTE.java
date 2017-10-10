@@ -26,6 +26,7 @@ public class PlayerTE extends Player{
     public int ratBlkR;
     //RecEva affects how easily he can dodge tackles
     public int ratRecEva;
+//    public int ratRecSpd;
 
     //public Vector ratingsVector;
 
@@ -44,7 +45,7 @@ public class PlayerTE extends Player{
     public int careerDrops;
     public int careerFumbles;
 
-    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur ) {
+    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva/*, int rsp*/, boolean rs, int dur ) {
         team = t;
         name = nm;
         year = yr;
@@ -57,6 +58,7 @@ public class PlayerTE extends Player{
         ratRecCat = cat;
         ratBlkR = blk;
         ratRecEva = eva;
+//        ratRecSpd = rsp;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
@@ -70,6 +72,7 @@ public class PlayerTE extends Player{
         ratingsVector.addElement(ratRecCat);
         ratingsVector.addElement(ratBlkR);
         ratingsVector.addElement(ratRecEva);
+//        ratingsVector.addElement(ratRecSpd);
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -97,7 +100,7 @@ public class PlayerTE extends Player{
         position = "TE";
     }
 
-    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur,
+    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva/*, int rsp*/, boolean rs, int dur,
                      int cGamesPlayed, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles,
                      int cHeismans, int cAA, int cAC, int cWins) {
         team = t;
@@ -112,6 +115,7 @@ public class PlayerTE extends Player{
         ratRecCat = cat;
         ratBlkR = blk;
         ratRecEva = eva;
+//        ratRecSpd = rsp;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
@@ -125,6 +129,8 @@ public class PlayerTE extends Player{
         ratingsVector.addElement(ratRecCat);
         ratingsVector.addElement(ratBlkR);
         ratingsVector.addElement(ratRecEva);
+//        ratingsVector.addElement(ratRecSpd);
+
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -164,6 +170,7 @@ public class PlayerTE extends Player{
         ratRecCat = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratBlkR = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratRecEva = (int) (60 + year*5 + stars*5 - 25*Math.random());
+//        ratRecSpd = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratRecCat*2 + ratBlkR*2 + ratRecEva)/5;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 80 + (int)(Math.random()*100) - 50;
@@ -176,6 +183,8 @@ public class PlayerTE extends Player{
         ratingsVector.addElement(ratRecCat);
         ratingsVector.addElement(ratBlkR);
         ratingsVector.addElement(ratRecEva);
+//        ratingsVector.addElement(ratRecSpd);
+
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -224,6 +233,8 @@ public class PlayerTE extends Player{
         ratingsVector.addElement(ratRecCat);
         ratingsVector.addElement(ratBlkR);
         ratingsVector.addElement(ratRecEva);
+//        ratingsVector.addElement(ratRecSpd);
+
         return ratingsVector;
     }
 
@@ -235,11 +246,14 @@ public class PlayerTE extends Player{
         ratRecCat += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratBlkR += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratRecEva += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+//        ratRecSpd += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         if ( Math.random()*100 < ratPot ) {
             //breakthrough
             ratRecCat += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
             ratBlkR += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
             ratRecEva += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+//            ratRecSpd += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+
         }
         ratOvr = (ratRecCat*2 + ratBlkR + ratRecEva)/4;
         ratImprovement = ratOvr - oldOvr;

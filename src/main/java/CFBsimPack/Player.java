@@ -203,16 +203,15 @@ public class Player {
             case "QB": return 0;
             case "RB": return 1;
             case "WR": return 2;
-            case "OL": return 3;
-            case "K": return 4;
-            case "S": return 5;
-            case "CB": return 6;
-            case "F7": return 7;
-            //case "DL": return 7;
-            //case "LB": return 8;
-            //case "TE": return 9;
-            //default: return 10;
-            default: return 8;
+            case "TE": return 3;
+            case "OL": return 4;
+            case "K": return 5;
+            case "DL": return 6;
+            case "LB": return 7;
+            case "CB": return 8;
+            case "S": return 9;
+            default: return 10;
+
         }
     }
     

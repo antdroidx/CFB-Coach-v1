@@ -1599,9 +1599,9 @@ public void showUserTeamHistoryDialog() {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)", "OL (5 starters)",
-                "K (1 starter)", "S (1 starter)", "CB (3 starters)", "F7 (7 starters)"};
-        final int[] positionNumberRequired = {1, 2, 3, 5, 1, 1, 3, 7};
+        final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)","TE (1 starter)", "OL (5 starters)",
+                "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (1 starter)"};
+        final int[] positionNumberRequired = {1, 2, 3, 1, 5, 1, 4, 3, 3, 1};
         final Spinner teamLineupPositionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamLineupPosition);
         ArrayAdapter<String> teamLineupPositionSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positionSelection);
@@ -1694,24 +1694,32 @@ public void showUserTeamHistoryDialog() {
                 positionPlayers.addAll(userTeam.teamWRs);
                 break;
             case 3:
+                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cat, RunBlk, Eva)");
+                positionPlayers.addAll(userTeam.teamTEs);
+                break;
+            case 4:
                 textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Str, RunBlk, PassBlk)");
                 positionPlayers.addAll(userTeam.teamOLs);
                 break;
-            case 4:
+            case 5:
                 textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (KStr, KAcc, Clum)");
                 positionPlayers.addAll(userTeam.teamKs);
                 break;
-            case 5:
+            case 6:
+                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Str, RunDef, PassDef)");
+                positionPlayers.addAll(userTeam.teamDLs);
+                break;
+            case 7:
+                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, RunDef, Tack)");
+                positionPlayers.addAll(userTeam.teamLBs);
+                break;
+            case 8:
                 textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, Spd, Tack)");
                 positionPlayers.addAll(userTeam.teamSs);
                 break;
-            case 6:
+            case 9:
                 textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, Spd, Tack)");
                 positionPlayers.addAll(userTeam.teamCBs);
-                break;
-            case 7:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Str, RunDef, PassDef)");
-                positionPlayers.addAll(userTeam.teamF7s);
                 break;
         }
 

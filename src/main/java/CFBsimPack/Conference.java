@@ -379,31 +379,40 @@ public class Conference {
             ArrayList<PlayerQB> qbs = new ArrayList<>();
             ArrayList<PlayerRB> rbs = new ArrayList<>();
             ArrayList<PlayerWR> wrs = new ArrayList<>();
+            ArrayList<PlayerTE> tes = new ArrayList<>();
             ArrayList<PlayerOL> ols = new ArrayList<>();
             ArrayList<PlayerK> ks = new ArrayList<>();
-            ArrayList<PlayerS> ss = new ArrayList<>();
+            ArrayList<PlayerDL> dls = new ArrayList<>();
+            ArrayList<PlayerLB> lbs = new ArrayList<>();
             ArrayList<PlayerCB> cbs = new ArrayList<>();
-            ArrayList<PlayerF7> f7s = new ArrayList<>();
+            ArrayList<PlayerS> ss = new ArrayList<>();
+
+
 
             for (Team t : confTeams) {
                 qbs.addAll(t.teamQBs);
                 rbs.addAll(t.teamRBs);
                 wrs.addAll(t.teamWRs);
+                tes.addAll(t.teamTEs);
                 ols.addAll(t.teamOLs);
                 ks.addAll(t.teamKs);
-                ss.addAll(t.teamSs);
+                dls.addAll(t.teamDLs);
+                lbs.addAll(t.teamLBs);
                 cbs.addAll(t.teamCBs);
-                f7s.addAll(t.teamF7s);
+                ss.addAll(t.teamSs);
+
             }
 
             Collections.sort(qbs, new PlayerHeismanComp());
             Collections.sort(rbs, new PlayerHeismanComp());
             Collections.sort(wrs, new PlayerHeismanComp());
+            Collections.sort(tes, new PlayerHeismanComp());
             Collections.sort(ols, new PlayerHeismanComp());
             Collections.sort(ks, new PlayerHeismanComp());
-            Collections.sort(ss, new PlayerHeismanComp());
+            Collections.sort(dls, new PlayerHeismanComp());
+            Collections.sort(lbs, new PlayerHeismanComp());
             Collections.sort(cbs, new PlayerHeismanComp());
-            Collections.sort(f7s, new PlayerHeismanComp());
+            Collections.sort(ss, new PlayerHeismanComp());
 
             allConfPlayers.add(qbs.get(0));
             qbs.get(0).wonAllConference = true;
@@ -415,22 +424,31 @@ public class Conference {
                 allConfPlayers.add(wrs.get(i));
                 wrs.get(i).wonAllConference = true;
             }
+            allConfPlayers.add(tes.get(0));
+            tes.get(0).wonAllConference = true;
+
             for (int i = 0; i < 5; ++i) {
                 allConfPlayers.add(ols.get(i));
                 ols.get(i).wonAllConference = true;
             }
+
             allConfPlayers.add(ks.get(0));
             ks.get(0).wonAllConference = true;
-            allConfPlayers.add(ss.get(0));
-            ss.get(0).wonAllConference = true;
+
+            for (int i = 0; i < 4; ++i) {
+                allConfPlayers.add(dls.get(i));
+               dls.get(i).wonAllConference = true;
+            }
+            for (int i = 0; i < 3; ++i) {
+                allConfPlayers.add(lbs.get(i));
+                lbs.get(i).wonAllConference = true;
+            }
             for (int i = 0; i < 3; ++i) {
                 allConfPlayers.add(cbs.get(i));
                 cbs.get(i).wonAllConference = true;
             }
-            for (int i = 0; i < 7; ++i) {
-                allConfPlayers.add(f7s.get(i));
-                f7s.get(i).wonAllConference = true;
-            }
+            allConfPlayers.add(ss.get(0));
+            ss.get(0).wonAllConference = true;
         }
 
         return allConfPlayers;

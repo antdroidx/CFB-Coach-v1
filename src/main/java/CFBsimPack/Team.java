@@ -103,12 +103,14 @@ public class Team {
     public ArrayList<PlayerQB> teamQBs;
     public ArrayList<PlayerRB> teamRBs;
     public ArrayList<PlayerWR> teamWRs;
+    public ArrayList<PlayerTE> teamTEs;
     public ArrayList<PlayerK> teamKs;
     public ArrayList<PlayerOL> teamOLs;
     //defense
-    public ArrayList<PlayerF7> teamF7s;
-    public ArrayList<PlayerS> teamSs;
+    public ArrayList<PlayerDL> teamDLs;
+    public ArrayList<PlayerLB> teamLBs;
     public ArrayList<PlayerCB> teamCBs;
+    public ArrayList<PlayerS> teamSs;
     //By year
     public ArrayList<Player> teamRSs;
     public ArrayList<Player> teamFRs;
@@ -151,11 +153,14 @@ public class Team {
         teamQBs = new ArrayList<PlayerQB>();
         teamRBs = new ArrayList<PlayerRB>();
         teamWRs = new ArrayList<PlayerWR>();
+        teamTEs = new ArrayList<PlayerTE>();
         teamKs = new ArrayList<PlayerK>();
         teamOLs = new ArrayList<PlayerOL>();
-        teamF7s = new ArrayList<PlayerF7>();
-        teamSs = new ArrayList<PlayerS>();
+        teamDLs = new ArrayList<PlayerDL>();
+        teamLBs = new ArrayList<PlayerLB>();
         teamCBs = new ArrayList<PlayerCB>();
+        teamSs = new ArrayList<PlayerS>();
+
 
         teamRSs = new ArrayList<Player>();
         teamFRs = new ArrayList<Player>();
@@ -174,7 +179,7 @@ public class Team {
         natChampWL = "";
 
         teamPrestige = prestige;
-        recruitPlayers(2, 4, 6, 2, 10, 2, 6, 14);
+        recruitPlayers(2, 4, 6, 2, 10, 2, 8, 6, 6, 2);
 
         //set stats
         totalWins = 0;
@@ -231,11 +236,14 @@ public class Team {
         teamQBs = new ArrayList<PlayerQB>();
         teamRBs = new ArrayList<PlayerRB>();
         teamWRs = new ArrayList<PlayerWR>();
+        teamTEs = new ArrayList<PlayerTE>();
         teamKs = new ArrayList<PlayerK>();
         teamOLs = new ArrayList<PlayerOL>();
-        teamF7s = new ArrayList<PlayerF7>();
-        teamSs = new ArrayList<PlayerS>();
+        teamDLs = new ArrayList<PlayerDL>();
+        teamLBs = new ArrayList<PlayerLB>();
         teamCBs = new ArrayList<PlayerCB>();
+        teamSs = new ArrayList<PlayerS>();
+
 
         teamRSs = new ArrayList<Player>();
         teamFRs = new ArrayList<Player>();
@@ -569,6 +577,14 @@ public class Team {
                 records.checkRecord("Catch Percent", (100 * getWR(i).statsReceptions) / (getWR(i).statsTargets + 1), abbr + " " + getWR(i).getInitialName(), league.getYear());
             }
         }
+        
+        for (int i = 0; i < teamTEs.size(); ++i) {
+            if (getTE(i).gamesPlayed > 6) {
+                records.checkRecord("Rec Yards", getTE(i).statsRecYards, abbr + " " + getTE(i).getInitialName(), league.getYear());
+                records.checkRecord("Rec TDs", getTE(i).statsTD, abbr + " " + getTE(i).getInitialName(), league.getYear());
+                records.checkRecord("Catch Percent", (100 * getTE(i).statsReceptions) / (getTE(i).statsTargets + 1), abbr + " " + getTE(i).getInitialName(), league.getYear());
+            }
+        }
 
     }
 
@@ -593,6 +609,11 @@ public class Team {
                 PlayerWR wr = (PlayerWR) p;
                 records.checkRecord("Career Rec Yards", wr.statsRecYards+wr.careerRecYards, abbr + " " + wr.getInitialName(), league.getYear()-1);
                 records.checkRecord("Career Rec TDs", wr.statsTD+wr.careerTD, abbr + " " + wr.getInitialName(), league.getYear()-1);
+            }
+            else if (p instanceof PlayerTE) {
+                PlayerTE te = (PlayerTE) p;
+                records.checkRecord("Career Rec Yards", te.statsRecYards+te.careerRecYards, abbr + " " + te.getInitialName(), league.getYear()-1);
+                records.checkRecord("Career Rec TDs", te.statsTD+te.careerTD, abbr + " " + te.getInitialName(), league.getYear()-1);
             }
         }
     }
@@ -637,6 +658,14 @@ public class Team {
             }
 
             i = 0;
+            while (i < teamTEs.size()) {
+                if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
+                    playersLeaving.add(teamTEs.get(i));
+                }
+                ++i;
+            }
+
+            i = 0;
             while (i < teamKs.size()) {
                 if (teamKs.get(i).year == 4) {
                     playersLeaving.add(teamKs.get(i));
@@ -653,9 +682,17 @@ public class Team {
             }
 
             i = 0;
-            while (i < teamSs.size()) {
-                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
-                    playersLeaving.add(teamSs.get(i));
+            while (i < teamDLs.size()) {
+                if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
+                    playersLeaving.add(teamDLs.get(i));
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamLBs.size()) {
+                if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
+                    playersLeaving.add(teamLBs.get(i));
                 }
                 ++i;
             }
@@ -667,11 +704,11 @@ public class Team {
                 }
                 ++i;
             }
-
+            
             i = 0;
-            while (i < teamF7s.size()) {
-                if (teamF7s.get(i).year == 4 || (teamF7s.get(i).year == 3 && teamF7s.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
-                    playersLeaving.add(teamF7s.get(i));
+            while (i < teamSs.size()) {
+                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
+                    playersLeaving.add(teamSs.get(i));
                 }
                 ++i;
             }
@@ -682,7 +719,7 @@ public class Team {
      * Advance season for players. Removes seniors and develops underclassmen.
      */
     public void advanceSeasonPlayers() {
-        int qbNeeds=0, rbNeeds=0, wrNeeds=0, kNeeds=0, olNeeds=0, sNeeds=0, cbNeeds=0, f7Needs=0;
+        int qbNeeds=0, rbNeeds=0, wrNeeds=0, teNeeds=0, olNeeds=0, kNeeds=0, dlNeeds=0, lbNeeds=0, cbNeeds=0, sNeeds=0;
         if (playersLeaving.isEmpty()) {
             int i = 0;
             while (i < teamQBs.size()) {
@@ -718,12 +755,12 @@ public class Team {
             }
 
             i = 0;
-            while (i < teamKs.size()) {
-                if (teamKs.get(i).year == 4) {
-                    teamKs.remove(i);
-                    kNeeds++;
+            while (i < teamTEs.size()) {
+                if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamTEs.remove(i);
+                    teNeeds++;
                 } else {
-                    teamKs.get(i).advanceSeason();
+                    teamTEs.get(i).advanceSeason();
                     i++;
                 }
             }
@@ -740,12 +777,34 @@ public class Team {
             }
 
             i = 0;
-            while (i < teamSs.size()) {
-                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    teamSs.remove(i);
-                    sNeeds++;
+            while (i < teamKs.size()) {
+                if (teamKs.get(i).year == 4) {
+                    teamKs.remove(i);
+                    kNeeds++;
                 } else {
-                    teamSs.get(i).advanceSeason();
+                    teamKs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamDLs.size()) {
+                if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamDLs.remove(i);
+                    dlNeeds++;
+                } else {
+                    teamDLs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamLBs.size()) {
+                if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamLBs.remove(i);
+                    lbNeeds++;
+                } else {
+                    teamLBs.get(i).advanceSeason();
                     i++;
                 }
             }
@@ -762,18 +821,18 @@ public class Team {
             }
 
             i = 0;
-            while (i < teamF7s.size()) {
-                if (teamF7s.get(i).year == 4 || (teamF7s.get(i).year == 3 && teamF7s.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    teamF7s.remove(i);
-                    f7Needs++;
+            while (i < teamSs.size()) {
+                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamSs.remove(i);
+                    sNeeds++;
                 } else {
-                    teamF7s.get(i).advanceSeason();
+                    teamSs.get(i).advanceSeason();
                     i++;
                 }
             }
 
             if (!userControlled) {
-                recruitPlayersFreshman(qbNeeds, rbNeeds, wrNeeds, kNeeds, olNeeds, sNeeds, cbNeeds, f7Needs);
+                recruitPlayersFreshman(qbNeeds, rbNeeds, wrNeeds, teNeeds, kNeeds, olNeeds, dlNeeds, lbNeeds, cbNeeds, sNeeds);
                 resetStats();
             }
 
@@ -813,12 +872,12 @@ public class Team {
             }
 
             i = 0;
-            while (i < teamKs.size()) {
-                if (playersLeaving.contains(teamKs.get(i))) {
-                    teamKs.remove(i);
-                    kNeeds++;
+            while (i < teamTEs.size()) {
+                if (playersLeaving.contains(teamTEs.get(i))) {
+                    teamTEs.remove(i);
+                    teNeeds++;
                 } else {
-                    teamKs.get(i).advanceSeason();
+                    teamTEs.get(i).advanceSeason();
                     i++;
                 }
             }
@@ -833,14 +892,36 @@ public class Team {
                     i++;
                 }
             }
+            
+            i = 0;
+            while (i < teamKs.size()) {
+                if (playersLeaving.contains(teamKs.get(i))) {
+                    teamKs.remove(i);
+                    kNeeds++;
+                } else {
+                    teamKs.get(i).advanceSeason();
+                    i++;
+                }
+            }
 
             i = 0;
-            while (i < teamSs.size()) {
-                if (playersLeaving.contains(teamSs.get(i))) {
-                    teamSs.remove(i);
-                    sNeeds++;
+            while (i < teamDLs.size()) {
+                if (playersLeaving.contains(teamDLs.get(i))) {
+                    teamDLs.remove(i);
+                    dlNeeds++;
                 } else {
-                    teamSs.get(i).advanceSeason();
+                    teamDLs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamLBs.size()) {
+                if (playersLeaving.contains(teamLBs.get(i))) {
+                    teamLBs.remove(i);
+                    lbNeeds++;
+                } else {
+                    teamLBs.get(i).advanceSeason();
                     i++;
                 }
             }
@@ -855,20 +936,20 @@ public class Team {
                     i++;
                 }
             }
-
+            
             i = 0;
-            while (i < teamF7s.size()) {
-                if (playersLeaving.contains(teamF7s.get(i))) {
-                    teamF7s.remove(i);
-                    f7Needs++;
+            while (i < teamSs.size()) {
+                if (playersLeaving.contains(teamSs.get(i))) {
+                    teamSs.remove(i);
+                    sNeeds++;
                 } else {
-                    teamF7s.get(i).advanceSeason();
+                    teamSs.get(i).advanceSeason();
                     i++;
                 }
             }
-
+            
             if (!userControlled) {
-                recruitPlayersFreshman(qbNeeds, rbNeeds, wrNeeds, kNeeds, olNeeds, sNeeds, cbNeeds, f7Needs);
+                recruitPlayersFreshman(qbNeeds, rbNeeds, wrNeeds, teNeeds, olNeeds, kNeeds, dlNeeds, lbNeeds, cbNeeds, sNeeds);
                 resetStats();
             }
         }
@@ -885,10 +966,11 @@ public class Team {
      * @param olNeeds
      * @param sNeeds
      * @param cbNeeds
-     * @param f7Needs
+     * @param dlNeeds
+     * @param teNeeds
+     * @param lbNeeds
      */
-    public void recruitPlayers( int qbNeeds, int rbNeeds, int wrNeeds, int kNeeds,
-                                int olNeeds, int sNeeds, int cbNeeds, int f7Needs ) {
+    public void recruitPlayers( int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds) {
         //make team
         int stars = teamPrestige/20 + 1;
         int chance = 20 - (teamPrestige - 20*( teamPrestige/20 )); //between 0 and 20
@@ -928,6 +1010,15 @@ public class Team {
                 teamWRs.add( new PlayerWR(league.getRandName(), (int)(4*Math.random() + 1), stars, this) );
             }
         }
+        
+        for( int i = 0; i < teNeeds; ++i ) {
+            //make TEs
+            if ( 100*Math.random() < 5*chance ) {
+                teamTEs.add( new PlayerTE(league.getRandName(), (int)(4*Math.random() + 1), stars-1, this) );
+            } else {
+                teamTEs.add( new PlayerTE(league.getRandName(), (int)(4*Math.random() + 1), stars, this) );
+            }
+        }
 
         for( int i = 0; i < olNeeds; ++i ) {
             //make OLs
@@ -947,12 +1038,21 @@ public class Team {
             }
         }
 
-        for( int i = 0; i < f7Needs; ++i ) {
-            //make F7s
+        for( int i = 0; i < dlNeeds; ++i ) {
+            //make DLs
             if ( 100*Math.random() < 5*chance ) {
-                teamF7s.add( new PlayerF7(league.getRandName(), (int)(4*Math.random() + 1), stars-1, this) );
+                teamDLs.add( new PlayerDL(league.getRandName(), (int)(4*Math.random() + 1), stars-1, this) );
             } else {
-                teamF7s.add( new PlayerF7(league.getRandName(), (int)(4*Math.random() + 1), stars, this) );
+                teamDLs.add( new PlayerDL(league.getRandName(), (int)(4*Math.random() + 1), stars, this) );
+            }
+        }
+
+        for( int i = 0; i < lbNeeds; ++i ) {
+            //make LBs
+            if ( 100*Math.random() < 5*chance ) {
+                teamLBs.add( new PlayerLB(league.getRandName(), (int)(4*Math.random() + 1), stars-1, this) );
+            } else {
+                teamLBs.add( new PlayerLB(league.getRandName(), (int)(4*Math.random() + 1), stars, this) );
             }
         }
 
@@ -979,10 +1079,11 @@ public class Team {
      * @param olNeeds
      * @param sNeeds
      * @param cbNeeds
-     * @param f7Needs
+     * @param dlNeeds
+     * @param teNeeds
+     * @param lbNeeds
      */
-    public void recruitPlayersFreshman( int qbNeeds, int rbNeeds, int wrNeeds, int kNeeds,
-                                        int olNeeds, int sNeeds, int cbNeeds, int f7Needs ) {
+    public void recruitPlayersFreshman( int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds) {
         //make team
         int stars = teamPrestige/20 + 1;
         int chance = 20 - (teamPrestige - 20*( teamPrestige/20 )); //between 0 and 20
@@ -1038,6 +1139,18 @@ public class Team {
             teamWRs.add( new PlayerWR(league.getRandName(), 1, stars, this) );
         }
 
+        for( int i = 0; i < teNeeds; ++i ) {
+            // Add some randomness so that players with higher stars can be recruited
+            stars = teamPrestige/20 + 1;
+            if ( 100*Math.random() < 5*chance ) stars = stars - 1;
+            if (Math.random() < starsBonusChance) stars = stars + 1;
+            else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
+            if (stars > 5) stars = 5;
+
+            //make WRs
+            teamTEs.add( new PlayerTE(league.getRandName(), 1, stars, this) );
+        }
+
         for( int i = 0; i < olNeeds; ++i ) {
             // Add some randomness so that players with higher stars can be recruited
             stars = teamPrestige/20 + 1;
@@ -1062,7 +1175,7 @@ public class Team {
             teamCBs.add( new PlayerCB(league.getRandName(), 1, stars, this) );
         }
 
-        for( int i = 0; i < f7Needs; ++i ) {
+        for( int i = 0; i < dlNeeds; ++i ) {
             // Add some randomness so that players with higher stars can be recruited
             stars = teamPrestige/20 + 1;
             if ( 100*Math.random() < 5*chance ) stars = stars - 1;
@@ -1070,8 +1183,20 @@ public class Team {
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
             if (stars > 5) stars = 5;
 
-            //make F7s
-            teamF7s.add( new PlayerF7(league.getRandName(), 1, stars, this) );
+            //make DLs
+            teamDLs.add( new PlayerDL(league.getRandName(), 1, stars, this) );
+        }
+
+        for( int i = 0; i < lbNeeds; ++i ) {
+            // Add some randomness so that players with higher stars can be recruited
+            stars = teamPrestige/20 + 1;
+            if ( 100*Math.random() < 5*chance ) stars = stars - 1;
+            if (Math.random() < starsBonusChance) stars = stars + 1;
+            else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
+            if (stars > 5) stars = 5;
+
+            //make WRs
+            teamLBs.add( new PlayerLB(league.getRandName(), 1, stars, this) );
         }
 
         for( int i = 0; i < sNeeds; ++i ) {
@@ -1114,6 +1239,12 @@ public class Team {
             teamWRs.add( new PlayerWR(league.getRandName(), 1, 2, this) );
         }
 
+        needs = 2 - teamTEs.size();
+        for( int i = 0; i < needs; ++i ) {
+            //make TEs
+            teamTEs.add( new PlayerTE(league.getRandName(), 1, 2, this) );
+        }
+
         needs = 10 - teamOLs.size();
         for( int i = 0; i < needs; ++i ) {
             //make OLs
@@ -1138,10 +1269,16 @@ public class Team {
             teamCBs.add( new PlayerCB(league.getRandName(), 1, 2, this) );
         }
 
-        needs = 14 - teamF7s.size();
+        needs = 8 - teamDLs.size();
         for( int i = 0; i < needs; ++i ) {
-            //make Ss
-            teamF7s.add( new PlayerF7(league.getRandName(), 1, 2, this) );
+            //make DLs
+            teamDLs.add( new PlayerDL(league.getRandName(), 1, 2, this) );
+        }
+
+        needs = 6 - teamLBs.size();
+        for( int i = 0; i < needs; ++i ) {
+            //make LBs
+            teamLBs.add( new PlayerLB(league.getRandName(), 1, 2, this) );
         }
 
         //done making players, sort them
@@ -1232,6 +1369,24 @@ public class Team {
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability)
                 );
+        } else if (playerInfo[0].equals("TE")) {
+            if (playerInfo.length >= 22)
+                teamTEs.add( new PlayerTE(playerInfo[1], this,
+                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
+                        Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
+                        Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
+                        Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
+                        Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
+                        Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21]))
+                );
+            else
+                teamTEs.add( new PlayerTE(playerInfo[1], this,
+                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability)
+                );
         } else if (playerInfo[0].equals("OL")) {
             if (playerInfo.length >= 16)
                 teamOLs.add( new PlayerOL(playerInfo[1], this,
@@ -1286,20 +1441,34 @@ public class Team {
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
-        } else if (playerInfo[0].equals("F7")) {
+        } else if (playerInfo[0].equals("DL")) {
             if (playerInfo.length >= 16)
-                teamF7s.add( new PlayerF7(playerInfo[1], this,
+                teamDLs.add( new PlayerDL(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
                         Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
                         Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15])));
             else
-                teamF7s.add( new PlayerF7(playerInfo[1], this,
+                teamDLs.add( new PlayerDL(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
-        }
+        } else if (playerInfo[0].equals("LB")) {
+            if (playerInfo.length >= 16)
+            teamLBs.add( new PlayerLB(playerInfo[1], this,
+                    Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                    Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                    Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
+                    Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
+                    Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15])));
+            else
+            teamLBs.add( new PlayerLB(playerInfo[1], this,
+                    Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                    Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                    Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
+    }
+
     }
 
     /**
@@ -1328,6 +1497,13 @@ public class Team {
             else if (p.year == 3) teamJRs.add(p);
             else if (p.year == 4) teamSRs.add(p);
         }
+        for (PlayerTE p : teamTEs){
+            if (p.year == 0) teamRSs.add(p);
+            else if (p.year == 1) teamFRs.add(p);
+            else if (p.year == 2) teamSOs.add(p);
+            else if (p.year == 3) teamJRs.add(p);
+            else if (p.year == 4) teamSRs.add(p);
+        }
         for (PlayerK p : teamKs){
             if (p.year == 0) teamRSs.add(p);
             else if (p.year == 1) teamFRs.add(p);
@@ -1342,7 +1518,14 @@ public class Team {
             else if (p.year == 3) teamJRs.add(p);
             else if (p.year == 4) teamSRs.add(p);
         }
-        for (PlayerS p : teamSs){
+        for (PlayerDL p : teamDLs){
+            if (p.year == 0) teamRSs.add(p);
+            else if (p.year == 1) teamFRs.add(p);
+            else if (p.year == 2) teamSOs.add(p);
+            else if (p.year == 3) teamJRs.add(p);
+            else if (p.year == 4) teamSRs.add(p);
+        }
+        for (PlayerLB p : teamLBs){
             if (p.year == 0) teamRSs.add(p);
             else if (p.year == 1) teamFRs.add(p);
             else if (p.year == 2) teamSOs.add(p);
@@ -1356,7 +1539,7 @@ public class Team {
             else if (p.year == 3) teamJRs.add(p);
             else if (p.year == 4) teamSRs.add(p);
         }
-        for (PlayerF7 p : teamF7s){
+        for (PlayerS p : teamSs){
             if (p.year == 0) teamRSs.add(p);
             else if (p.year == 1) teamFRs.add(p);
             else if (p.year == 2) teamSOs.add(p);
@@ -1525,11 +1708,13 @@ public class Team {
         Collections.sort(teamQBs, new PlayerComparator());
         Collections.sort(teamRBs, new PlayerComparator());
         Collections.sort(teamWRs, new PlayerComparator());
+        Collections.sort(teamTEs, new PlayerComparator());
         Collections.sort(teamKs, new PlayerComparator());
         Collections.sort(teamOLs, new PlayerComparator());
+        Collections.sort(teamDLs, new PlayerComparator());
+        Collections.sort(teamLBs, new PlayerComparator());
         Collections.sort(teamCBs, new PlayerComparator());
         Collections.sort(teamSs, new PlayerComparator());
-        Collections.sort(teamF7s, new PlayerComparator());
 
         Collections.sort(teamRSs, new PlayerComparator());
         Collections.sort(teamFRs, new PlayerComparator());
@@ -1548,11 +1733,13 @@ public class Team {
             checkInjuryPosition(teamQBs, 1);
             checkInjuryPosition(teamRBs, 2);
             checkInjuryPosition(teamWRs, 3);
+            checkInjuryPosition(teamTEs, 1);
             checkInjuryPosition(teamOLs, 5);
             checkInjuryPosition(teamKs, 1);
-            checkInjuryPosition(teamSs, 1);
+            checkInjuryPosition(teamDLs, 4);
+            checkInjuryPosition(teamLBs, 3);
             checkInjuryPosition(teamCBs, 3);
-            checkInjuryPosition(teamF7s, 1);
+            checkInjuryPosition(teamSs, 1);
     }
 
     private void checkInjuryPosition(ArrayList<? extends Player> players, int numStarters) {
@@ -1620,11 +1807,13 @@ public class Team {
         curePlayersPosition(teamQBs);
         curePlayersPosition(teamRBs);
         curePlayersPosition(teamWRs);
+        curePlayersPosition(teamTEs);
         curePlayersPosition(teamOLs);
         curePlayersPosition(teamKs);
-        curePlayersPosition(teamSs);
+        curePlayersPosition(teamDLs);
+        curePlayersPosition(teamTEs);
         curePlayersPosition(teamCBs);
-        curePlayersPosition(teamF7s);
+        curePlayersPosition(teamSs);
         sortPlayers();
     }
 
@@ -1642,8 +1831,8 @@ public class Team {
     public int getOffTalent() {
         return ( getQB(0).ratOvr*5 +
                 teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr +
-                teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr +
-                getCompositeOLPass() + getCompositeOLRush() ) / 12;
+                teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr + teamTEs.get(0).ratOvr +
+                getCompositeOLPass() + getCompositeOLRush() ) / 13;
     }
 
     /**
@@ -1663,15 +1852,19 @@ public class Team {
         comp += getQB(0).ratFootIQ * 5;
         comp += getRB(0).ratFootIQ + getRB(1).ratFootIQ;
         comp += getWR(0).ratFootIQ + getWR(1).ratFootIQ + getWR(2).ratFootIQ;
+        comp += getTE(0).ratFootIQ;
         for (int i = 0; i < 5; ++i) {
             comp += getOL(i).ratFootIQ/5;
         }
         comp += getS(0).ratFootIQ * 5;
         comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ;
-        for (int i = 0; i < 7; ++i) {
-            comp += getF7(i).ratFootIQ/7;
+        for (int i = 0; i < 4; ++i) {
+            comp += getDL(i).ratFootIQ/4;
         }
-        return comp / 20;
+        for (int i = 0; i < 3; ++i) {
+            comp += getLB(i).ratFootIQ/3;
+        }
+        return comp / 21;
     }
 
     /**
@@ -1706,11 +1899,13 @@ public class Team {
         allPlayersList.addAll(teamQBs);
         allPlayersList.addAll(teamRBs);
         allPlayersList.addAll(teamWRs);
+        allPlayersList.addAll(teamTEs);
         allPlayersList.addAll(teamOLs);
         allPlayersList.addAll(teamKs);
-        allPlayersList.addAll(teamSs);
+        allPlayersList.addAll(teamDLs);
+        allPlayersList.addAll(teamLBs);
         allPlayersList.addAll(teamCBs);
-        allPlayersList.addAll(teamF7s);
+        allPlayersList.addAll(teamSs);
         return allPlayersList;
     }
 
@@ -1738,6 +1933,14 @@ public class Team {
         }
     }
 
+    public PlayerTE getTE(int depth) {
+        if ( depth < teamTEs.size() && depth >= 0 ) {
+            return teamTEs.get(depth);
+        } else {
+            return teamTEs.get(0);
+        }
+    }
+
     public PlayerK getK(int depth) {
         if ( depth < teamKs.size() && depth >= 0 ) {
             return teamKs.get(depth);
@@ -1753,7 +1956,31 @@ public class Team {
             return teamOLs.get(0);
         }
     }
-
+    
+    public PlayerDL getDL(int depth) {
+        if ( depth < teamDLs.size() && depth >= 0 ) {
+            return teamDLs.get(depth);
+        } else {
+            return teamDLs.get(0);
+        }
+    }
+    
+    public PlayerLB getLB(int depth) {
+        if ( depth < teamLBs.size() && depth >= 0 ) {
+            return teamLBs.get(depth);
+        } else {
+            return teamLBs.get(0);
+        }
+    }
+    
+    public PlayerCB getCB(int depth) {
+        if ( depth < teamCBs.size() && depth >= 0 ) {
+            return teamCBs.get(depth);
+        } else {
+            return teamCBs.get(0);
+        }
+    }
+    
     public PlayerS getS(int depth) {
         if ( depth < teamSs.size() && depth >= 0 ) {
             return teamSs.get(depth);
@@ -1762,28 +1989,13 @@ public class Team {
         }
     }
 
-    public PlayerCB getCB(int depth) {
-        if ( depth < teamCBs.size() && depth >= 0 ) {
-            return teamCBs.get(depth);
-        } else {
-            return teamCBs.get(0);
-        }
-    }
-
-    public PlayerF7 getF7(int depth) {
-        if ( depth < teamF7s.size() && depth >= 0 ) {
-            return teamF7s.get(depth);
-        } else {
-            return teamF7s.get(0);
-        }
-    }
-
+    
     /**
      * Get pass proficiency. The higher the more likely the team is to pass.
      * @return integer of how good the team is at passing
      */
     public int getPassProf() {
-        int avgWRs = ( teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr)/3;
+        int avgWRs = ( teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratRecCat)/4;
         return (getCompositeOLPass() + getQB(0).ratOvr*2 + avgWRs)/4;
     }
 
@@ -1802,7 +2014,9 @@ public class Team {
      */
     public int getPassDef() {
         int avgCBs = ( teamCBs.get(0).ratOvr + teamCBs.get(1).ratOvr + teamCBs.get(2).ratOvr)/3;
-        return (avgCBs*3 + teamSs.get(0).ratOvr + getCompositeF7Pass()*2)/6;
+        int avgLBs = (teamLBs.get(0).ratLBCov + teamLBs.get(1).ratLBCov + teamLBs.get(2).ratLBCov)/ 3;
+        int def = (avgCBs + avgLBs) / 2;
+        return (def*3 + teamSs.get(0).ratOvr + getCompositeDLPass()*2)/6;
     }
 
     /**
@@ -1810,7 +2024,7 @@ public class Team {
      * @return integer of how good
      */
     public int getRushDef() {
-        return getCompositeF7Rush();
+        return getCompositeDLRush();
     }
 
     /**
@@ -1836,33 +2050,38 @@ public class Team {
         for ( int i = 0; i < 5; ++i ) {
             compositeOL += (teamOLs.get(i).ratOLPow + teamOLs.get(i).ratOLBkR)/2;
         }
-        return compositeOL / 5;
+        int compositeTE = teamTEs.get(0).ratBlkR;
+        return (2*(compositeOL) + compositeTE)/11;
     }
 
     /**
-     * Get how good the F7 is at defending the pass.
+     * Get how good the DL is at defending the pass.
      * Is the average of power and pass pressure.
      * @return how good they are at putting pressure on passer.
      */
-    public int getCompositeF7Pass() {
-        int compositeF7 = 0;
-        for ( int i = 0; i < 7; ++i ) {
-            compositeF7 += (teamF7s.get(i).ratF7Pow + teamF7s.get(i).ratF7Pas)/2;
+    public int getCompositeDLPass() {
+        int compositeDL = 0;
+        for ( int i = 0; i < 4; ++i ) {
+            compositeDL += (teamDLs.get(i).ratDLPow + teamDLs.get(i).ratDLPas)/2;
         }
-        return compositeF7 / 7;
+        return compositeDL / 4;
     }
 
     /**
-     * Get how good the F7 is at defending the run.
+     * Get how good the DL is at defending the run.
      * Is the average of power and run stopping.
      * @return how good they are at stopping the RB.
      */
-    public int getCompositeF7Rush() {
-        int compositeF7 = 0;
-        for ( int i = 0; i < 7; ++i ) {
-            compositeF7 += (teamF7s.get(i).ratF7Pow + teamF7s.get(i).ratF7Rsh)/2;
+    public int getCompositeDLRush() {
+        int compositeDL = 0;
+        int compositeLB = 0;
+        for ( int i = 0; i < 4; ++i ) {
+            compositeDL += (teamDLs.get(i).ratDLPow + teamDLs.get(i).ratDLRsh)/2;
         }
-        return compositeF7 / 7;
+        for ( int i = 0; i < 3; ++i ) {
+            compositeLB += teamLBs.get(i).ratLBRsh;
+        }
+        return (2*compositeDL + compositeLB)/11;
     }
 
     /**
@@ -2052,22 +2271,28 @@ public class Team {
         for (int i = 0; i < 3; ++i) {
             pList.add(getWR(i).getPosNameYrOvrPot_Str());
         }
+        
+        pList.add(getTE(0).getPosNameYrOvrPot_Str());
 
         for (int i = 0; i < 5; ++i) {
             pList.add(getOL(i).getPosNameYrOvrPot_Str());
         }
 
         pList.add(getK(0).getPosNameYrOvrPot_Str());
+        
+        for (int i = 0; i < 4; ++i) {
+            pList.add(getDL(i).getPosNameYrOvrPot_Str());
+        }
 
-        pList.add(getS(0).getPosNameYrOvrPot_Str());
-
+        for (int i = 0; i < 3; ++i) {
+            pList.add(getLB(i).getPosNameYrOvrPot_Str());
+        }
+        
         for (int i = 0; i < 3; ++i) {
             pList.add(getCB(i).getPosNameYrOvrPot_Str());
         }
-
-        for (int i = 0; i < 7; ++i) {
-            pList.add(getF7(i).getPosNameYrOvrPot_Str());
-        }
+        
+        pList.add(getS(0).getPosNameYrOvrPot_Str());
 
         pList.add("BENCH > BENCH");
 
@@ -2098,30 +2323,35 @@ public class Team {
             ph = playerStatsGroupHeaders.get(i);
             playerStatsMap.put(ph, getWR(i - 3).getDetailStatsList(numGames()));
         }
-
-        for (int i = 6; i < 11; ++i) {
+        
+        ph = playerStatsGroupHeaders.get(6);
+        playerStatsMap.put(ph, getTE(0).getDetailStatsList(numGames()));
+        
+        for (int i = 7; i < 12; ++i) {
             ph = playerStatsGroupHeaders.get(i);
-            playerStatsMap.put(ph, getOL(i - 6).getDetailStatsList(numGames()));
+            playerStatsMap.put(ph, getOL(i - 7).getDetailStatsList(numGames()));
         }
-
-        ph = playerStatsGroupHeaders.get(11);
-        playerStatsMap.put(ph, getK(0).getDetailStatsList(numGames()));
 
         ph = playerStatsGroupHeaders.get(12);
+        playerStatsMap.put(ph, getK(0).getDetailStatsList(numGames()));
+        
+        for (int i = 13; i < 17; ++i) {
+            ph = playerStatsGroupHeaders.get(i);
+            playerStatsMap.put(ph, getDL(i - 13).getDetailStatsList(numGames()));
+        }
+        for (int i = 17; i < 20; ++i) {
+            ph = playerStatsGroupHeaders.get(i);
+            playerStatsMap.put(ph, getLB(i - 17).getDetailStatsList(numGames()));
+        }
+        for (int i = 20; i < 23; ++i) {
+            ph = playerStatsGroupHeaders.get(i);
+            playerStatsMap.put(ph, getCB(i - 20).getDetailStatsList(numGames()));
+        }
+        ph = playerStatsGroupHeaders.get(23);
         playerStatsMap.put(ph, getS(0).getDetailStatsList(numGames()));
 
-        for (int i = 13; i < 16; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            playerStatsMap.put(ph, getCB(i - 13).getDetailStatsList(numGames()));
-        }
-
-        for (int i = 16; i < 23; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            playerStatsMap.put(ph, getF7(i - 16).getDetailStatsList(numGames()));
-        }
-
         //Bench
-        ph = playerStatsGroupHeaders.get(23);
+        ph = playerStatsGroupHeaders.get(24);
         ArrayList<String> benchStr = new ArrayList<>();
         for ( int i = 1; i < teamQBs.size(); ++i) {
             benchStr.add( getQB(i).getPosNameYrOvrPot_Str() );
@@ -2132,20 +2362,26 @@ public class Team {
         for ( int i = 3; i < teamWRs.size(); ++i) {
             benchStr.add( getWR(i).getPosNameYrOvrPot_Str() );
         }
+        for ( int i = 1; i < teamTEs.size(); ++i) {
+            benchStr.add( getTE(i).getPosNameYrOvrPot_Str() );
+        }
         for ( int i = 5; i < teamOLs.size(); ++i) {
             benchStr.add( getOL(i).getPosNameYrOvrPot_Str() );
         }
         for ( int i = 1; i < teamKs.size(); ++i) {
             benchStr.add( getK(i).getPosNameYrOvrPot_Str() );
         }
-        for ( int i = 1; i < teamSs.size(); ++i) {
-            benchStr.add(getS(i).getPosNameYrOvrPot_Str());
+        for ( int i = 4; i < teamDLs.size(); ++i) {
+            benchStr.add( getDL(i).getPosNameYrOvrPot_Str() );
+        }
+        for ( int i = 3; i < teamLBs.size(); ++i) {
+            benchStr.add( getLB(i).getPosNameYrOvrPot_Str() );
         }
         for ( int i = 3; i < teamCBs.size(); ++i) {
             benchStr.add( getCB(i).getPosNameYrOvrPot_Str() );
         }
-        for ( int i = 7; i < teamF7s.size(); ++i) {
-            benchStr.add( getF7(i).getPosNameYrOvrPot_Str() );
+        for ( int i = 1; i < teamSs.size(); ++i) {
+            benchStr.add(getS(i).getPosNameYrOvrPot_Str());
         }
         playerStatsMap.put(ph, benchStr);
 
@@ -2162,19 +2398,25 @@ public class Team {
         for (Player p : teamWRs) {
             if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
         }
+        for (Player p : teamTEs) {
+            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+        }
         for (Player p : teamOLs) {
             if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
         }
         for (Player p : teamKs) {
             if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
         }
-        for (Player p : teamSs) {
+        for (Player p : teamDLs) {
+            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+        }
+        for (Player p : teamLBs) {
             if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
         }
         for (Player p : teamCBs) {
             if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
         }
-        for (Player p : teamF7s) {
+        for (Player p : teamSs) {
             if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
         }
         return null;
@@ -2415,11 +2657,14 @@ public class Team {
         needs.append("\t\t"+(2-teamQBs.size())+ "QBs, ");
         needs.append((4-teamRBs.size())+ "RBs, ");
         needs.append((6-teamWRs.size())+ "WRs, ");
-        needs.append((2-teamKs.size())+ "Ks\n");
-        needs.append("\t\t"+(10-teamOLs.size())+ "OLs, ");
-        needs.append((2-teamSs.size())+ "Ss, ");
+        needs.append((2-teamTEs.size())+ "TEs, ");
+        needs.append((10-teamOLs.size())+ "OLs, ");
+        needs.append("\t\t"+(2-teamKs.size())+ "Ks\n");
+        needs.append((8-teamDLs.size())+ "DLs");
+        needs.append((6-teamLBs.size())+ "LBs");
         needs.append((6-teamCBs.size())+ "CBs, ");
-        needs.append((14-teamF7s.size())+ "F7s");
+        needs.append((2-teamSs.size())+ "Ss, ");
+
         return needs.toString();
     }
 
@@ -2447,12 +2692,24 @@ public class Team {
     }
 
     public PlayerWR[] getWRRecruits() {
-        int adjNumRecruits = 2*numRecruits;
+        int adjNumRecruits = numRecruits;
         PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
         int stars;
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int)(5*(float)(adjNumRecruits - i/2)/adjNumRecruits);
             recruits[i] = new PlayerWR(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new PlayerComparator());
+        return recruits;
+    }
+    
+    public PlayerTE[] getTERecruits() {
+        int adjNumRecruits = 2*numRecruits;
+        PlayerTE[] recruits = new PlayerTE[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int)(5*(float)(adjNumRecruits - i/2)/adjNumRecruits);
+            recruits[i] = new PlayerTE(league.getRandName(), 1, stars, this);
         }
         Arrays.sort(recruits, new PlayerComparator());
         return recruits;
@@ -2481,19 +2738,31 @@ public class Team {
         Arrays.sort(recruits, new PlayerComparator());
         return recruits;
     }
-
-    public PlayerS[] getSRecruits() {
-        int adjNumRecruits = numRecruits;
-        PlayerS[] recruits = new PlayerS[adjNumRecruits];
+    
+    public PlayerDL[] getDLRecruits() {
+        int adjNumRecruits = 3*numRecruits;
+        PlayerDL[] recruits = new PlayerDL[adjNumRecruits];
         int stars;
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int)(5*(float)(adjNumRecruits - i/2)/adjNumRecruits);
-            recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
+            recruits[i] = new PlayerDL(league.getRandName(), 1, stars, this);
         }
         Arrays.sort(recruits, new PlayerComparator());
         return recruits;
     }
-
+    
+    public PlayerLB[] getLBRecruits() {
+        int adjNumRecruits = 2*numRecruits;
+        PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int)(5*(float)(adjNumRecruits - i/2)/adjNumRecruits);
+            recruits[i] = new PlayerLB(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new PlayerComparator());
+        return recruits;
+    }
+    
     public PlayerCB[] getCBRecruits() {
         int adjNumRecruits = 2*numRecruits;
         PlayerCB[] recruits = new PlayerCB[adjNumRecruits];
@@ -2505,18 +2774,19 @@ public class Team {
         Arrays.sort(recruits, new PlayerComparator());
         return recruits;
     }
-
-    public PlayerF7[] getF7Recruits() {
-        int adjNumRecruits = 3*numRecruits;
-        PlayerF7[] recruits = new PlayerF7[adjNumRecruits];
+    
+    public PlayerS[] getSRecruits() {
+        int adjNumRecruits = numRecruits;
+        PlayerS[] recruits = new PlayerS[adjNumRecruits];
         int stars;
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int)(5*(float)(adjNumRecruits - i/2)/adjNumRecruits);
-            recruits[i] = new PlayerF7(league.getRandName(), 1, stars, this);
+            recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
         }
         Arrays.sort(recruits, new PlayerComparator());
         return recruits;
     }
+    
 
     /**
      * Save all the recruits into a string to be used by RecruitingActivity
@@ -2539,6 +2809,11 @@ public class Team {
             sb.append("WR," + wr.name + "," + wr.year + "," + wr.ratPot + "," + wr.ratFootIQ + "," +
                     wr.ratRecCat + "," + wr.ratRecSpd + "," + wr.ratRecEva + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratDur + "%\n");
         }
+        PlayerTE[] tes = getTERecruits();
+        for (PlayerTE te : tes) {
+            sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
+                    te.ratRecCat + "," + te.ratBlkR + "," + te.ratRecEva + "," + te.ratOvr + "," + te.cost + "," + te.ratDur + "%\n");
+        }
         PlayerK[] ks = getKRecruits();
         for (PlayerK k : ks) {
             sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
@@ -2549,21 +2824,27 @@ public class Team {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
                     ol.ratOLPow + "," + ol.ratOLBkR + "," + ol.ratOLBkP + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratDur + "%\n");
         }
-        PlayerS[] ss = getSRecruits();
-        for (PlayerS s : ss) {
-            sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
-                    s.ratSCov + "," + s.ratSSpd + "," + s.ratSTkl + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "%\n");
+        PlayerDL[] DLs = getDLRecruits();
+        for (PlayerDL DL : DLs) {
+            sb.append("DL," + DL.name + "," + DL.year + "," + DL.ratPot + "," + DL.ratFootIQ + "," +
+                    DL.ratDLPow + "," + DL.ratDLRsh + "," + DL.ratDLPas + "," + DL.ratOvr + "," + DL.cost + "," + DL.ratDur + "%\n");
+        }
+        PlayerLB[] lbs = getLBRecruits();
+        for (PlayerLB lb : lbs) {
+            sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
+                    lb.ratLBCov + "," + lb.ratLBRsh + "," + lb.ratLBTkl + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "%\n");
         }
         PlayerCB[] cbs = getCBRecruits();
         for (PlayerCB cb : cbs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
                     cb.ratCBCov + "," + cb.ratCBSpd + "," + cb.ratCBTkl + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratDur + "%\n");
         }
-        PlayerF7[] f7s = getF7Recruits();
-        for (PlayerF7 f7 : f7s) {
-            sb.append("F7," + f7.name + "," + f7.year + "," + f7.ratPot + "," + f7.ratFootIQ + "," +
-                    f7.ratF7Pow + "," + f7.ratF7Rsh + "," + f7.ratF7Pas + "," + f7.ratOvr + "," + f7.cost + "," + f7.ratDur + "%\n");
+        PlayerS[] ss = getSRecruits();
+        for (PlayerS s : ss) {
+            sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
+                    s.ratSCov + "," + s.ratSSpd + "," + s.ratSTkl + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "%\n");
         }
+        
         return sb.toString();
     }
 
@@ -2591,32 +2872,44 @@ public class Team {
                     wr.careerGamesPlayed + "," + wr.careerTargets + "," + wr.careerReceptions + "," + wr.careerRecYards + "," + wr.careerTD + "," +
                     wr.careerDrops + "," + wr.careerFumbles + "," + wr.careerHeismans + "," + wr.careerAllAmerican + "," + wr.careerAllConference + "," + wr.careerWins + "%\n");
         }
-        for (PlayerK k : teamKs) {
-            sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
-                    k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.ratImprovement + "," + k.ratDur + "," +
-                    k.careerGamesPlayed + "," + k.careerXPAtt + "," + k.careerXPMade + "," + k.careerFGAtt + "," + k.careerFGMade + "," +
-                    k.careerHeismans + "," + k.careerAllAmerican + "," + k.careerAllConference + "," + k.careerWins + "%\n");
+        for (PlayerTE te : teamTEs) {
+            sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
+                    te.ratRecCat + "," + te.ratBlkR + "," + te.ratRecEva + "," + te.ratOvr + "," + te.ratImprovement + "," + te.ratDur + "," +
+                    te.careerGamesPlayed + "," + te.careerTargets + "," + te.careerReceptions + "," + te.careerRecYards + "," + te.careerTD + "," +
+                    te.careerDrops + "," + te.careerFumbles + "," + te.careerHeismans + "," + te.careerAllAmerican + "," + te.careerAllConference + "," + te.careerWins + "%\n");
         }
         for (PlayerOL ol : teamOLs) {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
                     ol.ratOLPow + "," + ol.ratOLBkR + "," + ol.ratOLBkP + "," + ol.ratOvr + "," + ol.ratImprovement + "," + ol.ratDur + "," +
                     ol.careerGamesPlayed + "," + ol.careerHeismans + "," + ol.careerAllAmerican + "," + ol.careerAllConference + "," + ol.careerWins + "%\n");
         }
-        for (PlayerS s : teamSs) {
-            sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
-                    s.ratSCov + "," + s.ratSSpd + "," + s.ratSTkl + "," + s.ratOvr + "," + s.ratImprovement + "," + s.ratDur + "," +
-                    s.careerGamesPlayed + "," + s.careerHeismans + "," + s.careerAllAmerican + "," + s.careerAllConference + "," + s.careerWins + "%\n");
+        for (PlayerK k : teamKs) {
+            sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
+                    k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.ratImprovement + "," + k.ratDur + "," +
+                    k.careerGamesPlayed + "," + k.careerXPAtt + "," + k.careerXPMade + "," + k.careerFGAtt + "," + k.careerFGMade + "," +
+                    k.careerHeismans + "," + k.careerAllAmerican + "," + k.careerAllConference + "," + k.careerWins + "%\n");
+        }
+        for (PlayerDL DL : teamDLs) {
+            sb.append("DL," + DL.name + "," + DL.year + "," + DL.ratPot + "," + DL.ratFootIQ + "," +
+                    DL.ratDLPow + "," + DL.ratDLRsh + "," + DL.ratDLPas + "," + DL.ratOvr + "," + DL.ratImprovement + "," + DL.ratDur + "," +
+                    DL.careerGamesPlayed + "," + DL.careerHeismans + "," + DL.careerAllAmerican + "," + DL.careerAllConference + "," + DL.careerWins + "%\n");
+        }
+        for (PlayerLB lb : teamLBs) {
+            sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
+                    lb.ratLBCov + "," + lb.ratLBRsh + "," + lb.ratLBTkl + "," + lb.ratOvr + "," + lb.ratImprovement + "," + lb.ratDur + "," +
+                    lb.careerGamesPlayed + lb.careerHeismans + "," + lb.careerAllAmerican + "," + lb.careerAllConference + "," + lb.careerWins + "%\n");
         }
         for (PlayerCB cb : teamCBs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
                     cb.ratCBCov + "," + cb.ratCBSpd + "," + cb.ratCBTkl + "," + cb.ratOvr + "," + cb.ratImprovement + "," + cb.ratDur + "," +
                     cb.careerGamesPlayed + "," + cb.careerHeismans + "," + cb.careerAllAmerican + "," + cb.careerAllConference + "," + cb.careerWins + "%\n");
         }
-        for (PlayerF7 f7 : teamF7s) {
-            sb.append("F7," + f7.name + "," + f7.year + "," + f7.ratPot + "," + f7.ratFootIQ + "," +
-                    f7.ratF7Pow + "," + f7.ratF7Rsh + "," + f7.ratF7Pas + "," + f7.ratOvr + "," + f7.ratImprovement + "," + f7.ratDur + "," +
-                    f7.careerGamesPlayed + "," + f7.careerHeismans + "," + f7.careerAllAmerican + "," + f7.careerAllConference + "," + f7.careerWins + "%\n");
+        for (PlayerS s : teamSs) {
+            sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
+                    s.ratSCov + "," + s.ratSSpd + "," + s.ratSTkl + "," + s.ratOvr + "," + s.ratImprovement + "," + s.ratDur + "," +
+                    s.careerGamesPlayed + "," + s.careerHeismans + "," + s.careerAllAmerican + "," + s.careerAllConference + "," + s.careerWins + "%\n");
         }
+
         return sb.toString();
     }
 
@@ -2645,9 +2938,9 @@ public class Team {
         int OP, OR, OS = 0;
         OP = getPassProf();
         OR = getRushProf();
-        if(OP > (OR + 3)) {
+        if(OP > (OR + 5)) {
             OS = 0;
-        } else if(OR > (OP + 3)) {
+        } else if(OR > (OP + 5)) {
             OS = 2;
         } else OS = 1;
         return OS;
@@ -2657,9 +2950,9 @@ public class Team {
         int DP, DR, DS = 0;
         DP = getPassProf();
         DR = getRushProf();
-        if(DR < (DP + 3)) {
+        if(DR < (DP + 5)) {
             DS = 0;
-        } else if(DP < (DR + 3)) {
+        } else if(DP < (DR + 5)) {
             DS = 2;
         } else DS = 1;
         return DS;
@@ -2729,6 +3022,18 @@ public class Team {
                 }
                 break;
             case 3:
+                ArrayList<PlayerTE> oldTEs = new ArrayList<>();
+                oldTEs.addAll(teamTEs);
+                teamTEs.clear();
+                for (Player p : starters) {
+                    teamTEs.add( (PlayerTE) p );
+                }
+                Collections.sort(teamTEs, new PlayerComparator());
+                for (PlayerTE oldP : oldTEs) {
+                    if (!teamTEs.contains(oldP)) teamTEs.add(oldP);
+                }
+                break;
+            case 4:
                 ArrayList<PlayerOL> oldOLs = new ArrayList<>();
                 oldOLs.addAll(teamOLs);
                 teamOLs.clear();
@@ -2740,7 +3045,7 @@ public class Team {
                     if (!teamOLs.contains(oldP)) teamOLs.add(oldP);
                 }
                 break;
-            case 4:
+            case 5:
                 ArrayList<PlayerK> oldKs = new ArrayList<>();
                 oldKs.addAll(teamKs);
                 teamKs.clear();
@@ -2752,19 +3057,31 @@ public class Team {
                     if (!teamKs.contains(oldP)) teamKs.add(oldP);
                 }
                 break;
-            case 5:
-                ArrayList<PlayerS> oldSs = new ArrayList<>();
-                oldSs.addAll(teamSs);
-                teamSs.clear();
+            case 6:
+                ArrayList<PlayerDL> oldDLs = new ArrayList<>();
+                oldDLs.addAll(teamDLs);
+                teamDLs.clear();
                 for (Player p : starters) {
-                    teamSs.add( (PlayerS) p );
+                    teamDLs.add( (PlayerDL) p );
                 }
-                Collections.sort(teamSs, new PlayerComparator());
-                for (PlayerS oldP : oldSs) {
-                    if (!teamSs.contains(oldP)) teamSs.add(oldP);
+                Collections.sort(teamDLs, new PlayerComparator());
+                for (PlayerDL oldP : oldDLs) {
+                    if (!teamDLs.contains(oldP)) teamDLs.add(oldP);
                 }
                 break;
-            case 6:
+            case 7:
+                ArrayList<PlayerLB> oldLBs = new ArrayList<>();
+                oldLBs.addAll(teamLBs);
+                teamLBs.clear();
+                for (Player p : starters) {
+                    teamLBs.add( (PlayerLB) p );
+                }
+                Collections.sort(teamLBs, new PlayerComparator());
+                for (PlayerLB oldP : oldLBs) {
+                    if (!teamLBs.contains(oldP)) teamLBs.add(oldP);
+                }
+                break;
+            case 8:
                 ArrayList<PlayerCB> oldCBs = new ArrayList<>();
                 oldCBs.addAll(teamCBs);
                 teamCBs.clear();
@@ -2776,16 +3093,16 @@ public class Team {
                     if (!teamCBs.contains(oldP)) teamCBs.add(oldP);
                 }
                 break;
-            case 7:
-                ArrayList<PlayerF7> oldF7s = new ArrayList<>();
-                oldF7s.addAll(teamF7s);
-                teamF7s.clear();
+            case 9:
+                ArrayList<PlayerS> oldSs = new ArrayList<>();
+                oldSs.addAll(teamSs);
+                teamSs.clear();
                 for (Player p : starters) {
-                    teamF7s.add( (PlayerF7) p );
+                    teamSs.add( (PlayerS) p );
                 }
-                Collections.sort(teamF7s, new PlayerComparator());
-                for (PlayerF7 oldP : oldF7s) {
-                    if (!teamF7s.contains(oldP)) teamF7s.add(oldP);
+                Collections.sort(teamSs, new PlayerComparator());
+                for (PlayerS oldP : oldSs) {
+                    if (!teamSs.contains(oldP)) teamSs.add(oldP);
                 }
                 break;
         }
@@ -2802,11 +3119,13 @@ public class Team {
         addGamePlayedList(teamQBs, 1, wonGame);
         addGamePlayedList(teamRBs, 2, wonGame);
         addGamePlayedList(teamWRs, 3, wonGame);
+        addGamePlayedList(teamTEs, 1, wonGame);
         addGamePlayedList(teamOLs, 5, wonGame);
         addGamePlayedList(teamKs, 1, wonGame);
-        addGamePlayedList(teamSs, 1, wonGame);
+        addGamePlayedList(teamDLs, 4, wonGame);
+        addGamePlayedList(teamLBs, 3, wonGame);
         addGamePlayedList(teamCBs, 3, wonGame);
-        addGamePlayedList(teamF7s, 7, wonGame);
+        addGamePlayedList(teamSs, 1, wonGame);
     }
 
     private void addGamePlayedList(ArrayList<? extends Player> playerList, int starters, boolean wonGame) {
@@ -2848,7 +3167,7 @@ class PlayerComparator implements Comparator<Player> {
 }
 
 /**
- * Comparator used to sort players by position, QB-RB-WR-OL-K-S-CB-F7
+ * Comparator used to sort players by position, QB-RB-WR-OL-K-S-CB-DL
  */
 class PlayerPositionComparator implements Comparator<Player> {
     @Override
