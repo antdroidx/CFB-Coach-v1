@@ -208,6 +208,10 @@ public class Player {
             case "S": return 5;
             case "CB": return 6;
             case "F7": return 7;
+            //case "DL": return 7;
+            //case "LB": return 8;
+            //case "TE": return 9;
+            //default: return 10;
             default: return 8;
         }
     }
