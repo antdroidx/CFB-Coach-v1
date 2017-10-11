@@ -387,12 +387,13 @@
                     android:id="@+id/gameDialogCenter"
                     android:layout_width="110.0dp"
                     android:layout_height="fill_parent"
-                    android:layout_toRightOf="@id/gameDialogLeft"
                     android:layout_weight="1.0"
                     android:gravity="center"
                     android:text="ha3"
                     android:textAlignment="gravity"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/gameDialogLeft" />
 
                 <TextView
                     android:id="@+id/gameDialogRight"

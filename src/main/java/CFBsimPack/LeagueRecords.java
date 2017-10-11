@@ -45,12 +45,12 @@ public class LeagueRecords {
     private HashMap<String, Record> records;
 
     public final String[] recordsList = {"TEAM","Team PPG","Team Opp PPG","Team YPG","Team Opp YPG","Team TO Diff",
-            "SEASON","Pass Yards","Pass TDs","Interceptions","Comp Percent",
+            "SEASON: OFFENSE","Pass Yards","Pass TDs","Interceptions","Comp Percent",
             "Rush Yards","Rush TDs","Rush Fumbles",
-            "Rec Yards","Rec TDs","Catch Percent",
-            "CAREER","Career Pass Yards","Career Pass TDs","Career Interceptions",
+            "Rec Yards","Rec TDs","Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions",
+            "CAREER: OFFENSE","Career Pass Yards","Career Pass TDs","Career Interceptions",
             "Career Rush Yards","Career Rush TDs","Career Rush Fumbles",
-            "Career Rec Yards","Career Rec TDs"};
+            "Career Rec Yards","Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Recovered", "Career Interceptions"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<String, Record>();
@@ -69,7 +69,7 @@ public class LeagueRecords {
         records.put("Team YPG", new Record(0, "XXX", 0));
         records.put("Team Opp YPG", new Record(1000, "XXX", 0));
         records.put("Team TO Diff", new Record(0, "XXX", 0));
-        records.put("SEASON", null);
+        records.put("SEASON: OFFENSE", null);
         records.put("Pass Yards", new Record(0, "XXX", 0));
         records.put("Pass TDs", new Record(0, "XXX", 0));
         records.put("Interceptions", new Record(0, "XXX", 0));
@@ -80,7 +80,12 @@ public class LeagueRecords {
         records.put("Rec Yards", new Record(0, "XXX", 0));
         records.put("Rec TDs", new Record(0, "XXX", 0));
         records.put("Catch Percent", new Record(0, "XXX", 0));
-        records.put("CAREER", null);
+        records.put("SEASON: DEFENSE", null);
+        records.put("Tackles", new Record(0, "XXX", 0));
+        records.put("Sacks", new Record(0, "XXX", 0));
+        records.put("Fumbles Recovered", new Record(0, "XXX", 0));
+        records.put("Interceptions", new Record(0, "XXX", 0));
+        records.put("CAREER: OFFENSE", null);
         records.put("Career Pass Yards", new Record(0, "XXX", 0));
         records.put("Career Pass TDs", new Record(0, "XXX", 0));
         records.put("Career Interceptions", new Record(0, "XXX", 0));
@@ -89,6 +94,12 @@ public class LeagueRecords {
         records.put("Career Rush Fumbles", new Record(0, "XXX", 0));
         records.put("Career Rec Yards", new Record(0, "XXX", 0));
         records.put("Career Rec TDs", new Record(0, "XXX", 0));
+        records.put("CAREER: DEFENSE", null);
+        records.put("Career Tackles", new Record(0, "XXX", 0));
+        records.put("Career Sacks", new Record(0, "XXX", 0));
+        records.put("Career Fumbles Recovered", new Record(0, "XXX", 0));
+        records.put("Career Interceptions", new Record(0, "XXX", 0));
+
     }
 
     public void checkRecord(String record, int number, String holder, int year) {

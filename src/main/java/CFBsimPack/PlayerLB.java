@@ -31,6 +31,17 @@ public class PlayerLB extends Player{
     public int ratLBTkl;
     //public int ratCBSpd;
 
+    //Stats
+    public int statsTackles;
+    public int statsSacks;
+    public int statsFumbles;
+    public int statsInts;
+
+    public int careerTackles;
+    public int careerSacks;
+    public int careerFumbles;
+    public int careerInts;
+
     //public Vector ratingsVector;
 
     public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl/*, int spd*/, boolean rs, int dur ) {
@@ -74,10 +85,19 @@ public class PlayerLB extends Player{
         careerAllConference = 0;
         careerWins = 0;
 
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+
+        careerTackles = 0;
+        careerSacks = 0;
+        careerFumbles = 0;
+        careerInts = 0;
     }
 
     public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl/*, int spd*/, boolean rs, int dur,
-                     int cGamesPlayed, int cHeismans, int cAA, int cAC, int cWins ) {
+                     int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins ) {
         team = t;
         name = nm;
         year = yr;
@@ -117,6 +137,16 @@ public class PlayerLB extends Player{
         careerAllAmerican = cAA;
         careerAllConference = cAC;
         careerWins = cWins;
+
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+
+        careerTackles = cTackles;
+        careerSacks = cSacks;
+        careerFumbles = cFumbles;
+        careerInts = cInts;
 
     }
 
@@ -159,6 +189,30 @@ public class PlayerLB extends Player{
         careerAllAmerican = 0;
         careerAllConference = 0;
         careerWins = 0;
+
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+
+        careerTackles = 0;
+        careerSacks = 0;
+        careerFumbles = 0;
+        careerInts = 0;
+    }
+
+    @Override
+    public int getHeismanScore() {
+            return statsTackles*37 + statsSacks*303 + statsFumbles*315 + statsInts*300 + ratOvr;
+    }
+
+    public Vector getStatsVector() {
+        Vector v = new Vector(4);
+        v.add(statsTackles);
+        v.add(statsSacks);
+        v.add(statsFumbles);
+        v.add(statsInts);
+        return v;
     }
 
     public Vector getRatingsVector() {
@@ -178,6 +232,10 @@ public class PlayerLB extends Player{
     public void advanceSeason() {
         year++;
         int oldOvr = ratOvr;
+        if (wonAllConference) ratPot++;
+        if (wonAllAmerican) ratPot++;
+        if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
+
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratLBCov += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratLBRsh += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
@@ -196,6 +254,16 @@ public class PlayerLB extends Player{
         careerGamesPlayed += gamesPlayed;
         careerWins += statsWins;
 
+        careerTackles += statsTackles;
+        careerSacks += statsSacks;
+        careerFumbles += statsFumbles;
+        careerInts += statsInts;
+
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
         if (wonAllConference) careerAllConference++;
@@ -204,6 +272,8 @@ public class PlayerLB extends Player{
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Tackles: " + (statsTackles + careerTackles) + " >Sacks: " + (statsSacks + careerSacks));
+        pStats.add("Fumbles: " + (statsFumbles + careerFumbles) + " >Interceptions: " + (statsInts + careerInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratLBCov));
         pStats.add("Run Stop: " + getLetterGrade(ratLBRsh) + ">Tackling: " + getLetterGrade(ratLBTkl));
@@ -214,6 +284,8 @@ public class PlayerLB extends Player{
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Tackles: " + (statsTackles + careerTackles) + " >Sacks: " + (statsSacks + careerSacks));
+        pStats.add("Fumbles: " + (statsFumbles + careerFumbles) + " >Interceptions: " + (statsInts + careerInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratLBCov));
         pStats.add("Run Stop: " + getLetterGrade(ratLBRsh) + ">Tackling: " + getLetterGrade(ratLBTkl));
@@ -221,6 +293,16 @@ public class PlayerLB extends Player{
         pStats.addAll(getCareerStatsList());
         return pStats;
     }
+
+    @Override
+    public ArrayList<String> getCareerStatsList() {
+        ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Tackles: " + (statsTackles + careerTackles) + " >Sacks: " + (statsSacks + careerSacks));
+        pStats.add("Fumbles: " + (statsFumbles + careerFumbles) + " >Interceptions: " + (statsInts + careerInts));
+        pStats.addAll(super.getCareerStatsList());
+        return pStats;
+    }
+
 
     @Override
     public String getInfoForLineup() {
