@@ -537,7 +537,16 @@ public class Game implements Serializable {
         gameR.append(homeCBs[1].getInitialName() + "\n");
         gameR.append(homeCBs[1].getYrStr() + " " + homeCBs[1].ratOvr + "\n");
         gameR.append(HomeCB2Stats[0] + "/" + HomeCB2Stats[1] + "\n" + HomeCB2Stats[2] + "/" + HomeCB2Stats[3] + "\n");
-
+        gameL.append("\n");
+        gameC.append("\n");
+        gameR.append("\n");
+        gameL.append("CB\nYr Ovr\nTckl/Sack\nFum/Int\n");
+        gameC.append(awayCBs[2].getInitialName() + "\n");
+        gameC.append(awayCBs[2].getYrStr() + " " + awayCBs[1].ratOvr + "\n");
+        gameC.append(AwayCB3Stats[0] + "/" + AwayCB3Stats[1] + "\n" + AwayCB3Stats[2] + "/" + AwayCB3Stats[3] + "\n");
+        gameR.append(homeCBs[2].getInitialName() + "\n");
+        gameR.append(homeCBs[2].getYrStr() + " " + homeCBs[1].ratOvr + "\n");
+        gameR.append(HomeCB3Stats[0] + "/" + HomeCB3Stats[1] + "\n" + HomeCB3Stats[2] + "/" + HomeCB3Stats[3] + "\n");
         //Safety
         gameL.append("\n");
         gameC.append("\n");
