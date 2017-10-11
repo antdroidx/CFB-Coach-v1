@@ -4,3 +4,13 @@
 /gradle
 /.gradle
 /.git
+/.idea
+.idea/workspace.xml
+.gradle/3.3/taskArtifacts/taskArtifacts.lock
+.gradle/3.3/taskArtifacts/taskArtifacts.bin
+.gradle/3.3/taskArtifacts/fileSnapshots.bin
+.gradle/3.3/taskArtifacts/fileHashes.bin
+.idea/workspace.xml
+.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock
+.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock
+.gradle/3.3/taskArtifacts/taskArtifacts.lock
