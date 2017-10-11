@@ -210,6 +210,10 @@ public class PlayerRB extends Player {
     public void advanceSeason() {
         year++;
         int oldOvr = ratOvr;
+        if (wonAllConference) ratPot++;
+        if (wonAllAmerican) ratPot++;
+        if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
+
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratRushPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratRushSpd += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
@@ -242,7 +246,7 @@ public class PlayerRB extends Player {
     
     @Override
     public int getHeismanScore() {
-        return statsTD * 100 - statsFumbles * 80 + (int)(statsRushYards * 2.4);
+        return statsTD * 105 - statsFumbles * 80 + (int)(statsRushYards * 2.5);
     }
 
     @Override

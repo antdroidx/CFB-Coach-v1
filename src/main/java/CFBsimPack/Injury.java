@@ -33,6 +33,7 @@ public class Injury {
         player = p;
         player.isInjured = true;
         player.ratPot -= duration;
+        player.ratDur -= duration;
     }
 
     public int getDuration() {

@@ -160,6 +160,10 @@ public class PlayerOL extends Player {
     public void advanceSeason() {
         year++;
         int oldOvr = ratOvr;
+        if (wonAllConference) ratPot++;
+        if (wonAllAmerican) ratPot++;
+        if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
+
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratOLPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratOLBkR += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
