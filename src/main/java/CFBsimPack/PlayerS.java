@@ -253,7 +253,7 @@ public class PlayerS extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*37 + statsSacks*305 + statsFumbles*305 + statsInts*315 + ratOvr;
+        return statsTackles*35 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 10*ratOvr - (int)(4.25*team.teamOppYards) - (int)(5.5*team.teamOppPoints);
     }
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
