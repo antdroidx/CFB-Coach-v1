@@ -1009,8 +1009,8 @@ public class Game implements Serializable {
 
             }
         } else {
-            double preferPass = (offense.getPassProf() * 2 - defense.getPassDef()) * Math.random() + offense.teamStratOff.getPAB() - 10;
-            double preferRush = (offense.getRushProf() * 2 - defense.getRushDef()) * Math.random() + offense.teamStratOff.getRYB();
+            double preferPass = (offense.getPassProf() - defense.getPassDef())/100 + Math.random() * offense.teamStratOff.getPassPref();       //STRATEGIES
+            double preferRush = (offense.getRushProf() - defense.getRushDef())/100 + Math.random() * offense.teamStratOff.getRunPref();
 
             // If it's 1st and Goal to go, adjust yards needed to reflect distance for a TD so that play selection reflects actual yards to go
             // If we don't do this, gameYardsNeed may be higher than the actually distance for a TD and suboptimal plays may be chosen
@@ -1311,7 +1311,7 @@ public class Game implements Serializable {
         boolean gotFumble = false;
 
         //get how much pressure there is on qb, check if sack
-        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv();
+        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() + (defense.teamStratDef.getRunProtection() - offense.teamStratDef.getRunProtection());  //STRATEGIES
         if (Math.random() * 100 < pressureOnQB / 8) {
             //sacked!
             String defender;
@@ -1346,8 +1346,8 @@ public class Game implements Serializable {
         }
 
         //check for int
-        double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 18
-                + offense.teamStratOff.getPAB() + defense.teamStratDef.getPAB();
+        double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 18    //STRATEGIES
+                + offense.teamStratOff.getPassProtection() + defense.teamStratDef.getPassProtection();
         if (intChance < 0.015) intChance = 0.015;
         if (100 * Math.random() < intChance) {
             //Interception
@@ -1377,7 +1377,7 @@ public class Game implements Serializable {
 
         //throw ball, check for completion
         double completion = (getHFadv() + normalize(offense.getQB(0).ratPassAcc) + normalize(selWR.ratRecCat)
-                - normalize(selCB.ratCBCov)) / 2 + 18.25 - pressureOnQB / 16.8 - offense.teamStratOff.getPAB() - defense.teamStratDef.getPAB();
+                - normalize(selCB.ratCBCov)) / 2 + 18.25 - pressureOnQB / 16.8 - offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();   //STRATEGIES
         if (100 * Math.random() < completion) {
             if (100 * Math.random() < (100 - selWR.ratRecCat) / 3) {
                 //drop
@@ -1391,15 +1391,15 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratRecSpd) - normalize(selCB.ratCBSpd)) * Math.random() / 3.7
-                        + offense.teamStratOff.getPYB() / 2 - defense.teamStratDef.getPYB());
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratRecSpd) - normalize(selCB.ratCBSpd)) * Math.random() / 3.7  //STRATEGIES
+                        + offense.teamStratOff.getPassPotential() / 2 - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
-                double escapeChance = (normalize(selWR.ratRecEva) * 3 - selCB.ratCBTkl - defense.getS(0).ratOvr) * Math.random()
-                        + offense.teamStratOff.getPYB() - defense.teamStratDef.getPAB();
+                double escapeChance = (normalize(selWR.ratRecEva) * 3 - selCB.ratCBTkl - defense.getS(0).ratOvr) * Math.random()   //STRATEGIES
+                        + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
                 if (escapeChance > 92 || Math.random() > 0.95) {
                     yardsGain += 3 + selWR.ratRecSpd * Math.random() / 3;
                 }
-                if (escapeChance > 75 && Math.random() < (0.1 + (offense.teamStratOff.getPAB() - defense.teamStratDef.getPAB()) / 200)) {
+                if (escapeChance > 75 && Math.random() < (0.1 + (offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential()) / 200)) {  //STRATEGIES
                     //wr escapes for TD
                     yardsGain += 100;
                 }
@@ -1521,7 +1521,7 @@ public class Game implements Serializable {
 
 
         //get how much pressure there is on qb, check if sack
-        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv();
+        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() + (defense.teamStratDef.getPassProtection() - offense.teamStratDef.getPassProtection());   //STRATEGIES
         if (Math.random() * 100 < pressureOnQB / 8) {
             //sacked!
             String defender;
@@ -1547,7 +1547,7 @@ public class Game implements Serializable {
 
         //check for int
         double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 18
-                + offense.teamStratOff.getPAB() + defense.teamStratDef.getPAB();
+                + offense.teamStratOff.getPassProtection() + defense.teamStratDef.getPassProtection();   //STRATEGIES
         if (intChance < 0.015) intChance = 0.015;
         if (100 * Math.random() < intChance) {
             //Interception
@@ -1571,7 +1571,7 @@ public class Game implements Serializable {
 
         //throw ball, check for completion
         double completion = (getHFadv() + normalize(offense.getQB(0).ratPassAcc) + normalize(selTE.ratRecCat)
-                - normalize(selLB.ratLBCov)) / 2 + 18.25 - pressureOnQB / 16.8 - offense.teamStratOff.getPAB() - defense.teamStratDef.getPAB();
+                - normalize(selLB.ratLBCov)) / 2 + 18.25 - pressureOnQB / 16.8 - offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();  //STRATEGIES
         if (100 * Math.random() < completion) {
             if (100 * Math.random() < (100 - selTE.ratRecCat) / 3) {
                 //drop
@@ -1585,15 +1585,15 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(speedTE) - normalize(speedLB)) * Math.random() / 3.7
-                        + offense.teamStratOff.getPYB() / 2 - defense.teamStratDef.getPYB());
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(speedTE) - normalize(speedLB)) * Math.random() / 3.7 //STRATEGIES
+                        + offense.teamStratOff.getPassPotential() / 2 - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
-                double escapeChance = (normalize(selTE.ratRecEva) * 3 - selLB.ratLBTkl - defense.getS(0).ratOvr) * Math.random()
-                        + offense.teamStratOff.getPYB() - defense.teamStratDef.getPAB();
+                double escapeChance = (normalize(selTE.ratRecEva) * 3 - selLB.ratLBTkl - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
+                        + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
                 if (escapeChance > 92 || Math.random() > 0.95) {
                     yardsGain += 3 + speedTE * Math.random() / 3;
                 }
-                if (escapeChance > 75 && Math.random() < (0.1 + (offense.teamStratOff.getPAB() - defense.teamStratDef.getPAB()) / 200)) {
+                if (escapeChance > 75 && Math.random() < (0.1 + (offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential()) / 200)) {  //STRATEGIES
                     //wr escapes for TD
                     yardsGain += 100;
                 }
@@ -1854,14 +1854,14 @@ public class Game implements Serializable {
             }
         }
 
-        int blockAdv = offense.getCompositeOLRush() - defense.getCompositeDLRush();
-        int blockAdvOutside = selTE.ratBlkR - selLB.ratLBRsh;
-        int yardsGain = (int) ((selRB.ratRushSpd + blockAdv + blockAdvOutside + getHFadv()) * Math.random() / 10 + (double) offense.teamStratOff.getRYB() / 2 - (double) defense.teamStratDef.getRYB() / 2);
+        int blockAdv = offense.getCompositeOLRush() - defense.getCompositeDLRush() + (offense.teamStratDef.getRunProtection() - defense.teamStratDef.getRunProtection());  //STRATEGIES
+        int blockAdvOutside = selTE.ratBlkR - selLB.ratLBRsh + (offense.teamStratDef.getRunUsage() -  defense.teamStratDef.getRunUsage());
+        int yardsGain = (int) ((selRB.ratRushSpd + blockAdv + blockAdvOutside + getHFadv()) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);  //STRATEGIES
         if (yardsGain < 2) {
-            yardsGain += selRB.ratRushPow / 20 - 3 - (double) defense.teamStratDef.getRYB() / 2;
+            yardsGain += selRB.ratRushPow / 20 - 3 - (double) defense.teamStratDef.getRunPotential() / 2;  //STRATEGIES
         } else {
             //break free from tackles
-            if (Math.random() < (0.28 + (offense.teamStratOff.getRAB() - (double) defense.teamStratDef.getRYB() / 2) / 50)) {
+            if (Math.random() < (0.28 + (offense.teamStratOff.getRunPotential()- (double) defense.teamStratDef.getRunPotential() / 2) / 50)) {  //STRATEGIES
                 yardsGain += (selRB.ratRushEva - blockAdvOutside) / 5 * Math.random();
             }
         }
@@ -1932,7 +1932,7 @@ public class Game implements Serializable {
         } else {
             gameTime -= 25 + 15 * Math.random();
             //check for fumble
-            double fumChance = ((defense.getS(0).ratSTkl + selLB.ratLBTkl)/2 + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.teamStratOff.getRAB();
+            double fumChance = ((defense.getS(0).ratSTkl + selLB.ratLBTkl)/2 + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.teamStratOff.getRunProtection();  //STRATEGIES
             if (100 * Math.random() < fumChance / 50) {
                 //Fumble!
                 if (gamePoss) {
@@ -2151,7 +2151,7 @@ public class Game implements Serializable {
                 gameTime -= 4 + 5 * Math.random(); //Onside kicks are very fast, unless there's a weird fight for the ball. Chance to burn a lot of time, odds are you'll burn a little time.
             } else {
                 // Just regular kick off
-                gameYardLine = (int) (100 - (offense.getK(0).ratKickPow + 20 - 40 * Math.random()));
+                gameYardLine = (int) (100 - (offense.getK(0).ratKickPow + 20 - 40 * Math.random()));    //FUTURE IMPLEMENTATION: WR speed affect Kick return
                 if (gameYardLine <= 0) gameYardLine = 25;
                 gameDown = 1;
                 gameYardsNeed = 10;
