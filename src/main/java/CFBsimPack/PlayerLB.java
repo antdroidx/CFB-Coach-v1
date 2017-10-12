@@ -203,7 +203,7 @@ public class PlayerLB extends Player{
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*35 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 10*ratOvr - (int)(4.25*team.teamOppYards) - (int)(5.5*team.teamOppPoints);
+        return statsTackles*35 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (int)(4*team.teamOppYards) - (int)(5*team.teamOppPoints);
     }
 
     public Vector getStatsVector() {
@@ -272,8 +272,8 @@ public class PlayerLB extends Player{
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Tackles: " + (statsTackles + careerTackles) + " >Sacks: " + (statsSacks + careerSacks));
-        pStats.add("Fumbles: " + (statsFumbles + careerFumbles) + " >Interceptions: " + (statsInts + careerInts));
+        pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
+        pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratLBCov));
         pStats.add("Run Stop: " + getLetterGrade(ratLBRsh) + ">Tackling: " + getLetterGrade(ratLBTkl));
@@ -284,8 +284,8 @@ public class PlayerLB extends Player{
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Tackles: " + (statsTackles + careerTackles) + " >Sacks: " + (statsSacks + careerSacks));
-        pStats.add("Fumbles: " + (statsFumbles + careerFumbles) + " >Interceptions: " + (statsInts + careerInts));
+        pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
+        pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratLBCov));
         pStats.add("Run Stop: " + getLetterGrade(ratLBRsh) + ">Tackling: " + getLetterGrade(ratLBTkl));

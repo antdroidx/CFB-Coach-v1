@@ -24,13 +24,13 @@ public class TeamStrategy {
     }
 
     public TeamStrategy() {
-        stratName = "No Preference";
-        stratDescription = "Will play a normal O/D with no bonus either way, but no penalties either.";
-        rushYdBonus = 0;
-        rushAgBonus = 0;
-        passYdBonus = 0;
-        passAgBonus = 0;
+                stratName = "Balanced";
+                stratDescription = "Balance Game plan";
+                rushYdBonus = 0;
+                rushAgBonus = 0;
+                passYdBonus = 0;
     }
+
 
     public String getStratName() {
         return stratName;
