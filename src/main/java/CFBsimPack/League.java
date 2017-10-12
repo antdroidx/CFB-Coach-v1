@@ -75,7 +75,7 @@ public class League {
     public Game ncg;
     public Game[] bowlGames;
     public int countBG = 18;
-    public Game weeklyScores;
+    public ArrayList<String> weeklyScores;
 
     //User Team
     public Team userTeam;
@@ -627,6 +627,8 @@ public class League {
      * Plays week. If normal week, handled by conferences. If bowl week, handled here.
      */
     public void playWeek() {
+        weeklyScores = new ArrayList<String>();
+        weeklyScores.clear();
         if ( currentWeek <= 12 ) {
             for (int i = 0; i < conferences.size(); ++i) {
                 conferences.get(i).playWeek();
