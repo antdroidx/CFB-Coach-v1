@@ -16,7 +16,7 @@ import java.util.Map;
 public class Team {
 
     public League league;
-
+    public Playbook playbook;
     public String name;
     public String abbr;
     public String conference;
@@ -1646,7 +1646,7 @@ public class Team {
 
         if(!userControlled) {
             teamStratOffNum = getCPUOffense();
-            teamStratDefNum = getCPUDefense();
+            teamStratDefNum = getCPUOffense();
             teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
             teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
         }
@@ -1694,7 +1694,7 @@ public class Team {
      */
     public void updateTeamHistory() {
         String histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                + confChampion + " " + semiFinalWL + natChampWL;
+                + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige;
 
         for (int i = 12; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);
@@ -2990,73 +2990,6 @@ public class Team {
         return sb.toString();
     }
 
-    /**
-     * Generate all the offense team strategies that can be selected
-     * @return array of all the offense team strats
-     */
-    public TeamStrategy[] getTeamStrategiesOff() {
-        TeamStrategy[] ts = new TeamStrategy[3];
-
-        ts[0] = new TeamStrategy("Pro-Style",
-                "Play a normal balanced offense.", 0, 0, 0, 0);
-
-        ts[1] = new TeamStrategy("Smash Mouth",
-                "Play a more conservative offense, running the ball heavily. Passes are more accurate but shorter.", 1, -2, -3, -1);
-
-        ts[2] = new TeamStrategy("Spread",
-                "Offense is heavier on passing than running, spreading ball around to many receivers.", 1, -2, 1, 1);
-
-/*        ts[3] = new TeamStrategy("Zone Read",
-                "QB will run more often to surprise defenses, however likelihood of sacks and fumbles is greater.",  1, -2, -3, -1);*/
-
-
-        return ts;
-    }
-
-    /**
-     * Generate all the defense team strategies that can be selected
-     * @return array of all the defense team strats
-     */
-    public TeamStrategy[] getTeamStrategiesDef() {
-        TeamStrategy[] ts = new TeamStrategy[3];
-
-        ts[0] = new TeamStrategy("46 Defense",
-                "Focus on stopping the run. Will give up more big passing plays but will allow less rushing yards and far less big plays from rushing.", 1, 0, -1, -1);
-
-        ts[1] = new TeamStrategy("4-3",
-                "Will play a normal defense with no bonus either way, but no penalties either.", 0, 0, 0, 0);
-
-        ts[2] = new TeamStrategy("Cover 2",
-                "Focus on stopping the pass. Will give up less yards on catches and will be more likely to intercept passes, " +
-                        "but will allow more rushing yards.", -1, 0, 1, 1);
-
-        return ts;
-    }
-
-    // Generate CPU Strategy
-    public int getCPUOffense() {
-        int OP, OR, OS = 0;
-        OP = getPassProf();
-        OR = getRushProf();
-        if(OP > (OR + 5)) {
-            OS = 0;
-        } else if(OR > (OP + 5)) {
-            OS = 2;
-        } else OS = 1;
-        return OS;
-    }
-
-    public int getCPUDefense() {
-        int DP, DR, DS = 0;
-        DP = getPassProf();
-        DR = getRushProf();
-        if(DR < (DP + 5)) {
-            DS = 0;
-        } else if(DP < (DR + 5)) {
-            DS = 2;
-        } else DS = 1;
-        return DS;
-    }
 
     /**
      * Set the starters for a particular position.
@@ -3214,6 +3147,86 @@ public class Team {
             if (wonGame) playerList.get(i).statsWins++;
         }
     }
+
+    // Generate CPU Strategy
+    //
+    public int getCPUOffense() {
+        int OP, OR, OS = 0;
+        OP = getPassProf();
+        OR = getRushProf();
+        if(OP > (OR + 8)) {
+            return 3;
+        } else if(OP > (OR + 5)) {
+            return 2;
+        } else if(OR > (OR + 5)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int getCPUDefense() {
+        int DP, DR, DS = 0;
+        DP = getPassProf();
+        DR = getRushProf();
+        if(DR > (DP + 8)) {
+            return 3;
+        } else if(DR > (DP + 5)) {
+            return 2;
+        } else if(DP > (DR + 5)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Generate all the offense team strategies that can be selected
+     * @return array of all the offense team strats
+     */
+    public TeamStrategy[] getTeamStrategiesOff() {
+        TeamStrategy[] ts = new TeamStrategy[4];
+
+        ts[0] = new TeamStrategy("Pro-Style",
+                "Play a normal balanced offense.", 1, 0, 0, 1, 1, 0, 0, 1);
+
+        ts[1] = new TeamStrategy("Smash Mouth",
+                "Play a conservative run-heavy offense, setting up the passes as necessary.", 3, 2, -1, 1, 2, 2, 0, 0);
+
+        ts[2] = new TeamStrategy("West Coast",
+                "Passing game dictates the run game with short accurate passes.", 2, 2, 0, 0, 3, 1, -1, 1);
+
+        ts[3] = new TeamStrategy("Spread",
+                "Pass-heavy offense using many receivers with big play potential with risk.", 3, -1, 1, 0, 7, -1, 3, 1);
+
+        return ts;
+    }
+
+
+
+    /**
+     * Generate all the defense team strategies that can be selected
+     * @return array of all the defense team strats
+     */
+    public TeamStrategy[] getTeamStrategiesDef() {
+        TeamStrategy[] ts = new TeamStrategy[4];
+
+        ts[0] = new TeamStrategy("4-3",
+                "Play a standard 4-3 man-to-man balanced defense.", 1, 0, 0, 1, 1, 0 ,0, 1);
+
+        ts[1] = new TeamStrategy("46 Bear Defense",
+                "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from runing.",  2, 0, 2, 1, 1, -1 ,-1, 0);
+
+        ts[2] = new TeamStrategy("Cover 2",
+                "Play a zone defense with safety help in the back against the pass, while LBs cover the run game. ",  2, 0, -1, 1, 3, 1 ,0, 1);
+
+        ts[3] = new TeamStrategy("Cover 3",
+                "Play a zone defense to stop the big plays, but allows soft zone coverage underneath.", 3, 0, -2, 1, 7, 2 ,1, 1);
+
+        return ts;
+    }
+
+
 }
 
 /**
