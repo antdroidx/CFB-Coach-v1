@@ -20,24 +20,33 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="LOGCAT_FORMAT_STRING" value="%2$s/%3$s %4$c/%5$s: %6$s" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Playbook.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/TeamStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/TeamStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,28 +103,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="2131" column="15" selection-start-line="2131" selection-start-column="15" selection-end-line="2131" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#98402#98410#0" expanded="true" />
-                <element signature="e#99794#99816#0" expanded="true" />
-                <marker date="1507794658648" expanded="false" signature="83081:83092" ph=" { " />
-                <marker date="1507794658648" expanded="false" signature="83135:83141" ph=" }" />
-                <marker date="1507794658648" expanded="false" signature="88683:88694" ph=" { " />
-                <marker date="1507794658648" expanded="false" signature="88722:88728" ph=" }" />
-                <marker date="1507794658648" expanded="false" signature="106283:106294" ph=" { " />
-                <marker date="1507794658648" expanded="false" signature="106341:106347" ph=" }" />
-                <marker date="1507794658648" expanded="false" signature="106388:106399" ph=" { " />
-                <marker date="1507794658648" expanded="false" signature="106447:106453" ph=" }" />
-                <marker date="1507794658648" expanded="false" signature="107989:108000" ph=" { " />
-                <marker date="1507794658648" expanded="false" signature="108043:108049" ph=" }" />
-                <marker date="1507794658648" expanded="false" signature="108166:108177" ph=" { " />
-                <marker date="1507794658648" expanded="false" signature="108222:108228" ph=" }" />
-              </folding>
+            <state relative-caret-position="62">
+              <caret line="654" column="23" selection-start-line="654" selection-start-column="23" selection-end-line="654" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,70 +116,20 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-86">
-              <caret line="860" column="48" selection-start-line="860" selection-start-column="41" selection-end-line="860" selection-end-column="48" />
-              <folding>
-                <element signature="e#2715#2754#0" expanded="true" />
-                <element signature="e#2756#2793#0" expanded="true" />
-                <element signature="e#62000#62008#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="918">
+              <caret line="190" column="55" selection-start-line="190" selection-start-column="55" selection-end-line="190" selection-end-column="55" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-188">
-              <caret line="1523" column="202" selection-start-line="1523" selection-start-column="195" selection-end-line="1523" selection-end-column="202" />
+            <state relative-caret-position="5916">
+              <caret line="348" column="0" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="docComment;class#Game#0" expanded="false" />
-                <element signature="docComment;method#Game#0;class#Game#0" expanded="false" />
-                <element signature="method#Game#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#Game#1;class#Game#0" expanded="false" />
-                <element signature="method#Game#1;class#Game#0" expanded="false" />
-                <element signature="docComment;method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-                <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#getGameScoutStr#0;class#Game#0" expanded="false" />
-                <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#getPassYards#0;class#Game#0" expanded="false" />
-                <element signature="method#getPassYards#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#getRushYards#0;class#Game#0" expanded="false" />
-                <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#getHFadv#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#getEventPrefix#0;class#Game#0" expanded="false" />
-                <element signature="method#getEventPrefix#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#convGameTime#0;class#Game#0" expanded="false" />
-                <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#playGame#0;class#Game#0" expanded="false" />
-                <element signature="method#playGame#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#addNewsStory#0;class#Game#0" expanded="false" />
-                <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#runPlay#0;class#Game#0" expanded="false" />
-                <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
-                <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#kickXP#0;class#Game#0" expanded="false" />
-                <element signature="method#kickXP#0;class#Game#0" expanded="false" />
-                <element signature="method#kickOff#0;class#Game#0" expanded="false" />
-                <element signature="method#freeKick#0;class#Game#0" expanded="false" />
-                <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
-                <element signature="method#qbSack#0;class#Game#0" expanded="false" />
-                <element signature="method#safety#0;class#Game#0" expanded="false" />
-                <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
-                <element signature="method#passingTD#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#passCompletion#0;class#Game#0" expanded="false" />
-                <element signature="method#passCompletion#0;class#Game#0" expanded="false" />
-                <element signature="method#passAttempt#0;class#Game#0" expanded="false" />
-                <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#passCompletionTE#0;class#Game#0" expanded="false" />
-                <element signature="method#passCompletionTE#0;class#Game#0" expanded="false" />
-                <element signature="e#98112#98145#0" expanded="false" />
-                <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
-                <element signature="method#rushAttempt#0;class#Game#0" expanded="false" />
-                <element signature="e#99916#99949#0" expanded="false" />
-                <element signature="docComment;method#addPointsQuarter#0;class#Game#0" expanded="false" />
-                <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1249,32 +1192,32 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerK.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Injury.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/TeamStrategy.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Playbook.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="448" />
-    <option name="y" value="7" />
-    <option name="width" value="1293" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -1690,8 +1633,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="448" y="7" width="1293" height="1056" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1091314" sideWeight="0.43429488" order="12" side_tool="false" content_ui="tabs" />
@@ -1700,8 +1643,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.389755" sideWeight="0.42094016" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.47403562" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.4925816" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.47121534" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25213677" sideWeight="0.49498746" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1712,7 +1656,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24893162" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.389755" sideWeight="0.57905984" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.389755" sideWeight="0.57905984" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.12666667" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1723,7 +1667,6 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1781,15 +1724,9 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java</url>
-          <line>655</line>
+          <line>654</line>
           <properties />
           <option name="timeStamp" value="1049" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java</url>
-          <line>694</line>
-          <properties />
-          <option name="timeStamp" value="1069" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1804,7 +1741,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="1070" />
+      <option name="time" value="1213" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -1834,27 +1771,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -2020,13 +1936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/HeadCoach.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/TeamStreak.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -2082,93 +1991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="164" column="20" selection-start-line="164" selection-start-column="20" selection-end-line="164" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3740">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="274" column="28" selection-start-line="274" selection-start-column="28" selection-end-line="274" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="119" column="38" selection-start-line="119" selection-start-column="38" selection-end-line="119" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="94" column="59" selection-start-line="94" selection-start-column="59" selection-end-line="94" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="255" column="87" selection-start-line="255" selection-start-column="87" selection-end-line="255" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4471">
-          <caret line="264" column="85" selection-start-line="264" selection-start-column="85" selection-end-line="264" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="273" column="41" selection-start-line="273" selection-start-column="41" selection-end-line="273" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="205" column="87" selection-start-line="205" selection-start-column="87" selection-end-line="205" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-221">
@@ -2181,23 +2003,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="2346" column="0" selection-start-line="2346" selection-start-column="0" selection-end-line="2350" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4403">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2205,71 +2010,160 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-198">
           <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-          <folding>
-            <element signature="e#1397#1398#0" expanded="true" />
-            <element signature="e#1429#1430#0" expanded="true" />
-            <element signature="e#1472#1473#0" expanded="true" />
-            <element signature="e#1511#1512#0" expanded="true" />
-            <element signature="e#1542#1543#0" expanded="true" />
-            <element signature="e#1572#1573#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
-            <element signature="e#1645#1646#0" expanded="true" />
-            <element signature="e#1681#1682#0" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1748#1749#0" expanded="true" />
-            <element signature="e#1779#1780#0" expanded="true" />
-            <element signature="e#1810#1811#0" expanded="true" />
-            <element signature="e#1841#1842#0" expanded="true" />
-            <element signature="e#1879#1880#0" expanded="true" />
-            <element signature="e#1916#1917#0" expanded="true" />
-            <element signature="e#1953#1954#0" expanded="true" />
-            <element signature="e#1989#1990#0" expanded="true" />
-            <element signature="e#2022#2023#0" expanded="true" />
-            <element signature="e#2054#2055#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="2131" column="15" selection-start-line="2131" selection-start-column="15" selection-end-line="2131" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#98402#98410#0" expanded="true" />
-            <element signature="e#99794#99816#0" expanded="true" />
-            <marker date="1507794658648" expanded="false" signature="83081:83092" ph=" { " />
-            <marker date="1507794658648" expanded="false" signature="83135:83141" ph=" }" />
-            <marker date="1507794658648" expanded="false" signature="88683:88694" ph=" { " />
-            <marker date="1507794658648" expanded="false" signature="88722:88728" ph=" }" />
-            <marker date="1507794658648" expanded="false" signature="106283:106294" ph=" { " />
-            <marker date="1507794658648" expanded="false" signature="106341:106347" ph=" }" />
-            <marker date="1507794658648" expanded="false" signature="106388:106399" ph=" { " />
-            <marker date="1507794658648" expanded="false" signature="106447:106453" ph=" }" />
-            <marker date="1507794658648" expanded="false" signature="107989:108000" ph=" { " />
-            <marker date="1507794658648" expanded="false" signature="108043:108049" ph=" }" />
-            <marker date="1507794658648" expanded="false" signature="108166:108177" ph=" { " />
-            <marker date="1507794658648" expanded="false" signature="108222:108228" ph=" }" />
-          </folding>
+        <state relative-caret-position="408">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="256" column="47" selection-start-line="256" selection-start-column="47" selection-end-line="256" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="256" column="30" selection-start-line="256" selection-start-column="30" selection-end-line="256" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/content/res/TypedArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-592">
+          <caret line="774" column="0" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="275" column="28" selection-start-line="275" selection-start-column="28" selection-end-line="275" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="248" column="81" selection-start-line="248" selection-start-column="81" selection-end-line="248" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="411" column="27" selection-start-line="411" selection-start-column="27" selection-end-line="411" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="511" column="29" selection-start-line="511" selection-start-column="29" selection-end-line="511" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4776">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1206">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="119" column="40" selection-start-line="119" selection-start-column="40" selection-end-line="119" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1684">
+          <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="86" column="25" selection-start-line="86" selection-start-column="25" selection-end-line="86" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/HeadCoach.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="654" column="23" selection-start-line="654" selection-start-column="23" selection-end-line="654" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-86">
-          <caret line="860" column="48" selection-start-line="860" selection-start-column="41" selection-end-line="860" selection-end-column="48" />
-          <folding>
-            <element signature="e#2715#2754#0" expanded="true" />
-            <element signature="e#2756#2793#0" expanded="true" />
-            <element signature="e#62000#62008#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="918">
+          <caret line="190" column="55" selection-start-line="190" selection-start-column="55" selection-end-line="190" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-188">
-          <caret line="1523" column="202" selection-start-line="1523" selection-start-column="195" selection-end-line="1523" selection-end-column="202" />
+        <state relative-caret-position="164">
+          <caret line="764" column="16" selection-start-line="764" selection-start-column="16" selection-end-line="764" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#Game#0" expanded="false" />
@@ -2278,7 +2172,6 @@
             <element signature="docComment;method#Game#1;class#Game#0" expanded="false" />
             <element signature="method#Game#1;class#Game#0" expanded="false" />
             <element signature="docComment;method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#getGameScoutStr#0;class#Game#0" expanded="false" />
             <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#getPassYards#0;class#Game#0" expanded="false" />
@@ -2286,25 +2179,22 @@
             <element signature="docComment;method#getRushYards#0;class#Game#0" expanded="false" />
             <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#getHFadv#0;class#Game#0" expanded="false" />
+            <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#getEventPrefix#0;class#Game#0" expanded="false" />
             <element signature="method#getEventPrefix#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#convGameTime#0;class#Game#0" expanded="false" />
             <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="method#playGame#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#addNewsStory#0;class#Game#0" expanded="false" />
             <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
+            <element signature="e#37715#37741#0" expanded="false" />
             <element signature="docComment;method#runPlay#0;class#Game#0" expanded="false" />
+            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
             <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
-            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
-            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
-            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#qbSack#0;class#Game#0" expanded="false" />
-            <element signature="method#safety#0;class#Game#0" expanded="false" />
-            <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
+            <element signature="docComment;method#passingPlay#0;class#Game#0" expanded="false" />
+            <element signature="docComment;method#passingPlayWR#0;class#Game#0" expanded="false" />
+            <element signature="method#RushPlayRB#0;class#Game#0" expanded="false" />
+            <element signature="method#RushPlayQB#0;class#Game#0" expanded="false" />
             <element signature="method#passingTD#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#passCompletion#0;class#Game#0" expanded="false" />
             <element signature="method#passCompletion#0;class#Game#0" expanded="false" />
@@ -2312,12 +2202,22 @@
             <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
             <element signature="docComment;method#passCompletionTE#0;class#Game#0" expanded="false" />
             <element signature="method#passCompletionTE#0;class#Game#0" expanded="false" />
-            <element signature="e#98112#98145#0" expanded="false" />
+            <element signature="e#104719#104752#0" expanded="false" />
             <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
-            <element signature="method#rushAttempt#0;class#Game#0" expanded="false" />
-            <element signature="e#99916#99949#0" expanded="false" />
+            <element signature="e#106381#106414#0" expanded="false" />
+            <element signature="e#106909#106942#0" expanded="false" />
             <element signature="docComment;method#addPointsQuarter#0;class#Game#0" expanded="false" />
             <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5916">
+          <caret line="348" column="0" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

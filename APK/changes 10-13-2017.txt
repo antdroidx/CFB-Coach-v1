@@ -1,0 +1,5 @@
+New playbook option: Zone Read
+Fixed defensive stats
+New QB, TE, LB attribute SPEED.
+New QB stats - Rushing, Rushing TDs, Fumbles
+League Records fixes

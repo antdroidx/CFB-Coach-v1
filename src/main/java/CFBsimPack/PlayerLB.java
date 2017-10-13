@@ -24,12 +24,14 @@ public class PlayerLB extends Player{
     //OLcov affects how strong he is against OL
     
     //Coverage against TEs
-    public int ratLBCov;
+    public int ratCoverage;
     //OLBkR affects how well he defends running plays
-    public int ratLBRsh;
+    public int ratRunStop;
     //LB Tackle Ability
-    public int ratLBTkl;
-    //public int ratCBSpd;
+    public int ratTackle;
+    //public int ratSpeed;
+    public int ratSpeed;
+
 
     //Stats
     public int statsTackles;
@@ -44,20 +46,20 @@ public class PlayerLB extends Player{
 
     //public Vector ratingsVector;
 
-    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl/*, int spd*/, boolean rs, int dur ) {
+    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, int spd, boolean rs, int dur ) {
         team = t;
         name = nm;
         year = yr;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (cov + 2*rsh + 2*tkl)/5;
+        ratOvr = (cov + 2*rsh + 2*tkl + spd)/6;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
-        ratLBCov = cov;
-        ratLBRsh = rsh;
-        ratLBTkl = tkl;
-        //ratCBSpd = spd;
+        ratCoverage = cov;
+        ratRunStop = rsh;
+        ratTackle = tkl;
+        ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "LB";
@@ -69,10 +71,10 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratLBCov);
-        ratingsVector.addElement(ratLBRsh);
-        ratingsVector.addElement(ratLBTkl);
-        //ratingsVector.addElement(ratCBSpd);
+        ratingsVector.addElement(ratCoverage);
+        ratingsVector.addElement(ratRunStop);
+        ratingsVector.addElement(ratTackle);
+        ratingsVector.addElement(ratSpeed);
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -96,7 +98,7 @@ public class PlayerLB extends Player{
         careerInts = 0;
     }
 
-    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl/*, int spd*/, boolean rs, int dur,
+    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, int spd, boolean rs, int dur,
                      int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins ) {
         team = t;
         name = nm;
@@ -107,10 +109,10 @@ public class PlayerLB extends Player{
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
-        ratLBCov = cov;
-        ratLBRsh = rsh;
-        ratLBTkl = tkl;
-        //ratCBSpd = spd;
+        ratCoverage = cov;
+        ratRunStop = rsh;
+        ratTackle = tkl;
+        ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "LB";
@@ -122,10 +124,10 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratLBCov);
-        ratingsVector.addElement(ratLBRsh);
-        ratingsVector.addElement(ratLBTkl);
-        //ratingsVector.addElement(ratCBSpd);
+        ratingsVector.addElement(ratCoverage);
+        ratingsVector.addElement(ratRunStop);
+        ratingsVector.addElement(ratTackle);
+        ratingsVector.addElement(ratSpeed);
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -159,11 +161,11 @@ public class PlayerLB extends Player{
         ratPot = (int) (50 + 50*Math.random());
         ratFootIQ = (int) (50 + 50*Math.random());
         ratDur = (int) (50 + 50*Math.random());
-        ratLBCov = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratLBRsh = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratLBTkl = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        //ratCBSpd = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratOvr = (ratLBCov + ratLBRsh*2 + ratLBTkl*2)/5;
+        ratCoverage = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratRunStop = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratTackle = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratSpeed = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratOvr = (ratCoverage + ratRunStop *2 + ratTackle *2 + ratSpeed)/6;
         position = "LB";
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/6) + 50 + (int)(Math.random()*100) - 50;
@@ -173,10 +175,10 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratLBCov);
-        ratingsVector.addElement(ratLBRsh);
-        ratingsVector.addElement(ratLBTkl);
-        //ratingsVector.addElement(ratCBSpd);
+        ratingsVector.addElement(ratCoverage);
+        ratingsVector.addElement(ratRunStop);
+        ratingsVector.addElement(ratTackle);
+        ratingsVector.addElement(ratSpeed);
 
 
         wonHeisman = false;
@@ -203,7 +205,7 @@ public class PlayerLB extends Player{
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*35 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (int)(4*team.teamOppYards) - (int)(5*team.teamOppPoints);
+        return statsTackles*40 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (int)(4*team.teamOppYards) - (int)(5*team.teamOppPoints);
     }
 
     public Vector getStatsVector() {
@@ -221,10 +223,10 @@ public class PlayerLB extends Player{
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratLBCov);
-        ratingsVector.addElement(ratLBRsh);
-        ratingsVector.addElement(ratLBTkl);
-        //ratingsVector.addElement(ratCBSpd);
+        ratingsVector.addElement(ratCoverage);
+        ratingsVector.addElement(ratRunStop);
+        ratingsVector.addElement(ratTackle);
+        ratingsVector.addElement(ratSpeed);
         return ratingsVector;
     }
 
@@ -237,18 +239,18 @@ public class PlayerLB extends Player{
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
 
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratLBCov += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratLBRsh += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratLBTkl += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        //ratCBSpd += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratCoverage += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratRunStop += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratTackle += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         if ( Math.random()*100 < ratPot ) {
             //breakthrough
-            ratLBCov += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratLBRsh += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratLBTkl += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            //ratCBSpd += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratCoverage += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratRunStop += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratTackle += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
         }
-        ratOvr = (ratLBCov + ratLBRsh*2 + ratLBTkl*2)/5;
+        ratOvr = (ratCoverage + ratRunStop *2 + ratTackle *2 + ratSpeed)/6;
         ratImprovement = ratOvr - oldOvr;
 
         careerGamesPlayed += gamesPlayed;
@@ -275,8 +277,9 @@ public class PlayerLB extends Player{
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratLBCov));
-        pStats.add("Run Stop: " + getLetterGrade(ratLBRsh) + ">Tackling: " + getLetterGrade(ratLBTkl));
+        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
+        pStats.add("Run Stop: " + getLetterGrade(ratRunStop) + ">Tackling: " + getLetterGrade(ratTackle));
+        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
         pStats.add(" > ");
         return pStats;
     }
@@ -287,8 +290,9 @@ public class PlayerLB extends Player{
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratLBCov));
-        pStats.add("Run Stop: " + getLetterGrade(ratLBRsh) + ">Tackling: " + getLetterGrade(ratLBTkl));
+        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
+        pStats.add("Run Stop: " + getLetterGrade(ratRunStop) + ">Tackling: " + getLetterGrade(ratTackle));
+        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;
@@ -308,7 +312,7 @@ public class PlayerLB extends Player{
     public String getInfoForLineup() {
         if (injury != null) return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " " + injury.toString();
         return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " (" +
-                getLetterGrade(ratLBCov) + ", " + getLetterGrade(ratLBRsh) + ", " + getLetterGrade(ratLBTkl) + ")";
+                getLetterGrade(ratCoverage) + ", " + getLetterGrade(ratRunStop) + ", " + getLetterGrade(ratTackle) +", " + getLetterGrade(ratSpeed) + ")";
     }
 
 }
