@@ -17,18 +17,18 @@ public class PlayerRB extends Player {
     //FootIQ, affects how smart he plays
     //public int ratFootIQ;
     //RushPow affects how consistenly he can get past line of scrimmage
-    public int ratRushPow;
+    public int ratRushPower;
     //RushSpd affects how long he can run
-    public int ratRushSpd;
+    public int ratSpeed;
     //RushEva affects how easily he can dodge tackles
-    public int ratRushEva;
-    
+    public int ratEvasion;
+
     //public Vector ratingsVector;
-    
+
     //Stats
     public int statsRushAtt;
     public int statsRushYards;
-    public int statsTD;
+    public int statsRushTD;
     public int statsFumbles;
 
     public int careerRushAtt;
@@ -47,9 +47,9 @@ public class PlayerRB extends Player {
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
-        ratRushPow = pow;
-        ratRushSpd = spd;
-        ratRushEva = eva;
+        ratRushPower = pow;
+        ratSpeed = spd;
+        ratEvasion = eva;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
@@ -60,13 +60,13 @@ public class PlayerRB extends Player {
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratRushPow);
-        ratingsVector.addElement(ratRushSpd);
-        ratingsVector.addElement(ratRushEva);
+        ratingsVector.addElement(ratRushPower);
+        ratingsVector.addElement(ratSpeed);
+        ratingsVector.addElement(ratEvasion);
 
         statsRushAtt = 0;
         statsRushYards = 0;
-        statsTD = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
         wonHeisman = false;
         wonAllAmerican = false;
@@ -98,26 +98,26 @@ public class PlayerRB extends Player {
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
-        ratRushPow = pow;
-        ratRushSpd = spd;
-        ratRushEva = eva;
+        ratRushPower = pow;
+        ratSpeed = spd;
+        ratEvasion = eva;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/2) + 70 + (int)(Math.random()*100) - 50;
-        
+
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratRushPow);
-        ratingsVector.addElement(ratRushSpd);
-        ratingsVector.addElement(ratRushEva);
-        
+        ratingsVector.addElement(ratRushPower);
+        ratingsVector.addElement(ratSpeed);
+        ratingsVector.addElement(ratEvasion);
+
         statsRushAtt = 0;
         statsRushYards = 0;
-        statsTD = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
         wonHeisman = false;
         wonAllAmerican = false;
@@ -136,7 +136,7 @@ public class PlayerRB extends Player {
 
         position = "RB";
     }
-    
+
     public PlayerRB( String nm, int yr, int stars, Team t ) {
         name = nm;
         year = yr;
@@ -146,25 +146,25 @@ public class PlayerRB extends Player {
         ratPot = (int) (50 + 50*Math.random());
         ratFootIQ = (int) (50 + 50*Math.random());
         ratDur = (int) (50 + 50*Math.random());
-        ratRushPow = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratRushSpd = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratRushEva = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratOvr = (ratRushPow + ratRushSpd + ratRushEva)/3;
+        ratRushPower = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratSpeed = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratEvasion = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratOvr = (ratRushPower + ratSpeed + ratEvasion)/3;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/2) + 70 + (int)(Math.random()*100) - 50;
-        
+
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratRushPow);
-        ratingsVector.addElement(ratRushSpd);
-        ratingsVector.addElement(ratRushEva);
+        ratingsVector.addElement(ratRushPower);
+        ratingsVector.addElement(ratSpeed);
+        ratingsVector.addElement(ratEvasion);
 
         statsRushAtt = 0;
         statsRushYards = 0;
-        statsTD = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
         wonHeisman = false;
         wonAllAmerican = false;
@@ -183,29 +183,29 @@ public class PlayerRB extends Player {
 
         position = "RB";
     }
-    
+
     public Vector getStatsVector() {
         Vector v = new Vector(5);
         v.add(statsRushAtt);
         v.add(statsRushYards);
-        v.add(statsTD);
+        v.add(statsRushTD);
         v.add(statsFumbles);
         v.add((float)((int)((float)statsRushYards/statsRushAtt*100))/100);
         return v;
     }
-    
+
     public Vector getRatingsVector() {
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
         ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
         ratingsVector.addElement(ratPot);
         ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratRushPow);
-        ratingsVector.addElement(ratRushSpd);
-        ratingsVector.addElement(ratRushEva);
+        ratingsVector.addElement(ratRushPower);
+        ratingsVector.addElement(ratSpeed);
+        ratingsVector.addElement(ratEvasion);
         return ratingsVector;
     }
-    
+
     @Override
     public void advanceSeason() {
         year++;
@@ -215,21 +215,21 @@ public class PlayerRB extends Player {
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
 
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratRushPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratRushSpd += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratRushEva += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratRushPower += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratEvasion += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         if ( Math.random()*100 < ratPot ) {
             //breakthrough
-            ratRushPow += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratRushSpd += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratRushEva += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratRushPower += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratEvasion += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
         }
-        ratOvr = (ratRushPow + ratRushSpd + ratRushEva)/3;
+        ratOvr = (ratRushPower + ratSpeed + ratEvasion)/3;
         ratImprovement = ratOvr - oldOvr;
         //reset stats (keep career stats?)
         careerRushAtt += statsRushAtt;
         careerRushYards += statsRushYards;
-        careerTDs += statsTD;
+        careerTDs += statsRushTD;
         careerFumbles += statsFumbles;
         careerGamesPlayed += gamesPlayed;
         careerWins += statsWins;
@@ -240,24 +240,24 @@ public class PlayerRB extends Player {
 
         statsRushAtt = 0;
         statsRushYards = 0;
-        statsTD = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
     }
-    
+
     @Override
     public int getHeismanScore() {
-        return statsTD * 105 - statsFumbles * 80 + (int)(statsRushYards * 2.5);
+        return statsRushTD * 135 - statsFumbles * 80 + (int)(statsRushYards * 2.5);
     }
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + statsTD + ">Fumbles: " + statsFumbles);
+        pStats.add("TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + ((double)(10*statsRushYards/(statsRushAtt+1))/10) + " yds");
         pStats.add("Yds/Game: " + (statsRushYards/getGamesPlayed()) + " yds/g>Rush Att: " + statsRushAtt);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Rush Power: " + getLetterGrade(ratRushPow));
-        pStats.add("Rush Speed: " + getLetterGrade(ratRushSpd) + ">Evasion: " + getLetterGrade(ratRushEva));
+        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Rush Power: " + getLetterGrade(ratRushPower));
+        pStats.add("Rush Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
         pStats.add(" > ");
         return pStats;
     }
@@ -265,12 +265,12 @@ public class PlayerRB extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + statsTD + ">Fumbles: " + statsFumbles);
+        pStats.add("TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + ((double)(10*statsRushYards/(statsRushAtt+1))/10) + " yds");
         pStats.add("Yds/Game: " + (statsRushYards/getGamesPlayed()) + " yds/g>Rush Att: " + statsRushAtt);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Rush Power: " + getLetterGrade(ratRushPow));
-        pStats.add("Rush Speed: " + getLetterGrade(ratRushSpd) + ">Evasion: " + getLetterGrade(ratRushEva));
+        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Rush Power: " + getLetterGrade(ratRushPower));
+        pStats.add("Rush Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;
@@ -279,7 +279,7 @@ public class PlayerRB extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + (statsTD+careerTDs) + ">Fumbles: " + (statsFumbles+careerFumbles));
+        pStats.add("TDs: " + (statsRushTD +careerTDs) + ">Fumbles: " + (statsFumbles+careerFumbles));
         pStats.add("Rush Yards: " + (statsRushYards+careerRushYards) + " yds>Yards/Att: " + ((double)(10*(statsRushYards+careerRushYards)/(statsRushAtt+careerRushAtt+1))/10) + " yds");
         pStats.add("Yds/Game: " + ((statsRushYards+careerRushYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Rush Att: " + (statsRushAtt+careerRushAtt));
         pStats.addAll(super.getCareerStatsList());
@@ -290,7 +290,7 @@ public class PlayerRB extends Player {
     public String getInfoForLineup() {
         if (injury != null) return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " " + injury.toString();
         return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " (" +
-                getLetterGrade(ratRushPow) + ", " + getLetterGrade(ratRushSpd) + ", " + getLetterGrade(ratRushEva) + ")";
+                getLetterGrade(ratRushPower) + ", " + getLetterGrade(ratSpeed) + ", " + getLetterGrade(ratEvasion) + ")";
     }
     
 }

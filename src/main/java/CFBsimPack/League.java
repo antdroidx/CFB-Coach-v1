@@ -3,22 +3,16 @@ package CFBsimPack;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
-
-import antdroid.cfbcoach.MainActivity;
 
 /**
  * League class. Has 6 conferences of 10 teams each.
@@ -153,7 +147,7 @@ public class League {
         conferences.get(0).confTeams.add( new Team( "Florida St", "FSU", "ACC", this, 70, "MIA" ));
         conferences.get(0).confTeams.add( new Team( "Georgia Tech", "GT", "ACC", this, 48, "NCST" ));
         conferences.get(0).confTeams.add( new Team( "Louisville", "LOUI", "ACC", this, 75, "PITT" ));
-        conferences.get(0).confTeams.add( new Team( "Miami", "MIA", "ACC", this, 73, "FSU" ));
+        conferences.get(0).confTeams.add( new Team( "Miami", "MIA", "ACC", this, 74, "FSU" ));
         conferences.get(0).confTeams.add( new Team( "North Carolina", "UNC", "ACC", this, 47, "DUKE" ));
         conferences.get(0).confTeams.add( new Team( "NC State", "NCST", "ACC", this, 60, "GT" ));
         conferences.get(0).confTeams.add( new Team( "Pittsburgh", "PITT", "ACC", this, 65, "LOUI" ));
@@ -163,7 +157,7 @@ public class League {
 
         //American - done x 12
         conferences.get(1).confTeams.add( new Team( "Boston College", "BC", "American", this, 38, "TEM" ));
-        conferences.get(1).confTeams.add( new Team( "Central Florida", "UCF", "American", this, 60, "USF" ));
+        conferences.get(1).confTeams.add( new Team( "Central Florida", "UCF", "American", this, 63, "USF" ));
         conferences.get(1).confTeams.add( new Team( "Cinncinati", "CINN", "American", this, 46, "MEMP" ));
         conferences.get(1).confTeams.add( new Team( "Maryland", "MARY", "American", this, 49, "RUT" ));
         conferences.get(1).confTeams.add( new Team( "Memphis", "MEMP", "American", this, 67, "CINN" ));
@@ -173,15 +167,15 @@ public class League {
         conferences.get(1).confTeams.add( new Team( "Syracuse", "SYR", "American", this, 47, "UCON" ));
         conferences.get(1).confTeams.add( new Team( "Temple", "TEM", "American", this, 46, "BC" ));
         conferences.get(1).confTeams.add( new Team( "UConn", "UCON", "American", this, 37, "SYR" ));
-        conferences.get(1).confTeams.add( new Team( "West Virginia", "WVU", "American", this, 71, "ND" ));
+        conferences.get(1).confTeams.add( new Team( "West Virginia", "WVU", "American", this, 72, "ND" ));
 
         //Big Ten - done x 12
         conferences.get(2).confTeams.add( new Team( "Illinois", "ILL", "Big Ten", this, 45, "IND" ));
         conferences.get(2).confTeams.add( new Team( "Indiana", "IND", "Big Ten", this, 42, "ILL" ));
         conferences.get(2).confTeams.add( new Team( "Iowa", "IOW", "Big Ten", this, 63, "NEB" ));
         conferences.get(2).confTeams.add( new Team( "Michigan", "MIC", "Big Ten", this, 85, "OSU" ));
-        conferences.get(2).confTeams.add( new Team( "Michigan St", "MSU", "Big Ten", this, 65, "PSU" ));
-        conferences.get(2).confTeams.add( new Team( "Minnesota", "MIN", "Big Ten", this, 60, "WIS" ));
+        conferences.get(2).confTeams.add( new Team( "Michigan St", "MSU", "Big Ten", this, 70, "PSU" ));
+        conferences.get(2).confTeams.add( new Team( "Minnesota", "MIN", "Big Ten", this, 62, "WIS" ));
         conferences.get(2).confTeams.add( new Team( "Nebraska", "NEB", "Big Ten", this, 72, "IOW" ));
         conferences.get(2).confTeams.add( new Team( "Northwestern", "NWU", "Big Ten", this, 55, "PUR" ));
         conferences.get(2).confTeams.add( new Team( "Ohio State", "OSU", "Big Ten", this, 85, "MIC" ));
@@ -198,10 +192,10 @@ public class League {
         conferences.get(3).confTeams.add( new Team( "Kansas St", "KSU", "Big 12", this, 72, "KAN" ));
         conferences.get(3).confTeams.add( new Team( "Oklahoma", "OKL", "Big 12", this, 87, "TEX" ));
         conferences.get(3).confTeams.add( new Team( "Oklahoma St", "OKST", "Big 12", this, 74, "TXAM" ));
-        conferences.get(3).confTeams.add( new Team( "Texas", "TEX", "Big 12", this, 65, "OKL" ));
+        conferences.get(3).confTeams.add( new Team( "Texas", "TEX", "Big 12", this, 67, "OKL" ));
         conferences.get(3).confTeams.add( new Team( "Texas AM", "TXAM", "Big 12", this, 71, "OKST" ));
         conferences.get(3).confTeams.add( new Team( "TCU", "TCU", "Big 12", this, 75, "BAY" ));
-        conferences.get(3).confTeams.add( new Team( "Missouri", "MIZ", "Big 12", this, 52, "ISU" ));
+        conferences.get(3).confTeams.add( new Team( "Missouri", "MIZ", "Big 12", this, 50, "ISU" ));
 
         //Conf USA x 12
         conferences.get(4).confTeams.add( new Team( "Army", "ARMY", "Conf USA", this, 40, "NAVY" ));
@@ -246,9 +240,9 @@ public class League {
         conferences.get(6).confTeams.add( new Team( "Wyoming", "WYOM", "Mt West", this, 49, "CSU" ));
 
         //Pac-12 - done x 12
-        conferences.get(7).confTeams.add( new Team( "Arizona", "ARIZ", "Pac-12", this, 49, "ASU" ));
-        conferences.get(7).confTeams.add( new Team( "Arizona State", "ASU", "Pac-12", this, 58, "ARIZ" ));
-        conferences.get(7).confTeams.add( new Team( "California", "CAL", "Pac-12", this, 58, "STAN" ));
+        conferences.get(7).confTeams.add( new Team( "Arizona", "ARIZ", "Pac-12", this, 47, "ASU" ));
+        conferences.get(7).confTeams.add( new Team( "Arizona State", "ASU", "Pac-12", this, 57, "ARIZ" ));
+        conferences.get(7).confTeams.add( new Team( "California", "CAL", "Pac-12", this, 57, "STAN" ));
         conferences.get(7).confTeams.add( new Team( "Colorado", "COL", "Pac-12", this, 68, "UTAH" ));
         conferences.get(7).confTeams.add( new Team( "Oregon", "OREG", "Pac-12", this, 71, "ORST" ));
         conferences.get(7).confTeams.add( new Team( "Oregon State", "ORST", "Pac-12", this, 40, "OREG" ));
@@ -256,8 +250,8 @@ public class League {
         conferences.get(7).confTeams.add( new Team( "UCLA", "UCLA", "Pac-12", this, 67, "USC" ));
         conferences.get(7).confTeams.add( new Team( "USC", "USC", "Pac-12", this, 83, "UCLA" ));
         conferences.get(7).confTeams.add( new Team( "Washington", "WASH", "Pac-12", this, 83, "WSU" ));
-        conferences.get(7).confTeams.add( new Team( "Wash State", "WSU", "Pac-12", this, 73, "WASH" ));
-        conferences.get(7).confTeams.add( new Team( "Utah", "UTAH", "Pac-12", this, 71, "COL" ));
+        conferences.get(7).confTeams.add( new Team( "Wash State", "WSU", "Pac-12", this, 74, "WASH" ));
+        conferences.get(7).confTeams.add( new Team( "Utah", "UTAH", "Pac-12", this, 70, "COL" ));
 
         //SEC - done x 12
         conferences.get(8).confTeams.add( new Team( "Alabama", "BAMA", "SEC", this, 95, "AUB" ));
@@ -293,6 +287,10 @@ public class League {
         for (int i = 0; i < conferences.size(); ++i ) {
             for (int j = 0; j < conferences.get(i).confTeams.size(); ++j ) {
                 teamList.add( conferences.get(i).confTeams.get(j) );
+                teamList.get(i).teamStratOffNum = teamList.get(i).getCPUOffense();
+                teamList.get(i).teamStratDefNum = teamList.get(i).getCPUDefense();
+                teamList.get(i).teamStratOff = teamList.get(i).getTeamStrategiesOff()[teamList.get(i).teamStratOffNum];
+                teamList.get(i).teamStratDef = teamList.get(i).getTeamStrategiesDef()[teamList.get(i).teamStratDefNum];
             }
         }
 
@@ -315,6 +313,7 @@ public class League {
         for (int i = 0; i < conferences.size(); ++i ) {
             conferences.get(i).insertOOCSchedule();
         }
+
     }
 
     /* LOAD A SAVE FILE
@@ -1389,11 +1388,12 @@ public class League {
                 if (p instanceof PlayerQB) {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.name + " [" + pqb.getYrStr() +
-                            "]\n \t\t(" + pqb.statsTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds)\n\n";
+                            "]\n \t\t(" + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
+                            + pqb.statsRushTD + " TDs, " + pqb.statsFumbles + " Fum, " + pqb.statsRushYards + " Yds)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.name + " [" + prb.getYrStr() +
-                            "]\n \t\t(" + prb.statsTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
+                            "]\n \t\t(" + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
                 } else if (p instanceof PlayerWR) {
                     PlayerWR pwr = (PlayerWR) p;
                     heismanTop5 += " WR " + pwr.name + " [" + pwr.getYrStr() +
@@ -1401,7 +1401,7 @@ public class League {
                 } else if (p instanceof PlayerTE) {
                     PlayerTE pte = (PlayerTE) p;
                     heismanTop5 += " WR " + pte.name + " [" + pte.getYrStr() +
-                            "]\n \t\t(" + pte.statsTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
+                            "]\n \t\t(" + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
                     heismanTop5 += " DL " + pdl.name + " [" + pdl.getYrStr() +
@@ -1445,11 +1445,12 @@ public class League {
                 if (p instanceof PlayerQB) {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
-                            + pqb.statsTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds)\n\n";
+                            + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
+                            + pqb.statsRushTD + " TDs, " + pqb.statsFumbles + " Fum, " + pqb.statsRushYards + " Yds)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
-                            + prb.statsTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
+                            + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
                 } else if (p instanceof PlayerWR) {
                     PlayerWR pwr = (PlayerWR) p;
                     heismanTop5 += " WR " + pwr.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1457,7 +1458,7 @@ public class League {
                 } else if (p instanceof PlayerTE) {
                     PlayerTE pte = (PlayerTE) p;
                     heismanTop5 += " TE " + pte.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
-                            + pte.statsTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
+                            + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
                     heismanTop5 += " DL " + pdl.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1484,8 +1485,8 @@ public class League {
                     PlayerQB heisQB = (PlayerQB) heisman;
                     heismanWinnerStr = "Congratulations to the Player of the Year, " + heisQB.team.abbr +
                             " QB " + heisQB.name + " [" + heisman.getYrStr() + "], who had " +
-                            heisQB.statsTD + " TDs, just " + heisQB.statsInt + " interceptions, and " +
-                            heisQB.statsPassYards + " passing yards. He led " + heisQB.team.name +
+                            heisQB.statsPassTD + " TDs, just " + heisQB.statsInt + " interceptions, and " +
+                            heisQB.statsPassYards + " passing yards. In addition, he ran for " + heisQB.statsRushYards + "yards and scored " + heisQB.statsRushTD + " touchdowns. He led " + heisQB.team.name +
                             " to a " + heisQB.team.wins + "-" + heisQB.team.losses + " record and a #" + heisQB.team.rankTeamPollScore +
                             " poll ranking.";
                     heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
@@ -1494,7 +1495,7 @@ public class League {
                     PlayerRB heisRB = (PlayerRB) heisman;
                     heismanWinnerStr = "Congratulations to the Player of the Year, " + heisRB.team.abbr +
                             " RB " + heisRB.name + " [" + heisman.getYrStr() + "], who had " +
-                            heisRB.statsTD + " TDs, just " + heisRB.statsFumbles + " fumbles, and " +
+                            heisRB.statsRushTD + " TDs, just " + heisRB.statsFumbles + " fumbles, and " +
                             heisRB.statsRushYards + " rushing yards. He led " + heisRB.team.name +
                             " to a " + heisRB.team.wins + "-" + heisRB.team.losses + " record and a #" + heisRB.team.rankTeamPollScore +
                             " poll ranking.";
@@ -1514,7 +1515,7 @@ public class League {
                     PlayerTE heisTE = (PlayerTE) heisman;
                     heismanWinnerStr = "Congratulations to the Player of the Year, " + heisTE.team.abbr +
                             " TE " + heisTE.name + " [" + heisman.getYrStr() + "], who had " +
-                            heisTE.statsTD + " TDs, just " + heisTE.statsFumbles + " fumbles, and " +
+                            heisTE.statsRecTD + " TDs, just " + heisTE.statsFumbles + " fumbles, and " +
                             heisTE.statsRecYards + " receiving yards. He led " + heisTE.team.name +
                             " to a " + heisTE.team.wins + "-" + heisTE.team.losses + " record and a #" + heisTE.team.rankTeamPollScore +
                             " poll ranking.";
@@ -1667,12 +1668,12 @@ public class League {
             if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 allAmerican.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
-                        pqb.statsTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
             }
             else if (p instanceof PlayerRB) {
                 PlayerRB prb = (PlayerRB) p;
                 allAmerican.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
-                        prb.statsTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
+                        prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
             }
             else if (p instanceof PlayerWR) {
                 PlayerWR pwr = (PlayerWR) p;
@@ -1682,7 +1683,7 @@ public class League {
             else if (p instanceof PlayerTE) {
                 PlayerTE pte = (PlayerTE) p;
                 allAmerican.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
-                        pte.statsTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
+                        pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
             }
             else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
@@ -1733,12 +1734,12 @@ public class League {
             if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 sb.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
-                        pqb.statsTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
             }
             else if (p instanceof PlayerRB) {
                 PlayerRB prb = (PlayerRB) p;
                 sb.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
-                        prb.statsTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
+                        prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
             }
             else if (p instanceof PlayerWR) {
                 PlayerWR pwr = (PlayerWR) p;
@@ -1748,7 +1749,7 @@ public class League {
             else if (p instanceof PlayerTE) {
                 PlayerTE pte = (PlayerTE) p;
                 sb.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
-                        pte.statsTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
+                        pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
             }
             else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;

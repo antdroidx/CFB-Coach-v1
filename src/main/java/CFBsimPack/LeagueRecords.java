@@ -47,10 +47,10 @@ public class LeagueRecords {
     public final String[] recordsList = {"TEAM","Team PPG","Team Opp PPG","Team YPG","Team Opp YPG","Team TO Diff",
             "SEASON: OFFENSE","Pass Yards","Pass TDs","Interceptions","Comp Percent",
             "Rush Yards","Rush TDs","Rush Fumbles",
-            "Rec Yards","Rec TDs","Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions",
+            "Rec Yards","Rec TDs","Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Def Interceptions",
             "CAREER: OFFENSE","Career Pass Yards","Career Pass TDs","Career Interceptions",
             "Career Rush Yards","Career Rush TDs","Career Rush Fumbles",
-            "Career Rec Yards","Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions"};
+            "Career Rec Yards","Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Def Interceptions"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<String, Record>();
@@ -84,7 +84,7 @@ public class LeagueRecords {
         records.put("Tackles", new Record(0, "XXX", 0));
         records.put("Sacks", new Record(0, "XXX", 0));
         records.put("Fumbles Recovered", new Record(0, "XXX", 0));
-        records.put("Interceptions", new Record(0, "XXX", 0));
+        records.put("Def Interceptions", new Record(0, "XXX", 0));
         records.put("CAREER: OFFENSE", null);
         records.put("Career Pass Yards", new Record(0, "XXX", 0));
         records.put("Career Pass TDs", new Record(0, "XXX", 0));
@@ -98,7 +98,7 @@ public class LeagueRecords {
         records.put("Career Tackles", new Record(0, "XXX", 0));
         records.put("Career Sacks", new Record(0, "XXX", 0));
         records.put("Career Fumbles Rec", new Record(0, "XXX", 0));
-        records.put("Career Interceptions", new Record(0, "XXX", 0));
+        records.put("Career Def Interceptions", new Record(0, "XXX", 0));
 
     }
 
