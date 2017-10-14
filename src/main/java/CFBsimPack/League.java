@@ -302,7 +302,7 @@ public class League {
         randgm = rand.nextInt((max - min)+1) + min;
         int maxc = 1;
         int minc = 0;
-        randconf = rand.nextInt((maxc - minc)+1) + minc;
+        randconf = 0; //rand.nextInt((maxc - minc)+1) + minc;
 
         for (int i = 0; i < conferences.size(); ++i ) {
             conferences.get(i).setUpSchedule();
@@ -554,7 +554,7 @@ public class League {
             randgm = rand.nextInt((max - min)+1) + min;
             int maxc = 1;
             int minc = 0;
-            randconf = rand.nextInt((maxc - minc)+1) + minc;
+            randconf = 0; //rand.nextInt((maxc - minc)+1) + minc;
 
             for (int i = 0; i < conferences.size(); ++i ) {
                 conferences.get(i).setUpOOCSchedule();
@@ -572,7 +572,7 @@ public class League {
                     "on your mind, or just a winning season, good luck!");
 
 
-            if (saveBless != null) {
+            if (saveBless != null || saveBless2 != null || saveBless3 != null || saveBless4 != null || saveBless5 != null) {
                 newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n\n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "\n" + saveBless4.name + ": " + getRandName() + "\n" + saveBless5.name + ": " + getRandName() + "\n");
             }
             if (saveCurse != null) {
@@ -1830,21 +1830,6 @@ public class League {
      */
     public ArrayList<String> getTeamRankingsStr(int selection) {
         /*
-        0 = poll score
-        1 = conf standings
-        2 = sos
-        3 = points
-        4 = opp points
-        5 = yards
-        6 = opp yards
-        7 = pass yards
-        8 = rush yards
-        9 = opp pass yards
-        10 = opp rush yards
-        11 = TO diff
-        12 = off talent
-        13 = def talent
-        14 = prestige
          */
         ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
         ArrayList<String> rankings = new ArrayList<String>();

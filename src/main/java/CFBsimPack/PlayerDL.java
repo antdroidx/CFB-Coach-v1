@@ -219,7 +219,7 @@ public class PlayerDL extends Player {
         if (wonAllConference) ratPot++;
         if (wonAllAmerican) ratPot++;
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
-
+        if (ratPot < 0) ratPot = 0;
 
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratStrength += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
@@ -254,7 +254,7 @@ public class PlayerDL extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*35 + statsSacks*365 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (int)(4*team.teamOppYards) - (int)(5*team.teamOppPoints);
+        return statsTackles*35 + statsSacks*365 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (4*team.teamOppYards) - (5*team.teamOppPoints);
     }
 
     @Override

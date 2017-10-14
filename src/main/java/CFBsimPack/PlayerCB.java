@@ -191,7 +191,7 @@ public class PlayerCB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*35 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12* ratCoverage - (int)(4*team.teamOppYards) - (int)(5*team.teamOppPoints);
+        return statsTackles*35 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12* ratCoverage - (4*team.teamOppYards) - (5*team.teamOppPoints);
     }
 
     public Vector getStatsVector() {
@@ -222,7 +222,7 @@ public class PlayerCB extends Player {
         if (wonAllConference) ratPot++;
         if (wonAllAmerican) ratPot++;
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
-
+        if (ratPot < 0) ratPot = 0;
         // old: ratPot - 25
         // new ratPot + gamesPlayed - 35
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;

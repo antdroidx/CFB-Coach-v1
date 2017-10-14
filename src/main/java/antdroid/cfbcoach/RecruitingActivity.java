@@ -217,7 +217,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
-        availAll = new ArrayList<String>(availAll.subList(0, 100));
+        availAll = new ArrayList<String>(availAll.subList(0, 50));
 
         // Get needs for each position
         updatePositionNeeds();
@@ -244,7 +244,7 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("LB (Need: " + needLBs + ")");
         positions.add("CB (Need: " + needCBs + ")");
         positions.add("S (Need: " + needSs + ")");
-        positions.add("Top 100 Recruits");
+        positions.add("Top 50 Recruits");
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
         dataAdapterPosition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -575,7 +575,7 @@ public class RecruitingActivity extends AppCompatActivity {
      * Called whenever new position is selected, updates all the components
      */
     private void updateForNewPosition() {
-        if (!currentPosition.equals("Top 100 Recruits")) {
+        if (!currentPosition.equals("Top 50 Recruits")) {
             String[] splitty = currentPosition.split(" ");
             setPlayerList(splitty[0]);
             setPlayerInfoMap(splitty[0]);
