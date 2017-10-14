@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     userTeamStr = userTeam.name;
                     userTeam.recruitPlayersFromStr(extras.getString("RECRUITS"));
                     simLeague.updateTeamTalentRatings();
-                    simLeague.updateTeamTalentRatings();
                     season = simLeague.getYear();
                     currentTeam = userTeam;
                     loadedLeague = true;

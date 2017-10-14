@@ -13932,7 +13932,6 @@ Ken,
 Kevin,
 Kevin,
 Josh,
-X,
 Raymond,
 James,
 Alan,
@@ -29543,7 +29542,6 @@ McLaurin,
 Thomas,
 Johnson,
 Williams,
-X,
 Epps,
 Proche,
 Ali,
@@ -29644,7 +29642,7 @@ Mitchell,
 Douglas,
 Kilcrease,
 Parks,
-Marion,
+Marion, Nguyen,
 Payne,
 Maberry,
 Turner,
@@ -32523,7 +32521,7 @@ Nguyen,
     <string name="tutBasics">
         In College Football Coach, you take the role of a newly hired coach at your college of choice.
         As coach, it will be your responsibility to manage your team\'s strategy, simulate through seasons, recruit new players, and above all, win championships.\n\n
-        2017 version has been expanded with 100 real team names, conferences, and updated prestiges and calculations.
+        2017 version has been expanded with 120 real team names, conferences, and updated prestiges and calculations.
     </string>
     <string name="tutPlayingSeason">
         Your team will play 12 games in the regular season, which consist of playing all 9 of your conference opponents once and three out of conference games.
@@ -32549,10 +32547,11 @@ Nguyen,
         determines how much each play improves during the offseason. You can view all of these players in the "ROSTER" tab.\n
         \n
         QB (1 starter):\n
-        - Quarterback, responsible for throwing passes to Wide Receivers\n
+        - Quarterback, leader on offense, responsible for throwing passes to Wide Receivers\n
         - Pass Strength: how far the QB can throw. Higher strength means catches go for more yards.\n
         - Accuracy: how accurate the QB is. Higher accuracy means a greater chance that the throw will be caught, as well as a lower interception chance.\n
-        - Evasion: how evasive the QB is. Higher evasion means less sacks.\n
+        - Evasion: how evasive the QB is. Higher evasion means less sacks.
+        - Speed: mobile quarterbacks are capable of scrambling out of plays and rushing in option offenses.\n
         \n
         RB (2 starters):\n
         - Running Back, responsible for carrying the ball up and down the field.\n
@@ -32566,8 +32565,14 @@ Nguyen,
         - Speed: how quick the WR is. Higher speed means his catches go for more yards.\n
         - Evasion: how agile and crafty the WR is. Higher evasion means higher chance to break free for big gains and long touchdowns.\n
         \n
+        TE (1 starter):\n
+        - Tight End, responsible for blocking during the running plays and a 4th option for receiving\n
+        - Catching: how good the TE is at catching the ball. Higher catching means higher chance of completion and less drops.\n
+        - Speed: how quick the TE is. Higher speed means his catches go for more yards.\n
+        - Run Block: how good the TE is at blocking for rushing plays.\n
+        \n
         OL (5 starters):\n
-        - Offensive Line, responsible for protecting the QB and blocking for the RBs when they run.\n
+        - Offensive Linemen, responsible for protecting the QB and blocking for the RBs when they run.\n
         - Strength: most important rating, how strong the OL is.\n
         - Run Block: how good the OL is at blocking for rushing plays.\n
         - Pass Block: how good the OL is at blocking for pass plays.\n
@@ -32577,12 +32582,17 @@ Nguyen,
         - Kick Strength: how strong the kicker\'s leg is. Higher strength means longer field goals.\n
         - Kick Accuracy: how accurate the kicker is, higher means kicks are more likely to be good.\n
         - Clumsiness: how clumsy the kicker is, higher means more chance of success at onside kicks.\n
+        DL (4 starters):\n
+        - Defensive Linemen, responsible for putting pressure on the opposing QB and tackling RBs.\n
+        - Strength: most important rating, how strong the DL is against opposing OLs.\n
+        - Run Stop: how good the DL is at tackling opposing RBs without allowing many yards.\n
+        - Pass Pressure: how much pressure they put on the opposing QB, higher pressure means the QB will have a harder time throwing accurate passes.\n
         \n
-        S (1 starter):\n
-        - Safety, responsible for covering the pass and causing inteceptions from opposing QBs.\n
-        - Coverage: how good the safety is at convering the pass and how good he is at catching interceptions.\n
-        - Speed: how quick the safety is, affects how he can keep up with WRs.\n
-        - Tackling: how good the safety is at tackling, higher means he is more likely to tackle WRs before they get away.\n
+        LB (3 starters):\n
+        - Linebacker, a leader on defense, responsible for putting pressure on the opposing QB, tackling RBs, and covering TEs.\n
+        - Coverage: how good the LB is at covering receivers. Higher means less likely that the TE will complete the catch.\n
+        - Run Stop: how good the LB is at tackling opposing RBs without allowing many yards.\n
+        - Speed: how quick the LB is, affects how he can keep up with TEs.\n
         \n
         CB (3 starters):\n
         - Cornerback, responsible for covering a corresponding WR.\n
@@ -32590,33 +32600,57 @@ Nguyen,
         - Speed: how quick the CB is, affects how he can keep up with WRs.\n
         - Tackling: how good the CB is at tackling, higher means he is more likely to tackle WRs before they get away.\n
         \n
-        F7 (7 starters):\n
-        - Front Seven, responsible for putting pressure on the opposing QB and tackling RBs.\n
-        - Strength: most important rating, how strong the F7 is against opposing OLs.\n
-        - Run Stop: how good the F7 is at tackling opposing RBs without allowing many yards.\n
-        - Pass Pressure: how much pressure they put on the opposing QB, higher pressure means the QB will have a harder time throwing accurate passes.\n
+        S (1 starter):\n
+        - Safety, a leader on defense, and responsible for covering the pass and causing inteceptions from opposing QBs.\n
+        - Coverage: how good the safety is at convering the pass and how good he is at catching interceptions.\n
+        - Speed: how quick the safety is, affects how he can keep up with WRs.\n
+        - Tackling: how good the safety is at tackling, higher means he is more likely to tackle WRs before they get away.\n
+        \n
     </string>
     <string name="tutTeamStrategy">
-        As a coach, you can pick what strategy your team employs on offense and defense as they play through their season. By default both strategies are set to "No Preference",
+        As a coach, you can pick what strategy your team employs on offense and defense as they play through their season. By default both strategies are set to balanced offenses and defenses,
         meaning there are no bonuses or penalties either way. But you can change your strategy to any of the following:\n
         \n
-        [Offense] Aggressive:\n
-        - Utilize a more aggressive offense. Will pass a bit more.\n
-        - Pass with a lower completion percentage and higher chance of interception.\n
-        - However, passes that are caught will go for more yards.\n
+        [Offense] Pro-Style:\n
+        -Balanced offense\n
+        -50/50 play calling\n
+        -No Strengths or weaknesses\n
         \n
-        [Offense] Conservative:\n
-        - Utilize a more conservative offense. Will run a bit more.\n
-        - Passes are more accurate but go for less yards.\n
-        - Rushes are more likely to gain yards but less likely to break free for big plays.\n
+        [Offense] Smash Mouth:\n
+        -Run heavy offense\n
+        -60/40 rushing play calls\n
+        -Blocking bonuses, shorter gains, more time off the playclock\n
         \n
-        [Defense] Stack the Box:\n
-        - Defensive scheme with emphasis on stopping the run.\n
-        - Will give up more big passing plays but will allow less rushing yards and big plays from rushing.\n
+        [Offense] West Coast:\n
+        -Favor passing over rushing\n
+        -60/40 passing play calls\n
+        -Blocking bonuses, shorter gains, more time off the playclock\n
         \n
-        [Defense] Nickel Zone:\n
-        - Defensive scheme with emphasis on limiting the pass.\n
-        - Will give up less yards on catches and be more likely to intercept passes.\n
-        - However, rushing plays will go for more yards.\n
+        [Offense] Spread:\n
+        -Pass heavy offense\n
+        -72 pct passing play calls\n
+        -Weaker blocking, bigger play potential\n
+        \n
+        [Offense] Read Option:\n
+        -Favors run over pass - requires mobile QB\n
+        -55 pct rushing play calls\n
+        -Weaker blocking, bigger play potential\n
+        \n
+        [Defense] 4-3:\n
+        - Balanced base man defense\n
+        - No bonuses or weaknesses\n
+        \n
+        [Defense] 4-6 Bear:\n
+        - Defensive scheme with emphasis on limiting the run\n
+        - Gives up less rushing yards, however secondary is susceptible to giving up big plays\n
+        \n
+        [Defense] Cover 2:\n
+        - Zone coverage set up to stop passing games underneath\n
+        - Improves pass coverage, however may allow for bigger rushes\n
+        \n
+        [Defense] Cover 3:\n
+        - Zone coverage scheme set up to stop big passing plays\n
+        - Significantly improves passing coverage and stops long balls\n
+        - May allow big rushing gains\n
     </string>
 </resources>

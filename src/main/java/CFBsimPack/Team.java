@@ -389,8 +389,8 @@ public class Team {
         int ccPts = 0;
         int ncwPts = 0;
         int nflPts = 0;
-
         int rgameplayed = 0;
+
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
             g = gameSchedule.get(i);
@@ -462,14 +462,17 @@ public class Team {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2250); //Top teams: gain little prestige if success
             } else if ((teamPrestige >= 80) && diffExpected < 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1650); //Top teams: lose significant prestige for poor seasons
+
             } else if ((teamPrestige < 80 && teamPrestige >= 60) && diffExpected > 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1850); //Above avg teams: gain prestige faster
             } else if ((teamPrestige < 80 && teamPrestige >= 60) && diffExpected < 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //Above avg team: lose prestige at normal rate
+
             } else if ((teamPrestige < 60 && teamPrestige >= 40) && diffExpected > 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 1750); //below avg teams: gain prestige fastest
             } else if ((teamPrestige < 60 && teamPrestige >= 40) && diffExpected < 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2200); //below avg teams: lose prestige slower
+
             } else if ((teamPrestige < 40) && diffExpected > 0) {
                 newPrestige = (int) Math.pow(newPrestige, 1 + (float) diffExpected / 2000); //Bad teams: gain prestige at normal rate
             } else if ((teamPrestige < 40) && diffExpected < 0) {
@@ -633,7 +636,8 @@ public class Team {
                 records.checkRecord("Career Pass TDs", qb.statsPassTD +qb.careerTDs, abbr + ": " + qb.getInitialName(), league.getYear()-1);
                 records.checkRecord("Career Interceptions", qb.statsInt+qb.careerInt, abbr + ": " + qb.getInitialName(), league.getYear()-1);
                 records.checkRecord("Career Rush Yards", qb.statsRushYards+qb.careerRushYards, abbr + ": " + qb.getInitialName(), league.getYear()-1);
-                records.checkRecord("Career Rush TDs", qb.statsRushTD +qb.careerTDs, abbr + ": " + qb.getInitialName(), league.getYear()-1);
+                records.checkRecord("Career Rush TDs", qb.statsRushTD +qb.careerRushTD, abbr + ": " + qb.getInitialName(), league.getYear()-1);
+                records.checkRecord("Career Fumbles", qb.statsFumbles+qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear()-1);
             }
             else if (p instanceof PlayerRB) {
                 PlayerRB rb = (PlayerRB) p;
@@ -1211,7 +1215,7 @@ public class Team {
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
             if (stars > 5) stars = 5;
 
-            //make WRs
+            //make TEs
             teamTEs.add( new PlayerTE(league.getRandName(), 1, stars, this) );
         }
 
@@ -1259,7 +1263,7 @@ public class Team {
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
             if (stars > 5) stars = 5;
 
-            //make WRs
+            //make LBs
             teamLBs.add( new PlayerLB(league.getRandName(), 1, stars, this) );
         }
 
@@ -1321,18 +1325,6 @@ public class Team {
             teamKs.add( new PlayerK(league.getRandName(), 1, 2, this) );
         }
 
-        needs = 2 - teamSs.size();
-        for( int i = 0; i < needs; ++i ) {
-            //make Ss
-            teamSs.add( new PlayerS(league.getRandName(), 1, 2, this) );
-        }
-
-        needs = 6 - teamCBs.size();
-        for( int i = 0; i < needs; ++i ) {
-            //make Ss
-            teamCBs.add( new PlayerCB(league.getRandName(), 1, 2, this) );
-        }
-
         needs = 8 - teamDLs.size();
         for( int i = 0; i < needs; ++i ) {
             //make DLs
@@ -1344,6 +1336,20 @@ public class Team {
             //make LBs
             teamLBs.add( new PlayerLB(league.getRandName(), 1, 2, this) );
         }
+
+        needs = 6 - teamCBs.size();
+        for( int i = 0; i < needs; ++i ) {
+            //make Ss
+            teamCBs.add( new PlayerCB(league.getRandName(), 1, 2, this) );
+        }
+
+        needs = 2 - teamSs.size();
+        for( int i = 0; i < needs; ++i ) {
+            //make Ss
+            teamSs.add( new PlayerS(league.getRandName(), 1, 2, this) );
+        }
+
+
 
         //done making players, sort them
         sortPlayers();
@@ -1485,39 +1491,9 @@ public class Team {
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
-        } else if (playerInfo[0].equals("S")) {
-            if (playerInfo.length >= 16)
-                teamSs.add( new PlayerS(playerInfo[1], this,
-                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
-                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
-                        Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
-                        Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
-                        Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
-                        Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19])));
-            else
-                teamSs.add( new PlayerS(playerInfo[1], this,
-                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
-                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
-        } else if (playerInfo[0].equals("CB")) {
-            if (playerInfo.length >= 16)
-                teamCBs.add( new PlayerCB(playerInfo[1], this,
-                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
-                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
-                        Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
-                        Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
-                        Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
-                        Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19])));
-            else
-                teamCBs.add( new PlayerCB(playerInfo[1], this,
-                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
-                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
         } else if (playerInfo[0].equals("DL")) {
             if (playerInfo.length >= 16)
-                teamDLs.add( new PlayerDL(playerInfo[1], this,
+                teamDLs.add(new PlayerDL(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
@@ -1525,7 +1501,7 @@ public class Team {
                         Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19])));
-            else
+         else
                 teamDLs.add( new PlayerDL(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
@@ -1542,14 +1518,43 @@ public class Team {
                     Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                     Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                     Integer.parseInt(playerInfo[19])));
-        } else {
+        else
             teamLBs.add( new PlayerLB(playerInfo[1], this,
                     Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                     Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                     Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
                     Integer.parseInt(playerInfo[8]), isRedshirt, durability));
+        } else if (playerInfo[0].equals("CB")) {
+        if (playerInfo.length >= 16)
+            teamCBs.add( new PlayerCB(playerInfo[1], this,
+                    Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                    Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                    Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
+                    Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
+                    Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
+                    Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
+                    Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19])));
+        else
+            teamCBs.add( new PlayerCB(playerInfo[1], this,
+                    Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                    Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                    Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
+        } else if (playerInfo[0].equals("S")) {
+            if (playerInfo.length >= 16)
+                teamSs.add(new PlayerS(playerInfo[1], this,
+                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability,
+                        Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
+                        Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
+                        Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
+                        Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19])));
+            else
+                teamSs.add(new PlayerS(playerInfo[1], this,
+                        Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
+                        Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]), isRedshirt, durability));
         }
-
     }
 
     /**
@@ -1656,13 +1661,6 @@ public class Team {
         teamOppPassYards = 0;
         teamOppRushYards = 0;
         teamTODiff = 0;
-
-        if(!userControlled) {
-            teamStratOffNum = getCPUOffense();
-            teamStratDefNum = getCPUOffense();
-            teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
-            teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
-        }
 
     }
 
@@ -2088,7 +2086,8 @@ public class Team {
      */
     public int getRushProf() {
         int avgRBs = ( teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr )/2;
-        return (getCompositeOLRush() + avgRBs )/2;
+        int QB = teamQBs.get(0).ratSpeed;
+        return (3*getCompositeOLRush() + 3*avgRBs + QB)/7;
     }
 
     /**
@@ -2098,7 +2097,7 @@ public class Team {
     public int getPassDef() {
         int avgCBs = ( teamCBs.get(0).ratOvr + teamCBs.get(1).ratOvr + teamCBs.get(2).ratOvr)/3;
         int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage)/ 3;
-        int def = (avgCBs + avgLBs) / 2;
+        int def = (2*avgCBs + avgLBs) / 3;
         return (def*3 + teamSs.get(0).ratOvr + getCompositeDLPass()*2)/6;
     }
 
@@ -2944,7 +2943,7 @@ public class Team {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
                     qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratSpeed + "," + qb.ratOvr + "," + qb.ratImprovement + "," + qb.ratDur + "," +
                     qb.careerGamesPlayed + "," + qb.careerPassAtt + "," + qb.careerPassComp + "," + qb.careerTDs + "," + qb.careerInt + "," +
-                    qb.careerPassYards + "," + qb.careerSacked  + qb.careerRushAtt + "," + qb.careerRushYards + "," + qb.careerRushTD + "," + qb.careerFumbles + "," + qb.careerHeismans +
+                    qb.careerPassYards + "," + qb.careerSacked + "," + qb.careerRushAtt + "," + qb.careerRushYards + "," + qb.careerRushTD + "," + qb.careerFumbles + "," + qb.careerHeismans +
                     "," + qb.careerAllAmerican + "," + qb.careerAllConference + "," + qb.careerWins + "%\n");
         }
         for (PlayerRB rb : teamRBs) {
@@ -3166,24 +3165,24 @@ public class Team {
     // Generate CPU Strategy
     //
     public int getCPUOffense() {
-        int OP, OR, OS = 0;
+        int OP, OR;
         OP = getPassProf();
         OR = getRushProf();
         if(OP > (OR + 8)) {
             return 3;
         } else if(OP > (OR + 5)) {
             return 2;
+        } else if(OR > (OP + 8) && teamQBs.get(0).ratSpeed > 85) {
+            return 4;
         } else if(OR > (OR + 8)) {
             return 1;
-        } else if(OR > (OP + 4) && teamQBs.get(0).ratSpeed > 85) {
-            return 4;
         } else {
             return 0;
         }
     }
 
     public int getCPUDefense() {
-        int DP, DR, DS = 0;
+        int DP, DR;
         DP = getPassProf();
         DR = getRushProf();
         if(DR > (DP + 8)) {
@@ -3216,7 +3215,7 @@ public class Team {
         ts[3] = new TeamStrategy("Spread",
                 "Pass-heavy offense using many receivers with big play potential with risk.", 3, -1, 1, 0, 7, -1, 3, 1);
 
-        ts[4] = new TeamStrategy("Zone-Read",
+        ts[4] = new TeamStrategy("Read Option",
                 "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 1, 0);
 
 

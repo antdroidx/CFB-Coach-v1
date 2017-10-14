@@ -215,6 +215,7 @@ public class PlayerK extends Player {
         if (wonAllConference) ratPot++;
         if (wonAllAmerican) ratPot++;
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
+        if (ratPot < 0) ratPot = 0;
 
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratKickPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
