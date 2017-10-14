@@ -637,7 +637,7 @@ public class Team {
                 records.checkRecord("Career Interceptions", qb.statsInt+qb.careerInt, abbr + ": " + qb.getInitialName(), league.getYear()-1);
                 records.checkRecord("Career Rush Yards", qb.statsRushYards+qb.careerRushYards, abbr + ": " + qb.getInitialName(), league.getYear()-1);
                 records.checkRecord("Career Rush TDs", qb.statsRushTD +qb.careerRushTD, abbr + ": " + qb.getInitialName(), league.getYear()-1);
-                records.checkRecord("Career Fumbles", qb.statsFumbles+qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear()-1);
+                records.checkRecord("Career Rush Fumbles", qb.statsFumbles+qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear()-1);
             }
             else if (p instanceof PlayerRB) {
                 PlayerRB rb = (PlayerRB) p;
@@ -2882,7 +2882,7 @@ public class Team {
         PlayerQB[] qbs = getQBRecruits();
         for (PlayerQB qb : qbs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
-                    qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratSpeed + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "%\n");
+                    qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "," + qb.ratSpeed + "%\n");
         }
         PlayerRB[] rbs = getRBRecruits();
         for (PlayerRB rb : rbs) {
@@ -2897,7 +2897,7 @@ public class Team {
         PlayerTE[] tes = getTERecruits();
         for (PlayerTE te : tes) {
             sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
-                    te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratSpeed + "," +te.ratOvr + "," + te.cost + "," + te.ratDur + "%\n");
+                    te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," +te.ratOvr + "," + te.cost + "," + te.ratDur  + "," + te.ratSpeed +  "%\n");
         }
         PlayerK[] ks = getKRecruits();
         for (PlayerK k : ks) {
@@ -2917,7 +2917,7 @@ public class Team {
         PlayerLB[] lbs = getLBRecruits();
         for (PlayerLB lb : lbs) {
             sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
-                    lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratSpeed + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "%\n");
+                    lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle +"," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur +  "," + lb.ratSpeed +  "%\n");
         }
         PlayerCB[] cbs = getCBRecruits();
         for (PlayerCB cb : cbs) {
@@ -3168,13 +3168,13 @@ public class Team {
         int OP, OR;
         OP = getPassProf();
         OR = getRushProf();
-        if(OP > (OR + 8)) {
+        if(OP > (OR + 6)) {
             return 3;
-        } else if(OP > (OR + 5)) {
+        } else if(OP > (OR + 4)) {
             return 2;
-        } else if(OR > (OP + 8) && teamQBs.get(0).ratSpeed > 85) {
+        } else if(OR > (OP + 6) && teamQBs.get(0).ratSpeed > 75) {
             return 4;
-        } else if(OR > (OR + 8)) {
+        } else if(OR > (OR + 87)) {
             return 1;
         } else {
             return 0;
@@ -3185,11 +3185,11 @@ public class Team {
         int DP, DR;
         DP = getPassProf();
         DR = getRushProf();
-        if(DR > (DP + 8)) {
+        if(DR > (DP + 7)) {
             return 3;
-        } else if(DR > (DP + 5)) {
+        } else if(DR > (DP + 4)) {
             return 2;
-        } else if(DP > (DR + 5)) {
+        } else if(DP > (DR + 4)) {
             return 1;
         } else {
             return 0;

@@ -113,7 +113,7 @@ public class Game implements Serializable {
     private boolean playingOT;
     private boolean bottomOT;
     
-    public int timePerPlay = 23;
+    public int timePerPlay = 24;
 
     Random rand = new Random();
 

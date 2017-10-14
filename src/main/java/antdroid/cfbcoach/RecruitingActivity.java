@@ -426,7 +426,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">" + ps[8] + ", Pot: " + getLetterGrade(ps[3]);
+        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">" + ps[8] + ", Pot: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
     }
 
     /**
@@ -448,9 +448,10 @@ public class RecruitingActivity extends AppCompatActivity {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Strength: " + getLetterGrade(ps[5]) +
-                    "\nAccuracy: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]);
+                    ", Pass Strength: " + getLetterGrade(ps[5]) +
+                    "\nPass Accuracy: " + getLetterGrade(ps[6]) +
+                    ", Evasion: " + getLetterGrade(ps[7]) +
+                    "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("RB")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Power: " + getLetterGrade(ps[5]) +
@@ -465,7 +466,8 @@ public class RecruitingActivity extends AppCompatActivity {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Catching: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]);
+                    ", Evasion: " + getLetterGrade(ps[7]) +
+                    "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("OL")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Strength: " + getLetterGrade(ps[5]) +
@@ -485,7 +487,8 @@ public class RecruitingActivity extends AppCompatActivity {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    ", Tackling: " + getLetterGrade(ps[7]);
+                    ", Tackling: " + getLetterGrade(ps[7]) +
+                    "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("CB")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +

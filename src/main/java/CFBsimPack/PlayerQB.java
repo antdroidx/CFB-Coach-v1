@@ -49,7 +49,7 @@ public class PlayerQB extends Player {
 
 
 
-    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, int speed, boolean rs, int dur ) {
+    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, int spd, boolean rs, int dur ) {
         team = t;
         name = nm;
         year = yr;
@@ -62,7 +62,7 @@ public class PlayerQB extends Player {
         ratPassPow = pow;
         ratPassAcc = acc;
         ratEvasion = eva;
-        ratSpeed = speed;
+        ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
