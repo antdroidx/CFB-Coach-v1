@@ -2304,7 +2304,7 @@ public class Team {
         if (this == league.saveBless || this == league.saveBless2 || this == league.saveBless3 || this == league.saveBless4 || this == league.saveBless5) {
             summary += "\n\nThere was a major shake-up on your coaching staff this season. This fresh start hopefully will guide you to success in the future!";
         } else if (this == league.saveCurse || this == league.saveCurse2 || this == league.saveCurse3 || this == league.saveCurse4 || this == league.saveCurse5) {
-            summary += "\n\n our team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
+            summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[0] - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (prestigePts[0] - teamPrestige) + " prestige points! This will help your recruiting.";
         } else if ((prestigePts[0] - teamPrestige) < 0) {
@@ -3200,13 +3200,13 @@ public class Team {
                 "Play a normal balanced offense.", 1, 0, 0, 1, 1, 0, 0, 1);
 
         ts[1] = new TeamStrategy("Smash Mouth",
-                "Play a conservative run-heavy offense, setting up the passes as necessary.", 3, 2, -1, 1, 2, 2, 0, 0);
+                "Play a conservative run-heavy offense, setting up the passes as necessary.", 3, 2, -1, 1, 2, 1, 0, 0);
 
         ts[2] = new TeamStrategy("West Coast",
                 "Passing game dictates the run game with short accurate passes.", 2, 2, 0, 0, 3, 1, -1, 1);
 
         ts[3] = new TeamStrategy("Spread",
-                "Pass-heavy offense using many receivers with big play potential with risk.", 3, -1, 1, 0, 7, -1, 3, 1);
+                "Pass-heavy offense using many receivers with big play potential with risk.", 4, -1, 1, 0, 7, -2, 2, 1);
 
         ts[4] = new TeamStrategy("Read Option",
                 "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 1, 0);
