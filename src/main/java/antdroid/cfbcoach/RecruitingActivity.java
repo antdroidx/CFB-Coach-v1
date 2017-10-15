@@ -625,7 +625,7 @@ public class RecruitingActivity extends AppCompatActivity {
             positions.add("CB (Need: " + needCBs + ")");
             positions.add("S (Need: " + needSs + ")");
 
-            positions.add("Top 100 Recruits");
+            positions.add("Top 50 Recruits");
             dataAdapterPosition.clear();
             for (String p : positions) {
                 dataAdapterPosition.add(p);
