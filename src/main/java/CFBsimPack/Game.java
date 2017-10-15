@@ -1354,7 +1354,7 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 4.7  //STRATEGIES
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 5  //STRATEGIES
                         + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
                 double escapeChance = (normalize(selWR.ratEvasion) * 3 - selCB.ratTackle - selS.ratTackle) * Math.random()   //STRATEGIES
@@ -1558,7 +1558,7 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 4.7 //STRATEGIES
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 5 //STRATEGIES
                         + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
                 double escapeChance = (normalize(selTE.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
