@@ -168,7 +168,7 @@ public class Home extends AppCompatActivity {
      * Get info of the 10 save files for printing in the save file list
      */
     private String[] getSaveFileInfos() {
-        String[] infos = new String[7];
+        String[] infos = new String[10];
         String fileInfo;
         File saveFile;
         File extFile;
