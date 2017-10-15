@@ -27,7 +27,7 @@ public class PlayerWR extends Player {
     public int ratSpeed;
     //RecEva affects how easily he can dodge tackles
     public int ratEvasion;
-    public int ratAgility;
+    public int ratJump;
     
     //public Vector ratingsVector;
     
@@ -236,7 +236,6 @@ public class PlayerWR extends Player {
         if (wonAllConference) ratPot++;
         if (wonAllAmerican) ratPot++;
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
-        if (ratPot < 0) ratPot = 0;
 
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratCatch += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;

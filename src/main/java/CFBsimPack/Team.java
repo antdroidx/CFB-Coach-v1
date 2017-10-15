@@ -3161,13 +3161,13 @@ public class Team {
         int OP, OR;
         OP = getPassProf();
         OR = getRushProf();
-        if(OP > (OR + 6)) {
+        if(OP > (OR + 5)) {
             return 3;
-        } else if(OP > (OR + 4)) {
+        } else if(OP > (OR + 3)) {
             return 2;
-        } else if(OR > (OP + 6) && teamQBs.get(0).ratSpeed > 75) {
+        } else if(OR > (OP + 5) && teamQBs.get(0).ratSpeed > 75) {
             return 4;
-        } else if(OR > (OR + 87)) {
+        } else if(OR > (OR + 5)) {
             return 1;
         } else {
             return 0;
@@ -3178,11 +3178,11 @@ public class Team {
         int DP, DR;
         DP = getPassProf();
         DR = getRushProf();
-        if(DR > (DP + 7)) {
+        if(DR > (DP + 5)) {
             return 3;
-        } else if(DR > (DP + 4)) {
+        } else if(DR > (DP + 3)) {
             return 2;
-        } else if(DP > (DR + 4)) {
+        } else if(DP > (DR + 3)) {
             return 1;
         } else {
             return 0;
@@ -3224,10 +3224,10 @@ public class Team {
     public TeamStrategy[] getTeamStrategiesDef() {
         TeamStrategy[] ts = new TeamStrategy[4];
 
-        ts[0] = new TeamStrategy("4-3",
+        ts[0] = new TeamStrategy("4-3 Man",
                 "Play a standard 4-3 man-to-man balanced defense.", 1, 0, 0, 1, 1, 0 ,0, 1);
 
-        ts[1] = new TeamStrategy("46 Bear Defense",
+        ts[1] = new TeamStrategy("4-6 Bear",
                 "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from runing.",  2, 0, 2, 1, 1, -1 ,-1, 0);
 
         ts[2] = new TeamStrategy("Cover 2",

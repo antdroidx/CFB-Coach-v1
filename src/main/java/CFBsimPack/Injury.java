@@ -32,9 +32,9 @@ public class Injury {
         description = injuries[ (int)(Math.random() * injuries.length) ];
         player = p;
         player.isInjured = true;
-        player.ratPot -= duration/2;
+        player.ratPot -= duration/1.5;
         if (player.ratPot < 0) player.ratPot = 0;
-        player.ratDur -= duration/2;
+        player.ratDur -= duration/1.5;
         if (player.ratDur < 0) player.ratDur = 0;
     }
 
