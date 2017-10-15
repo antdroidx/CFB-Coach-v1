@@ -113,7 +113,7 @@ public class Game implements Serializable {
     private boolean playingOT;
     private boolean bottomOT;
     
-    public int timePerPlay = 24;
+    public int timePerPlay = 25;
 
     Random rand = new Random();
 
@@ -1132,7 +1132,7 @@ public class Game implements Serializable {
         double WR1pref = Math.pow(offense.getWR(0).ratOvr, 1) * Math.random();
         double WR2pref = Math.pow(offense.getWR(1).ratOvr, 1) * Math.random();
         double WR3pref = Math.pow(offense.getWR(2).ratOvr, 1) * Math.random();
-        double TEpref = Math.pow((offense.getTE(0).ratOvr / 2.5), 1) * Math.random();
+        double TEpref = Math.pow((offense.getTE(0).ratOvr / 2), 1) * Math.random();
 
         //To implement - half back catches/screens/etc.
         double RB1pref = Math.pow((offense.getRB(0).ratOvr), 1) * Math.random();
@@ -1354,13 +1354,13 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 3.7  //STRATEGIES
-                        + offense.teamStratOff.getPassPotential() / 2 - defense.teamStratDef.getPassPotential());
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 4.7  //STRATEGIES
+                        + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
                 double escapeChance = (normalize(selWR.ratEvasion) * 3 - selCB.ratTackle - selS.ratTackle) * Math.random()   //STRATEGIES
                         + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
                 if (escapeChance > 92 || Math.random() > 0.95) {
-                    yardsGain += 3 + selWR.ratSpeed * Math.random() / 3;
+                    yardsGain += 3 + (selWR.ratSpeed * Math.random() / 5);
                 }
                 if (escapeChance > 80 && Math.random() < (0.1 + (offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential()) / 200)) {  //STRATEGIES
                     //wr escapes for TD
@@ -1546,7 +1546,7 @@ public class Game implements Serializable {
         double completion = (getHFadv() + normalize(offense.getQB(0).ratPassAcc) + normalize(selTE.ratCatch)
                 - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 - offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();  //STRATEGIES
         if (100 * Math.random() < completion) {
-            if (100 * Math.random() < (100 - selTE.ratCatch) / 3) {
+            if (100 * Math.random() < (100 - selTE.ratCatch) / 5) {
                 //drop
                 gameDown++;
                 selTEStats[4]++;
@@ -1558,13 +1558,13 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 3.7 //STRATEGIES
-                        + offense.teamStratOff.getPassPotential() / 2 - defense.teamStratDef.getPassPotential());
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 4.7 //STRATEGIES
+                        + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
                 double escapeChance = (normalize(selTE.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
                         + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
                 if (escapeChance > 92 || Math.random() > 0.95) {
-                    yardsGain += 3 + selTE.ratSpeed * Math.random() / 3;
+                    yardsGain += 3 + (selTE.ratSpeed * Math.random() / 5);
                 }
                 if (escapeChance > 75 && Math.random() < (0.1 + (offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential()) / 200)) {  //STRATEGIES
                     //wr escapes for TD

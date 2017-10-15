@@ -3200,16 +3200,16 @@ public class Team {
                 "Play a normal balanced offense.", 1, 0, 0, 1, 1, 0, 0, 1);
 
         ts[1] = new TeamStrategy("Smash Mouth",
-                "Play a conservative run-heavy offense, setting up the passes as necessary.", 3, 2, -1, 1, 2, 1, 0, 0);
+                "Play a conservative run-heavy offense, setting up the passes as necessary.", 2, 2, -3, 1, 1, 2, 0, 0);
 
         ts[2] = new TeamStrategy("West Coast",
-                "Passing game dictates the run game with short accurate passes.", 2, 2, 0, 0, 3, 1, -1, 1);
+                "Passing game dictates the run game with short accurate passes.", 2, -1, 0, 0, 3, 1, -1, 1);
 
         ts[3] = new TeamStrategy("Spread",
-                "Pass-heavy offense using many receivers with big play potential with risk.", 4, -1, 1, 0, 7, -2, 2, 1);
+                "Pass-heavy offense using many receivers with big play potential with risk.", 2, -6, 1, 0, 1, -6, 2, 1);
 
         ts[4] = new TeamStrategy("Read Option",
-                "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 1, 0);
+                "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -2, 1, 1, 5, -2, 1, 0);
 
 
         return ts;
@@ -3231,10 +3231,10 @@ public class Team {
                 "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from runing.",  2, 0, 2, 1, 1, -1 ,-1, 0);
 
         ts[2] = new TeamStrategy("Cover 2",
-                "Play a zone defense with safety help in the back against the pass, while LBs cover the run game. ",  2, 0, -1, 1, 3, 1 ,0, 1);
+                "Play a zone defense with safety help in the back against the pass, while LBs cover the run game. ",  2, 0, -1, 1, 3, 2 ,0, 1);
 
         ts[3] = new TeamStrategy("Cover 3",
-                "Play a zone defense to stop the big plays, but allows soft zone coverage underneath.", 3, 0, -2, 1, 7, 2 ,1, 1);
+                "Play a zone defense to stop the big plays, but allows soft zone coverage underneath.", 3, 0, -2, 1, 7, 2 ,2, 1);
 
         return ts;
     }
