@@ -46,7 +46,7 @@ public class PlayerTE extends Player{
     public int careerDrops;
     public int careerFumbles;
 
-    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur, int rsp ) {
+    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, int rsp, boolean rs, int dur ) {
         team = t;
         name = nm;
         year = yr;
@@ -101,7 +101,7 @@ public class PlayerTE extends Player{
         position = "TE";
     }
 
-    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur, int spd,
+    public PlayerTE( String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, int spd, boolean rs, int dur,
                      int cGamesPlayed, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles,
                      int cHeismans, int cAA, int cAC, int cWins) {
         team = t;

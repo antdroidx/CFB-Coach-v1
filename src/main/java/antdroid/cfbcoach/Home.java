@@ -172,7 +172,7 @@ public class Home extends AppCompatActivity {
         String fileInfo;
         File saveFile;
         File extFile;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 7; ++i) {
             saveFile = new File(getFilesDir(), "saveFile" + i + ".cfb");
             if (saveFile.exists()) {
                 try {

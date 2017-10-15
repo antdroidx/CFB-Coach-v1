@@ -45,12 +45,12 @@ public class LeagueRecords {
     private HashMap<String, Record> records;
 
     public final String[] recordsList = {"TEAM","Team PPG","Team Opp PPG","Team YPG","Team Opp YPG","Team TO Diff",
-            "SEASON: OFFENSE","Pass Yards","Pass TDs","Ints Thrown","Comp Percent",
-            "Rush Yards","Rush TDs","Fumbles Lost",
-            "Rec Yards","Rec TDs","Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions",
-            "CAREER: OFFENSE","Career Pass Yards","Career Pass TDs","Career Ints Thrown",
-            "Career Rush Yards","Career Rush TDs","Career Fumbles Lost",
-            "Career Rec Yards","Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions"};
+            "SEASON: OFFENSE","Pass Yards","Pass TDs","Interceptions","Comp Percent",
+            "Rush Yards","Rush TDs","Rush Fumbles",
+            "Rec Yards","Rec TDs","Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Def Interceptions",
+            "CAREER: OFFENSE","Career Pass Yards","Career Pass TDs","Career Interceptions",
+            "Career Rush Yards","Career Rush TDs","Career Rush Fumbles",
+            "Career Rec Yards","Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Def Interceptions"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<String, Record>();
@@ -72,11 +72,11 @@ public class LeagueRecords {
         records.put("SEASON: OFFENSE", null);
         records.put("Pass Yards", new Record(0, "XXX", 0));
         records.put("Pass TDs", new Record(0, "XXX", 0));
-        records.put("Ints Thrown", new Record(0, "XXX", 0));
+        records.put("Interceptions", new Record(0, "XXX", 0));
         records.put("Comp Percent", new Record(0, "XXX", 0));
         records.put("Rush Yards", new Record(0, "XXX", 0));
         records.put("Rush TDs", new Record(0, "XXX", 0));
-        records.put("Fumbles Lost", new Record(0, "XXX", 0));
+        records.put("Rush Fumbles", new Record(0, "XXX", 0));
         records.put("Rec Yards", new Record(0, "XXX", 0));
         records.put("Rec TDs", new Record(0, "XXX", 0));
         records.put("Catch Percent", new Record(0, "XXX", 0));
@@ -84,21 +84,21 @@ public class LeagueRecords {
         records.put("Tackles", new Record(0, "XXX", 0));
         records.put("Sacks", new Record(0, "XXX", 0));
         records.put("Fumbles Recovered", new Record(0, "XXX", 0));
-        records.put("Interceptions", new Record(0, "XXX", 0));
+        records.put("Def Interceptions", new Record(0, "XXX", 0));
         records.put("CAREER: OFFENSE", null);
         records.put("Career Pass Yards", new Record(0, "XXX", 0));
         records.put("Career Pass TDs", new Record(0, "XXX", 0));
-        records.put("Career Ints Thrown", new Record(0, "XXX", 0));
+        records.put("Career Interceptions", new Record(0, "XXX", 0));
         records.put("Career Rush Yards", new Record(0, "XXX", 0));
         records.put("Career Rush TDs", new Record(0, "XXX", 0));
-        records.put("Career Fumbles Lost", new Record(0, "XXX", 0));
+        records.put("Career Rush Fumbles", new Record(0, "XXX", 0));
         records.put("Career Rec Yards", new Record(0, "XXX", 0));
         records.put("Career Rec TDs", new Record(0, "XXX", 0));
         records.put("CAREER: DEFENSE", null);
         records.put("Career Tackles", new Record(0, "XXX", 0));
         records.put("Career Sacks", new Record(0, "XXX", 0));
         records.put("Career Fumbles Rec", new Record(0, "XXX", 0));
-        records.put("Career Interceptions", new Record(0, "XXX", 0));
+        records.put("Career Def Interceptions", new Record(0, "XXX", 0));
 
     }
 

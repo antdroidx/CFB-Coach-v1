@@ -49,7 +49,7 @@ public class PlayerQB extends Player {
 
 
 
-    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd ) {
+    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, int spd, boolean rs, int dur ) {
         team = t;
         name = nm;
         year = yr;
@@ -112,7 +112,7 @@ public class PlayerQB extends Player {
         position = "QB";
     }
 
-    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd,
+    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, int spd, boolean rs, int dur,
                      int cGamesPlayed, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
                      int cRushAtt, int cRushYards, int cRushTD, int cFumbles, int cHeismans, int cAA, int cAC, int cWins) {
         team = t;
