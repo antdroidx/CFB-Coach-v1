@@ -344,12 +344,12 @@ public class Game implements Serializable {
         gameC.append(awayRBs[0].getInitialName() + "\n");
         gameC.append(awayRBs[0].getYrStr() + " " + awayRBs[0].ratOvr + "\n");
         gameC.append(AwayRB1Stats[2] + "/" + AwayRB1Stats[3] + "\n"); //td/fum
-        gameC.append(AwayRB1Stats[1] + " yds / " + AwayRB1Stats[0] + "\n"); //rush yards
+        gameC.append(AwayRB1Stats[1] + " yds/" + AwayRB1Stats[0] + "\n"); //rush yards
         gameC.append(((double) (10 * AwayRB1Stats[1] / AwayRB1Stats[0]) / 10) + "\n");
         gameR.append(homeRBs[0].getInitialName() + "\n");
         gameR.append(homeRBs[0].getYrStr() + " " + homeRBs[0].ratOvr + "\n");
         gameR.append(HomeRB1Stats[2] + "/" + HomeRB1Stats[3] + "\n"); //td/fum
-        gameR.append(HomeRB1Stats[1] + " yds /" + HomeRB1Stats[0] +"\n"); //rush yards
+        gameR.append(HomeRB1Stats[1] + " yds/" + HomeRB1Stats[0] +"\n"); //rush yards
         gameR.append(((double) (10 * HomeRB1Stats[1] / HomeRB1Stats[0]) / 10) + "\n");
         gameL.append("\n");
         gameC.append("\n");
@@ -358,12 +358,12 @@ public class Game implements Serializable {
         gameC.append(awayRBs[1].getInitialName() + "\n");
         gameC.append(awayRBs[1].getYrStr() + " " + awayRBs[1].ratOvr + "\n");
         gameC.append(AwayRB2Stats[2] + "/" + AwayRB2Stats[3] + "\n"); //td/fum
-        gameC.append(AwayRB2Stats[1] + " yds / " + AwayRB2Stats[0] + "\n"); //rush yards
+        gameC.append(AwayRB2Stats[1] + " yds/" + AwayRB2Stats[0] + "\n"); //rush yards
         gameC.append(((double) (10 * AwayRB2Stats[1] / AwayRB2Stats[0]) / 10) + "\n");
         gameR.append(homeRBs[1].getInitialName() + "\n");
         gameR.append(homeRBs[1].getYrStr() + " " + homeRBs[1].ratOvr + "\n");
         gameR.append(HomeRB2Stats[2] + "/" + HomeRB2Stats[3] + "\n"); //td/fum
-        gameR.append(HomeRB2Stats[1] + " yds / " + HomeRB2Stats[0] + "\n"); //rush yards
+        gameR.append(HomeRB2Stats[1] + " yds/" + HomeRB2Stats[0] + "\n"); //rush yards
         gameR.append(((double) (10 * HomeRB2Stats[1] / HomeRB2Stats[0]) / 10) + "\n");
         gameL.append("\n");
         gameC.append("\n");
@@ -622,7 +622,7 @@ public class Game implements Serializable {
         StringBuilder gameR = new StringBuilder();
 
         gameL.append("Ranking\nRecord\nPPG\nOpp PPG\nYPG\nOpp YPG\n" +
-                "\nPass YPG\nRush YPG\nOpp PYPG\nOpp RYPG\n\nOff Talent\nDef Talent\nPrestige");
+                "\nPass YPG\nRush YPG\nOpp PYPG\nOpp RYPG\n\nOff Talent\nDef Talent\nPrestige\nOffense\nDefense");
         int g = awayTeam.numGames();
         Team t = awayTeam;
         gameC.append("#" + t.rankTeamPollScore + " " + t.abbr + "\n" + t.wins + "-" + t.losses + "\n" +
@@ -631,7 +631,7 @@ public class Game implements Serializable {
                 t.teamPassYards / g + " (" + t.rankTeamPassYards + ")\n" + t.teamRushYards / g + " (" + t.rankTeamRushYards + ")\n" +
                 t.teamOppPassYards / g + " (" + t.rankTeamOppPassYards + ")\n" + t.teamOppRushYards / g + " (" + t.rankTeamOppRushYards + ")\n\n" +
                 t.teamOffTalent + " (" + t.rankTeamOffTalent + ")\n" + t.teamDefTalent + " (" + t.rankTeamDefTalent + ")\n" +
-                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n");
+                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n" + t.teamStratOff.getStratName() + "\n" + t.teamStratDef.getStratName() +"\n");
         g = homeTeam.numGames();
         t = homeTeam;
         gameR.append("#" + t.rankTeamPollScore + " " + t.abbr + "\n" + t.wins + "-" + t.losses + "\n" +
@@ -640,7 +640,7 @@ public class Game implements Serializable {
                 t.teamPassYards / g + " (" + t.rankTeamPassYards + ")\n" + t.teamRushYards / g + " (" + t.rankTeamRushYards + ")\n" +
                 t.teamOppPassYards / g + " (" + t.rankTeamOppPassYards + ")\n" + t.teamOppRushYards / g + " (" + t.rankTeamOppRushYards + ")\n\n" +
                 t.teamOffTalent + " (" + t.rankTeamOffTalent + ")\n" + t.teamDefTalent + " (" + t.rankTeamDefTalent + ")\n" +
-                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n");
+                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n" + t.teamStratOff.getStratName() + "\n" + t.teamStratDef.getStratName() +"\n");
 
         gameSum[0] = gameL.toString();
         gameSum[1] = gameC.toString();
@@ -1304,7 +1304,6 @@ public class Game implements Serializable {
             }
 
             qbSack(offense, defender);
-
 
             return;
         }

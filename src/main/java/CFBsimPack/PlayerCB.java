@@ -24,7 +24,7 @@ public class PlayerCB extends Player {
     public int ratSpeed;
     //CBTkl affects how good he is at tackling
     public int ratTackle;
-    public int ratAgility;
+    public int ratJump;
     
     //public Vector ratingsVector;
 
@@ -222,7 +222,6 @@ public class PlayerCB extends Player {
         if (wonAllConference) ratPot++;
         if (wonAllAmerican) ratPot++;
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
-        if (ratPot < 0) ratPot = 0;
         // old: ratPot - 25
         // new ratPot + gamesPlayed - 35
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;

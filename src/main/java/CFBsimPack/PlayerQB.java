@@ -55,7 +55,7 @@ public class PlayerQB extends Player {
         year = yr;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow*3 + acc*4 + eva)/8;
+        ratOvr = (pow*3 + acc*4 + eva + spd)/9;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -279,7 +279,6 @@ public class PlayerQB extends Player {
         if (wonAllConference) ratPot++;
         if (wonAllAmerican) ratPot++;
         if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
-        if (ratPot < 0) ratPot = 0;
 
         ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratPassPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
