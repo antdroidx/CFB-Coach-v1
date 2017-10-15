@@ -46,7 +46,7 @@ public class PlayerLB extends Player{
 
     //public Vector ratingsVector;
 
-    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, int spd, boolean rs, int dur ) {
+    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur, int spd) {
         team = t;
         name = nm;
         year = yr;
@@ -98,7 +98,7 @@ public class PlayerLB extends Player{
         careerInts = 0;
     }
 
-    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, int spd, boolean rs, int dur,
+    public PlayerLB( String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur, int spd,
                      int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins ) {
         team = t;
         name = nm;
