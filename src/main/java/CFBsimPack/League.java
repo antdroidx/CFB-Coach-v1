@@ -142,11 +142,11 @@ public class League {
         // FUTURE: READ FROM XML OR CSV FILE
 
         //ACC - done + 12
-        conferences.get(0).confTeams.add( new Team( "Clemson", "CLEM", "ACC", this, 88, "WAKE" ));
+        conferences.get(0).confTeams.add( new Team( "Clemson", "CLEM", "ACC", this, 86, "WAKE" ));
         conferences.get(0).confTeams.add( new Team( "Duke", "DUKE", "ACC", this, 60, "UNC" ));
-        conferences.get(0).confTeams.add( new Team( "Florida St", "FSU", "ACC", this, 70, "MIA" ));
+        conferences.get(0).confTeams.add( new Team( "Florida St", "FSU", "ACC", this, 68, "MIA" ));
         conferences.get(0).confTeams.add( new Team( "Georgia Tech", "GT", "ACC", this, 48, "NCST" ));
-        conferences.get(0).confTeams.add( new Team( "Louisville", "LOUI", "ACC", this, 74, "PITT" ));
+        conferences.get(0).confTeams.add( new Team( "Louisville", "LOUI", "ACC", this, 72, "PITT" ));
         conferences.get(0).confTeams.add( new Team( "Miami", "MIA", "ACC", this, 74, "FSU" ));
         conferences.get(0).confTeams.add( new Team( "North Carolina", "UNC", "ACC", this, 47, "DUKE" ));
         conferences.get(0).confTeams.add( new Team( "NC State", "NCST", "ACC", this, 62, "GT" ));
@@ -171,12 +171,12 @@ public class League {
 
         //Big Ten - done x 12
         conferences.get(2).confTeams.add( new Team( "Illinois", "ILL", "Big Ten", this, 45, "IND" ));
-        conferences.get(2).confTeams.add( new Team( "Indiana", "IND", "Big Ten", this, 42, "ILL" ));
-        conferences.get(2).confTeams.add( new Team( "Iowa", "IOW", "Big Ten", this, 63, "NEB" ));
-        conferences.get(2).confTeams.add( new Team( "Michigan", "MIC", "Big Ten", this, 83, "OSU" ));
+        conferences.get(2).confTeams.add( new Team( "Indiana", "IND", "Big Ten", this, 43, "ILL" ));
+        conferences.get(2).confTeams.add( new Team( "Iowa", "IOW", "Big Ten", this, 64, "NEB" ));
+        conferences.get(2).confTeams.add( new Team( "Michigan", "MIC", "Big Ten", this, 80, "OSU" ));
         conferences.get(2).confTeams.add( new Team( "Michigan St", "MSU", "Big Ten", this, 70, "PSU" ));
         conferences.get(2).confTeams.add( new Team( "Minnesota", "MIN", "Big Ten", this, 62, "WIS" ));
-        conferences.get(2).confTeams.add( new Team( "Nebraska", "NEB", "Big Ten", this, 68, "IOW" ));
+        conferences.get(2).confTeams.add( new Team( "Nebraska", "NEB", "Big Ten", this, 67, "IOW" ));
         conferences.get(2).confTeams.add( new Team( "Northwestern", "NWU", "Big Ten", this, 55, "PUR" ));
         conferences.get(2).confTeams.add( new Team( "Ohio State", "OSU", "Big Ten", this, 85, "MIC" ));
         conferences.get(2).confTeams.add( new Team( "Penn State", "PSU", "Big Ten", this, 84, "MSU" ));
@@ -188,11 +188,11 @@ public class League {
         conferences.get(3).confTeams.add( new Team( "Houston", "HOU", "Big 12", this, 58, "TTEC" ));
         conferences.get(3).confTeams.add( new Team( "Iowa State", "ISU", "Big 12", this, 49, "MIZ" ));
         conferences.get(3).confTeams.add( new Team( "Texas Tech", "TTEC", "Big 12", this, 51, "HOU" ));
-        conferences.get(3).confTeams.add( new Team( "Kansas", "KAN", "Big 12", this, 35, "KSU" ));
+        conferences.get(3).confTeams.add( new Team( "Kansas", "KAN", "Big 12", this, 36, "KSU" ));
         conferences.get(3).confTeams.add( new Team( "Kansas St", "KSU", "Big 12", this, 68, "KAN" ));
-        conferences.get(3).confTeams.add( new Team( "Oklahoma", "OKL", "Big 12", this, 85, "TEX" ));
+        conferences.get(3).confTeams.add( new Team( "Oklahoma", "OKL", "Big 12", this, 80, "TEX" ));
         conferences.get(3).confTeams.add( new Team( "Oklahoma St", "OKST", "Big 12", this, 74, "TXAM" ));
-        conferences.get(3).confTeams.add( new Team( "Texas", "TEX", "Big 12", this, 68, "OKL" ));
+        conferences.get(3).confTeams.add( new Team( "Texas", "TEX", "Big 12", this, 72, "OKL" ));
         conferences.get(3).confTeams.add( new Team( "Texas AM", "TXAM", "Big 12", this, 70, "OKST" ));
         conferences.get(3).confTeams.add( new Team( "TCU", "TCU", "Big 12", this, 75, "BAY" ));
         conferences.get(3).confTeams.add( new Team( "Missouri", "MIZ", "Big 12", this, 50, "ISU" ));
@@ -234,7 +234,7 @@ public class League {
         conferences.get(6).confTeams.add( new Team( "Hawaii", "HAW", "Mt West", this, 35, "AF" ));
         conferences.get(6).confTeams.add( new Team( "Nevada", "NEV", "Mt West", this, 35, "NMEX" ));
         conferences.get(6).confTeams.add( new Team( "New Mexico", "NMEX", "Mt West", this, 40, "NEV" ));
-        conferences.get(6).confTeams.add( new Team( "San Diego State", "SDSU", "Mt West", this, 72, "BOIS" ));
+        conferences.get(6).confTeams.add( new Team( "San Diego State", "SDSU", "Mt West", this, 67, "BOIS" ));
         conferences.get(6).confTeams.add( new Team( "San Jose St", "SJSU", "Mt West", this, 31, "FRES" ));
         conferences.get(6).confTeams.add( new Team( "Utah State", "UTST", "Mt West", this, 43, "BYU" ));
         conferences.get(6).confTeams.add( new Team( "Wyoming", "WYOM", "Mt West", this, 48, "CSU" ));
@@ -243,32 +243,32 @@ public class League {
         conferences.get(7).confTeams.add( new Team( "Arizona", "ARIZ", "Pac-12", this, 47, "ASU" ));
         conferences.get(7).confTeams.add( new Team( "Arizona State", "ASU", "Pac-12", this, 57, "ARIZ" ));
         conferences.get(7).confTeams.add( new Team( "California", "CAL", "Pac-12", this, 62, "STAN" ));
-        conferences.get(7).confTeams.add( new Team( "Colorado", "COL", "Pac-12", this, 62, "UTAH" ));
+        conferences.get(7).confTeams.add( new Team( "Colorado", "COL", "Pac-12", this, 60, "UTAH" ));
         conferences.get(7).confTeams.add( new Team( "Oregon", "OREG", "Pac-12", this, 70, "ORST" ));
         conferences.get(7).confTeams.add( new Team( "Oregon State", "ORST", "Pac-12", this, 40, "OREG" ));
         conferences.get(7).confTeams.add( new Team( "Stanford", "STAN", "Pac-12", this, 75, "CAL" ));
-        conferences.get(7).confTeams.add( new Team( "UCLA", "UCLA", "Pac-12", this, 67, "USC" ));
+        conferences.get(7).confTeams.add( new Team( "UCLA", "UCLA", "Pac-12", this, 62, "USC" ));
         conferences.get(7).confTeams.add( new Team( "USC", "USC", "Pac-12", this, 83, "UCLA" ));
-        conferences.get(7).confTeams.add( new Team( "Washington", "WASH", "Pac-12", this, 82, "WSU" ));
+        conferences.get(7).confTeams.add( new Team( "Washington", "WASH", "Pac-12", this, 80, "WSU" ));
         conferences.get(7).confTeams.add( new Team( "Wash State", "WSU", "Pac-12", this, 72, "WASH" ));
         conferences.get(7).confTeams.add( new Team( "Utah", "UTAH", "Pac-12", this, 71, "COL" ));
 
         //SEC - done x 12
         conferences.get(8).confTeams.add( new Team( "Alabama", "BAMA", "SEC", this, 93, "AUB" ));
         conferences.get(8).confTeams.add( new Team( "Arkansas", "ARK", "SEC", this, 50, "LSU" ));
-        conferences.get(8).confTeams.add( new Team( "Auburn", "AUB", "SEC", this, 70, "BAMA" ));
+        conferences.get(8).confTeams.add( new Team( "Auburn", "AUB", "SEC", this, 72, "BAMA" ));
         conferences.get(8).confTeams.add( new Team( "Florida", "FLOR", "SEC", this, 68, "UGA" ));
         conferences.get(8).confTeams.add( new Team( "Georgia", "UGA", "SEC", this, 82, "FLOR" ));
         conferences.get(8).confTeams.add( new Team( "Kentucky", "UK", "SEC", this, 59, "SC" ));
-        conferences.get(8).confTeams.add( new Team( "Louisiana St", "LSU", "SEC", this, 74, "ARK" ));
+        conferences.get(8).confTeams.add( new Team( "Louisiana St", "LSU", "SEC", this, 73, "ARK" ));
         conferences.get(8).confTeams.add( new Team( "Ole Miss", "MISS", "SEC", this, 54, "MSST" ));
         conferences.get(8).confTeams.add( new Team( "Mississippi St", "MSST", "SEC", this, 70, "MISS" ));
         conferences.get(8).confTeams.add( new Team( "South Carolina", "SC", "SEC", this, 50, "UK" ));
-        conferences.get(8).confTeams.add( new Team( "Tennessee", "TENN", "SEC", this, 70, "VAND" ));
+        conferences.get(8).confTeams.add( new Team( "Tennessee", "TENN", "SEC", this, 69, "VAND" ));
         conferences.get(8).confTeams.add( new Team( "Vanderbilt", "VAND", "SEC", this, 47, "TENN" ));
 
         //Sun Belt
-        conferences.get(9).confTeams.add( new Team( "Appalachian State", "APP", "Sun Belt", this, 44, "ODOM" ));
+        conferences.get(9).confTeams.add( new Team( "Appalachian State", "APP", "Sun Belt", this, 43, "ODOM" ));
         conferences.get(9).confTeams.add( new Team( "LA Monroe", "LMON", "Sun Belt", this, 32, "TROY" ));
         conferences.get(9).confTeams.add( new Team( "Mid Tenn State", "MTSU", "Sun Belt", this, 39, "GASO" ));
         conferences.get(9).confTeams.add( new Team( "Troy", "TROY", "Sun Belt", this, 45, "LMON" ));
@@ -279,7 +279,7 @@ public class League {
         conferences.get(9).confTeams.add( new Team( "Texas St", "TXST", "Sun Belt", this, 30, "NTEX" ));
         conferences.get(9).confTeams.add( new Team( "Georgia Southern", "GASO", "Sun Belt", this, 32, "MTSU" ));
         conferences.get(9).confTeams.add( new Team( "Old Dominion", "ODOM", "Sun Belt", this, 35, "APP" ));
-        conferences.get(9).confTeams.add( new Team( "TX San Antonio", "UTSA", "Sun Belt", this, 44, "UTEP" ));
+        conferences.get(9).confTeams.add( new Team( "TX San Antonio", "UTSA", "Sun Belt", this, 43, "UTEP" ));
 
 
         //set teamList
