@@ -940,7 +940,10 @@ public class Game implements Serializable {
     public void addNewsStory() {
 
         //Weekly Scoreboard Update
-        //league.weeklyScores.add(awayTeam.name + " " + awayScore + "\n" + homeTeam.name + " " +homeScore + "\n\n");
+        homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek+1).add(gameName + ">#" + awayTeam.rankTeamPollScore +" " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name +  " " +homeScore);
+
+        //homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek+1).add("#" + awayTeam.rankTeamPollScore +" " + awayTeam.name + " at " + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + ">" +  awayTeam.name + " " + awayScore + "\n" +  homeTeam.name + " " +homeScore);
+
 
         if (numOT >= 3) {
             // Thriller in OT

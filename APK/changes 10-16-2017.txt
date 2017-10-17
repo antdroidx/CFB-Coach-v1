@@ -1,0 +1,20 @@
+10-16 Updates:
+
+Fixed several bugs related to statistics
+-in-game stats for Team yardage counter
+-out-of-game team rushing yard errors
+-QB stats errors
+
+Fixed Passing Offense/Defense perks systems for team strategies
+
+Added new UI feature - weekly scoreboards!
+
+
+10-14 Fixed recruiting phase bugs!
+Help file updated with new features
+
+New playbook option: Zone Read
+Fixed defensive stats
+New QB, TE, LB attribute SPEED.
+New QB stats - Rushing, Rushing TDs, Fumbles
+League Records fixes

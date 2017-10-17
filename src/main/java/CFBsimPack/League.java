@@ -27,6 +27,7 @@ public class League {
     public ArrayList<String> nameList;
     public ArrayList<String> lastNameList;
     public ArrayList< ArrayList<String> > newsStories;
+    public ArrayList< ArrayList<String> > weeklyScores;
 
     public LeagueRecords leagueRecords;
     public LeagueRecords userTeamRecords;
@@ -69,7 +70,6 @@ public class League {
     public Game ncg;
     public Game[] bowlGames;
     public int countBG = 18;
-    public ArrayList<String> weeklyScores;
 
     //User Team
     public Team userTeam;
@@ -112,11 +112,15 @@ public class League {
 
         // Initialize new stories lists
         newsStories = new ArrayList< ArrayList<String> >();
+        weeklyScores = new ArrayList< ArrayList<String> >();
         for (int i = 0; i < 16; ++i) {
             newsStories.add( new ArrayList<String>() );
+           weeklyScores.add( new ArrayList<String>() );
         }
         newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
                 "on your mind, or just a winning season, good luck!");
+
+        weeklyScores.get(0).add("Scores:>No games this week.");
 
         leagueRecords = new LeagueRecords();
         userTeamRecords = new LeagueRecords();
@@ -565,11 +569,14 @@ public class League {
 
             // Initialize new stories lists
             newsStories = new ArrayList< ArrayList<String> >();
+            weeklyScores = new ArrayList< ArrayList<String> >();
             for (int i = 0; i < 16; ++i) {
                 newsStories.add(new ArrayList<String>());
+                weeklyScores.add(new ArrayList<String>());
             }
             newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
                     "on your mind, or just a winning season, good luck!");
+            weeklyScores.get(0).add("Scores:>No games this week.");
 
 
             if (saveBless != null || saveBless2 != null || saveBless3 != null || saveBless4 != null || saveBless5 != null) {
@@ -626,8 +633,7 @@ public class League {
      * Plays week. If normal week, handled by conferences. If bowl week, handled here.
      */
     public void playWeek() {
-        weeklyScores = new ArrayList<String>();
-        weeklyScores.clear();
+
         if ( currentWeek <= 12 ) {
             for (int i = 0; i < conferences.size(); ++i) {
                 conferences.get(i).playWeek();
