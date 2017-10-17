@@ -330,6 +330,7 @@ public class MainActivity extends AppCompatActivity {
         final Button teamStatsButton = (Button) findViewById(R.id.teamStatsButton);
         final Button playerStatsButton = (Button) findViewById(R.id.playerStatsButton);
         final Button teamScheduleButton = (Button) findViewById(R.id.teamScheduleButton);
+        final Button scoresButton = (Button) findViewById(R.id.buttonScores);
         final Button standingsButton = (Button) findViewById(R.id.standingsButton);
         final Button rankingsButton = (Button) findViewById(R.id.rankingsButton);
         final Button depthchartButton = (Button) findViewById(R.id.buttonDepthChart);
@@ -368,6 +369,15 @@ public class MainActivity extends AppCompatActivity {
                 updateSchedule();
             }
         });
+
+        //Set up "Weekly Scoreboard" Button
+        scoresButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                showWeeklyScores();
+            }
+        });
+
 
         //Set up "Conf Standings" Button
         standingsButton.setOnClickListener(new View.OnClickListener() {
@@ -1955,7 +1965,63 @@ public void showUserTeamHistoryDialog() {
         return infos;
     }
 
-    
+    public void showWeeklyScores() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Weekly Scoreboard")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
+        String[] weekSelection = new String[simLeague.currentWeek + 1];
+        for (int i = 0; i < weekSelection.length; ++i) {
+            if (i == 13) weekSelection[i] = "Conf Champ Week";
+            else if (i == 14) weekSelection[i] = "Bowl Game Week";
+            else if (i == 15) weekSelection[i] = "National Champ";
+            else weekSelection[i] = "Week " + i;
+        }
+        Spinner weekSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        ArrayAdapter<String> weekSelectionSpinnerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, weekSelection);
+        weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
+        weekSelectionSpinner.setSelection(simLeague.currentWeek);
+
+        final ListView newsStoriesList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final NewsStoriesListArrayAdapter newsStoriesAdapter = new NewsStoriesListArrayAdapter(this, rankings);
+        newsStoriesList.setAdapter(newsStoriesAdapter);
+
+        weekSelectionSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        ArrayList<String> rankings = simLeague.weeklyScores.get(position);
+                        boolean isempty = false;
+                        if (rankings.size() == 0) {
+                            isempty = true;
+                            rankings.add("No news stories.>I guess this week was a bit boring, huh?");
+                        }
+                        newsStoriesAdapter.clear();
+                        newsStoriesAdapter.addAll(rankings);
+                        newsStoriesAdapter.notifyDataSetChanged();
+                        if (isempty) {
+                            rankings.remove(0);
+                        }
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+    }
+
+
     public void updateTeamUI() {
         getSupportActionBar().setTitle(season + " | " + userTeam.name);
     }
