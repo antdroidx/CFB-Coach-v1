@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="News"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
             <Button
                 android:id="@+id/teamStatsButton"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Stats"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
             <Button
                 android:id="@+id/playerStatsButton"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Roster"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
             <Button
                 android:id="@+id/teamScheduleButton"
@@ -106,7 +106,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:text="Schedule"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
             <Button
                 android:id="@+id/buttonScores"
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Scores"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
             <Button
                 android:id="@+id/standingsButton"
@@ -124,7 +124,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:text="Standings"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
             <Button
                 android:id="@+id/rankingsButton"
@@ -134,7 +134,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:text="Rankings"
-                android:textSize="7sp" />
+                android:textSize="6sp" />
 
         </LinearLayout>
 
