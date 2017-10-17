@@ -142,14 +142,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="6"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <ExpandableListView
                 android:id="@+id/playerStatsExpandList"
-                android:layout_width="352dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="5dp"
-                android:paddingTop="5dp" />
+                android:paddingTop="5dp"
+                android:layout_weight="1" />
 
             <ListView
                 android:id="@+id/mainList"
