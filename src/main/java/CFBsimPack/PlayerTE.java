@@ -286,7 +286,7 @@ public class PlayerTE extends Player{
 
     @Override
     public int getHeismanScore() {
-        return statsRecTD * 175 - statsFumbles * 100 - statsDrops * 50 + (int)(statsRecYards * 2.5);
+        return statsRecTD * 175 - statsFumbles * 100 - statsDrops * 50 + (int)(statsRecYards * 3);
     }
 
     @Override
