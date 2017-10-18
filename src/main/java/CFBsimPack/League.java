@@ -990,8 +990,8 @@ public class League {
 
         //Minor infraction to an avg team
         x = (int)(Math.random()*11);
-        if (x > 6 ) {
-            int curseNumber = (int) (Math.random()*45);
+        if (x > 7 ) {
+            int curseNumber = (int) (Math.random()*55);
             Team curseTeam2 = teamList.get(curseNumber);
                 curseTeam2.teamPrestige -= (10 + x);
                 saveCurse2 = curseTeam2;
@@ -1000,7 +1000,7 @@ public class League {
         //Discipline a team
         x = (int)(Math.random()*11);
         if (x > 6 ) {
-            int curseNumber = (int) (Math.random()*55);
+            int curseNumber = (int) (Math.random()*60);
             Team curseTeam3 = teamList.get(curseNumber);
             curseTeam3.teamPrestige -= (6 + x);
             saveCurse3 = curseTeam3;
@@ -1011,7 +1011,7 @@ public class League {
         if (x > 5 ) {
             int curseNumber = (int) (Math.random()*75);
             Team curseTeam4 = teamList.get(curseNumber);
-            curseTeam4.teamPrestige -= (3 + x);
+            curseTeam4.teamPrestige -= (5 + x);
             saveCurse4 = curseTeam4;
         } else saveCurse4 = null;
 
@@ -1020,7 +1020,7 @@ public class League {
         if (x > 5 ) {
             int curseNumber = (int) (Math.random()*85);
             Team curseTeam5 = teamList.get(curseNumber);
-            curseTeam5.teamPrestige -= (5);
+            curseTeam5.teamPrestige -= (3 + x);
             saveCurse5 = curseTeam5;
         } else saveCurse5 = null;
 
