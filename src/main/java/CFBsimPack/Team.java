@@ -15,7 +15,6 @@ import java.util.Map;
 public class Team {
 
     public League league;
-    public Playbook playbook;
     public String name;
     public String abbr;
     public String conference;
@@ -401,7 +400,7 @@ public class Team {
 
         // Don't add/subtract prestige if they are a blessed/cursed team from last season
         if (this != league.saveBless && this != league.saveBless2 && this != league.saveBless3 && this != league.saveBless4 && this != league.saveBless5
-                && this != league.saveCurse && this != league.saveCurse2 && this != league.saveCurse3 && this != league.saveCurse4 && this != league.saveCurse5) {
+                && this != league.saveCurse && this != league.saveCurse2 && this != league.saveCurse3 /*&& this != league.saveCurse4 && this != league.saveCurse5*/) {
 
             //RIVALRY POINTS!
             //Only call it if there's not a huge difference in team strength
@@ -2303,7 +2302,7 @@ public class Team {
 
         if (this == league.saveBless || this == league.saveBless2 || this == league.saveBless3 || this == league.saveBless4 || this == league.saveBless5) {
             summary += "\n\nThere was a major shake-up on your coaching staff this season. This fresh start hopefully will guide you to success in the future!";
-        } else if (this == league.saveCurse || this == league.saveCurse2 || this == league.saveCurse3 || this == league.saveCurse4 || this == league.saveCurse5) {
+        } else if (this == league.saveCurse || this == league.saveCurse2 || this == league.saveCurse3 /*|| this == league.saveCurse4 || this == league.saveCurse5*/) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[0] - teamPrestige) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + (prestigePts[0] - teamPrestige) + " prestige points! This will help your recruiting.";

@@ -64,7 +64,7 @@ public class PlayerLB extends Player{
         if (isRedshirt) year = 0;
         position = "LB";
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/5) + 60 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 70 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
@@ -117,7 +117,7 @@ public class PlayerLB extends Player{
         if (isRedshirt) year = 0;
         position = "LB";
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/6) + 50 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 70 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
@@ -168,7 +168,7 @@ public class PlayerLB extends Player{
         ratOvr = (ratCoverage + ratRunStop *2 + ratTackle *2 + ratSpeed)/6;
         position = "LB";
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/6) + 50 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 70 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
@@ -205,7 +205,7 @@ public class PlayerLB extends Player{
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*40 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (4*team.teamOppYards) - (4*team.teamOppPoints);
+        return statsTackles*35 + statsSacks*350 + statsFumbles*500 + statsInts*500 + 16*ratOvr - (4*team.teamOppYards) - (5*team.teamOppPoints);
     }
 
     public Vector getStatsVector() {

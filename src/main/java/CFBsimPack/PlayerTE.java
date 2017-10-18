@@ -63,7 +63,7 @@ public class PlayerTE extends Player{
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 65 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 75 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
@@ -120,7 +120,7 @@ public class PlayerTE extends Player{
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 80 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 75 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
@@ -174,7 +174,7 @@ public class PlayerTE extends Player{
         ratSpeed = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratCatch*2 + ratRunBlock*2 + ratEvasion + ratSpeed)/6;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 80 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 75 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");

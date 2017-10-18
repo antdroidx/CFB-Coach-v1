@@ -1372,7 +1372,7 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 5 //STRATEGIES
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 4.8 //STRATEGIES
                         + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
                 double escapeChance = (normalize(selWR.ratEvasion) * 3 - selCB.ratTackle - selS.ratTackle) * Math.random()   //STRATEGIES
@@ -1570,7 +1570,7 @@ public class Game implements Serializable {
         double completion = (getHFadv() + normalize(offense.getQB(0).ratPassAcc) + normalize(selTE.ratCatch)
                 - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();  //STRATEGIES
         if (100 * Math.random() < completion) {
-            if (100 * Math.random() < (100 - selTE.ratCatch) / 5) {
+            if (100 * Math.random() < (100 - selTE.ratCatch) / 3) {
                 //drop
                 gameDown++;
                 selTEStats[4]++;
@@ -1582,7 +1582,7 @@ public class Game implements Serializable {
 
             } else {
                 //no drop
-                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 5 //STRATEGIES
+                yardsGain = (int) ((normalize(offense.getQB(0).ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 4.8 //STRATEGIES
                         + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
                 //see if receiver can get yards after catch
                 double escapeChance = (normalize(selTE.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
