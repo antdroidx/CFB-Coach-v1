@@ -1140,7 +1140,7 @@ public class Game implements Serializable {
         double WR1pref = Math.pow(offense.getWR(0).ratOvr, 1) * Math.random();
         double WR2pref = Math.pow(offense.getWR(1).ratOvr, 1) * Math.random();
         double WR3pref = Math.pow(offense.getWR(2).ratOvr, 1) * Math.random();
-        double TEpref = Math.pow((offense.getTE(0).ratOvr), 1) * Math.random()/2;
+        double TEpref = Math.pow(((offense.getTE(0).ratCatch + offense.getTE(0).ratSpeed)/2), 1) * Math.random()*.67;
 
         //To implement - half back catches/screens/etc.
         double RB1pref = Math.pow((offense.getRB(0).ratOvr), 1) * Math.random();
@@ -2387,7 +2387,7 @@ public class Game implements Serializable {
         int sackloss = (3 + (int) (Math.random() * (normalize(defense.getCompositeDLPass()) - normalize(offense.getCompositeOLPass())) / 2));
         if (sackloss < 3) sackloss = 3;
         offense.getQB(0).statsSacked++;
-        offense.getQB(0).statsRushYards -= sackloss;
+        //offense.getQB(0).statsRushYards -= sackloss;
         gameYardsNeed += sackloss;
         gameYardLine -= sackloss;
 
