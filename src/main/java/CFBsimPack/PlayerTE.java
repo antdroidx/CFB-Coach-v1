@@ -292,8 +292,9 @@ public class PlayerTE extends Player{
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs/Fumbles: " + statsRecTD + "/" + statsFumbles + ">Catch Percent: " + (100*statsReceptions/(statsTargets+1))+"%");
-        pStats.add("Rec Yards: " + statsRecYards + " yds" + ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
+        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
+        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
+        pStats.add("Catch Percent: " + (100*statsReceptions/(statsTargets+1))+ ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards/getGamesPlayed()) + " yds/g>Drops: " + statsDrops);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Catching: " + getLetterGrade(ratCatch));
@@ -306,8 +307,9 @@ public class PlayerTE extends Player{
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs/Fumbles: " + statsRecTD + "/" + statsFumbles + ">Catch Percent: " + (100*statsReceptions/(statsTargets+1))+"%");
-        pStats.add("Rec Yards: " + statsRecYards + " yds" + ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
+        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
+        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
+        pStats.add("Catch Percent: " + (100*statsReceptions/(statsTargets+1))+ ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards/getGamesPlayed()) + " yds/g>Drops: " + statsDrops);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Catching: " + getLetterGrade(ratCatch));
@@ -321,8 +323,9 @@ public class PlayerTE extends Player{
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs/Fumbles: " + (statsRecTD +careerTD) + "/" + (statsFumbles+careerFumbles) + ">Catch Percent: " + (100*(statsReceptions+careerReceptions)/(statsTargets+careerTargets+1))+"%");
-        pStats.add("Rec Yards: " + (statsRecYards+careerRecYards) + " yds" + ">Yards/Tgt: " + ((double)(10*(statsRecYards+careerRecYards)/(statsTargets+careerTargets+1))/10) + " yds");
+        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
+        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
+        pStats.add("Catch Percent: " + (100*statsReceptions/(statsTargets+1))+ ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
         pStats.add("Yds/Game: " + ((statsRecYards+careerRecYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Drops: " + (statsDrops+careerDrops));
         pStats.addAll(super.getCareerStatsList());
         return pStats;

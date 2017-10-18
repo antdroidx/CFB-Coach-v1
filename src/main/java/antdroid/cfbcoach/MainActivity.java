@@ -786,8 +786,8 @@ public class MainActivity extends AppCompatActivity {
             final TextView gameHomeScoreName = (TextView) dialog.findViewById(R.id.gameDialogScoreHomeName);
             gameAwayScore.setText(g.awayScore + "");
             gameHomeScore.setText(g.homeScore + "");
-            gameAwayScoreName.setText(g.awayTeam.getStrAbbrWL_2Lines() + "\n" + g.awayTeam.teamStratOff.getStratName());
-            gameHomeScoreName.setText(g.homeTeam.getStrAbbrWL_2Lines() + "\n" + g.homeTeam.teamStratOff.getStratName());
+            gameAwayScoreName.setText(g.awayTeam.getStrAbbrWL_2Lines());
+            gameHomeScoreName.setText(g.homeTeam.getStrAbbrWL_2Lines());
 
 
             final TextView awayTeam = (TextView) dialog.findViewById(R.id.teamAway);

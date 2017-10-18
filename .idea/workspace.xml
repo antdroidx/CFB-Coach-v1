@@ -24,28 +24,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Playbook.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerF7.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CFB-Coach.iml" afterPath="$PROJECT_DIR$/CFB-Coach.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerK.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerK.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" afterPath="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,61 +110,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="669">
-              <caret line="1020" column="53" selection-start-line="1020" selection-start-column="53" selection-end-line="1020" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerCB.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
-              <caret line="193" column="87" selection-start-line="193" selection-start-column="87" selection-end-line="193" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerDL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="255" column="87" selection-start-line="255" selection-start-column="87" selection-end-line="255" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerLB.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="207" column="87" selection-start-line="207" selection-start-column="87" selection-end-line="207" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerS.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="256" column="87" selection-start-line="256" selection-start-column="87" selection-end-line="256" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6732">
-              <caret line="402" column="104" selection-start-line="402" selection-start-column="104" selection-end-line="402" selection-end-column="104" />
+            <state relative-caret-position="449">
+              <caret line="277" column="88" selection-start-line="277" selection-start-column="88" selection-end-line="277" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -1229,12 +1169,10 @@
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/LeagueRecords.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Injury.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/src/main/res/menu/menu_main.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
         <option value="$PROJECT_DIR$/src/main/res/values/strings.xml" />
@@ -1246,16 +1184,18 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/HeadCoach.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerK.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java" />
         <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CFBsimPack/League.java" />
       </list>
     </option>
   </component>
@@ -1290,130 +1230,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFBsimPack" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFBsimPack" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Team.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cfbcoach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1819,7 +1642,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25213677" sideWeight="0.49498746" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.52665246" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22061966" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22061966" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5682303" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24840085" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -2090,14 +1913,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
@@ -2117,14 +1940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2153,26 +1968,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="1374" column="153" selection-start-line="1374" selection-start-column="153" selection-end-line="1374" selection-end-column="153" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerRB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="249" column="52" selection-start-line="249" selection-start-column="52" selection-end-line="249" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="329" column="86" selection-start-line="329" selection-start-column="85" selection-end-line="329" selection-end-column="86" />
           <folding />
         </state>
       </provider>
@@ -2185,22 +1984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4096">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1503">
-          <caret line="177" column="0" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerOL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -2209,25 +1992,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6732">
-          <caret line="402" column="104" selection-start-line="402" selection-start-column="104" selection-end-line="402" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="1020" column="53" selection-start-line="1020" selection-start-column="53" selection-end-line="1020" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerCB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
+        <state relative-caret-position="3264">
           <caret line="193" column="87" selection-start-line="193" selection-start-column="87" selection-end-line="193" selection-end-column="87" />
           <folding />
         </state>
@@ -2235,7 +2002,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerDL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="4318">
           <caret line="255" column="87" selection-start-line="255" selection-start-column="87" selection-end-line="255" selection-end-column="87" />
           <folding />
         </state>
@@ -2243,7 +2010,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerLB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
+        <state relative-caret-position="3502">
           <caret line="207" column="87" selection-start-line="207" selection-start-column="87" selection-end-line="207" selection-end-column="87" />
           <folding />
         </state>
@@ -2253,6 +2020,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="256" column="87" selection-start-line="256" selection-start-column="87" selection-end-line="256" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="402" column="104" selection-start-line="402" selection-start-column="104" selection-end-line="402" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerQB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5599">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="788" column="72" selection-start-line="788" selection-start-column="72" selection-end-line="788" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7497">
+          <caret line="443" column="27" selection-start-line="443" selection-start-column="27" selection-end-line="443" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerTE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="325" column="69" selection-start-line="325" selection-start-column="69" selection-end-line="325" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/PlayerWR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="310" column="66" selection-start-line="310" selection-start-column="66" selection-end-line="310" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CFBsimPack/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="277" column="88" selection-start-line="277" selection-start-column="88" selection-end-line="277" selection-end-column="88" />
           <folding />
         </state>
       </provider>
