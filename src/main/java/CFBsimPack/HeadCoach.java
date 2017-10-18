@@ -8,4 +8,6 @@ package CFBsimPack;
  */
 
 public class HeadCoach {
+
+
 }

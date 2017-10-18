@@ -205,7 +205,7 @@ public class PlayerLB extends Player{
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*40 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (4*team.teamOppYards) - (5*team.teamOppPoints);
+        return statsTackles*40 + statsSacks*250 + statsFumbles*500 + statsInts*500 + 12*ratOvr - (4*team.teamOppYards) - (4*team.teamOppPoints);
     }
 
     public Vector getStatsVector() {
