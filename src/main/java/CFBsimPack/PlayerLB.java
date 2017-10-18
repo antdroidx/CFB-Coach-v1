@@ -64,7 +64,7 @@ public class PlayerLB extends Player{
         if (isRedshirt) year = 0;
         position = "LB";
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/5) + 50 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/5) + 60 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
