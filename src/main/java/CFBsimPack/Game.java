@@ -1335,7 +1335,7 @@ public class Game implements Serializable {
         if (100 * Math.random() < intChance) {
             //Interception
             double cb = selCB.ratCoverage * Math.random() * 100;
-            double s = selS.ratCoverage * Math.random() * 70;
+            double s = selS.ratCoverage * Math.random() * 60;
             double lb = selLB.ratCoverage * Math.random() * 35;
             String defender;
 
@@ -1546,7 +1546,7 @@ public class Game implements Serializable {
         if (100 * Math.random() < intChance) {
             //Interception
             double lb = selLB.ratCoverage * Math.random() * 100;
-            double s = selS.ratCoverage * Math.random() * 75;
+            double s = selS.ratCoverage * Math.random() * 70;
             double cb = selCB.ratCoverage * Math.random() * 25;
             String defender;
 
