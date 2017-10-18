@@ -63,7 +63,7 @@ public class PlayerTE extends Player{
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 50 + (int)(Math.random()*100) - 50;
+        cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 65 + (int)(Math.random()*100) - 50;
 
         ratingsVector = new Vector();
         ratingsVector.addElement(name+" ("+getYrStr()+")");
