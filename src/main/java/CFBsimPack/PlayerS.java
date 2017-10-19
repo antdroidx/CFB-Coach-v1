@@ -274,7 +274,7 @@ public class PlayerS extends Player {
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Tackling: " + getLetterGrade(ratTackle));
-        pStats.add("Run Stopping: " + getLetterGrade(ratRunStop) + "Nothing");
+        pStats.add("Run Stopping: " + getLetterGrade(ratRunStop) + ">Nothing");
         pStats.add(" > ");
         return pStats;
     }
@@ -287,7 +287,7 @@ public class PlayerS extends Player {
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Tackling: " + getLetterGrade(ratTackle));
-        pStats.add("Run Stopping: " + getLetterGrade(ratRunStop) + "Nothing");
+        pStats.add("Run Stopping: " + getLetterGrade(ratRunStop) + ">Nothing");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

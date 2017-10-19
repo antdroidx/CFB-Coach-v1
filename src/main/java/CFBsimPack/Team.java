@@ -1541,7 +1541,7 @@ public class Team {
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
-                        Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22])));
+                        Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
             else
                 teamCBs.add(new PlayerCB(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
@@ -2108,7 +2108,8 @@ public class Team {
     public int getPassDef() {
         int avgCBs = ( teamCBs.get(0).ratOvr + teamCBs.get(1).ratOvr + teamCBs.get(2).ratOvr)/3;
         int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage)/ 3;
-        int def = (2*avgCBs + avgLBs) / 3;
+        int S = (teamSs.get(0).ratCoverage);
+        int def = (3*avgCBs + avgLBs + S) / 5;
         return (def*3 + teamSs.get(0).ratOvr + getCompositeDLPass()*2)/6;
     }
 
@@ -2128,7 +2129,7 @@ public class Team {
     public int getCompositeOLPass() {
         int compositeOL = 0;
         for ( int i = 0; i < 5; ++i ) {
-            compositeOL += (teamOLs.get(i).ratStrength + teamOLs.get(i).ratPassBlock)/2;
+            compositeOL += (teamOLs.get(i).ratStrength*2 + teamOLs.get(i).ratPassBlock*2 + teamOLs.get(i).ratAwareness)/5;
         }
         return compositeOL / 5;
     }
@@ -2141,7 +2142,7 @@ public class Team {
     public int getCompositeOLRush() {
         int compositeOL = 0;
         for ( int i = 0; i < 5; ++i ) {
-            compositeOL += (teamOLs.get(i).ratStrength + teamOLs.get(i).ratRunBlock)/2;
+            compositeOL += (teamOLs.get(i).ratStrength*2 + teamOLs.get(i).ratRunBlock*2 + teamOLs.get(i).ratAwareness)/5;
         }
         int compositeTE = teamTEs.get(0).ratRunBlock;
         return (2*(compositeOL) + compositeTE)/11;
@@ -2168,13 +2169,17 @@ public class Team {
     public int getCompositeDLRush() {
         int compositeDL = 0;
         int compositeLB = 0;
+        int compositeS = 0;
         for ( int i = 0; i < 4; ++i ) {
             compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop)/2;
         }
         for ( int i = 0; i < 3; ++i ) {
             compositeLB += teamLBs.get(i).ratRunStop;
         }
-        return (2*compositeDL + compositeLB)/11;
+        for ( int i = 0; i < 1; ++i ) {
+            compositeS += teamSs.get(i).ratRunStop;
+        }
+        return (2*compositeDL + compositeLB + compositeS)/12;
     }
 
     /**
