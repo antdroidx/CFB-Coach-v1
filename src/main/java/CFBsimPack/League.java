@@ -1419,7 +1419,7 @@ public class League {
                 } else if (p instanceof PlayerCB) {
                     PlayerCB pcb = (PlayerCB) p;
                     heismanTop5 += " CB " + pcb.name + " [" + pcb.getYrStr() +
-                            "]\n \t\t(" + pcb.statsTackles + " Tkl, " + pcb.statsFumbles + " Fum, " + pcb.statsInts + " Int)\n\n";
+                            "]\n \t\t(" + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
                 } else if (p instanceof PlayerS) {
                     PlayerS ps = (PlayerS) p;
                     heismanTop5 += " S " + ps.name + " [" + ps.getYrStr() +
@@ -1476,7 +1476,7 @@ public class League {
                 } else if (p instanceof PlayerCB) {
                     PlayerCB pcb = (PlayerCB) p;
                     heismanTop5 += " CB " + pcb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
-                            + pcb.statsTackles + " Tkl, " + pcb.statsFumbles + " Fum, " + pcb.statsInts + " Int)\n\n";
+                            + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
                 } else if (p instanceof PlayerS) {
                     PlayerS ps = (PlayerS) p;
                     heismanTop5 += " S " + ps.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1550,7 +1550,7 @@ public class League {
                     PlayerCB heisCB = (PlayerCB) heisman;
                     heismanWinnerStr = "Congratulations to the Player of the Year, " + heisCB.team.abbr +
                             " CB " + heisCB.name + " [" + heisman.getYrStr() + "], who had " +
-                            heisCB.statsTackles + " tackles, recovered " + heisCB.statsFumbles + " fumbles, and " +
+                            heisCB.statsTackles + " tackles, defended " + heisCB.statsDefended + " passes, and " +
                             heisCB.statsInts + " inteceptions. He led " + heisCB.team.name +
                             " to a " + heisCB.team.wins + "-" + heisCB.team.losses + " record and a #" + heisCB.team.rankTeamPollScore +
                             " poll ranking.";
@@ -1709,7 +1709,7 @@ public class League {
             else if (p instanceof PlayerCB) {
                 PlayerCB pcb = (PlayerCB) p;
                 allAmerican.append(" CB " + pcb.name + " [" + pcb.getYrStr() + "]\n \t\t" +
-                        pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsFumbles + " Fum, " + pcb.statsInts + " Int\n");
+                        pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int\n");
             }
             else if (p instanceof PlayerS) {
                 PlayerS ps = (PlayerS) p;
@@ -1740,7 +1740,7 @@ public class League {
             if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 sb.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
-                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Pass Yds, " + pqb.statsRushYards + "Rush Yds\n");
             }
             else if (p instanceof PlayerRB) {
                 PlayerRB prb = (PlayerRB) p;
@@ -1775,7 +1775,7 @@ public class League {
             else if (p instanceof PlayerCB) {
                 PlayerCB pcb = (PlayerCB) p;
                 sb.append(" CB " + pcb.name + " [" + pcb.getYrStr() + "]\n \t\t" +
-                        pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsFumbles + " Fum, " + pcb.statsInts + " Int\n");
+                        pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsFumbles + " Fum, " + pcb.statsInts + " Int\n");
             }
             else if (p instanceof PlayerS) {
                 PlayerS ps = (PlayerS) p;

@@ -27,6 +27,7 @@ public class PlayerK extends Player {
     public int ratKickAcc;
     //KickFum affects how often he can fumble the snap
     public int ratKickFum;
+    public int ratPressure;
     
     //Vector ratingsVector;
     
@@ -41,7 +42,7 @@ public class PlayerK extends Player {
     public int careerFGAtt;
     public int careerFGMade;
     
-    public PlayerK( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur ) {
+    public PlayerK( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur, int prs ) {
         team = t;
         name = nm;
         year = yr;
@@ -54,6 +55,7 @@ public class PlayerK extends Player {
         ratKickPow = pow;
         ratKickAcc = acc;
         ratKickFum = fum;
+        ratPressure = prs;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "K";
@@ -68,6 +70,7 @@ public class PlayerK extends Player {
         ratingsVector.addElement(ratKickPow);
         ratingsVector.addElement(ratKickAcc);
         ratingsVector.addElement(ratKickFum);
+        ratingsVector.addElement(ratPressure);
         
         statsXPAtt = 0;
         statsXPMade = 0;
@@ -89,7 +92,7 @@ public class PlayerK extends Player {
         careerWins = 0;
     }
 
-    public PlayerK( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur,
+    public PlayerK( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur, int prs,
                     int cGamesPlayed, int cXPA, int cXPM, int cFGA, int cFGM,
                     int cHeismans, int cAA, int cAC, int cWins) {
         team = t;
@@ -104,6 +107,7 @@ public class PlayerK extends Player {
         ratKickPow = pow;
         ratKickAcc = acc;
         ratKickFum = fum;
+        ratPressure = prs;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "K";
@@ -118,6 +122,8 @@ public class PlayerK extends Player {
         ratingsVector.addElement(ratKickPow);
         ratingsVector.addElement(ratKickAcc);
         ratingsVector.addElement(ratKickFum);
+        ratingsVector.addElement(ratPressure);
+
 
         statsXPAtt = 0;
         statsXPMade = 0;
@@ -151,6 +157,7 @@ public class PlayerK extends Player {
         ratKickPow = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratKickAcc = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratKickFum = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratPressure = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratKickPow + ratKickAcc + 75)/3;
         position = "K";
 
@@ -164,6 +171,7 @@ public class PlayerK extends Player {
         ratingsVector.addElement(ratKickPow);
         ratingsVector.addElement(ratKickAcc);
         ratingsVector.addElement(ratKickFum);
+        ratingsVector.addElement(ratPressure);
 
         statsXPAtt = 0;
         statsXPMade = 0;
@@ -205,6 +213,7 @@ public class PlayerK extends Player {
         ratingsVector.addElement(ratKickPow);
         ratingsVector.addElement(ratKickAcc);
         ratingsVector.addElement(ratKickFum);
+        ratingsVector.addElement(ratPressure);
         return ratingsVector;
     }
     
@@ -221,11 +230,15 @@ public class PlayerK extends Player {
         ratKickPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratKickAcc += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
         ratKickFum += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        ratPressure += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+
         if ( Math.random()*100 < ratPot ) {
             //breakthrough
             ratKickPow += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
             ratKickAcc += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
             ratKickFum += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratPressure += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+
         }
         ratOvr = (ratKickPow + ratKickAcc)/2;
         ratImprovement = ratOvr - oldOvr;
@@ -269,6 +282,7 @@ public class PlayerK extends Player {
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Kick Strength: " + getLetterGrade(ratKickPow));
         pStats.add("Kick Accuracy: " + getLetterGrade(ratKickAcc) + ">Clumsiness: " + getLetterGrade(ratKickFum));
+        pStats.add("Pressure: " + getLetterGrade(ratPressure) + ">Nothing");
         pStats.add(" > ");
         return pStats;
     }
@@ -290,6 +304,7 @@ public class PlayerK extends Player {
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Kick Strength: " + getLetterGrade(ratKickPow));
         pStats.add("Kick Accuracy: " + getLetterGrade(ratKickAcc) + ">Clumsiness: " + getLetterGrade(ratKickFum));
+        pStats.add("Pressure: " + getLetterGrade(ratPressure) + ">Nothing");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;
@@ -319,6 +334,6 @@ public class PlayerK extends Player {
     public String getInfoForLineup() {
         if (injury != null) return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " " + injury.toString();
         return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " (" +
-                getLetterGrade(ratKickPow) + ", " + getLetterGrade(ratKickAcc) + ", " + getLetterGrade(ratKickFum) + ")";
+                getLetterGrade(ratKickPow) + ", " + getLetterGrade(ratKickAcc) + ", " + getLetterGrade(ratKickFum) + ", " + getLetterGrade(ratPressure) +")";
     }
 }
