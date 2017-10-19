@@ -2723,14 +2723,12 @@ public class Game implements Serializable {
             HomeQBStats[6]++;
             HomeQBStats[7] -= sackloss;
             HomeQBStats[5]++;
-            homeYards -= sackloss;
             homeTeam.teamRushYards -= sackloss;
             awayTeam.teamOppRushYards -= sackloss;
         } else {
             AwayQBStats[6]++;
             AwayQBStats[7] -= sackloss;
             AwayQBStats[5]++;
-            awayYards -= sackloss;
             awayTeam.teamRushYards -= sackloss;
             homeTeam.teamOppRushYards -= sackloss;
         }
@@ -2863,13 +2861,11 @@ public class Game implements Serializable {
         selWR.statsTargets++;
 
         if (gamePoss) { // home possession
-            homeYards += yardsGain;
             HomeQBStats[4] += yardsGain;
             HomeQBStats[1]++;
             selWRStats[2] += yardsGain;
             selWRStats[1]++;
         } else {
-            awayYards += yardsGain;
             AwayQBStats[4] += yardsGain;
             AwayQBStats[1]++;
             selWRStats[2] += yardsGain;
@@ -2939,13 +2935,11 @@ public class Game implements Serializable {
         selTE.statsTargets++;
 
         if (gamePoss) { // home possession
-            homeYards += yardsGain;
             HomeQBStats[4] += yardsGain;
             HomeQBStats[1]++;
             selTEStats[2] += yardsGain;
             selTEStats[1]++;
         } else {
-            awayYards += yardsGain;
             AwayQBStats[4] += yardsGain;
             AwayQBStats[1]++;
             selTEStats[2] += yardsGain;
@@ -3012,13 +3006,11 @@ public class Game implements Serializable {
         offense.getQB(0).statsPassAtt++;
 
         if (gamePoss) { // home possession
-            homeYards += yardsGain;
             HomeQBStats[4] += yardsGain;
             HomeQBStats[1]++;
             selRBStats[5] += yardsGain;
             selRBStats[4]++;
         } else {
-            awayYards += yardsGain;
             AwayQBStats[4] += yardsGain;
             AwayQBStats[1]++;
             selRBStats[5] += yardsGain;
@@ -3042,11 +3034,9 @@ public class Game implements Serializable {
         selRBStats[0]++;
         selRBStats[1] += yardsGain;
         if (gamePoss) { // home possession
-            homeYards += yardsGain;
             homeTeam.teamRushYards += yardsGain;
             awayTeam.teamOppRushYards += yardsGain;
         } else {
-            awayYards += yardsGain;
             awayTeam.teamRushYards += yardsGain;
             homeTeam.teamOppRushYards += yardsGain;
 
@@ -3058,13 +3048,11 @@ public class Game implements Serializable {
         offense.getQB(0).statsRushYards += yardsGain;
 
         if (gamePoss) { // home possession
-            homeYards += yardsGain;
             HomeQBStats[6]++;
             HomeQBStats[7] += yardsGain;
             homeTeam.teamRushYards += yardsGain;
             awayTeam.teamOppRushYards -= yardsGain;
         } else {
-            awayYards += yardsGain;
             AwayQBStats[6]++;
             AwayQBStats[7] += yardsGain;
             awayTeam.teamRushYards += yardsGain;
