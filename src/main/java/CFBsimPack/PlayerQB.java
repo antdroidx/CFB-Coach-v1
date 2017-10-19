@@ -327,7 +327,7 @@ public class PlayerQB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsPassTD * 140 - statsInt * 250 + statsPassYards + statsRushTD * 120 + statsRushYards;
+        return statsPassTD * 140 - statsInt * 250 + statsPassYards + statsRushTD * 140 + statsRushYards;
     }
 
     @Override
