@@ -247,6 +247,8 @@ public class MainActivity extends AppCompatActivity {
 
                         if (simLeague.currentWeek == 15) {
                             // Show NCG summary and check league records
+                            File saveFile = new File(getFilesDir(), "debugSave.cfb");
+                            simLeague.saveLeague(saveFile);
                             simLeague.checkLeagueRecords();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage(simLeague.seasonSummaryStr())
