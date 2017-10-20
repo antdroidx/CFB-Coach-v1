@@ -59,12 +59,14 @@
         - Rush Power: how strong the RB is. Higher power means he is less likely to be stopped at the line of scrimmage.\n
         - Rush Speed: how quick the RB is. Higher speed means runs go for more yards.\n
         - Evasion: how agile the RB is. Higher evasion means a higher chance of breaking free for bigger runs.\n
+        - Catching: how good RB is at catching the ball. Used on screen-passes. \n
         \n
         WR (3 starters):\n
         - Wide Receiver, responsible for catching passes from the QB downfield.\n
         - Catching: how good the WR is at catching the ball. Higher catching means higher chance of completion and less drops.\n
         - Speed: how quick the WR is. Higher speed means his catches go for more yards.\n
         - Evasion: how agile and crafty the WR is. Higher evasion means higher chance to break free for big gains and long touchdowns.\n
+        - Jumping: how high/quick a WR can jump to make a play on the ball. \n
         \n
         TE (1 starter):\n
         - Tight End, responsible for blocking during the running plays and a 4th option for receiving\n
@@ -77,17 +79,20 @@
         - Strength: most important rating, how strong the OL is.\n
         - Run Block: how good the OL is at blocking for rushing plays.\n
         - Pass Block: how good the OL is at blocking for pass plays.\n
+        - Awareness: awareness of surroundings affects how well the OL cooperate together. \n
         \n
         K (1 starter):\n
         - Kicker, responsible for kicking extra points and field goals.\n
         - Kick Strength: how strong the kicker\'s leg is. Higher strength means longer field goals.\n
         - Kick Accuracy: how accurate the kicker is, higher means kicks are more likely to be good.\n
         - Clumsiness: how clumsy the kicker is, higher means more chance of success at onside kicks.\n
+        - Pressure: how well the kicker handles pressure under situations such as 2 min warning and OT. \n
         DL (4 starters):\n
         - Defensive Linemen, responsible for putting pressure on the opposing QB and tackling RBs.\n
         - Strength: most important rating, how strong the DL is against opposing OLs.\n
         - Run Stop: how good the DL is at tackling opposing RBs without allowing many yards.\n
         - Pass Pressure: how much pressure they put on the opposing QB, higher pressure means the QB will have a harder time throwing accurate passes.\n
+        - Tackling: how good the DL is at tackling RBs and QBs for sacks. \n
         \n
         LB (3 starters):\n
         - Linebacker, a leader on defense, responsible for putting pressure on the opposing QB, tackling RBs, and covering TEs.\n
@@ -100,12 +105,14 @@
         - Coverage: how good the cornerback is at covering receivers. Higher means less likely that the WR will complete the catch.\n
         - Speed: how quick the CB is, affects how he can keep up with WRs.\n
         - Tackling: how good the CB is at tackling, higher means he is more likely to tackle WRs before they get away.\n
+        - Jumping: how high and quick the CB can jump and attack the ball against the WR. \n
         \n
         S (1 starter):\n
         - Safety, a leader on defense, and responsible for covering the pass and causing inteceptions from opposing QBs.\n
         - Coverage: how good the safety is at convering the pass and how good he is at catching interceptions.\n
         - Speed: how quick the safety is, affects how he can keep up with WRs.\n
         - Tackling: how good the safety is at tackling, higher means he is more likely to tackle WRs before they get away.\n
+        - Run Stop: how well the safety reads running plays and closes down on the RB.\n
         \n
     </string>
     <string name="tutTeamStrategy">

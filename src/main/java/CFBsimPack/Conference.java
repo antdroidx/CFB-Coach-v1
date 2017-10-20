@@ -239,8 +239,18 @@ public class Conference {
             if ( week == 11 ) schedConfChamp();
             week++;
         }
+
     }
 
+    public void newsMatchups() {
+       if (week == 12) {
+
+        } else {
+            for (int i = 0; i < confTeams.size(); ++i) {
+                confTeams.get(i).gameSchedule.get(week).addUpcomingGames(confTeams.get(i));
+            }
+        }
+    }
     /**
      * Schedule the CCG based on team rankings.
      */
@@ -290,6 +300,7 @@ public class Conference {
         ccg = new Game ( confTeams.get(0), confTeams.get(1), confName + " CCG" );
         confTeams.get(0).gameSchedule.add(ccg);
         confTeams.get(1).gameSchedule.add(ccg);
+        league.newsStories.get(week+1).add("Upcoming: " + confName + " Championship Game>" + confTeams.get(0).strRankTeamRecord() + " will host " + confTeams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
     }
 
     /**
