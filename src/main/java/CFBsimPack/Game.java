@@ -958,8 +958,6 @@ public class Game implements Serializable {
         //Weekly Scoreboard Update
         homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek+1).add(gameName + ">#" + awayTeam.rankTeamPollScore +" " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name +  " " +homeScore);
 
-        //homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek+1).add("#" + awayTeam.rankTeamPollScore +" " + awayTeam.name + " at " + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + ">" +  awayTeam.name + " " + awayScore + "\n" +  homeTeam.name + " " +homeScore);
-
 
         if (numOT >= 3) {
             // Thriller in OT
@@ -1008,6 +1006,17 @@ public class Game implements Serializable {
                             awayTeam.rankTeamPollScore + " " + awayTeam.name + ", winning " + homeScore + " to " + awayScore + ".");
         }
 
+    }
+
+    public void addUpcomingGames(Team name) {
+        if (name == awayTeam) {
+            if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26) {
+                homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add("Upcoming Game: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
+                        homeTeam.rankTeamPollScore + " " + homeTeam.name + ">Next week, " + awayTeam.getStrAbbrWL() + " visits " + homeTeam.getStrAbbrWL() + " in a battle of two ranked schools. " +
+                        awayTeam.name + " plays a " + awayTeam.teamStratOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards/awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
+                        homeTeam.teamStratOff.getStratName() + " offense, averaging " + (homeTeam.teamYards/homeTeam.numGames()) + " yards per game.");
+            }
+        }
     }
 
     /**

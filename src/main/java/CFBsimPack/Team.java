@@ -2648,8 +2648,8 @@ public class Team {
     }
 
     //Team Names for main display spinner
-    public String mainTeam() {
-        return "["+ rankTeamPollScore + "]" + name;
+    public String strRankTeamRecord() {
+        return "#"+ rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ")";
     }
     /**
      * Str rep of team, no bowl results
