@@ -2724,13 +2724,11 @@ public class Game implements Serializable {
             HomeQBStats[7] -= sackloss;
             HomeQBStats[5]++;
             homeTeam.teamRushYards -= sackloss;
-            awayTeam.teamOppRushYards -= sackloss;
         } else {
             AwayQBStats[6]++;
             AwayQBStats[7] -= sackloss;
             AwayQBStats[5]++;
             awayTeam.teamRushYards -= sackloss;
-            homeTeam.teamOppRushYards -= sackloss;
         }
 
         if (gameYardLine < 0) {
@@ -3035,10 +3033,10 @@ public class Game implements Serializable {
         selRBStats[1] += yardsGain;
         if (gamePoss) { // home possession
             homeTeam.teamRushYards += yardsGain;
-            awayTeam.teamOppRushYards += yardsGain;
+            //awayTeam.teamOppRushYards += yardsGain;
         } else {
             awayTeam.teamRushYards += yardsGain;
-            homeTeam.teamOppRushYards += yardsGain;
+            //homeTeam.teamOppRushYards += yardsGain;
 
         }
     }
@@ -3051,12 +3049,12 @@ public class Game implements Serializable {
             HomeQBStats[6]++;
             HomeQBStats[7] += yardsGain;
             homeTeam.teamRushYards += yardsGain;
-            awayTeam.teamOppRushYards -= yardsGain;
+            //awayTeam.teamOppRushYards -= yardsGain;
         } else {
             AwayQBStats[6]++;
             AwayQBStats[7] += yardsGain;
             awayTeam.teamRushYards += yardsGain;
-            homeTeam.teamOppRushYards -= yardsGain;
+            //homeTeam.teamOppRushYards -= yardsGain;
         }
     }
 
