@@ -259,7 +259,7 @@ public class PlayerWR extends Player {
         }
         ratOvr = (ratCatch *2 + ratSpeed + ratEvasion + ratJump)/5;
         ratImprovement = ratOvr - oldOvr;
-        //reset stats (keep career stats?)
+
         careerTargets += statsTargets;
         careerReceptions += statsReceptions;
         careerRecYards += statsRecYards;
@@ -320,9 +320,9 @@ public class PlayerWR extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + statsTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
-        pStats.add("Catch Percent: " + (100*statsReceptions/(statsTargets+1))+ ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
+        pStats.add("TDs: " + (statsTD+careerTD) + ">Fumbles: " + (statsFumbles+careerFumbles));
+        pStats.add("Rec Yards: " + (statsRecYards+careerRecYards) + " yds>Receptions: " + (statsReceptions+careerReceptions));
+        pStats.add("Catch Percent: " + (100*(statsReceptions+careerReceptions)/(statsTargets+careerTargets+1))+ ">Yards/Tgt: " + ((double)((10*statsRecYards+careerRecYards)/(statsTargets+careerTargets+1))/10) + " yds");
         pStats.add("Yds/Game: " + ((statsRecYards+careerRecYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Drops: " + (statsDrops+careerDrops));
         pStats.addAll(super.getCareerStatsList());
         return pStats;

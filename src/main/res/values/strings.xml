@@ -10,6 +10,7 @@
     <string name="action_current_team_history">Team History</string>
     <string name="action_team_history">My Team History</string>
     <string name="action_rankings">Team Rankings</string>
+    <string name="action_player_rankings">Player Rankings</string>
     <string name="action_heisman">Post-Season Awards</string>
     <string name="action_news_stories">News Stories</string>
     <string name="action_bowlgame_watch">Bowl Games</string>

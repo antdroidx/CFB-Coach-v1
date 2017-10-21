@@ -1,7 +1,10 @@
 10-20
-Bug fixes: names, opposing team rushing yard stat, other minor fixes
+More News Stories: Upcoming Games, Game of the Week Results, Spotlight Players, CFB Playoff Committees, etc!
+Bug fixes: names, opposing team rushing yard stat, receiving career stats, other minor fixes
 upcoming games news feature added per request
 updated HELP file with more player positional info
+
+
 
 10-18
 Two versions released:
