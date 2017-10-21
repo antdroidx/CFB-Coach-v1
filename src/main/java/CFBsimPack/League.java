@@ -681,11 +681,16 @@ public class League {
                 );
             }
         }
+        //add news regarding CFB Playoff Committee
+        cfbPlayoffsNews();
 
         //add upcoming matches of the week
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).newsMatchups();
         }
+
+        //focus on the best player at a position this year each week
+        playerSpotlight();
 
         setTeamRanks();
         updateLongestActiveWinStreak();
@@ -998,8 +1003,8 @@ public class League {
         if (blessTeam.teamPrestige > 99) {blessTeam.teamPrestige = 99;}
 
         // Hire Coach for medicore team
-        blessNumber = (int)(Math.random()*21);
-        Team blessTeam2 = teamList.get(55 + blessNumber);
+        blessNumber = (int)(Math.random()*20);
+        Team blessTeam2 = teamList.get(56 + blessNumber);
         coach = (int)(Math.random()*19);
         blessTeam2.teamPrestige += coach + 4;
         saveBless2 = blessTeam2;
@@ -1017,7 +1022,7 @@ public class League {
         // Hire Coach for very bad team
         blessNumber = (int)(Math.random()*12);
         if (blessNumber > 10) blessNumber = 10;
-        Team blessTeam4 = teamList.get(99 + blessNumber);
+        Team blessTeam4 = teamList.get(98 + blessNumber);
         coach = (int)(Math.random()*21);
         blessTeam4.teamPrestige += coach + 4;
         saveBless4 = blessTeam4;
@@ -2502,11 +2507,309 @@ public class League {
         }
     }
 
+    //News on opening weekend
     public void preseasonNews() {
         //Add Big Games of the Week
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).newsNSMatchups();
         }
+    }
+
+    //Committee News
+    public void cfbPlayoffsNews() {
+        setTeamRanks();
+        if (currentWeek == 8) {
+            newsStories.get(currentWeek + 1).add("Committee Announces First Playoff Rankings>The College Football Playoffs Committee has set ther initial rankings for this season's playoffs. The first look at the playoffs have " +
+                    teamList.get(0).name + " at the top of the list. The rest of the playoff order looks like this:\n\n" + "1." + teamList.get(0).getStrAbbrWL() + "\n" + "2." + teamList.get(1).getStrAbbrWL() + "\n" + "3." +
+                    teamList.get(2).getStrAbbrWL() + "\n" + "4." + teamList.get(3).getStrAbbrWL() + "\n" + "5." + teamList.get(4).getStrAbbrWL() + "\n" + "6." + teamList.get(5).getStrAbbrWL() + "\n" + "7." +
+                    teamList.get(6).getStrAbbrWL() + "\n" + "8." + teamList.get(7).getStrAbbrWL() + "\n");
+        }
+        if (currentWeek > 8 && currentWeek < 12) {
+            newsStories.get(currentWeek + 1).add("Committee Updates Rankings>The College Football Playoff Committee has updated their Playoff Rankings. The order looks like this: \n\n" + "1." + teamList.get(0).getStrAbbrWL() +
+                    "\n" + "2." + teamList.get(1).getStrAbbrWL() + "\n" + "3." + teamList.get(2).getStrAbbrWL() + "\n" + "4." + teamList.get(3).getStrAbbrWL() + "\n" + "5." + teamList.get(4).getStrAbbrWL() + "\n" + "6." +
+                    teamList.get(5).getStrAbbrWL() + "\n" + "7." + teamList.get(6).getStrAbbrWL() + "\n" + "8." + teamList.get(7).getStrAbbrWL() + "\n");
+        }
+    }
+
+    //Player Spotlight
+    public void playerSpotlight() {
+        ArrayList<PlayerQB> QB = rankQB();
+        ArrayList<PlayerRB> RB = rankRB();
+        ArrayList<PlayerWR> WR = rankWR();
+        ArrayList<PlayerDL> DL = rankDL();
+        ArrayList<PlayerLB> LB = rankLB();
+        ArrayList<PlayerCB> CB = rankCB();
+        ArrayList<PlayerS> S = rankS();
+        if (currentWeek == 6) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ S.get(0).getYrStr() + " safety, " + S.get(0).name + ", has been cleaning up in the back this year helping " + S.get(0).team.name +
+                    " to a record of " + S.get(0).team.strTeamRecord() + ". The safety has made " + S.get(0).statsTackles + " tackles and sacked the QB " + S.get(0).statsSacks + " times this year. In coverage, he's recovered " +
+                    S.get(0).statsFumbles + " fumbles and intercepted opposing QBs " + S.get(0).statsInts + " times this year. Look for him to be in the year end running for Player of the Year.");
+        }else if (currentWeek == 7) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ QB.get(0).getYrStr() + " quarterback, " + QB.get(0).name + ", is one of the top players at his position in the nation this year. He has led " + QB.get(0).team.name +
+                    " to a record of " + QB.get(0).team.strTeamRecord() + ". He has passed for " + QB.get(0).statsPassYards + " yards this season, and thrown " + QB.get(0).statsPassTD + " touchdowns. " +
+                    "He's also carried the ball for " +  QB.get(0).statsRushYards + " yards this season. Look for him to be in the year end running for Player of the Year.");
+        } else if (currentWeek == 8) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ WR.get(0).getYrStr() + " wide receiver, " + WR.get(0).name + ", has been flying pass defensive coverages this year helping " + WR.get(0).team.name +
+                    " to a record of " + WR.get(0).team.strTeamRecord() + ". The receiver has caught " + WR.get(0).statsReceptions + " for " + WR.get(0).statsRecYards + " yards this year. He's found the end zone " +  WR.get(0).statsTD +
+                    " times this year. Look for him to be in the year end running for Player of the Year.");
+        } else if (currentWeek == 9) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ LB.get(0).getYrStr() + " linebacker, " + LB.get(0).name + ", has been blowing up offenses this year helping " + LB.get(0).team.name +
+                    " to a record of " + LB.get(0).team.strTeamRecord() + ". The linebacker has made " + LB.get(0).statsTackles + " tackles and sacked the QB " + LB.get(0).statsSacks + " times this year. In coverage, he's recovered " +
+                    LB.get(0).statsFumbles + " fumbles and intercepted opposing QBs " + LB.get(0).statsInts + " times this year. Look for him to be in the year end running for Player of the Year.");
+        } else if (currentWeek == 10) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ DL.get(0).getYrStr() + " defensive lineman, " + DL.get(0).name + ", has been disrupting offensive lines this year helping " + DL.get(0).team.name +
+                    " to a record of " + DL.get(0).team.strTeamRecord() + ". The lineman has made " + DL.get(0).statsTackles + " tackles and sacked the QB " + DL.get(0).statsSacks + " times this year.He's also recovered " +
+                    DL.get(0).statsFumbles + " fumbles this year. Look for him to be in the year end running for Player of the Year.");
+        } else if (currentWeek == 11) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ RB.get(0).getYrStr() + " running back, " + RB.get(0).name + ", has been finding holes in opposing defenses this season for " + RB.get(0).team.name +
+                    " as they compiled a record of " + RB.get(0).team.strTeamRecord() + ". The running back has rushed for " + RB.get(0).statsRushYards+ " yards and scored " + RB.get(0).statsRushTD + " times this year. " +
+                    "In the passing game, he's caught " + RB.get(0).statsReceptions + " for " + RB.get(0).statsRecYards + " and scored " + RB.get(0).statsRecTD + " touchdowns in the air this year. " +
+                    "Look for him to be in the year end running for Player of the Year.");
+        } else if (currentWeek == 12) {
+            newsStories.get(currentWeek+1).add("Player Spotlight>"+ CB.get(0).getYrStr() + " cornerback, " + CB.get(0).name + ", has been shutting down opposing receivers this year helping " + CB.get(0).team.name +
+                    " to a record of " + CB.get(0).team.strTeamRecord() + ". The corner has made " + CB.get(0).statsTackles + " tackles and sacked the QB " + CB.get(0).statsSacks + " times this year. In coverage, he's recovered " +
+                    CB.get(0).statsFumbles + " fumbles and intercepted opposing QBs " + CB.get(0).statsInts + " times this year. Look for him to be in the year end running for Player of the Year.");
+        }
+    }
+
+
+    //PLAYER RANKINGS WIP
+
+    public ArrayList<PlayerQB> rankQB() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerQB> heismanCandidates = new ArrayList<PlayerQB>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
+                heismanCandidates.add(teamList.get(i).teamQBs.get(qb));
+                tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamQBs.get(qb);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerRB> rankRB() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerRB> heismanCandidates = new ArrayList<PlayerRB>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
+                heismanCandidates.add(teamList.get(i).teamRBs.get(rb));
+                tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamRBs.get(rb);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerWR> rankWR() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerWR> heismanCandidates = new ArrayList<PlayerWR>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
+                heismanCandidates.add(teamList.get(i).teamWRs.get(wr));
+                tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamWRs.get(wr);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+
+    public ArrayList<PlayerTE> rankTE() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerTE> heismanCandidates = new ArrayList<PlayerTE>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
+                heismanCandidates.add(teamList.get(i).teamTEs.get(te));
+                tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamTEs.get(te);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerOL> rankOL() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerOL> heismanCandidates = new ArrayList<PlayerOL>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int te = 0; te < teamList.get(i).teamOLs.size(); ++te) {
+                heismanCandidates.add(teamList.get(i).teamOLs.get(te));
+                tempScore = teamList.get(i).teamOLs.get(te).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamOLs.get(te);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerK> rankK() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerK> heismanCandidates = new ArrayList<PlayerK>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int te = 0; te < teamList.get(i).teamKs.size(); ++te) {
+                heismanCandidates.add(teamList.get(i).teamKs.get(te));
+                tempScore = teamList.get(i).teamKs.get(te).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamKs.get(te);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+    
+    public ArrayList<PlayerDL> rankDL() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerDL> heismanCandidates = new ArrayList<PlayerDL>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
+                heismanCandidates.add(teamList.get(i).teamDLs.get(dl));
+                tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamDLs.get(dl);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerLB> rankLB() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerLB> heismanCandidates = new ArrayList<PlayerLB>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
+                heismanCandidates.add(teamList.get(i).teamLBs.get(lb));
+                tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamLBs.get(lb);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerCB> rankCB() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerCB> heismanCandidates = new ArrayList<PlayerCB>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
+                heismanCandidates.add(teamList.get(i).teamCBs.get(cb));
+                tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamCBs.get(cb);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+    public ArrayList<PlayerS> rankS() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<PlayerS> heismanCandidates = new ArrayList<PlayerS>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int s = 0; s < teamList.get(i).teamSs.size(); ++s)
+            {
+                heismanCandidates.add(teamList.get(i).teamSs.get(s));
+                tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins * 100;
+                if (tempScore > heismanScore) {
+                    heisman = teamList.get(i).teamSs.get(s);
+                    heismanScore = tempScore;
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        return heismanCandidates;
+    }
+
+        //PLAYER RANKINGS WIP
+
+    public ArrayList<String> getPlayerRankStr(int selection) {
+
+        ArrayList<String> rankings = new ArrayList<String>();
+        switch (selection) {
+            case 0: rankQB();
+                break;
+            case 1: return getConfStandings();
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
+            case 15:
+                break;
+            case 16:
+                break;
+            default:
+                break;
+        }
+        return rankings;
     }
 
 }
@@ -2574,7 +2877,12 @@ class PlayerReceptionsComp implements Comparator<PlayerWR> {
     }
 }
 
-
+class PlayerRecTDsComp implements Comparator<PlayerWR> {
+    @Override
+    public int compare( PlayerWR a, PlayerWR b ) {
+        return a.statsTD > b.statsTD ? -1 : a.statsTD == b.statsTD ? 0 : 1;
+    }
+}
 
 class TeamCompPoll implements Comparator<Team> {
     @Override

@@ -1680,7 +1680,7 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 8 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*223 + 3*(teamPoints-teamOppPoints) +
                 (teamYards-teamOppYards)/40 + 1*teamStrengthOfWins/4 +
@@ -2672,6 +2672,10 @@ public class Team {
      */
     public String strRepWithPrestige() {
         return /*"#" + rankTeamPollScore + " " + */name + " [" + teamPrestige + "]";
+    }
+
+    public String strTeamRecord() {
+        return "(" + wins + "-" + losses + ")";
     }
 
     /**

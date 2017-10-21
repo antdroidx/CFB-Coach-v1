@@ -323,9 +323,9 @@ public class PlayerTE extends Player{
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
-        pStats.add("Catch Percent: " + (100*statsReceptions/(statsTargets+1))+ ">Yards/Tgt: " + ((double)(10*statsRecYards/(statsTargets+1))/10) + " yds");
+        pStats.add("TDs: " + (statsRecTD+careerTD) + ">Fumbles: " + (statsFumbles+careerFumbles));
+        pStats.add("Rec Yards: " + (statsRecYards+careerRecYards) + " yds>Receptions: " + (statsReceptions+careerReceptions));
+        pStats.add("Catch Percent: " + (100*(statsReceptions+careerReceptions)/(statsTargets+careerTargets+1))+ ">Yards/Tgt: " + ((double)((10*statsRecYards+careerRecYards)/(statsTargets+careerTargets+1))/10) + " yds");
         pStats.add("Yds/Game: " + ((statsRecYards+careerRecYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Drops: " + (statsDrops+careerDrops));
         pStats.addAll(super.getCareerStatsList());
         return pStats;

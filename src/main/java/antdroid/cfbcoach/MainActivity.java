@@ -484,6 +484,9 @@ public class MainActivity extends AppCompatActivity {
              * Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
+/*         } else if (id == R.id.action_player_rankings) {
+
+             showPlayerRankingsDialog();*/
         } else if (id == R.id.action_current_team_history) {
             /**
              * Current selected team history
@@ -1005,6 +1008,57 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+/*    public void showPlayerRankingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Team Rankings")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
+        String[] rankingsSelection =
+                {"Poll Votes", "Conference Standings", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
+                        "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
+                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class"};
+        Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, rankingsSelection);
+        teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
+
+        final ListView teamRankingsList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final TeamRankingsListArrayAdapter teamRankingsAdapter =
+                new TeamRankingsListArrayAdapter(this, rankings, userTeam.strRepWithBowlResults());
+        teamRankingsList.setAdapter(teamRankingsAdapter);
+
+        teamRankingsSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
+                        if (position == 16) {
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
+                        } else {
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
+                        }
+                        teamRankingsAdapter.clear();
+                        teamRankingsAdapter.addAll(rankings);
+                        teamRankingsAdapter.notifyDataSetChanged();
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+    }*/
+
 
     public void showRecruitingClassDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
