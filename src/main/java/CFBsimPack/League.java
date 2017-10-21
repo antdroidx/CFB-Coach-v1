@@ -576,7 +576,6 @@ public class League {
                     "on your mind, or just a winning season, good luck!");
             weeklyScores.get(0).add("Scores:>No games this week.");
 
-
             if (saveBless != null || saveBless2 != null || saveBless3 != null || saveBless4 != null || saveBless5 != null) {
                 newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n\n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "\n" + saveBless4.name + ": " + getRandName() + "\n" + saveBless5.name + ": " + getRandName() + "\n");
             }
@@ -746,77 +745,77 @@ public class League {
         teamList.get(8).gameSchedule.add(bowlGames[2]);
         teamList.get(14).gameSchedule.add(bowlGames[2]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[2].gameName + "Selection Announced:>" + teamList.get(8).strRankTeamRecord() + " will play " + teamList.get(14).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[2].gameName + " Selection Announced:>" + teamList.get(8).strRankTeamRecord() + " will play " + teamList.get(14).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[3] = new Game( teamList.get(9), teamList.get(15), bowlNames[3] );
         teamList.get(9).gameSchedule.add(bowlGames[3]);
         teamList.get(15).gameSchedule.add(bowlGames[3]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[3].gameName + "Selection Announced:>" + teamList.get(9).strRankTeamRecord() + " will play " + teamList.get(15).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[3].gameName + " Selection Announced:>" + teamList.get(9).strRankTeamRecord() + " will play " + teamList.get(15).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[4] = new Game( teamList.get(10), teamList.get(11), bowlNames[4] );
         teamList.get(10).gameSchedule.add(bowlGames[4]);
         teamList.get(11).gameSchedule.add(bowlGames[4]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[4].gameName + "Selection Announced:>" + teamList.get(10).strRankTeamRecord() + " will play " + teamList.get(11).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[4].gameName + " Selection Announced:>" + teamList.get(10).strRankTeamRecord() + " will play " + teamList.get(11).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[5] = new Game( teamList.get(12), teamList.get(13), bowlNames[5] );
         teamList.get(12).gameSchedule.add(bowlGames[5]);
         teamList.get(13).gameSchedule.add(bowlGames[5]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[5].gameName + "Selection Announced:>" + teamList.get(12).strRankTeamRecord() + " will play " + teamList.get(13).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[5].gameName + " Selection Announced:>" + teamList.get(12).strRankTeamRecord() + " will play " + teamList.get(13).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[6] = new Game( teamList.get(16), teamList.get(20), bowlNames[6] );
         teamList.get(16).gameSchedule.add(bowlGames[6]);
         teamList.get(20).gameSchedule.add(bowlGames[6]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[6].gameName + "Selection Announced:>" + teamList.get(16).strRankTeamRecord() + " will play " + teamList.get(20).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[6].gameName + " Selection Announced:>" + teamList.get(16).strRankTeamRecord() + " will play " + teamList.get(20).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[7] = new Game( teamList.get(17), teamList.get(21), bowlNames[7] );
         teamList.get(17).gameSchedule.add(bowlGames[7]);
         teamList.get(21).gameSchedule.add(bowlGames[7]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[7].gameName + "Selection Announced:>" + teamList.get(17).strRankTeamRecord() + " will play " + teamList.get(21).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[7].gameName + " Selection Announced:>" + teamList.get(17).strRankTeamRecord() + " will play " + teamList.get(21).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[8] = new Game( teamList.get(18), teamList.get(22), bowlNames[8] );
         teamList.get(18).gameSchedule.add(bowlGames[8]);
         teamList.get(22).gameSchedule.add(bowlGames[8]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[8].gameName + "Selection Announced:>" + teamList.get(18).strRankTeamRecord() + " will play " + teamList.get(22).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[8].gameName + " Selection Announced:>" + teamList.get(18).strRankTeamRecord() + " will play " + teamList.get(22).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[9] = new Game( teamList.get(19), teamList.get(23), bowlNames[9] );
         teamList.get(19).gameSchedule.add(bowlGames[9]);
         teamList.get(23).gameSchedule.add(bowlGames[9]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[9].gameName + "Selection Announced:>" + teamList.get(19).strRankTeamRecord() + " will play " + teamList.get(23).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[9].gameName + " Selection Announced:>" + teamList.get(19).strRankTeamRecord() + " will play " + teamList.get(23).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[10] = new Game( teamList.get(24), teamList.get(28), bowlNames[10] );
         teamList.get(24).gameSchedule.add(bowlGames[10]);
         teamList.get(28).gameSchedule.add(bowlGames[10]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[10].gameName + "Selection Announced:>" + teamList.get(24).strRankTeamRecord() + " will play " + teamList.get(28).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[10].gameName + " Selection Announced:>" + teamList.get(24).strRankTeamRecord() + " will play " + teamList.get(28).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[11] = new Game( teamList.get(25), teamList.get(30), bowlNames[11] );
         teamList.get(25).gameSchedule.add(bowlGames[11]);
         teamList.get(30).gameSchedule.add(bowlGames[11]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[11].gameName + "Selection Announced:>" + teamList.get(25).strRankTeamRecord() + " will play " + teamList.get(30).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[11].gameName + " Selection Announced:>" + teamList.get(25).strRankTeamRecord() + " will play " + teamList.get(30).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[12] = new Game( teamList.get(26), teamList.get(29), bowlNames[12] );
         teamList.get(26).gameSchedule.add(bowlGames[12]);
         teamList.get(29).gameSchedule.add(bowlGames[12]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[12].gameName + "Selection Announced:>" + teamList.get(26).strRankTeamRecord() + " will play " + teamList.get(29).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[12].gameName + " Selection Announced:>" + teamList.get(26).strRankTeamRecord() + " will play " + teamList.get(29).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[13] = new Game( teamList.get(27), teamList.get(31), bowlNames[13] );
@@ -824,35 +823,35 @@ public class League {
         teamList.get(31).gameSchedule.add(bowlGames[13]);
         hasScheduledBowls = true;
 
-        newsStories.get(currentWeek+1).add(bowlGames[13].gameName + "Selection Announced:>" + teamList.get(27).strRankTeamRecord() + " will play " + teamList.get(31).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[13].gameName + " Selection Announced:>" + teamList.get(27).strRankTeamRecord() + " will play " + teamList.get(31).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[14] = new Game( teamList.get(32), teamList.get(36), bowlNames[10] );
         teamList.get(32).gameSchedule.add(bowlGames[14]);
         teamList.get(36).gameSchedule.add(bowlGames[14]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[14].gameName + "Selection Announced:>" + teamList.get(32).strRankTeamRecord() + " will play " + teamList.get(36).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[14].gameName + " Selection Announced:>" + teamList.get(32).strRankTeamRecord() + " will play " + teamList.get(36).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[15] = new Game( teamList.get(33), teamList.get(38), bowlNames[11] );
         teamList.get(33).gameSchedule.add(bowlGames[15]);
         teamList.get(38).gameSchedule.add(bowlGames[15]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[15].gameName + "Selection Announced:>" + teamList.get(33).strRankTeamRecord() + " will play " + teamList.get(38).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[15].gameName + " Selection Announced:>" + teamList.get(33).strRankTeamRecord() + " will play " + teamList.get(38).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[16] = new Game( teamList.get(34), teamList.get(37), bowlNames[12] );
         teamList.get(34).gameSchedule.add(bowlGames[16]);
         teamList.get(37).gameSchedule.add(bowlGames[16]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[16].gameName + "Selection Announced:>" + teamList.get(34).strRankTeamRecord() + " will play " + teamList.get(37).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[16].gameName + " Selection Announced:>" + teamList.get(34).strRankTeamRecord() + " will play " + teamList.get(37).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         bowlGames[17] = new Game( teamList.get(35), teamList.get(39), bowlNames[13] );
         teamList.get(35).gameSchedule.add(bowlGames[17]);
         teamList.get(39).gameSchedule.add(bowlGames[17]);
 
-        newsStories.get(currentWeek+1).add(bowlGames[17].gameName + "Selection Announced:>" + teamList.get(35).strRankTeamRecord() + " will play " + teamList.get(39).strRankTeamRecord() +
+        newsStories.get(currentWeek+1).add(bowlGames[17].gameName + " Selection Announced:>" + teamList.get(35).strRankTeamRecord() + " will play " + teamList.get(39).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
         hasScheduledBowls = true;
@@ -2502,6 +2501,14 @@ public class League {
             return false;
         }
     }
+
+    public void preseasonNews() {
+        //Add Big Games of the Week
+        for (int i = 0; i < conferences.size(); ++i) {
+            conferences.get(i).newsNSMatchups();
+        }
+    }
+
 }
 
 class PlayerHeismanComp implements Comparator<Player> {

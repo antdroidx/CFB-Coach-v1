@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     // set rankings so that not everyone is rank #0
                     simLeague.setTeamRanks();
+                    simLeague.preseasonNews();
                     // Set toolbar text to '2017 Season' etc
                     updateTeamUI();
                     examineTeam(currentTeam.name);
@@ -171,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show();
         } else {
-            // Set toolbar text to '2017 Season' etc
             updateTeamUI();
         }
 
@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < teamsStart; i++) {
             teamList.add(simLeague.teamList.get(i).strRep());
         }
+
         dataAdapterTeam = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, teamList);
         dataAdapterTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -428,6 +429,7 @@ public class MainActivity extends AppCompatActivity {
         if (loadedLeague) {
             // Set rankings so that not everyone is rank #0
             simLeague.setTeamRanks();
+            simLeague.preseasonNews();
             examineTeam(userTeam.name);
             showToasts = userTeam.showPopups;
         }

@@ -243,11 +243,21 @@ public class Conference {
     }
 
     public void newsMatchups() {
-       if (week == 12) {
-
+       if (week >= 12) {
+            return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
                 confTeams.get(i).gameSchedule.get(week).addUpcomingGames(confTeams.get(i));
+            }
+        }
+    }
+
+    public void newsNSMatchups() {
+        if (week >= 12) {
+            return;
+        } else {
+            for (int i = 0; i < confTeams.size(); ++i) {
+                confTeams.get(i).gameSchedule.get(week).addNewSeasonGames(confTeams.get(i));
             }
         }
     }
