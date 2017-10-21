@@ -94,7 +94,7 @@ public class Team {
     public int diffOffTalent;
     public int diffDefTalent;
     public int newPrestige;
-    //public int confPrestige;
+    public int confPrestige;
 
     //players on team
     //offense
@@ -217,6 +217,8 @@ public class Team {
         teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
+
+       confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
     }
 
 
@@ -278,6 +280,7 @@ public class Team {
         teamStratDefNum = 0;
         teamTVDeal = false;
         confTVDeal = false;
+
 
         // Actually load the team from the string
         String[] lines = loadStr.split("%");
@@ -1680,12 +1683,17 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
+        confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
+        teamOffTalent = getOffTalent();
+        teamDefTalent = getDefTalent();
+
         int preseasonBias = 8 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
-        teamPollScore = (wins*223 + 3*(teamPoints-teamOppPoints) +
-                (teamYards-teamOppYards)/40 + 1*teamStrengthOfWins/4 +
-                3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()) +
-                teamStrengthOfWins)/10;
+        teamPollScore = (wins*215 + 3*(teamPoints-teamOppPoints) +
+                (teamYards-teamOppYards)/40 +
+                teamStrengthOfWins + confPrestige +
+                3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()+confPrestige)) /8;
+
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
             teamPollScore += 25;
@@ -1707,8 +1715,7 @@ public class Team {
             teamPollScore -= 10;
         }
 
-        teamOffTalent = getOffTalent();
-        teamDefTalent = getDefTalent();
+
     }
 
     /**
@@ -2311,7 +2318,7 @@ public class Team {
 
         if (prestigePts[5] > 0) {
             if (wonRivalryGame) {
-                summary += "\n\nCongrats on beating your rival, " + rivalTeam + "! You will gain of " + prestigePts[1] + " prestige points in the off-season!";
+                summary += "\n\nCongrats on beating your rival, " + rivalTeam + "! You will gain " + prestigePts[1] + " prestige points in the off-season!";
             } else {
                 summary += "\n\nUnfortunately you lost to your rival, " + rivalTeam + "! You lose " + prestigePts[1] + " prestige points this off-season!";
             }

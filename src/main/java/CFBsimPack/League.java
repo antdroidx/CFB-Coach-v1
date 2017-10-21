@@ -317,6 +317,17 @@ public class League {
             conferences.get(i).insertOOCSchedule();
         }
 
+        newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
+                conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
+                conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
+                conferences.get(2).confName + ":  " + conferences.get(2).confPrestige + "\n" +
+                conferences.get(3).confName + ":  " + conferences.get(3).confPrestige + "\n" +
+                conferences.get(4).confName + ":  " + conferences.get(4).confPrestige + "\n" +
+                conferences.get(5).confName + ":  " + conferences.get(5).confPrestige + "\n" +
+                conferences.get(6).confName + ":  " + conferences.get(6).confPrestige + "\n" +
+                conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
+                conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
+                conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
     }
 
     /* LOAD A SAVE FILE
@@ -575,6 +586,18 @@ public class League {
             newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
                     "on your mind, or just a winning season, good luck!");
             weeklyScores.get(0).add("Scores:>No games this week.");
+
+            newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
+                    conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
+                    conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
+                    conferences.get(2).confName + ":  " + conferences.get(2).confPrestige + "\n" +
+                    conferences.get(3).confName + ":  " + conferences.get(3).confPrestige + "\n" +
+                    conferences.get(4).confName + ":  " + conferences.get(4).confPrestige + "\n" +
+                    conferences.get(5).confName + ":  " + conferences.get(5).confPrestige + "\n" +
+                    conferences.get(6).confName + ":  " + conferences.get(6).confPrestige + "\n" +
+                    conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
+                    conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
+                    conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
 
             if (saveBless != null || saveBless2 != null || saveBless3 != null || saveBless4 != null || saveBless5 != null) {
                 newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n\n" + saveBless.name + ": " + getRandName() + "\n" + saveBless2.name + ": " + getRandName() + "\n" + saveBless3.name + ": " + getRandName() + "\n" + saveBless4.name + ": " + getRandName() + "\n" + saveBless5.name + ": " + getRandName() + "\n");
@@ -1357,7 +1380,7 @@ public class League {
             //qb
             for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
                 heismanCandidates.add(teamList.get(i).teamQBs.get(qb));
-                tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamQBs.get(qb);
                     heismanScore = tempScore;
@@ -1367,7 +1390,7 @@ public class League {
             //rb
             for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
                 heismanCandidates.add( teamList.get(i).teamRBs.get(rb) );
-                tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamRBs.get(rb);
                     heismanScore = tempScore;
@@ -1377,7 +1400,7 @@ public class League {
             //wr
             for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
                 heismanCandidates.add( teamList.get(i).teamWRs.get(wr) );
-                tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamWRs.get(wr);
                     heismanScore = tempScore;
@@ -1387,7 +1410,7 @@ public class League {
             //te
             for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
                 heismanCandidates.add( teamList.get(i).teamTEs.get(te) );
-                tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamTEs.get(te);
                     heismanScore = tempScore;
@@ -1397,7 +1420,7 @@ public class League {
             //dl
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
                 heismanCandidates.add( teamList.get(i).teamDLs.get(dl) );
-                tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamDLs.get(dl);
                     heismanScore = tempScore;
@@ -1407,7 +1430,7 @@ public class League {
             //lb
             for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
                 heismanCandidates.add( teamList.get(i).teamLBs.get(lb) );
-                tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamLBs.get(lb);
                     heismanScore = tempScore;
@@ -1417,7 +1440,7 @@ public class League {
             //cb
             for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
                 heismanCandidates.add( teamList.get(i).teamCBs.get(cb) );
-                tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamCBs.get(cb);
                     heismanScore = tempScore;
@@ -1427,7 +1450,7 @@ public class League {
             //s
             for (int s = 0; s < teamList.get(i).teamSs.size(); ++s) {
                 heismanCandidates.add( teamList.get(i).teamSs.get(s) );
-                tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins*100;
+                tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins*100 + teamList.get(i).confPrestige*10;
                 if ( tempScore > heismanScore ) {
                     heisman = teamList.get(i).teamSs.get(s);
                     heismanScore = tempScore;
@@ -2582,7 +2605,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
                 heismanCandidates.add(teamList.get(i).teamQBs.get(qb));
-                tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamQBs.get(qb);
                     heismanScore = tempScore;
@@ -2601,7 +2624,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
                 heismanCandidates.add(teamList.get(i).teamRBs.get(rb));
-                tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamRBs.get(rb);
                     heismanScore = tempScore;
@@ -2620,7 +2643,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
                 heismanCandidates.add(teamList.get(i).teamWRs.get(wr));
-                tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamWRs.get(wr);
                     heismanScore = tempScore;
@@ -2640,7 +2663,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
                 heismanCandidates.add(teamList.get(i).teamTEs.get(te));
-                tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamTEs.get(te);
                     heismanScore = tempScore;
@@ -2659,7 +2682,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamOLs.size(); ++te) {
                 heismanCandidates.add(teamList.get(i).teamOLs.get(te));
-                tempScore = teamList.get(i).teamOLs.get(te).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamOLs.get(te).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamOLs.get(te);
                     heismanScore = tempScore;
@@ -2678,7 +2701,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamKs.size(); ++te) {
                 heismanCandidates.add(teamList.get(i).teamKs.get(te));
-                tempScore = teamList.get(i).teamKs.get(te).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamKs.get(te).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamKs.get(te);
                     heismanScore = tempScore;
@@ -2697,7 +2720,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
                 heismanCandidates.add(teamList.get(i).teamDLs.get(dl));
-                tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamDLs.get(dl);
                     heismanScore = tempScore;
@@ -2716,7 +2739,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
                 heismanCandidates.add(teamList.get(i).teamLBs.get(lb));
-                tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamLBs.get(lb);
                     heismanScore = tempScore;
@@ -2735,7 +2758,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
                 heismanCandidates.add(teamList.get(i).teamCBs.get(cb));
-                tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamCBs.get(cb);
                     heismanScore = tempScore;
@@ -2755,7 +2778,7 @@ public class League {
             for (int s = 0; s < teamList.get(i).teamSs.size(); ++s)
             {
                 heismanCandidates.add(teamList.get(i).teamSs.get(s));
-                tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins * 100;
+                tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige*10;
                 if (tempScore > heismanScore) {
                     heisman = teamList.get(i).teamSs.get(s);
                     heismanScore = tempScore;

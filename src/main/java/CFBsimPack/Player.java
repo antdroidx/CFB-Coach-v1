@@ -63,8 +63,8 @@ public class Player {
     
     public int getHeismanScore() {
         int adjGames = gamesPlayed;
-        if (adjGames > 10) adjGames = 10;
-        return ratOvr * adjGames;
+        if (adjGames > 11) adjGames = 11;
+        return ratOvr * adjGames + team.confPrestige*5;
     }
 
     public String getInitialName() {

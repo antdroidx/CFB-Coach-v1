@@ -53,6 +53,7 @@ public class Conference {
         robinWeek = 0;
         evenYear = (league.leagueHistory.size()%2==0);
 
+        updateConfPrestige();
 
         // Set up int arrays for each team's home/away rotation.
         // Theoretically every year you should change off between having 5 home games and 4 away games in conference
@@ -260,6 +261,14 @@ public class Conference {
                 confTeams.get(i).gameSchedule.get(week).addNewSeasonGames(confTeams.get(i));
             }
         }
+    }
+
+    public void updateConfPrestige() {
+        int CP = 0;
+        for ( int i = 0; i < confTeams.size(); ++i ) {
+           CP += confTeams.get(i).teamPrestige;
+        }
+        confPrestige = CP/confTeams.size();
     }
     /**
      * Schedule the CCG based on team rankings.
