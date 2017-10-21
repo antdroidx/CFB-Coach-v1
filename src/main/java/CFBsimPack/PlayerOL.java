@@ -200,6 +200,11 @@ public class PlayerOL extends Player {
     }
 
     @Override
+    public int getHeismanScore() {
+        return ratOvr*10 + team.confPrestige*5;
+    }
+
+    @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));

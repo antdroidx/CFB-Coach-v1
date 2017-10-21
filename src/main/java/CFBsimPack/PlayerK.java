@@ -262,7 +262,7 @@ public class PlayerK extends Player {
 
     @Override
     public int getHeismanScore() {
-        return (int)((statsFGMade*5 + statsXPMade)*((double)statsFGMade/statsFGAtt)) + ratOvr;
+        return (int)((statsFGMade*5 + statsXPMade)*((double)statsFGMade/statsFGAtt)) + ratOvr + team.confPrestige*5;
     }
 
     @Override
