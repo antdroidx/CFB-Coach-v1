@@ -2543,14 +2543,14 @@ public class League {
         setTeamRanks();
         if (currentWeek == 8) {
             newsStories.get(currentWeek + 1).add("Committee Announces First Playoff Rankings>The College Football Playoffs Committee has set ther initial rankings for this season's playoffs. The first look at the playoffs have " +
-                    teamList.get(0).name + " at the top of the list. The rest of the playoff order looks like this:\n\n" + "1." + teamList.get(0).getStrAbbrWL() + "\n" + "2." + teamList.get(1).getStrAbbrWL() + "\n" + "3." +
-                    teamList.get(2).getStrAbbrWL() + "\n" + "4." + teamList.get(3).getStrAbbrWL() + "\n" + "5." + teamList.get(4).getStrAbbrWL() + "\n" + "6." + teamList.get(5).getStrAbbrWL() + "\n" + "7." +
-                    teamList.get(6).getStrAbbrWL() + "\n" + "8." + teamList.get(7).getStrAbbrWL() + "\n");
+                    teamList.get(0).name + " at the top of the list. The rest of the playoff order looks like this:\n\n" + "1. " + teamList.get(0).getStrAbbrWL() + "\n" + "2. " + teamList.get(1).getStrAbbrWL() + "\n" + "3. " +
+                    teamList.get(2).getStrAbbrWL() + "\n" + "4. " + teamList.get(3).getStrAbbrWL() + "\n" + "5. " + teamList.get(4).getStrAbbrWL() + "\n" + "6. " + teamList.get(5).getStrAbbrWL() + "\n" + "7. " +
+                    teamList.get(6).getStrAbbrWL() + "\n" + "8. " + teamList.get(7).getStrAbbrWL() + "\n");
         }
         if (currentWeek > 8 && currentWeek < 12) {
-            newsStories.get(currentWeek + 1).add("Committee Updates Rankings>The College Football Playoff Committee has updated their Playoff Rankings. The order looks like this: \n\n" + "1." + teamList.get(0).getStrAbbrWL() +
-                    "\n" + "2." + teamList.get(1).getStrAbbrWL() + "\n" + "3." + teamList.get(2).getStrAbbrWL() + "\n" + "4." + teamList.get(3).getStrAbbrWL() + "\n" + "5." + teamList.get(4).getStrAbbrWL() + "\n" + "6." +
-                    teamList.get(5).getStrAbbrWL() + "\n" + "7." + teamList.get(6).getStrAbbrWL() + "\n" + "8." + teamList.get(7).getStrAbbrWL() + "\n");
+            newsStories.get(currentWeek + 1).add("Committee Updates Rankings>The College Football Playoff Committee has updated their Playoff Rankings. The order looks like this: \n\n" + "1. " + teamList.get(0).getStrAbbrWL() +
+                    "\n" + "2. " + teamList.get(1).getStrAbbrWL() + "\n" + "3. " + teamList.get(2).getStrAbbrWL() + "\n" + "4. " + teamList.get(3).getStrAbbrWL() + "\n" + "5. " + teamList.get(4).getStrAbbrWL() + "\n" + "6. " +
+                    teamList.get(5).getStrAbbrWL() + "\n" + "7. " + teamList.get(6).getStrAbbrWL() + "\n" + "8. " + teamList.get(7).getStrAbbrWL() + "\n");
         }
     }
 
@@ -2563,32 +2563,32 @@ public class League {
         ArrayList<PlayerLB> LB = rankLB();
         ArrayList<PlayerCB> CB = rankCB();
         ArrayList<PlayerS> S = rankS();
-        if (currentWeek == 6) {
+        if (currentWeek == 5) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ S.get(0).getYrStr() + " safety, " + S.get(0).name + ", has been cleaning up in the back this year helping " + S.get(0).team.name +
                     " to a record of " + S.get(0).team.strTeamRecord() + ". The safety has made " + S.get(0).statsTackles + " tackles and sacked the QB " + S.get(0).statsSacks + " times this year. In coverage, he's recovered " +
                     S.get(0).statsFumbles + " fumbles and intercepted opposing QBs " + S.get(0).statsInts + " times this year. Look for him to be in the year end running for Player of the Year.");
-        }else if (currentWeek == 7) {
+        }else if (currentWeek == 6) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ QB.get(0).getYrStr() + " quarterback, " + QB.get(0).name + ", is one of the top players at his position in the nation this year. He has led " + QB.get(0).team.name +
                     " to a record of " + QB.get(0).team.strTeamRecord() + ". He has passed for " + QB.get(0).statsPassYards + " yards this season, and thrown " + QB.get(0).statsPassTD + " touchdowns. " +
                     "He's also carried the ball for " +  QB.get(0).statsRushYards + " yards this season. Look for him to be in the year end running for Player of the Year.");
-        } else if (currentWeek == 8) {
+        } else if (currentWeek == 7) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ WR.get(0).getYrStr() + " wide receiver, " + WR.get(0).name + ", has been flying pass defensive coverages this year helping " + WR.get(0).team.name +
                     " to a record of " + WR.get(0).team.strTeamRecord() + ". The receiver has caught " + WR.get(0).statsReceptions + " for " + WR.get(0).statsRecYards + " yards this year. He's found the end zone " +  WR.get(0).statsTD +
-                    " times this year. Look for him to be in the year end running for Player of the Year.");
-        } else if (currentWeek == 9) {
+                    " times. Look for him to be in the year end running for Player of the Year.");
+        } else if (currentWeek == 8) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ LB.get(0).getYrStr() + " linebacker, " + LB.get(0).name + ", has been blowing up offenses this year helping " + LB.get(0).team.name +
                     " to a record of " + LB.get(0).team.strTeamRecord() + ". The linebacker has made " + LB.get(0).statsTackles + " tackles and sacked the QB " + LB.get(0).statsSacks + " times this year. In coverage, he's recovered " +
                     LB.get(0).statsFumbles + " fumbles and intercepted opposing QBs " + LB.get(0).statsInts + " times this year. Look for him to be in the year end running for Player of the Year.");
-        } else if (currentWeek == 10) {
+        } else if (currentWeek == 9) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ DL.get(0).getYrStr() + " defensive lineman, " + DL.get(0).name + ", has been disrupting offensive lines this year helping " + DL.get(0).team.name +
                     " to a record of " + DL.get(0).team.strTeamRecord() + ". The lineman has made " + DL.get(0).statsTackles + " tackles and sacked the QB " + DL.get(0).statsSacks + " times this year.He's also recovered " +
                     DL.get(0).statsFumbles + " fumbles this year. Look for him to be in the year end running for Player of the Year.");
-        } else if (currentWeek == 11) {
+        } else if (currentWeek == 10) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ RB.get(0).getYrStr() + " running back, " + RB.get(0).name + ", has been finding holes in opposing defenses this season for " + RB.get(0).team.name +
                     " as they compiled a record of " + RB.get(0).team.strTeamRecord() + ". The running back has rushed for " + RB.get(0).statsRushYards+ " yards and scored " + RB.get(0).statsRushTD + " times this year. " +
                     "In the passing game, he's caught " + RB.get(0).statsReceptions + " for " + RB.get(0).statsRecYards + " and scored " + RB.get(0).statsRecTD + " touchdowns in the air this year. " +
                     "Look for him to be in the year end running for Player of the Year.");
-        } else if (currentWeek == 12) {
+        } else if (currentWeek == 11) {
             newsStories.get(currentWeek+1).add("Player Spotlight>"+ CB.get(0).getYrStr() + " cornerback, " + CB.get(0).name + ", has been shutting down opposing receivers this year helping " + CB.get(0).team.name +
                     " to a record of " + CB.get(0).team.strTeamRecord() + ". The corner has made " + CB.get(0).statsTackles + " tackles and sacked the QB " + CB.get(0).statsSacks + " times this year. In coverage, he's recovered " +
                     CB.get(0).statsFumbles + " fumbles and intercepted opposing QBs " + CB.get(0).statsInts + " times this year. Look for him to be in the year end running for Player of the Year.");
