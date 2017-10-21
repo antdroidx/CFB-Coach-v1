@@ -745,7 +745,7 @@ public class Game implements Serializable {
         } else {
             gameDownAdj = gameDown;
         }
-        return "\n\n" + homeTeam.abbr + " " + homeScore + " - " + awayScore + " " + awayTeam.abbr + ", Time: " + convGameTime() +
+        return "\n\n" + homeTeam.abbr + " " + homeScore + " - " + awayScore + " " + awayTeam.abbr + ",   Time: " + convGameTime() +
                 "\n\t" + possStr + " " + gameDownAdj + " and " + yardsNeedAdj + " at " + gameYardLine + " yard line." + "\n";
     }
 
@@ -1584,7 +1584,7 @@ public class Game implements Serializable {
             selWRStats[5]++;
             selWR.statsFumbles++;
 
-            gameEventLog += getEventPrefix() + "TURNOVER!\n" + offense.abbr + " receiver " + selWR.name + " fumbled the ball after a catch. It was recovered by " + defender + ".";
+            gameEventLog += getEventPrefix() + "FUMBLE!\n" + offense.abbr + " receiver " + selWR.name + " fumbled the ball after a catch. It was recovered by " + defender + ".";
 
 
             if (gamePoss) { // home possession
@@ -1804,7 +1804,7 @@ public class Game implements Serializable {
                 defender = ("CB " + selCB.name);
             }
 
-            gameEventLog += getEventPrefix() + "TURNOVER!\n" + offense.abbr + " TE " + selTE.name + " fumbled the ball after a catch. It was recovered by " + defender + ".";
+            gameEventLog += getEventPrefix() + "FUMBLE!\n" + offense.abbr + " TE " + selTE.name + " fumbled the ball after a catch. It was recovered by " + defender + ".";
 
 
             if (gamePoss) { // home possession
@@ -2020,7 +2020,7 @@ public class Game implements Serializable {
                 defender = ("CB " + selCB.name);
             }
 
-            gameEventLog += getEventPrefix() + "TURNOVER!\n" + offense.abbr + " RB " + selRB.name + " fumbled the ball after a catch. It was recovered by " + defender + ".";
+            gameEventLog += getEventPrefix() + "FUMBLE!\n" + offense.abbr + " RB " + selRB.name + " fumbled the ball after a catch. It was recovered by " + defender + ".";
 
 
             if (gamePoss) { // home possession
@@ -2343,7 +2343,7 @@ public class Game implements Serializable {
                     defender = ("LB " + selLB.name);
                 }
 
-                gameEventLog += getEventPrefix() + "TURNOVER!\n" + offense.abbr + " RB " + selRB.name + " fumbled the ball while rushing and recovered by " + defender + ".";
+                gameEventLog += getEventPrefix() + "FUMBLE!\n" + offense.abbr + " RB " + selRB.name + " fumbled the ball while rushing and recovered by " + defender + ".";
 
                 if (!playingOT) {
                     gameDown = 1;
@@ -2472,7 +2472,7 @@ public class Game implements Serializable {
                 }
 
 
-                gameEventLog += getEventPrefix() + "TURNOVER!\n" + offense.abbr + " QB " + selQB.name + " fumbled the ball while rushing and recovered by " + defender + ".";
+                gameEventLog += getEventPrefix() + "FUMBLE!\n" + offense.abbr + " QB " + selQB.name + " fumbled the ball while rushing and recovered by " + defender + ".";
 
                 if (!playingOT) {
                     gameDown = 1;
@@ -2585,15 +2585,15 @@ public class Game implements Serializable {
     private void kickXP(Team offense, Team defense) {
         // No XP/2pt try if the TD puts the bottom OT offense ahead (aka wins the game)
         if (playingOT && bottomOT && (((numOT % 2 == 0) && awayScore > homeScore) || ((numOT % 2 != 0) && homeScore > awayScore))) {
-            gameEventLog += getEventPrefix() + " " + tdInfo + "\n" + offense.abbr + " wins on a walk-off touchdown!";
+            gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + "\n" + offense.abbr + " wins on a walk-off touchdown!";
         }
         // If a TD is scored as time expires, there is no XP/2pt if the score difference is greater than 2
         else if (!playingOT && gameTime <= 0 && ((homeScore - awayScore > 2) || (awayScore - homeScore > 2))) {
             //Walkoff TD!
             if ((Math.abs(homeScore - awayScore) < 7) && ((gamePoss && homeScore > awayScore) || (!gamePoss && awayScore > homeScore)))
-                gameEventLog += getEventPrefix() + " " + tdInfo + "\n" + offense.abbr + " wins on a walk-off touchdown!";
+                gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + "\n" + offense.abbr + " wins on a walk-off touchdown!";
                 //Just rubbing in the win or saving some pride
-            else gameEventLog += getEventPrefix() + " " + tdInfo;
+            else gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo;
         } else {
             if ((numOT >= 3) || (((gamePoss && (awayScore - homeScore) == 2) || (!gamePoss && (homeScore - awayScore) == 2)) && gameTime < 300)) {
                 //go for 2
@@ -2610,9 +2610,9 @@ public class Game implements Serializable {
                             awayScore += 2;
                         }
                         addPointsQuarter(2);
-                        gameEventLog += getEventPrefix() + " " + tdInfo + " " + offense.getRB(0).name + " rushed for the 2pt conversion.";
+                        gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getRB(0).name + " rushed for the 2pt conversion.";
                     } else {
-                        gameEventLog += getEventPrefix() + " " + tdInfo + " " + offense.getRB(0).name + " stopped at the line of scrimmage, failed the 2pt conversion.";
+                        gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getRB(0).name + " stopped at the line of scrimmage, failed the 2pt conversion.";
                     }
                 } else {
                     int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass();
@@ -2625,9 +2625,9 @@ public class Game implements Serializable {
                             awayScore += 2;
                         }
                         addPointsQuarter(2);
-                        gameEventLog += getEventPrefix() + " " + tdInfo + " " + offense.getQB(0).name + " completed the pass to " + offense.getWR(0).name + " for the 2pt conversion.";
+                        gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getQB(0).name + " completed the pass to " + offense.getWR(0).name + " for the 2pt conversion.";
                     } else {
-                        gameEventLog += getEventPrefix() + " " + tdInfo + " " + offense.getQB(0).name + "'s pass incomplete to " + offense.getWR(0).name + " for the failed 2pt conversion.";
+                        gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getQB(0).name + "'s pass incomplete to " + offense.getWR(0).name + " for the failed 2pt conversion.";
                     }
                 }
 
@@ -2644,11 +2644,11 @@ public class Game implements Serializable {
                         AwayKStats[0]++;
                         AwayKStats[1]++;
                     }
-                    gameEventLog += getEventPrefix() + " " + tdInfo + " " + offense.getK(0).name + " made the XP.";
+                    gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getK(0).name + " made the XP.";
                     addPointsQuarter(1);
                     offense.getK(0).statsXPMade++;
                 } else {
-                    gameEventLog += getEventPrefix() + " " + tdInfo + " " + offense.getK(0).name + " missed the XP.";
+                    gameEventLog += getEventPrefix() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getK(0).name + " missed the XP.";
                     // missed XP
                     if (gamePoss) { // home possession
                         HomeKStats[1]++;
@@ -2768,7 +2768,7 @@ public class Game implements Serializable {
         int sackloss = (3 + (int) (Math.random() * (normalize(defense.getCompositeDLPass()) - normalize(offense.getCompositeOLPass())) / 2));
         if (sackloss < 3) sackloss = 3;
         offense.getQB(0).statsSacked++;
-        //offense.getQB(0).statsRushYards -= sackloss;
+        offense.getQB(0).statsRushYards -= sackloss;
         gameYardsNeed += sackloss;
         gameYardLine -= sackloss;
 
@@ -2839,7 +2839,7 @@ public class Game implements Serializable {
         offense.getQB(0).statsInt++;
 
         //Log the event before decreasing the time, in keeping with the standard of other logged plays (TD, Fumble, etc.)
-        gameEventLog += getEventPrefix() + "TURNOVER!\n" + offense.abbr + " QB " + offense.getQB(0).name + " was intercepted by " + defender + ".";
+        gameEventLog += getEventPrefix() + "INTERCEPTED!\n" + offense.abbr + " QB " + offense.getQB(0).name + " was intercepted by " + defender + ".";
         //Clock stops after a pick, so just run time off the clock for the play that occurred
         //NOTE: If the ability to run an interception back is ever added, this should be changed to be more time
         gameTime -= timePerPlay * Math.random();
