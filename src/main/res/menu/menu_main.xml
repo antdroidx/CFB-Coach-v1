@@ -31,11 +31,11 @@
         android:orderInCategory="100"
         android:title="@string/action_rankings"
         app:showAsAction="never" />
-    <?item
+    <item
         android:id="@+id/action_player_rankings"
         android:orderInCategory="100"
         android:title="@string/action_player_rankings"
-        app:showAsAction="never" /?>
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_ccg_bowl_watch"
         android:orderInCategory="100"
