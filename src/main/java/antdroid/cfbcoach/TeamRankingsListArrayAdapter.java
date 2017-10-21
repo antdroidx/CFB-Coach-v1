@@ -44,7 +44,7 @@ public class TeamRankingsListArrayAdapter extends ArrayAdapter<String> {
         textCenter.setText(teamStat[1]);
         textRight.setText(teamStat[2]);
 
-        if (teamStat[1].equals(userTeamStrRep)) {
+        if (teamStat[1].contains(userTeamStrRep)) {
             // Bold user team
             textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
             textLeft.setTextColor(Color.parseColor("#1A75FF"));

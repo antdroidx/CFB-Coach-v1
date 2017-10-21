@@ -484,9 +484,9 @@ public class MainActivity extends AppCompatActivity {
              * Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
-/*         } else if (id == R.id.action_player_rankings) {
+         } else if (id == R.id.action_player_rankings) {
 
-             showPlayerRankingsDialog();*/
+             showPlayerRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
             /**
              * Current selected team history
@@ -1009,9 +1009,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-/*    public void showPlayerRankingsDialog() {
+    public void showPlayerRankingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Team Rankings")
+        builder.setTitle("Player Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1022,11 +1022,10 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
+        ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
-                {"Poll Votes", "Conference Standings", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
-                        "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
-                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class"};
+                {"QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
+                        "Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs"};
         Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -1035,18 +1034,18 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamRankingsList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, rankings, userTeam.strRepWithBowlResults());
+                new TeamRankingsListArrayAdapter(this, rankings, userTeam.abbr);
         teamRankingsList.setAdapter(teamRankingsAdapter);
 
         teamRankingsSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                        ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
+                        ArrayList<String> rankings = simLeague.getPlayerRankStr(position);
                         if (position == 16) {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
                         } else {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
                         }
                         teamRankingsAdapter.clear();
                         teamRankingsAdapter.addAll(rankings);
@@ -1057,7 +1056,7 @@ public class MainActivity extends AppCompatActivity {
                         // do nothing
                     }
                 });
-    }*/
+    }
 
 
     public void showRecruitingClassDialog() {

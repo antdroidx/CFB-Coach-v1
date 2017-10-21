@@ -330,10 +330,21 @@ public class PlayerQB extends Player {
         return statsPassTD * 142 - statsInt*250 + statsPassYards + statsRushTD*142 + statsRushYards;
     }
 
+    public int getPasserRating() {
+        int rating = (int)(((8.4*statsPassYards)+(300*statsPassTD)+(100*statsPassComp)-(200*statsInt))/statsPassAtt+1);
+    return rating;
+    }
+
+    public int getPassPCT() {
+        int rating = (int)(100*statsPassComp/(statsPassAtt+1));
+        return rating;
+    }
+
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TD/Int: " + statsPassTD + "/" + statsInt + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
+        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
+        pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + ((double)(10*statsPassYards/(statsPassAtt+1))/10) + " yds");
         pStats.add("Yds/Game: " + (statsPassYards/getGamesPlayed()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
@@ -348,8 +359,8 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TD/Int: " + statsPassTD + "/" + statsInt + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
-        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + ((double)(10*statsPassYards/(statsPassAtt+1))/10) + " yds");
+        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
+        pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Yds/Game: " + (statsPassYards/getGamesPlayed()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
         pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")");
@@ -364,7 +375,8 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TD/Int: " + (statsPassTD +careerTDs) + "/" + (statsInt+careerInt) + ">Comp Percent: " + (100*(statsPassComp+careerPassComp)/(statsPassAtt+careerPassAtt+1))+"%");
+        pStats.add("Passer Rating " + (int)(((8.4*(statsPassYards+careerPassYards))+(300*(statsPassTD+careerTDs))+(100*(statsPassComp+careerPassComp))-(200*(statsInt+careerInt)))/(statsPassAtt+careerPassAtt+1)) + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
+        pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Pass Yards: " + (statsPassYards+careerPassYards) + " yds>Yards/Att: " + ((double)(10*(statsPassYards+careerPassYards)/(statsPassAtt+careerPassAtt+1))/10) + " yds");
         pStats.add("Yds/Game: " + ((statsPassYards+careerPassYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Sacks: " + (statsSacked+careerSacked));
         pStats.add("Rush Yards: " + (statsRushYards+careerRushYards) + ">Rush TDs: " + (statsRushTD+careerRushTD));
