@@ -1,11 +1,10 @@
 package antdroid.cfbcoach;
 
-/**
- * Created by Achi Jones on 2/20/2016.
+/*
+  Created by Achi Jones on 2/20/2016.
  */
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

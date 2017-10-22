@@ -1,19 +1,16 @@
 package antdroid.cfbcoach;
 
 import android.os.Bundle;
-import android.service.notification.NotificationListenerService;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
-import android.os.Environment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
@@ -30,7 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Collections;
 
 import CFBsimPack.Conference;
 import CFBsimPack.Game;
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     League simLeague;
     Conference currentConference;
     Team currentTeam;
-    public String oldConf, newConf;
+    public String oldConf;
     int currentConferenceID;
     Team userTeam;
     File saveLeagueFile;
@@ -80,14 +76,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         //Set up list
         mainList = (ListView) findViewById(R.id.mainList);
         expListPlayerStats = (ExpandableListView) findViewById(R.id.playerStatsExpandList);
 
-        /**
-         * Determine whether to load League or start new one
+        /*
+          Determine whether to load League or start new one
          */
         Bundle extras = getIntent().getExtras();
         boolean loadedLeague = false;
@@ -221,14 +215,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
-                        //heh
-                        //updateCurrTeam();
                     }
                 });
 
 
-        /**
-         * Set up "Play Week" button
+        /*
+          Set up "Play Week" button
          */
         final Button simGameButton = (Button) findViewById(R.id.simGameButton);
         simGameButton.setOnClickListener(new View.OnClickListener() {
@@ -410,7 +402,6 @@ public class MainActivity extends AppCompatActivity {
         depthchartButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //currTab = 3;
                 currentTeam = userTeam;
                 showTeamLineupDialog();
             }
@@ -420,7 +411,6 @@ public class MainActivity extends AppCompatActivity {
         strategyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                //currTab = 3;
                 currentTeam = userTeam;
                 showTeamStrategyDialog();
             }
@@ -457,8 +447,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
          if (id == R.id.action_heisman) {
-            /**
-             * Clicked Heisman watch in drop down menu
+            /*
+              Clicked Heisman watch in drop down menu
              */
             if (simLeague.currentWeek < 13) {
                 String heismanTop5Str = simLeague.getTop5HeismanStr();
@@ -480,51 +470,51 @@ public class MainActivity extends AppCompatActivity {
                 heismanCeremony();
             }
         } else if (id == R.id.action_rankings) {
-            /**
-             * Clicked Team Rankings in drop down menu
+            /*
+              Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
          } else if (id == R.id.action_player_rankings) {
 
              showPlayerRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
-            /**
-             * Current selected team history
+            /*
+              Current selected team history
              */
             showCurrTeamHistoryDialog();
         } else if (id == R.id.action_league_history) {
-            /**
-             * Clicked League History in drop down menu
+            /*
+              Clicked League History in drop down menu
              */
             showLeagueHistoryDialog();
          } else if (id == R.id.action_top_25_history) {
-             /**
-              * Clicked Top 25 History
+             /*
+               Clicked Top 25 History
               */
              showTop25History();
         } else if (id == R.id.action_team_history) {
-            /**
-             * Clicked User Team History in drop down menu
+            /*
+              Clicked User Team History in drop down menu
              */
             showUserTeamHistoryDialog();
         } else if (id == R.id.action_ccg_bowl_watch) {
-            /**
-             * Clicked CCG / Bowl Watch in drop down menu
+            /*
+              Clicked CCG / Bowl Watch in drop down menu
              */
             showBowlCCGDialog();
         } else if (id == R.id.action_save_league) {
-            /**
-             * Clicked Save League in drop down menu
+            /*
+              Clicked Save League in drop down menu
              */
             saveLeague();
         } else if (id == R.id.action_return_main_menu) {
-            /**
-             * Let user confirm that they actually do want to go to main menu
+            /*
+              Let user confirm that they actually do want to go to main menu
              */
             exitMainActivity();
         } else if (id == R.id.action_change_team_name) {
-            /**
-             * Let user change their team name and abbr
+            /*
+              Let user change their team name and abbr
              */
             changeTeamNameDialog();
         }

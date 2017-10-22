@@ -22,7 +22,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import CFBsimPack.Team;
 import antdroid.cfbcoach.R;
 
 import java.util.ArrayList;
@@ -222,15 +221,15 @@ public class RecruitingActivity extends AppCompatActivity {
         // Get needs for each position
         updatePositionNeeds();
 
-        /**
-         * Assign components to private variables for easier access later
+        /*
+          Assign components to private variables for easier access later
          */
         budgetText = (TextView) findViewById(R.id.textRecBudget);
         String budgetStr = "Budget: $" + recruitingBudget;
         budgetText.setText(budgetStr);
 
-        /**
-         * Set up spinner for examining choosing position to recruit
+        /*
+          Set up spinner for examining choosing position to recruit
          */
         positionSpinner = (Spinner) findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
@@ -262,8 +261,8 @@ public class RecruitingActivity extends AppCompatActivity {
                     }
                 });
 
-        /**
-         * Set up the "Done" button for returning back to MainActivity
+        /*
+          Set up the "Done" button for returning back to MainActivity
          */
         Button doneRecrutingButton = (Button) findViewById(R.id.buttonDoneRecruiting);
         doneRecrutingButton.setOnClickListener(new View.OnClickListener() {
@@ -272,8 +271,8 @@ public class RecruitingActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Set up the "Roster" button for displaying dialog of all players in roster
+        /*
+          Set up the "Roster" button for displaying dialog of all players in roster
          */
         Button viewRosterButton = (Button) findViewById(R.id.buttonRecRoster);
         viewRosterButton.setOnClickListener(new View.OnClickListener() {
@@ -283,8 +282,8 @@ public class RecruitingActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Set up expandable list view
+        /*
+          Set up expandable list view
          */
         recruitList = (ExpandableListView) findViewById(R.id.recruitExpandList);
         setPlayerList("QB");
@@ -292,8 +291,8 @@ public class RecruitingActivity extends AppCompatActivity {
         expListAdapter = new ExpandableListAdapterRecruiting(this);
         recruitList.setAdapter(expListAdapter);
 
-        /**
-         * Set up "Expand All / Collapse All" button
+        /*
+          Set up "Expand All / Collapse All" button
          */
         final Button buttonExpandAll = (Button) findViewById(R.id.buttonRecruitExpandCollapse);
         buttonExpandAll.setOnClickListener(new View.OnClickListener() {

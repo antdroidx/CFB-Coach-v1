@@ -1,15 +1,13 @@
 package CFBsimPack;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.lang.StringBuilder;
 
 /**
- * Class for conferences, which each have 10 teams.
- * @author Achi
+ * Class for conferences, which each have 12 teams.
+ *
  */
 public class Conference {
 
@@ -136,8 +134,8 @@ public class Conference {
     public void setUpOOCSchedule() {
         //schedule OOC games
         int confNum = -1;
-        if ( league.conferences.get(0 + league.randconf).confName.equals(confName) ) {
-            confNum = 0 + league.randconf;
+        if ( league.conferences.get(league.randconf).confName.equals(confName) ) {
+            confNum = league.randconf;
         } else if ( league.conferences.get(1 + 2*league.randconf).confName.equals(confName) ) {
             confNum = 1 + 2*league.randconf;
         } else if ( league.conferences.get(2 + 3*league.randconf).confName.equals(confName) ) {
