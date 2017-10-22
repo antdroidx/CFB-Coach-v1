@@ -1,16 +1,13 @@
 package antdroid.cfbcoach;
 
-/**
- * Created by Achi Jones on 2/21/2016.
+/*
+  Created by Achi Jones on 2/21/2016.
  */
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

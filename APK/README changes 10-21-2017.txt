@@ -1,3 +1,11 @@
+10-22
+Major Injury reports to star players in News
+Medical Redshirting now exists
+Initial Player Rating tuning
+Player Progression tuning
+Code optimizations/clean-up
+
+
 10-21
 Player Rankings in the menu!
 Added QB Rating stat

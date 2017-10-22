@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Random;
 
-import antdroid.cfbcoach.Home;
-
 
 /**
  * Class for storing games. Has all stats for the game.
@@ -278,11 +276,11 @@ public class Game implements Serializable {
      * @return A String array of the left, center, right, and logs.
      */
     public String[] getGameSummaryStr() {
-        /**
-         * [0] is left side
-         * [1] is center
-         * [2] is right
-         * [3] is bottom (game log)
+        /*
+          [0] is left side
+          [1] is center
+          [2] is right
+          [3] is bottom (game log)
          */
         String[] gameSum = new String[4];
         StringBuilder gameL = new StringBuilder();
@@ -629,11 +627,11 @@ public class Game implements Serializable {
      * @return a String array with the left, right, center, and "SCOUTING REPORT"
      */
     public String[] getGameScoutStr() {
-        /**
-         * [0] is left side
-         * [1] is center
-         * [2] is right
-         * [3] is bottom (will be empty for scouting)
+        /*
+          [0] is left side
+          [1] is center
+          [2] is right
+          [3] is bottom (will be empty for scouting)
          */
         String[] gameSum = new String[4];
         StringBuilder gameL = new StringBuilder();
@@ -1661,10 +1659,7 @@ public class Game implements Serializable {
 
             qbSack(offense, defense, defender);
             return;
-        } //escapes pocket and scrambles...
-/*        else if (Math.random() * 100 < pressureOnQB / 8 && selQB.ratSpeed > selDL.ratPassRush) {
-            RushPlayQB(offense, defense, selQB, selTE, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
-        }*/
+        }
 
         //check for int
         double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 18
@@ -1879,9 +1874,7 @@ public class Game implements Serializable {
 
             qbSack(offense, defense, defender);
             return;
-        } /*else if (Math.random() * 100 < pressureOnQB / 9) {
-            RushPlayQB(offense, defense, selQB, selRB, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
-        }*/
+        }
 
         //check for int
         double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 25
@@ -2263,9 +2256,6 @@ public class Game implements Serializable {
                 awayScore += 6;
             }
             tdInfo = offense.abbr + " RB " + selRB.name + " rushed " + yardsGain + " yards for a TD.";
-            //offense.teamPoints += 6;
-            //defense.teamOppPoints += 6;
-
             gotTD = true;
         }
 
@@ -2390,9 +2380,6 @@ public class Game implements Serializable {
             }
 
             tdInfo = offense.abbr + " QB " + selQB.name + " rushed " + yardsGain + " yards for a TD.";
-            //offense.teamPoints += 6;
-            //defense.teamOppPoints += 6;
-
             gotTD = true;
         }
 
@@ -2807,7 +2794,6 @@ public class Game implements Serializable {
      * Perform safety. Will add 2 to the correct team and give the ball over via a free kick.
      */
     private void safety(String defender) {
-        //addPointsQuarter(2);
         if (gamePoss) {
             awayScore += 2;
             gameEventLog += getEventPrefix() + "SAFETY!\n" + homeTeam.abbr + " QB " + homeTeam.getQB(0).name +
@@ -3086,11 +3072,8 @@ public class Game implements Serializable {
         selRBStats[1] += yardsGain;
         if (gamePoss) { // home possession
             homeTeam.teamRushYards += yardsGain;
-            //awayTeam.teamOppRushYards += yardsGain;
         } else {
             awayTeam.teamRushYards += yardsGain;
-            //homeTeam.teamOppRushYards += yardsGain;
-
         }
     }
 
@@ -3102,12 +3085,10 @@ public class Game implements Serializable {
             HomeQBStats[6]++;
             HomeQBStats[7] += yardsGain;
             homeTeam.teamRushYards += yardsGain;
-            //awayTeam.teamOppRushYards -= yardsGain;
         } else {
             AwayQBStats[6]++;
             AwayQBStats[7] += yardsGain;
             awayTeam.teamRushYards += yardsGain;
-            //homeTeam.teamOppRushYards -= yardsGain;
         }
     }
 

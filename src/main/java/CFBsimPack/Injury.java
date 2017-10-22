@@ -10,6 +10,7 @@ import java.util.Random;
  */
 public class Injury {
 
+    public League league;
     private int duration; // Duration of the injury (in games)
     private String description; // What the injury is
     private Player player; // Player that has this injury
@@ -33,9 +34,20 @@ public class Injury {
         player = p;
         player.isInjured = true;
         player.ratPot -= duration/1.5;
-        if (player.ratPot < 0) player.ratPot = 0;
-        player.ratDur -= duration/1.5;
+        player.ratDur -= duration;
         if (player.ratDur < 0) player.ratDur = 0;
+        if (player.ratOvr > 80 && duration > 6) {
+            player.team.league.newsStories.get(player.team.league.currentWeek+1).add("Injury Report>A major injury was sustained by " + player.team.name + "'s star " + player.position + " , " + player.name + " today. During the game, " + player.name + " suffered a " + description
+                    + " injury and will be out for " + duration + " weeks.");
+        }
+
+        if (duration > 12 && player.team.league.currentWeek < 6 && player.gamesPlayed < 4) {
+            player.isMedicalRS = true;
+            if (player.team.userControlled) {
+                player.team.league.newsStories.get(player.team.league.currentWeek+1).add("Medical Redshirt>" + player.name + " sustained a major " + description + " injury and will be out for the season. A medical redshirt has been granted.");
+            }
+        }
+
     }
 
     public int getDuration() {
@@ -56,6 +68,10 @@ public class Injury {
     }
 
     public String toString() {
-        return description + " (" + duration + " wk)";
+        if (player.isMedicalRS) {
+            return description + " (" + duration + " wk) MedRS";
+        } else {
+            return description + " (" + duration + " wk)";
+        }
     }
 }

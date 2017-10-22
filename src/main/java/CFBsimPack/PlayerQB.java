@@ -1,21 +1,13 @@
 package CFBsimPack;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Class for QB player.
  * @author Achi
  */
 public class PlayerQB extends Player {
-    
-    //public String name;
-    //Overall rating, combination of other ratings
-    //public int ratOvr;
-    //Potential, affects how much he gets better in offseason
-    //public int ratPot;
-    //FootIQ, affects how smart he plays
-    //public int ratFootIQ;
+
     //PassPow affects how far he can throw
     public int ratPassPow;
     //PassAcc affects how accurate his passes are
@@ -67,17 +59,6 @@ public class PlayerQB extends Player {
         if (isRedshirt) year = 0;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/1.5) + 150 + (int)(Math.random()*100) - 50;
-
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratPassPow);
-        ratingsVector.addElement(ratPassAcc);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
-
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -133,16 +114,6 @@ public class PlayerQB extends Player {
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/1.5) + 150 + (int)(Math.random()*100) - 50;
 
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratPassPow);
-        ratingsVector.addElement(ratPassAcc);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
-
         statsPassAtt = 0;
         statsPassComp = 0;
         statsPassTD = 0;
@@ -191,20 +162,11 @@ public class PlayerQB extends Player {
         ratPassPow = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratPassAcc = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratEvasion = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratSpeed = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratSpeed = (int) (47 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratPassPow*3 + ratPassAcc*4 + ratEvasion + ratSpeed)/9;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/1.5) + 150 + (int)(Math.random()*100) - 50;
 
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratPassPow);
-        ratingsVector.addElement(ratPassAcc);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -241,58 +203,32 @@ public class PlayerQB extends Player {
         position = "QB";
     }
 
-    public Vector getStatsVector() {
-        Vector v = new Vector(13);
-        v.add(statsPassComp);
-        v.add(statsPassAtt);
-        v.add((float)((int)((float)statsPassComp/statsPassAtt*1000))/10);
-        v.add(statsPassTD);
-        v.add(statsInt);
-        v.add(statsPassYards);
-        v.add(statsPassYards);
-        v.add((float)((int)((float)statsPassYards/statsPassAtt*100))/100);
-        v.add(statsSacked);
-        v.add(statsRushAtt);
-        v.add(statsRushYards);
-        v.add(statsRushTD);
-        v.add(statsFumbles);
-        return v;
-    }
-
-    public Vector getRatingsVector() {
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name + " (" + getYrStr() + ")");
-        ratingsVector.addElement(ratOvr + " (+" + ratImprovement + ")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratPassPow);
-        ratingsVector.addElement(ratPassAcc);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
-        return ratingsVector;
-    }
 
     @Override
     public void advanceSeason() {
-        year++;
         int oldOvr = ratOvr;
-        if (wonAllConference) ratPot++;
-        if (wonAllAmerican) ratPot++;
-        if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
 
-        ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratPassPow += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratPassAcc += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratEvasion += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
+        if (!isMedicalRS) {
+            year++;
+            if (wonAllConference) ratPot++;
+            if (wonAllAmerican) ratPot++;
+            if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
 
-        if ( Math.random()*100 < ratPot ) {
-            //breakthrough
-            ratPassPow += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratPassAcc += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratEvasion += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+            ratFootIQ += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratPassPow += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratPassAcc += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratEvasion += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 20)) / 10;
+
+            if (Math.random() * 100 < ratPot) {
+                //breakthrough
+                ratPassPow += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratPassAcc += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratEvasion += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 25)) / 10;
+            }
         }
+
         ratOvr = (ratPassPow*3 + ratPassAcc*4 + ratEvasion + ratSpeed)/9;
         ratImprovement = ratOvr - oldOvr;
         //reset stats (keep career stats?)
@@ -336,7 +272,7 @@ public class PlayerQB extends Player {
     }
 
     public int getPassPCT() {
-        int rating = (int)(100*statsPassComp/(statsPassAtt+1));
+        int rating = 100*statsPassComp/(statsPassAtt+1);
         return rating;
     }
 

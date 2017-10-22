@@ -1,7 +1,6 @@
 package CFBsimPack;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Base player class that others extend. Has name, overall, potential, and football IQ.
@@ -33,14 +32,13 @@ public class Player {
     public int careerWins;
 
     public boolean isRedshirt;
+    public boolean isMedicalRS;
 
     public boolean isInjured;
     public Injury injury;
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
-    
-    public Vector ratingsVector;
-    
+
     public String getYrStr() {
         if (year == 0) {
             return "RS";
@@ -58,7 +56,7 @@ public class Player {
     
     public void advanceSeason() {
         //add stuff
-        year++;
+        if (!isMedicalRS) year++;
     }
     
     public int getHeismanScore() {

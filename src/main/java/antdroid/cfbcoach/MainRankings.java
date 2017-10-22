@@ -1,7 +1,7 @@
 package antdroid.cfbcoach;
 
-/**
- * Created by ahngu on 9/29/2017.
+/*
+  Created by ahngu on 9/29/2017.
  */
 
 import android.content.Context;

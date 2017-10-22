@@ -1,7 +1,7 @@
 package antdroid.cfbcoach;
 
-/**
- * Created by Achi Jones on 4/17/2016.
+/*
+  Created by Achi Jones on 4/17/2016.
  */
 
 import android.content.Context;
@@ -11,9 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import java.util.Arrays;
-import java.util.List;
 
 import antdroid.cfbcoach.R;
 

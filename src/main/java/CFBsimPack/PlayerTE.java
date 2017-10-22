@@ -1,7 +1,6 @@
 package CFBsimPack;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Created by ahngu on 10/9/2017.
@@ -13,13 +12,6 @@ import java.util.Vector;
 
 public class PlayerTE extends Player{
 
-    //public String name;
-    //Overall rating, combination of other ratings
-    //public int ratOvr;
-    //Potential, affects how much he gets better in offseason
-    //public int ratPot;
-    //FootIQ, affects how smart he plays
-    //public int ratFootIQ;
     //RecCat affects how good he is at catching
     public int ratCatch;
     //BlkR Blocking for Rushes
@@ -64,16 +56,6 @@ public class PlayerTE extends Player{
         if (isRedshirt) year = 0;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 75 + (int)(Math.random()*100) - 50;
-
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCatch);
-        ratingsVector.addElement(ratRunBlock);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -122,17 +104,6 @@ public class PlayerTE extends Player{
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 75 + (int)(Math.random()*100) - 50;
 
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCatch);
-        ratingsVector.addElement(ratRunBlock);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
-
-
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;
@@ -171,21 +142,10 @@ public class PlayerTE extends Player{
         ratCatch = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratRunBlock = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratEvasion = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratSpeed = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratSpeed = (int) (45 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratCatch*2 + ratRunBlock*2 + ratEvasion + ratSpeed)/6;
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/4) + 75 + (int)(Math.random()*100) - 50;
-
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCatch);
-        ratingsVector.addElement(ratRunBlock);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
-
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -213,52 +173,28 @@ public class PlayerTE extends Player{
         position = "TE";
     }
 
-    public Vector getStatsVector() {
-        Vector v = new Vector(7);
-        v.add(statsReceptions);
-        v.add(statsTargets);
-        v.add(statsRecYards);
-        v.add(statsRecTD);
-        v.add(statsFumbles);
-        v.add(statsDrops);
-        v.add((float)((int)((float)statsRecYards/statsReceptions*100))/100);
-        return v;
-    }
-
-    public Vector getRatingsVector() {
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name + " (" + getYrStr() + ")");
-        ratingsVector.addElement(ratOvr + " (+" + ratImprovement + ")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCatch);
-        ratingsVector.addElement(ratRunBlock);
-        ratingsVector.addElement(ratEvasion);
-        ratingsVector.addElement(ratSpeed);
-
-        return ratingsVector;
-    }
-
     @Override
     public void advanceSeason() {
-        year++;
         int oldOvr = ratOvr;
-        if (wonAllConference) ratPot++;
-        if (wonAllAmerican) ratPot++;
-        if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
 
-        ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratCatch += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratRunBlock += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratEvasion += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        if ( Math.random()*100 < ratPot ) {
-            //breakthrough
-            ratCatch += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratRunBlock += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratEvasion += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+        if (!isMedicalRS) {
+            year++;
+            if (wonAllConference) ratPot++;
+            if (wonAllAmerican) ratPot++;
+            if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
 
+            ratFootIQ += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratCatch += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratRunBlock += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratEvasion += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 20)) / 10;
+            if (Math.random() * 100 < ratPot) {
+                //breakthrough
+                ratCatch += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratRunBlock += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratEvasion += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 30)) / 10;
+            }
         }
         ratOvr = (ratCatch*2 + ratRunBlock*2 + ratEvasion + ratSpeed)/6;
         ratImprovement = ratOvr - oldOvr;
@@ -286,7 +222,7 @@ public class PlayerTE extends Player{
 
     @Override
     public int getHeismanScore() {
-        return statsRecTD * 175 - statsFumbles * 100 - statsDrops * 50 + (int)(statsRecYards * 3) + team.confPrestige*7;
+        return statsRecTD * 175 - statsFumbles * 100 - statsDrops * 50 + statsRecYards * 3 + team.confPrestige*7;
     }
 
     @Override

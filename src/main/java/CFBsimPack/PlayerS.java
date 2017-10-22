@@ -6,21 +6,9 @@
 package CFBsimPack;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
-/**
- * Class for the safety player. One on field.
- * @author Achi
- */
 public class PlayerS extends Player {
-    
-    //public String name;
-    //Overall rating, combination of other ratings
-    //public int ratOvr;
-    //Potential, affects how much he gets better in offseason
-    //public int ratPot;
-    //FootIQ, affects how smart he plays and how involved he is in each play
-    //public int ratFootIQ;
+
     //CBCov affects how good he is at covering the pass
     public int ratCoverage;
     //CBSpd affects how good he is at not letting up deep passes
@@ -39,9 +27,7 @@ public class PlayerS extends Player {
     public int careerSacks;
     public int careerFumbles;
     public int careerInts;
-    
-    //public Vector ratingsVector;
-    
+
     public PlayerS( String nm, Team t, int yr, int pot, int iq, int cov, int spd, int tkl, boolean rs, int dur, int rstop ) {
         team = t;
         name = nm;
@@ -61,16 +47,6 @@ public class PlayerS extends Player {
         position = "S";
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 125 + (int)(Math.random()*100) - 50;
-        
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCoverage);
-        ratingsVector.addElement(ratSpeed);
-        ratingsVector.addElement(ratTackle);
-        ratingsVector.addElement(ratRunStop);
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -115,16 +91,6 @@ public class PlayerS extends Player {
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 125 + (int)(Math.random()*100) - 50;
 
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCoverage);
-        ratingsVector.addElement(ratSpeed);
-        ratingsVector.addElement(ratTackle);
-        ratingsVector.addElement(ratRunStop);
-
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
@@ -158,23 +124,13 @@ public class PlayerS extends Player {
         ratFootIQ = (int) (50 + 50*Math.random());
         ratDur = (int) (50 + 50*Math.random());
         ratCoverage = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratSpeed = (int) (60 + year*5 + stars*5 - 25*Math.random());
+        ratSpeed = (int) (55 + year*5 + stars*5 - 25*Math.random());
         ratTackle = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratRunStop = (int) (60 + year*5 + stars*5 - 25*Math.random());
         ratOvr = (ratCoverage *2 + ratSpeed + ratTackle + ratRunStop)/5;
         position = "S";
 
         cost = (int)(Math.pow((float)ratOvr - 55,2)/3.5) + 125 + (int)(Math.random()*100) - 50;
-        
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCoverage);
-        ratingsVector.addElement(ratSpeed);
-        ratingsVector.addElement(ratTackle);
-        ratingsVector.addElement(ratRunStop);
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -198,48 +154,28 @@ public class PlayerS extends Player {
         careerInts = 0;
     }
 
-    public Vector getStatsVector() {
-        Vector v = new Vector(4);
-        v.add(statsTackles);
-        v.add(statsSacks);
-        v.add(statsFumbles);
-        v.add(statsInts);
-        return v;
-    }
-
-    public Vector getRatingsVector() {
-        ratingsVector = new Vector();
-        ratingsVector.addElement(name+" ("+getYrStr()+")");
-        ratingsVector.addElement(ratOvr+" (+"+ratImprovement+")");
-        ratingsVector.addElement(ratPot);
-        ratingsVector.addElement(ratFootIQ);
-        ratingsVector.addElement(ratCoverage);
-        ratingsVector.addElement(ratSpeed);
-        ratingsVector.addElement(ratTackle);
-        ratingsVector.addElement(ratRunStop);
-
-        return ratingsVector;
-    }
-    
     @Override
     public void advanceSeason() {
-        year++;
         int oldOvr = ratOvr;
-        if (wonAllConference) ratPot++;
-        if (wonAllAmerican) ratPot++;
-        if (year > 2 && gamesPlayed < 4) ratPot -= (int)Math.random()*15;
 
-        ratFootIQ += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratCoverage += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratTackle += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        ratRunStop += (int)(Math.random()*(ratPot + gamesPlayed - 35))/10;
-        if ( Math.random()*100 < ratPot ) {
-            //breakthrough
-            ratCoverage += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratSpeed += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratTackle += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
-            ratRunStop += (int)(Math.random()*(ratPot + gamesPlayed - 40))/10;
+        if (!isMedicalRS) {
+            year++;
+            if (wonAllConference) ratPot++;
+            if (wonAllAmerican) ratPot++;
+            if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
+
+            ratFootIQ += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratCoverage += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratTackle += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratRunStop += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            if (Math.random() * 100 < ratPot) {
+                //breakthrough
+                ratCoverage += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratTackle += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratRunStop += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+            }
         }
         ratOvr = (ratCoverage *2 + ratSpeed + ratTackle + ratRunStop)/5;
         ratImprovement = ratOvr - oldOvr;
