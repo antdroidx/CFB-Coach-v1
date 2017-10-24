@@ -3238,7 +3238,7 @@ public class Team {
                 "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -2, 2, 1);
 
         ts[4] = new TeamStrategy("Read Option",
-                "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 1, 0);
+                "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 0, 0);
 
         return ts;
     }
