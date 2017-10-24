@@ -1686,8 +1686,8 @@ public class Team {
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins*215 + 3*(teamPoints-teamOppPoints) +
                 (teamYards-teamOppYards)/40 +
-                teamStrengthOfWins +
-                3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()+confPrestige)) /8;
+                5*teamStrengthOfWins/4 +
+                3*(preseasonBias)*(teamPrestige + getOffTalent() + getDefTalent()+confPrestige)) /7;
 
         if ( "CC".equals(confChampion) ) {
             //bonus for winning conference
@@ -3232,7 +3232,7 @@ public class Team {
                 "Play a conservative run-heavy offense, setting up the passes as necessary.", 2, 2, -2, 1, 1, 2, 1, 0);
 
         ts[2] = new TeamStrategy("West Coast",
-                "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 2, -1, 1);
+                "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 2, -2, 1);
 
         ts[3] = new TeamStrategy("Spread",
                 "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -2, 2, 1);
