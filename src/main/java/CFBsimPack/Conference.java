@@ -266,7 +266,7 @@ public class Conference {
         for ( int i = 0; i < confTeams.size(); ++i ) {
            CP += confTeams.get(i).teamPrestige;
         }
-        confPrestige = CP/confTeams.size();
+        confPrestige = (CP/(confTeams.size()/2));
     }
     /**
      * Schedule the CCG based on team rankings.
