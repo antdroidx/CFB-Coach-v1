@@ -1978,7 +1978,7 @@ public class Team {
                 numFreshman++;
             }
             if (p.year == 0 && p.ratOvr > 65) {
-                classStrength += p.ratOvr - 35;
+                classStrength += p.ratOvr - 30;
                 numRedshirt++;
             }
       }

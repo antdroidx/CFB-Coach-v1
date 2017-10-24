@@ -325,7 +325,7 @@ public class Game implements Serializable {
         gameR.append(HomeQBStats[2] + "/" + HomeQBStats[3] + "\n"); //td/int
         gameR.append(HomeQBStats[4] + " yds\n"); //pass yards
         gameR.append(HomeQBStats[0] + "/" + HomeQBStats[1] + "\n"); //pass comp/att
-        gameR.append(HomeQBStats[7] + " yds/\n"); //rushing
+        gameR.append(HomeQBStats[7] + " yds\n"); //rushing
         gameR.append(HomeQBStats[8] + "/" + HomeQBStats[9] + "\n"); //rush td/fum
         gameR.append(HomeQBStats[5] + " sacks\n"); //rush td/fum
         gameL.append("\n");

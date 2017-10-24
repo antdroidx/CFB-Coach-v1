@@ -312,7 +312,7 @@ public class PlayerQB extends Player {
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Passer Rating " + (int)(((8.4*(statsPassYards+careerPassYards))+(300*(statsPassTD+careerTDs))+(100*(statsPassComp+careerPassComp))-(200*(statsInt+careerInt)))/(statsPassAtt+careerPassAtt+1)) + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
-        pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
+        pStats.add("Touchdowns: " + (statsPassTD+careerTDs) + ">Interceptions: " + (statsInt+careerInt));
         pStats.add("Pass Yards: " + (statsPassYards+careerPassYards) + " yds>Yards/Att: " + ((double)(10*(statsPassYards+careerPassYards)/(statsPassAtt+careerPassAtt+1))/10) + " yds");
         pStats.add("Yds/Game: " + ((statsPassYards+careerPassYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Sacks: " + (statsSacked+careerSacked));
         pStats.add("Rush Yards: " + (statsRushYards+careerRushYards) + ">Rush TDs: " + (statsRushTD+careerRushTD));
