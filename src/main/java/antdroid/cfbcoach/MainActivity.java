@@ -1300,6 +1300,7 @@ public void showUserTeamHistoryDialog() {
         ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
         String[] weekSelection = new String[simLeague.currentWeek + 1];
         for (int i = 0; i < weekSelection.length; ++i) {
+            if(i == 0) weekSelection[i] = "Pre-Season News";
             if (i == 13) weekSelection[i] = "Conf Champ Week";
             else if (i == 14) weekSelection[i] = "Bowl Game Week";
             else if (i == 15) weekSelection[i] = "National Champ";

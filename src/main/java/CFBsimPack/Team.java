@@ -2755,25 +2755,6 @@ public class Team {
         return playersLeavingList;
     }
 
-    /**
-     * Get string of the current team needs (not used anymore?)
-     * @return String of all the position needs
-     */
-    public String getTeamNeeds() {
-        StringBuilder needs = new StringBuilder();
-        needs.append("\t\t"+(2-teamQBs.size())+ "QBs, ");
-        needs.append((4-teamRBs.size())+ "RBs, ");
-        needs.append((6-teamWRs.size())+ "WRs, ");
-        needs.append((2-teamTEs.size())+ "TEs, ");
-        needs.append((10-teamOLs.size())+ "OLs, ");
-        needs.append("\t\t"+(2-teamKs.size())+ "Ks\n");
-        needs.append((8-teamDLs.size())+ "DLs");
-        needs.append((6-teamLBs.size())+ "LBs");
-        needs.append((6-teamCBs.size())+ "CBs, ");
-        needs.append((2-teamSs.size())+ "Ss, ");
-
-        return needs.toString();
-    }
 
     public PlayerQB[] getQBRecruits() {
         PlayerQB[] recruits = new PlayerQB[numRecruits];
