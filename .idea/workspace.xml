@@ -24,15 +24,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CFB-Coach.iml" afterPath="$PROJECT_DIR$/CFB-Coach.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,7 +113,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1750">
+            <state relative-caret-position="17">
               <caret line="1301" column="56" selection-start-line="1301" selection-start-column="56" selection-end-line="1301" selection-end-column="56" />
               <folding />
             </state>
@@ -1627,10 +1620,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21260998" sideWeight="0.40405118" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21260998" sideWeight="0.40405118" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21801706" sideWeight="0.15256125" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1992,7 +1985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
           <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2007,84 +1999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="1836" column="263" selection-start-line="1836" selection-start-column="263" selection-end-line="1836" selection-end-column="263" />
-          <folding>
-            <element signature="docComment;class#Game#0" expanded="false" />
-            <element signature="docComment;method#Game#0;class#Game#0" expanded="false" />
-            <element signature="method#Game#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#Game#1;class#Game#0" expanded="false" />
-            <element signature="method#Game#1;class#Game#0" expanded="false" />
-            <element signature="docComment;method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#getGameScoutStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#getPassYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getPassYards#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#getRushYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#getHFadv#0;class#Game#0" expanded="false" />
-            <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#getEventPrefix#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#convGameTime#0;class#Game#0" expanded="false" />
-            <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#addNewsStory#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#resetForOT#0;class#Game#0" expanded="false" />
-            <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passingPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passingPlayWR#0;class#Game#0" expanded="false" />
-            <element signature="method#passingPlayWR#0;class#Game#0" expanded="false" />
-            <element signature="method#passingPlayTE#0;class#Game#0" expanded="false" />
-            <element signature="method#passingPlayRB#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#rushingPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#rushingPlay#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#kickOff#0;class#Game#0" expanded="false" />
-            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#freeKick#0;class#Game#0" expanded="false" />
-            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#puntPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#qbSack#0;class#Game#0" expanded="false" />
-            <element signature="method#qbSack#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#safety#0;class#Game#0" expanded="false" />
-            <element signature="method#safety#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#qbInterception#0;class#Game#0" expanded="false" />
-            <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passingTD#0;class#Game#0" expanded="false" />
-            <element signature="method#passingTD#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passCompletion#0;class#Game#0" expanded="false" />
-            <element signature="method#passCompletion#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#passAttempt#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passingTDTE#0;class#Game#0" expanded="false" />
-            <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passCompletionTE#0;class#Game#0" expanded="false" />
-            <element signature="method#passCompletionTE#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passAttemptTE#0;class#Game#0" expanded="false" />
-            <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passingTDRB#0;class#Game#0" expanded="false" />
-            <element signature="method#passingTDRB#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passCompletionRB#0;class#Game#0" expanded="false" />
-            <element signature="method#passCompletionRB#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#passAttemptRB#0;class#Game#0" expanded="false" />
-            <element signature="method#passAttemptRB#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#rushAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#rushAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#rushAttemptQB#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#addPointsQuarter#0;class#Game#0" expanded="false" />
-            <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#normalize#0;class#Game#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2116,7 +2030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2165,7 +2078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="268" column="49" selection-start-line="268" selection-start-column="49" selection-end-line="268" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2173,7 +2085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="91" column="27" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2187,7 +2098,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1750">
+        <state relative-caret-position="17">
           <caret line="1301" column="56" selection-start-line="1301" selection-start-column="56" selection-end-line="1301" selection-end-column="56" />
           <folding />
         </state>
