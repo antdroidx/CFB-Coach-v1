@@ -2531,16 +2531,19 @@ public class League {
     //Committee News
     public void cfbPlayoffsNews() {
         setTeamRanks();
+        ArrayList<Team> teams = teamList;
+        Collections.sort( teams, new TeamCompPoll() );
+
         if (currentWeek == 8) {
             newsStories.get(currentWeek + 1).add("Committee Announces First Playoff Rankings>The College Football Playoffs Committee has set ther initial rankings for this season's playoffs. The first look at the playoffs have " +
-                    teamList.get(0).name + " at the top of the list. The rest of the playoff order looks like this:\n\n" + "1. " + teamList.get(0).getStrAbbrWL() + "\n" + "2. " + teamList.get(1).getStrAbbrWL() + "\n" + "3. " +
-                    teamList.get(2).getStrAbbrWL() + "\n" + "4. " + teamList.get(3).getStrAbbrWL() + "\n" + "5. " + teamList.get(4).getStrAbbrWL() + "\n" + "6. " + teamList.get(5).getStrAbbrWL() + "\n" + "7. " +
-                    teamList.get(6).getStrAbbrWL() + "\n" + "8. " + teamList.get(7).getStrAbbrWL() + "\n");
+                    teams.get(0).name + " at the top of the list. The rest of the playoff order looks like this:\n\n" + "1. " + teams.get(0).getStrAbbrWL() + "\n" + "2. " + teams.get(1).getStrAbbrWL() + "\n" + "3. " +
+                    teams.get(2).getStrAbbrWL() + "\n" + "4. " + teams.get(3).getStrAbbrWL() + "\n" + "5. " + teams.get(4).getStrAbbrWL() + "\n" + "6. " + teams.get(5).getStrAbbrWL() + "\n" + "7. " +
+                    teams.get(6).getStrAbbrWL() + "\n" + "8. " + teams.get(7).getStrAbbrWL() + "\n");
         }
         if (currentWeek > 8 && currentWeek < 12) {
-            newsStories.get(currentWeek + 1).add("Committee Updates Rankings>The College Football Playoff Committee has updated their Playoff Rankings. The order looks like this: \n\n" + "1. " + teamList.get(0).getStrAbbrWL() +
-                    "\n" + "2. " + teamList.get(1).getStrAbbrWL() + "\n" + "3. " + teamList.get(2).getStrAbbrWL() + "\n" + "4. " + teamList.get(3).getStrAbbrWL() + "\n" + "5. " + teamList.get(4).getStrAbbrWL() + "\n" + "6. " +
-                    teamList.get(5).getStrAbbrWL() + "\n" + "7. " + teamList.get(6).getStrAbbrWL() + "\n" + "8. " + teamList.get(7).getStrAbbrWL() + "\n");
+            newsStories.get(currentWeek + 1).add("Committee Updates Rankings>The College Football Playoff Committee has updated their Playoff Rankings. The order looks like this: \n\n" + "1. " + teams.get(0).getStrAbbrWL() +
+                    "\n" + "2. " + teams.get(1).getStrAbbrWL() + "\n" + "3. " + teams.get(2).getStrAbbrWL() + "\n" + "4. " + teams.get(3).getStrAbbrWL() + "\n" + "5. " + teams.get(4).getStrAbbrWL() + "\n" + "6. " +
+                    teams.get(5).getStrAbbrWL() + "\n" + "7. " + teams.get(6).getStrAbbrWL() + "\n" + "8. " + teams.get(7).getStrAbbrWL() + "\n");
         }
     }
 
