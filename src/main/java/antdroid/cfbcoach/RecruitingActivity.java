@@ -36,7 +36,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamName;
     private String teamAbbr;
     private int recruitingBudget;
-    private final String[] letterGrades = {"F", "D", "C", "C", "B", "A"};
+    private final String[] letterGrades = {"1-Star", "2-Star", "3-Star", "3-Star", "4-Star", "5-Star"};
     private int ratingTolerance;
     private int tolerance;
 
