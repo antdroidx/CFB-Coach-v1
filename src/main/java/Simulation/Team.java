@@ -2444,7 +2444,8 @@ public class Team {
         for (int i = 0; i < 3; ++i) {
             comp += getLB(i).ratFootIQ;
         }
-        return comp / 23;
+        comp += HC.get(0).ratDef*2 + HC.get(0).ratOff*2;
+        return comp / 27;
     }
 
     /**

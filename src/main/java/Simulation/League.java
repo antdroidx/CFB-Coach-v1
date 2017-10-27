@@ -3174,10 +3174,21 @@ public class League {
         return average;
     }
 
-    public ArrayList<Defender> getDefenderStats() {
+/*    public ArrayList<Defender> getDefenderStats() {
         ArrayList<Defender> defenseArray = new ArrayList<>();
         return defenseArray;
-    }
+    }*/
+
+public void disciplineAction() {
+    int t = 0;
+    //randomly chooose 5 teams from teamlist
+    //disciplinary action
+    //use coach pts to fix
+    //if not, coach score goes down
+    //team loses prestige
+
+}
+
 }
 
 class CoachScoreComp implements Comparator<HeadCoach> {
@@ -3375,9 +3386,6 @@ class TeamCompRecruitClass implements Comparator<Team> {
     public int compare(Team a, Team b) {
         return a.getRecruitingClassRat() > b.getRecruitingClassRat() ? -1 : a.getRecruitingClassRat() == b.getRecruitingClassRat() ? 0 : 1;
     }
-}
-
-class Defender {
 }
 
 
