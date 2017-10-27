@@ -88,6 +88,7 @@ public class Team {
     public int rankTeamSOS;
     public int teamCount = 12;
     public int totalTeamCount = teamCount * 10;
+    public int ratTransfer = 80;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -116,6 +117,7 @@ public class Team {
     public ArrayList<Player> teamSRs;
 
     public ArrayList<Player> playersLeaving;
+    public ArrayList<Player> playersTransferring;
     public ArrayList<Player> playersInjured;
     public ArrayList<Player> playersRecovered;
     public ArrayList<Player> playersInjuredAll;
@@ -179,7 +181,7 @@ public class Team {
         natChampWL = "";
 
         teamPrestige = prestige;
-        recruitPlayers(2, 4, 6, 2, 10, 2, 8, 6, 6, 2);
+        newRoster(2, 4, 6, 2, 10, 2, 8, 6, 6, 2);
 
         //set stats
         totalWins = 0;
@@ -412,7 +414,7 @@ public class Team {
             int age = HC.get(0).age;
             fired = true;
             HC.remove(0);
-            recruitPlayers(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             league.newsStories.get(league.currentWeek + 1).add("Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
                     ". His former team, " + name + " have announced " + HC.get(0).name + " as the successor to replace the retired coach.");
 
@@ -443,7 +445,7 @@ public class Team {
                 String oldCoach = HC.get(0).name;
                 fired = true;
                 HC.remove(0);
-                recruitPlayers(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 league.newsStories.get(league.currentWeek + 1).add("Coach Firing!>" + name + " has fired their head coach, " + oldCoach +
                         " after a disappointing tenure. The team has announced the signing of " + HC.get(0).name + " as their new head coach.");
             } else {
@@ -758,11 +760,6 @@ public class Team {
 
     public void getPlayersLeaving() {
 
-        // FUTURE - PLAYER TRANSFERS
-        // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
-        // Transfer to teams under 60
-        //
-        //
 
         if (playersLeaving.isEmpty()) {
             int i = 0;
@@ -811,14 +808,6 @@ public class Team {
             }
 
             i = 0;
-            while (i < teamKs.size()) {
-                if (teamKs.get(i).year == 4) {
-                    playersLeaving.add(teamKs.get(i));
-                }
-                ++i;
-            }
-
-            i = 0;
             while (i < teamOLs.size()) {
                 if (teamOLs.get(i).year == 4 && !teamOLs.get(i).isMedicalRS || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
                     playersLeaving.add(teamOLs.get(i));
@@ -826,6 +815,14 @@ public class Team {
                 ++i;
             }
 
+            i = 0;
+            while (i < teamKs.size()) {
+                if (teamKs.get(i).year == 4) {
+                    playersLeaving.add(teamKs.get(i));
+                }
+                ++i;
+            }
+            
             i = 0;
             while (i < teamDLs.size()) {
                 if (teamDLs.get(i).year == 4 && !teamDLs.get(i).isMedicalRS || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
@@ -859,6 +856,367 @@ public class Team {
             }
         }
     }
+
+/*
+    public int[] getPlayersTransferring() {
+
+        // FUTURE - PLAYER TRANSFERS
+        // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
+        // Transfer to teams under 60
+        //
+        //
+        int[] transfers = new int[10];
+
+        if (playersTransferring.isEmpty()) {
+            int i = 0;
+
+            sortPlayers();
+            i = 0;
+            while (i < teamQBs.size()) {
+                if (teamQBs.get(i).year > 1 && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int)(Math.random()*10) < 2) {
+                    playersTransferring.add(teamQBs.get(i));
+                    transfers[0]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamRBs.size()) {
+                if (teamRBs.get(i).year > 1 && !teamRBs.get(i).isMedicalRS && teamRBs.get(i).ratOvr > ratTransfer && teamRBs.get(i) != teamRBs.get(0)) {
+                    playersTransferring.add(teamRBs.get(i));
+                    transfers[1]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamWRs.size()) {
+                if (teamWRs.get(i).year > 1 && !teamWRs.get(i).isMedicalRS && teamWRs.get(i).ratOvr > ratTransfer && teamWRs.get(i) != teamWRs.get(0)) {
+                    playersTransferring.add(teamWRs.get(i));
+                    transfers[2]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamTEs.size()) {
+                if (teamTEs.get(i).year > 1 && !teamTEs.get(i).isMedicalRS && teamTEs.get(i).ratOvr > ratTransfer && teamTEs.get(i) != teamTEs.get(0)) {
+                    playersTransferring.add(teamTEs.get(i));
+                    transfers[3]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamOLs.size()) {
+                if (teamOLs.get(i).year > 1 && !teamOLs.get(i).isMedicalRS && teamOLs.get(i).ratOvr > ratTransfer && teamOLs.get(i) != teamOLs.get(0)) {
+                    playersTransferring.add(teamOLs.get(i));
+                    transfers[4]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamKs.size()) {
+                if (teamKs.get(i).year > 1 && !teamKs.get(i).isMedicalRS && teamKs.get(i).ratOvr > ratTransfer && teamKs.get(i) != teamKs.get(0)) {
+                    playersTransferring.add(teamKs.get(i));
+                    transfers[5]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamDLs.size()) {
+                if (teamDLs.get(i).year > 1 && !teamDLs.get(i).isMedicalRS && teamDLs.get(i).ratOvr > ratTransfer && teamDLs.get(i) != teamDLs.get(0)) {
+                    playersTransferring.add(teamDLs.get(i));
+                    transfers[6]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamLBs.size()) {
+                if (teamLBs.get(i).year > 1 && !teamLBs.get(i).isMedicalRS && teamLBs.get(i).ratOvr > ratTransfer && teamLBs.get(i) != teamLBs.get(0)) {
+                    playersTransferring.add(teamLBs.get(i));
+                    transfers[7]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamCBs.size()) {
+                if (teamCBs.get(i).year > 1 && !teamCBs.get(i).isMedicalRS && teamCBs.get(i).ratOvr > ratTransfer && teamCBs.get(i) != teamCBs.get(0)) {
+                    playersTransferring.add(teamCBs.get(i));
+                    transfers[8]++;
+                }
+                ++i;
+            }
+
+            i = 0;
+            while (i < teamSs.size()) {
+                if (teamSs.get(i).year > 1 && !teamSs.get(i).isMedicalRS && teamSs.get(i).ratOvr > ratTransfer && teamSs.get(i) != teamSs.get(0)) {
+                    playersTransferring.add(teamSs.get(i));
+                    transfers[9]++;
+                }
+                ++i;
+            }
+        }
+        return transfers;
+    }
+
+     // Advance season for players. Removes seniors and develops underclassmen.
+
+    public void advanceSeasonPlayers() {
+        int qbNeeds = 0, rbNeeds = 0, wrNeeds = 0, teNeeds = 0, olNeeds = 0, kNeeds = 0, dlNeeds = 0, lbNeeds = 0, cbNeeds = 0, sNeeds = 0;
+
+
+        if (playersLeaving.isEmpty()) {
+
+            int i = 0;
+            while (i < teamQBs.size()) {
+                if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamQBs.remove(i);
+                    qbNeeds++;
+                } else {
+                    teamQBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamRBs.size()) {
+                if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamRBs.remove(i);
+                    rbNeeds++;
+                } else {
+                    teamRBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamWRs.size()) {
+                if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamWRs.remove(i);
+                    wrNeeds++;
+                } else {
+                    teamWRs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamTEs.size()) {
+                if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamTEs.remove(i);
+                    teNeeds++;
+                } else {
+                    teamTEs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamOLs.size()) {
+                if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamOLs.remove(i);
+                    olNeeds++;
+                } else {
+                    teamOLs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamKs.size()) {
+                if (teamKs.get(i).year == 4) {
+                    teamKs.remove(i);
+                    kNeeds++;
+                } else {
+                    teamKs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamDLs.size()) {
+                if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamDLs.remove(i);
+                    dlNeeds++;
+                } else {
+                    teamDLs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamLBs.size()) {
+                if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamLBs.remove(i);
+                    lbNeeds++;
+                } else {
+                    teamLBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamCBs.size()) {
+                if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamCBs.remove(i);
+                    cbNeeds++;
+                } else {
+                    teamCBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamSs.size()) {
+                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                    teamSs.remove(i);
+                    sNeeds++;
+                } else {
+                    teamSs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            int[] transfers =  new int[10];
+            transfers = getPlayersTransferring();
+
+            if (!userControlled) {
+                recruitPlayersFreshman(qbNeeds + transfers[0], rbNeeds + transfers[1], wrNeeds + transfers[2], teNeeds + transfers[3], kNeeds + transfers[4], olNeeds + transfers[5],
+                        dlNeeds + transfers[6], lbNeeds + transfers[7], cbNeeds + transfers[8], sNeeds + transfers[9]);
+                resetStats();
+            }
+
+        } else {
+            // Just remove the players that are in playersLeaving
+            int i = 0;
+            while (i < teamQBs.size()) {
+                if (playersLeaving.contains(teamQBs.get(i))) {
+                    teamQBs.remove(i);
+                    qbNeeds++;
+                } else {
+                    teamQBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamRBs.size()) {
+                if (playersLeaving.contains(teamRBs.get(i))) {
+                    teamRBs.remove(i);
+                    rbNeeds++;
+                } else {
+                    teamRBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamWRs.size()) {
+                if (playersLeaving.contains(teamWRs.get(i))) {
+                    teamWRs.remove(i);
+                    wrNeeds++;
+                } else {
+                    teamWRs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamTEs.size()) {
+                if (playersLeaving.contains(teamTEs.get(i))) {
+                    teamTEs.remove(i);
+                    teNeeds++;
+                } else {
+                    teamTEs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamOLs.size()) {
+                if (playersLeaving.contains(teamOLs.get(i))) {
+                    teamOLs.remove(i);
+                    olNeeds++;
+                } else {
+                    teamOLs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamKs.size()) {
+                if (playersLeaving.contains(teamKs.get(i))) {
+                    teamKs.remove(i);
+                    kNeeds++;
+                } else {
+                    teamKs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamDLs.size()) {
+                if (playersLeaving.contains(teamDLs.get(i))) {
+                    teamDLs.remove(i);
+                    dlNeeds++;
+                } else {
+                    teamDLs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamLBs.size()) {
+                if (playersLeaving.contains(teamLBs.get(i))) {
+                    teamLBs.remove(i);
+                    lbNeeds++;
+                } else {
+                    teamLBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamCBs.size()) {
+                if (playersLeaving.contains(teamCBs.get(i))) {
+                    teamCBs.remove(i);
+                    cbNeeds++;
+                } else {
+                    teamCBs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            i = 0;
+            while (i < teamSs.size()) {
+                if (playersLeaving.contains(teamSs.get(i))) {
+                    teamSs.remove(i);
+                    sNeeds++;
+                } else {
+                    teamSs.get(i).advanceSeason();
+                    i++;
+                }
+            }
+
+            int[] transfers =  new int[10];
+            transfers = getPlayersTransferring();
+
+            if (!userControlled) {
+                recruitPlayersFreshman(qbNeeds + transfers[0], rbNeeds + transfers[1], wrNeeds + transfers[2], teNeeds + transfers[3], kNeeds + transfers[4], olNeeds + transfers[5],
+                        dlNeeds + transfers[6], lbNeeds + transfers[7], cbNeeds + transfers[8], sNeeds + transfers[9]);
+                resetStats();
+
+            }
+        }
+    }
+*/
+
+
 
     /**
      * Advance season for players. Removes seniors and develops underclassmen.
@@ -1119,7 +1477,7 @@ public class Team {
      * @param teNeeds
      * @param lbNeeds
      */
-    public void recruitPlayers(int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds) {
+    public void newRoster(int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds) {
         //make team
         int stars = teamPrestige / 20 + 1;
         int chance = 20 - (teamPrestige - 20 * (teamPrestige / 20)); //between 0 and 20
@@ -1243,7 +1601,9 @@ public class Team {
     public void recruitPlayersFreshman(int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds) {
         //make team
         int stars = teamPrestige / 20 + 1;
-        int chance = 20 - (teamPrestige - 20 * (teamPrestige / 20)); //between 0 and 20
+        int chance = 20;
+        if (HC.get(0) != null) chance = (2*teamPrestige + HC.get(0).ratTalent)/15; //between 0 and 20
+
 
         double starsBonusChance = 0.15;
         double starsBonusDoubleChance = 0.05;

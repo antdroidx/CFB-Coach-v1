@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class RecruitingActivity extends AppCompatActivity {
 
@@ -35,8 +36,8 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamName;
     private String teamAbbr;
     private int recruitingBudget;
-    private final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
-    //private final String[] letterGrades = {"C", "C", "C", "B", "B", "B", "A", "A", "A", "A"};
+    private final String[] letterGrades = {"F", "D", "C", "C", "B", "A"};
+    private int ratingTolerance;
 
     private ArrayList<String> playersRecruited;
     private ArrayList<String> playersRedshirted;
@@ -127,6 +128,8 @@ public class RecruitingActivity extends AppCompatActivity {
         availSs = new ArrayList<String>();
 
         availAll = new ArrayList<String>();
+
+        ratingTolerance = 8;
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -424,7 +427,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">" + ps[8] + ", Pot: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
+        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Overall:" + getLetterGrade(ps[8]) + ", Potential: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
     }
 
     /**
@@ -445,65 +448,55 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Pass Strength: " + getLetterGrade(ps[5]) +
+            return "Pass Strength: " + getLetterGrade(ps[5]) +
                     "\nPass Accuracy: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]) +
+                    "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("RB")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Power: " + getLetterGrade(ps[5]) +
+            return "Power: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]) +
-                    ",\nCatching: " + getLetterGrade(ps[11]);
+                    "\nEvasion: " + getLetterGrade(ps[7]) +
+                    "\nCatching: " + getLetterGrade(ps[11]);
         } else if (pos.equals("WR")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Catching: " + getLetterGrade(ps[5]) +
+            return  "Catching: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]) +
-                    ",\nJumping: " + getLetterGrade(ps[11]);
+                    "\nEvasion: " + getLetterGrade(ps[7]) +
+                    "\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("TE")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Catching: " + getLetterGrade(ps[5]) +
+            return  "Catching: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]) +
+                    "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("OL")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Strength: " + getLetterGrade(ps[5]) +
+            return  "Strength: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
-                    ", Pass Blk: " + getLetterGrade(ps[7]) +
-                    ",\nAwareness: " + getLetterGrade(ps[11]);
+                    "\nPass Blk: " + getLetterGrade(ps[7]) +
+                    "\nAwareness: " + getLetterGrade(ps[11]);
         } else if (pos.equals("K")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Kick Power: " + getLetterGrade(ps[5]) +
+            return  "Kick Power: " + getLetterGrade(ps[5]) +
                     "\nAccuracy: " + getLetterGrade(ps[6]) +
-                    ", Clumsiness: " + getLetterGrade(ps[7]) +
-                    ",\nPressure: " + getLetterGrade(ps[11]);
+                    "\nClumsiness: " + getLetterGrade(ps[7]) +
+                    "\nPressure: " + getLetterGrade(ps[11]);
         } else if (pos.equals("DL")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Strength: " + getLetterGrade(ps[5]) +
+            return  "Strength: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    ", Pass Press: " + getLetterGrade(ps[7]) +
-                    ",\nTackling: " + getLetterGrade(ps[11]);
+                    "\nPass Press: " + getLetterGrade(ps[7]) +
+                    "\nTackling: " + getLetterGrade(ps[11]);
         } else if (pos.equals("LB")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Coverage: " + getLetterGrade(ps[5]) +
+            return  "Coverage: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    ", Tackling: " + getLetterGrade(ps[7]) +
+                    "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("CB")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Coverage: " + getLetterGrade(ps[5]) +
+            return "Coverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Tackling: " + getLetterGrade(ps[7]) +
-                    ",\nJumping: " + getLetterGrade(ps[11]);
+                    "\nTackling: " + getLetterGrade(ps[7]) +
+                    "\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("S")) {
-            return "Football IQ: " + getLetterGradePot(ps[4]) +
-                    ", Coverage: " + getLetterGrade(ps[5]) +
+            return "Coverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Tackling: " + getLetterGrade(ps[7]) +
-                    ",\nRun Stop: " + getLetterGrade(ps[11]);
+                    "\nTackling: " + getLetterGrade(ps[7]) +
+                    "\nRun Stop: " + getLetterGrade(ps[11]);
         }
         return "ERROR";
     }
@@ -512,8 +505,13 @@ public class RecruitingActivity extends AppCompatActivity {
      * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
      */
     private String getLetterGrade(String num) {
-        int ind = (Integer.parseInt(num) - 50) / 5;
-        if (ind > 9) ind = 9;
+        int max = ratingTolerance;
+        int min = -ratingTolerance;
+        Random rand = new Random();
+        int tolerance = rand.nextInt((max - min) + 1) + min;
+        int ind = (Integer.parseInt(num));
+        ind = (ind + tolerance)/20;
+        if (ind > 5) ind = 5;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
     }
@@ -522,8 +520,13 @@ public class RecruitingActivity extends AppCompatActivity {
      * Convert a rating into a letter grade for potential, so 50 is a C instead of F
      */
     private String getLetterGradePot(String num) {
-        int ind = (Integer.parseInt(num) - 50) / 5;
-        if (ind > 9) ind = 9;
+        int max = ratingTolerance;
+        int min = -ratingTolerance;
+        Random rand = new Random();
+        int tolerance = rand.nextInt((max - min) + 1) + min;
+        int ind = (Integer.parseInt(num));
+        ind = (ind + tolerance)/20;
+        if (ind > 5) ind = 5;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
     }
@@ -1189,7 +1192,7 @@ public class RecruitingActivity extends AppCompatActivity {
             final TextView potential = (TextView) convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
-            potential.setText("Potential: " + getLetterGrade(playerCSV.split(",")[3]) + "\n" +
+            potential.setText("Football IQ: " + getLetterGrade(playerCSV.split(",")[4]) + "\nPotential: " + getLetterGrade(playerCSV.split(",")[3]) + "\n" +
                     "Durability: " + getLetterGrade(playerCSV.split(",")[10]));
 
             // Set up Recruit and Redshirt buttons to display the right price
@@ -1273,8 +1276,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[8]);
-        int ovrB = Integer.parseInt(psB[8]);
+        int ovrA = Integer.parseInt(psA[8]) + (int)(Math.random()*5);
+        int ovrB = Integer.parseInt(psB[8]) + (int)(Math.random()*5);;
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
