@@ -725,6 +725,18 @@ public class Game implements Serializable {
         }
     }
 
+    private int coachAdv(){
+        int adv=0;
+
+        if (gamePoss){
+            adv = homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef;
+        } else {
+
+        }
+
+        return adv;
+    }
+
     /**
      * Gets the even prefix for events that happen in the log.
      * Will be of type ALA 3 - 3 GEO, Time: Q2 X:XX, 1st and goal at 95 yard line.
