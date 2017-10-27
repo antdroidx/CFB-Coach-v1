@@ -2181,7 +2181,7 @@ public class MainActivity extends AppCompatActivity {
                 // Do something with the selection
                 userTeam.userControlled = false;
                 userTeam.HC.clear();
-                userTeam.recruitPlayers(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 simLeague.newJobtransfer(simLeague.teamList.get(item).name);
                 userTeam = simLeague.userTeam;
                 userTeamStr = userTeam.name;
@@ -2204,19 +2204,21 @@ public class MainActivity extends AppCompatActivity {
     //Only schools lower than Coach Rating will offer jobs
     public void newJob(HeadCoach headCoach) {
         userHC = headCoach;
+        int offers = (int)(Math.random()*5);
+        if (offers < 1) offers =1;
         updateTeamUI();
         //get user team from list dialog
-        final ArrayList<Team> coachList = simLeague.getCoachList(userHC.ratOvr);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr(userHC.ratOvr, offers);
+        final ArrayList<Team> coachList = simLeague.getCoachList(userHC.ratOvr, offers);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr(userHC.ratOvr);
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
                 userTeam.userControlled = false;
                 userTeam.HC.clear();
-                userTeam.recruitPlayers(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 simLeague.newJobtransfer(coachList.get(item).name);
                 userTeam = simLeague.userTeam;
                 userTeamStr = userTeam.name;
@@ -2237,10 +2239,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newGameHardDialog() {
-        final ArrayList<Team> coachList = simLeague.getCoachList(50);
+        int offers = (int)(Math.random()*5);
+        if (offers < 1) offers =1;
+        final ArrayList<Team> coachList = simLeague.getCoachList(50, offers);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr(50);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr(50, offers);
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
@@ -2298,7 +2302,7 @@ public class MainActivity extends AppCompatActivity {
     private void userNameDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter User Name")
+        builder.setTitle("Enter Name:")
                 .setView(getLayoutInflater().inflate(R.layout.username_dialog, null));
         final AlertDialog dialog = builder.create();
         dialog.show();

@@ -131,6 +131,7 @@ public class League {
         nameList = new ArrayList<String>();
         String[] namesSplit = namesCSV.split(",");
         for (String n : namesSplit) {
+            if (isNameValid(n.trim()))
             nameList.add(n.trim());
         }
 
@@ -138,6 +139,7 @@ public class League {
         lastNameList = new ArrayList<String>();
         namesSplit = lastNamesCSV.split(",");
         for (String n : namesSplit) {
+            if (isNameValid(n.trim()))
             lastNameList.add(n.trim());
         }
 
@@ -1335,9 +1337,11 @@ public class League {
      * @return random name
      */
     public String getRandName() {
+        String name;
         int fn = (int) (Math.random() * nameList.size());
         int ln = (int) (Math.random() * lastNameList.size());
-        return nameList.get(fn) + " " + lastNameList.get(ln);
+        name = nameList.get(fn) + " " + lastNameList.get(ln);
+        return name;
     }
 
     /**
@@ -2179,11 +2183,11 @@ public class League {
     }
 
     //Get Coaching Job Offers
-    public ArrayList<String> getCoachListStr(int rating) {
+    public ArrayList<String> getCoachListStr(int rating, int offers) {
         ArrayList<String> teams = new ArrayList<>();
         ArrayList<Team> coachList = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).teamPrestige < rating && 2 > (int) (Math.random() * 3)) {
+        for (int i = 0; i < teamList.size(); i+=offers) {
+            if (teamList.get(i).teamPrestige < rating) {
                 coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, this, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
@@ -2192,9 +2196,9 @@ public class League {
     }
 
     //Get Coach Job Offers List for Team Transfer
-    public ArrayList<Team> getCoachList(int rating) {
+    public ArrayList<Team> getCoachList(int rating, int offers) {
         ArrayList<Team> coachList = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); ++i) {
+        for (int i = 0; i < teamList.size(); i+=offers) {
             if (teamList.get(i).teamPrestige < rating) {
                 coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, this, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam));
             }
