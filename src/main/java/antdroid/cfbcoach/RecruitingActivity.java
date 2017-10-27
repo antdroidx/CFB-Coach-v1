@@ -38,6 +38,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int recruitingBudget;
     private final String[] letterGrades = {"F", "D", "C", "C", "B", "A"};
     private int ratingTolerance;
+    private int tolerance;
 
     private ArrayList<String> playersRecruited;
     private ArrayList<String> playersRedshirted;
@@ -130,6 +131,10 @@ public class RecruitingActivity extends AppCompatActivity {
         availAll = new ArrayList<String>();
 
         ratingTolerance = 8;
+        Random rand = new Random();
+        int max = ratingTolerance;
+        int min = -ratingTolerance;
+        tolerance = rand.nextInt((max - min) + 1) + min;
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -427,7 +432,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Overall:" + getLetterGrade(ps[8]) + ", Potential: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
+        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr:" + getLetterGrade(ps[8]) + ", Pot: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
     }
 
     /**
@@ -505,12 +510,8 @@ public class RecruitingActivity extends AppCompatActivity {
      * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
      */
     private String getLetterGrade(String num) {
-        int max = ratingTolerance;
-        int min = -ratingTolerance;
-        Random rand = new Random();
-        int tolerance = rand.nextInt((max - min) + 1) + min;
         int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance)/20;
+        ind = (ind + tolerance - 50)/10;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
@@ -520,12 +521,8 @@ public class RecruitingActivity extends AppCompatActivity {
      * Convert a rating into a letter grade for potential, so 50 is a C instead of F
      */
     private String getLetterGradePot(String num) {
-        int max = ratingTolerance;
-        int min = -ratingTolerance;
-        Random rand = new Random();
-        int tolerance = rand.nextInt((max - min) + 1) + min;
         int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance)/20;
+        ind = (ind + tolerance-50)/10;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
