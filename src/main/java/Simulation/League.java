@@ -23,6 +23,7 @@ import java.util.Random;
 public class League {
     //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
+    public ArrayList<String> leagueUserHistory;
     public ArrayList<String> heismanHistory;
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;

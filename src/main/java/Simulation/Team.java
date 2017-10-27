@@ -419,12 +419,14 @@ public class Team {
                     ". His former team, " + name + " have announced " + HC.get(0).name + " as the successor to replace the retired coach.");
 
             //New Contracts or Firing
-        } else if ((HC.get(0).contractYear) == HC.get(0).contractLength) {
-            if (totalPDiff > 20) {
+        } else if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") ) {
+            if (totalPDiff > 20 || (natChampWL.equals("NCW"))) {
                 HC.get(0).contractLength = 6;
                 HC.get(0).contractYear = 0;
                 HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                 HC.get(0).job = 1;
+                league.newsStories.get(league.currentWeek + 1).add("Long-Term Extension!>" + name + " has extended their head coach, " + HC.get(0).name +
+                        " for 6 additional seasons for his successful tenue at the university.");
             } else if (totalPDiff > 15) {
                 HC.get(0).contractLength = 5;
                 HC.get(0).contractYear = 0;
@@ -435,11 +437,15 @@ public class Team {
                 HC.get(0).contractYear = 0;
                 HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                 HC.get(0).job = 1;
-            } else if (totalPDiff > 5) {
-                HC.get(0).contractLength = 3;
-                HC.get(0).contractYear = 0;
-                HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                HC.get(0).job = 1;
+            } else if (totalPDiff > 5 || (natChampWL.equals("NCL"))) {
+                if ((natChampWL.equals("NCL")) && HC.get(0).contractLength - HC.get(0).contractYear > 2) {
+
+                } else {
+                    HC.get(0).contractLength = 3;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                    HC.get(0).job = 1;
+                }
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
                 String oldCoach = HC.get(0).name;
