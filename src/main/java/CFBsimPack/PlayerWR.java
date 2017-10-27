@@ -172,6 +172,7 @@ public class PlayerWR extends Player {
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
+        progression = (ratPot*3 + team.HC.get(0).ratTalent*2 + team.HC.get(0).ratOff)/6;
 
         if (!isMedicalRS) {
             year++;
@@ -179,17 +180,17 @@ public class PlayerWR extends Player {
             if (wonAllAmerican) ratPot++;
             if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
 
-            ratFootIQ += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratCatch += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratEvasion += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratJump += (int) (Math.random() * (ratPot + gamesPlayed - 25)) / 10;
-            if (Math.random() * 100 < ratPot) {
+            ratFootIQ += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratCatch += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratSpeed += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratEvasion += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratJump += (int) (Math.random() * (progression + gamesPlayed - 25)) / 10;
+            if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratCatch += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratSpeed += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratEvasion += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratJump += (int) (Math.random() * (ratPot + gamesPlayed - 30)) / 10;
+                ratCatch += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratSpeed += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratEvasion += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratJump += (int) (Math.random() * (progression + gamesPlayed - 30)) / 10;
             }
         }
         ratOvr = (ratCatch *2 + ratSpeed + ratEvasion + ratJump)/5;

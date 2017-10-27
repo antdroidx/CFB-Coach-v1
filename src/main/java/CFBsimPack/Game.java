@@ -837,6 +837,8 @@ public class Game implements Serializable {
                 homeTeam.winStreak.addWin(homeTeam.league.getYear());
                 homeTeam.league.checkLongestWinStreak(homeTeam.winStreak);
                 awayTeam.winStreak.resetStreak(awayTeam.league.getYear());
+                homeTeam.HC.get(0).wins++;
+                awayTeam.HC.get(0).losses++;
             } else {
                 homeTeam.losses++;
                 homeTeam.totalLosses++;
@@ -848,6 +850,8 @@ public class Game implements Serializable {
                 awayTeam.winStreak.addWin(awayTeam.league.getYear());
                 awayTeam.league.checkLongestWinStreak(awayTeam.winStreak);
                 homeTeam.winStreak.resetStreak(homeTeam.league.getYear());
+                homeTeam.HC.get(0).losses++;
+                awayTeam.HC.get(0).wins++;
             }
 
             // Add points/opp points

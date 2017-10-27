@@ -1,10 +1,7 @@
 package antdroid.cfbcoach;
 
-/*
-  Created by Achi Jones on 2/20/2016.
- */
-
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +34,19 @@ public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
         TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
         itemL.setPadding(5, 0, 5, 0);
         itemL.setText(detailSplit[0]);
+        if (detailSplit.length >= 2) {
+            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+            itemR.setPadding(5,0,5,0);
+            itemR.setText(detailSplit[1]);
+            if (detailSplit[1].equals("[CAREER]"))
+                itemR.setTextColor(Color.RED);
+            else itemR.setTextColor(Color.parseColor("#008066"));
+        } else {
+            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+            itemR.setPadding(5,0,5,0);
+            itemR.setText("[DYNASTY]");
+            itemR.setTextColor(Color.parseColor("#008066"));
+        }
 
         return rowView;
     }

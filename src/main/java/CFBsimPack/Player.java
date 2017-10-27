@@ -18,6 +18,7 @@ public class Player {
     public int ratDur;
     public int ratImprovement;
     public int cost;
+    public int progression;
 
     public int gamesPlayed;
     public int statsWins;
@@ -68,6 +69,10 @@ public class Player {
     public String getInitialName() {
         String[] names = name.split(" ");
         return names[0].substring(0,1) + ". " + names[1];
+    }
+
+    public String getHCString(){
+        return "Head Coach " + name +"> ";
     }
 
     public String getPosNameYrOvrPot_Str() {

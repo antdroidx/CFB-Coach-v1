@@ -38,6 +38,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamAbbr;
     private int recruitingBudget;
     private final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
+    //private final String[] letterGrades = {"C", "C", "C", "B", "B", "B", "A", "A", "A", "A"};
 
     private ArrayList<String> playersRecruited;
     private ArrayList<String> playersRedshirted;
@@ -455,12 +456,14 @@ public class RecruitingActivity extends AppCompatActivity {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Power: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]);
+                    ", Evasion: " + getLetterGrade(ps[7]) +
+                    ",\nCatching: " + getLetterGrade(ps[11]);
         } else if (pos.equals("WR")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Catching: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Evasion: " + getLetterGrade(ps[7]);
+                    ", Evasion: " + getLetterGrade(ps[7]) +
+                    ",\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("TE")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Catching: " + getLetterGrade(ps[5]) +
@@ -471,17 +474,20 @@ public class RecruitingActivity extends AppCompatActivity {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Strength: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
-                    ", Pass Blk: " + getLetterGrade(ps[7]);
+                    ", Pass Blk: " + getLetterGrade(ps[7]) +
+                    ",\nAwareness: " + getLetterGrade(ps[11]);
         } else if (pos.equals("K")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Kick Power: " + getLetterGrade(ps[5]) +
                     "\nAccuracy: " + getLetterGrade(ps[6]) +
-                    ", Clumsiness: " + getLetterGrade(ps[7]);
+                    ", Clumsiness: " + getLetterGrade(ps[7]) +
+                    ",\nPressure: " + getLetterGrade(ps[11]);
         } else if (pos.equals("DL")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Strength: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    ", Pass Press: " + getLetterGrade(ps[7]);
+                    ", Pass Press: " + getLetterGrade(ps[7]) +
+                    ",\nTackling: " + getLetterGrade(ps[11]);
         } else if (pos.equals("LB")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +
@@ -492,12 +498,14 @@ public class RecruitingActivity extends AppCompatActivity {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Tackling: " + getLetterGrade(ps[7]);
+                    ", Tackling: " + getLetterGrade(ps[7]) +
+                    ",\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("S")) {
             return "Football IQ: " + getLetterGradePot(ps[4]) +
                     ", Coverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
-                    ", Tackling: " + getLetterGrade(ps[7]);
+                    ", Tackling: " + getLetterGrade(ps[7]) +
+                    ",\nRun Stop: " + getLetterGrade(ps[11]);
         }
         return "ERROR";
     }

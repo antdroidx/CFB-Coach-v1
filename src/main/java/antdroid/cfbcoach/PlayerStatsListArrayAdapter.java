@@ -32,12 +32,6 @@ public class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.child_player_stats, parent, false);
 
-        /*String[] detailSplit = values[position].split(">");
-        TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
-        itemL.setText(detailSplit[0]);
-        TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
-        itemR.setText(detailSplit[1]);*/
-
         String[] detailSplit = values[position].split(">");
         if (detailSplit.length == 2) {
             TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);

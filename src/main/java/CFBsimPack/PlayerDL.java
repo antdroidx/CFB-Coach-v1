@@ -162,6 +162,7 @@ public class PlayerDL extends Player {
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
+        progression = (ratPot*3 + team.HC.get(0).ratTalent*2 + team.HC.get(0).ratOff)/6;
 
         if (!isMedicalRS) {
             year++;
@@ -169,17 +170,17 @@ public class PlayerDL extends Player {
             if (wonAllAmerican) ratPot++;
             if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
 
-            ratFootIQ += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratStrength += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratRunStop += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratPassRush += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratTackle += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            if (Math.random() * 100 < ratPot) {
+            ratFootIQ += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratStrength += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratRunStop += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratPassRush += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratTackle += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratStrength += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratRunStop += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratPassRush += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratTackle += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratStrength += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratRunStop += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratPassRush += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratTackle += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
             }
         }
         ratOvr = (ratStrength *3 + ratRunStop + ratPassRush + ratTackle)/6;

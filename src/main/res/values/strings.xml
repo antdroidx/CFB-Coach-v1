@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">College Football Coach 2017</string>
+    <string name="app_name">College Football Coach: 2017</string>
     <string name="version">version 2.0 BETA</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_team_strategy">Set Team Strategy</string>

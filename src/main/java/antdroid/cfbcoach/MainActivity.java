@@ -11,10 +11,12 @@ import android.view.View;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
 
+import CFBsimPack.HeadCoach;
 import CFBsimPack.Player;
 import CFBsimPack.TeamStrategy;
 import antdroid.cfbcoach.R;
@@ -42,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     public String oldConf;
     int currentConferenceID;
     Team userTeam;
+    public HeadCoach userHC;
     File saveLeagueFile;
+    String username;
 
     List<String> teamList;
     List<String> confList;
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     int wantUpdateConf;
     boolean showToasts;
     boolean showInjuryReport;
-    
+
     //Universe Settings
     int teamsStart = 12;
     int confStart = 10;
@@ -87,8 +91,11 @@ public class MainActivity extends AppCompatActivity {
         boolean loadedLeague = false;
         if (extras != null) {
             String saveFileStr = extras.getString("SAVE_FILE");
-            if (saveFileStr.equals("NEW_LEAGUE")) {
-                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
+            if (saveFileStr.equals("NEW_LEAGUE_DYNASTY")) {
+                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+                season = seasonStart;
+            } else if (saveFileStr.equals("NEW_LEAGUE_CAREER")) {
+                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true);
                 season = seasonStart;
             } else if (saveFileStr.equals("DONE_RECRUITING")) {
                 File saveFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
@@ -102,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     loadedLeague = true;
                 } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
                     season = seasonStart;
                 }
             } else {
@@ -116,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     loadedLeague = true;
                 } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
                     season = seasonStart;
                 }
             }
         } else {
-            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names));
+            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
             season = seasonStart;
         }
 
@@ -142,29 +149,33 @@ public class MainActivity extends AppCompatActivity {
 
             currentTeam = simLeague.teamList.get(0);
             currentConference = simLeague.conferences.get(0);
-            //get user team from list dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Choose your team:");
-            final String[] teams = simLeague.getTeamListStr();
-            builder.setItems(teams, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    // Do something with the selection
-                    userTeam.userControlled = false;
-                    userTeam = simLeague.teamList.get(item);
-                    simLeague.userTeam = userTeam;
-                    userTeam.userControlled = true;
-                    userTeamStr = userTeam.name;
-                    currentTeam = userTeam;
-                    // set rankings so that not everyone is rank #0
-                    simLeague.setTeamRanks();
-                    simLeague.preseasonNews();
-                    // Set toolbar text to '2017 Season' etc
-                    updateTeamUI();
-                    examineTeam(currentTeam.name);
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
+
+            if (simLeague.isCareerMode()) {
+                AlertDialog.Builder mode = new AlertDialog.Builder(this);
+                mode.setMessage("What difficulty would you like?\n\n" +
+                        "Normal: Choose any team to start your new career.\n\n" +
+                        "Challenge: Start at the bottom and work your way up.\n\n")
+                        .setTitle("Choose Difficulty:")
+                        .setPositiveButton("Challenge", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                newGameHardDialog();
+                            }
+                        })
+                        .setNegativeButton("Normal", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                newGameDialog();
+                            }
+                        });
+                AlertDialog dialog = mode.create();
+                dialog.show();
+                TextView msgTxt = (TextView) dialog.findViewById(android.R.id.message);
+                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            } else {
+                //get user team from list dialog
+                newGameDialog();
+            }
         } else {
             updateTeamUI();
         }
@@ -227,7 +238,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (recruitingStage == -1) {
                     // Perform action on click
-                    if (simLeague.currentWeek == 15) {
+                    if (simLeague.currentWeek == 16 && userTeam.fired == true) {
+                        newJob(userHC);
+                        simLeague.currentWeek++;
+                    } else if (simLeague.currentWeek >= 17) {
+
                         recruitingStage = 0;
                         beginRecruiting();
                     } else {
@@ -243,19 +258,21 @@ public class MainActivity extends AppCompatActivity {
                             File saveFile = new File(getFilesDir(), "debugSave.cfb");
                             simLeague.saveLeague(saveFile);
                             simLeague.checkLeagueRecords();
+                            userHC = userTeam.HC.get(0);
+                            simLeague.advanceHC();
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage(simLeague.seasonSummaryStr())
                                     .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Summary")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            //do nothing?
                                         }
                                     });
                             AlertDialog dialog = builder.create();
                             dialog.show();
                             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                            simLeague.currentWeek++;
                         } else if (userTeam.gameWLSchedule.size() > numGamesPlayed) {
                             // Played a game, show summary
                             if (showToasts)
@@ -303,6 +320,9 @@ public class MainActivity extends AppCompatActivity {
                         } else if (simLeague.currentWeek == 14) {
                             simGameButton.setTextSize(10);
                             simGameButton.setText("Play National Championship");
+                        } else if (simLeague.currentWeek == 16) {
+                            simGameButton.setTextSize(12);
+                            simGameButton.setText("Begin Off-Season");
                         } else {
                             simGameButton.setTextSize(14);
                             simGameButton.setText("Begin Recruiting");
@@ -319,6 +339,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         final Button homeButton = (Button) findViewById(R.id.buttonHome);
         final Button newsButton = (Button) findViewById(R.id.buttonNews);
@@ -446,7 +467,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-         if (id == R.id.action_heisman) {
+        if (id == R.id.action_heisman) {
             /*
               Clicked Heisman watch in drop down menu
              */
@@ -474,9 +495,9 @@ public class MainActivity extends AppCompatActivity {
               Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
-         } else if (id == R.id.action_player_rankings) {
+        } else if (id == R.id.action_player_rankings) {
 
-             showPlayerRankingsDialog();
+            showPlayerRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
             /*
               Current selected team history
@@ -487,11 +508,11 @@ public class MainActivity extends AppCompatActivity {
               Clicked League History in drop down menu
              */
             showLeagueHistoryDialog();
-         } else if (id == R.id.action_top_25_history) {
+        } else if (id == R.id.action_top_25_history) {
              /*
                Clicked Top 25 History
               */
-             showTop25History();
+            showTop25History();
         } else if (id == R.id.action_team_history) {
             /*
               Clicked User Team History in drop down menu
@@ -601,7 +622,7 @@ public class MainActivity extends AppCompatActivity {
         }
         dataAdapterConf.notifyDataSetChanged();
 
-       if (wantUpdateConf >= 1) {
+        if (wantUpdateConf >= 1) {
             teamList = new ArrayList<String>();
             dataAdapterTeam.clear();
             for (int i = 0; i < teamsStart; i++) {
@@ -613,8 +634,8 @@ public class MainActivity extends AppCompatActivity {
             currentTeam = currentConference.confTeams.get(0);
             updateCurrTeam();
         } else {
-           wantUpdateConf++;
-       }
+            wantUpdateConf++;
+        }
     }
 
     private void updateTeamStats() {
@@ -650,7 +671,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-   private void updateSchedule() {
+    private void updateSchedule() {
         mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
 
@@ -715,11 +736,12 @@ public class MainActivity extends AppCompatActivity {
             selection = new String[1];
             selection[0] = "Player of the Year";
         } else {
-            selection = new String[12];
+            selection = new String[13];
             selection[0] = "Player of the Year";
-            selection[1] = "All Americans";
+            selection[1] = "Coach of the Year";
+            selection[2] = "All Americans";
             for (int i = 0; i < confStart; ++i) {
-                selection[i + 2] = "All " + simLeague.conferences.get(i).confName + " Team";
+                selection[i + 3] = "All " + simLeague.conferences.get(i).confName + " Team";
             }
         }
 
@@ -732,6 +754,7 @@ public class MainActivity extends AppCompatActivity {
         final ListView potyList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
 
         // Get all american and all conf
+        final String[] coachAwardList = simLeague.getCoachAwardStr().split(">");
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
         final String[][] allConference = new String[confStart][];
         for (int i = 0; i < confStart; ++i) {
@@ -746,9 +769,11 @@ public class MainActivity extends AppCompatActivity {
                         if (position == 0) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, simLeague.getHeismanCeremonyStr().split(">"), userTeam.abbr));
                         } else if (position == 1) {
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, coachAwardList, userTeam.abbr));
+                        } else if (position == 2) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allAmericans, userTeam.abbr));
                         } else {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 2], userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 3], userTeam.abbr));
                         }
                     }
 
@@ -1014,8 +1039,9 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
-                {"QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
-                        "Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs"};
+                { "Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
+                        "Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
+                       };
         Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -1032,7 +1058,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getPlayerRankStr(position);
-                        if (position == 16) {
+                        if (position == 21) {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
                         } else {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
@@ -1132,9 +1158,9 @@ public class MainActivity extends AppCompatActivity {
             top25hisSpinner.setAdapter(top25Adapter);
         } else {
             String[] selection = new String[simLeague.leagueHistory.size()];
-                for (int i = 0; i < simLeague.leagueHistory.size(); ++i) {
-                    selection[i] = Integer.toString(seasonStart + i);
-                }
+            for (int i = 0; i < simLeague.leagueHistory.size(); ++i) {
+                selection[i] = Integer.toString(seasonStart + i);
+            }
             Spinner top25hisSpinner = (Spinner) dialog.findViewById(R.id.spinnerBowlCCG);
             final ArrayAdapter<String> top25Adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_item, selection);
@@ -1149,6 +1175,7 @@ public class MainActivity extends AppCompatActivity {
                                 AdapterView<?> parent, View view, int position, long id) {
                             top25his.setText(simLeague.getLeagueTop25History(position));
                         }
+
                         public void onNothingSelected(AdapterView<?> parent) {
                             // do nothing
                         }
@@ -1156,7 +1183,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-public void showUserTeamHistoryDialog() {
+    public void showUserTeamHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("My Team History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1233,9 +1260,9 @@ public void showUserTeamHistoryDialog() {
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                            TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getTeamHistoryList());
-                            teamHistoryList.setAdapter(teamHistoryAdapter);
+                        TeamHistoryListArrayAdapter teamHistoryAdapter =
+                                new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getTeamHistoryList());
+                        teamHistoryList.setAdapter(teamHistoryAdapter);
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -1300,10 +1327,12 @@ public void showUserTeamHistoryDialog() {
         ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
         String[] weekSelection = new String[simLeague.currentWeek + 1];
         for (int i = 0; i < weekSelection.length; ++i) {
-            if(i == 0) weekSelection[i] = "Pre-Season News";
+            if (i == 0) weekSelection[i] = "Pre-Season News";
             else if (i == 13) weekSelection[i] = "Conf Champ Week";
             else if (i == 14) weekSelection[i] = "Bowl Game Week";
             else if (i == 15) weekSelection[i] = "National Champ";
+            else if (i == 16) weekSelection[i] = "Off-Season News";
+            else if (i == 17) weekSelection[i] = "Recruiting News";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
@@ -1323,6 +1352,9 @@ public void showUserTeamHistoryDialog() {
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.newsStories.get(position);
                         boolean isempty = false;
+                        if (simLeague.currentWeek == 17 && rankings.size() == 0) {
+                            rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshman to their schools.");
+                        }
                         if (rankings.size() == 0) {
                             isempty = true;
                             rankings.add("No news stories.>I guess this week was a bit boring, huh?");
@@ -1440,10 +1472,14 @@ public void showUserTeamHistoryDialog() {
         changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
         final EditText changeConfEditText = (EditText) dialog.findViewById(R.id.editTextChangeConf);
         changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
+        final EditText changeHCEditText = (EditText) dialog.findViewById(R.id.editTextChangeHC);
+        changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
+
 
         final TextView invalidNameText = (TextView) dialog.findViewById(R.id.textViewChangeName);
         final TextView invalidAbbrText = (TextView) dialog.findViewById(R.id.textViewChangeAbbr);
         final TextView invalidConfText = (TextView) dialog.findViewById(R.id.textViewChangeConf);
+        final TextView invalidHCText = (TextView) dialog.findViewById(R.id.textViewChangeHC);
 
         changeNameEditText.addTextChangedListener(new TextWatcher() {
             String newName;
@@ -1520,9 +1556,9 @@ public void showUserTeamHistoryDialog() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 newConf = s.toString().trim();
                 if (!simLeague.isNameValid(newConf)) {
-                    invalidNameText.setText("Name already in use or has illegal characters!");
+                    invalidConfText.setText("Name already in use or has illegal characters!");
                 } else {
-                    invalidNameText.setText("");
+                    invalidConfText.setText("");
                 }
             }
 
@@ -1530,9 +1566,9 @@ public void showUserTeamHistoryDialog() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 newConf = s.toString().trim();
                 if (!simLeague.isNameValid(newConf)) {
-                    invalidNameText.setText("Name already in use or has illegal characters!");
+                    invalidConfText.setText("Name already in use or has illegal characters!");
                 } else {
-                    invalidNameText.setText("");
+                    invalidConfText.setText("");
                 }
             }
 
@@ -1540,11 +1576,47 @@ public void showUserTeamHistoryDialog() {
             public void afterTextChanged(Editable s) {
                 newConf = s.toString().trim();
                 if (!simLeague.isNameValid(newConf)) {
-                    invalidNameText.setText("Name already in use or has illegal characters!");
+                    invalidConfText.setText("Name already in use or has illegal characters!");
                 } else {
-                    invalidNameText.setText("");
+                    invalidConfText.setText("");
                 }
             }
+
+        });
+
+        changeHCEditText.addTextChangedListener(new TextWatcher() {
+            String newHC;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                newHC = s.toString().trim();
+                if (!simLeague.isNameValid(newHC)) {
+                    invalidHCText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidHCText.setText("");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                newHC = s.toString().trim();
+                if (!simLeague.isNameValid(newHC)) {
+                    invalidHCText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidHCText.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                newHC = s.toString().trim();
+                if (!simLeague.isNameValid(newHC)) {
+                    invalidHCText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidHCText.setText("");
+                }
+            }
+
         });
 
         final CheckBox checkboxShowPopup = (CheckBox) dialog.findViewById(R.id.checkboxShowPopups);
@@ -1555,6 +1627,7 @@ public void showUserTeamHistoryDialog() {
 
         Button cancelChangeNameButton = (Button) dialog.findViewById(R.id.buttonCancelChangeName);
         Button okChangeNameButton = (Button) dialog.findViewById(R.id.buttonOkChangeName);
+        Button changeTeamsButton = (Button) dialog.findViewById(R.id.buttonChangeTeams);
 
         cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1572,15 +1645,17 @@ public void showUserTeamHistoryDialog() {
                 String newName = changeNameEditText.getText().toString().trim();
                 String newAbbr = changeAbbrEditText.getText().toString().trim().toUpperCase();
                 String newConf = changeConfEditText.getText().toString().trim();
+                String newHC = changeHCEditText.getText().toString().trim();
 
-                if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr) && simLeague.isNameValid(newConf)) {
+                if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr) && simLeague.isNameValid(newConf) && simLeague.isNameValid((newHC))) {
                     simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
                     currentTeam.name = newName; //set new team name
                     currentTeam.abbr = newAbbr; //set new conference name
                     oldConf = currentConference.confName;
                     currentConference.confName = newConf;
+                    currentTeam.HC.get(0).name = newHC;
                     simLeague.updateTeamConf(newConf, oldConf, currentConferenceID);  //update all other conf teams
-                    getSupportActionBar().setTitle( season + " | " + userTeam.name);
+                    getSupportActionBar().setTitle(season + " | " + userTeam.name);
                     Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);  // Have to update rival's rival too!
                     rival.rivalTeam = currentTeam.abbr;
                     //examineTeam(currentTeam.name);
@@ -1598,7 +1673,16 @@ public void showUserTeamHistoryDialog() {
                 dialog.dismiss();
             }
         });
-
+        changeTeamsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                userHC = userTeam.HC.get(0);
+                //switchTeams();
+                if (simLeague.isCareerMode()) newJob(userHC);
+                else switchTeams(userHC);
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -1656,7 +1740,7 @@ public void showUserTeamHistoryDialog() {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)","TE (1 starter)", "OL (5 starters)",
+        final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)", "TE (1 starter)", "OL (5 starters)",
                 "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (1 starter)"};
         final int[] positionNumberRequired = {1, 2, 3, 1, 5, 1, 4, 3, 3, 1};
         final Spinner teamLineupPositionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamLineupPosition);
@@ -1795,7 +1879,7 @@ public void showUserTeamHistoryDialog() {
      */
     public void examinePlayer(String player) {
         Player p = currentTeam.findBenchPlayer(player);
-        if (p == null) p = currentTeam.getQB(0);
+        if (p == null) p = currentTeam.getHC(0);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ArrayList<String> pStatsList = p.getDetailAllStatsList(currentTeam.numGames());
         if (p.injury != null) pStatsList.add(0, "[I]Injured: " + p.injury.toString());
@@ -2071,7 +2155,204 @@ public void showUserTeamHistoryDialog() {
 
 
     public void updateTeamUI() {
-        getSupportActionBar().setTitle(season + " | " + userTeam.name);
+        if (simLeague.isCareerMode()) {
+            getSupportActionBar().setTitle(season + " | " + userTeam.name + " | Career Mode");
+        } else {
+            getSupportActionBar().setTitle(season + " | " + userTeam.name + " | Dynasty Mode");
+        }
+    }
+
+    //Choose ANY team
+    public void switchTeams(HeadCoach headCoach) {
+        userHC = headCoach;
+        updateTeamUI();
+        //get user team from list dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose your new team:");
+        final String[] teams = simLeague.getTeamListStr();
+        builder.setItems(teams, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                userTeam.userControlled = false;
+                userTeam.HC.clear();
+                userTeam.recruitPlayers(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                simLeague.newJobtransfer(simLeague.teamList.get(item).name);
+                userTeam = simLeague.userTeam;
+                userTeamStr = userTeam.name;
+                currentTeam = userTeam;
+                userTeam.HC.clear();
+                userTeam.HC.add(userHC);
+                userTeam.fired = false;
+                userHC.contractYear = 0;
+                userHC.contractLength = 4;
+                userHC.baselinePrestige = userTeam.teamPrestige;
+                simLeague.setTeamRanks();
+                updateTeamUI();
+                examineTeam(currentTeam.name);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    //Only schools lower than Coach Rating will offer jobs
+    public void newJob(HeadCoach headCoach) {
+        userHC = headCoach;
+        updateTeamUI();
+        //get user team from list dialog
+        final ArrayList<Team> coachList = simLeague.getCoachList(userHC.ratOvr);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Job Offers Available:");
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr(userHC.ratOvr);
+        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
+        builder.setItems(teams, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                userTeam.userControlled = false;
+                userTeam.HC.clear();
+                userTeam.recruitPlayers(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                simLeague.newJobtransfer(coachList.get(item).name);
+                userTeam = simLeague.userTeam;
+                userTeamStr = userTeam.name;
+                currentTeam = userTeam;
+                userTeam.HC.clear();
+                userTeam.HC.add(userHC);
+                userTeam.fired = false;
+                userHC.contractYear = 0;
+                userHC.contractLength = 4;
+                userHC.baselinePrestige = userTeam.teamPrestige;
+                simLeague.setTeamRanks();
+                updateTeamUI();
+                examineTeam(currentTeam.name);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void newGameHardDialog() {
+        final ArrayList<Team> coachList = simLeague.getCoachList(50);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Job Offers Available:");
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr(50);
+        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
+        builder.setItems(teams, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                userTeam.userControlled = false;
+                simLeague.newJobtransfer(coachList.get(item).name);
+                userTeam = simLeague.userTeam;
+                userTeam.userControlled = true;
+                userTeamStr = userTeam.name;
+                currentTeam = userTeam;
+                userNameDialog();
+                userTeam.setupUserCoach(username);
+                // set rankings so that not everyone is rank #0
+                simLeague.setTeamRanks();
+                simLeague.preseasonNews();
+                userHC = userTeam.HC.get(0);
+                // Set toolbar text to '2017 Season' etc
+                updateTeamUI();
+                examineTeam(currentTeam.name);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void newGameDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose your team:");
+        final String[] teams = simLeague.getTeamListStr();
+        builder.setItems(teams, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                userTeam.userControlled = false;
+                userTeam = simLeague.teamList.get(item);
+                simLeague.userTeam = userTeam;
+                userTeam.userControlled = true;
+                userTeamStr = userTeam.name;
+                currentTeam = userTeam;
+                userNameDialog();
+                userTeam.setupUserCoach(username);
+                // set rankings so that not everyone is rank #0
+                simLeague.setTeamRanks();
+                simLeague.preseasonNews();
+                userHC = userTeam.HC.get(0);
+                // Set toolbar text to '2017 Season' etc
+                updateTeamUI();
+                examineTeam(currentTeam.name);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
+    private void userNameDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter User Name")
+                .setView(getLayoutInflater().inflate(R.layout.username_dialog, null));
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        final EditText changeHCEditText = (EditText) dialog.findViewById(R.id.editTextChangeHC);
+        changeHCEditText.setText(simLeague.getRandName());   //change Head Coach Name
+
+        final TextView invalidHCText = (TextView) dialog.findViewById(R.id.textViewChangeHC);
+
+        changeHCEditText.addTextChangedListener(new TextWatcher() {
+            String newHC;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                newHC = s.toString().trim();
+                if (!simLeague.isNameValid(newHC)) {
+                    invalidHCText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidHCText.setText("");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                newHC = s.toString().trim();
+                if (!simLeague.isNameValid(newHC)) {
+                    invalidHCText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidHCText.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                newHC = s.toString().trim();
+                if (!simLeague.isNameValid(newHC)) {
+                    invalidHCText.setText("Name already in use or has illegal characters!");
+                } else {
+                    invalidHCText.setText("");
+                }
+            }
+
+        });
+        Button okChangeNameButton = (Button) dialog.findViewById(R.id.buttonOkChangeName);
+
+        okChangeNameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                String newHC = changeHCEditText.getText().toString().trim();
+                if (simLeague.isNameValid((newHC))) {
+                    userTeam.HC.get(0).name = newHC;
+                    dialog.dismiss();
+                } else {
+                    if (showToasts)
+                        Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
+                                Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
     }
 }
 
