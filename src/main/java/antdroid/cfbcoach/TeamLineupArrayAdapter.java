@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import CFBsimPack.Player;
+import Simulation.Player;
 
 /**
  * Created by Achi Jones on 3/18/2016.

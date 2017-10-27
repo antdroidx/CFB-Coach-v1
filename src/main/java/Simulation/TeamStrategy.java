@@ -1,4 +1,4 @@
-package CFBsimPack;
+package Simulation;
 
 /**
  * Team Strategy class. It works for both offense and defense, just applying the bonus different ways.
@@ -69,6 +69,7 @@ public class TeamStrategy {
     public int getRunUsage() {
         return runUsage;
     }
+
     public int getPassPref() {
         return passPref;
     }

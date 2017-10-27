@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import antdroid.cfbcoach.R;
-
 public class TeamStatsListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;

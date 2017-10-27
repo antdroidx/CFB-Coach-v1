@@ -1,25 +1,28 @@
 package antdroid.cfbcoach;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.View;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.*;
-
-import CFBsimPack.HeadCoach;
-import CFBsimPack.Player;
-import CFBsimPack.TeamStrategy;
-import antdroid.cfbcoach.R;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,10 +33,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import CFBsimPack.Conference;
-import CFBsimPack.Game;
-import CFBsimPack.League;
-import CFBsimPack.Team;
+import Simulation.Conference;
+import Simulation.Game;
+import Simulation.HeadCoach;
+import Simulation.League;
+import Simulation.Player;
+import Simulation.Team;
+import Simulation.TeamStrategy;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -1039,9 +1045,9 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
-                { "Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
+                {"Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
                         "Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
-                       };
+                };
         Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -1823,43 +1829,43 @@ public class MainActivity extends AppCompatActivity {
         // Change position players to correct position
         switch (position) {
             case 0:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Str, Acc, Eva)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Pass Strength, Pass Accuracy, Evasion, Speed)");
                 positionPlayers.addAll(userTeam.teamQBs);
                 break;
             case 1:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Pow, Spd, Eva)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Power, Speed, Evasion, Catch)");
                 positionPlayers.addAll(userTeam.teamRBs);
                 break;
             case 2:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cat, Spd, Eva)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Catch, Speed, Evaasion, Jump)");
                 positionPlayers.addAll(userTeam.teamWRs);
                 break;
             case 3:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cat, RunBlk, Eva)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Catch, Run Block, Evasion, Speed)");
                 positionPlayers.addAll(userTeam.teamTEs);
                 break;
             case 4:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Str, RunBlk, PassBlk)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Strength, Run Block, Pass Block, Awareness)");
                 positionPlayers.addAll(userTeam.teamOLs);
                 break;
             case 5:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (KStr, KAcc, Clum)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Kick Strength, Kick Accuracy, Clumsiness, Pressure)");
                 positionPlayers.addAll(userTeam.teamKs);
                 break;
             case 6:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Str, RunDef, PassDef)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Strength, Run Def, Pass Def, Tackle)");
                 positionPlayers.addAll(userTeam.teamDLs);
                 break;
             case 7:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, RunDef, Tack)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Cover, Run Def, Tackle, Run Stop)");
                 positionPlayers.addAll(userTeam.teamLBs);
                 break;
             case 8:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, Spd, Tack)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Cover, Speed, Tackle, Jump)");
                 positionPlayers.addAll(userTeam.teamCBs);
                 break;
             case 9:
-                textLineupPositionDescription.setText("Name [Yr] Ovr/Pot (Cov, Spd, Tack)");
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Cover, Speed, Tackle, Run Stop)");
                 positionPlayers.addAll(userTeam.teamSs);
                 break;
 
