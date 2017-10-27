@@ -1,12 +1,11 @@
-package CFBsimPack;
+package Simulation;
 
 import java.util.ArrayList;
 
 /**
  * Created by ahngu on 10/9/2017.
- *
+ * <p>
  * Head Coach Position, TBD
- *
  */
 
 public class HeadCoach extends Player {
@@ -35,15 +34,15 @@ public class HeadCoach extends Player {
     int awards;
     int job;
 
-    public HeadCoach( String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                      int bwins, int blosses, int cchamps, int nchamps, int allams, int allconf, int aw) {
+    public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
+                     int bwins, int blosses, int cchamps, int nchamps, int allams, int allconf, int aw) {
         team = t;
         name = nm;
         age = a;
         year = yr;
         contractYear = cyr;
         contractLength = clength;
-        ratOvr = (off + def + tal + dis)/4;
+        ratOvr = (off + def + tal + dis) / 4;
         ratOff = off;
         ratDef = def;
         ratTalent = tal;
@@ -60,19 +59,19 @@ public class HeadCoach extends Player {
         bowlwins = bwins;
         bowllosses = blosses;
         allamericans = allams;
-        allconference= allconf;
+        allconference = allconf;
         awards = aw;
 
         position = "HC";
     }
 
-    public HeadCoach( String nm, int yr, int stars, Team t ) {
+    public HeadCoach(String nm, int yr, int stars, Team t) {
         name = nm;
         year = yr;
         team = t;
 
         age = 30 + (int) (Math.random() * 35);
-        year = (int)(Math.random()*(age-35));
+        year = (int) (Math.random() * (age - 35));
         contractYear = (int) (5 * Math.random());
         contractLength = 5;
         ratOff = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
@@ -92,7 +91,7 @@ public class HeadCoach extends Player {
         bowlwins = 0;
         bowllosses = 0;
         allamericans = 0;
-        allconference= 0;
+        allconference = 0;
         awards = 0;
 
         position = "HC";
@@ -114,20 +113,20 @@ public class HeadCoach extends Player {
         int def = avgYards - team.teamOppPassYards;
         int offTal = offTalent - team.teamOffTalent;
         int defTal = defTalent - team.teamDefTalent;
-        offpts= ((off/avgYards) + (offTal/offTalent))*10;
-        defpts = ((def/avgYards) + (defTal/defTalent))*10;
+        offpts = ((off / avgYards) + (offTal / offTalent)) * 10;
+        defpts = ((def / avgYards) + (defTal / defTalent)) * 10;
 
-        ratOff += (int)(Math.random()*(prestigeDiff/2 + offpts));
+        ratOff += (int) (Math.random() * (prestigeDiff / 2 + offpts));
         if (ratOff > 99) ratOff = 99;
 
-        ratDef += (int)(Math.random()*(prestigeDiff/2 + defpts));
+        ratDef += (int) (Math.random() * (prestigeDiff / 2 + defpts));
         if (ratDef > 99) ratDef = 99;
 
-        ratDiscipline += (int)(Math.random()*4);
+        ratDiscipline += (int) (Math.random() * 4);
         if (ratDiscipline > 95) ratDiscipline = 95;
         if (ratTalent > 95) ratTalent = 95;
 
-        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline)/4;
+        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
         ratImprovement = ratOvr - oldOvr;
 
         wins += 0;
@@ -143,7 +142,7 @@ public class HeadCoach extends Player {
         int[] newPrestige = team.calcSeasonPrestige();
         int prestigeDiff = newPrestige[0] - team.teamPrestige;
 
-        return prestigeDiff*10 + wins*2 + (team.teamStrengthOfWins/25);
+        return prestigeDiff * 10 + wins * 2 + (team.teamStrengthOfWins / 25);
     }
 
     @Override

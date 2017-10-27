@@ -1,9 +1,10 @@
-package CFBsimPack;
+package Simulation;
 
 import java.util.ArrayList;
 
 /**
  * Class for QB player.
+ *
  * @author Achi
  */
 public class PlayerQB extends Player {
@@ -40,14 +41,13 @@ public class PlayerQB extends Player {
     public int careerFumbles;
 
 
-
-    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd ) {
+    public PlayerQB(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd) {
         team = t;
         name = nm;
         year = yr;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow*3 + acc*4 + eva + spd)/9;
+        ratOvr = (pow * 3 + acc * 4 + eva + spd) / 9;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -58,7 +58,7 @@ public class PlayerQB extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/1.5) + 150 + (int)(Math.random()*100) - 50;
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -66,9 +66,9 @@ public class PlayerQB extends Player {
         statsInt = 0;
         statsPassYards = 0;
         statsSacked = 0;
-        statsRushAtt= 0;
-        statsRushYards= 0;
-        statsRushTD= 0;
+        statsRushAtt = 0;
+        statsRushYards = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
         wonHeisman = false;
         wonAllAmerican = false;
@@ -81,9 +81,9 @@ public class PlayerQB extends Player {
         careerInt = 0;
         careerPassYards = 0;
         careerSacked = 0;
-        careerRushAtt= 0;
-        careerRushYards= 0;
-        careerRushTD= 0;
+        careerRushAtt = 0;
+        careerRushYards = 0;
+        careerRushTD = 0;
         careerGamesPlayed = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
@@ -93,15 +93,15 @@ public class PlayerQB extends Player {
         position = "QB";
     }
 
-    public PlayerQB( String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd,
-                     int cGamesPlayed, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
-                     int cRushAtt, int cRushYards, int cRushTD, int cFumbles, int cHeismans, int cAA, int cAC, int cWins) {
+    public PlayerQB(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd,
+                    int cGamesPlayed, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
+                    int cRushAtt, int cRushYards, int cRushTD, int cFumbles, int cHeismans, int cAA, int cAC, int cWins) {
         team = t;
         name = nm;
         year = yr;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow*3 + acc*4 + eva + spd)/9;
+        ratOvr = (pow * 3 + acc * 4 + eva + spd) / 9;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -112,7 +112,7 @@ public class PlayerQB extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/1.5) + 150 + (int)(Math.random()*100) - 50;
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -120,9 +120,9 @@ public class PlayerQB extends Player {
         statsInt = 0;
         statsPassYards = 0;
         statsSacked = 0;
-        statsRushAtt= 0;
-        statsRushYards= 0;
-        statsRushTD= 0;
+        statsRushAtt = 0;
+        statsRushYards = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
 
         wonHeisman = false;
@@ -136,9 +136,9 @@ public class PlayerQB extends Player {
         careerInt = cInt;
         careerPassYards = cPassYards;
         careerSacked = cSacked;
-        careerRushAtt= cRushAtt;
-        careerRushYards= cRushYards;
-        careerRushTD= cRushTD;
+        careerRushAtt = cRushAtt;
+        careerRushYards = cRushYards;
+        careerRushTD = cRushTD;
         careerFumbles = cFumbles;
 
         careerGamesPlayed = cGamesPlayed;
@@ -150,22 +150,22 @@ public class PlayerQB extends Player {
         position = "QB";
     }
 
-    public PlayerQB( String nm, int yr, int stars, Team t ) {
+    public PlayerQB(String nm, int yr, int stars, Team t) {
         name = nm;
         year = yr;
         team = t;
         gamesPlayed = 0;
         isInjured = false;
-        ratPot = (int) (50 + 50*Math.random());
-        ratFootIQ = (int) (50 + 50*Math.random());
-        ratDur = (int) (50 + 50*Math.random());
-        ratPassPow = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratPassAcc = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratEvasion = (int) (60 + year*5 + stars*5 - 25*Math.random());
-        ratSpeed = (int) (47 + year*5 + stars*5 - 25*Math.random());
-        ratOvr = (ratPassPow*3 + ratPassAcc*4 + ratEvasion + ratSpeed)/9;
+        ratPot = (int) (50 + 50 * Math.random());
+        ratFootIQ = (int) (50 + 50 * Math.random());
+        ratDur = (int) (50 + 50 * Math.random());
+        ratPassPow = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
+        ratPassAcc = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
+        ratEvasion = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
+        ratSpeed = (int) (47 + year * 5 + stars * 5 - 25 * Math.random());
+        ratOvr = (ratPassPow * 3 + ratPassAcc * 4 + ratEvasion + ratSpeed) / 9;
 
-        cost = (int)(Math.pow((float)ratOvr - 55,2)/1.5) + 150 + (int)(Math.random()*100) - 50;
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
 
         statsPassAtt = 0;
@@ -174,9 +174,9 @@ public class PlayerQB extends Player {
         statsInt = 0;
         statsPassYards = 0;
         statsSacked = 0;
-        statsRushAtt= 0;
-        statsRushYards= 0;
-        statsRushTD= 0;
+        statsRushAtt = 0;
+        statsRushYards = 0;
+        statsRushTD = 0;
         statsFumbles = 0;
 
         wonHeisman = false;
@@ -190,9 +190,9 @@ public class PlayerQB extends Player {
         careerInt = 0;
         careerPassYards = 0;
         careerSacked = 0;
-        careerRushAtt= 0;
-        careerRushYards= 0;
-        careerRushTD= 0;
+        careerRushAtt = 0;
+        careerRushYards = 0;
+        careerRushTD = 0;
         careerFumbles = 0;
         careerGamesPlayed = 0;
         careerHeismans = 0;
@@ -207,7 +207,7 @@ public class PlayerQB extends Player {
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
-        progression = (ratPot*3 + team.HC.get(0).ratTalent*2 + team.HC.get(0).ratOff)/6;
+        progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 6;
 
         if (!isMedicalRS) {
             year++;
@@ -230,7 +230,7 @@ public class PlayerQB extends Player {
             }
         }
 
-        ratOvr = (ratPassPow*3 + ratPassAcc*4 + ratEvasion + ratSpeed)/9;
+        ratOvr = (ratPassPow * 3 + ratPassAcc * 4 + ratEvasion + ratSpeed) / 9;
         ratImprovement = ratOvr - oldOvr;
         //reset stats (keep career stats?)
         careerPassAtt += statsPassAtt;
@@ -256,39 +256,39 @@ public class PlayerQB extends Player {
         statsInt = 0;
         statsPassYards = 0;
         statsSacked = 0;
-        statsRushAtt= 0;
+        statsRushAtt = 0;
         statsRushYards = 0;
-        statsRushTD= 0;
+        statsRushTD = 0;
         statsFumbles = 0;
     }
 
     @Override
     public int getHeismanScore() {
-        return statsPassTD * 142 - statsInt*250 + statsPassYards + statsRushTD*142 + statsRushYards + team.confPrestige*7;
+        return statsPassTD * 142 - statsInt * 250 + statsPassYards + statsRushTD * 142 + statsRushYards + team.confPrestige * 7;
     }
 
     public int getPasserRating() {
-        int rating = (int)(((8.4*statsPassYards)+(300*statsPassTD)+(100*statsPassComp)-(200*statsInt))/statsPassAtt+1);
-    return rating;
+        int rating = (int) (((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt + 1);
+        return rating;
     }
 
     public int getPassPCT() {
-        int rating = 100*statsPassComp/(statsPassAtt+1);
+        int rating = 100 * statsPassComp / (statsPassAtt + 1);
         return rating;
     }
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
+        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100 * statsPassComp / (statsPassAtt + 1)) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
-        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + ((double)(10*statsPassYards/(statsPassAtt+1))/10) + " yds");
-        pStats.add("Yds/Game: " + (statsPassYards/getGamesPlayed()) + " yds/g>Sacks: " + statsSacked);
+        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + ((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10) + " yds");
+        pStats.add("Yds/Game: " + (statsPassYards / getGamesPlayed()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
-        pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")");
+        pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")");
         pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
         pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed)  + ">Evasion: " + getLetterGrade(ratEvasion));
+        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
         pStats.add(" > ");
         return pStats;
     }
@@ -296,14 +296,14 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
+        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100 * statsPassComp / (statsPassAtt + 1)) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
-        pStats.add("Yds/Game: " + (statsPassYards/getGamesPlayed()) + " yds/g>Sacks: " + statsSacked);
+        pStats.add("Yds/Game: " + (statsPassYards / getGamesPlayed()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
-        pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed-statsWins) + ")");
+        pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")");
         pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
         pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed)  + ">Evasion: " + getLetterGrade(ratEvasion));
+        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;
@@ -312,20 +312,21 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + (int)(((8.4*(statsPassYards+careerPassYards))+(300*(statsPassTD+careerTDs))+(100*(statsPassComp+careerPassComp))-(200*(statsInt+careerInt)))/(statsPassAtt+careerPassAtt+1)) + ">Comp Percent: " + (100*statsPassComp/(statsPassAtt+1))+"%");
-        pStats.add("Touchdowns: " + (statsPassTD+careerTDs) + ">Interceptions: " + (statsInt+careerInt));
-        pStats.add("Pass Yards: " + (statsPassYards+careerPassYards) + " yds>Yards/Att: " + ((double)(10*(statsPassYards+careerPassYards)/(statsPassAtt+careerPassAtt+1))/10) + " yds");
-        pStats.add("Yds/Game: " + ((statsPassYards+careerPassYards)/(getGamesPlayed()+careerGamesPlayed)) + " yds/g>Sacks: " + (statsSacked+careerSacked));
-        pStats.add("Rush Yards: " + (statsRushYards+careerRushYards) + ">Rush TDs: " + (statsRushTD+careerRushTD));
+        pStats.add("Passer Rating " + (int) (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt + 1)) + ">Comp Percent: " + (100 * statsPassComp / (statsPassAtt + 1)) + "%");
+        pStats.add("Touchdowns: " + (statsPassTD + careerTDs) + ">Interceptions: " + (statsInt + careerInt));
+        pStats.add("Pass Yards: " + (statsPassYards + careerPassYards) + " yds>Yards/Att: " + ((double) (10 * (statsPassYards + careerPassYards) / (statsPassAtt + careerPassAtt + 1)) / 10) + " yds");
+        pStats.add("Yds/Game: " + ((statsPassYards + careerPassYards) / (getGamesPlayed() + careerGamesPlayed)) + " yds/g>Sacks: " + (statsSacked + careerSacked));
+        pStats.add("Rush Yards: " + (statsRushYards + careerRushYards) + ">Rush TDs: " + (statsRushTD + careerRushTD));
         pStats.addAll(super.getCareerStatsList());
         return pStats;
     }
 
     @Override
     public String getInfoForLineup() {
-        if (injury != null) return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " " + injury.toString();
+        if (injury != null)
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " " + injury.toString();
         return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " (" +
-                getLetterGrade(ratPassPow) + ", " + getLetterGrade(ratPassAcc) + ", " + getLetterGrade(ratEvasion) + "," + getLetterGrade(ratSpeed) + ")";
+                getLetterGrade(ratPassPow) + ", " + getLetterGrade(ratPassAcc) + ", " + getLetterGrade(ratEvasion) + ", " + getLetterGrade(ratSpeed) + ")";
     }
-    
+
 }

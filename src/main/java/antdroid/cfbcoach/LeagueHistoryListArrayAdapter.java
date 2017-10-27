@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import antdroid.cfbcoach.R;
-
 public class LeagueHistoryListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
@@ -34,7 +32,9 @@ public class LeagueHistoryListArrayAdapter extends ArrayAdapter<String> {
         TextView textTop = (TextView) rowView.findViewById(R.id.textViewLeagueHistoryTop);
         TextView textMiddle = (TextView) rowView.findViewById(R.id.textViewLeagueHistoryMiddle);
         TextView textBottom = (TextView) rowView.findViewById(R.id.textViewLeagueHistoryBottom);
-        if (position == 2) { position = 1;}
+        if (position == 2) {
+            position = 1;
+        }
         String[] record = values[position].split("\n");
         if (record.length == 3) {
             textTop.setText(record[0]);

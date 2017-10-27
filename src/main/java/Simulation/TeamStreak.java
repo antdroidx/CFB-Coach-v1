@@ -1,4 +1,4 @@
-package CFBsimPack;
+package Simulation;
 
 /**
  * Class used by Teams to keep track of the longest winning streaks in the league.

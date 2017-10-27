@@ -1,4 +1,4 @@
-package CFBsimPack;
+package Simulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,13 +44,13 @@ public class LeagueRecords {
 
     private HashMap<String, Record> records;
 
-    public final String[] recordsList = {"TEAM","Team PPG","Team Opp PPG","Team YPG","Team Opp YPG","Team TO Diff",
-            "SEASON: OFFENSE","Pass Yards","Pass TDs","Ints Thrown","Comp Percent",
-            "Rush Yards","Rush TDs","Fumbles Lost",
-            "Rec Yards","Rec TDs","Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended",
-            "CAREER: OFFENSE","Career Pass Yards","Career Pass TDs","Career Ints Thrown",
-            "Career Rush Yards","Career Rush TDs","Career Fumbles Lost",
-            "Career Rec Yards","Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended"};
+    public final String[] recordsList = {"TEAM", "Team PPG", "Team Opp PPG", "Team YPG", "Team Opp YPG", "Team TO Diff",
+            "SEASON: OFFENSE", "Pass Yards", "Pass TDs", "Ints Thrown", "Comp Percent",
+            "Rush Yards", "Rush TDs", "Fumbles Lost",
+            "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended",
+            "CAREER: OFFENSE", "Career Pass Yards", "Career Pass TDs", "Career Ints Thrown",
+            "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost",
+            "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<String, Record>();
@@ -144,14 +144,14 @@ public class LeagueRecords {
     private String recordStrCSV(String key) {
         if (records.containsKey(key)) {
             Record r = records.get(key);
-            if (r == null) return key+",-1,-1,-1";
-            return key+","+r.getNumber()+","+r.getHolder()+","+r.getYear();
-        }
-        else return "ERROR,ERROR,ERROR,ERROR";
+            if (r == null) return key + ",-1,-1,-1";
+            return key + "," + r.getNumber() + "," + r.getHolder() + "," + r.getYear();
+        } else return "ERROR,ERROR,ERROR,ERROR";
     }
 
     /**
      * Print out string of all the records broken by a team that year
+     *
      * @return string of all records broken
      */
     public String brokenRecordsStr(int year, String abbr) {
@@ -162,7 +162,7 @@ public class LeagueRecords {
                     r.getValue().getYear() == year &&
                     !r.getKey().split(" ")[0].equals("Career")) {
                 sb.append(r.getValue().getHolder() + " broke the record for " +
-                    r.getKey() + " with " + r.getValue().getNumber() + "!\n");
+                        r.getKey() + " with " + r.getValue().getNumber() + "!\n");
             }
         }
 

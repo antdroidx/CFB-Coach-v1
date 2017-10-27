@@ -12,10 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import antdroid.cfbcoach.R;
-
-import CFBsimPack.Game;
-import CFBsimPack.Team;
+import Simulation.Game;
+import Simulation.Team;
 
 public class GameScheduleListArrayAdapter extends ArrayAdapter<Game> {
     private final Context context;

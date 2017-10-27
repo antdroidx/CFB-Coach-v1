@@ -15,8 +15,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import antdroid.cfbcoach.R;
-
 import java.util.List;
 import java.util.Map;
 

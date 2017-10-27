@@ -9,8 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import antdroid.cfbcoach.R;
-
 public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
@@ -36,14 +34,14 @@ public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
         itemL.setText(detailSplit[0]);
         if (detailSplit.length >= 2) {
             TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
-            itemR.setPadding(5,0,5,0);
+            itemR.setPadding(5, 0, 5, 0);
             itemR.setText(detailSplit[1]);
             if (detailSplit[1].equals("[CAREER]"))
                 itemR.setTextColor(Color.RED);
             else itemR.setTextColor(Color.parseColor("#008066"));
         } else {
             TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
-            itemR.setPadding(5,0,5,0);
+            itemR.setPadding(5, 0, 5, 0);
             itemR.setText("[DYNASTY]");
             itemR.setTextColor(Color.parseColor("#008066"));
         }

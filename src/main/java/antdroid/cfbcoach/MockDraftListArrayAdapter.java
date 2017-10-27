@@ -13,8 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import antdroid.cfbcoach.R;
-
 public class MockDraftListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
