@@ -330,6 +330,9 @@ public class Conference {
             confTeams.get(0).confChampion = "CC";
             confTeams.get(0).totalCCs++;
             confTeams.get(1).totalCCLosses++;
+            confTeams.get(0).HC.get(0).bowlwins++;
+            confTeams.get(0).HC.get(0).confchamp++;
+            confTeams.get(1).HC.get(0).bowllosses++;
             league.newsStories.get(13).add(
                     ccg.homeTeam.name + " wins the " + confName +"!>" +
                     ccg.homeTeam.strRep() + " took care of business in the conference championship against " + ccg.awayTeam.strRep() +
@@ -339,6 +342,9 @@ public class Conference {
             confTeams.get(1).confChampion = "CC";
             confTeams.get(1).totalCCs++;
             confTeams.get(0).totalCCLosses++;
+            confTeams.get(1).HC.get(0).bowlwins++;
+            confTeams.get(1).HC.get(0).confchamp++;
+            confTeams.get(0).HC.get(0).bowllosses++;
             league.newsStories.get(13).add(
                     ccg.awayTeam.name + " wins the " + confName +"!>" +
                             ccg.awayTeam.strRep() + " surprised many in the conference championship against " + ccg.homeTeam.strRep() +

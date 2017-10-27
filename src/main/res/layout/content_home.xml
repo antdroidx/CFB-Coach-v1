@@ -32,8 +32,7 @@
         android:layout_width="250dp"
         android:layout_height="0dip"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_margin="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -42,45 +41,81 @@
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="New" />
+            android:padding="0dp"
+            android:text="New Dynasty"
+            android:textSize="14sp" />
 
         <Button
-            android:id="@+id/buttonLoadGame"
+            android:id="@+id/buttonCareer"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
+            android:layout_margin="0dp"
             android:layout_weight="1"
-            android:text="Load" />
-    </LinearLayout>
+            android:padding="0dp"
+            android:text="New Career"
+            android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/buttonTutorial"
-        android:layout_width="250dp"
-        android:layout_height="0dip"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:text="How to Play" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="250dp"
-        android:layout_height="0dip"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1">
+        android:layout_margin="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonLoadGame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:text="Load"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonTutorial"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="How to Play"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="0dp">
 
         <Button
             android:id="@+id/buttonSubreddit"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
             android:layout_weight="1"
-            android:text="Reddit" />
+            android:padding="0dp"
+            android:text="Reddit"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/buttonAntdroid"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
             android:layout_weight="1"
-            android:text="Antdroid" />
+            android:padding="0dp"
+            android:text="Antdroid"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -100,7 +135,8 @@
             android:layout_weight="1"
             android:background="?attr/colorControlActivated"
             android:text="Pro Football Coach"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/buttonCollegeHoopsCoach"
@@ -109,7 +145,8 @@
             android:layout_marginLeft="3dp"
             android:layout_weight="1"
             android:background="@android:color/holo_orange_light"
-            android:text="College Hoops Coach" />
+            android:text="College Hoops Coach"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <TextView
@@ -117,9 +154,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="[v2.00 2017-10-24 BETA]\n© Achi Jones, 2016 | Anthony Nguyen, 2017"
+        android:text="[v2.00 BETA: 10-26-2017]\n© Achi Jones, 2016 | Anthony Nguyen, 2017"
         android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
 
 
 </LinearLayout>

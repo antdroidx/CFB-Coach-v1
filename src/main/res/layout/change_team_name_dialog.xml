@@ -79,7 +79,31 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_gravity="center"
         android:id="@+id/textViewChangeConf" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="HC:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/editTextChangeHC"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewChangeHC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -113,6 +137,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkboxShowInjuryReport"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonChangeTeams"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resign Job" />
 
     <LinearLayout
         android:layout_width="fill_parent"

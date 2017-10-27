@@ -53,13 +53,6 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
 
         convertView = inflater.inflate(R.layout.child_player_stats, null);
 
-        /* Set up Text for player details
-        String[] detailSplit = playerDetail.split(">");
-        TextView itemL = (TextView) convertView.findViewById(R.id.textPlayerStatsLeftChild);
-        itemL.setText(detailSplit[0]);
-        TextView itemR = (TextView) convertView.findViewById(R.id.textPlayerStatsRightChild);
-        itemR.setText(detailSplit[1]);*/
-
         // Set up Text for player details
         TextView itemL = (TextView) convertView.findViewById(R.id.textPlayerStatsLeftChild);
         TextView itemR = (TextView) convertView.findViewById(R.id.textPlayerStatsRightChild);

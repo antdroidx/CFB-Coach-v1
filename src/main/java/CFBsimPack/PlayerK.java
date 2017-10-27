@@ -151,25 +151,26 @@ public class PlayerK extends Player {
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
+        progression = (ratPot*3 + team.HC.get(0).ratTalent*2 + team.HC.get(0).ratOff)/6;
+        
         if (!isMedicalRS) {
             year++;
             if (wonAllConference) ratPot++;
             if (wonAllAmerican) ratPot++;
             if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
-            if (ratPot < 0) ratPot = 0;
 
-            ratFootIQ += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratKickPow += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratKickAcc += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratKickFum += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
-            ratPressure += (int) (Math.random() * (ratPot + gamesPlayed - 35)) / 10;
+            ratFootIQ += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratKickPow += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratKickAcc += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratKickFum += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratPressure += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
 
-            if (Math.random() * 100 < ratPot) {
+            if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratKickPow += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratKickAcc += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratKickFum += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
-                ratPressure += (int) (Math.random() * (ratPot + gamesPlayed - 40)) / 10;
+                ratKickPow += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratKickAcc += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratKickFum += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratPressure += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
             }
         }
         ratOvr = (ratKickPow + ratKickAcc)/2;

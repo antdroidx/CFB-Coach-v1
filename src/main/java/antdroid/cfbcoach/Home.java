@@ -41,7 +41,16 @@ public class Home extends AppCompatActivity {
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
-                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE");
+                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
+                Home.this.startActivity(myIntent);
+            }
+        });
+
+        Button newCareerButton = (Button) findViewById(R.id.buttonCareer);
+        newCareerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Home.this, MainActivity.class);
+                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER");
                 Home.this.startActivity(myIntent);
             }
         });
