@@ -22,6 +22,7 @@ public class Team {
     public String rivalTeam;
     public boolean wonRivalryGame;
     public ArrayList<String> teamHistory;
+    public ArrayList<String> userHistory;
     public ArrayList<String> hallOfFame;
     public boolean userControlled;
     public boolean showPopups;
@@ -149,6 +150,7 @@ public class Team {
         userControlled = false;
         showPopups = true;
         teamHistory = new ArrayList<String>();
+        userHistory = new ArrayList<String>();
         hallOfFame = new ArrayList<>();
         playersInjuredAll = new ArrayList<>();
 
@@ -237,6 +239,7 @@ public class Team {
         userControlled = false;
         showPopups = true;
         teamHistory = new ArrayList<String>();
+        userHistory = new ArrayList<String>();
         hallOfFame = new ArrayList<>();
         playersInjuredAll = new ArrayList<>();
 

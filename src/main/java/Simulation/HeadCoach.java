@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 
 public class HeadCoach extends Player {
-    //ArrayList<String> coachHistory;
     int age;
     int year;
     public int contractYear;
@@ -36,7 +35,7 @@ public class HeadCoach extends Player {
     int job;
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int aw/*, ArrayList<String> history*/) {
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int aw) {
         team = t;
         name = nm;
         age = a;
@@ -62,7 +61,6 @@ public class HeadCoach extends Player {
         allamericans = allams;
         allconference = allconf;
         awards = aw;
-        //coachHistory = history;
 
         position = "HC";
     }
@@ -95,7 +93,6 @@ public class HeadCoach extends Player {
         allamericans = 0;
         allconference = 0;
         awards = 0;
-        //ArrayList<String> coachHistory = new ArrayList<>();
 
         position = "HC";
     }

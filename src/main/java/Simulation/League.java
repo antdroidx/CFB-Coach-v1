@@ -23,7 +23,7 @@ import java.util.Random;
 public class League {
     //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
-    public ArrayList<String> leagueUserHistory;
+    public ArrayList<String[]> leagueUserHistory;
     public ArrayList<String> heismanHistory;
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
@@ -93,6 +93,7 @@ public class League {
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
         leagueHistory = new ArrayList<String[]>();
+        leagueUserHistory = new ArrayList<String[]>();
         heismanHistory = new ArrayList<String>();
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
