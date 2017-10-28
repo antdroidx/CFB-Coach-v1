@@ -109,6 +109,7 @@ public class Team {
     public ArrayList<PlayerLB> teamLBs;
     public ArrayList<PlayerCB> teamCBs;
     public ArrayList<PlayerS> teamSs;
+    public ArrayList<PlayerDefense> teamDefense;
     //By year
     public ArrayList<Player> teamRSs;
     public ArrayList<Player> teamFRs;
@@ -250,6 +251,7 @@ public class Team {
         teamLBs = new ArrayList<PlayerLB>();
         teamCBs = new ArrayList<PlayerCB>();
         teamSs = new ArrayList<PlayerS>();
+        teamDefense = new ArrayList<PlayerDefense>();
 
 
         teamRSs = new ArrayList<Player>();
@@ -419,7 +421,7 @@ public class Team {
                     ". His former team, " + name + " have announced " + HC.get(0).name + " as the successor to replace the retired coach.");
 
             //New Contracts or Firing
-        } else if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") ) {
+        } else if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL")) {
             if (totalPDiff > 20 || (natChampWL.equals("NCW"))) {
                 HC.get(0).contractLength = 6;
                 HC.get(0).contractYear = 0;
@@ -828,7 +830,7 @@ public class Team {
                 }
                 ++i;
             }
-            
+
             i = 0;
             while (i < teamDLs.size()) {
                 if (teamDLs.get(i).year == 4 && !teamDLs.get(i).isMedicalRS || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE + champsBonus)) {
@@ -1223,7 +1225,6 @@ public class Team {
 */
 
 
-
     /**
      * Advance season for players. Removes seniors and develops underclassmen.
      */
@@ -1608,7 +1609,8 @@ public class Team {
         //make team
         int stars = teamPrestige / 20 + 1;
         int chance = 20;
-        if (HC.get(0) != null) chance = (2*teamPrestige + HC.get(0).ratTalent)/15; //between 0 and 20
+        if (HC.get(0) != null)
+            chance = (2 * teamPrestige + HC.get(0).ratTalent) / 15; //between 0 and 20
 
 
         double starsBonusChance = 0.15;
@@ -2444,7 +2446,7 @@ public class Team {
         for (int i = 0; i < 3; ++i) {
             comp += getLB(i).ratFootIQ;
         }
-        comp += HC.get(0).ratDef*2 + HC.get(0).ratOff*2;
+        comp += HC.get(0).ratDef * 2 + HC.get(0).ratOff * 2;
         return comp / 27;
     }
 

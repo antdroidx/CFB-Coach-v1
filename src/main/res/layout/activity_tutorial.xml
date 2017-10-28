@@ -14,8 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:id="@+id/tutorialSpinner">
-    </Spinner>
+        android:id="@+id/tutorialSpinner"></Spinner>
 
     <TextView
         android:layout_width="fill_parent"
@@ -24,17 +23,18 @@
         android:text="FBC Basics"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center"
-        android:id="@+id/tutorialTitle"/>
+        android:id="@+id/tutorialTitle" />
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="10">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="this is a test of the emergency broadcast system!"
-            android:id="@+id/tutorialContent"/>
+            android:id="@+id/tutorialContent" />
     </ScrollView>
 
 </LinearLayout>

@@ -11,12 +11,14 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Name:" />
+
         <EditText
             android:layout_width="0dip"
             android:layout_weight="3"
@@ -34,6 +36,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="0dip"
             android:layout_weight="1"
@@ -73,12 +76,14 @@
             android:layout_weight="3" />
 
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_gravity="center"
         android:id="@+id/textViewChangeConf" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -115,27 +120,30 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Show weekly pop-ups:"/>
+            android:text="Show weekly pop-ups:" />
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkboxShowPopups"/>
+            android:id="@+id/checkboxShowPopups" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15sp">
+
         <TextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Show injury report:"/>
+            android:text="Show injury report:" />
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkboxShowInjuryReport"/>
+            android:id="@+id/checkboxShowInjuryReport" />
     </LinearLayout>
 
     <Button
@@ -148,12 +156,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15sp">
+
         <Button
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:id="@+id/buttonCancelChangeName" />
+
         <Button
             android:layout_width="0dip"
             android:layout_weight="1"

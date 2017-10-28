@@ -449,39 +449,50 @@ public class Conference {
 
             allConfPlayers.add(qbs.get(0));
             qbs.get(0).wonAllConference = true;
+            qbs.get(0).team.HC.get(0).allconference++;
             allConfPlayers.add(rbs.get(0));
             rbs.get(0).wonAllConference = true;
+            rbs.get(0).team.HC.get(0).allconference++;
             allConfPlayers.add(rbs.get(1));
             rbs.get(1).wonAllConference = true;
+            rbs.get(1).team.HC.get(0).allconference++;
             for (int i = 0; i < 3; ++i) {
                 allConfPlayers.add(wrs.get(i));
                 wrs.get(i).wonAllConference = true;
+                wrs.get(i).team.HC.get(0).allconference++;
             }
             allConfPlayers.add(tes.get(0));
             tes.get(0).wonAllConference = true;
+            tes.get(0).team.HC.get(0).allconference++;
 
             for (int i = 0; i < 5; ++i) {
                 allConfPlayers.add(ols.get(i));
                 ols.get(i).wonAllConference = true;
+                ols.get(i).team.HC.get(0).allconference++;
             }
 
             allConfPlayers.add(ks.get(0));
             ks.get(0).wonAllConference = true;
+            ks.get(0).team.HC.get(0).allconference++;
 
             for (int i = 0; i < 4; ++i) {
                 allConfPlayers.add(dls.get(i));
                 dls.get(i).wonAllConference = true;
+                dls.get(i).team.HC.get(0).allconference++;
             }
             for (int i = 0; i < 3; ++i) {
                 allConfPlayers.add(lbs.get(i));
                 lbs.get(i).wonAllConference = true;
+                lbs.get(i).team.HC.get(0).allconference++;
             }
             for (int i = 0; i < 3; ++i) {
                 allConfPlayers.add(cbs.get(i));
                 cbs.get(i).wonAllConference = true;
+                cbs.get(i).team.HC.get(0).allconference++;
             }
             allConfPlayers.add(ss.get(0));
             ss.get(0).wonAllConference = true;
+            ss.get(0).team.HC.get(0).allconference++;
         }
 
         return allConfPlayers;

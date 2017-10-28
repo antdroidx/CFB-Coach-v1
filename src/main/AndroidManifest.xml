@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="antdroid.cfbcoach">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -41,10 +42,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="antdroid.cfbcoach.MainActivity" />
         </activity>
-        <activity 
+        <activity
             android:name=".TutorialActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
     </application>
 
 </manifest>

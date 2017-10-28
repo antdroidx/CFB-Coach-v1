@@ -133,7 +133,7 @@ public class League {
         String[] namesSplit = namesCSV.split(",");
         for (String n : namesSplit) {
             if (isNameValid(n.trim()))
-            nameList.add(n.trim());
+                nameList.add(n.trim());
         }
 
         // Read last names from file
@@ -141,7 +141,7 @@ public class League {
         namesSplit = lastNamesCSV.split(",");
         for (String n : namesSplit) {
             if (isNameValid(n.trim()))
-            lastNameList.add(n.trim());
+                lastNameList.add(n.trim());
         }
 
         //Set up conference
@@ -1799,36 +1799,47 @@ public class League {
 
             allAmericans.add(qbs.get(0));
             qbs.get(0).wonAllAmerican = true;
+            qbs.get(0).team.HC.get(0).allamericans++;
             allAmericans.add(rbs.get(0));
             rbs.get(0).wonAllAmerican = true;
+            rbs.get(0).team.HC.get(0).allamericans++;
             allAmericans.add(rbs.get(1));
             rbs.get(1).wonAllAmerican = true;
+            rbs.get(1).team.HC.get(0).allamericans++;
             for (int i = 0; i < 3; ++i) {
                 allAmericans.add(wrs.get(i));
                 wrs.get(i).wonAllAmerican = true;
+                wrs.get(i).team.HC.get(0).allamericans++;
             }
             allAmericans.add(tes.get(0));
             tes.get(0).wonAllAmerican = true;
+            tes.get(0).team.HC.get(0).allamericans++;
             for (int i = 0; i < 5; ++i) {
                 allAmericans.add(ols.get(i));
                 ols.get(i).wonAllAmerican = true;
+                ols.get(i).team.HC.get(0).allamericans++;
             }
             allAmericans.add(ks.get(0));
             ks.get(0).wonAllAmerican = true;
+            ks.get(0).team.HC.get(0).allamericans++;
             for (int i = 0; i < 4; ++i) {
                 allAmericans.add(dls.get(i));
                 dls.get(i).wonAllAmerican = true;
+                dls.get(i).team.HC.get(0).allamericans++;
             }
             for (int i = 0; i < 3; ++i) {
                 allAmericans.add(lbs.get(i));
                 lbs.get(i).wonAllAmerican = true;
+                lbs.get(i).team.HC.get(0).allamericans++;
             }
             for (int i = 0; i < 3; ++i) {
                 allAmericans.add(cbs.get(i));
                 cbs.get(i).wonAllAmerican = true;
+                cbs.get(i).team.HC.get(0).allamericans++;
             }
             allAmericans.add(ss.get(0));
             ss.get(0).wonAllAmerican = true;
+            ss.get(0).team.HC.get(0).allamericans++;
         }
 
         StringBuilder allAmerican = new StringBuilder();
@@ -2187,7 +2198,7 @@ public class League {
     public ArrayList<String> getCoachListStr(int rating, int offers) {
         ArrayList<String> teams = new ArrayList<>();
         ArrayList<Team> coachList = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); i+=offers) {
+        for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
                 coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, this, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
@@ -2199,7 +2210,7 @@ public class League {
     //Get Coach Job Offers List for Team Transfer
     public ArrayList<Team> getCoachList(int rating, int offers) {
         ArrayList<Team> coachList = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); i+=offers) {
+        for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
                 coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, this, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam));
             }
@@ -3014,6 +3025,50 @@ public class League {
             HC.add(teamList.get(i).HC.get(0));
         }
 
+        ArrayList<PlayerDefense> def = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            for (int p = 0; p < teamList.get(i).teamDLs.size(); ++p) {
+                def.add(new PlayerDefense(teamList.get(i),
+                        teamList.get(i).teamDLs.get(p).name,
+                        "DL",
+                        teamList.get(i).teamDLs.get(p).year,
+                        teamList.get(i).teamDLs.get(p).statsTackles,
+                        teamList.get(i).teamDLs.get(p).statsSacks,
+                        teamList.get(i).teamDLs.get(p).statsFumbles,
+                        teamList.get(i).teamDLs.get(p).statsInts));
+            }
+            for (int p = 0; p < teamList.get(i).teamLBs.size(); ++p) {
+                def.add(new PlayerDefense(teamList.get(i),
+                        teamList.get(i).teamLBs.get(p).name,
+                        "LB",
+                        teamList.get(i).teamLBs.get(p).year,
+                        teamList.get(i).teamLBs.get(p).statsTackles,
+                        teamList.get(i).teamLBs.get(p).statsSacks,
+                        teamList.get(i).teamLBs.get(p).statsFumbles,
+                        teamList.get(i).teamLBs.get(p).statsInts));
+            }
+            for (int p = 0; p < teamList.get(i).teamCBs.size(); ++p) {
+                def.add(new PlayerDefense(teamList.get(i),
+                        teamList.get(i).teamCBs.get(p).name,
+                        "CB",
+                        teamList.get(i).teamCBs.get(p).year,
+                        teamList.get(i).teamCBs.get(p).statsTackles,
+                        teamList.get(i).teamCBs.get(p).statsSacks,
+                        teamList.get(i).teamCBs.get(p).statsFumbles,
+                        teamList.get(i).teamCBs.get(p).statsInts));
+            }
+            for (int p = 0; p < teamList.get(i).teamSs.size(); ++p) {
+                def.add(new PlayerDefense(teamList.get(i),
+                        teamList.get(i).teamSs.get(p).name,
+                        "S",
+                        teamList.get(i).teamSs.get(p).year,
+                        teamList.get(i).teamSs.get(p).statsTackles,
+                        teamList.get(i).teamSs.get(p).statsSacks,
+                        teamList.get(i).teamSs.get(p).statsFumbles,
+                        teamList.get(i).teamSs.get(p).statsInts));
+            }
+        }
+
         ArrayList<String> rankings = new ArrayList<String>();
         switch (selection) {
             case 0:
@@ -3077,72 +3132,96 @@ public class League {
                 }
                 break;
             case 10:
+                Collections.sort(def, new PlayerTacklesComp());
+                for (int i = 0; i < rankNum; ++i) {
+                    rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).tackles);
+                }
+                break;
+            case 11:
+                Collections.sort(def, new PlayerSacksComp());
+                for (int i = 0; i < rankNum; ++i) {
+                    rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).sacks);
+                }
+                break;
+            case 12:
+                Collections.sort(def, new PlayerFumblesRecComp());
+                for (int i = 0; i < rankNum; ++i) {
+                    rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).fumbles);
+                }
+                break;
+            case 13:
+                Collections.sort(def, new PlayerInterceptionsComp());
+                for (int i = 0; i < rankNum; ++i) {
+                    rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).interceptions);
+                }
+                break;
+
+            case 14:
                 Collections.sort(HC, new CoachScoreComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachScore());
                 }
                 break;
-            case 11:
+            case 15:
                 Collections.sort(pQB, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).getHeismanScore());
                 }
                 break;
-            case 12:
+            case 16:
                 Collections.sort(pRB, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pRB.get(i).name + " (" + pRB.get(i).team.abbr + ")," + pRB.get(i).getHeismanScore());
                 }
                 break;
-            case 13:
+            case 17:
                 Collections.sort(pWR, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pWR.get(i).name + " (" + pWR.get(i).team.abbr + ")," + pWR.get(i).getHeismanScore());
                 }
                 break;
-            case 14:
+            case 18:
                 Collections.sort(pTE, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pTE.get(i).name + " (" + pTE.get(i).team.abbr + ")," + pTE.get(i).getHeismanScore());
                 }
                 break;
-            case 15:
+            case 19:
                 Collections.sort(pOL, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pOL.get(i).name + " (" + pOL.get(i).team.abbr + ")," + pOL.get(i).getHeismanScore());
                 }
                 break;
-            case 16:
+            case 20:
                 Collections.sort(pK, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pK.get(i).name + " (" + pK.get(i).team.abbr + ")," + pK.get(i).getHeismanScore());
                 }
                 break;
-            case 17:
+            case 21:
                 Collections.sort(pDL, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pDL.get(i).name + " (" + pDL.get(i).team.abbr + ")," + pDL.get(i).getHeismanScore());
                 }
                 break;
-            case 18:
+            case 22:
                 Collections.sort(pLB, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pLB.get(i).name + " (" + pLB.get(i).team.abbr + ")," + pLB.get(i).getHeismanScore());
                 }
                 break;
-            case 19:
+            case 23:
                 Collections.sort(pCB, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pCB.get(i).name + " (" + pCB.get(i).team.abbr + ")," + pCB.get(i).getHeismanScore());
                 }
                 break;
-            case 20:
+            case 24:
                 Collections.sort(pS, new PlayerHeismanComp());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pS.get(i).name + " (" + pS.get(i).team.abbr + ")," + pS.get(i).getHeismanScore());
                 }
                 break;
-
         }
         return rankings;
     }
@@ -3174,20 +3253,17 @@ public class League {
         return average;
     }
 
-/*    public ArrayList<Defender> getDefenderStats() {
-        ArrayList<Defender> defenseArray = new ArrayList<>();
-        return defenseArray;
-    }*/
 
-public void disciplineAction() {
-    int t = 0;
-    //randomly chooose 5 teams from teamlist
-    //disciplinary action
-    //use coach pts to fix
-    //if not, coach score goes down
-    //team loses prestige
 
-}
+    public void disciplineAction() {
+        int t = 0;
+        //randomly chooose 5 teams from teamlist
+        //disciplinary action
+        //use coach pts to fix
+        //if not, coach score goes down
+        //team loses prestige
+
+    }
 
 }
 
@@ -3275,6 +3351,33 @@ class PlayerRecTDsComp implements Comparator<PlayerWR> {
     }
 }
 
+class PlayerTacklesComp implements Comparator<PlayerDefense> {
+    @Override
+    public int compare(PlayerDefense a, PlayerDefense b) {
+        return a.tackles > b.tackles ? -1 : a.tackles == b.tackles ? 0 : 1;
+    }
+}
+
+class PlayerSacksComp implements Comparator<PlayerDefense> {
+    @Override
+    public int compare(PlayerDefense a, PlayerDefense b) {
+        return a.sacks > b.sacks ? -1 : a.sacks == b.sacks ? 0 : 1;
+    }
+}
+
+class PlayerFumblesRecComp implements Comparator<PlayerDefense> {
+    @Override
+    public int compare(PlayerDefense a, PlayerDefense b) {
+        return a.fumbles > b.fumbles ? -1 : a.fumbles == b.fumbles ? 0 : 1;
+    }
+}
+
+class PlayerInterceptionsComp implements Comparator<PlayerDefense> {
+    @Override
+    public int compare(PlayerDefense a, PlayerDefense b) {
+        return a.interceptions > b.interceptions ? -1 : a.interceptions == b.interceptions ? 0 : 1;
+    }
+}
 class TeamCompPoll implements Comparator<Team> {
     @Override
     public int compare(Team a, Team b) {

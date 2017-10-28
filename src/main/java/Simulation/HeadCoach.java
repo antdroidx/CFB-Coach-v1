@@ -36,7 +36,7 @@ public class HeadCoach extends Player {
     int job;
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                     int bwins, int blosses, int cchamps, int nchamps, int allams, int allconf, int aw/*, ArrayList<String> history*/) {
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int aw/*, ArrayList<String> history*/) {
         team = t;
         name = nm;
         age = a;

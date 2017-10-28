@@ -18,6 +18,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -25,13 +26,14 @@
             android:text="Filter Recruits"
             android:layout_gravity="center"
             android:id="@+id/buttonRecruitExpandCollapse" />
+
         <Spinner
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerRec"
             android:spinnerMode="dropdown"
             android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
     </LinearLayout>
 
 
@@ -39,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2">
+
         <ExpandableListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -51,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
+
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
@@ -61,7 +65,8 @@
             android:layout_gravity="center"
             android:id="@+id/buttonRecRoster"
             android:background="@drawable/button_shape_fc"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,6 +76,7 @@
             android:id="@+id/textRecBudget"
             android:textAlignment="center"
             android:layout_gravity="center|center_horizontal" />
+
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="0dp"
@@ -80,7 +86,7 @@
             android:id="@+id/buttonDoneRecruiting"
             android:layout_gravity="center"
             android:background="@drawable/button_shape_fc"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
 
 
     </LinearLayout>

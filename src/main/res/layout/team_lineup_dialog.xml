@@ -20,7 +20,7 @@
         android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textViewLineupPositionDescription"
-        android:text="Name [Yr] Ovr/Pot (Str, Acc, Eva)"/>
+        android:text="Name [Yr] Ovr/Pot (Str, Acc, Eva)" />
 
     <ListView
         android:layout_width="match_parent"
@@ -33,12 +33,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        android:text="More playing time = more improvement!"/>
+        android:text="More playing time = more improvement!" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +47,8 @@
             android:text="Save Lineup"
             android:layout_alignParentStart="true"
             android:id="@+id/buttonSaveLineups"
-            android:background="@drawable/button_shape_fc_win"/>
+            android:background="@drawable/button_shape_fc_win" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +56,7 @@
             android:text="Done"
             android:layout_alignParentEnd="true"
             android:id="@+id/buttonDoneWithLineups"
-            android:background="@drawable/button_shape_fc_loss"/>
+            android:background="@drawable/button_shape_fc_loss" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -13,12 +13,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_centerVertical="true"
         android:text="A. Player Ovr:99 Pot:99 (A+,B-,C+)"
-        android:id="@+id/textViewLineupPlayerInfo"/>
+        android:id="@+id/textViewLineupPlayerInfo" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:id="@+id/checkboxPlayerStartingLineup"/>
+        android:id="@+id/checkboxPlayerStartingLineup" />
 
 </RelativeLayout>

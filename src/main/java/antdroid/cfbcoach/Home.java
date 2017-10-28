@@ -61,6 +61,14 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button deleteGameButton = (Button) findViewById(R.id.buttonDeleteSave);
+        deleteGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                deleteSave();
+            }
+        });
+
         Button tutorialButton = (Button) findViewById(R.id.buttonTutorial);
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -152,6 +160,35 @@ public class Home extends AppCompatActivity {
                     Home.this.startActivity(myIntent);
                 } else {
                     Toast.makeText(Home.this, "Cannot load empty file!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /**
+     * Delete Save
+     */
+    private void deleteSave() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose File to Delete:");
+        final String[] fileInfos = getSaveFileInfos();
+        SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
+        builder.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                if (!fileInfos[item].equals("EMPTY")) {
+                    deleteFile("saveFile" + item + ".cfb");
+                } else {
+                    Toast.makeText(Home.this, "Cannot load delete file!",
                             Toast.LENGTH_SHORT).show();
                 }
             }

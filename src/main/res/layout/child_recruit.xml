@@ -3,11 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/textRecruitDetails"
             android:layout_width="wrap_content"
@@ -37,20 +38,22 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10sp">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:text="Redshirt: $XXX"
             android:id="@+id/buttonRedshirtPlayer"
-            android:background="@drawable/button_shape_fc_loss"/>
+            android:background="@drawable/button_shape_fc_loss" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="Recruit: $XXX"
             android:id="@+id/buttonRecruitPlayer"
-            android:background="@drawable/button_shape_fc_win"/>
+            android:background="@drawable/button_shape_fc_win" />
     </RelativeLayout>
 
 </LinearLayout>

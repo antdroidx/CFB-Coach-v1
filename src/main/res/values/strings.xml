@@ -23,7 +23,17 @@
     <string name="tutBasics">
         In College Football Coach, you take the role of a newly hired coach at your college of choice.
         As coach, it will be your responsibility to manage your team\'s strategy, simulate through seasons, recruit new players, and above all, win championships.\n\n
-        2017 version has been expanded with 120 real team names, conferences, and updated prestiges and calculations.
+
+        DYNASTY MODE: Dynasty mode allows you to start with any team and build it into the best football dynasty you can. You will not get fired, however, other colleges may see changes in their staff.
+        Every other feature is unlocked except user contracts. You can also switch universities via the Editor menu. \n\n
+        CAREER MODE: Career mode puts you in the shoes of a new head coach trying to build your way up to stardom. If you perform well, your coaching attributes increase, your talent pool increases,
+        and you will be offered contract extensions. If you perform poorly, you will lose coaching attributes, and potentially risk losing your job and be on the streets applying for a new position.\n
+        This Mode has two starting points: NORMAL mode, which lets you start at any university, and CHALLENGE mode, which humbly starts you at a smaller school and makes your work to get to the top.
+        \n\n
+
+        Developer Notes:\n\n
+        The original version of this game was created by Achi Jones in 2016. He graciously made this game open-source on Github and allowed it to be tinkered with. In Fall of 2017, I took
+        the source code and expanded upon it for Android devices. The game now features several new features including expanded universe, improved realism, career mode, and in-game editor.
     </string>
     <string name="tutPlayingSeason">
         Your team will play 12 games in the regular season, which consist of playing all 9 of your conference opponents once and three out of conference games.

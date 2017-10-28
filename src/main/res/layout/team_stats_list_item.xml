@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:gravity="center"
     android:padding="5dp">
+
     <TextView
         android:text="ha1"
         android:id="@+id/textTeamStatsLeft"
@@ -14,6 +15,7 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1.0" />
+
     <TextView
         android:text="ha2"
         android:id="@+id/textTeamStatsCenter"
@@ -24,6 +26,7 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1.0" />
+
     <TextView
         android:text="ha3"
         android:id="@+id/textTeamStatsRight"
