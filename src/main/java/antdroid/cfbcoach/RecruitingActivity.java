@@ -463,32 +463,32 @@ public class RecruitingActivity extends AppCompatActivity {
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nCatching: " + getLetterGrade(ps[11]);
         } else if (pos.equals("WR")) {
-            return  "Catching: " + getLetterGrade(ps[5]) +
+            return "Catching: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("TE")) {
-            return  "Catching: " + getLetterGrade(ps[5]) +
+            return "Catching: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("OL")) {
-            return  "Strength: " + getLetterGrade(ps[5]) +
+            return "Strength: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
                     "\nPass Blk: " + getLetterGrade(ps[7]) +
                     "\nAwareness: " + getLetterGrade(ps[11]);
         } else if (pos.equals("K")) {
-            return  "Kick Power: " + getLetterGrade(ps[5]) +
+            return "Kick Power: " + getLetterGrade(ps[5]) +
                     "\nAccuracy: " + getLetterGrade(ps[6]) +
                     "\nClumsiness: " + getLetterGrade(ps[7]) +
                     "\nPressure: " + getLetterGrade(ps[11]);
         } else if (pos.equals("DL")) {
-            return  "Strength: " + getLetterGrade(ps[5]) +
+            return "Strength: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
                     "\nPass Press: " + getLetterGrade(ps[7]) +
                     "\nTackling: " + getLetterGrade(ps[11]);
         } else if (pos.equals("LB")) {
-            return  "Coverage: " + getLetterGrade(ps[5]) +
+            return "Coverage: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
@@ -511,7 +511,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getLetterGrade(String num) {
         int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance - 50)/10;
+        ind = (ind + tolerance - 50) / 10;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
@@ -522,7 +522,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getLetterGradePot(String num) {
         int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance-50)/10;
+        ind = (ind + tolerance - 50) / 10;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 0;
         return letterGrades[ind];

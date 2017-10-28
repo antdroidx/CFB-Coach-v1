@@ -42,7 +42,7 @@ public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
         } else {
             TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
             itemR.setPadding(5, 0, 5, 0);
-            itemR.setText("[DYNASTY]");
+            //itemR.setText("[DYNASTY]");
             itemR.setTextColor(Color.parseColor("#008066"));
         }
 

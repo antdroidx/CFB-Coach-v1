@@ -1046,6 +1046,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
                 {"Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
+                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions",
                         "Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
                 };
         Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
@@ -2204,8 +2205,8 @@ public class MainActivity extends AppCompatActivity {
     //Only schools lower than Coach Rating will offer jobs
     public void newJob(HeadCoach headCoach) {
         userHC = headCoach;
-        int offers = (int)(Math.random()*5);
-        if (offers < 1) offers =1;
+        int offers = (int) (Math.random() * 5);
+        if (offers < 1) offers = 1;
         updateTeamUI();
         //get user team from list dialog
         final ArrayList<String> teamsArray = simLeague.getCoachListStr(userHC.ratOvr, offers);
@@ -2239,8 +2240,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newGameHardDialog() {
-        int offers = (int)(Math.random()*5);
-        if (offers < 1) offers =1;
+        int offers = (int) (Math.random() * 5);
+        if (offers < 1) offers = 1;
         final ArrayList<Team> coachList = simLeague.getCoachList(50, offers);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");

@@ -725,13 +725,13 @@ public class Game implements Serializable {
         }
     }
 
-    private int coachAdv(){
-        int adv=0;
+    private int coachAdv() {
+        int adv = 0;
 
-        if (gamePoss){
-            adv = (homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef)/5;
+        if (gamePoss) {
+            adv = (homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 5;
         } else {
-            adv = (awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef)/5;
+            adv = (awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 5;
         }
         if (adv > 3) adv = 3;
         if (adv < -3) adv = -3;
@@ -1410,7 +1410,7 @@ public class Game implements Serializable {
         boolean gotFumble = false;
 
         //get how much pressure there is on qb, check if sack
-        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int)(Math.random()*coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());  //STRATEGIES
+        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());  //STRATEGIES
         if (Math.random() * 100 < pressureOnQB / 8) {
 
             if (Math.random() * 100 < pressureOnQB / 8 && selQB.ratSpeed > selDL.ratPassRush) {
@@ -1478,7 +1478,7 @@ public class Game implements Serializable {
         }
 
         //throw ball, check for completion
-        double completion = (getHFadv() + (int)(Math.random()*coachAdv())+ normalize(offense.getQB(0).ratPassAcc) + normalize(selWR.ratCatch)
+        double completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(offense.getQB(0).ratPassAcc) + normalize(selWR.ratCatch)
                 - normalize(selCB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();   //STRATEGIES
         if (100 * Math.random() < completion) {
             if (100 * Math.random() < (100 - selWR.ratCatch) / 3) {
@@ -1634,7 +1634,7 @@ public class Game implements Serializable {
         boolean gotFumble = false;
 
         //get how much pressure there is on qb, check if sack
-        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int)(Math.random()*coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());  //STRATEGIES
+        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());  //STRATEGIES
         if (Math.random() * 100 < pressureOnQB / 8) {
             if (Math.random() * 100 < pressureOnQB / 8 && selQB.ratSpeed > selDL.ratPassRush) {
                 RushPlayQB(offense, defense, selQB, selTE, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
@@ -1705,7 +1705,7 @@ public class Game implements Serializable {
         }
 
         //throw ball, check for completion
-        double completion = (getHFadv()  + (int)(Math.random()*coachAdv()) + normalize(offense.getQB(0).ratPassAcc) + normalize(selTE.ratCatch)
+        double completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(offense.getQB(0).ratPassAcc) + normalize(selTE.ratCatch)
                 - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();  //STRATEGIES
         if (100 * Math.random() < completion) {
             if (100 * Math.random() < (100 - selTE.ratCatch) / 3) {
@@ -1852,7 +1852,7 @@ public class Game implements Serializable {
         boolean gotFumble = false;
 
         //get how much pressure there is on qb, check if sack
-        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int)(Math.random()*coachAdv()) + (defense.teamStratDef.getPassProtection() - offense.teamStratDef.getPassProtection());   //STRATEGIES
+        int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getPassProtection() - offense.teamStratDef.getPassProtection());   //STRATEGIES
         if (Math.random() * 200 < pressureOnQB / 8) {
             //sacked!
             String defender;
@@ -1920,7 +1920,7 @@ public class Game implements Serializable {
         }
 
         //throw ball, check for completion
-        double completion = (getHFadv() + (int)(Math.random()*coachAdv()) + normalize(offense.getQB(0).ratPassAcc) + normalize(selRB.ratCatch)
+        double completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(offense.getQB(0).ratPassAcc) + normalize(selRB.ratCatch)
                 - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();  //STRATEGIES
         if (100 * Math.random() < completion) {
             if (100 * Math.random() < (100 - selRB.ratCatch) / 4) {
@@ -2242,7 +2242,7 @@ public class Game implements Serializable {
 
         int blockAdv = offense.getCompositeOLRush() - defense.getCompositeDLRush() + (offense.teamStratDef.getRunProtection() - defense.teamStratDef.getRunProtection());  //STRATEGIES
         int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.teamStratDef.getRunUsage() - defense.teamStratDef.getRunUsage());
-        int yardsGain = (int) ((selRB.ratSpeed + blockAdv + blockAdvOutside + getHFadv()  + (int)(Math.random()*coachAdv())) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);  //STRATEGIES
+        int yardsGain = (int) ((selRB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);  //STRATEGIES
 
         if (yardsGain < 2) {
             yardsGain += selRB.ratRushPower / 20 - 3 - (double) defense.teamStratDef.getRunPotential() / 2;  //STRATEGIES
@@ -2365,7 +2365,7 @@ public class Game implements Serializable {
 
         int blockAdv = offense.getCompositeOLRush() - defense.getCompositeDLRush() + (offense.teamStratDef.getRunProtection() - defense.teamStratDef.getRunProtection());  //STRATEGIES
         int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.teamStratDef.getRunUsage() - defense.teamStratDef.getRunUsage());
-        int yardsGain = (int) ((selQB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int)(Math.random()*coachAdv())) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);  //STRATEGIES
+        int yardsGain = (int) ((selQB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);  //STRATEGIES
 
         if (yardsGain < 2) {
             yardsGain += selQB.ratEvasion / 20 - 3 - (double) defense.teamStratDef.getRunPotential() / 2;  //STRATEGIES

@@ -3,22 +3,26 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/scrollerGameScoutDialog"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="vertical"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent">
+
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:padding="10sp">
+
                 <TextView
                     android:text="ha1"
                     android:id="@+id/gameScoutDialogLeft"
@@ -29,6 +33,7 @@
                     android:layout_width="90.0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0" />
+
                 <TextView
                     android:text="ha3"
                     android:id="@+id/gameScoutDialogCenter"
@@ -38,7 +43,8 @@
                     android:layout_width="110.0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
-                    android:layout_toRightOf="@id/gameScoutDialogLeft"/>
+                    android:layout_toRightOf="@id/gameScoutDialogLeft" />
+
                 <TextView
                     android:text="ha3"
                     android:id="@+id/gameScoutDialogRight"
@@ -48,7 +54,7 @@
                     android:layout_width="110.0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
-                    android:layout_toRightOf="@id/gameScoutDialogCenter"/>
+                    android:layout_toRightOf="@id/gameScoutDialogCenter" />
             </RelativeLayout>
 
             <LinearLayout
@@ -58,6 +64,7 @@
                 android:paddingEnd="5dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp">
+
                 <TextView
                     android:layout_width="0dip"
                     android:text="Offense Strategy:"
@@ -66,7 +73,8 @@
                     android:layout_weight="3"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/textScoutOffenseStrategy"/>
+                    android:id="@+id/textScoutOffenseStrategy" />
+
                 <Spinner
                     android:layout_width="0dip"
                     android:layout_weight="4"
@@ -81,6 +89,7 @@
                 android:paddingEnd="5dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="10dp">
+
                 <TextView
                     android:layout_width="0dip"
                     android:text="Defense Strategy:"
@@ -89,7 +98,8 @@
                     android:layout_weight="3"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/textScoutDefenseStrategy"/>
+                    android:id="@+id/textScoutDefenseStrategy" />
+
                 <Spinner
                     android:layout_width="0dip"
                     android:layout_weight="4"
@@ -108,7 +118,7 @@
                 android:layout_weight="1.0"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:paddingBottom="20dp"/>
+                android:paddingBottom="20dp" />
 
         </LinearLayout>
 
