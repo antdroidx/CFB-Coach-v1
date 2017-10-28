@@ -2205,12 +2205,14 @@ public class MainActivity extends AppCompatActivity {
     //Only schools lower than Coach Rating will offer jobs
     public void newJob(HeadCoach headCoach) {
         userHC = headCoach;
+        int ratOvr = userHC.ratOvr;
+        if (ratOvr < 40) ratOvr = 40;
         int offers = (int) (Math.random() * 5);
         if (offers < 1) offers = 1;
         updateTeamUI();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr(userHC.ratOvr, offers);
-        final ArrayList<Team> coachList = simLeague.getCoachList(userHC.ratOvr, offers);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr((ratOvr-10), offers);
+        final ArrayList<Team> coachList = simLeague.getCoachList((ratOvr-10), offers);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
@@ -2228,7 +2230,7 @@ public class MainActivity extends AppCompatActivity {
                 userTeam.HC.add(userHC);
                 userTeam.fired = false;
                 userHC.contractYear = 0;
-                userHC.contractLength = 4;
+                userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 simLeague.setTeamRanks();
                 updateTeamUI();
