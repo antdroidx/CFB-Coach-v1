@@ -381,7 +381,7 @@ public class Team {
         int newPrestige[] = calcSeasonPrestige();
         teamPrestige = newPrestige[0];
 
-        if (userControlled) checkHallofFame();
+        checkHallofFame();
 
         checkCareerRecords(league.leagueRecords);
         if (league.userTeam == this) checkCareerRecords(league.userTeamRecords);
@@ -2214,6 +2214,7 @@ public class Team {
         }
 
         teamHistory.add(histYear);
+        if (userControlled) league.UserHistory.add(histYear);
     }
 
     /**
@@ -2230,6 +2231,24 @@ public class Team {
         hist[4] = " ";
         for (int i = 0; i < teamHistory.size(); ++i) {
             hist[i + 5] = teamHistory.get(i);
+        }
+        return hist;
+    }
+
+    /**
+     * Gets the team history as a String array
+     *
+     * @return team history
+     */
+    public String[] getUserTeamHistoryList() {
+        String[] hist = new String[league.UserHistory.size() + 5];
+        hist[0] = "Overall W-L: " + totalWins + "-" + totalLosses;
+        hist[1] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses;
+        hist[2] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses;
+        hist[3] = "National Champ Record: " + totalNCs + "-" + totalNCLosses;
+        hist[4] = " ";
+        for (int i = 0; i < league.UserHistory.size(); ++i) {
+            hist[i + 5] = league.UserHistory.get(i);
         }
         return hist;
     }

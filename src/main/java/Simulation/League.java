@@ -23,7 +23,7 @@ import java.util.Random;
 public class League {
     //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
-    public ArrayList<String[]> leagueUserHistory;
+    public ArrayList<String> UserHistory;
     public ArrayList<String> heismanHistory;
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
@@ -35,6 +35,7 @@ public class League {
 
     public LeagueRecords leagueRecords;
     public LeagueRecords userTeamRecords;
+    public LeagueRecords teamRecords;
     public TeamStreak longestWinStreak;
     public TeamStreak yearStartLongestWinStreak;
     public TeamStreak longestActiveWinStreak;
@@ -93,7 +94,7 @@ public class League {
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
         leagueHistory = new ArrayList<String[]>();
-        leagueUserHistory = new ArrayList<String[]>();
+        UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
@@ -347,6 +348,7 @@ public class League {
 
         leagueRecords = new LeagueRecords();
         userTeamRecords = new LeagueRecords();
+        UserHistory = new ArrayList<>();
         longestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         yearStartLongestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
@@ -405,7 +407,15 @@ public class League {
                 }
             }
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_USER_TEAM")) {
-                userTeam.teamHistory.add(line);
+                UserHistory.add(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM_HISTORY")) {
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
+                        teamList.get(i).teamHistory.add(line);
+                    }
+                }
             }
 
             // Set up lucky and penalized teams for Week 0 news stories
@@ -2571,10 +2581,19 @@ public class League {
 
         // Save history of the user's team of the W-L and bowl results each year
         sb.append(userTeam.name + "\n");
-        for (String s : userTeam.teamHistory) {
+        for (String s : UserHistory) {
             sb.append(s + "\n");
         }
         sb.append("END_USER_TEAM\n");
+
+        //TEST
+        for (Team t : teamList) {
+            for (String s : t.teamHistory) {
+                sb.append(s + "\n");
+            }
+            sb.append("END_TEAM\n");
+        }
+        sb.append("END_TEAM_HISTORY\n");
 
         // Save who was luckyed and penalizedd this year for news stories the following year
         if (saveLucky != null) {
