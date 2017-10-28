@@ -1273,8 +1273,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[8]));
-        int ovrB = Integer.parseInt(psB[8]));
+        int ovrA = Integer.parseInt(psA[8]);
+        int ovrB = Integer.parseInt(psB[8]);
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
