@@ -139,3 +139,4 @@ Sun Belt
 "Old Dominion", "ODOM", "Sun Belt", this, 35, "APP"
 "UT San Antonio", "UTSA", "Sun Belt", this, 43, "UTEP"
 [END_CONF]
+[END_TEAMS]
