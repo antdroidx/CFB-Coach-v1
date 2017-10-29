@@ -261,8 +261,6 @@ public class MainActivity extends AppCompatActivity {
 
                         if (simLeague.currentWeek == 15) {
                             // Show NCG summary and check league records
-                            File saveFile = new File(getFilesDir(), "debugSave.cfb");
-                            simLeague.saveLeague(saveFile);
                             simLeague.checkLeagueRecords();
                             userHC = userTeam.HC.get(0);
                             simLeague.advanceHC();
@@ -1192,7 +1190,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showUserTeamHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("My Team History")
+        builder.setTitle("Coach History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1203,7 +1201,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] selection = {"Team History", "Team Records", "Hall of Fame"};
+        String[] selection = {"Team History"};
         Spinner teamHistSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, selection);
@@ -1254,7 +1252,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] selection = {"Team History"};
+        String[] selection = {"Team History", "Team Records", "Hall of Fame"};
         Spinner teamHistSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
         final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, selection);
@@ -1262,14 +1260,27 @@ public class MainActivity extends AppCompatActivity {
         teamHistSpinner.setAdapter(teamHistAdapter);
 
         final ListView teamHistoryList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final String[] hofPlayers = new String[userTeam.hallOfFame.size()];
+        for (int i = 0; i < currentTeam.hallOfFame.size(); ++i) {
+            hofPlayers[i] = currentTeam.hallOfFame.get(i);
+        }
 
         teamHistSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                        TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getTeamHistoryList());
-                        teamHistoryList.setAdapter(teamHistoryAdapter);
+                        if (position == 0) {
+                            TeamHistoryListArrayAdapter teamHistoryAdapter =
+                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getUserTeamHistoryList());
+                            teamHistoryList.setAdapter(teamHistoryAdapter);
+                        } else if (position == 1) {
+                            LeagueRecordsListArrayAdapter leagueRecordsAdapter =
+                                    new LeagueRecordsListArrayAdapter(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---");
+                            teamHistoryList.setAdapter(leagueRecordsAdapter);
+                        } else {
+                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
+                            teamHistoryList.setAdapter(hofAdapter);
+                        }
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {

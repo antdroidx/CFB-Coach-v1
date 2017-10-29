@@ -24,6 +24,7 @@ public class Team {
     public ArrayList<String> teamHistory;
     public ArrayList<String> userHistory;
     public ArrayList<String> hallOfFame;
+    public LeagueRecords teamRecords;
     public boolean userControlled;
     public boolean showPopups;
     public int numRecruits;
@@ -152,6 +153,7 @@ public class Team {
         teamHistory = new ArrayList<String>();
         userHistory = new ArrayList<String>();
         hallOfFame = new ArrayList<>();
+        teamRecords = new LeagueRecords();
         playersInjuredAll = new ArrayList<>();
 
         HC = new ArrayList<HeadCoach>();
@@ -241,6 +243,7 @@ public class Team {
         teamHistory = new ArrayList<String>();
         userHistory = new ArrayList<String>();
         hallOfFame = new ArrayList<>();
+        teamRecords = new LeagueRecords();
         playersInjuredAll = new ArrayList<>();
 
         HC = new ArrayList<HeadCoach>();
@@ -384,6 +387,7 @@ public class Team {
         checkHallofFame();
 
         checkCareerRecords(league.leagueRecords);
+        checkCareerRecords(teamRecords);
         if (league.userTeam == this) checkCareerRecords(league.userTeamRecords);
 
         advanceSeasonPlayers();
