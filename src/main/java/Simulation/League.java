@@ -35,7 +35,6 @@ public class League {
 
     public LeagueRecords leagueRecords;
     public LeagueRecords userTeamRecords;
-    public LeagueRecords teamRecords;
     public TeamStreak longestWinStreak;
     public TeamStreak yearStartLongestWinStreak;
     public TeamStreak longestActiveWinStreak;
@@ -531,14 +530,22 @@ public class League {
                         Integer.parseInt(record[2]), Integer.parseInt(record[3]), Integer.parseInt(record[0]), record[1]);
             }
 
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_USER_TEAM_RECORDS")) {
-                record = line.split(",");
-                if (!record[1].equals("-1"))
-                    userTeamRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM_RECORDS")) {
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
+                        record = line.split(",");
+                        if (!record[1].equals("-1"))
+                            teamList.get(i).teamRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+                    }
+                }
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_HALL_OF_FAME")) {
-                userTeam.hallOfFame.add(line);
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
+                        teamList.get(i).hallOfFame.add(line);
+                    }
+                }
             }
 
             // Always close files.
@@ -1290,6 +1297,7 @@ public class League {
     public void checkLeagueRecords() {
         for (Team t : teamList) {
             t.checkLeagueRecords(leagueRecords);
+            t.checkLeagueRecords(t.teamRecords);
         }
         userTeam.checkLeagueRecords(userTeamRecords);
     }
@@ -2585,8 +2593,7 @@ public class League {
             sb.append(s + "\n");
         }
         sb.append("END_USER_TEAM\n");
-
-        //TEST
+        //Every Team Year-by-Year History
         for (Team t : teamList) {
             for (String s : t.teamHistory) {
                 sb.append(s + "\n");
@@ -2661,12 +2668,18 @@ public class League {
         sb.append("\nEND_LEAGUE_WIN_STREAK\n");
 
         // Save user team records
-        sb.append(userTeamRecords.getRecordsStr());
-        sb.append("END_USER_TEAM_RECORDS\n");
+        for (Team t : teamList) {
+           sb.append(t.teamRecords.getRecordsStr());
+            sb.append("END_TEAM\n");
+            }
+        sb.append("END_TEAM_RECORDS\n");
 
         // Save all the Hall of Famers
-        for (String s : userTeam.hallOfFame) {
-            sb.append(s + "\n");
+        for (Team t : teamList) {
+            for (String s : t.hallOfFame) {
+                sb.append(s + "\n");
+                sb.append("END_TEAM\n");
+            }
         }
         sb.append("END_HALL_OF_FAME\n");
 
