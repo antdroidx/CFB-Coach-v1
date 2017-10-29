@@ -34,6 +34,77 @@
         android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <?LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textOffensePlayCall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Offense Play Calling" />
+
+        <SeekBar
+            android:id="@+id/seekBarOffense"
+            style="@android:style/Widget.Material.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="70" />
+
+        <TextView
+            android:id="@+id/textDefensePlayCall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Defense Play Calling" />
+
+        <SeekBar
+            android:id="@+id/seekBarDefense"
+            style="@android:style/Widget.Material.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="70" />
+
+        <TextView
+            android:id="@+id/textTalent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Talent Progression" />
+
+        <SeekBar
+            android:id="@+id/seekBarTalent"
+            style="@android:style/Widget.Material.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="70" />
+
+        <TextView
+            android:id="@+id/textDiscipline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Discipline" />
+
+        <SeekBar
+            android:id="@+id/seekBarDiscipline"
+            style="@android:style/Widget.Material.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="70" />
+
+    </LinearLayout?>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

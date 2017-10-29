@@ -23,6 +23,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -2360,7 +2363,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         Button okChangeNameButton = (Button) dialog.findViewById(R.id.buttonOkChangeName);
+
 
         okChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

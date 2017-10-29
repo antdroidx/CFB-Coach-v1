@@ -410,6 +410,7 @@ public class Conference {
      */
     public ArrayList<Player> getAllConfPlayers() {
         if (allConfPlayers.isEmpty()) {
+            ArrayList<HeadCoach> hc = new ArrayList<>();
             ArrayList<PlayerQB> qbs = new ArrayList<>();
             ArrayList<PlayerRB> rbs = new ArrayList<>();
             ArrayList<PlayerWR> wrs = new ArrayList<>();
@@ -423,6 +424,7 @@ public class Conference {
 
 
             for (Team t : confTeams) {
+                hc.addAll(t.HC);
                 qbs.addAll(t.teamQBs);
                 rbs.addAll(t.teamRBs);
                 wrs.addAll(t.teamWRs);
@@ -436,6 +438,7 @@ public class Conference {
 
             }
 
+            Collections.sort(hc, new CoachScoreComp());
             Collections.sort(qbs, new PlayerHeismanComp());
             Collections.sort(rbs, new PlayerHeismanComp());
             Collections.sort(wrs, new PlayerHeismanComp());
@@ -447,6 +450,9 @@ public class Conference {
             Collections.sort(cbs, new PlayerHeismanComp());
             Collections.sort(ss, new PlayerHeismanComp());
 
+            allConfPlayers.add(hc.get(0));
+            hc.get(0).wonAllConference = true;
+            hc.get(0).confAward++;
             allConfPlayers.add(qbs.get(0));
             qbs.get(0).wonAllConference = true;
             qbs.get(0).team.HC.get(0).allconference++;
