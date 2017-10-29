@@ -31,11 +31,12 @@ public class HeadCoach extends Player {
     int natchamp;
     int allamericans;
     int allconference;
+    int confAward;
     int awards;
     int job;
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int aw) {
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
         team = t;
         name = nm;
         age = a;
@@ -60,6 +61,7 @@ public class HeadCoach extends Player {
         bowllosses = blosses;
         allamericans = allams;
         allconference = allconf;
+        confAward = caw;
         awards = aw;
 
         position = "HC";
@@ -92,6 +94,7 @@ public class HeadCoach extends Player {
         bowllosses = 0;
         allamericans = 0;
         allconference = 0;
+        confAward = 0;
         awards = 0;
 
         position = "HC";
@@ -135,6 +138,7 @@ public class HeadCoach extends Player {
         natchamp += 0;
         allamericans += 0;
         allconference += 0;
+        confAward += 0;
         awards += 0;
     }
 
@@ -182,7 +186,8 @@ public class HeadCoach extends Player {
         pStats.add("Career Wins: " + wins + ">Career Losses: " + losses);
         pStats.add("Bowl Wins: " + bowlwins + ">Bowl Losses: " + bowllosses);
         pStats.add("Conf Champs: " + confchamp + ">National Champs: " + natchamp);
-        pStats.add("Coaching Awards: " + awards + ">All Americans: " + allamericans);
+        pStats.add("All Conferences: " + allconference + ">All Americans: " + allamericans);
+        pStats.add("Conference Coach: " + confAward + ">Coach of Year: " + awards);
         return pStats;
     }
 
@@ -190,4 +195,9 @@ public class HeadCoach extends Player {
     public String getYrOvrPot_Str() {
         return "COACH ATTRIBUTES:";
     }
+
+    @Override
+    public String getYrStr() {
+        return "Season " + year;
+        }
 }

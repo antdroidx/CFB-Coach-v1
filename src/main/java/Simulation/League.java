@@ -1782,27 +1782,27 @@ public class League {
 
             for (Conference c : conferences) {
                 c.getAllConfPlayers();
-                qbs.add((PlayerQB) c.allConfPlayers.get(0));
-                rbs.add((PlayerRB) c.allConfPlayers.get(1));
+                qbs.add((PlayerQB) c.allConfPlayers.get(1));
                 rbs.add((PlayerRB) c.allConfPlayers.get(2));
-                wrs.add((PlayerWR) c.allConfPlayers.get(3));
+                rbs.add((PlayerRB) c.allConfPlayers.get(3));
                 wrs.add((PlayerWR) c.allConfPlayers.get(4));
                 wrs.add((PlayerWR) c.allConfPlayers.get(5));
-                tes.add((PlayerTE) c.allConfPlayers.get(6));
-                for (int i = 7; i < 12; ++i) {
+                wrs.add((PlayerWR) c.allConfPlayers.get(6));
+                tes.add((PlayerTE) c.allConfPlayers.get(7));
+                for (int i = 8; i < 13; ++i) {
                     ols.add((PlayerOL) c.allConfPlayers.get(i));
                 }
-                ks.add((PlayerK) c.allConfPlayers.get(12));
-                for (int i = 13; i < 16; ++i) {
+                ks.add((PlayerK) c.allConfPlayers.get(13));
+                for (int i = 14; i < 17; ++i) {
                     dls.add((PlayerDL) c.allConfPlayers.get(i));
                 }
-                for (int i = 17; i < 20; ++i) {
+                for (int i = 18; i < 21; ++i) {
                     lbs.add((PlayerLB) c.allConfPlayers.get(i));
                 }
-                for (int i = 20; i < 23; ++i) {
+                for (int i = 21; i < 24; ++i) {
                     cbs.add((PlayerCB) c.allConfPlayers.get(i));
                 }
-                ss.add((PlayerS) c.allConfPlayers.get(23));
+                ss.add((PlayerS) c.allConfPlayers.get(24));
             }
 
             Collections.sort(qbs, new PlayerHeismanComp());
@@ -1922,8 +1922,11 @@ public class League {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < allConfPlayers.size(); ++i) {
             Player p = allConfPlayers.get(i);
-            sb.append(p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ");
-            if (p instanceof PlayerQB) {
+            sb.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
+            if (p instanceof HeadCoach) {
+                HeadCoach hc = (HeadCoach) p;
+                sb.append(" HC " + hc.name + "\n \t\tAge: :" + hc.age + " Season " + hc.year + "\n");
+            } else if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 sb.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
                         pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Pass Yds, " + pqb.statsRushYards + "Rush Yds\n");

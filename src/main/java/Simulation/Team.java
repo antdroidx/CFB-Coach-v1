@@ -2039,7 +2039,8 @@ public class Team {
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19]),
-                        Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21])));
+                        Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21]),
+                        Integer.parseInt(playerInfo[22])));
 
             else
                 HC.add(new HeadCoach(playerInfo[1], this,
@@ -2052,7 +2053,8 @@ public class Team {
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19]),
-                        Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21])));
+                        Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21]),
+                        Integer.parseInt(playerInfo[22])));
         }
     }
 
@@ -3493,7 +3495,7 @@ public class Team {
             sb.append("HC," + hc.name + "," + hc.age + "," + hc.year + "," + hc.contractYear + "," + hc.contractLength + "," +
                     hc.ratOff + "," + hc.ratDef + "," + hc.ratTalent + "," + hc.ratDiscipline + "," + hc.offStrat + "," + hc.defStrat + "," + hc.baselinePrestige + "," +
                     hc.wins + "," + hc.losses + "," + hc.bowlwins + "," + hc.bowllosses + "," + hc.confchamp + "," + hc.natchamp + "," + hc.allconference + "," +
-                    hc.allamericans + "," + hc.awards + "%\n");
+                    hc.allamericans + "," + hc.confAward  + "," + hc.awards + "%\n");
         }
         for (PlayerQB qb : teamQBs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
