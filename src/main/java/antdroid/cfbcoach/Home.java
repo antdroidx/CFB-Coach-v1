@@ -14,14 +14,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.HttpURLConnection;
+import 	javax.net.ssl.HttpsURLConnection;
+import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
@@ -35,14 +46,21 @@ public class Home extends AppCompatActivity {
         ImageView imageLogo = (ImageView) findViewById(R.id.imageLogo);
         imageLogo.setImageResource(R.drawable.main_menu_logo);
 
-        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
+/*        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
                 Home.this.startActivity(myIntent);
             }
-        });
+        });*/
+
+/*        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            customLeague();
+            }
+            });*/
 
         Button newCareerButton = (Button) findViewById(R.id.buttonCareer);
         newCareerButton.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +115,17 @@ public class Home extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse("http://www.Antdroid.net"));
+                startActivity(intent);
+            }
+        });
+
+        Button githubButton = (Button) findViewById(R.id.buttonGitHub);
+        githubButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://github.com/minotauri/CFB-Coach"));
                 startActivity(intent);
             }
         });
@@ -232,29 +261,6 @@ public class Home extends AppCompatActivity {
                 infos[i] = "EMPTY";
             }
         }
-       /* for (int i = 0; i < 3; ++i) {
-            isExternalStorageReadable();
-
-            extFile = new File(getExternalFilesDir(
-            if (extFile.exists()) {
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(extFile));
-                    fileInfo = bufferedReader.readLine();
-                    infos[i] = fileInfo.substring(0, fileInfo.length() - 1); //gets rid of % at end
-                } catch (FileNotFoundException ex) {
-                    System.out.println(
-                            "Unable to open file");
-                } catch (IOException ex) {
-                    System.out.println(
-                            "Error reading file");
-                } catch (NullPointerException ex) {
-                    System.out.println(
-                            "Null pointer exception!");
-                }
-            } else {
-                infos[i] = "EMPTY";
-            }
-        }*/
         return infos;
     }
 
@@ -281,4 +287,82 @@ public class Home extends AppCompatActivity {
         }
         return file;
     }
+
+   /* private void customLeague() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Universe File URL:");
+        final EditText input = new EditText(this);
+        input.setInputType(1);
+        builder.setView(input);
+        builder.setPositiveButton("Load", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent myIntent = new Intent(Home.this, MainActivity.class);
+
+                try {
+                    URL url = new URL(input.getText().toString());
+                    File conferences = new File(getFilesDir(), "conferences.txt");
+                    File teams = new File(getFilesDir(), "teams.txt");
+                    URLConnection conn = url.openConnection();
+                    // Always wrap FileReader in BufferedReader.
+                    String line = null;
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    //First ignore the save file info
+                    line = bufferedReader.readLine();
+                    //Next get league history
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONFERENCES]")) {
+                        sb.append(line);
+                    }
+                    sb.append("END_CONFERENCES");
+
+                    // Actually write to the file
+                    try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                            new FileOutputStream(conferences), "utf-8"))) {
+                        writer.write(sb.toString());
+                    } catch (Exception e) {
+                    }
+                    StringBuilder sb1 = new StringBuilder();
+
+                    //Next get heismans
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAMS")) {
+                        sb1.append(line);
+                    }
+                    sb1.append("END_TEAMS");
+                    // Actually write to the file
+                    try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                            new FileOutputStream(teams), "utf-8"))) {
+                        writer.write(sb1.toString());
+                    } catch (Exception e) {
+                    }
+                    // Always close files.
+                    bufferedReader.close();
+                    myIntent.putExtra("SAVE_FILE","NEW_LEAGUE_CAREER-CUSTOM");
+                    Home.this.startActivity(myIntent);
+                } catch (Exception e) {
+                    Toast.makeText(Home.this, "Error! Bad URL or unable to read file.", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+                }
+            }
+
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setNeutralButton("How To Guide", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                intent.addCategory("android.intent.category.BROWSABLE");
+                intent.setData(Uri.parse("https://m.reddit.com/r/FootballCoach/wiki/rosters"));
+                Home.this.startActivity(intent);
+            }
+        });
+        builder.show();
+    }
+
+    private void customFileBuilder() {
+
+    }*/
 }

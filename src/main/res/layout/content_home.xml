@@ -127,6 +127,16 @@
             android:text="Antdroid"
             android:textSize="14sp" />
 
+        <Button
+            android:id="@+id/buttonGitHub"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:text="GitHub"
+            android:textSize="14sp" />
+
     </LinearLayout>
 
     <LinearLayout
