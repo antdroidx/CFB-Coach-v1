@@ -55,10 +55,12 @@ Future Features?!?
 
 
 Github source code & apk download:
+
 https://github.com/minotauri/CFB-Coach
 
 
-Installation
+**Installation**
+
 Go to github (use desktop version if on phone - link to switch is at bottom of the page)
 Download the "apk" file to your phone or to your PC (and then transfer to your phone)
 Once on your phone, use a file manager, if necessary, to install the APK.
