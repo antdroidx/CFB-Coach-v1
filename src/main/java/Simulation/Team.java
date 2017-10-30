@@ -146,7 +146,7 @@ public class Team {
      * @param league     reference to the league object all must obey
      * @param prestige   prestige of that team, between 0-100
      */
-    public Team(String name, String abbr, String conference, League league, int prestige, String rivalTeamAbbr) {
+    public Team(String name, String abbr, String conference, int prestige, String rivalTeamAbbr, League league) {
         this.league = league;
         userControlled = false;
         showPopups = true;

@@ -103,9 +103,16 @@ public class MainActivity extends AppCompatActivity {
             if (saveFileStr.equals("NEW_LEAGUE_DYNASTY")) {
                 simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
                 season = seasonStart;
-            } else if (saveFileStr.equals("NEW_LEAGUE_CAREER")) {
-                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true);
-                season = seasonStart;
+            } else if (saveFileStr.contains("NEW_LEAGUE_CAREER")) {
+                if (saveFileStr.contains("CUSTOM")) {
+                    File customConfs = new File(getFilesDir(), "conferences.txt");
+                    File customTeams = new File(getFilesDir(), "teams.txt");
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams);
+                    season = seasonStart;
+                } else {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true);
+                    season = seasonStart;
+                }
             } else if (saveFileStr.equals("DONE_RECRUITING")) {
                 File saveFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
                 if (saveFile.exists()) {
