@@ -55,7 +55,6 @@ Future Features?!?
 
 
 Github source code & apk download:
-
 https://github.com/minotauri/CFB-Coach
 
 
