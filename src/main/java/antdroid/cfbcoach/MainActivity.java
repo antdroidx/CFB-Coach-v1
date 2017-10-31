@@ -337,10 +337,10 @@ public class MainActivity extends AppCompatActivity {
                         } else if (simLeague.currentWeek == 16) {
                             simGameButton.setTextSize(12);
                             simGameButton.setText("Begin Off-Season");
+                            simLeague.curePlayers(); // get rid of all injuries
                         } else {
                             simGameButton.setTextSize(14);
                             simGameButton.setText("Begin Recruiting");
-                            simLeague.curePlayers(); // get rid of all injuries
                         }
 
                         updateCurrTeam();
@@ -2253,6 +2253,7 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractYear = 0;
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
+                userTeam.skipHistory = true;
                 simLeague.setTeamRanks();
                 updateTeamUI();
                 examineTeam(currentTeam.name);

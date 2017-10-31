@@ -98,6 +98,8 @@ public class Team {
     public ArrayList<HeadCoach> HC;
     public boolean fired;
     public boolean retired;
+    public boolean skipHistory;
+    public Team oldTeam;
     //players on team
     //offense
     public ArrayList<PlayerQB> teamQBs;
@@ -458,6 +460,7 @@ public class Team {
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
                 String oldCoach = HC.get(0).name;
+                if(userControlled) oldTeam = this;
                 fired = true;
                 HC.remove(0);
                 newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -2220,7 +2223,11 @@ public class Team {
         }
 
         teamHistory.add(histYear);
-        if (userControlled) league.UserHistory.add(histYear);
+        if (userControlled && oldTeam == null && !skipHistory) {
+            league.UserHistory.add(histYear);
+        } else if (oldTeam != null) {
+            oldTeam.league.UserHistory.add(histYear);
+        }
     }
 
     /**
