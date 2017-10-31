@@ -536,7 +536,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String improveStr = "";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
             improveStr = "(+" + pi[9] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + getLetterGrade(pi[3]) + " Pot " + improveStr;
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + pi[3] + " Pot " + improveStr;
     }
 
     /**
