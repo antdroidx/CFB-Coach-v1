@@ -46,16 +46,16 @@ public class Home extends AppCompatActivity {
         ImageView imageLogo = (ImageView) findViewById(R.id.imageLogo);
         imageLogo.setImageResource(R.drawable.main_menu_logo);
 
-/*        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
+        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
                 Home.this.startActivity(myIntent);
             }
-        });*/
+        });
 
-/*        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
+/*      Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             customLeague();
@@ -288,7 +288,7 @@ public class Home extends AppCompatActivity {
         return file;
     }
 
-   /* private void customLeague() {
+/*    private void customLeague() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Universe File URL:");
         final EditText input = new EditText(this);
@@ -360,9 +360,6 @@ public class Home extends AppCompatActivity {
             }
         });
         builder.show();
-    }
-
-    private void customFileBuilder() {
-
     }*/
+
 }
