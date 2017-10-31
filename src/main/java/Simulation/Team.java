@@ -97,6 +97,7 @@ public class Team {
 
     public ArrayList<HeadCoach> HC;
     public boolean fired;
+    public boolean newContract;
     public boolean retired;
     public boolean skipHistory;
     public Team oldTeam;
@@ -400,7 +401,7 @@ public class Team {
     // CAN BE FIRED OR EXTENDED CONTRACT HERE
     //
     public void advanceHC() {
-        HC.get(0).job = 0;
+        newContract = false;
         fired = false;
         retired = false;
         int newPrestige[] = calcSeasonPrestige();
@@ -420,7 +421,6 @@ public class Team {
         //RETIREMENT
         if (HC.get(0).age > retire && !userControlled) {
             retired = true;
-            HC.get(0).job = 3;
             String oldCoach = HC.get(0).name;
             int age = HC.get(0).age;
             fired = true;
@@ -435,19 +435,19 @@ public class Team {
                 HC.get(0).contractLength = 6;
                 HC.get(0).contractYear = 0;
                 HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                HC.get(0).job = 1;
+                newContract = true;
                 league.newsStories.get(league.currentWeek + 1).add("Long-Term Extension!>" + name + " has extended their head coach, " + HC.get(0).name +
                         " for 6 additional seasons for his successful tenue at the university.");
             } else if (totalPDiff > 15) {
                 HC.get(0).contractLength = 5;
                 HC.get(0).contractYear = 0;
                 HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                HC.get(0).job = 1;
+                newContract = true;
             } else if (totalPDiff > 10) {
                 HC.get(0).contractLength = 4;
                 HC.get(0).contractYear = 0;
                 HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                HC.get(0).job = 1;
+                newContract = true;
             } else if (totalPDiff > 5 || (natChampWL.equals("NCL"))) {
                 if ((natChampWL.equals("NCL")) && HC.get(0).contractLength - HC.get(0).contractYear > 2) {
 
@@ -455,8 +455,16 @@ public class Team {
                     HC.get(0).contractLength = 3;
                     HC.get(0).contractYear = 0;
                     HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                    HC.get(0).job = 1;
+                    newContract = true;
                 }
+            } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && !league.isCareerMode() && !userControlled) {
+                HC.get(0).job = 2;
+                String oldCoach = HC.get(0).name;
+                fired = true;
+                HC.remove(0);
+                newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                league.newsStories.get(league.currentWeek + 1).add("Coach Firing!>" + name + " has fired their head coach, " + oldCoach +
+                        " after a disappointing tenure. The team has announced the signing of " + HC.get(0).name + " as their new head coach.");
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
                 String oldCoach = HC.get(0).name;
@@ -470,7 +478,7 @@ public class Team {
                 HC.get(0).contractLength = 2;
                 HC.get(0).contractYear = 0;
                 HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
-                HC.get(0).job = 1;
+                newContract = true;
             }
         }
     }
@@ -2878,7 +2886,7 @@ public class Team {
 
         summary += "\n\nCurrent Prestige: " + teamPrestige + " New Prestige: " + prestigePts[0];
 
-        if (HC.get(0).job == 1 && league.isCareerMode()) {
+        if (newContract && league.isCareerMode()) {
             summary += "\n\nCongratulations! You've been awarded with a contract extension of " + HC.get(0).contractLength + " years.";
         } else if (fired) {
             summary += "\n\nDue to failing to raise the team prestige during your contract length, you've been terminated from this position.";
