@@ -468,7 +468,7 @@ public class Team {
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
                 String oldCoach = HC.get(0).name;
-                if(userControlled) oldTeam = this;
+                if (userControlled) oldTeam = this;
                 fired = true;
                 HC.remove(0);
                 newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -3510,7 +3510,7 @@ public class Team {
             sb.append("HC," + hc.name + "," + hc.age + "," + hc.year + "," + hc.contractYear + "," + hc.contractLength + "," +
                     hc.ratOff + "," + hc.ratDef + "," + hc.ratTalent + "," + hc.ratDiscipline + "," + hc.offStrat + "," + hc.defStrat + "," + hc.baselinePrestige + "," +
                     hc.wins + "," + hc.losses + "," + hc.bowlwins + "," + hc.bowllosses + "," + hc.confchamp + "," + hc.natchamp + "," + hc.allconference + "," +
-                    hc.allamericans + "," + hc.confAward  + "," + hc.awards + "%\n");
+                    hc.allamericans + "," + hc.confAward + "," + hc.awards + "%\n");
         }
         for (PlayerQB qb : teamQBs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +

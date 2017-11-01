@@ -199,5 +199,5 @@ public class HeadCoach extends Player {
     @Override
     public String getYrStr() {
         return "Season " + year;
-        }
+    }
 }

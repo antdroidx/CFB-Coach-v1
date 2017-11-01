@@ -334,12 +334,11 @@ public class League {
 
     /**
      * Creates a CUSTOM League Universe
-     *
      */
 
 
     //public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams) {
-    public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams) {
+    public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl) {
         String line = null;
         careerMode = career;
         heismanDecided = false;
@@ -416,7 +415,7 @@ public class League {
             while ((line = bufferedReader.readLine()) != null && !line.equals("[END_TEAMS]")) {
                 for (int c = 0; c < conferences.size(); ++c) {
                     while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
-                        line.replace("\"","\\\"");
+                        line.replace("\"", "\\\"");
                         String[] filesSplit = line.split(", ");
                         String tmName = filesSplit[0];
                         String tmAbbr = filesSplit[1];
@@ -477,6 +476,46 @@ public class League {
                 conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
                 conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
                 conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
+
+        try {
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(customBowl));
+
+            //First ignore the save file info
+            line = bufferedReader.readLine();
+            line.replaceAll("\"", "\\\"");
+/*                String[] filesSplit = line.split(", ");
+                String bowl1 = filesSplit[0];
+                String bowl2 = filesSplit[1];
+                String bowl3 = filesSplit[2];
+                String bowl4 = filesSplit[3];
+                String bowl5 = filesSplit[4];
+                String bowl6 = filesSplit[5];
+                String bowl7 = filesSplit[6];
+                String bowl8 = filesSplit[7];
+                String bowl9 = filesSplit[8];
+                String bowl10 = filesSplit[9];
+                String bowl11 = filesSplit[10];
+                String bowl12 = filesSplit[11];
+                String bowl13 = filesSplit[12];
+                String bowl14 = filesSplit[13];
+                String bowl15 = filesSplit[14];
+                String bowl16 = filesSplit[15];
+                String bowl17 = filesSplit[16];
+                String bowl18 = filesSplit[17];*/
+                for (int b = 0; b < bowlGames.length; ++b) {
+                    String[] filesSplit = line.split(", ");
+                    bowlNames[b] = filesSplit[b+1].toString();
+                }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file");
+        } catch (IOException ex) {
+            System.out.println(
+                    "Error reading file");
+        }
+
     }
 
 
@@ -507,9 +546,7 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             // Game Mode
-            if (line.substring(line.length() - 9, line.length()).equals("[CAREER]%"))
-                careerMode = true;
-            else careerMode = false;
+            careerMode = line.substring(line.length() - 9, line.length()).equals("[CAREER]%");
 
             //Next get league history
             leagueHistory = new ArrayList<String[]>();
@@ -2369,7 +2406,7 @@ public class League {
         ArrayList<Team> coachList = new ArrayList<>();
         for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
-                coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference,teamList.get(i).teamPrestige, teamList.get(i).rivalTeam,this));
+                coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
         }
@@ -2819,9 +2856,9 @@ public class League {
 
         // Save user team records
         for (Team t : teamList) {
-           sb.append(t.teamRecords.getRecordsStr());
+            sb.append(t.teamRecords.getRecordsStr());
             sb.append("END_TEAM\n");
-            }
+        }
         sb.append("END_TEAM_RECORDS\n");
 
         // Save all the Hall of Famers
@@ -3437,7 +3474,6 @@ public class League {
     }
 
 
-
     public void disciplineAction() {
         int t = 0;
         //randomly chooose 5 teams from teamlist
@@ -3447,7 +3483,6 @@ public class League {
         //team loses prestige
 
     }
-
 
 
 }
@@ -3563,6 +3598,7 @@ class PlayerInterceptionsComp implements Comparator<PlayerDefense> {
         return a.interceptions > b.interceptions ? -1 : a.interceptions == b.interceptions ? 0 : 1;
     }
 }
+
 class TeamCompPoll implements Comparator<Team> {
     @Override
     public int compare(Team a, Team b) {

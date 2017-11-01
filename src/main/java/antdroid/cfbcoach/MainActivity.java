@@ -24,9 +24,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -91,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     String saveLeagueFileStr;
     File customConfs;
     File customTeams;
+    File customBowls;
     String customUri;
 
     @Override
@@ -117,9 +115,10 @@ public class MainActivity extends AppCompatActivity {
                     this.customUri = filesSplit[1];
                     customConfs = new File(getFilesDir(), "conferences.txt");
                     customTeams = new File(getFilesDir(), "teams.txt");
+                    customBowls = new File(getFilesDir(), "bowls.txt");
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls);
                     season = seasonStart;
                 } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
@@ -131,9 +130,10 @@ public class MainActivity extends AppCompatActivity {
                     this.customUri = filesSplit[1];
                     customConfs = new File(getFilesDir(), "conferences.txt");
                     customTeams = new File(getFilesDir(), "teams.txt");
+                    customBowls = new File(getFilesDir(), "bowls.txt");
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls);
                     season = seasonStart;
                 } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true);
@@ -2258,8 +2258,8 @@ public class MainActivity extends AppCompatActivity {
         if (offers < 1) offers = 1;
         updateTeamUI();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr((ratOvr-10), offers);
-        final ArrayList<Team> coachList = simLeague.getCoachList((ratOvr-10), offers);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr((ratOvr - 10), offers);
+        final ArrayList<Team> coachList = simLeague.getCoachList((ratOvr - 10), offers);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
@@ -2422,6 +2422,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             File conferences = new File(getFilesDir(), "conferences.txt");
             File teams = new File(getFilesDir(), "teams.txt");
+            File bowls = new File(getFilesDir(), "bowls.txt");
             String line;
             InputStream inputStream = getContentResolver().openInputStream(uri);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -2456,6 +2457,26 @@ public class MainActivity extends AppCompatActivity {
                 writer.write(sb1.toString());
             } catch (Exception e) {
             }
+
+            StringBuilder sb2 = new StringBuilder();
+
+            line = null;
+            line = reader.readLine();
+            //Next get league history
+            sb2.append("[START_BOWL_NAMES]\n");
+            while ((line = reader.readLine()) != null && !line.equals("[END_BOWL_NAMES]")) {
+                sb2.append(line + "\n");
+            }
+            sb2.append("[END_BOWL_NAMES]\n");
+
+            // Actually write to the file
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(bowls)))) {
+                writer.write(sb2.toString());
+            } catch (Exception e) {
+            }
+
+
             // Always close files.
             reader.close();
         } catch (Exception e) {
