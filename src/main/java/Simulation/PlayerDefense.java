@@ -1,7 +1,5 @@
 package Simulation;
 
-import java.util.ArrayList;
-
 /**
  * Base player class that others extend. Has name, overall, potential, and football IQ.
  *
@@ -18,7 +16,7 @@ public class PlayerDefense {
     public int fumbles;
     public int interceptions;
 
-    public PlayerDefense(Team tm, String nm, String pos, int yr, int tkl, int sk, int fmb, int ints){
+    public PlayerDefense(Team tm, String nm, String pos, int yr, int tkl, int sk, int fmb, int ints) {
         team = tm;
         name = nm;
         position = pos;

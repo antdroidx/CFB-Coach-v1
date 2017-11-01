@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,18 +24,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.io.InputStream;
-
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.HttpURLConnection;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
@@ -380,8 +371,8 @@ public class Home extends AppCompatActivity {
             // provided to this method as a parameter.
             // Pull that URI using resultData.getData().
             Uri uri = null;
-                uri = resultData.getData();
-                uriStr = uri.toString();
+            uri = resultData.getData();
+            uriStr = uri.toString();
             if (customCareer) {
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM," + uriStr);
             } else {
