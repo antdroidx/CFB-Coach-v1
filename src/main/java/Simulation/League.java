@@ -336,6 +336,9 @@ public class League {
      * Creates a CUSTOM League Universe
      *
      */
+
+
+    //public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams) {
     public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams) {
         String line = null;
         careerMode = career;
@@ -354,9 +357,8 @@ public class League {
 
             //First ignore the save file info
             line = bufferedReader.readLine();
-
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONFERENCES")) {
-                conferences.add(new Conference(line, this));
+            while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONFERENCES]")) {
+                conferences.add(new Conference(line.toString(), this));
             }
         } catch (FileNotFoundException ex) {
             System.out.println(
@@ -411,11 +413,17 @@ public class League {
 
             //First ignore the save file info
             line = bufferedReader.readLine();
-
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAMS")) {
+            while ((line = bufferedReader.readLine()) != null && !line.equals("[END_TEAMS]")) {
                 for (int c = 0; c < conferences.size(); ++c) {
-                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONF")) {
-                        conferences.get(c).confTeams.add(new Team(line, this));
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
+                        line.replace("\"","\\\"");
+                        String[] filesSplit = line.split(", ");
+                        String tmName = filesSplit[0];
+                        String tmAbbr = filesSplit[1];
+                        String tmConf = filesSplit[2];
+                        int tmPres = Integer.parseInt(filesSplit[3]);
+                        String tmRival = filesSplit[4];
+                        conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, this));
                     }
                 }
             }
@@ -3439,6 +3447,8 @@ public class League {
         //team loses prestige
 
     }
+
+
 
 }
 

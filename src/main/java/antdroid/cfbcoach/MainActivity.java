@@ -3,6 +3,7 @@ package antdroid.cfbcoach;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,10 +29,16 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
     int confStart = 10;
     int seasonStart = 2017;
 
+    String saveLeagueFileStr;
+    File customConfs;
+    File customTeams;
+    String customUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +111,28 @@ public class MainActivity extends AppCompatActivity {
         boolean loadedLeague = false;
         if (extras != null) {
             String saveFileStr = extras.getString("SAVE_FILE");
-            if (saveFileStr.equals("NEW_LEAGUE_DYNASTY")) {
-                simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
-                season = seasonStart;
+            if (saveFileStr.contains("NEW_LEAGUE_DYNASTY")) {
+                if (saveFileStr.contains("CUSTOM")) {
+                    String[] filesSplit = saveFileStr.split(",");
+                    this.customUri = filesSplit[1];
+                    customConfs = new File(getFilesDir(), "conferences.txt");
+                    customTeams = new File(getFilesDir(), "teams.txt");
+                    Uri uri = Uri.parse(customUri);
+                    customLeague(uri);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams);
+                    season = seasonStart;
+                } else {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+                    season = seasonStart;
+                }
             } else if (saveFileStr.contains("NEW_LEAGUE_CAREER")) {
                 if (saveFileStr.contains("CUSTOM")) {
-                    File customConfs = new File(getFilesDir(), "conferences.txt");
-                    File customTeams = new File(getFilesDir(), "teams.txt");
+                    String[] filesSplit = saveFileStr.split(",");
+                    this.customUri = filesSplit[1];
+                    customConfs = new File(getFilesDir(), "conferences.txt");
+                    customTeams = new File(getFilesDir(), "teams.txt");
+                    Uri uri = Uri.parse(customUri);
+                    customLeague(uri);
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams);
                     season = seasonStart;
                 } else {
@@ -2391,5 +2417,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void customLeague(Uri uri) {
+        try {
+            File conferences = new File(getFilesDir(), "conferences.txt");
+            File teams = new File(getFilesDir(), "teams.txt");
+            String line;
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder sb = new StringBuilder();
+            //First ignore the save file info
+            line = null;
+            line = reader.readLine();
+            //Next get league history
+            sb.append("[START_CONFERENCES]\n");
+            while ((line = reader.readLine()) != null && !line.equals("[END_CONFERENCES]")) {
+                sb.append(line + "\n");
+            }
+            sb.append("[END_CONFERENCES]\n");
+
+            // Actually write to the file
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(conferences)))) {
+                writer.write(sb.toString());
+            } catch (Exception e) {
+            }
+            StringBuilder sb1 = new StringBuilder();
+
+            //teams
+            sb1.append("[START_TEAMS]\n");
+            while ((line = reader.readLine()) != null && !line.equals("[END_TEAMS]")) {
+                sb1.append(line + "\n");
+            }
+            sb1.append("[END_TEAMS]\n");
+            // Actually write to the file
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(teams)))) {
+                writer.write(sb1.toString());
+            } catch (Exception e) {
+            }
+            // Always close files.
+            reader.close();
+        } catch (Exception e) {
+            Toast.makeText(MainActivity.this, "Error! Bad URL or unable to read file.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
 
