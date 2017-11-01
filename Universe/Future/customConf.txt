@@ -1,0 +1,12 @@
+[START_CONFERENCES]
+ACC
+American
+Big Ten
+Big 12
+Conf USA
+MAC
+Mt West
+Pac-12
+SEC
+Sun Belt
+[END_CONFERENCES]
