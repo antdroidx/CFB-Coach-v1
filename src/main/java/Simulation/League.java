@@ -477,6 +477,8 @@ public class League {
                 conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
                 conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
 
+
+        //Create new Bowl Game Names from TXT
         try {
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(new FileReader(customBowl));
@@ -484,28 +486,9 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             line.replaceAll("\"", "\\\"");
-/*                String[] filesSplit = line.split(", ");
-                String bowl1 = filesSplit[0];
-                String bowl2 = filesSplit[1];
-                String bowl3 = filesSplit[2];
-                String bowl4 = filesSplit[3];
-                String bowl5 = filesSplit[4];
-                String bowl6 = filesSplit[5];
-                String bowl7 = filesSplit[6];
-                String bowl8 = filesSplit[7];
-                String bowl9 = filesSplit[8];
-                String bowl10 = filesSplit[9];
-                String bowl11 = filesSplit[10];
-                String bowl12 = filesSplit[11];
-                String bowl13 = filesSplit[12];
-                String bowl14 = filesSplit[13];
-                String bowl15 = filesSplit[14];
-                String bowl16 = filesSplit[15];
-                String bowl17 = filesSplit[16];
-                String bowl18 = filesSplit[17];*/
                 for (int b = 0; b < bowlGames.length; ++b) {
                     String[] filesSplit = line.split(", ");
-                    bowlNames[b] = filesSplit[b+1].toString();
+                    bowlNames[b] = filesSplit[b].toString();
                 }
 
         } catch (FileNotFoundException ex) {

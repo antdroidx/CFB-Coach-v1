@@ -2463,10 +2463,7 @@ public class MainActivity extends AppCompatActivity {
             line = null;
             line = reader.readLine();
             //Next get league history
-            sb2.append("[START_BOWL_NAMES]\n");
-            while ((line = reader.readLine()) != null && !line.equals("[END_BOWL_NAMES]")) {
-                sb2.append(line + "\n");
-            }
+            sb2.append(line + "\n");
             sb2.append("[END_BOWL_NAMES]\n");
 
             // Actually write to the file
@@ -2475,8 +2472,6 @@ public class MainActivity extends AppCompatActivity {
                 writer.write(sb2.toString());
             } catch (Exception e) {
             }
-
-
             // Always close files.
             reader.close();
         } catch (Exception e) {
