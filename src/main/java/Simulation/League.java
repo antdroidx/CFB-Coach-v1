@@ -27,7 +27,7 @@ public class League {
     public ArrayList<String> heismanHistory;
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
-    public ArrayList<Team> coachList;
+    public ArrayList<HeadCoach> coachList;
     public ArrayList<String> nameList;
     public ArrayList<String> lastNameList;
     public ArrayList<ArrayList<String>> newsStories;
@@ -95,6 +95,8 @@ public class League {
         leagueHistory = new ArrayList<String[]>();
         UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
+        coachList = new ArrayList<>();
+
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
         conferences.add(new Conference("ACC", this));
@@ -347,6 +349,7 @@ public class League {
         leagueHistory = new ArrayList<String[]>();
         UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
+        coachList = new ArrayList<>();
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
 
@@ -520,7 +523,7 @@ public class League {
         longestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         yearStartLongestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
-        ArrayList<Team> coachList = new ArrayList<>();
+        coachList = new ArrayList<>();
 
         try {
             // Always wrap FileReader in BufferedReader.

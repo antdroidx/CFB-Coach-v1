@@ -36,7 +36,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamName;
     private String teamAbbr;
     private int recruitingBudget;
-    private final String[] letterGrades = {"1-Star", "2-Star", "3-Star", "3-Star", "4-Star", "5-Star"};
+    private final String[] letterGrades = {"*", "**", "***", "***", "****", "*****"};
     private int ratingTolerance;
     private int tolerance;
 
@@ -432,7 +432,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr:" + getLetterGrade(ps[8]) + ", Pot: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
+        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr:" + getLetterGrade(ps[8]) + " | Pot: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
     }
 
     /**
@@ -540,11 +540,30 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
     /**
-     * Converts the lines from the file into readable lines, without revealing potential
+     * Converts the lines from the file into readable lines
+     */
+    private String getReadablePlayerInfoPotDisplay(String p) {
+        String[] pi = p.split(",");
+        String improveStr = "";
+        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
+            improveStr = "(+" + pi[9] + ")";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[8] + " " + improveStr;
+    }
+
+    /**
+     * Converts the lines from the file into readable lines, without revealing potential - used for recruiting to database
      */
     private String getReadablePlayerInfoNoPot(String p) {
         String[] pi = p.split(",");
         return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr";
+    }
+
+    /**
+     * Converts the lines from the file into readable lines, without revealing potential used for displaying
+     */
+    private String getReadablePlayerInfoDisplay(String p) {
+        String[] pi = p.split(",");
+        return getInitialName(pi[1]) + " [Overall: " + getLetterGrade(pi[8]) + "]";
     }
 
     /**
@@ -554,6 +573,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String[] pi = p.split(",");
         return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + getLetterGrade(pi[3]) + " Pot";
     }
+
 
     /**
      * Convert year from number to String, i.e. 3 -> Junior
@@ -756,7 +776,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Recruiting");
-                builder.setMessage("Are you sure you want to recruit " + player.split(",")[0] + " " + getReadablePlayerInfoNoPot(player) + " for $" + moneyNeeded + "?");
+                builder.setMessage("Are you sure you want to recruit " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -942,7 +962,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Redshirting");
-                builder.setMessage("Are you sure you want to redshirt " + player.split(",")[0] + " " + getReadablePlayerInfoNoPot(player) + " for $" + moneyNeeded + "?\n" +
+                builder.setMessage("Are you sure you want to redshirt " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?\n" +
                         "He will be unavailable to play for the first year.");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
