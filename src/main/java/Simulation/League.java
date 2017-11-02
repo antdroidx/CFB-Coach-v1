@@ -28,6 +28,7 @@ public class League {
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
     public ArrayList<HeadCoach> coachList;
+    public ArrayList<String> coachPrevTeam;
     public ArrayList<String> nameList;
     public ArrayList<String> lastNameList;
     public ArrayList<ArrayList<String>> newsStories;
@@ -96,6 +97,7 @@ public class League {
         UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
         coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
 
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
@@ -350,6 +352,7 @@ public class League {
         UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
         coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
 
@@ -524,6 +527,7 @@ public class League {
         yearStartLongestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -3470,6 +3474,26 @@ public class League {
 
     }
 
+
+    public void coachCarousel() {
+        for (int i = 0; i < coachList.size(); ++i) {
+            for (int t = 0; t < teamList.size(); ++t) {
+                if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i)) {
+                    teamList.get(t).HC.add(coachList.get(i));
+                    newsStories.get(currentWeek + 1).add("Coaching Hire>After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                            " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
+                    break;
+                }
+            }
+        }
+        for (int t = 0; t < teamList.size(); ++t) {
+            if (teamList.get(t).HC.isEmpty()) {
+                teamList.get(t).newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                newsStories.get(currentWeek + 1).add("Coaching Hire>After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                        " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " was previously unemployed, but the team is willing to take its chances on a new face.");
+            }
+        }
+    }
 
 }
 

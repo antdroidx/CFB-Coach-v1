@@ -282,9 +282,12 @@ public class MainActivity extends AppCompatActivity {
                     // Perform action on click
                     if (simLeague.currentWeek == 16 && userTeam.fired == true) {
                         newJob(userHC);
+                        simLeague.coachCarousel();
+                        simLeague.currentWeek++;
+                    } else if (simLeague.currentWeek == 16) {
+                        simLeague.coachCarousel();
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek >= 17) {
-
                         recruitingStage = 0;
                         beginRecruiting();
                     } else {
@@ -2251,6 +2254,47 @@ public class MainActivity extends AppCompatActivity {
 
     //Only schools lower than Coach Rating will offer jobs
     public void newJob(HeadCoach headCoach) {
+        userHC = headCoach;
+        int ratOvr = userHC.ratOvr;
+        if (ratOvr < 40) ratOvr = 40;
+        int offers = (int) (Math.random() * 5);
+        if (offers < 1) offers = 1;
+        updateTeamUI();
+        //get user team from list dialog
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr((ratOvr - 10), offers);
+        final ArrayList<Team> coachList = simLeague.getCoachList((ratOvr - 10), offers);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Job Offers Available:");
+        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
+        builder.setItems(teams, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                userTeam.userControlled = false;
+                userTeam.HC.clear();
+                userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                simLeague.newJobtransfer(coachList.get(item).name);
+                userTeam = simLeague.userTeam;
+                userTeamStr = userTeam.name;
+                currentTeam = userTeam;
+                userTeam.HC.clear();
+                userTeam.HC.add(userHC);
+                userTeam.fired = false;
+                userHC.contractYear = 0;
+                userHC.contractLength = 5;
+                userHC.baselinePrestige = userTeam.teamPrestige;
+                userTeam.skipHistory = true;
+                simLeague.setTeamRanks();
+                updateTeamUI();
+                examineTeam(currentTeam.name);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    //Only schools lower than Coach Rating will offer jobs
+    //Version 2 will only have offers from schools with coaching vacancies and teams looking to improve
+    public void newJobV2(HeadCoach headCoach) {
         userHC = headCoach;
         int ratOvr = userHC.ratOvr;
         if (ratOvr < 40) ratOvr = 40;
