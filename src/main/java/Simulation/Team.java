@@ -425,9 +425,9 @@ public class Team {
             int age = HC.get(0).age;
             fired = true;
             HC.remove(0);
-            newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             league.newsStories.get(league.currentWeek + 1).add("Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
-                    ". His former team, " + name + " have announced " + HC.get(0).name + " as the successor to replace the retired coach.");
+                    ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
 
             //New Contracts or Firing
         } else if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL")) {
@@ -461,19 +461,23 @@ public class Team {
                 HC.get(0).job = 2;
                 String oldCoach = HC.get(0).name;
                 fired = true;
+                league.coachList.add(HC.get(0));
+                league.coachPrevTeam.add(name);
                 HC.remove(0);
-                newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 league.newsStories.get(league.currentWeek + 1).add("Coach Firing!>" + name + " has fired their head coach, " + oldCoach +
-                        " after a disappointing tenure. The team has announced the signing of " + HC.get(0).name + " as their new head coach.");
+                        " after a disappointing tenure. The team is now searching for a new head coach.");
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
                 String oldCoach = HC.get(0).name;
                 if (userControlled) oldTeam = this;
                 fired = true;
+                league.coachList.add(HC.get(0));
+                league.coachPrevTeam.add(name);
                 HC.remove(0);
-                newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 league.newsStories.get(league.currentWeek + 1).add("Coach Firing!>" + name + " has fired their head coach, " + oldCoach +
-                        " after a disappointing tenure. The team has announced the signing of " + HC.get(0).name + " as their new head coach.");
+                        " after a disappointing tenure. The team is now searching for a new head coach.");
             } else {
                 HC.get(0).contractLength = 2;
                 HC.get(0).contractYear = 0;
@@ -482,6 +486,7 @@ public class Team {
             }
         }
     }
+
 
     //Calculates Prestige Change at end of season
     public int[] calcSeasonPrestige() {
