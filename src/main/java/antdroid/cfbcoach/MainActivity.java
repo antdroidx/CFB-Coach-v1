@@ -281,15 +281,32 @@ public class MainActivity extends AppCompatActivity {
                 if (recruitingStage == -1) {
                     // Perform action on click
                     if (simLeague.currentWeek == 16 && userTeam.fired == true) {
-                        newJob(userHC);
+                        newJobV2(userHC);
                         simLeague.coachCarousel();
+                        showNewsStoriesDialog();
+                        simGameButton.setTextSize(12);
+                        simGameButton.setText("Begin Off-Season: Phase 2");
+                        simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek == 16) {
                         simLeague.coachCarousel();
+                        showNewsStoriesDialog();
+                        simGameButton.setTextSize(12);
+                        simGameButton.setText("Begin Off-Season: Phase 2");
+                        simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
-                    } else if (simLeague.currentWeek >= 17) {
+                    } else if (simLeague.currentWeek == 17) {
+                        // Transfer Players
+                        // Transfer Players
+                        // Transfer Players
+                        simGameButton.setTextSize(12);
+                        simGameButton.setText("Begin Recruiting");
+                        showNewsStoriesDialog();
+                        simLeague.currentWeek++;
+                    } else if (simLeague.currentWeek >= 18) {
                         recruitingStage = 0;
                         beginRecruiting();
+
                     } else {
                         int numGamesPlayed = userTeam.gameWLSchedule.size();
                         simLeague.playWeek();
@@ -315,6 +332,8 @@ public class MainActivity extends AppCompatActivity {
                             dialog.show();
                             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                            simGameButton.setTextSize(12);
+                            simGameButton.setText("Begin Off-Season: Phase 1");
                             simLeague.currentWeek++;
                         } else if (userTeam.gameWLSchedule.size() > numGamesPlayed) {
                             // Played a game, show summary
@@ -350,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (simLeague.currentWeek < 12) {
                             simGameButton.setTextSize(14);
-                            simGameButton.setText("Play Week");
+                            simGameButton.setText("Play Week " + (simLeague.currentWeek+1));
                         } else if (simLeague.currentWeek == 12) {
                             simGameButton.setTextSize(11);
                             simGameButton.setText("Play Conf Championships");
@@ -363,13 +382,10 @@ public class MainActivity extends AppCompatActivity {
                         } else if (simLeague.currentWeek == 14) {
                             simGameButton.setTextSize(10);
                             simGameButton.setText("Play National Championship");
-                        } else if (simLeague.currentWeek == 16) {
+                        } else if (simLeague.currentWeek == 15) {
                             simGameButton.setTextSize(12);
-                            simGameButton.setText("Begin Off-Season");
+                            simGameButton.setText("Begin Off-Season: Phase 1");
                             simLeague.curePlayers(); // get rid of all injuries
-                        } else {
-                            simGameButton.setTextSize(14);
-                            simGameButton.setText("Begin Recruiting");
                         }
 
                         updateCurrTeam();
@@ -1388,8 +1404,10 @@ public class MainActivity extends AppCompatActivity {
             else if (i == 13) weekSelection[i] = "Conf Champ Week";
             else if (i == 14) weekSelection[i] = "Bowl Game Week";
             else if (i == 15) weekSelection[i] = "National Champ";
-            else if (i == 16) weekSelection[i] = "Off-Season News";
-            else if (i == 17) weekSelection[i] = "Recruiting News";
+            else if (i == 16) weekSelection[i] = "Coach Firings";
+            else if (i == 17) weekSelection[i] = "Coach Hirings";
+            else if (i == 18) weekSelection[i] = "Transfer News";
+            else if (i == 19) weekSelection[i] = "Recruiting News";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
@@ -1409,7 +1427,7 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.newsStories.get(position);
                         boolean isempty = false;
-                        if (simLeague.currentWeek == 17 && rankings.size() == 0) {
+                        if (simLeague.currentWeek == 19 && rankings.size() == 0) {
                             rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshman to their schools.");
                         }
                         if (rankings.size() == 0) {
@@ -2298,12 +2316,14 @@ public class MainActivity extends AppCompatActivity {
         userHC = headCoach;
         int ratOvr = userHC.ratOvr;
         if (ratOvr < 40) ratOvr = 40;
-        int offers = (int) (Math.random() * 5);
-        if (offers < 1) offers = 1;
+/*        int offers = (int) (Math.random() * 5);
+        if (offers < 1) offers = 1;*/
+        int offers = 8;  //skip every 'offers' teams during for loop
+        String oldTeam = userHC.team.name;
         updateTeamUI();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr((ratOvr - 10), offers);
-        final ArrayList<Team> coachList = simLeague.getCoachList((ratOvr - 10), offers);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStrV2((ratOvr - 10), offers, oldTeam);
+        final ArrayList<Team> coachList = simLeague.getCoachListV2((ratOvr - 10), offers, oldTeam);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
