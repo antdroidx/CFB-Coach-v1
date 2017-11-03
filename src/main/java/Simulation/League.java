@@ -60,6 +60,8 @@ public class League {
     int seasonStart = 2017;
     int countTeam = 120;
 
+    int seasonWeeks = 20;
+
     //Bowl Games
     public boolean hasScheduledBowls;
     public Game semiG14;
@@ -119,7 +121,7 @@ public class League {
         // Initialize new stories lists
         newsStories = new ArrayList<ArrayList<String>>();
         weeklyScores = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i < 18; ++i) {
+        for (int i = 0; i < seasonWeeks; ++i) {
             newsStories.add(new ArrayList<String>());
             weeklyScores.add(new ArrayList<String>());
         }
@@ -381,7 +383,7 @@ public class League {
         // Initialize new stories lists
         newsStories = new ArrayList<ArrayList<String>>();
         weeklyScores = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i < 18; ++i) {
+        for (int i = 0; i < seasonWeeks; ++i) {
             newsStories.add(new ArrayList<String>());
             weeklyScores.add(new ArrayList<String>());
         }
@@ -767,7 +769,7 @@ public class League {
             // Initialize new stories lists
             newsStories = new ArrayList<ArrayList<String>>();
             weeklyScores = new ArrayList<ArrayList<String>>();
-            for (int i = 0; i < 18; ++i) {
+            for (int i = 0; i < seasonWeeks; ++i) {
                 newsStories.add(new ArrayList<String>());
                 weeklyScores.add(new ArrayList<String>());
             }
@@ -2418,24 +2420,41 @@ public class League {
     }
 
     //Get Coaching Job Offers
-    public ArrayList<String> getCoachListStrV2(int rating, int offers) {
+    public ArrayList<String> getCoachListStrV2(int rating, int offers, String oldTeam) {
         ArrayList<String> teams = new ArrayList<>();
         ArrayList<Team> teamVacancies = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); i += offers) {
-            if (teamList.get(i).teamPrestige < rating) {
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
                 teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
+            }
+        }
+
+        if (teamVacancies.isEmpty()) {
+            for (int i = 0; i < teamList.size(); i += offers) {
+                if (teamList.get(i).teamPrestige < rating  && teamList.get(i).name != oldTeam) {
+                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                    teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
+                }
             }
         }
         return teams;
     }
 
     //Get Coach Job Offers List for Team Transfer
-    public ArrayList<Team> getCoachListV2(int rating, int offers) {
+    public ArrayList<Team> getCoachListV2(int rating, int offers, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); i += offers) {
-            if (teamList.get(i).teamPrestige < rating) {
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty()  && teamList.get(i).name != oldTeam) {
                 teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+            }
+        }
+
+        if (teamVacancies.isEmpty()) {
+            for (int i = 0; i < teamList.size(); i += offers) {
+                if (teamList.get(i).teamPrestige < rating  && teamList.get(i).name != oldTeam) {
+                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                }
             }
         }
         return teamVacancies;
