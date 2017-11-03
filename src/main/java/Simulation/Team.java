@@ -426,7 +426,7 @@ public class Team {
             fired = true;
             HC.remove(0);
             //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            league.newsStories.get(league.currentWeek + 1).add("Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
+            league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
                     ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
 
             //New Contracts or Firing
@@ -465,7 +465,7 @@ public class Team {
                 league.coachPrevTeam.add(name);
                 HC.remove(0);
                 //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                league.newsStories.get(league.currentWeek + 1).add("Coach Firing!>" + name + " has fired their head coach, " + oldCoach +
+                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at  " + name + ">" +name + " has fired their head coach, " + oldCoach +
                         " after a disappointing tenure. The team is now searching for a new head coach.");
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
@@ -476,7 +476,7 @@ public class Team {
                 league.coachPrevTeam.add(name);
                 HC.remove(0);
                 //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                league.newsStories.get(league.currentWeek + 1).add("Coach Firing!>" + name + " has fired their head coach, " + oldCoach +
+                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at  " + name + ">" + name + " has fired their head coach, " + oldCoach +
                         " after a disappointing tenure. The team is now searching for a new head coach.");
             } else {
                 HC.get(0).contractLength = 2;
@@ -2190,7 +2190,7 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
-        int preseasonBias = 8 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
                 (teamYards - teamOppYards) / 40 +

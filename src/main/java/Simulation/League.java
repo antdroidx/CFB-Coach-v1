@@ -28,7 +28,6 @@ public class League {
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
     public ArrayList<HeadCoach> coachList;
-    public ArrayList<HeadCoach> teamVacancies;
     public ArrayList<String> coachPrevTeam;
     public ArrayList<String> nameList;
     public ArrayList<String> lastNameList;
@@ -495,10 +494,10 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             line.replaceAll("\"", "\\\"");
-                for (int b = 0; b < bowlGames.length; ++b) {
-                    String[] filesSplit = line.split(", ");
-                    bowlNames[b] = filesSplit[b].toString();
-                }
+            for (int b = 0; b < bowlNames.length; ++b) {
+                String[] filesSplit = line.split(", ");
+                bowlNames[b] = filesSplit[b].toString();
+            }
 
         } catch (FileNotFoundException ex) {
             System.out.println(
@@ -691,6 +690,12 @@ public class League {
             } else {
                 savePenalized5 = null;
             }
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
+                for (int b = 0; b < bowlNames.length; ++b) {
+                    String[] filesSplit = line.split(",");
+                    bowlNames[b] = filesSplit[b];
+                }
+            }
 
             String[] record;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
@@ -724,6 +729,7 @@ public class League {
                     }
                 }
             }
+
 
             // Always close files.
             bufferedReader.close();
@@ -922,6 +928,9 @@ public class League {
 
         //focus on the best player at a position this year each week
         playerSpotlight();
+
+        coachingHotSeat();
+
 
         setTeamRanks();
         updateLongestActiveWinStreak();
@@ -2432,7 +2441,7 @@ public class League {
 
         if (teamVacancies.isEmpty()) {
             for (int i = 0; i < teamList.size(); i += offers) {
-                if (teamList.get(i).teamPrestige < rating  && teamList.get(i).name != oldTeam) {
+                if (teamList.get(i).teamPrestige < rating && teamList.get(i).name != oldTeam) {
                     teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
                     teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
                 }
@@ -2445,14 +2454,14 @@ public class League {
     public ArrayList<Team> getCoachListV2(int rating, int offers, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty()  && teamList.get(i).name != oldTeam) {
+            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
                 teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
             }
         }
 
         if (teamVacancies.isEmpty()) {
             for (int i = 0; i < teamList.size(); i += offers) {
-                if (teamList.get(i).teamPrestige < rating  && teamList.get(i).name != oldTeam) {
+                if (teamList.get(i).teamPrestige < rating && teamList.get(i).name != oldTeam) {
                     teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
                 }
             }
@@ -2883,6 +2892,11 @@ public class League {
             sb.append("END_PENALIZED5_TEAM\n");
         }
 
+        for (int b = 0; b < bowlNames.length; ++b) {
+            sb.append(bowlNames[b] + ",");
+        }
+        sb.append("\nEND_BOWL_NAMES\n");
+
         // Save league records
         sb.append(leagueRecords.getRecordsStr());
         sb.append("END_LEAGUE_RECORDS\n");
@@ -2906,7 +2920,6 @@ public class League {
         }
         sb.append("END_HALL_OF_FAME\n");
 
-
         // Actually write to the file
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(saveFile), "utf-8"))) {
@@ -2919,6 +2932,7 @@ public class League {
 
     //News on opening weekend
     public void preseasonNews() {
+        coachingHotSeat();
         //Add Big Games of the Week
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).newsNSMatchups();
@@ -3212,7 +3226,7 @@ public class League {
         return coachStats;
     }
 
-    //PLAYER RANKINGS WIP
+    //PLAYER RANKINGS STUFF
 
     public ArrayList<String> getPlayerRankStr(int selection) {
         int rankNum = 120;
@@ -3509,7 +3523,7 @@ public class League {
         return average;
     }
 
-
+    //Coaching Discipline Opportunities
     public void disciplineAction() {
         int t = 0;
         //randomly chooose 5 teams from teamlist
@@ -3520,13 +3534,15 @@ public class League {
 
     }
 
+    //COACHING CAROUSEL HIRING METHOD
+    //THIS METHOD TAKES THE COACH LIST CREATED AFTER FIRING AND PUTS IT INTO A POPULATION FOR TEAMS WITH NO COACHES TO HIRE FROM
 
     public void coachCarousel() {
         for (int i = 0; i < coachList.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
                 if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i)) {
                     teamList.get(t).HC.add(coachList.get(i));
-                    newsStories.get(currentWeek + 1).add("Coaching Hire>After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                    newsStories.get(currentWeek + 1).add("Coaching Hire " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     break;
                 }
@@ -3535,12 +3551,31 @@ public class League {
         for (int t = 0; t < teamList.size(); ++t) {
             if (teamList.get(t).HC.isEmpty()) {
                 teamList.get(t).newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                newsStories.get(currentWeek + 1).add("Coaching Hire>After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                         " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " was previously unemployed, but the team is willing to take its chances on a new face.");
             }
         }
     }
 
+    //Coaching Hot Seat News
+    public void coachingHotSeat() {
+        if (currentWeek == 0) {
+            for (int i = 0; i < teamList.size(); ++i) {
+                if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength) {
+                    newsStories.get(0).add("Coaching Hot Seat:" + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " has struggled over the course of his current contract with " +
+                            teamList.get(i).name + " and has failed to raise the team prestige. Because this is his final contract year, the team will be evaluating whether to continue with the coach at the end of " +
+                            "this season. He'll remain on the hot seat throughout this year.");
+                }
+            }
+        } else if (currentWeek == 7){
+            for (int i = 0; i < teamList.size(); ++i) {
+                if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength && teamList.get(i).rankTeamPollScore > (100 - teamList.get(i).HC.get(0).baselinePrestige)) {
+                    newsStories.get(currentWeek + 1).add("Coaching Hot Seat:" + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " future is in jeopardy at  " +
+                            teamList.get(i).name + ". The coach has failed to get out of the hot seat this season with disappointing losses and failing to live up to the school's standards.");
+                }
+            }
+        }
+    }
 }
 
 class CoachScoreComp implements Comparator<HeadCoach> {
