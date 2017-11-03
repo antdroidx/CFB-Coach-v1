@@ -1326,7 +1326,7 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
                             TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getUserTeamHistoryList());
+                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getTeamHistoryList());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         } else if (position == 1) {
                             LeagueRecordsListArrayAdapter leagueRecordsAdapter =
