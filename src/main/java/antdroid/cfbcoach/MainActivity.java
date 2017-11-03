@@ -50,14 +50,14 @@ import Simulation.TeamStrategy;
 
 public class MainActivity extends AppCompatActivity {
 
+    public String oldConf;
+    public HeadCoach userHC;
     int season;
     League simLeague;
     Conference currentConference;
     Team currentTeam;
-    public String oldConf;
     int currentConferenceID;
     Team userTeam;
-    public HeadCoach userHC;
     File saveLeagueFile;
     String username;
 
@@ -369,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (simLeague.currentWeek < 12) {
                             simGameButton.setTextSize(14);
-                            simGameButton.setText("Play Week " + (simLeague.currentWeek+1));
+                            simGameButton.setText("Play Week " + (simLeague.currentWeek + 1));
                         } else if (simLeague.currentWeek == 12) {
                             simGameButton.setTextSize(11);
                             simGameButton.setText("Play Conf Championships");
@@ -2344,6 +2344,8 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 userTeam.skipHistory = true;
+                simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
+                        " to lead the team.");
                 simLeague.coachCarousel();
                 simLeague.setTeamRanks();
                 updateTeamUI();
