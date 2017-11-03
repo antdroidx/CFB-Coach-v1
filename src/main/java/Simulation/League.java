@@ -28,6 +28,7 @@ public class League {
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
     public ArrayList<HeadCoach> coachList;
+    public ArrayList<HeadCoach> teamVacancies;
     public ArrayList<String> coachPrevTeam;
     public ArrayList<String> nameList;
     public ArrayList<String> lastNameList;
@@ -1225,6 +1226,8 @@ public class League {
 
 
     public void advanceHC() {
+        coachList.clear();
+        coachPrevTeam.clear();
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceHC();
         }
@@ -2393,10 +2396,10 @@ public class League {
     //Get Coaching Job Offers
     public ArrayList<String> getCoachListStr(int rating, int offers) {
         ArrayList<String> teams = new ArrayList<>();
-        ArrayList<Team> coachList = new ArrayList<>();
+        ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
-                coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
         }
@@ -2405,13 +2408,37 @@ public class League {
 
     //Get Coach Job Offers List for Team Transfer
     public ArrayList<Team> getCoachList(int rating, int offers) {
-        ArrayList<Team> coachList = new ArrayList<>();
+        ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
-                coachList.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
             }
         }
-        return coachList;
+        return teamVacancies;
+    }
+
+    //Get Coaching Job Offers
+    public ArrayList<String> getCoachListStrV2(int rating, int offers) {
+        ArrayList<String> teams = new ArrayList<>();
+        ArrayList<Team> teamVacancies = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); i += offers) {
+            if (teamList.get(i).teamPrestige < rating) {
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
+            }
+        }
+        return teams;
+    }
+
+    //Get Coach Job Offers List for Team Transfer
+    public ArrayList<Team> getCoachListV2(int rating, int offers) {
+        ArrayList<Team> teamVacancies = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); i += offers) {
+            if (teamList.get(i).teamPrestige < rating) {
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+            }
+        }
+        return teamVacancies;
     }
 
     //Transferring Jobs
