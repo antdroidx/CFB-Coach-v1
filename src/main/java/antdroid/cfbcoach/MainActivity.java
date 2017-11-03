@@ -2344,7 +2344,7 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 userTeam.skipHistory = true;
-                simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
+                simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                         " to lead the team.");
                 simLeague.coachCarousel();
                 simLeague.setTeamRanks();

@@ -3542,7 +3542,7 @@ public class League {
             for (int t = 0; t < teamList.size(); ++t) {
                 if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i)) {
                     teamList.get(t).HC.add(coachList.get(i));
-                    newsStories.get(currentWeek + 1).add("Coaching Hire " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                    newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     break;
                 }
@@ -3562,7 +3562,7 @@ public class League {
         if (currentWeek == 0) {
             for (int i = 0; i < teamList.size(); ++i) {
                 if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength) {
-                    newsStories.get(0).add("Coaching Hot Seat:" + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " has struggled over the course of his current contract with " +
+                    newsStories.get(0).add("Coaching Hot Seat: " + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " has struggled over the course of his current contract with " +
                             teamList.get(i).name + " and has failed to raise the team prestige. Because this is his final contract year, the team will be evaluating whether to continue with the coach at the end of " +
                             "this season. He'll remain on the hot seat throughout this year.");
                 }
@@ -3570,7 +3570,7 @@ public class League {
         } else if (currentWeek == 7){
             for (int i = 0; i < teamList.size(); ++i) {
                 if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength && teamList.get(i).rankTeamPollScore > (100 - teamList.get(i).HC.get(0).baselinePrestige)) {
-                    newsStories.get(currentWeek + 1).add("Coaching Hot Seat:" + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " future is in jeopardy at  " +
+                    newsStories.get(currentWeek + 1).add("Coaching Hot Seat: " + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " future is in jeopardy at  " +
                             teamList.get(i).name + ". The coach has failed to get out of the hot seat this season with disappointing losses and failing to live up to the school's standards.");
                 }
             }

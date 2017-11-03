@@ -465,7 +465,7 @@ public class Team {
                 league.coachPrevTeam.add(name);
                 HC.remove(0);
                 //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at  " + name + ">" +name + " has fired their head coach, " + oldCoach +
+                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" +name + " has fired their head coach, " + oldCoach +
                         " after a disappointing tenure. The team is now searching for a new head coach.");
             } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
                 HC.get(0).job = 2;
@@ -476,7 +476,7 @@ public class Team {
                 league.coachPrevTeam.add(name);
                 HC.remove(0);
                 //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at  " + name + ">" + name + " has fired their head coach, " + oldCoach +
+                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + oldCoach +
                         " after a disappointing tenure. The team is now searching for a new head coach.");
             } else {
                 HC.get(0).contractLength = 2;
