@@ -2324,6 +2324,7 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 userTeam.skipHistory = true;
+                simLeague.coachCarousel();
                 simLeague.setTeamRanks();
                 updateTeamUI();
                 examineTeam(currentTeam.name);
