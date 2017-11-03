@@ -1315,7 +1315,7 @@ public class MainActivity extends AppCompatActivity {
         teamHistSpinner.setAdapter(teamHistAdapter);
 
         final ListView teamHistoryList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
-        final String[] hofPlayers = new String[userTeam.hallOfFame.size()];
+        final String[] hofPlayers = new String[currentTeam.hallOfFame.size()];
         for (int i = 0; i < currentTeam.hallOfFame.size(); ++i) {
             hofPlayers[i] = currentTeam.hallOfFame.get(i);
         }
