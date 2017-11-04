@@ -1,6 +1,7 @@
 package Simulation;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by ahngu on 10/9/2017.
@@ -34,6 +35,10 @@ public class HeadCoach extends Player {
     int confAward;
     int awards;
     int job;
+    Random rand = new Random();
+    int max = 4;
+    int min = 0;
+
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
                      int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
@@ -81,8 +86,8 @@ public class HeadCoach extends Player {
         ratTalent = (int) (50 + 50 * Math.random());
         ratDiscipline = (int) (50 + 50 * Math.random());
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
-        offStrat = (int) (5 * Math.random());
-        defStrat = (int) (4 * Math.random());
+        offStrat = rand.nextInt((max - min) + 1) + min;;
+        defStrat = rand.nextInt((max - min) + 1) + min;;
         baselinePrestige = team.teamPrestige;
         teamWins = 0;
         teamLosses = 0;
@@ -157,7 +162,7 @@ public class HeadCoach extends Player {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
         pStats.add("Offense Playcalling: " + getLetterGrade(ratOff) + ">Defense Playcalling: " + getLetterGrade(ratDef));
-        pStats.add("Offense Style: " + offStrat + ">Defense Style: " + defStrat);
+        pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
         pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Nothing");
         pStats.add(" > ");
@@ -172,7 +177,7 @@ public class HeadCoach extends Player {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
         pStats.add("Offense Philosophy: " + getLetterGrade(ratOff) + ">Defense Philosophy: " + getLetterGrade(ratDef));
-        pStats.add("Offense Style: " + offStrat + ">Defense Style: " + defStrat);
+        pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
         pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Nothing");
         pStats.add("[B]CAREER STATS:");

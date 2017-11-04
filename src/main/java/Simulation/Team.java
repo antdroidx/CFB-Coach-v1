@@ -3747,7 +3747,15 @@ public class Team {
         int OP, OR;
         OP = getPassProf();
         OR = getRushProf();
-        if (OP > (OR + 5)) {
+        if (teamQBs.get(0).ratSpeed >= 75 && HC.get(0).offStrat == 4) {
+            return 4;
+        } else if (teamQBs.get(0).ratSpeed < 75 && HC.get(0).offStrat == 4 ) {
+            return 0;
+        } else {
+            return HC.get(0).offStrat;
+        }
+
+/*        if (OP > (OR + 5)) {
             return 3;
         } else if (OP > (OR + 3)) {
             return 2;
@@ -3757,11 +3765,11 @@ public class Team {
             return 1;
         } else {
             return 0;
-        }
+        }*/
     }
 
     public int getCPUDefense() {
-        int DP, DR;
+/*        int DP, DR;
         DP = getPassProf();
         DR = getRushProf();
         if (DR > (DP + 5)) {
@@ -3772,7 +3780,8 @@ public class Team {
             return 1;
         } else {
             return 0;
-        }
+        }*/
+    return HC.get(0).defStrat;
     }
 
     /**
@@ -3808,7 +3817,7 @@ public class Team {
      * @return array of all the defense team strats
      */
     public TeamStrategy[] getTeamStrategiesDef() {
-        TeamStrategy[] ts = new TeamStrategy[4];
+        TeamStrategy[] ts = new TeamStrategy[5];
 
         ts[0] = new TeamStrategy("4-3 Man",
                 "Play a standard 4-3 man-to-man balanced defense.", 1, 0, 0, 1, 1, 0, 0, 1);
@@ -3816,10 +3825,12 @@ public class Team {
         ts[1] = new TeamStrategy("4-6 Bear",
                 "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from runing.", 2, 0, 2, 1, 1, -1, -1, 0);
 
-        ts[2] = new TeamStrategy("Cover 2",
+        ts[2] = new TeamStrategy("Cover 0", "Play a pure man-to-man defense with no deep defenders.", 1, 1, 1, 1, 1, 2, -2, 1);
+
+        ts[3] = new TeamStrategy("Cover 2",
                 "Play a zone defense with safety help in the back against the pass, while LBs cover the run game. ", 2, 0, -1, 1, 3, 2, 0, 1);
 
-        ts[3] = new TeamStrategy("Cover 3",
+        ts[4] = new TeamStrategy("Cover 3",
                 "Play a zone defense to stop the big plays, but allows soft zone coverage underneath.", 3, 0, -2, 1, 7, 2, 2, 1);
 
         return ts;
