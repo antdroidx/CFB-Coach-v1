@@ -1071,28 +1071,28 @@ public class League {
         newsStories.get(currentWeek + 1).add(bowlGames[13].gameName + " Selection Announced:>" + teamList.get(27).strRankTeamRecord() + " will play " + teamList.get(31).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
-        bowlGames[14] = new Game(teamList.get(32), teamList.get(36), bowlNames[10]);
+        bowlGames[14] = new Game(teamList.get(32), teamList.get(36), bowlNames[14]);
         teamList.get(32).gameSchedule.add(bowlGames[14]);
         teamList.get(36).gameSchedule.add(bowlGames[14]);
 
         newsStories.get(currentWeek + 1).add(bowlGames[14].gameName + " Selection Announced:>" + teamList.get(32).strRankTeamRecord() + " will play " + teamList.get(36).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
-        bowlGames[15] = new Game(teamList.get(33), teamList.get(38), bowlNames[11]);
+        bowlGames[15] = new Game(teamList.get(33), teamList.get(38), bowlNames[15]);
         teamList.get(33).gameSchedule.add(bowlGames[15]);
         teamList.get(38).gameSchedule.add(bowlGames[15]);
 
         newsStories.get(currentWeek + 1).add(bowlGames[15].gameName + " Selection Announced:>" + teamList.get(33).strRankTeamRecord() + " will play " + teamList.get(38).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
-        bowlGames[16] = new Game(teamList.get(34), teamList.get(37), bowlNames[12]);
+        bowlGames[16] = new Game(teamList.get(34), teamList.get(37), bowlNames[16]);
         teamList.get(34).gameSchedule.add(bowlGames[16]);
         teamList.get(37).gameSchedule.add(bowlGames[16]);
 
         newsStories.get(currentWeek + 1).add(bowlGames[16].gameName + " Selection Announced:>" + teamList.get(34).strRankTeamRecord() + " will play " + teamList.get(37).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
-        bowlGames[17] = new Game(teamList.get(35), teamList.get(39), bowlNames[13]);
+        bowlGames[17] = new Game(teamList.get(35), teamList.get(39), bowlNames[17]);
         teamList.get(35).gameSchedule.add(bowlGames[17]);
         teamList.get(39).gameSchedule.add(bowlGames[17]);
 
