@@ -415,7 +415,7 @@ public class Team {
         HC.get(0).advanceSeason(totalPDiff, avgOff, offTal, defTal);
 
         int max = 78;
-        int min = 60;
+        int min = 63;
         Random rand = new Random();
         retire = rand.nextInt((max - min) + 1) + min;
         //RETIREMENT
@@ -431,7 +431,7 @@ public class Team {
         }
 
         if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 8) && teamPrestige < 77 && !userControlled && HC.get(0).age < 55) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 7) && teamPrestige < 77 && !userControlled && HC.get(0).age < 55) {
                 league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0).name + " has moved to the top of" +
                         " many of the schools looking for a replacement at that position.");
                 if (Math.random() > 0.50) {
