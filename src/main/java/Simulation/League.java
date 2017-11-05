@@ -3561,7 +3561,7 @@ public class League {
             String tmName = coachSplit[0];
             int tmPres = Integer.parseInt(coachSplit[1]);
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr - 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && teamList.get(t).teamPrestige >= tmPres) {
+                if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr - 8) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && teamList.get(t).teamPrestige >= tmPres) {
                     teamList.get(t).HC.add(coachStarList.get(i));
                     newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                      coachStarPrevTeam.get(i) + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
@@ -3608,7 +3608,7 @@ public class League {
                     newsStories.get(0).add("Coaching Hot Seat: " + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " has struggled over the course of his current contract with " +
                             teamList.get(i).name + " and has failed to raise the team prestige. Because this is his final contract year, the team will be evaluating whether to continue with the coach at the end of " +
                             "this season. He'll remain on the hot seat throughout this year.");
-                } else if (teamList.get(i).HC.get(0).baselinePrestige > teamList.get(i).teamPrestige + 8 && teamList.get(i).teamPrestige < 75) {
+                } else if (teamList.get(i).teamPrestige > (teamList.get(i).HC.get(0).baselinePrestige + 8) && teamList.get(i).teamPrestige < 75) {
                     newsStories.get(0).add("Coaching Rising Star: " + teamList.get(i).HC.get(0).name + ">" + teamList.get(i).name + " head coach " + teamList.get(i).HC.get(0).name +
                             " has been building a strong program and if he continues this path, he'll be on the top of the wishlist at a major program in the future.");
                 }
