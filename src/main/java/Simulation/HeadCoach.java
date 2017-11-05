@@ -78,9 +78,9 @@ public class HeadCoach extends Player {
         team = t;
 
         age = 30 + (int) (Math.random() * 35);
-        year = (int) (Math.random() * (age - 35));
-        contractYear = (int) (5 * Math.random());
-        contractLength = 5;
+        year = (int) (Math.random() * (age - 30));
+        contractYear = (int) (6 * Math.random());
+        contractLength = 6;
         ratOff = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
         ratDef = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
         ratTalent = (int) (50 + 50 * Math.random());
