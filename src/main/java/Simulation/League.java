@@ -102,6 +102,8 @@ public class League {
         heismanHistory = new ArrayList<String>();
         coachList = new ArrayList<>();
         coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
 
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
@@ -117,6 +119,9 @@ public class League {
         conferences.add(new Conference("Sun Belt", this));
         allAmericans = new ArrayList<Player>();
         ArrayList<Team> coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
 
 
         // Initialize new stories lists
@@ -357,6 +362,8 @@ public class League {
         heismanHistory = new ArrayList<String>();
         coachList = new ArrayList<>();
         coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
         currentWeek = 0;
         conferences = new ArrayList<Conference>();
 
@@ -379,6 +386,9 @@ public class League {
 
         allAmericans = new ArrayList<Player>();
         ArrayList<Team> coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
 
 
         // Initialize new stories lists
@@ -3594,7 +3604,7 @@ public class League {
                     newsStories.get(0).add("Coaching Hot Seat: " + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " has struggled over the course of his current contract with " +
                             teamList.get(i).name + " and has failed to raise the team prestige. Because this is his final contract year, the team will be evaluating whether to continue with the coach at the end of " +
                             "this season. He'll remain on the hot seat throughout this year.");
-                } else if (teamList.get(i).HC.get(0).baselinePrestige > teamList.get(i).teamPrestige + 12) {
+                } else if (teamList.get(i).HC.get(0).baselinePrestige > teamList.get(i).teamPrestige + 8 && teamList.get(i).teamPrestige < 75) {
                     newsStories.get(0).add("Coaching Rising Star: " + teamList.get(i).HC.get(0).name + ">" + teamList.get(i).name + " head coach " + teamList.get(i).HC.get(0).name +
                             " has been building a strong program and if he continues this path, he'll be on the top of the wishlist at a major program in the future.");
                 }
