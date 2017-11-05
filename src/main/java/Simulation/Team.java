@@ -485,6 +485,16 @@ public class Team {
                 newContract = true;
             }
         }
+
+        if (teamPrestige > HC.get(0).baselinePrestige + 12 && teamPrestige < 75) {
+            league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0) + " has moved to the top of" +
+                    "many of the schools looking for a replacement at that position.");
+            if (Math.random() > 0.60) {
+                league.coachStarList.add(HC.get(0));
+                league.coachStarPrevTeam.add(name + "," + teamPrestige);
+            }
+        }
+
     }
 
 
