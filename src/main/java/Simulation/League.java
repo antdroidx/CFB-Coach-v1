@@ -542,6 +542,8 @@ public class League {
         longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         coachList = new ArrayList<>();
         coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -1251,6 +1253,8 @@ public class League {
     public void advanceHC() {
         coachList.clear();
         coachPrevTeam.clear();
+        coachStarList.clear();
+        coachStarPrevTeam.clear();
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceHC();
         }
@@ -3557,9 +3561,9 @@ public class League {
             String tmName = coachSplit[0];
             int tmPres = Integer.parseInt(coachSplit[1]);
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && teamList.get(t).teamPrestige > tmPres) {
+                if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr - 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && teamList.get(t).teamPrestige >= tmPres) {
                     teamList.get(t).HC.add(coachStarList.get(i));
-                    newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).name + " has announced his departure from " +
+                    newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                      coachStarPrevTeam.get(i) + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
                     for (int j = 0; j < teamList.size(); ++j) {
