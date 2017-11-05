@@ -77,7 +77,7 @@ public class HeadCoach extends Player {
         year = yr;
         team = t;
 
-        age = 30 + (int) (Math.random() * 35);
+        age = 30 + (int) (Math.random() * 28);
         year = (int) (Math.random() * (age - 30));
         contractYear = (int) (6 * Math.random());
         contractLength = 6;

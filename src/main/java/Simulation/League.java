@@ -3564,7 +3564,7 @@ public class League {
                 if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && teamList.get(t).teamPrestige >= tmPres) {
                     teamList.get(t).HC.add(coachStarList.get(i));
                     newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
-                     coachStarPrevTeam.get(i) + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
+                     tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
                     for (int j = 0; j < teamList.size(); ++j) {
                         if (teamList.get(j).name == tmName) {
