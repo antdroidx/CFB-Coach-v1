@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (recruitingStage == -1) {
                     // Perform action on click
-                    if (simLeague.currentWeek == 16 && userTeam.fired == true) {
+                    if (simLeague.currentWeek == 16 && userTeam.fired) {
                         newJobV2(userHC);
                         simLeague.coachCarousel();
                         showNewsStoriesDialog();
@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setText("Begin Off-Season: Phase 2");
                         simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
-                    } else if (simLeague.currentWeek == 16) {
+                    } else if (simLeague.currentWeek == 16 && !userTeam.fired) {
                         simLeague.coachCarousel();
                         showNewsStoriesDialog();
                         simGameButton.setTextSize(12);

@@ -414,8 +414,8 @@ public class Team {
         int totalPDiff = newPrestige[0] - HC.get(0).baselinePrestige;
         HC.get(0).advanceSeason(totalPDiff, avgOff, offTal, defTal);
 
-        int max = 80;
-        int min = 62;
+        int max = 78;
+        int min = 60;
         Random rand = new Random();
         retire = rand.nextInt((max - min) + 1) + min;
         //RETIREMENT
@@ -428,73 +428,74 @@ public class Team {
             //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
                     ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
+        }
 
+        if (!retired) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 8) && teamPrestige < 77 && !userControlled && HC.get(0).age < 55) {
+                league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0).name + " has moved to the top of" +
+                        " many of the schools looking for a replacement at that position.");
+                if (Math.random() > 0.50) {
+                    league.coachStarList.add(HC.get(0));
+                    league.coachStarPrevTeam.add(name + "," + teamPrestige);
+                }
+            }
             //New Contracts or Firing
-        } else if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear+1 == HC.get(0).contractLength && Math.random() < 0.33)) {
-            if (totalPDiff > 15 || (natChampWL.equals("NCW"))) {
-                HC.get(0).contractLength = 6;
-                HC.get(0).contractYear = 0;
-                HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                newContract = true;
-                league.newsStories.get(league.currentWeek + 1).add("Long-Term Extension!>" + name + " has extended their head coach, " + HC.get(0).name +
-                        " for 6 additional seasons for his successful tenue at the university.");
-            } else if (totalPDiff > 10) {
-                HC.get(0).contractLength = 5;
-                HC.get(0).contractYear = 0;
-                HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                newContract = true;
-            } else if (totalPDiff > 7) {
-                HC.get(0).contractLength = 4;
-                HC.get(0).contractYear = 0;
-                HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                newContract = true;
-            } else if (totalPDiff > 5 || (natChampWL.equals("NCL"))) {
-                if ((natChampWL.equals("NCL")) && HC.get(0).contractLength - HC.get(0).contractYear > 2) {
-
-                } else {
-                    HC.get(0).contractLength = 3;
+            if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.33)) {
+                if (totalPDiff > 15 || (natChampWL.equals("NCW"))) {
+                    HC.get(0).contractLength = 6;
                     HC.get(0).contractYear = 0;
                     HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                     newContract = true;
+                    league.newsStories.get(league.currentWeek + 1).add("Long-Term Extension!>" + name + " has extended their head coach, " + HC.get(0).name +
+                            " for 6 additional seasons for his successful tenue at the university.");
+                } else if (totalPDiff > 10) {
+                    HC.get(0).contractLength = 5;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                    newContract = true;
+                } else if (totalPDiff > 7) {
+                    HC.get(0).contractLength = 4;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                    newContract = true;
+                } else if (totalPDiff > 5 || (natChampWL.equals("NCL"))) {
+                    if ((natChampWL.equals("NCL")) && HC.get(0).contractLength - HC.get(0).contractYear > 2) {
+
+                    } else {
+                        HC.get(0).contractLength = 3;
+                        HC.get(0).contractYear = 0;
+                        HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                        newContract = true;
+                    }
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && !league.isCareerMode() && !userControlled) {
+                    HC.get(0).job = 2;
+                    String oldCoach = HC.get(0).name;
+                    fired = true;
+                    league.coachList.add(HC.get(0));
+                    league.coachPrevTeam.add(name);
+                    HC.remove(0);
+                    //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + oldCoach +
+                            " after a disappointing tenure. The team is now searching for a new head coach.");
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
+                    HC.get(0).job = 2;
+                    String oldCoach = HC.get(0).name;
+                    if (userControlled) oldTeam = this;
+                    fired = true;
+                    league.coachList.add(HC.get(0));
+                    league.coachPrevTeam.add(name);
+                    HC.remove(0);
+                    //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + oldCoach +
+                            " after a disappointing tenure. The team is now searching for a new head coach.");
+                } else {
+                    HC.get(0).contractLength = 2;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
+                    newContract = true;
                 }
-            } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && !league.isCareerMode() && !userControlled) {
-                HC.get(0).job = 2;
-                String oldCoach = HC.get(0).name;
-                fired = true;
-                league.coachList.add(HC.get(0));
-                league.coachPrevTeam.add(name);
-                HC.remove(0);
-                //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" +name + " has fired their head coach, " + oldCoach +
-                        " after a disappointing tenure. The team is now searching for a new head coach.");
-            } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
-                HC.get(0).job = 2;
-                String oldCoach = HC.get(0).name;
-                if (userControlled) oldTeam = this;
-                fired = true;
-                league.coachList.add(HC.get(0));
-                league.coachPrevTeam.add(name);
-                HC.remove(0);
-                //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + oldCoach +
-                        " after a disappointing tenure. The team is now searching for a new head coach.");
-            } else {
-                HC.get(0).contractLength = 2;
-                HC.get(0).contractYear = 0;
-                HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
-                newContract = true;
             }
         }
-
-       if (teamPrestige > HC.get(0).baselinePrestige + 8 && teamPrestige < 77 && !userControlled && HC.get(0).age < 55){
-            league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0) + " has moved to the top of" +
-                    "many of the schools looking for a replacement at that position.");
-            if (Math.random() > 0.50) {
-                league.coachStarList.add(HC.get(0));
-                league.coachStarPrevTeam.add(name + "," + teamPrestige);
-            }
-        }
-
     }
 
 
