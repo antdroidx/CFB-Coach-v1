@@ -405,7 +405,6 @@ public class Team {
         fired = false;
         retired = false;
         int newPrestige[] = calcSeasonPrestige();
-        int prestigeDiff = teamPrestige - newPrestige[0];
         int avgOff = league.getAverageYards();
         int offTal = league.getAverageOffTalent();
         int defTal = league.getAverageDefTalent();

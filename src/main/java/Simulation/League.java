@@ -348,9 +348,6 @@ public class League {
     /**
      * Creates a CUSTOM League Universe
      */
-
-
-    //public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams) {
     public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl) {
         String line = null;
         careerMode = career;
