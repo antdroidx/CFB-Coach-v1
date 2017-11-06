@@ -3569,9 +3569,9 @@ public class League {
                     for (int j = 0; j < teamList.size(); ++j) {
                         if (teamList.get(j).name == tmName) {
                             teamList.get(j).HC.remove(0);
-                            teamList.get(t).newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                            newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">Following the departure of coach, " + teamList.get(t).name +
-                            " has promoted assistant coach " + teamList.get(t).HC.get(0).name + " to the head coaching job at the school.");
+                            teamList.get(j).newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                            newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">Following the departure of coach, " + teamList.get(j).name +
+                            " has promoted assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
                         }
                     }
 
