@@ -436,7 +436,7 @@ public class Team {
                         " many of the schools looking for a replacement at that position.");
                 if (Math.random() > 0.50) {
                     league.coachStarList.add(HC.get(0));
-                    league.coachStarPrevTeam.add(name + "," + teamPrestige);
+                    league.coachStarPrevTeam.add(name + "," + teamPrestige + "," + confPrestige);
                 }
             }
             //New Contracts or Firing

@@ -24,12 +24,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APK/2017-11-05-B-CFB-Coach-debug.apk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APK/2017-11-05-C-CFB-Coach-debug.apk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APK/2017-11-4-A-CFB-Coach-debug.apk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APK/2017-11-4-CFB-Coach-debug.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APK/2017-11-05-D-CFB-Coach-debug.apk" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,8 +105,8 @@
       <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-762">
-              <caret line="438" column="72" lean-forward="false" selection-start-line="438" selection-start-column="72" selection-end-line="438" selection-end-column="72" />
+            <state relative-caret-position="998">
+              <caret line="436" column="43" lean-forward="false" selection-start-line="436" selection-start-column="43" selection-end-line="436" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -117,8 +115,8 @@
       <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="3571" column="63" lean-forward="false" selection-start-line="3571" selection-start-column="63" selection-end-line="3571" selection-end-column="63" />
+            <state relative-caret-position="408">
+              <caret line="3611" column="143" lean-forward="false" selection-start-line="3611" selection-start-column="143" selection-end-line="3611" selection-end-column="143" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1342,7 +1340,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1509944127690" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1509946547254" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1390,7 +1388,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1509944127690" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1509946547254" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1575,7 +1573,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1509944127692" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1509946547255" />
       </method>
     </configuration>
     <list size="1">
@@ -2134,8 +2132,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="3571" column="63" lean-forward="false" selection-start-line="3571" selection-start-column="63" selection-end-line="3571" selection-end-column="63" />
+        <state relative-caret-position="408">
+          <caret line="3611" column="143" lean-forward="false" selection-start-line="3611" selection-start-column="143" selection-end-line="3611" selection-end-column="143" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2144,8 +2142,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-762">
-          <caret line="438" column="72" lean-forward="false" selection-start-line="438" selection-start-column="72" selection-end-line="438" selection-end-column="72" />
+        <state relative-caret-position="998">
+          <caret line="436" column="43" lean-forward="false" selection-start-line="436" selection-start-column="43" selection-end-line="436" selection-end-column="43" />
           <folding />
         </state>
       </provider>
