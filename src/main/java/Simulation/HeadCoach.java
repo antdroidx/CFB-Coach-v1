@@ -129,8 +129,7 @@ public class HeadCoach extends Player {
 
         ratDef += (int) (Math.random() * (prestigeDiff / 2 + defpts));
         if (ratDef > 99) ratDef = 99;
-
-        ratDiscipline += (int) (Math.random() * 4);
+        
         if (ratDiscipline > 95) ratDiscipline = 95;
         if (ratTalent > 95) ratTalent = 95;
 
