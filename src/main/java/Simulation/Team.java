@@ -453,6 +453,8 @@ public class Team {
                     HC.get(0).contractYear = 0;
                     HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                     newContract = true;
+                    league.newsStories.get(league.currentWeek + 1).add("New 5-Year Contract Awarded!>" + name + " has extended their head coach, " + HC.get(0).name +
+                            " for 5 additional seasons for his successful tenue at the university.");
                 } else if (totalPDiff > 7) {
                     HC.get(0).contractLength = 4;
                     HC.get(0).contractYear = 0;
