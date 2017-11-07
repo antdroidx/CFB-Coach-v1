@@ -105,7 +105,39 @@ public class HeadCoach extends Player {
         position = "HC";
     }
 
+    public HeadCoach(String nm, int yr, int stars, Team t, boolean newhire) {
+        name = nm;
+        year = yr;
+        team = t;
+        boolean promote = newhire;
 
+        age = 30 + (int) (Math.random() * 10);
+        year = 0;
+        contractYear = 0;
+        contractLength = 6;
+        ratOff = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
+        ratDef = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
+        ratTalent = (int) (45 + 45 * Math.random());
+        ratDiscipline = (int) (45 + 45 * Math.random());
+        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
+        offStrat = rand.nextInt((max - min) + 1) + min;;
+        defStrat = rand.nextInt((max - min) + 1) + min;;
+        baselinePrestige = team.teamPrestige;
+        teamWins = 0;
+        teamLosses = 0;
+        wins = 0;
+        losses = 0;
+        confchamp = 0;
+        natchamp = 0;
+        bowlwins = 0;
+        bowllosses = 0;
+        allamericans = 0;
+        allconference = 0;
+        confAward = 0;
+        awards = 0;
+
+        position = "HC";
+    }
     //@Override
     public void advanceSeason(int prestigeDiff, int avgYards, int offTalent, int defTalent) {
         int oldOvr = ratOvr;

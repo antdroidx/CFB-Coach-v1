@@ -124,6 +124,7 @@ public class Team {
 
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
+    public int[] recruitNeeds;
     public ArrayList<Player> playersInjured;
     public ArrayList<Player> playersRecovered;
     public ArrayList<Player> playersInjuredAll;
@@ -1257,6 +1258,23 @@ public class Team {
     }
 */
 
+    public void CPUrecruiting(int[] recruits) {
+        if (!userControlled) {
+            int qb = recruits[0];
+            int rb = recruits[1];
+            int wr = recruits[2];
+            int te = recruits[3];
+            int ol = recruits[4];
+            int k = recruits[5];
+            int dl = recruits[6];
+            int lb = recruits[7];
+            int cb = recruits[8];
+            int s = recruits[9];
+            recruitPlayersFreshman(qb, rb, wr, te, ol, k, dl, lb, cb, s);
+            resetStats();
+        }
+    }
+
 
     /**
      * Advance season for players. Removes seniors and develops underclassmen.
@@ -1837,6 +1855,23 @@ public class Team {
         for (int i = 0; i < needs; ++i) {
             //make Ss
             teamSs.add(new PlayerS(league.getRandName(), 1, 2, this));
+        }
+
+        //done making players, sort them
+        sortPlayers();
+    }
+
+    public void promoteCoach() {
+        //make team
+        boolean promote = true;
+        int stars = teamPrestige / 20 + 1;
+        int chance = 20 - (teamPrestige - 20 * (teamPrestige / 20)); //between 0 and 20
+
+        //MAKE HEAD COACH
+        if (100 * Math.random() < 5 * chance) {
+            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars - 1, this, promote));
+        } else {
+            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this, promote));
         }
 
         //done making players, sort them
