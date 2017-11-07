@@ -195,7 +195,7 @@ public class HeadCoach extends Player {
         pStats.add("Offense Playcalling: " + getLetterGrade(ratOff) + ">Defense Playcalling: " + getLetterGrade(ratDef));
         pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
         pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
-        pStats.add("Baseline Prestige: " + baselinePrestige + ">Nothing");
+        pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add(" > ");
         return pStats;
     }
@@ -210,7 +210,7 @@ public class HeadCoach extends Player {
         pStats.add("Offense Philosophy: " + getLetterGrade(ratOff) + ">Defense Philosophy: " + getLetterGrade(ratDef));
         pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
         pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
-        pStats.add("Baseline Prestige: " + baselinePrestige + ">Nothing");
+        pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

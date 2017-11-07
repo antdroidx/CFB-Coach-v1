@@ -3579,6 +3579,7 @@ public class League {
                         teamList.get(t).HC.add(coachStarList.get(i));
                         teamList.get(t).HC.get(0).contractLength = 6;
                         teamList.get(t).HC.get(0).contractYear = 0;
+                        teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                         newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                                 tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
@@ -3604,6 +3605,7 @@ public class League {
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
+                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                     newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     break;
