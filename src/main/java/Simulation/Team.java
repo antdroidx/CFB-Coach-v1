@@ -431,7 +431,7 @@ public class Team {
         }
 
         if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 7) && teamPrestige < 77 && !userControlled && HC.get(0).age < 55) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 7) && teamPrestige < 76 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige +7) && confPrestige < 100 && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
                 league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0).name + " has moved to the top of" +
                         " many of the schools looking for a replacement at that position.");
                 if (Math.random() > 0.50) {
