@@ -2509,6 +2509,20 @@ public class Team {
     }
 
     /**
+     * Using Football IQ for team disicipline rating
+     *
+     *
+     */
+    public int getTeamDiscipline() {
+        int rating = 0;
+        ArrayList<Player> roster = getAllPlayers();
+        for (int i = 0; i < roster.size(); ++i) {
+            rating += roster.get(i).ratFootIQ;
+        }
+        return rating / roster.size();
+    }
+
+    /**
      * Gets the recruiting class strength.
      * Adds up all the ovrs of freshman
      *
