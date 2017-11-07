@@ -27,8 +27,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -103,11 +101,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="3607" column="94" lean-forward="false" selection-start-line="3607" selection-start-column="94" selection-end-line="3607" selection-end-column="94" />
+            <state relative-caret-position="274">
+              <caret line="3607" column="105" lean-forward="false" selection-start-line="3607" selection-start-column="105" selection-end-line="3607" selection-end-column="105" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -115,11 +113,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HeadCoach.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="124" column="56" lean-forward="false" selection-start-line="124" selection-start-column="56" selection-end-line="124" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="455" column="100" lean-forward="false" selection-start-line="455" selection-start-column="100" selection-end-line="455" selection-end-column="100" />
+            <state relative-caret-position="285">
+              <caret line="638" column="29" lean-forward="false" selection-start-line="638" selection-start-column="29" selection-end-line="638" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1832">
+              <caret line="2004" column="45" lean-forward="false" selection-start-line="2004" selection-start-column="45" selection-end-line="2004" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -138,8 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Hall</find>
-      <find>teamReco</find>
       <find>records</find>
       <find>history</find>
       <find>hallOfFame</find>
@@ -168,6 +184,8 @@
       <find>playWee</find>
       <find>IQ</find>
       <find>recruit</find>
+      <find>advanceSea</find>
+      <find>calc</find>
     </findStrings>
     <replaceStrings>
       <replace>S</replace>
@@ -1197,9 +1215,9 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Injury.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
       </list>
     </option>
   </component>
@@ -1418,7 +1436,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510042453309" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510044581656" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1466,7 +1484,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510042453309" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510044581656" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1521,6 +1539,27 @@
       <setting name="params" value="" />
       <setting name="workDir" value="file://$PROJECT_DIR$" />
       <setting name="debug" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -1651,7 +1690,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510042453311" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510044581658" />
       </method>
     </configuration>
     <list size="1">
@@ -1705,7 +1744,7 @@
     <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15764706" sideWeight="0.40405118" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21801706" sideWeight="0.15256125" order="3" side_tool="true" content_ui="tabs" />
@@ -1713,7 +1752,6 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24387528" sideWeight="0.47121534" order="14" side_tool="false" content_ui="tabs" />
@@ -1740,6 +1778,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32628062" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2164,14 +2203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4938">
-          <caret line="732" column="35" lean-forward="true" selection-start-line="732" selection-start-column="35" selection-end-line="732" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -2184,7 +2215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6103">
           <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2192,7 +2222,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2414">
           <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2200,36 +2229,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="185" column="45" lean-forward="true" selection-start-line="185" selection-start-column="45" selection-end-line="185" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="3607" column="94" lean-forward="false" selection-start-line="3607" selection-start-column="94" selection-end-line="3607" selection-end-column="94" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="212" column="100" lean-forward="false" selection-start-line="212" selection-start-column="100" selection-end-line="212" selection-end-column="100" />
+        <state relative-caret-position="1832">
+          <caret line="2004" column="45" lean-forward="false" selection-start-line="2004" selection-start-column="45" selection-end-line="2004" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="455" column="100" lean-forward="false" selection-start-line="455" selection-start-column="100" selection-end-line="455" selection-end-column="100" />
+        <state relative-caret-position="285">
+          <caret line="638" column="29" lean-forward="false" selection-start-line="638" selection-start-column="29" selection-end-line="638" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="124" column="56" lean-forward="false" selection-start-line="124" selection-start-column="56" selection-end-line="124" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="3607" column="105" lean-forward="false" selection-start-line="3607" selection-start-column="105" selection-end-line="3607" selection-end-column="105" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

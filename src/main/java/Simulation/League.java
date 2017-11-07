@@ -165,7 +165,7 @@ public class League {
         //ACC - done + 12
         conferences.get(0).confTeams.add(new Team("Clemson", "CLEM", "ACC", 85, "WAKE", this));
         conferences.get(0).confTeams.add(new Team("Duke", "DUKE", "ACC", 53, "UNC", this));
-        conferences.get(0).confTeams.add(new Team("Florida St", "FSU", "ACC", 62, "MIA", this));
+        conferences.get(0).confTeams.add(new Team("Florida St", "FSU", "ACC", 65, "MIA", this));
         conferences.get(0).confTeams.add(new Team("Georgia Tech", "GT", "ACC", 48, "NCST", this));
         conferences.get(0).confTeams.add(new Team("Louisville", "LOUI", "ACC", 72, "PITT", this));
         conferences.get(0).confTeams.add(new Team("Miami", "MIA", "ACC", 77, "FSU", this));
@@ -3579,7 +3579,7 @@ public class League {
                         teamList.get(t).HC.add(coachStarList.get(i));
                         teamList.get(t).HC.get(0).contractLength = 6;
                         teamList.get(t).HC.get(0).contractYear = 0;
-                        teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
+                        teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
                         newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                                 tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
@@ -3605,7 +3605,7 @@ public class League {
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
-                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
+                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
                     newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     break;
