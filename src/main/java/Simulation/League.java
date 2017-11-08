@@ -191,17 +191,17 @@ public class League {
         conferences.get(1).confTeams.add(new Team("West Virginia", "WVU", "American", 70, "ND", this));
 
         //Big Ten - done x 12
-        conferences.get(2).confTeams.add(new Team("Illinois", "ILL", "Big Ten", 40, "IND", this));
-        conferences.get(2).confTeams.add(new Team("Indiana", "IND", "Big Ten", 40, "ILL", this));
+        conferences.get(2).confTeams.add(new Team("Illinois", "ILL", "Big Ten", 40, "NWU", this));
+        conferences.get(2).confTeams.add(new Team("Indiana", "IND", "Big Ten", 40, "PUR", this));
         conferences.get(2).confTeams.add(new Team("Iowa", "IOW", "Big Ten", 64, "NEB", this));
         conferences.get(2).confTeams.add(new Team("Michigan", "MIC", "Big Ten", 77, "OSU", this));
         conferences.get(2).confTeams.add(new Team("Michigan St", "MSU", "Big Ten", 75, "PSU", this));
         conferences.get(2).confTeams.add(new Team("Minnesota", "MIN", "Big Ten", 60, "WIS", this));
         conferences.get(2).confTeams.add(new Team("Nebraska", "NEB", "Big Ten", 63, "IOW", this));
-        conferences.get(2).confTeams.add(new Team("Northwestern", "NWU", "Big Ten", 60, "PUR", this));
+        conferences.get(2).confTeams.add(new Team("Northwestern", "NWU", "Big Ten", 60, "ILL", this));
         conferences.get(2).confTeams.add(new Team("Ohio State", "OSU", "Big Ten", 80, "MIC", this));
         conferences.get(2).confTeams.add(new Team("Penn State", "PSU", "Big Ten", 82, "MSU", this));
-        conferences.get(2).confTeams.add(new Team("Purdue", "PUR", "Big Ten", 50, "NWU", this));
+        conferences.get(2).confTeams.add(new Team("Purdue", "PUR", "Big Ten", 50, "IND", this));
         conferences.get(2).confTeams.add(new Team("Wisconsin", "WIS", "Big Ten", 79, "MIN", this));
 
         //Big 12 - done x 12
@@ -3575,7 +3575,7 @@ public class League {
             int cPres = Integer.parseInt(coachSplit[2]);
             for (int t = 0; t < teamList.size(); ++t) {
                 if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && Math.random() > 0.66) {
-                    if (teamList.get(t).teamPrestige >= tmPres || teamList.get(t).confPrestige > cPres) {
+                    if (teamList.get(t).teamPrestige > tmPres && teamList.get(t).confPrestige > cPres || teamList.get(t).teamPrestige > tmPres + 5 || teamList.get(t).confPrestige + 10 > cPres) {
                         teamList.get(t).HC.add(coachStarList.get(i));
                         teamList.get(t).HC.get(0).contractLength = 6;
                         teamList.get(t).HC.get(0).contractYear = 0;
@@ -3584,7 +3584,7 @@ public class League {
                                 tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
                         for (int j = 0; j < teamList.size(); ++j) {
-                            if (teamList.get(j).name.contains(tmName)) {
+                            if (teamList.get(j).name.equals(tmName)) {
                                 teamList.get(j).HC.remove(0);
                                 teamList.get(j).promoteCoach();
                                 newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
@@ -3642,6 +3642,14 @@ public class League {
                 }
             }
         }
+    }
+
+    public int averageConfPrestige () {
+        int avgPrestige = 0;
+        for (int i = 0; i < conferences.size(); ++i) {
+            avgPrestige += conferences.get(i).confPrestige;
+        }
+        return avgPrestige/conferences.size();
     }
 }
 

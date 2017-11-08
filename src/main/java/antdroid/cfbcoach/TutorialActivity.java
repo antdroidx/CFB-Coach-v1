@@ -46,6 +46,12 @@ public class TutorialActivity extends AppCompatActivity {
         titles.add("Team Strategies");
         contents.add(getString(R.string.tutTeamStrategy));
 
+        titles.add("User Customization");
+        contents.add(getString(R.string.tutCustomizations));
+
+        titles.add("Customization Example");
+        contents.add(getString(R.string.tutExampleCustom));
+
         dataAdapterTutorial = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, titles);
         dataAdapterTutorial.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tutorialSpinner.setAdapter(dataAdapterTutorial);

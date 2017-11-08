@@ -172,4 +172,167 @@
         - Significantly improves passing coverage and stops long balls\n
         - May allow big rushing gains\n
     </string>
+    <string name="tutCustomizations">
+        Users can now create their own College Football Universe! The universe file is a simple text or comma separated value (CSV) file which can be made in any text editor or spreadsheet editor, and then placed in your phone internal storage or sdcard.\n\n
+The following is an example format:\n\n
+https://raw.githubusercontent.com/minotauri/CFB-Coach/master/Universe/customUniverse.txt\n\n
+
+The first series are the 10 conference strings. Please make sure to have the [] designators between each block of data.\n\n
+
+The second series of items are the 12 teams per conferences. They follow this notation:\n
+
+TEAM NAME, Team Abbr (4 letters max), Conf Name (must match!), Team Prestige (25-95), Rival Abb\n\n
+
+Finally at the end of the file are the Bowl Name strings. Please make sure you have 18 bowl games listed in order of best to worst and separated by a comma and NO line breaks!
+        \n\n
+        More Info at https://github.com/minotauri/CFB-Coach/wiki/Custom-Universe
+    </string>
+    <string name ="tutExampleCustom">
+        [START_CONFERENCES]\n
+ACC\n
+American\n
+Big Ten\n
+Big 12\n
+Conf USA\n
+MAC\n
+Mt West\n
+Pac-12\n
+SEC\n
+Sun Belt\n
+[END_CONFERENCES]\n
+[START_TEAMS]\n
+Clemson, CLEM, ACC, 86, WAKE\n
+Duke, DUKE, ACC, 54, UNC\n
+Florida St, FSU, ACC, 67, MIA\n
+Georgia Tech, GT, ACC, 50, NCST\n
+Louisville, LOUI, ACC, 72, PITT\n
+Miami, MIA, ACC, 75, FSU\n
+North Carolina, UNC, ACC, 46, DUKE\n
+NC State, NCST, ACC, 64, GT\n
+Pittsburgh, PITT, ACC, 64, LOUI\n
+Wake Forest, WAKE, ACC, 50, CLEM\n
+Virginia, VIR, ACC, 47, VTEC\n
+Virginia Tech, VTEC, ACC, 73, VIR\n
+[END_CONF]\n
+Boston College, BC, American, 40, TEM\n
+Central Florida, UCF, American, 64, USF\n
+Cinncinati, CINN, American, 44, MEMP\n
+Maryland, MARY, American, 49, RUT\n
+Memphis, MEMP, American, 66, CINN\n
+Notre Dame, ND, American, 75, WVU\n
+Rutgers, RUT, American, 41, MARY\n
+South Florida, USF, American, 69, UCF\n
+Syracuse, SYR, American, 47, UCON\n
+Temple, TEM, American, 43, BC\n
+UConn, UCON, American, 40, SYR\n
+West Virginia, WVU, American, 73, ND\n
+[END_CONF]\n
+Illinois, ILL, Big Ten, 43, IND\n
+Indiana, IND, Big Ten, 43, ILL\n
+Iowa, IOW, Big Ten, 60, NEB\n
+Michigan, MIC, Big Ten, 80, OSU\n
+Michigan St, MSU, Big Ten, 73, PSU\n
+Minnesota, MIN, Big Ten, 62, WIS\n
+Nebraska, NEB, Big Ten, 67, IOW\n
+Northwestern, NWU, Big Ten, 58, PUR\n
+Ohio State, OSU, Big Ten, 85, MIC\n
+Penn State, PSU, Big Ten, 85, MSU\n
+Purdue, PUR, Big Ten, 50, NWU\n
+Wisconsin, WIS, Big Ten, 79, MIN\n
+[END_CONF]\n
+Baylor, BAY, Big 12, 47, TCU\n
+Houston, HOU, Big 12, 56, TTEC\n
+Iowa State, ISU, Big 12, 50, MIZ\n
+Texas Tech, TTEC, Big 12, 50, HOU\n
+Kansas, KAN, Big 12, 35, KSU\n
+Kansas St, KSU, Big 12, 66, KAN\n
+Oklahoma, OKL, Big 12, 80, TEX\n
+Oklahoma St, OKST, Big 12, 75, TXAM\n
+Texas, TEX, Big 12, 69, OKL\n
+Texas AM, TXAM, Big 12, 70, OKST\n
+TCU, TCU, Big 12, 75, BAY\n
+Missouri, MIZ, Big 12, 50, ISU\n
+[END_CONF]\n
+Army, ARMY, Conf USA, 42, NAVY\n
+East Carolina, ECU, Conf USA, 31, WKU\n
+Florida Atl, FAU, Conf USA, 40, FIU\n
+Florida Intl, FIU, Conf USA, 38, FAU\n
+LA Tech, LTEC, Conf USA, 44, TUL\n
+Marshall, MARS, Conf USA, 47, SMU\n
+Navy, NAVY, Conf USA, 54, ARMY\n
+Southern Meth, SMU, Conf USA, 47, MARS\n
+Southern Miss, SMIS, Conf USA, 42, UAB\n
+Tulane, TUL, Conf USA, 38, LTEC\n
+UAB, UAB, Conf USA, 32, SMIS\n
+Western Kentucky, WKU, Conf USA, 47, ECU\n
+[END_CONF]\n
+Akron, AKR, MAC, 35, KNST\n
+Ball St, BAL, MAC, 28, NIU\n
+Bowling Green, BG, MAC, 28, TOL\n
+Buffalo, BUF, MAC, 34, EMU\n
+Central Mich, CMU, MAC, 38, WMU\n
+Eastern Mich, EMU, MAC, 38, BUF\n
+Kent State, KNST, MAC, 32, KNST\n
+Miami OH, MiOH, MAC, 38, OHIO\n
+Northern Illinois, NIU, MAC, 44, BAL\n
+Ohio, OHIO, MAC, 44, MiOH\n
+Toledo, TOL, MAC, 40, BG\n
+Western Mich, WMU, MAC, 46, CMU\n
+[END_CONF]\n
+Air Force, AF, Mt West, 42, HAW\n
+Boise State, BOIS, Mt West, 65, SDSU\n
+BYU, BYU, Mt West, 35, UTST\n
+Colorado St, CSU, Mt West, 48, WYO\n
+Fresno St, FRES, Mt West, 38, SJSU\n
+Hawaii, HAW, Mt West, 35, AF\n
+Nevada, NEV, Mt West, 35, NMEX\n
+New Mexico, NMEX, Mt West, 41, NEV\n
+San Diego State, SDSU, Mt West, 65, BOIS\n
+San Jose St, SJSU, Mt West, 31, FRES\n
+Utah State, UTST, Mt West, 43, BYU\n
+Wyoming, WYOM, Mt West, 46, CSU\n
+[END_CONF]\n
+Arizona, ARIZ, Pac-12, 50, ASU\n
+Arizona State, ASU, Pac-12, 62, ARIZ\n
+California, CAL, Pac-12, 55, STAN\n
+Colorado, COL, Pac-12, 59, UTAH\n
+Oregon, OREG, Pac-12, 67, ORST\n
+Oregon State, ORST, Pac-12, 40, OREG\n
+Stanford, STAN, Pac-12, 75, CAL\n
+UCLA, UCLA, Pac-12, 64, USC\n
+USC, USC, Pac-12, 80, UCLA\n
+Washington, WASH, Pac-12, 80, WSU\n
+Wash State, WSU, Pac-12, 73, WASH\n
+Utah, UTAH, Pac-12, 66, COL\n
+[END_CONF]\n
+Alabama, BAMA, SEC, 94, AUB\n
+Arkansas, ARK, SEC, 50, LSU\n
+Auburn, AUB, SEC, 72, BAMA\n
+Florida, FLOR, SEC, 68, UGA\n
+Georgia, UGA, SEC, 81, FLOR\n
+Kentucky, UK, SEC, 59, SC\n
+LSU, LSU, SEC, 73, ARK\n
+Ole Miss, MISS, SEC, 54, MSST\n
+Mississippi St, MSST, SEC, 71, MISS\n
+South Carolina, SC, SEC, 50, UK\n
+Tennessee, TENN, SEC, 69, VAND\n
+Vanderbilt, VAND, SEC, 47, TENN\n
+[END_CONF]\n
+Appalachian State, APP, Sun Belt, 43, ODOM\n
+LA Monroe, LMON, Sun Belt, 33, TROY\n
+Mid Tenn State, MTSU, Sun Belt, 39, GASO\n
+Troy, TROY, Sun Belt, 45, LMON\n
+UT El Paso, UTEP, Sun Belt, 30, UTSA\n
+North Texas, NTEX, Sun Belt, 35, TXST\n
+Tulsa, TULS, Sun Belt, 39, RICE\n
+Rice, RICE, Sun Belt, 33, TULS\n
+Texas St, TXST, Sun Belt, 30, NTEX\n
+Georgia Southern, GASO, Sun Belt, 32, MTSU\n
+Old Dominion, ODOM, Sun Belt, 35, APP\n
+UT San Antonio, UTSA, Sun Belt, 43, UTEP\n
+[END_CONF]\n
+[END_TEAMS]\n
+Rose Bowl, Orange Bowl, Sugar Bowl, Fiesta Bowl, Peach Bowl, Cotton Bowl, Citrus Bowl, Gator Bowl, Cactus Bowl, Alamo Bowl, Holiday Bowl, Sun Bowl, Liberty Bowl, Independence Bowl, Vegas Bowl, Military Bowl, Aloha Bowl, Humanitarian Bowl\n
+[END_BOWL_NAMES]\n
+    </string>
 </resources>
