@@ -126,7 +126,7 @@
             android:layout_width="247dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="How to Play"
+            android:text="Tutorials"
             android:textSize="14sp" />
     </LinearLayout>
 
