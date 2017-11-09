@@ -101,6 +101,7 @@ public class Team {
     public boolean retired;
     public boolean skipHistory;
     public Team oldTeam;
+    public String contractString;
     //players on team
     //offense
     public ArrayList<PlayerQB> teamQBs;
@@ -470,8 +471,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && !league.isCareerMode() && !userControlled) {
-                    HC.get(0).job = 2;
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && !league.isCareerMode() && !userControlled) {
                     String oldCoach = HC.get(0).name;
                     fired = true;
                     league.coachList.add(HC.get(0));
@@ -480,10 +480,9 @@ public class Team {
                     //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + oldCoach +
                             " after a disappointing tenure. The team is now searching for a new head coach.");
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 70 && league.isCareerMode()) {
-                    HC.get(0).job = 2;
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && league.isCareerMode()) {
                     String oldCoach = HC.get(0).name;
-                    if (userControlled) oldTeam = this;
+                    oldTeam = this;
                     fired = true;
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
@@ -497,6 +496,18 @@ public class Team {
                     HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
                     newContract = true;
                 }
+            }
+        }
+        if (userControlled) {
+            if (newContract) {
+                contractString = "Congratulations! You've been award with a new contract extension for " + HC.get(0).contractLength + " years!";
+            } else if (fired) {
+                contractString = "Due to your poor performance as head coach, the Athletic Director has terminated your contract and you are no longer Head Coach of this school.";
+            } else {
+                int[] newPres = calcSeasonPrestige();
+                contractString = "You have " + (HC.get(0).contractLength - HC.get(0).contractYear)
+                + " years left on your contract. Your team prestige is currently at " + newPres[0] + " and your baseline " +
+                        "prestige was " + HC.get(0).baselinePrestige;
             }
         }
     }
@@ -634,7 +645,7 @@ public class Team {
 
         //Sets the bounds for Prestige
         if (newPrestige > 95) newPrestige = 95;
-        if (newPrestige < 25) newPrestige = 25;
+        if (newPrestige < 20) newPrestige = 20;
 
         int PrestigeScore[] = {newPrestige, rivalryPts, ccPts, ncwPts, nflPts, rgameplayed};
         return PrestigeScore;
@@ -2288,6 +2299,21 @@ public class Team {
             league.UserHistory.add(histYear);
         } else if (oldTeam != null) {
             oldTeam.league.UserHistory.add(histYear);
+        }
+    }
+
+    public void updateCoachHistory() {
+        String histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
+                + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige;
+
+        for (int i = 12; i < gameSchedule.size(); ++i) {
+            Game g = gameSchedule.get(i);
+            histYear += ">" + g.gameName + ": ";
+            String[] gameSum = getGameSummaryStr(i);
+            histYear += gameSum[1] + " " + gameSum[2];
+        }
+        if (!HC.isEmpty()) {
+            HC.get(0).history.add(histYear);
         }
     }
 

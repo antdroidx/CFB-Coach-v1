@@ -34,10 +34,10 @@ public class HeadCoach extends Player {
     int allconference;
     int confAward;
     int awards;
-    int job;
     Random rand = new Random();
     int max = 4;
     int min = 0;
+    public ArrayList<String> history;
 
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
@@ -68,6 +68,7 @@ public class HeadCoach extends Player {
         allconference = allconf;
         confAward = caw;
         awards = aw;
+        history = new ArrayList<>();
 
         position = "HC";
     }
@@ -78,13 +79,13 @@ public class HeadCoach extends Player {
         team = t;
 
         age = 30 + (int) (Math.random() * 28);
-        year = (int) (Math.random() * (age - 30));
+        year = 0;
         contractYear = (int) (6 * Math.random());
         contractLength = 6;
         ratOff = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
         ratDef = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
         ratTalent = (int) (50 + 50 * Math.random());
-        ratDiscipline = (int) (50 + 50 * Math.random());
+        ratDiscipline = (int) (45 + 50 * Math.random());
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
         offStrat = rand.nextInt((max - min) + 1) + min;;
         defStrat = rand.nextInt((max - min) + 1) + min;;
@@ -101,6 +102,7 @@ public class HeadCoach extends Player {
         allconference = 0;
         confAward = 0;
         awards = 0;
+        history = new ArrayList<>();
 
         position = "HC";
     }
@@ -135,6 +137,7 @@ public class HeadCoach extends Player {
         allconference = 0;
         confAward = 0;
         awards = 0;
+        history = new ArrayList<>();
 
         position = "HC";
     }
@@ -182,7 +185,11 @@ public class HeadCoach extends Player {
         int[] newPrestige = team.calcSeasonPrestige();
         int prestigeDiff = newPrestige[0] - team.teamPrestige;
 
-        return prestigeDiff * 10 + wins * 2 + (team.teamStrengthOfWins / 25);
+        return prestigeDiff * 10 + team.wins * 2 + (team.teamStrengthOfWins / 25);
+    }
+
+    public int getCoachCareerScore() {
+        return 5*wins - 2*losses + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans;
     }
 
     @Override
@@ -227,6 +234,7 @@ public class HeadCoach extends Player {
         return pStats;
     }
 
+
     @Override
     public String getYrOvrPot_Str() {
         return "COACH ATTRIBUTES:";
@@ -235,5 +243,14 @@ public class HeadCoach extends Player {
     @Override
     public String getYrStr() {
         return "Season " + year;
+    }
+
+    public String[] getCoachHistory() {
+        String[] hist = new String[history.size()];
+
+        for (int i = 0; i < history.size(); ++i) {
+            hist[i] = history.get(i);
+        }
+        return hist;
     }
 }
