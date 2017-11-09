@@ -94,6 +94,7 @@ public class Team {
 
     //prestige/talent improvements
     public int confPrestige;
+    public int disciplinePts;
 
     public ArrayList<HeadCoach> HC;
     public boolean fired;
@@ -233,6 +234,7 @@ public class Team {
         playersLeaving = new ArrayList<>();
 
         confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
+        disciplinePts = 0;
     }
 
 
@@ -298,6 +300,7 @@ public class Team {
         teamStratDefNum = 0;
         teamTVDeal = false;
         confTVDeal = false;
+        disciplinePts = 0;
 
 
         // Actually load the team from the string
@@ -642,6 +645,8 @@ public class Team {
                 nflPts += 2;
             }
         }
+
+        newPrestige += disciplinePts;
 
         //Sets the bounds for Prestige
         if (newPrestige > 95) newPrestige = 95;
@@ -2284,8 +2289,14 @@ public class Team {
      * Updates team history.
      */
     public void updateTeamHistory() {
-        String histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige;
+        int[] newPres = calcSeasonPrestige();
+        String histYear;
+        if (newPres[0] > teamPrestige)
+            histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (+" + (newPres[0] - teamPrestige) + ")";
+        else
+            histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (" + (newPres[0] - teamPrestige) + ")";
 
         for (int i = 12; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);
@@ -2303,8 +2314,14 @@ public class Team {
     }
 
     public void updateCoachHistory() {
-        String histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige;
+        int[] newPres = calcSeasonPrestige();
+        String histYear;
+        if (newPres[0] > teamPrestige)
+            histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (+" + (newPres[0] - teamPrestige) + ")";
+        else
+            histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (" + (newPres[0] - teamPrestige) + ")";
 
         for (int i = 12; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);
@@ -2965,6 +2982,12 @@ public class Team {
         }
         if (prestigePts[4] > 0) {
             summary += "\n\nYou have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
+        }
+
+        if (disciplinePts < 0) {
+            summary += "\n\nYour team had some trouble with disciplinary violations this season and dropped " + disciplinePts + " prestige points.";
+        } else if (disciplinePts > 0) {
+            summary += "\n\nYour team stayed out of trouble this season and bonded together. Your team gained " + disciplinePts + " prestige points.";
         }
 
         if (this == league.savePenalized || this == league.savePenalized2 || this == league.savePenalized3) {
