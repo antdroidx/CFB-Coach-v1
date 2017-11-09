@@ -605,6 +605,16 @@ public class League {
                 }
             }
 
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACH_HISTORY")) {
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACH")) {
+                        teamList.get(i).HC.get(0).history.add(line);
+                    }
+                }
+            }
+
+
             // Set up lucky and penalized teams for Week 0 news stories
             StringBuilder sbLucky = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LUCKY_TEAM")) {
@@ -1260,6 +1270,13 @@ public class League {
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceHC();
         }
+    }
+
+    public void updateHCHistory(){
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).updateCoachHistory();
+        }
+
     }
 
     //Advances season for each team and sets up schedules for the new year.
@@ -2852,6 +2869,16 @@ public class League {
         }
         sb.append("END_TEAM_HISTORY\n");
 
+
+        for (Team t : teamList) {
+            for (String s : t.HC.get(0).history) {
+                sb.append(s + "\n");
+            }
+            sb.append("END_COACH\n");
+        }
+        sb.append("END_COACH_HISTORY\n");
+
+
         // Save who was luckyed and penalizedd this year for news stories the following year
         if (saveLucky != null) {
             sb.append(saveLucky.abbr + "\n");
@@ -3213,7 +3240,9 @@ public class League {
         heisman = null;
         ArrayList<HeadCoach> coachCandidates = new ArrayList<HeadCoach>();
         for (int i = 0; i < teamList.size(); ++i) {
-            coachCandidates.add(teamList.get(i).HC.get(0));
+            if (!teamList.get(i).HC.isEmpty()) {
+                coachCandidates.add(teamList.get(i).HC.get(0));
+            }
         }
         Collections.sort(coachCandidates, new CoachScoreComp());
         return coachCandidates;
@@ -3587,6 +3616,7 @@ public class League {
                             if (teamList.get(j).name.equals(tmName)) {
                                 teamList.get(j).HC.remove(0);
                                 teamList.get(j).promoteCoach();
+                                teamList.get(j).HC.get(0).history.add("");
                                 newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
                                         " hopes to continue their recent success, despite the recent loss of coach " + teamList.get(t).HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
                             }
@@ -3615,6 +3645,7 @@ public class League {
         for (int t = 0; t < teamList.size(); ++t) {
             if (teamList.get(t).HC.isEmpty()) {
                 teamList.get(t).promoteCoach();
+                teamList.get(t).HC.get(0).history.add("");
                 newsStories.get(currentWeek + 1).add("Coaching Promotion: " + teamList.get(t).name + ">Following the departure of their previous head coach, " + teamList.get(t).name + " has promoted assistant " + teamList.get(t).HC.get(0).name +
                         " to lead the team.");
             }
