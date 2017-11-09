@@ -1314,30 +1314,12 @@ public class League {
         luckyTeam3.teamPrestige += coach + 4;
         saveLucky3 = luckyTeam3;
         if (luckyTeam3.teamPrestige > 99) {luckyTeam3.teamPrestige = 99;}
+        */
 
-        // Hire Coach for very bad team
-        luckyNumber = (int)(Math.random()*12);
-        if (luckyNumber > 10) luckyNumber = 10;
-        Team luckyTeam4 = teamList.get(98 + luckyNumber);
-        coach = (int)(Math.random()*21);
-        luckyTeam4.teamPrestige += coach + 4;
-        saveLucky4 = luckyTeam4;
-        if (luckyTeam4.teamPrestige > 99) {luckyTeam4.teamPrestige = 99;}
-
-        // Hire Coach for very bad team
-        luckyNumber = (int)(Math.random()*12);
-        if (luckyNumber > 10) luckyNumber = 10;
-        Team luckyTeam5 = teamList.get(109 + luckyNumber);
-        coach = (int)(Math.random()*23);
-        luckyTeam5.teamPrestige += coach + 4;
-        saveLucky5 = luckyTeam5;
-        if (luckyTeam5.teamPrestige > 99) {luckyTeam5.teamPrestige = 99;}*/
 
         saveLucky = null;
         saveLucky2 = null;
         saveLucky3 = null;
-        saveLucky4 = null;
-        saveLucky5 = null;
 
         /// INFRACTIONS TIME
 
@@ -3577,12 +3559,12 @@ public class League {
         for (int t = 0; t < teamList.size(); ++t)  {
             int teamDis = teamList.get(t).getTeamDiscipline();
             if ((int)(Math.random()*(100-teamDis)) > (int)(Math.random()*teamList.get(t).HC.get(0).ratDiscipline)) {
-                teamList.get(t).HC.get(0).ratDiscipline -= (int)Math.random()*3;
-                teamList.get(t).teamPrestige -= 1;
+                teamList.get(t).HC.get(0).ratDiscipline -= (int)Math.random()*4;
+                teamList.get(t).disciplinePts -= (int)(Math.random()*2);
                 teamDiscipline.add(teamList.get(t).name);
             } else {
-                teamList.get(t).HC.get(0).ratDiscipline += (int)Math.random()*3;
-                teamList.get(t).teamPrestige += 1;
+                teamList.get(t).HC.get(0).ratDiscipline += (int)Math.random()*4;
+                teamList.get(t).disciplinePts += (int)(Math.random()*2);
             }
         }
         for (int i = 0; i < teamDiscipline.size(); ++i) {
