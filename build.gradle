@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId "antdroid.cfbcoach"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionName '2.0'
         versionNameSuffix 'BETA'
     }
