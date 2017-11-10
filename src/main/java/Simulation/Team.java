@@ -649,8 +649,10 @@ public class Team {
         newPrestige += disciplinePts;
 
         //Sets the bounds for Prestige
+        int confAvg = league.averageConfPrestige();
+        int confLimit = (confPrestige - confAvg)/3;
         if (newPrestige > 95) newPrestige = 95;
-        if (newPrestige < 20) newPrestige = 20;
+        if (newPrestige < 25 + confLimit) newPrestige = 25 + confLimit;
 
         int PrestigeScore[] = {newPrestige, rivalryPts, ccPts, ncwPts, nflPts, rgameplayed};
         return PrestigeScore;
@@ -2254,12 +2256,12 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
-        int preseasonBias = 7 - (wins + losses); // change wins + losses to -
+        int preseasonBias = 7 - (wins + losses);
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
                 (teamYards - teamOppYards) / 40 +
                 5 * teamStrengthOfWins / 4 +
-                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + confPrestige)) / 7;
+                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige/2))) / 7;
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
