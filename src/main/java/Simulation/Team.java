@@ -2122,7 +2122,7 @@ public class Team {
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19]),
                         Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21]),
-                        Integer.parseInt(playerInfo[22])));
+                        Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
 
             else
                 HC.add(new HeadCoach(playerInfo[1], this,
@@ -2136,7 +2136,8 @@ public class Team {
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19]),
                         Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21]),
-                        Integer.parseInt(playerInfo[22])));
+                        Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
+
         }
     }
 
