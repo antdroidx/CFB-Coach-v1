@@ -3625,7 +3625,7 @@ public class Team {
     public String getPlayerInfoSaveFile() {
         StringBuilder sb = new StringBuilder();
         for (HeadCoach hc : HC) {
-            sb.append("HC," + hc.name + "," + hc.age + "," + hc.year + "," + hc.contractYear + "," + hc.contractLength + "," +
+            sb.append("HC," + hc.name + "," + hc.age + "," + hc.year + "," + hc.contractYear + "," + hc.contractLength + "," + hc.ratPot + "," +
                     hc.ratOff + "," + hc.ratDef + "," + hc.ratTalent + "," + hc.ratDiscipline + "," + hc.offStrat + "," + hc.defStrat + "," + hc.baselinePrestige + "," +
                     hc.wins + "," + hc.losses + "," + hc.bowlwins + "," + hc.bowllosses + "," + hc.confchamp + "," + hc.natchamp + "," + hc.allconference + "," +
                     hc.allamericans + "," + hc.confAward + "," + hc.awards + "%\n");
@@ -3955,6 +3955,7 @@ public class Team {
         HC.get(0).age = 35;
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
+        HC.get(0).ratPot = 75;
         HC.get(0).ratOff = 70;
         HC.get(0).ratDef = 70;
         HC.get(0).ratTalent = 70;
