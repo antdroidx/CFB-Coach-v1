@@ -16,11 +16,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:minHeight="15dp"
         android:minWidth="15dp"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:theme="@android:style/Theme.Material">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -149,9 +150,9 @@
                 android:id="@+id/playerStatsExpandList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:layout_weight="1" />
+                android:paddingTop="5dp" />
 
             <ListView
                 android:id="@+id/mainList"

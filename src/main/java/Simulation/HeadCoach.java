@@ -15,6 +15,7 @@ public class HeadCoach extends Player {
     public int contractYear;
     public int contractLength;
     public int ratOvr;
+    int ratPot;
     int ratOff;
     int ratDef;
     int ratTalent;
@@ -38,9 +39,10 @@ public class HeadCoach extends Player {
     int max = 4;
     int min = 0;
     public ArrayList<String> history;
+    int potFactor = 4/3;
 
 
-    public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
+    public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
                      int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
         team = t;
         name = nm;
@@ -49,6 +51,7 @@ public class HeadCoach extends Player {
         contractYear = cyr;
         contractLength = clength;
         ratOvr = (off + def + tal + dis) / 4;
+        ratPot = pot;
         ratOff = off;
         ratDef = def;
         ratTalent = tal;
@@ -82,6 +85,7 @@ public class HeadCoach extends Player {
         year = 0;
         contractYear = (int) (6 * Math.random());
         contractLength = 6;
+        ratPot = (int) (50 + 50 * Math.random());
         ratOff = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
         ratDef = (int) (50 + year * 5 + stars * 5 - 25 * Math.random());
         ratTalent = (int) (50 + 50 * Math.random());
@@ -117,6 +121,7 @@ public class HeadCoach extends Player {
         year = 0;
         contractYear = 0;
         contractLength = 6;
+        ratPot = (int) (50 + 50 * Math.random());
         ratOff = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
         ratDef = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
         ratTalent = (int) (45 + 45 * Math.random());
@@ -151,7 +156,7 @@ public class HeadCoach extends Player {
         contractYear++;
 
         // WIP
-        ratTalent += prestigeDiff + bowl;
+        ratTalent += (prestigeDiff + bowl)*((potFactor*ratPot)/100);
         int off = team.teamYards - avgYards;
         int def = avgYards - team.teamOppPassYards;
         int offTal = offTalent - team.teamOffTalent;
@@ -159,12 +164,11 @@ public class HeadCoach extends Player {
         offpts = ((off / avgYards) + (offTal / offTalent)) * 10;
         defpts = ((def / avgYards) + (defTal / defTalent)) * 10;
 
-        ratOff += (int) (Math.random() * (prestigeDiff / 2 + offpts));
+        ratOff += (int) (Math.random() * (prestigeDiff / 2 + offpts))*((potFactor*ratPot)/100);
         if (ratOff > 99) ratOff = 99;
 
-        ratDef += (int) (Math.random() * (prestigeDiff / 2 + defpts));
-        if (ratDef > 99) ratDef = 99;
-        
+        ratDef += (int) (Math.random() * (prestigeDiff / 2 + defpts))*((potFactor*ratPot)/100);
+
         if (ratDiscipline > 95) ratDiscipline = 95;
         if (ratTalent > 95) ratTalent = 95;
 
