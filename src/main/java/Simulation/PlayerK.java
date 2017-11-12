@@ -70,7 +70,7 @@ public class PlayerK extends Player {
 
     public PlayerK(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur, int prs,
                    int cGamesPlayed, int cXPA, int cXPM, int cFGA, int cFGM,
-                   int cHeismans, int cAA, int cAC, int cWins) {
+                   int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
         team = t;
         name = nm;
         year = yr;
@@ -86,6 +86,8 @@ public class PlayerK extends Player {
         ratPressure = prs;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        isTransfer = transfer;
+
         position = "K";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 80 + (int) (Math.random() * 100) - 50;
@@ -191,6 +193,11 @@ public class PlayerK extends Player {
         statsXPMade = 0;
         statsFGAtt = 0;
         statsFGMade = 0;
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
     }
 
     @Override

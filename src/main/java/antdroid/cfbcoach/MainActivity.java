@@ -284,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
                         userHC = userTeam.HC.get(0);
                         simLeague.advanceHC();
                         simLeague.curePlayers(); // get rid of all injuries
+                        if (simLeague.isCareerMode()) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage(userTeam.contractString)
                                     .setTitle((seasonStart + userTeam.teamHistory.size()) + " Contract Status")
@@ -296,30 +297,42 @@ public class MainActivity extends AppCompatActivity {
                             dialog.show();
                             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                        }
                         simGameButton.setTextSize(12);
-                        simGameButton.setText("Begin Off-Season: Phase 2");
+                        simGameButton.setText("Off-Season: Contracts");
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek == 17 && userTeam.fired) {
                         newJobV2(userHC);
-                        //simLeague.coachCarousel();
                         simGameButton.setTextSize(12);
-                        simGameButton.setText("Begin Off-Season: Phase 3");
+                        simGameButton.setText("Off-Season: Coaching Changes");
                         simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
                         simGameButton.setTextSize(12);
-                        simGameButton.setText("Begin Off-Season: Phase 3");
+                        simGameButton.setText("Off-Season: Coaching Changes");
                         simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 18) {
                         simLeague.coachCarousel();
                         simGameButton.setTextSize(12);
-                        simGameButton.setText("Begin Recruiting");
+                        simGameButton.setText("Off-Season: Graduation");
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
-                    } else if (simLeague.currentWeek >= 19) {
+                    } else if (simLeague.currentWeek == 19) {
+                        userTeam.resetStats();
+                        simLeague.advanceSeason();
+                        simGameButton.setTextSize(12);
+                        simGameButton.setText("Off-Season: Transfer Players");
+                        simLeague.currentWeek++;
+                    }else if (simLeague.currentWeek == 20) {
+                        simLeague.transferPlayers();
+                        showNewsStoriesDialog();
+                        simGameButton.setTextSize(12);
+                        simGameButton.setText("Begin Recruiting");
+                        simLeague.currentWeek++;
+                    } else if (simLeague.currentWeek >= 21) {
                         recruitingStage = 0;
                         beginRecruiting();
                     } else {
@@ -334,6 +347,8 @@ public class MainActivity extends AppCompatActivity {
                             // Show NCG summary and check league records
                             simLeague.checkLeagueRecords();
                             simLeague.updateHCHistory();
+                            simLeague.updateTeamHistories();
+                            simLeague.updateLeagueHistory();
                             simLeague.curePlayers(); // get rid of all injuries
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage(simLeague.seasonSummaryStr())
@@ -348,7 +363,7 @@ public class MainActivity extends AppCompatActivity {
                             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                             simGameButton.setTextSize(12);
-                            simGameButton.setText("Begin Off-Season: Phase 1");
+                            simGameButton.setText("Begin Off-Season");
                             simLeague.currentWeek++;
                         } else if (userTeam.gameWLSchedule.size() > numGamesPlayed) {
                             // Played a game, show summary
@@ -1419,7 +1434,9 @@ public class MainActivity extends AppCompatActivity {
             else if (i == 17) weekSelection[i] = "Coaching Contracts";
             else if (i == 18) weekSelection[i] = "Off-Season News";
             else if (i == 19) weekSelection[i] = "Coach Hirings";
-            else if (i == 20) weekSelection[i] = "Recruiting News";
+            else if (i == 20) weekSelection[i] = "Transfer News";
+            else if (i == 21) weekSelection[i] = "Recruiting News";
+            else if (i == 22) weekSelection[i] = "Spring News";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
@@ -1443,7 +1460,7 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.newsStories.get(position);
                         boolean isempty = false;
-                        if (simLeague.currentWeek == 20 && rankings.size() == 0) {
+                        if (simLeague.currentWeek == 22 && rankings.size() == 0) {
                             rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshman to their schools.");
                         }
                         if (rankings.size() == 0) {
@@ -2031,16 +2048,13 @@ public class MainActivity extends AppCompatActivity {
      * Start Recruiting Activity, sending over the user team's players and budget.
      */
     private void beginRecruiting() {
-        simLeague.getPlayersLeaving();
+        simLeague.recruitPlayers();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(userTeam.abbr + " Players Leaving")
                 .setPositiveButton("Begin Recruiting", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        simLeague.updateTeamHistories();
-                        simLeague.updateLeagueHistory();
-                        userTeam.resetStats();
-                        simLeague.advanceSeason();
+                        simLeague.currentWeek = 0;
                         saveLeagueFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
                         simLeague.saveLeague(saveLeagueFile);
 
@@ -2338,7 +2352,6 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractYear = 0;
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
-                userTeam.skipHistory = true;
                 simLeague.setTeamRanks();
                 updateTeamUI();
                 examineTeam(currentTeam.name);
@@ -2381,7 +2394,6 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractYear = 0;
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
-                userTeam.skipHistory = true;
                 simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                         " to lead the team.");
                 simLeague.coachCarousel();

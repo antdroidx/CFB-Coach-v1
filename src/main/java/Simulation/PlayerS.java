@@ -71,7 +71,7 @@ public class PlayerS extends Player {
     }
 
     public PlayerS(String nm, Team t, int yr, int pot, int iq, int cov, int spd, int tkl, boolean rs, int dur, int rstop,
-                   int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins) {
+                   int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
         team = t;
         name = nm;
         year = yr;
@@ -87,6 +87,8 @@ public class PlayerS extends Player {
         ratRunStop = rstop;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        isTransfer = transfer;
+
         position = "S";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 3.5) + 125 + (int) (Math.random() * 100) - 50;
@@ -197,6 +199,11 @@ public class PlayerS extends Player {
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
         if (wonAllConference) careerAllConference++;
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
     }
 
     @Override

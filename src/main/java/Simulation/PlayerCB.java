@@ -77,7 +77,7 @@ public class PlayerCB extends Player {
     }
 
     public PlayerCB(String nm, Team t, int yr, int pot, int iq, int cov, int spd, int tkl, boolean rs, int dur, int jmp,
-                    int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cTar, int cInc, int cDef, int cHeismans, int cAA, int cAC, int cWins) {
+                    int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cTar, int cInc, int cDef, int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
         team = t;
         name = nm;
         year = yr;
@@ -93,6 +93,9 @@ public class PlayerCB extends Player {
         ratJump = jmp;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        isTransfer = transfer;
+
+
         position = "CB";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 50 + (int) (Math.random() * 100) - 50;
@@ -227,6 +230,11 @@ public class PlayerCB extends Player {
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
         if (wonAllConference) careerAllConference++;
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
 
     }
 

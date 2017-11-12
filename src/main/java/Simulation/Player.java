@@ -35,6 +35,7 @@ public class Player {
 
     public boolean isRedshirt;
     public boolean isMedicalRS;
+    public boolean isTransfer;
 
     public boolean isInjured;
     public Injury injury;
@@ -79,6 +80,9 @@ public class Player {
     public String getPosNameYrOvrPot_Str() {
         if (injury != null) {
             return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">" + injury.toString();
+        }
+        if (isTransfer) {
+            return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
         }
         return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
     }
@@ -197,7 +201,13 @@ public class Player {
         return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
     }
 
-    public int getGamesPlayed() {
+    public String getInfoLineupTransfer() {
+        return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + ratPot + " Transfer";
+
+    }
+
+
+        public int getGamesPlayed() {
         if (gamesPlayed == 0) return 1;
         else return gamesPlayed;
     }

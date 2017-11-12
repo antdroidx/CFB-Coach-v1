@@ -40,7 +40,6 @@ public class PlayerQB extends Player {
     public int careerRushTD;
     public int careerFumbles;
 
-
     public PlayerQB(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd) {
         team = t;
         name = nm;
@@ -95,7 +94,7 @@ public class PlayerQB extends Player {
 
     public PlayerQB(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int eva, boolean rs, int dur, int spd,
                     int cGamesPlayed, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
-                    int cRushAtt, int cRushYards, int cRushTD, int cFumbles, int cHeismans, int cAA, int cAC, int cWins) {
+                    int cRushAtt, int cRushYards, int cRushTD, int cFumbles, int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
         team = t;
         name = nm;
         year = yr;
@@ -111,6 +110,7 @@ public class PlayerQB extends Player {
         ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        isTransfer = transfer;
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
@@ -260,6 +260,11 @@ public class PlayerQB extends Player {
         statsRushYards = 0;
         statsRushTD = 0;
         statsFumbles = 0;
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
     }
 
     @Override
