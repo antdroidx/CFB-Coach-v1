@@ -12,6 +12,7 @@
     <string name="action_rankings">Team Rankings</string>
     <string name="action_player_rankings">Player Rankings</string>
     <string name="action_heisman">Post-Season Awards</string>
+    <string name="action_import">Import Data</string>
     <string name="action_news_stories">News Stories</string>
     <string name="action_bowlgame_watch">Bowl Games</string>
     <string name="action_ccg_watch">Conf Championships</string>

@@ -3734,8 +3734,8 @@ public class League {
     public void transferPlayers() {
         int rand;
         Random random = new Random();
-        int max = 120;
-        int min = 50;
+        int max = 119;
+        int min = 0;
         for (int i = 0; i < transferQBs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {

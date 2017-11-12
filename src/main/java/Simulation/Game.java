@@ -311,13 +311,14 @@ public class Game implements Serializable {
         gameL.append("\n");
         gameC.append("\n");
         gameR.append("\n");
-        gameL.append("QB\nYr Ovr\nTD/Int\nPass Yards\nComp/Att\nRush Yards\nTD/Fum\nSacks\n");
+        gameL.append("QB\nYr Ovr\nTD/Int\nPass Yards\nComp/Att\nRush Yards\nCarries\nTD/Fum\nSacks\n");
         gameC.append(awayQB.getInitialName() + "\n");
         gameC.append(awayQB.getYrStr() + " " + awayQB.ratOvr + "\n");
         gameC.append(AwayQBStats[2] + "/" + AwayQBStats[3] + "\n"); //td/int
         gameC.append(AwayQBStats[4] + " yds\n"); //pass yards
         gameC.append(AwayQBStats[0] + "/" + AwayQBStats[1] + "\n"); //pass comp/att
         gameC.append(AwayQBStats[7] + "yds\n"); //rush
+        gameC.append(AwayQBStats[6] + " carries\n");
         gameC.append(AwayQBStats[8] + "/" + AwayQBStats[9] + "\n"); //rush td/fum
         gameC.append(AwayQBStats[5] + " sacks\n"); //rush td/fum
         gameR.append(homeQB.getInitialName() + "\n");
@@ -326,6 +327,7 @@ public class Game implements Serializable {
         gameR.append(HomeQBStats[4] + " yds\n"); //pass yards
         gameR.append(HomeQBStats[0] + "/" + HomeQBStats[1] + "\n"); //pass comp/att
         gameR.append(HomeQBStats[7] + " yds\n"); //rushing
+        gameR.append(HomeQBStats[6] + " carries\n"); //rush yards
         gameR.append(HomeQBStats[8] + "/" + HomeQBStats[9] + "\n"); //rush td/fum
         gameR.append(HomeQBStats[5] + " sacks\n"); //rush td/fum
         gameL.append("\n");
@@ -343,11 +345,12 @@ public class Game implements Serializable {
         gameL.append("\n");
         gameC.append("\n");
         gameR.append("\n");
-        gameL.append("RB\nYr Ovr\nTD/Fum\nRush Yards\nYds/Att\nRec Yards\nRec/TD\n");
+        gameL.append("RB\nYr Ovr\nTD/Fum\nRush Yards\nCarries\nYds/Att\nRec Yards\nRec/TD\n");
         gameC.append(awayRBs[0].getInitialName() + "\n");
         gameC.append(awayRBs[0].getYrStr() + " " + awayRBs[0].ratOvr + "\n");
         gameC.append(AwayRB1Stats[2] + "/" + AwayRB1Stats[3] + "\n"); //td/fum
         gameC.append(AwayRB1Stats[1] + " yds\n"); //rush yards
+        gameC.append(AwayRB1Stats[0] + " carries\n"); //rush yards
         gameC.append(((double) (10 * AwayRB1Stats[1] / AwayRB1Stats[0]) / 10) + "\n");
         gameC.append(AwayRB1Stats[5] + " yds\n"); //Rec yards
         gameC.append(AwayRB1Stats[4] + " / " + AwayRB1Stats[6] + "\n"); //rec/TD
@@ -355,17 +358,19 @@ public class Game implements Serializable {
         gameR.append(homeRBs[0].getYrStr() + " " + homeRBs[0].ratOvr + "\n");
         gameR.append(HomeRB1Stats[2] + "/" + HomeRB1Stats[3] + "\n"); //td/fum
         gameR.append(HomeRB1Stats[1] + " yds\n"); //rush yards
+        gameR.append(HomeRB1Stats[0] + " carries\n"); //rush yards
         gameR.append(((double) (10 * HomeRB1Stats[1] / HomeRB1Stats[0]) / 10) + "\n");
         gameR.append(HomeRB1Stats[5] + " yds\n"); //Rec yards
         gameR.append(HomeRB1Stats[4] + " / " + HomeRB1Stats[6] + "\n"); //rec/TD
         gameL.append("\n");
         gameC.append("\n");
         gameR.append("\n");
-        gameL.append("RB\nYr Ovr\nTD/Fum\nRush Yards\nYds/Att\nRec Yards\nRec/TD\n");
+        gameL.append("RB\nYr Ovr\nTD/Fum\nRush Yards\nCarries\nYds/Att\nRec Yards\nRec/TD\n");
         gameC.append(awayRBs[1].getInitialName() + "\n");
         gameC.append(awayRBs[1].getYrStr() + " " + awayRBs[1].ratOvr + "\n");
         gameC.append(AwayRB2Stats[2] + "/" + AwayRB2Stats[3] + "\n"); //td/fum
         gameC.append(AwayRB2Stats[1] + " yds\n"); //rush yards
+        gameC.append(AwayRB2Stats[0] + " carries\n"); //rush yards
         gameC.append(((double) (10 * AwayRB2Stats[1] / AwayRB2Stats[0]) / 10) + "\n");
         gameC.append(AwayRB2Stats[5] + " yds\n"); //Rec yards
         gameC.append(AwayRB2Stats[4] + " / " + AwayRB2Stats[6] + "\n"); //rec/TD
@@ -373,6 +378,7 @@ public class Game implements Serializable {
         gameR.append(homeRBs[1].getYrStr() + " " + homeRBs[1].ratOvr + "\n");
         gameR.append(HomeRB2Stats[2] + "/" + HomeRB2Stats[3] + "\n"); //td/fum
         gameR.append(HomeRB2Stats[1] + " yds\n"); //rush yards
+        gameR.append(HomeRB2Stats[0] + " carries\n"); //rush yards
         gameR.append(((double) (10 * HomeRB2Stats[1] / HomeRB2Stats[0]) / 10) + "\n");
         gameR.append(HomeRB2Stats[5] + " yds\n"); //Rec yards
         gameR.append(HomeRB2Stats[4] + " / " + HomeRB2Stats[6] + "\n"); //rec/TD
