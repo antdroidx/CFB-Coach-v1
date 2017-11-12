@@ -66,7 +66,12 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
                 itemR.setText(detailSplit[1]);
                 itemL.setTextColor(Color.RED);
                 itemR.setTextColor(Color.RED);
-            } else {
+            } else if (playerDetail.substring(0, 3).equals("[T]")) {
+                itemL.setText(detailSplit[0].substring(3));
+                itemR.setText(detailSplit[1]);
+                itemL.setTextColor(Color.RED);
+                itemR.setTextColor(Color.RED);
+            }else {
                 itemL.setText(detailSplit[0]);
                 itemR.setText(detailSplit[1]);
                 colorizeRatings(itemL, detailSplit[0]);

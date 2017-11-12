@@ -75,7 +75,7 @@ public class PlayerDL extends Player {
     }
 
     public PlayerDL(String nm, Team t, int yr, int pot, int iq, int pow, int rsh, int pas, boolean rs, int dur, int tkl,
-                    int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins) {
+                    int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
         team = t;
         name = nm;
         year = yr;
@@ -91,6 +91,8 @@ public class PlayerDL extends Player {
         ratTackle = tkl;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        isTransfer = transfer;
+
         position = "DL";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
@@ -201,6 +203,11 @@ public class PlayerDL extends Player {
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
         if (wonAllConference) careerAllConference++;
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
     }
 
     @Override

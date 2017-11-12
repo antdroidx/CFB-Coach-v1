@@ -90,7 +90,7 @@ public class PlayerRB extends Player {
 
     public PlayerRB(String nm, Team t, int yr, int pot, int iq, int pow, int spd, int eva, boolean rs, int dur, int cat,
                     int cGamesPlayed, int cRushAtt, int cRushYards, int cTDs, int cFumbles, int cRec, int cRecYards, int cRecTD,
-                    int cHeismans, int cAA, int cAC, int cWins) {
+                    int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
         team = t;
         name = nm;
         year = yr;
@@ -106,6 +106,7 @@ public class PlayerRB extends Player {
         ratCatch = cat;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        isTransfer = transfer;
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 2) + 70 + (int) (Math.random() * 100) - 50;
 
@@ -231,6 +232,12 @@ public class PlayerRB extends Player {
         statsReceptions = 0;
         statsRecYards = 0;
         statsRecTD = 0;
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
+
     }
 
     @Override

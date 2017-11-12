@@ -42,10 +42,13 @@ public class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
 
         TextView playerInfo = (TextView) rowView.findViewById(R.id.textViewLineupPlayerInfo);
 
-        if (players.get(position).injury == null) {
+        if (players.get(position).injury == null && !players.get(position).isTransfer) {
             playerInfo.setText(players.get(position).getInfoForLineup());
-        } else {
+        } else if (players.get(position).isInjured){
             playerInfo.setText(players.get(position).getInfoLineupInjury());
+        } else if (players.get(position).isTransfer) {
+            playerInfo.setText(players.get(position).getInfoLineupTransfer());
+
         }
 
 
@@ -59,7 +62,11 @@ public class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
         } else if (players.get(position).isInjured) {
             // Is injured
             isPlayerStarting.setEnabled(false);
-            playerInfo.setTextColor(Color.RED);
+            playerInfo.setTextColor(Color.BLUE);
+        } else if (players.get(position).isTransfer) {
+            // Is Transfer
+            isPlayerStarting.setEnabled(false);
+            playerInfo.setTextColor(Color.DKGRAY);
         } else {
             isPlayerStarting.setChecked(false);
         }

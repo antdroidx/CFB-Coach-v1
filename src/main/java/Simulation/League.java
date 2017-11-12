@@ -23,7 +23,6 @@ import java.util.Random;
 public class League {
     //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
-    public ArrayList<String> UserHistory;
     public ArrayList<String> heismanHistory;
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
@@ -47,8 +46,6 @@ public class League {
     public Team saveLucky;
     public Team saveLucky2;
     public Team saveLucky3;
-    public Team saveLucky4;
-    public Team saveLucky5;
     public Team savePenalized;
     public Team savePenalized2;
     public Team savePenalized3;
@@ -62,7 +59,7 @@ public class League {
     int seasonStart = 2017;
     int countTeam = 120;
 
-    int seasonWeeks = 20;
+    int seasonWeeks = 26;
 
     //Bowl Games
     public boolean hasScheduledBowls;
@@ -84,6 +81,29 @@ public class League {
     ArrayList<Player> allAmericans;
     private String allAmericanStr;
 
+    //Transfer List
+    public ArrayList<String> tQBs;
+    public ArrayList<String> tRBs;
+    public ArrayList<String> tWRs;
+    public ArrayList<String> tTEs;
+    public ArrayList<String> tKs;
+    public ArrayList<String> tOLs;
+    public ArrayList<String> tDLs;
+    public ArrayList<String> tLBs;
+    public ArrayList<String> tCBs;
+    public ArrayList<String> tSs;
+    
+    public ArrayList<PlayerQB> transferQBs;
+    public ArrayList<PlayerRB> transferRBs;
+    public ArrayList<PlayerWR> transferWRs;
+    public ArrayList<PlayerTE> transferTEs;
+    public ArrayList<PlayerK> transferKs;
+    public ArrayList<PlayerOL> transferOLs;
+    public ArrayList<PlayerDL> transferDLs;
+    public ArrayList<PlayerLB> transferLBs;
+    public ArrayList<PlayerCB> transferCBs;
+    public ArrayList<PlayerS> transferSs;
+
     public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl", "Cotton Bowl", "Citrus Bowl", "Gator Bowl", "Cactus Bowl", "Alamo Bowl", "Holiday Bowl", "Sun Bowl",
             "Liberty Bowl", "Independence Bowl", "Vegas Bowl", "Military Bowl", "Aloha Bowl", "Humanitarian Bowl"};
 
@@ -99,7 +119,6 @@ public class League {
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
         leagueHistory = new ArrayList<String[]>();
-        UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
         coachList = new ArrayList<>();
         coachPrevTeam = new ArrayList<>();
@@ -123,6 +142,26 @@ public class League {
         coachPrevTeam = new ArrayList<>();
         coachStarList = new ArrayList<>();
         coachStarPrevTeam = new ArrayList<>();
+        tQBs = new ArrayList<>();
+        tRBs = new ArrayList<>();
+        tWRs = new ArrayList<>();
+        tTEs = new ArrayList<>();
+        tKs = new ArrayList<>();
+        tOLs = new ArrayList<>();
+        tDLs = new ArrayList<>();
+        tLBs = new ArrayList<>();
+        tCBs = new ArrayList<>();
+        tSs = new ArrayList<>();
+        transferQBs = new ArrayList<>();
+        transferRBs = new ArrayList<>();
+        transferWRs = new ArrayList<>();
+        transferTEs = new ArrayList<>();
+        transferKs = new ArrayList<>();
+        transferOLs = new ArrayList<>();
+        transferDLs = new ArrayList<>();
+        transferLBs = new ArrayList<>();
+        transferCBs = new ArrayList<>();
+        transferSs = new ArrayList<>();
 
 
         // Initialize new stories lists
@@ -356,7 +395,6 @@ public class League {
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
         leagueHistory = new ArrayList<String[]>();
-        UserHistory = new ArrayList<>();
         heismanHistory = new ArrayList<String>();
         coachList = new ArrayList<>();
         coachPrevTeam = new ArrayList<>();
@@ -387,6 +425,26 @@ public class League {
         coachPrevTeam = new ArrayList<>();
         coachStarList = new ArrayList<>();
         coachStarPrevTeam = new ArrayList<>();
+        tQBs = new ArrayList<>();
+        tRBs = new ArrayList<>();
+        tWRs = new ArrayList<>();
+        tTEs = new ArrayList<>();
+        tKs = new ArrayList<>();
+        tOLs = new ArrayList<>();
+        tDLs = new ArrayList<>();
+        tLBs = new ArrayList<>();
+        tCBs = new ArrayList<>();
+        tSs = new ArrayList<>();
+        transferQBs = new ArrayList<>();
+        transferRBs = new ArrayList<>();
+        transferWRs = new ArrayList<>();
+        transferTEs = new ArrayList<>();
+        transferKs = new ArrayList<>();
+        transferOLs = new ArrayList<>();
+        transferDLs = new ArrayList<>();
+        transferLBs = new ArrayList<>();
+        transferCBs = new ArrayList<>();
+        transferSs = new ArrayList<>();
 
 
         // Initialize new stories lists
@@ -534,7 +592,6 @@ public class League {
 
         leagueRecords = new LeagueRecords();
         userTeamRecords = new LeagueRecords();
-        UserHistory = new ArrayList<>();
         longestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         yearStartLongestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
         longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
@@ -542,6 +599,26 @@ public class League {
         coachPrevTeam = new ArrayList<>();
         coachStarList = new ArrayList<>();
         coachStarPrevTeam = new ArrayList<>();
+        tQBs = new ArrayList<>();
+        tRBs = new ArrayList<>();
+        tWRs = new ArrayList<>();
+        tTEs = new ArrayList<>();
+        tKs = new ArrayList<>();
+        tOLs = new ArrayList<>();
+        tDLs = new ArrayList<>();
+        tLBs = new ArrayList<>();
+        tCBs = new ArrayList<>();
+        tSs = new ArrayList<>();
+        transferQBs = new ArrayList<>();
+        transferRBs = new ArrayList<>();
+        transferWRs = new ArrayList<>();
+        transferTEs = new ArrayList<>();
+        transferKs = new ArrayList<>();
+        transferOLs = new ArrayList<>();
+        transferDLs = new ArrayList<>();
+        transferLBs = new ArrayList<>();
+        transferCBs = new ArrayList<>();
+        transferSs = new ArrayList<>();
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -593,10 +670,7 @@ public class League {
                     }
                 }
             }
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_USER_TEAM")) {
-                UserHistory.add(line);
-            }
-
+            //Team History
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM_HISTORY")) {
                 for (int i = 0; i < countTeam; ++i) { //Do for every team
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
@@ -604,8 +678,7 @@ public class League {
                     }
                 }
             }
-
-
+            //Coach History
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACH_HISTORY")) {
                 for (int i = 0; i < countTeam; ++i) { //Do for every team
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACH")) {
@@ -817,9 +890,9 @@ public class League {
                     conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
                     conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
 
-            if (saveLucky != null || saveLucky2 != null || saveLucky3 != null || saveLucky4 != null || saveLucky5 != null) {
-                newsStories.get(0).add("Off-Season Coaching Hires:>New Coaching hires at the following schools will add new look and will hopefully bring more prestige to the university: \n\n" +
-                        saveLucky.name + ": " + getRandName() + "\n" + saveLucky2.name + ": " + getRandName() + "\n" + saveLucky3.name + ": " + getRandName() + "\n" + saveLucky4.name + ": " + getRandName() + "\n" + saveLucky5.name + ": " + getRandName() + "\n");
+            if (saveLucky != null || saveLucky2 != null || saveLucky3 != null) {
+                newsStories.get(0).add("Facility Upgrades:>The following teams have had significant facility upgrades performed to their campus this off-season: \n\n" +
+                        saveLucky.name + "\n" + saveLucky2.name + "\n" + saveLucky3.name + "\n");
             }
             if (savePenalized != null) {
                 newsStories.get(0).add("Major Infraction: " + savePenalized.name + ">An administrative probe has determined that booster " + savePenalized.HC.get(0).name +
@@ -1282,7 +1355,6 @@ public class League {
     //Advances season for each team and sets up schedules for the new year.
 
     public void advanceSeason() {
-        currentWeek = 0;
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceSeason();
         }
@@ -1409,6 +1481,12 @@ public class League {
         }
 
         hasScheduledBowls = false;
+    }
+
+    public void recruitPlayers(){
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).CPUrecruiting();
+        }
     }
 
     /**
@@ -2177,15 +2255,6 @@ public class League {
     }
 
     /**
-     * Set the players leaving for each team.
-     */
-    public void getPlayersLeaving() {
-        for (Team t : teamList) {
-            t.getPlayersLeaving();
-        }
-    }
-
-    /**
      * Get a mock draft of all players who are leaving, sorted by overall.
      *
      * @return array of string reps of the players
@@ -2201,8 +2270,8 @@ public class League {
         Collections.sort(allPlayersLeaving, new PlayerComparator());
 
         // Get 100 players (first 4 rounds)
-        ArrayList<Player> NFLPlayers = new ArrayList<>(128);
-        for (int i = 0; i < 128; ++i) {
+        ArrayList<Player> NFLPlayers = new ArrayList<>(64);
+        for (int i = 0; i < 64; ++i) {
             NFLPlayers.add(allPlayersLeaving.get(i));
         }
 
@@ -2838,9 +2907,6 @@ public class League {
 
         // Save history of the user's team of the W-L and bowl results each year
         sb.append(userTeam.name + "\n");
-        for (String s : UserHistory) {
-            sb.append(s + "\n");
-        }
         sb.append("END_USER_TEAM\n");
         //Every Team Year-by-Year History
         for (Team t : teamList) {
@@ -3552,6 +3618,14 @@ public class League {
         return average;
     }
 
+    public int averageConfPrestige () {
+        int avgPrestige = 0;
+        for (int i = 0; i < conferences.size(); ++i) {
+            avgPrestige += conferences.get(i).confPrestige;
+        }
+        return avgPrestige/conferences.size();
+    }
+
     //Coaching Discipline Opportunities
     public void disciplineAction() {
         teamDiscipline = new ArrayList<>();
@@ -3657,13 +3731,141 @@ public class League {
         }
     }
 
-    public int averageConfPrestige () {
-        int avgPrestige = 0;
-        for (int i = 0; i < conferences.size(); ++i) {
-            avgPrestige += conferences.get(i).confPrestige;
+    public void transferPlayers() {
+        int rand;
+        Random random = new Random();
+        int max = 120;
+        int min = 50;
+        for (int i = 0; i < transferQBs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
+                    teamList.get(t).teamQBs.add(transferQBs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                    tQBs.get(i).toString() + " .");
+                    break;
+                }
+            }
         }
-        return avgPrestige/conferences.size();
+        
+        for (int i = 0; i < transferRBs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr) {
+                    teamList.get(t).teamRBs.add(transferRBs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>RB " + transferRBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tRBs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+        
+        for (int i = 0; i < transferWRs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr) {
+                    teamList.get(t).teamWRs.add(transferWRs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>WR " + transferWRs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tWRs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < transferTEs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr) {
+                    teamList.get(t).teamTEs.add(transferTEs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>TE " + transferTEs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tTEs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < transferOLs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr) {
+                    teamList.get(t).teamOLs.add(transferOLs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>OL " + transferOLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tOLs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < transferKs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr) {
+                    teamList.get(t).teamKs.add(transferKs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>K " + transferKs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tKs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < transferDLs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamDLs.size() < 4 || teamList.get(t).teamDLs.get(0).ratOvr < transferDLs.get(i).ratOvr) {
+                    teamList.get(t).teamDLs.add(transferDLs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>DL " + transferDLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tDLs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < transferLBs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr) {
+                    teamList.get(t).teamLBs.add(transferLBs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>LB " + transferLBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tLBs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < transferCBs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr) {
+                    teamList.get(t).teamCBs.add(transferCBs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>CB " + transferCBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tCBs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }
+        
+        for (int i = 0; i < transferSs.size(); ++i) {
+            rand = random.nextInt((max - min) + 1) + min;
+            for (int t = rand; t < teamList.size() - rand; ++t) {
+                if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr) {
+                    teamList.get(t).teamSs.add(transferSs.get(i));
+                    newsStories.get(currentWeek).add("Transfer News>S " + transferSs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                            tSs.get(i).toString() + " .");
+                    break;
+
+                }
+            }
+        }   
     }
+
 }
 
 class CoachScoreComp implements Comparator<HeadCoach> {
