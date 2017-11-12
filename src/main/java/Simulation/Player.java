@@ -20,6 +20,8 @@ public class Player {
     public int ratImprovement;
     public int cost;
     public int progression;
+    public int region;
+    public int personality;
 
     public int gamesPlayed;
     public int statsWins;
@@ -85,6 +87,10 @@ public class Player {
             return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
         }
         return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
+    }
+
+    public String getPosNameYrOvrPotTra_Str() {
+        return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + " [Transfer]";
     }
 
     public String getPosNameYrOvrPot_OneLine() {

@@ -90,7 +90,7 @@ public class Team {
     public int rankTeamSOS;
     public int teamCount = 12;
     public int totalTeamCount = teamCount * 10;
-    public int ratTransfer = 75;
+    public int ratTransfer = 74;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -1093,15 +1093,13 @@ public class Team {
 
         // FUTURE - PLAYER TRANSFERS
         // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
-        // Transfer to teams under 60
-        //
-        //
+
         int i = 0;
 
         sortPlayers();
         i = 0;
         while (i < teamQBs.size() && teamQBs.size() > 1) {
-            if (teamQBs.get(i).year > 1 && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int) (Math.random() * 10) < 2) {
+            if (teamQBs.get(i).year > 1 && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int) (Math.random() * 10) < 4) {
                 teamQBs.get(i).isTransfer = true;
                 playersTransferring.add(teamQBs.get(i));
                 league.transferQBs.add(teamQBs.get(i));
@@ -1114,7 +1112,7 @@ public class Team {
 
         i = 0;
         while (i < teamRBs.size() && teamRBs.size() > 2) {
-            if (teamRBs.get(i).year > 1 && !teamRBs.get(i).isMedicalRS && teamRBs.get(i).ratOvr > ratTransfer) {
+            if (teamRBs.get(i).year > 1 && !teamRBs.get(i).isMedicalRS && teamRBs.get(i).ratOvr > ratTransfer  && (int) (Math.random() * 10) < 3) {
                 if (teamRBs.get(i) != teamRBs.get(0) && teamRBs.get(i) != teamRBs.get(1)) {
                     teamRBs.get(i).isTransfer = true;
                     playersTransferring.add(teamRBs.get(i));
@@ -1129,7 +1127,7 @@ public class Team {
 
         i = 0;
         while (i < teamWRs.size() && teamWRs.size() > 3) {
-            if (teamWRs.get(i).year > 1 && !teamWRs.get(i).isMedicalRS && teamWRs.get(i).ratOvr > ratTransfer) {
+            if (teamWRs.get(i).year > 1 && !teamWRs.get(i).isMedicalRS && teamWRs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < 3) {
                 if (teamWRs.get(i) != teamWRs.get(0) && teamWRs.get(i) != teamWRs.get(1) && teamWRs.get(i) != teamWRs.get(2)) {
                     teamWRs.get(i).isTransfer = true;
                     playersTransferring.add(teamWRs.get(i));
@@ -1144,7 +1142,7 @@ public class Team {
 
         i = 0;
         while (i < teamTEs.size() && teamTEs.size() > 1) {
-            if (teamTEs.get(i).year > 1 && !teamTEs.get(i).isMedicalRS && teamTEs.get(i).ratOvr > ratTransfer && teamTEs.get(i) != teamTEs.get(0)) {
+            if (teamTEs.get(i).year > 1 && !teamTEs.get(i).isMedicalRS && teamTEs.get(i).ratOvr > ratTransfer && teamTEs.get(i) != teamTEs.get(0) && (int) (Math.random() * 10) < 3) {
                 teamTEs.get(i).isTransfer = true;
                 playersTransferring.add(teamTEs.get(i));
                 league.transferTEs.add(teamTEs.get(i));
@@ -1157,7 +1155,7 @@ public class Team {
 
         i = 0;
         while (i < teamOLs.size() && teamOLs.size() > 5) {
-            if (teamOLs.get(i).year > 1 && !teamOLs.get(i).isMedicalRS && teamOLs.get(i).ratOvr > ratTransfer) {
+            if (teamOLs.get(i).year > 1 && !teamOLs.get(i).isMedicalRS && teamOLs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < 3) {
                 if (teamOLs.get(i) != teamOLs.get(0) && teamOLs.get(i) != teamOLs.get(1) && teamOLs.get(i) != teamOLs.get(2) && teamOLs.get(i) != teamOLs.get(3) && teamOLs.get(i) != teamOLs.get(4)) {
                     teamOLs.get(i).isTransfer = true;
                     playersTransferring.add(teamOLs.get(i));
@@ -1172,7 +1170,7 @@ public class Team {
 
         i = 0;
         while (i < teamKs.size() && teamKs.size() > 1) {
-            if (teamKs.get(i).year > 1 && !teamKs.get(i).isMedicalRS && teamKs.get(i).ratOvr > ratTransfer && teamKs.get(i) != teamKs.get(0)) {
+            if (teamKs.get(i).year > 1 && !teamKs.get(i).isMedicalRS && teamKs.get(i).ratOvr > ratTransfer && teamKs.get(i) != teamKs.get(0) && (int) (Math.random() * 10) < 2) {
                 teamKs.get(i).isTransfer = true;
                 playersTransferring.add(teamKs.get(i));
                 league.transferKs.add(teamKs.get(i));
@@ -1185,7 +1183,7 @@ public class Team {
 
         i = 0;
         while (i < teamDLs.size() && teamDLs.size() > 4) {
-            if (teamDLs.get(i).year > 1 && !teamDLs.get(i).isMedicalRS && teamDLs.get(i).ratOvr > ratTransfer) {
+            if (teamDLs.get(i).year > 1 && !teamDLs.get(i).isMedicalRS && teamDLs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < 3) {
                 if (teamDLs.get(i) != teamDLs.get(0) && teamDLs.get(i) != teamDLs.get(1) && teamDLs.get(i) != teamDLs.get(2) && teamDLs.get(i) != teamDLs.get(3)) {
                     teamDLs.get(i).isTransfer = true;
                     playersTransferring.add(teamDLs.get(i));
@@ -1200,7 +1198,7 @@ public class Team {
 
         i = 0;
         while (i < teamLBs.size() && teamLBs.size() > 3) {
-            if (teamLBs.get(i).year > 1 && !teamLBs.get(i).isMedicalRS && teamLBs.get(i).ratOvr > ratTransfer) {
+            if (teamLBs.get(i).year > 1 && !teamLBs.get(i).isMedicalRS && teamLBs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < 3) {
                 if (teamLBs.get(i) != teamLBs.get(0) && teamLBs.get(i) != teamLBs.get(1) && teamLBs.get(i) != teamLBs.get(2)) {
                     teamLBs.get(i).isTransfer = true;
                     playersTransferring.add(teamLBs.get(i));
@@ -1215,7 +1213,7 @@ public class Team {
 
         i = 0;
         while (i < teamCBs.size() && teamCBs.size() > 3) {
-            if (teamCBs.get(i).year > 1 && !teamCBs.get(i).isMedicalRS && teamCBs.get(i).ratOvr > ratTransfer) {
+            if (teamCBs.get(i).year > 1 && !teamCBs.get(i).isMedicalRS && teamCBs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < 3) {
                 if (teamCBs.get(i) != teamCBs.get(0) && teamCBs.get(i) != teamCBs.get(1) && teamCBs.get(i) != teamCBs.get(2) && teamCBs.get(i) != teamCBs.get(3)) {
                     teamCBs.get(i).isTransfer = true;
                     playersTransferring.add(teamCBs.get(i));
@@ -1230,7 +1228,7 @@ public class Team {
 
         i = 0;
         while (i < teamSs.size() && teamSs.size() > 1) {
-            if (teamSs.get(i).year > 1 && !teamSs.get(i).isMedicalRS && teamSs.get(i).ratOvr > ratTransfer && teamSs.get(i) != teamSs.get(0)) {
+            if (teamSs.get(i).year > 1 && !teamSs.get(i).isMedicalRS && teamSs.get(i).ratOvr > ratTransfer && teamSs.get(i) != teamSs.get(0) && (int) (Math.random() * 10) < 3) {
                 teamSs.get(i).isTransfer = true;
                 playersTransferring.add(teamSs.get(i));
                 league.transferSs.add(teamSs.get(i));
@@ -3015,6 +3013,9 @@ public class Team {
         for (int i = 0; i < playersLeavingList.length; ++i) {
             playersLeavingList[i] = playersLeaving.get(i).getPosNameYrOvrPot_Str();
         }
+        for (int i = 0; i < playersTransferring.size(); ++i) {
+            playersLeavingList[i] = playersTransferring.get(i).getPosNameYrOvrPotTra_Str();
+        }
         return playersLeavingList;
     }
 
@@ -3026,7 +3027,7 @@ public class Team {
             stars = (int) (5 * (float) (numRecruits - i / 2) / numRecruits);
             recruits[i] = new PlayerQB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3038,31 +3039,31 @@ public class Team {
             stars = (int) (5 * (float) (numRBrecruits - i / 2) / numRBrecruits);
             recruits[i] = new PlayerRB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
     public PlayerWR[] getWRRecruits() {
-        int adjNumRecruits = numRecruits;
+        int adjNumRecruits = 3 * numRecruits;
         PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
         int stars;
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerWR(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
     public PlayerTE[] getTERecruits() {
-        int adjNumRecruits = 2 * numRecruits;
+        int adjNumRecruits = numRecruits;
         PlayerTE[] recruits = new PlayerTE[adjNumRecruits];
         int stars;
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerTE(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3074,7 +3075,7 @@ public class Team {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerOL(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3086,7 +3087,7 @@ public class Team {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerK(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3098,19 +3099,19 @@ public class Team {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerDL(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
     public PlayerLB[] getLBRecruits() {
-        int adjNumRecruits = 2 * numRecruits;
+        int adjNumRecruits = 3 * numRecruits;
         PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
         int stars;
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerLB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3122,7 +3123,7 @@ public class Team {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerCB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3134,7 +3135,7 @@ public class Team {
             stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new PlayerComparator());
+        Arrays.sort(recruits, new RecruitComparator());
         return recruits;
     }
 
@@ -3571,4 +3572,14 @@ class PlayerPositionComparator implements Comparator<Player> {
         int bPos = Player.getPosNumber(b.position);
         return aPos < bPos ? -1 : aPos == bPos ? 0 : 1;
     }
+}
+
+/**
+ * Comparator used to sort players by overall
+ */
+class RecruitComparator implements Comparator<Player> {
+    @Override
+    public int compare(Player a, Player b) {
+            return a.cost > b.cost ? -1 : a.cost == b.cost ? 0 : 1;
+        }
 }

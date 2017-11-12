@@ -1,14 +1,17 @@
 package antdroid.cfbcoach;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,7 +52,7 @@ import Simulation.Team;
 import Simulation.TeamStrategy;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int READ_REQUEST_CODE = 43;
     public String oldConf;
     public HeadCoach userHC;
     int season;
@@ -608,6 +611,11 @@ public class MainActivity extends AppCompatActivity {
               Clicked CCG / Bowl Watch in drop down menu
              */
             showBowlCCGDialog();
+/*        } else if (id == R.id.action_import) {
+            *//*
+              Clicked Save League in drop down menu
+             *//*
+            importData();*/
         } else if (id == R.id.action_save_league) {
             /*
               Clicked Save League in drop down menu
@@ -2595,6 +2603,64 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Error! Bad URL or unable to read file.", Toast.LENGTH_SHORT).show();
         }
     }
+
+/*    *//* Checks if external storage is available for read and write *//*
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    *//* Checks if external storage is available to at least read *//*
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+    }
+    *//* Creates external Save directory *//*
+
+    public File getExtSaveDir(Context context, String cfbCoach) {
+        // Get the directory for the app's private pictures directory.
+        File file = new File(context.getExternalFilesDir(
+                Environment.DIRECTORY_DOCUMENTS), cfbCoach);
+        if (!file.mkdirs()) {
+            Log.e(cfbCoach, "Directory not created");
+        }
+        return file;
+    }
+
+    public void importData() {
+        isExternalStorageReadable();
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("text/plain");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, READ_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        String uriStr;
+
+        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
+        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
+        // response to some other intent, and the code below shouldn't run at all.
+
+        if (requestCode == READ_REQUEST_CODE && resultCode == Home.RESULT_OK) {
+            // The document selected by the user won't be returned in the intent.
+            // Instead, a URI to that document will be contained in the return intent
+            // provided to this method as a parameter.
+            // Pull that URI using resultData.getData().
+            Uri uri = null;
+            uri = resultData.getData();
+            String line;
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder sb = new StringBuilder();
+            //First ignore the save file info
+            line = null;
+            line = reader.readLine();
+        }
+    }*/
 
 }
 
