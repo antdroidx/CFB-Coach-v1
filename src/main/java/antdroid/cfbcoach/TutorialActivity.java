@@ -24,9 +24,9 @@ public class TutorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
-        tutorialSpinner = (Spinner) findViewById(R.id.tutorialSpinner);
-        tutorialTitle = (TextView) findViewById(R.id.tutorialTitle);
-        tutorialContent = (TextView) findViewById(R.id.tutorialContent);
+        tutorialSpinner = findViewById(R.id.tutorialSpinner);
+        tutorialTitle = findViewById(R.id.tutorialTitle);
+        tutorialContent = findViewById(R.id.tutorialContent);
 
         titles = new ArrayList<>();
         contents = new ArrayList<>();

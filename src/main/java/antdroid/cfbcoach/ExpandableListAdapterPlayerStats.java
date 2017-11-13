@@ -52,9 +52,9 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
         convertView = inflater.inflate(R.layout.child_player_stats, null);
 
         // Set up Text for player details
-        TextView itemL = (TextView) convertView.findViewById(R.id.textPlayerStatsLeftChild);
-        TextView itemR = (TextView) convertView.findViewById(R.id.textPlayerStatsRightChild);
-        TextView itemC = (TextView) convertView.findViewById(R.id.textPlayerStatsCenter);
+        TextView itemL = convertView.findViewById(R.id.textPlayerStatsLeftChild);
+        TextView itemR = convertView.findViewById(R.id.textPlayerStatsRightChild);
+        TextView itemC = convertView.findViewById(R.id.textPlayerStatsCenter);
         itemC.setText("");
         itemL.setText("");
         itemR.setText("");
@@ -84,7 +84,7 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
             itemR.setVisibility(View.GONE);
         }
 
-        Button buttonViewStats = (Button) convertView.findViewById(R.id.buttonPlayerStatsViewAll);
+        Button buttonViewStats = convertView.findViewById(R.id.buttonPlayerStatsViewAll);
         buttonViewStats.setText("View Career Stats");
         buttonViewStats.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -131,11 +131,11 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
         convertView = infalInflater.inflate(R.layout.group_player_stats, null);
 
         String[] detailSplit = getGroup(groupPosition).split(">");
-        TextView itemL = (TextView) convertView.findViewById(R.id.textPlayerStatsLeft);
+        TextView itemL = convertView.findViewById(R.id.textPlayerStatsLeft);
         itemL.setText(detailSplit[0]);
         itemL.setTypeface(null, Typeface.BOLD);
 
-        TextView itemR = (TextView) convertView.findViewById(R.id.textPlayerStatsRight);
+        TextView itemR = convertView.findViewById(R.id.textPlayerStatsRight);
         itemR.setText(detailSplit[1]);
         itemR.setTypeface(null, Typeface.BOLD);
 

@@ -32,12 +32,12 @@ public class MockDraftListArrayAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.child_player_stats, parent, false);
 
         String[] detailSplit = values[position].split(">");
-        TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
+        TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
         itemL.setText((1 + position) + ". " + detailSplit[0]);
-        TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+        TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
         itemR.setText(detailSplit[1]);
 
-        Button butt = (Button) rowView.findViewById(R.id.buttonPlayerStatsViewAll);
+        Button butt = rowView.findViewById(R.id.buttonPlayerStatsViewAll);
         butt.setVisibility(View.GONE);
 
         if (detailSplit[1].equals(userTeamStrRep)) {

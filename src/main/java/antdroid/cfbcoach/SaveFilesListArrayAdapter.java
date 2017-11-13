@@ -25,22 +25,22 @@ public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.child_player_stats, parent, false);
 
-        Button butt = (Button) rowView.findViewById(R.id.buttonPlayerStatsViewAll);
+        Button butt = rowView.findViewById(R.id.buttonPlayerStatsViewAll);
         butt.setVisibility(View.GONE);
 
         String[] detailSplit = values[position].split(">");
-        TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
+        TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
         itemL.setPadding(5, 0, 5, 0);
         itemL.setText(detailSplit[0]);
         if (detailSplit.length >= 2) {
-            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+            TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
             itemR.setPadding(5, 0, 5, 0);
             itemR.setText(detailSplit[1]);
             if (detailSplit[1].equals("[CAREER]"))
                 itemR.setTextColor(Color.RED);
             else itemR.setTextColor(Color.parseColor("#008066"));
         } else {
-            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+            TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
             itemR.setPadding(5, 0, 5, 0);
             //itemR.setText("[DYNASTY]");
             itemR.setTextColor(Color.parseColor("#008066"));

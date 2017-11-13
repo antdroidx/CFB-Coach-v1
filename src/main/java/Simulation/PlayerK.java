@@ -28,7 +28,7 @@ public class PlayerK extends Player {
     public int careerFGAtt;
     public int careerFGMade;
 
-    public PlayerK(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur, int prs) {
+    public PlayerK(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur, int prs, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -45,7 +45,8 @@ public class PlayerK extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "K";
-
+        region = reg;
+        personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 80 + (int) (Math.random() * 100) - 50;
 
         statsXPAtt = 0;
@@ -70,7 +71,7 @@ public class PlayerK extends Player {
 
     public PlayerK(String nm, Team t, int yr, int pot, int iq, int pow, int acc, int fum, boolean rs, int dur, int prs,
                    int cGamesPlayed, int cXPA, int cXPM, int cFGA, int cFGM,
-                   int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
+                   int cHeismans, int cAA, int cAC, int cWins, boolean transfer, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -87,7 +88,8 @@ public class PlayerK extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         isTransfer = transfer;
-
+        region = reg;
+        personality = trait;
         position = "K";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 80 + (int) (Math.random() * 100) - 50;
@@ -127,7 +129,8 @@ public class PlayerK extends Player {
         ratPressure = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
         ratOvr = (ratKickPow + ratKickAcc + 75) / 3;
         position = "K";
-
+        region = (int)(Math.random()*10);
+        personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 100 + (int) (Math.random() * 100) - 50;
 
         statsXPAtt = 0;
@@ -220,6 +223,7 @@ public class PlayerK extends Player {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Kick Strength: " + getLetterGrade(ratKickPow));
         pStats.add("Kick Accuracy: " + getLetterGrade(ratKickAcc) + ">Clumsiness: " + getLetterGrade(ratKickFum));
         pStats.add("Pressure: " + getLetterGrade(ratPressure) + ">Nothing");
@@ -242,6 +246,7 @@ public class PlayerK extends Player {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Kick Strength: " + getLetterGrade(ratKickPow));
         pStats.add("Kick Accuracy: " + getLetterGrade(ratKickAcc) + ">Clumsiness: " + getLetterGrade(ratKickFum));
         pStats.add("Pressure: " + getLetterGrade(ratPressure) + ">Nothing");

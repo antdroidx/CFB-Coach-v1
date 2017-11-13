@@ -26,9 +26,9 @@ public class HallOfFameListArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.hall_fame_list_item, parent, false);
-        TextView textTop = (TextView) rowView.findViewById(R.id.textViewHallFameName);
-        TextView textLeft = (TextView) rowView.findViewById(R.id.textViewHallFameLeft);
-        TextView textRight = (TextView) rowView.findViewById(R.id.textViewHallFameRight);
+        TextView textTop = rowView.findViewById(R.id.textViewHallFameName);
+        TextView textLeft = rowView.findViewById(R.id.textViewHallFameLeft);
+        TextView textRight = rowView.findViewById(R.id.textViewHallFameRight);
 
         String[] hof = values[position].split("&");
         if (hof.length > 1) {

@@ -27,8 +27,8 @@ public class TeamHistoryListArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.team_history_list_item, parent, false);
-        TextView textTop = (TextView) rowView.findViewById(R.id.textViewTeamHistoryTitle);
-        TextView textBottom = (TextView) rowView.findViewById(R.id.textViewTeamHistoryDetail);
+        TextView textTop = rowView.findViewById(R.id.textViewTeamHistoryTitle);
+        TextView textBottom = rowView.findViewById(R.id.textViewTeamHistoryDetail);
 
         String[] teamHist = values[position].split(">");
         if (teamHist.length > 1) {

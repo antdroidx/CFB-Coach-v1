@@ -26,9 +26,9 @@ public class TeamStatsListArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.team_stats_list_item, parent, false);
-        TextView textLeft = (TextView) rowView.findViewById(R.id.textTeamStatsLeft);
-        TextView textCenter = (TextView) rowView.findViewById(R.id.textTeamStatsCenter);
-        TextView textRight = (TextView) rowView.findViewById(R.id.textTeamStatsRight);
+        TextView textLeft = rowView.findViewById(R.id.textTeamStatsLeft);
+        TextView textCenter = rowView.findViewById(R.id.textTeamStatsCenter);
+        TextView textRight = rowView.findViewById(R.id.textTeamStatsRight);
 
         String[] teamStat = values[position].split(",");
         textLeft.setText(teamStat[0]);

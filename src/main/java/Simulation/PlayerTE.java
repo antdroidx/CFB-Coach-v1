@@ -37,7 +37,7 @@ public class PlayerTE extends Player {
     public int careerDrops;
     public int careerFumbles;
 
-    public PlayerTE(String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur, int rsp) {
+    public PlayerTE(String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur, int rsp, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -53,7 +53,8 @@ public class PlayerTE extends Player {
         ratSpeed = rsp;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
-
+        region = reg;
+        personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
 
         statsTargets = 0;
@@ -84,7 +85,7 @@ public class PlayerTE extends Player {
 
     public PlayerTE(String nm, Team t, int yr, int pot, int iq, int cat, int blk, int eva, boolean rs, int dur, int spd,
                     int cGamesPlayed, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles,
-                    int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
+                    int cHeismans, int cAA, int cAC, int cWins, boolean transfer, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -101,7 +102,8 @@ public class PlayerTE extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         isTransfer = transfer;
-
+        region = reg;
+        personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
 
         statsTargets = 0;
@@ -144,7 +146,8 @@ public class PlayerTE extends Player {
         ratEvasion = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
         ratSpeed = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
         ratOvr = (ratCatch * 2 + ratRunBlock * 2 + ratEvasion + ratSpeed) / 6;
-
+        region = (int)(Math.random()*10);
+        personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
 
         statsTargets = 0;
@@ -239,6 +242,7 @@ public class PlayerTE extends Player {
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGamesPlayed()) + " yds/g>Drops: " + statsDrops);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Catching: " + getLetterGrade(ratCatch));
         pStats.add("Blocking: " + getLetterGrade(ratRunBlock) + ">Evasion: " + getLetterGrade(ratEvasion));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
@@ -254,6 +258,7 @@ public class PlayerTE extends Player {
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGamesPlayed()) + " yds/g>Drops: " + statsDrops);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Catching: " + getLetterGrade(ratCatch));
         pStats.add("Blocking: " + getLetterGrade(ratRunBlock) + ">Evasion: " + getLetterGrade(ratEvasion));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
