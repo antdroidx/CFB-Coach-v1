@@ -99,7 +99,7 @@ public class RecruitingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruiting);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Init all the ArrayLists
@@ -231,14 +231,14 @@ public class RecruitingActivity extends AppCompatActivity {
         /*
           Assign components to private variables for easier access later
          */
-        budgetText = (TextView) findViewById(R.id.textRecBudget);
+        budgetText = findViewById(R.id.textRecBudget);
         String budgetStr = "Budget: $" + recruitingBudget;
         budgetText.setText(budgetStr);
 
         /*
           Set up spinner for examining choosing position to recruit
          */
-        positionSpinner = (Spinner) findViewById(R.id.spinnerRec);
+        positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
         positions.add("QB (Need: " + needQBs + ")");
         positions.add("RB (Need: " + needRBs + ")");
@@ -271,7 +271,7 @@ public class RecruitingActivity extends AppCompatActivity {
         /*
           Set up the "Done" button for returning back to MainActivity
          */
-        Button doneRecrutingButton = (Button) findViewById(R.id.buttonDoneRecruiting);
+        Button doneRecrutingButton = findViewById(R.id.buttonDoneRecruiting);
         doneRecrutingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 exitRecruiting();
@@ -281,7 +281,7 @@ public class RecruitingActivity extends AppCompatActivity {
         /*
           Set up the "Roster" button for displaying dialog of all players in roster
          */
-        Button viewRosterButton = (Button) findViewById(R.id.buttonRecRoster);
+        Button viewRosterButton = findViewById(R.id.buttonRecRoster);
         viewRosterButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Make dialog
@@ -292,7 +292,7 @@ public class RecruitingActivity extends AppCompatActivity {
         /*
           Set up expandable list view
          */
-        recruitList = (ExpandableListView) findViewById(R.id.recruitExpandList);
+        recruitList = findViewById(R.id.recruitExpandList);
         setPlayerList("QB");
         setPlayerInfoMap("QB");
         expListAdapter = new ExpandableListAdapterRecruiting(this);
@@ -301,7 +301,7 @@ public class RecruitingActivity extends AppCompatActivity {
         /*
           Set up "Expand All / Collapse All" button
          */
-        final Button buttonExpandAll = (Button) findViewById(R.id.buttonRecruitExpandCollapse);
+        final Button buttonExpandAll = findViewById(R.id.buttonRecruitExpandCollapse);
         buttonExpandAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
@@ -751,7 +751,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
-        TextView msgTxt = (TextView) dialog.findViewById(android.R.id.message);
+        TextView msgTxt = dialog.findViewById(android.R.id.message);
         msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
@@ -846,7 +846,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
-                TextView msgTxt = (TextView) dialog.findViewById(android.R.id.message);
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
                 msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
             } else {
@@ -1033,7 +1033,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
-                TextView msgTxt = (TextView) dialog.findViewById(android.R.id.message);
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
                 msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
             } else {
@@ -1205,18 +1205,18 @@ public class RecruitingActivity extends AppCompatActivity {
             }
 
             // Set up Text for player details
-            final TextView details = (TextView) convertView.findViewById(R.id.textRecruitDetails);
-            final TextView potential = (TextView) convertView.findViewById(R.id.textRecruitPotential);
+            final TextView details = convertView.findViewById(R.id.textRecruitDetails);
+            final TextView potential = convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
             potential.setText("Football IQ: " + getLetterGrade(playerCSV.split(",")[4]) + "\nPotential: " + getLetterGrade(playerCSV.split(",")[3]) + "\n" +
                     "Durability: " + getLetterGrade(playerCSV.split(",")[10]));
 
             // Set up Recruit and Redshirt buttons to display the right price
-            Button recruitPlayerButton = (Button) convertView.findViewById(R.id.buttonRecruitPlayer);
+            Button recruitPlayerButton = convertView.findViewById(R.id.buttonRecruitPlayer);
             recruitPlayerButton.setText("Recruit: $" + getRecruitCost(playerCSV));
 
-            Button redshirtPlayerButton = (Button) convertView.findViewById(R.id.buttonRedshirtPlayer);
+            Button redshirtPlayerButton = convertView.findViewById(R.id.buttonRedshirtPlayer);
             redshirtPlayerButton.setText("Redshirt: $" + (5 * getRecruitCost(playerCSV)) / 4);
 
             // Set up button for recruiting player
@@ -1267,10 +1267,10 @@ public class RecruitingActivity extends AppCompatActivity {
                 convertView = infalInflater.inflate(R.layout.group_recruit,
                         null);
             }
-            TextView itemL = (TextView) convertView.findViewById(R.id.textRecruitLeft);
+            TextView itemL = convertView.findViewById(R.id.textRecruitLeft);
             itemL.setTypeface(null, Typeface.BOLD);
             itemL.setText(playerLeft);
-            TextView itemR = (TextView) convertView.findViewById(R.id.textRecruitRight);
+            TextView itemR = convertView.findViewById(R.id.textRecruitRight);
             itemR.setTypeface(null, Typeface.BOLD);
             itemR.setText(playerRight);
             return convertView;

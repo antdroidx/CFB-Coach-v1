@@ -32,9 +32,9 @@ public class MainRankings extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.rankings_main, parent, false);
-        TextView textLeft = (TextView) rowView.findViewById(R.id.textRankLeft);
-        TextView textCenter = (TextView) rowView.findViewById(R.id.textRankCenter);
-        TextView textRight = (TextView) rowView.findViewById(R.id.textRankRight);
+        TextView textLeft = rowView.findViewById(R.id.textRankLeft);
+        TextView textCenter = rowView.findViewById(R.id.textRankCenter);
+        TextView textRight = rowView.findViewById(R.id.textRankRight);
 
         String[] teamStat = values.get(position).split(",");
         textLeft.setText(teamStat[0]);

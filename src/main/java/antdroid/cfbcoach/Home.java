@@ -37,13 +37,13 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageView imageLogo = (ImageView) findViewById(R.id.imageLogo);
+        ImageView imageLogo = findViewById(R.id.imageLogo);
         imageLogo.setImageResource(R.drawable.main_menu_logo);
 
-        Button newGameButton = (Button) findViewById(R.id.buttonNewGame);
+        Button newGameButton = findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
@@ -52,7 +52,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button newCustomGameButton = (Button) findViewById(R.id.buttonCustomNewGame);
+        Button newCustomGameButton = findViewById(R.id.buttonCustomNewGame);
         newCustomGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 isExternalStorageReadable();
@@ -65,7 +65,7 @@ public class Home extends AppCompatActivity {
         });
 
 
-        Button newCareerButton = (Button) findViewById(R.id.buttonCareer);
+        Button newCareerButton = findViewById(R.id.buttonCareer);
         newCareerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
@@ -74,7 +74,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button newCustomCareerButton = (Button) findViewById(R.id.buttonCustomCareer);
+        Button newCustomCareerButton = findViewById(R.id.buttonCustomCareer);
         newCustomCareerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 isExternalStorageReadable();
@@ -86,7 +86,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button loadGameButton = (Button) findViewById(R.id.buttonLoadGame);
+        Button loadGameButton = findViewById(R.id.buttonLoadGame);
         loadGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -94,7 +94,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button deleteGameButton = (Button) findViewById(R.id.buttonDeleteSave);
+        Button deleteGameButton = findViewById(R.id.buttonDeleteSave);
         deleteGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -102,7 +102,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button tutorialButton = (Button) findViewById(R.id.buttonTutorial);
+        Button tutorialButton = findViewById(R.id.buttonTutorial);
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -111,7 +111,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button subredditButton = (Button) findViewById(R.id.buttonSubreddit);
+        Button subredditButton = findViewById(R.id.buttonSubreddit);
         subredditButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -123,7 +123,7 @@ public class Home extends AppCompatActivity {
         });
 
 
-        Button antdroidButton = (Button) findViewById(R.id.buttonAntdroid);
+        Button antdroidButton = findViewById(R.id.buttonAntdroid);
         antdroidButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -134,7 +134,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button githubButton = (Button) findViewById(R.id.buttonGitHub);
+        Button githubButton = findViewById(R.id.buttonGitHub);
         githubButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -145,7 +145,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button proButton = (Button) findViewById(R.id.buttonProFootballCoach);
+        Button proButton = findViewById(R.id.buttonProFootballCoach);
         proButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
@@ -156,7 +156,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button CollegeHoopsCoachButton = (Button) findViewById(R.id.buttonCollegeHoopsCoach);
+        Button CollegeHoopsCoachButton = findViewById(R.id.buttonCollegeHoopsCoach);
         CollegeHoopsCoachButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {

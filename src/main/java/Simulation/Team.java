@@ -16,6 +16,7 @@ import java.util.Random;
 public class Team {
 
     public League league;
+    Rankings rank;
     public String name;
     public String abbr;
     public String conference;
@@ -1543,13 +1544,15 @@ public class Team {
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
                         Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]),
                         Integer.parseInt(playerInfo[23]), Integer.parseInt(playerInfo[24]), Integer.parseInt(playerInfo[25]),
-                        Integer.parseInt(playerInfo[26]), Boolean.parseBoolean(playerInfo[27])));
+                        Integer.parseInt(playerInfo[26]), Boolean.parseBoolean(playerInfo[27]),
+                        Integer.parseInt(playerInfo[28]), Integer.parseInt(playerInfo[29])));
             else
                 teamQBs.add(new PlayerQB(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("RB")) {
             if (playerInfo.length >= 20)
                 teamRBs.add(new PlayerRB(playerInfo[1], this,
@@ -1562,13 +1565,15 @@ public class Team {
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
                         Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]),
-                        Integer.parseInt(playerInfo[23]), Boolean.parseBoolean(playerInfo[24])));
+                        Integer.parseInt(playerInfo[23]), Boolean.parseBoolean(playerInfo[24]),
+                        Integer.parseInt(playerInfo[25]), Integer.parseInt(playerInfo[26])));
             else
                 teamRBs.add(new PlayerRB(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("WR")) {
             if (playerInfo.length >= 22)
                 teamWRs.add(new PlayerWR(playerInfo[1], this,
@@ -1581,13 +1586,14 @@ public class Team {
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
                         Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]),
-                        Boolean.parseBoolean(playerInfo[23])));
+                        Boolean.parseBoolean(playerInfo[23]),Integer.parseInt(playerInfo[24]), Integer.parseInt(playerInfo[25])));
             else
                 teamWRs.add(new PlayerWR(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("TE")) {
             if (playerInfo.length >= 22)
                 teamTEs.add(new PlayerTE(playerInfo[1], this,
@@ -1600,13 +1606,14 @@ public class Team {
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
                         Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]),
-                        Boolean.parseBoolean(playerInfo[23])));
+                        Boolean.parseBoolean(playerInfo[23]),Integer.parseInt(playerInfo[24]), Integer.parseInt(playerInfo[25])));
             else
                 teamTEs.add(new PlayerTE(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("OL")) {
             if (playerInfo.length >= 16)
                 teamOLs.add(new PlayerOL(playerInfo[1], this,
@@ -1616,13 +1623,14 @@ public class Team {
                         Integer.parseInt(playerInfo[11]), Integer.parseInt(playerInfo[12]),
                         Integer.parseInt(playerInfo[13]), Integer.parseInt(playerInfo[14]),
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
-                        Boolean.parseBoolean(playerInfo[17])));
+                        Boolean.parseBoolean(playerInfo[17]),Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19])));
             else
                 teamOLs.add(new PlayerOL(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("K")) {
             if (playerInfo.length >= 20)
                 teamKs.add(new PlayerK(playerInfo[1], this,
@@ -1634,13 +1642,14 @@ public class Team {
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
-                        Boolean.parseBoolean(playerInfo[21])));
+                        Boolean.parseBoolean(playerInfo[21]),Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
             else
                 teamKs.add(new PlayerK(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("DL")) {
             if (playerInfo.length >= 16)
                 teamDLs.add(new PlayerDL(playerInfo[1], this,
@@ -1652,13 +1661,14 @@ public class Team {
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
-                        Boolean.parseBoolean(playerInfo[21])));
+                        Boolean.parseBoolean(playerInfo[21]),Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
             else
                 teamDLs.add(new PlayerDL(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("LB")) {
             if (playerInfo.length >= 16)
                 teamLBs.add(new PlayerLB(playerInfo[1], this,
@@ -1670,13 +1680,14 @@ public class Team {
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
-                        Boolean.parseBoolean(playerInfo[21])));
+                        Boolean.parseBoolean(playerInfo[21]),Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
             else
                 teamLBs.add(new PlayerLB(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("CB")) {
             if (playerInfo.length >= 16)
                 teamCBs.add(new PlayerCB(playerInfo[1], this,
@@ -1689,13 +1700,15 @@ public class Team {
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
                         Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]),
-                        Integer.parseInt(playerInfo[23]), Boolean.parseBoolean(playerInfo[24])));
+                        Integer.parseInt(playerInfo[23]), Boolean.parseBoolean(playerInfo[24]),
+                        Integer.parseInt(playerInfo[25]), Integer.parseInt(playerInfo[26])));
             else
                 teamCBs.add(new PlayerCB(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("S")) {
             if (playerInfo.length >= 16)
                 teamSs.add(new PlayerS(playerInfo[1], this,
@@ -1707,13 +1720,14 @@ public class Team {
                         Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]),
                         Integer.parseInt(playerInfo[17]), Integer.parseInt(playerInfo[18]),
                         Integer.parseInt(playerInfo[19]), Integer.parseInt(playerInfo[20]),
-                        Boolean.parseBoolean(playerInfo[21])));
+                        Boolean.parseBoolean(playerInfo[21]),Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
             else
                 teamSs.add(new PlayerS(playerInfo[1], this,
                         Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
                         Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]),
                         Integer.parseInt(playerInfo[6]), Integer.parseInt(playerInfo[7]),
-                        isRedshirt, durability, Integer.parseInt(playerInfo[11])));
+                        isRedshirt, durability, Integer.parseInt(playerInfo[11]),
+                        Integer.parseInt(playerInfo[12]), Integer.parseInt(playerInfo[13])));
         } else if (playerInfo[0].equals("HC")) {
             if (playerInfo.length >= 16)
                 HC.add(new HeadCoach(playerInfo[1], this,
@@ -1742,7 +1756,6 @@ public class Team {
                         Integer.parseInt(playerInfo[18]), Integer.parseInt(playerInfo[19]),
                         Integer.parseInt(playerInfo[20]), Integer.parseInt(playerInfo[21]),
                         Integer.parseInt(playerInfo[22]), Integer.parseInt(playerInfo[23])));
-
         }
     }
 
@@ -2181,7 +2194,7 @@ public class Team {
         int rating = 0;
         ArrayList<Player> roster = getAllPlayers();
         for (int i = 0; i < roster.size(); ++i) {
-            rating += roster.get(i).ratFootIQ;
+            rating += roster.get(i).personality;
         }
         return rating / roster.size();
     }
@@ -3150,52 +3163,52 @@ public class Team {
         PlayerQB[] qbs = getQBRecruits();
         for (PlayerQB qb : qbs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
-                    qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "," + qb.ratSpeed + "%\n");
+                    qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "," + qb.ratSpeed + "," + qb.region + "," + qb.personality + "%\n");
         }
         PlayerRB[] rbs = getRBRecruits();
         for (PlayerRB rb : rbs) {
             sb.append("RB," + rb.name + "," + rb.year + "," + rb.ratPot + "," + rb.ratFootIQ + "," +
-                    rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.cost + "," + rb.ratDur + "," + rb.ratCatch + "%\n");
+                    rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.cost + "," + rb.ratDur + "," + rb.ratCatch + "," + rb.region + "," + rb.personality + "%\n");
         }
         PlayerWR[] wrs = getWRRecruits();
         for (PlayerWR wr : wrs) {
             sb.append("WR," + wr.name + "," + wr.year + "," + wr.ratPot + "," + wr.ratFootIQ + "," +
-                    wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratDur + "," + wr.ratJump + "%\n");
+                    wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratDur + "," + wr.ratJump + "," + wr.region + "," + wr.personality + "%\n");
         }
         PlayerTE[] tes = getTERecruits();
         for (PlayerTE te : tes) {
             sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
-                    te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.cost + "," + te.ratDur + "," + te.ratSpeed + "%\n");
+                    te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.cost + "," + te.ratDur + "," + te.ratSpeed + "," + te.region + "," + te.personality + "%\n");
         }
         PlayerK[] ks = getKRecruits();
         for (PlayerK k : ks) {
             sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
-                    k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.cost + "," + k.ratDur + "," + k.ratPressure + "%\n");
+                    k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.cost + "," + k.ratDur + "," + k.ratPressure + "," + k.region + "," + k.personality + "%\n");
         }
         PlayerOL[] ols = getOLRecruits();
         for (PlayerOL ol : ols) {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
-                    ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratDur + "," + ol.ratAwareness + "%\n");
+                    ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratDur + "," + ol.ratAwareness + "," + ol.region + "," + ol.personality + "%\n");
         }
         PlayerDL[] DLs = getDLRecruits();
         for (PlayerDL DL : DLs) {
             sb.append("DL," + DL.name + "," + DL.year + "," + DL.ratPot + "," + DL.ratFootIQ + "," +
-                    DL.ratStrength + "," + DL.ratRunStop + "," + DL.ratPassRush + "," + DL.ratOvr + "," + DL.cost + "," + DL.ratDur + "," + DL.ratTackle + "%\n");
+                    DL.ratStrength + "," + DL.ratRunStop + "," + DL.ratPassRush + "," + DL.ratOvr + "," + DL.cost + "," + DL.ratDur + "," + DL.ratTackle + "," + DL.region + "," + DL.personality + "%\n");
         }
         PlayerLB[] lbs = getLBRecruits();
         for (PlayerLB lb : lbs) {
             sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
-                    lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "," + lb.ratSpeed + "%\n");
+                    lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "," + lb.ratSpeed  + "," + lb.region + "," + lb.personality + "%\n");
         }
         PlayerCB[] cbs = getCBRecruits();
         for (PlayerCB cb : cbs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
-                    cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratDur + "," + cb.ratJump + "%\n");
+                    cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratDur + "," + cb.ratJump + "," + cb.region + "," + cb.personality + "%\n");
         }
         PlayerS[] ss = getSRecruits();
         for (PlayerS s : ss) {
             sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
-                    s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "," + s.ratRunStop + "%\n");
+                    s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "," + s.ratRunStop + "," + s.region + "," + s.personality + "%\n");
         }
 
         return sb.toString();
@@ -3219,60 +3232,60 @@ public class Team {
                     qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.ratImprovement + "," + qb.ratDur + "," + qb.ratSpeed + "," +
                     qb.careerGamesPlayed + "," + qb.careerPassAtt + "," + qb.careerPassComp + "," + qb.careerTDs + "," + qb.careerInt + "," +
                     qb.careerPassYards + "," + qb.careerSacked + "," + qb.careerRushAtt + "," + qb.careerRushYards + "," + qb.careerRushTD + "," + qb.careerFumbles + "," + qb.careerHeismans +
-                    "," + qb.careerAllAmerican + "," + qb.careerAllConference + "," + qb.careerWins + "," + qb.isTransfer + "%\n");
+                    "," + qb.careerAllAmerican + "," + qb.careerAllConference + "," + qb.careerWins + "," + qb.isTransfer + "," + qb.region + "," + qb.personality + "%\n");
         }
         for (PlayerRB rb : teamRBs) {
             sb.append("RB," + rb.name + "," + rb.year + "," + rb.ratPot + "," + rb.ratFootIQ + "," +
                     rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.ratImprovement + "," + rb.ratDur + "," + rb.ratCatch + "," +
                     rb.careerGamesPlayed + "," + rb.careerRushAtt + "," + rb.careerRushYards + "," + rb.careerTDs + "," + rb.careerFumbles + "," + rb.careerReceptions + "," + rb.careerRecYards + "," + rb.careerRecTD + "," +
-                    rb.careerHeismans + "," + rb.careerAllAmerican + "," + rb.careerAllConference + "," + rb.careerWins + "," + rb.isTransfer + "%\n");
+                    rb.careerHeismans + "," + rb.careerAllAmerican + "," + rb.careerAllConference + "," + rb.careerWins + "," + rb.isTransfer + "," + rb.region + "," + rb.personality + "%\n");
         }
         for (PlayerWR wr : teamWRs) {
             sb.append("WR," + wr.name + "," + wr.year + "," + wr.ratPot + "," + wr.ratFootIQ + "," +
                     wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.ratImprovement + "," + wr.ratDur + "," + wr.ratJump + "," +
                     wr.careerGamesPlayed + "," + wr.careerTargets + "," + wr.careerReceptions + "," + wr.careerRecYards + "," + wr.careerTD + "," +
-                    wr.careerDrops + "," + wr.careerFumbles + "," + wr.careerHeismans + "," + wr.careerAllAmerican + "," + wr.careerAllConference + "," + wr.careerWins + "," + wr.isTransfer + "%\n");
+                    wr.careerDrops + "," + wr.careerFumbles + "," + wr.careerHeismans + "," + wr.careerAllAmerican + "," + wr.careerAllConference + "," + wr.careerWins + "," + wr.isTransfer + "," + wr.region + "," + wr.personality + "%\n");
         }
         for (PlayerTE te : teamTEs) {
             sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
                     te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.ratImprovement + "," + te.ratDur + "," + te.ratSpeed + "," +
                     te.careerGamesPlayed + "," + te.careerTargets + "," + te.careerReceptions + "," + te.careerRecYards + "," + te.careerTD + "," +
-                    te.careerDrops + "," + te.careerFumbles + "," + te.careerHeismans + "," + te.careerAllAmerican + "," + te.careerAllConference + "," + te.careerWins  + "," + te.isTransfer+ "%\n");
+                    te.careerDrops + "," + te.careerFumbles + "," + te.careerHeismans + "," + te.careerAllAmerican + "," + te.careerAllConference + "," + te.careerWins  + "," + te.isTransfer + "," + te.region + "," + te.personality + "%\n");
         }
         for (PlayerOL ol : teamOLs) {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
                     ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.ratImprovement + "," + ol.ratDur + "," + ol.ratAwareness + "," +
-                    ol.careerGamesPlayed + "," + ol.careerHeismans + "," + ol.careerAllAmerican + "," + ol.careerAllConference + "," + ol.careerWins  + "," + ol.isTransfer+ "%\n");
+                    ol.careerGamesPlayed + "," + ol.careerHeismans + "," + ol.careerAllAmerican + "," + ol.careerAllConference + "," + ol.careerWins  + "," + ol.isTransfer + "," + ol.region + "," + ol.personality + "%\n");
         }
         for (PlayerK k : teamKs) {
             sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
                     k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.ratImprovement + "," + k.ratDur + "," + k.ratPressure + "," +
                     k.careerGamesPlayed + "," + k.careerXPAtt + "," + k.careerXPMade + "," + k.careerFGAtt + "," + k.careerFGMade + "," +
-                    k.careerHeismans + "," + k.careerAllAmerican + "," + k.careerAllConference + "," + k.careerWins  + "," + k.isTransfer+ "%\n");
+                    k.careerHeismans + "," + k.careerAllAmerican + "," + k.careerAllConference + "," + k.careerWins  + "," + k.isTransfer + "," + k.region + "," + k.personality + "%\n");
         }
         for (PlayerDL dl : teamDLs) {
             sb.append("DL," + dl.name + "," + dl.year + "," + dl.ratPot + "," + dl.ratFootIQ + "," +
                     dl.ratStrength + "," + dl.ratRunStop + "," + dl.ratPassRush + "," + dl.ratOvr + "," + dl.ratImprovement + "," + dl.ratDur + "," + dl.ratTackle + "," +
                     dl.careerGamesPlayed + "," + dl.careerTackles + "," + dl.careerSacks + "," + dl.careerFumbles + "," + dl.careerInts + "," +
-                    dl.careerHeismans + "," + dl.careerAllAmerican + "," + dl.careerAllConference + "," + dl.careerWins  + "," + dl.isTransfer+ "%\n");
+                    dl.careerHeismans + "," + dl.careerAllAmerican + "," + dl.careerAllConference + "," + dl.careerWins  + "," + dl.isTransfer + "," + dl.region + "," + dl.personality + "%\n");
         }
         for (PlayerLB lb : teamLBs) {
             sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
                     lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.ratImprovement + "," + lb.ratDur + "," + lb.ratSpeed + "," +
                     lb.careerGamesPlayed + "," + lb.careerTackles + "," + lb.careerSacks + "," + lb.careerFumbles + "," + lb.careerInts + "," +
-                    lb.careerHeismans + "," + lb.careerAllAmerican + "," + lb.careerAllConference + "," + lb.careerWins  + "," + lb.isTransfer+ "%\n");
+                    lb.careerHeismans + "," + lb.careerAllAmerican + "," + lb.careerAllConference + "," + lb.careerWins  + "," + lb.isTransfer + "," + lb.region + "," + lb.personality + "%\n");
         }
         for (PlayerCB cb : teamCBs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
                     cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.ratImprovement + "," + cb.ratDur + "," + cb.ratJump + "," +
                     cb.careerGamesPlayed + "," + cb.careerTackles + "," + cb.careerSacks + "," + cb.careerFumbles + "," + cb.careerInts + "," + cb.careerTargets + "," + cb.careerIncomplete + "," + cb.careerDefended + "," +
-                    cb.careerHeismans + "," + cb.careerAllAmerican + "," + cb.careerAllConference + "," + cb.careerWins  + "," + cb.isTransfer+ "%\n");
+                    cb.careerHeismans + "," + cb.careerAllAmerican + "," + cb.careerAllConference + "," + cb.careerWins  + "," + cb.isTransfer + "," + cb.region + "," + cb.personality + "%\n");
         }
         for (PlayerS s : teamSs) {
             sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
                     s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.ratImprovement + "," + s.ratDur + "," + s.ratRunStop + "," +
                     s.careerGamesPlayed + "," + s.careerTackles + "," + s.careerSacks + "," + s.careerFumbles + "," + s.careerInts + "," +
-                    s.careerHeismans + "," + s.careerAllAmerican + "," + s.careerAllConference + "," + s.careerWins  + "," + s.isTransfer+ "%\n");
+                    s.careerHeismans + "," + s.careerAllAmerican + "," + s.careerAllConference + "," + s.careerWins  + "," + s.isTransfer + "," + s.region + "," + s.personality + "%\n");
         }
 
         return sb.toString();
@@ -3522,64 +3535,4 @@ public class Team {
         HC.get(0).defStrat = 0;
     }
 
-}
-
-/**
- * Comparator used to sort players by overall
- */
-class PlayerComparator implements Comparator<Player> {
-    @Override
-    public int compare(Player a, Player b) {
-        if (!a.isInjured && !b.isInjured) {
-            // If both players aren't injured
-            if (a.year > 0 && b.year > 0) {
-                if (!a.isTransfer && !b.isTransfer) {
-                    // If both players aren't redshirted
-                    if (a.ratOvr > b.ratOvr) return -1;
-                    else if (a.ratOvr == b.ratOvr)
-                        return a.ratPot > b.ratPot ? -1 : a.ratPot == b.ratPot ? 0 : 1;
-                    else return 1;
-                } else if (!a.isTransfer) {
-                    return -1;
-                } else if (!b.isTransfer) {
-                    return 1;
-                } else if (a.year > 0) {
-                    return -1;
-                } else if (b.year > 0) {
-                    return 1;
-                } else {
-                    return a.ratOvr > b.ratOvr ? -1 : a.ratOvr == b.ratOvr ? 0 : 1;
-                }
-            }
-        } else if (!a.isInjured) {
-            return -1;
-        } else if (!b.isInjured) {
-            return 1;
-        } else {
-            return a.ratOvr > b.ratOvr ? -1 : a.ratOvr == b.ratOvr ? 0 : 1;
-        }             return a.ratOvr > b.ratOvr ? -1 : a.ratOvr == b.ratOvr ? 0 : 1;
-
-    }
-}
-
-/**
- * Comparator used to sort players by position, QB-RB-WR-OL-K-S-CB-DL
- */
-class PlayerPositionComparator implements Comparator<Player> {
-    @Override
-    public int compare(Player a, Player b) {
-        int aPos = Player.getPosNumber(a.position);
-        int bPos = Player.getPosNumber(b.position);
-        return aPos < bPos ? -1 : aPos == bPos ? 0 : 1;
-    }
-}
-
-/**
- * Comparator used to sort players by overall
- */
-class RecruitComparator implements Comparator<Player> {
-    @Override
-    public int compare(Player a, Player b) {
-            return a.cost > b.cost ? -1 : a.cost == b.cost ? 0 : 1;
-        }
 }

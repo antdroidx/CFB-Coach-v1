@@ -33,7 +33,7 @@ public class PlayerLB extends Player {
     public int careerFumbles;
     public int careerInts;
 
-    public PlayerLB(String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur, int spd) {
+    public PlayerLB(String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur, int spd, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -50,7 +50,8 @@ public class PlayerLB extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "LB";
-
+        region = reg;
+        personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
 
         wonHeisman = false;
@@ -76,7 +77,7 @@ public class PlayerLB extends Player {
     }
 
     public PlayerLB(String nm, Team t, int yr, int pot, int iq, int cov, int rsh, int tkl, boolean rs, int dur, int spd,
-                    int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
+                    int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins, boolean transfer, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -93,7 +94,8 @@ public class PlayerLB extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         isTransfer = transfer;
-
+        region = reg;
+        personality = trait;
         position = "LB";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
@@ -136,7 +138,8 @@ public class PlayerLB extends Player {
         ratSpeed = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
         ratOvr = (ratCoverage + ratRunStop * 2 + ratTackle * 2 + ratSpeed) / 6;
         position = "LB";
-
+        region = (int)(Math.random()*10);
+        personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
 
         wonHeisman = false;
@@ -222,6 +225,7 @@ public class PlayerLB extends Player {
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
         pStats.add("Run Stop: " + getLetterGrade(ratRunStop) + ">Tackling: " + getLetterGrade(ratTackle));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
@@ -235,6 +239,7 @@ public class PlayerLB extends Player {
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
         pStats.add("Run Stop: " + getLetterGrade(ratRunStop) + ">Tackling: " + getLetterGrade(ratTackle));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");

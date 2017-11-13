@@ -32,8 +32,8 @@ public class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
 
         String[] detailSplit = values[position].split(">");
         if (detailSplit.length == 2) {
-            TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
-            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+            TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
+            TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
 
             if (values[position].substring(0, 3).equals("[I]")) {
                 // Injury, make red
@@ -48,11 +48,11 @@ public class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
                 colorizeRatings(itemR, detailSplit[1]);
             }
 
-            TextView itemC = (TextView) rowView.findViewById(R.id.textPlayerStatsCenter);
+            TextView itemC = rowView.findViewById(R.id.textPlayerStatsCenter);
             itemC.setText("");
         } else {
             // Only one, center it
-            TextView itemC = (TextView) rowView.findViewById(R.id.textPlayerStatsCenter);
+            TextView itemC = rowView.findViewById(R.id.textPlayerStatsCenter);
             if (values[position].substring(0, 3).equals("[B]")) {
                 // Bold it
                 itemC.setText(values[position].substring(3));
@@ -65,13 +65,13 @@ public class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
                 itemC.setText(values[position]);
             }
 
-            TextView itemL = (TextView) rowView.findViewById(R.id.textPlayerStatsLeftChild);
+            TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
             itemL.setVisibility(View.GONE);
-            TextView itemR = (TextView) rowView.findViewById(R.id.textPlayerStatsRightChild);
+            TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
             itemR.setVisibility(View.GONE);
         }
 
-        Button butt = (Button) rowView.findViewById(R.id.buttonPlayerStatsViewAll);
+        Button butt = rowView.findViewById(R.id.buttonPlayerStatsViewAll);
         butt.setVisibility(View.GONE);
 
         return rowView;

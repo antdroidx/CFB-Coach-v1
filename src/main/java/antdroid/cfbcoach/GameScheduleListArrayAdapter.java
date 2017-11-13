@@ -34,9 +34,9 @@ public class GameScheduleListArrayAdapter extends ArrayAdapter<Game> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.game_schedule_list_item, parent, false);
-        TextView textLeft = (TextView) rowView.findViewById(R.id.gameScheduleLeft);
-        Button gameButton = (Button) rowView.findViewById(R.id.gameScheduleButtonList);
-        Button textRight = (Button) rowView.findViewById(R.id.gameScheduleRight);
+        TextView textLeft = rowView.findViewById(R.id.gameScheduleLeft);
+        Button gameButton = rowView.findViewById(R.id.gameScheduleButtonList);
+        Button textRight = rowView.findViewById(R.id.gameScheduleRight);
 
         String[] gameSummary = team.getGameSummaryStr(position);
         textLeft.setText(gameSummary[0]);

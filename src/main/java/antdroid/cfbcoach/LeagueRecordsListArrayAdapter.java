@@ -30,9 +30,9 @@ public class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.league_record_list_item, parent, false);
-        TextView textLeft = (TextView) rowView.findViewById(R.id.textLeagueRecordLeft);
-        TextView textCenter = (TextView) rowView.findViewById(R.id.textLeagueRecordCenter);
-        TextView textRight = (TextView) rowView.findViewById(R.id.textLeagueRecordRight);
+        TextView textLeft = rowView.findViewById(R.id.textLeagueRecordLeft);
+        TextView textCenter = rowView.findViewById(R.id.textLeagueRecordCenter);
+        TextView textRight = rowView.findViewById(R.id.textLeagueRecordRight);
 
         String[] record = values[position].split(",");
         if (record[1].equals("-1")) {

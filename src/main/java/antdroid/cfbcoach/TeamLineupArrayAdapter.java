@@ -40,7 +40,7 @@ public class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.team_lineup_list_item, parent, false);
 
-        TextView playerInfo = (TextView) rowView.findViewById(R.id.textViewLineupPlayerInfo);
+        TextView playerInfo = rowView.findViewById(R.id.textViewLineupPlayerInfo);
 
         if (players.get(position).injury == null && !players.get(position).isTransfer) {
             playerInfo.setText(players.get(position).getInfoForLineup());
@@ -52,7 +52,7 @@ public class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
         }
 
 
-        CheckBox isPlayerStarting = (CheckBox) rowView.findViewById(R.id.checkboxPlayerStartingLineup);
+        CheckBox isPlayerStarting = rowView.findViewById(R.id.checkboxPlayerStartingLineup);
         if (playersSelected.contains(players.get(position))) {
             isPlayerStarting.setChecked(true);
         } else if (players.get(position).year == 0) {

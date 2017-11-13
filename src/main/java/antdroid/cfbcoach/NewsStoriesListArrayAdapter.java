@@ -27,8 +27,8 @@ public class NewsStoriesListArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.news_story_list_item, parent, false);
-        TextView newsTitle = (TextView) rowView.findViewById(R.id.textNewsTitle);
-        TextView newsContent = (TextView) rowView.findViewById(R.id.textNewsContent);
+        TextView newsTitle = rowView.findViewById(R.id.textNewsTitle);
+        TextView newsContent = rowView.findViewById(R.id.textNewsContent);
 
         String[] story = values.get(position).split(">");
         newsTitle.setText(story[0]);

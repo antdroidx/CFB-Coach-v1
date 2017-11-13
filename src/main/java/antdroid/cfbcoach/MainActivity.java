@@ -48,6 +48,7 @@ import Simulation.Game;
 import Simulation.HeadCoach;
 import Simulation.League;
 import Simulation.Player;
+import Simulation.Rankings;
 import Simulation.Team;
 import Simulation.TeamStrategy;
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     League simLeague;
     Conference currentConference;
     Team currentTeam;
+    Rankings rank;
     int currentConferenceID;
     Team userTeam;
     File saveLeagueFile;
@@ -98,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Set up list
-        mainList = (ListView) findViewById(R.id.mainList);
-        expListPlayerStats = (ExpandableListView) findViewById(R.id.playerStatsExpandList);
+        mainList = findViewById(R.id.mainList);
+        expListPlayerStats = findViewById(R.id.playerStatsExpandList);
 
         /*
           Determine whether to load League or start new one
@@ -215,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                 AlertDialog dialog = mode.create();
                 dialog.show();
-                TextView msgTxt = (TextView) dialog.findViewById(android.R.id.message);
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
                 msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             } else {
                 //get user team from list dialog
@@ -225,11 +227,11 @@ public class MainActivity extends AppCompatActivity {
             updateTeamUI();
         }
 
-        final TextView currentTeamText = (TextView) findViewById(R.id.currentTeamText);
+        final TextView currentTeamText = findViewById(R.id.currentTeamText);
         currentTeamText.setText(currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ")");
 
         //Set up spinner for examining team.
-        examineConfSpinner = (Spinner) findViewById(R.id.examineConfSpinner);
+        examineConfSpinner = findViewById(R.id.examineConfSpinner);
         confList = new ArrayList<String>();
         for (int i = 0; i < confStart; i++) {
             confList.add(simLeague.conferences.get(i).confName);
@@ -252,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        examineTeamSpinner = (Spinner) findViewById(R.id.examineTeamSpinner);
+        examineTeamSpinner = findViewById(R.id.examineTeamSpinner);
         teamList = new ArrayList<String>();
         for (int i = 0; i < teamsStart; i++) {
             teamList.add(simLeague.teamList.get(i).strRep());
@@ -278,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
         /*
           Set up "Play Week" button
          */
-        final Button simGameButton = (Button) findViewById(R.id.simGameButton);
+        final Button simGameButton = findViewById(R.id.simGameButton);
         simGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (recruitingStage == -1) {
@@ -298,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                                     });
                             AlertDialog dialog = builder.create();
                             dialog.show();
-                            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                            TextView textView = dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                         }
                         simGameButton.setTextSize(12);
@@ -363,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
                                     });
                             AlertDialog dialog = builder.create();
                             dialog.show();
-                            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                            TextView textView = dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                             simGameButton.setTextSize(12);
                             simGameButton.setText("Begin Off-Season");
@@ -429,16 +431,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        final Button homeButton = (Button) findViewById(R.id.buttonHome);
-        final Button newsButton = (Button) findViewById(R.id.buttonNews);
-        final Button teamStatsButton = (Button) findViewById(R.id.teamStatsButton);
-        final Button playerStatsButton = (Button) findViewById(R.id.playerStatsButton);
-        final Button teamScheduleButton = (Button) findViewById(R.id.teamScheduleButton);
-        final Button scoresButton = (Button) findViewById(R.id.buttonScores);
-        final Button standingsButton = (Button) findViewById(R.id.standingsButton);
-        final Button rankingsButton = (Button) findViewById(R.id.rankingsButton);
-        final Button depthchartButton = (Button) findViewById(R.id.buttonDepthChart);
-        final Button strategyButton = (Button) findViewById(R.id.buttonStrategy);
+        final Button homeButton = findViewById(R.id.buttonHome);
+        final Button newsButton = findViewById(R.id.buttonNews);
+        final Button teamStatsButton = findViewById(R.id.teamStatsButton);
+        final Button playerStatsButton = findViewById(R.id.playerStatsButton);
+        final Button teamScheduleButton = findViewById(R.id.teamScheduleButton);
+        final Button scoresButton = findViewById(R.id.buttonScores);
+        final Button standingsButton = findViewById(R.id.standingsButton);
+        final Button rankingsButton = findViewById(R.id.rankingsButton);
+        final Button depthchartButton = findViewById(R.id.buttonDepthChart);
+        final Button strategyButton = findViewById(R.id.buttonStrategy);
 
         //News
         newsButton.setOnClickListener(new View.OnClickListener() {
@@ -572,7 +574,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+                TextView textView = dialog.findViewById(android.R.id.message);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             } else {
                 // Show dialog with All American spinner too
@@ -671,7 +673,7 @@ public class MainActivity extends AppCompatActivity {
             if (spinnerSplit[1].equals(tempT.abbr)) {
                 examineTeamSpinner.setSelection(i);
                 currentTeam = tempT;
-                TextView currentTeamText = (TextView) findViewById(R.id.currentTeamText);
+                TextView currentTeamText = findViewById(R.id.currentTeamText);
                 currentTeamText.setText("#" + currentTeam.rankTeamPollScore +
                         " " + currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ") " +
                         currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
@@ -695,7 +697,7 @@ public class MainActivity extends AppCompatActivity {
             dataAdapterTeam.add(teamList.get(i));
         }
         dataAdapterTeam.notifyDataSetChanged();
-        TextView currentTeamText = (TextView) findViewById(R.id.currentTeamText);
+        TextView currentTeamText = findViewById(R.id.currentTeamText);
         currentTeamText.setText("#" + currentTeam.rankTeamPollScore +
                 " " + currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ") " +
                 currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
@@ -838,13 +840,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Spinner potySpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner potySpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> potyAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, selection);
         potyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         potySpinner.setAdapter(potyAdapter);
 
-        final ListView potyList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView potyList = dialog.findViewById(R.id.listViewTeamRankings);
 
         // Get all american and all conf
         final String[] coachAwardList = simLeague.getCoachAwardStr().split(">");
@@ -895,29 +897,29 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
 
             // Game score
-            final TextView gameAwayScore = (TextView) dialog.findViewById(R.id.gameDialogScoreAway);
-            final TextView gameHomeScore = (TextView) dialog.findViewById(R.id.gameDialogScoreHome);
-            final TextView gameAwayScoreName = (TextView) dialog.findViewById(R.id.gameDialogScoreAwayName);
-            final TextView gameHomeScoreName = (TextView) dialog.findViewById(R.id.gameDialogScoreHomeName);
+            final TextView gameAwayScore = dialog.findViewById(R.id.gameDialogScoreAway);
+            final TextView gameHomeScore = dialog.findViewById(R.id.gameDialogScoreHome);
+            final TextView gameAwayScoreName = dialog.findViewById(R.id.gameDialogScoreAwayName);
+            final TextView gameHomeScoreName = dialog.findViewById(R.id.gameDialogScoreHomeName);
             gameAwayScore.setText(g.awayScore + "");
             gameHomeScore.setText(g.homeScore + "");
             gameAwayScoreName.setText(g.awayTeam.getStrAbbrWL_2Lines());
             gameHomeScoreName.setText(g.homeTeam.getStrAbbrWL_2Lines());
 
 
-            final TextView awayTeam = (TextView) dialog.findViewById(R.id.teamAway);
-            final TextView awayQT1 = (TextView) dialog.findViewById(R.id.awayQT1);
-            final TextView awayQT2 = (TextView) dialog.findViewById(R.id.awayQT2);
-            final TextView awayQT3 = (TextView) dialog.findViewById(R.id.awayQT3);
-            final TextView awayQT4 = (TextView) dialog.findViewById(R.id.awayQT4);
-            final TextView awayOT = (TextView) dialog.findViewById(R.id.awayOT);
-            final TextView homeTeam = (TextView) dialog.findViewById(R.id.teamHome);
-            final TextView homeQT1 = (TextView) dialog.findViewById(R.id.homeQT1);
-            final TextView homeQT2 = (TextView) dialog.findViewById(R.id.homeQT2);
-            final TextView homeQT3 = (TextView) dialog.findViewById(R.id.homeQT3);
-            final TextView homeQT4 = (TextView) dialog.findViewById(R.id.homeQT4);
-            final TextView homeOT = (TextView) dialog.findViewById(R.id.homeOT);
-            final TextView scoreOT = (TextView) dialog.findViewById(R.id.scoreOT);
+            final TextView awayTeam = dialog.findViewById(R.id.teamAway);
+            final TextView awayQT1 = dialog.findViewById(R.id.awayQT1);
+            final TextView awayQT2 = dialog.findViewById(R.id.awayQT2);
+            final TextView awayQT3 = dialog.findViewById(R.id.awayQT3);
+            final TextView awayQT4 = dialog.findViewById(R.id.awayQT4);
+            final TextView awayOT = dialog.findViewById(R.id.awayOT);
+            final TextView homeTeam = dialog.findViewById(R.id.teamHome);
+            final TextView homeQT1 = dialog.findViewById(R.id.homeQT1);
+            final TextView homeQT2 = dialog.findViewById(R.id.homeQT2);
+            final TextView homeQT3 = dialog.findViewById(R.id.homeQT3);
+            final TextView homeQT4 = dialog.findViewById(R.id.homeQT4);
+            final TextView homeOT = dialog.findViewById(R.id.homeOT);
+            final TextView scoreOT = dialog.findViewById(R.id.scoreOT);
 
 
             awayTeam.setText(g.awayTeam.abbr);
@@ -944,18 +946,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            final TextView gameDialogScoreDashName = (TextView) dialog.findViewById(R.id.gameDialogScoreDashName);
+            final TextView gameDialogScoreDashName = dialog.findViewById(R.id.gameDialogScoreDashName);
             if (g.numOT > 0) {
                 gameDialogScoreDashName.setText(g.numOT + "OT");
             } else gameDialogScoreDashName.setText("@");
 
-            final TextView gameL = (TextView) dialog.findViewById(R.id.gameDialogLeft);
+            final TextView gameL = dialog.findViewById(R.id.gameDialogLeft);
             gameL.setText(gameStr[0]);
-            final TextView gameC = (TextView) dialog.findViewById(R.id.gameDialogCenter);
+            final TextView gameC = dialog.findViewById(R.id.gameDialogCenter);
             gameC.setText(gameStr[1]);
-            final TextView gameR = (TextView) dialog.findViewById(R.id.gameDialogRight);
+            final TextView gameR = dialog.findViewById(R.id.gameDialogRight);
             gameR.setText(gameStr[2]);
-            final TextView gameB = (TextView) dialog.findViewById(R.id.gameDialogBottom);
+            final TextView gameB = dialog.findViewById(R.id.gameDialogBottom);
             gameB.setText(gameStr[3] + "\n\n");
         } else {
             // Show game scouting dialog
@@ -973,21 +975,21 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
 
-            final TextView gameL = (TextView) dialog.findViewById(R.id.gameScoutDialogLeft);
+            final TextView gameL = dialog.findViewById(R.id.gameScoutDialogLeft);
             gameL.setText(gameStr[0]);
-            final TextView gameC = (TextView) dialog.findViewById(R.id.gameScoutDialogCenter);
+            final TextView gameC = dialog.findViewById(R.id.gameScoutDialogCenter);
             gameC.setText(gameStr[1]);
-            final TextView gameR = (TextView) dialog.findViewById(R.id.gameScoutDialogRight);
+            final TextView gameR = dialog.findViewById(R.id.gameScoutDialogRight);
             gameR.setText(gameStr[2]);
-            final TextView gameB = (TextView) dialog.findViewById(R.id.gameScoutDialogBottom);
+            final TextView gameB = dialog.findViewById(R.id.gameScoutDialogBottom);
             gameB.setText(gameStr[3]);
 
             // Set up spinners to choose strategy, if the game involves the user team
             if (g.awayTeam == userTeam || g.homeTeam == userTeam) {
 
                 // Set text to show user team's abbr
-                TextView textScoutOffenseStrategy = (TextView) dialog.findViewById(R.id.textScoutOffenseStrategy);
-                TextView textScoutDefenseStrategy = (TextView) dialog.findViewById(R.id.textScoutDefenseStrategy);
+                TextView textScoutOffenseStrategy = dialog.findViewById(R.id.textScoutOffenseStrategy);
+                TextView textScoutDefenseStrategy = dialog.findViewById(R.id.textScoutDefenseStrategy);
                 textScoutOffenseStrategy.setText(userTeam.abbr + " Off Strategy:");
                 textScoutDefenseStrategy.setText(userTeam.abbr + " Def Strategy:");
 
@@ -1012,7 +1014,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // Offense Strategy Spinner
-                Spinner stratOffSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerScoutOffenseStrategy);
+                Spinner stratOffSelectionSpinner = dialog.findViewById(R.id.spinnerScoutOffenseStrategy);
                 ArrayAdapter<String> stratOffSpinnerAdapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_spinner_item, stratOffSelection);
                 stratOffSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1033,7 +1035,7 @@ public class MainActivity extends AppCompatActivity {
                         });
 
                 // Defense Spinner Adapter
-                Spinner stratDefSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerScoutDefenseStrategy);
+                Spinner stratDefSelectionSpinner = dialog.findViewById(R.id.spinnerScoutDefenseStrategy);
                 ArrayAdapter<String> stratDefSpinnerAdapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_spinner_item, stratDefSelection);
                 stratDefSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1054,13 +1056,13 @@ public class MainActivity extends AppCompatActivity {
                         });
             } else {
                 // Make the strategy stuff invisible
-                Spinner stratOffSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerScoutOffenseStrategy);
-                Spinner stratDefSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerScoutDefenseStrategy);
+                Spinner stratOffSelectionSpinner = dialog.findViewById(R.id.spinnerScoutOffenseStrategy);
+                Spinner stratDefSelectionSpinner = dialog.findViewById(R.id.spinnerScoutDefenseStrategy);
                 stratOffSelectionSpinner.setVisibility(View.GONE);
                 stratDefSelectionSpinner.setVisibility(View.GONE);
 
-                TextView textScoutOffenseStrategy = (TextView) dialog.findViewById(R.id.textScoutOffenseStrategy);
-                TextView textScoutDefenseStrategy = (TextView) dialog.findViewById(R.id.textScoutDefenseStrategy);
+                TextView textScoutOffenseStrategy = dialog.findViewById(R.id.textScoutOffenseStrategy);
+                TextView textScoutDefenseStrategy = dialog.findViewById(R.id.textScoutDefenseStrategy);
                 textScoutOffenseStrategy.setVisibility(View.GONE);
                 textScoutDefenseStrategy.setVisibility(View.GONE);
             }
@@ -1085,13 +1087,13 @@ public class MainActivity extends AppCompatActivity {
                 {"Poll Votes", "Conference Standings", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
                         "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class"};
-        Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
         teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
 
-        final ListView teamRankingsList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
                 new TeamRankingsListArrayAdapter(this, rankings, userTeam.strRepWithBowlResults());
         teamRankingsList.setAdapter(teamRankingsAdapter);
@@ -1136,13 +1138,13 @@ public class MainActivity extends AppCompatActivity {
                         "Tackles", "Sacks", "Fumbles Recovered", "Interceptions",
                         "Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
                 };
-        Spinner teamRankingsSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
         teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
 
-        final ListView teamRankingsList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
                 new TeamRankingsListArrayAdapter(this, rankings, userTeam.abbr);
         teamRankingsList.setAdapter(teamRankingsAdapter);
@@ -1182,7 +1184,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        final ListView teamRankingsList = (ListView) dialog.findViewById(R.id.listViewDialog);
+        final ListView teamRankingsList = dialog.findViewById(R.id.listViewDialog);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
                 new TeamRankingsListArrayAdapter(this, simLeague.getTeamRankingsStr(16), userTeam.strRepWithPrestige());
         teamRankingsList.setAdapter(teamRankingsAdapter);
@@ -1202,13 +1204,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         String[] historySelection = {"League History", "League Records"};
-        Spinner leagueHistorySpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner leagueHistorySpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, historySelection);
         leagueHistorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         leagueHistorySpinner.setAdapter(leagueHistorySpinnerAdapter);
 
-        final ListView leagueHistoryList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView leagueHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
 
         leagueHistorySpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -1245,7 +1247,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         if (season == seasonStart) {
             String[] selection = {"No History to Display"};
-            Spinner top25hisSpinner = (Spinner) dialog.findViewById(R.id.spinnerBowlCCG);
+            Spinner top25hisSpinner = dialog.findViewById(R.id.spinnerBowlCCG);
             final ArrayAdapter<String> top25Adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_item, selection);
             top25Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1255,13 +1257,13 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < simLeague.leagueHistory.size(); ++i) {
                 selection[i] = Integer.toString(seasonStart + i);
             }
-            Spinner top25hisSpinner = (Spinner) dialog.findViewById(R.id.spinnerBowlCCG);
+            Spinner top25hisSpinner = dialog.findViewById(R.id.spinnerBowlCCG);
             final ArrayAdapter<String> top25Adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_item, selection);
             top25Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             top25hisSpinner.setAdapter(top25Adapter);
 
-            final TextView top25his = (TextView) dialog.findViewById(R.id.textViewBowlCCGDialog);
+            final TextView top25his = dialog.findViewById(R.id.textViewBowlCCGDialog);
 
             top25hisSpinner.setOnItemSelectedListener(
                     new AdapterView.OnItemSelectedListener() {
@@ -1291,13 +1293,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         String[] selection = {"Team History"};
-        Spinner teamHistSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, selection);
         teamHistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teamHistSpinner.setAdapter(teamHistAdapter);
 
-        final ListView teamHistoryList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView teamHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
 
         final String[] hofPlayers = new String[userTeam.hallOfFame.size()];
         for (int i = 0; i < userTeam.hallOfFame.size(); ++i) {
@@ -1342,13 +1344,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         String[] selection = {"Team History", "Team Records", "Hall of Fame"};
-        Spinner teamHistSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, selection);
         teamHistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teamHistSpinner.setAdapter(teamHistAdapter);
 
-        final ListView teamHistoryList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView teamHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
         final String[] hofPlayers = new String[currentTeam.hallOfFame.size()];
         for (int i = 0; i < currentTeam.hallOfFame.size(); ++i) {
             hofPlayers[i] = currentTeam.hallOfFame.get(i);
@@ -1393,13 +1395,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         String[] selection = {"Conf Championships", "Bowl Games"};
-        Spinner bowlCCGSpinner = (Spinner) dialog.findViewById(R.id.spinnerBowlCCG);
+        Spinner bowlCCGSpinner = dialog.findViewById(R.id.spinnerBowlCCG);
         ArrayAdapter<String> bowlCCGadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, selection);
         bowlCCGadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bowlCCGSpinner.setAdapter(bowlCCGadapter);
 
-        final TextView bowlCCGscores = (TextView) dialog.findViewById(R.id.textViewBowlCCGDialog);
+        final TextView bowlCCGscores = dialog.findViewById(R.id.textViewBowlCCGDialog);
 
         bowlCCGSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -1447,7 +1449,7 @@ public class MainActivity extends AppCompatActivity {
             else if (i == 22) weekSelection[i] = "Spring News";
             else weekSelection[i] = "Week " + i;
         }
-        Spinner weekSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> weekSelectionSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, weekSelection);
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1458,7 +1460,7 @@ public class MainActivity extends AppCompatActivity {
             weekSelectionSpinner.setSelection(simLeague.currentWeek);
         }
 
-        final ListView newsStoriesList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
         final NewsStoriesListArrayAdapter newsStoriesAdapter = new NewsStoriesListArrayAdapter(this, rankings);
         newsStoriesList.setAdapter(newsStoriesAdapter);
 
@@ -1523,11 +1525,11 @@ public class MainActivity extends AppCompatActivity {
             if (stratDefSelection[i].equals(userTeam.teamStratDef.getStratName())) defStratNum = i;
         }
 
-        final TextView offStratDescription = (TextView) dialog.findViewById(R.id.textOffenseStrategy);
-        final TextView defStratDescription = (TextView) dialog.findViewById(R.id.textDefenseStrategy);
+        final TextView offStratDescription = dialog.findViewById(R.id.textOffenseStrategy);
+        final TextView defStratDescription = dialog.findViewById(R.id.textDefenseStrategy);
 
         // Offense Strategy Spinner
-        Spinner stratOffSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerOffenseStrategy);
+        Spinner stratOffSelectionSpinner = dialog.findViewById(R.id.spinnerOffenseStrategy);
         ArrayAdapter<String> stratOffSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, stratOffSelection);
         stratOffSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1549,7 +1551,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         // Defense Spinner Adapter
-        Spinner stratDefSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerDefenseStrategy);
+        Spinner stratDefSelectionSpinner = dialog.findViewById(R.id.spinnerDefenseStrategy);
         ArrayAdapter<String> stratDefSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, stratDefSelection);
         stratDefSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1582,20 +1584,20 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        final EditText changeNameEditText = (EditText) dialog.findViewById(R.id.editTextChangeName);
+        final EditText changeNameEditText = dialog.findViewById(R.id.editTextChangeName);
         changeNameEditText.setText(currentTeam.name);  //updated from userTeam to currentTeam
-        final EditText changeAbbrEditText = (EditText) dialog.findViewById(R.id.editTextChangeAbbr);
+        final EditText changeAbbrEditText = dialog.findViewById(R.id.editTextChangeAbbr);
         changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
-        final EditText changeConfEditText = (EditText) dialog.findViewById(R.id.editTextChangeConf);
+        final EditText changeConfEditText = dialog.findViewById(R.id.editTextChangeConf);
         changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
-        final EditText changeHCEditText = (EditText) dialog.findViewById(R.id.editTextChangeHC);
+        final EditText changeHCEditText = dialog.findViewById(R.id.editTextChangeHC);
         changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
 
 
-        final TextView invalidNameText = (TextView) dialog.findViewById(R.id.textViewChangeName);
-        final TextView invalidAbbrText = (TextView) dialog.findViewById(R.id.textViewChangeAbbr);
-        final TextView invalidConfText = (TextView) dialog.findViewById(R.id.textViewChangeConf);
-        final TextView invalidHCText = (TextView) dialog.findViewById(R.id.textViewChangeHC);
+        final TextView invalidNameText = dialog.findViewById(R.id.textViewChangeName);
+        final TextView invalidAbbrText = dialog.findViewById(R.id.textViewChangeAbbr);
+        final TextView invalidConfText = dialog.findViewById(R.id.textViewChangeConf);
+        final TextView invalidHCText = dialog.findViewById(R.id.textViewChangeHC);
 
         changeNameEditText.addTextChangedListener(new TextWatcher() {
             String newName;
@@ -1735,15 +1737,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        final CheckBox checkboxShowPopup = (CheckBox) dialog.findViewById(R.id.checkboxShowPopups);
+        final CheckBox checkboxShowPopup = dialog.findViewById(R.id.checkboxShowPopups);
         checkboxShowPopup.setChecked(showToasts);
 
-        final CheckBox checkboxShowInjury = (CheckBox) dialog.findViewById(R.id.checkboxShowInjuryReport);
+        final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
         checkboxShowInjury.setChecked(showInjuryReport);
 
-        Button cancelChangeNameButton = (Button) dialog.findViewById(R.id.buttonCancelChangeName);
-        Button okChangeNameButton = (Button) dialog.findViewById(R.id.buttonOkChangeName);
-        Button changeTeamsButton = (Button) dialog.findViewById(R.id.buttonChangeTeams);
+        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
+        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
+        Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
 
         cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1848,10 +1850,10 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
 
-            ListView injuryList = (ListView) dialog.findViewById(R.id.listViewInjuryReport);
+            ListView injuryList = dialog.findViewById(R.id.listViewInjuryReport);
             injuryList.setAdapter(new PlayerStatsListArrayAdapter(this, injuries));
 
-            CheckBox showInjuryReportCheckBox = (CheckBox) dialog.findViewById(R.id.checkBoxInjuryReport);
+            CheckBox showInjuryReportCheckBox = dialog.findViewById(R.id.checkBoxInjuryReport);
             showInjuryReportCheckBox.setChecked(true);
 
             showInjuryReportCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -1881,20 +1883,20 @@ public class MainActivity extends AppCompatActivity {
         final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)", "TE (1 starter)", "OL (5 starters)",
                 "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (1 starter)"};
         final int[] positionNumberRequired = {1, 2, 3, 1, 5, 1, 4, 3, 3, 1};
-        final Spinner teamLineupPositionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamLineupPosition);
+        final Spinner teamLineupPositionSpinner = dialog.findViewById(R.id.spinnerTeamLineupPosition);
         ArrayAdapter<String> teamLineupPositionSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positionSelection);
         teamLineupPositionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teamLineupPositionSpinner.setAdapter(teamLineupPositionSpinnerAdapter);
 
         // Text to show what each attr is
-        final TextView textLineupPositionDescription = (TextView) dialog.findViewById(R.id.textViewLineupPositionDescription);
+        final TextView textLineupPositionDescription = dialog.findViewById(R.id.textViewLineupPositionDescription);
 
         // List of team's players for selected position
         final ArrayList<Player> positionPlayers = new ArrayList<>();
         positionPlayers.addAll(userTeam.teamQBs);
 
-        final ListView teamPositionList = (ListView) dialog.findViewById(R.id.listViewTeamLineup);
+        final ListView teamPositionList = dialog.findViewById(R.id.listViewTeamLineup);
         final TeamLineupArrayAdapter teamLineupAdapter = new TeamLineupArrayAdapter(this, positionPlayers, 1);
         teamPositionList.setAdapter(teamLineupAdapter);
 
@@ -1910,8 +1912,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        Button saveLineupsButton = (Button) dialog.findViewById(R.id.buttonSaveLineups);
-        Button doneWithLineupsButton = (Button) dialog.findViewById(R.id.buttonDoneWithLineups);
+        Button saveLineupsButton = dialog.findViewById(R.id.buttonSaveLineups);
+        Button doneWithLineupsButton = dialog.findViewById(R.id.buttonDoneWithLineups);
 
         doneWithLineupsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -2085,13 +2087,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         String[] spinnerSelection = {"Players Leaving", "Mock Draft"};
-        Spinner beginRecruitingSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner beginRecruitingSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> beginRecruitingSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerSelection);
         beginRecruitingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         beginRecruitingSpinner.setAdapter(beginRecruitingSpinnerAdapter);
 
-        final ListView playerList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView playerList = dialog.findViewById(R.id.listViewTeamRankings);
         final PlayerStatsListArrayAdapter playerStatsAdapter =
                 new PlayerStatsListArrayAdapter(this, userTeam.getGradPlayersList());
         final MockDraftListArrayAdapter mockDraftAdapter =
@@ -2189,7 +2191,7 @@ public class MainActivity extends AppCompatActivity {
                             });
                     AlertDialog dialog2 = builder.create();
                     dialog2.show();
-                    TextView textView = (TextView) dialog2.findViewById(android.R.id.message);
+                    TextView textView = dialog2.findViewById(android.R.id.message);
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 }
             }
@@ -2253,14 +2255,14 @@ public class MainActivity extends AppCompatActivity {
             else if (i == 15) weekSelection[i] = "National Champ";
             else weekSelection[i] = "Week " + i;
         }
-        Spinner weekSelectionSpinner = (Spinner) dialog.findViewById(R.id.spinnerTeamRankings);
+        Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> weekSelectionSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, weekSelection);
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
         weekSelectionSpinner.setSelection(simLeague.currentWeek);
 
-        final ListView newsStoriesList = (ListView) dialog.findViewById(R.id.listViewTeamRankings);
+        final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
         final NewsStoriesListArrayAdapter newsStoriesAdapter = new NewsStoriesListArrayAdapter(this, rankings);
         newsStoriesList.setAdapter(newsStoriesAdapter);
 
@@ -2483,10 +2485,10 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        final EditText changeHCEditText = (EditText) dialog.findViewById(R.id.editTextChangeHC);
+        final EditText changeHCEditText = dialog.findViewById(R.id.editTextChangeHC);
         changeHCEditText.setText(simLeague.getRandName());   //change Head Coach Name
 
-        final TextView invalidHCText = (TextView) dialog.findViewById(R.id.textViewChangeHC);
+        final TextView invalidHCText = dialog.findViewById(R.id.textViewChangeHC);
 
         changeHCEditText.addTextChangedListener(new TextWatcher() {
             String newHC;
@@ -2523,7 +2525,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Button okChangeNameButton = (Button) dialog.findViewById(R.id.buttonOkChangeName);
+        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
 
 
         okChangeNameButton.setOnClickListener(new View.OnClickListener() {

@@ -21,7 +21,7 @@ public class PlayerOL extends Player {
     public int statsRushYards;
     public int statsPassYards;
 
-    public PlayerOL(String nm, Team t, int yr, int pot, int iq, int pow, int bkr, int bkp, boolean rs, int dur, int awr) {
+    public PlayerOL(String nm, Team t, int yr, int pot, int iq, int pow, int bkr, int bkp, boolean rs, int dur, int awr, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -38,7 +38,8 @@ public class PlayerOL extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         position = "OL";
-
+        region = reg;
+        personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 50 + (int) (Math.random() * 100) - 50;
 
         wonHeisman = false;
@@ -54,7 +55,7 @@ public class PlayerOL extends Player {
     }
 
     public PlayerOL(String nm, Team t, int yr, int pot, int iq, int pow, int bkr, int bkp, boolean rs, int dur, int awr,
-                    int cGamesPlayed, int cHeismans, int cAA, int cAC, int cWins, boolean transfer) {
+                    int cGamesPlayed, int cHeismans, int cAA, int cAC, int cWins, boolean transfer, int reg, int trait) {
         team = t;
         name = nm;
         year = yr;
@@ -71,7 +72,8 @@ public class PlayerOL extends Player {
         isRedshirt = rs;
         if (isRedshirt) year = 0;
         isTransfer = transfer;
-
+        region = reg;
+        personality = trait;
         position = "OL";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 50 + (int) (Math.random() * 100) - 50;
@@ -103,7 +105,8 @@ public class PlayerOL extends Player {
         ratAwareness = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
         ratOvr = (ratStrength * 3 + ratRunBlock * 2 + ratPassBlock * 2 + ratAwareness) / 8;
         position = "OL";
-
+        region = (int)(Math.random()*10);
+        personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 50 + (int) (Math.random() * 100) - 50;
 
         wonHeisman = false;
@@ -169,6 +172,7 @@ public class PlayerOL extends Player {
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Strength: " + getLetterGrade(ratStrength));
         pStats.add("Run Block: " + getLetterGrade(ratRunBlock) + ">Pass Block: " + getLetterGrade(ratPassBlock));
         pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Nothing");
@@ -180,6 +184,7 @@ public class PlayerOL extends Player {
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Strength: " + getLetterGrade(ratStrength));
         pStats.add("Run Block: " + getLetterGrade(ratRunBlock) + ">Pass Block: " + getLetterGrade(ratPassBlock));
         pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Nothing");

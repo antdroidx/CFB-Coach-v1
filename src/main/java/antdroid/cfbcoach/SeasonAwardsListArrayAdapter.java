@@ -29,9 +29,9 @@ public class SeasonAwardsListArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.league_history_list_item, parent, false);
-        TextView textTop = (TextView) rowView.findViewById(R.id.textViewLeagueHistoryTop);
-        TextView textMiddle = (TextView) rowView.findViewById(R.id.textViewLeagueHistoryMiddle);
-        TextView textBottom = (TextView) rowView.findViewById(R.id.textViewLeagueHistoryBottom);
+        TextView textTop = rowView.findViewById(R.id.textViewLeagueHistoryTop);
+        TextView textMiddle = rowView.findViewById(R.id.textViewLeagueHistoryMiddle);
+        TextView textBottom = rowView.findViewById(R.id.textViewLeagueHistoryBottom);
 
         String[] player = values[position].split("\n");
         if (player.length == 3) {
