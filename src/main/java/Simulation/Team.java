@@ -3,7 +3,6 @@ package Simulation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +19,7 @@ public class Team {
     public String name;
     public String abbr;
     public String conference;
+    public int location;
     public String rivalTeam;
     public boolean wonRivalryGame;
     public ArrayList<String> teamHistory;
@@ -72,6 +72,7 @@ public class Team {
     public int teamPollScore;
     public int teamStrengthOfWins;
     public int teamSOS;
+    public int teamDiscipline;
 
     public int rankTeamPoints;
     public int rankTeamOppPoints;
@@ -152,7 +153,7 @@ public class Team {
      * @param league     reference to the league object all must obey
      * @param prestige   prestige of that team, between 0-100
      */
-    public Team(String name, String abbr, String conference, int prestige, String rivalTeamAbbr, League league) {
+    public Team(String name, String abbr, String conference, int prestige, String rivalTeamAbbr, int loc, League league) {
         this.league = league;
         userControlled = false;
         showPopups = true;
@@ -161,6 +162,7 @@ public class Team {
         hallOfFame = new ArrayList<>();
         teamRecords = new LeagueRecords();
         playersInjuredAll = new ArrayList<>();
+        location = loc;
 
         HC = new ArrayList<HeadCoach>();
         teamQBs = new ArrayList<PlayerQB>();
@@ -222,6 +224,7 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
         disciplinePts = 0;
+        teamDiscipline = getTeamDiscipline();
 
         teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
 
@@ -357,7 +360,7 @@ public class Team {
 
         // Lines 1 is Team Home/Away Rotation
         int startOfPlayers = 2;
-        if (!lines[1].split(",")[0].equals("HC")) evenYearHomeOpp = lines[1];
+            if (!lines[1].split(",")[0].equals("HC")) evenYearHomeOpp = lines[1];
         else {
             startOfPlayers = 1;
         }
@@ -374,6 +377,7 @@ public class Team {
         wonRivalryGame = false;
         teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
         teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
+        teamDiscipline = getTeamDiscipline();
 
         numRecruits = 30;
         playersLeaving = new ArrayList<>();
@@ -1092,8 +1096,9 @@ public class Team {
 
     public void getPlayersTransferring() {
 
-        // FUTURE - PLAYER TRANSFERS
+        // PLAYER TRANSFERS
         // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
+        // NEXT CHANGE: Player Personality Conflict - if a player has bad personality, he may want to leave, then bump his personality up a little bit for new team.
 
         int i = 0;
 
@@ -1956,30 +1961,15 @@ public class Team {
      * @return team history
      */
     public String[] getTeamHistoryList() {
-        String[] hist = new String[teamHistory.size() + 5];
-        hist[0] = "Overall W-L: " + totalWins + "-" + totalLosses;
-        hist[1] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses;
-        hist[2] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses;
-        hist[3] = "National Champ Record: " + totalNCs + "-" + totalNCLosses;
-        hist[4] = " ";
+        String[] hist = new String[teamHistory.size() + 6];
+        hist[0] = "Location: " + league.getRegion(location);
+        hist[1] = "Overall W-L: " + totalWins + "-" + totalLosses;
+        hist[2] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses;
+        hist[3] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses;
+        hist[4] = "National Champ Record: " + totalNCs + "-" + totalNCLosses;
+        hist[5] = " ";
         for (int i = 0; i < teamHistory.size(); ++i) {
-            hist[i + 5] = teamHistory.get(i);
-        }
-        return hist;
-    }
-
-    /**
-     * Gets a string of the entire team history
-     */
-    public String getTeamHistoryStr() {
-        String hist = "";
-        hist += "Overall W-L: " + totalWins + "-" + totalLosses + "\n";
-        hist += "Conf Champ Record: " + totalCCs + "-" + totalCCLosses + "\n";
-        hist += "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses + "\n";
-        hist += "National Champ Record: " + totalNCs + "-" + totalNCLosses + "\n";
-        hist += "\nYear by year summary:\n";
-        for (int i = 0; i < teamHistory.size(); ++i) {
-            hist += teamHistory.get(i) + "\n";
+            hist[i + 6] = teamHistory.get(i);
         }
         return hist;
     }
@@ -2020,22 +2010,22 @@ public class Team {
      */
     public void sortPlayers() {
         //sort players based on overall ratings to assemble best starting lineup
-        Collections.sort(teamQBs, new PlayerComparator());
-        Collections.sort(teamRBs, new PlayerComparator());
-        Collections.sort(teamWRs, new PlayerComparator());
-        Collections.sort(teamTEs, new PlayerComparator());
-        Collections.sort(teamKs, new PlayerComparator());
-        Collections.sort(teamOLs, new PlayerComparator());
-        Collections.sort(teamDLs, new PlayerComparator());
-        Collections.sort(teamLBs, new PlayerComparator());
-        Collections.sort(teamCBs, new PlayerComparator());
-        Collections.sort(teamSs, new PlayerComparator());
+        Collections.sort(teamQBs, new CompPlayer());
+        Collections.sort(teamRBs, new CompPlayer());
+        Collections.sort(teamWRs, new CompPlayer());
+        Collections.sort(teamTEs, new CompPlayer());
+        Collections.sort(teamKs, new CompPlayer());
+        Collections.sort(teamOLs, new CompPlayer());
+        Collections.sort(teamDLs, new CompPlayer());
+        Collections.sort(teamLBs, new CompPlayer());
+        Collections.sort(teamCBs, new CompPlayer());
+        Collections.sort(teamSs, new CompPlayer());
 
-        Collections.sort(teamRSs, new PlayerComparator());
-        Collections.sort(teamFRs, new PlayerComparator());
-        Collections.sort(teamSOs, new PlayerComparator());
-        Collections.sort(teamJRs, new PlayerComparator());
-        Collections.sort(teamSRs, new PlayerComparator());
+        Collections.sort(teamRSs, new CompPlayer());
+        Collections.sort(teamFRs, new CompPlayer());
+        Collections.sort(teamSOs, new CompPlayer());
+        Collections.sort(teamJRs, new CompPlayer());
+        Collections.sort(teamSRs, new CompPlayer());
     }
 
     /**
@@ -2085,7 +2075,7 @@ public class Team {
             }
         }
 
-        if (numInjured > 0) Collections.sort(players, new PlayerComparator());
+        if (numInjured > 0) Collections.sort(players, new CompPlayer());
     }
 
     /**
@@ -2447,7 +2437,7 @@ public class Team {
         for (Conference c : league.conferences) {
             if (c.confName.equals(conference)) {
                 confTeams.addAll(c.confTeams);
-                Collections.sort(confTeams, new TeamCompConfWins());
+                Collections.sort(confTeams, new CompTeamConfWins());
                 int confRank = 11;
                 for (int i = 0; i < confTeams.size(); ++i) {
                     if (confTeams.get(i).equals(this)) {
@@ -3163,52 +3153,52 @@ public class Team {
         PlayerQB[] qbs = getQBRecruits();
         for (PlayerQB qb : qbs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
-                    qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "," + qb.ratSpeed + "," + qb.region + "," + qb.personality + "%\n");
+                    qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "," + qb.ratSpeed + "," + qb.getRegion(qb.region) + "," + qb.personality + "%\n");
         }
         PlayerRB[] rbs = getRBRecruits();
         for (PlayerRB rb : rbs) {
             sb.append("RB," + rb.name + "," + rb.year + "," + rb.ratPot + "," + rb.ratFootIQ + "," +
-                    rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.cost + "," + rb.ratDur + "," + rb.ratCatch + "," + rb.region + "," + rb.personality + "%\n");
+                    rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.cost + "," + rb.ratDur + "," + rb.ratCatch + "," + rb.getRegion(rb.region) + "," + rb.personality + "%\n");
         }
         PlayerWR[] wrs = getWRRecruits();
         for (PlayerWR wr : wrs) {
             sb.append("WR," + wr.name + "," + wr.year + "," + wr.ratPot + "," + wr.ratFootIQ + "," +
-                    wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratDur + "," + wr.ratJump + "," + wr.region + "," + wr.personality + "%\n");
+                    wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratDur + "," + wr.ratJump + "," + wr.getRegion(wr.region) + "," + wr.personality + "%\n");
         }
         PlayerTE[] tes = getTERecruits();
         for (PlayerTE te : tes) {
             sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
-                    te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.cost + "," + te.ratDur + "," + te.ratSpeed + "," + te.region + "," + te.personality + "%\n");
+                    te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.cost + "," + te.ratDur + "," + te.ratSpeed + "," + te.getRegion(te.region) + "," + te.personality + "%\n");
         }
         PlayerK[] ks = getKRecruits();
         for (PlayerK k : ks) {
             sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
-                    k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.cost + "," + k.ratDur + "," + k.ratPressure + "," + k.region + "," + k.personality + "%\n");
+                    k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.cost + "," + k.ratDur + "," + k.ratPressure + "," + k.getRegion(k.region) + "," + k.personality + "%\n");
         }
         PlayerOL[] ols = getOLRecruits();
         for (PlayerOL ol : ols) {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
-                    ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratDur + "," + ol.ratAwareness + "," + ol.region + "," + ol.personality + "%\n");
+                    ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratDur + "," + ol.ratAwareness + "," + ol.getRegion(ol.region) + "," + ol.personality + "%\n");
         }
         PlayerDL[] DLs = getDLRecruits();
         for (PlayerDL DL : DLs) {
             sb.append("DL," + DL.name + "," + DL.year + "," + DL.ratPot + "," + DL.ratFootIQ + "," +
-                    DL.ratStrength + "," + DL.ratRunStop + "," + DL.ratPassRush + "," + DL.ratOvr + "," + DL.cost + "," + DL.ratDur + "," + DL.ratTackle + "," + DL.region + "," + DL.personality + "%\n");
+                    DL.ratStrength + "," + DL.ratRunStop + "," + DL.ratPassRush + "," + DL.ratOvr + "," + DL.cost + "," + DL.ratDur + "," + DL.ratTackle + "," + DL.getRegion(DL.region) + "," + DL.personality + "%\n");
         }
         PlayerLB[] lbs = getLBRecruits();
         for (PlayerLB lb : lbs) {
             sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
-                    lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "," + lb.ratSpeed  + "," + lb.region + "," + lb.personality + "%\n");
+                    lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "," + lb.ratSpeed  + "," + lb.getRegion(lb.region) + "," + lb.personality + "%\n");
         }
         PlayerCB[] cbs = getCBRecruits();
         for (PlayerCB cb : cbs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
-                    cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratDur + "," + cb.ratJump + "," + cb.region + "," + cb.personality + "%\n");
+                    cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratDur + "," + cb.ratJump + "," + cb.getRegion(cb.region) + "," + cb.personality + "%\n");
         }
         PlayerS[] ss = getSRecruits();
         for (PlayerS s : ss) {
             sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
-                    s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "," + s.ratRunStop + "," + s.region + "," + s.personality + "%\n");
+                    s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "," + s.ratRunStop + "," + s.getRegion(s.region) + "," + s.personality + "%\n");
         }
 
         return sb.toString();
@@ -3307,7 +3297,7 @@ public class Team {
                 for (Player p : starters) {
                     teamQBs.add((PlayerQB) p);
                 }
-                Collections.sort(teamQBs, new PlayerComparator());
+                Collections.sort(teamQBs, new CompPlayer());
                 for (PlayerQB oldP : oldQBs) {
                     if (!teamQBs.contains(oldP)) teamQBs.add(oldP);
                 }
@@ -3319,7 +3309,7 @@ public class Team {
                 for (Player p : starters) {
                     teamRBs.add((PlayerRB) p);
                 }
-                Collections.sort(teamRBs, new PlayerComparator());
+                Collections.sort(teamRBs, new CompPlayer());
                 for (PlayerRB oldP : oldRBs) {
                     if (!teamRBs.contains(oldP)) teamRBs.add(oldP);
                 }
@@ -3331,7 +3321,7 @@ public class Team {
                 for (Player p : starters) {
                     teamWRs.add((PlayerWR) p);
                 }
-                Collections.sort(teamWRs, new PlayerComparator());
+                Collections.sort(teamWRs, new CompPlayer());
                 for (PlayerWR oldP : oldWRs) {
                     if (!teamWRs.contains(oldP)) teamWRs.add(oldP);
                 }
@@ -3343,7 +3333,7 @@ public class Team {
                 for (Player p : starters) {
                     teamTEs.add((PlayerTE) p);
                 }
-                Collections.sort(teamTEs, new PlayerComparator());
+                Collections.sort(teamTEs, new CompPlayer());
                 for (PlayerTE oldP : oldTEs) {
                     if (!teamTEs.contains(oldP)) teamTEs.add(oldP);
                 }
@@ -3355,7 +3345,7 @@ public class Team {
                 for (Player p : starters) {
                     teamOLs.add((PlayerOL) p);
                 }
-                Collections.sort(teamOLs, new PlayerComparator());
+                Collections.sort(teamOLs, new CompPlayer());
                 for (PlayerOL oldP : oldOLs) {
                     if (!teamOLs.contains(oldP)) teamOLs.add(oldP);
                 }
@@ -3367,7 +3357,7 @@ public class Team {
                 for (Player p : starters) {
                     teamKs.add((PlayerK) p);
                 }
-                Collections.sort(teamKs, new PlayerComparator());
+                Collections.sort(teamKs, new CompPlayer());
                 for (PlayerK oldP : oldKs) {
                     if (!teamKs.contains(oldP)) teamKs.add(oldP);
                 }
@@ -3379,7 +3369,7 @@ public class Team {
                 for (Player p : starters) {
                     teamDLs.add((PlayerDL) p);
                 }
-                Collections.sort(teamDLs, new PlayerComparator());
+                Collections.sort(teamDLs, new CompPlayer());
                 for (PlayerDL oldP : oldDLs) {
                     if (!teamDLs.contains(oldP)) teamDLs.add(oldP);
                 }
@@ -3391,7 +3381,7 @@ public class Team {
                 for (Player p : starters) {
                     teamLBs.add((PlayerLB) p);
                 }
-                Collections.sort(teamLBs, new PlayerComparator());
+                Collections.sort(teamLBs, new CompPlayer());
                 for (PlayerLB oldP : oldLBs) {
                     if (!teamLBs.contains(oldP)) teamLBs.add(oldP);
                 }
@@ -3403,7 +3393,7 @@ public class Team {
                 for (Player p : starters) {
                     teamCBs.add((PlayerCB) p);
                 }
-                Collections.sort(teamCBs, new PlayerComparator());
+                Collections.sort(teamCBs, new CompPlayer());
                 for (PlayerCB oldP : oldCBs) {
                     if (!teamCBs.contains(oldP)) teamCBs.add(oldP);
                 }
@@ -3415,7 +3405,7 @@ public class Team {
                 for (Player p : starters) {
                     teamSs.add((PlayerS) p);
                 }
-                Collections.sort(teamSs, new PlayerComparator());
+                Collections.sort(teamSs, new CompPlayer());
                 for (PlayerS oldP : oldSs) {
                     if (!teamSs.contains(oldP)) teamSs.add(oldP);
                 }

@@ -432,7 +432,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr:" + getLetterGrade(ps[8]) + " | Pot: " + getLetterGrade(ps[3]);  //need to change in futgure to ps[10]
+        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr:" + getLetterGrade(ps[8]) + " | Pot: " + getLetterGrade(ps[3]);
     }
 
     /**
@@ -453,17 +453,20 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return "Pass Strength: " + getLetterGrade(ps[5]) +
+            return  "Home Region: " + ps[12] +
+                    "\nPass Strength: " + getLetterGrade(ps[5]) +
                     "\nPass Accuracy: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("RB")) {
-            return "Power: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nPower: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nCatching: " + getLetterGrade(ps[11]);
         } else if (pos.equals("WR")) {
-            return "Catching: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nCatching: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nJumping: " + getLetterGrade(ps[11]);
@@ -473,32 +476,38 @@ public class RecruitingActivity extends AppCompatActivity {
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("OL")) {
-            return "Strength: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nStrength: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
                     "\nPass Blk: " + getLetterGrade(ps[7]) +
                     "\nAwareness: " + getLetterGrade(ps[11]);
         } else if (pos.equals("K")) {
-            return "Kick Power: " + getLetterGrade(ps[5]) +
+            return  "Home Region: " + ps[12] +
+                    "\nKick Power: " + getLetterGrade(ps[5]) +
                     "\nAccuracy: " + getLetterGrade(ps[6]) +
                     "\nClumsiness: " + getLetterGrade(ps[7]) +
                     "\nPressure: " + getLetterGrade(ps[11]);
         } else if (pos.equals("DL")) {
-            return "Strength: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nStrength: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
                     "\nPass Press: " + getLetterGrade(ps[7]) +
                     "\nTackling: " + getLetterGrade(ps[11]);
         } else if (pos.equals("LB")) {
-            return "Coverage: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nCoverage: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("CB")) {
-            return "Coverage: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nCoverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("S")) {
-            return "Coverage: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + ps[12] +
+                    "\nCoverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nRun Stop: " + getLetterGrade(ps[11]);
@@ -1209,7 +1218,8 @@ public class RecruitingActivity extends AppCompatActivity {
             final TextView potential = convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
-            potential.setText("Football IQ: " + getLetterGrade(playerCSV.split(",")[4]) + "\nPotential: " + getLetterGrade(playerCSV.split(",")[3]) + "\n" +
+            potential.setText("\nFootball IQ: " + getLetterGrade(playerCSV.split(",")[4]) + "\nPotential: " + getLetterGrade(playerCSV.split(",")[3]) + "\n" +
+                    "Personality: " + getLetterGrade(playerCSV.split(",")[13])+ "\n" +
                     "Durability: " + getLetterGrade(playerCSV.split(",")[10]));
 
             // Set up Recruit and Redshirt buttons to display the right price
