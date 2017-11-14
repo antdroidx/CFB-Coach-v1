@@ -150,6 +150,11 @@ public class PlayerTE extends Player {
         personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
 
+        int locFactor = Math.abs(team.location - region) - 5;
+        cost = cost + (int)(Math.random()*(locFactor * 10));
+        if (cost < 15) cost = (int)(Math.random()*20);
+
+
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;

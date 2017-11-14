@@ -248,13 +248,13 @@ public class Player {
     public String getRegion(int region) {
         String location;
         if (region == 0) location = "Northwest";
-        else if (region == 1) location = "California";
+        else if (region == 1) location = "West Coast";
         else if (region == 2) location = "Southwest";
         else if (region == 3) location = "Rockies";
         else if (region == 4) location = "Great Plains";
         else if (region == 5) location = "Texas";
         else if (region == 6) location = "Great Lakes";
-        else if (region == 7) location = "New England";
+        else if (region == 7) location = "Atlantic";
         else if (region == 8) location = "Florida";
         else location = "South";
         return location;

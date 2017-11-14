@@ -11,7 +11,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.Random;
 
@@ -203,144 +202,144 @@ public class League extends Rankings {
         // FUTURE: READ FROM XML OR CSV FILE
 
         //ACC - done + 12
-        conferences.get(0).confTeams.add(new Team("Clemson", "CLEM", "ACC", 85, "WAKE", this));
-        conferences.get(0).confTeams.add(new Team("Duke", "DUKE", "ACC", 53, "UNC", this));
-        conferences.get(0).confTeams.add(new Team("Florida St", "FSU", "ACC", 65, "MIA", this));
-        conferences.get(0).confTeams.add(new Team("Georgia Tech", "GT", "ACC", 48, "NCST", this));
-        conferences.get(0).confTeams.add(new Team("Louisville", "LOUI", "ACC", 72, "PITT", this));
-        conferences.get(0).confTeams.add(new Team("Miami", "MIA", "ACC", 78, "FSU", this));
-        conferences.get(0).confTeams.add(new Team("North Carolina", "UNC", "ACC", 45, "DUKE", this));
-        conferences.get(0).confTeams.add(new Team("NC State", "NCST", "ACC", 69, "GT", this));
-        conferences.get(0).confTeams.add(new Team("Pittsburgh", "PITT", "ACC", 64, "LOUI", this));
-        conferences.get(0).confTeams.add(new Team("Wake Forest", "WAKE", "ACC", 52, "CLEM", this));
-        conferences.get(0).confTeams.add(new Team("Virginia", "VIR", "ACC", 50, "VTEC", this));
-        conferences.get(0).confTeams.add(new Team("Virginia Tech", "VTEC", "ACC", 73, "VIR", this));
+        conferences.get(0).confTeams.add(new Team("Clemson", "CLEM", "ACC", 85, "WAKE", 9,this));
+        conferences.get(0).confTeams.add(new Team("Duke", "DUKE", "ACC", 53, "UNC",9, this));
+        conferences.get(0).confTeams.add(new Team("Florida St", "FSU", "ACC", 65, "MIA",8, this));
+        conferences.get(0).confTeams.add(new Team("Georgia Tech", "GT", "ACC", 48, "NCST",9, this));
+        conferences.get(0).confTeams.add(new Team("Louisville", "LOUI", "ACC", 72, "PITT",8, this));
+        conferences.get(0).confTeams.add(new Team("Miami", "MIA", "ACC", 78, "FSU",8, this));
+        conferences.get(0).confTeams.add(new Team("North Carolina", "UNC", "ACC", 45, "DUKE",9, this));
+        conferences.get(0).confTeams.add(new Team("NC State", "NCST", "ACC", 69, "GT",9, this));
+        conferences.get(0).confTeams.add(new Team("Pittsburgh", "PITT", "ACC", 64, "LOUI",7, this));
+        conferences.get(0).confTeams.add(new Team("Wake Forest", "WAKE", "ACC", 52, "CLEM", 9,  this));
+        conferences.get(0).confTeams.add(new Team("Virginia", "VIR", "ACC", 50, "VTEC", 7, this));
+        conferences.get(0).confTeams.add(new Team("Virginia Tech", "VTEC", "ACC", 73, "VIR", 7, this));
 
         //American - done x 12
-        conferences.get(1).confTeams.add(new Team("Boston College", "BC", "American", 40, "TEM", this));
-        conferences.get(1).confTeams.add(new Team("Central Florida", "UCF", "American", 66, "USF", this));
-        conferences.get(1).confTeams.add(new Team("Cinncinati", "CINN", "American", 42, "MEMP", this));
-        conferences.get(1).confTeams.add(new Team("Maryland", "MARY", "American", 45, "RUT", this));
-        conferences.get(1).confTeams.add(new Team("Memphis", "MEMP", "American", 66, "CINN", this));
-        conferences.get(1).confTeams.add(new Team("Notre Dame", "ND", "American", 77, "WVU", this));
-        conferences.get(1).confTeams.add(new Team("Rutgers", "RUT", "American", 42, "MARY", this));
-        conferences.get(1).confTeams.add(new Team("South Florida", "USF", "American", 70, "UCF", this));
-        conferences.get(1).confTeams.add(new Team("Syracuse", "SYR", "American", 48, "UCON", this));
-        conferences.get(1).confTeams.add(new Team("Temple", "TEM", "American", 43, "BC", this));
-        conferences.get(1).confTeams.add(new Team("UConn", "UCON", "American", 40, "SYR", this));
-        conferences.get(1).confTeams.add(new Team("West Virginia", "WVU", "American", 70, "ND", this));
+        conferences.get(1).confTeams.add(new Team("Boston College", "BC", "American", 40, "TEM", 7, this));
+        conferences.get(1).confTeams.add(new Team("Central Florida", "UCF", "American", 66, "USF",8, this));
+        conferences.get(1).confTeams.add(new Team("Cinncinati", "CINN", "American", 42, "MEMP", 8, this));
+        conferences.get(1).confTeams.add(new Team("Maryland", "MARY", "American", 45, "RUT", 7, this));
+        conferences.get(1).confTeams.add(new Team("Memphis", "MEMP", "American", 66, "CINN", 6, this));
+        conferences.get(1).confTeams.add(new Team("Notre Dame", "ND", "American", 77, "WVU", 6,  this));
+        conferences.get(1).confTeams.add(new Team("Rutgers", "RUT", "American", 42, "MARY", 7,  this));
+        conferences.get(1).confTeams.add(new Team("South Florida", "USF", "American", 70, "UCF", 8,  this));
+        conferences.get(1).confTeams.add(new Team("Syracuse", "SYR", "American", 48, "UCON", 7, this));
+        conferences.get(1).confTeams.add(new Team("Temple", "TEM", "American", 43, "BC", 7, this));
+        conferences.get(1).confTeams.add(new Team("UConn", "UCON", "American", 40, "SYR", 7, this));
+        conferences.get(1).confTeams.add(new Team("West Virginia", "WVU", "American", 70, "ND", 7, this));
 
         //Big Ten - done x 12
-        conferences.get(2).confTeams.add(new Team("Illinois", "ILL", "Big Ten", 40, "NWU", this));
-        conferences.get(2).confTeams.add(new Team("Indiana", "IND", "Big Ten", 40, "PUR", this));
-        conferences.get(2).confTeams.add(new Team("Iowa", "IOW", "Big Ten", 64, "NEB", this));
-        conferences.get(2).confTeams.add(new Team("Michigan", "MIC", "Big Ten", 77, "OSU", this));
-        conferences.get(2).confTeams.add(new Team("Michigan St", "MSU", "Big Ten", 75, "PSU", this));
-        conferences.get(2).confTeams.add(new Team("Minnesota", "MIN", "Big Ten", 60, "WIS", this));
-        conferences.get(2).confTeams.add(new Team("Nebraska", "NEB", "Big Ten", 63, "IOW", this));
-        conferences.get(2).confTeams.add(new Team("Northwestern", "NWU", "Big Ten", 60, "ILL", this));
-        conferences.get(2).confTeams.add(new Team("Ohio State", "OSU", "Big Ten", 81, "MIC", this));
-        conferences.get(2).confTeams.add(new Team("Penn State", "PSU", "Big Ten", 82, "MSU", this));
-        conferences.get(2).confTeams.add(new Team("Purdue", "PUR", "Big Ten", 50, "IND", this));
-        conferences.get(2).confTeams.add(new Team("Wisconsin", "WIS", "Big Ten", 79, "MIN", this));
+        conferences.get(2).confTeams.add(new Team("Illinois", "ILL", "Big Ten", 40, "NWU", 6, this));
+        conferences.get(2).confTeams.add(new Team("Indiana", "IND", "Big Ten", 40, "PUR", 6, this));
+        conferences.get(2).confTeams.add(new Team("Iowa", "IOW", "Big Ten", 64, "NEB", 4, this));
+        conferences.get(2).confTeams.add(new Team("Michigan", "MIC", "Big Ten", 77, "OSU", 6, this));
+        conferences.get(2).confTeams.add(new Team("Michigan St", "MSU", "Big Ten", 75, "PSU", 6,this));
+        conferences.get(2).confTeams.add(new Team("Minnesota", "MIN", "Big Ten", 60, "WIS", 6, this));
+        conferences.get(2).confTeams.add(new Team("Nebraska", "NEB", "Big Ten", 63, "IOW", 4, this));
+        conferences.get(2).confTeams.add(new Team("Northwestern", "NWU", "Big Ten", 60, "ILL", 6, this));
+        conferences.get(2).confTeams.add(new Team("Ohio State", "OSU", "Big Ten", 81, "MIC", 6, this));
+        conferences.get(2).confTeams.add(new Team("Penn State", "PSU", "Big Ten", 82, "MSU", 7, this));
+        conferences.get(2).confTeams.add(new Team("Purdue", "PUR", "Big Ten", 50, "IND", 6, this));
+        conferences.get(2).confTeams.add(new Team("Wisconsin", "WIS", "Big Ten", 79, "MIN", 6, this));
 
         //Big 12 - done x 12
-        conferences.get(3).confTeams.add(new Team("Baylor", "BAY", "Big 12", 42, "TCU", this));
-        conferences.get(3).confTeams.add(new Team("Houston", "HOU", "Big 12", 57, "TTEC", this));
-        conferences.get(3).confTeams.add(new Team("Iowa State", "ISU", "Big 12", 66, "MIZ", this));
-        conferences.get(3).confTeams.add(new Team("Texas Tech", "TTEC", "Big 12", 50, "HOU", this));
-        conferences.get(3).confTeams.add(new Team("Kansas", "KAN", "Big 12", 30, "KSU", this));
-        conferences.get(3).confTeams.add(new Team("Kansas St", "KSU", "Big 12", 66, "KAN", this));
-        conferences.get(3).confTeams.add(new Team("Oklahoma", "OKL", "Big 12", 80, "TEX", this));
-        conferences.get(3).confTeams.add(new Team("Oklahoma St", "OKST", "Big 12", 76, "TXAM", this));
-        conferences.get(3).confTeams.add(new Team("Texas", "TEX", "Big 12", 68, "OKL", this));
-        conferences.get(3).confTeams.add(new Team("Texas AM", "TXAM", "Big 12", 67, "OKST", this));
-        conferences.get(3).confTeams.add(new Team("TCU", "TCU", "Big 12", 76, "BAY", this));
-        conferences.get(3).confTeams.add(new Team("Missouri", "MIZ", "Big 12", 53, "ISU", this));
+        conferences.get(3).confTeams.add(new Team("Baylor", "BAY", "Big 12", 42, "TCU", 5, this));
+        conferences.get(3).confTeams.add(new Team("Houston", "HOU", "Big 12", 57, "TTEC", 5,this));
+        conferences.get(3).confTeams.add(new Team("Iowa State", "ISU", "Big 12", 66, "MIZ", 4,this));
+        conferences.get(3).confTeams.add(new Team("Texas Tech", "TTEC", "Big 12", 50, "HOU", 5, this));
+        conferences.get(3).confTeams.add(new Team("Kansas", "KAN", "Big 12", 30, "KSU", 4, this));
+        conferences.get(3).confTeams.add(new Team("Kansas St", "KSU", "Big 12", 66, "KAN", 4, this));
+        conferences.get(3).confTeams.add(new Team("Oklahoma", "OKL", "Big 12", 80, "TEX", 5, this));
+        conferences.get(3).confTeams.add(new Team("Oklahoma St", "OKST", "Big 12", 76, "TXAM", 5, this));
+        conferences.get(3).confTeams.add(new Team("Texas", "TEX", "Big 12", 68, "OKL", 5, this));
+        conferences.get(3).confTeams.add(new Team("Texas AM", "TXAM", "Big 12", 67, "OKST", 5, this));
+        conferences.get(3).confTeams.add(new Team("TCU", "TCU", "Big 12", 76, "BAY", 5, this));
+        conferences.get(3).confTeams.add(new Team("Missouri", "MIZ", "Big 12", 53, "ISU", 4, this));
 
         //Conf USA x 12
-        conferences.get(4).confTeams.add(new Team("Army", "ARMY", "Conf USA", 43, "NAVY", this));
-        conferences.get(4).confTeams.add(new Team("East Carolina", "ECU", "Conf USA", 32, "WKU", this));
-        conferences.get(4).confTeams.add(new Team("Florida Atl", "FAU", "Conf USA", 47, "FIU", this));
-        conferences.get(4).confTeams.add(new Team("Florida Intl", "FIU", "Conf USA", 44, "FAU", this));
-        conferences.get(4).confTeams.add(new Team("LA Tech", "LTEC", "Conf USA", 43, "TUL", this));
-        conferences.get(4).confTeams.add(new Team("Marshall", "MARS", "Conf USA", 47, "SMU", this));
-        conferences.get(4).confTeams.add(new Team("Navy", "NAVY", "Conf USA", 50, "ARMY", this));
-        conferences.get(4).confTeams.add(new Team("Southern Meth", "SMU", "Conf USA", 46, "MARS", this));
-        conferences.get(4).confTeams.add(new Team("Southern Miss", "SMIS", "Conf USA", 42, "UAB", this));
-        conferences.get(4).confTeams.add(new Team("Tulane", "TUL", "Conf USA", 38, "LTEC", this));
-        conferences.get(4).confTeams.add(new Team("UAB", "UAB", "Conf USA", 40, "SMIS", this));
-        conferences.get(4).confTeams.add(new Team("Western Kentucky", "WKU", "Conf USA", 44, "ECU", this));
+        conferences.get(4).confTeams.add(new Team("Army", "ARMY", "Conf USA", 43, "NAVY", 7, this));
+        conferences.get(4).confTeams.add(new Team("East Carolina", "ECU", "Conf USA", 32, "WKU", 9, this));
+        conferences.get(4).confTeams.add(new Team("Florida Atl", "FAU", "Conf USA", 47, "FIU", 8, this));
+        conferences.get(4).confTeams.add(new Team("Florida Intl", "FIU", "Conf USA", 44, "FAU", 8, this));
+        conferences.get(4).confTeams.add(new Team("LA Tech", "LTEC", "Conf USA", 43, "TUL", 9, this));
+        conferences.get(4).confTeams.add(new Team("Marshall", "MARS", "Conf USA", 47, "SMU", 7, this));
+        conferences.get(4).confTeams.add(new Team("Navy", "NAVY", "Conf USA", 50, "ARMY", 7, this));
+        conferences.get(4).confTeams.add(new Team("Southern Meth", "SMU", "Conf USA", 46, "MARS", 5,this));
+        conferences.get(4).confTeams.add(new Team("Southern Miss", "SMIS", "Conf USA", 42, "UAB", 9,this));
+        conferences.get(4).confTeams.add(new Team("Tulane", "TUL", "Conf USA", 38, "LTEC", 9, this));
+        conferences.get(4).confTeams.add(new Team("UAB", "UAB", "Conf USA", 40, "SMIS", 9, this));
+        conferences.get(4).confTeams.add(new Team("Western Kentucky", "WKU", "Conf USA", 44, "ECU", 9, this));
 
         // MAC - x 12
-        conferences.get(5).confTeams.add(new Team("Akron", "AKR", "MAC", 35, "KNST", this));
-        conferences.get(5).confTeams.add(new Team("Ball St", "BAL", "MAC", 28, "NIU", this));
-        conferences.get(5).confTeams.add(new Team("Bowling Green", "BG", "MAC", 30, "TOL", this));
-        conferences.get(5).confTeams.add(new Team("Buffalo", "BUF", "MAC", 34, "EMU", this));
-        conferences.get(5).confTeams.add(new Team("Central Mich", "CMU", "MAC", 40, "WMU", this));
-        conferences.get(5).confTeams.add(new Team("Eastern Mich", "EMU", "MAC", 38, "BUF", this));
-        conferences.get(5).confTeams.add(new Team("Kent State", "KNST", "MAC", 30, "KNST", this));
-        conferences.get(5).confTeams.add(new Team("Miami OH", "MiOH", "MAC", 34, "OHIO", this));
-        conferences.get(5).confTeams.add(new Team("Northern Illinois", "NIU", "MAC", 44, "BAL", this));
-        conferences.get(5).confTeams.add(new Team("Ohio", "OHIO", "MAC", 45, "MiOH", this));
-        conferences.get(5).confTeams.add(new Team("Toledo", "TOL", "MAC", 45, "BG", this));
-        conferences.get(5).confTeams.add(new Team("Western Mich", "WMU", "MAC", 44, "CMU", this));
+        conferences.get(5).confTeams.add(new Team("Akron", "AKR", "MAC", 35, "KNST", 6, this));
+        conferences.get(5).confTeams.add(new Team("Ball St", "BAL", "MAC", 28, "NIU", 6, this));
+        conferences.get(5).confTeams.add(new Team("Bowling Green", "BG", "MAC", 30, "TOL", 6,this));
+        conferences.get(5).confTeams.add(new Team("Buffalo", "BUF", "MAC", 34, "EMU", 7, this));
+        conferences.get(5).confTeams.add(new Team("Central Mich", "CMU", "MAC", 40, "WMU", 6, this));
+        conferences.get(5).confTeams.add(new Team("Eastern Mich", "EMU", "MAC", 38, "BUF", 6, this));
+        conferences.get(5).confTeams.add(new Team("Kent State", "KNST", "MAC", 30, "KNST", 6, this));
+        conferences.get(5).confTeams.add(new Team("Miami OH", "MiOH", "MAC", 34, "OHIO", 6, this));
+        conferences.get(5).confTeams.add(new Team("Northern Illinois", "NIU", "MAC", 44, "BAL", 6, this));
+        conferences.get(5).confTeams.add(new Team("Ohio", "OHIO", "MAC", 45, "MiOH", 6, this));
+        conferences.get(5).confTeams.add(new Team("Toledo", "TOL", "MAC", 45, "BG", 6, this));
+        conferences.get(5).confTeams.add(new Team("Western Mich", "WMU", "MAC", 44, "CMU", 6, this));
 
         //Mt West x 12
-        conferences.get(6).confTeams.add(new Team("Air Force", "AF", "Mt West", 42, "HAW", this));
-        conferences.get(6).confTeams.add(new Team("Boise State", "BOIS", "Mt West", 64, "SDSU", this));
-        conferences.get(6).confTeams.add(new Team("BYU", "BYU", "Mt West", 32, "UTST", this));
-        conferences.get(6).confTeams.add(new Team("Colorado St", "CSU", "Mt West", 47, "WYO", this));
-        conferences.get(6).confTeams.add(new Team("Fresno St", "FRES", "Mt West", 42, "SJSU", this));
-        conferences.get(6).confTeams.add(new Team("Hawaii", "HAW", "Mt West", 35, "AF", this));
-        conferences.get(6).confTeams.add(new Team("Nevada", "NEV", "Mt West", 35, "NMEX", this));
-        conferences.get(6).confTeams.add(new Team("New Mexico", "NMEX", "Mt West", 38, "NEV", this));
-        conferences.get(6).confTeams.add(new Team("San Diego State", "SDSU", "Mt West", 64, "BOIS", this));
-        conferences.get(6).confTeams.add(new Team("San Jose St", "SJSU", "Mt West", 29, "FRES", this));
-        conferences.get(6).confTeams.add(new Team("Utah State", "UTST", "Mt West", 42, "BYU", this));
-        conferences.get(6).confTeams.add(new Team("Wyoming", "WYOM", "Mt West", 45, "CSU", this));
+        conferences.get(6).confTeams.add(new Team("Air Force", "AF", "Mt West", 42, "HAW", 3, this));
+        conferences.get(6).confTeams.add(new Team("Boise State", "BOIS", "Mt West", 64, "SDSU", 0, this));
+        conferences.get(6).confTeams.add(new Team("BYU", "BYU", "Mt West", 32, "UTST", 3, this));
+        conferences.get(6).confTeams.add(new Team("Colorado St", "CSU", "Mt West", 47, "WYO", 3, this));
+        conferences.get(6).confTeams.add(new Team("Fresno St", "FRES", "Mt West", 42, "SJSU", 3, this));
+        conferences.get(6).confTeams.add(new Team("Hawaii", "HAW", "Mt West", 35, "AF", 1, this));
+        conferences.get(6).confTeams.add(new Team("Nevada", "NEV", "Mt West", 35, "NMEX", 1, this));
+        conferences.get(6).confTeams.add(new Team("New Mexico", "NMEX", "Mt West", 38, "NEV", 2, this));
+        conferences.get(6).confTeams.add(new Team("San Diego State", "SDSU", "Mt West", 64, "BOIS", 1, this));
+        conferences.get(6).confTeams.add(new Team("San Jose St", "SJSU", "Mt West", 29, "FRES", 1, this));
+        conferences.get(6).confTeams.add(new Team("Utah State", "UTST", "Mt West", 42, "BYU", 3, this));
+        conferences.get(6).confTeams.add(new Team("Wyoming", "WYOM", "Mt West", 45, "CSU", 4, this));
 
         //Pac-12 - done x 12
-        conferences.get(7).confTeams.add(new Team("Arizona", "ARIZ", "Pac-12", 60, "ASU", this));
-        conferences.get(7).confTeams.add(new Team("Arizona State", "ASU", "Pac-12", 60, "ARIZ", this));
-        conferences.get(7).confTeams.add(new Team("California", "CAL", "Pac-12", 54, "STAN", this));
-        conferences.get(7).confTeams.add(new Team("Colorado", "COL", "Pac-12", 54, "UTAH", this));
-        conferences.get(7).confTeams.add(new Team("Oregon", "OREG", "Pac-12", 64, "ORST", this));
-        conferences.get(7).confTeams.add(new Team("Oregon State", "ORST", "Pac-12", 40, "OREG", this));
-        conferences.get(7).confTeams.add(new Team("Stanford", "STAN", "Pac-12", 76, "CAL", this));
-        conferences.get(7).confTeams.add(new Team("UCLA", "UCLA", "Pac-12", 54, "USC", this));
-        conferences.get(7).confTeams.add(new Team("USC", "USC", "Pac-12", 80, "UCLA", this));
-        conferences.get(7).confTeams.add(new Team("Washington", "WASH", "Pac-12", 78, "WSU", this));
-        conferences.get(7).confTeams.add(new Team("Wash State", "WSU", "Pac-12", 73, "WASH", this));
-        conferences.get(7).confTeams.add(new Team("Utah", "UTAH", "Pac-12", 67, "COL", this));
+        conferences.get(7).confTeams.add(new Team("Arizona", "ARIZ", "Pac-12", 60, "ASU", 2, this));
+        conferences.get(7).confTeams.add(new Team("Arizona State", "ASU", "Pac-12", 60, "ARIZ", 2, this));
+        conferences.get(7).confTeams.add(new Team("California", "CAL", "Pac-12", 54, "STAN", 1, this));
+        conferences.get(7).confTeams.add(new Team("Colorado", "COL", "Pac-12", 54, "UTAH", 3, this));
+        conferences.get(7).confTeams.add(new Team("Oregon", "OREG", "Pac-12", 64, "ORST", 0, this));
+        conferences.get(7).confTeams.add(new Team("Oregon State", "ORST", "Pac-12", 40, "OREG", 0, this));
+        conferences.get(7).confTeams.add(new Team("Stanford", "STAN", "Pac-12", 76, "CAL", 1, this));
+        conferences.get(7).confTeams.add(new Team("UCLA", "UCLA", "Pac-12", 54, "USC", 1, this));
+        conferences.get(7).confTeams.add(new Team("USC", "USC", "Pac-12", 80, "UCLA", 1, this));
+        conferences.get(7).confTeams.add(new Team("Washington", "WASH", "Pac-12", 78, "WSU", 0, this));
+        conferences.get(7).confTeams.add(new Team("Wash State", "WSU", "Pac-12", 73, "WASH", 0, this));
+        conferences.get(7).confTeams.add(new Team("Utah", "UTAH", "Pac-12", 67, "COL", 3, this));
 
         //SEC - done x 12
-        conferences.get(8).confTeams.add(new Team("Alabama", "BAMA", "SEC", 90, "AUB", this));
-        conferences.get(8).confTeams.add(new Team("Arkansas", "ARK", "SEC", 55, "LSU", this));
-        conferences.get(8).confTeams.add(new Team("Auburn", "AUB", "SEC", 75, "BAMA", this));
-        conferences.get(8).confTeams.add(new Team("Florida", "FLOR", "SEC", 65, "UGA", this));
-        conferences.get(8).confTeams.add(new Team("Georgia", "UGA", "SEC", 80, "FLOR", this));
-        conferences.get(8).confTeams.add(new Team("Kentucky", "UK", "SEC", 60, "SC", this));
-        conferences.get(8).confTeams.add(new Team("LSU", "LSU", "SEC", 75, "ARK", this));
-        conferences.get(8).confTeams.add(new Team("Ole Miss", "MISS", "SEC", 54, "MSST", this));
-        conferences.get(8).confTeams.add(new Team("Mississippi St", "MSST", "SEC", 73, "MISS", this));
-        conferences.get(8).confTeams.add(new Team("South Carolina", "SC", "SEC", 60, "UK", this));
-        conferences.get(8).confTeams.add(new Team("Tennessee", "TENN", "SEC", 60, "VAND", this));
-        conferences.get(8).confTeams.add(new Team("Vanderbilt", "VAND", "SEC", 47, "TENN", this));
+        conferences.get(8).confTeams.add(new Team("Alabama", "BAMA", "SEC", 90, "AUB", 9, this));
+        conferences.get(8).confTeams.add(new Team("Arkansas", "ARK", "SEC", 55, "LSU", 9, this));
+        conferences.get(8).confTeams.add(new Team("Auburn", "AUB", "SEC", 75, "BAMA", 9, this));
+        conferences.get(8).confTeams.add(new Team("Florida", "FLOR", "SEC", 65, "UGA", 8, this));
+        conferences.get(8).confTeams.add(new Team("Georgia", "UGA", "SEC", 80, "FLOR", 9, this));
+        conferences.get(8).confTeams.add(new Team("Kentucky", "UK", "SEC", 60, "SC", 9, this));
+        conferences.get(8).confTeams.add(new Team("LSU", "LSU", "SEC", 75, "ARK", 9, this));
+        conferences.get(8).confTeams.add(new Team("Ole Miss", "MISS", "SEC", 54, "MSST", 9, this));
+        conferences.get(8).confTeams.add(new Team("Mississippi St", "MSST", "SEC", 73, "MISS", 9, this));
+        conferences.get(8).confTeams.add(new Team("South Carolina", "SC", "SEC", 60, "UK", 9, this));
+        conferences.get(8).confTeams.add(new Team("Tennessee", "TENN", "SEC", 60, "VAND", 9, this));
+        conferences.get(8).confTeams.add(new Team("Vanderbilt", "VAND", "SEC", 47, "TENN", 9, this));
 
         //Sun Belt
-        conferences.get(9).confTeams.add(new Team("Appalachian State", "APP", "Sun Belt", 42, "ODOM", this));
-        conferences.get(9).confTeams.add(new Team("LA Monroe", "LMON", "Sun Belt", 38, "TROY", this));
-        conferences.get(9).confTeams.add(new Team("Mid Tenn State", "MTSU", "Sun Belt", 39, "GASO", this));
-        conferences.get(9).confTeams.add(new Team("Troy", "TROY", "Sun Belt", 46, "LMON", this));
-        conferences.get(9).confTeams.add(new Team("UT El Paso", "UTEP", "Sun Belt", 30, "UTSA", this));
-        conferences.get(9).confTeams.add(new Team("North Texas", "NTEX", "Sun Belt", 43, "TXST", this));
-        conferences.get(9).confTeams.add(new Team("Tulsa", "TULS", "Sun Belt", 39, "RICE", this));
-        conferences.get(9).confTeams.add(new Team("Rice", "RICE", "Sun Belt", 33, "TULS", this));
-        conferences.get(9).confTeams.add(new Team("Texas St", "TXST", "Sun Belt", 30, "NTEX", this));
-        conferences.get(9).confTeams.add(new Team("Georgia Southern", "GASO", "Sun Belt", 30, "MTSU", this));
-        conferences.get(9).confTeams.add(new Team("Old Dominion", "ODOM", "Sun Belt", 35, "APP", this));
-        conferences.get(9).confTeams.add(new Team("UT San Antonio", "UTSA", "Sun Belt", 43, "UTEP", this));
+        conferences.get(9).confTeams.add(new Team("Appalachian State", "APP", "Sun Belt", 42, "ODOM", 9, this));
+        conferences.get(9).confTeams.add(new Team("LA Monroe", "LMON", "Sun Belt", 38, "TROY", 9, this));
+        conferences.get(9).confTeams.add(new Team("Mid Tenn State", "MTSU", "Sun Belt", 39, "GASO", 9, this));
+        conferences.get(9).confTeams.add(new Team("Troy", "TROY", "Sun Belt", 46, "LMON", 9, this));
+        conferences.get(9).confTeams.add(new Team("UT El Paso", "UTEP", "Sun Belt", 30, "UTSA", 5, this));
+        conferences.get(9).confTeams.add(new Team("North Texas", "NTEX", "Sun Belt", 43, "TXST", 5, this));
+        conferences.get(9).confTeams.add(new Team("Tulsa", "TULS", "Sun Belt", 39, "RICE", 5, this));
+        conferences.get(9).confTeams.add(new Team("Rice", "RICE", "Sun Belt", 33, "TULS", 5, this));
+        conferences.get(9).confTeams.add(new Team("Texas St", "TXST", "Sun Belt", 30, "NTEX", 5, this));
+        conferences.get(9).confTeams.add(new Team("Georgia Southern", "GASO", "Sun Belt", 30, "MTSU", 9, this));
+        conferences.get(9).confTeams.add(new Team("Old Dominion", "ODOM", "Sun Belt", 35, "APP", 7, this));
+        conferences.get(9).confTeams.add(new Team("UT San Antonio", "UTSA", "Sun Belt", 43, "UTEP", 5, this));
 
         //set teamList
         teamList = new ArrayList<Team>();
@@ -499,7 +498,8 @@ public class League extends Rankings {
                         String tmConf = filesSplit[2];
                         int tmPres = Integer.parseInt(filesSplit[3]);
                         String tmRival = filesSplit[4];
-                        conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, this));
+                        int tmLoc = Integer.parseInt(filesSplit[5]);
+                        conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, tmLoc, this));
                     }
                 }
             }
@@ -958,6 +958,21 @@ public class League extends Rankings {
     }
 
 
+    public String getRegion(int region) {
+        String location;
+        if (region == 0) location = "Northwest";
+        else if (region == 1) location = "West Coast";
+        else if (region == 2) location = "Southwest";
+        else if (region == 3) location = "Rockies";
+        else if (region == 4) location = "Great Plains";
+        else if (region == 5) location = "Texas";
+        else if (region == 6) location = "Great Lakes";
+        else if (region == 7) location = "Atlantic";
+        else if (region == 8) location = "Florida";
+        else location = "South";
+        return location;
+    }
+
     /**
      * Get list of teams and their prestige, used for selecting when a new game is started
      *
@@ -1117,7 +1132,7 @@ public class League extends Rankings {
             for (int i = 0; i < teamList.size(); ++i) {
                 teamList.get(i).updatePollScore();
             }
-            Collections.sort(teamList, new TeamCompPoll());
+            Collections.sort(teamList, new CompTeamPoll());
 
             schedBowlGames();
         } else if (currentWeek == 13) {
@@ -1248,7 +1263,7 @@ public class League extends Rankings {
     public void cfbPlayoffsNews() {
         setTeamRanks();
         ArrayList<Team> teams = teamList;
-        Collections.sort(teams, new TeamCompPoll());
+        Collections.sort(teams, new CompTeamPoll());
 
         if (currentWeek == 8) {
             newsStories.get(currentWeek + 1).add("Committee Announces First Playoff Rankings>The College Football Playoffs Committee has set ther initial rankings for this season's playoffs. The first look at the playoffs have " +
@@ -1355,7 +1370,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
 
         return heismanCandidates;
     }
@@ -1632,16 +1647,16 @@ public class League extends Rankings {
                 ss.add((PlayerS) c.allConfPlayers.get(24));
             }
 
-            Collections.sort(qbs, new PlayerHeismanComp());
-            Collections.sort(rbs, new PlayerHeismanComp());
-            Collections.sort(wrs, new PlayerHeismanComp());
-            Collections.sort(tes, new PlayerHeismanComp());
-            Collections.sort(ols, new PlayerHeismanComp());
-            Collections.sort(ks, new PlayerHeismanComp());
-            Collections.sort(dls, new PlayerHeismanComp());
-            Collections.sort(lbs, new PlayerHeismanComp());
-            Collections.sort(cbs, new PlayerHeismanComp());
-            Collections.sort(ss, new PlayerHeismanComp());
+            Collections.sort(qbs, new CompPlayerHeisman());
+            Collections.sort(rbs, new CompPlayerHeisman());
+            Collections.sort(wrs, new CompPlayerHeisman());
+            Collections.sort(tes, new CompPlayerHeisman());
+            Collections.sort(ols, new CompPlayerHeisman());
+            Collections.sort(ks, new CompPlayerHeisman());
+            Collections.sort(dls, new CompPlayerHeisman());
+            Collections.sort(lbs, new CompPlayerHeisman());
+            Collections.sort(cbs, new CompPlayerHeisman());
+            Collections.sort(ss, new CompPlayerHeisman());
 
             allAmericans.add(qbs.get(0));
             qbs.get(0).wonAllAmerican = true;
@@ -1824,7 +1839,7 @@ public class League extends Rankings {
                 teamList.get(i).updatePollScore();
                 if (teamList.get(i) == savePenalized) teamList.get(i).teamPollScore = 0;
             }
-            Collections.sort(teamList, new TeamCompPoll());
+            Collections.sort(teamList, new CompTeamPoll());
 
             StringBuilder sb = new StringBuilder();
             Team t1;
@@ -1958,7 +1973,7 @@ public class League extends Rankings {
                 teamList.get(i).teamPollScore = 0;
             }
         }
-        Collections.sort(teamList, new TeamCompPoll());
+        Collections.sort(teamList, new CompTeamPoll());
 
         //semifinals
         semiG14 = new Game(teamList.get(0), teamList.get(3), "Semis, 1v4");
@@ -2312,7 +2327,7 @@ public class League extends Rankings {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
         }
@@ -2324,7 +2339,7 @@ public class League extends Rankings {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); i += offers) {
             if (teamList.get(i).teamPrestige < rating) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
             }
         }
         return teamVacancies;
@@ -2336,7 +2351,7 @@ public class League extends Rankings {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
         }
@@ -2344,7 +2359,7 @@ public class League extends Rankings {
         if (teamVacancies.isEmpty()) {
             for (int i = 0; i < teamList.size(); i += offers) {
                 if (teamList.get(i).teamPrestige < rating && teamList.get(i).name != oldTeam) {
-                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
                     teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
                 }
             }
@@ -2357,14 +2372,14 @@ public class League extends Rankings {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
             }
         }
 
         if (teamVacancies.isEmpty()) {
             for (int i = 0; i < teamList.size(); i += offers) {
                 if (teamList.get(i).teamPrestige < rating && teamList.get(i).name != oldTeam) {
-                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, this));
+                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
                 }
             }
         }
@@ -2614,7 +2629,7 @@ public class League extends Rankings {
             }
         }
 
-        Collections.sort(allPlayersLeaving, new PlayerComparator());
+        Collections.sort(allPlayersLeaving, new CompPlayer());
 
         // Get 100 players (first 4 rounds)
         ArrayList<Player> NFLPlayers = new ArrayList<>(64);
@@ -2682,9 +2697,9 @@ public class League extends Rankings {
         //Major Infraction to a good team
         int x = (int) (Math.random() * 11);
         if (x > 7) {
-            int penalizedNumber = (int) (Math.random() * 25);
+            int penalizedNumber = (int) (Math.random() * 50);
             Team penalizedTeam = teamList.get(penalizedNumber);
-            if (penalizedTeam.teamPrestige > 70 && penalizedTeam.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+            if (penalizedTeam.teamPrestige > 60 && penalizedTeam.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam.teamPrestige -= (25 + x);
                 savePenalized = penalizedTeam;
                 penalizedTeam.HC.get(0).ratDiscipline -= 20;
@@ -2697,7 +2712,7 @@ public class League extends Rankings {
         //Minor infraction to an avg team
         x = (int) (Math.random() * 11);
         if (x > 7) {
-            int penalizedNumber = (int) (Math.random() * 55);
+            int penalizedNumber = (int) (Math.random() * 60);
             Team penalizedTeam2 = teamList.get(penalizedNumber);
             if (penalizedTeam2.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam2.teamPrestige -= (10 + x);
@@ -2712,7 +2727,7 @@ public class League extends Rankings {
         //Discipline a team
         x = (int) (Math.random() * 11);
         if (x > 6) {
-            int penalizedNumber = (int) (Math.random() * 60);
+            int penalizedNumber = (int) (Math.random() * 70);
             Team penalizedTeam3 = teamList.get(penalizedNumber);
             if (penalizedTeam3.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam3.teamPrestige -= (6 + x);
@@ -2727,7 +2742,7 @@ public class League extends Rankings {
         //Discipline a team
         x = (int) (Math.random() * 11);
         if (x > 5) {
-            int penalizedNumber = (int) (Math.random() * 75);
+            int penalizedNumber = (int) (Math.random() * 80);
             Team penalizedTeam4 = teamList.get(penalizedNumber);
             if (penalizedTeam4.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam4.teamPrestige -= (5 + x);
@@ -2742,7 +2757,7 @@ public class League extends Rankings {
         //Discipline a team
         x = (int) (Math.random() * 11);
         if (x > 5) {
-            int penalizedNumber = (int) (Math.random() * 85);
+            int penalizedNumber = (int) (Math.random() * 100);
             Team penalizedTeam5 = teamList.get(penalizedNumber);
             if (penalizedTeam5.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam5.teamPrestige -= (3 + x);
@@ -2893,7 +2908,7 @@ public class League extends Rankings {
      */
     public void updateLeagueHistory() {
         //update league history
-        Collections.sort(teamList, new TeamCompPoll());
+        Collections.sort(teamList, new CompTeamPoll());
         String[] yearTop25 = new String[25];
         Team tt;
         for (int i = 0; i < 25; ++i) {
@@ -2954,7 +2969,7 @@ public class League extends Rankings {
             teamList.get(i).updatePollScore();
         }
 
-        Collections.sort(teamList, new TeamCompPoll());
+        Collections.sort(teamList, new CompTeamPoll());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamPollScore = t + 1;
         }
@@ -2963,78 +2978,78 @@ public class League extends Rankings {
             teamList.get(i).updateSOS();
         }
 
-        Collections.sort(teamList, new TeamCompSoS());
+        Collections.sort(teamList, new CompTeamSoS());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamSOS = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompSoW());
+        Collections.sort(teamList, new CompTeamSoW());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamStrengthOfWins = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompPPG());
+        Collections.sort(teamList, new CompTeamPPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamPoints = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompOPPG());
+        Collections.sort(teamList, new CompTeamOPPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamOppPoints = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompYPG());
+        Collections.sort(teamList, new CompTeamYPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamYards = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompOYPG());
+        Collections.sort(teamList, new CompTeamOYPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamOppYards = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompPYPG());
+        Collections.sort(teamList, new CompTeamPYPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamPassYards = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompRYPG());
+        Collections.sort(teamList, new CompTeamRYPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamRushYards = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompOPYPG());
+        Collections.sort(teamList, new CompTeamOPYPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamOppPassYards = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompORYPG());
+        Collections.sort(teamList, new CompTeamORYPG());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamOppRushYards = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompTODiff());
+        Collections.sort(teamList, new CompTeamTODiff());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamTODiff = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompOffTalent());
+        Collections.sort(teamList, new CompTeamOffTalent());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamOffTalent = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompDefTalent());
+        Collections.sort(teamList, new CompTeamDefTalent());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamDefTalent = t + 1;
         }
 
-        Collections.sort(teamList, new TeamCompPrestige());
+        Collections.sort(teamList, new CompTeamPrestige());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).rankTeamPrestige = t + 1;
         }
 
         if (currentWeek == 0) {
-            Collections.sort(teamList, new TeamCompRecruitClass());
+            Collections.sort(teamList, new CompTeamRecruitClass());
             for (int t = 0; t < teamList.size(); ++t) {
                 teamList.get(t).rankTeamRecruitClass = t + 1;
             }
@@ -3055,7 +3070,7 @@ public class League extends Rankings {
         Team t;
         switch (selection) {
             case 0:
-                Collections.sort(teams, new TeamCompPoll());
+                Collections.sort(teams, new CompTeamPoll());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamPollScore);
@@ -3064,77 +3079,77 @@ public class League extends Rankings {
             case 1:
                 return getConfStandings();
             case 2:
-                Collections.sort(teams, new TeamCompSoS());
+                Collections.sort(teams, new CompTeamSoS());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamSOS);
                 }
                 break;
             case 3:
-                Collections.sort(teams, new TeamCompSoW());
+                Collections.sort(teams, new CompTeamSoW());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamStrengthOfWins);
                 }
                 break;
             case 4:
-                Collections.sort(teams, new TeamCompPPG());
+                Collections.sort(teams, new CompTeamPPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamPoints / t.numGames()));
                 }
                 break;
             case 5:
-                Collections.sort(teams, new TeamCompOPPG());
+                Collections.sort(teams, new CompTeamOPPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppPoints / t.numGames()));
                 }
                 break;
             case 6:
-                Collections.sort(teams, new TeamCompYPG());
+                Collections.sort(teams, new CompTeamYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamYards / t.numGames()));
                 }
                 break;
             case 7:
-                Collections.sort(teams, new TeamCompOYPG());
+                Collections.sort(teams, new CompTeamOYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppYards / t.numGames()));
                 }
                 break;
             case 8:
-                Collections.sort(teams, new TeamCompPYPG());
+                Collections.sort(teams, new CompTeamPYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamPassYards / t.numGames()));
                 }
                 break;
             case 9:
-                Collections.sort(teams, new TeamCompRYPG());
+                Collections.sort(teams, new CompTeamRYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamRushYards / t.numGames()));
                 }
                 break;
             case 10:
-                Collections.sort(teams, new TeamCompOPYPG());
+                Collections.sort(teams, new CompTeamOPYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppPassYards / t.numGames()));
                 }
                 break;
             case 11:
-                Collections.sort(teams, new TeamCompORYPG());
+                Collections.sort(teams, new CompTeamORYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + (t.teamOppRushYards / t.numGames()));
                 }
                 break;
             case 12:
-                Collections.sort(teams, new TeamCompTODiff());
+                Collections.sort(teams, new CompTeamTODiff());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     if (t.teamTODiff > 0)
@@ -3144,35 +3159,35 @@ public class League extends Rankings {
                 }
                 break;
             case 13:
-                Collections.sort(teams, new TeamCompOffTalent());
+                Collections.sort(teams, new CompTeamOffTalent());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamOffTalent);
                 }
                 break;
             case 14:
-                Collections.sort(teams, new TeamCompDefTalent());
+                Collections.sort(teams, new CompTeamDefTalent());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamDefTalent);
                 }
                 break;
             case 15:
-                Collections.sort(teams, new TeamCompPrestige());
+                Collections.sort(teams, new CompTeamPrestige());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamPrestige);
                 }
                 break;
             case 16:
-                Collections.sort(teams, new TeamCompRecruitClass());
+                Collections.sort(teams, new CompTeamRecruitClass());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + t.getRecruitingClassRat());
                 }
                 break;
             default:
-                Collections.sort(teams, new TeamCompPoll());
+                Collections.sort(teams, new CompTeamPoll());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.teamPollScore);
@@ -3194,7 +3209,7 @@ public class League extends Rankings {
         ArrayList<Team> confTeams = new ArrayList<>();
         for (Conference c : conferences) {
             confTeams.addAll(c.confTeams);
-            Collections.sort(confTeams, new TeamCompConfWins());
+            Collections.sort(confTeams, new CompTeamConfWins());
             confStandings.add(" ," + c.confName + " Conference, ");
             Team t;
             for (int i = 0; i < confTeams.size(); ++i) {
@@ -3222,7 +3237,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3241,7 +3256,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3260,7 +3275,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3280,7 +3295,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3299,7 +3314,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3318,7 +3333,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3337,7 +3352,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3356,7 +3371,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3375,7 +3390,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3394,7 +3409,7 @@ public class League extends Rankings {
                 }
             }
         }
-        Collections.sort(heismanCandidates, new PlayerHeismanComp());
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
         return heismanCandidates;
     }
 
@@ -3406,7 +3421,7 @@ public class League extends Rankings {
                 coachCandidates.add(teamList.get(i).HC.get(0));
             }
         }
-        Collections.sort(coachCandidates, new CoachScoreComp());
+        Collections.sort(coachCandidates, new CompCoachScore());
         return coachCandidates;
     }
 
@@ -3528,152 +3543,152 @@ public class League extends Rankings {
         ArrayList<String> rankings = new ArrayList<String>();
         switch (selection) {
             case 0:
-                Collections.sort(pQB, new PlayerPassRatingComp());
+                Collections.sort(pQB, new CompPlayerPassRating());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).getPasserRating());
                 }
                 break;
             case 1:
-                Collections.sort(pQB, new PlayerPassYardsComp());
+                Collections.sort(pQB, new CompPlayerPassYards());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).statsPassYards);
                 }
                 break;
             case 2:
-                Collections.sort(pQB, new PlayerPassTDsComp());
+                Collections.sort(pQB, new CompPlayerPassTDs());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).statsPassTD);
                 }
                 break;
             case 3:
-                Collections.sort(pQB, new PlayerPassIntsComp());
+                Collections.sort(pQB, new CompPlayerPassInts());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).statsInt);
                 }
                 break;
             case 4:
-                Collections.sort(pQB, new PlayerPassPctComp());
+                Collections.sort(pQB, new CompPlayerPassPCT());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).getPassPCT() + "%");
                 }
                 break;
             case 5:
-                Collections.sort(pRB, new PlayerRushYardsComp());
+                Collections.sort(pRB, new CompPlayerRushYards());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pRB.get(i).name + " (" + pRB.get(i).team.abbr + ")," + pRB.get(i).statsRushYards);
                 }
                 break;
             case 6:
-                Collections.sort(pRB, new PlayerRushTDsComp());
+                Collections.sort(pRB, new CompPlayerRushTDs());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pRB.get(i).name + " (" + pRB.get(i).team.abbr + ")," + pRB.get(i).statsRushTD);
                 }
                 break;
             case 7:
-                Collections.sort(pWR, new PlayerReceptionsComp());
+                Collections.sort(pWR, new CompPlayerReceptions());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pWR.get(i).name + " (" + pWR.get(i).team.abbr + ")," + pWR.get(i).statsReceptions);
                 }
                 break;
             case 8:
-                Collections.sort(pWR, new PlayerRecYardsComp());
+                Collections.sort(pWR, new CompPlayerRecYards());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pWR.get(i).name + " (" + pWR.get(i).team.abbr + ")," + pWR.get(i).statsRecYards);
                 }
                 break;
             case 9:
-                Collections.sort(pWR, new PlayerRecTDsComp());
+                Collections.sort(pWR, new CompPlayerRecTDs());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pWR.get(i).name + " (" + pWR.get(i).team.abbr + ")," + pWR.get(i).statsTD);
                 }
                 break;
             case 10:
-                Collections.sort(def, new PlayerTacklesComp());
+                Collections.sort(def, new CompPlayerTackles());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).tackles);
                 }
                 break;
             case 11:
-                Collections.sort(def, new PlayerSacksComp());
+                Collections.sort(def, new CompPlayerSacks());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).sacks);
                 }
                 break;
             case 12:
-                Collections.sort(def, new PlayerFumblesRecComp());
+                Collections.sort(def, new CompPlayerFumblesRec());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).fumbles);
                 }
                 break;
             case 13:
-                Collections.sort(def, new PlayerInterceptionsComp());
+                Collections.sort(def, new CompPlayerInterceptions());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).interceptions);
                 }
                 break;
 
             case 14:
-                Collections.sort(HC, new CoachScoreComp());
+                Collections.sort(HC, new CompCoachScore());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachScore());
                 }
                 break;
             case 15:
-                Collections.sort(pQB, new PlayerHeismanComp());
+                Collections.sort(pQB, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).getHeismanScore());
                 }
                 break;
             case 16:
-                Collections.sort(pRB, new PlayerHeismanComp());
+                Collections.sort(pRB, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pRB.get(i).name + " (" + pRB.get(i).team.abbr + ")," + pRB.get(i).getHeismanScore());
                 }
                 break;
             case 17:
-                Collections.sort(pWR, new PlayerHeismanComp());
+                Collections.sort(pWR, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pWR.get(i).name + " (" + pWR.get(i).team.abbr + ")," + pWR.get(i).getHeismanScore());
                 }
                 break;
             case 18:
-                Collections.sort(pTE, new PlayerHeismanComp());
+                Collections.sort(pTE, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pTE.get(i).name + " (" + pTE.get(i).team.abbr + ")," + pTE.get(i).getHeismanScore());
                 }
                 break;
             case 19:
-                Collections.sort(pOL, new PlayerHeismanComp());
+                Collections.sort(pOL, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pOL.get(i).name + " (" + pOL.get(i).team.abbr + ")," + pOL.get(i).getHeismanScore());
                 }
                 break;
             case 20:
-                Collections.sort(pK, new PlayerHeismanComp());
+                Collections.sort(pK, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pK.get(i).name + " (" + pK.get(i).team.abbr + ")," + pK.get(i).getHeismanScore());
                 }
                 break;
             case 21:
-                Collections.sort(pDL, new PlayerHeismanComp());
+                Collections.sort(pDL, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pDL.get(i).name + " (" + pDL.get(i).team.abbr + ")," + pDL.get(i).getHeismanScore());
                 }
                 break;
             case 22:
-                Collections.sort(pLB, new PlayerHeismanComp());
+                Collections.sort(pLB, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pLB.get(i).name + " (" + pLB.get(i).team.abbr + ")," + pLB.get(i).getHeismanScore());
                 }
                 break;
             case 23:
-                Collections.sort(pCB, new PlayerHeismanComp());
+                Collections.sort(pCB, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pCB.get(i).name + " (" + pCB.get(i).team.abbr + ")," + pCB.get(i).getHeismanScore());
                 }
                 break;
             case 24:
-                Collections.sort(pS, new PlayerHeismanComp());
+                Collections.sort(pS, new CompPlayerHeisman());
                 for (int i = 0; i < rankNum; ++i) {
                     rankings.add((i + 1) + ". ," + pS.get(i).name + " (" + pS.get(i).team.abbr + ")," + pS.get(i).getHeismanScore());
                 }

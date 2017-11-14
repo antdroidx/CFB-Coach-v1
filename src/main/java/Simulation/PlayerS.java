@@ -137,6 +137,10 @@ public class PlayerS extends Player {
         personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 3.5) + 125 + (int) (Math.random() * 100) - 50;
 
+        int locFactor = Math.abs(team.location - region) - 5;
+        cost = cost + (int)(Math.random()*(locFactor * 10));
+        if (cost < 15) cost = (int)(Math.random()*20);
+
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;

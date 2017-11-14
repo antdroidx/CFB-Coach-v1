@@ -2,7 +2,6 @@ package Simulation;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Class for conferences, which each have 12 teams.
@@ -275,7 +274,7 @@ public class Conference {
         for (int i = 0; i < confTeams.size(); ++i) {
             confTeams.get(i).updatePollScore();
         }
-        Collections.sort(confTeams, new TeamCompConfWins());
+        Collections.sort(confTeams, new CompTeamConfWins());
 
         int winsFirst = confTeams.get(0).getConfWins();
         Team t = confTeams.get(0);
@@ -288,7 +287,7 @@ public class Conference {
         }
         if (teamTB.size() > 2) {
             // ugh 3 way tiebreaker
-            Collections.sort(teamTB, new TeamCompPoll());
+            Collections.sort(teamTB, new CompTeamPoll());
             for (int j = 0; j < teamTB.size(); ++j) {
                 confTeams.set(j, teamTB.get(j));
             }
@@ -306,7 +305,7 @@ public class Conference {
         }
         if (teamTB.size() > 2) {
             // ugh 3 way tiebreaker
-            Collections.sort(teamTB, new TeamCompPoll());
+            Collections.sort(teamTB, new CompTeamPoll());
             for (int j = 0; j < teamTB.size(); ++j) {
                 confTeams.set(1 + j, teamTB.get(j));
             }
@@ -350,7 +349,7 @@ public class Conference {
                             ", winning on the road with a score of " + ccg.awayScore + " to " + ccg.homeScore + "."
             );
         }
-        Collections.sort(confTeams, new TeamCompPoll());
+        Collections.sort(confTeams, new CompTeamPoll());
     }
 
     /**
@@ -438,17 +437,17 @@ public class Conference {
 
             }
 
-            Collections.sort(hc, new CoachScoreComp());
-            Collections.sort(qbs, new PlayerHeismanComp());
-            Collections.sort(rbs, new PlayerHeismanComp());
-            Collections.sort(wrs, new PlayerHeismanComp());
-            Collections.sort(tes, new PlayerHeismanComp());
-            Collections.sort(ols, new PlayerHeismanComp());
-            Collections.sort(ks, new PlayerHeismanComp());
-            Collections.sort(dls, new PlayerHeismanComp());
-            Collections.sort(lbs, new PlayerHeismanComp());
-            Collections.sort(cbs, new PlayerHeismanComp());
-            Collections.sort(ss, new PlayerHeismanComp());
+            Collections.sort(hc, new CompCoachScore());
+            Collections.sort(qbs, new CompPlayerHeisman());
+            Collections.sort(rbs, new CompPlayerHeisman());
+            Collections.sort(wrs, new CompPlayerHeisman());
+            Collections.sort(tes, new CompPlayerHeisman());
+            Collections.sort(ols, new CompPlayerHeisman());
+            Collections.sort(ks, new CompPlayerHeisman());
+            Collections.sort(dls, new CompPlayerHeisman());
+            Collections.sort(lbs, new CompPlayerHeisman());
+            Collections.sort(cbs, new CompPlayerHeisman());
+            Collections.sort(ss, new CompPlayerHeisman());
 
             allConfPlayers.add(hc.get(0));
             hc.get(0).wonAllConference = true;
