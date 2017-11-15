@@ -173,8 +173,8 @@ public class PlayerQB extends Player {
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
         int locFactor = Math.abs(team.location - region) - 5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
-        if (cost < 15) cost = (int)(Math.random()*20);
+        cost = cost + (int)(Math.random()*(locFactor * 7));
+        if (cost < 15) cost = (int)(Math.random()*19) + 1;
 
         statsPassAtt = 0;
         statsPassComp = 0;

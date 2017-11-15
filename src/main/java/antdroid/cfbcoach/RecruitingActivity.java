@@ -67,6 +67,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> availCBs;
     private ArrayList<String> availSs;
     private ArrayList<String> availAll;
+    private ArrayList<String> recruitDisplay;
 
     private ArrayList<String> availR0;
     private ArrayList<String> availR1;
@@ -153,7 +154,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         availAll = new ArrayList<String>();
 
-        ratingTolerance = 8;
+        ratingTolerance = 7;
         Random rand = new Random();
         int max = ratingTolerance;
         int min = -ratingTolerance;
@@ -1500,8 +1501,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[8]);
-        int ovrB = Integer.parseInt(psB[8]);
+        int ovrA = Integer.parseInt(psA[9]);
+        int ovrB = Integer.parseInt(psB[9]);
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }

@@ -1284,8 +1284,11 @@ public class Team {
         //make team
         int stars = teamPrestige / 20 + 1;
         int chance = 20;
-        if (HC.get(0) != null)
-            chance = (2 * teamPrestige + HC.get(0).ratTalent) / 15; //between 0 and 20
+        if (HC.get(0) != null) {
+            chance = (2 * teamPrestige + HC.get(0).ratTalent) / 19; //between 0 and 20
+        } else {
+            chance = (int)Math.random()*20;
+        }
 
 
         double starsBonusChance = 0.15;
