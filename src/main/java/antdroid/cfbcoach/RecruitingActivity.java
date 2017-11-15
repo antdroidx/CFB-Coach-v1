@@ -68,6 +68,17 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> availSs;
     private ArrayList<String> availAll;
 
+    private ArrayList<String> availR0;
+    private ArrayList<String> availR1;
+    private ArrayList<String> availR2;
+    private ArrayList<String> availR3;
+    private ArrayList<String> availR4;
+    private ArrayList<String> availR5;
+    private ArrayList<String> availR6;
+    private ArrayList<String> availR7;
+    private ArrayList<String> availR8;
+    private ArrayList<String> availR9;
+    
     private int needQBs;
     private int needRBs;
     private int needWRs;
@@ -127,6 +138,18 @@ public class RecruitingActivity extends AppCompatActivity {
         availLBs = new ArrayList<String>();
         availCBs = new ArrayList<String>();
         availSs = new ArrayList<String>();
+
+        availR0 = new ArrayList<String>();
+        availR1 = new ArrayList<String>();
+        availR2 = new ArrayList<String>();
+        availR3 = new ArrayList<String>();
+        availR4 = new ArrayList<String>();
+        availR5 = new ArrayList<String>();
+        availR6 = new ArrayList<String>();
+        availR7 = new ArrayList<String>();
+        availR8 = new ArrayList<String>();
+        availR9 = new ArrayList<String>();
+
 
         availAll = new ArrayList<String>();
 
@@ -218,6 +241,27 @@ public class RecruitingActivity extends AppCompatActivity {
             } else if (playerInfo[0].equals("S")) {
                 availSs.add(lines[i]);
             }
+            if (playerInfo[12].equals("0")) {
+                availR0.add(lines[i]);
+            } else if (playerInfo[12].equals("1")) {
+                availR1.add(lines[i]);
+            } else if (playerInfo[12].equals("2")) {
+                availR2.add(lines[i]);
+            } else if (playerInfo[12].equals("3")) {
+                availR3.add(lines[i]);
+            } else if (playerInfo[12].equals("4")) {
+                availR4.add(lines[i]);
+            } else if (playerInfo[12].equals("5")) {
+                availR5.add(lines[i]);
+            } else if (playerInfo[12].equals("6")) {
+                availR6.add(lines[i]);
+            } else if (playerInfo[12].equals("7")) {
+                availR7.add(lines[i]);
+            } else if (playerInfo[12].equals("8")) {
+                availR8.add(lines[i]);
+            } else if (playerInfo[12].equals("9")) {
+                availR9.add(lines[i]);
+            }
             ++i;
         }
 
@@ -240,6 +284,7 @@ public class RecruitingActivity extends AppCompatActivity {
          */
         positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
+        positions.add("Top 50 Recruits");
         positions.add("QB (Need: " + needQBs + ")");
         positions.add("RB (Need: " + needRBs + ")");
         positions.add("WR (Need: " + needWRs + ")");
@@ -250,7 +295,17 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("LB (Need: " + needLBs + ")");
         positions.add("CB (Need: " + needCBs + ")");
         positions.add("S (Need: " + needSs + ")");
-        positions.add("Top 50 Recruits");
+/*        positions.add("Northwest");
+        positions.add("West Coast");
+        positions.add("Southwest");
+        positions.add("Rockies");
+        positions.add("Great Plains");
+        positions.add("Texas");
+        positions.add("Great Lakes");
+        positions.add("Atlantic");
+        positions.add("Florida");
+        positions.add("South");*/
+
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
         dataAdapterPosition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -306,7 +361,10 @@ public class RecruitingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
                 builder.setTitle("Filter Recruits");
-                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players"};
+                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players",
+/*                        "Northwest Region", "West Coast Region", "Southwest Region", "Rockies Region",
+                        "Great Plains Region", "Texas Region", "Great Lakes Region", "Atlantic Region",
+                        "Florida Region", "South Region"*/};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
@@ -334,8 +392,38 @@ public class RecruitingActivity extends AppCompatActivity {
                             removeUnaffordable(availLBs);
                             removeUnaffordable(availCBs);
                             removeUnaffordable(availSs);
+                            removeUnaffordable(availR0);
+                            removeUnaffordable(availR0);
+                            removeUnaffordable(availR2);
+                            removeUnaffordable(availR3);
+                            removeUnaffordable(availR4);
+                            removeUnaffordable(availR5);
+                            removeUnaffordable(availR6);
+                            removeUnaffordable(availR7);
+                            removeUnaffordable(availR8);
+                            removeUnaffordable(availR9);
                             // Notify that players were removed
                             expListAdapter.notifyDataSetChanged();
+                        } else if (item == 3) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 4) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 5) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 6) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 7) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 8) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 9) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 10) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 11) {
+                            filterRegion(availAll, (item - 3));
+                        } else if (item == 12) {
+                            filterRegion(availAll, (item - 3));
                         }
 
                         dialog.dismiss();
@@ -360,6 +448,33 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
+    public void filterRegion(List<String> list, int region) {
+        int i = 0;
+        while (i < list.size()) {
+            if (getRecruitRegion(list.get(i)) != region) {
+                list.remove(i);
+            } else {
+                ++i;
+            }
+        }
+    }
+
+    /**
+     * Used for parsing through string to get cost
+     */
+    public int getRecruitCost(String p) {
+        String[] pSplit = p.split(",");
+        return Integer.parseInt(pSplit[9]);
+    }
+
+    /**
+     * Used for parsing through string to get region
+     */
+    public int getRecruitRegion(String p) {
+        String[] pSplit = p.split(",");
+        return Integer.parseInt(pSplit[12]);
+    }
+
     @Override
     public void onBackPressed() {
         exitRecruiting();
@@ -375,7 +490,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private void exitRecruiting() {
         StringBuilder sb = new StringBuilder();
         sb.append("Are you sure you are done recruiting? Any unfilled positions will be filled by walk-ons.\n\n");
-        for (int i = 0; i < positions.size() - 1; ++i) {
+        for (int i = 1; i < positions.size(); ++i) {
             sb.append("\t\t" + positions.get(i) + "\n");
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
@@ -424,6 +539,26 @@ public class RecruitingActivity extends AppCompatActivity {
             players = availCBs;
         } else if (pos.equals("S")) {
             players = availSs;
+        } else if (pos.equals("0")) {
+            players = availR0;
+        } else if (pos.equals("1")) {
+            players = availR1;
+        } else if (pos.equals("2")) {
+            players = availR2;
+        } else if (pos.equals("3")) {
+            players = availR3;
+        } else if (pos.equals("4")) {
+            players = availR4;
+        } else if (pos.equals("5")) {
+            players = availR5;
+        } else if (pos.equals("6")) {
+            players = availR6;
+        } else if (pos.equals("7")) {
+            players = availR7;
+        } else if (pos.equals("8")) {
+            players = availR8;
+        } else if (pos.equals("0")) {
+            players = availR9;
         }
     }
 
@@ -453,19 +588,19 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return  "Home Region: " + ps[12] +
+            return  "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nPass Strength: " + getLetterGrade(ps[5]) +
                     "\nPass Accuracy: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("RB")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nPower: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nCatching: " + getLetterGrade(ps[11]);
         } else if (pos.equals("WR")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nCatching: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
@@ -476,37 +611,37 @@ public class RecruitingActivity extends AppCompatActivity {
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("OL")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nStrength: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
                     "\nPass Blk: " + getLetterGrade(ps[7]) +
                     "\nAwareness: " + getLetterGrade(ps[11]);
         } else if (pos.equals("K")) {
-            return  "Home Region: " + ps[12] +
+            return  "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nKick Power: " + getLetterGrade(ps[5]) +
                     "\nAccuracy: " + getLetterGrade(ps[6]) +
                     "\nClumsiness: " + getLetterGrade(ps[7]) +
                     "\nPressure: " + getLetterGrade(ps[11]);
         } else if (pos.equals("DL")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nStrength: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
                     "\nPass Press: " + getLetterGrade(ps[7]) +
                     "\nTackling: " + getLetterGrade(ps[11]);
         } else if (pos.equals("LB")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nCoverage: " + getLetterGrade(ps[5]) +
                     "\nRun Stop: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);
         } else if (pos.equals("CB")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nCoverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
                     "\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("S")) {
-            return "Home Region: " + ps[12] +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
                     "\nCoverage: " + getLetterGrade(ps[5]) +
                     "\nSpeed: " + getLetterGrade(ps[6]) +
                     "\nTackling: " + getLetterGrade(ps[7]) +
@@ -648,6 +783,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         if (dataAdapterPosition != null) {
             positions = new ArrayList<String>();
+            positions.add("Top 50 Recruits");
             positions.add("QB (Need: " + needQBs + ")");
             positions.add("RB (Need: " + needRBs + ")");
             positions.add("WR (Need: " + needWRs + ")");
@@ -658,8 +794,17 @@ public class RecruitingActivity extends AppCompatActivity {
             positions.add("LB (Need: " + needLBs + ")");
             positions.add("CB (Need: " + needCBs + ")");
             positions.add("S (Need: " + needSs + ")");
+/*            positions.add("Northwest");
+            positions.add("West Coast");
+            positions.add("Southwest");
+            positions.add("Rockies");
+            positions.add("Great Plains");
+            positions.add("Texas");
+            positions.add("Great Lakes");
+            positions.add("Atlantic");
+            positions.add("Florida");
+            positions.add("South");*/
 
-            positions.add("Top 50 Recruits");
             dataAdapterPosition.clear();
             for (String p : positions) {
                 dataAdapterPosition.add(p);
@@ -764,13 +909,7 @@ public class RecruitingActivity extends AppCompatActivity {
         msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
-    /**
-     * Used for parsing through string to get cost
-     */
-    public int getRecruitCost(String p) {
-        String[] pSplit = p.split(",");
-        return Integer.parseInt(pSplit[9]);
-    }
+
 
     /**
      * Recruit player, add to correct list and remove from available players list
@@ -949,6 +1088,27 @@ public class RecruitingActivity extends AppCompatActivity {
             teamSs.add(getReadablePlayerInfo(player));
             Collections.sort(teamSs, new PlayerTeamStrCompOverall());
         }
+        if (ps[12].equals("Northwest")) {
+            availR0.remove(player);
+        } else if (ps[12].equals("West Coast")) {
+            availR1.remove(player);
+        } else if (ps[12].equals("Southwest")) {
+            availR2.remove(player);
+        } else if (ps[12].equals("Rockies")) {
+            availR3.remove(player);
+        } else if (ps[12].equals("Great Plains")) {
+            availR4.remove(player);
+        } else if (ps[12].equals("Texas")) {
+            availR5.remove(player);
+        } else if (ps[12].equals("Great Lakes")) {
+            availR6.remove(player);
+        } else if (ps[12].equals("Atlantic")) {
+            availR7.remove(player);
+        } else if (ps[12].equals("Florida")) {
+            availR8.remove(player);
+        } else if (ps[12].equals("South")) {
+            availR9.remove(player);
+        }
 
         players.remove(player);
 
@@ -1115,6 +1275,28 @@ public class RecruitingActivity extends AppCompatActivity {
             availCBs.remove(player);
         } else if (ps[0].equals("S")) {
             availSs.remove(player);
+        }
+
+        if (ps[12].equals("0")) {
+            availR0.remove(player);
+        } else if (ps[12].equals("1")) {
+            availR1.remove(player);
+        } else if (ps[12].equals("2")) {
+            availR2.remove(player);
+        } else if (ps[12].equals("3")) {
+            availR3.remove(player);
+        } else if (ps[12].equals("4")) {
+            availR4.remove(player);
+        } else if (ps[12].equals("5")) {
+            availR5.remove(player);
+        } else if (ps[12].equals("6")) {
+            availR6.remove(player);
+        } else if (ps[12].equals("7")) {
+            availR7.remove(player);
+        } else if (ps[12].equals("8")) {
+            availR8.remove(player);
+        } else if (ps[12].equals("9")) {
+            availR9.remove(player);
         }
 
         players.remove(player);
@@ -1295,6 +1477,21 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
     } //end class
+
+    public String getRegion(int region) {
+        String location;
+        if (region == 0) location = "Northwest";
+        else if (region == 1) location = "West Coast";
+        else if (region == 2) location = "Southwest";
+        else if (region == 3) location = "Rockies";
+        else if (region == 4) location = "Great Plains";
+        else if (region == 5) location = "Texas";
+        else if (region == 6) location = "Great Lakes";
+        else if (region == 7) location = "Atlantic";
+        else if (region == 8) location = "Florida";
+        else location = "South";
+        return location;
+    }
 
 }
 

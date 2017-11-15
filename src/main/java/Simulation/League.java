@@ -2481,6 +2481,7 @@ public class League extends Rankings {
     }
 
     public void transferPlayers() {
+        Collections.sort(teamList, new CompTeamPoll());
         int rand;
         Random random = new Random();
         int max = 119;
@@ -2488,7 +2489,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferQBs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
+                if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferQBs.get(i).region) < 2) {
                     teamList.get(t).teamQBs.add(transferQBs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tQBs.get(i).toString() + " .");
@@ -2500,7 +2501,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferRBs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr) {
+                if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferRBs.get(i).region) < 2) {
                     teamList.get(t).teamRBs.add(transferRBs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>RB " + transferRBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tRBs.get(i).toString() + " .");
@@ -2513,7 +2514,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferWRs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr) {
+                if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferWRs.get(i).region) < 2) {
                     teamList.get(t).teamWRs.add(transferWRs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>WR " + transferWRs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tWRs.get(i).toString() + " .");
@@ -2526,7 +2527,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferTEs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr) {
+                if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferTEs.get(i).region) < 2) {
                     teamList.get(t).teamTEs.add(transferTEs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>TE " + transferTEs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tTEs.get(i).toString() + " .");
@@ -2539,7 +2540,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferOLs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr) {
+                if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferOLs.get(i).region) < 2) {
                     teamList.get(t).teamOLs.add(transferOLs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>OL " + transferOLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tOLs.get(i).toString() + " .");
@@ -2552,7 +2553,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferKs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr) {
+                if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferKs.get(i).region) < 2) {
                     teamList.get(t).teamKs.add(transferKs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>K " + transferKs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tKs.get(i).toString() + " .");
@@ -2578,7 +2579,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferLBs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr) {
+                if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferLBs.get(i).region) < 2) {
                     teamList.get(t).teamLBs.add(transferLBs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>LB " + transferLBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tLBs.get(i).toString() + " .");
@@ -2591,7 +2592,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferCBs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr) {
+                if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferCBs.get(i).region) < 2) {
                     teamList.get(t).teamCBs.add(transferCBs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>CB " + transferCBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tCBs.get(i).toString() + " .");
@@ -2604,7 +2605,7 @@ public class League extends Rankings {
         for (int i = 0; i < transferSs.size(); ++i) {
             rand = random.nextInt((max - min) + 1) + min;
             for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr) {
+                if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferSs.get(i).region) < 2) {
                     teamList.get(t).teamSs.add(transferSs.get(i));
                     newsStories.get(currentWeek).add("Transfer News>S " + transferSs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tSs.get(i).toString() + " .");
