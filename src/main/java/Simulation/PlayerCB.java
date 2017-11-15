@@ -150,8 +150,8 @@ public class PlayerCB extends Player {
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 50 + (int) (Math.random() * 100) - 50;
 
         int locFactor = Math.abs(team.location - region) - 5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
-        if (cost < 15) cost = (int)(Math.random()*20);
+        cost = cost + (int)(Math.random()*(locFactor * 5));
+        if (cost < 15) cost = (int)(Math.random()*19) + 1;
 
 
         wonHeisman = false;
