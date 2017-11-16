@@ -168,12 +168,12 @@ public class PlayerQB extends Player {
         ratEvasion = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
         ratSpeed = (int) (47 + year * 5 + stars * 5 - 25 * Math.random());
         ratOvr = (ratPassPow * 3 + ratPassAcc * 4 + ratEvasion + ratSpeed) / 9;
-        region = (int)(Math.random()*10);
+        region = (int)(Math.random()*5);
         personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
-        int locFactor = Math.abs(team.location - region) - 5;
-        cost = cost + (int)(Math.random()*(locFactor * 7));
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        cost = cost + (int)(Math.random()*(locFactor * 15));
         if (cost < 15) cost = (int)(Math.random()*19) + 1;
 
         statsPassAtt = 0;

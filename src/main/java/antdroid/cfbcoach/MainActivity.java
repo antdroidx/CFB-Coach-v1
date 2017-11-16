@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     League simLeague;
     Conference currentConference;
     Team currentTeam;
-    Rankings rank;
     int currentConferenceID;
     Team userTeam;
     File saveLeagueFile;
