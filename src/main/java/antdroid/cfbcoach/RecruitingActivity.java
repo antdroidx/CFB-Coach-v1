@@ -607,7 +607,8 @@ public class RecruitingActivity extends AppCompatActivity {
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nJumping: " + getLetterGrade(ps[11]);
         } else if (pos.equals("TE")) {
-            return "Catching: " + getLetterGrade(ps[5]) +
+            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
+                    "Catching: " + getLetterGrade(ps[5]) +
                     "\nRush Blk: " + getLetterGrade(ps[6]) +
                     "\nEvasion: " + getLetterGrade(ps[7]) +
                     "\nSpeed: " + getLetterGrade(ps[11]);

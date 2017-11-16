@@ -245,7 +245,7 @@ public class Player {
 
         }
     }
-    public String getRegion(int region) {
+/*    public String getRegion(int region) {
         String location;
         if (region == 0) location = "Northwest";
         else if (region == 1) location = "West Coast";
@@ -258,7 +258,18 @@ public class Player {
         else if (region == 8) location = "Florida";
         else location = "South";
         return location;
+    }*/
+
+    public String getRegion(int region) {
+        String location;
+        if (region == 0) location = "West";
+        else if (region == 1) location = "Mid-West";
+        else if (region == 2) location = "Central";
+        else if (region == 3) location = "East";
+        else location = "South";
+        return location;
     }
+
 
     public String getPersonality(int personality) {
         String trait;

@@ -138,12 +138,12 @@ public class PlayerLB extends Player {
         ratSpeed = (int) (45 + year * 5 + stars * 5 - 25 * Math.random());
         ratOvr = (ratCoverage + ratRunStop * 2 + ratTackle * 2 + ratSpeed) / 6;
         position = "LB";
-        region = (int)(Math.random()*10);
+        region = (int)(Math.random()*5);
         personality = (int) (50 + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
 
-        int locFactor = Math.abs(team.location - region) - 5;
-        cost = cost + (int)(Math.random()*(locFactor * 5));
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        cost = cost + (int)(Math.random()*(locFactor * 10));
         if (cost < 15) cost = (int)(Math.random()*19) + 1;
 
         wonHeisman = false;

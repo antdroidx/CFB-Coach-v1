@@ -124,6 +124,17 @@ public class Team {
     public ArrayList<Player> teamJRs;
     public ArrayList<Player> teamSRs;
 
+    public int minQBs = 2;
+    public int minRBs = 4;
+    public int minWRs = 6;
+    public int minTEs = 2;
+    public int minOLs = 10;
+    public int minKs = 2;
+    public int minDLs = 8;
+    public int minLBs = 6;
+    public int minCBs = 6;
+    public int minSs = 2;
+
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
 
@@ -194,7 +205,7 @@ public class Team {
         natChampWL = "";
 
         teamPrestige = prestige;
-        newRoster(2, 4, 6, 2, 10, 2, 8, 6, 6, 2);
+        newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs);
 
         //set stats
         totalWins = 0;
@@ -756,24 +767,6 @@ public class Team {
             ccPts += 1;
         }
 
-/*        //Bonus for NFL Prospects if team is medicore
-        if (teamPrestige < 50) {
-            getPlayersLeaving();
-            for (int i = 0; i < playersLeaving.size(); ++i) {
-                if (playersLeaving.get(i).ratOvr > 90 && !playersLeaving.get(i).position.equals("K")) {
-                    players++;
-                }
-            }
-            if (players > 2) {
-                newPrestige += 2;
-                nflPts += 2;
-            }
-            if (players > 0) {
-                newPrestige += 2;
-                nflPts += 2;
-            }
-        }*/
-
         newPrestige += disciplinePts;
 
         //Sets the bounds for Prestige
@@ -953,8 +946,6 @@ public class Team {
      * Advance season for players. Removes seniors and develops underclassmen.
      */
     public void advanceSeasonPlayers() {
-        int qbNeeds = 0, rbNeeds = 0, wrNeeds = 0, teNeeds = 0, olNeeds = 0, kNeeds = 0, dlNeeds = 0, lbNeeds = 0, cbNeeds = 0, sNeeds = 0;
-
 
         if (playersLeaving.isEmpty()) {
 
@@ -963,7 +954,6 @@ public class Team {
                 if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamQBs.get(i));
                     teamQBs.remove(i);
-                    qbNeeds++;
                 } else {
                     teamQBs.get(i).advanceSeason();
                     i++;
@@ -975,7 +965,6 @@ public class Team {
                 if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamRBs.get(i));
                     teamRBs.remove(i);
-                    rbNeeds++;
                 } else {
                     teamRBs.get(i).advanceSeason();
                     i++;
@@ -987,7 +976,6 @@ public class Team {
                 if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamWRs.get(i));
                     teamWRs.remove(i);
-                    wrNeeds++;
                 } else {
                     teamWRs.get(i).advanceSeason();
                     i++;
@@ -999,7 +987,6 @@ public class Team {
                 if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamTEs.get(i));
                     teamTEs.remove(i);
-                    teNeeds++;
                 } else {
                     teamTEs.get(i).advanceSeason();
                     i++;
@@ -1011,7 +998,6 @@ public class Team {
                 if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamOLs.get(i));
                     teamOLs.remove(i);
-                    olNeeds++;
                 } else {
                     teamOLs.get(i).advanceSeason();
                     i++;
@@ -1023,7 +1009,6 @@ public class Team {
                 if (teamKs.get(i).year == 4) {
                     playersLeaving.add(teamKs.get(i));
                     teamKs.remove(i);
-                    kNeeds++;
                 } else {
                     teamKs.get(i).advanceSeason();
                     i++;
@@ -1035,7 +1020,6 @@ public class Team {
                 if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamDLs.get(i));
                     teamDLs.remove(i);
-                    dlNeeds++;
                 } else {
                     teamDLs.get(i).advanceSeason();
                     i++;
@@ -1047,7 +1031,6 @@ public class Team {
                 if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamLBs.get(i));
                     teamLBs.remove(i);
-                    lbNeeds++;
                 } else {
                     teamLBs.get(i).advanceSeason();
                     i++;
@@ -1059,7 +1042,6 @@ public class Team {
                 if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamCBs.get(i));
                     teamCBs.remove(i);
-                    cbNeeds++;
                 } else {
                     teamCBs.get(i).advanceSeason();
                     i++;
@@ -1071,23 +1053,11 @@ public class Team {
                 if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                     playersLeaving.add(teamSs.get(i));
                     teamSs.remove(i);
-                    sNeeds++;
                 } else {
                     teamSs.get(i).advanceSeason();
                     i++;
                 }
             }
-
-            recruitNeeds[0] = qbNeeds;
-            recruitNeeds[1] = rbNeeds;
-            recruitNeeds[2] = wrNeeds;
-            recruitNeeds[3] = teNeeds;
-            recruitNeeds[4] = olNeeds;
-            recruitNeeds[5] = kNeeds;
-            recruitNeeds[6] = dlNeeds;
-            recruitNeeds[7] = lbNeeds;
-            recruitNeeds[8] = cbNeeds;
-            recruitNeeds[9] = sNeeds;
             resetStats();
             sortPlayers();
             getPlayersTransferring();
@@ -1110,7 +1080,6 @@ public class Team {
                 playersTransferring.add(teamQBs.get(i));
                 league.transferQBs.add(teamQBs.get(i));
                 league.tQBs.add(name);
-                recruitNeeds[0]++;
                 teamQBs.remove(i);
             }
             ++i;
@@ -1124,7 +1093,6 @@ public class Team {
                     playersTransferring.add(teamRBs.get(i));
                     league.transferRBs.add(teamRBs.get(i));
                     league.tRBs.add(name);
-                    recruitNeeds[1]++;
                     teamRBs.remove(i);
                 }
             }
@@ -1139,7 +1107,6 @@ public class Team {
                     playersTransferring.add(teamWRs.get(i));
                     league.transferWRs.add(teamWRs.get(i));
                     league.tWRs.add(name);
-                    recruitNeeds[2]++;
                     teamWRs.remove(i);
                 }
             }
@@ -1153,7 +1120,6 @@ public class Team {
                 playersTransferring.add(teamTEs.get(i));
                 league.transferTEs.add(teamTEs.get(i));
                 league.tTEs.add(name);
-                recruitNeeds[3]++;
                 teamTEs.remove(i);
             }
             ++i;
@@ -1167,7 +1133,6 @@ public class Team {
                     playersTransferring.add(teamOLs.get(i));
                     league.transferOLs.add(teamOLs.get(i));
                     league.tOLs.add(name);
-                    recruitNeeds[4]++;
                     teamOLs.remove(i);
                 }
             }
@@ -1181,7 +1146,6 @@ public class Team {
                 playersTransferring.add(teamKs.get(i));
                 league.transferKs.add(teamKs.get(i));
                 league.tKs.add(name);
-                recruitNeeds[5]++;
                 teamKs.remove(i);
             }
             ++i;
@@ -1195,7 +1159,6 @@ public class Team {
                     playersTransferring.add(teamDLs.get(i));
                     league.transferDLs.add(teamDLs.get(i));
                     league.tDLs.add(name);
-                    recruitNeeds[6]++;
                     teamDLs.remove(i);
                 }
             }
@@ -1210,7 +1173,6 @@ public class Team {
                     playersTransferring.add(teamLBs.get(i));
                     league.transferLBs.add(teamLBs.get(i));
                     league.tLBs.add(name);
-                    recruitNeeds[7]++;
                     teamLBs.remove(i);
                 }
             }
@@ -1225,7 +1187,6 @@ public class Team {
                     playersTransferring.add(teamCBs.get(i));
                     league.transferCBs.add(teamCBs.get(i));
                     league.tCBs.add(name);
-                    recruitNeeds[8]++;
                     teamCBs.remove(i);
                 }
             }
@@ -1239,7 +1200,6 @@ public class Team {
                 playersTransferring.add(teamSs.get(i));
                 league.transferSs.add(teamSs.get(i));
                 league.tSs.add(name);
-                recruitNeeds[9]++;
                 teamSs.remove(i);
             }
             ++i;
@@ -1249,17 +1209,88 @@ public class Team {
 
     //GET FINAL RECRUITING NEEDS PRIOR TO RECRUITING
     public void CPUrecruiting() {
+        
+        int numTransfers = 0;
         if (!userControlled) {
-            int qb = recruitNeeds[0];
-            int rb = recruitNeeds[1];
-            int wr = recruitNeeds[2];
-            int te = recruitNeeds[3];
-            int ol = recruitNeeds[4];
-            int k = recruitNeeds[5];
-            int dl = recruitNeeds[6];
-            int lb = recruitNeeds[7];
-            int cb = recruitNeeds[8];
-            int s = recruitNeeds[9];
+            for (int i = 0; i < teamQBs.size(); ++i) {
+                if (teamQBs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int qb = minQBs - (teamQBs.size() - numTransfers);
+            
+            numTransfers = 0;
+            for (int i = 0; i < teamRBs.size(); ++i) {
+                if (teamRBs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int rb = minRBs - (teamRBs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamWRs.size(); ++i) {
+                if (teamWRs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int wr = minWRs - (teamWRs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamTEs.size(); ++i) {
+                if (teamTEs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int te = minTEs - (teamTEs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamOLs.size(); ++i) {
+                if (teamOLs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int ol = minOLs - (teamOLs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamKs.size(); ++i) {
+                if (teamKs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int k = minKs - (teamKs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamDLs.size(); ++i) {
+                if (teamDLs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int dl = minDLs - (teamDLs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamLBs.size(); ++i) {
+                if (teamLBs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int lb = minLBs - (teamLBs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamCBs.size(); ++i) {
+                if (teamCBs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int cb = minCBs - (teamCBs.size() - numTransfers);
+
+            numTransfers = 0;
+            for (int i = 0; i < teamSs.size(); ++i) {
+                if (teamSs.get(i).isTransfer) {
+                    numTransfers++;
+                }
+            }
+            int s = minSs - (teamSs.size() - numTransfers);
+
             recruitPlayersFreshman(qb, rb, wr, te, ol, k, dl, lb, cb, s);
             resetStats();
         }
@@ -3518,7 +3549,7 @@ public class Team {
         HC.get(0).age = 35;
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
-        HC.get(0).ratPot = 75;
+        HC.get(0).ratPot = 70;
         HC.get(0).ratOff = 70;
         HC.get(0).ratDef = 70;
         HC.get(0).ratTalent = 70;
