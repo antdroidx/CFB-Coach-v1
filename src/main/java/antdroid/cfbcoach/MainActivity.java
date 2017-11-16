@@ -1792,6 +1792,7 @@ public class MainActivity extends AppCompatActivity {
         });
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                dialog.dismiss();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Confirmation");
