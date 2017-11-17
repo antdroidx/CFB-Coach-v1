@@ -36,9 +36,12 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamName;
     private String teamAbbr;
     private int recruitingBudget;
-    private final String[] letterGrades = {"*", "**", "***", "***", "****", "*****"};
+    private final String[] starGrades = {"*", "*", "* *", "* * *", "* * * *", "* * * * *"};
+    Random rand = new Random();
     private int ratingTolerance;
     private int tolerance;
+    private int min;
+    private int max;
 
     private ArrayList<String> playersRecruited;
     private ArrayList<String> playersRedshirted;
@@ -79,6 +82,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needLBs;
     private int needCBs;
     private int needSs;
+
 
     // Whether to show pop ups every recruit
     private boolean showPopUp;
@@ -132,10 +136,7 @@ public class RecruitingActivity extends AppCompatActivity {
         availAll = new ArrayList<String>();
 
         ratingTolerance = 7;
-        Random rand = new Random();
-        int max = ratingTolerance;
-        int min = -ratingTolerance;
-        tolerance = rand.nextInt((max - min) + 1) + min;
+
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -224,7 +225,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
-        availAll = new ArrayList<String>(availAll.subList(0, 50));
+        availAll = new ArrayList<String>(availAll.subList(0, 100));
 
         // Get needs for each position
         updatePositionNeeds();
@@ -241,7 +242,7 @@ public class RecruitingActivity extends AppCompatActivity {
          */
         positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
-        positions.add("Top 50");
+        positions.add("Top 100 Recruits");
         positions.add("QB (Need: " + needQBs + ")");
         positions.add("RB (Need: " + needRBs + ")");
         positions.add("WR (Need: " + needWRs + ")");
@@ -484,7 +485,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr:" + getLetterGrade(ps[8]) + " | Pot: " + getLetterGrade(ps[3]);
+        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr: " + getGrade(ps[8]) + " | Pot: " + getGradePot(ps[3]);
     }
 
     /**
@@ -506,64 +507,64 @@ public class RecruitingActivity extends AppCompatActivity {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
             return  "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nPass Strength: " + getLetterGrade(ps[5]) +
-                    "\nPass Accuracy: " + getLetterGrade(ps[6]) +
-                    "\nEvasion: " + getLetterGrade(ps[7]) +
-                    "\nSpeed: " + getLetterGrade(ps[11]);
+                    "\nPass Strength: " + getGrade(ps[5]) +
+                    "\nPass Accuracy: " + getGrade(ps[6]) +
+                    "\nEvasion: " + getGrade(ps[7]) +
+                    "\nSpeed: " + getGrade(ps[11]);
         } else if (pos.equals("RB")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nPower: " + getLetterGrade(ps[5]) +
-                    "\nSpeed: " + getLetterGrade(ps[6]) +
-                    "\nEvasion: " + getLetterGrade(ps[7]) +
-                    "\nCatching: " + getLetterGrade(ps[11]);
+                    "\nPower: " + getGrade(ps[5]) +
+                    "\nSpeed: " + getGrade(ps[6]) +
+                    "\nEvasion: " + getGrade(ps[7]) +
+                    "\nCatching: " + getGrade(ps[11]);
         } else if (pos.equals("WR")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCatching: " + getLetterGrade(ps[5]) +
-                    "\nSpeed: " + getLetterGrade(ps[6]) +
-                    "\nEvasion: " + getLetterGrade(ps[7]) +
-                    "\nJumping: " + getLetterGrade(ps[11]);
+                    "\nCatching: " + getGrade(ps[5]) +
+                    "\nSpeed: " + getGrade(ps[6]) +
+                    "\nEvasion: " + getGrade(ps[7]) +
+                    "\nJumping: " + getGrade(ps[11]);
         } else if (pos.equals("TE")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "Catching: " + getLetterGrade(ps[5]) +
-                    "\nRush Blk: " + getLetterGrade(ps[6]) +
-                    "\nEvasion: " + getLetterGrade(ps[7]) +
-                    "\nSpeed: " + getLetterGrade(ps[11]);
+                    "Catching: " + getGrade(ps[5]) +
+                    "\nRush Blk: " + getGrade(ps[6]) +
+                    "\nEvasion: " + getGrade(ps[7]) +
+                    "\nSpeed: " + getGrade(ps[11]);
         } else if (pos.equals("OL")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nStrength: " + getLetterGrade(ps[5]) +
-                    "\nRush Blk: " + getLetterGrade(ps[6]) +
-                    "\nPass Blk: " + getLetterGrade(ps[7]) +
-                    "\nAwareness: " + getLetterGrade(ps[11]);
+                    "\nStrength: " + getGrade(ps[5]) +
+                    "\nRush Blk: " + getGrade(ps[6]) +
+                    "\nPass Blk: " + getGrade(ps[7]) +
+                    "\nAwareness: " + getGrade(ps[11]);
         } else if (pos.equals("K")) {
             return  "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nKick Power: " + getLetterGrade(ps[5]) +
-                    "\nAccuracy: " + getLetterGrade(ps[6]) +
-                    "\nClumsiness: " + getLetterGrade(ps[7]) +
-                    "\nPressure: " + getLetterGrade(ps[11]);
+                    "\nKick Power: " + getGrade(ps[5]) +
+                    "\nAccuracy: " + getGrade(ps[6]) +
+                    "\nClumsiness: " + getGrade(ps[7]) +
+                    "\nPressure: " + getGrade(ps[11]);
         } else if (pos.equals("DL")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nStrength: " + getLetterGrade(ps[5]) +
-                    "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    "\nPass Press: " + getLetterGrade(ps[7]) +
-                    "\nTackling: " + getLetterGrade(ps[11]);
+                    "\nStrength: " + getGrade(ps[5]) +
+                    "\nRun Stop: " + getGrade(ps[6]) +
+                    "\nPass Press: " + getGrade(ps[7]) +
+                    "\nTackling: " + getGrade(ps[11]);
         } else if (pos.equals("LB")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCoverage: " + getLetterGrade(ps[5]) +
-                    "\nRun Stop: " + getLetterGrade(ps[6]) +
-                    "\nTackling: " + getLetterGrade(ps[7]) +
-                    "\nSpeed: " + getLetterGrade(ps[11]);
+                    "\nCoverage: " + getGrade(ps[5]) +
+                    "\nRun Stop: " + getGrade(ps[6]) +
+                    "\nTackling: " + getGrade(ps[7]) +
+                    "\nSpeed: " + getGrade(ps[11]);
         } else if (pos.equals("CB")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCoverage: " + getLetterGrade(ps[5]) +
-                    "\nSpeed: " + getLetterGrade(ps[6]) +
-                    "\nTackling: " + getLetterGrade(ps[7]) +
-                    "\nJumping: " + getLetterGrade(ps[11]);
+                    "\nCoverage: " + getGrade(ps[5]) +
+                    "\nSpeed: " + getGrade(ps[6]) +
+                    "\nTackling: " + getGrade(ps[7]) +
+                    "\nJumping: " + getGrade(ps[11]);
         } else if (pos.equals("S")) {
             return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCoverage: " + getLetterGrade(ps[5]) +
-                    "\nSpeed: " + getLetterGrade(ps[6]) +
-                    "\nTackling: " + getLetterGrade(ps[7]) +
-                    "\nRun Stop: " + getLetterGrade(ps[11]);
+                    "\nCoverage: " + getGrade(ps[5]) +
+                    "\nSpeed: " + getGrade(ps[6]) +
+                    "\nTackling: " + getGrade(ps[7]) +
+                    "\nRun Stop: " + getGrade(ps[11]);
         }
         return "ERROR";
     }
@@ -571,23 +572,29 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
      */
-    private String getLetterGrade(String num) {
+    private String getGrade(String num) {
         int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance - 50) / 10;
+        max = ratingTolerance;
+        min = -ratingTolerance;
+        tolerance = rand.nextInt((max - min) + 1) + min;
+        ind = (ind + tolerance - 40) / 8;
         if (ind > 5) ind = 5;
-        if (ind < 0) ind = 0;
-        return letterGrades[ind];
+        if (ind < 0) ind = 1;
+        return starGrades[ind];
     }
 
     /**
      * Convert a rating into a letter grade for potential, so 50 is a C instead of F
      */
-    private String getLetterGradePot(String num) {
+    private String getGradePot(String num) {
         int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance - 50) / 10;
+        max = ratingTolerance;
+        min = -ratingTolerance;
+        tolerance = rand.nextInt((max - min) + 1) + min;
+        ind = (ind + tolerance - 40) / 10;
         if (ind > 5) ind = 5;
-        if (ind < 0) ind = 0;
-        return letterGrades[ind];
+        if (ind < 0) ind = 1;
+        return starGrades[ind];
     }
 
     /**
@@ -625,7 +632,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoDisplay(String p) {
         String[] pi = p.split(",");
-        return getInitialName(pi[1]) + " [Overall: " + getLetterGrade(pi[8]) + "]";
+        return getInitialName(pi[1]) + " [Overall: " + getGrade(pi[8]) + "]";
     }
 
     /**
@@ -633,7 +640,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoPos(String p) {
         String[] pi = p.split(",");
-        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + getLetterGrade(pi[3]) + " Pot";
+        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + getGradePot(pi[3]) + " Pot";
     }
 
 
@@ -665,7 +672,7 @@ public class RecruitingActivity extends AppCompatActivity {
      * Called whenever new position is selected, updates all the components
      */
     private void updateForNewPosition() {
-        if (!currentPosition.equals("Top 50 Recruits")) {
+        if (!currentPosition.equals("Top 100 Recruits")) {
             String[] splitty = currentPosition.split(" ");
             setPlayerList(splitty[0]);
             setPlayerInfoMap(splitty[0]);
@@ -701,7 +708,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         if (dataAdapterPosition != null) {
             positions = new ArrayList<String>();
-            positions.add("Top 50 Recruits");
+            positions.add("Top 100 Recruits");
             positions.add("QB (Need: " + needQBs + ")");
             positions.add("RB (Need: " + needRBs + ")");
             positions.add("WR (Need: " + needWRs + ")");
@@ -1265,9 +1272,9 @@ public class RecruitingActivity extends AppCompatActivity {
             final TextView potential = convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
-            potential.setText("\nFootball IQ: " + getLetterGrade(playerCSV.split(",")[4]) + "\nPotential: " + getLetterGrade(playerCSV.split(",")[3]) + "\n" +
-                    "Personality: " + getLetterGrade(playerCSV.split(",")[13])+ "\n" +
-                    "Durability: " + getLetterGrade(playerCSV.split(",")[10]));
+            potential.setText("\nFootball IQ: " + getGrade(playerCSV.split(",")[4]) + "\nPotential: " + getGradePot(playerCSV.split(",")[3]) + "\n" +
+                    "Personality: " + getGrade(playerCSV.split(",")[13])+ "\n" +
+                    "Durability: " + getGrade(playerCSV.split(",")[10]));
 
             // Set up Recruit and Redshirt buttons to display the right price
             Button recruitPlayerButton = convertView.findViewById(R.id.buttonRecruitPlayer);
@@ -1360,8 +1367,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[9]);
-        int ovrB = Integer.parseInt(psB[9]);
+        int ovrA = Integer.parseInt(psA[8]);
+        int ovrB = Integer.parseInt(psB[8]);
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }

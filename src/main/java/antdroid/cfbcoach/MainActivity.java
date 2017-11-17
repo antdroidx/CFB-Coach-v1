@@ -1210,6 +1210,10 @@ public class MainActivity extends AppCompatActivity {
         leagueHistorySpinner.setAdapter(leagueHistorySpinnerAdapter);
 
         final ListView leagueHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
+        final String[] hofPlayers = new String[simLeague.leagueHoF.size()];
+        for (int i = 0; i < simLeague.leagueHoF.size(); ++i) {
+            hofPlayers[i] = simLeague.leagueHoF.get(i);
+        }
 
         leagueHistorySpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {

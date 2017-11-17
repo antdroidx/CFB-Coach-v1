@@ -15,7 +15,6 @@ import java.util.Random;
 public class Team {
 
     public League league;
-    Rankings rank;
     public String name;
     public String abbr;
     public String conference;
@@ -947,129 +946,124 @@ public class Team {
      */
     public void advanceSeasonPlayers() {
 
-        if (playersLeaving.isEmpty()) {
-
-            int i = 0;
-            while (i < teamQBs.size()) {
-                if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamQBs.get(i));
-                    teamQBs.remove(i);
-                } else {
-                    teamQBs.get(i).advanceSeason();
-                    i++;
-                }
+        int i = 0;
+        while (i < teamQBs.size()) {
+            if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamQBs.get(i));
+                teamQBs.remove(i);
+            } else {
+                teamQBs.get(i).advanceSeason();
+                i++;
             }
-
-            i = 0;
-            while (i < teamRBs.size()) {
-                if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamRBs.get(i));
-                    teamRBs.remove(i);
-                } else {
-                    teamRBs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamWRs.size()) {
-                if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamWRs.get(i));
-                    teamWRs.remove(i);
-                } else {
-                    teamWRs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamTEs.size()) {
-                if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamTEs.get(i));
-                    teamTEs.remove(i);
-                } else {
-                    teamTEs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamOLs.size()) {
-                if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamOLs.get(i));
-                    teamOLs.remove(i);
-                } else {
-                    teamOLs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamKs.size()) {
-                if (teamKs.get(i).year == 4) {
-                    playersLeaving.add(teamKs.get(i));
-                    teamKs.remove(i);
-                } else {
-                    teamKs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamDLs.size()) {
-                if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamDLs.get(i));
-                    teamDLs.remove(i);
-                } else {
-                    teamDLs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamLBs.size()) {
-                if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamLBs.get(i));
-                    teamLBs.remove(i);
-                } else {
-                    teamLBs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamCBs.size()) {
-                if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamCBs.get(i));
-                    teamCBs.remove(i);
-                } else {
-                    teamCBs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-
-            i = 0;
-            while (i < teamSs.size()) {
-                if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
-                    playersLeaving.add(teamSs.get(i));
-                    teamSs.remove(i);
-                } else {
-                    teamSs.get(i).advanceSeason();
-                    i++;
-                }
-            }
-            resetStats();
-            sortPlayers();
-            getPlayersTransferring();
         }
+
+        i = 0;
+        while (i < teamRBs.size()) {
+            if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamRBs.get(i));
+                teamRBs.remove(i);
+            } else {
+                teamRBs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamWRs.size()) {
+            if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamWRs.get(i));
+                teamWRs.remove(i);
+            } else {
+                teamWRs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamTEs.size()) {
+            if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamTEs.get(i));
+                teamTEs.remove(i);
+            } else {
+                teamTEs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamOLs.size()) {
+            if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamOLs.get(i));
+                teamOLs.remove(i);
+            } else {
+                teamOLs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamKs.size()) {
+            if (teamKs.get(i).year == 4) {
+                playersLeaving.add(teamKs.get(i));
+                teamKs.remove(i);
+            } else {
+                teamKs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamDLs.size()) {
+            if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamDLs.get(i));
+                teamDLs.remove(i);
+            } else {
+                teamDLs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamLBs.size()) {
+            if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamLBs.get(i));
+                teamLBs.remove(i);
+            } else {
+                teamLBs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamCBs.size()) {
+            if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamCBs.get(i));
+                teamCBs.remove(i);
+            } else {
+                teamCBs.get(i).advanceSeason();
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < teamSs.size()) {
+            if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+                playersLeaving.add(teamSs.get(i));
+                teamSs.remove(i);
+            } else {
+                teamSs.get(i).advanceSeason();
+                i++;
+            }
+        }
+        resetStats();
+        sortPlayers();
+        getPlayersTransferring();
     }
 
     public void getPlayersTransferring() {
 
         // PLAYER TRANSFERS
         // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
-        // NEXT CHANGE: Player Personality Conflict - if a player has bad personality, he may want to leave, then bump his personality up a little bit for new team.
-
         int i;
 
         sortPlayers();
