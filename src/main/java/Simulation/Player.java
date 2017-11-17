@@ -22,6 +22,8 @@ public class Player {
     public int progression;
     public int region;
     public int personality;
+    public boolean isSuspended;
+    public int troubledTimes = 0;
 
     public int gamesPlayed;
     public int statsWins;
