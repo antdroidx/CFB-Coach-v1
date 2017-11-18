@@ -1218,13 +1218,6 @@ public class League extends Rankings {
         newsStories.get(currentWeek+1).add("In-Season Disciplinary Action>The following teams have had issues with discipline in the past week:\n" + news);
     }
 
-    public void disciplinePlayer() {
-
-    }
-
-    public void suspendPlayer() {
-
-    }
 
     //Player Spotlight
     public void playerSpotlight() {
@@ -2631,6 +2624,10 @@ public class League extends Rankings {
                     }
                 }
             }
+        }
+
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).sortPlayers();
         }
     }
 
