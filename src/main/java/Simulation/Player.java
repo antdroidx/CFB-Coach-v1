@@ -43,6 +43,7 @@ public class Player {
 
     public boolean isInjured;
     public Injury injury;
+    public Suspension suspension;
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
 
@@ -87,6 +88,9 @@ public class Player {
         }
         if (isTransfer) {
             return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
+        }
+        if (isSuspended) {
+            return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended";
         }
         return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
     }
@@ -214,7 +218,10 @@ public class Player {
 
     }
 
+    public String getInfoLineupSuspended() {
+        return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + ratPot + " Suspended";
 
+    }
         public int getGamesPlayed() {
         if (gamesPlayed == 0) return 1;
         else return gamesPlayed;

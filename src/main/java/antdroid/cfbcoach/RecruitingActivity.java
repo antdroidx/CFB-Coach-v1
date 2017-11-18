@@ -43,6 +43,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int min;
     private int max;
 
+
     private ArrayList<String> playersRecruited;
     private ArrayList<String> playersRedshirted;
     private ArrayList<String> playersGraduating;
@@ -136,7 +137,9 @@ public class RecruitingActivity extends AppCompatActivity {
         availAll = new ArrayList<String>();
 
         ratingTolerance = 7;
-
+        max = ratingTolerance;
+        min = -ratingTolerance;
+        tolerance = rand.nextInt((max - min) + 1) + min;
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -569,28 +572,19 @@ public class RecruitingActivity extends AppCompatActivity {
         return "ERROR";
     }
 
-    /**
-     * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
-     */
+
     private String getGrade(String num) {
         int ind = (Integer.parseInt(num));
-        max = ratingTolerance;
-        min = -ratingTolerance;
-        tolerance = rand.nextInt((max - min) + 1) + min;
+
         ind = (ind + tolerance - 40) / 8;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 1;
         return starGrades[ind];
     }
 
-    /**
-     * Convert a rating into a letter grade for potential, so 50 is a C instead of F
-     */
+
     private String getGradePot(String num) {
         int ind = (Integer.parseInt(num));
-        max = ratingTolerance;
-        min = -ratingTolerance;
-        tolerance = rand.nextInt((max - min) + 1) + min;
         ind = (ind + tolerance - 40) / 10;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 1;

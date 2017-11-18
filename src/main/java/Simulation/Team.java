@@ -1,5 +1,7 @@
 package Simulation;
 
+import android.widget.QuickContactBadge;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -526,6 +528,62 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
         teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
+    }
+
+    /**
+     * Updates poll score based on team stats.
+     */
+    public void updatePollScore() {
+        updateStrengthOfWins();
+        confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
+        teamOffTalent = getOffTalent();
+        teamDefTalent = getDefTalent();
+
+        int preseasonBias = 6 - (wins + losses);
+        if (preseasonBias < 0) preseasonBias = 0;
+        teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
+                (teamYards - teamOppYards) / 40 +
+                5 * teamStrengthOfWins / 4 + (confPrestige/3) +
+                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige / 2))) / 7;
+
+        if ("CC".equals(confChampion)) {
+            //bonus for winning conference
+            teamPollScore += 25;
+        }
+        if ("NCW".equals(natChampWL)) {
+            //bonus for winning champ game
+            teamPollScore += 125;
+        }
+        if ("NCL".equals(natChampWL)) {
+            //bonus for winning champ game
+            teamPollScore += 35;
+        }
+        if (losses == 0) {
+            teamPollScore += 50;
+        } else if (losses == 1) {
+            teamPollScore += 25;
+        }
+        if (wins == 0) {
+            teamPollScore -= 15;
+        }
+    }
+
+
+    public void disciplinePlayer() {
+        ArrayList<Player> allPlayers = getAllPlayers();
+        ArrayList<Player> disPlayers = new ArrayList<>();
+        for (int i = 0; i < allPlayers.size(); ++i) {
+            if (allPlayers.get(i).personality < 60) {
+                disPlayers.add(allPlayers.get(i));
+            }
+        }
+        int rand = (int)(Math.random()*disPlayers.size());
+        suspendPlayer(disPlayers.get(rand));
+    }
+
+    public void suspendPlayer(Player person) {
+        person.troubledTimes++;
+        person.isSuspended = true;
     }
 
     /**
@@ -1539,61 +1597,61 @@ public class Team {
      */
     public void recruitWalkOns() {
         //recruit walk ons (used for player teams who dont recruit all needs)
-        int needs = 2 - teamQBs.size();
+        int needs = minQBs - teamQBs.size();
         for (int i = 0; i < needs; ++i) {
             //make QBs
             teamQBs.add(new PlayerQB(league.getRandName(), 1, 2, this));
         }
 
-        needs = 4 - teamRBs.size();
+        needs = minRBs - teamRBs.size();
         for (int i = 0; i < needs; ++i) {
             //make RBs
             teamRBs.add(new PlayerRB(league.getRandName(), 1, 2, this));
         }
 
-        needs = 6 - teamWRs.size();
+        needs = minWRs - teamWRs.size();
         for (int i = 0; i < needs; ++i) {
             //make WRs
             teamWRs.add(new PlayerWR(league.getRandName(), 1, 2, this));
         }
 
-        needs = 2 - teamTEs.size();
+        needs = minTEs - teamTEs.size();
         for (int i = 0; i < needs; ++i) {
             //make TEs
             teamTEs.add(new PlayerTE(league.getRandName(), 1, 2, this));
         }
 
-        needs = 10 - teamOLs.size();
+        needs = minOLs - teamOLs.size();
         for (int i = 0; i < needs; ++i) {
             //make OLs
             teamOLs.add(new PlayerOL(league.getRandName(), 1, 2, this));
         }
 
-        needs = 2 - teamKs.size();
+        needs = minKs - teamKs.size();
         for (int i = 0; i < needs; ++i) {
             //make Ks
             teamKs.add(new PlayerK(league.getRandName(), 1, 2, this));
         }
 
-        needs = 8 - teamDLs.size();
+        needs = minDLs - teamDLs.size();
         for (int i = 0; i < needs; ++i) {
             //make DLs
             teamDLs.add(new PlayerDL(league.getRandName(), 1, 2, this));
         }
 
-        needs = 6 - teamLBs.size();
+        needs = minLBs - teamLBs.size();
         for (int i = 0; i < needs; ++i) {
             //make LBs
             teamLBs.add(new PlayerLB(league.getRandName(), 1, 2, this));
         }
 
-        needs = 6 - teamCBs.size();
+        needs = minCBs - teamCBs.size();
         for (int i = 0; i < needs; ++i) {
             //make Ss
             teamCBs.add(new PlayerCB(league.getRandName(), 1, 2, this));
         }
 
-        needs = 2 - teamSs.size();
+        needs = minSs - teamSs.size();
         for (int i = 0; i < needs; ++i) {
             //make Ss
             teamSs.add(new PlayerS(league.getRandName(), 1, 2, this));
@@ -1989,45 +2047,6 @@ public class Team {
 
     }
 
-    /**
-     * Updates poll score based on team stats.
-     */
-    public void updatePollScore() {
-        updateStrengthOfWins();
-        confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
-        teamOffTalent = getOffTalent();
-        teamDefTalent = getDefTalent();
-
-        int preseasonBias = 7 - (wins + losses);
-        if (preseasonBias < 0) preseasonBias = 0;
-        teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
-                (teamYards - teamOppYards) / 40 +
-                5 * teamStrengthOfWins / 4 +
-                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige / 2))) / 7;
-
-        if ("CC".equals(confChampion)) {
-            //bonus for winning conference
-            teamPollScore += 25;
-        }
-        if ("NCW".equals(natChampWL)) {
-            //bonus for winning champ game
-            teamPollScore += 125;
-        }
-        if ("NCL".equals(natChampWL)) {
-            //bonus for winning champ game
-            teamPollScore += 25;
-        }
-        if (losses == 0) {
-            teamPollScore += 50;
-        } else if (losses == 1) {
-            teamPollScore += 25;
-        }
-        if (wins == 0) {
-            teamPollScore -= 10;
-        }
-
-
-    }
 
     /**
      * Updates team history.
