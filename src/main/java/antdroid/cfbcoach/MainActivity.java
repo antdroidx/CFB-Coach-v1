@@ -2075,7 +2075,7 @@ public class MainActivity extends AppCompatActivity {
                         //Get String of user team's players and such
                         StringBuilder sb = new StringBuilder();
                         userTeam.sortPlayers();
-                        sb.append(userTeam.conference + "," + userTeam.name + "," + userTeam.abbr + "," + userTeam.teamPrestige + "%\n");
+                        sb.append(userTeam.conference + "," + userTeam.name + "," + userTeam.abbr + "," + userTeam.teamPrestige + "," + userTeam.HC.get(0).ratTalent + "%\n");
                         sb.append(userTeam.getPlayerInfoSaveFile());
                         sb.append("END_TEAM_INFO%\n");
                         sb.append(userTeam.getRecruitsInfoSaveFile());

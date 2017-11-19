@@ -70,7 +70,7 @@ public class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
             isPlayerStarting.setEnabled(false);
             playerInfo.setTextColor(Color.DKGRAY);
         } else if (players.get(position).isSuspended) {
-            // Is injured
+            // Is suspended
             isPlayerStarting.setEnabled(false);
             playerInfo.setTextColor(Color.GREEN);
         } else {

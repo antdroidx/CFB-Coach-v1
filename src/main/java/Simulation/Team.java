@@ -93,7 +93,7 @@ public class Team {
     public int rankTeamSOS;
     public int teamCount = 12;
     public int totalTeamCount = teamCount * 10;
-    public int ratTransfer = 74;
+    public int ratTransfer = 72;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -136,6 +136,17 @@ public class Team {
     public int minCBs = 6;
     public int minSs = 2;
 
+    public int maxQBs = 3;
+    public int maxRBs = 6;
+    public int maxWRs = 8;
+    public int maxTEs = 3;
+    public int maxOLs = 13;
+    public int maxKs = 3;
+    public int maxDLs = 12;
+    public int maxLBs = 9;
+    public int maxCBs = 8;
+    public int maxSs = 3;
+
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
 
@@ -143,6 +154,7 @@ public class Team {
     public ArrayList<Player> playersInjured;
     public ArrayList<Player> playersRecovered;
     public ArrayList<Player> playersInjuredAll;
+    public ArrayList<Player> playersDis;
 
     public TeamStrategy teamStratOff;
     public TeamStrategy teamStratDef;
@@ -398,6 +410,23 @@ public class Team {
 
     }
 
+
+    public void setupUserCoach(String name) {
+        HC.get(0).name = name;
+        HC.get(0).year = 0;
+        HC.get(0).age = 35;
+        HC.get(0).contractYear = 0;
+        HC.get(0).contractLength = 6;
+        HC.get(0).ratPot = 70;
+        HC.get(0).ratOff = 70;
+        HC.get(0).ratDef = 70;
+        HC.get(0).ratTalent = 70;
+        HC.get(0).ratDiscipline = 70;
+        HC.get(0).ratOvr = (HC.get(0).ratOff + HC.get(0).ratDef + HC.get(0).ratTalent + HC.get(0).ratDiscipline) / 4;
+        HC.get(0).offStrat = 0;
+        HC.get(0).defStrat = 0;
+    }
+
     /**
      * Recruits the needed amount of players at each position.
      * Rating of each player based on team prestige.
@@ -520,14 +549,27 @@ public class Team {
         sortPlayers();
     }
 
-
     /**
-     * Gets the OffTalent, DefTalent, poll score
+     * Sorts players so that best players are higher in depth chart.
      */
-    public void updateTalentRatings() {
-        teamOffTalent = getOffTalent();
-        teamDefTalent = getDefTalent();
-        teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
+    public void sortPlayers() {
+        //sort players based on overall ratings to assemble best starting lineup
+        Collections.sort(teamQBs, new CompPlayer());
+        Collections.sort(teamRBs, new CompPlayer());
+        Collections.sort(teamWRs, new CompPlayer());
+        Collections.sort(teamTEs, new CompPlayer());
+        Collections.sort(teamKs, new CompPlayer());
+        Collections.sort(teamOLs, new CompPlayer());
+        Collections.sort(teamDLs, new CompPlayer());
+        Collections.sort(teamLBs, new CompPlayer());
+        Collections.sort(teamCBs, new CompPlayer());
+        Collections.sort(teamSs, new CompPlayer());
+
+        Collections.sort(teamRSs, new CompPlayer());
+        Collections.sort(teamFRs, new CompPlayer());
+        Collections.sort(teamSOs, new CompPlayer());
+        Collections.sort(teamJRs, new CompPlayer());
+        Collections.sort(teamSRs, new CompPlayer());
     }
 
     /**
@@ -568,147 +610,214 @@ public class Team {
         }
     }
 
-
-    public void disciplinePlayer() {
-        ArrayList<Player> allPlayers = getAllPlayers();
-        ArrayList<Player> disPlayers = new ArrayList<>();
-        for (int i = 0; i < allPlayers.size(); ++i) {
-            if (allPlayers.get(i).personality < 60) {
-                disPlayers.add(allPlayers.get(i));
+    /**
+     * Updates strength of wins based on how opponents have fared.
+     */
+    public void updateStrengthOfWins() {
+        int strWins = 0;
+        for (int i = 0; i < 12; ++i) {
+            Game g = gameSchedule.get(i);
+            if (g.homeTeam == this) {
+                strWins += Math.pow(totalTeamCount - g.awayTeam.rankTeamPollScore, 2);
+            } else {
+                strWins += Math.pow(totalTeamCount - g.homeTeam.rankTeamPollScore, 2);
             }
         }
-        int rand = (int)(Math.random()*disPlayers.size());
-        suspendPlayer(disPlayers.get(rand));
+        teamStrengthOfWins = strWins / 50;
+        for (Team t : gameWinsAgainst) {
+            teamStrengthOfWins += Math.pow(t.wins, 2);
+        }
     }
 
-    public void suspendPlayer(Player person) {
-        person.troubledTimes++;
-        person.isSuspended = true;
+    public void updateSOS() {
+        teamSOS = 0;
+        for (int i = 0; i < 12; ++i) {
+            Game g = gameSchedule.get(i);
+            if (g.homeTeam == this) {
+                teamSOS += totalTeamCount - g.awayTeam.rankTeamPollScore;
+            } else {
+                teamSOS += totalTeamCount - g.homeTeam.rankTeamPollScore;
+            }
+        }
     }
 
     /**
-     * Advance season, hiring new coach if needed and calculating new prestige level.
+     * Gets the OffTalent, DefTalent, poll score
      */
-    public void advanceSeason() {
-        int newPrestige[] = calcSeasonPrestige();
-        teamPrestige = newPrestige[0];
-
-        advanceSeasonPlayers();
-
-        checkHallofFame();
-
-        checkCareerRecords(league.leagueRecords);
-        checkCareerRecords(teamRecords);
-        if (league.userTeam == this) checkCareerRecords(league.userTeamRecords);
+    public void updateTalentRatings() {
+        teamOffTalent = getOffTalent();
+        teamDefTalent = getDefTalent();
+        teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
     }
 
-    // OFF-SEASON HEAD COACH PROGRESSION
-    // CAN BE FIRED OR EXTENDED CONTRACT HERE
-    //
-    public void advanceHC() {
-        newContract = false;
-        fired = false;
-        retired = false;
-        int newPrestige[] = calcSeasonPrestige();
-        int avgOff = league.getAverageYards();
-        int offTal = league.getAverageOffTalent();
-        int defTal = league.getAverageDefTalent();
-        int retire;
-        int avgCP = league.averageConfPrestige();
+    /**
+     * Calculates offensive talent level of team.
+     *
+     * @return Offensive Talent Level
+     */
+    public int getOffTalent() {
+        return (getQB(0).ratOvr * 5 +
+                teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr +
+                teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr + teamTEs.get(0).ratOvr +
+                getCompositeOLPass() + getCompositeOLRush()) / 13;
+    }
 
-        int totalPDiff = newPrestige[0] - HC.get(0).baselinePrestige;
-        HC.get(0).advanceSeason(totalPDiff, avgOff, offTal, defTal);
+    /**
+     * Calculates defensive talent level of team.
+     *
+     * @return Defensive Talent Level
+     */
+    public int getDefTalent() {
+        return (getRushDef() + getPassDef()) / 2;
+    }
 
-        int max = 78;
-        int min = 63;
-        Random rand = new Random();
-        retire = rand.nextInt((max - min) + 1) + min;
-        //RETIREMENT
-        if (HC.get(0).age > retire && !userControlled) {
-            retired = true;
-            String oldCoach = HC.get(0).name;
-            int age = HC.get(0).age;
-            fired = true;
-            HC.remove(0);
-            //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
-                    ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
+
+
+    /**
+     * Get the composite Football IQ of the team. Is used in game simulation.
+     *
+     * @return football iq of the team
+     */
+    public int getCompositeFootIQ() {
+        int comp = 0;
+        comp += getQB(0).ratFootIQ * 5;
+        comp += getRB(0).ratFootIQ + getRB(1).ratFootIQ;
+        comp += getWR(0).ratFootIQ + getWR(1).ratFootIQ + getWR(2).ratFootIQ;
+        comp += getTE(0).ratFootIQ;
+        for (int i = 0; i < 5; ++i) {
+            comp += getOL(i).ratFootIQ / 5;
         }
-
-        if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 7) && teamPrestige < 76 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige + 7) && confPrestige < avgCP && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
-                league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0).name + " has moved to the top of" +
-                        " many of the schools looking for a replacement at that position.");
-                if (Math.random() > 0.50) {
-                    league.coachStarList.add(HC.get(0));
-                    league.coachStarPrevTeam.add(name + "," + teamPrestige + "," + confPrestige);
-                }
-            }
-            //New Contracts or Firing
-            if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.33)) {
-                if (totalPDiff > 15 || (natChampWL.equals("NCW"))) {
-                    HC.get(0).contractLength = 6;
-                    HC.get(0).contractYear = 0;
-                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                    newContract = true;
-                    league.newsStories.get(league.currentWeek + 1).add("Long-Term Extension!>" + name + " has extended their head coach, " + HC.get(0).name +
-                            " for 6 additional seasons for his successful tenue at the university.");
-                } else if (totalPDiff > 10) {
-                    HC.get(0).contractLength = 5;
-                    HC.get(0).contractYear = 0;
-                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                    newContract = true;
-                    league.newsStories.get(league.currentWeek + 1).add("New 5-Year Contract Awarded!>" + name + " has extended their head coach, " + HC.get(0).name +
-                            " for 5 additional seasons for his successful tenue at the university.");
-                } else if (totalPDiff > 7) {
-                    HC.get(0).contractLength = 4;
-                    HC.get(0).contractYear = 0;
-                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                    newContract = true;
-                } else if (totalPDiff > 5 || (natChampWL.equals("NCL"))) {
-                    if ((natChampWL.equals("NCL")) && HC.get(0).contractLength - HC.get(0).contractYear > 2) {
-
-                    } else {
-                        HC.get(0).contractLength = 3;
-                        HC.get(0).contractYear = 0;
-                        HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
-                        newContract = true;
-                    }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && !league.isCareerMode() && !userControlled) {
-                    fired = true;
-                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
-                            " after a disappointing tenure. The team is now searching for a new head coach.");
-                    league.coachList.add(HC.get(0));
-                    league.coachPrevTeam.add(name);
-                    HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && league.isCareerMode()) {
-                    String oldCoach = HC.get(0).name;
-                    fired = true;
-                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
-                            " after a disappointing tenure. The team is now searching for a new head coach.");
-                    league.coachList.add(HC.get(0));
-                    league.coachPrevTeam.add(name);
-                    HC.remove(0);
-                } else {
-                    HC.get(0).contractLength = 2;
-                    HC.get(0).contractYear = 0;
-                    HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
-                    newContract = true;
-                }
-            }
+        comp += getS(0).ratFootIQ * 4;
+        comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ;
+        for (int i = 0; i < 4; ++i) {
+            comp += getDL(i).ratFootIQ / 4;
         }
-        if (userControlled) {
-            if (newContract) {
-                contractString = "Congratulations! You've been award with a new contract extension for " + HC.get(0).contractLength + " years!";
-            } else if (fired) {
-                contractString = "Due to your poor performance as head coach, the Athletic Director has terminated your contract and you are no longer Head Coach of this school.";
-            } else {
-                int[] newPres = calcSeasonPrestige();
-                contractString = "You have " + (HC.get(0).contractLength - HC.get(0).contractYear)
-                        + " years left on your contract. Your team prestige is currently at " + newPres[0] + " and your baseline " +
-                        "prestige was " + HC.get(0).baselinePrestige;
-            }
+        for (int i = 0; i < 3; ++i) {
+            comp += getLB(i).ratFootIQ;
         }
+        comp += HC.get(0).ratDef * 2 + HC.get(0).ratOff * 2;
+        return comp / 27;
+    }
+
+    /**
+     * Using Football IQ for team disicipline rating
+     */
+    public int getTeamDiscipline() {
+        int rating = 0;
+        ArrayList<Player> roster = getAllPlayers();
+        for (int i = 0; i < roster.size(); ++i) {
+            rating += roster.get(i).personality;
+        }
+        return rating / roster.size();
+    }
+
+
+    /**
+     * Get pass proficiency. The higher the more likely the team is to pass.
+     *
+     * @return integer of how good the team is at passing
+     */
+    public int getPassProf() {
+        int avgRBs = (teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratCatch) / 4;
+        return (getCompositeOLPass() + getQB(0).ratOvr * 2 + avgRBs) / 4;
+    }
+
+    /**
+     * Get run proficiency. The higher the more likely the team is to run.
+     *
+     * @return integer of how good the team is at rushing
+     */
+    public int getRushProf() {
+        int avgRBs = (teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr) / 2;
+        int QB = teamQBs.get(0).ratSpeed;
+        return (3 * getCompositeOLRush() + 3 * avgRBs + QB) / 7;
+    }
+
+    /**
+     * Get how good the team is at defending the pass
+     *
+     * @return integer of how good
+     */
+    public int getPassDef() {
+        int avgCBs = (teamCBs.get(0).ratOvr + teamCBs.get(1).ratOvr + teamCBs.get(2).ratOvr) / 3;
+        int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage) / 3;
+        int S = (teamSs.get(0).ratCoverage);
+        int def = (3 * avgCBs + avgLBs + S) / 5;
+        return (def * 3 + teamSs.get(0).ratOvr + getCompositeDLPass() * 2) / 6;
+    }
+
+    /**
+     * Get how good the team is at defending the rush
+     *
+     * @return integer of how good
+     */
+    public int getRushDef() {
+        return getCompositeDLRush();
+    }
+
+    /**
+     * Get how good the OL is at defending the pass
+     * Is the average of power and pass blocking.
+     *
+     * @return how good they are at blocking the pass.
+     */
+    public int getCompositeOLPass() {
+        int compositeOL = 0;
+        for (int i = 0; i < 5; ++i) {
+            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
+        }
+        return compositeOL / 5;
+    }
+
+    /**
+     * Get how good the OL is at defending the rush
+     * Is the average of power and rush blocking.
+     *
+     * @return how good they are at blocking the rush.
+     */
+    public int getCompositeOLRush() {
+        int compositeOL = 0;
+        for (int i = 0; i < 5; ++i) {
+            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
+        }
+        int compositeTE = teamTEs.get(0).ratRunBlock;
+        return (2 * (compositeOL) + compositeTE) / 11;
+    }
+
+    /**
+     * Get how good the DL is at defending the pass.
+     * Is the average of power and pass pressure.
+     *
+     * @return how good they are at putting pressure on passer.
+     */
+    public int getCompositeDLPass() {
+        int compositeDL = 0;
+        for (int i = 0; i < 4; ++i) {
+            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
+        }
+        return compositeDL / 4;
+    }
+
+    /**
+     * Get how good the DL is at defending the run.
+     * Is the average of power and run stopping.
+     *
+     * @return how good they are at stopping the RB.
+     */
+    public int getCompositeDLRush() {
+        int compositeDL = 0;
+        int compositeLB = 0;
+        int compositeS = 0;
+        for (int i = 0; i < 4; ++i) {
+            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
+        }
+        for (int i = 0; i < 3; ++i) {
+            compositeLB += teamLBs.get(i).ratRunStop;
+        }
+        for (int i = 0; i < 1; ++i) {
+            compositeS += teamSs.get(i).ratRunStop;
+        }
+        return (2 * compositeDL + compositeLB + compositeS) / 12;
     }
 
 
@@ -838,166 +947,149 @@ public class Team {
 
 
     /**
-     * Checks all the players leaving to see if they should be inducted to the hall of fame.
+     * Advance season, hiring new coach if needed and calculating new prestige level.
      */
-    public void checkHallofFame() {
-        // hofScore = gamesPlayed + 5*allConf + 15*allAmer + 50*POTY
-        // Need 50 to get in
-        for (Player p : playersLeaving) {
-            int gms = p.gamesPlayed + p.careerGamesPlayed;
-            int allConf = p.careerAllConference + (p.wonAllConference ? 1 : 0);
-            int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
-            int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
-            if (gms / 2 + 7 * allConf + 16 * allAmer + 50 * poty > 50) {
-                // HOFer
-                ArrayList<String> careerStats = p.getCareerStatsList();
-                StringBuilder sb = new StringBuilder();
-                sb.append(p.getPosNameYrOvr_Str() + "&");
-                for (String s : careerStats) {
-                    sb.append(s + "&");
+    public void advanceSeason() {
+        int newPrestige[] = calcSeasonPrestige();
+        teamPrestige = newPrestige[0];
+
+        advanceSeasonPlayers();
+
+        checkHallofFame();
+
+        checkCareerRecords(league.leagueRecords);
+        checkCareerRecords(teamRecords);
+        if (league.userTeam == this) checkCareerRecords(league.userTeamRecords);
+    }
+
+    // OFF-SEASON HEAD COACH PROGRESSION
+    // CAN BE FIRED OR EXTENDED CONTRACT HERE
+    //
+    public void advanceHC() {
+        newContract = false;
+        fired = false;
+        retired = false;
+        int newPrestige[] = calcSeasonPrestige();
+        int avgOff = league.getAverageYards();
+        int offTal = league.getAverageOffTalent();
+        int defTal = league.getAverageDefTalent();
+        int retire;
+        int avgCP = league.averageConfPrestige();
+
+        int totalPDiff = newPrestige[0] - HC.get(0).baselinePrestige;
+        HC.get(0).advanceSeason(totalPDiff, avgOff, offTal, defTal);
+
+        int max = 78;
+        int min = 63;
+        Random rand = new Random();
+        retire = rand.nextInt((max - min) + 1) + min;
+        //RETIREMENT
+        if (HC.get(0).age > retire && !userControlled) {
+            retired = true;
+            String oldCoach = HC.get(0).name;
+            int age = HC.get(0).age;
+            fired = true;
+            HC.remove(0);
+            //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
+                    ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
+        }
+
+        if (!retired) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 7) && teamPrestige < 76 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige + 7) && confPrestige < avgCP && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
+                league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0).name + " has moved to the top of" +
+                        " many of the schools looking for a replacement at that position.");
+                if (Math.random() > 0.50) {
+                    league.coachStarList.add(HC.get(0));
+                    league.coachStarPrevTeam.add(name + "," + teamPrestige + "," + confPrestige);
                 }
-                hallOfFame.add(sb.toString());
+            }
+            //New Contracts or Firing
+            if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.33)) {
+                if (totalPDiff > 15 || (natChampWL.equals("NCW"))) {
+                    HC.get(0).contractLength = 6;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                    newContract = true;
+                    league.newsStories.get(league.currentWeek + 1).add("Long-Term Extension!>" + name + " has extended their head coach, " + HC.get(0).name +
+                            " for 6 additional seasons for his successful tenue at the university.");
+                } else if (totalPDiff > 10) {
+                    HC.get(0).contractLength = 5;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                    newContract = true;
+                    league.newsStories.get(league.currentWeek + 1).add("New 5-Year Contract Awarded!>" + name + " has extended their head coach, " + HC.get(0).name +
+                            " for 5 additional seasons for his successful tenue at the university.");
+                } else if (totalPDiff > 7) {
+                    HC.get(0).contractLength = 4;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                    newContract = true;
+                } else if (totalPDiff > 5 || (natChampWL.equals("NCL"))) {
+                    if ((natChampWL.equals("NCL")) && HC.get(0).contractLength - HC.get(0).contractYear > 2) {
+
+                    } else {
+                        HC.get(0).contractLength = 3;
+                        HC.get(0).contractYear = 0;
+                        HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
+                        newContract = true;
+                    }
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && !league.isCareerMode() && !userControlled) {
+                    fired = true;
+                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
+                            " after a disappointing tenure. The team is now searching for a new head coach.");
+                    league.coachList.add(HC.get(0));
+                    league.coachPrevTeam.add(name);
+                    HC.remove(0);
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && league.isCareerMode()) {
+                    String oldCoach = HC.get(0).name;
+                    fired = true;
+                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
+                            " after a disappointing tenure. The team is now searching for a new head coach.");
+                    league.coachList.add(HC.get(0));
+                    league.coachPrevTeam.add(name);
+                    HC.remove(0);
+                } else {
+                    HC.get(0).contractLength = 2;
+                    HC.get(0).contractYear = 0;
+                    HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
+                    newContract = true;
+                }
+            }
+        }
+        if (userControlled) {
+            if (newContract) {
+                contractString = "Congratulations! You've been award with a new contract extension for " + HC.get(0).contractLength + " years!";
+            } else if (fired) {
+                contractString = "Due to your poor performance as head coach, the Athletic Director has terminated your contract and you are no longer Head Coach of this school.";
+            } else {
+                int[] newPres = calcSeasonPrestige();
+                contractString = "You have " + (HC.get(0).contractLength - HC.get(0).contractYear)
+                        + " years left on your contract. Your team prestige is currently at " + newPres[0] + " and your baseline " +
+                        "prestige was " + HC.get(0).baselinePrestige;
             }
         }
     }
 
-    /**
-     * Checks if any of the league records were broken by this team.
-     */
-    public void checkLeagueRecords(LeagueRecords records) {
-        records.checkRecord("Team PPG", teamPoints / numGames(), abbr, league.getYear());
-        records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), abbr, league.getYear());
-        records.checkRecord("Team YPG", teamYards / numGames(), abbr, league.getYear());
-        records.checkRecord("Team Opp YPG", teamOppYards / numGames(), abbr, league.getYear());
-        records.checkRecord("Team PPG", teamPoints / numGames(), abbr, league.getYear());
-        records.checkRecord("Team TO Diff", teamTODiff, abbr, league.getYear());
+    public void promoteCoach() {
+        //make team
+        boolean promote = true;
+        int stars = teamPrestige / 20 + 1;
+        int chance = 20 - (teamPrestige - 20 * (teamPrestige / 20)); //between 0 and 20
 
-        for (int i = 0; i < teamQBs.size(); ++i) {
-            if (getQB(i).gamesPlayed > 6) {
-                records.checkRecord("Pass Yards", getQB(i).statsPassYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("Pass TDs", getQB(i).statsPassTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("Ints Thrown", getQB(i).statsInt, abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("Comp Percent", (100 * getQB(i).statsPassComp) / (getQB(i).statsPassAtt + 1), abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("Rush Yards", getQB(i).statsRushYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("Rush TDs", getQB(i).statsRushTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("Fumbles Lost", getQB(i).statsFumbles, abbr + ": " + getQB(i).getInitialName(), league.getYear());
-            }
+        //MAKE HEAD COACH
+        if (100 * Math.random() < 5 * chance) {
+            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars - 1, this, promote));
+        } else {
+            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this, promote));
         }
 
-
-        for (int i = 0; i < teamRBs.size(); ++i) {
-            if (getRB(i).gamesPlayed > 6) {
-                records.checkRecord("Rush Yards", getRB(i).statsRushYards, abbr + ": " + getRB(i).getInitialName(), league.getYear());
-                records.checkRecord("Rush TDs", getRB(i).statsRushTD, abbr + ": " + getRB(i).getInitialName(), league.getYear());
-                records.checkRecord("Fumbles Lost", getRB(i).statsFumbles, abbr + ": " + getRB(i).getInitialName(), league.getYear());
-            }
-        }
-
-        for (int i = 0; i < teamWRs.size(); ++i) {
-            if (getWR(i).gamesPlayed > 6) {
-                records.checkRecord("Rec Yards", getWR(i).statsRecYards, abbr + ": " + getWR(i).getInitialName(), league.getYear());
-                records.checkRecord("Rec TDs", getWR(i).statsTD, abbr + ": " + getWR(i).getInitialName(), league.getYear());
-                records.checkRecord("Catch Percent", (100 * getWR(i).statsReceptions) / (getWR(i).statsTargets + 1), abbr + ": " + getWR(i).getInitialName(), league.getYear());
-            }
-        }
-
-        for (int i = 0; i < teamTEs.size(); ++i) {
-            if (getTE(i).gamesPlayed > 6) {
-                records.checkRecord("Rec Yards", getTE(i).statsRecYards, abbr + ": " + getTE(i).getInitialName(), league.getYear());
-                records.checkRecord("Rec TDs", getTE(i).statsRecTD, abbr + ": " + getTE(i).getInitialName(), league.getYear());
-                records.checkRecord("Catch Percent", (100 * getTE(i).statsReceptions) / (getTE(i).statsTargets + 1), abbr + ": " + getTE(i).getInitialName(), league.getYear());
-            }
-        }
-        for (int i = 0; i < teamDLs.size(); ++i) {
-            if (getDL(i).gamesPlayed > 6) {
-                records.checkRecord("Tackles", getDL(i).statsTackles, abbr + ": " + getDL(i).getInitialName(), league.getYear());
-                records.checkRecord("Sacks", getDL(i).statsSacks, abbr + ": " + getDL(i).getInitialName(), league.getYear());
-                records.checkRecord("Fumbles Recovered", getDL(i).statsFumbles, abbr + ": " + getDL(i).getInitialName(), league.getYear());
-                records.checkRecord("Interceptions", getDL(i).statsInts, abbr + ": " + getDL(i).getInitialName(), league.getYear());
-            }
-        }
-        for (int i = 0; i < teamLBs.size(); ++i) {
-            if (getLB(i).gamesPlayed > 6) {
-                records.checkRecord("Tackles", getLB(i).statsTackles, abbr + ": " + getLB(i).getInitialName(), league.getYear());
-                records.checkRecord("Sacks", getLB(i).statsSacks, abbr + ": " + getLB(i).getInitialName(), league.getYear());
-                records.checkRecord("Fumbles Recovered", getLB(i).statsFumbles, abbr + ": " + getLB(i).getInitialName(), league.getYear());
-                records.checkRecord("Interceptions", getLB(i).statsInts, abbr + ": " + getLB(i).getInitialName(), league.getYear());
-            }
-        }
-        for (int i = 0; i < teamCBs.size(); ++i) {
-            if (getCB(i).gamesPlayed > 6) {
-                records.checkRecord("Tackles", getCB(i).statsTackles, abbr + ": " + getCB(i).getInitialName(), league.getYear());
-                records.checkRecord("Sacks", getCB(i).statsSacks, abbr + ": " + getCB(i).getInitialName(), league.getYear());
-                records.checkRecord("Fumbles Recovered", getCB(i).statsFumbles, abbr + ": " + getCB(i).getInitialName(), league.getYear());
-                records.checkRecord("Interceptions", getCB(i).statsInts, abbr + ": " + getCB(i).getInitialName(), league.getYear());
-                records.checkRecord("Passes Defended", getCB(i).statsDefended, abbr + ": " + getCB(i).getInitialName(), league.getYear());
-            }
-        }
-        for (int i = 0; i < teamSs.size(); ++i) {
-            if (getS(i).gamesPlayed > 6) {
-                records.checkRecord("Tackles", getS(i).statsTackles, abbr + ": " + getS(i).getInitialName(), league.getYear());
-                records.checkRecord("Sacks", getS(i).statsSacks, abbr + ": " + getS(i).getInitialName(), league.getYear());
-                records.checkRecord("Fumbles Recovered", getS(i).statsFumbles, abbr + ": " + getS(i).getInitialName(), league.getYear());
-                records.checkRecord("Interceptions", getS(i).statsInts, abbr + ": " + getS(i).getInitialName(), league.getYear());
-            }
-        }
-
+        //done making players, sort them
+        sortPlayers();
     }
 
-    /**
-     * Checks the career records for all the leaving players. Must be done after playersLeaving is populated.
-     */
-    public void checkCareerRecords(LeagueRecords records) {
-        for (Player p : playersLeaving) {
-            if (p instanceof PlayerQB) {
-                PlayerQB qb = (PlayerQB) p;
-                records.checkRecord("Career Pass Yards", qb.statsPassYards + qb.careerPassYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Pass TDs", qb.statsPassTD + qb.careerTDs, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Ints Thrown", qb.statsInt + qb.careerInt, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Rush Yards", qb.statsRushYards + qb.careerRushYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Rush TDs", qb.statsRushTD + qb.careerRushTD, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Fumbles Lost", qb.statsFumbles + qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerRB) {
-                PlayerRB rb = (PlayerRB) p;
-                records.checkRecord("Career Rush Yards", rb.statsRushYards + rb.careerRushYards, abbr + ": " + rb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Rush TDs", rb.statsRushTD + rb.careerTDs, abbr + ": " + rb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Fumbles Lost", rb.statsFumbles + rb.careerFumbles, abbr + ": " + rb.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerWR) {
-                PlayerWR wr = (PlayerWR) p;
-                records.checkRecord("Career Rec Yards", wr.statsRecYards + wr.careerRecYards, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Rec TDs", wr.statsTD + wr.careerTD, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerTE) {
-                PlayerTE te = (PlayerTE) p;
-                records.checkRecord("Career Rec Yards", te.statsRecYards + te.careerRecYards, abbr + ": " + te.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Rec TDs", te.statsRecTD + te.careerTD, abbr + ": " + te.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerDL) {
-                PlayerDL dl = (PlayerDL) p;
-                records.checkRecord("Career Tackles", dl.statsTackles + dl.careerTackles, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Sacks", dl.statsSacks + dl.careerSacks, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Fumbles Rec", dl.statsFumbles + dl.careerFumbles, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Interceptions", dl.statsInts + dl.careerInts, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerLB) {
-                PlayerLB lb = (PlayerLB) p;
-                records.checkRecord("Career Tackles", lb.statsTackles + lb.careerTackles, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Sacks", lb.statsSacks + lb.careerSacks, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Fumbles Rec", lb.statsFumbles + lb.careerFumbles, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Interceptions", lb.statsInts + lb.careerInts, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerCB) {
-                PlayerCB cb = (PlayerCB) p;
-                records.checkRecord("Career Tackles", cb.statsTackles + cb.careerTackles, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Sacks", cb.statsSacks + cb.careerSacks, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Fumbles Rec", cb.statsFumbles + cb.careerFumbles, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Interceptions", cb.statsInts + cb.careerInts, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Defended", cb.statsDefended + cb.careerDefended, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
-            } else if (p instanceof PlayerS) {
-                PlayerS s = (PlayerS) p;
-                records.checkRecord("Career Tackles", s.statsTackles + s.careerTackles, abbr + ": " + s.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Sacks", s.statsSacks + s.careerSacks, abbr + ": " + s.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Fumbles Rec", s.statsFumbles + s.careerFumbles, abbr + ": " + s.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Interceptions", s.statsInts + s.careerInts, abbr + ": " + s.getInitialName(), league.getYear() - 1);
-            }
-        }
-    }
+
+
 
     /**
      * Advance season for players. Removes seniors and develops underclassmen.
@@ -1129,12 +1221,13 @@ public class Team {
         while (i < teamQBs.size() && teamQBs.size() > 1) {
             int chance = 1;
             if (Math.abs(teamQBs.get(i).region - location) > 2) ++chance;
-            if (teamQBs.get(i).personality < 65) ++chance;
+            if (teamQBs.get(i).personality < 60) ++chance;
             if (teamQBs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamQBs.get(i).year == 4) ++chance;
+            chance += teamQBs.get(i).troubledTimes;
             if (teamQBs.get(i).year > 2 && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int) (Math.random() * 10) < chance && !teamQBs.get(i).isTransfer) {
                 teamQBs.get(i).isTransfer = true;
-                if (teamQBs.get(i).personality < 60) {
+                if (teamQBs.get(i).troubledTimes > 0) {
                     league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed QB " + teamQBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamQBs.get(i).personality += (int)Math.random()*20;
                 }
@@ -1150,13 +1243,14 @@ public class Team {
         while (i < teamRBs.size() && teamRBs.size() > 2) {
             int chance = 0;
             if (Math.abs(teamRBs.get(i).region - location) > 2) ++chance;
-            if (teamRBs.get(i).personality < 65) ++chance;
+            if (teamRBs.get(i).personality < 60) ++chance;
             if (teamRBs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamRBs.get(i).year == 4) ++chance;
+            chance += teamRBs.get(i).troubledTimes;
             if (teamRBs.get(i).year > 2 && !teamRBs.get(i).isMedicalRS && teamRBs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < chance && !teamRBs.get(i).isTransfer) {
                 if (teamRBs.get(i) != teamRBs.get(0) && teamRBs.get(i) != teamRBs.get(1)) {
                     teamRBs.get(i).isTransfer = true;
-                    if (teamRBs.get(i).personality < 60) {
+                    if (teamRBs.get(i).troubledTimes > 0) {
                         league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed RB " + teamRBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamRBs.get(i).personality += (int)Math.random()*15;
                     }
@@ -1173,13 +1267,14 @@ public class Team {
         while (i < teamWRs.size() && teamWRs.size() > 3) {
             int chance = 0;
             if (Math.abs(teamWRs.get(i).region - location) > 2) ++chance;
-            if (teamWRs.get(i).personality < 65) ++chance;
+            if (teamWRs.get(i).personality < 60) ++chance;
             if (teamWRs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamWRs.get(i).year == 4) ++chance;
+            chance += teamWRs.get(i).troubledTimes;
             if (teamWRs.get(i).year > 2 && !teamWRs.get(i).isMedicalRS && teamWRs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < chance && !teamWRs.get(i).isTransfer) {
                 if (teamWRs.get(i) != teamWRs.get(0) && teamWRs.get(i) != teamWRs.get(1) && teamWRs.get(i) != teamWRs.get(2)) {
                     teamWRs.get(i).isTransfer = true;
-                    if (teamWRs.get(i).personality < 60) {
+                    if (teamWRs.get(i).troubledTimes > 0) {
                         league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed WR " + teamWRs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamWRs.get(i).personality += (int)Math.random()*15;
                     }
@@ -1196,12 +1291,13 @@ public class Team {
         while (i < teamTEs.size() && teamTEs.size() > 1) {
             int chance = 0;
             if (Math.abs(teamTEs.get(i).region - location) > 2) ++chance;
-            if (teamTEs.get(i).personality < 65) ++chance;
+            if (teamTEs.get(i).personality < 60) ++chance;
             if (teamTEs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamTEs.get(i).year == 4) ++chance;
+            chance += teamTEs.get(i).troubledTimes;
             if (teamTEs.get(i).year > 2 && !teamTEs.get(i).isMedicalRS && teamTEs.get(i).ratOvr > ratTransfer && teamTEs.get(i) != teamTEs.get(0) && (int) (Math.random() * 10) < chance && !teamTEs.get(i).isTransfer) {
                 teamTEs.get(i).isTransfer = true;
-                if (teamTEs.get(i).personality < 65) {
+                if (teamTEs.get(i).troubledTimes > 0 ) {
                     league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed TE " + teamTEs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamTEs.get(i).personality += (int)Math.random()*15;
                 }
@@ -1217,13 +1313,14 @@ public class Team {
         while (i < teamOLs.size() && teamOLs.size() > 5) {
             int chance = 0;
             if (Math.abs(teamOLs.get(i).region - location) > 2) ++chance;
-            if (teamOLs.get(i).personality < 65) ++chance;
+            if (teamOLs.get(i).personality < 60) ++chance;
             if (teamOLs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamOLs.get(i).year == 4) ++chance;
+            chance += teamOLs.get(i).troubledTimes;
             if (teamOLs.get(i).year > 2 && !teamOLs.get(i).isMedicalRS && teamOLs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < chance && !teamOLs.get(i).isTransfer) {
                 if (teamOLs.get(i) != teamOLs.get(0) && teamOLs.get(i) != teamOLs.get(1) && teamOLs.get(i) != teamOLs.get(2) && teamOLs.get(i) != teamOLs.get(3) && teamOLs.get(i) != teamOLs.get(4)) {
                     teamOLs.get(i).isTransfer = true;
-                    if (teamOLs.get(i).personality < 60) {
+                    if (teamOLs.get(i).troubledTimes > 0) {
                         league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed OL " + teamOLs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamOLs.get(i).personality += (int)Math.random()*15;
                     }
@@ -1240,12 +1337,13 @@ public class Team {
         while (i < teamKs.size() && teamKs.size() > 1) {
             int chance = 0;
             if (Math.abs(teamKs.get(i).region - location) > 2) ++chance;
-            if (teamKs.get(i).personality < 65) ++chance;
+            if (teamKs.get(i).personality < 60) ++chance;
             if (teamKs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamKs.get(i).year == 4) ++chance;
+            chance += teamKs.get(i).troubledTimes;
             if (teamKs.get(i).year > 2 && !teamKs.get(i).isMedicalRS && teamKs.get(i).ratOvr > ratTransfer && teamKs.get(i) != teamKs.get(0) && (int) (Math.random() * 10) < chance && !teamKs.get(i).isTransfer) {
                 teamKs.get(i).isTransfer = true;
-                if (teamKs.get(i).personality < 60) {
+                if (teamKs.get(i).troubledTimes > 0) {
                     league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed K " + teamKs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamKs.get(i).personality += (int)Math.random()*15;
                 }
@@ -1261,13 +1359,14 @@ public class Team {
         while (i < teamDLs.size() && teamDLs.size() > 4) {
             int chance = 0;
             if (Math.abs(teamDLs.get(i).region - location) > 2) ++chance;
-            if (teamDLs.get(i).personality < 65) ++chance;
+            if (teamDLs.get(i).personality < 60) ++chance;
             if (teamDLs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamDLs.get(i).year == 4) ++chance;
+            chance += teamDLs.get(i).troubledTimes;
             if (teamDLs.get(i).year > 2 && !teamDLs.get(i).isMedicalRS && teamDLs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < chance && !teamDLs.get(i).isTransfer) {
                 if (teamDLs.get(i) != teamDLs.get(0) && teamDLs.get(i) != teamDLs.get(1) && teamDLs.get(i) != teamDLs.get(2) && teamDLs.get(i) != teamDLs.get(3)) {
                     teamDLs.get(i).isTransfer = true;
-                    if (teamDLs.get(i).personality < 60) {
+                    if (teamDLs.get(i).troubledTimes > 0) {
                         league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed DL " + teamDLs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamDLs.get(i).personality += (int)Math.random()*15;
                     }
@@ -1284,13 +1383,14 @@ public class Team {
         while (i < teamLBs.size() && teamLBs.size() > 3) {
             int chance = 0;
             if (Math.abs(teamLBs.get(i).region - location) > 2) ++chance;
-            if (teamLBs.get(i).personality < 65) ++chance;
+            if (teamLBs.get(i).personality < 60) ++chance;
             if (teamLBs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamLBs.get(i).year == 4) ++chance;
+            chance += teamLBs.get(i).troubledTimes;
             if (teamLBs.get(i).year > 2 && !teamLBs.get(i).isMedicalRS && teamLBs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < chance && !teamLBs.get(i).isTransfer) {
                 if (teamLBs.get(i) != teamLBs.get(0) && teamLBs.get(i) != teamLBs.get(1) && teamLBs.get(i) != teamLBs.get(2)) {
                     teamLBs.get(i).isTransfer = true;
-                    if (teamLBs.get(i).personality < 65) {
+                    if (teamLBs.get(i).troubledTimes > 0) {
                         league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed LB " + teamLBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamLBs.get(i).personality += (int)Math.random()*15;
                     }
@@ -1307,13 +1407,14 @@ public class Team {
         while (i < teamCBs.size() && teamCBs.size() > 3) {
             int chance = 0;
             if (Math.abs(teamCBs.get(i).region - location) > 2) ++chance;
-            if (teamCBs.get(i).personality < 65) ++chance;
+            if (teamCBs.get(i).personality < 60) ++chance;
             if (teamCBs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamCBs.get(i).year == 4) ++chance;
+            chance += teamCBs.get(i).troubledTimes;
             if (teamCBs.get(i).year > 2 && !teamCBs.get(i).isMedicalRS && teamCBs.get(i).ratOvr > ratTransfer && (int) (Math.random() * 10) < chance && !teamCBs.get(i).isTransfer) {
                 if (teamCBs.get(i) != teamCBs.get(0) && teamCBs.get(i) != teamCBs.get(1) && teamCBs.get(i) != teamCBs.get(2) && teamCBs.get(i) != teamCBs.get(3)) {
                     teamCBs.get(i).isTransfer = true;
-                    if (teamCBs.get(i).personality < 60) {
+                    if (teamCBs.get(i).troubledTimes > 0) {
                         league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed CB " + teamCBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamCBs.get(i).personality += (int)Math.random()*15;
                     }
@@ -1330,12 +1431,13 @@ public class Team {
         while (i < teamSs.size() && teamSs.size() > 1) {
             int chance = 0;
             if (Math.abs(teamSs.get(i).region - location) > 2) ++chance;
-            if (teamSs.get(i).personality < 65) ++chance;
+            if (teamSs.get(i).personality < 60) ++chance;
             if (teamSs.get(i).careerGamesPlayed < 6) ++chance;
             if (teamSs.get(i).year == 4) ++chance;
+            chance += teamSs.get(i).troubledTimes;
             if (teamSs.get(i).year > 2 && !teamSs.get(i).isMedicalRS && teamSs.get(i).ratOvr > ratTransfer && teamSs.get(i) != teamSs.get(0) && (int) (Math.random() * 10) < chance && !teamSs.get(i).isTransfer) {
                 teamSs.get(i).isTransfer = true;
-                if (teamSs.get(i).personality < 60) {
+                if (teamSs.get(i).troubledTimes > 0) {
                     league.newsStories.get(league.currentWeek+1).add("Player Dismissed>Following several incidents, " + name + " has dimissed S " + teamSs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamSs.get(i).personality += (int)Math.random()*15;
                 }
@@ -1661,22 +1763,7 @@ public class Team {
         sortPlayers();
     }
 
-    public void promoteCoach() {
-        //make team
-        boolean promote = true;
-        int stars = teamPrestige / 20 + 1;
-        int chance = 20 - (teamPrestige - 20 * (teamPrestige / 20)); //between 0 and 20
 
-        //MAKE HEAD COACH
-        if (100 * Math.random() < 5 * chance) {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars - 1, this, promote));
-        } else {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this, promote));
-        }
-
-        //done making players, sort them
-        sortPlayers();
-    }
 
     /**
      * Recruit all players given in a string
@@ -1940,6 +2027,35 @@ public class Team {
         }
     }
 
+
+    /**
+     * Gets the recruiting class strength.
+     * Adds up all the ovrs of freshman
+     *
+     * @return class strength as a number
+     */
+    public int getRecruitingClassRat() {
+        int classStrength = 0;
+        int numFreshman = 0;
+        int numRedshirt = 0;
+        ArrayList<Player> allPlayers = getAllPlayers();
+        for (Player p : allPlayers) {
+            if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
+                // Is freshman
+                classStrength += p.ratOvr - 30;
+                numFreshman++;
+            }
+            if (p.year == 0 && p.ratOvr > 65) {
+                classStrength += p.ratOvr - 30;
+                numRedshirt++;
+            }
+        }
+
+        if (numFreshman > 0 || numRedshirt > 0)
+            return classStrength * (classStrength / (numFreshman + numRedshirt)) / 100;
+        else return 0;
+    }
+
     /**
      * For news stories or other info gathering, setup player groups by student standing
      * Run through each type of player, add them to the appropriate year
@@ -2111,58 +2227,76 @@ public class Team {
         return hist;
     }
 
-    /**
-     * Updates strength of wins based on how opponents have fared.
-     */
-    public void updateStrengthOfWins() {
-        int strWins = 0;
-        for (int i = 0; i < 12; ++i) {
-            Game g = gameSchedule.get(i);
-            if (g.homeTeam == this) {
-                strWins += Math.pow(totalTeamCount - g.awayTeam.rankTeamPollScore, 2);
-            } else {
-                strWins += Math.pow(totalTeamCount - g.homeTeam.rankTeamPollScore, 2);
+
+    public void disciplinePlayer() {
+        playersDis = new ArrayList<>();
+        checkSuspensionPosition(teamQBs, 1);
+        checkSuspensionPosition(teamRBs, 2);
+        checkSuspensionPosition(teamWRs, 3);
+        checkSuspensionPosition(teamTEs, 1);
+        checkSuspensionPosition(teamOLs, 5);
+        checkSuspensionPosition(teamKs, 1);
+        checkSuspensionPosition(teamDLs, 4);
+        checkSuspensionPosition(teamLBs, 3);
+        checkSuspensionPosition(teamCBs, 3);
+        checkSuspensionPosition(teamSs, 1);
+
+        int randomPlayer = (int)(Math.random()* playersDis.size());
+        suspendPlayer(playersDis.get(randomPlayer));
+    }
+
+    public void suspendPlayer(Player player) {
+        String[] issue = {"Academics", "Fighting", "DUI", "Skipping Class", "Skipping Practice", "Failed Drug Test", "Academics", "Excessive Partying", "Practice Brawl"};
+        int duration = (int)(Math.random()*(65 - player.personality)/2);
+        if (duration == 0) duration = 1;
+        String description = issue[(int) (Math.random() * issue.length)];
+        if (player.personality*Math.random() < Math.random()*HC.get(0).ratDiscipline) {
+            player.isSuspended = true;
+            player.ratPot -= duration / 1.5;
+            player.ratFootIQ -= duration * 2;
+            player.weeksSuspended = duration;
+            player.troubledTimes++;
+            if (player.ratOvr > 75) {
+                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Star Suspension>" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
+                        + ". The player will be suspended for " + duration + " weeks.");
             }
-        }
-        teamStrengthOfWins = strWins / 50;
-        for (Team t : gameWinsAgainst) {
-            teamStrengthOfWins += Math.pow(t.wins, 2);
+
+            sortPlayers();
+
         }
     }
 
-    public void updateSOS() {
-        teamSOS = 0;
-        for (int i = 0; i < 12; ++i) {
-            Game g = gameSchedule.get(i);
-            if (g.homeTeam == this) {
-                teamSOS += totalTeamCount - g.awayTeam.rankTeamPollScore;
-            } else {
-                teamSOS += totalTeamCount - g.homeTeam.rankTeamPollScore;
+    private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters) {
+        int numInjured = 0;
+
+        for (Player p : players) {
+            if (p.injury != null && !p.isSuspended) {
+                numInjured++;
+            }
+        }
+
+        // Only injure if there are people left to injure
+        if (numInjured < numStarters) {
+            for (int i = 0; i < numStarters; ++i) {
+                Player p = players.get(i);
+                if (p.personality < 60) {
+                    playersDis.add(p);
+                }
             }
         }
     }
 
-    /**
-     * Sorts players so that best players are higher in depth chart.
-     */
-    public void sortPlayers() {
-        //sort players based on overall ratings to assemble best starting lineup
-        Collections.sort(teamQBs, new CompPlayer());
-        Collections.sort(teamRBs, new CompPlayer());
-        Collections.sort(teamWRs, new CompPlayer());
-        Collections.sort(teamTEs, new CompPlayer());
-        Collections.sort(teamKs, new CompPlayer());
-        Collections.sort(teamOLs, new CompPlayer());
-        Collections.sort(teamDLs, new CompPlayer());
-        Collections.sort(teamLBs, new CompPlayer());
-        Collections.sort(teamCBs, new CompPlayer());
-        Collections.sort(teamSs, new CompPlayer());
-
-        Collections.sort(teamRSs, new CompPlayer());
-        Collections.sort(teamFRs, new CompPlayer());
-        Collections.sort(teamSOs, new CompPlayer());
-        Collections.sort(teamJRs, new CompPlayer());
-        Collections.sort(teamSRs, new CompPlayer());
+    public void updateSuspensions() {
+        ArrayList<Player> allPlayers = getAllPlayers();
+        for (int i = 0; i < allPlayers.size(); ++i ) {
+            if (allPlayers.get(i).isSuspended) {
+                allPlayers.get(i).weeksSuspended--;
+                if (allPlayers.get(i).weeksSuspended < 1) {
+                    allPlayers.get(i).isSuspended = false;
+                    sortPlayers();
+                }
+            }
+        }
     }
 
     /**
@@ -2188,7 +2322,7 @@ public class Team {
         int numInjured = 0;
 
         for (Player p : players) {
-            if (p.injury != null) {
+            if (p.injury != null && !p.isSuspended) {
                 p.injury.advanceGame();
                 numInjured++;
                 if (p.injury == null) {
@@ -2264,95 +2398,13 @@ public class Team {
         for (Player p : players) {
             p.injury = null;
             p.isInjured = false;
+            p.isSuspended = false;
+            p.troubledTimes = 0;
+            p.weeksSuspended = 0;
         }
     }
 
-    /**
-     * Calculates offensive talent level of team.
-     *
-     * @return Offensive Talent Level
-     */
-    public int getOffTalent() {
-        return (getQB(0).ratOvr * 5 +
-                teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr +
-                teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr + teamTEs.get(0).ratOvr +
-                getCompositeOLPass() + getCompositeOLRush()) / 13;
-    }
 
-    /**
-     * Calculates defensive talent level of team.
-     *
-     * @return Defensive Talent Level
-     */
-    public int getDefTalent() {
-        return (getRushDef() + getPassDef()) / 2;
-    }
-
-    /**
-     * Get the composite Football IQ of the team. Is used in game simulation.
-     *
-     * @return football iq of the team
-     */
-    public int getCompositeFootIQ() {
-        int comp = 0;
-        comp += getQB(0).ratFootIQ * 5;
-        comp += getRB(0).ratFootIQ + getRB(1).ratFootIQ;
-        comp += getWR(0).ratFootIQ + getWR(1).ratFootIQ + getWR(2).ratFootIQ;
-        comp += getTE(0).ratFootIQ;
-        for (int i = 0; i < 5; ++i) {
-            comp += getOL(i).ratFootIQ / 5;
-        }
-        comp += getS(0).ratFootIQ * 4;
-        comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ;
-        for (int i = 0; i < 4; ++i) {
-            comp += getDL(i).ratFootIQ / 4;
-        }
-        for (int i = 0; i < 3; ++i) {
-            comp += getLB(i).ratFootIQ;
-        }
-        comp += HC.get(0).ratDef * 2 + HC.get(0).ratOff * 2;
-        return comp / 27;
-    }
-
-    /**
-     * Using Football IQ for team disicipline rating
-     */
-    public int getTeamDiscipline() {
-        int rating = 0;
-        ArrayList<Player> roster = getAllPlayers();
-        for (int i = 0; i < roster.size(); ++i) {
-            rating += roster.get(i).personality;
-        }
-        return rating / roster.size();
-    }
-
-    /**
-     * Gets the recruiting class strength.
-     * Adds up all the ovrs of freshman
-     *
-     * @return class strength as a number
-     */
-    public int getRecruitingClassRat() {
-        int classStrength = 0;
-        int numFreshman = 0;
-        int numRedshirt = 0;
-        ArrayList<Player> allPlayers = getAllPlayers();
-        for (Player p : allPlayers) {
-            if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
-                // Is freshman
-                classStrength += p.ratOvr - 30;
-                numFreshman++;
-            }
-            if (p.year == 0 && p.ratOvr > 65) {
-                classStrength += p.ratOvr - 30;
-                numRedshirt++;
-            }
-        }
-
-        if (numFreshman > 0 || numRedshirt > 0)
-            return classStrength * (classStrength / (numFreshman + numRedshirt)) / 100;
-        else return 0;
-    }
 
     public ArrayList<Player> getAllPlayers() {
         ArrayList<Player> allPlayersList = new ArrayList<>();
@@ -2454,113 +2506,7 @@ public class Team {
     }
 
 
-    /**
-     * Get pass proficiency. The higher the more likely the team is to pass.
-     *
-     * @return integer of how good the team is at passing
-     */
-    public int getPassProf() {
-        int avgRBs = (teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratCatch) / 4;
-        return (getCompositeOLPass() + getQB(0).ratOvr * 2 + avgRBs) / 4;
-    }
 
-    /**
-     * Get run proficiency. The higher the more likely the team is to run.
-     *
-     * @return integer of how good the team is at rushing
-     */
-    public int getRushProf() {
-        int avgRBs = (teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr) / 2;
-        int QB = teamQBs.get(0).ratSpeed;
-        return (3 * getCompositeOLRush() + 3 * avgRBs + QB) / 7;
-    }
-
-    /**
-     * Get how good the team is at defending the pass
-     *
-     * @return integer of how good
-     */
-    public int getPassDef() {
-        int avgCBs = (teamCBs.get(0).ratOvr + teamCBs.get(1).ratOvr + teamCBs.get(2).ratOvr) / 3;
-        int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage) / 3;
-        int S = (teamSs.get(0).ratCoverage);
-        int def = (3 * avgCBs + avgLBs + S) / 5;
-        return (def * 3 + teamSs.get(0).ratOvr + getCompositeDLPass() * 2) / 6;
-    }
-
-    /**
-     * Get how good the team is at defending the rush
-     *
-     * @return integer of how good
-     */
-    public int getRushDef() {
-        return getCompositeDLRush();
-    }
-
-    /**
-     * Get how good the OL is at defending the pass
-     * Is the average of power and pass blocking.
-     *
-     * @return how good they are at blocking the pass.
-     */
-    public int getCompositeOLPass() {
-        int compositeOL = 0;
-        for (int i = 0; i < 5; ++i) {
-            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
-        }
-        return compositeOL / 5;
-    }
-
-    /**
-     * Get how good the OL is at defending the rush
-     * Is the average of power and rush blocking.
-     *
-     * @return how good they are at blocking the rush.
-     */
-    public int getCompositeOLRush() {
-        int compositeOL = 0;
-        for (int i = 0; i < 5; ++i) {
-            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
-        }
-        int compositeTE = teamTEs.get(0).ratRunBlock;
-        return (2 * (compositeOL) + compositeTE) / 11;
-    }
-
-    /**
-     * Get how good the DL is at defending the pass.
-     * Is the average of power and pass pressure.
-     *
-     * @return how good they are at putting pressure on passer.
-     */
-    public int getCompositeDLPass() {
-        int compositeDL = 0;
-        for (int i = 0; i < 4; ++i) {
-            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
-        }
-        return compositeDL / 4;
-    }
-
-    /**
-     * Get how good the DL is at defending the run.
-     * Is the average of power and run stopping.
-     *
-     * @return how good they are at stopping the RB.
-     */
-    public int getCompositeDLRush() {
-        int compositeDL = 0;
-        int compositeLB = 0;
-        int compositeS = 0;
-        for (int i = 0; i < 4; ++i) {
-            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
-        }
-        for (int i = 0; i < 3; ++i) {
-            compositeLB += teamLBs.get(i).ratRunStop;
-        }
-        for (int i = 0; i < 1; ++i) {
-            compositeS += teamSs.get(i).ratRunStop;
-        }
-        return (2 * compositeDL + compositeLB + compositeS) / 12;
-    }
 
     /**
      * Get comma separated value of the team stats and their rankings.
@@ -3646,20 +3592,168 @@ public class Team {
         return ts;
     }
 
-    public void setupUserCoach(String name) {
-        HC.get(0).name = name;
-        HC.get(0).year = 0;
-        HC.get(0).age = 35;
-        HC.get(0).contractYear = 0;
-        HC.get(0).contractLength = 6;
-        HC.get(0).ratPot = 70;
-        HC.get(0).ratOff = 70;
-        HC.get(0).ratDef = 70;
-        HC.get(0).ratTalent = 70;
-        HC.get(0).ratDiscipline = 70;
-        HC.get(0).ratOvr = (HC.get(0).ratOff + HC.get(0).ratDef + HC.get(0).ratTalent + HC.get(0).ratDiscipline) / 4;
-        HC.get(0).offStrat = 0;
-        HC.get(0).defStrat = 0;
+
+    /**
+     * Checks all the players leaving to see if they should be inducted to the hall of fame.
+     */
+    public void checkHallofFame() {
+        // hofScore = gamesPlayed + 5*allConf + 15*allAmer + 50*POTY
+        // Need 50 to get in
+        for (Player p : playersLeaving) {
+            int gms = p.gamesPlayed + p.careerGamesPlayed;
+            int allConf = p.careerAllConference + (p.wonAllConference ? 1 : 0);
+            int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
+            int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
+            if (gms / 2 + 7 * allConf + 16 * allAmer + 50 * poty > 50) {
+                // HOFer
+                ArrayList<String> careerStats = p.getCareerStatsList();
+                StringBuilder sb = new StringBuilder();
+                sb.append(p.getPosNameYrOvr_Str() + "&");
+                for (String s : careerStats) {
+                    sb.append(s + "&");
+                }
+                hallOfFame.add(sb.toString());
+            }
+        }
+    }
+
+
+    /**
+     * Checks if any of the league records were broken by this team.
+     */
+    public void checkLeagueRecords(LeagueRecords records) {
+        records.checkRecord("Team PPG", teamPoints / numGames(), abbr, league.getYear());
+        records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), abbr, league.getYear());
+        records.checkRecord("Team YPG", teamYards / numGames(), abbr, league.getYear());
+        records.checkRecord("Team Opp YPG", teamOppYards / numGames(), abbr, league.getYear());
+        records.checkRecord("Team PPG", teamPoints / numGames(), abbr, league.getYear());
+        records.checkRecord("Team TO Diff", teamTODiff, abbr, league.getYear());
+
+        for (int i = 0; i < teamQBs.size(); ++i) {
+            if (getQB(i).gamesPlayed > 6) {
+                records.checkRecord("Pass Yards", getQB(i).statsPassYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("Pass TDs", getQB(i).statsPassTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("Ints Thrown", getQB(i).statsInt, abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("Comp Percent", (100 * getQB(i).statsPassComp) / (getQB(i).statsPassAtt + 1), abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("Rush Yards", getQB(i).statsRushYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("Rush TDs", getQB(i).statsRushTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("Fumbles Lost", getQB(i).statsFumbles, abbr + ": " + getQB(i).getInitialName(), league.getYear());
+            }
+        }
+
+
+        for (int i = 0; i < teamRBs.size(); ++i) {
+            if (getRB(i).gamesPlayed > 6) {
+                records.checkRecord("Rush Yards", getRB(i).statsRushYards, abbr + ": " + getRB(i).getInitialName(), league.getYear());
+                records.checkRecord("Rush TDs", getRB(i).statsRushTD, abbr + ": " + getRB(i).getInitialName(), league.getYear());
+                records.checkRecord("Fumbles Lost", getRB(i).statsFumbles, abbr + ": " + getRB(i).getInitialName(), league.getYear());
+            }
+        }
+
+        for (int i = 0; i < teamWRs.size(); ++i) {
+            if (getWR(i).gamesPlayed > 6) {
+                records.checkRecord("Rec Yards", getWR(i).statsRecYards, abbr + ": " + getWR(i).getInitialName(), league.getYear());
+                records.checkRecord("Rec TDs", getWR(i).statsTD, abbr + ": " + getWR(i).getInitialName(), league.getYear());
+                records.checkRecord("Catch Percent", (100 * getWR(i).statsReceptions) / (getWR(i).statsTargets + 1), abbr + ": " + getWR(i).getInitialName(), league.getYear());
+            }
+        }
+
+        for (int i = 0; i < teamTEs.size(); ++i) {
+            if (getTE(i).gamesPlayed > 6) {
+                records.checkRecord("Rec Yards", getTE(i).statsRecYards, abbr + ": " + getTE(i).getInitialName(), league.getYear());
+                records.checkRecord("Rec TDs", getTE(i).statsRecTD, abbr + ": " + getTE(i).getInitialName(), league.getYear());
+                records.checkRecord("Catch Percent", (100 * getTE(i).statsReceptions) / (getTE(i).statsTargets + 1), abbr + ": " + getTE(i).getInitialName(), league.getYear());
+            }
+        }
+        for (int i = 0; i < teamDLs.size(); ++i) {
+            if (getDL(i).gamesPlayed > 6) {
+                records.checkRecord("Tackles", getDL(i).statsTackles, abbr + ": " + getDL(i).getInitialName(), league.getYear());
+                records.checkRecord("Sacks", getDL(i).statsSacks, abbr + ": " + getDL(i).getInitialName(), league.getYear());
+                records.checkRecord("Fumbles Recovered", getDL(i).statsFumbles, abbr + ": " + getDL(i).getInitialName(), league.getYear());
+                records.checkRecord("Interceptions", getDL(i).statsInts, abbr + ": " + getDL(i).getInitialName(), league.getYear());
+            }
+        }
+        for (int i = 0; i < teamLBs.size(); ++i) {
+            if (getLB(i).gamesPlayed > 6) {
+                records.checkRecord("Tackles", getLB(i).statsTackles, abbr + ": " + getLB(i).getInitialName(), league.getYear());
+                records.checkRecord("Sacks", getLB(i).statsSacks, abbr + ": " + getLB(i).getInitialName(), league.getYear());
+                records.checkRecord("Fumbles Recovered", getLB(i).statsFumbles, abbr + ": " + getLB(i).getInitialName(), league.getYear());
+                records.checkRecord("Interceptions", getLB(i).statsInts, abbr + ": " + getLB(i).getInitialName(), league.getYear());
+            }
+        }
+        for (int i = 0; i < teamCBs.size(); ++i) {
+            if (getCB(i).gamesPlayed > 6) {
+                records.checkRecord("Tackles", getCB(i).statsTackles, abbr + ": " + getCB(i).getInitialName(), league.getYear());
+                records.checkRecord("Sacks", getCB(i).statsSacks, abbr + ": " + getCB(i).getInitialName(), league.getYear());
+                records.checkRecord("Fumbles Recovered", getCB(i).statsFumbles, abbr + ": " + getCB(i).getInitialName(), league.getYear());
+                records.checkRecord("Interceptions", getCB(i).statsInts, abbr + ": " + getCB(i).getInitialName(), league.getYear());
+                records.checkRecord("Passes Defended", getCB(i).statsDefended, abbr + ": " + getCB(i).getInitialName(), league.getYear());
+            }
+        }
+        for (int i = 0; i < teamSs.size(); ++i) {
+            if (getS(i).gamesPlayed > 6) {
+                records.checkRecord("Tackles", getS(i).statsTackles, abbr + ": " + getS(i).getInitialName(), league.getYear());
+                records.checkRecord("Sacks", getS(i).statsSacks, abbr + ": " + getS(i).getInitialName(), league.getYear());
+                records.checkRecord("Fumbles Recovered", getS(i).statsFumbles, abbr + ": " + getS(i).getInitialName(), league.getYear());
+                records.checkRecord("Interceptions", getS(i).statsInts, abbr + ": " + getS(i).getInitialName(), league.getYear());
+            }
+        }
+
+    }
+
+    /**
+     * Checks the career records for all the leaving players. Must be done after playersLeaving is populated.
+     */
+    public void checkCareerRecords(LeagueRecords records) {
+        for (Player p : playersLeaving) {
+            if (p instanceof PlayerQB) {
+                PlayerQB qb = (PlayerQB) p;
+                records.checkRecord("Career Pass Yards", qb.statsPassYards + qb.careerPassYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Pass TDs", qb.statsPassTD + qb.careerTDs, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Ints Thrown", qb.statsInt + qb.careerInt, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Rush Yards", qb.statsRushYards + qb.careerRushYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Rush TDs", qb.statsRushTD + qb.careerRushTD, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Fumbles Lost", qb.statsFumbles + qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerRB) {
+                PlayerRB rb = (PlayerRB) p;
+                records.checkRecord("Career Rush Yards", rb.statsRushYards + rb.careerRushYards, abbr + ": " + rb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Rush TDs", rb.statsRushTD + rb.careerTDs, abbr + ": " + rb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Fumbles Lost", rb.statsFumbles + rb.careerFumbles, abbr + ": " + rb.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerWR) {
+                PlayerWR wr = (PlayerWR) p;
+                records.checkRecord("Career Rec Yards", wr.statsRecYards + wr.careerRecYards, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Rec TDs", wr.statsTD + wr.careerTD, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerTE) {
+                PlayerTE te = (PlayerTE) p;
+                records.checkRecord("Career Rec Yards", te.statsRecYards + te.careerRecYards, abbr + ": " + te.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Rec TDs", te.statsRecTD + te.careerTD, abbr + ": " + te.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerDL) {
+                PlayerDL dl = (PlayerDL) p;
+                records.checkRecord("Career Tackles", dl.statsTackles + dl.careerTackles, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Sacks", dl.statsSacks + dl.careerSacks, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Fumbles Rec", dl.statsFumbles + dl.careerFumbles, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Interceptions", dl.statsInts + dl.careerInts, abbr + ": " + dl.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerLB) {
+                PlayerLB lb = (PlayerLB) p;
+                records.checkRecord("Career Tackles", lb.statsTackles + lb.careerTackles, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Sacks", lb.statsSacks + lb.careerSacks, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Fumbles Rec", lb.statsFumbles + lb.careerFumbles, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Interceptions", lb.statsInts + lb.careerInts, abbr + ": " + lb.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerCB) {
+                PlayerCB cb = (PlayerCB) p;
+                records.checkRecord("Career Tackles", cb.statsTackles + cb.careerTackles, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Sacks", cb.statsSacks + cb.careerSacks, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Fumbles Rec", cb.statsFumbles + cb.careerFumbles, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Interceptions", cb.statsInts + cb.careerInts, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Defended", cb.statsDefended + cb.careerDefended, abbr + ": " + cb.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerS) {
+                PlayerS s = (PlayerS) p;
+                records.checkRecord("Career Tackles", s.statsTackles + s.careerTackles, abbr + ": " + s.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Sacks", s.statsSacks + s.careerSacks, abbr + ": " + s.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Fumbles Rec", s.statsFumbles + s.careerFumbles, abbr + ": " + s.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Interceptions", s.statsInts + s.careerInts, abbr + ": " + s.getInitialName(), league.getYear() - 1);
+            }
+        }
     }
 
 }
