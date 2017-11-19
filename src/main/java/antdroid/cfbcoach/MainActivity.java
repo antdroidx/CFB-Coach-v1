@@ -287,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
                     if (simLeague.currentWeek == 16) {
                         userHC = userTeam.HC.get(0);
                         simLeague.advanceHC();
-                        simLeague.curePlayers(); // get rid of all injuries
                         if (simLeague.isCareerMode()) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage(userTeam.contractString)
@@ -309,13 +308,11 @@ public class MainActivity extends AppCompatActivity {
                         newJobV2(userHC);
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Coaching Changes");
-                        simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Coaching Changes");
-                        simLeague.curePlayers(); // get rid of all injuries
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 18) {
@@ -338,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek >= 21) {
                         recruitingStage = 0;
+                        simLeague.curePlayers(); // get rid of all injuries
                         beginRecruiting();
                     } else {
                         int numGamesPlayed = userTeam.gameWLSchedule.size();

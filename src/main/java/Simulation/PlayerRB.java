@@ -111,6 +111,7 @@ public class PlayerRB extends Player {
         region = reg;
         personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 2) + 70 + (int) (Math.random() * 100) - 50;
+        troubledTimes = 0;
 
         statsRushAtt = 0;
         statsRushYards = 0;
@@ -163,6 +164,7 @@ public class PlayerRB extends Player {
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 12));
         if (cost < 15) cost = (int)(Math.random()*19) + 1;
+        troubledTimes = 0;
 
         statsRushAtt = 0;
         statsRushYards = 0;

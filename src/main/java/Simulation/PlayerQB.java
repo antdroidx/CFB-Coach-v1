@@ -58,6 +58,7 @@ public class PlayerQB extends Player {
         if (isRedshirt) year = 0;
         region = reg;
         personality = trait;
+        troubledTimes = 0;
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
@@ -115,6 +116,7 @@ public class PlayerQB extends Player {
         isTransfer = transfer;
         region = reg;
         personality = trait;
+        troubledTimes = 0;
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
 
@@ -175,6 +177,7 @@ public class PlayerQB extends Player {
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 15));
         if (cost < 15) cost = (int)(Math.random()*19) + 1;
+        troubledTimes = 0;
 
         statsPassAtt = 0;
         statsPassComp = 0;

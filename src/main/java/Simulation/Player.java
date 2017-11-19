@@ -24,7 +24,7 @@ public class Player {
     public int personality;
     public boolean isSuspended;
     public int weeksSuspended;
-    public int troubledTimes = 0;
+    public int troubledTimes;
 
     public int gamesPlayed;
     public int statsWins;

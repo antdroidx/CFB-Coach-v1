@@ -56,6 +56,7 @@ public class PlayerTE extends Player {
         region = reg;
         personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
+        troubledTimes = 0;
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -105,6 +106,7 @@ public class PlayerTE extends Player {
         region = reg;
         personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
+        troubledTimes = 0;
 
         statsTargets = 0;
         statsReceptions = 0;
