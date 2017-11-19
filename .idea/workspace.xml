@@ -28,7 +28,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/PlayerS.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/PlayerS.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
     </list>
     <ignored path="CFB-Coach.iws" />
@@ -107,8 +106,8 @@
       <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="1434" column="57" lean-forward="true" selection-start-line="1434" selection-start-column="57" selection-end-line="1434" selection-end-column="57" />
+            <state relative-caret-position="136">
+              <caret line="1219" column="0" lean-forward="false" selection-start-line="1219" selection-start-column="0" selection-end-line="1219" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1408,7 +1407,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511117825616" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511118352037" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1456,7 +1455,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511117825616" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511118352037" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1662,7 +1661,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511117825618" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511118352041" />
       </method>
     </configuration>
     <list size="1">
@@ -1713,7 +1712,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />
+    <frame x="-8" y="-8" width="1552" height="840" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1737,7 +1736,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24798928" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5058651" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5058651" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.12666667" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1774,6 +1773,24 @@
           </properties>
           <option name="timeStamp" value="5" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/Team.java</url>
+          <line>1231</line>
+          <properties />
+          <option name="timeStamp" value="2050" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/Team.java</url>
+          <line>1254</line>
+          <properties />
+          <option name="timeStamp" value="2052" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/Team.java</url>
+          <line>1278</line>
+          <properties />
+          <option name="timeStamp" value="2053" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog>
@@ -1787,7 +1804,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2050" />
+      <option name="time" value="2054" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -2186,8 +2203,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="1434" column="57" lean-forward="true" selection-start-line="1434" selection-start-column="57" selection-end-line="1434" selection-end-column="57" />
+        <state relative-caret-position="136">
+          <caret line="1219" column="0" lean-forward="false" selection-start-line="1219" selection-start-column="0" selection-end-line="1219" selection-end-column="0" />
           <folding />
         </state>
       </provider>

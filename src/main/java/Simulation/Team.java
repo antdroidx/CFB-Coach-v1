@@ -149,7 +149,7 @@ public class Team {
 
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
-    public int dismissalChance = 6;
+    public int dismissalChance = 3;
 
     public int[] recruitNeeds;
     public ArrayList<Player> playersInjured;
@@ -1216,6 +1216,7 @@ public class Team {
         // PLAYER TRANSFERS
         // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
         int i;
+        dismissalChance = Math.round((100-HC.get(0).ratDiscipline)/10);
 
         sortPlayers();
         i = 0;
