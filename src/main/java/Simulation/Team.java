@@ -2241,8 +2241,10 @@ public class Team {
         checkSuspensionPosition(teamCBs, 3);
         checkSuspensionPosition(teamSs, 1);
 
-        int randomPlayer = (int)(Math.random()* playersDis.size());
-        suspendPlayer(playersDis.get(randomPlayer));
+        if (playersDis.size() > 0) {
+            int randomPlayer = (int) (Math.random() * playersDis.size());
+            suspendPlayer(playersDis.get(randomPlayer));
+        }
     }
 
     public void suspendPlayer(Player player) {

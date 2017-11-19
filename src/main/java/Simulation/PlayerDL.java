@@ -51,6 +51,7 @@ public class PlayerDL extends Player {
         region = reg;
         personality = trait;
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
+        troubledTimes = 0;
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -98,6 +99,7 @@ public class PlayerDL extends Player {
         position = "DL";
 
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
+        troubledTimes = 0;
 
         wonHeisman = false;
         wonAllAmerican = false;
