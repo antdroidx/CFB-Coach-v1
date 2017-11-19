@@ -23,6 +23,7 @@ public class Player {
     public int region;
     public int personality;
     public boolean isSuspended;
+    public int weeksSuspended;
     public int troubledTimes = 0;
 
     public int gamesPlayed;
@@ -43,7 +44,6 @@ public class Player {
 
     public boolean isInjured;
     public Injury injury;
-    public Suspension suspension;
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
 
@@ -90,7 +90,7 @@ public class Player {
             return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
         }
         if (isSuspended) {
-            return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended";
+            return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended (" + weeksSuspended + "wk)";
         }
         return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
     }
@@ -254,20 +254,7 @@ public class Player {
 
         }
     }
-/*    public String getRegion(int region) {
-        String location;
-        if (region == 0) location = "Northwest";
-        else if (region == 1) location = "West Coast";
-        else if (region == 2) location = "Southwest";
-        else if (region == 3) location = "Rockies";
-        else if (region == 4) location = "Great Plains";
-        else if (region == 5) location = "Texas";
-        else if (region == 6) location = "Great Lakes";
-        else if (region == 7) location = "Atlantic";
-        else if (region == 8) location = "Florida";
-        else location = "South";
-        return location;
-    }*/
+
 
     public String getRegion(int region) {
         String location;

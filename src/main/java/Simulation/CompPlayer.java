@@ -20,10 +20,16 @@ public class CompPlayer implements Comparator<Player> {
             if (a.year > 0 && b.year > 0) {
                 if (!a.isTransfer && !b.isTransfer) {
                     // If both players aren't redshirted
-                    if (a.ratOvr > b.ratOvr) return -1;
-                    else if (a.ratOvr == b.ratOvr)
-                        return a.ratPot > b.ratPot ? -1 : a.ratPot == b.ratPot ? 0 : 1;
-                    else return 1;
+                    if (!a.isSuspended && !b.isSuspended) {
+                        if (a.ratOvr > b.ratOvr) return -1;
+                        else if (a.ratOvr == b.ratOvr)
+                            return a.ratPot > b.ratPot ? -1 : a.ratPot == b.ratPot ? 0 : 1;
+                        else return 1;
+                    } else if (!a.isSuspended) {
+                        return -1;
+                    } else if (!b.isSuspended) {
+                        return 1;
+                    }
                 } else if (!a.isTransfer) {
                     return -1;
                 } else if (!b.isTransfer) {

@@ -38,6 +38,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int recruitingBudget;
     private final String[] starGrades = {"*", "*", "* *", "* * *", "* * * *", "* * * * *"};
     Random rand = new Random();
+    private int HCtalent;
     private int ratingTolerance;
     private int tolerance;
     private int min;
@@ -136,10 +137,6 @@ public class RecruitingActivity extends AppCompatActivity {
 
         availAll = new ArrayList<String>();
 
-        ratingTolerance = 7;
-        max = ratingTolerance;
-        min = -ratingTolerance;
-        tolerance = rand.nextInt((max - min) + 1) + min;
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -154,6 +151,11 @@ public class RecruitingActivity extends AppCompatActivity {
         teamName = teamInfo[1];
         teamAbbr = teamInfo[2];
         recruitingBudget = Integer.parseInt(teamInfo[3]) * 17;
+        if (teamInfo[4].isEmpty()) {
+            HCtalent = 70;
+        } else {
+            HCtalent = Integer.parseInt(teamInfo[4]);
+        }
         getSupportActionBar().setTitle(teamName + " Recruiting");
 
         showPopUp = true;
@@ -225,6 +227,12 @@ public class RecruitingActivity extends AppCompatActivity {
             }
             ++i;
         }
+
+
+        ratingTolerance = Math.round((140-HCtalent)/10);
+        max = ratingTolerance;
+        min = -ratingTolerance;
+        tolerance = rand.nextInt((max - min) + 1) + min;
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());

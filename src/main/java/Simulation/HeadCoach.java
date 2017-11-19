@@ -18,10 +18,10 @@ public class HeadCoach extends Player {
     int ratPot;
     int ratOff;
     int ratDef;
-    int ratTalent;
-    int ratDiscipline;
-    int offStrat;
-    int defStrat;
+    public int ratTalent;
+    public int ratDiscipline;
+    public int offStrat;
+    public int defStrat;
     public int baselinePrestige;
     int teamWins;
     int teamLosses;

@@ -1116,8 +1116,11 @@ public class League extends Rankings {
      * Plays week. If normal week, handled by conferences. If bowl week, handled here.
      */
     public void playWeek() {
+        //focus on the best player at a position this year each week
+        playerSpotlight();
 
-        if (currentWeek == 3 || currentWeek == 9) {
+        updateSuspensions();
+        if (currentWeek == 3 || currentWeek == 8) {
             disciplineAction();
         }
 
@@ -1185,14 +1188,14 @@ public class League extends Rankings {
             conferences.get(i).newsMatchups();
         }
 
-        //focus on the best player at a position this year each week
-        playerSpotlight();
+
 
         coachingHotSeat();
 
 
         setTeamRanks();
         updateLongestActiveWinStreak();
+
         currentWeek++;
     }
 
@@ -1207,6 +1210,7 @@ public class League extends Rankings {
                 teamList.get(t).HC.get(0).ratDiscipline -= (int)Math.random()*4;
                 teamList.get(t).disciplinePts -= (int)(Math.random()*2);
                 teamDiscipline.add(teamList.get(t).name);
+                teamList.get(t).disciplinePlayer();
             } else {
                 teamList.get(t).HC.get(0).ratDiscipline += (int)Math.random()*4;
                 teamList.get(t).disciplinePts += (int)(Math.random()*2);
@@ -1218,6 +1222,11 @@ public class League extends Rankings {
         newsStories.get(currentWeek+1).add("In-Season Disciplinary Action>The following teams have had issues with discipline in the past week:\n" + news);
     }
 
+    public void updateSuspensions() {
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).updateSuspensions();
+        }
+    }
 
     //Player Spotlight
     public void playerSpotlight() {
