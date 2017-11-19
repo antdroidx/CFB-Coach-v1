@@ -36,6 +36,10 @@ public class League extends Rankings {
     public ArrayList<ArrayList<String>> newsStories;
     public ArrayList<ArrayList<String>> weeklyScores;
     public ArrayList<String> teamDiscipline;
+    public int disciplineWeekA;
+    public int disciplineWeekB;
+    public int disciplineWeekC;
+    public int disciplineTimes;
 
     public LeagueRecords leagueRecords;
     public LeagueRecords userTeamRecords;
@@ -199,7 +203,10 @@ public class League extends Rankings {
             if (isNameValid(n.trim()))
                 lastNameList.add(n.trim());
         }
-
+        disciplineTimes = (int)(Math.random()*2) + 1;
+        disciplineWeekA = (int)(Math.random()*13);
+        disciplineWeekB = (int)(Math.random()*13);
+        disciplineWeekC = (int)(Math.random()*13);
         //Set up conference
         // FUTURE: READ FROM XML OR CSV FILE
 
@@ -483,6 +490,11 @@ public class League extends Rankings {
             if (isNameValid(n.trim()))
                 lastNameList.add(n.trim());
         }
+
+        disciplineTimes = (int)(Math.random()*2) + 1;
+        disciplineWeekA = (int)(Math.random()*13);
+        disciplineWeekB = (int)(Math.random()*13);
+        disciplineWeekC = (int)(Math.random()*13);
 
         //Set up conference teams
         try {
@@ -918,6 +930,10 @@ public class League extends Rankings {
                 newsStories.get(0).add("Incidental Infraction: " + savePenalized5.name + ">Newspapers are reporting " + savePenalized5.name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
             }
 
+            disciplineTimes = (int)(Math.random()*3) + 1;
+            disciplineWeekA = (int)(Math.random()*13);
+            disciplineWeekB = (int)(Math.random()*13);
+            disciplineWeekC = (int)(Math.random()*13);
 
         } catch (FileNotFoundException ex) {
             System.out.println(
@@ -1120,8 +1136,18 @@ public class League extends Rankings {
         playerSpotlight();
 
         updateSuspensions();
-        if (currentWeek == 3 || currentWeek == 8) {
-            disciplineAction();
+        if (disciplineTimes == 3) {
+            if (currentWeek == disciplineWeekA || currentWeek == disciplineWeekB || currentWeek == disciplineWeekC) {
+                disciplineAction();
+            }
+        } else if (disciplineTimes == 2) {
+            if (currentWeek == disciplineWeekA || currentWeek == disciplineWeekB) {
+                disciplineAction();
+            }
+        } else {
+            if (currentWeek == disciplineWeekA) {
+                disciplineAction();
+            }
         }
 
         if (currentWeek <= 12) {
