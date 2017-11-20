@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> dataAdapterTeam;
     Spinner examineConfSpinner;
     ArrayAdapter<String> dataAdapterConf;
-    ArrayList<String> scoreboard;
     ListView mainList;
     ExpandableListView expListPlayerStats;
 
