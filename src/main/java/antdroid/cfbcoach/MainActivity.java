@@ -320,20 +320,25 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Graduation");
                         simLeague.currentWeek++;
-                        showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 19) {
                         userTeam.resetStats();
                         simLeague.advanceSeason();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players");
+                        showNewsStoriesDialog();
                         simLeague.currentWeek++;
                     }else if (simLeague.currentWeek == 20) {
                         simLeague.transferPlayers();
                         showNewsStoriesDialog();
                         simGameButton.setTextSize(12);
+                        simGameButton.setText("Off-Season: Transfer Players II");
+                        simLeague.currentWeek++;
+                    }else if (simLeague.currentWeek == 21) {
+                        showNewsStoriesDialog();
+                        simGameButton.setTextSize(12);
                         simGameButton.setText("Begin Recruiting");
                         simLeague.currentWeek++;
-                    } else if (simLeague.currentWeek >= 21) {
+                    } else if (simLeague.currentWeek >= 22) {
                         recruitingStage = 0;
                         simLeague.curePlayers(); // get rid of all injuries
                         beginRecruiting();
@@ -1445,9 +1450,9 @@ public class MainActivity extends AppCompatActivity {
             else if (i == 17) weekSelection[i] = "Coaching Contracts";
             else if (i == 18) weekSelection[i] = "Off-Season News";
             else if (i == 19) weekSelection[i] = "Coach Hirings";
-            else if (i == 20) weekSelection[i] = "Transfer News";
-            else if (i == 21) weekSelection[i] = "Recruiting News";
-            else if (i == 22) weekSelection[i] = "Spring News";
+            else if (i == 20) weekSelection[i] = "Roster News";
+            else if (i == 21) weekSelection[i] = "Transfer News";
+            else if (i == 22) weekSelection[i] = "Recruiting News";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
