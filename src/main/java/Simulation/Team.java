@@ -141,7 +141,7 @@ public class Team {
     public int maxWRs = 8;
     public int maxTEs = 3;
     public int maxOLs = 13;
-    public int maxKs = 3;
+    public int maxKs = 2;
     public int maxDLs = 12;
     public int maxLBs = 9;
     public int maxCBs = 8;
@@ -582,12 +582,12 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
-        int preseasonBias = 6 - (wins + losses);
+        int preseasonBias = 5 - (wins + losses);
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
                 (teamYards - teamOppYards) / 40 +
                 5 * teamStrengthOfWins / 4 + (confPrestige/3) +
-                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige / 2))) / 7;
+                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige / 3))) / 7;
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
@@ -1623,7 +1623,6 @@ public class Team {
 
         for (int i = 0; i < qbNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1635,7 +1634,6 @@ public class Team {
 
         for (int i = 0; i < kNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1647,7 +1645,6 @@ public class Team {
 
         for (int i = 0; i < rbNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1659,7 +1656,6 @@ public class Team {
 
         for (int i = 0; i < wrNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1671,7 +1667,6 @@ public class Team {
 
         for (int i = 0; i < teNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1683,7 +1678,6 @@ public class Team {
 
         for (int i = 0; i < olNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1695,7 +1689,6 @@ public class Team {
 
         for (int i = 0; i < cbNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1707,7 +1700,6 @@ public class Team {
 
         for (int i = 0; i < dlNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1719,7 +1711,6 @@ public class Team {
 
         for (int i = 0; i < lbNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;
@@ -1731,7 +1722,6 @@ public class Team {
 
         for (int i = 0; i < sNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
-            stars = teamPrestige / 20 + 1;
             if (100 * Math.random() < 5 * chance) stars = stars - 1;
             if (Math.random() < starsBonusChance) stars = stars + 1;
             else if (Math.random() < starsBonusDoubleChance) stars = stars + 2;

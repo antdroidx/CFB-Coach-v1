@@ -321,9 +321,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
                 builder.setTitle("Filter Recruits");
                 final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players",
-/*                        "Northwest Region", "West Coast Region", "Southwest Region", "Rockies Region",
-                        "Great Plains Region", "Texas Region", "Great Lakes Region", "Atlantic Region",
-                        "Florida Region", "South Region"*/};
+/*                        "West", "Mid-West", "Central", "East", "South"*/};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
