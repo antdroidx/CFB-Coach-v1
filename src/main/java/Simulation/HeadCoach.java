@@ -164,10 +164,11 @@ public class HeadCoach extends Player {
         offpts = ((off / avgYards) + (offTal / offTalent)) * 10;
         defpts = ((def / avgYards) + (defTal / defTalent)) * 10;
 
-        ratOff += (int) (Math.random() * (prestigeDiff / 2 + offpts))*((potFactor*ratPot)/100);
+        ratOff += (prestigeDiff / 2 + offpts)*((potFactor*ratPot)/100);
         if (ratOff > 99) ratOff = 99;
 
-        ratDef += (int) (Math.random() * (prestigeDiff / 2 + defpts))*((potFactor*ratPot)/100);
+        ratDef += (prestigeDiff / 2 + defpts)*((potFactor*ratPot)/100);
+        if (ratDef > 99) ratDef = 99;
 
         if (ratDiscipline > 95) ratDiscipline = 95;
         if (ratTalent > 95) ratTalent = 95;

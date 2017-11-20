@@ -586,7 +586,7 @@ public class Team {
         if (preseasonBias < 0) preseasonBias = 0;
         teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
                 (teamYards - teamOppYards) / 40 +
-                5 * teamStrengthOfWins / 4 + (confPrestige/3) +
+                5 * teamStrengthOfWins / 4 + (2*confPrestige/5) +
                 3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige / 3))) / 7;
 
         if ("CC".equals(confChampion)) {
@@ -602,9 +602,9 @@ public class Team {
             teamPollScore += 35;
         }
         if (losses == 0) {
-            teamPollScore += 50;
+            teamPollScore += 40;
         } else if (losses == 1) {
-            teamPollScore += 25;
+            teamPollScore += 20;
         }
         if (wins == 0) {
             teamPollScore -= 15;
@@ -939,7 +939,7 @@ public class Team {
         //Sets the bounds for Prestige
         int confAvg = league.averageConfPrestige();
         int confLimit = (confPrestige - confAvg) / 3;
-        if (newPrestige > 95) newPrestige = 95;
+        if (newPrestige > 85 + confLimit) newPrestige = 85 + confLimit;
         if (newPrestige < 25 + confLimit) newPrestige = 25 + confLimit;
 
         int PrestigeScore[] = {newPrestige, rivalryPts, ccPts, ncwPts, nflPts, rgameplayed};
@@ -976,6 +976,8 @@ public class Team {
         int defTal = league.getAverageDefTalent();
         int retire;
         int avgCP = league.averageConfPrestige();
+        int confAvg = league.averageConfPrestige();
+        int confLimit = (confPrestige - confAvg) / 3;
 
         int totalPDiff = newPrestige[0] - HC.get(0).baselinePrestige;
         HC.get(0).advanceSeason(totalPDiff, avgOff, offTal, defTal);
@@ -1035,14 +1037,14 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && !league.isCareerMode() && !userControlled) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < (85+confLimit*.85) && !league.isCareerMode() && !userControlled) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. The team is now searching for a new head coach.");
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < 72 && league.isCareerMode()) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < (85+confLimit*.85) && league.isCareerMode()) {
                     String oldCoach = HC.get(0).name;
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
@@ -2082,15 +2084,15 @@ public class Team {
         int numRedshirt = 0;
         ArrayList<Player> allPlayers = getAllPlayers();
         for (Player p : allPlayers) {
-            if (p.year == 1 && p.ratOvr > 60 && !p.isRedshirt) {
+            if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
                 // Is freshman
                 classStrength += p.ratOvr - 30;
-                classStrength += p.ratPot - 45;
+                classStrength += p.ratPot - 60;
                 numFreshman++;
             }
             if (p.year == 0 && p.ratOvr > 65) {
                 classStrength += p.ratOvr - 30;
-                classStrength += p.ratPot - 45;
+                classStrength += p.ratPot - 60;
                 numRedshirt++;
             }
         }
