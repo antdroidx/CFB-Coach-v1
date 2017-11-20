@@ -15,6 +15,8 @@ _Implemented Updates/Features:_
 * Names database is now over 20,000 first and last names
 * Improved scheduling logic (Out of Conf schedule changes each season)
 * More in-depth News and Features updated
+* Geographic Home Regions
+
 
 **[Game Simulation]**
 * New Player Positions
@@ -26,16 +28,18 @@ _Implemented Updates/Features:_
 * Defensive Player stats & tracking new
 * Off-season Coaching changes & Infraction system for balancing gameplay
 * Small/Low prestige schools with NFL high draft talent get bonus prestige
-* CPU Strategies based on each team's roster strengths starting year 2
+* Head Coach Team Strategies
 * Updates with internal game algorithms updated
 * Improved poll logic for weeding out smaller conference/weaker schedules updated
 * Improved prestige growth/decline logic updated
 * Medical Redshirting new
+* Undergrad & Graduate Transfers
+* Player Suspensions and Dismissals
 
 **[Interface]**
 * UI Re-Design (more buttons!)
 * Updated material design
-* Non-User team history [WIP]
+*  Full Teaam history
 * AP Poll History Menu
 * More team and player stats updated
 * Player Individual Rankings Menu new
