@@ -319,12 +319,12 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Graduation");
                         simLeague.currentWeek++;
+                        showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 19) {
                         userTeam.resetStats();
                         simLeague.advanceSeason();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players");
-                        showNewsStoriesDialog();
                         simLeague.currentWeek++;
                     }else if (simLeague.currentWeek == 20) {
                         simLeague.transferPlayers();
