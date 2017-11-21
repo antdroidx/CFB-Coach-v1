@@ -414,6 +414,7 @@ public class Team {
     }
 
     public void setupTeamBenchmark() {
+        sortPlayers();
         confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
         leagueOffTal = league.getAverageOffTalent();
         leagueDefTal = league.getAverageDefTalent();
@@ -2105,13 +2106,13 @@ public class Team {
         for (Player p : allPlayers) {
             if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
                 // Is freshman
-                classStrength += p.ratOvr;
-                classPotential += p.ratPot;
+                classStrength += p.ratOvr-30;
+                classPotential += p.ratPot-50;
                 numFreshman++;
             }
             if (p.year == 0 && p.ratOvr > 65) {
-                classStrength += p.ratOvr;
-                classPotential += p.ratPot;
+                classStrength += p.ratOvr-30;
+                classPotential += p.ratPot-50;
                 numRedshirt++;
             }
         }

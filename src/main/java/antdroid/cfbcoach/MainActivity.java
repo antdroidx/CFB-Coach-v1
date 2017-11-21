@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
         wantUpdateConf = 2; // 0 and 1, don't update, 2 update
         showToasts = false;
         showInjuryReport = true;
+        simLeague.setTeamBenchMarks();
 
         if (!loadedLeague) {
             // Set it to 1st team until one selected
