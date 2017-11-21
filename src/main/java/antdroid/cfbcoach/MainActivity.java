@@ -1,17 +1,14 @@
 package antdroid.cfbcoach;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,7 +45,6 @@ import Simulation.Game;
 import Simulation.HeadCoach;
 import Simulation.League;
 import Simulation.Player;
-import Simulation.Rankings;
 import Simulation.Team;
 import Simulation.TeamStrategy;
 
@@ -464,8 +460,10 @@ public class MainActivity extends AppCompatActivity {
         playerStatsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                currTab = 1;
-                updatePlayerStats();
+                if (simLeague.currentWeek < 19) {
+                    currTab = 1;
+                    updatePlayerStats();
+                }
             }
         });
 
@@ -515,7 +513,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 currentTeam = userTeam;
-                showTeamLineupDialog();
+                if (simLeague.currentWeek < 19) showTeamLineupDialog();
             }
         });
 
@@ -608,7 +606,7 @@ public class MainActivity extends AppCompatActivity {
             /*
               Clicked User Team History in drop down menu
              */
-            showUserTeamHistoryDialog();
+            showCoachHistoryDialog();
         } else if (id == R.id.action_ccg_bowl_watch) {
             /*
               Clicked CCG / Bowl Watch in drop down menu
@@ -1204,7 +1202,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] historySelection = {"League History", "League Records"};
+        String[] historySelection = {"League History", "League Records", "Hall of Fame"};
         Spinner leagueHistorySpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, historySelection);
@@ -1225,6 +1223,9 @@ public class MainActivity extends AppCompatActivity {
                             final LeagueRecordsListArrayAdapter leagueRecordsAdapter =
                                     new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
+                        } else if (position == 2) {
+                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
+                            leagueHistoryList.setAdapter(hofAdapter);
                         } else {
                             final LeagueHistoryListArrayAdapter leagueHistoryAdapter =
                                     new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
@@ -1284,7 +1285,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showUserTeamHistoryDialog() {
+    public void showCoachHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1306,11 +1307,6 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
 
-        final String[] hofPlayers = new String[userTeam.hallOfFame.size()];
-        for (int i = 0; i < userTeam.hallOfFame.size(); ++i) {
-            hofPlayers[i] = userTeam.hallOfFame.get(i);
-        }
-
         teamHistSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
@@ -1319,13 +1315,6 @@ public class MainActivity extends AppCompatActivity {
                             TeamHistoryListArrayAdapter teamHistoryAdapter =
                                     new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
-                        } else if (position == 1) {
-                            LeagueRecordsListArrayAdapter leagueRecordsAdapter =
-                                    new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.userTeamRecords.getRecordsStr().split("\n"), "---");
-                            teamHistoryList.setAdapter(leagueRecordsAdapter);
-                        } else {
-                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
-                            teamHistoryList.setAdapter(hofAdapter);
                         }
                     }
 

@@ -50,7 +50,7 @@ public class LeagueRecords {
             "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended",
             "CAREER: OFFENSE", "Career Pass Yards", "Career Pass TDs", "Career Ints Thrown",
             "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost",
-            "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended"};
+            "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended", "COACHING RECORDS", "Wins", "National Championships", "Bowl Wins", "Coach Awards"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<String, Record>();
@@ -101,6 +101,11 @@ public class LeagueRecords {
         records.put("Career Fumbles Rec", new Record(0, "XXX", 0));
         records.put("Career Interceptions", new Record(0, "XXX", 0));
         records.put("Career Defended", new Record(0, "XXX", 0));
+        records.put("COACHING RECORDS",null);
+        records.put("Wins", new Record(0, "XXX", 0));
+        records.put("National Championships", new Record(0, "XXX", 0));
+        records.put("Bowl Wins", new Record(0, "XXX", 0));
+        records.put("Coach Awards", new Record(0, "XXX", 0));
     }
 
     public void checkRecord(String record, int number, String holder, int year) {

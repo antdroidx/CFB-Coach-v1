@@ -735,12 +735,12 @@ public class Game implements Serializable {
         int adv = 0;
 
         if (gamePoss) {
-            adv = (homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 5;
+            adv = Math.round((homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 4);
         } else {
-            adv = (awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 5;
+            adv = Math.round((awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 4);
         }
-        if (adv > 3) adv = 3;
-        if (adv < -3) adv = -3;
+        if (adv > 4) adv = 4;
+        if (adv < -4) adv = -4;
         return adv;
     }
 

@@ -28,8 +28,6 @@ public class PlayerDefense {
     }
 
 
-    protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
-
     public String getYrStr() {
         if (year == 0) {
             return "RS";
@@ -44,33 +42,4 @@ public class PlayerDefense {
         }
         return "ERROR";
     }
-
-    public static int getPosNumber(String pos) {
-        switch (pos) {
-            case "QB":
-                return 0;
-            case "RB":
-                return 1;
-            case "WR":
-                return 2;
-            case "TE":
-                return 3;
-            case "OL":
-                return 4;
-            case "K":
-                return 5;
-            case "DL":
-                return 6;
-            case "LB":
-                return 7;
-            case "CB":
-                return 8;
-            case "S":
-                return 9;
-            default:
-                return 10;
-
-        }
-    }
-
 }
