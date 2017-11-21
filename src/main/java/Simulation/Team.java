@@ -987,11 +987,13 @@ public class Team {
 
         teamRecords.checkRecord("Wins", HC.get(0).wins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         teamRecords.checkRecord("National Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("Conf Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         teamRecords.checkRecord("Bowl Wins", HC.get(0).bowlwins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         teamRecords.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
 
         records.checkRecord("Wins", HC.get(0).wins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         records.checkRecord("National Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("Conf Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         records.checkRecord("Bowl Wins", HC.get(0).bowlwins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         records.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
 
