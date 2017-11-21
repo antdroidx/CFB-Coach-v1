@@ -1444,7 +1444,7 @@ public class League extends Rankings {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.name + " [" + pqb.getYrStr() +
                             "]\n \t\t(" + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs, " + pqb.statsFumbles + " Fum, " + pqb.statsRushYards + " Yds)\n\n";
+                            + pqb.statsRushTD + " TDs\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.name + " [" + prb.getYrStr() +
@@ -1502,7 +1502,7 @@ public class League extends Rankings {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
                             + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs, " + pqb.statsFumbles + " Fum, " + pqb.statsRushYards + " Yds)\n\n";
+                            + pqb.statsRushTD + " TDs\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1821,7 +1821,7 @@ public class League extends Rankings {
             } else if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 sb.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
-                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Pass Yds, " + pqb.statsRushYards + "Rush Yds\n");
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Pass Yds\n");
             } else if (p instanceof PlayerRB) {
                 PlayerRB prb = (PlayerRB) p;
                 sb.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
