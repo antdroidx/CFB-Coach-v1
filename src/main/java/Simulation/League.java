@@ -381,6 +381,10 @@ public class League extends Rankings {
             conferences.get(i).insertOOCSchedule();
         }
 
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).setupTeamBenchmark();
+        }
+
         newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
                 conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
                 conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
@@ -556,6 +560,12 @@ public class League extends Rankings {
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).insertOOCSchedule();
         }
+
+
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).setupTeamBenchmark();
+        }
+
 
         newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
                 conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
@@ -883,6 +893,10 @@ public class League extends Rankings {
             }
             for (int i = 0; i < conferences.size(); ++i) {
                 conferences.get(i).insertOOCSchedule();
+            }
+
+            for (int i = 0; i < teamList.size(); ++i) {
+                teamList.get(i).setupTeamBenchmark();
             }
 
             // Initialize new stories lists
@@ -2345,7 +2359,7 @@ public class League extends Rankings {
         coachStarList.clear();
         coachStarPrevTeam.clear();
         for (int t = 0; t < teamList.size(); ++t) {
-            teamList.get(t).advanceHC();
+            teamList.get(t).advanceHC(leagueRecords, teamList.get(t).teamRecords);
         }
     }
 

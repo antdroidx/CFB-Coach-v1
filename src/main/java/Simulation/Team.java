@@ -169,6 +169,12 @@ public class Team {
     private static final int NFL_OVR = 90;
     private static final double NFL_CHANCE = 0.67;
 
+    public int leagueOffTal;
+    public int leagueDefTal;
+    public int avgCP;
+    public int confAvg;
+    public int confLimit;
+
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
      *
@@ -263,9 +269,6 @@ public class Team {
         playersLeaving = new ArrayList<>();
         playersTransferring = new ArrayList<>();
         recruitNeeds = new int[10];
-
-        confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
-
     }
 
 
@@ -408,9 +411,15 @@ public class Team {
         playersLeaving = new ArrayList<>();
         playersTransferring = new ArrayList<>();
         recruitNeeds = new int[10];
-
     }
 
+    public void setupTeamBenchmark() {
+        confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
+        leagueOffTal = league.getAverageOffTalent();
+        leagueDefTal = league.getAverageDefTalent();
+        confAvg = league.averageConfPrestige();
+        confLimit = (confPrestige - confAvg) / 3;
+    }
 
     public void setupUserCoach(String name) {
         HC.get(0).name = name;
@@ -578,7 +587,6 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
-        confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
@@ -696,12 +704,12 @@ public class Team {
         for (int i = 0; i < 3; ++i) {
             comp += getLB(i).ratFootIQ;
         }
-        comp += HC.get(0).ratDef * 2 + HC.get(0).ratOff * 2;
-        return comp / 27;
+        comp += HC.get(0).ratDef * 3 + HC.get(0).ratOff * 3;
+        return comp / 29;
     }
 
     /**
-     * Using Football IQ for team disicipline rating
+     * team disicipline rating
      */
     public int getTeamDiscipline() {
         int rating = 0;
@@ -720,7 +728,7 @@ public class Team {
      */
     public int getPassProf() {
         int avgRBs = (teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratCatch) / 4;
-        return (getCompositeOLPass() + getQB(0).ratOvr * 2 + avgRBs) / 4;
+        return (getCompositeOLPass() + getQB(0).ratOvr * 2 + avgRBs + HC.get(0).ratOff) / 5;
     }
 
     /**
@@ -731,7 +739,7 @@ public class Team {
     public int getRushProf() {
         int avgRBs = (teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr) / 2;
         int QB = teamQBs.get(0).ratSpeed;
-        return (3 * getCompositeOLRush() + 3 * avgRBs + QB) / 7;
+        return (3 * getCompositeOLRush() + 3 * avgRBs + QB + HC.get(0).ratOff) / 8;
     }
 
     /**
@@ -744,7 +752,7 @@ public class Team {
         int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage) / 3;
         int S = (teamSs.get(0).ratCoverage);
         int def = (3 * avgCBs + avgLBs + S) / 5;
-        return (def * 3 + teamSs.get(0).ratOvr + getCompositeDLPass() * 2) / 6;
+        return (def * 3 + teamSs.get(0).ratOvr + getCompositeDLPass() * 2 + HC.get(0).ratDef) / 7;
     }
 
     /**
@@ -782,7 +790,7 @@ public class Team {
             compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
         }
         int compositeTE = teamTEs.get(0).ratRunBlock;
-        return (2 * (compositeOL) + compositeTE) / 11;
+        return (2 * (compositeOL) + compositeTE + HC.get(0).ratOff) / 12;
     }
 
     /**
@@ -796,7 +804,7 @@ public class Team {
         for (int i = 0; i < 4; ++i) {
             compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
         }
-        return compositeDL / 4;
+        return (compositeDL + HC.get(0).ratDef) / 5;
     }
 
     /**
@@ -818,7 +826,7 @@ public class Team {
         for (int i = 0; i < 1; ++i) {
             compositeS += teamSs.get(i).ratRunStop;
         }
-        return (2 * compositeDL + compositeLB + compositeS) / 12;
+        return (2 * compositeDL + compositeLB + compositeS + HC.get(0).ratDef) / 13;
     }
 
 
@@ -833,6 +841,7 @@ public class Team {
         int ncwPts = 0;
         int nflPts = 0;
         int rgameplayed = 0;
+
 
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
@@ -966,26 +975,36 @@ public class Team {
     // OFF-SEASON HEAD COACH PROGRESSION
     // CAN BE FIRED OR EXTENDED CONTRACT HERE
     //
-    public void advanceHC() {
+    public void advanceHC(LeagueRecords records, LeagueRecords teamRecords) {
         newContract = false;
         fired = false;
         retired = false;
         int newPrestige[] = calcSeasonPrestige();
         int avgOff = league.getAverageYards();
-        int offTal = league.getAverageOffTalent();
-        int defTal = league.getAverageDefTalent();
-        int retire;
-        int avgCP = league.averageConfPrestige();
-        int confAvg = league.averageConfPrestige();
-        int confLimit = (confPrestige - confAvg) / 3;
 
         int totalPDiff = newPrestige[0] - HC.get(0).baselinePrestige;
-        HC.get(0).advanceSeason(totalPDiff, avgOff, offTal, defTal);
+        HC.get(0).advanceSeason(totalPDiff, avgOff, leagueOffTal, leagueDefTal);
 
+        teamRecords.checkRecord("Wins", HC.get(0).wins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("National Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("Bowl Wins", HC.get(0).bowlwins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+
+        records.checkRecord("Wins", HC.get(0).wins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        records.checkRecord("National Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        records.checkRecord("Bowl Wins", HC.get(0).bowlwins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        records.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+
+        coachContracts(totalPDiff, newPrestige[0], confLimit, avgCP);
+    }
+
+
+
+    public void coachContracts(int totalPDiff, int newPrestige, int confLimit, int avgCP) {
         int max = 78;
         int min = 63;
         Random rand = new Random();
-        retire = rand.nextInt((max - min) + 1) + min;
+        int retire = rand.nextInt((max - min) + 1) + min;
         //RETIREMENT
         if (HC.get(0).age > retire && !userControlled) {
             retired = true;
@@ -993,7 +1012,6 @@ public class Team {
             int age = HC.get(0).age;
             fired = true;
             HC.remove(0);
-            //newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
                     ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
         }
@@ -1037,15 +1055,14 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < (85+confLimit*.85) && !league.isCareerMode() && !userControlled) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && !league.isCareerMode() && !userControlled) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. The team is now searching for a new head coach.");
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige[0] < (85+confLimit*.85) && league.isCareerMode()) {
-                    String oldCoach = HC.get(0).name;
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && league.isCareerMode()) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. The team is now searching for a new head coach.");
@@ -1072,6 +1089,7 @@ public class Team {
                         "prestige was " + HC.get(0).baselinePrestige;
             }
         }
+
     }
 
     public void promoteCoach() {
@@ -1090,9 +1108,6 @@ public class Team {
         //done making players, sort them
         sortPlayers();
     }
-
-
-
 
     /**
      * Advance season for players. Removes seniors and develops underclassmen.
@@ -2079,26 +2094,27 @@ public class Team {
      * @return class strength as a number
      */
     public int getRecruitingClassRat() {
+        int classRating;
         int classStrength = 0;
+        int classPotential = 0;
         int numFreshman = 0;
         int numRedshirt = 0;
         ArrayList<Player> allPlayers = getAllPlayers();
         for (Player p : allPlayers) {
             if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
                 // Is freshman
-                classStrength += p.ratOvr - 30;
-                classStrength += p.ratPot - 60;
+                classStrength += p.ratOvr;
+                classPotential += p.ratPot;
                 numFreshman++;
             }
             if (p.year == 0 && p.ratOvr > 65) {
-                classStrength += p.ratOvr - 30;
-                classStrength += p.ratPot - 60;
+                classStrength += p.ratOvr;
+                classPotential += p.ratPot;
                 numRedshirt++;
             }
         }
-
         if (numFreshman > 0 || numRedshirt > 0)
-            return classStrength * (classStrength / (numFreshman + numRedshirt)) / 100;
+            return  classStrength * (((3*classStrength + classPotential)/4) / (numFreshman+numRedshirt))/100;
         else return 0;
     }
 
@@ -3743,7 +3759,6 @@ public class Team {
                 records.checkRecord("Interceptions", getS(i).statsInts, abbr + ": " + getS(i).getInitialName(), league.getYear());
             }
         }
-
     }
 
     /**
