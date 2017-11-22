@@ -3669,7 +3669,7 @@ public class Team {
             int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
             int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
             int score = 10*allConf + 20*allAmer + 50*poty;
-            if ( score > 79) {
+            if ( score > 69 ) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
@@ -3678,7 +3678,7 @@ public class Team {
                     sb.append(s + "&");
                 }
                 hallOfFame.add(sb.toString());
-                if (score > 125) league.leagueHoF.add(sb.toString());
+                if (score > 115) league.leagueHoF.add(sb.toString());
             }
         }
     }
