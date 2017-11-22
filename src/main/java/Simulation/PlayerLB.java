@@ -244,11 +244,11 @@ public class PlayerLB extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
-        pStats.add("Run Stop: " + getLetterGrade(ratRunStop) + ">Tackling: " + getLetterGrade(ratTackle));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + ratDur);
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
+        pStats.add("Football IQ: " + ratFootIQ + ">Coverage: " + ratCoverage);
+        pStats.add("Run Stop: " + ratRunStop + ">Tackling: " + ratTackle);
+        pStats.add("Speed: " + ratSpeed + ">Nothing ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

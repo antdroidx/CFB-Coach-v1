@@ -264,11 +264,11 @@ public class PlayerTE extends Player {
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGamesPlayed()) + " yds/g>Drops: " + statsDrops);
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Catching: " + getLetterGrade(ratCatch));
-        pStats.add("Blocking: " + getLetterGrade(ratRunBlock) + ">Evasion: " + getLetterGrade(ratEvasion));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Nothing ");
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + ratDur);
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
+        pStats.add("Football IQ: " + ratFootIQ + ">Catching: " + ratCatch);
+        pStats.add("Blocking: " + ratRunBlock + ">Evasion: " + ratEvasion);
+        pStats.add("Speed: " + ratSpeed + ">Nothing ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

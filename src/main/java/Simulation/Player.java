@@ -107,7 +107,7 @@ public class Player {
     }
 
     public String getPosNameYrOvr_Str() {
-        return position + " " + name + " [" + getYrStr() + "] Ovr: " + ratOvr;
+        return team.name + " " + position + " " + name + " [" + getYrStr() + "] Ovr: " + ratOvr;
     }
 
     public String getYrOvrPot_Str() {

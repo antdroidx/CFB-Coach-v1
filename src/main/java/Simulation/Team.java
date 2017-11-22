@@ -269,6 +269,7 @@ public class Team {
         playersLeaving = new ArrayList<>();
         playersTransferring = new ArrayList<>();
         recruitNeeds = new int[10];
+        hallOfFame.add("");
     }
 
 
@@ -2131,6 +2132,7 @@ public class Team {
             else if (p.year == 1) teamFRs.add(p);
             else if (p.year == 2) teamSOs.add(p);
             else if (p.year == 3) teamJRs.add(p);
+            else if (p.year == 3) teamJRs.add(p);
             else if (p.year == 4) teamSRs.add(p);
         }
         for (PlayerRB p : teamRBs) {
@@ -3661,14 +3663,12 @@ public class Team {
      * Checks all the players leaving to see if they should be inducted to the hall of fame.
      */
     public void checkHallofFame() {
-        // hofScore = gamesPlayed + 5*allConf + 15*allAmer + 50*POTY
-        // Need 50 to get in
+
         for (Player p : playersLeaving) {
-            int gms = p.gamesPlayed + p.careerGamesPlayed;
             int allConf = p.careerAllConference + (p.wonAllConference ? 1 : 0);
             int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
             int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
-            if (gms / 2 + 7 * allConf + 16 * allAmer + 50 * poty > 50) {
+            if ( 5 * allConf + 15 * allAmer + 50 * poty > 55) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
@@ -3677,6 +3677,7 @@ public class Team {
                     sb.append(s + "&");
                 }
                 hallOfFame.add(sb.toString());
+                league.leagueHoF.add(sb.toString());
             }
         }
     }

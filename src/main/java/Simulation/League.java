@@ -839,11 +839,13 @@ public class League extends Rankings {
                 for (int i = 0; i < countTeam; ++i) { //Do for every team
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
                         teamList.get(i).hallOfFame.add(line);
-                        leagueHoF.add(line);
                     }
                 }
             }
 
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HALL_OF_FAME")) {
+                leagueHoF.add(line);
+            }
 
             // Always close files.
             bufferedReader.close();
@@ -1242,12 +1244,12 @@ public class League extends Rankings {
         for (int t = 0; t < teamList.size(); ++t)  {
             int teamDis = teamList.get(t).getTeamDiscipline();
             if ((int)(Math.random()*(100-teamDis)) > (int)(Math.random()*teamList.get(t).HC.get(0).ratDiscipline)) {
-                teamList.get(t).HC.get(0).ratDiscipline -= (int)Math.random()*4;
+                teamList.get(t).HC.get(0).ratDiscipline -= (int)(Math.random()*4);
                 teamList.get(t).disciplinePts -= (int)(Math.random()*2);
                 teamDiscipline.add(teamList.get(t).name);
                 teamList.get(t).disciplinePlayer();
             } else {
-                teamList.get(t).HC.get(0).ratDiscipline += (int)Math.random()*4;
+                teamList.get(t).HC.get(0).ratDiscipline += (int)(Math.random()*4);
                 teamList.get(t).disciplinePts += (int)(Math.random()*2);
             }
         }
@@ -4047,10 +4049,13 @@ public class League extends Rankings {
         for (Team t : teamList) {
             for (String s : t.hallOfFame) {
                 sb.append(s + "\n");
-                sb.append("END_TEAM\n");
             }
+            sb.append("END_TEAM\n");
         }
         sb.append("END_HALL_OF_FAME\n");
+        for (String s : leagueHoF) {
+            sb.append(s + "\n");
+        }        sb.append("END_LEAGUE_HALL_OF_FAME\n");
 
         // Actually write to the file
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
