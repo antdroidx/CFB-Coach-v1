@@ -189,11 +189,11 @@ public class PlayerOL extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Strength: " + getLetterGrade(ratStrength));
-        pStats.add("Run Block: " + getLetterGrade(ratRunBlock) + ">Pass Block: " + getLetterGrade(ratPassBlock));
-        pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Nothing");
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + ratDur);
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
+        pStats.add("Football IQ: " + ratFootIQ + ">Strength: " + ratStrength);
+        pStats.add("Run Block: " + ratRunBlock + ">Pass Block: " + ratPassBlock);
+        pStats.add("Awareness: " + ratAwareness + ">Nothing");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

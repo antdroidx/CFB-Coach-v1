@@ -251,11 +251,11 @@ public class PlayerK extends Player {
         } else {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Kick Strength: " + getLetterGrade(ratKickPow));
-        pStats.add("Kick Accuracy: " + getLetterGrade(ratKickAcc) + ">Clumsiness: " + getLetterGrade(ratKickFum));
-        pStats.add("Pressure: " + getLetterGrade(ratPressure) + ">Nothing");
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + ratDur);
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
+        pStats.add("Football IQ: " + ratFootIQ + ">Kick Strength: " + ratKickPow);
+        pStats.add("Kick Accuracy: " + ratKickAcc + ">Clumsiness: " + ratKickFum);
+        pStats.add("Pressure: " + ratPressure + ">Nothing");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

@@ -278,10 +278,10 @@ public class PlayerRB extends Player {
         pStats.add("Yds/Game: " + (statsRushYards / getGamesPlayed()) + " yds/g>Rush Att: " + statsRushAtt);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions + " ");
         pStats.add("Rec TDs: " + statsRecTD + ">Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")");
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Rush Speed: " + getLetterGrade(ratSpeed) + ">Rush Power: " + getLetterGrade(ratRushPower));
-        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Evasion: " + getLetterGrade(ratEvasion));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
+        pStats.add("Durability: " + ratDur + ">Football IQ: " + ratFootIQ);
+        pStats.add("Rush Speed: " + ratSpeed + ">Rush Power: " + ratRushPower);
+        pStats.add("Catching: " + ratCatch + ">Evasion: " + ratEvasion);
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

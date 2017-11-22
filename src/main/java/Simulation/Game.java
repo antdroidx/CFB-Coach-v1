@@ -2774,6 +2774,8 @@ public class Game implements Serializable {
     private void qbSack(Team offense, Team defense, String defender) {
         int sackloss = (3 + (int) (Math.random() * (normalize(defense.getCompositeDLPass()) - normalize(offense.getCompositeOLPass())) / 2));
         if (sackloss < 3) sackloss = 3;
+        gameEventLog += getEventPrefix() + "SACK!\n" + " QB " + offense.getQB(0).name +
+                " was sacked for a loss of " + sackloss + " by " + defender + ".";
         offense.getQB(0).statsSacked++;
         offense.getQB(0).statsRushYards -= sackloss;
         gameYardsNeed += sackloss;
@@ -2797,12 +2799,7 @@ public class Game implements Serializable {
             gameTime -= 10 * Math.random();
             safety(defender);
             return; // Run safety then get out of qbSack (safety() will take care of free kick)
-        } else {
-
-            gameEventLog += getEventPrefix() + "SACK!\n" + " QB " + offense.getQB(0).name +
-                    " was sacked for a loss of " + sackloss + " by " + defender + ".";
         }
-
 
         gameDown++; // Advance gameDown after checking for Safety, otherwise game log reports Safety occurring one down later than it did
 

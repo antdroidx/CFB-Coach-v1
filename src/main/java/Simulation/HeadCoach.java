@@ -39,7 +39,7 @@ public class HeadCoach extends Player {
     int max = 4;
     int min = 0;
     public ArrayList<String> history;
-    int potFactor = 4/3;
+    double potFactor = 1.33;
 
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
@@ -149,25 +149,24 @@ public class HeadCoach extends Player {
     //@Override
     public void advanceSeason(int prestigeDiff, int avgYards, int offTalent, int defTalent) {
         int oldOvr = ratOvr;
-        int offpts, defpts;
         int bowl = (team.wins + team.losses - 12);
         age++;
         year++;
         contractYear++;
 
         // WIP
-        ratTalent += (prestigeDiff + bowl)*((potFactor*ratPot)/100);
-        int off = team.teamYards - avgYards;
-        int def = avgYards - team.teamOppPassYards;
-        int offTal = offTalent - team.teamOffTalent;
-        int defTal = defTalent - team.teamDefTalent;
-        offpts = ((off / avgYards) + (offTal / offTalent)) * 10;
-        defpts = ((def / avgYards) + (defTal / defTalent)) * 10;
+        ratTalent += (prestigeDiff+bowl) * (potFactor*ratPot/100);
+        float off = team.teamYards - avgYards;
+        float def = avgYards - team.teamOppYards;
+        float offTal = offTalent - team.teamOffTalent;
+        float defTal = defTalent - team.teamDefTalent;
+        float offpts = ((off / avgYards) + (offTal / offTalent)) * 10;
+        float defpts = ((def / avgYards) + (defTal / defTalent)) * 10;
 
-        ratOff += (prestigeDiff / 2 + offpts)*((potFactor*ratPot)/100);
+        ratOff += Math.round((prestigeDiff + offpts)*((potFactor*ratPot)/100));
         if (ratOff > 99) ratOff = 99;
 
-        ratDef += (prestigeDiff / 2 + defpts)*((potFactor*ratPot)/100);
+        ratDef += Math.round((prestigeDiff + defpts)*((potFactor*ratPot)/100));
         if (ratDef > 99) ratDef = 99;
 
         if (ratDiscipline > 95) ratDiscipline = 95;
@@ -219,9 +218,9 @@ public class HeadCoach extends Player {
         if (team.league.isCareerMode()) {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
-        pStats.add("Offense Philosophy: " + getLetterGrade(ratOff) + ">Defense Philosophy: " + getLetterGrade(ratDef));
+        pStats.add("Offense Philosophy: " + ratOff + ">Defense Philosophy: " + ratDef);
         pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
-        pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
+        pStats.add("Talent Progression: " + ratTalent + ">Discipline: " + ratDiscipline);
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
