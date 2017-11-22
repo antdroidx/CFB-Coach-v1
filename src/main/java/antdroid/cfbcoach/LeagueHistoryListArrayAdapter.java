@@ -32,9 +32,6 @@ public class LeagueHistoryListArrayAdapter extends ArrayAdapter<String> {
         TextView textTop = rowView.findViewById(R.id.textViewLeagueHistoryTop);
         TextView textMiddle = rowView.findViewById(R.id.textViewLeagueHistoryMiddle);
         TextView textBottom = rowView.findViewById(R.id.textViewLeagueHistoryBottom);
-        if (position == 2) {
-            position = 1;
-        }
         String[] record = values[position].split("\n");
         if (record.length == 3) {
             textTop.setText(record[0]);
