@@ -139,7 +139,8 @@ Rice, RICE, Sun Belt, 33, TULS, 1
 Texas St, TXST, Sun Belt, 30, NTEX, 1
 Georgia Southern, GASO, Sun Belt, 30, MTSU, 4
 Old Dominion, ODOM, Sun Belt, 35, APP, 3
-UT San Antonio, UTSA, Sun Belt, 43, UTEP, 1[END_CONF]
+UT San Antonio, UTSA, Sun Belt, 43, UTEP, 1
+[END_CONF]
 [END_TEAMS]
 Rose Bowl, Orange Bowl, Sugar Bowl, Fiesta Bowl, Peach Bowl, Cotton Bowl, Citrus Bowl, Gator Bowl, Cactus Bowl, Alamo Bowl, Holiday Bowl, Sun Bowl, Liberty Bowl, Independence Bowl, Vegas Bowl, Military Bowl, Aloha Bowl, Humanitarian Bowl
 [END_BOWL_NAMES]
