@@ -107,7 +107,7 @@
       <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4930">
+            <state relative-caret-position="4200">
               <caret line="212" column="25" lean-forward="false" selection-start-line="212" selection-start-column="25" selection-end-line="212" selection-end-column="25" />
               <folding>
                 <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
@@ -119,8 +119,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="2773" column="164" lean-forward="false" selection-start-line="2773" selection-start-column="164" selection-end-line="2773" selection-end-column="164" />
+            <state relative-caret-position="10074">
+              <caret line="2786" column="29" lean-forward="false" selection-start-line="2786" selection-start-column="29" selection-end-line="2786" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1231,10 +1231,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1552" />
-    <option name="height" value="840" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -1374,7 +1374,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511433881244" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511435215393" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1422,7 +1422,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511433881245" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511435215393" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1477,27 +1477,6 @@
       <setting name="params" value="" />
       <setting name="workDir" value="file://$PROJECT_DIR$" />
       <setting name="debug" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -1628,7 +1607,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511433881247" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511435215397" />
       </method>
     </configuration>
     <list size="1">
@@ -1679,7 +1658,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1856,7 +1835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="11" column="98" lean-forward="false" selection-start-line="11" selection-start-column="98" selection-end-line="11" selection-end-column="98" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1975,7 +1953,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="31" lean-forward="true" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2006,7 +1983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="267" column="39" lean-forward="false" selection-start-line="267" selection-start-column="39" selection-end-line="267" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2022,7 +1998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1408">
           <caret line="287" column="5" lean-forward="false" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2030,7 +2005,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="270" column="39" lean-forward="false" selection-start-line="270" selection-start-column="39" selection-end-line="270" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2045,7 +2019,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="253" column="128" lean-forward="false" selection-start-line="253" selection-start-column="128" selection-end-line="253" selection-end-column="128" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2053,7 +2026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="253" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2061,7 +2033,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="248" column="46" lean-forward="false" selection-start-line="248" selection-start-column="46" selection-end-line="248" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2069,7 +2040,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="273" column="46" lean-forward="false" selection-start-line="273" selection-start-column="46" selection-end-line="273" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2077,7 +2047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
           <caret line="244" column="46" lean-forward="false" selection-start-line="244" selection-start-column="46" selection-end-line="244" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2085,7 +2054,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="322" column="49" lean-forward="false" selection-start-line="322" selection-start-column="49" selection-end-line="322" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2153,7 +2121,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4930">
+        <state relative-caret-position="4200">
           <caret line="212" column="25" lean-forward="false" selection-start-line="212" selection-start-column="25" selection-end-line="212" selection-end-column="25" />
           <folding>
             <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
@@ -2163,8 +2131,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="2773" column="164" lean-forward="false" selection-start-line="2773" selection-start-column="164" selection-end-line="2773" selection-end-column="164" />
+        <state relative-caret-position="10074">
+          <caret line="2786" column="29" lean-forward="false" selection-start-line="2786" selection-start-column="29" selection-end-line="2786" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
