@@ -2726,11 +2726,25 @@ public class MainActivity extends AppCompatActivity {
         int s = 0;
         int te = 0;
         int wr = 0;
+        String teamX = "No Team";
         while ((line = reader.readLine()) != null && !line.equals("END_ROSTER")) {
             String[] fileSplit = line.split(",");
+            if (!fileSplit[0].equals(teamX)) {
+                cb = 0;
+                dl = 0;
+                k = 0;
+                lb = 0;
+                ol = 0;
+                qb = 0;
+                rb = 0;
+                s = 0;
+                te = 0;
+                wr = 0;
+            }
 
             for (int i = 0; i < simLeague.teamList.size(); ++i) {
-                if (fileSplit[0].toString().equals(simLeague.teamList.get(i).name)) {
+                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
+                    teamX = simLeague.teamList.get(i).name;
                     if (fileSplit[2].equals("CB") && cb < 6) {
                         simLeague.teamList.get(i).teamCBs.get(cb).name = fileSplit[1];
                         simLeague.teamList.get(i).teamCBs.get(cb).year = Integer.parseInt(fileSplit[3]);
@@ -2771,17 +2785,6 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.teamList.get(i).teamWRs.get(wr).name = fileSplit[1];
                         simLeague.teamList.get(i).teamWRs.get(wr).year = Integer.parseInt(fileSplit[3]);
                         wr++;
-                    } else if (cb > 5 && dl > 3 && k > 1 && lb > 5 && ol > 9 && qb > 1 && rb > 3 && s > 1 && te > 1 && wr > 5 || fileSplit[2].equals("WR") && wr > 5){
-                        cb = 0;
-                        dl = 0;
-                        k = 0;
-                        lb = 0;
-                        ol = 0;
-                        qb = 0;
-                        rb = 0;
-                        s = 0;
-                        te = 0;
-                        wr = 0;
                     }
                 }
             }
