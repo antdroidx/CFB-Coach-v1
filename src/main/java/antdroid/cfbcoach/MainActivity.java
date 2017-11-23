@@ -2771,7 +2771,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.teamList.get(i).teamWRs.get(wr).name = fileSplit[1];
                         simLeague.teamList.get(i).teamWRs.get(wr).year = Integer.parseInt(fileSplit[3]);
                         wr++;
-                    } else if (cb > 5 && dl > 3 && k > 1 && lb > 5 && ol > 9 && qb > 1 && rb > 3 && s > 1 && te > 1 && wr > 5){
+                    } else if (cb > 5 && dl > 3 && k > 1 && lb > 5 && ol > 9 && qb > 1 && rb > 3 && s > 1 && te > 1 && wr > 5 || fileSplit[2].equals("WR") && wr > 5){
                         cb = 0;
                         dl = 0;
                         k = 0;
