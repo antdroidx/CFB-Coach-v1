@@ -28,14 +28,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Universe/Future/customConf.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Universe/Future/customTeams.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Universe/cfc universe setup v2.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Universe/cfc universe setup.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Universe/customUniverse.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/src/main/res/menu/menu_main.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,42 +103,7 @@
     <favorites_list name="CFB-Coach" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="3680" column="31" lean-forward="false" selection-start-line="3680" selection-start-column="31" selection-end-line="3680" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6681">
-              <caret line="675" column="17" lean-forward="false" selection-start-line="675" selection-start-column="17" selection-end-line="675" selection-end-column="17" />
-              <folding>
-                <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="2701" column="0" lean-forward="false" selection-start-line="2701" selection-start-column="0" selection-end-line="2701" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -157,7 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>currentWeek + 1</find>
       <find>currentWeek</find>
       <find>injury</find>
       <find>lucky</find>
@@ -184,9 +142,10 @@
       <find>check</find>
       <find>checkHal</find>
       <find>coach</find>
-      <find>checkHall</find>
       <find>leagueHistory</find>
       <find>importData</find>
+      <find>checkHall</find>
+      <find>int</find>
     </findStrings>
     <replaceStrings>
       <replace>hc</replace>
@@ -1390,7 +1349,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511422330660" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511431725094" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1438,7 +1397,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511422330660" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511431725094" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1644,7 +1603,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511422330661" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511431725095" />
       </method>
     </configuration>
     <list size="1">
@@ -1696,7 +1655,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="10" side_tool="false" content_ui="tabs" />
@@ -1720,7 +1678,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24798928" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3518931" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35085228" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.12666667" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1775,7 +1733,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2150" />
+      <option name="time" value="2160" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -2131,14 +2089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="3680" column="31" lean-forward="false" selection-start-line="3680" selection-start-column="31" selection-end-line="3680" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -2171,20 +2121,30 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-258">
+          <caret line="3680" column="31" lean-forward="false" selection-start-line="3680" selection-start-column="31" selection-end-line="3680" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="2701" column="0" lean-forward="false" selection-start-line="2701" selection-start-column="0" selection-end-line="2701" selection-end-column="0" />
+        <state relative-caret-position="325">
+          <caret line="2763" column="49" lean-forward="false" selection-start-line="2763" selection-start-column="49" selection-end-line="2763" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#123889#124399#0" expanded="true" />
+            <element signature="e#124398#124399#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6681">
-          <caret line="675" column="17" lean-forward="false" selection-start-line="675" selection-start-column="17" selection-end-line="675" selection-end-column="17" />
+        <state relative-caret-position="-11373">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding>
             <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
           </folding>
