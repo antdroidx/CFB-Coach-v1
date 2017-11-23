@@ -1,0 +1,120 @@
+Air Force,Troy Calhoun
+Akron,Terry Bowden
+Alabama,Nick Saban
+Arizona,Rich Rodriguez
+Arizona State,Todd Graham
+Arkansas,Bret Bielema
+Arkansas State,Blake Anderson
+Army,Jeff Monken
+Auburn,Gus Malzahn
+Ball State,Mike Neu
+Baylor,Matt Rhule
+Boise State,Bryan Harsin
+Boston College,Steve Addazio
+Bowling Green,Mike Jinks
+Buffalo,Lance Leipold
+BYU,Kalani Sitake
+California,Sonny Dykes
+Central Florida,Scott Frost
+Central Mich,John Bonamego
+Cincinnati,Luke Fickell
+Clemson,Dabo Swinney
+Colorado,Mike MacIntyre
+Colorado State,Mike Bobo
+Duke,David Cutcliffe
+East Carolina,Scottie Montgomery
+Eastern Mich,Chris Creighton
+Florida,Jim McElwain
+Florida State,Jimbo Fisher
+Fresno State,Jeff Tedford
+Georgia,Kirby Smart
+Georgia Tech,Paul Johnson
+Hawaii,Nick Rolovich
+Houston,Major Applewhite
+Idaho,Paul Petrino
+Illinois,Lovie Smith
+Indiana,Tom Allen
+Iowa,Kirk Ferentz
+Iowa State,Matt Campbell
+Kansas,David Beaty
+Kansas State,Bill Snyder
+Kent State,Paul Haynes
+Kentucky,Mark Stoops
+Louisiana Tech,Skip Holtz
+Louisville,Bobby Petrino
+LSU,Ed Orgeron
+Marshall,Doc Holliday
+Maryland,D.J. Durkin
+Memphis,Mike Norvell
+Miami,Mark Richt
+Miami OH,Chuck Martin
+Michigan,Jim Harbaugh
+Michigan State,Mark Dantonio
+Mid Tenn State,Rick Stockstill
+Minnesota,Tracy Claeys
+Mississippi St,Dan Mullen
+Missouri,Barry Odom
+Navy,Ken Niumatalolo
+Nebraska,Mike Riley
+Nevada,Jay Norvell
+New Mexico,Bob Davie
+New Mexico State,Doug Martin
+North Carolina,Larry Fedora
+NC State,Dave Doeren
+North Texas,Seth Littrell
+LA Monroe,Matt Viator
+Northern Illinois,Rod Carey
+Northwestern,Pat Fitzgerald
+Notre Dame,Brian Kelly
+Ohio,Frank Solich
+Ohio State,Urban Meyer
+Oklahoma,Bob Stoops
+Oklahoma State,Mike Gundy
+Ole Miss,Hugh Freeze
+Oregon,Willie Taggart
+Oregon State,Gary Andersen
+Penn State,James Franklin
+Pittsburgh,Pat Narduzzi
+Purdue,Jeff Brohm
+Rice,David Bailiff
+Rutgers,Chris Ash
+San Diego State,Rocky Long
+San Jose State,Brent Brennan
+Southern Meth,Chad Morris
+South Carolina,Will Muschamp
+Southern Miss,Jay Hopson
+UL Lafayette,Mark Hudspeth
+Stanford,David Shaw
+Syracuse,Dino Babers
+TCU,Gary Patterson
+Temple,Geoff Collins
+Tennessee,Butch Jones
+Texas,Tom Herman
+Texas AM,Kevin Sumlin
+Texas Tech,Kliff Kingsbury
+Toledo,Jason Candle
+Tulane,Willie Fritz
+Tulsa,Philip Montgomery
+UCLA,Jim Mora
+Uconn,Bob Diaco
+UNLV,Tony Sanchez
+USC,Clay Helton
+Utah,Kyle Whittingham
+Utah State,Matt Wells
+UTEP,Sean Kugler
+Vanderbilt,Derek Mason
+Virginia,Bronco Mendenhall
+Virginia Tech,Justin Fuente
+Wake Forest,Dave Clawson
+Washington,Chris Petersen
+Wash State,Mike Leach
+West Virginia,Dana Holgorsen
+Western Mich,P.J. Fleck
+Wisconsin,Paul Chryst
+Wyoming,Craig Bohl
+Troy,Neal Brown
+South Florida,Charlie Strong
+Western Kentucky,Mike Sanford
+Florida Atl,Lane Kiffin
+Florida Intl,Butch Davis
+END_COACHES
