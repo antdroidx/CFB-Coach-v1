@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,10 +39,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.lang.Object;
 import java.util.ArrayList;
 import java.util.List;
-import android.util.Log;
 import java.util.Map;
 
 import Simulation.Conference;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     Team userTeam;
     File saveLeagueFile;
     String username;
-    Uri coachUri;
+    Uri dataUri;
     Uri rosterUri;
     String loadData;
 
@@ -2636,11 +2635,31 @@ public class MainActivity extends AppCompatActivity {
         isExternalStorageReadable();
 
         //ALERT DIALOG - ROSTER or COACH
-        loadData = "coach";
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("text/plain");
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, READ_REQUEST_CODE);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("What type of custom data would you like to import?")
+                .setPositiveButton("Coach File", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        loadData = "coach";
+                        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.setType("text/plain");
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        startActivityForResult(intent, READ_REQUEST_CODE);
+                    }
+                })
+                .setNegativeButton("Roster File", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        loadData = "roster";
+                        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.setType("text/plain");
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        startActivityForResult(intent, READ_REQUEST_CODE);
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -2657,13 +2676,13 @@ public class MainActivity extends AppCompatActivity {
             // provided to this method as a parameter.
             // Pull that URI using resultData.getData().
             if (resultData != null) {
-                coachUri = null;
-                coachUri = resultData.getData();
+                dataUri = null;
+                dataUri = resultData.getData();
                 try {
                     if (loadData.equals("coach")) {
-                        readCoachFile(coachUri);
+                        readCoachFile(dataUri);
                     } else if (loadData.equals("roster")) {
-
+                        readRosterFile(dataUri);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -2697,8 +2716,75 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         line = reader.readLine();
         //First ignore the save file info
+        int cb = 0;
+        int dl = 0;
+        int k = 0;
+        int lb = 0;
+        int ol = 0;
+        int qb = 0;
+        int rb = 0;
+        int s = 0;
+        int te = 0;
+        int wr = 0;
         while ((line = reader.readLine()) != null && !line.equals("END_ROSTER")) {
+            String[] fileSplit = line.split(",");
 
+            for (int i = 0; i < simLeague.teamList.size(); ++i) {
+                if (fileSplit[0].toString().equals(simLeague.teamList.get(i).name)) {
+                    if (fileSplit[2].equals("CB") && cb < 6) {
+                        simLeague.teamList.get(i).teamCBs.get(cb).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamCBs.get(cb).year = Integer.parseInt(fileSplit[3]);
+                        cb++;
+                    } else if (fileSplit[2].equals("DL") && dl < 8) {
+                        simLeague.teamList.get(i).teamDLs.get(dl).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamDLs.get(dl).year = Integer.parseInt(fileSplit[3]);
+                        dl++;
+                    } else if (fileSplit[2].equals("K") && k < 2) {
+                        simLeague.teamList.get(i).teamKs.get(k).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamKs.get(k).year = Integer.parseInt(fileSplit[3]);
+                        k++;
+                    } else if (fileSplit[2].equals("LB") && lb < 6) {
+                        simLeague.teamList.get(i).teamLBs.get(lb).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamLBs.get(lb).year = Integer.parseInt(fileSplit[3]);
+                        lb++;
+                    } else if (fileSplit[2].equals("OL") && ol < 10) {
+                        simLeague.teamList.get(i).teamOLs.get(ol).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamOLs.get(ol).year = Integer.parseInt(fileSplit[3]);
+                        ol++;
+                    } else if (fileSplit[2].equals("QB") && qb < 2) {
+                        simLeague.teamList.get(i).teamQBs.get(qb).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamQBs.get(qb).year = Integer.parseInt(fileSplit[3]);
+                        qb++;
+                    } else if (fileSplit[2].equals("RB") && rb < 4) {
+                        simLeague.teamList.get(i).teamRBs.get(rb).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamRBs.get(rb).year = Integer.parseInt(fileSplit[3]);
+                        rb++;
+                    } else if (fileSplit[2].equals("S") && s < 2) {
+                        simLeague.teamList.get(i).teamSs.get(s).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamSs.get(s).year = Integer.parseInt(fileSplit[3]);
+                        s++;
+                    } else if (fileSplit[2].equals("TE") && te < 2) {
+                        simLeague.teamList.get(i).teamTEs.get(te).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamTEs.get(te).year = Integer.parseInt(fileSplit[3]);
+                        te++;
+                    } else if (fileSplit[2].equals("WR") && wr < 6) {
+                        simLeague.teamList.get(i).teamWRs.get(wr).name = fileSplit[1];
+                        simLeague.teamList.get(i).teamWRs.get(wr).year = Integer.parseInt(fileSplit[3]);
+                        wr++;
+                    } else if (cb > 5 && dl > 3 && k > 1 && lb > 5 && ol > 9 && qb > 1 && rb > 3 && s > 1 && te > 1 && wr > 5){
+                        cb = 0;
+                        dl = 0;
+                        k = 0;
+                        lb = 0;
+                        ol = 0;
+                        qb = 0;
+                        rb = 0;
+                        s = 0;
+                        te = 0;
+                        wr = 0;
+                    }
+                }
+            }
         }
         reader.close();
     }
