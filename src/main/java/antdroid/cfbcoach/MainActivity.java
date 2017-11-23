@@ -1,10 +1,12 @@
 package antdroid.cfbcoach;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -36,8 +38,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.lang.Object;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 import java.util.Map;
 
 import Simulation.Conference;
@@ -60,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     Team userTeam;
     File saveLeagueFile;
     String username;
+    Uri coachUri;
+    Uri rosterUri;
+    String loadData;
 
     List<String> teamList;
     List<String> confList;
@@ -613,11 +620,9 @@ public class MainActivity extends AppCompatActivity {
               Clicked CCG / Bowl Watch in drop down menu
              */
             showBowlCCGDialog();
-/*        } else if (id == R.id.action_import) {
-            *//*
-              Clicked Save League in drop down menu
-             *//*
-            importData();*/
+        } else if (id == R.id.action_import) {
+            importData();
+
         } else if (id == R.id.action_save_league) {
             /*
               Clicked Save League in drop down menu
@@ -2602,19 +2607,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-/*    *//* Checks if external storage is available for read and write *//*
+    // Checks if external storage is available for read and write *//*
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
     }
 
-    *//* Checks if external storage is available to at least read *//*
+    //* Checks if external storage is available to at least read *//*
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state) ||
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
-    *//* Creates external Save directory *//*
+
+    //* Creates external Save directory *//*
 
     public File getExtSaveDir(Context context, String cfbCoach) {
         // Get the directory for the app's private pictures directory.
@@ -2628,6 +2634,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void importData() {
         isExternalStorageReadable();
+
+        //ALERT DIALOG - ROSTER or COACH
+        loadData = "coach";
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("text/plain");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -2637,7 +2646,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
-        String uriStr;
 
         // The ACTION_OPEN_DOCUMENT intent was sent with the request code
         // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
@@ -2648,17 +2656,51 @@ public class MainActivity extends AppCompatActivity {
             // Instead, a URI to that document will be contained in the return intent
             // provided to this method as a parameter.
             // Pull that URI using resultData.getData().
-            Uri uri = null;
-            uri = resultData.getData();
-            String line;
-            InputStream inputStream = getContentResolver().openInputStream(uri);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder sb = new StringBuilder();
-            //First ignore the save file info
-            line = null;
-            line = reader.readLine();
-        }
-    }*/
+            if (resultData != null) {
+                coachUri = null;
+                coachUri = resultData.getData();
+                try {
+                    if (loadData.equals("coach")) {
+                        readCoachFile(coachUri);
+                    } else if (loadData.equals("roster")) {
 
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void readCoachFile(Uri uri) throws IOException {
+            String line;
+        InputStream inputStream = getContentResolver().openInputStream(uri);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder sb = new StringBuilder();
+        line = reader.readLine();
+        //First ignore the save file info
+        while ((line = reader.readLine()) != null && !line.equals("END_COACHES")) {
+            String[] fileSplit = line.split(",");
+            for (int i = 0; i < simLeague.teamList.size(); ++i) {
+                if (fileSplit[0].toString().equals(simLeague.teamList.get(i).name)) {
+                    simLeague.teamList.get(i).HC.get(0).name = fileSplit[1].toString();
+                }
+            }
+        }
+        reader.close();
+    }
+
+    public void readRosterFile(Uri uri) throws IOException {
+        String line;
+        InputStream inputStream = getContentResolver().openInputStream(uri);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder sb = new StringBuilder();
+        line = reader.readLine();
+        //First ignore the save file info
+        while ((line = reader.readLine()) != null && !line.equals("END_ROSTER")) {
+
+        }
+        reader.close();
+    }
 }
 
