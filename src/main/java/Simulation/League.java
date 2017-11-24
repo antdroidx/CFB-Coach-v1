@@ -1616,7 +1616,319 @@ public class League extends Rankings {
 
             // Add news story
             if (putNewsStory) {
-                newsStories.get(13).add(heisman.name + " is the Player of the Year!>" + heismanWinnerStr);
+                newsStories.get(currentWeek+1).add(heisman.name + " is the Player of the Year!>" + heismanWinnerStr);
+                heismanWinnerStrFull = heismanStats;
+            }
+
+            return heismanStats;
+        } else {
+            return heismanWinnerStrFull;
+        }
+    }
+
+    public ArrayList<Player> getTopFreshman() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<Player> heismanCandidates = new ArrayList<Player>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            //qb
+            for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
+                if (teamList.get(i).teamQBs.get(qb).year == 1){
+                    heismanCandidates.add(teamList.get(i).teamQBs.get(qb));
+                    tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamQBs.get(qb);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //rb
+            for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
+                if (teamList.get(i).teamRBs.get(rb).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamRBs.get(rb));
+                    tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamRBs.get(rb);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //wr
+            for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
+                if (teamList.get(i).teamWRs.get(wr).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamWRs.get(wr));
+                    tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamWRs.get(wr);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //te
+            for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
+                if (teamList.get(i).teamTEs.get(te).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamTEs.get(te));
+                    tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamTEs.get(te);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //dl
+            for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
+                if (teamList.get(i).teamDLs.get(dl).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamDLs.get(dl));
+                    tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamDLs.get(dl);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //lb
+            for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
+                if (teamList.get(i).teamLBs.get(lb).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamLBs.get(lb));
+                    tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamLBs.get(lb);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //cb
+            for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
+                if (teamList.get(i).teamCBs.get(cb).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamCBs.get(cb));
+                    tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamCBs.get(cb);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+
+            //s
+            for (int s = 0; s < teamList.get(i).teamSs.size(); ++s) {
+                if (teamList.get(i).teamSs.get(s).year == 1) {
+                    heismanCandidates.add(teamList.get(i).teamSs.get(s));
+                    tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
+                    if (tempScore > heismanScore) {
+                        heisman = teamList.get(i).teamSs.get(s);
+                        heismanScore = tempScore;
+                    }
+                }
+            }
+        }
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
+
+        return heismanCandidates;
+    }
+
+
+    /**
+     * Get string of the top 5 heisman candidates. If the heisman is already decided, get the ceremony str.
+     *
+     * @return string of top 5 players and their stats
+     */
+    public String getTop5FreshmanStr() {
+        if (heismanDecided) {
+            return getFreshmanCeremonyStr();
+        } else {
+            ArrayList<Player> heismanCandidates = getTopFreshman();
+            //full results string
+            String heismanTop5 = "";
+            for (int i = 0; i < 10; ++i) {
+                Player p = heismanCandidates.get(i);
+                heismanTop5 += (i + 1) + ". " + p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ";
+                if (p instanceof PlayerQB) {
+                    PlayerQB pqb = (PlayerQB) p;
+                    heismanTop5 += " QB " + pqb.name + " [" + pqb.getYrStr() +
+                            "]\n \t\t(" + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
+                            + pqb.statsRushTD + " TDs\n\n";
+                } else if (p instanceof PlayerRB) {
+                    PlayerRB prb = (PlayerRB) p;
+                    heismanTop5 += " RB " + prb.name + " [" + prb.getYrStr() +
+                            "]\n \t\t(" + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
+                } else if (p instanceof PlayerWR) {
+                    PlayerWR pwr = (PlayerWR) p;
+                    heismanTop5 += " WR " + pwr.name + " [" + pwr.getYrStr() +
+                            "]\n \t\t(" + pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds)\n\n";
+                } else if (p instanceof PlayerTE) {
+                    PlayerTE pte = (PlayerTE) p;
+                    heismanTop5 += " WR " + pte.name + " [" + pte.getYrStr() +
+                            "]\n \t\t(" + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
+                } else if (p instanceof PlayerDL) {
+                    PlayerDL pdl = (PlayerDL) p;
+                    heismanTop5 += " DL " + pdl.name + " [" + pdl.getYrStr() +
+                            "]\n \t\t(" + pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum)\n\n";
+                } else if (p instanceof PlayerLB) {
+                    PlayerLB plb = (PlayerLB) p;
+                    heismanTop5 += " LB " + plb.name + " [" + plb.getYrStr() +
+                            "]\n \t\t(" + plb.statsTackles + " Tkl, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int)\n\n";
+                } else if (p instanceof PlayerCB) {
+                    PlayerCB pcb = (PlayerCB) p;
+                    heismanTop5 += " CB " + pcb.name + " [" + pcb.getYrStr() +
+                            "]\n \t\t(" + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
+                } else if (p instanceof PlayerS) {
+                    PlayerS ps = (PlayerS) p;
+                    heismanTop5 += " S " + ps.name + " [" + ps.getYrStr() +
+                            "]\n \t\t(" + ps.statsTackles + " Tkl, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int)\n\n";
+                }
+
+            }
+            return heismanTop5;
+        }
+    }
+
+
+
+    /**
+     * Perform the heisman ceremony. Congratulate winner and give top 5 vote getters.
+     *
+     * @return string of the heisman ceremony.
+     */
+    public String getFreshmanCeremonyStr() {
+        boolean putNewsStory = false;
+        if (!heismanDecided) {
+            heismanCandidates = getTopFreshman();
+            heisman = heismanCandidates.get(0);
+            putNewsStory = true;
+            //full results string
+            String heismanTop5 = "\n";
+            for (int i = 0; i < 5; ++i) {
+                Player p = heismanCandidates.get(i);
+                heismanTop5 += (i + 1) + ". " + p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ";
+                if (p instanceof PlayerQB) {
+                    PlayerQB pqb = (PlayerQB) p;
+                    heismanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
+                            + pqb.statsRushTD + " TDs\n\n";
+                } else if (p instanceof PlayerRB) {
+                    PlayerRB prb = (PlayerRB) p;
+                    heismanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
+                } else if (p instanceof PlayerWR) {
+                    PlayerWR pwr = (PlayerWR) p;
+                    heismanTop5 += " WR " + pwr.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds)\n\n";
+                } else if (p instanceof PlayerTE) {
+                    PlayerTE pte = (PlayerTE) p;
+                    heismanTop5 += " TE " + pte.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
+                } else if (p instanceof PlayerDL) {
+                    PlayerDL pdl = (PlayerDL) p;
+                    heismanTop5 += " DL " + pdl.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum)\n\n";
+                } else if (p instanceof PlayerLB) {
+                    PlayerLB plb = (PlayerLB) p;
+                    heismanTop5 += " LB " + plb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + plb.statsTackles + " Tkl, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int)\n\n";
+                } else if (p instanceof PlayerCB) {
+                    PlayerCB pcb = (PlayerCB) p;
+                    heismanTop5 += " CB " + pcb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
+                } else if (p instanceof PlayerS) {
+                    PlayerS ps = (PlayerS) p;
+                    heismanTop5 += " S " + ps.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                            + ps.statsTackles + " Tkl, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int)\n\n";
+                }
+            }
+
+            String heismanStats = "";
+            String heismanWinnerStr = "";
+            if (heisman instanceof PlayerQB) {
+                //qb heisman
+                PlayerQB heisQB = (PlayerQB) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisQB.team.abbr +
+                        " QB " + heisQB.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisQB.statsPassTD + " TDs, just " + heisQB.statsInt + " interceptions, and " +
+                        heisQB.statsPassYards + " passing yards. In addition, he ran for " + heisQB.statsRushYards + "yards and scored " + heisQB.statsRushTD + " touchdowns. He led " + heisQB.team.name +
+                        " to a " + heisQB.team.wins + "-" + heisQB.team.losses + " record and a #" + heisQB.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerRB) {
+                //rb heisman
+                PlayerRB heisRB = (PlayerRB) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisRB.team.abbr +
+                        " RB " + heisRB.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisRB.statsRushTD + " TDs, just " + heisRB.statsFumbles + " fumbles, and " +
+                        heisRB.statsRushYards + " rushing yards. He led " + heisRB.team.name +
+                        " to a " + heisRB.team.wins + "-" + heisRB.team.losses + " record and a #" + heisRB.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerWR) {
+                //wr heisman
+                PlayerWR heisWR = (PlayerWR) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisWR.team.abbr +
+                        " WR " + heisWR.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisWR.statsTD + " TDs, just " + heisWR.statsFumbles + " fumbles, and " +
+                        heisWR.statsRecYards + " receiving yards. He led " + heisWR.team.name +
+                        " to a " + heisWR.team.wins + "-" + heisWR.team.losses + " record and a #" + heisWR.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerTE) {
+                //te heisman
+                PlayerTE heisTE = (PlayerTE) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisTE.team.abbr +
+                        " TE " + heisTE.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisTE.statsRecTD + " TDs, just " + heisTE.statsFumbles + " fumbles, and " +
+                        heisTE.statsRecYards + " receiving yards. He led " + heisTE.team.name +
+                        " to a " + heisTE.team.wins + "-" + heisTE.team.losses + " record and a #" + heisTE.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerDL) {
+                //dl heisman
+                PlayerDL heisDL = (PlayerDL) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisDL.team.abbr +
+                        " DL " + heisDL.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisDL.statsTackles + " tackles, " + heisDL.statsSacks + " sacks, and forced " + heisDL.statsFumbles + " fumbles. He led " + heisDL.team.name +
+                        " to a " + heisDL.team.wins + "-" + heisDL.team.losses + " record and a #" + heisDL.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerLB) {
+                //wr heisman
+                PlayerLB heisLB = (PlayerLB) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisLB.team.abbr +
+                        " LB " + heisLB.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisLB.statsTackles + " tackles, " + heisLB.statsSacks + " sacks, and recovered " + heisLB.statsFumbles + " fumbles, and " +
+                        heisLB.statsInts + " inteceptions. He led " + heisLB.team.name +
+                        " to a " + heisLB.team.wins + "-" + heisLB.team.losses + " record and a #" + heisLB.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerCB) {
+                //wr heisman
+                PlayerCB heisCB = (PlayerCB) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisCB.team.abbr +
+                        " CB " + heisCB.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisCB.statsTackles + " tackles, defended " + heisCB.statsDefended + " passes, and " +
+                        heisCB.statsInts + " inteceptions. He led " + heisCB.team.name +
+                        " to a " + heisCB.team.wins + "-" + heisCB.team.losses + " record and a #" + heisCB.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerS) {
+                //wr heisman
+                PlayerS heisS = (PlayerS) heisman;
+                heismanWinnerStr = "Congratulations to the Freshman Player of the Year, " + heisS.team.abbr +
+                        " S " + heisS.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisS.statsTackles + " tackles, " + heisS.statsSacks + " sacks, and recovered " + heisS.statsFumbles + " fumbles, and " +
+                        heisS.statsInts + " inteceptions. He led " + heisS.team.name +
+                        " to a " + heisS.team.wins + "-" + heisS.team.losses + " record and a #" + heisS.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            }
+
+            // Add news story
+            if (putNewsStory) {
+                newsStories.get(currentWeek+1).add(heisman.name + " is the Freshman Player of the Year!>" + heismanWinnerStr);
                 heismanWinnerStrFull = heismanStats;
             }
 

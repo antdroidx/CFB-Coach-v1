@@ -835,12 +835,13 @@ public class MainActivity extends AppCompatActivity {
             selection = new String[1];
             selection[0] = "Player of the Year";
         } else {
-            selection = new String[13];
+            selection = new String[14];
             selection[0] = "Player of the Year";
             selection[1] = "Coach of the Year";
-            selection[2] = "All Americans";
+            selection[2] = "Freshman of the Year";
+            selection[3] = "All Americans";
             for (int i = 0; i < confStart; ++i) {
-                selection[i + 3] = "All " + simLeague.conferences.get(i).confName + " Team";
+                selection[i + 4] = "All " + simLeague.conferences.get(i).confName + " Team";
             }
         }
 
@@ -854,6 +855,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get all american and all conf
         final String[] coachAwardList = simLeague.getCoachAwardStr().split(">");
+        final String[] freshmanAwardList = simLeague.getFreshmanCeremonyStr().split(">");
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
         final String[][] allConference = new String[confStart][];
         for (int i = 0; i < confStart; ++i) {
@@ -870,9 +872,11 @@ public class MainActivity extends AppCompatActivity {
                         } else if (position == 1) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, coachAwardList, userTeam.abbr));
                         } else if (position == 2) {
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, freshmanAwardList, userTeam.abbr));
+                        } else if (position == 3) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allAmericans, userTeam.abbr));
                         } else {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 3], userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 4], userTeam.abbr));
                         }
                     }
 
@@ -2745,43 +2749,43 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < simLeague.teamList.size(); ++i) {
                 if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
                     teamX = simLeague.teamList.get(i).name;
-                    if (fileSplit[2].equals("CB") && cb < 6) {
+                    if (fileSplit[2].equals("CB") && cb < simLeague.teamList.get(i).minCBs) {
                         simLeague.teamList.get(i).teamCBs.get(cb).name = fileSplit[1];
                         simLeague.teamList.get(i).teamCBs.get(cb).year = Integer.parseInt(fileSplit[3]);
                         cb++;
-                    } else if (fileSplit[2].equals("DL") && dl < 8) {
+                    } else if (fileSplit[2].equals("DL") && dl < simLeague.teamList.get(i).minDLs) {
                         simLeague.teamList.get(i).teamDLs.get(dl).name = fileSplit[1];
                         simLeague.teamList.get(i).teamDLs.get(dl).year = Integer.parseInt(fileSplit[3]);
                         dl++;
-                    } else if (fileSplit[2].equals("K") && k < 2) {
+                    } else if (fileSplit[2].equals("K") && k < simLeague.teamList.get(i).minKs) {
                         simLeague.teamList.get(i).teamKs.get(k).name = fileSplit[1];
                         simLeague.teamList.get(i).teamKs.get(k).year = Integer.parseInt(fileSplit[3]);
                         k++;
-                    } else if (fileSplit[2].equals("LB") && lb < 6) {
+                    } else if (fileSplit[2].equals("LB") && lb < simLeague.teamList.get(i).minLBs) {
                         simLeague.teamList.get(i).teamLBs.get(lb).name = fileSplit[1];
                         simLeague.teamList.get(i).teamLBs.get(lb).year = Integer.parseInt(fileSplit[3]);
                         lb++;
-                    } else if (fileSplit[2].equals("OL") && ol < 10) {
+                    } else if (fileSplit[2].equals("OL") && ol < simLeague.teamList.get(i).minOLs) {
                         simLeague.teamList.get(i).teamOLs.get(ol).name = fileSplit[1];
                         simLeague.teamList.get(i).teamOLs.get(ol).year = Integer.parseInt(fileSplit[3]);
                         ol++;
-                    } else if (fileSplit[2].equals("QB") && qb < 2) {
+                    } else if (fileSplit[2].equals("QB") && qb < simLeague.teamList.get(i).minQBs) {
                         simLeague.teamList.get(i).teamQBs.get(qb).name = fileSplit[1];
                         simLeague.teamList.get(i).teamQBs.get(qb).year = Integer.parseInt(fileSplit[3]);
                         qb++;
-                    } else if (fileSplit[2].equals("RB") && rb < 4) {
+                    } else if (fileSplit[2].equals("RB") && rb < simLeague.teamList.get(i).minRBs) {
                         simLeague.teamList.get(i).teamRBs.get(rb).name = fileSplit[1];
                         simLeague.teamList.get(i).teamRBs.get(rb).year = Integer.parseInt(fileSplit[3]);
                         rb++;
-                    } else if (fileSplit[2].equals("S") && s < 2) {
+                    } else if (fileSplit[2].equals("S") && s < simLeague.teamList.get(i).minSs) {
                         simLeague.teamList.get(i).teamSs.get(s).name = fileSplit[1];
                         simLeague.teamList.get(i).teamSs.get(s).year = Integer.parseInt(fileSplit[3]);
                         s++;
-                    } else if (fileSplit[2].equals("TE") && te < 2) {
+                    } else if (fileSplit[2].equals("TE") && te < simLeague.teamList.get(i).minTEs) {
                         simLeague.teamList.get(i).teamTEs.get(te).name = fileSplit[1];
                         simLeague.teamList.get(i).teamTEs.get(te).year = Integer.parseInt(fileSplit[3]);
                         te++;
-                    } else if (fileSplit[2].equals("WR") && wr < 6) {
+                    } else if (fileSplit[2].equals("WR") && wr < simLeague.teamList.get(i).minWRs) {
                         simLeague.teamList.get(i).teamWRs.get(wr).name = fileSplit[1];
                         simLeague.teamList.get(i).teamWRs.get(wr).year = Integer.parseInt(fileSplit[3]);
                         wr++;
