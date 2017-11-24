@@ -31,9 +31,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Universe/customRoster.txt" afterPath="$PROJECT_DIR$/Universe/customRoster.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -111,40 +109,10 @@
       <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1260">
-              <caret line="1919" column="68" lean-forward="false" selection-start-line="1919" selection-start-column="68" selection-end-line="1919" selection-end-column="68" />
+            <state relative-caret-position="-1466">
+              <caret line="285" column="101" lean-forward="true" selection-start-line="285" selection-start-column="101" selection-end-line="285" selection-end-column="101" />
               <folding>
                 <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
-                <element signature="e#84476#84484#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1923">
-              <caret line="401" column="48" lean-forward="false" selection-start-line="401" selection-start-column="48" selection-end-line="401" selection-end-column="48" />
-              <folding>
-                <marker date="1511511528336" expanded="false" signature="23408:23419" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="23460:23466" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="26179:26190" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="26218:26224" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="112833:112844" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="112861:112867" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="122712:122720" ph="&lt;~&gt;" />
-                <marker date="1511511528336" expanded="false" signature="124123:124145" ph="&lt;~&gt;" />
-                <marker date="1511511528336" expanded="false" signature="130727:130738" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="130785:130791" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="130832:130843" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="130891:130897" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="132665:132676" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="132721:132727" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="133289:133300" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="133339:133345" ph=" }" />
-                <marker date="1511511528336" expanded="false" signature="159198:159209" ph=" { " />
-                <marker date="1511511528336" expanded="false" signature="159235:159241" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -163,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>injury</find>
       <find>lucky</find>
       <find>top</find>
       <find>hallo</find>
@@ -193,6 +160,7 @@
       <find>int</find>
       <find>public</find>
       <find>heisman</find>
+      <find>transferPla</find>
     </findStrings>
     <replaceStrings>
       <replace>hc</replace>
@@ -1243,12 +1211,12 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
         <option value="$PROJECT_DIR$/src/main/res/menu/menu_main.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
       </list>
     </option>
   </component>
@@ -1396,7 +1364,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511513233718" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511514826990" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1444,7 +1412,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511513233719" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511514826990" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1499,27 +1467,6 @@
       <setting name="params" value="" />
       <setting name="workDir" value="file://$PROJECT_DIR$" />
       <setting name="debug" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -1650,7 +1597,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511513233721" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511514827002" />
       </method>
     </configuration>
     <list size="1">
@@ -1704,7 +1651,7 @@
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19318181" sideWeight="0.40405118" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21750806" sideWeight="0.15256125" order="4" side_tool="true" content_ui="tabs" />
@@ -1712,6 +1659,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767856" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24387528" sideWeight="0.47121534" order="16" side_tool="false" content_ui="tabs" />
@@ -1721,7 +1669,6 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.52665246" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19638069" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5682303" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24798928" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -1733,12 +1680,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.47403562" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6744868" sideWeight="0.4978678" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Assistant" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32841823" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6158358" sideWeight="0.4978678" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1876,14 +1823,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/os/BaseBundle.class">
@@ -2014,7 +1961,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1529">
           <caret line="186" column="64" lean-forward="true" selection-start-line="186" selection-start-column="64" selection-end-line="186" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2113,115 +2059,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-919">
           <caret line="306" column="22" lean-forward="false" selection-start-line="306" selection-start-column="22" selection-end-line="306" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/menu/menu_main.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_recruiting.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_recruiting.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_recruiting.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="109" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1511511455760" expanded="false" signature="11462:11549" ph="(v) → { " />
-            <marker date="1511511455760" expanded="false" signature="11566:11590" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="11815:11885" ph="(v) → {" />
-            <marker date="1511511455760" expanded="false" signature="11961:11976" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="12484:12554" ph="(v) → {" />
-            <marker date="1511511455760" expanded="false" signature="12905:13020" ph="(dialog, item) → {" />
-            <marker date="1511511455760" expanded="false" signature="15159:15182" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="15277:15292" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="16395:16406" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="16423:16429" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="16471:16482" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="16497:16503" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="17124:17270" ph="(dialog, which) → {" />
-            <marker date="1511511455760" expanded="false" signature="17683:17706" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="17749:17895" ph="(dialog, which) → {" />
-            <marker date="1511511455760" expanded="false" signature="17950:17973" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="19508:19516" ph="&lt;~&gt;" />
-            <marker date="1511511455760" expanded="false" signature="26784:26792" ph="&lt;~&gt;" />
-            <marker date="1511511455760" expanded="false" signature="31121:31267" ph="(dialog, which) → {" />
-            <marker date="1511511455760" expanded="false" signature="31325:31348" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="32373:32494" ph="(dialog, id) → {" />
-            <marker date="1511511455760" expanded="false" signature="33311:33342" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="33430:33551" ph="(dialog, id) → {" />
-            <marker date="1511511455760" expanded="false" signature="34421:34452" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="34532:34653" ph="(dialog, id) → {" />
-            <marker date="1511511455760" expanded="false" signature="35530:35561" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="40723:40844" ph="(dialog, id) → {" />
-            <marker date="1511511455760" expanded="false" signature="41662:41693" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="41781:41902" ph="(dialog, id) → {" />
-            <marker date="1511511455760" expanded="false" signature="42773:42804" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="42884:43005" ph="(dialog, id) → {" />
-            <marker date="1511511455760" expanded="false" signature="43882:43913" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="50080:50095" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="50118:50128" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="50417:50432" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="50453:50463" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="52107:52181" ph="(v) → {" />
-            <marker date="1511511455760" expanded="false" signature="52401:52420" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="52528:52602" ph="(v) → {" />
-            <marker date="1511511455760" expanded="false" signature="52823:52842" ph="}" />
-            <marker date="1511511455760" expanded="false" signature="53131:53146" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="53180:53190" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="53226:53241" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="53263:53273" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="53324:53339" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="53360:53370" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="54425:54440" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="54452:54462" ph=" }" />
-            <marker date="1511511455760" expanded="false" signature="54542:54557" ph=" { " />
-            <marker date="1511511455760" expanded="false" signature="54569:54579" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2235,38 +2113,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1923">
+        <state relative-caret-position="8253">
           <caret line="401" column="48" lean-forward="false" selection-start-line="401" selection-start-column="48" selection-end-line="401" selection-end-column="48" />
           <folding>
-            <marker date="1511511528336" expanded="false" signature="23408:23419" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="23460:23466" ph=" }" />
-            <marker date="1511511528336" expanded="false" signature="26179:26190" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="26218:26224" ph=" }" />
-            <marker date="1511511528336" expanded="false" signature="112833:112844" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="112861:112867" ph=" }" />
             <marker date="1511511528336" expanded="false" signature="122712:122720" ph="&lt;~&gt;" />
             <marker date="1511511528336" expanded="false" signature="124123:124145" ph="&lt;~&gt;" />
-            <marker date="1511511528336" expanded="false" signature="130727:130738" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="130785:130791" ph=" }" />
-            <marker date="1511511528336" expanded="false" signature="130832:130843" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="130891:130897" ph=" }" />
-            <marker date="1511511528336" expanded="false" signature="132665:132676" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="132721:132727" ph=" }" />
-            <marker date="1511511528336" expanded="false" signature="133289:133300" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="133339:133345" ph=" }" />
-            <marker date="1511511528336" expanded="false" signature="159198:159209" ph=" { " />
-            <marker date="1511511528336" expanded="false" signature="159235:159241" ph=" }" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="1919" column="68" lean-forward="false" selection-start-line="1919" selection-start-column="68" selection-end-line="1919" selection-end-column="68" />
+        <state relative-caret-position="-1466">
+          <caret line="285" column="101" lean-forward="true" selection-start-line="285" selection-start-column="101" selection-end-line="285" selection-end-column="101" />
           <folding>
             <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
-            <element signature="e#84476#84484#0" expanded="true" />
           </folding>
         </state>
       </provider>

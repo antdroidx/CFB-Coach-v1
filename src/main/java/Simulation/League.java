@@ -2854,6 +2854,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tQBs.get(i).toString() + " .");
                         transferQBs.remove(i);
+                        tQBs.remove(i);
                         break;
                     }
                 }
@@ -2869,6 +2870,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>RB " + transferRBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tRBs.get(i).toString() + " .");
                         transferRBs.remove(i);
+                        tRBs.remove(i);
                         break;
                     }
                 }
@@ -2884,6 +2886,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>WR " + transferWRs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tWRs.get(i).toString() + " .");
                         transferWRs.remove(i);
+                        tWRs.remove(i);
                         break;
                     }
                 }
@@ -2899,6 +2902,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>TE " + transferTEs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tTEs.get(i).toString() + " .");
                         transferTEs.remove(i);
+                        tTEs.remove(i);
                         break;
                     }
                 }
@@ -2913,6 +2917,7 @@ public class League extends Rankings {
                     newsStories.get(currentWeek+1).add("Transfer News>OL " + transferOLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                             tOLs.get(i).toString() + " .");
                     transferOLs.remove(i);
+                    tOLs.remove(i);
                     break;
 
                 }
@@ -2928,6 +2933,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>K " + transferKs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tKs.get(i).toString() + " .");
                         transferKs.remove(i);
+                        tKs.remove(i);
                         break;
                     }
                 }
@@ -2943,6 +2949,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>DL " + transferDLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tDLs.get(i).toString() + " .");
                         transferDLs.remove(i);
+                        tDLs.remove(i);
                         break;
                     }
                 }
@@ -2958,6 +2965,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>LB " + transferLBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tLBs.get(i).toString() + " .");
                         transferLBs.remove(i);
+                        tLBs.remove(i);
                         break;
                     }
                 }
@@ -2973,6 +2981,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>CB " + transferCBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tCBs.get(i).toString() + " .");
                         transferCBs.remove(i);
+                        tCBs.remove(i);
                         break;
                     }
                 }
@@ -2988,6 +2997,7 @@ public class League extends Rankings {
                         newsStories.get(currentWeek+1).add("Transfer News>S " + transferSs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
                                 tSs.get(i).toString() + " .");
                         transferSs.remove(i);
+                        tSs.remove(i);
                         break;
                     }
                 }
