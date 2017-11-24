@@ -125,27 +125,16 @@ public class Team {
     public ArrayList<Player> teamJRs;
     public ArrayList<Player> teamSRs;
 
-    public int minQBs = 2;
-    public int minRBs = 4;
-    public int minWRs = 6;
-    public int minTEs = 2;
-    public int minOLs = 10;
+    public int minQBs = 3;
+    public int minRBs = 6;
+    public int minWRs = 8;
+    public int minTEs = 3;
+    public int minOLs = 12;
     public int minKs = 2;
-    public int minDLs = 8;
-    public int minLBs = 6;
-    public int minCBs = 6;
-    public int minSs = 2;
-
-    public int maxQBs = 3;
-    public int maxRBs = 6;
-    public int maxWRs = 8;
-    public int maxTEs = 3;
-    public int maxOLs = 13;
-    public int maxKs = 2;
-    public int maxDLs = 12;
-    public int maxLBs = 9;
-    public int maxCBs = 8;
-    public int maxSs = 3;
+    public int minDLs = 10;
+    public int minLBs = 8;
+    public int minCBs = 8;
+    public int minSs = 3;
 
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;

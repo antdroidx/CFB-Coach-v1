@@ -84,6 +84,30 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needLBs;
     private int needCBs;
     private int needSs;
+    
+/*    int minPlayers = 34;
+    int minQBs = 2;
+    int minRBs = 4;
+    int minWRs = 6;
+    int minTEs = 2;
+    int minOLs = 10;
+    int minKs = 2;
+    int minDLs = 8;
+    int minLBs = 6;
+    int minCBs = 6;
+    int minSs = 2;*/
+    
+    int minPlayers = 50;
+    int minQBs = 3;
+    int minRBs = 6;
+    int minWRs = 8;
+    int minTEs = 3;
+    int minOLs = 12;
+    int minKs = 2;
+    int minDLs = 10;
+    int minLBs = 8;
+    int minCBs = 8;
+    int minSs = 3;
 
 
     // Whether to show pop ups every recruit
@@ -196,7 +220,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
         // Add extra money if your team was fleeced
-        int recBonus = (Integer.parseInt(teamInfo[3]) / 3) * (34 - teamPlayers.size());
+        int recBonus = (Integer.parseInt(teamInfo[3]) / 3) * (minPlayers - teamPlayers.size());
         recruitingBudget += recBonus;
 
         // Next get recruits info
@@ -320,8 +344,7 @@ public class RecruitingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
                 builder.setTitle("Filter Recruits");
-                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players",
-/*                        "West", "Mid-West", "Central", "East", "South"*/};
+                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players"/*, "West", "Mid-West", "Central", "East", "South", "Reset"*/};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
@@ -352,25 +375,15 @@ public class RecruitingActivity extends AppCompatActivity {
                             // Notify that players were removed
                             expListAdapter.notifyDataSetChanged();
                         } else if (item == 3) {
-                            filterRegion(availAll, (item - 3));
+                            filterRegion(players, (item - 3));
                         } else if (item == 4) {
-                            filterRegion(availAll, (item - 3));
+                            filterRegion(players, (item - 3));
                         } else if (item == 5) {
-                            filterRegion(availAll, (item - 3));
+                            filterRegion(players, (item - 3));
                         } else if (item == 6) {
-                            filterRegion(availAll, (item - 3));
+                            filterRegion(players, (item - 3));
                         } else if (item == 7) {
-                            filterRegion(availAll, (item - 3));
-                        } else if (item == 8) {
-                            filterRegion(availAll, (item - 3));
-                        } else if (item == 9) {
-                            filterRegion(availAll, (item - 3));
-                        } else if (item == 10) {
-                            filterRegion(availAll, (item - 3));
-                        } else if (item == 11) {
-                            filterRegion(availAll, (item - 3));
-                        } else if (item == 12) {
-                            filterRegion(availAll, (item - 3));
+                            filterRegion(players, (item - 3));
                         }
 
                         dialog.dismiss();
@@ -404,6 +417,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 ++i;
             }
         }
+        expListAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -695,16 +709,16 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private void updatePositionNeeds() {
         // Get needs for each position
-        needQBs = 2 - teamQBs.size();
-        needRBs = 4 - teamRBs.size();
-        needWRs = 6 - teamWRs.size();
-        needTEs = 2 - teamTEs.size();
-        needOLs = 10 - teamOLs.size();
-        needKs = 2 - teamKs.size();
-        needDLs = 8 - teamDLs.size();
-        needLBs = 6 - teamLBs.size();
-        needCBs = 6 - teamCBs.size();
-        needSs = 2 - teamSs.size();
+        needQBs = minQBs - teamQBs.size();
+        needRBs = minRBs - teamRBs.size();
+        needWRs = minWRs - teamWRs.size();
+        needTEs = minTEs - teamTEs.size();
+        needOLs = minOLs - teamOLs.size();
+        needKs = minKs - teamKs.size();
+        needDLs = minDLs - teamDLs.size();
+        needLBs = minLBs - teamLBs.size();
+        needCBs = minCBs - teamCBs.size();
+        needSs = minSs - teamSs.size();
 
         if (dataAdapterPosition != null) {
             positions = new ArrayList<String>();
