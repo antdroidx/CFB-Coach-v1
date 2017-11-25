@@ -53,6 +53,7 @@ public class Team {
     public Game gameOOCSchedule2;
     public ArrayList<String> gameWLSchedule;
     public ArrayList<Team> gameWinsAgainst;
+    public ArrayList<Team> gameLossesAgainst;
     public String confChampion;
     public String semiFinalWL;
     public String natChampWL;
@@ -72,6 +73,7 @@ public class Team {
     public int teamPrestige;
     public int teamPollScore;
     public int teamStrengthOfWins;
+    public int teamStrengthOfLosses;
     public int teamSOS;
     public int teamDiscipline;
 
@@ -208,6 +210,7 @@ public class Team {
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
         gameWinsAgainst = new ArrayList<Team>();
+        gameLossesAgainst = new ArrayList<Team>();
         gameWLSchedule = new ArrayList<String>();
         confChampion = "";
         semiFinalWL = "";
@@ -302,6 +305,7 @@ public class Team {
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
         gameWinsAgainst = new ArrayList<Team>();
+        gameLossesAgainst = new ArrayList<Team>();
         gameWLSchedule = new ArrayList<String>();
         confChampion = "";
         semiFinalWL = "";
@@ -578,15 +582,18 @@ public class Team {
      */
     public void updatePollScore() {
         updateStrengthOfWins();
+        updateLossStrength();
+        int offRating = offenseRating();
+        int defRating = defenseRating();
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
-        int preseasonBias = 5 - (wins + losses);
+        int preseasonBias = 6 - (wins + losses);
         if (preseasonBias < 0) preseasonBias = 0;
-        teamPollScore = (wins * 215 + 3 * (teamPoints - teamOppPoints) +
-                (teamYards - teamOppYards) / 40 +
-                5 * teamStrengthOfWins / 4 + (2*confPrestige/5) +
-                3 * (preseasonBias) * (teamPrestige + getOffTalent() + getDefTalent() + (confPrestige / 3))) / 7;
+        teamPollScore =
+                preseasonBias * (teamOffTalent + teamDefTalent + (teamPrestige/2) + (confPrestige/3)) +
+                        (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
+                        1000)/2;
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
@@ -600,33 +607,6 @@ public class Team {
             //bonus for winning champ game
             teamPollScore += 35;
         }
-        if (losses == 0) {
-            teamPollScore += 40;
-        } else if (losses == 1) {
-            teamPollScore += 20;
-        }
-        if (wins == 0) {
-            teamPollScore -= 15;
-        }
-    }
-
-    /**
-     * Updates strength of wins based on how opponents have fared.
-     */
-    public void updateStrengthOfWins() {
-        int strWins = 0;
-        for (int i = 0; i < 12; ++i) {
-            Game g = gameSchedule.get(i);
-            if (g.homeTeam == this) {
-                strWins += Math.pow(totalTeamCount - g.awayTeam.rankTeamPollScore, 2);
-            } else {
-                strWins += Math.pow(totalTeamCount - g.homeTeam.rankTeamPollScore, 2);
-            }
-        }
-        teamStrengthOfWins = strWins / 50;
-        for (Team t : gameWinsAgainst) {
-            teamStrengthOfWins += Math.pow(t.wins, 2);
-        }
     }
 
     public void updateSOS() {
@@ -639,6 +619,37 @@ public class Team {
                 teamSOS += totalTeamCount - g.homeTeam.rankTeamPollScore;
             }
         }
+    }
+
+    /**
+     * Updates strength of wins based on how opponents have fared.
+     */
+    public void updateStrengthOfWins() {
+        teamStrengthOfWins = 0;
+        int test = 0;
+        for (int i = 0;  i < gameWinsAgainst.size(); ++i) {
+            teamStrengthOfWins += (league.countTeam - gameWinsAgainst.get(i).rankTeamPollScore);
+            }
+    }
+
+
+    public void updateLossStrength() {
+        teamStrengthOfLosses = 0;
+        for (int i = 0; i < gameLossesAgainst.size(); ++i) {
+            teamStrengthOfLosses += gameLossesAgainst.get(i).rankTeamPollScore;
+        }
+    }
+
+    public int offenseRating() {
+        int offRating = 0;
+        offRating = (league.countTeam - rankTeamPoints) + (league.countTeam - rankTeamYards);
+        return offRating;
+    }
+
+    public int defenseRating() {
+        int defRating = 0;
+        defRating = (league.countTeam - rankTeamOppPoints) + (league.countTeam - rankTeamOppYards);
+        return defRating;
     }
 
     /**
@@ -2199,6 +2210,7 @@ public class Team {
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
         gameWinsAgainst = new ArrayList<Team>();
+        gameLossesAgainst = new ArrayList<Team>();
         gameWLSchedule = new ArrayList<String>();
         confChampion = "";
         semiFinalWL = "";

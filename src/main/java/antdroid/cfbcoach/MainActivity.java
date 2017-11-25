@@ -48,6 +48,16 @@ import Simulation.Game;
 import Simulation.HeadCoach;
 import Simulation.League;
 import Simulation.Player;
+import Simulation.PlayerCB;
+import Simulation.PlayerDL;
+import Simulation.PlayerK;
+import Simulation.PlayerLB;
+import Simulation.PlayerOL;
+import Simulation.PlayerQB;
+import Simulation.PlayerRB;
+import Simulation.PlayerS;
+import Simulation.PlayerTE;
+import Simulation.PlayerWR;
 import Simulation.Team;
 import Simulation.TeamStrategy;
 
@@ -2749,6 +2759,54 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < simLeague.teamList.size(); ++i) {
                 if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
                     teamX = simLeague.teamList.get(i).name;
+                    Team teamRoster = simLeague.teamList.get(i);
+                    if (fileSplit[2].equals("CB") && cb < simLeague.teamList.get(i).minCBs) {
+                        teamRoster.teamCBs.remove(cb);
+                        teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        cb++;
+                    } else if (fileSplit[2].equals("DL") && dl < simLeague.teamList.get(i).minDLs) {
+                        teamRoster.teamDLs.remove(dl);
+                        teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        dl++;
+                    } else if (fileSplit[2].equals("K") && k < simLeague.teamList.get(i).minKs) {
+                        teamRoster.teamKs.remove(k);
+                        teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        k++;
+                    } else if (fileSplit[2].equals("LB") && lb < simLeague.teamList.get(i).minLBs) {
+                        teamRoster.teamLBs.remove(lb);
+                        teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        lb++;
+                    } else if (fileSplit[2].equals("OL") && ol < simLeague.teamList.get(i).minOLs) {
+                        teamRoster.teamOLs.remove(ol);
+                        teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        ol++;
+                    } else if (fileSplit[2].equals("QB") && qb < simLeague.teamList.get(i).minQBs) {
+                        teamRoster.teamQBs.remove(qb);
+                        teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        qb++;
+                    } else if (fileSplit[2].equals("RB") && rb < simLeague.teamList.get(i).minRBs) {
+                        teamRoster.teamRBs.remove(rb);
+                        teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        rb++;
+                    } else if (fileSplit[2].equals("S") && s < simLeague.teamList.get(i).minSs) {
+                        teamRoster.teamSs.remove(s);
+                        teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        s++;
+                    } else if (fileSplit[2].equals("TE") && te < simLeague.teamList.get(i).minTEs) {
+                        teamRoster.teamTEs.remove(te);
+                        teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        te++;
+                    } else if (fileSplit[2].equals("WR") && wr < simLeague.teamList.get(i).minWRs) {
+                        teamRoster.teamWRs.remove(wr);
+                        teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        wr++;
+                    }
+                }
+
+
+           /* for (int i = 0; i < simLeague.teamList.size(); ++i) {
+                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
+                    teamX = simLeague.teamList.get(i).name;
                     if (fileSplit[2].equals("CB") && cb < simLeague.teamList.get(i).minCBs) {
                         simLeague.teamList.get(i).teamCBs.get(cb).name = fileSplit[1];
                         simLeague.teamList.get(i).teamCBs.get(cb).year = Integer.parseInt(fileSplit[3]);
@@ -2790,7 +2848,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.teamList.get(i).teamWRs.get(wr).year = Integer.parseInt(fileSplit[3]);
                         wr++;
                     }
-                }
+                }*/
             }
         }
         reader.close();
