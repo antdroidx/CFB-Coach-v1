@@ -14,8 +14,11 @@ _Implemented Updates/Features:_
 * Expanded to 18 Bowl Games + CFB Playoffs
 * Names database is now over 20,000 first and last names
 * Improved scheduling logic (Out of Conf schedule changes each season)
-* More in-depth News and Features updated
+* More in-depth News and Features
 * Geographic Home Regions
+* Import Custom Universe from text file
+* Import Custom Rosters from text file
+* Import Custom Coaches from text file
 
 
 **[Game Simulation]**
