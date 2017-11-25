@@ -1762,61 +1762,61 @@ public class Team {
         int needs = minQBs - teamQBs.size();
         for (int i = 0; i < needs; ++i) {
             //make QBs
-            teamQBs.add(new PlayerQB(league.getRandName(), 1, 2, this));
+            teamQBs.add(new PlayerQB(league.getRandName(), 1, 1, this));
         }
 
         needs = minRBs - teamRBs.size();
         for (int i = 0; i < needs; ++i) {
             //make RBs
-            teamRBs.add(new PlayerRB(league.getRandName(), 1, 2, this));
+            teamRBs.add(new PlayerRB(league.getRandName(), 1, 1, this));
         }
 
         needs = minWRs - teamWRs.size();
         for (int i = 0; i < needs; ++i) {
             //make WRs
-            teamWRs.add(new PlayerWR(league.getRandName(), 1, 2, this));
+            teamWRs.add(new PlayerWR(league.getRandName(), 1, 1, this));
         }
 
         needs = minTEs - teamTEs.size();
         for (int i = 0; i < needs; ++i) {
             //make TEs
-            teamTEs.add(new PlayerTE(league.getRandName(), 1, 2, this));
+            teamTEs.add(new PlayerTE(league.getRandName(), 1, 1, this));
         }
 
         needs = minOLs - teamOLs.size();
         for (int i = 0; i < needs; ++i) {
             //make OLs
-            teamOLs.add(new PlayerOL(league.getRandName(), 1, 2, this));
+            teamOLs.add(new PlayerOL(league.getRandName(), 1, 1, this));
         }
 
         needs = minKs - teamKs.size();
         for (int i = 0; i < needs; ++i) {
             //make Ks
-            teamKs.add(new PlayerK(league.getRandName(), 1, 2, this));
+            teamKs.add(new PlayerK(league.getRandName(), 1, 1, this));
         }
 
         needs = minDLs - teamDLs.size();
         for (int i = 0; i < needs; ++i) {
             //make DLs
-            teamDLs.add(new PlayerDL(league.getRandName(), 1, 2, this));
+            teamDLs.add(new PlayerDL(league.getRandName(), 1, 1, this));
         }
 
         needs = minLBs - teamLBs.size();
         for (int i = 0; i < needs; ++i) {
             //make LBs
-            teamLBs.add(new PlayerLB(league.getRandName(), 1, 2, this));
+            teamLBs.add(new PlayerLB(league.getRandName(), 1, 1, this));
         }
 
         needs = minCBs - teamCBs.size();
         for (int i = 0; i < needs; ++i) {
             //make Ss
-            teamCBs.add(new PlayerCB(league.getRandName(), 1, 2, this));
+            teamCBs.add(new PlayerCB(league.getRandName(), 1, 1, this));
         }
 
         needs = minSs - teamSs.size();
         for (int i = 0; i < needs; ++i) {
             //make Ss
-            teamSs.add(new PlayerS(league.getRandName(), 1, 2, this));
+            teamSs.add(new PlayerS(league.getRandName(), 1, 1, this));
         }
 
         //done making players, sort them
