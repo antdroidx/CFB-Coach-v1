@@ -853,6 +853,7 @@ public class Game implements Serializable {
                 awayTeam.totalLosses++;
                 awayTeam.gameWLSchedule.add("L");
                 homeTeam.gameWinsAgainst.add(awayTeam);
+                awayTeam.gameLossesAgainst.add(homeTeam);
                 homeTeam.winStreak.addWin(homeTeam.league.getYear());
                 homeTeam.league.checkLongestWinStreak(homeTeam.winStreak);
                 awayTeam.winStreak.resetStreak(awayTeam.league.getYear());
@@ -866,6 +867,7 @@ public class Game implements Serializable {
                 awayTeam.totalWins++;
                 awayTeam.gameWLSchedule.add("W");
                 awayTeam.gameWinsAgainst.add(homeTeam);
+                homeTeam.gameLossesAgainst.add(awayTeam);
                 awayTeam.winStreak.addWin(awayTeam.league.getYear());
                 awayTeam.league.checkLongestWinStreak(awayTeam.winStreak);
                 homeTeam.winStreak.resetStreak(homeTeam.league.getYear());
