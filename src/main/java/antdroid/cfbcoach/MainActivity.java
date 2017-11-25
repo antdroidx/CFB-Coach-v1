@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     File saveLeagueFile;
     String username;
     Uri dataUri;
-    Uri rosterUri;
     String loadData;
 
     List<String> teamList;
@@ -339,13 +338,13 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players");
                         simLeague.currentWeek++;
-                    }else if (simLeague.currentWeek == 20) {
+                    } else if (simLeague.currentWeek == 20) {
                         simLeague.transferPlayers();
                         showNewsStoriesDialog();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players II");
                         simLeague.currentWeek++;
-                    }else if (simLeague.currentWeek == 21) {
+                    } else if (simLeague.currentWeek == 21) {
                         showNewsStoriesDialog();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Begin Recruiting");
@@ -2706,7 +2705,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readCoachFile(Uri uri) throws IOException {
-            String line;
+        String line;
         InputStream inputStream = getContentResolver().openInputStream(uri);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
@@ -2724,25 +2723,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readRosterFile(Uri uri) throws IOException {
+
+        //METHOD USED FOR CREATING NEW ROSTER FROM CUSTOM FILE
+        for (int i = 0; i < simLeague.teamList.size(); ++i) {
+            Team teamRoster = simLeague.teamList.get(i);
+            teamRoster.teamQBs.clear();
+            teamRoster.teamRBs.clear();
+            teamRoster.teamWRs.clear();
+            teamRoster.teamTEs.clear();
+            teamRoster.teamOLs.clear();
+            teamRoster.teamKs.clear();
+            teamRoster.teamDLs.clear();
+            teamRoster.teamLBs.clear();
+            teamRoster.teamCBs.clear();
+            teamRoster.teamSs.clear();
+        }
+
         String line;
         InputStream inputStream = getContentResolver().openInputStream(uri);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
         line = reader.readLine();
         //First ignore the save file info
-        int cb = 0;
-        int dl = 0;
-        int k = 0;
-        int lb = 0;
-        int ol = 0;
-        int qb = 0;
-        int rb = 0;
-        int s = 0;
-        int te = 0;
-        int wr = 0;
+        int qb, rb, wr, te, ol, k, dl, lb, cb, s;
         String teamX = "No Team";
         while ((line = reader.readLine()) != null && !line.equals("END_ROSTER")) {
             String[] fileSplit = line.split(",");
+
+
+            //METHOD FOR CREATING NEW ROSTER WITH CUSTOM FILE
+            for (int i = 0; i < simLeague.teamList.size(); ++i) {
+                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
+                    teamX = simLeague.teamList.get(i).name;
+                    Team teamRoster = simLeague.teamList.get(i);
+
+                    if (fileSplit[2].equals("QB")) {
+                        teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("RB")) {
+                        teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("WR")) {
+                        teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("TE")) {
+                        teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("OL")) {
+                        teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("DL")) {
+                        teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("LB")) {
+                        teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("CB")) {
+                        teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("S")) {
+                        teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    } else if (fileSplit[2].equals("K")) {
+                        teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                    }
+                }
+            }
+
+/*            //METHOD FOR REPLACING NAMES + YEAR ONLY
             if (!fileSplit[0].equals(teamX)) {
                 cb = 0;
                 dl = 0;
@@ -2755,55 +2794,6 @@ public class MainActivity extends AppCompatActivity {
                 te = 0;
                 wr = 0;
             }
-
-/*            for (int i = 0; i < simLeague.teamList.size(); ++i) {
-                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
-                    teamX = simLeague.teamList.get(i).name;
-                    Team teamRoster = simLeague.teamList.get(i);
-                    if (fileSplit[2].equals("CB") && cb < simLeague.teamList.get(i).minCBs) {
-                        teamRoster.teamCBs.remove(cb);
-                        teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        cb++;
-                    } else if (fileSplit[2].equals("DL") && dl < simLeague.teamList.get(i).minDLs) {
-                        teamRoster.teamDLs.remove(dl);
-                        teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        dl++;
-                    } else if (fileSplit[2].equals("K") && k < simLeague.teamList.get(i).minKs) {
-                        teamRoster.teamKs.remove(k);
-                        teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        k++;
-                    } else if (fileSplit[2].equals("LB") && lb < simLeague.teamList.get(i).minLBs) {
-                        teamRoster.teamLBs.remove(lb);
-                        teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        lb++;
-                    } else if (fileSplit[2].equals("OL") && ol < simLeague.teamList.get(i).minOLs) {
-                        teamRoster.teamOLs.remove(ol);
-                        teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        ol++;
-                    } else if (fileSplit[2].equals("QB") && qb < simLeague.teamList.get(i).minQBs) {
-                        teamRoster.teamQBs.remove(qb);
-                        teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        qb++;
-                    } else if (fileSplit[2].equals("RB") && rb < simLeague.teamList.get(i).minRBs) {
-                        teamRoster.teamRBs.remove(rb);
-                        teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        rb++;
-                    } else if (fileSplit[2].equals("S") && s < simLeague.teamList.get(i).minSs) {
-                        teamRoster.teamSs.remove(s);
-                        teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        s++;
-                    } else if (fileSplit[2].equals("TE") && te < simLeague.teamList.get(i).minTEs) {
-                        teamRoster.teamTEs.remove(te);
-                        teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        te++;
-                    } else if (fileSplit[2].equals("WR") && wr < simLeague.teamList.get(i).minWRs) {
-                        teamRoster.teamWRs.remove(wr);
-                        teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
-                        wr++;
-                    }
-                }*/
-
-
             for (int i = 0; i < simLeague.teamList.size(); ++i) {
                 if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
                     teamX = simLeague.teamList.get(i).name;
@@ -2849,9 +2839,16 @@ public class MainActivity extends AppCompatActivity {
                         wr++;
                     }
                 }
-            }
+            }*/
+
         }
         reader.close();
-    }
-}
 
+        for (int i = 0; i < simLeague.teamList.size(); ++i) {
+            Team teamRoster = simLeague.teamList.get(i);
+            teamRoster.recruitWalkOns();
+        }
+        simLeague.updateTeamTalentRatings();
+    }
+
+}
