@@ -4126,7 +4126,6 @@ NC State,Stephen Louis,WR,3,82
 NC State,Gavin Locklear,WR,4,79
 NC State,Kelvin Harmon,WR,2,79
 NC State,Maurice Trowell,WR,3,79
-NC State, Wr,WR,1,77
 NC State,Jakobi Meyers,WR,2,77
 NC State,Emeka Emezie,WR,1,77
 Nebraska,Chris Jones,CB,4,91
