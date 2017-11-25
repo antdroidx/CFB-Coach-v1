@@ -69,7 +69,7 @@ Notre Dame,Brian Kelly
 Ohio,Frank Solich
 Ohio State,Urban Meyer
 Oklahoma,Bob Stoops
-Oklahoma State,Mike Gundy
+Oklahoma St,Mike Gundy
 Ole Miss,Hugh Freeze
 Oregon,Willie Taggart
 Oregon State,Gary Andersen
