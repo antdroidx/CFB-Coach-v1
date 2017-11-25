@@ -246,8 +246,8 @@ Arizona,Cody Creason,OL,2,3
 Arizona,Alex Kosinski,OL,2,3
 Arizona,Levi Walton,OL,3,3
 Arizona,Bryson Cain,OL,1,3
+Arizona,Khalil Tate,QB,2,5
 Arizona,Brandon Dawkins,QB,3,4
-Arizona,Khalil Tate,QB,2,4
 Arizona,Donavan Tate,QB,1,3
 Arizona,Nick Wilson,RB,4,4
 Arizona,Zach Green,RB,4,3
@@ -7898,8 +7898,8 @@ Washington,Matt James,OL,3,3
 Washington,Devin Burleson,OL,2,3
 Washington,Jared Hilbers,OL,2,3
 Washington,Jake Browning,QB,3,5
-Washington,K.j. Carta-samue,QB,3,3
 Washington,Jake Haener,QB,1,3
+Washington,K.j. Carta-samue,QB,3,3
 Washington,Myles Gaskin,RB,3,5
 Washington,Lavon Coleman,RB,4,4
 Washington,Salvon Ahmed,RB,1,3
