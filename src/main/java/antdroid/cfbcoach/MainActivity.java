@@ -2756,7 +2756,7 @@ public class MainActivity extends AppCompatActivity {
                 wr = 0;
             }
 
-            for (int i = 0; i < simLeague.teamList.size(); ++i) {
+/*            for (int i = 0; i < simLeague.teamList.size(); ++i) {
                 if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
                     teamX = simLeague.teamList.get(i).name;
                     Team teamRoster = simLeague.teamList.get(i);
@@ -2801,10 +2801,10 @@ public class MainActivity extends AppCompatActivity {
                         teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
                         wr++;
                     }
-                }
+                }*/
 
 
-           /* for (int i = 0; i < simLeague.teamList.size(); ++i) {
+            for (int i = 0; i < simLeague.teamList.size(); ++i) {
                 if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
                     teamX = simLeague.teamList.get(i).name;
                     if (fileSplit[2].equals("CB") && cb < simLeague.teamList.get(i).minCBs) {
@@ -2848,7 +2848,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.teamList.get(i).teamWRs.get(wr).year = Integer.parseInt(fileSplit[3]);
                         wr++;
                     }
-                }*/
+                }
             }
         }
         reader.close();
