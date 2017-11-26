@@ -138,17 +138,17 @@ public class PlayerCB extends Player {
         team = t;
         gamesPlayed = 0;
         isInjured = false;
-        ratPot = (int) (50 + 50 * Math.random());
-        ratFootIQ = (int) (50 + 50 * Math.random());
-        ratDur = (int) (50 + 50 * Math.random());
-        ratCoverage = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratSpeed = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratTackle = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratJump = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratCoverage = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratSpeed = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratTackle = (int) ((ratBase-10) + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratJump = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratOvr = (ratCoverage * 2 + ratSpeed + ratTackle + ratJump) / 5;
         position = "CB";
         region = (int)(Math.random()*5);
-        personality = (int) (50 + 50 * Math.random());
+        personality = (int) (attrBase + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 50 + (int) (Math.random() * 100) - 50;
 
         double locFactor = Math.abs(team.location - region) - 2.5;
@@ -184,6 +184,59 @@ public class PlayerCB extends Player {
         careerDefended = 0;
     }
 
+    public PlayerCB(String nm, int yr, int stars, Team t, boolean custom) {
+        name = nm;
+        year = yr;
+        team = t;
+        gamesPlayed = 0;
+        isInjured = false;
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratCoverage = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratSpeed = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratTackle = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratJump = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratOvr = (ratCoverage * 2 + ratSpeed + ratTackle + ratJump) / 5;
+        position = "CB";
+        region = (int)(Math.random()*5);
+        personality = (int) (attrBase + 50 * Math.random());
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 50 + (int) (Math.random() * 100) - 50;
+
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        cost = cost + (int)(Math.random()*(locFactor * 10));
+        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
+
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        statsWins = 0;
+
+        careerGamesPlayed = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerWins = 0;
+
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+        statsTargets = 0;
+        statsIncomplete = 0;
+        statsDefended = 0;
+
+        careerTackles = 0;
+        careerSacks = 0;
+        careerFumbles = 0;
+        careerInts = 0;
+        careerTargets = 0;
+        careerIncomplete = 0;
+        careerDefended = 0;
+    }
+
+    
     @Override
     public int getHeismanScore() {
         return statsTackles * 35 + statsSacks * 500 + statsFumbles * 500 + statsInts * 500 + statsDefended * 45 + statsIncomplete * 15 - statsTargets * 10 + ratCoverage * 14 + ratSpeed * 5 + ratJump * 2 - (1 * team.teamOppYards) - (2 * team.teamOppPoints) + team.confPrestige * 7;

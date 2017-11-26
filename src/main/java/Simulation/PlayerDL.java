@@ -129,17 +129,17 @@ public class PlayerDL extends Player {
         team = t;
         gamesPlayed = 0;
         isInjured = false;
-        ratPot = (int) (50 + 50 * Math.random());
-        ratFootIQ = (int) (50 + 50 * Math.random());
-        ratDur = (int) (50 + 50 * Math.random());
-        ratStrength = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratRunStop = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratPassRush = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratTackle = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratStrength = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratRunStop = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratPassRush = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratTackle = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
         position = "DL";
         region = (int)(Math.random()*5);
-        personality = (int) (50 + 50 * Math.random());
+        personality = (int) (attrBase + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
 
         double locFactor = Math.abs(team.location - region) - 2.5;
@@ -219,6 +219,52 @@ public class PlayerDL extends Player {
         }
     }
 
+    public PlayerDL(String nm, int yr, int stars, Team t, boolean custom) {
+        name = nm;
+        year = yr;
+        team = t;
+        gamesPlayed = 0;
+        isInjured = false;
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratStrength = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratRunStop = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratPassRush = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratTackle = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
+        position = "DL";
+        region = (int)(Math.random()*5);
+        personality = (int) (attrBase + 50 * Math.random());
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
+
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        cost = cost + (int)(Math.random()*(locFactor * 10));
+        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        statsWins = 0;
+
+        careerGamesPlayed = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerWins = 0;
+
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+
+        careerTackles = 0;
+        careerSacks = 0;
+        careerFumbles = 0;
+        careerInts = 0;
+
+    }
+    
     @Override
     public int getHeismanScore() {
         return statsTackles * 35 + statsSacks * 575 + statsFumbles * 500 + statsInts * 500 + 16 * ratOvr - (team.teamOppYards * 2) - (team.teamOppPoints * 2) + team.confPrestige * 7;

@@ -45,6 +45,13 @@ public class Player {
     public boolean isInjured;
     public Injury injury;
 
+    public int attrBase = 50;
+    public int ratBase = 60;
+    public int yearFactor = 5;
+    public double starFactor = 2.5;
+    public double customFactor = 4.5;
+    public int ratTolerance = 20;
+
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
 
     public String getYrStr() {

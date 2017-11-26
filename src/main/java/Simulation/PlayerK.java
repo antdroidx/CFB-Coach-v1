@@ -34,7 +34,7 @@ public class PlayerK extends Player {
         year = yr;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow + acc + 75) / 3;
+        ratOvr = (pow + acc + prs) / 3;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -78,7 +78,7 @@ public class PlayerK extends Player {
         year = yr;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow + acc + 75) / 3;
+        ratOvr = (pow + acc + prs) / 3;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -121,17 +121,17 @@ public class PlayerK extends Player {
         team = t;
         gamesPlayed = 0;
         isInjured = false;
-        ratPot = (int) (50 + 50 * Math.random());
-        ratFootIQ = (int) (50 + 50 * Math.random());
-        ratDur = (int) (50 + 50 * Math.random());
-        ratKickPow = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratKickAcc = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratKickFum = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratPressure = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratOvr = (ratKickPow + ratKickAcc + 75) / 3;
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratKickPow = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratKickAcc = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratKickFum = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratPressure = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratOvr = (ratKickPow + ratKickAcc + ratPressure) / 3;
         position = "K";
         region = (int)(Math.random()*5);
-        personality = (int) (50 + 50 * Math.random());
+        personality = (int) (attrBase + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 100 + (int) (Math.random() * 100) - 50;
 
         double locFactor = Math.abs(team.location - region) - 2.5;
@@ -159,6 +159,50 @@ public class PlayerK extends Player {
         careerWins = 0;
     }
 
+    public PlayerK(String nm, int yr, int stars, Team t, boolean custom) {
+        name = nm;
+        year = yr;
+        team = t;
+        gamesPlayed = 0;
+        isInjured = false;
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratKickPow = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratKickAcc = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratKickFum = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratPressure = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratOvr = (ratKickPow + ratKickAcc + 75) / 3;
+        position = "K";
+        region = (int)(Math.random()*5);
+        personality = (int) (attrBase + 50 * Math.random());
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 100 + (int) (Math.random() * 100) - 50;
+
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        cost = cost + (int)(Math.random()*(locFactor * 9));
+        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+        troubledTimes = 0;
+
+        statsXPAtt = 0;
+        statsXPMade = 0;
+        statsFGAtt = 0;
+        statsFGMade = 0;
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        statsWins = 0;
+
+        careerXPAtt = 0;
+        careerXPMade = 0;
+        careerFGAtt = 0;
+        careerFGMade = 0;
+        careerGamesPlayed = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerWins = 0;
+    }
+    
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
@@ -184,7 +228,7 @@ public class PlayerK extends Player {
                 ratPressure += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
             }
         }
-        ratOvr = (ratKickPow + ratKickAcc) / 2;
+        ratOvr = (ratKickPow + ratKickAcc + ratPressure) / 3;
         ratImprovement = ratOvr - oldOvr;
         //reset stats (keep career stats?)
         careerXPAtt += statsXPAtt;
