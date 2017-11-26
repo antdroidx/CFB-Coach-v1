@@ -109,6 +109,8 @@ public class League extends Rankings {
     public ArrayList<PlayerCB> transferCBs;
     public ArrayList<PlayerS> transferSs;
 
+    public ArrayList<Player> freshman;
+
     public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl", "Cotton Bowl", "Citrus Bowl", "Gator Bowl", "Cactus Bowl", "Alamo Bowl", "Holiday Bowl", "Sun Bowl",
             "Liberty Bowl", "Independence Bowl", "Vegas Bowl", "Military Bowl", "Aloha Bowl", "Humanitarian Bowl"};
 
@@ -168,7 +170,7 @@ public class League extends Rankings {
         transferLBs = new ArrayList<>();
         transferCBs = new ArrayList<>();
         transferSs = new ArrayList<>();
-
+        freshman = new ArrayList<>();
 
         // Initialize new stories lists
         newsStories = new ArrayList<ArrayList<String>>();
@@ -456,6 +458,7 @@ public class League extends Rankings {
         transferLBs = new ArrayList<>();
         transferCBs = new ArrayList<>();
         transferSs = new ArrayList<>();
+        freshman = new ArrayList<>();
 
 
         // Initialize new stories lists
@@ -637,6 +640,7 @@ public class League extends Rankings {
         transferLBs = new ArrayList<>();
         transferCBs = new ArrayList<>();
         transferSs = new ArrayList<>();
+        freshman = new ArrayList<>();
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -1133,10 +1137,27 @@ public class League extends Rankings {
     //News on opening weekend
     public void preseasonNews() {
         coachingHotSeat();
+
+        topRecruits();
+
         //Add Big Games of the Week
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).newsNSMatchups();
         }
+    }
+
+    public void topRecruits() {
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).getFreshman();
+        }
+        Collections.sort(freshman, new CompPlayer());
+
+        StringBuilder newsFreshman = new StringBuilder();
+        for (int i = 0; i < 20; ++i) {
+            newsFreshman.append((i+1) + ". " + freshman.get(i).position + " " + freshman.get(i).name + ", " + freshman.get(i).team.name + "\n\n");
+        }
+
+        newsStories.get(0).add("Top Incoming Freshman Recruits>This year's top incoming freshman are:\n\n" + newsFreshman);
     }
 
     /**

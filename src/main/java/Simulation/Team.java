@@ -1638,6 +1638,8 @@ public class Team {
             recruitChance = teamPrestige;
         }
 
+        int recruitBudget = teamPrestige * 17;
+        recruitBudget += teamPrestige/3 * (50 - (teamQBs.size()+teamRBs.size()+teamWRs.size()+teamTEs.size()+teamOLs.size()+teamKs.size()+teamDLs.size()+teamLBs.size()+teamCBs.size()+teamSs.size()));
 
         for (int i = 0; i < qbNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
@@ -2100,12 +2102,12 @@ public class Team {
         int numRedshirt = 0;
         ArrayList<Player> allPlayers = getAllPlayers();
         for (Player p : allPlayers) {
-            if (p.year == 1 && p.ratOvr > 60 && !p.isRedshirt) {
+            if (p.year == 1 && p.ratOvr > 65 && !p.isRedshirt) {
                 // Is freshman
                 classStrength += ((p.ratOvr-50)/8)*((p.ratOvr-50)/8);
                 numFreshman++;
             }
-            if (p.year == 0 && p.ratOvr > 60) {
+            if (p.year == 0 && p.ratOvr > 65) {
                 classStrength += ((p.ratOvr-50)/8)*((p.ratOvr-50)/8);
                 numRedshirt++;
             }
@@ -2113,6 +2115,15 @@ public class Team {
         if (numFreshman > 0 || numRedshirt > 0)
             return  (int)(classStrength * (classStrength/(numFreshman+numRedshirt)));
         else return 0;
+    }
+
+    public void getFreshman() {
+        ArrayList<Player> teamPlayers = getAllPlayers();
+        for (int p = 0; p < teamPlayers.size(); ++p) {
+                if (teamPlayers.get(p).year == 1) {
+                league.freshman.add(teamPlayers.get(p));
+            }
+        }
     }
 
     /**
