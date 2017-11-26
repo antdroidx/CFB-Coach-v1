@@ -2723,6 +2723,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readRosterFile(Uri uri) throws IOException {
+        boolean custom = true;
 
         //METHOD USED FOR CREATING NEW ROSTER FROM CUSTOM FILE
         for (int i = 0; i < simLeague.teamList.size(); ++i) {
@@ -2758,25 +2759,25 @@ public class MainActivity extends AppCompatActivity {
                     Team teamRoster = simLeague.teamList.get(i);
 
                     if (fileSplit[2].equals("QB")) {
-                        teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("RB")) {
-                        teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("WR")) {
-                        teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("TE")) {
-                        teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("OL")) {
-                        teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("DL")) {
-                        teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("LB")) {
-                        teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("CB")) {
-                        teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("S")) {
-                        teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     } else if (fileSplit[2].equals("K")) {
-                        teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster));
+                        teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
                     }
                 }
             }
@@ -2843,6 +2844,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
         reader.close();
+
+        for (int i = 0; i < simLeague.teamList.size(); ++i) {
+            Team teamRoster = simLeague.teamList.get(i);
+            if (teamRoster.getAllPlayers().isEmpty()) {
+                teamRoster.newRoster(teamRoster.minQBs, teamRoster.minRBs, teamRoster.minWRs, teamRoster.minTEs, teamRoster.minOLs, teamRoster.minKs, teamRoster.minDLs, teamRoster.minLBs, teamRoster.minCBs, teamRoster.minSs);
+            }
+        }
 
         for (int i = 0; i < simLeague.teamList.size(); ++i) {
             Team teamRoster = simLeague.teamList.get(i);

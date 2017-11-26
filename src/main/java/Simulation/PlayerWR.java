@@ -137,16 +137,64 @@ public class PlayerWR extends Player {
         team = t;
         gamesPlayed = 0;
         isInjured = false;
-        ratPot = (int) (50 + 50 * Math.random());
-        ratFootIQ = (int) (50 + 50 * Math.random());
-        ratDur = (int) (50 + 50 * Math.random());
-        ratCatch = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratSpeed = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratEvasion = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
-        ratJump = (int) (60 + year * 5 + stars * 5 - 25 * Math.random());
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratCatch = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratSpeed = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratEvasion = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratJump = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratOvr = (ratCatch * 2 + ratSpeed + ratEvasion + ratJump) / 5;
         region = (int)(Math.random()*5);
-        personality = (int) (50 + 50 * Math.random());
+        personality = (int) (attrBase + 50 * Math.random());
+        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 3.5) + 80 + (int) (Math.random() * 100) - 50;
+
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        cost = cost + (int)(Math.random()*(locFactor * 12));
+        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
+        statsTargets = 0;
+        statsReceptions = 0;
+        statsRecYards = 0;
+        statsTD = 0;
+        statsDrops = 0;
+        statsFumbles = 0;
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        statsWins = 0;
+
+        careerTargets = 0;
+        careerReceptions = 0;
+        careerRecYards = 0;
+        careerTD = 0;
+        careerDrops = 0;
+        careerFumbles = 0;
+        careerGamesPlayed = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerWins = 0;
+
+        position = "WR";
+    }
+
+    public PlayerWR(String nm, int yr, int stars, Team t, boolean custom) {
+        name = nm;
+        year = yr;
+        team = t;
+        gamesPlayed = 0;
+        isInjured = false;
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        ratCatch = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratSpeed = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratEvasion = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratJump = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
+        ratOvr = (ratCatch * 2 + ratSpeed + ratEvasion + ratJump) / 5;
+        region = (int)(Math.random()*5);
+        personality = (int) (attrBase + 50 * Math.random());
         cost = (int) (Math.pow((float) ratOvr - 55, 2) / 3.5) + 80 + (int) (Math.random() * 100) - 50;
 
         double locFactor = Math.abs(team.location - region) - 2.5;

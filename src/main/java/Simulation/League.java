@@ -1153,7 +1153,7 @@ public class League extends Rankings {
         Collections.sort(freshman, new CompPlayer());
 
         StringBuilder newsFreshman = new StringBuilder();
-        for (int i = 0; i < 20; ++i) {
+        for (int i = 0; i < 25; ++i) {
             newsFreshman.append((i+1) + ". " + freshman.get(i).position + " " + freshman.get(i).name + ", " + freshman.get(i).team.name + "\n\n");
         }
 
