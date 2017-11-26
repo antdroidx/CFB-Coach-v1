@@ -2849,6 +2849,9 @@ public class MainActivity extends AppCompatActivity {
             teamRoster.recruitWalkOns();
         }
         simLeague.updateTeamTalentRatings();
+        simLeague.newsStories.get(0).remove(2);
+        simLeague.topRecruits();
+
     }
 
 }
