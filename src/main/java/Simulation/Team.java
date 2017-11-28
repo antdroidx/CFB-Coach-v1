@@ -1153,7 +1153,7 @@ public class Team {
 
         int i = 0;
         while (i < teamQBs.size()) {
-            if (teamQBs.get(i).year == 4 || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamQBs.get(i).year == 4 && !teamQBs.get(i).isTransfer || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamQBs.get(i));
                 teamQBs.remove(i);
             } else {
@@ -1164,7 +1164,7 @@ public class Team {
 
         i = 0;
         while (i < teamRBs.size()) {
-            if (teamRBs.get(i).year == 4 || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamRBs.get(i).year == 4  && !teamRBs.get(i).isTransfer || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamRBs.get(i));
                 teamRBs.remove(i);
             } else {
@@ -1175,7 +1175,7 @@ public class Team {
 
         i = 0;
         while (i < teamWRs.size()) {
-            if (teamWRs.get(i).year == 4 || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamWRs.get(i).year == 4  && !teamWRs.get(i).isTransfer || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamWRs.get(i));
                 teamWRs.remove(i);
             } else {
@@ -1186,7 +1186,7 @@ public class Team {
 
         i = 0;
         while (i < teamTEs.size()) {
-            if (teamTEs.get(i).year == 4 || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamTEs.get(i).year == 4  && !teamTEs.get(i).isTransfer || (teamTEs.get(i).year == 3 && teamTEs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamTEs.get(i));
                 teamTEs.remove(i);
             } else {
@@ -1197,7 +1197,7 @@ public class Team {
 
         i = 0;
         while (i < teamOLs.size()) {
-            if (teamOLs.get(i).year == 4 || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamOLs.get(i).year == 4  && !teamOLs.get(i).isTransfer || (teamOLs.get(i).year == 3 && teamOLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamOLs.get(i));
                 teamOLs.remove(i);
             } else {
@@ -1208,7 +1208,7 @@ public class Team {
 
         i = 0;
         while (i < teamKs.size()) {
-            if (teamKs.get(i).year == 4) {
+            if (teamKs.get(i).year == 4 && !teamKs.get(i).isTransfer ) {
                 playersLeaving.add(teamKs.get(i));
                 teamKs.remove(i);
             } else {
@@ -1219,7 +1219,7 @@ public class Team {
 
         i = 0;
         while (i < teamDLs.size()) {
-            if (teamDLs.get(i).year == 4 || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamDLs.get(i).year == 4  && !teamDLs.get(i).isTransfer || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamDLs.get(i));
                 teamDLs.remove(i);
             } else {
@@ -1230,7 +1230,7 @@ public class Team {
 
         i = 0;
         while (i < teamLBs.size()) {
-            if (teamLBs.get(i).year == 4 || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamLBs.get(i).year == 4  && !teamLBs.get(i).isTransfer || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamLBs.get(i));
                 teamLBs.remove(i);
             } else {
@@ -1241,7 +1241,7 @@ public class Team {
 
         i = 0;
         while (i < teamCBs.size()) {
-            if (teamCBs.get(i).year == 4 || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamCBs.get(i).year == 4  && !teamCBs.get(i).isTransfer || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamCBs.get(i));
                 teamCBs.remove(i);
             } else {
@@ -1252,7 +1252,7 @@ public class Team {
 
         i = 0;
         while (i < teamSs.size()) {
-            if (teamSs.get(i).year == 4 || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamSs.get(i).year == 4  && !teamSs.get(i).isTransfer || (teamSs.get(i).year == 3 && teamSs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
                 playersLeaving.add(teamSs.get(i));
                 teamSs.remove(i);
             } else {
