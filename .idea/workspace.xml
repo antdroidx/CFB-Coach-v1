@@ -29,9 +29,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,11 +104,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="3419" column="54" lean-forward="false" selection-start-line="3419" selection-start-column="43" selection-end-line="3419" selection-end-column="54" />
+            <state relative-caret-position="445">
+              <caret line="1691" column="5" lean-forward="false" selection-start-line="1691" selection-start-column="5" selection-end-line="1691" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecruitingActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3507">
+              <caret line="195" column="56" lean-forward="false" selection-start-line="195" selection-start-column="56" selection-end-line="195" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -1216,16 +1224,15 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -1365,7 +1372,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511928366693" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511941493380" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1413,7 +1420,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511928366694" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511941493380" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1619,7 +1626,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511928366698" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1511941493380" />
       </method>
     </configuration>
     <list size="1">
@@ -1670,7 +1677,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="1" />
+    <frame x="-8" y="0" width="1936" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2118,14 +2125,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6593">
-          <caret line="1313" column="74" lean-forward="false" selection-start-line="1313" selection-start-column="56" selection-end-line="1313" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -2155,8 +2154,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="3419" column="54" lean-forward="false" selection-start-line="3419" selection-start-column="43" selection-end-line="3419" selection-end-column="54" />
+        <state relative-caret-position="445">
+          <caret line="1691" column="5" lean-forward="false" selection-start-line="1691" selection-start-column="5" selection-end-line="1691" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3507">
+          <caret line="195" column="56" lean-forward="false" selection-start-line="195" selection-start-column="56" selection-end-line="195" selection-end-column="56" />
           <folding />
         </state>
       </provider>

@@ -244,7 +244,8 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
 
-        ratingTolerance = Math.round((140-HCtalent)/10);
+        //ratingTolerance = Math.round((140-HCtalent)/10);
+        ratingTolerance = 1;
         max = ratingTolerance;
         min = -ratingTolerance;
         tolerance = rand.nextInt((max - min) + 1) + min;
