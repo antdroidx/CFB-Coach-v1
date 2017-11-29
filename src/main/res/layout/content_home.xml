@@ -203,7 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="[v2.00 BETA: 11-25-2017]\n© Achi Jones, 2016 | Anthony Nguyen, 2017"
+        android:text="[v2.00 BETA: 11-28-2017]\n© Achi Jones, 2016 | Anthony Nguyen, 2017"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp" />
