@@ -76,6 +76,11 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
                 itemR.setText(detailSplit[1]);
                 itemL.setTextColor(Color.RED);
                 itemR.setTextColor(Color.RED);
+            } else if (playerDetail.contains("[RS]")) {
+                itemL.setText(detailSplit[0]);
+                itemR.setText(detailSplit[1]);
+                itemL.setTextColor(Color.RED);
+                itemR.setTextColor(Color.RED);
             }else {
                 itemL.setText(detailSplit[0]);
                 itemR.setText(detailSplit[1]);

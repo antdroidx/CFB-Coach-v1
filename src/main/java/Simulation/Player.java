@@ -41,6 +41,7 @@ public class Player {
     public boolean isRedshirt;
     public boolean isMedicalRS;
     public boolean isTransfer;
+    public boolean isWalkOn;
 
     public boolean isInjured;
     public Injury injury;
@@ -98,6 +99,9 @@ public class Player {
         }
         if (isSuspended) {
             return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended (" + weeksSuspended + "wk)";
+        }
+        if (isWalkOn) {
+            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot) + " [WO]";
         }
         return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
     }
