@@ -110,6 +110,7 @@ public class League extends Rankings {
     public ArrayList<PlayerS> transferSs;
 
     public ArrayList<Player> freshman;
+    public ArrayList<Player> redshirts;
 
     public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl", "Cotton Bowl", "Citrus Bowl", "Gator Bowl", "Cactus Bowl", "Alamo Bowl", "Holiday Bowl", "Sun Bowl",
             "Liberty Bowl", "Independence Bowl", "Vegas Bowl", "Military Bowl", "Aloha Bowl", "Humanitarian Bowl"};
@@ -171,6 +172,7 @@ public class League extends Rankings {
         transferCBs = new ArrayList<>();
         transferSs = new ArrayList<>();
         freshman = new ArrayList<>();
+        redshirts = new ArrayList<>();
 
         // Initialize new stories lists
         newsStories = new ArrayList<ArrayList<String>>();
@@ -459,6 +461,7 @@ public class League extends Rankings {
         transferCBs = new ArrayList<>();
         transferSs = new ArrayList<>();
         freshman = new ArrayList<>();
+        redshirts = new ArrayList<>();
 
 
         // Initialize new stories lists
@@ -641,6 +644,7 @@ public class League extends Rankings {
         transferCBs = new ArrayList<>();
         transferSs = new ArrayList<>();
         freshman = new ArrayList<>();
+        redshirts = new ArrayList<>();
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -1148,16 +1152,25 @@ public class League extends Rankings {
 
     public void topRecruits() {
         for (int i = 0; i < teamList.size(); ++i) {
-            teamList.get(i).getFreshman();
+            if (teamList.get(i) != userTeam) {
+                teamList.get(i).redshirtPlayers();
+            }
+            teamList.get(i).getLeagueFreshman();
         }
         Collections.sort(freshman, new CompPlayer());
+        Collections.sort(redshirts, new CompPlayer());
 
         StringBuilder newsFreshman = new StringBuilder();
         for (int i = 0; i < 25; ++i) {
             newsFreshman.append((i+1) + ". " + freshman.get(i).position + " " + freshman.get(i).name + ", " + freshman.get(i).team.name + "\n\n");
         }
+        StringBuilder newsRedshirts = new StringBuilder();
+        for (int i = 0; i < 25; ++i) {
+            newsRedshirts.append((i+1) + ". " + redshirts.get(i).position + " " + redshirts.get(i).name + ", " + redshirts.get(i).team.name + "\n\n");
+        }
 
-        newsStories.get(0).add("Top Incoming Freshman Recruits>This year's top incoming freshman are:\n\n" + newsFreshman);
+        newsStories.get(0).add("Top Incoming Freshman Recruits>This year's top incoming freshman who are expected to play right away:\n\n" + newsFreshman);
+        newsStories.get(0).add("Top Incoming Redshirted Recruits>The following list is this year's top redshirts. Their respective teams decided to sit them out this season, in hopes of progressing their talent further for next year.\n\n" + newsRedshirts);
     }
 
     /**
@@ -2871,12 +2884,18 @@ public class League extends Rankings {
             for (int t = rand; t < teamList.size() - rand; ++t) {
                 if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
                     if (Math.abs(teamList.get(t).location - transferQBs.get(i).region) < 2){
-                        teamList.get(t).teamQBs.add(transferQBs.get(i));
-                        newsStories.get(currentWeek+1).add("Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tQBs.get(i).toString() + " .");
-                        transferQBs.remove(i);
-                        tQBs.remove(i);
-                        break;
+                        int qbTransfers = 0;
+                        for (int x = 0; x < teamList.get(t).teamQBs.size(); ++x) {
+                            if (teamList.get(t).teamQBs.get(x).isTransfer) qbTransfers++;
+                        }
+                        if (qbTransfers == 0) {
+                            teamList.get(t).teamQBs.add(transferQBs.get(i));
+                            newsStories.get(currentWeek + 1).add("Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tQBs.get(i).toString() + " .");
+                            transferQBs.remove(i);
+                            tQBs.remove(i);
+                            break;
+                        }
                     }
                 }
             }

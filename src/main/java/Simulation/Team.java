@@ -1,7 +1,5 @@
 package Simulation;
 
-import android.widget.QuickContactBadge;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -137,7 +135,18 @@ public class Team {
     public int minLBs = 8;
     public int minCBs = 8;
     public int minSs = 3;
-
+    
+    public int startersQB = 1;
+    public int startersRB = 2;
+    public int startersWR = 3;
+    public int startersTE = 1;
+    public int startersOL = 5;
+    public int startersK = 1;
+    public int startersDL = 4;
+    public int startersLB = 3;
+    public int startersCB = 3;
+    public int startersS = 1;
+    
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
     public int dismissalChance = 3;
@@ -587,6 +596,130 @@ public class Team {
         sortPlayers();
     }
 
+    public void redshirtPlayers() {
+        int redshirts = 0;
+        int redshirtMax = HC.get(0).ratTalent/12;
+        sortPlayers();
+        groupPlayerStandingCSV();
+        Collections.sort(teamFRs, new CompPlayer());
+
+
+        for (Player p : teamFRs) {
+            if (p instanceof PlayerQB) {
+                for (int i = 0; i < teamQBs.size(); ++i) {
+                    if (teamQBs.get(i) == p) {
+                        if (i > 2 * startersQB && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerRB) {
+                for (int i = 0; i < teamRBs.size(); ++i) {
+                    if (teamRBs.get(i) == p) {
+                        if (i > 2 * startersRB && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerWR) {
+                for (int i = 0; i < teamWRs.size(); ++i) {
+                    if (teamWRs.get(i) == p) {
+                        if (i > 2 * startersWR && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerTE) {
+                for (int i = 0; i < teamTEs.size(); ++i) {
+                    if (teamTEs.get(i) == p) {
+                        if (i > 2 * startersTE && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerOL) {
+                for (int i = 0; i < teamOLs.size(); ++i) {
+                    if (teamOLs.get(i) == p) {
+                        if (i > 2 * startersOL && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerK) {
+                for (int i = 0; i < teamKs.size(); ++i) {
+                    if (teamKs.get(i) == p) {
+                        if (i > 2 * startersK && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerDL) {
+                for (int i = 0; i < teamDLs.size(); ++i) {
+                    if (teamDLs.get(i) == p) {
+                        if (i > 2 * startersDL && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerLB) {
+                for (int i = 0; i < teamLBs.size(); ++i) {
+                    if (teamLBs.get(i) == p) {
+                        if (i > 2 * startersLB && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerCB) {
+                for (int i = 0; i < teamCBs.size(); ++i) {
+                    if (teamCBs.get(i) == p) {
+                        if (i > 2 * startersCB && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+            if (p instanceof PlayerS) {
+                for (int i = 0; i < teamSs.size(); ++i) {
+                    if (teamSs.get(i) == p) {
+                        if (i > 2 * startersS && redshirts < redshirtMax) {
+                            p.year = 0;
+                            p.isRedshirt = true;
+                            redshirts++;
+                        }
+                    }
+                }
+            }
+        }
+
+        recruitWalkOns();
+    }
+    
     /**
      * Sorts players so that best players are higher in depth chart.
      */
@@ -1800,72 +1933,123 @@ public class Team {
     public void recruitWalkOns() {
         int star;
         //recruit walk ons (used for player teams who dont recruit all needs)
+        
+        //QUARTERBACKS
         int needs = minQBs - teamQBs.size();
+        for (int i = 0; i < teamQBs.size(); ++i) {
+            if (teamQBs.get(i).isRedshirt || teamQBs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make QBs
             star = (int)Math.random()*5 + 1;
             teamQBs.add(new PlayerQB(league.getRandName(), 1, star, this));
         }
 
+        //RUNNING BACKS
         needs = minRBs - teamRBs.size();
+        for (int i = 0; i < teamRBs.size(); ++i) {
+            if (teamRBs.get(i).isRedshirt || teamRBs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make RBs
             star = (int)Math.random()*5 + 1;
             teamRBs.add(new PlayerRB(league.getRandName(), 1, star, this));
         }
 
+        //WIDE RECEIVERS
         needs = minWRs - teamWRs.size();
+        for (int i = 0; i < teamWRs.size(); ++i) {
+            if (teamWRs.get(i).isRedshirt || teamWRs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make WRs
             star = (int)Math.random()*5 + 1;
             teamWRs.add(new PlayerWR(league.getRandName(), 1, star, this));
         }
 
+        //TIGHT ENDS
         needs = minTEs - teamTEs.size();
+        for (int i = 0; i < teamTEs.size(); ++i) {
+            if (teamTEs.get(i).isRedshirt || teamTEs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make TEs
             star = (int)Math.random()*5 + 1;
             teamTEs.add(new PlayerTE(league.getRandName(), 1, star, this));
         }
 
+        //OFFENSIVE LINE
         needs = minOLs - teamOLs.size();
+        for (int i = 0; i < teamOLs.size(); ++i) {
+            if (teamOLs.get(i).isRedshirt || teamOLs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make OLs
             star = (int)Math.random()*5 + 1;
             teamOLs.add(new PlayerOL(league.getRandName(), 1, star, this));
         }
-
+    
+        //KICKERS
         needs = minKs - teamKs.size();
+        for (int i = 0; i < teamKs.size(); ++i) {
+            if (teamKs.get(i).isRedshirt || teamKs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make Ks
             star = (int)Math.random()*5 + 1;
             teamKs.add(new PlayerK(league.getRandName(), 1, star, this));
         }
 
+        //DEFENSIVE LINE
         needs = minDLs - teamDLs.size();
+        for (int i = 0; i < teamDLs.size(); ++i) {
+            if (teamDLs.get(i).isRedshirt || teamDLs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make DLs
             star = (int)Math.random()*5 + 1;
             teamDLs.add(new PlayerDL(league.getRandName(), 1, star, this));
         }
 
+        //LINEBACKERS
         needs = minLBs - teamLBs.size();
+        for (int i = 0; i < teamLBs.size(); ++i) {
+            if (teamLBs.get(i).isRedshirt || teamLBs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make LBs
             star = (int)Math.random()*5 + 1;
             teamLBs.add(new PlayerLB(league.getRandName(), 1, star, this));
         }
 
+        //CORNERBACKS
         needs = minCBs - teamCBs.size();
+        for (int i = 0; i < teamCBs.size(); ++i) {
+            if (teamCBs.get(i).isRedshirt || teamCBs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make CBs
             star = (int)Math.random()*5 + 1;
             teamCBs.add(new PlayerCB(league.getRandName(), 1, star, this));
         }
 
+        //SAFETY
         needs = minSs - teamSs.size();
+        for (int i = 0; i < teamSs.size(); ++i) {
+            if (teamSs.get(i).isRedshirt || teamSs.get(i).isTransfer) {
+                needs++;
+            }
+        }
         for (int i = 0; i < needs; ++i) {
-            //make Ss
             star = (int)Math.random()*5 + 1;
             teamSs.add(new PlayerS(league.getRandName(), 1, star, this));
         }
@@ -2166,14 +2350,18 @@ public class Team {
         else return 0;
     }
 
-    public void getFreshman() {
+    public void getLeagueFreshman() {
         ArrayList<Player> teamPlayers = getAllPlayers();
         for (int p = 0; p < teamPlayers.size(); ++p) {
-                if (teamPlayers.get(p).year == 1) {
+            if (teamPlayers.get(p).year == 1) {
                 league.freshman.add(teamPlayers.get(p));
+            }
+            if (teamPlayers.get(p).year == 0) {
+                league.redshirts.add(teamPlayers.get(p));
             }
         }
     }
+
 
     /**
      * For news stories or other info gathering, setup player groups by student standing
