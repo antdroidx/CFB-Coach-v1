@@ -97,6 +97,9 @@ public class RecruitingActivity extends AppCompatActivity {
     int minCBs = 8;
     int minSs = 3;
 
+    int redshirtCount = 0;
+    int maxRedshirt = 6;
+    int maxPlayers = 70;
 
     // Whether to show pop ups every recruit
     private boolean showPopUp;
@@ -168,7 +171,7 @@ public class RecruitingActivity extends AppCompatActivity {
         } else {
             HCtalent = Integer.parseInt(teamInfo[4]);
         }
-        getSupportActionBar().setTitle(teamName + " Recruiting");
+        getSupportActionBar().setTitle(teamName + " | Recruiting" );
 
         showPopUp = true;
 
@@ -813,7 +816,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String rosterStr = getRosterStr();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(rosterStr)
-                .setTitle(teamName + " Roster")
+                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size())  )
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -841,7 +844,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Recruiting");
-                builder.setMessage("Are you sure you want to recruit " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
+                builder.setMessage("Your team roster is at " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -1021,13 +1024,15 @@ public class RecruitingActivity extends AppCompatActivity {
         final String player = p;
         final int groupPosition = pos;
         final List<Integer> groupsExpanded = groupsExp;
-        int moneyNeeded = (5 * getRecruitCost(player)) / 4;
+        int moneyNeeded = getRecruitCost(player);
         if (recruitingBudget >= moneyNeeded) {
 
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Redshirting");
-                builder.setMessage("Are you sure you want to redshirt " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?\n" +
+                builder.setMessage("Your team roster is at " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) + " (Max: 70).\n" +
+                        "You currently have redshirted " + redshirtCount + " players (Max: " + maxRedshirt + ").\n\n" +
+                        "Are you sure you want to redshirt " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?\n" +
                         "He will be unavailable to play for the first year.");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
@@ -1047,6 +1052,7 @@ public class RecruitingActivity extends AppCompatActivity {
                                 for (int group : groupsExpanded) {
                                     recruitList.expandGroup(group - 1);
                                 }
+                                redshirtCount++;
                                 dialog.dismiss();
                             }
                         });
@@ -1280,17 +1286,24 @@ public class RecruitingActivity extends AppCompatActivity {
 
             // Set up Recruit and Redshirt buttons to display the right price
             Button recruitPlayerButton = convertView.findViewById(R.id.buttonRecruitPlayer);
-            recruitPlayerButton.setText("Recruit: $" + getRecruitCost(playerCSV));
+
+            if(teamPlayers.size()+playersRecruited.size()+playersRedshirted.size() < maxPlayers) {
+                recruitPlayerButton.setText("Recruit: $" + getRecruitCost(playerCSV));
+            } else recruitPlayerButton.setVisibility(View.INVISIBLE);
 
             Button redshirtPlayerButton = convertView.findViewById(R.id.buttonRedshirtPlayer);
-            redshirtPlayerButton.setText("Redshirt: $" + (5 * getRecruitCost(playerCSV)) / 4);
+            if (redshirtCount < maxRedshirt) {
+                redshirtPlayerButton.setText("Redshirt: $" + getRecruitCost(playerCSV));
+            } else redshirtPlayerButton.setVisibility(View.INVISIBLE);
 
             // Set up button for recruiting player
             recruitPlayerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Save who is currently expanded
-                    List<Integer> groupsExpanded = new ArrayList<>();
-                    recruitPlayerDialog(playerCSV, groupPosition, groupsExpanded);
+                    if(teamPlayers.size()+playersRecruited.size()+playersRedshirted.size() < maxPlayers) {
+                        List<Integer> groupsExpanded = new ArrayList<>();
+                        recruitPlayerDialog(playerCSV, groupPosition, groupsExpanded);
+                    }
                 }
             });
 
@@ -1298,8 +1311,10 @@ public class RecruitingActivity extends AppCompatActivity {
             redshirtPlayerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Save who is currently expanded
-                    List<Integer> groupsExpanded = new ArrayList<>();
-                    redshirtPlayerDialog(playerCSV, groupPosition, groupsExpanded);
+                    if (redshirtCount < maxRedshirt && (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) < maxPlayers) {
+                        List<Integer> groupsExpanded = new ArrayList<>();
+                        redshirtPlayerDialog(playerCSV, groupPosition, groupsExpanded);
+                    }
                 }
             });
 

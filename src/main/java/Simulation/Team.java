@@ -146,6 +146,8 @@ public class Team {
     public int startersLB = 3;
     public int startersCB = 3;
     public int startersS = 1;
+
+    public int maxPlayers = 70;
     
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
