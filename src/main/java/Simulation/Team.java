@@ -1811,9 +1811,9 @@ public class Team {
         int negBonusNum = 85;
         int posBonusNum = 125;
         int ultBonusNum = 150;
-        int negativeBonus = -3;
-        int positiveBonus = 3;
-        int ultraBonus = 5;
+        int negativeBonus = Math.round(teamPrestige/20);
+        int positiveBonus = Math.round(HC.get(0).ratTalent/20);
+        int ultraBonus = Math.round(HC.get(0).ratTalent/12);
 
         for (int i = 0; i < qbNeeds; ++i) {
             // Add some randomness so that players with higher stars can be recruited
