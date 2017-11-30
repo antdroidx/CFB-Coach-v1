@@ -2446,7 +2446,7 @@ public class Game implements Serializable {
             if (95 * Math.random() < fumChance / 50) {
                 //Fumble!
 
-                selQBStats[8]++;
+                selQBStats[9]++;
                 selQB.statsFumbles++;
 
                 if (gamePoss) {

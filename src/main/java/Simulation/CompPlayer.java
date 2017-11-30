@@ -34,13 +34,13 @@ public class CompPlayer implements Comparator<Player> {
                     return -1;
                 } else if (!b.isTransfer) {
                     return 1;
-                } else if (a.year > 0) {
-                    return -1;
-                } else if (b.year > 0) {
-                    return 1;
-                } else {
-                    return a.ratOvr > b.ratOvr ? -1 : a.ratOvr == b.ratOvr ? 0 : 1;
                 }
+            } else if (a.year > 0) {
+                return -1;
+            } else if (b.year > 0) {
+                return 1;
+            } else {
+                return a.ratOvr > b.ratOvr ? -1 : a.ratOvr == b.ratOvr ? 0 : 1;
             }
         } else if (!a.isInjured) {
             return -1;

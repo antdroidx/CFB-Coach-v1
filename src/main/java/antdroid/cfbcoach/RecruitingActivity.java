@@ -245,7 +245,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
 
         //ratingTolerance = Math.round((140-HCtalent)/10);
-        ratingTolerance = 1;
+        ratingTolerance = 0;
         max = ratingTolerance;
         min = -ratingTolerance;
         tolerance = rand.nextInt((max - min) + 1) + min;
@@ -1145,7 +1145,7 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
     private void redshirtPlayer(String player) {
-        int moneyNeeded = (5 * getRecruitCost(player)) / 4;
+        int moneyNeeded = getRecruitCost(player);
         recruitingBudget -= moneyNeeded;
         budgetText.setText("Budget: $" + recruitingBudget);
 
