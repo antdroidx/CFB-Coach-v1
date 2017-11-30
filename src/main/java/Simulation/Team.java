@@ -1120,6 +1120,8 @@ public class Team {
         int confLimit = (confPrestige - confAvg) / 3;
         if (newPrestige > 85 + confLimit) newPrestige = 85 + confLimit;
         if (newPrestige < 25 + confLimit) newPrestige = 25 + confLimit;
+        if (newPrestige > 95) newPrestige = 95;
+        if (newPrestige < 15) newPrestige = 15;
 
         int PrestigeScore[] = {newPrestige, rivalryPts, ccPts, ncwPts, nflPts, rgameplayed};
         return PrestigeScore;
@@ -2635,7 +2637,7 @@ public class Team {
         int numInjured = 0;
 
         for (Player p : players) {
-            if (p.injury != null && !p.isSuspended) {
+            if (p.injury != null && !p.isSuspended && !p.isTransfer) {
                 p.injury.advanceGame();
                 numInjured++;
                 if (p.injury == null) {
@@ -3913,7 +3915,7 @@ public class Team {
             int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
             int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
             int score = 10*allConf + 20*allAmer + 50*poty;
-            if ( score > 69 ) {
+            if ( score > 65 ) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
@@ -3922,7 +3924,7 @@ public class Team {
                     sb.append(s + "&");
                 }
                 hallOfFame.add(sb.toString());
-                if (score > 115) league.leagueHoF.add(sb.toString());
+                if (score > 99) league.leagueHoF.add(sb.toString());
             }
         }
     }
