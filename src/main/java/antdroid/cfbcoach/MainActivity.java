@@ -322,10 +322,10 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
+                        promotions(userHC);
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Coaching Changes");
                         simLeague.currentWeek++;
-                        showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 18) {
                         simLeague.coachCarousel();
                         simGameButton.setTextSize(12);
@@ -2427,6 +2427,65 @@ public class MainActivity extends AppCompatActivity {
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    //Job offers promotions
+    public void promotions(HeadCoach headCoach) {
+        userHC = headCoach;
+        int ratOvr = userHC.ratOvr;
+        if (ratOvr < 40) ratOvr = 40;
+        double offers = Math.random();
+        String oldTeam = userHC.team.name;
+        updateTeamUI();
+        //get user team from list dialog
+        final ArrayList<String> teamsArray = simLeague.getCoachPromotionListStr((ratOvr - 10), offers, oldTeam);
+        final ArrayList<Team> coachList = simLeague.getCoachPromotionList((ratOvr - 10), offers, oldTeam);
+        if (coachList.isEmpty()) {
+
+            showNewsStoriesDialog();
+
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Job Offers Available:")
+                    .setPositiveButton("Decline Offers", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            showNewsStoriesDialog();
+
+                        }
+                    });
+            final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
+            builder.setItems(teams, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    // Do something with the selection
+                    userTeam.userControlled = false;
+                    userTeam.HC.clear();
+                    userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    simLeague.newJobtransfer(coachList.get(item).name);
+                    userTeam = simLeague.userTeam;
+                    userTeamStr = userTeam.name;
+                    currentTeam = userTeam;
+                    userTeam.HC.clear();
+                    userTeam.HC.add(userHC);
+                    userTeam.fired = false;
+                    userHC.contractYear = 0;
+                    userHC.contractLength = 5;
+                    userHC.baselinePrestige = userTeam.teamPrestige;
+                    simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
+                            " to lead the team.");
+                    simLeague.coachCarousel();
+                    simLeague.setTeamRanks();
+                    updateTeamUI();
+                    examineTeam(currentTeam.name);
+                    showNewsStoriesDialog();
+
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     private void newGameHardDialog() {

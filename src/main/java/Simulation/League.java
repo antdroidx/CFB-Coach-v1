@@ -713,7 +713,6 @@ public class League extends Rankings {
                 }
             }
 
-
             // Set up lucky and penalized teams for Week 0 news stories
             StringBuilder sbLucky = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LUCKY_TEAM")) {
@@ -843,16 +842,22 @@ public class League extends Rankings {
                 }
             }
 
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_HALL_OF_FAME")) {
-                for (int i = 0; i < countTeam; ++i) { //Do for every team
+/*            while ((line = bufferedReader.readLine()) != null && !line.equals("END_HALL_OF_FAME")) {
+                for (int i = 0; i < teamList.size(); ++i) { //Do for every team
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
                         teamList.get(i).hallOfFame.add(line);
                     }
                 }
-            }
+            }*/
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HALL_OF_FAME")) {
                 leagueHoF.add(line);
+                String[] fileSplit = line.split(" ");
+                for (int i = 0; i < teamList.size(); ++i) {
+                    if (teamList.get(i).name.equals(fileSplit[0])) {
+                        teamList.get(i).hallOfFame.add(line);
+                    }
+                }
             }
 
             // Always close files.
@@ -2779,6 +2784,30 @@ public class League extends Rankings {
         return teamVacancies;
     }
 
+    public ArrayList<String> getCoachPromotionListStr(int rating, double offers, String oldTeam) {
+        ArrayList<String> teams = new ArrayList<>();
+        ArrayList<Team> teamVacancies = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
+                teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
+            }
+        }
+        return teams;
+    }
+
+    //Get Coach Job Offers List for Team Transfer
+    public ArrayList<Team> getCoachPromotionList(int rating, double offers, String oldTeam) {
+        ArrayList<Team> teamVacancies = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
+                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
+            }
+        }
+
+        return teamVacancies;
+    }
+
     //Transferring Jobs
     public void newJobtransfer(String coachTeam) {
         for (int i = 0; i < teamList.size(); ++i) {
@@ -4339,7 +4368,6 @@ public class League extends Rankings {
         }
         sb.append("END_COACH_HISTORY\n");
 
-
         // Save who was luckyed and penalizedd this year for news stories the following year
         if (saveLucky != null) {
             sb.append(saveLucky.abbr + "\n");
@@ -4418,13 +4446,13 @@ public class League extends Rankings {
         sb.append("END_TEAM_RECORDS\n");
 
         // Save all the Hall of Famers
-        for (Team t : teamList) {
+/*        for (Team t : teamList) {
             for (String s : t.hallOfFame) {
                 sb.append(s + "\n");
             }
             sb.append("END_TEAM\n");
         }
-        sb.append("END_HALL_OF_FAME\n");
+        sb.append("END_HALL_OF_FAME\n"); */
         for (String s : leagueHoF) {
             sb.append(s + "\n");
         }        sb.append("END_LEAGUE_HALL_OF_FAME\n");
