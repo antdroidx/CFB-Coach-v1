@@ -588,10 +588,16 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getGrade(String num) {
         int ind = (Integer.parseInt(num));
 
-        ind = (ind + tolerance - 40) / 8;
+/*        ind = (ind + tolerance - 40) / 8;
         if (ind > 5) ind = 5;
         if (ind < 0) ind = 1;
-        return starGrades[ind];
+        return starGrades[ind];*/
+
+        if (ind > 79) return "* * * * *";
+        else if (ind > 74) return " * * * *";
+        else if (ind > 63) return " * * * ";
+        else if (ind > 54) return "  * * ";
+        else return "  *  ";
     }
 
 
