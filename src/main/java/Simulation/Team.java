@@ -3914,8 +3914,8 @@ public class Team {
             int allConf = p.careerAllConference + (p.wonAllConference ? 1 : 0);
             int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
             int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
-            int score = 10*allConf + 20*allAmer + 50*poty;
-            if ( score > 65 ) {
+            int score = 10*allConf + 20*allAmer + 50*poty; //Heisman winners automatically get 80 points
+            if ( score > 100 ) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
@@ -3924,7 +3924,7 @@ public class Team {
                     sb.append(s + "&");
                 }
                 hallOfFame.add(sb.toString());
-                if (score > 99) league.leagueHoF.add(sb.toString());
+                league.leagueHoF.add(sb.toString());
             }
         }
     }
