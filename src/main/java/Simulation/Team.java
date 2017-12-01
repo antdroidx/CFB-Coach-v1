@@ -1816,8 +1816,7 @@ public class Team {
         } else {
             recruitChance = teamPrestige;
         }
-        
-        int negBonusNum = 80;
+                int negBonusNum = 80;
         int negBonusNum2 = 70;
         int posBonusNum = 120;
         int ultBonusNum = 150;
@@ -1868,7 +1867,6 @@ public class Team {
         }
 
         for (int i = 0; i < teNeeds; ++i) {
-            if (negBonusNum2*Math.random() < recruitChance && teamPrestige > 65) stars = (int)Math.random()*3+1;
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;

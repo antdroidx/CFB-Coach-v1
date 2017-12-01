@@ -28,12 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -111,23 +106,23 @@
       <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-538">
-              <caret line="1818" column="8" lean-forward="false" selection-start-line="1818" selection-start-column="8" selection-end-line="1818" selection-end-column="8" />
+            <state relative-caret-position="1094">
+              <caret line="1869" column="0" lean-forward="false" selection-start-line="1869" selection-start-column="0" selection-end-line="1869" selection-end-column="0" />
               <folding>
-                <marker date="1512116442376" expanded="false" signature="128930:128941" ph=" { " />
-                <marker date="1512116442376" expanded="false" signature="128958:128964" ph=" }" />
-                <marker date="1512116442376" expanded="false" signature="138809:138817" ph="&lt;~&gt;" />
-                <marker date="1512116442376" expanded="false" signature="140220:140242" ph="&lt;~&gt;" />
-                <marker date="1512116442376" expanded="false" signature="146824:146835" ph=" { " />
-                <marker date="1512116442376" expanded="false" signature="146882:146888" ph=" }" />
-                <marker date="1512116442376" expanded="false" signature="146929:146940" ph=" { " />
-                <marker date="1512116442376" expanded="false" signature="146988:146994" ph=" }" />
-                <marker date="1512116442376" expanded="false" signature="148762:148773" ph=" { " />
-                <marker date="1512116442376" expanded="false" signature="148818:148824" ph=" }" />
-                <marker date="1512116442376" expanded="false" signature="149386:149397" ph=" { " />
-                <marker date="1512116442376" expanded="false" signature="149436:149442" ph=" }" />
-                <marker date="1512116442376" expanded="false" signature="170631:170642" ph=" { " />
-                <marker date="1512116442376" expanded="false" signature="170668:170674" ph=" }" />
+                <marker date="1512116551336" expanded="false" signature="128816:128827" ph=" { " />
+                <marker date="1512116551336" expanded="false" signature="128844:128850" ph=" }" />
+                <marker date="1512116551336" expanded="false" signature="138695:138703" ph="&lt;~&gt;" />
+                <marker date="1512116551336" expanded="false" signature="140106:140128" ph="&lt;~&gt;" />
+                <marker date="1512116551336" expanded="false" signature="146710:146721" ph=" { " />
+                <marker date="1512116551336" expanded="false" signature="146768:146774" ph=" }" />
+                <marker date="1512116551336" expanded="false" signature="146815:146826" ph=" { " />
+                <marker date="1512116551336" expanded="false" signature="146874:146880" ph=" }" />
+                <marker date="1512116551336" expanded="false" signature="148648:148659" ph=" { " />
+                <marker date="1512116551336" expanded="false" signature="148704:148710" ph=" }" />
+                <marker date="1512116551336" expanded="false" signature="149272:149283" ph=" { " />
+                <marker date="1512116551336" expanded="false" signature="149322:149328" ph=" }" />
+                <marker date="1512116551336" expanded="false" signature="170517:170528" ph=" { " />
+                <marker date="1512116551336" expanded="false" signature="170554:170560" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -1516,7 +1511,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512116499935" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512116557374" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1564,7 +1559,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512116499936" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512116557374" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1770,7 +1765,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512116499937" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512116557375" />
       </method>
     </configuration>
     <list size="1">
@@ -2286,23 +2281,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-538">
-          <caret line="1818" column="8" lean-forward="false" selection-start-line="1818" selection-start-column="8" selection-end-line="1818" selection-end-column="8" />
+        <state relative-caret-position="1094">
+          <caret line="1869" column="0" lean-forward="false" selection-start-line="1869" selection-start-column="0" selection-end-line="1869" selection-end-column="0" />
           <folding>
-            <marker date="1512116442376" expanded="false" signature="128930:128941" ph=" { " />
-            <marker date="1512116442376" expanded="false" signature="128958:128964" ph=" }" />
-            <marker date="1512116442376" expanded="false" signature="138809:138817" ph="&lt;~&gt;" />
-            <marker date="1512116442376" expanded="false" signature="140220:140242" ph="&lt;~&gt;" />
-            <marker date="1512116442376" expanded="false" signature="146824:146835" ph=" { " />
-            <marker date="1512116442376" expanded="false" signature="146882:146888" ph=" }" />
-            <marker date="1512116442376" expanded="false" signature="146929:146940" ph=" { " />
-            <marker date="1512116442376" expanded="false" signature="146988:146994" ph=" }" />
-            <marker date="1512116442376" expanded="false" signature="148762:148773" ph=" { " />
-            <marker date="1512116442376" expanded="false" signature="148818:148824" ph=" }" />
-            <marker date="1512116442376" expanded="false" signature="149386:149397" ph=" { " />
-            <marker date="1512116442376" expanded="false" signature="149436:149442" ph=" }" />
-            <marker date="1512116442376" expanded="false" signature="170631:170642" ph=" { " />
-            <marker date="1512116442376" expanded="false" signature="170668:170674" ph=" }" />
+            <marker date="1512116551336" expanded="false" signature="128816:128827" ph=" { " />
+            <marker date="1512116551336" expanded="false" signature="128844:128850" ph=" }" />
+            <marker date="1512116551336" expanded="false" signature="138695:138703" ph="&lt;~&gt;" />
+            <marker date="1512116551336" expanded="false" signature="140106:140128" ph="&lt;~&gt;" />
+            <marker date="1512116551336" expanded="false" signature="146710:146721" ph=" { " />
+            <marker date="1512116551336" expanded="false" signature="146768:146774" ph=" }" />
+            <marker date="1512116551336" expanded="false" signature="146815:146826" ph=" { " />
+            <marker date="1512116551336" expanded="false" signature="146874:146880" ph=" }" />
+            <marker date="1512116551336" expanded="false" signature="148648:148659" ph=" { " />
+            <marker date="1512116551336" expanded="false" signature="148704:148710" ph=" }" />
+            <marker date="1512116551336" expanded="false" signature="149272:149283" ph=" { " />
+            <marker date="1512116551336" expanded="false" signature="149322:149328" ph=" }" />
+            <marker date="1512116551336" expanded="false" signature="170517:170528" ph=" { " />
+            <marker date="1512116551336" expanded="false" signature="170554:170560" ph=" }" />
           </folding>
         </state>
       </provider>
