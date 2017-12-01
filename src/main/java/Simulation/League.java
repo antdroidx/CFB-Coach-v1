@@ -2842,10 +2842,12 @@ public class League extends Rankings {
                         for (int j = 0; j < teamList.size(); ++j) {
                             if (teamList.get(j).name.equals(tmName)) {
                                 teamList.get(j).HC.remove(0);
-                                teamList.get(j).promoteCoach();
-                                teamList.get(j).HC.get(0).history.add("");
-                                newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
-                                        " hopes to continue their recent success, despite the recent loss of coach " + teamList.get(t).HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
+                                if (Math.random() > 0.50) {
+                                    teamList.get(j).promoteCoach();
+                                    teamList.get(j).HC.get(0).history.add("");
+                                    newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
+                                            " hopes to continue their recent success, despite the recent loss of coach " + teamList.get(t).HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
+                                }
                             }
                         }
 
@@ -4339,7 +4341,7 @@ public class League extends Rankings {
         // Save information about each team like W-L records, as well as all the players
         for (Team t : teamList) {
             sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," +
-                    (t.totalWins - t.wins) + "," + (t.totalLosses - t.losses) + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," +
+                    (t.totalWins - t.wins) + "," + (t.totalLosses - t.losses) + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," +
                     t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," +
                     t.teamStratOffNum + "," + t.teamStratDefNum + "," + (t.showPopups ? 1 : 0) + "," +
                     t.yearStartWinStreak.getStreakCSV() + "," + t.teamTVDeal + "," + t.confTVDeal + "%" + t.evenYearHomeOpp + "%\n");

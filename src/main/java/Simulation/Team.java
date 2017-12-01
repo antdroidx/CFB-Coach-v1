@@ -148,7 +148,9 @@ public class Team {
     public int startersS = 1;
 
     public int maxPlayers = 70;
-    
+
+    public int maxStarRating = 9;
+
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
     public int dismissalChance = 3;
@@ -359,27 +361,28 @@ public class Team {
             totalCCs = Integer.parseInt(teamInfo[6]);
             totalNCs = Integer.parseInt(teamInfo[7]);
             rivalTeam = teamInfo[8];
-            if (teamInfo.length >= 13) {
-                totalNCLosses = Integer.parseInt(teamInfo[9]);
-                totalCCLosses = Integer.parseInt(teamInfo[10]);
-                totalBowls = Integer.parseInt(teamInfo[11]);
-                totalBowlLosses = Integer.parseInt(teamInfo[12]);
-                if (teamInfo.length >= 16) {
+            location = Integer.parseInt(teamInfo[9]);
+            if (teamInfo.length >= 14) {
+                totalNCLosses = Integer.parseInt(teamInfo[10]);
+                totalCCLosses = Integer.parseInt(teamInfo[11]);
+                totalBowls = Integer.parseInt(teamInfo[12]);
+                totalBowlLosses = Integer.parseInt(teamInfo[13]);
+                if (teamInfo.length >= 17) {
                     teamStratOffNum = Integer.parseInt(teamInfo[13]);
-                    teamStratDefNum = Integer.parseInt(teamInfo[14]);
-                    showPopups = (Integer.parseInt(teamInfo[15]) == 1);
-                    if (teamInfo.length >= 20) {
-                        winStreak = new TeamStreak(Integer.parseInt(teamInfo[18]),
-                                Integer.parseInt(teamInfo[19]),
-                                Integer.parseInt(teamInfo[16]),
-                                teamInfo[17]);
-                        yearStartWinStreak = new TeamStreak(Integer.parseInt(teamInfo[18]),
-                                Integer.parseInt(teamInfo[19]),
-                                Integer.parseInt(teamInfo[16]),
-                                teamInfo[17]);
-                        if (teamInfo.length >= 22) {
-                            teamTVDeal = Boolean.parseBoolean(teamInfo[20]);
-                            confTVDeal = Boolean.parseBoolean(teamInfo[21]);
+                    teamStratDefNum = Integer.parseInt(teamInfo[15]);
+                    showPopups = (Integer.parseInt(teamInfo[16]) == 1);
+                    if (teamInfo.length >= 21) {
+                        winStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
+                                Integer.parseInt(teamInfo[20]),
+                                Integer.parseInt(teamInfo[17]),
+                                teamInfo[18]);
+                        yearStartWinStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
+                                Integer.parseInt(teamInfo[20]),
+                                Integer.parseInt(teamInfo[17]),
+                                teamInfo[18]);
+                        if (teamInfo.length >= 23) {
+                            teamTVDeal = Boolean.parseBoolean(teamInfo[21]);
+                            confTVDeal = Boolean.parseBoolean(teamInfo[22]);
                         }
                     }
                 }
@@ -1170,6 +1173,11 @@ public class Team {
         records.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
 
         coachContracts(totalPDiff, newPrestige[0], confLimit, avgCP);
+
+        if (userControlled && totalPDiff > 2) {
+            HC.get(0).promotionCandidate = true;
+        }
+
     }
 
 
@@ -1179,6 +1187,7 @@ public class Team {
         int min = 63;
         Random rand = new Random();
         int retire = rand.nextInt((max - min) + 1) + min;
+
         //RETIREMENT
         if (HC.get(0).age > retire && !userControlled) {
             retired = true;
@@ -1807,14 +1816,13 @@ public class Team {
         } else {
             recruitChance = teamPrestige;
         }
-
-        int recruitBudget = teamPrestige * 17;
-        recruitBudget += teamPrestige/3 * (50 - (teamQBs.size()+teamRBs.size()+teamWRs.size()+teamTEs.size()+teamOLs.size()+teamKs.size()+teamDLs.size()+teamLBs.size()+teamCBs.size()+teamSs.size()));
-        int negBonusNum = 85;
-        int posBonusNum = 125;
+        
+        int negBonusNum = 80;
+        int negBonusNum2 = 70;
+        int posBonusNum = 120;
         int ultBonusNum = 150;
-        int negativeBonus = Math.round(teamPrestige/20);
-        int positiveBonus = Math.round(HC.get(0).ratTalent/20);
+        int negativeBonus = Math.round(teamPrestige/17);
+        int positiveBonus = Math.round(HC.get(0).ratTalent/17);
         int ultraBonus = Math.round(HC.get(0).ratTalent/12);
 
         for (int i = 0; i < qbNeeds; ++i) {
@@ -1840,7 +1848,6 @@ public class Team {
         }
 
         for (int i = 0; i < rbNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -1851,7 +1858,6 @@ public class Team {
         }
 
         for (int i = 0; i < wrNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -1862,7 +1868,7 @@ public class Team {
         }
 
         for (int i = 0; i < teNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
+            if (negBonusNum2*Math.random() < recruitChance && teamPrestige > 65) stars = (int)Math.random()*3+1;
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -1873,7 +1879,6 @@ public class Team {
         }
 
         for (int i = 0; i < olNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -1895,7 +1900,6 @@ public class Team {
         }
 
         for (int i = 0; i < lbNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -1905,7 +1909,6 @@ public class Team {
         }
 
         for (int i = 0; i < cbNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -1916,7 +1919,6 @@ public class Team {
         }
 
         for (int i = 0; i < sNeeds; ++i) {
-            // Add some randomness so that players with higher stars can be recruited
             if (negBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*negativeBonus;
             if (posBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*positiveBonus;
             else if (ultBonusNum*Math.random() < recruitChance) stars = stars + (int)Math.random()*ultraBonus;
@@ -2062,6 +2064,124 @@ public class Team {
         sortPlayers();
     }
 
+    public PlayerQB[] getQBRecruits() {
+        PlayerQB[] recruits = new PlayerQB[numRecruits];
+        int stars;
+        for (int i = 0; i < numRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (numRecruits - i / 2) / numRecruits);
+            recruits[i] = new PlayerQB(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerRB[] getRBRecruits() {
+        int numRBrecruits = 2 * numRecruits;
+        PlayerRB[] recruits = new PlayerRB[numRBrecruits];
+        int stars;
+        for (int i = 0; i < numRBrecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (numRBrecruits - i / 2) / numRBrecruits);
+            recruits[i] = new PlayerRB(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerWR[] getWRRecruits() {
+        int adjNumRecruits = 3 * numRecruits;
+        PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerWR(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerTE[] getTERecruits() {
+        int adjNumRecruits = numRecruits;
+        PlayerTE[] recruits = new PlayerTE[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerTE(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerOL[] getOLRecruits() {
+        int adjNumRecruits = 3 * numRecruits;
+        PlayerOL[] recruits = new PlayerOL[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerOL(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerK[] getKRecruits() {
+        int adjNumRecruits = numRecruits;
+        PlayerK[] recruits = new PlayerK[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerK(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerDL[] getDLRecruits() {
+        int adjNumRecruits = 3 * numRecruits;
+        PlayerDL[] recruits = new PlayerDL[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerDL(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerLB[] getLBRecruits() {
+        int adjNumRecruits = 3 * numRecruits;
+        PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerLB(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerCB[] getCBRecruits() {
+        int adjNumRecruits = 2 * numRecruits;
+        PlayerCB[] recruits = new PlayerCB[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerCB(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
+
+    public PlayerS[] getSRecruits() {
+        int adjNumRecruits = numRecruits;
+        PlayerS[] recruits = new PlayerS[adjNumRecruits];
+        int stars;
+        for (int i = 0; i < adjNumRecruits; ++i) {
+            stars = (int) (maxStarRating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
+            recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
+        }
+        Arrays.sort(recruits, new RecruitComparator());
+        return recruits;
+    }
 
 
     /**
@@ -3418,124 +3538,6 @@ public class Team {
     }
 
 
-    public PlayerQB[] getQBRecruits() {
-        PlayerQB[] recruits = new PlayerQB[numRecruits];
-        int stars;
-        for (int i = 0; i < numRecruits; ++i) {
-            stars = (int) (5 * (float) (numRecruits - i / 2) / numRecruits);
-            recruits[i] = new PlayerQB(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerRB[] getRBRecruits() {
-        int numRBrecruits = 2 * numRecruits;
-        PlayerRB[] recruits = new PlayerRB[numRBrecruits];
-        int stars;
-        for (int i = 0; i < numRBrecruits; ++i) {
-            stars = (int) (5 * (float) (numRBrecruits - i / 2) / numRBrecruits);
-            recruits[i] = new PlayerRB(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerWR[] getWRRecruits() {
-        int adjNumRecruits = 3 * numRecruits;
-        PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerWR(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerTE[] getTERecruits() {
-        int adjNumRecruits = numRecruits;
-        PlayerTE[] recruits = new PlayerTE[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerTE(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerOL[] getOLRecruits() {
-        int adjNumRecruits = 3 * numRecruits;
-        PlayerOL[] recruits = new PlayerOL[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerOL(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerK[] getKRecruits() {
-        int adjNumRecruits = numRecruits;
-        PlayerK[] recruits = new PlayerK[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerK(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerDL[] getDLRecruits() {
-        int adjNumRecruits = 3 * numRecruits;
-        PlayerDL[] recruits = new PlayerDL[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerDL(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerLB[] getLBRecruits() {
-        int adjNumRecruits = 3 * numRecruits;
-        PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerLB(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerCB[] getCBRecruits() {
-        int adjNumRecruits = 2 * numRecruits;
-        PlayerCB[] recruits = new PlayerCB[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerCB(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
-
-    public PlayerS[] getSRecruits() {
-        int adjNumRecruits = numRecruits;
-        PlayerS[] recruits = new PlayerS[adjNumRecruits];
-        int stars;
-        for (int i = 0; i < adjNumRecruits; ++i) {
-            stars = (int) (5 * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
-            recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
-        }
-        Arrays.sort(recruits, new RecruitComparator());
-        return recruits;
-    }
 
 
     /**

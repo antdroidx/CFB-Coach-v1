@@ -41,6 +41,8 @@ public class HeadCoach extends Player {
     public ArrayList<String> history;
     double potFactor = 1.33;
 
+    public boolean promotionCandidate;
+
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
                      int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
