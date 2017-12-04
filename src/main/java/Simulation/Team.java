@@ -3844,11 +3844,13 @@ public class Team {
         } else if (teamQBs.get(0).ratSpeed < 75 && HC.get(0).offStrat == 4) {
             return 0;
         } else {
+            if (HC.get(0).offStrat > 4) HC.get(0).offStrat = 0;
             return HC.get(0).offStrat;
         }
     }
 
     public int getCPUDefense() {
+        if (HC.get(0).defStrat > 4) HC.get(0).defStrat = 0;
         return HC.get(0).defStrat;
     }
 

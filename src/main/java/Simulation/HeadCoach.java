@@ -132,7 +132,9 @@ public class HeadCoach extends Player {
         ratDiscipline = (int) (45 + 45 * Math.random());
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
         offStrat = rand.nextInt((max - min) + 1) + min;
+        if (offStrat > 4) offStrat = 4;
         defStrat = rand.nextInt((max - min) + 1) + min;
+        if (defStrat > 4) defStrat = 4;
         baselinePrestige = team.calcSeasonPrestige()[0];
         teamWins = 0;
         teamLosses = 0;
