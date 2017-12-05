@@ -685,6 +685,10 @@ public class League extends Rankings {
                 Team t = new Team(sbTeam.toString(), this);
                 conferences.get(getConfNumber(t.conference)).confTeams.add(t);
                 teamList.add(t);
+                teamList.get(i).teamStratOffNum = teamList.get(i).getCPUOffense();
+                teamList.get(i).teamStratDefNum = teamList.get(i).getCPUDefense();
+                teamList.get(i).teamStratOff = teamList.get(i).getTeamStrategiesOff()[teamList.get(i).teamStratOffNum];
+                teamList.get(i).teamStratDef = teamList.get(i).getTeamStrategiesDef()[teamList.get(i).teamStratDefNum];
             }
 
             //Set up user team
