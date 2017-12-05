@@ -3916,12 +3916,12 @@ public class Team {
             int allConf = p.careerAllConference + (p.wonAllConference ? 1 : 0);
             int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
             int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
-            int score = 10*allConf + 20*allAmer + 50*poty; //Heisman winners automatically get 80 points
-            if ( score > 100 ) {
+            int score = 10*allConf + 25*allAmer + 50*poty;
+            if ( score > 74 ) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
-                sb.append(p.getPosNameYrOvr_Str() + "&");
+                sb.append(score + "-" + p.getPosNameYrOvr_Str() + "&");
                 for (String s : careerStats) {
                     sb.append(s + "&");
                 }
