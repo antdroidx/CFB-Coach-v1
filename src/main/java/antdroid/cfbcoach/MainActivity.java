@@ -1467,7 +1467,7 @@ public class MainActivity extends AppCompatActivity {
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
         if (simLeague.currentWeek > 15 && simLeague.currentWeek < 19) {
-            weekSelectionSpinner.setSelection(simLeague.currentWeek - 1);
+            weekSelectionSpinner.setSelection(simLeague.currentWeek);
         } else {
             weekSelectionSpinner.setSelection(simLeague.currentWeek);
         }
@@ -2336,7 +2336,6 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractYear = 0;
                 userHC.contractLength = 4;
                 userHC.baselinePrestige = userTeam.teamPrestige;
-                simLeague.setTeamRanks();
                 updateTeamUI();
                 examineTeam(currentTeam.name);
             }
@@ -2375,7 +2374,6 @@ public class MainActivity extends AppCompatActivity {
                 userHC.contractYear = 0;
                 userHC.contractLength = 5;
                 userHC.baselinePrestige = userTeam.teamPrestige;
-                simLeague.setTeamRanks();
                 updateTeamUI();
                 examineTeam(currentTeam.name);
             }
@@ -2420,7 +2418,6 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                         " to lead the team.");
                 simLeague.coachCarousel();
-                simLeague.setTeamRanks();
                 updateTeamUI();
                 examineTeam(currentTeam.name);
             }
@@ -2477,7 +2474,6 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                                 " to lead the team.");
                         simLeague.coachCarousel();
-                        simLeague.setTeamRanks();
                         updateTeamUI();
                         examineTeam(currentTeam.name);
                         showNewsStoriesDialog();

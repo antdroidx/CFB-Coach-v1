@@ -411,8 +411,8 @@ public class Team {
 
 
         wonRivalryGame = false;
-        teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
-        teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
+/*        teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
+        teamStratDef = getTeamStrategiesDef()[teamStratDefNum];*/
         teamDiscipline = getTeamDiscipline();
 
         numRecruits = 30;
