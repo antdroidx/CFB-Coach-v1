@@ -172,7 +172,7 @@ public class PlayerDL extends Player {
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
-        progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 6;
+        progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef) / 6;
 
         if (!isMedicalRS) {
             year++;
