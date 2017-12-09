@@ -136,7 +136,7 @@ public class PlayerK extends Player {
 
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 9));
-        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
         troubledTimes = 0;
 
         statsXPAtt = 0;
@@ -180,7 +180,7 @@ public class PlayerK extends Player {
 
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 9));
-        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
         troubledTimes = 0;
 
         statsXPAtt = 0;

@@ -176,7 +176,7 @@ public class PlayerQB extends Player {
 
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 15));
-        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
         troubledTimes = 0;
 
         statsPassAtt = 0;
@@ -234,7 +234,7 @@ public class PlayerQB extends Player {
 
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 15));
-        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+
         troubledTimes = 0;
 
         statsPassAtt = 0;

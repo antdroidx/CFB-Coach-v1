@@ -85,7 +85,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needCBs;
     private int needSs;
 
-    int minPlayers = 50;
+    int minPlayers = 53;
     int minQBs = 3;
     int minRBs = 6;
     int minWRs = 8;
@@ -100,6 +100,11 @@ public class RecruitingActivity extends AppCompatActivity {
     int redshirtCount = 0;
     int maxRedshirt = 6;
     int maxPlayers = 70;
+
+    int five = 84;
+    int four = 78;
+    int three = 68;
+    int two = 56;
 
     // Whether to show pop ups every recruit
     private boolean showPopUp;
@@ -212,7 +217,8 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Add extra money if your team was fleeced
         int recBonus = (Integer.parseInt(teamInfo[3]) / 3) * (minPlayers - teamPlayers.size());
-        recruitingBudget += recBonus;
+        int coachBonus = 5*HCtalent/2;
+        recruitingBudget += recBonus + coachBonus;
 
         // Next get recruits info
         ++i;
@@ -252,7 +258,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
-        availAll = new ArrayList<String>(availAll.subList(0, 100));
+        availAll = new ArrayList<String>(availAll.subList(0, 50));
 
         // Get needs for each position
         updatePositionNeeds();
@@ -269,7 +275,7 @@ public class RecruitingActivity extends AppCompatActivity {
          */
         positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
-        positions.add("Top 100 Recruits");
+        positions.add("Top 50 Recruits");
         positions.add("QB (Need: " + needQBs + ")");
         positions.add("RB (Need: " + needRBs + ")");
         positions.add("WR (Need: " + needWRs + ")");
@@ -586,17 +592,11 @@ public class RecruitingActivity extends AppCompatActivity {
 
 
     private String getGrade(String num) {
-        int ind = (Integer.parseInt(num));
-
-/*        ind = (ind + tolerance - 40) / 8;
-        if (ind > 5) ind = 5;
-        if (ind < 0) ind = 1;
-        return starGrades[ind];*/
-
-        if (ind > 79) return "* * * * *";
-        else if (ind > 74) return " * * * *";
-        else if (ind > 63) return " * * * ";
-        else if (ind > 54) return "  * * ";
+        int pRat = (Integer.parseInt(num));
+        if (pRat > five) return "* * * * *";
+        else if (pRat > four) return " * * * *";
+        else if (pRat > three) return " * * * ";
+        else if (pRat > two) return "  * * ";
         else return "  *  ";
     }
 
@@ -684,7 +684,7 @@ public class RecruitingActivity extends AppCompatActivity {
      * Called whenever new position is selected, updates all the components
      */
     private void updateForNewPosition() {
-        if (!currentPosition.equals("Top 100 Recruits")) {
+        if (!currentPosition.equals("Top 50 Recruits")) {
             String[] splitty = currentPosition.split(" ");
             setPlayerList(splitty[0]);
             setPlayerInfoMap(splitty[0]);
@@ -720,7 +720,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         if (dataAdapterPosition != null) {
             positions = new ArrayList<String>();
-            positions.add("Top 100 Recruits");
+            positions.add("Top 50 Recruits");
             positions.add("QB (Need: " + needQBs + ")");
             positions.add("RB (Need: " + needRBs + ")");
             positions.add("WR (Need: " + needWRs + ")");

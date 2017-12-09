@@ -142,7 +142,7 @@ public class PlayerS extends Player {
 
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 12));
-        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+        troubledTimes = 0;
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -188,7 +188,7 @@ public class PlayerS extends Player {
 
         double locFactor = Math.abs(team.location - region) - 2.5;
         cost = cost + (int)(Math.random()*(locFactor * 12));
-        if (cost < 15) cost = (int)(Math.random()*19) + 1;
+        troubledTimes = 0;
 
         wonHeisman = false;
         wonAllAmerican = false;
