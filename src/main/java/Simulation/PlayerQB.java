@@ -60,8 +60,6 @@ public class PlayerQB extends Player {
         personality = trait;
         troubledTimes = 0;
 
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
-
         statsPassAtt = 0;
         statsPassComp = 0;
         statsPassTD = 0;
@@ -118,8 +116,6 @@ public class PlayerQB extends Player {
         personality = trait;
         troubledTimes = 0;
 
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
-
         statsPassAtt = 0;
         statsPassComp = 0;
         statsPassTD = 0;
@@ -172,10 +168,17 @@ public class PlayerQB extends Player {
         ratOvr = (ratPassPow * 3 + ratPassAcc * 4 + ratEvasion + ratSpeed) / 9;
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
+        //cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
+
+        recruitTolerance = (int)((60 - team.teamPrestige)/qbImportance);
+        cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
+
+        cost = (int)(cost/qbImportance);
 
         double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 15));
+        cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
+
+        if (cost < 0) cost = (int)Math.random()*7+1;
 
         troubledTimes = 0;
 
@@ -230,10 +233,6 @@ public class PlayerQB extends Player {
         ratOvr = (ratPassPow * 3 + ratPassAcc * 4 + ratEvasion + ratSpeed) / 9;
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 1.5) + 150 + (int) (Math.random() * 100) - 50;
-
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 15));
 
         troubledTimes = 0;
 

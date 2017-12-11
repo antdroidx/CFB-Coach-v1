@@ -52,7 +52,7 @@ public class PlayerLB extends Player {
         position = "LB";
         region = reg;
         personality = trait;
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
+
         troubledTimes = 0;
 
         wonHeisman = false;
@@ -100,8 +100,6 @@ public class PlayerLB extends Player {
         position = "LB";
         troubledTimes = 0;
 
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
-
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
@@ -142,10 +140,17 @@ public class PlayerLB extends Player {
         position = "LB";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
 
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
+        //cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
+         recruitTolerance = (int)((60 - team.teamPrestige)/lbImportance);
+         cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
+
+         cost = (int)(cost/lbImportance);
+
+         double locFactor = Math.abs(team.location - region) - 2.5;
+         cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
+         if (cost < 0) cost = (int)Math.random()*7+1;
+
          troubledTimes = 0;
 
         wonHeisman = false;
@@ -187,10 +192,7 @@ public class PlayerLB extends Player {
         position = "LB";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 70 + (int) (Math.random() * 100) - 50;
 
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
         troubledTimes = 0;
 
         wonHeisman = false;

@@ -85,7 +85,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needCBs;
     private int needSs;
 
-    int minPlayers = 53;
+    int minPlayers = 50;
     int minQBs = 3;
     int minRBs = 6;
     int minWRs = 8;
@@ -104,7 +104,7 @@ public class RecruitingActivity extends AppCompatActivity {
     int five = 84;
     int four = 78;
     int three = 68;
-    int two = 56;
+    int two = 58;
 
     // Whether to show pop ups every recruit
     private boolean showPopUp;
@@ -170,7 +170,7 @@ public class RecruitingActivity extends AppCompatActivity {
         final String[] teamInfo = lines[0].split(",");
         teamName = teamInfo[1];
         teamAbbr = teamInfo[2];
-        recruitingBudget = Integer.parseInt(teamInfo[3]) * 17;
+        recruitingBudget = Integer.parseInt(teamInfo[3]) * 15;
         if (teamInfo[4].isEmpty()) {
             HCtalent = 70;
         } else {
@@ -216,8 +216,8 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
         // Add extra money if your team was fleeced
-        int recBonus = (Integer.parseInt(teamInfo[3]) / 3) * (minPlayers - teamPlayers.size());
-        int coachBonus = 5*HCtalent/2;
+        int recBonus = (minPlayers - teamPlayers.size())*15;
+        int coachBonus = HCtalent*3;
         recruitingBudget += recBonus + coachBonus;
 
         // Next get recruits info

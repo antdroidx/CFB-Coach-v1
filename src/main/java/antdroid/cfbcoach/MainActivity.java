@@ -2776,7 +2776,12 @@ public class MainActivity extends AppCompatActivity {
             String[] fileSplit = line.split(",");
             for (int i = 0; i < simLeague.teamList.size(); ++i) {
                 if (fileSplit[0].toString().equals(simLeague.teamList.get(i).name)) {
-                    simLeague.teamList.get(i).HC.get(0).name = fileSplit[1].toString();
+                    if (fileSplit.length > 2) {
+                        simLeague.teamList.get(i).HC.clear();
+                        simLeague.teamList.get(i).newCustomHeadCoach(fileSplit[1].toString(), Integer.parseInt(fileSplit[2]));
+                    } else {
+                        simLeague.teamList.get(i).HC.get(0).name = fileSplit[1].toString();
+                    }
                 }
             }
         }
