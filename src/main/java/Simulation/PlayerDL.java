@@ -50,7 +50,7 @@ public class PlayerDL extends Player {
         position = "DL";
         region = reg;
         personality = trait;
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
+
         troubledTimes = 0;
 
         wonHeisman = false;
@@ -98,7 +98,6 @@ public class PlayerDL extends Player {
         personality = trait;
         position = "DL";
 
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
         troubledTimes = 0;
 
         wonHeisman = false;
@@ -140,10 +139,17 @@ public class PlayerDL extends Player {
         position = "DL";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
+
+        //cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
+        recruitTolerance = (int)((60 - team.teamPrestige)/dlImportance);
+        cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
+
+        cost = (int)(cost/dlImportance);
 
         double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
+        cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
+        if (cost < 0) cost = (int)Math.random()*7+1;
+
         troubledTimes = 0;
 
         wonHeisman = false;
@@ -236,10 +242,7 @@ public class PlayerDL extends Player {
         position = "DL";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 60 + (int) (Math.random() * 100) - 50;
 
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
         troubledTimes = 0;
 
         wonHeisman = false;

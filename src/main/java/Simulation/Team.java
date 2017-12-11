@@ -153,7 +153,7 @@ public class Team {
     int five = 84;
     int four = 78;
     int three = 68;
-    int two = 56;
+    int two = 58;
 
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
@@ -728,6 +728,10 @@ public class Team {
         }
 
         recruitWalkOns();
+    }
+
+    public void newCustomHeadCoach(String coachName, int stars) {
+        HC.add(new HeadCoach(coachName, 1, stars, this));
     }
     
     /**
@@ -1819,7 +1823,7 @@ public class Team {
         if (HC.get(0) != null) {
             recruitChance = HC.get(0).ratTalent-50;
         } else {
-            recruitChance = teamPrestige;
+            recruitChance = teamPrestige-50;
         }
 
         for (int i = 0; i < qbNeeds; ++i) {
@@ -1972,7 +1976,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamQBs.add(new PlayerQB(league.getRandName(), 1, star, this));
         }
 
@@ -1984,7 +1988,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamRBs.add(new PlayerRB(league.getRandName(), 1, star, this));
         }
 
@@ -1996,7 +2000,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamWRs.add(new PlayerWR(league.getRandName(), 1, star, this));
         }
 
@@ -2008,7 +2012,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamTEs.add(new PlayerTE(league.getRandName(), 1, star, this));
         }
 
@@ -2020,7 +2024,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamOLs.add(new PlayerOL(league.getRandName(), 1, star, this));
         }
     
@@ -2032,7 +2036,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamKs.add(new PlayerK(league.getRandName(), 1, star, this));
         }
 
@@ -2044,7 +2048,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamDLs.add(new PlayerDL(league.getRandName(), 1, star, this));
         }
 
@@ -2056,7 +2060,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamLBs.add(new PlayerLB(league.getRandName(), 1, star, this));
         }
 
@@ -2068,7 +2072,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamCBs.add(new PlayerCB(league.getRandName(), 1, star, this));
         }
 
@@ -2080,7 +2084,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*5 + 1;
+            star = (int)Math.random()*3 + 1;
             teamSs.add(new PlayerS(league.getRandName(), 1, star, this));
         }
 
@@ -2088,17 +2092,23 @@ public class Team {
         sortPlayers();
     }
 
-    public PlayerQB[] getQBRecruits() {
-        int adjNumRecruits = numRecruits;
-        PlayerQB[] recruits = new PlayerQB[adjNumRecruits];
-        int stars;
+    public int calcMaxRecruitRating() {
         int rating;
-
-        if (teamPrestige > 75) {
+/*        if (teamPrestige > 75) {
             rating = maxStarRating + 1;
         } else if (teamPrestige < 40) {
             rating = maxStarRating - 1;
-        } else rating = maxStarRating;
+        } else rating = maxStarRating;*/
+
+        rating = (int)Math.round(( maxStarRating + (double)((teamPrestige - 60)/10) ));
+
+        return rating;
+    }
+
+    public PlayerQB[] getQBRecruits(int rating) {
+        int adjNumRecruits = numRecruits;
+        PlayerQB[] recruits = new PlayerQB[adjNumRecruits];
+        int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2108,17 +2118,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerRB[] getRBRecruits() {
+    public PlayerRB[] getRBRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
         PlayerRB[] recruits = new PlayerRB[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2128,17 +2131,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerWR[] getWRRecruits() {
+    public PlayerWR[] getWRRecruits(int rating) {
         int adjNumRecruits = 3 * numRecruits;
         PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2148,17 +2144,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerTE[] getTERecruits() {
+    public PlayerTE[] getTERecruits(int rating) {
         int adjNumRecruits = numRecruits;
         PlayerTE[] recruits = new PlayerTE[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2168,17 +2157,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerOL[] getOLRecruits() {
+    public PlayerOL[] getOLRecruits(int rating) {
         int adjNumRecruits = 3 * numRecruits;
         PlayerOL[] recruits = new PlayerOL[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2188,17 +2170,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerK[] getKRecruits() {
+    public PlayerK[] getKRecruits(int rating) {
         int adjNumRecruits = numRecruits;
         PlayerK[] recruits = new PlayerK[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2208,17 +2183,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerDL[] getDLRecruits() {
+    public PlayerDL[] getDLRecruits(int rating) {
         int adjNumRecruits = 3 * numRecruits;
         PlayerDL[] recruits = new PlayerDL[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2228,17 +2196,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerLB[] getLBRecruits() {
+    public PlayerLB[] getLBRecruits(int rating) {
         int adjNumRecruits = 3 * numRecruits;
         PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2248,17 +2209,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerCB[] getCBRecruits() {
+    public PlayerCB[] getCBRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
         PlayerCB[] recruits = new PlayerCB[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -2268,17 +2222,10 @@ public class Team {
         return recruits;
     }
 
-    public PlayerS[] getSRecruits() {
+    public PlayerS[] getSRecruits(int rating) {
         int adjNumRecruits = numRecruits;
         PlayerS[] recruits = new PlayerS[adjNumRecruits];
         int stars;
-        int rating;
-
-        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
@@ -3653,53 +3600,55 @@ public class Team {
      * @return String of all the recruits
      */
     public String getRecruitsInfoSaveFile() {
+        int rating = calcMaxRecruitRating();
+
         StringBuilder sb = new StringBuilder();
-        PlayerQB[] qbs = getQBRecruits();
+        PlayerQB[] qbs = getQBRecruits(rating);
         for (PlayerQB qb : qbs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
                     qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratDur + "," + qb.ratSpeed + "," + qb.region + "," + qb.personality + "%\n");
         }
-        PlayerRB[] rbs = getRBRecruits();
+        PlayerRB[] rbs = getRBRecruits(rating);
         for (PlayerRB rb : rbs) {
             sb.append("RB," + rb.name + "," + rb.year + "," + rb.ratPot + "," + rb.ratFootIQ + "," +
                     rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.cost + "," + rb.ratDur + "," + rb.ratCatch + "," + rb.region + "," + rb.personality + "%\n");
         }
-        PlayerWR[] wrs = getWRRecruits();
+        PlayerWR[] wrs = getWRRecruits(rating);
         for (PlayerWR wr : wrs) {
             sb.append("WR," + wr.name + "," + wr.year + "," + wr.ratPot + "," + wr.ratFootIQ + "," +
                     wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratDur + "," + wr.ratJump + "," + wr.region + "," + wr.personality + "%\n");
         }
-        PlayerTE[] tes = getTERecruits();
+        PlayerTE[] tes = getTERecruits(rating);
         for (PlayerTE te : tes) {
             sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
                     te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.cost + "," + te.ratDur + "," + te.ratSpeed + "," + te.region + "," + te.personality + "%\n");
         }
-        PlayerK[] ks = getKRecruits();
+        PlayerK[] ks = getKRecruits(rating);
         for (PlayerK k : ks) {
             sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
                     k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.cost + "," + k.ratDur + "," + k.ratPressure + "," + k.region + "," + k.personality + "%\n");
         }
-        PlayerOL[] ols = getOLRecruits();
+        PlayerOL[] ols = getOLRecruits(rating);
         for (PlayerOL ol : ols) {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
                     ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratDur + "," + ol.ratAwareness + "," + ol.region + "," + ol.personality + "%\n");
         }
-        PlayerDL[] DLs = getDLRecruits();
+        PlayerDL[] DLs = getDLRecruits(rating);
         for (PlayerDL DL : DLs) {
             sb.append("DL," + DL.name + "," + DL.year + "," + DL.ratPot + "," + DL.ratFootIQ + "," +
                     DL.ratStrength + "," + DL.ratRunStop + "," + DL.ratPassRush + "," + DL.ratOvr + "," + DL.cost + "," + DL.ratDur + "," + DL.ratTackle + "," + DL.region + "," + DL.personality + "%\n");
         }
-        PlayerLB[] lbs = getLBRecruits();
+        PlayerLB[] lbs = getLBRecruits(rating);
         for (PlayerLB lb : lbs) {
             sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
                     lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratDur + "," + lb.ratSpeed  + "," + lb.region + "," + lb.personality + "%\n");
         }
-        PlayerCB[] cbs = getCBRecruits();
+        PlayerCB[] cbs = getCBRecruits(rating);
         for (PlayerCB cb : cbs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
                     cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratDur + "," + cb.ratJump + "," + cb.region + "," + cb.personality + "%\n");
         }
-        PlayerS[] ss = getSRecruits();
+        PlayerS[] ss = getSRecruits(rating);
         for (PlayerS s : ss) {
             sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
                     s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.cost + "," + s.ratDur + "," + s.ratRunStop + "," + s.region + "," + s.personality + "%\n");

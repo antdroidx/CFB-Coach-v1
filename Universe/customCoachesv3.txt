@@ -1,0 +1,120 @@
+Air Force,Troy Calhoun,4
+Akron,Terry Bowden,5
+Alabama,Nick Saban,9
+Arizona,Rich Rodriguez,7
+Arizona State,Todd Graham,4
+Arkansas,Bret Bielema,5
+Arkansas State,Blake Anderson,4
+Army,Jeff Monken,4
+Auburn,Gus Malzahn,8
+Ball State,Mike Neu,3
+Baylor,Matt Rhule,4
+Boise State,Bryan Harsin,6
+Boston College,Steve Addazio,4
+Bowling Green,Mike Jinks,2
+Buffalo,Lance Leipold,3
+BYU,Kalani Sitake,2
+California,Justin Wilcox,7
+Central Florida,Scott Frost,8
+Central Michigan,John Bonamego,4
+Cincinnati,Luke Fickell,3
+Clemson,Dabo Swinney,9
+Colorado,Mike MacIntyre,6
+Colorado State,Mike Bobo,6
+Duke,David Cutcliffe,4
+East Carolina,Scottie Montgomery,2
+Eastern Michigan,Chris Creighton,2
+Florida,Jim McElwain,4
+Florida State,Jimbo Fisher,7
+Fresno State,Jeff Tedford,7
+Georgia,Kirby Smart,8
+Georgia Tech,Paul Johnson,3
+Hawaii,Nick Rolovich,3
+Houston,Major Applewhite,4
+Idaho,Paul Petrino,2
+Illinois,Lovie Smith,5
+Indiana,Tom Allen,6
+Iowa,Kirk Ferentz,5
+Iowa State,Matt Campbell,5
+Kansas,David Beaty,2
+Kansas State,Bill Snyder,8
+Kent State,Paul Haynes,2
+Kentucky,Mark Stoops,7
+Louisiana Tech,Skip Holtz,5
+Louisville,Bobby Petrino,7
+LSU,Ed Orgeron,7
+Marshall,Doc Holliday,4
+Maryland,D.J. Durkin,4
+Memphis,Mike Norvell,7
+Miami,Mark Richt,8
+Miami OH,Chuck Martin,2
+Michigan,Jim Harbaugh,8
+Michigan State,Mark Dantonio,7
+Mid Tenn State,Rick Stockstill,3
+Minnesota,PJ Fleck,8
+Mississippi St,Dan Mullen,7
+Missouri,Barry Odom,4
+Navy,Ken Niumatalolo,5
+Nebraska,Mike Riley,6
+Nevada,Jay Norvell,3
+New Mexico,Bob Davie,4
+New Mexico State,Doug Martin,3
+North Carolina,Larry Fedora,4
+NC State,Dave Doeren,7
+North Texas,Seth Littrell,6
+LA Monroe,Matt Viator,3
+Northern Illinois,Rod Carey,5
+Northwestern,Pat Fitzgerald,7
+Notre Dame,Brian Kelly,7
+Ohio,Frank Solich,2
+Ohio State,Urban Meyer,9
+Oklahoma,Bob Stoops,9
+Oklahoma State,Mike Gundy,8
+Ole Miss,Hugh Freeze,4
+Oregon,Willie Taggart,7
+Oregon State,Gary Andersen,6
+Penn State,James Franklin,8
+Pittsburgh,Pat Narduzzi,5
+Purdue,Jeff Brohm,7
+Rice,David Bailiff,2
+Rutgers,Chris Ash,5
+San Diego State,Rocky Long,7
+San Jose State,Brent Brennan,3
+Southern Meth,Chad Morris,5
+South Carolina,Will Muschamp,6
+Southern Miss,Jay Hopson,4
+UL Lafayette,Mark Hudspeth,2
+Stanford,David Shaw,8
+Syracuse,Dino Babers,5
+TCU,Gary Patterson,8
+Temple,Geoff Collins,3
+Tennessee,Butch Jones,4
+Texas,Tom Herman,7
+Texas AM,Kevin Sumlin,6
+Texas Tech,Kliff Kingsbury,4
+Toledo,Jason Candle,2
+Tulane,Willie Fritz,2
+Tulsa,Philip Montgomery,2
+UCLA,Jim Mora,4
+Uconn,Bob Diaco,3
+UNLV,Tony Sanchez,4
+USC,Clay Helton,7
+Utah,Kyle Whittingham,7
+Utah State,Matt Wells,5
+UT El Paso,Sean Kugler,4
+Vanderbilt,Derek Mason,5
+Virginia,Bronco Mendenhall,5
+Virginia Tech,Justin Fuente,6
+Wake Forest,Dave Clawson,4
+Washington,Chris Petersen,9
+Washington State,Mike Leach,8
+West Virginia,Dana Holgorsen,7
+Western Michigan,Tim Lester,4
+Wisconsin,Paul Chryst,7
+Wyoming,Craig Bohl,7
+Troy,Neal Brown,6
+South Florida,Charlie Strong,7
+Western Kentucky,Mike Sanford,5
+Florida Atl,Lane Kiffin,5
+Florida Intl,Butch Davis,5
+END_COACHES

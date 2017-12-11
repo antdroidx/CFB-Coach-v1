@@ -47,7 +47,7 @@ public class PlayerK extends Player {
         position = "K";
         region = reg;
         personality = trait;
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 80 + (int) (Math.random() * 100) - 50;
+
         troubledTimes = 0;
 
         statsXPAtt = 0;
@@ -93,8 +93,6 @@ public class PlayerK extends Player {
         personality = trait;
         position = "K";
 
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 80 + (int) (Math.random() * 100) - 50;
-
         statsXPAtt = 0;
         statsXPMade = 0;
         statsFGAtt = 0;
@@ -132,10 +130,16 @@ public class PlayerK extends Player {
         position = "K";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 100 + (int) (Math.random() * 100) - 50;
+
+        //cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 100 + (int) (Math.random() * 100) - 50;
+        recruitTolerance = (int)((60 - team.teamPrestige)/kImportance);
+        cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
+
+        cost = (int)(cost/kImportance);
 
         double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 9));
+        cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
+        if (cost < 0) cost = (int)Math.random()*7+1;
 
         troubledTimes = 0;
 
@@ -176,10 +180,6 @@ public class PlayerK extends Player {
         position = "K";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4.5) + 100 + (int) (Math.random() * 100) - 50;
-
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 9));
 
         troubledTimes = 0;
 

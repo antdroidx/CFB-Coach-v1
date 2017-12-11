@@ -55,7 +55,7 @@ public class PlayerTE extends Player {
         if (isRedshirt) year = 0;
         region = reg;
         personality = trait;
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
+
         troubledTimes = 0;
 
         statsTargets = 0;
@@ -105,7 +105,7 @@ public class PlayerTE extends Player {
         isTransfer = transfer;
         region = reg;
         personality = trait;
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
+
         troubledTimes = 0;
 
         statsTargets = 0;
@@ -150,10 +150,17 @@ public class PlayerTE extends Player {
         ratOvr = (ratCatch * 2 + ratRunBlock * 2 + ratEvasion + ratSpeed) / 6;
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
+
+        //cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
+
+        recruitTolerance = (int)((60 - team.teamPrestige)/teImportance);
+        cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
+
+        cost = (int)(cost/teImportance);
 
         double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
+        cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
+        if (cost < 0) cost = (int)Math.random()*7+1;
 
         troubledTimes = 0;
 
@@ -199,10 +206,6 @@ public class PlayerTE extends Player {
         ratOvr = (ratCatch * 2 + ratRunBlock * 2 + ratEvasion + ratSpeed) / 6;
         region = (int)(Math.random()*5);
         personality = (int) (50 + 50 * Math.random());
-        cost = (int) (Math.pow((float) ratOvr - 55, 2) / 4) + 75 + (int) (Math.random() * 100) - 50;
-
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * 10));
 
         troubledTimes = 0;
 

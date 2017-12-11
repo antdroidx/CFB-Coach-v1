@@ -2840,7 +2840,7 @@ public class League extends Rankings {
                         teamList.get(t).HC.get(0).contractLength = 6;
                         teamList.get(t).HC.get(0).contractYear = 0;
                         teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
-                        newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
+                        newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                                 tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
                         for (int j = 0; j < teamList.size(); ++j) {
@@ -2849,7 +2849,7 @@ public class League extends Rankings {
                                 if (Math.random() > 0.50) {
                                     teamList.get(j).promoteCoach();
                                     teamList.get(j).HC.get(0).history.add("");
-                                    newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
+                                    newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
                                             " hopes to continue their recent success, despite the recent loss of coach " + teamList.get(t).HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
                                 }
                             }
@@ -2869,7 +2869,7 @@ public class League extends Rankings {
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
                     teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
-                    newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                    newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     break;
                 }
@@ -2879,7 +2879,7 @@ public class League extends Rankings {
             if (teamList.get(t).HC.isEmpty()) {
                 teamList.get(t).promoteCoach();
                 teamList.get(t).HC.get(0).history.add("");
-                newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Coaching Promotion: " + teamList.get(t).name + ">Following the departure of their previous head coach, " + teamList.get(t).name + " has promoted assistant " + teamList.get(t).HC.get(0).name +
+                newsStories.get(currentWeek + 1).add("Coaching Promotion: " + teamList.get(t).name + ">Following the departure of their previous head coach, " + teamList.get(t).name + " has promoted assistant " + teamList.get(t).HC.get(0).name +
                         " to lead the team.");
             }
         }
