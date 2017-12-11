@@ -2094,12 +2094,6 @@ public class Team {
 
     public int calcMaxRecruitRating() {
         int rating;
-/*        if (teamPrestige > 75) {
-            rating = maxStarRating + 1;
-        } else if (teamPrestige < 40) {
-            rating = maxStarRating - 1;
-        } else rating = maxStarRating;*/
-
         rating = (int)Math.round(( maxStarRating + (double)((teamPrestige - 60)/10) ));
 
         return rating;
@@ -2119,7 +2113,7 @@ public class Team {
     }
 
     public PlayerRB[] getRBRecruits(int rating) {
-        int adjNumRecruits = 2 * numRecruits;
+        int adjNumRecruits = numRecruits;
         PlayerRB[] recruits = new PlayerRB[adjNumRecruits];
         int stars;
 
@@ -2132,7 +2126,7 @@ public class Team {
     }
 
     public PlayerWR[] getWRRecruits(int rating) {
-        int adjNumRecruits = 3 * numRecruits;
+        int adjNumRecruits = 2 * numRecruits;
         PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
         int stars;
 
@@ -2158,7 +2152,7 @@ public class Team {
     }
 
     public PlayerOL[] getOLRecruits(int rating) {
-        int adjNumRecruits = 3 * numRecruits;
+        int adjNumRecruits = 2 * numRecruits;
         PlayerOL[] recruits = new PlayerOL[adjNumRecruits];
         int stars;
 
@@ -2184,7 +2178,7 @@ public class Team {
     }
 
     public PlayerDL[] getDLRecruits(int rating) {
-        int adjNumRecruits = 3 * numRecruits;
+        int adjNumRecruits = 2 * numRecruits;
         PlayerDL[] recruits = new PlayerDL[adjNumRecruits];
         int stars;
 
@@ -2197,7 +2191,7 @@ public class Team {
     }
 
     public PlayerLB[] getLBRecruits(int rating) {
-        int adjNumRecruits = 3 * numRecruits;
+        int adjNumRecruits = 2 * numRecruits;
         PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
         int stars;
 
