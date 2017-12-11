@@ -88,9 +88,9 @@ public class HeadCoach extends Player {
         contractYear = (int) (6 * Math.random());
         contractLength = 6;
         ratPot = (int) (50 + 50 * Math.random());
-        ratOff = (int) (50 + stars * 5 - 25 * Math.random());
-        ratDef = (int) (50 + stars * 5 - 25 * Math.random());
-        ratTalent = (int) (50 + 50 * Math.random());
+        ratOff = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random() );
+        ratDef = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random() );
+        ratTalent = (int) (45 + 50*Math.random());
         ratDiscipline = (int) (45 + 50 * Math.random());
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
         offStrat = rand.nextInt((max - min) + 1) + min;
@@ -126,8 +126,8 @@ public class HeadCoach extends Player {
         contractYear = 0;
         contractLength = 6;
         ratPot = (int) (50 + 50 * Math.random());
-        ratOff = (int) (45 + stars * 5 - 30 * Math.random());
-        ratDef = (int) (45 + stars * 5 - 30 * Math.random());
+        ratOff = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random() );
+        ratDef = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random() );
         ratTalent = (int) (45 + 45 * Math.random());
         ratDiscipline = (int) (45 + 45 * Math.random());
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
