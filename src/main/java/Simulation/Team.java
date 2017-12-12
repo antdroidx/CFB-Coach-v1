@@ -147,6 +147,17 @@ public class Team {
     public int startersCB = 3;
     public int startersS = 1;
 
+    public int subQB = 0;
+    public int subRB = 1;
+    public int subWR = 2;
+    public int subTE = 1;
+    public int subOL = 2;
+    public int subK = 0;
+    public int subDL = 2;
+    public int subLB = 1;
+    public int subCB = 1;
+    public int subS = 1;
+
     public int maxPlayers = 70;
 
     public int maxStarRating = 10;
@@ -850,7 +861,11 @@ public class Team {
         return (getQB(0).ratOvr * 5 +
                 teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr +
                 teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr + teamTEs.get(0).ratOvr +
-                getCompositeOLPass() + getCompositeOLRush()) / 13;
+                getCompositeOLPass() + getCompositeOLRush() + getOffSubTalent()) / 14;
+    }
+    
+    public int getOffSubTalent() {
+        return ((getQB(1).ratOvr + getRB(2).ratOvr + getWR(3).ratOvr + getWR(4).ratOvr + getTE(1).ratOvr + getOL(5).ratOvr + getOL(6).ratOvr)/7);
     }
 
     /**
@@ -859,10 +874,12 @@ public class Team {
      * @return Defensive Talent Level
      */
     public int getDefTalent() {
-        return (getRushDef() + getPassDef()) / 2;
+        return (2*getRushDef() + 2*getPassDef() + getDefSubTalent()) / 5;
     }
 
-
+    public int getDefSubTalent() {
+        return ( (getDL(4).ratOvr + getDL(5).ratOvr + getLB(3).ratOvr + getCB(4).ratOvr + getCB(5).ratOvr + getS(1).ratOvr) / 6);
+    }
 
     /**
      * Get the composite Football IQ of the team. Is used in game simulation.
@@ -886,8 +903,15 @@ public class Team {
         for (int i = 0; i < 3; ++i) {
             comp += getLB(i).ratFootIQ;
         }
-        comp += HC.get(0).ratDef * 3 + HC.get(0).ratOff * 3;
-        return comp / 29;
+
+        //coach
+        comp += HC.get(0).ratDef * 4 + HC.get(0).ratOff * 4;
+
+        //subs
+        comp += (getRB(2).ratFootIQ + getWR(3).ratFootIQ + getWR(4).ratFootIQ + getTE(1).ratFootIQ + getOL(5).ratFootIQ + getOL(6).ratFootIQ +
+                getDL(4).ratFootIQ + getDL(5).ratFootIQ + getLB(3).ratFootIQ + getCB(4).ratFootIQ + 2*getS(1).ratFootIQ) / 12;
+
+        return comp / 32;
     }
 
     /**
@@ -909,8 +933,10 @@ public class Team {
      * @return integer of how good the team is at passing
      */
     public int getPassProf() {
-        int avgRBs = (teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratCatch) / 4;
-        return (getCompositeOLPass() + getQB(0).ratOvr * 2 + avgRBs + HC.get(0).ratOff) / 5;
+        int avgWRs = (teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratCatch) / 4;
+        int avgSubs = (2*getWR(3).ratCatch + getTE(1).ratCatch + getRB(0).ratCatch + getRB(1).ratCatch + getRB(2).ratCatch)/ 6;
+
+        return (getCompositeOLPass() + getQB(0).ratOvr*4 + avgWRs*3 + HC.get(0).ratOff*2 + avgSubs) / 10;
     }
 
     /**
@@ -921,7 +947,9 @@ public class Team {
     public int getRushProf() {
         int avgRBs = (teamRBs.get(0).ratOvr + teamRBs.get(1).ratOvr) / 2;
         int QB = teamQBs.get(0).ratSpeed;
-        return (3 * getCompositeOLRush() + 3 * avgRBs + QB + HC.get(0).ratOff) / 8;
+        int avgSub = getRB(2).ratOvr;
+
+        return (4*getCompositeOLRush() + 4*avgRBs + QB + 2*HC.get(0).ratOff + avgSub) / 12;
     }
 
     /**
@@ -934,7 +962,10 @@ public class Team {
         int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage) / 3;
         int S = (teamSs.get(0).ratCoverage);
         int def = (3 * avgCBs + avgLBs + S) / 5;
-        return (def * 3 + teamSs.get(0).ratOvr + getCompositeDLPass() * 2 + HC.get(0).ratDef) / 7;
+        int avgSub = (getLB(3).ratCoverage + getCB(3).ratOvr*2 + getS(1).ratCoverage);
+
+
+        return (def*4 + teamSs.get(0).ratOvr + getCompositeDLPass()*2 + 2*HC.get(0).ratDef + avgSub) / 10;
     }
 
     /**
@@ -957,7 +988,10 @@ public class Team {
         for (int i = 0; i < 5; ++i) {
             compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
         }
-        return compositeOL / 5;
+        compositeOL = compositeOL / 5;
+        int avgSub = (getOL(5).ratOvr + getOL(6).ratOvr)/2;
+
+        return (5*compositeOL + avgSub + 2*HC.get(0).ratOff) / 8;
     }
 
     /**
@@ -971,8 +1005,12 @@ public class Team {
         for (int i = 0; i < 5; ++i) {
             compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
         }
+        compositeOL = compositeOL / 5;
         int compositeTE = teamTEs.get(0).ratRunBlock;
-        return (2 * (compositeOL) + compositeTE + HC.get(0).ratOff) / 12;
+
+        int avgSub = (2*getOL(5).ratOvr + 2*getOL(6).ratOvr + getTE(1).ratRunBlock)/5;
+
+        return (5*compositeOL + compositeTE + 2*HC.get(0).ratOff + avgSub) / 9;
     }
 
     /**
@@ -986,7 +1024,11 @@ public class Team {
         for (int i = 0; i < 4; ++i) {
             compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
         }
-        return (compositeDL + HC.get(0).ratDef) / 5;
+        compositeDL = compositeDL / 4;
+
+        int avgSub = getDL(4).ratOvr + getDL(5).ratOvr;
+
+        return (5*compositeDL + 2*HC.get(0).ratDef + avgSub) / 7;
     }
 
     /**
@@ -1008,7 +1050,9 @@ public class Team {
         for (int i = 0; i < 1; ++i) {
             compositeS += teamSs.get(i).ratRunStop;
         }
-        return (2 * compositeDL + compositeLB + compositeS + HC.get(0).ratDef) / 13;
+
+        int avgSub = (2*getDL(4).ratOvr + 2*getDL(5).ratOvr + getLB(3).ratRunStop + getS(1).ratRunStop) / 8;
+        return (3*compositeDL + compositeLB + compositeS + 2*HC.get(0).ratDef + avgSub) / 19;
     }
 
 
@@ -2095,6 +2139,8 @@ public class Team {
     public int calcMaxRecruitRating() {
         int rating;
         rating = (int)Math.round(( maxStarRating + (double)((teamPrestige - 60)/10) ));
+        if (rating < 2) rating = 2;
+        if (rating > 10) rating = 10;
 
         return rating;
     }
@@ -2710,16 +2756,16 @@ public class Team {
 
     public void disciplinePlayer() {
         playersDis = new ArrayList<>();
-        checkSuspensionPosition(teamQBs, 1);
-        checkSuspensionPosition(teamRBs, 2);
-        checkSuspensionPosition(teamWRs, 3);
-        checkSuspensionPosition(teamTEs, 1);
-        checkSuspensionPosition(teamOLs, 5);
-        checkSuspensionPosition(teamKs, 1);
-        checkSuspensionPosition(teamDLs, 4);
-        checkSuspensionPosition(teamLBs, 3);
-        checkSuspensionPosition(teamCBs, 3);
-        checkSuspensionPosition(teamSs, 1);
+        checkSuspensionPosition(teamQBs, startersQB + subQB);
+        checkSuspensionPosition(teamRBs, startersRB + subRB);
+        checkSuspensionPosition(teamWRs, startersWR + subWR);
+        checkSuspensionPosition(teamTEs, startersTE + subTE);
+        checkSuspensionPosition(teamOLs, startersOL + subOL);
+        checkSuspensionPosition(teamKs, startersK + subK);
+        checkSuspensionPosition(teamDLs, startersDL + subDL);
+        checkSuspensionPosition(teamLBs, startersLB + subLB);
+        checkSuspensionPosition(teamCBs, startersCB + subCB);
+        checkSuspensionPosition(teamSs, startersS + subS);
 
         if (playersDis.size() > 0) {
             int randomPlayer = (int) (Math.random() * playersDis.size());
@@ -2798,6 +2844,17 @@ public class Team {
         checkInjuryPosition(teamLBs, 3);
         checkInjuryPosition(teamCBs, 3);
         checkInjuryPosition(teamSs, 1);
+        checkInjuryPosition(teamQBs, startersQB + subQB);
+        checkInjuryPosition(teamRBs, startersRB + subRB);
+        checkInjuryPosition(teamWRs, startersWR + subWR);
+        checkInjuryPosition(teamTEs, startersTE + subTE);
+        checkInjuryPosition(teamOLs, startersOL + subOL);
+        checkInjuryPosition(teamKs, startersK + subK);
+        checkInjuryPosition(teamDLs, startersDL + subDL);
+        checkInjuryPosition(teamLBs, startersLB + subLB);
+        checkInjuryPosition(teamCBs, startersCB + subCB);
+        checkInjuryPosition(teamSs, startersS + subS);
+        
     }
 
     private void checkInjuryPosition(ArrayList<? extends Player> players, int numStarters) {
