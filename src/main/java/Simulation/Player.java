@@ -58,12 +58,12 @@ public class Player {
     public double qbImportance = 1;
     public double rbImportance = 1.5;
     public double wrImportance = 2;
-    public double teImportance = 4.5;
+    public double teImportance = 4;
     public double olImportance = 2.5;
     public double kImportance = 5;
     public double dlImportance = 2.5;
     public double lbImportance = 2.5;
-    public double cbImportance = 2;
+    public double cbImportance = 2.5;
     public double sImportance = 1.5;
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};

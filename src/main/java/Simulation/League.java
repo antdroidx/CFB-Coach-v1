@@ -3375,6 +3375,36 @@ public class League extends Rankings {
         }
     }
 
+    /*  IDEA: Conference Invites - Switch teams around with partner conference if criteria met:
+         1. Team A is over 75 Prestige / Team B is below 30
+         2. Conferences are partners:
+            a. ACC :: American
+            b. Big Ten :: MAC
+            c. Big 12 :: Sun Belt
+            d. SEC :: Conf USA
+            e. Pac 12 :: Mt West
+          3. Random Chance, low: 15% ?
+          4. Rivalries remain same or trade rivalries?
+    */
+
+    public void conferenceInvites() {
+        for (int i = 0; i < conferences.size()/2; ++i) {
+            for (int t = 0; t < conferences.get(i).confTeams.size(); ++t) {
+                if (conferences.get(i).confTeams.get(t).teamPrestige > 80) {
+                    
+                }
+            }
+        }
+    }
+
+    /* IDEA: Conference TV Contracts -
+    Contracts every Nth year will be awarded to conferences. increases prestige temporarily
+     */
+
+    public void conferenceTVContracts() {
+
+    }
+
 
     /**
      * Get a mock draft of all players who are leaving, sorted by overall.
@@ -3385,15 +3415,15 @@ public class League extends Rankings {
         ArrayList<Player> allPlayersLeaving = new ArrayList<>();
         for (Team t : teamList) {
             for (Player p : t.playersLeaving) {
-                if (p.ratOvr > 80 && !p.position.equals("K")) allPlayersLeaving.add(p);
+                if (p.ratOvr > 75 && !p.position.equals("K")) allPlayersLeaving.add(p);
             }
         }
 
         Collections.sort(allPlayersLeaving, new CompPlayer());
 
         // Get 100 players (first 4 rounds)
-        ArrayList<Player> NFLPlayers = new ArrayList<>(64);
-        for (int i = 0; i < 64; ++i) {
+        ArrayList<Player> NFLPlayers = new ArrayList<>(96);
+        for (int i = 0; i < 96; ++i) {
             NFLPlayers.add(allPlayersLeaving.get(i));
         }
 
