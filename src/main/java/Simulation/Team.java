@@ -888,30 +888,32 @@ public class Team {
      */
     public int getCompositeFootIQ() {
         int comp = 0;
-        comp += getQB(0).ratFootIQ * 5;
-        comp += getRB(0).ratFootIQ + getRB(1).ratFootIQ;
-        comp += getWR(0).ratFootIQ + getWR(1).ratFootIQ + getWR(2).ratFootIQ;
-        comp += getTE(0).ratFootIQ;
-        for (int i = 0; i < 5; ++i) {
-            comp += getOL(i).ratFootIQ / 5;
+        //Offense: 16
+        comp += getQB(0).ratFootIQ * 5; //5
+        comp += getRB(0).ratFootIQ + getRB(1).ratFootIQ; //2
+        comp += getWR(0).ratFootIQ + getWR(1).ratFootIQ + getWR(2).ratFootIQ; //3
+        comp += getTE(0).ratFootIQ; //1
+        for (int i = 0; i < 5; ++i) { //5
+            comp += getOL(i).ratFootIQ;
         }
-        comp += getS(0).ratFootIQ * 4;
-        comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ;
-        for (int i = 0; i < 4; ++i) {
-            comp += getDL(i).ratFootIQ / 4;
+        //Defense: 14
+        comp += getS(0).ratFootIQ * 4; //4
+        comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ; //3
+        for (int i = 0; i < 4; ++i) { //4
+            comp += getDL(i).ratFootIQ;
         }
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i) { //3
             comp += getLB(i).ratFootIQ;
         }
 
-        //coach
-        comp += HC.get(0).ratDef * 4 + HC.get(0).ratOff * 4;
+        //coach: 8
+        comp += HC.get(0).ratDef * 4 + HC.get(0).ratOff * 4; //8
 
-        //subs
+        //subs: 1
         comp += (getRB(2).ratFootIQ + getWR(3).ratFootIQ + getWR(4).ratFootIQ + getTE(1).ratFootIQ + getOL(5).ratFootIQ + getOL(6).ratFootIQ +
                 getDL(4).ratFootIQ + getDL(5).ratFootIQ + getLB(3).ratFootIQ + getCB(4).ratFootIQ + 2*getS(1).ratFootIQ) / 12;
 
-        return comp / 32;
+        return comp / 39;
     }
 
     /**
@@ -936,7 +938,7 @@ public class Team {
         int avgWRs = (teamWRs.get(0).ratOvr + teamWRs.get(1).ratOvr + teamWRs.get(2).ratOvr + teamTEs.get(0).ratCatch) / 4;
         int avgSubs = (2*getWR(3).ratCatch + getTE(1).ratCatch + getRB(0).ratCatch + getRB(1).ratCatch + getRB(2).ratCatch)/ 6;
 
-        return (getCompositeOLPass() + getQB(0).ratOvr*4 + avgWRs*3 + HC.get(0).ratOff*2 + avgSubs) / 10;
+        return (2*getCompositeOLPass() + getQB(0).ratOvr*5 + avgWRs*4 + HC.get(0).ratOff*2 + avgSubs) / 14;
     }
 
     /**
@@ -949,7 +951,7 @@ public class Team {
         int QB = teamQBs.get(0).ratSpeed;
         int avgSub = getRB(2).ratOvr;
 
-        return (4*getCompositeOLRush() + 4*avgRBs + QB + 2*HC.get(0).ratOff + avgSub) / 12;
+        return (3*getCompositeOLRush() + 4*avgRBs + QB + 2*HC.get(0).ratOff + avgSub) / 11;
     }
 
     /**
@@ -962,7 +964,7 @@ public class Team {
         int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage) / 3;
         int S = (teamSs.get(0).ratCoverage);
         int def = (3 * avgCBs + avgLBs + S) / 5;
-        int avgSub = (getLB(3).ratCoverage + getCB(3).ratOvr*2 + getS(1).ratCoverage);
+        int avgSub = (getLB(3).ratCoverage + getCB(3).ratOvr*2 + getS(1).ratCoverage) / 4;
 
 
         return (def*4 + teamSs.get(0).ratOvr + getCompositeDLPass()*2 + 2*HC.get(0).ratDef + avgSub) / 10;
@@ -991,7 +993,7 @@ public class Team {
         compositeOL = compositeOL / 5;
         int avgSub = (getOL(5).ratOvr + getOL(6).ratOvr)/2;
 
-        return (5*compositeOL + avgSub + 2*HC.get(0).ratOff) / 8;
+        return (9*compositeOL + avgSub + 3*HC.get(0).ratOff) / 13;
     }
 
     /**
@@ -1010,7 +1012,7 @@ public class Team {
 
         int avgSub = (2*getOL(5).ratOvr + 2*getOL(6).ratOvr + getTE(1).ratRunBlock)/5;
 
-        return (5*compositeOL + compositeTE + 2*HC.get(0).ratOff + avgSub) / 9;
+        return (9*compositeOL + 2*compositeTE + 3*HC.get(0).ratOff + avgSub) / 15;
     }
 
     /**
@@ -1028,7 +1030,7 @@ public class Team {
 
         int avgSub = getDL(4).ratOvr + getDL(5).ratOvr;
 
-        return (5*compositeDL + 2*HC.get(0).ratDef + avgSub) / 7;
+        return (5*compositeDL + 2*HC.get(0).ratDef + avgSub) / 8;
     }
 
     /**
@@ -1041,18 +1043,21 @@ public class Team {
         int compositeDL = 0;
         int compositeLB = 0;
         int compositeS = 0;
+
         for (int i = 0; i < 4; ++i) {
             compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
         }
+        compositeDL = compositeDL / 4;
+
         for (int i = 0; i < 3; ++i) {
             compositeLB += teamLBs.get(i).ratRunStop;
         }
-        for (int i = 0; i < 1; ++i) {
-            compositeS += teamSs.get(i).ratRunStop;
-        }
+        compositeLB = compositeLB / 3;
 
-        int avgSub = (2*getDL(4).ratOvr + 2*getDL(5).ratOvr + getLB(3).ratRunStop + getS(1).ratRunStop) / 8;
-        return (3*compositeDL + compositeLB + compositeS + 2*HC.get(0).ratDef + avgSub) / 19;
+        compositeS += teamSs.get(0).ratRunStop;
+
+        int avgSub = (2*getDL(4).ratOvr + 2*getDL(5).ratOvr + getLB(3).ratRunStop + getS(1).ratRunStop) / 6;
+        return (4*compositeDL + 2*compositeLB + 2*compositeS + 2*HC.get(0).ratDef + avgSub) / 11;
     }
 
 
@@ -3975,13 +3980,13 @@ public class Team {
                 "Play a normal balanced offense.", 1, 0, 0, 1, 1, 0, 0, 1);
 
         ts[1] = new TeamStrategy("Smash Mouth",
-                "Play a conservative run-heavy offense, setting up the passes as necessary.", 2, 2, -2, 1, 1, 2, 1, 0);
+                "Play a conservative run-heavy offense, setting up the passes as necessary.", 2, 2, -2, 1, 1, 1, 1, 0);
 
         ts[2] = new TeamStrategy("West Coast",
-                "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 2, -2, 1);
+                "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 1, -2, 1);
 
         ts[3] = new TeamStrategy("Spread",
-                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -2, 2, 1);
+                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -1, 1, 1);
 
         ts[4] = new TeamStrategy("Read Option",
                 "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 0, 0);
@@ -4030,7 +4035,7 @@ public class Team {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
-                sb.append(score + "-" + p.getPosNameYrOvr_Str() + "&");
+                sb.append(p.getPosNameYrOvr_Str() + "&");
                 for (String s : careerStats) {
                     sb.append(s + "&");
                 }

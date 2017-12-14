@@ -114,7 +114,9 @@ public class Game implements Serializable {
     private boolean playingOT;
     private boolean bottomOT;
 
-    private int timePerPlay = 21;
+    private int timePerPlay = 20; //affects snaps per game!
+    private int intValue = 150;
+    private int sackValue = 175;
 
     Random rand = new Random();
 
@@ -739,8 +741,8 @@ public class Game implements Serializable {
         } else {
             adv = Math.round((awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 4);
         }
-        if (adv > 4) adv = 4;
-        if (adv < -4) adv = -4;
+        if (adv > 4) adv = 3;
+        if (adv < -4) adv = -3;
         return adv;
     }
 
@@ -1419,47 +1421,49 @@ public class Game implements Serializable {
 
         //get how much pressure there is on qb, check if sack
         int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());  //STRATEGIES
-        if (Math.random() * 100 < pressureOnQB / 8) {
+        if (Math.random() * sackValue < pressureOnQB / 8) {
 
             if (Math.random() * 100 < pressureOnQB / 8 && selQB.ratSpeed > selDL.ratPassRush) {
                 RushPlayQB(offense, defense, selQB, selTE, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
-            }
-            //sacked!
-            String defender;
-            double DL = selDL.ratTackle * Math.random() * 100;
-            double LB = selLB2.ratTackle * Math.random() * 60;
-            double S = selS.ratTackle * Math.random() * 25;
-
-            if (DL >= LB && DL >= S) {
-                selDLStats[0]++;
-                selDLStats[1]++;
-                selDL.statsTackles++;
-                selDL.statsSacks++;
-                defender = ("DL " + selDL.name);
-            } else if (LB > DL && LB >= S) {
-                selLB2Stats[0]++;
-                selLB2Stats[1]++;
-                selLB2.statsTackles++;
-                selLB2.statsSacks++;
-                defender = ("LB " + selLB2.name);
             } else {
-                selSStats[0]++;
-                selSStats[1]++;
-                selS.statsTackles++;
-                selS.statsSacks++;
-                defender = ("S " + selS.name);
+
+                //sacked!
+                String defender;
+                double DL = selDL.ratTackle * Math.random() * 100;
+                double LB = selLB2.ratTackle * Math.random() * 60;
+                double S = selS.ratTackle * Math.random() * 25;
+
+                if (DL >= LB && DL >= S) {
+                    selDLStats[0]++;
+                    selDLStats[1]++;
+                    selDL.statsTackles++;
+                    selDL.statsSacks++;
+                    defender = ("DL " + selDL.name);
+                } else if (LB > DL && LB >= S) {
+                    selLB2Stats[0]++;
+                    selLB2Stats[1]++;
+                    selLB2.statsTackles++;
+                    selLB2.statsSacks++;
+                    defender = ("LB " + selLB2.name);
+                } else {
+                    selSStats[0]++;
+                    selSStats[1]++;
+                    selS.statsTackles++;
+                    selS.statsSacks++;
+                    defender = ("S " + selS.name);
+                }
+
+                qbSack(offense, defense, defender);
+
+                return;
             }
-
-            qbSack(offense, defense, defender);
-
-            return;
         }
 
         //check for int
         double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 18    //STRATEGIES
                 - offense.teamStratOff.getPassProtection() + defense.teamStratDef.getPassProtection();
         if (intChance < 0.015) intChance = 0.015;
-        if (100 * Math.random() < intChance) {
+        if (intValue * Math.random() < intChance) {
             //Interception
             double cb = selCB.ratCoverage * Math.random() * 100;
             double s = selS.ratCoverage * Math.random() * 60;
@@ -1643,51 +1647,52 @@ public class Game implements Serializable {
 
         //get how much pressure there is on qb, check if sack
         int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());  //STRATEGIES
-        if (Math.random() * 100 < pressureOnQB / 8) {
+        if (Math.random() * sackValue < pressureOnQB / 8) {
             if (Math.random() * 100 < pressureOnQB / 8 && selQB.ratSpeed > selDL.ratPassRush) {
                 RushPlayQB(offense, defense, selQB, selTE, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
-            }
-            //sacked!
-            String defender;
-            double DL = selDL.ratTackle * Math.random() * 100;
-            double LB = selLB2.ratTackle * Math.random() * 65;
-            double S = selS.ratTackle * Math.random() * 50;
-            double CB = selCB.ratTackle * Math.random() * 25;
-            if (DL >= S && DL >= CB && DL >= LB) {
-                selDLStats[0]++;
-                selDLStats[1]++;
-                selDL.statsTackles++;
-                selDL.statsSacks++;
-                defender = ("DL " + selDL.name);
-            } else if (LB > DL && LB >= S && LB >= CB) {
-                selLB2Stats[0]++;
-                selLB2Stats[1]++;
-                selLB2.statsTackles++;
-                selLB2.statsSacks++;
-                defender = ("LB " + selLB2.name);
-            } else if (S > DL && S > LB && S >= CB) {
-                selSStats[0]++;
-                selSStats[1]++;
-                selS.statsTackles++;
-                selS.statsSacks++;
-                defender = ("S " + selDL.name);
             } else {
-                selCBStats[0]++;
-                selCBStats[1]++;
-                selCB.statsTackles++;
-                selCB.statsSacks++;
-                defender = ("CB " + selCB.name);
-            }
+                //sacked!
+                String defender;
+                double DL = selDL.ratTackle * Math.random() * 100;
+                double LB = selLB2.ratTackle * Math.random() * 65;
+                double S = selS.ratTackle * Math.random() * 50;
+                double CB = selCB.ratTackle * Math.random() * 25;
+                if (DL >= S && DL >= CB && DL >= LB) {
+                    selDLStats[0]++;
+                    selDLStats[1]++;
+                    selDL.statsTackles++;
+                    selDL.statsSacks++;
+                    defender = ("DL " + selDL.name);
+                } else if (LB > DL && LB >= S && LB >= CB) {
+                    selLB2Stats[0]++;
+                    selLB2Stats[1]++;
+                    selLB2.statsTackles++;
+                    selLB2.statsSacks++;
+                    defender = ("LB " + selLB2.name);
+                } else if (S > DL && S > LB && S >= CB) {
+                    selSStats[0]++;
+                    selSStats[1]++;
+                    selS.statsTackles++;
+                    selS.statsSacks++;
+                    defender = ("S " + selDL.name);
+                } else {
+                    selCBStats[0]++;
+                    selCBStats[1]++;
+                    selCB.statsTackles++;
+                    selCB.statsSacks++;
+                    defender = ("CB " + selCB.name);
+                }
 
-            qbSack(offense, defense, defender);
-            return;
+                qbSack(offense, defense, defender);
+                return;
+            }
         }
 
         //check for int
         double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 18
                 - offense.teamStratOff.getPassProtection() + defense.teamStratDef.getPassProtection();   //STRATEGIES
         if (intChance < 0.015) intChance = 0.015;
-        if (100 * Math.random() < intChance) {
+        if (intValue * Math.random() < intChance) {
             //Interception
             double lb = selLB.ratCoverage * Math.random() * 100;
             double s = selS.ratCoverage * Math.random() * 70;
@@ -1861,7 +1866,7 @@ public class Game implements Serializable {
 
         //get how much pressure there is on qb, check if sack
         int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getPassProtection() - offense.teamStratDef.getPassProtection());   //STRATEGIES
-        if (Math.random() * 200 < pressureOnQB / 8) {
+        if (Math.random() * 2*sackValue < pressureOnQB / 8) {
             //sacked!
             String defender;
             double DL = selDL.ratPassRush * Math.random() * 100;
@@ -1902,7 +1907,7 @@ public class Game implements Serializable {
         double intChance = (pressureOnQB + defense.getS(0).ratOvr - (offense.getQB(0).ratPassAcc + offense.getQB(0).ratFootIQ + 100) / 3) / 25
                 - offense.teamStratOff.getPassProtection() + defense.teamStratDef.getPassProtection();   //STRATEGIES
         if (intChance < 0.015) intChance = 0.015;
-        if (100 * Math.random() < intChance) {
+        if (intValue * Math.random() < intChance) {
             //Interception
             double lb = selLB.ratCoverage * Math.random() * 80;
             double s = selS.ratCoverage * Math.random() * 50;
@@ -2503,6 +2508,8 @@ public class Game implements Serializable {
      * @param defense defending the kick
      */
     private void fieldGoalAtt(Team offense, Team defense) {
+        gameYardLine -= 7;
+
         double fgDistRatio = Math.pow((110 - gameYardLine) / 50, 2);
         double fgAccRatio = Math.pow((110 - gameYardLine) / 50, 1.25);
         double fgDistChance = (getHFadv() + offense.getK(0).ratKickPow - fgDistRatio * 80);
@@ -2784,15 +2791,15 @@ public class Game implements Serializable {
         gameYardLine -= sackloss;
 
         if (gamePoss) { // home possession
-            HomeQBStats[6]++;
-            HomeQBStats[7] -= sackloss;
+            //HomeQBStats[6]++;
+            //HomeQBStats[7] -= sackloss;
             HomeQBStats[5]++;
-            homeTeam.teamRushYards -= sackloss;
+            //homeTeam.teamRushYards -= sackloss;
         } else {
-            AwayQBStats[6]++;
-            AwayQBStats[7] -= sackloss;
+            //AwayQBStats[6]++;
+            //AwayQBStats[7] -= sackloss;
             AwayQBStats[5]++;
-            awayTeam.teamRushYards -= sackloss;
+            //awayTeam.teamRushYards -= sackloss;
         }
 
         if (gameYardLine < 0) {
