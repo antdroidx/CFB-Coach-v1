@@ -2839,16 +2839,6 @@ public class Team {
     public void checkForInjury() {
         playersInjured = new ArrayList<>();
         playersRecovered = new ArrayList<>();
-        checkInjuryPosition(teamQBs, 1);
-        checkInjuryPosition(teamRBs, 2);
-        checkInjuryPosition(teamWRs, 3);
-        checkInjuryPosition(teamTEs, 1);
-        checkInjuryPosition(teamOLs, 5);
-        checkInjuryPosition(teamKs, 1);
-        checkInjuryPosition(teamDLs, 4);
-        checkInjuryPosition(teamLBs, 3);
-        checkInjuryPosition(teamCBs, 3);
-        checkInjuryPosition(teamSs, 1);
         checkInjuryPosition(teamQBs, startersQB + subQB);
         checkInjuryPosition(teamRBs, startersRB + subRB);
         checkInjuryPosition(teamWRs, startersWR + subWR);
