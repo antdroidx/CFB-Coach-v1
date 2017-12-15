@@ -443,7 +443,7 @@ public class Team {
         leagueOffTal = league.getAverageOffTalent();
         leagueDefTal = league.getAverageDefTalent();
         confAvg = league.averageConfPrestige();
-        confLimit = (confPrestige - confAvg) / 2;
+        confLimit = 3*(confPrestige - confAvg)/4;
     }
 
     public void setupUserCoach(String name) {
@@ -1180,7 +1180,7 @@ public class Team {
 
         //Sets the bounds for Prestige
         int confAvg = league.averageConfPrestige();
-        int confLimit = (confPrestige - confAvg) / 2;
+        int confLimit = 3*(confPrestige - confAvg)/4;
         if (newPrestige > 80 + confLimit) newPrestige = 80 + confLimit;
         if (newPrestige < 35 + confLimit) newPrestige = 35 + confLimit;
         if (newPrestige > 95) newPrestige = 95;
