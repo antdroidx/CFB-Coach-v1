@@ -2786,6 +2786,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         reader.close();
+        userTeam.setupUserCoach(userHC.name);
     }
 
     public void readRosterFile(Uri uri) throws IOException {
