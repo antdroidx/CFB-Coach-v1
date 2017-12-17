@@ -3203,6 +3203,8 @@ public class Team {
             summary += "\n\nYour team stayed out of trouble this season and bonded together. Your team gained " + disciplinePts + " prestige points.";
         }
 
+        summary += "\n\nOVERALL SEASON ANALYSIS:";
+
         if (this == league.savePenalized || this == league.savePenalized2 || this == league.savePenalized3) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[0] - teamPrestige) > 0) {

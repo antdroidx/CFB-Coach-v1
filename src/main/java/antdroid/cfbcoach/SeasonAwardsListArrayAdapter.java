@@ -38,7 +38,7 @@ public class SeasonAwardsListArrayAdapter extends ArrayAdapter<String> {
             textTop.setText(player[0]);
             textMiddle.setText(player[1]);
             textBottom.setText(player[2]);
-            if (player[0].split("\\(")[0].equals(userTeamAbbr)) {
+            if (player[0].split("\\(")[0].contains(userTeamAbbr)) {
                 // highlight user team players
                 textTop.setTextColor(Color.parseColor("#1A75FF"));
             }
@@ -46,7 +46,7 @@ public class SeasonAwardsListArrayAdapter extends ArrayAdapter<String> {
             textTop.setText(player[0]);
             textMiddle.setText(player[1]);
             textBottom.setVisibility(View.GONE);
-            if (player[0].split("\\(")[0].equals(userTeamAbbr)) {
+            if (player[0].split("\\(")[0].contains(userTeamAbbr)) {
                 // highlight user team players
                 textTop.setTextColor(Color.parseColor("#1A75FF"));
             }
