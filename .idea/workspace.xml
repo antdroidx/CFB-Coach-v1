@@ -29,10 +29,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Injury.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Injury.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,11 +107,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8334">
-              <caret line="145" column="58" lean-forward="false" selection-start-line="145" selection-start-column="58" selection-end-line="145" selection-end-column="58" />
+            <state relative-caret-position="-71562">
+              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="content_home.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -120,8 +133,28 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="316" column="0" lean-forward="false" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+            <state relative-caret-position="436">
+              <caret line="348" column="0" lean-forward="false" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6198">
+              <caret line="1266" column="148" lean-forward="false" selection-start-line="1266" selection-start-column="148" selection-end-line="1266" selection-end-column="148" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeadCoach.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2278">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -140,9 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>num</find>
-      <find>5</find>
-      <find>recruitChance*Math.random()</find>
       <find>100</find>
       <find>injury</find>
       <find>cost = ratOvr*rbImportance + (int)Math.random()*100;</find>
@@ -170,6 +200,9 @@
       <find>checkFor</find>
       <find>idea</find>
       <find>get(7)</find>
+      <find>discipline</find>
+      <find>transf</find>
+      <find>QB</find>
     </findStrings>
     <replaceStrings>
       <replace>currentWeek+1</replace>
@@ -183,7 +216,6 @@
       <replace>year*yearFactor</replace>
       <replace>customFactor</replace>
       <replace>(int) (attrBase + 50 * Math.random());</replace>
-      <replace>S</replace>
       <replace>maxStarRating</replace>
       <replace>recruitChance</replace>
       <replace>cost = ratOvr*rbImportance + (int)Math.random()*recruitTolerance</replace>
@@ -202,6 +234,7 @@
       <replace>double</replace>
       <replace>checkInjury</replace>
       <replace>get(9)</replace>
+      <replace>S</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1223,12 +1256,12 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Injury.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
       </list>
     </option>
   </component>
@@ -1376,7 +1409,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513499336793" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513840903212" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1424,7 +1457,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513499336793" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513840903212" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1630,7 +1663,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513499336795" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513840903214" />
       </method>
     </configuration>
     <list size="1">
@@ -1692,6 +1725,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24387528" sideWeight="0.47121534" order="16" side_tool="false" content_ui="tabs" />
@@ -1718,7 +1752,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61618495" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1817,14 +1850,14 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/os/BaseBundle.class">
@@ -2012,7 +2045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-170">
           <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2116,15 +2148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="91" column="64" lean-forward="false" selection-start-line="91" selection-start-column="64" selection-end-line="91" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2135,21 +2158,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="183" column="37" lean-forward="false" selection-start-line="183" selection-start-column="37" selection-end-line="183" selection-end-column="37" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="62">
           <caret line="19" column="86" lean-forward="false" selection-start-line="19" selection-start-column="86" selection-end-line="19" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2165,15 +2177,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="614" column="19" lean-forward="false" selection-start-line="614" selection-start-column="19" selection-end-line="614" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="3760" column="163" lean-forward="false" selection-start-line="3760" selection-start-column="163" selection-end-line="3760" selection-end-column="163" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2193,20 +2196,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2278">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="316" column="0" lean-forward="false" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
+        <state relative-caret-position="436">
+          <caret line="348" column="0" lean-forward="false" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6198">
+          <caret line="1266" column="148" lean-forward="false" selection-start-line="1266" selection-start-column="148" selection-end-line="1266" selection-end-column="148" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8334">
-          <caret line="145" column="58" lean-forward="false" selection-start-line="145" selection-start-column="58" selection-end-line="145" selection-end-column="58" />
+        <state relative-caret-position="-71562">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>

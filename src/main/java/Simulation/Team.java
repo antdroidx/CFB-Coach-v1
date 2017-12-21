@@ -1247,22 +1247,24 @@ public class Team {
         int min = 63;
         Random rand = new Random();
         int retire = rand.nextInt((max - min) + 1) + min;
+        int age = HC.get(0).age;
+        int wins = HC.get(0).wins;
+        int losses = HC.get(0).losses;
 
         //RETIREMENT
         if (HC.get(0).age > retire && !userControlled) {
             retired = true;
             String oldCoach = HC.get(0).name;
-            int age = HC.get(0).age;
             fired = true;
             HC.remove(0);
             league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
-                    ". His former team, " + name + " have not announced a new successor to replace the retired coach.");
+                    ". His former team, " + name + " have not announced a new successor to replace the retired coach. Coach " + oldCoach + " had a career record of " + wins + "-" + losses + ".");
         }
 
         if (!retired) {
             if (teamPrestige > (HC.get(0).baselinePrestige + 7) && teamPrestige < 76 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige + 7) && confPrestige < avgCP && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
-                league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", head coach " + HC.get(0).name + " has moved to the top of" +
-                        " many of the schools looking for a replacement at that position.");
+                league.newsStories.get(league.currentWeek + 1).add("Coaching Carousel Rumor Mill>After another successful season at " + name + ", " + age + " year old head coach " + HC.get(0).name + " has moved to the top of" +
+                        " many of the schools looking for a replacement at that position. He has a career record of " + wins + "-" + losses + ". ");
                 if (Math.random() > 0.50) {
                     league.coachStarList.add(HC.get(0));
                     league.coachStarPrevTeam.add(name + "," + teamPrestige + "," + confPrestige);
@@ -1301,14 +1303,16 @@ public class Team {
                 } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && !league.isCareerMode() && !userControlled) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
-                            " after a disappointing tenure. The team is now searching for a new head coach.");
+                            " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
+                    teamPrestige -= (int)Math.random()*8;
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
                 } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && league.isCareerMode()) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
-                            " after a disappointing tenure. The team is now searching for a new head coach.");
+                            " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
+                    teamPrestige -= (int)Math.random()*8;
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
@@ -3220,7 +3224,7 @@ public class Team {
         if (newContract && league.isCareerMode()) {
             summary += "\n\nCongratulations! You've been awarded with a contract extension of " + HC.get(0).contractLength + " years.";
         } else if (fired) {
-            summary += "\n\nDue to failing to raise the team prestige during your contract length, you've been terminated from this position.";
+            summary += "\n\nDue to failing to raise the team prestige during your contract length, you've been terminated from this position. Your team may take an additional prestige hit due to the firing.";
         }
         return summary;
     }

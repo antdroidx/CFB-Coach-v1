@@ -346,6 +346,20 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek == 21) {
                         showNewsStoriesDialog();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage(simLeague.userTransfers)
+                                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Transfers")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        TextView textView = dialog.findViewById(android.R.id.message);
+                        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Begin Recruiting");
                         simLeague.currentWeek++;
