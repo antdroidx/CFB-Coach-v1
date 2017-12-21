@@ -108,6 +108,7 @@ public class League extends Rankings {
     public ArrayList<PlayerLB> transferLBs;
     public ArrayList<PlayerCB> transferCBs;
     public ArrayList<PlayerS> transferSs;
+    public String userTransfers;
 
     public ArrayList<Player> freshman;
     public ArrayList<Player> redshirts;
@@ -2910,23 +2911,263 @@ public class League extends Rankings {
         Random random = new Random();
         int max = 119;
         int min = 0;
+        userTransfers = "";
+        StringBuilder tOut = new StringBuilder();
+        StringBuilder tIn = new StringBuilder();
+        tOut.append("Transfers Out:\n\n");
+        tIn.append("Transfers In:\n\n");
 
-        //Round 1 of 3
-        for (int i = 0; i < transferQBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferQBs.get(i).region) < 1){
-                        int qbTransfers = 0;
-                        for (int x = 0; x < teamList.get(t).teamQBs.size(); ++x) {
-                            if (teamList.get(t).teamQBs.get(x).isTransfer) qbTransfers++;
+        for (int loc = 1; loc < 4; ++loc) {
+            
+            for (int i = 0; i < transferQBs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferQBs.get(i).region) < loc){
+                            int qbTransfers = 0;
+                            for (int x = 0; x < teamList.get(t).teamQBs.size(); ++x) {
+                                if (teamList.get(t).teamQBs.get(x).isTransfer) qbTransfers++;
+                            }
+                            if (qbTransfers == 0) {
+                                teamList.get(t).teamQBs.add(transferQBs.get(i));
+                                newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferQBs.get(i).getYrStr() + " QB " + transferQBs.get(i).name + "("  + transferQBs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                        tQBs.get(i).toString() + " .");
+                                if (teamList.get(t).equals(userTeam) && transferQBs.get(i).isTransfer) {
+                                    tIn.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (" + tQBs.get(i) + ")\n\n");
+                                }
+                                if (teamList.get(t).equals(userTeam) && !transferQBs.get(i).isTransfer) {
+                                    tIn.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferQBs.get(i).ratOvr + " (" + tQBs.get(i) + ")\n\n");
+                                }
+                                if (tQBs.get(i).toString().equals(userTeam.name)) {
+                                    tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                                }
+                                transferQBs.remove(i);
+                                tQBs.remove(i);
+                                break;
+                            }
                         }
-                        if (qbTransfers == 0) {
-                            teamList.get(t).teamQBs.add(transferQBs.get(i));
-                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                    tQBs.get(i).toString() + " .");
-                            transferQBs.remove(i);
-                            tQBs.remove(i);
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferRBs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferRBs.get(i).region) < loc){
+                            teamList.get(t).teamRBs.add(transferRBs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferRBs.get(i).getYrStr() + " RB " + transferRBs.get(i).name + "("  + transferRBs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tRBs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferRBs.get(i).isTransfer) {
+                                tIn.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (" + tRBs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferRBs.get(i).isTransfer) {
+                                tIn.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferRBs.get(i).ratOvr + " (" + tRBs.get(i) + ")\n\n");
+                            }
+                            if (tRBs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferRBs.remove(i);
+                            tRBs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferWRs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferWRs.get(i).region) < 1) {
+                            teamList.get(t).teamWRs.add(transferWRs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferWRs.get(i).getYrStr() + " WR " + transferWRs.get(i).name + "("  + transferWRs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tWRs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferWRs.get(i).isTransfer) {
+                                tIn.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (" + tWRs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferWRs.get(i).isTransfer) {
+                                tIn.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferWRs.get(i).ratOvr + " (" + tWRs.get(i) + ")\n\n");
+                            }
+                            if (tWRs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferWRs.remove(i);
+                            tWRs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferTEs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferTEs.get(i).region) < loc) {
+                            teamList.get(t).teamTEs.add(transferTEs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferTEs.get(i).getYrStr() + " TE " + transferTEs.get(i).name + "("  + transferTEs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tTEs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferTEs.get(i).isTransfer) {
+                                tIn.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (" + tTEs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferTEs.get(i).isTransfer) {
+                                tIn.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferTEs.get(i).ratOvr + " (" + tTEs.get(i) + ")\n\n");
+                            }
+                            if (tTEs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferTEs.remove(i);
+                            tTEs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferOLs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferOLs.get(i).region) < loc) {
+                        teamList.get(t).teamOLs.add(transferOLs.get(i));
+                        newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferOLs.get(i).getYrStr() + " OL " + transferOLs.get(i).name + "("  + transferOLs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                tOLs.get(i).toString() + " .");
+                        if (teamList.get(t).equals(userTeam) && transferOLs.get(i).isTransfer) {
+                            tIn.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (" + tOLs.get(i) + ")\n\n");
+                        }
+                        if (teamList.get(t).equals(userTeam) && !transferOLs.get(i).isTransfer) {
+                            tIn.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferOLs.get(i).ratOvr + " (" + tOLs.get(i) + ")\n\n");
+                        }
+                        if (tOLs.get(i).toString().equals(userTeam.name)) {
+                            tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                        }
+                        transferOLs.remove(i);
+                        tOLs.remove(i);
+                        break;
+
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferKs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferKs.get(i).region) < loc) {
+                            teamList.get(t).teamKs.add(transferKs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferKs.get(i).getYrStr() + " K " + transferKs.get(i).name + "("  + transferKs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tKs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferKs.get(i).isTransfer) {
+                                tIn.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (" + tKs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferKs.get(i).isTransfer) {
+                                tIn.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferKs.get(i).ratOvr + " (" + tKs.get(i) + ")\n\n");
+                            }
+                            if (tKs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferKs.remove(i);
+                            tKs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferDLs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamDLs.size() < 4 || teamList.get(t).teamDLs.get(0).ratOvr < transferDLs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferDLs.get(i).region) < loc) {
+                            teamList.get(t).teamDLs.add(transferDLs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferDLs.get(i).getYrStr() + " DL " + transferDLs.get(i).name + "("  + transferDLs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tDLs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferDLs.get(i).isTransfer) {
+                                tIn.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (" + tDLs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferDLs.get(i).isTransfer) {
+                                tIn.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferDLs.get(i).ratOvr + " (" + tDLs.get(i) + ")\n\n");
+                            }
+                            if (tDLs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferDLs.remove(i);
+                            tDLs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferLBs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferLBs.get(i).region) < loc) {
+                            teamList.get(t).teamLBs.add(transferLBs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferLBs.get(i).getYrStr() + " LB " + transferLBs.get(i).name + "("  + transferLBs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tLBs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferLBs.get(i).isTransfer) {
+                                tIn.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (" + tLBs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferLBs.get(i).isTransfer) {
+                                tIn.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferLBs.get(i).ratOvr + " (" + tLBs.get(i) + ")\n\n");
+                            }
+                            if (tLBs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferLBs.remove(i);
+                            tLBs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferCBs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferCBs.get(i).region) < loc) {
+                            teamList.get(t).teamCBs.add(transferCBs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferCBs.get(i).getYrStr() + " CB " + transferCBs.get(i).name + "("  + transferCBs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tCBs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferCBs.get(i).isTransfer) {
+                                tIn.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (" + tCBs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferCBs.get(i).isTransfer) {
+                                tIn.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferCBs.get(i).ratOvr + " (" + tCBs.get(i) + ")\n\n");
+                            }
+                            if (tCBs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferCBs.remove(i);
+                            tCBs.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < transferSs.size(); ++i) {
+                rand = random.nextInt((max - min) + 1) + min;
+                for (int t = rand; t < teamList.size() - rand; ++t) {
+                    if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr) {
+                        if (Math.abs(teamList.get(t).location - transferSs.get(i).region) < loc) {
+                            teamList.get(t).teamSs.add(transferSs.get(i));
+                            newsStories.get(currentWeek + 1).add(teamList.get(t).name + " Transfer News>" + transferSs.get(i).getYrStr() + " S " + transferSs.get(i).name + "("  + transferSs.get(i).ratOvr + ") has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
+                                    tSs.get(i).toString() + " .");
+                            if (teamList.get(t).equals(userTeam) && transferSs.get(i).isTransfer) {
+                                tIn.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (" + tSs.get(i) + ")\n\n");
+                            }
+                            if (teamList.get(t).equals(userTeam) && !transferSs.get(i).isTransfer) {
+                                tIn.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferSs.get(i).ratOvr + " (" + tSs.get(i) + ")\n\n");
+                            }
+                            if (tSs.get(i).toString().equals(userTeam.name)) {
+                                tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
+                            }
+                            transferSs.remove(i);
+                            tSs.remove(i);
                             break;
                         }
                     }
@@ -2934,441 +3175,63 @@ public class League extends Rankings {
             }
         }
 
-        for (int i = 0; i < transferRBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferRBs.get(i).region) < 1){
-                        teamList.get(t).teamRBs.add(transferRBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>RB " + transferRBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tRBs.get(i).toString() + " .");
-                        transferRBs.remove(i);
-                        tRBs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferWRs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferWRs.get(i).region) < 1) {
-                        teamList.get(t).teamWRs.add(transferWRs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>WR " + transferWRs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tWRs.get(i).toString() + " .");
-                        transferWRs.remove(i);
-                        tWRs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferTEs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferTEs.get(i).region) < 1) {
-                        teamList.get(t).teamTEs.add(transferTEs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>TE " + transferTEs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tTEs.get(i).toString() + " .");
-                        transferTEs.remove(i);
-                        tTEs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferOLs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferOLs.get(i).region) < 2) {
-                    teamList.get(t).teamOLs.add(transferOLs.get(i));
-                    newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>OL " + transferOLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                            tOLs.get(i).toString() + " .");
-                    transferOLs.remove(i);
-                    tOLs.remove(i);
-                    break;
-
-                }
-            }
-        }
-
-        for (int i = 0; i < transferKs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferKs.get(i).region) < 1) {
-                        teamList.get(t).teamKs.add(transferKs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>K " + transferKs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tKs.get(i).toString() + " .");
-                        transferKs.remove(i);
-                        tKs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferDLs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamDLs.size() < 4 || teamList.get(t).teamDLs.get(0).ratOvr < transferDLs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferDLs.get(i).region) < 1) {
-                        teamList.get(t).teamDLs.add(transferDLs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>DL " + transferDLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tDLs.get(i).toString() + " .");
-                        transferDLs.remove(i);
-                        tDLs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferLBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferLBs.get(i).region) < 1) {
-                        teamList.get(t).teamLBs.add(transferLBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>LB " + transferLBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tLBs.get(i).toString() + " .");
-                        transferLBs.remove(i);
-                        tLBs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferCBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferCBs.get(i).region) < 1) {
-                        teamList.get(t).teamCBs.add(transferCBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>CB " + transferCBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tCBs.get(i).toString() + " .");
-                        transferCBs.remove(i);
-                        tCBs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferSs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferSs.get(i).region) < 1) {
-                        teamList.get(t).teamSs.add(transferSs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>S " + transferSs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tSs.get(i).toString() + " .");
-                        transferSs.remove(i);
-                        tSs.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        //Round 2 of 3
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).sortPlayers();
         }
-
+        
         for (int i = 0; i < transferQBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferQBs.get(i).region) < 2){
-                        teamList.get(t).teamQBs.add(transferQBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tQBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tQBs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferRBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferRBs.get(i).region) < 2){
-                        teamList.get(t).teamRBs.add(transferRBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>RB " + transferRBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tRBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tRBs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferWRs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferWRs.get(i).region) < 2) {
-                        teamList.get(t).teamWRs.add(transferWRs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>WR " + transferWRs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tWRs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tWRs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferTEs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferTEs.get(i).region) < 2) {
-                        teamList.get(t).teamTEs.add(transferTEs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>TE " + transferTEs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tTEs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tTEs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferOLs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferOLs.get(i).region) < 2) {
-                    teamList.get(t).teamOLs.add(transferOLs.get(i));
-                    newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>OL " + transferOLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                            tOLs.get(i).toString() + " .");
-                    break;
-
-                }
+            if (tOLs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferKs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferKs.get(i).region) < 2) {
-                        teamList.get(t).teamKs.add(transferKs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>K " + transferKs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tKs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tKs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferDLs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamDLs.size() < 4 || teamList.get(t).teamDLs.get(0).ratOvr < transferDLs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferDLs.get(i).region) < 2) {
-                        teamList.get(t).teamDLs.add(transferDLs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>DL " + transferDLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tDLs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tDLs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferLBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferLBs.get(i).region) < 2) {
-                        teamList.get(t).teamLBs.add(transferLBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>LB " + transferLBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tLBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tLBs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferCBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferCBs.get(i).region) < 2) {
-                        teamList.get(t).teamCBs.add(transferCBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>CB " + transferCBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tCBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tCBs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
-
         for (int i = 0; i < transferSs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferSs.get(i).region) < 2) {
-                        teamList.get(t).teamSs.add(transferSs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>S " + transferSs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tSs.get(i).toString() + " .");
-                        break;
-                    }
-                }
+            if (tSs.get(i).toString().equals(userTeam.name)) {
+                tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
 
-        //ROUND 3 of 3
-
-        for (int i = 0; i < teamList.size(); ++i) {
-            teamList.get(i).sortPlayers();
-        }
-
-        for (int i = 0; i < transferQBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamQBs.size() < 1 || teamList.get(t).teamQBs.get(0).ratOvr < transferQBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferQBs.get(i).region) < 3){
-                        teamList.get(t).teamQBs.add(transferQBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>QB " + transferQBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tQBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferRBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamRBs.size() < 2 || teamList.get(t).teamRBs.get(0).ratOvr < transferRBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferRBs.get(i).region) < 3){
-                        teamList.get(t).teamRBs.add(transferRBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>RB " + transferRBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tRBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferWRs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamWRs.size() < 3 || teamList.get(t).teamWRs.get(0).ratOvr < transferWRs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferWRs.get(i).region) < 3) {
-                        teamList.get(t).teamWRs.add(transferWRs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>WR " + transferWRs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tWRs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferTEs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamTEs.size() < 1 || teamList.get(t).teamTEs.get(0).ratOvr < transferTEs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferTEs.get(i).region) < 3) {
-                        teamList.get(t).teamTEs.add(transferTEs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>TE " + transferTEs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tTEs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferOLs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamOLs.size() < 5 || teamList.get(t).teamOLs.get(0).ratOvr < transferOLs.get(i).ratOvr && Math.abs(teamList.get(t).location - transferOLs.get(i).region) < 3) {
-                    teamList.get(t).teamOLs.add(transferOLs.get(i));
-                    newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>OL " + transferOLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                            tOLs.get(i).toString() + " .");
-                    break;
-
-                }
-            }
-        }
-
-        for (int i = 0; i < transferKs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamKs.size() < 1 || teamList.get(t).teamKs.get(0).ratOvr < transferKs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferKs.get(i).region) < 3) {
-                        teamList.get(t).teamKs.add(transferKs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>K " + transferKs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tKs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferDLs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamDLs.size() < 4 || teamList.get(t).teamDLs.get(0).ratOvr < transferDLs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferDLs.get(i).region) < 3) {
-                        teamList.get(t).teamDLs.add(transferDLs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>DL " + transferDLs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tDLs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferLBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamLBs.size() < 3 || teamList.get(t).teamLBs.get(0).ratOvr < transferLBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferLBs.get(i).region) < 3) {
-                        teamList.get(t).teamLBs.add(transferLBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>LB " + transferLBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tLBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferCBs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamCBs.size() < 3 || teamList.get(t).teamCBs.get(0).ratOvr < transferCBs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferCBs.get(i).region) < 3) {
-                        teamList.get(t).teamCBs.add(transferCBs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>CB " + transferCBs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tCBs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < transferSs.size(); ++i) {
-            rand = random.nextInt((max - min) + 1) + min;
-            for (int t = rand; t < teamList.size() - rand; ++t) {
-                if (teamList.get(t).teamSs.size() < 1 || teamList.get(t).teamSs.get(0).ratOvr < transferSs.get(i).ratOvr) {
-                    if (Math.abs(teamList.get(t).location - transferSs.get(i).region) < 3) {
-                        teamList.get(t).teamSs.add(transferSs.get(i));
-                        newsStories.get(currentWeek+1).add(teamList.get(t).name + " Transfer News>S " + transferSs.get(i).name + " has announced his transfer to " + teamList.get(t).name + ". He was previously enrolled at " +
-                                tSs.get(i).toString() + " .");
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < teamList.size(); ++i) {
-            teamList.get(i).sortPlayers();
-        }
+        userTransfers = tIn + "\n" + tOut;
+        newsStories.get(currentWeek+1).add("User Team Transfers>" + userTransfers);
     }
 
     /*  IDEA: Conference Invites - Switch teams around with partner conference if criteria met:
