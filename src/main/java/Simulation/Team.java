@@ -779,8 +779,9 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
-        int preseasonBias = 6 - (wins + losses);
+        int preseasonBias = 12 - (wins + losses);
         if (preseasonBias < 0) preseasonBias = 0;
+        preseasonBias = preseasonBias/15;
         teamPollScore =
                 preseasonBias * (teamOffTalent + teamDefTalent + (teamPrestige/2) + (confPrestige/3)) +
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
