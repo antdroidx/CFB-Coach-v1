@@ -2386,7 +2386,7 @@ public class MainActivity extends AppCompatActivity {
                 userTeam.HC.add(userHC);
                 userTeam.fired = false;
                 userHC.contractYear = 0;
-                userHC.contractLength = 5;
+                userHC.contractLength = 6;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 updateTeamUI();
                 examineTeam(currentTeam.name);
@@ -2427,7 +2427,7 @@ public class MainActivity extends AppCompatActivity {
                 userTeam.HC.add(userHC);
                 userTeam.fired = false;
                 userHC.contractYear = 0;
-                userHC.contractLength = 5;
+                userHC.contractLength = 6;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                         " to lead the team.");
@@ -2483,7 +2483,7 @@ public class MainActivity extends AppCompatActivity {
                         userTeam.HC.add(userHC);
                         userTeam.fired = false;
                         userHC.contractYear = 0;
-                        userHC.contractLength = 5;
+                        userHC.contractLength = 6;
                         userHC.baselinePrestige = userTeam.teamPrestige;
                         simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                                 " to lead the team.");
