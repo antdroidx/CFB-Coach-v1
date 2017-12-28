@@ -114,7 +114,7 @@ public class Game implements Serializable {
     private boolean playingOT;
     private boolean bottomOT;
 
-    private int timePerPlay = 20; //affects snaps per game!
+    private int timePerPlay = 21; //affects snaps per game!
     private int intValue = 150;
     private int sackValue = 175;
 
@@ -1115,7 +1115,7 @@ public class Game implements Serializable {
             }
         } else {
             double preferPass = (offense.getPassProf() - defense.getPassDef()) / 100 + Math.random() * offense.teamStratOff.getPassPref();       //STRATEGIES
-            double preferRush = (offense.getRushProf() - defense.getRushDef()) / 100 + Math.random() * offense.teamStratOff.getRunPref();
+            double preferRush = (offense.getRushProf() - defense.getRushDef()) / 90 + Math.random() * offense.teamStratOff.getRunPref();
 
             // If it's 1st and Goal to go, adjust yards needed to reflect distance for a TD so that play selection reflects actual yards to go
             // If we don't do this, gameYardsNeed may be higher than the actually distance for a TD and suboptimal plays may be chosen
@@ -1570,7 +1570,7 @@ public class Game implements Serializable {
             //Incomplete pass stops the clock, so just run time for how long the play took, then move on
             gameTime -= timePerPlay * Math.random();
 
-            if ((selCB.ratJump * Math.random() + selCB.ratCoverage * Math.random()) > (selWR.ratJump * Math.random() + selWR.ratCatch * Math.random()) * 1.1) {
+            if ((selCB.ratJump * Math.random() + selCB.ratCoverage * Math.random()) > (selWR.ratJump * Math.random() + selWR.ratCatch * Math.random()) * 2) {
                 selCB.statsTargets++;
                 selCBStats[4]++;
                 selCB.statsDefended++;  //pass was tipped
@@ -2448,7 +2448,7 @@ public class Game implements Serializable {
             gameTime -= timePerPlay + timePerPlay * Math.random();
             //check for fumble
             double fumChance = ((defense.getS(0).ratTackle + selLB.ratTackle) / 2 + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.teamStratOff.getRunProtection();  //STRATEGIES
-            if (95 * Math.random() < fumChance / 50) {
+            if (100 * Math.random() < fumChance / 50) {
                 //Fumble!
 
                 selQBStats[9]++;
