@@ -690,14 +690,15 @@ public class RecruitingActivity extends AppCompatActivity {
      * Called whenever new position is selected, updates all the components
      */
     private void updateForNewPosition() {
-        if (!currentPosition.equals("Top 50 Recruits")) {
+        if (!currentPosition.equals("Top 50 Recruits") || !currentPosition.equals("All Players")) {
             String[] splitty = currentPosition.split(" ");
             setPlayerList(splitty[0]);
             setPlayerInfoMap(splitty[0]);
             expListAdapter.notifyDataSetChanged();
         } else {
             // See top 100 recruits
-            players = avail50;
+            if (currentPosition.equals("Top 50 Recruits")) players = avail50;
+            else players = availAll;
             playersInfo = new LinkedHashMap<String, List<String>>();
             for (String p : players) {
                 ArrayList<String> pInfoList = new ArrayList<String>();
