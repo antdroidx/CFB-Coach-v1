@@ -72,6 +72,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> availCBs;
     private ArrayList<String> availSs;
     private ArrayList<String> availAll;
+    private ArrayList<String> avail50;
     private ArrayList<String> recruitDisplay;
 
     private int needQBs;
@@ -155,6 +156,7 @@ public class RecruitingActivity extends AppCompatActivity {
         availCBs = new ArrayList<String>();
         availSs = new ArrayList<String>();
 
+        avail50 = new ArrayList<String>();
         availAll = new ArrayList<String>();
 
 
@@ -258,7 +260,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
-        availAll = new ArrayList<String>(availAll.subList(0, 50));
+        avail50 = new ArrayList<String>(availAll.subList(0, 50));
 
         // Get needs for each position
         updatePositionNeeds();
@@ -286,6 +288,7 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("LB (Need: " + needLBs + ")");
         positions.add("CB (Need: " + needCBs + ")");
         positions.add("S (Need: " + needSs + ")");
+        positions.add("All Players");
 
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -359,6 +362,7 @@ public class RecruitingActivity extends AppCompatActivity {
                         } else if (item == 2) {
                             // Remove unaffordable
                             removeUnaffordable(players);
+                            removeUnaffordable(avail50);
                             removeUnaffordable(availAll);
                             removeUnaffordable(availQBs);
                             removeUnaffordable(availRBs);
@@ -498,6 +502,8 @@ public class RecruitingActivity extends AppCompatActivity {
             players = availCBs;
         } else if (pos.equals("S")) {
             players = availSs;
+        } else if (pos.equals("All")) {
+            players = availAll;
         }
     }
 
@@ -691,7 +697,7 @@ public class RecruitingActivity extends AppCompatActivity {
             expListAdapter.notifyDataSetChanged();
         } else {
             // See top 100 recruits
-            players = availAll;
+            players = avail50;
             playersInfo = new LinkedHashMap<String, List<String>>();
             for (String p : players) {
                 ArrayList<String> pInfoList = new ArrayList<String>();
@@ -731,6 +737,7 @@ public class RecruitingActivity extends AppCompatActivity {
             positions.add("LB (Need: " + needLBs + ")");
             positions.add("CB (Need: " + needCBs + ")");
             positions.add("S (Need: " + needSs + ")");
+            positions.add("All Players");
 
             dataAdapterPosition.clear();
             for (String p : positions) {
@@ -966,6 +973,9 @@ public class RecruitingActivity extends AppCompatActivity {
         budgetText.setText("Budget: $" + recruitingBudget);
 
         // Remove the player from the top 100 list
+        if (avail50.contains(player)) {
+            avail50.remove(player);
+        }
         if (availAll.contains(player)) {
             availAll.remove(player);
         }
@@ -1156,6 +1166,9 @@ public class RecruitingActivity extends AppCompatActivity {
         budgetText.setText("Budget: $" + recruitingBudget);
 
         // Remove the player from the top 100 list
+        if (avail50.contains(player)) {
+            avail50.remove(player);
+        }
         if (availAll.contains(player)) {
             availAll.remove(player);
         }
@@ -1213,6 +1226,11 @@ public class RecruitingActivity extends AppCompatActivity {
                 int posTop = availAll.indexOf(player);
                 availAll.set(posTop, player.substring(0, player.length() - 1) + "1");
             }
+            if (avail50.contains(player)) {
+                int posTop = avail50.indexOf(player);
+                avail50.set(posTop, player.substring(0, player.length() - 1) + "1");
+            }
+
 
             // Next check all the position lists
             String[] ps = player.split(",");

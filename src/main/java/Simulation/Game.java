@@ -741,8 +741,8 @@ public class Game implements Serializable {
         } else {
             adv = Math.round((awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 4);
         }
-        if (adv > 4) adv = 3;
-        if (adv < -4) adv = -3;
+        if (adv > 3) adv = 3;
+        if (adv < -3) adv = -3;
         return adv;
     }
 

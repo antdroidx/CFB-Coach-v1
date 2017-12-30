@@ -1183,7 +1183,7 @@ public class Team {
         if (newPrestige > 80 + confLimit && !natChampWL.equals("NCW")) newPrestige = 80 + confLimit;
         if (newPrestige < 35 + confLimit) newPrestige = 35 + confLimit;
         if (newPrestige > 95) newPrestige = 95;
-        if (newPrestige < 20) newPrestige = 20;
+        if (newPrestige < 25) newPrestige = 25;
 
         int PrestigeScore[] = {newPrestige, rivalryPts, ccPts, ncwPts, nflPts, rgameplayed};
         return PrestigeScore;
