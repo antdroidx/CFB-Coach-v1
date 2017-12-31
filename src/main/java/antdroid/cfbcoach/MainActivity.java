@@ -2498,7 +2498,7 @@ public class MainActivity extends AppCompatActivity {
 
             int ratOvr = userHC.ratOvr;
             if (ratOvr < 40) ratOvr = 40;
-            double offers = Math.random();
+            double offers = 2;
             String oldTeam = userHC.team.name;
             updateTeamUI();
             //get user team from list dialog

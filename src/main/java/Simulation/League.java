@@ -2815,7 +2815,6 @@ public class League extends Rankings {
             if (teamList.get(i).name.equals(coachTeam)) {
                 teamList.get(i).userControlled = true;
                 userTeam = teamList.get(i);
-                userTeam.HC.get(0).baselinePrestige = userTeam.teamPrestige;
             }
         }
     }
