@@ -258,6 +258,16 @@ public class PlayerK extends Player {
         return (int) ((statsFGMade * 5 + statsXPMade) * ((double) statsFGMade / statsFGAtt)) + ratOvr + team.confPrestige * 5;
     }
 
+    public int getFGpct() {
+        if (statsFGAtt < 1) {
+            return 0;
+        } else {
+
+            int rating = 100 * statsFGMade / (statsFGAtt);
+            return rating;
+        }
+    }
+
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();

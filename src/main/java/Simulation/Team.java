@@ -195,6 +195,8 @@ public class Team {
     public int confAvg;
     public int confLimit;
 
+    public int championships;
+
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
      *
@@ -1224,12 +1226,16 @@ public class Team {
         teamRecords.checkRecord("Conf Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         teamRecords.checkRecord("Bowl Wins", HC.get(0).bowlwins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         teamRecords.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        teamRecords.checkRecord("Coach Career Score", HC.get(0).getCoachCareerScore(), abbr + ": " + HC.get(0).getInitialName(), league.getYear());
 
         records.checkRecord("Wins", HC.get(0).wins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         records.checkRecord("National Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
-        teamRecords.checkRecord("Conf Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        records.checkRecord("Conf Championships", HC.get(0).natchamp, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         records.checkRecord("Bowl Wins", HC.get(0).bowlwins, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
         records.checkRecord("Coach Awards", HC.get(0).awards, abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        records.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), abbr + ": " + HC.get(0).getInitialName(), league.getYear());
+        records.checkRecord("Coach Career Score", HC.get(0).getCoachCareerScore(), abbr + ": " + HC.get(0).getInitialName(), league.getYear());
 
         coachContracts(totalPDiff, newPrestige[0], confLimit, avgCP);
 
@@ -3243,31 +3249,31 @@ public class Team {
 
         pList.add(getQB(0).getPosNameYrOvrPot_Str());
 
-        for (int i = 0; i < 2; ++i) {
+        for (int i = 0; i < startersRB; ++i) {
             pList.add(getRB(i).getPosNameYrOvrPot_Str());
         }
 
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < startersWR; ++i) {
             pList.add(getWR(i).getPosNameYrOvrPot_Str());
         }
 
         pList.add(getTE(0).getPosNameYrOvrPot_Str());
 
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < startersOL; ++i) {
             pList.add(getOL(i).getPosNameYrOvrPot_Str());
         }
 
         pList.add(getK(0).getPosNameYrOvrPot_Str());
 
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < startersDL; ++i) {
             pList.add(getDL(i).getPosNameYrOvrPot_Str());
         }
 
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < startersLB; ++i) {
             pList.add(getLB(i).getPosNameYrOvrPot_Str());
         }
 
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < startersCB; ++i) {
             pList.add(getCB(i).getPosNameYrOvrPot_Str());
         }
 
@@ -3338,34 +3344,34 @@ public class Team {
         //Bench
         ph = playerStatsGroupHeaders.get(25);
         ArrayList<String> benchStr = new ArrayList<>();
-        for (int i = 1; i < teamQBs.size(); ++i) {
+        for (int i = startersQB; i < teamQBs.size(); ++i) {
             benchStr.add(getQB(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 2; i < teamRBs.size(); ++i) {
+        for (int i = startersRB; i < teamRBs.size(); ++i) {
             benchStr.add(getRB(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 3; i < teamWRs.size(); ++i) {
+        for (int i = startersWR; i < teamWRs.size(); ++i) {
             benchStr.add(getWR(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 1; i < teamTEs.size(); ++i) {
+        for (int i = startersTE; i < teamTEs.size(); ++i) {
             benchStr.add(getTE(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 5; i < teamOLs.size(); ++i) {
+        for (int i = startersOL; i < teamOLs.size(); ++i) {
             benchStr.add(getOL(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 1; i < teamKs.size(); ++i) {
+        for (int i = startersK; i < teamKs.size(); ++i) {
             benchStr.add(getK(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 4; i < teamDLs.size(); ++i) {
+        for (int i = startersDL; i < teamDLs.size(); ++i) {
             benchStr.add(getDL(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 3; i < teamLBs.size(); ++i) {
+        for (int i = startersLB; i < teamLBs.size(); ++i) {
             benchStr.add(getLB(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 3; i < teamCBs.size(); ++i) {
+        for (int i = startersCB; i < teamCBs.size(); ++i) {
             benchStr.add(getCB(i).getPosNameYrOvrPot_Str());
         }
-        for (int i = 1; i < teamSs.size(); ++i) {
+        for (int i = startersS; i < teamSs.size(); ++i) {
             benchStr.add(getS(i).getPosNameYrOvrPot_Str());
         }
         playerStatsMap.put(ph, benchStr);
@@ -3938,16 +3944,16 @@ public class Team {
      * The number of games played affects how much players improve.
      */
     public void addGamePlayedPlayers(boolean wonGame) {
-        addGamePlayedList(teamQBs, 1, wonGame);
-        addGamePlayedList(teamRBs, 2, wonGame);
-        addGamePlayedList(teamWRs, 3, wonGame);
-        addGamePlayedList(teamTEs, 1, wonGame);
-        addGamePlayedList(teamOLs, 5, wonGame);
-        addGamePlayedList(teamKs, 1, wonGame);
-        addGamePlayedList(teamDLs, 4, wonGame);
-        addGamePlayedList(teamLBs, 3, wonGame);
-        addGamePlayedList(teamCBs, 3, wonGame);
-        addGamePlayedList(teamSs, 1, wonGame);
+        addGamePlayedList(teamQBs, startersQB, wonGame);
+        addGamePlayedList(teamRBs, startersRB, wonGame);
+        addGamePlayedList(teamWRs, startersWR, wonGame);
+        addGamePlayedList(teamTEs, startersTE, wonGame);
+        addGamePlayedList(teamOLs, startersOL, wonGame);
+        addGamePlayedList(teamKs, startersK, wonGame);
+        addGamePlayedList(teamDLs, startersDL, wonGame);
+        addGamePlayedList(teamLBs, startersLB, wonGame);
+        addGamePlayedList(teamCBs, startersCB, wonGame);
+        addGamePlayedList(teamSs, startersS, wonGame);
     }
 
     private void addGamePlayedList(ArrayList<? extends Player> playerList, int starters, boolean wonGame) {
@@ -4071,6 +4077,7 @@ public class Team {
                 records.checkRecord("Pass TDs", getQB(i).statsPassTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Ints Thrown", getQB(i).statsInt, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Comp Percent", (100 * getQB(i).statsPassComp) / (getQB(i).statsPassAtt + 1), abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("QB Rating", getQB(i).getPasserRating(), abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Rush Yards", getQB(i).statsRushYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Rush TDs", getQB(i).statsRushTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Lost", getQB(i).statsFumbles, abbr + ": " + getQB(i).getInitialName(), league.getYear());
@@ -4079,60 +4086,49 @@ public class Team {
 
 
         for (int i = 0; i < teamRBs.size(); ++i) {
-            if (getRB(i).gamesPlayed > 6) {
                 records.checkRecord("Rush Yards", getRB(i).statsRushYards, abbr + ": " + getRB(i).getInitialName(), league.getYear());
                 records.checkRecord("Rush TDs", getRB(i).statsRushTD, abbr + ": " + getRB(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Lost", getRB(i).statsFumbles, abbr + ": " + getRB(i).getInitialName(), league.getYear());
-            }
         }
 
         for (int i = 0; i < teamWRs.size(); ++i) {
-            if (getWR(i).gamesPlayed > 6) {
                 records.checkRecord("Rec Yards", getWR(i).statsRecYards, abbr + ": " + getWR(i).getInitialName(), league.getYear());
                 records.checkRecord("Rec TDs", getWR(i).statsTD, abbr + ": " + getWR(i).getInitialName(), league.getYear());
                 records.checkRecord("Catch Percent", (100 * getWR(i).statsReceptions) / (getWR(i).statsTargets + 1), abbr + ": " + getWR(i).getInitialName(), league.getYear());
-            }
         }
 
         for (int i = 0; i < teamTEs.size(); ++i) {
-            if (getTE(i).gamesPlayed > 6) {
                 records.checkRecord("Rec Yards", getTE(i).statsRecYards, abbr + ": " + getTE(i).getInitialName(), league.getYear());
                 records.checkRecord("Rec TDs", getTE(i).statsRecTD, abbr + ": " + getTE(i).getInitialName(), league.getYear());
                 records.checkRecord("Catch Percent", (100 * getTE(i).statsReceptions) / (getTE(i).statsTargets + 1), abbr + ": " + getTE(i).getInitialName(), league.getYear());
-            }
         }
         for (int i = 0; i < teamDLs.size(); ++i) {
-            if (getDL(i).gamesPlayed > 6) {
                 records.checkRecord("Tackles", getDL(i).statsTackles, abbr + ": " + getDL(i).getInitialName(), league.getYear());
                 records.checkRecord("Sacks", getDL(i).statsSacks, abbr + ": " + getDL(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Recovered", getDL(i).statsFumbles, abbr + ": " + getDL(i).getInitialName(), league.getYear());
                 records.checkRecord("Interceptions", getDL(i).statsInts, abbr + ": " + getDL(i).getInitialName(), league.getYear());
-            }
         }
         for (int i = 0; i < teamLBs.size(); ++i) {
-            if (getLB(i).gamesPlayed > 6) {
                 records.checkRecord("Tackles", getLB(i).statsTackles, abbr + ": " + getLB(i).getInitialName(), league.getYear());
                 records.checkRecord("Sacks", getLB(i).statsSacks, abbr + ": " + getLB(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Recovered", getLB(i).statsFumbles, abbr + ": " + getLB(i).getInitialName(), league.getYear());
                 records.checkRecord("Interceptions", getLB(i).statsInts, abbr + ": " + getLB(i).getInitialName(), league.getYear());
-            }
         }
         for (int i = 0; i < teamCBs.size(); ++i) {
-            if (getCB(i).gamesPlayed > 6) {
                 records.checkRecord("Tackles", getCB(i).statsTackles, abbr + ": " + getCB(i).getInitialName(), league.getYear());
                 records.checkRecord("Sacks", getCB(i).statsSacks, abbr + ": " + getCB(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Recovered", getCB(i).statsFumbles, abbr + ": " + getCB(i).getInitialName(), league.getYear());
                 records.checkRecord("Interceptions", getCB(i).statsInts, abbr + ": " + getCB(i).getInitialName(), league.getYear());
                 records.checkRecord("Passes Defended", getCB(i).statsDefended, abbr + ": " + getCB(i).getInitialName(), league.getYear());
-            }
         }
         for (int i = 0; i < teamSs.size(); ++i) {
-            if (getS(i).gamesPlayed > 6) {
                 records.checkRecord("Tackles", getS(i).statsTackles, abbr + ": " + getS(i).getInitialName(), league.getYear());
                 records.checkRecord("Sacks", getS(i).statsSacks, abbr + ": " + getS(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Recovered", getS(i).statsFumbles, abbr + ": " + getS(i).getInitialName(), league.getYear());
                 records.checkRecord("Interceptions", getS(i).statsInts, abbr + ": " + getS(i).getInitialName(), league.getYear());
-            }
+        }
+        for (int i = 0; i < teamKs.size(); ++i) {
+                records.checkRecord("Field Goals", getK(i).statsFGMade, abbr + ": " + getS(i).getInitialName(), league.getYear());
         }
     }
 
@@ -4146,6 +4142,8 @@ public class Team {
                 records.checkRecord("Career Pass Yards", qb.statsPassYards + qb.careerPassYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Pass TDs", qb.statsPassTD + qb.careerTDs, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Ints Thrown", qb.statsInt + qb.careerInt, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Comp PCT", qb.getCareerPassPCT(), abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career QB Rating", qb.getCareerPasserRating(), abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Rush Yards", qb.statsRushYards + qb.careerRushYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Rush TDs", qb.statsRushTD + qb.careerRushTD, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Fumbles Lost", qb.statsFumbles + qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
@@ -4187,8 +4185,11 @@ public class Team {
                 records.checkRecord("Career Sacks", s.statsSacks + s.careerSacks, abbr + ": " + s.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Fumbles Rec", s.statsFumbles + s.careerFumbles, abbr + ": " + s.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Interceptions", s.statsInts + s.careerInts, abbr + ": " + s.getInitialName(), league.getYear() - 1);
+            } else if (p instanceof PlayerK) {
+                PlayerK k = (PlayerK) p;
+                records.checkRecord("Career Field Goals", k.statsFGMade + k.careerFGMade, abbr + ": " + k.getInitialName(), league.getYear() - 1);
+            }
             }
         }
-    }
 
 }

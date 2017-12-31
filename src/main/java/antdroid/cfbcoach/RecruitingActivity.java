@@ -260,7 +260,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
-        avail50 = new ArrayList<String>(availAll.subList(0, 50));
+        avail50 = new ArrayList<String>(availAll.subList(0, 49));
 
         // Get needs for each position
         updatePositionNeeds();
@@ -278,6 +278,7 @@ public class RecruitingActivity extends AppCompatActivity {
         positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
         positions.add("Top 50 Recruits");
+        positions.add("All Players");
         positions.add("QB (Need: " + needQBs + ")");
         positions.add("RB (Need: " + needRBs + ")");
         positions.add("WR (Need: " + needWRs + ")");
@@ -288,7 +289,7 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("LB (Need: " + needLBs + ")");
         positions.add("CB (Need: " + needCBs + ")");
         positions.add("S (Need: " + needSs + ")");
-        positions.add("All Players");
+
 
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -299,7 +300,7 @@ public class RecruitingActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         currentPosition = parent.getItemAtPosition(position).toString();
-                        updateForNewPosition();
+                        updateForNewPosition(position);
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -345,7 +346,7 @@ public class RecruitingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
                 builder.setTitle("Filter Recruits");
-                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players"/*, "West", "Mid-West", "Central", "East", "South", "Reset"*/};
+                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players"};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
@@ -376,16 +377,6 @@ public class RecruitingActivity extends AppCompatActivity {
                             removeUnaffordable(availSs);
                             // Notify that players were removed
                             expListAdapter.notifyDataSetChanged();
-                        } else if (item == 3) {
-                            filterRegion(players, (item - 3));
-                        } else if (item == 4) {
-                            filterRegion(players, (item - 3));
-                        } else if (item == 5) {
-                            filterRegion(players, (item - 3));
-                        } else if (item == 6) {
-                            filterRegion(players, (item - 3));
-                        } else if (item == 7) {
-                            filterRegion(players, (item - 3));
                         }
 
                         dialog.dismiss();
@@ -502,8 +493,6 @@ public class RecruitingActivity extends AppCompatActivity {
             players = availCBs;
         } else if (pos.equals("S")) {
             players = availSs;
-        } else if (pos.equals("All")) {
-            players = availAll;
         }
     }
 
@@ -689,16 +678,19 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Called whenever new position is selected, updates all the components
      */
-    private void updateForNewPosition() {
-        if (!currentPosition.equals("Top 50 Recruits") || !currentPosition.equals("All Players")) {
+    private void updateForNewPosition(int position) {
+        if (position > 1) {
             String[] splitty = currentPosition.split(" ");
             setPlayerList(splitty[0]);
             setPlayerInfoMap(splitty[0]);
             expListAdapter.notifyDataSetChanged();
         } else {
             // See top 100 recruits
-            if (currentPosition.equals("Top 50 Recruits")) players = avail50;
-            else players = availAll;
+            if (position == 0) {
+                players = avail50;
+            } else {
+                players = availAll;
+            }
             playersInfo = new LinkedHashMap<String, List<String>>();
             for (String p : players) {
                 ArrayList<String> pInfoList = new ArrayList<String>();
@@ -728,6 +720,7 @@ public class RecruitingActivity extends AppCompatActivity {
         if (dataAdapterPosition != null) {
             positions = new ArrayList<String>();
             positions.add("Top 50 Recruits");
+            positions.add("All Players");
             positions.add("QB (Need: " + needQBs + ")");
             positions.add("RB (Need: " + needRBs + ")");
             positions.add("WR (Need: " + needWRs + ")");
@@ -738,7 +731,6 @@ public class RecruitingActivity extends AppCompatActivity {
             positions.add("LB (Need: " + needLBs + ")");
             positions.add("CB (Need: " + needCBs + ")");
             positions.add("S (Need: " + needSs + ")");
-            positions.add("All Players");
 
             dataAdapterPosition.clear();
             for (String p : positions) {

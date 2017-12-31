@@ -45,12 +45,14 @@ public class LeagueRecords {
     private HashMap<String, Record> records;
 
     public final String[] recordsList = {"TEAM", "Team PPG", "Team Opp PPG", "Team YPG", "Team Opp YPG", "Team TO Diff",
-            "SEASON: OFFENSE", "Pass Yards", "Pass TDs", "Ints Thrown", "Comp Percent",
+            "SEASON: OFFENSE", "Pass Yards", "Pass TDs", "Ints Thrown", "Comp Percent", "QB Rating",
             "Rush Yards", "Rush TDs", "Fumbles Lost",
-            "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended",
-            "CAREER: OFFENSE", "Career Pass Yards", "Career Pass TDs", "Career Ints Thrown",
+            "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended", "SEASON: KICKING", "Field Goals",
+            "CAREER: OFFENSE", "Career Pass Yards", "Career Pass TDs", "Career Ints Thrown", "Career Comp PCT", "Career QB Rating",
             "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost",
-            "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended", "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Coach Awards"};
+            "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended",
+            "CAREER: KICKING", "Career Field Goals",
+            "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Coach Awards", "Coach Year Score", "Coach Career Score"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<String, Record>();
@@ -74,6 +76,7 @@ public class LeagueRecords {
         records.put("Pass TDs", new Record(0, "XXX", 0));
         records.put("Ints Thrown", new Record(0, "XXX", 0));
         records.put("Comp Percent", new Record(0, "XXX", 0));
+        records.put("QB Rating", new Record(0, "XXX", 0));
         records.put("Rush Yards", new Record(0, "XXX", 0));
         records.put("Rush TDs", new Record(0, "XXX", 0));
         records.put("Fumbles Lost", new Record(0, "XXX", 0));
@@ -86,10 +89,14 @@ public class LeagueRecords {
         records.put("Fumbles Recovered", new Record(0, "XXX", 0));
         records.put("Interceptions", new Record(0, "XXX", 0));
         records.put("Passes Defended", new Record(0, "XXX", 0));
+        records.put("SEASON: KICKING", null);
+        records.put("Field Goals", new Record(0, "XXX", 0));
         records.put("CAREER: OFFENSE", null);
         records.put("Career Pass Yards", new Record(0, "XXX", 0));
         records.put("Career Pass TDs", new Record(0, "XXX", 0));
         records.put("Career Ints Thrown", new Record(0, "XXX", 0));
+        records.put("Career Comp PCT", new Record(0, "XXX", 0));
+        records.put("Career QB Rating", new Record(0, "XXX", 0));
         records.put("Career Rush Yards", new Record(0, "XXX", 0));
         records.put("Career Rush TDs", new Record(0, "XXX", 0));
         records.put("Career Fumbles Lost", new Record(0, "XXX", 0));
@@ -101,12 +108,16 @@ public class LeagueRecords {
         records.put("Career Fumbles Rec", new Record(0, "XXX", 0));
         records.put("Career Interceptions", new Record(0, "XXX", 0));
         records.put("Career Defended", new Record(0, "XXX", 0));
+        records.put("CAREER: KICKING", null);
+        records.put("Career Field Goals", new Record(0, "XXX", 0));
         records.put("COACHING RECORDS",null);
         records.put("Wins", new Record(0, "XXX", 0));
         records.put("National Championships", new Record(0, "XXX", 0));
         records.put("Conf Championships", new Record(0, "XXX", 0));
         records.put("Bowl Wins", new Record(0, "XXX", 0));
         records.put("Coach Awards", new Record(0, "XXX", 0));
+        records.put("Coach Year Score", new Record(0, "XXX", 0));
+        records.put("Coach Career Score", new Record(0, "XXX", 0));
     }
 
     public void checkRecord(String record, int number, String holder, int year) {

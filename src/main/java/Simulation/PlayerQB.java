@@ -340,14 +340,41 @@ public class PlayerQB extends Player {
     }
 
     public int getPasserRating() {
-        int rating = (int) (((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt + 1);
-        return rating;
+        if (statsPassAtt < 1) {
+            return 0;
+        } else {
+            int rating = (int) (((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt);
+            return rating;
+        }
     }
 
     public int getPassPCT() {
-        int rating = 100 * statsPassComp / (statsPassAtt + 1);
-        return rating;
+        if (statsPassAtt < 1) {
+            return 0;
+        } else {
+            int rating = 100 * statsPassComp / (statsPassAtt);
+            return rating;
+        }
     }
+
+    public int getCareerPassPCT() {
+        if (statsPassAtt < 1) {
+            return 0;
+        } else {
+            int rating = (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt));
+            return rating;
+        }
+    }
+
+    public int getCareerPasserRating() {
+        if (statsPassAtt < 1) {
+            return 0;
+        } else {
+            int rating = (int) (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt));
+            return rating;
+        }
+    }
+
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
@@ -386,7 +413,7 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + (int) (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt + 1)) + ">Comp Percent: " + (100 * statsPassComp / (statsPassAtt + 1)) + "%");
+        pStats.add("Passer Rating " + (int) (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt + 1)) + ">Comp Percent: " + (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt+ 1)) + "%");
         pStats.add("Touchdowns: " + (statsPassTD + careerTDs) + ">Interceptions: " + (statsInt + careerInt));
         pStats.add("Pass Yards: " + (statsPassYards + careerPassYards) + " yds>Yards/Att: " + ((double) (10 * (statsPassYards + careerPassYards) / (statsPassAtt + careerPassAtt + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + ((statsPassYards + careerPassYards) / (getGamesPlayed() + careerGamesPlayed)) + " yds/g>Sacks: " + (statsSacked + careerSacked));

@@ -1117,7 +1117,7 @@ public class MainActivity extends AppCompatActivity {
         String[] rankingsSelection =
                 {"Poll Votes", "Conference Standings", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
-                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class"};
+                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class" };
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -1166,8 +1166,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
                 {"Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
-                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions",
+                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct",
                         "Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
+                        "Coach - Career Score"
                 };
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
@@ -1234,7 +1235,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] historySelection = {"League History", "League Records", "Hall of Fame"};
+        String[] historySelection = {"League History", "League Records", "Hall of Fame", "League Stats"};
         Spinner leagueHistorySpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, historySelection);
@@ -1258,11 +1259,61 @@ public class MainActivity extends AppCompatActivity {
                         } else if (position == 2) {
                             HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
                             leagueHistoryList.setAdapter(hofAdapter);
+                        } else if (position == 3) {
+                            showLeagueHistoryStats();
                         } else {
                             final LeagueHistoryListArrayAdapter leagueHistoryAdapter =
                                     new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueHistoryAdapter);
                         }
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+    }
+
+    public void showLeagueHistoryStats() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("League Stats")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
+        String[] rankingsSelection =
+                {"National Championships", "Conference Championships", "Bowl Victories"};
+        Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+        ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, rankingsSelection);
+        teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
+
+        final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
+        final TeamRankingsListArrayAdapter teamRankingsAdapter =
+                new TeamRankingsListArrayAdapter(this, rankings, userTeam.strRepWithBowlResults());
+        teamRankingsList.setAdapter(teamRankingsAdapter);
+
+        teamRankingsSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        ArrayList<String> rankings = simLeague.getLeagueHistoryStats(position);
+                        if (position == 4) {
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
+                        } else {
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
+                        }
+                        teamRankingsAdapter.clear();
+                        teamRankingsAdapter.addAll(rankings);
+                        teamRankingsAdapter.notifyDataSetChanged();
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
