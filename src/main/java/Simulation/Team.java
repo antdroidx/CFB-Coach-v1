@@ -94,6 +94,7 @@ public class Team {
     public int teamCount = 12;
     public int totalTeamCount = teamCount * 10;
     public int ratTransfer = 72;
+    public int promotionNum = 2;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -1239,7 +1240,7 @@ public class Team {
 
         coachContracts(totalPDiff, newPrestige[0], confLimit, avgCP);
 
-        if (userControlled && totalPDiff > 2) {
+        if (userControlled && totalPDiff > promotionNum) {
             HC.get(0).promotionCandidate = true;
         }
 
