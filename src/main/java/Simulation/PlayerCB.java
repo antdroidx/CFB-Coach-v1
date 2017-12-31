@@ -240,7 +240,7 @@ public class PlayerCB extends Player {
     
     @Override
     public int getHeismanScore() {
-        return statsTackles * 35 + statsSacks * 500 + statsFumbles * 500 + statsInts * 500 + statsDefended * 45 + statsIncomplete * 15 - statsTargets * 10 + ratCoverage * 14 + ratSpeed * 5 + ratJump * 2 - (1 * team.teamOppYards) - (2 * team.teamOppPoints) + team.confPrestige * 7;
+        return statsTackles * 40 + statsSacks * 700 + statsFumbles * 700 + statsInts * 700 + 10 * ratOvr - (team.teamOppYards * 2) - (team.teamOppPoints * 2) + team.confPrestige * 7 + (statsDefended * 70 + statsIncomplete * 15 - statsTargets * 10 + ratCoverage * 14 + ratSpeed * 5 + ratJump * 2);
     }
 
     @Override

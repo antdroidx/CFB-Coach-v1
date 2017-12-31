@@ -1793,7 +1793,7 @@ public class League extends Rankings {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.name + " [" + pqb.getYrStr() +
                             "]\n \t\t(" + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs\n\n";
+                            + pqb.statsRushTD + " TDs)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.name + " [" + prb.getYrStr() +
@@ -1801,11 +1801,11 @@ public class League extends Rankings {
                 } else if (p instanceof PlayerWR) {
                     PlayerWR pwr = (PlayerWR) p;
                     heismanTop5 += " WR " + pwr.name + " [" + pwr.getYrStr() +
-                            "]\n \t\t(" + pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds)\n\n";
+                            "]\n \t\t(" + pwr.statsTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerTE) {
                     PlayerTE pte = (PlayerTE) p;
-                    heismanTop5 += " WR " + pte.name + " [" + pte.getYrStr() +
-                            "]\n \t\t(" + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
+                    heismanTop5 += " TE " + pte.name + " [" + pte.getYrStr() +
+                            "]\n \t\t(" + pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
                     heismanTop5 += " DL " + pdl.name + " [" + pdl.getYrStr() +
@@ -1851,7 +1851,7 @@ public class League extends Rankings {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
                             + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs\n\n";
+                            + pqb.statsRushTD + " TDs)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1859,11 +1859,11 @@ public class League extends Rankings {
                 } else if (p instanceof PlayerWR) {
                     PlayerWR pwr = (PlayerWR) p;
                     heismanTop5 += " WR " + pwr.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
-                            + pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds)\n\n";
+                            + pwr.statsTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerTE) {
                     PlayerTE pte = (PlayerTE) p;
                     heismanTop5 += " TE " + pte.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
-                            + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
+                            + pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
                     heismanTop5 += " DL " + pdl.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -2117,11 +2117,11 @@ public class League extends Rankings {
             } else if (p instanceof PlayerWR) {
                 PlayerWR pwr = (PlayerWR) p;
                 allAmerican.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
-                        pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds\n");
+                        pwr.statsTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds\n");
             } else if (p instanceof PlayerTE) {
                 PlayerTE pte = (PlayerTE) p;
                 allAmerican.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
-                        pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
+                        pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
             } else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 allAmerican.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
@@ -2178,11 +2178,11 @@ public class League extends Rankings {
             } else if (p instanceof PlayerWR) {
                 PlayerWR pwr = (PlayerWR) p;
                 sb.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
-                        pwr.statsTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds\n");
+                        pwr.statsTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds\n");
             } else if (p instanceof PlayerTE) {
                 PlayerTE pte = (PlayerTE) p;
                 sb.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
-                        pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n");
+                        pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
             } else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 sb.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
