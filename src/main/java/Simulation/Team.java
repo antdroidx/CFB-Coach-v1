@@ -94,7 +94,7 @@ public class Team {
     public int teamCount = 12;
     public int totalTeamCount = teamCount * 10;
     public int ratTransfer = 72;
-    public int promotionNum = 2;
+    public int promotionNum = -2;
 
     //prestige/talent improvements
     public int confPrestige;
