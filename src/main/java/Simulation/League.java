@@ -4133,6 +4133,7 @@ public class League extends Rankings {
         ArrayList<PlayerQB> pQB = new ArrayList<PlayerQB>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamQBs.size(); ++p) {
+                if (pQB.get(p).statsPassAtt > (10*currentWeek))
                 pQB.add(teamList.get(i).teamQBs.get(p));
             }
         }
