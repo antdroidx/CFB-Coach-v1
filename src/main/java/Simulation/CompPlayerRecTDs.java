@@ -6,9 +6,9 @@ import java.util.Comparator;
  * Created by ahngu on 11/13/2017.
  */
 
-class CompPlayerRecTDs implements Comparator<PlayerWR> {
+class CompPlayerRecTDs implements Comparator<PlayerOffense> {
     @Override
-    public int compare(PlayerWR a, PlayerWR b) {
-        return a.statsTD > b.statsTD ? -1 : a.statsTD == b.statsTD ? 0 : 1;
+    public int compare(PlayerOffense a, PlayerOffense b) {
+        return a.receptionTDs > b.receptionTDs ? -1 : a.receptionTDs == b.receptionTDs ? 0 : 1;
     }
 }

@@ -199,7 +199,8 @@ public class HeadCoach extends Player {
     }
 
     public int getCoachCareerScore() {
-        return 5*wins - 2*losses + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans;
+        if (year < 1) return 0;
+        else return (5*wins - 2*losses + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans)/year;
     }
 
     @Override
