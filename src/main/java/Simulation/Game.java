@@ -161,7 +161,8 @@ public class Game implements Serializable {
     private int timePerPlay = 21; //affects snaps per game!
     private int intValue = 150;
     private int sackValue = 175;
-    private int fatigueDrop = 10;
+    private int fatigueDrop = 9;
+    private int fatigueDropII = 6;
     private int fatigueGain = 3;
 
     Random rand = new Random();
@@ -1244,6 +1245,7 @@ public class Game implements Serializable {
      */
     private void runPlay(Team offense, Team defense) {
         quarterCheck();
+        recoup(false, 0);
 
         if (gameDown > 4) {
             if (!playingOT) {
@@ -1638,26 +1640,16 @@ public class Game implements Serializable {
                 selSStats = HomeSSubStats;
             }
         }
-      
-
-        //recoup
-        for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
-            homeTeam.getAllPlayers().get(i).fatigue += fatigueGain;
-            if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
-        }
-        for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
-            awayTeam.getAllPlayers().get(i).fatigue += fatigueGain;
-            if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
-        }
 
         //Fatigue
         selRB.fatigue -= fatigueDrop + Math.round((100-selRB.ratDur)/10);
         selWR.fatigue -= fatigueDrop + Math.round((100-selWR.ratDur)/10);
-        selTE.fatigue -= fatigueDrop + Math.round((100-selTE.ratDur)/10);
+        selTE.fatigue -= fatigueDropII + Math.round((100-selTE.ratDur)/10);
         selDL.fatigue -= fatigueDrop + Math.round((100-selDL.ratDur)/10);
         selLB.fatigue -= fatigueDrop + Math.round((100-selLB.ratDur)/10);
-        selCB.fatigue -= fatigueDrop + Math.round((100-selCB.ratDur)/10);
-        selS.fatigue -= fatigueDrop + Math.round((100-selS.ratDur)/10);
+        selLB2.fatigue -= fatigueDrop + Math.round((100-selLB2.ratDur)/10);
+        selCB.fatigue -= fatigueDropII + Math.round((100-selCB.ratDur)/10);
+        selS.fatigue -= fatigueDropII + Math.round((100-selS.ratDur)/10);
 
         //Choose the Catch Target
         if (TEpref > WR1pref && TEpref > WR2pref & TEpref > WR3pref && TEpref >= rbPref) {
@@ -2556,23 +2548,14 @@ public class Game implements Serializable {
                 selSStats = HomeSSubStats;
             }
         }
-        //recoup
-        for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
-            homeTeam.getAllPlayers().get(i).fatigue += fatigueGain;
-            if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
-        }
-        for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
-            awayTeam.getAllPlayers().get(i).fatigue += fatigueGain;
-            if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
-        }
 
         //Fatigue
         selRB.fatigue -= fatigueDrop + Math.round((100-selRB.ratDur)/10);
-        selTE.fatigue -= fatigueDrop + Math.round((100-selTE.ratDur)/10);
+        selTE.fatigue -= fatigueDropII + Math.round((100-selTE.ratDur)/10);
         selDL.fatigue -= fatigueDrop + Math.round((100-selDL.ratDur)/10);
         selLB.fatigue -= fatigueDrop + Math.round((100-selLB.ratDur)/10);
-        selCB.fatigue -= fatigueDrop + Math.round((100-selCB.ratDur)/10);
-        selS.fatigue -= fatigueDrop + Math.round((100-selS.ratDur)/10);
+        selCB.fatigue -= fatigueDropII + Math.round((100-selCB.ratDur)/10);
+        selS.fatigue -= fatigueDropII + Math.round((100-selS.ratDur)/10);
 
         if (offense.teamStratOffNum == 4 && QBpref > RB1pref && QBpref > RB2pref) {
             RushPlayQB(offense, defense, selQB, selTE, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
@@ -3497,27 +3480,15 @@ public class Game implements Serializable {
     public void quarterCheck() {
         if (gameTime < 2700 && !QT1) {
             QT1 = true;
-            //Set Player Fatigue to 100
-            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
-                homeTeam.getAllPlayers().get(i).fatigue += 50;
-                if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
-            }
-            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
-                awayTeam.getAllPlayers().get(i).fatigue += 50;
-                if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
-            }
+            //Set Player Fatigue +50
+            recoup(true, 1);
             gameTime = 2700;
             gameEventLog += getEventPrefix() + "END OF 1ST QUARTER!";
 
         } else if (gameTime < 1800 && !QT2) {
             QT2 = true;
             //Set Player Fatigue to 100
-            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
-                homeTeam.getAllPlayers().get(i).fatigue += 100;
-            }
-            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
-                awayTeam.getAllPlayers().get(i).fatigue += 100;
-            }
+            recoup(true, 2);
             gameTime = 1800;
             gameEventLog += getEventPrefix() + "HALFTIME!";
             gamePoss = false;
@@ -3525,18 +3496,42 @@ public class Game implements Serializable {
 
         } else if (gameTime < 900 && !QT3) {
             QT3 = true;
-            //Set Player Fatigue to 100
-            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
-                homeTeam.getAllPlayers().get(i).fatigue += 50;
-                if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
-            }
-            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
-                awayTeam.getAllPlayers().get(i).fatigue += 50;
-                if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
-            }
-
+            //Set Player Fatigue +50
+            recoup(true, 3);
             gameTime = 900;
             gameEventLog += getEventPrefix() + "END OF 3RD QUARTER!";
+        }
+
+    }
+
+    public void recoup(boolean endQT, int qt) {
+        int gain = fatigueGain;
+        if (endQT && qt != 2) gain = (int)Math.random()*35 + 35;
+        if (endQT && qt == 2) gain = 100;
+        //recoup v2.0
+        for(int i=0; i < homeTeam.startersRB; ++i) {
+            homeTeam.getRB(i).fatigue += gain;
+            if (homeTeam.getRB(i).fatigue > 100) homeTeam.getRB(i).fatigue = 100;
+        }
+        for(int i=0; i < homeTeam.startersWR; ++i) {
+            homeTeam.getWR(i).fatigue += gain;
+            if (homeTeam.getWR(i).fatigue > 100) homeTeam.getWR(i).fatigue = 100;
+        }
+        for(int i=0; i < homeTeam.startersTE; ++i) {
+            homeTeam.getTE(i).fatigue += gain;
+            if (homeTeam.getTE(i).fatigue > 100) homeTeam.getTE(i).fatigue = 100;
+        }
+        for(int i=0; i < homeTeam.startersDL; ++i) {
+            homeTeam.getDL(i).fatigue += gain;
+            if (homeTeam.getDL(i).fatigue > 100) homeTeam.getDL(i).fatigue = 100;
+        }
+        for(int i=0; i < homeTeam.startersLB; ++i) {
+            homeTeam.getLB(i).fatigue += gain;
+            if (homeTeam.getLB(i).fatigue > 100) homeTeam.getLB(i).fatigue = 100;
+        }
+        for(int i=0; i < homeTeam.startersS; ++i) {
+            homeTeam.getS(i).fatigue += gain;
+            if (homeTeam.getS(i).fatigue > 100) homeTeam.getS(i).fatigue = 100;
         }
 
     }
