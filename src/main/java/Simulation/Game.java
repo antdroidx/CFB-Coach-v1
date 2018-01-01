@@ -19,6 +19,10 @@ public class Game implements Serializable {
     public Team awayTeam;
 
     public boolean hasPlayed;
+    public boolean QT1;
+    public boolean QT2;
+    public boolean QT3;
+    public boolean QT4;
 
     public String gameName;
 
@@ -35,11 +39,15 @@ public class Game implements Serializable {
 
     public int[] HomeQBStats;
     public int[] AwayQBStats;
+    public int[] HomeQBSubStats;
+    public int[] AwayQBSubStats;
 
     public int[] HomeRB1Stats;
     public int[] HomeRB2Stats;
     public int[] AwayRB1Stats;
     public int[] AwayRB2Stats;
+    public int[] HomeRBSubStats;
+    public int[] AwayRBSubStats;
 
     public int[] HomeWR1Stats;
     public int[] HomeWR2Stats;
@@ -47,9 +55,13 @@ public class Game implements Serializable {
     public int[] AwayWR1Stats;
     public int[] AwayWR2Stats;
     public int[] AwayWR3Stats;
+    public int[] HomeWRSubStats;
+    public int[] AwayWRSubStats;
 
     public int[] HomeTEStats;
     public int[] AwayTEStats;
+    public int[] HomeTESubStats;
+    public int[] AwayTESubStats;
 
     public int[] HomeKStats;
     public int[] AwayKStats;
@@ -62,6 +74,11 @@ public class Game implements Serializable {
     public int[] AwayDL2Stats;
     public int[] AwayDL3Stats;
     public int[] AwayDL4Stats;
+    public int[] HomeDLSubStats;
+    public int[] HomeDLSub2Stats;
+    public int[] AwayDLSubStats;
+    public int[] AwayDLSub2Stats;
+
 
     public int[] HomeLB1Stats;
     public int[] HomeLB2Stats;
@@ -69,6 +86,8 @@ public class Game implements Serializable {
     public int[] AwayLB1Stats;
     public int[] AwayLB2Stats;
     public int[] AwayLB3Stats;
+    public int[] HomeLBSubStats;
+    public int[] AwayLBSubStats;
 
     public int[] HomeCB1Stats;
     public int[] HomeCB2Stats;
@@ -76,9 +95,13 @@ public class Game implements Serializable {
     public int[] AwayCB1Stats;
     public int[] AwayCB2Stats;
     public int[] AwayCB3Stats;
+    public int[] HomeCBSubStats;
+    public int[] AwayCBSubStats;
 
     public int[] HomeSStats;
     public int[] AwaySStats;
+    public int[] HomeSSubStats;
+    public int[] AwaySSubStats;
 
 
     // Store reference to players, in case starters are changed later		
@@ -101,7 +124,28 @@ public class Game implements Serializable {
     private PlayerLB[] awayLBs;
     private PlayerCB[] awayCBs;
     private PlayerS awayS;
-
+    
+    //Subs
+    private PlayerQB homeQBsub;
+    private PlayerRB homeRBsub;
+    private PlayerWR homeWRsub;
+    private PlayerTE homeTEsub;
+    private PlayerDL homeDLsub;
+    private PlayerDL homeDL2sub;
+    private PlayerLB homeLBsub;
+    private PlayerCB homeCBsub;
+    private PlayerS homeSsub;
+    
+    private PlayerQB awayQBsub;
+    private PlayerRB awayRBsub;
+    private PlayerWR awayWRsub;
+    private PlayerTE awayTEsub;
+    private PlayerDL awayDLsub;
+    private PlayerDL awayDL2sub;
+    private PlayerLB awayLBsub;
+    private PlayerCB awayCBsub;
+    private PlayerS awaySsub;
+    
     String gameEventLog;
     String tdInfo;
 
@@ -117,6 +161,8 @@ public class Game implements Serializable {
     private int timePerPlay = 21; //affects snaps per game!
     private int intValue = 150;
     private int sackValue = 175;
+    private int fatigueDrop = 10;
+    private int fatigueGain = 3;
 
     Random rand = new Random();
 
@@ -143,52 +189,79 @@ public class Game implements Serializable {
         awayTOs = 0;
 
         //initialize arrays, set everything to zero
-        HomeQBStats = new int[10];
-        AwayQBStats = new int[10];
+        //QB 10
+        HomeQBStats = new int[11];
+        AwayQBStats = new int[11];
+        HomeQBSubStats = new int[11];
+        AwayQBSubStats = new int[11];
+        
+        //RB 7
+        HomeRB1Stats = new int[11];
+        HomeRB2Stats = new int[11];
+        AwayRB1Stats = new int[11];
+        AwayRB2Stats = new int[11];
+        HomeRBSubStats = new int[11];
+        AwayRBSubStats = new int[11];
 
-        HomeRB1Stats = new int[7];
-        HomeRB2Stats = new int[7];
-        AwayRB1Stats = new int[7];
-        AwayRB2Stats = new int[7];
-
-        HomeWR1Stats = new int[6];
-        HomeWR2Stats = new int[6];
-        HomeWR3Stats = new int[6];
-        AwayWR1Stats = new int[6];
-        AwayWR2Stats = new int[6];
-        AwayWR3Stats = new int[6];
-
-        HomeTEStats = new int[6];
-        AwayTEStats = new int[6];
-
-        HomeKStats = new int[6];
-        AwayKStats = new int[6];
-
-        HomeDL1Stats = new int[4];
-        HomeDL2Stats = new int[4];
-        HomeDL3Stats = new int[4];
-        HomeDL4Stats = new int[4];
-        AwayDL1Stats = new int[4];
-        AwayDL2Stats = new int[4];
-        AwayDL3Stats = new int[4];
-        AwayDL4Stats = new int[4];
-
-        HomeLB1Stats = new int[4];
-        HomeLB2Stats = new int[4];
-        HomeLB3Stats = new int[4];
-        AwayLB1Stats = new int[4];
-        AwayLB2Stats = new int[4];
-        AwayLB3Stats = new int[4];
-
-        HomeCB1Stats = new int[7];
-        HomeCB2Stats = new int[7];
-        HomeCB3Stats = new int[7];
-        AwayCB1Stats = new int[7];
-        AwayCB2Stats = new int[7];
-        AwayCB3Stats = new int[7];
-
-        HomeSStats = new int[4];
-        AwaySStats = new int[4];
+        //WR 6    
+        HomeWR1Stats = new int[11];
+        HomeWR2Stats = new int[11];
+        HomeWR3Stats = new int[11];
+        AwayWR1Stats = new int[11];
+        AwayWR2Stats = new int[11];
+        AwayWR3Stats = new int[11];
+        HomeWRSubStats = new int[11];
+        AwayWRSubStats = new int[11];
+        
+        //TE 6
+        HomeTEStats = new int[11];
+        AwayTEStats = new int[11];
+        HomeTESubStats = new int[11];
+        AwayTESubStats = new int[11];
+        
+        //K 6
+        HomeKStats = new int[11];
+        AwayKStats = new int[11];
+        
+        //DL 4
+        HomeDL1Stats = new int[11];
+        HomeDL2Stats = new int[11];
+        HomeDL3Stats = new int[11];
+        HomeDL4Stats = new int[11];
+        AwayDL1Stats = new int[11];
+        AwayDL2Stats = new int[11];
+        AwayDL3Stats = new int[11];
+        AwayDL4Stats = new int[11];
+        HomeDLSubStats = new int[11];
+        AwayDLSubStats = new int[11];
+        HomeDLSub2Stats = new int[11];
+        AwayDLSub2Stats = new int[11];
+        
+        //LB 4
+        HomeLB1Stats = new int[11];
+        HomeLB2Stats = new int[11];
+        HomeLB3Stats = new int[11];
+        AwayLB1Stats = new int[11];
+        AwayLB2Stats = new int[11];
+        AwayLB3Stats = new int[11];
+        HomeLBSubStats = new int[11];
+        AwayLBSubStats = new int[11];
+        
+        //CB 7
+        HomeCB1Stats = new int[11];
+        HomeCB2Stats = new int[11];
+        HomeCB3Stats = new int[11];
+        AwayCB1Stats = new int[11];
+        AwayCB2Stats = new int[11];
+        AwayCB3Stats = new int[11];
+        HomeCBSubStats = new int[11];
+        AwayCBSubStats = new int[11];
+        
+        //S 4
+        HomeSStats = new int[11];
+        AwaySStats = new int[11];
+        HomeSSubStats = new int[11];
+        AwaySSubStats = new int[11];
 
         //playGame();
         hasPlayed = false;
@@ -220,52 +293,80 @@ public class Game implements Serializable {
         awayQScore = new int[10];
 
         //initialize arrays, set everything to zero
-        HomeQBStats = new int[10];
-        AwayQBStats = new int[10];
+        //QB 10
+        HomeQBStats = new int[11];
+        AwayQBStats = new int[11];
+        HomeQBSubStats = new int[11];
+        AwayQBSubStats = new int[11];
 
-        HomeRB1Stats = new int[7];
-        HomeRB2Stats = new int[7];
-        AwayRB1Stats = new int[7];
-        AwayRB2Stats = new int[7];
+        //RB 7
+        HomeRB1Stats = new int[11];
+        HomeRB2Stats = new int[11];
+        AwayRB1Stats = new int[11];
+        AwayRB2Stats = new int[11];
+        HomeRBSubStats = new int[11];
+        AwayRBSubStats = new int[11];
 
-        HomeWR1Stats = new int[6];
-        HomeWR2Stats = new int[6];
-        HomeWR3Stats = new int[6];
-        AwayWR1Stats = new int[6];
-        AwayWR2Stats = new int[6];
-        AwayWR3Stats = new int[6];
+        //WR 6
+        HomeWR1Stats = new int[11];
+        HomeWR2Stats = new int[11];
+        HomeWR3Stats = new int[11];
+        AwayWR1Stats = new int[11];
+        AwayWR2Stats = new int[11];
+        AwayWR3Stats = new int[11];
+        HomeWRSubStats = new int[11];
+        AwayWRSubStats = new int[11];
 
-        HomeTEStats = new int[6];
-        AwayTEStats = new int[6];
+        //TE 6
+        HomeTEStats = new int[11];
+        AwayTEStats = new int[11];
+        HomeTESubStats = new int[11];
+        AwayTESubStats = new int[11];
 
-        HomeKStats = new int[6];
-        AwayKStats = new int[6];
+        //K 6
+        HomeKStats = new int[11];
+        AwayKStats = new int[11];
 
-        HomeDL1Stats = new int[4];
-        HomeDL2Stats = new int[4];
-        HomeDL3Stats = new int[4];
-        HomeDL4Stats = new int[4];
-        AwayDL1Stats = new int[4];
-        AwayDL2Stats = new int[4];
-        AwayDL3Stats = new int[4];
-        AwayDL4Stats = new int[4];
+        //DL 4
+        HomeDL1Stats = new int[11];
+        HomeDL2Stats = new int[11];
+        HomeDL3Stats = new int[11];
+        HomeDL4Stats = new int[11];
+        AwayDL1Stats = new int[11];
+        AwayDL2Stats = new int[11];
+        AwayDL3Stats = new int[11];
+        AwayDL4Stats = new int[11];
+        HomeDLSubStats = new int[11];
+        AwayDLSubStats = new int[11];
+        HomeDLSub2Stats = new int[11];
+        AwayDLSub2Stats = new int[11];
 
-        HomeLB1Stats = new int[4];
-        HomeLB2Stats = new int[4];
-        HomeLB3Stats = new int[4];
-        AwayLB1Stats = new int[4];
-        AwayLB2Stats = new int[4];
-        AwayLB3Stats = new int[4];
+        //LB 4
+        HomeLB1Stats = new int[11];
+        HomeLB2Stats = new int[11];
+        HomeLB3Stats = new int[11];
+        AwayLB1Stats = new int[11];
+        AwayLB2Stats = new int[11];
+        AwayLB3Stats = new int[11];
+        HomeLBSubStats = new int[11];
+        AwayLBSubStats = new int[11];
 
-        HomeCB1Stats = new int[7];
-        HomeCB2Stats = new int[7];
-        HomeCB3Stats = new int[7];
-        AwayCB1Stats = new int[7];
-        AwayCB2Stats = new int[7];
-        AwayCB3Stats = new int[7];
+        //CB 7
+        HomeCB1Stats = new int[11];
+        HomeCB2Stats = new int[11];
+        HomeCB3Stats = new int[11];
+        AwayCB1Stats = new int[11];
+        AwayCB2Stats = new int[11];
+        AwayCB3Stats = new int[11];
+        HomeCBSubStats = new int[11];
+        AwayCBSubStats = new int[11];
 
-        HomeSStats = new int[4];
-        AwaySStats = new int[4];
+        //S 4
+        HomeSStats = new int[11];
+        AwaySStats = new int[11];
+        HomeSSubStats = new int[11];
+        AwaySSubStats = new int[11];
+
 
         //playGame();
         hasPlayed = false;
@@ -813,8 +914,35 @@ public class Game implements Serializable {
             gameTime = 3600;
             gameDown = 1;
             gamePoss = true;
-            gameYardsNeed = 10;
-            gameYardLine = 20;
+            kickOff(homeTeam);
+
+            //Set Player Fatigue to 100
+            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+                homeTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+                awayTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+
+            //Set Subs
+            homeQBsub = homeTeam.getQB(1);
+            homeRBsub = homeTeam.getRB(2);
+            homeWRsub = homeTeam.getWR(3);
+            homeTEsub = homeTeam.getTE(1);
+            homeDLsub = homeTeam.getDL(4);
+            homeDL2sub = homeTeam.getDL(5);
+            homeLBsub = homeTeam.getLB(3);
+            homeCBsub = homeTeam.getCB(3);
+            homeSsub = homeTeam.getS(1);
+            awayQBsub = awayTeam.getQB(1);
+            awayRBsub = awayTeam.getRB(2);
+            awayWRsub = awayTeam.getWR(3);
+            awayTEsub = awayTeam.getTE(1);
+            awayDLsub = awayTeam.getDL(4);
+            awayDL2sub = awayTeam.getDL(5);
+            awayLBsub = awayTeam.getLB(3);
+            awayCBsub = awayTeam.getCB(3);
+            awaySsub = awayTeam.getS(1);
 
             // Regulation
             while (gameTime > 0) {
@@ -969,7 +1097,28 @@ public class Game implements Serializable {
                 awayCBs[i] = awayTeam.getCB(i);
             }
             awayS = awayTeam.getS(0);
-
+            
+            //subs
+            homeQBsub = homeTeam.getQB(1); 
+            homeRBsub = homeTeam.getRB(2);
+            homeWRsub = homeTeam.getWR(3);
+            homeTEsub = homeTeam.getTE(1);
+            homeDLsub = homeTeam.getDL(4);
+            homeDL2sub = homeTeam.getDL(5);
+            homeLBsub = homeTeam.getLB(3);
+            homeCBsub = homeTeam.getCB(3);
+            homeSsub = homeTeam.getS(1);
+            awayQBsub = awayTeam.getQB(1);
+            awayRBsub = awayTeam.getRB(2);
+            awayWRsub = awayTeam.getWR(3);
+            awayTEsub = awayTeam.getTE(1);
+            awayDLsub = awayTeam.getDL(4);
+            awayDL2sub = awayTeam.getDL(5);
+            awayLBsub = awayTeam.getLB(3);
+            awayCBsub = awayTeam.getCB(3);
+            awaySsub = awayTeam.getS(1);
+            
+            
             homeTeam.checkForInjury();
             awayTeam.checkForInjury();
 
@@ -1094,6 +1243,7 @@ public class Game implements Serializable {
      * @param defense defense defending the play
      */
     private void runPlay(Team offense, Team defense) {
+        quarterCheck();
 
         if (gameDown > 4) {
             if (!playingOT) {
@@ -1180,6 +1330,16 @@ public class Game implements Serializable {
      */
     private void resetForOT() {
         if (bottomOT && homeScore == awayScore) {
+            //Add some fatigue points
+            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+                homeTeam.getAllPlayers().get(i).fatigue += 50;
+                if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+                awayTeam.getAllPlayers().get(i).fatigue += 50;
+                if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+
             gameYardLine = 75;
             gameYardsNeed = 10;
             gameDown = 1;
@@ -1189,6 +1349,16 @@ public class Game implements Serializable {
             bottomOT = false;
             //runPlay( awayTeam, homeTeam );
         } else if (!bottomOT) {
+            //Add some fatigue points
+            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+                homeTeam.getAllPlayers().get(i).fatigue += 50;
+                if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+                awayTeam.getAllPlayers().get(i).fatigue += 50;
+                if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+
             gamePoss = !gamePoss;
             gameYardLine = 75;
             gameYardsNeed = 10;
@@ -1396,6 +1566,94 @@ public class Game implements Serializable {
                 selLB2Stats = AwayLB1Stats;
             }
         }
+        
+        //Check for Subs
+        if (gamePoss) {
+            if (selRB.fatigue <= 0) {
+                selRB = homeRBsub;
+                selRBStats = HomeRBSubStats;
+            }
+            if (selWR.fatigue <= 0) {
+                selWR = homeWRsub;
+                selWRStats = HomeWRSubStats;
+            }
+            if (selTE.fatigue <= 0) {
+                selTE = homeTEsub;
+                selTEStats = HomeTESubStats;
+            }
+            if (homeDLsub.ratOvr * Math.random() >= homeDL2sub.ratOvr * Math.random()) {
+                selDL = homeDLsub;
+                selDLStats = HomeDLSubStats;
+            } else {
+                selDL = homeDL2sub;
+                selDLStats = HomeDLSub2Stats;
+            }
+            if (selLB.fatigue <= 0) {
+                selLB = homeLBsub;
+                selLBStats = HomeLBSubStats;
+            }
+            if (selCB.fatigue <= 0) {
+                selCB = homeCBsub;
+                selCBStats = HomeCBSubStats;
+            }
+            if (selS.fatigue <= 0) {
+                selS = homeSsub;
+                selSStats = HomeSSubStats;
+            }
+
+        } else {
+            if (selRB.fatigue <= 0) {
+                selRB = awayRBsub;
+                selRBStats = HomeRBSubStats;
+            }
+            if (selWR.fatigue <= 0) {
+                selWR = awayWRsub;
+                selWRStats = HomeWRSubStats;
+            }
+            if (selTE.fatigue <= 0) {
+                selTE = awayTEsub;
+                selTEStats = HomeTESubStats;
+            }
+            if (awayDLsub.ratOvr * Math.random() >= awayDL2sub.ratOvr * Math.random()) {
+                selDL = awayDLsub;
+                selDLStats = HomeDLSubStats;
+            } else {
+                selDL = awayDL2sub;
+                selDLStats = HomeDLSub2Stats;
+            }
+            if (selLB.fatigue <= 0) {
+                selLB = awayLBsub;
+                selLBStats = AwayLBSubStats;
+            }
+            if (selCB.fatigue <= 0) {
+                selCB = awayCBsub;
+                selCBStats = HomeCBSubStats;
+            }
+            if (selS.fatigue <= 0) {
+                selS = awaySsub;
+                selSStats = HomeSSubStats;
+            }
+        }
+      
+
+        //recoup
+        for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+            homeTeam.getAllPlayers().get(i).fatigue += fatigueGain;
+            if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
+        }
+        for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+            awayTeam.getAllPlayers().get(i).fatigue += fatigueGain;
+            if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
+        }
+
+        //Fatigue
+        selRB.fatigue -= fatigueDrop + Math.round((100-selRB.ratDur)/10);
+        selWR.fatigue -= fatigueDrop + Math.round((100-selWR.ratDur)/10);
+        selTE.fatigue -= fatigueDrop + Math.round((100-selTE.ratDur)/10);
+        selDL.fatigue -= fatigueDrop + Math.round((100-selDL.ratDur)/10);
+        selLB.fatigue -= fatigueDrop + Math.round((100-selLB.ratDur)/10);
+        selCB.fatigue -= fatigueDrop + Math.round((100-selCB.ratDur)/10);
+        selS.fatigue -= fatigueDrop + Math.round((100-selS.ratDur)/10);
 
         //Choose the Catch Target
         if (TEpref > WR1pref && TEpref > WR2pref & TEpref > WR3pref && TEpref >= rbPref) {
@@ -2236,6 +2494,81 @@ public class Game implements Serializable {
                 selCBStats = HomeCB3Stats;
             }
         }
+
+        //Check for Subs
+        if (gamePoss) {
+            if (selRB.fatigue <= 0) {
+                selRB = homeRBsub;
+                selRBStats = HomeRBSubStats;
+            }
+            if (selTE.fatigue <= 0) {
+                selTE = homeTEsub;
+            }
+            if (homeDLsub.ratOvr * Math.random() >= homeDL2sub.ratOvr * Math.random()) {
+                selDL = homeDLsub;
+                selDLStats = HomeDLSubStats;
+            } else {
+                selDL = homeDL2sub;
+                selDLStats = HomeDLSub2Stats;
+            }
+            if (selLB.fatigue <= 0) {
+                selLB = homeLBsub;
+                selLBStats = HomeLBSubStats;
+            }
+            if (selCB.fatigue <= 0) {
+                selCB = homeCBsub;
+                selCBStats = HomeCBSubStats;
+            }
+            if (selS.fatigue <= 0) {
+                selS = homeSsub;
+                selSStats = HomeSSubStats;
+            }
+
+        } else {
+            if (selRB.fatigue <= 0) {
+                selRB = awayRBsub;
+                selRBStats = HomeRBSubStats;
+            }
+            if (selTE.fatigue <= 0) {
+                selTE = awayTEsub;
+            }
+            if (awayDLsub.ratOvr * Math.random() >= awayDL2sub.ratOvr * Math.random()) {
+                selDL = awayDLsub;
+                selDLStats = HomeDLSubStats;
+            } else {
+                selDL = awayDL2sub;
+                selDLStats = HomeDLSub2Stats;
+            }
+            if (selLB.fatigue <= 0) {
+                selLB = awayLBsub;
+                selLBStats = AwayLBSubStats;
+            }
+            if (selCB.fatigue <= 0) {
+                selCB = awayCBsub;
+                selCBStats = HomeCBSubStats;
+            }
+            if (selS.fatigue <= 0) {
+                selS = awaySsub;
+                selSStats = HomeSSubStats;
+            }
+        }
+        //recoup
+        for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+            homeTeam.getAllPlayers().get(i).fatigue += fatigueGain;
+            if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
+        }
+        for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+            awayTeam.getAllPlayers().get(i).fatigue += fatigueGain;
+            if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
+        }
+
+        //Fatigue
+        selRB.fatigue -= fatigueDrop + Math.round((100-selRB.ratDur)/10);
+        selTE.fatigue -= fatigueDrop + Math.round((100-selTE.ratDur)/10);
+        selDL.fatigue -= fatigueDrop + Math.round((100-selDL.ratDur)/10);
+        selLB.fatigue -= fatigueDrop + Math.round((100-selLB.ratDur)/10);
+        selCB.fatigue -= fatigueDrop + Math.round((100-selCB.ratDur)/10);
+        selS.fatigue -= fatigueDrop + Math.round((100-selS.ratDur)/10);
 
         if (offense.teamStratOffNum == 4 && QBpref > RB1pref && QBpref > RB2pref) {
             RushPlayQB(offense, defense, selQB, selTE, selDL, selLB, selCB, selS, selQBStats, selDLStats, selLBStats, selCBStats, selSStats);
@@ -3153,6 +3486,55 @@ public class Game implements Serializable {
                 else awayQScore[9] += points;
             }
         }
+    }
+
+    //Quarter Change Fatigue Reset
+
+    public void quarterCheck() {
+        if (gameTime < 2700 && !QT1) {
+            QT1 = true;
+            //Set Player Fatigue to 100
+            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+                homeTeam.getAllPlayers().get(i).fatigue += 50;
+                if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+                awayTeam.getAllPlayers().get(i).fatigue += 50;
+                if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+            gameTime = 2700;
+            gameEventLog += getEventPrefix() + "END OF 1ST QUARTER!";
+
+        } else if (gameTime < 1800 && !QT2) {
+            QT2 = true;
+            //Set Player Fatigue to 100
+            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+                homeTeam.getAllPlayers().get(i).fatigue += 100;
+            }
+            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+                awayTeam.getAllPlayers().get(i).fatigue += 100;
+            }
+            gameTime = 1800;
+            gameEventLog += getEventPrefix() + "HALFTIME!";
+            gamePoss = false;
+            kickOff(awayTeam);
+
+        } else if (gameTime < 900 && !QT3) {
+            QT3 = true;
+            //Set Player Fatigue to 100
+            for(int i = 0; i < homeTeam.getAllPlayers().size(); ++i) {
+                homeTeam.getAllPlayers().get(i).fatigue += 50;
+                if (homeTeam.getAllPlayers().get(i).fatigue > 100) homeTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+            for(int i = 0; i < awayTeam.getAllPlayers().size(); ++i) {
+                awayTeam.getAllPlayers().get(i).fatigue += 50;
+                if (awayTeam.getAllPlayers().get(i).fatigue > 100) awayTeam.getAllPlayers().get(i).fatigue = 100;
+            }
+
+            gameTime = 900;
+            gameEventLog += getEventPrefix() + "END OF 3RD QUARTER!";
+        }
+
     }
 
     /**

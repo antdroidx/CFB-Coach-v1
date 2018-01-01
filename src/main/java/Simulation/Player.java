@@ -65,6 +65,7 @@ public class Player {
     public double lbImportance = 2.5;
     public double cbImportance = 2.5;
     public double sImportance = 1.5;
+    public int fatigue;
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
 
