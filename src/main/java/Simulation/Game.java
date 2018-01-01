@@ -190,78 +190,78 @@ public class Game implements Serializable {
 
         //initialize arrays, set everything to zero
         //QB 10
-        HomeQBStats = new int[11];
-        AwayQBStats = new int[11];
-        HomeQBSubStats = new int[11];
-        AwayQBSubStats = new int[11];
-        
-        //RB 7
-        HomeRB1Stats = new int[11];
-        HomeRB2Stats = new int[11];
-        AwayRB1Stats = new int[11];
-        AwayRB2Stats = new int[11];
-        HomeRBSubStats = new int[11];
-        AwayRBSubStats = new int[11];
+        HomeQBStats = new int[10];
+        AwayQBStats = new int[10];
+        HomeQBSubStats = new int[10];
+        AwayQBSubStats = new int[10];
 
-        //WR 6    
-        HomeWR1Stats = new int[11];
-        HomeWR2Stats = new int[11];
-        HomeWR3Stats = new int[11];
-        AwayWR1Stats = new int[11];
-        AwayWR2Stats = new int[11];
-        AwayWR3Stats = new int[11];
-        HomeWRSubStats = new int[11];
-        AwayWRSubStats = new int[11];
-        
+        //RB 7
+        HomeRB1Stats = new int[7];
+        HomeRB2Stats = new int[7];
+        AwayRB1Stats = new int[7];
+        AwayRB2Stats = new int[7];
+        HomeRBSubStats = new int[7];
+        AwayRBSubStats = new int[7];
+
+        //WR 6
+        HomeWR1Stats = new int[6];
+        HomeWR2Stats = new int[6];
+        HomeWR3Stats = new int[6];
+        AwayWR1Stats = new int[6];
+        AwayWR2Stats = new int[6];
+        AwayWR3Stats = new int[6];
+        HomeWRSubStats = new int[6];
+        AwayWRSubStats = new int[6];
+
         //TE 6
-        HomeTEStats = new int[11];
-        AwayTEStats = new int[11];
-        HomeTESubStats = new int[11];
-        AwayTESubStats = new int[11];
-        
+        HomeTEStats = new int[6];
+        AwayTEStats = new int[6];
+        HomeTESubStats = new int[6];
+        AwayTESubStats = new int[6];
+
         //K 6
-        HomeKStats = new int[11];
-        AwayKStats = new int[11];
-        
+        HomeKStats = new int[6];
+        AwayKStats = new int[6];
+
         //DL 4
-        HomeDL1Stats = new int[11];
-        HomeDL2Stats = new int[11];
-        HomeDL3Stats = new int[11];
-        HomeDL4Stats = new int[11];
-        AwayDL1Stats = new int[11];
-        AwayDL2Stats = new int[11];
-        AwayDL3Stats = new int[11];
-        AwayDL4Stats = new int[11];
-        HomeDLSubStats = new int[11];
-        AwayDLSubStats = new int[11];
-        HomeDLSub2Stats = new int[11];
-        AwayDLSub2Stats = new int[11];
-        
+        HomeDL1Stats = new int[4];
+        HomeDL2Stats = new int[4];
+        HomeDL3Stats = new int[4];
+        HomeDL4Stats = new int[4];
+        AwayDL1Stats = new int[4];
+        AwayDL2Stats = new int[4];
+        AwayDL3Stats = new int[4];
+        AwayDL4Stats = new int[4];
+        HomeDLSubStats = new int[4];
+        AwayDLSubStats = new int[4];
+        HomeDLSub2Stats = new int[4];
+        AwayDLSub2Stats = new int[4];
+
         //LB 4
-        HomeLB1Stats = new int[11];
-        HomeLB2Stats = new int[11];
-        HomeLB3Stats = new int[11];
-        AwayLB1Stats = new int[11];
-        AwayLB2Stats = new int[11];
-        AwayLB3Stats = new int[11];
-        HomeLBSubStats = new int[11];
-        AwayLBSubStats = new int[11];
-        
+        HomeLB1Stats = new int[4];
+        HomeLB2Stats = new int[4];
+        HomeLB3Stats = new int[4];
+        AwayLB1Stats = new int[4];
+        AwayLB2Stats = new int[4];
+        AwayLB3Stats = new int[4];
+        HomeLBSubStats = new int[4];
+        AwayLBSubStats = new int[4];
+
         //CB 7
-        HomeCB1Stats = new int[11];
-        HomeCB2Stats = new int[11];
-        HomeCB3Stats = new int[11];
-        AwayCB1Stats = new int[11];
-        AwayCB2Stats = new int[11];
-        AwayCB3Stats = new int[11];
-        HomeCBSubStats = new int[11];
-        AwayCBSubStats = new int[11];
-        
+        HomeCB1Stats = new int[7];
+        HomeCB2Stats = new int[7];
+        HomeCB3Stats = new int[7];
+        AwayCB1Stats = new int[7];
+        AwayCB2Stats = new int[7];
+        AwayCB3Stats = new int[7];
+        HomeCBSubStats = new int[7];
+        AwayCBSubStats = new int[7];
+
         //S 4
-        HomeSStats = new int[11];
-        AwaySStats = new int[11];
-        HomeSSubStats = new int[11];
-        AwaySSubStats = new int[11];
+        HomeSStats = new int[4];
+        AwaySStats = new int[4];
+        HomeSSubStats = new int[4];
+        AwaySSubStats = new int[4];
 
         //playGame();
         hasPlayed = false;
@@ -294,78 +294,78 @@ public class Game implements Serializable {
 
         //initialize arrays, set everything to zero
         //QB 10
-        HomeQBStats = new int[11];
-        AwayQBStats = new int[11];
-        HomeQBSubStats = new int[11];
-        AwayQBSubStats = new int[11];
+        HomeQBStats = new int[10];
+        AwayQBStats = new int[10];
+        HomeQBSubStats = new int[10];
+        AwayQBSubStats = new int[10];
 
         //RB 7
-        HomeRB1Stats = new int[11];
-        HomeRB2Stats = new int[11];
-        AwayRB1Stats = new int[11];
-        AwayRB2Stats = new int[11];
-        HomeRBSubStats = new int[11];
-        AwayRBSubStats = new int[11];
+        HomeRB1Stats = new int[7];
+        HomeRB2Stats = new int[7];
+        AwayRB1Stats = new int[7];
+        AwayRB2Stats = new int[7];
+        HomeRBSubStats = new int[7];
+        AwayRBSubStats = new int[7];
 
         //WR 6
-        HomeWR1Stats = new int[11];
-        HomeWR2Stats = new int[11];
-        HomeWR3Stats = new int[11];
-        AwayWR1Stats = new int[11];
-        AwayWR2Stats = new int[11];
-        AwayWR3Stats = new int[11];
-        HomeWRSubStats = new int[11];
-        AwayWRSubStats = new int[11];
+        HomeWR1Stats = new int[6];
+        HomeWR2Stats = new int[6];
+        HomeWR3Stats = new int[6];
+        AwayWR1Stats = new int[6];
+        AwayWR2Stats = new int[6];
+        AwayWR3Stats = new int[6];
+        HomeWRSubStats = new int[6];
+        AwayWRSubStats = new int[6];
 
         //TE 6
-        HomeTEStats = new int[11];
-        AwayTEStats = new int[11];
-        HomeTESubStats = new int[11];
-        AwayTESubStats = new int[11];
+        HomeTEStats = new int[6];
+        AwayTEStats = new int[6];
+        HomeTESubStats = new int[6];
+        AwayTESubStats = new int[6];
 
         //K 6
-        HomeKStats = new int[11];
-        AwayKStats = new int[11];
+        HomeKStats = new int[6];
+        AwayKStats = new int[6];
 
         //DL 4
-        HomeDL1Stats = new int[11];
-        HomeDL2Stats = new int[11];
-        HomeDL3Stats = new int[11];
-        HomeDL4Stats = new int[11];
-        AwayDL1Stats = new int[11];
-        AwayDL2Stats = new int[11];
-        AwayDL3Stats = new int[11];
-        AwayDL4Stats = new int[11];
-        HomeDLSubStats = new int[11];
-        AwayDLSubStats = new int[11];
-        HomeDLSub2Stats = new int[11];
-        AwayDLSub2Stats = new int[11];
+        HomeDL1Stats = new int[4];
+        HomeDL2Stats = new int[4];
+        HomeDL3Stats = new int[4];
+        HomeDL4Stats = new int[4];
+        AwayDL1Stats = new int[4];
+        AwayDL2Stats = new int[4];
+        AwayDL3Stats = new int[4];
+        AwayDL4Stats = new int[4];
+        HomeDLSubStats = new int[4];
+        AwayDLSubStats = new int[4];
+        HomeDLSub2Stats = new int[4];
+        AwayDLSub2Stats = new int[4];
 
         //LB 4
-        HomeLB1Stats = new int[11];
-        HomeLB2Stats = new int[11];
-        HomeLB3Stats = new int[11];
-        AwayLB1Stats = new int[11];
-        AwayLB2Stats = new int[11];
-        AwayLB3Stats = new int[11];
-        HomeLBSubStats = new int[11];
-        AwayLBSubStats = new int[11];
+        HomeLB1Stats = new int[4];
+        HomeLB2Stats = new int[4];
+        HomeLB3Stats = new int[4];
+        AwayLB1Stats = new int[4];
+        AwayLB2Stats = new int[4];
+        AwayLB3Stats = new int[4];
+        HomeLBSubStats = new int[4];
+        AwayLBSubStats = new int[4];
 
         //CB 7
-        HomeCB1Stats = new int[11];
-        HomeCB2Stats = new int[11];
-        HomeCB3Stats = new int[11];
-        AwayCB1Stats = new int[11];
-        AwayCB2Stats = new int[11];
-        AwayCB3Stats = new int[11];
-        HomeCBSubStats = new int[11];
-        AwayCBSubStats = new int[11];
+        HomeCB1Stats = new int[7];
+        HomeCB2Stats = new int[7];
+        HomeCB3Stats = new int[7];
+        AwayCB1Stats = new int[7];
+        AwayCB2Stats = new int[7];
+        AwayCB3Stats = new int[7];
+        HomeCBSubStats = new int[7];
+        AwayCBSubStats = new int[7];
 
         //S 4
-        HomeSStats = new int[11];
-        AwaySStats = new int[11];
-        HomeSSubStats = new int[11];
-        AwaySSubStats = new int[11];
+        HomeSStats = new int[4];
+        AwaySStats = new int[4];
+        HomeSSubStats = new int[4];
+        AwaySSubStats = new int[4];
 
 
         //playGame();
@@ -1581,12 +1581,14 @@ public class Game implements Serializable {
                 selTE = homeTEsub;
                 selTEStats = HomeTESubStats;
             }
-            if (homeDLsub.ratOvr * Math.random() >= homeDL2sub.ratOvr * Math.random()) {
-                selDL = homeDLsub;
-                selDLStats = HomeDLSubStats;
-            } else {
-                selDL = homeDL2sub;
-                selDLStats = HomeDLSub2Stats;
+            if (selDL.fatigue <= 0) {
+                if (homeDLsub.ratOvr * Math.random() >= homeDL2sub.ratOvr * Math.random()) {
+                    selDL = homeDLsub;
+                    selDLStats = HomeDLSubStats;
+                } else {
+                    selDL = homeDL2sub;
+                    selDLStats = HomeDLSub2Stats;
+                }
             }
             if (selLB.fatigue <= 0) {
                 selLB = homeLBsub;
@@ -1614,12 +1616,14 @@ public class Game implements Serializable {
                 selTE = awayTEsub;
                 selTEStats = HomeTESubStats;
             }
-            if (awayDLsub.ratOvr * Math.random() >= awayDL2sub.ratOvr * Math.random()) {
-                selDL = awayDLsub;
-                selDLStats = HomeDLSubStats;
-            } else {
-                selDL = awayDL2sub;
-                selDLStats = HomeDLSub2Stats;
+            if (selDL.fatigue <= 0) {
+                if (awayDLsub.ratOvr * Math.random() >= awayDL2sub.ratOvr * Math.random()) {
+                    selDL = awayDLsub;
+                    selDLStats = HomeDLSubStats;
+                } else {
+                    selDL = awayDL2sub;
+                    selDLStats = HomeDLSub2Stats;
+                }
             }
             if (selLB.fatigue <= 0) {
                 selLB = awayLBsub;
