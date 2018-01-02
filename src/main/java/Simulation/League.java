@@ -3871,6 +3871,12 @@ public class League extends Rankings {
         ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
         ArrayList<String> rankings = new ArrayList<String>();
         Team t;
+
+        ArrayList<HeadCoach> HC = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            HC.add(teamList.get(i).HC.get(0));
+        }
+
         switch (selection) {
             case 0:
                 Collections.sort(teams, new CompTeamNC());
@@ -3891,6 +3897,18 @@ public class League extends Rankings {
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.totalBowls);
+                }
+                break;
+            case 3:
+                Collections.sort(teams, new CompTeamWins());
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.totalWins);
+                }
+            case 4:
+                Collections.sort(HC, new CompCoachCareer());
+                for (int i = 0; i < HC.size(); ++i) {
+                    rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachCareerScore());
                 }
                 break;
         }
@@ -4393,7 +4411,7 @@ public class League extends Rankings {
                 break;
             case 16:
                 Collections.sort(HC, new CompCoachScore());
-                for (int i = 0; i < rankNum; ++i) {
+                for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachScore());
                 }
                 break;
@@ -4459,7 +4477,7 @@ public class League extends Rankings {
                 break;
             case 27:
                 Collections.sort(HC, new CompCoachCareer());
-                for (int i = 0; i < rankNum; ++i) {
+                for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachCareerScore());
                 }
                 break;

@@ -26,13 +26,14 @@ public class Player {
     public int weeksSuspended;
     public int troubledTimes;
 
+    public int gamesStarted;
     public int gamesPlayed;
     public int statsWins;
     public boolean wonHeisman;
     public boolean wonAllAmerican;
     public boolean wonAllConference;
 
-    public int careerGamesPlayed;
+    public int careerGames;
     public int careerHeismans;
     public int careerAllAmerican;
     public int careerAllConference;
@@ -90,7 +91,7 @@ public class Player {
     }
 
     public int getHeismanScore() {
-        int adjGames = gamesPlayed;
+        int adjGames = gamesStarted;
         if (adjGames > 11) adjGames = 11;
         return ratOvr * adjGames + team.confPrestige * 5;
     }
@@ -197,7 +198,7 @@ public class Player {
 
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Games: " + (gamesPlayed + careerGamesPlayed) + " (" + (statsWins + careerWins) + "-" + (gamesPlayed + careerGamesPlayed - (statsWins + careerWins)) + ")"
+        pStats.add("Games: " + (gamesStarted + careerGames) + " (" + (statsWins + careerWins) + "-" + (gamesStarted + careerGames - (statsWins + careerWins)) + ")"
                 + ">Yrs: " + getYearsPlayed());
         pStats.add("Awards: " + getAwards() + "> ");
         return pStats;
@@ -247,9 +248,10 @@ public class Player {
         return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + ratPot + " Suspended";
 
     }
-        public int getGamesPlayed() {
-        if (gamesPlayed == 0) return 1;
-        else return gamesPlayed;
+        public int getGames() {
+        int games = gamesStarted + (gamesPlayed - gamesStarted);
+        if (games == 0) return 1;
+        else return games;
     }
 
     public static int getPosNumber(String pos) {

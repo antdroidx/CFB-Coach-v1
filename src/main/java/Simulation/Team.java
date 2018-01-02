@@ -430,8 +430,6 @@ public class Team {
 
 
         wonRivalryGame = false;
-/*        teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
-        teamStratDef = getTeamStrategiesDef()[teamStratDefNum];*/
         teamDiscipline = getTeamDiscipline();
 
         numRecruits = 30;
@@ -1073,7 +1071,6 @@ public class Team {
         int diffExpected = expectedPollFinish - rankTeamPollScore;
         int newPrestige = teamPrestige;
         int rivalryPts = 0;
-        int players = 0;
         int ccPts = 0;
         int ncwPts = 0;
         int nflPts = 0;
@@ -1476,7 +1473,6 @@ public class Team {
                 i++;
             }
         }
-        resetStats();
         sortPlayers();
         getPlayersTransferring();
     }
@@ -1495,7 +1491,7 @@ public class Team {
             int chance = 1;
             if (Math.abs(teamQBs.get(i).region - location) > 2) ++chance;
             if (teamQBs.get(i).personality < 60) ++chance;
-            if (teamQBs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamQBs.get(i).gamesStarted < 6) ++chance;
             if (teamQBs.get(i).year == 4) ++chance;
             if (teamQBs.get(i).personality > 85) ++chance;
             chance += teamQBs.get(i).troubledTimes;
@@ -1522,7 +1518,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamRBs.get(i).region - location) > 2) ++chance;
             if (teamRBs.get(i).personality < 60) ++chance;
-            if (teamRBs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamRBs.get(i).gamesStarted < 6) ++chance;
             if (teamRBs.get(i).year == 4) ++chance;
             chance += teamRBs.get(i).troubledTimes;
             if (teamRBs.get(i).personality > 85) ++chance;
@@ -1551,7 +1547,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamWRs.get(i).region - location) > 2) ++chance;
             if (teamWRs.get(i).personality < 60) ++chance;
-            if (teamWRs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamWRs.get(i).gamesStarted < 6) ++chance;
             if (teamWRs.get(i).year == 4) ++chance;
             chance += teamWRs.get(i).troubledTimes;
             if (teamWRs.get(i).personality > 85) ++chance;
@@ -1580,7 +1576,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamTEs.get(i).region - location) > 2) ++chance;
             if (teamTEs.get(i).personality < 60) ++chance;
-            if (teamTEs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamTEs.get(i).gamesStarted < 6) ++chance;
             if (teamTEs.get(i).year == 4) ++chance;
             chance += teamTEs.get(i).troubledTimes;
             if (teamTEs.get(i).personality > 85) ++chance;
@@ -1607,7 +1603,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamOLs.get(i).region - location) > 2) ++chance;
             if (teamOLs.get(i).personality < 60) ++chance;
-            if (teamOLs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamOLs.get(i).gamesStarted < 6) ++chance;
             if (teamOLs.get(i).year == 4) ++chance;
             chance += teamOLs.get(i).troubledTimes;
             if (teamOLs.get(i).personality > 85) ++chance;
@@ -1636,7 +1632,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamKs.get(i).region - location) > 2) ++chance;
             if (teamKs.get(i).personality < 60) ++chance;
-            if (teamKs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamKs.get(i).gamesStarted < 6) ++chance;
             if (teamKs.get(i).year == 4) ++chance;
             chance += teamKs.get(i).troubledTimes;
             if (teamKs.get(i).personality > 85) ++chance;
@@ -1663,7 +1659,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamDLs.get(i).region - location) > 2) ++chance;
             if (teamDLs.get(i).personality < 60) ++chance;
-            if (teamDLs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamDLs.get(i).gamesStarted < 6) ++chance;
             if (teamDLs.get(i).year == 4) ++chance;
             chance += teamDLs.get(i).troubledTimes;
             if (teamDLs.get(i).personality > 85) ++chance;
@@ -1692,7 +1688,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamLBs.get(i).region - location) > 2) ++chance;
             if (teamLBs.get(i).personality < 60) ++chance;
-            if (teamLBs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamLBs.get(i).gamesStarted < 6) ++chance;
             if (teamLBs.get(i).year == 4) ++chance;
             chance += teamLBs.get(i).troubledTimes;
             if (teamLBs.get(i).personality > 85) ++chance;
@@ -1721,7 +1717,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamCBs.get(i).region - location) > 2) ++chance;
             if (teamCBs.get(i).personality < 60) ++chance;
-            if (teamCBs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamCBs.get(i).gamesStarted < 6) ++chance;
             if (teamCBs.get(i).year == 4) ++chance;
             chance += teamCBs.get(i).troubledTimes;
             if (teamCBs.get(i).personality > 85) ++chance;
@@ -1750,7 +1746,7 @@ public class Team {
             int chance = 0;
             if (Math.abs(teamSs.get(i).region - location) > 2) ++chance;
             if (teamSs.get(i).personality < 60) ++chance;
-            if (teamSs.get(i).careerGamesPlayed < 6) ++chance;
+            if (teamSs.get(i).gamesStarted < 6) ++chance;
             if (teamSs.get(i).year == 4) ++chance;
             chance += teamSs.get(i).troubledTimes;
             if (teamSs.get(i).personality > 85) ++chance;
@@ -3744,61 +3740,61 @@ public class Team {
         for (PlayerQB qb : teamQBs) {
             sb.append("QB," + qb.name + "," + qb.year + "," + qb.ratPot + "," + qb.ratFootIQ + "," +
                     qb.ratPassPow + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratOvr + "," + qb.ratImprovement + "," + qb.ratDur + "," + qb.ratSpeed + "," +
-                    qb.careerGamesPlayed + "," + qb.careerPassAtt + "," + qb.careerPassComp + "," + qb.careerTDs + "," + qb.careerInt + "," +
+                    qb.careerGames + "," + qb.careerPassAtt + "," + qb.careerPassComp + "," + qb.careerTDs + "," + qb.careerInt + "," +
                     qb.careerPassYards + "," + qb.careerSacked + "," + qb.careerRushAtt + "," + qb.careerRushYards + "," + qb.careerRushTD + "," + qb.careerFumbles + "," + qb.careerHeismans +
                     "," + qb.careerAllAmerican + "," + qb.careerAllConference + "," + qb.careerWins + "," + qb.isTransfer + "," + qb.region + "," + qb.personality + "%\n");
         }
         for (PlayerRB rb : teamRBs) {
             sb.append("RB," + rb.name + "," + rb.year + "," + rb.ratPot + "," + rb.ratFootIQ + "," +
                     rb.ratRushPower + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratOvr + "," + rb.ratImprovement + "," + rb.ratDur + "," + rb.ratCatch + "," +
-                    rb.careerGamesPlayed + "," + rb.careerRushAtt + "," + rb.careerRushYards + "," + rb.careerTDs + "," + rb.careerFumbles + "," + rb.careerReceptions + "," + rb.careerRecYards + "," + rb.careerRecTD + "," +
+                    rb.careerGames + "," + rb.careerRushAtt + "," + rb.careerRushYards + "," + rb.careerTDs + "," + rb.careerFumbles + "," + rb.careerReceptions + "," + rb.careerRecYards + "," + rb.careerRecTD + "," +
                     rb.careerHeismans + "," + rb.careerAllAmerican + "," + rb.careerAllConference + "," + rb.careerWins + "," + rb.isTransfer + "," + rb.region + "," + rb.personality + "%\n");
         }
         for (PlayerWR wr : teamWRs) {
             sb.append("WR," + wr.name + "," + wr.year + "," + wr.ratPot + "," + wr.ratFootIQ + "," +
                     wr.ratCatch + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratOvr + "," + wr.ratImprovement + "," + wr.ratDur + "," + wr.ratJump + "," +
-                    wr.careerGamesPlayed + "," + wr.careerTargets + "," + wr.careerReceptions + "," + wr.careerRecYards + "," + wr.careerTD + "," +
+                    wr.careerGames + "," + wr.careerTargets + "," + wr.careerReceptions + "," + wr.careerRecYards + "," + wr.careerTD + "," +
                     wr.careerDrops + "," + wr.careerFumbles + "," + wr.careerHeismans + "," + wr.careerAllAmerican + "," + wr.careerAllConference + "," + wr.careerWins + "," + wr.isTransfer + "," + wr.region + "," + wr.personality + "%\n");
         }
         for (PlayerTE te : teamTEs) {
             sb.append("TE," + te.name + "," + te.year + "," + te.ratPot + "," + te.ratFootIQ + "," +
                     te.ratCatch + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratOvr + "," + te.ratImprovement + "," + te.ratDur + "," + te.ratSpeed + "," +
-                    te.careerGamesPlayed + "," + te.careerTargets + "," + te.careerReceptions + "," + te.careerRecYards + "," + te.careerTD + "," +
+                    te.careerGames + "," + te.careerTargets + "," + te.careerReceptions + "," + te.careerRecYards + "," + te.careerTD + "," +
                     te.careerDrops + "," + te.careerFumbles + "," + te.careerHeismans + "," + te.careerAllAmerican + "," + te.careerAllConference + "," + te.careerWins  + "," + te.isTransfer + "," + te.region + "," + te.personality + "%\n");
         }
         for (PlayerOL ol : teamOLs) {
             sb.append("OL," + ol.name + "," + ol.year + "," + ol.ratPot + "," + ol.ratFootIQ + "," +
                     ol.ratStrength + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratOvr + "," + ol.ratImprovement + "," + ol.ratDur + "," + ol.ratAwareness + "," +
-                    ol.careerGamesPlayed + "," + ol.careerHeismans + "," + ol.careerAllAmerican + "," + ol.careerAllConference + "," + ol.careerWins  + "," + ol.isTransfer + "," + ol.region + "," + ol.personality + "%\n");
+                    ol.careerGames + "," + ol.careerHeismans + "," + ol.careerAllAmerican + "," + ol.careerAllConference + "," + ol.careerWins  + "," + ol.isTransfer + "," + ol.region + "," + ol.personality + "%\n");
         }
         for (PlayerK k : teamKs) {
             sb.append("K," + k.name + "," + k.year + "," + k.ratPot + "," + k.ratFootIQ + "," +
                     k.ratKickPow + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratOvr + "," + k.ratImprovement + "," + k.ratDur + "," + k.ratPressure + "," +
-                    k.careerGamesPlayed + "," + k.careerXPAtt + "," + k.careerXPMade + "," + k.careerFGAtt + "," + k.careerFGMade + "," +
+                    k.careerGames + "," + k.careerXPAtt + "," + k.careerXPMade + "," + k.careerFGAtt + "," + k.careerFGMade + "," +
                     k.careerHeismans + "," + k.careerAllAmerican + "," + k.careerAllConference + "," + k.careerWins  + "," + k.isTransfer + "," + k.region + "," + k.personality + "%\n");
         }
         for (PlayerDL dl : teamDLs) {
             sb.append("DL," + dl.name + "," + dl.year + "," + dl.ratPot + "," + dl.ratFootIQ + "," +
                     dl.ratStrength + "," + dl.ratRunStop + "," + dl.ratPassRush + "," + dl.ratOvr + "," + dl.ratImprovement + "," + dl.ratDur + "," + dl.ratTackle + "," +
-                    dl.careerGamesPlayed + "," + dl.careerTackles + "," + dl.careerSacks + "," + dl.careerFumbles + "," + dl.careerInts + "," +
+                    dl.careerGames + "," + dl.careerTackles + "," + dl.careerSacks + "," + dl.careerFumbles + "," + dl.careerInts + "," +
                     dl.careerHeismans + "," + dl.careerAllAmerican + "," + dl.careerAllConference + "," + dl.careerWins  + "," + dl.isTransfer + "," + dl.region + "," + dl.personality + "%\n");
         }
         for (PlayerLB lb : teamLBs) {
             sb.append("LB," + lb.name + "," + lb.year + "," + lb.ratPot + "," + lb.ratFootIQ + "," +
                     lb.ratCoverage + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratOvr + "," + lb.ratImprovement + "," + lb.ratDur + "," + lb.ratSpeed + "," +
-                    lb.careerGamesPlayed + "," + lb.careerTackles + "," + lb.careerSacks + "," + lb.careerFumbles + "," + lb.careerInts + "," +
+                    lb.careerGames + "," + lb.careerTackles + "," + lb.careerSacks + "," + lb.careerFumbles + "," + lb.careerInts + "," +
                     lb.careerHeismans + "," + lb.careerAllAmerican + "," + lb.careerAllConference + "," + lb.careerWins  + "," + lb.isTransfer + "," + lb.region + "," + lb.personality + "%\n");
         }
         for (PlayerCB cb : teamCBs) {
             sb.append("CB," + cb.name + "," + cb.year + "," + cb.ratPot + "," + cb.ratFootIQ + "," +
                     cb.ratCoverage + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratOvr + "," + cb.ratImprovement + "," + cb.ratDur + "," + cb.ratJump + "," +
-                    cb.careerGamesPlayed + "," + cb.careerTackles + "," + cb.careerSacks + "," + cb.careerFumbles + "," + cb.careerInts + "," + cb.careerTargets + "," + cb.careerIncomplete + "," + cb.careerDefended + "," +
+                    cb.careerGames + "," + cb.careerTackles + "," + cb.careerSacks + "," + cb.careerFumbles + "," + cb.careerInts + "," + cb.careerTargets + "," + cb.careerIncomplete + "," + cb.careerDefended + "," +
                     cb.careerHeismans + "," + cb.careerAllAmerican + "," + cb.careerAllConference + "," + cb.careerWins  + "," + cb.isTransfer + "," + cb.region + "," + cb.personality + "%\n");
         }
         for (PlayerS s : teamSs) {
             sb.append("S," + s.name + "," + s.year + "," + s.ratPot + "," + s.ratFootIQ + "," +
                     s.ratCoverage + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratOvr + "," + s.ratImprovement + "," + s.ratDur + "," + s.ratRunStop + "," +
-                    s.careerGamesPlayed + "," + s.careerTackles + "," + s.careerSacks + "," + s.careerFumbles + "," + s.careerInts + "," +
+                    s.careerGames + "," + s.careerTackles + "," + s.careerSacks + "," + s.careerFumbles + "," + s.careerInts + "," +
                     s.careerHeismans + "," + s.careerAllAmerican + "," + s.careerAllConference + "," + s.careerWins  + "," + s.isTransfer + "," + s.region + "," + s.personality + "%\n");
         }
 
@@ -3955,13 +3951,23 @@ public class Team {
         addGamePlayedList(teamLBs, startersLB, wonGame);
         addGamePlayedList(teamCBs, startersCB, wonGame);
         addGamePlayedList(teamSs, startersS, wonGame);
+        getRB(2).gamesPlayed++;
+        getWR(3).gamesPlayed++;
+        getTE(1).gamesPlayed++;
+        getDL(4).gamesPlayed++;
+        getDL(5).gamesPlayed++;
+        getLB(3).gamesPlayed++;
+        getCB(3).gamesPlayed++;
+        getS(1).gamesPlayed++;
     }
 
     private void addGamePlayedList(ArrayList<? extends Player> playerList, int starters, boolean wonGame) {
         for (int i = 0; i < starters; ++i) {
+            playerList.get(i).gamesStarted++;
             playerList.get(i).gamesPlayed++;
             if (wonGame) playerList.get(i).statsWins++;
         }
+
     }
 
 
@@ -4073,7 +4079,7 @@ public class Team {
         records.checkRecord("Team TO Diff", teamTODiff, abbr, league.getYear());
 
         for (int i = 0; i < teamQBs.size(); ++i) {
-            if (getQB(i).gamesPlayed > 6) {
+            if (getQB(i).gamesStarted > 6) {
                 records.checkRecord("Pass Yards", getQB(i).statsPassYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Pass TDs", getQB(i).statsPassTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Ints Thrown", getQB(i).statsInt, abbr + ": " + getQB(i).getInitialName(), league.getYear());

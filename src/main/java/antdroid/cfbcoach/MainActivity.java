@@ -1289,7 +1289,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
         String[] rankingsSelection =
-                {"National Championships", "Conference Championships", "Bowl Victories"};
+                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Active Coach Career Score"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);

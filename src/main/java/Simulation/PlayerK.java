@@ -32,6 +32,7 @@ public class PlayerK extends Player {
         team = t;
         name = nm;
         year = yr;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratOvr = (pow + acc + prs) / 3;
@@ -63,7 +64,7 @@ public class PlayerK extends Player {
         careerXPMade = 0;
         careerFGAtt = 0;
         careerFGMade = 0;
-        careerGamesPlayed = 0;
+        careerGames = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
@@ -76,6 +77,7 @@ public class PlayerK extends Player {
         team = t;
         name = nm;
         year = yr;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratOvr = (pow + acc + prs) / 3;
@@ -106,7 +108,7 @@ public class PlayerK extends Player {
         careerXPMade = cXPM;
         careerFGAtt = cFGA;
         careerFGMade = cFGM;
-        careerGamesPlayed = cGamesPlayed;
+        careerGames = cGamesPlayed;
         careerHeismans = cHeismans;
         careerAllAmerican = cAA;
         careerAllConference = cAC;
@@ -117,6 +119,7 @@ public class PlayerK extends Player {
         name = nm;
         year = yr;
         team = t;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratPot = (int) (attrBase + 50 * Math.random());
@@ -156,7 +159,7 @@ public class PlayerK extends Player {
         careerXPMade = 0;
         careerFGAtt = 0;
         careerFGMade = 0;
-        careerGamesPlayed = 0;
+        careerGames = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
@@ -167,6 +170,7 @@ public class PlayerK extends Player {
         name = nm;
         year = yr;
         team = t;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratPot = (int) (attrBase + 50 * Math.random());
@@ -196,7 +200,7 @@ public class PlayerK extends Player {
         careerXPMade = 0;
         careerFGAtt = 0;
         careerFGMade = 0;
-        careerGamesPlayed = 0;
+        careerGames = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
@@ -207,27 +211,29 @@ public class PlayerK extends Player {
     public void advanceSeason() {
         int oldOvr = ratOvr;
         progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 6;
+        int games = gamesStarted + (gamesPlayed-gamesStarted)/3;
 
         if (!isMedicalRS) {
             year++;
             if (wonAllConference) ratPot++;
             if (wonAllAmerican) ratPot++;
-            if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
+            if (year > 2 && games < 4) ratPot -= (int) (Math.random() * 15);
 
-            ratFootIQ += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratKickPow += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratKickAcc += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratKickFum += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratPressure += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratKickPow += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratKickAcc += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratKickFum += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratPressure += (int) (Math.random() * (progression + games - 35)) / 10;
 
             if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratKickPow += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
-                ratKickAcc += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
-                ratKickFum += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
-                ratPressure += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratKickPow += (int) (Math.random() * (progression + games - 40)) / 10;
+                ratKickAcc += (int) (Math.random() * (progression + games - 40)) / 10;
+                ratKickFum += (int) (Math.random() * (progression + games - 40)) / 10;
+                ratPressure += (int) (Math.random() * (progression + games - 40)) / 10;
             }
         }
+        
         ratOvr = (ratKickPow + ratKickAcc + ratPressure) / 3;
         ratImprovement = ratOvr - oldOvr;
         //reset stats (keep career stats?)
@@ -235,7 +241,7 @@ public class PlayerK extends Player {
         careerXPMade += statsXPMade;
         careerFGAtt += statsFGAtt;
         careerFGMade += statsFGMade;
-        careerGamesPlayed += gamesPlayed;
+        careerGames += gamesPlayed;
         careerWins += statsWins;
 
         if (wonHeisman) careerHeismans++;
@@ -282,7 +288,7 @@ public class PlayerK extends Player {
         } else {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Kick Strength: " + getLetterGrade(ratKickPow));
         pStats.add("Kick Accuracy: " + getLetterGrade(ratKickAcc) + ">Clumsiness: " + getLetterGrade(ratKickFum));
@@ -305,7 +311,7 @@ public class PlayerK extends Player {
         } else {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + ratDur);
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + ">Durability: " + ratDur);
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
         pStats.add("Football IQ: " + ratFootIQ + ">Kick Strength: " + ratKickPow);
         pStats.add("Kick Accuracy: " + ratKickAcc + ">Clumsiness: " + ratKickFum);
