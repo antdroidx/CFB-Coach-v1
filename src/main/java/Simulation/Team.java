@@ -4001,13 +4001,13 @@ public class Team {
                 "Play a normal balanced offense.", 1, 0, 0, 1, 1, 0, 0, 1);
 
         ts[1] = new TeamStrategy("Smash Mouth",
-                "Play a conservative run-heavy offense, setting up the passes as necessary.", 2, 2, -2, 1, 1, 1, 1, 0);
+                "Play a conservative run-heavy offense, setting up the passes as necessary.", 3, 2, -2, 1, 2, 1, 1, 0);
 
         ts[2] = new TeamStrategy("West Coast",
                 "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 1, -2, 1);
 
         ts[3] = new TeamStrategy("Spread",
-                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -1, 1, 1);
+                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -1, 0, 1);
 
         ts[4] = new TeamStrategy("Read Option",
                 "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 0, 0);
