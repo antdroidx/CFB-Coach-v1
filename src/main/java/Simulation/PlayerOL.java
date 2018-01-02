@@ -25,6 +25,7 @@ public class PlayerOL extends Player {
         team = t;
         name = nm;
         year = yr;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratOvr = (pow * 3 + bkr * 2 + bkp * 2 + awr) / 8;
@@ -48,7 +49,7 @@ public class PlayerOL extends Player {
         wonAllConference = false;
         statsWins = 0;
 
-        careerGamesPlayed = 0;
+        careerGames = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
@@ -60,6 +61,7 @@ public class PlayerOL extends Player {
         team = t;
         name = nm;
         year = yr;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratOvr = (pow * 3 + bkr * 2 + bkp * 2 + awr) / 8;
@@ -83,7 +85,7 @@ public class PlayerOL extends Player {
         wonAllConference = false;
         statsWins = 0;
 
-        careerGamesPlayed = cGamesPlayed;
+        careerGames = cGamesPlayed;
         careerHeismans = cHeismans;
         careerAllAmerican = cAA;
         careerAllConference = cAC;
@@ -94,6 +96,7 @@ public class PlayerOL extends Player {
         name = nm;
         year = yr;
         team = t;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratPot = (int) (attrBase + 50 * Math.random());
@@ -125,7 +128,7 @@ public class PlayerOL extends Player {
         wonAllConference = false;
         statsWins = 0;
 
-        careerGamesPlayed = 0;
+        careerGames = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
@@ -137,6 +140,7 @@ public class PlayerOL extends Player {
         name = nm;
         year = yr;
         team = t;
+        gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
         ratPot = (int) (attrBase + 50 * Math.random());
@@ -158,7 +162,7 @@ public class PlayerOL extends Player {
         wonAllConference = false;
         statsWins = 0;
 
-        careerGamesPlayed = 0;
+        careerGames = 0;
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
@@ -170,31 +174,32 @@ public class PlayerOL extends Player {
     public void advanceSeason() {
         int oldOvr = ratOvr;
         progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 6;
-
+        int games = gamesStarted + (gamesPlayed-gamesStarted)/3;
 
         if (!isMedicalRS) {
             year++;
             if (wonAllConference) ratPot++;
             if (wonAllAmerican) ratPot++;
-            if (year > 2 && gamesPlayed < 4) ratPot -= (int) (Math.random() * 15);
+            if (year > 2 && games < 4) ratPot -= (int) (Math.random() * 15);
 
-            ratFootIQ += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratStrength += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratRunBlock += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratPassBlock += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
-            ratAwareness += (int) (Math.random() * (progression + gamesPlayed - 35)) / 10;
+            ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratStrength += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratRunBlock += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratPassBlock += (int) (Math.random() * (progression + games - 35)) / 10;
+            ratAwareness += (int) (Math.random() * (progression + games - 35)) / 10;
             if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratStrength += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
-                ratRunBlock += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
-                ratPassBlock += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
-                ratAwareness += (int) (Math.random() * (progression + gamesPlayed - 40)) / 10;
+                ratStrength += (int) (Math.random() * (progression + games - 40)) / 10;
+                ratRunBlock += (int) (Math.random() * (progression + games - 40)) / 10;
+                ratPassBlock += (int) (Math.random() * (progression + games - 40)) / 10;
+                ratAwareness += (int) (Math.random() * (progression + games - 40)) / 10;
             }
         }
+        
         ratOvr = (ratStrength * 3 + ratRunBlock * 2 + ratPassBlock * 2 + ratAwareness) / 8;
         ratImprovement = ratOvr - oldOvr;
 
-        careerGamesPlayed += gamesPlayed;
+        careerGames += gamesPlayed;
         careerWins += statsWins;
 
         if (wonHeisman) careerHeismans++;
@@ -215,7 +220,7 @@ public class PlayerOL extends Player {
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
         pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Strength: " + getLetterGrade(ratStrength));
         pStats.add("Run Block: " + getLetterGrade(ratRunBlock) + ">Pass Block: " + getLetterGrade(ratPassBlock));
@@ -227,7 +232,7 @@ public class PlayerOL extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesPlayed - statsWins) + ")" + ">Durability: " + ratDur);
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + ">Durability: " + ratDur);
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
         pStats.add("Football IQ: " + ratFootIQ + ">Strength: " + ratStrength);
         pStats.add("Run Block: " + ratRunBlock + ">Pass Block: " + ratPassBlock);

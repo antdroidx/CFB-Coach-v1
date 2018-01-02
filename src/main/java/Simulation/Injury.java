@@ -40,7 +40,7 @@ public class Injury {
                     + " injury and will be out for " + duration + " weeks.");
         }
 
-        if (duration > 12 && player.team.league.currentWeek < 6 && player.gamesPlayed < 4) {
+        if (duration > 12 && player.team.league.currentWeek < 6 && player.gamesStarted < 4) {
             player.isMedicalRS = true;
             duration = 26;
             if (player.team.userControlled) {
