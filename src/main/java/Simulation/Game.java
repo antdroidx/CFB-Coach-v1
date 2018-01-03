@@ -993,8 +993,8 @@ public class Game implements Serializable {
         selWR.fatigue -= fatigueDropHigh + Math.round((100-selWR.ratDur)/10);
         selTE.fatigue -= fatigueDropHigh + Math.round((100-selTE.ratDur)/10);
         selDL.fatigue -= fatigueDropHigh + Math.round((100-selDL.ratDur)/10);
-        selLB.fatigue -= fatigueDropHigh + Math.round((100-selLB.ratDur)/10);
-        selLB2.fatigue -= fatigueDropLow + Math.round((100-selLB2.ratDur)/10);
+        selLB.fatigue -= fatigueDropLow + Math.round((100-selLB.ratDur)/10);
+        selLB2.fatigue -= Math.round((100-selLB2.ratDur)/10);
         selCB.fatigue -= fatigueDropMed + Math.round((100-selCB.ratDur)/10);
         selS.fatigue -= fatigueDropMed + Math.round((100-selS.ratDur)/10);
 
@@ -1232,7 +1232,7 @@ public class Game implements Serializable {
         selRB.fatigue -= fatigueDropMed + Math.round((100-selRB.ratDur)/10);
         selTE.fatigue -= fatigueDropMed + Math.round((100-selTE.ratDur)/10);
         selDL.fatigue -= fatigueDropHigh + Math.round((100-selDL.ratDur)/10);
-        selLB.fatigue -= fatigueDropHigh + Math.round((100-selLB.ratDur)/10);
+        selLB.fatigue -= fatigueDropLow + Math.round((100-selLB.ratDur)/10);
         selCB.fatigue -= fatigueDropLow + Math.round((100-selCB.ratDur)/10);
         selS.fatigue -= fatigueDropMed + Math.round((100-selS.ratDur)/10);
 
