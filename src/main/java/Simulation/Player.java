@@ -66,7 +66,30 @@ public class Player {
     public double lbImportance = 2.5;
     public double cbImportance = 2.5;
     public double sImportance = 1.5;
-    public int fatigue;
+
+    //game simulation data
+    public int gameFatigue;
+    public double gameSim; //will be used for game sim calculations
+    public int posDepth;
+    public int gamePassAtempts;
+    public int gamePassComplete;
+    public int gamePassTDs;
+    public int gamePassInts;
+    public int gameRushAttempts;
+    public int gameRushYards;
+    public int gameRushTDs;
+    public int gameTargets;
+    public int gameReceptions;
+    public int gameRecYards;
+    public int gameRecTDs;
+    public int gameFumbles;
+    public int gameTackles;
+    public int gameSacks;
+    public int gameInterceptions;
+    public int gameFGAttempts;
+    public int gameFGMade;
+    public int gameXPAttempts;
+    public int gameXPMade;
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
 
