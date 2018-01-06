@@ -28,10 +28,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Player.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,111 +111,66 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="343" column="0" lean-forward="false" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
+            <state relative-caret-position="969">
+              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
               <folding>
-                <element signature="docComment;class#Game#0" expanded="false" />
-                <element signature="docComment;method#Game#0;class#Game#0" expanded="false" />
                 <element signature="method#Game#0;class#Game#0" expanded="false" />
-                <element signature="e#3041#3084#0" expanded="false" />
-                <element signature="docComment;method#Game#1;class#Game#0" expanded="false" />
                 <element signature="method#Game#1;class#Game#0" expanded="false" />
-                <element signature="e#5941#5984#0" expanded="false" />
-                <element signature="docComment;method#getHFadv#0;class#Game#0" expanded="false" />
                 <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
                 <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#playGame#0;class#Game#0" expanded="false" />
-                <element signature="method#playGame#0;class#Game#0" expanded="false" />
-                <element signature="docComment;method#runPlay#0;class#Game#0" expanded="false" />
-                <element signature="method#runPlay#0;class#Game#0" expanded="false" />
-                <element signature="e#19607#19737#0" expanded="false" />
-                <element signature="docComment;method#passingPlay#0;class#Game#0" expanded="false" />
+                <element signature="e#12842#12972#0" expanded="false" />
+                <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
+                <element signature="method#rushingPlay#0;class#Game#0" expanded="false" />
                 <element signature="method#passingPlayWR#0;class#Game#0" expanded="false" />
+                <element signature="method#passingTD#0;class#Game#0" expanded="false" />
+                <element signature="method#passAttempt#0;class#Game#0" expanded="false" />
                 <element signature="method#passingPlayTE#0;class#Game#0" expanded="false" />
+                <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
+                <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
                 <element signature="method#passingPlayRB#0;class#Game#0" expanded="false" />
-                <marker date="1515198450870" expanded="false" signature="29782:29920" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="33249:33376" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="38406:38458" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="42827:43120" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="43211:43656" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="43662:44004" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="44114:44525" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="44531:44826" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="44919:45348" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="50735:50787" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="54805:55098" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="55191:55639" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="55645:55987" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="56099:56510" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="56516:56811" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="56906:57335" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="62314:62366" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="66384:66677" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="66770:67218" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="67224:67566" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="67678:68031" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="68037:68332" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="68427:68826" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="68832:69009" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="69073:70077" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="69630:69828" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="70083:70230" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="70300:71824" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="70842:70934" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="71044:71105" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="71241:71336" ph="//..." />
-                <marker date="1515198450870" expanded="false" signature="71830:71935" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="71977:72653" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="72928:77875" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="78116:83066" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="83072:83324" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="83431:83741" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="83851:84264" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="84270:84508" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="84567:88150" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="88156:88379" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="88432:93029" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="93035:93163" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="93203:94919" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="94925:95174" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="95215:97004" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="97010:97171" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="97212:97548" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="97590:97703" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="97750:98789" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="98795:99088" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="99119:100991" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="100997:101146" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="101181:101981" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="102014:102784" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="102832:104221" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="104254:104435" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="123204:123371" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="123410:126945" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="126951:127158" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="127195:127836" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="127842:128032" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="128073:128212" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="128218:128408" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="128449:128660" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="128666:128828" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="128860:134468" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="134514:136293" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="136340:137860" ph="{...}" />
-                <marker date="1515198450870" expanded="false" signature="137866:138030" ph="/**...*/" />
-                <marker date="1515198450870" expanded="false" signature="138068:138079" ph=" { " />
-                <marker date="1515198450870" expanded="false" signature="138105:138111" ph=" }" />
+                <element signature="method#passingTDRB#0;class#Game#0" expanded="false" />
+                <element signature="method#passAttemptRB#0;class#Game#0" expanded="false" />
+                <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
+                <element signature="e#59206#59291#0" expanded="false" />
+                <element signature="method#qbSack#0;class#Game#0" expanded="false" />
+                <element signature="method#safety#0;class#Game#0" expanded="false" />
+                <element signature="method#RushPlayRB#0;class#Game#0" expanded="false" />
+                <element signature="method#RushPlayQB#0;class#Game#0" expanded="false" />
+                <element signature="method#rushAttempt#0;class#Game#0" expanded="false" />
+                <element signature="method#rushAttemptQB#0;class#Game#0" expanded="false" />
+                <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
+                <element signature="method#kickXP#0;class#Game#0" expanded="false" />
+                <element signature="method#kickOff#0;class#Game#0" expanded="false" />
+                <element signature="method#freeKick#0;class#Game#0" expanded="false" />
+                <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
+                <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
+                <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
+                <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
+                <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
+                <element signature="method#recoup#0;class#Game#0" expanded="false" />
+                <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
+                <element signature="method#getEventPrefix#0;class#Game#0" expanded="false" />
+                <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
+                <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
+                <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
+                <marker date="1515228137752" expanded="false" signature="32504:32556" ph="//..." />
+                <marker date="1515228137752" expanded="false" signature="43375:43427" ph="//..." />
+                <marker date="1515228137752" expanded="false" signature="53563:53615" ph="//..." />
+                <marker date="1515228137752" expanded="false" signature="60348:60443" ph="//..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1113">
-              <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="485">
+              <caret line="924" column="22" lean-forward="false" selection-start-line="924" selection-start-column="22" selection-end-line="924" selection-end-column="22" />
+              <folding>
+                <element signature="e#23763#23920#0" expanded="true" />
+                <element signature="e#23919#23920#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -221,14 +178,47 @@
       <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="2901" column="62" lean-forward="false" selection-start-line="2901" selection-start-column="58" selection-end-line="2901" selection-end-column="62" />
+            <state relative-caret-position="272">
+              <caret line="140" column="15" lean-forward="false" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
               <folding>
                 <element signature="method#advanceHC#0;class#Team#0" expanded="false" />
                 <element signature="method#coachContracts#0;class#Team#0" expanded="false" />
                 <element signature="method#promoteCoach#0;class#Team#0" expanded="false" />
                 <element signature="method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="game_dialog.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_dialog.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="-32">
+              <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerCB.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -246,10 +236,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>QB</find>
-      <find>leagueHistory</find>
-      <find>promote</find>
-      <find>promoteCoac</find>
       <find>promotion</find>
       <find>promotionCan</find>
       <find>int[7</find>
@@ -260,7 +246,6 @@
       <find>kickOff</find>
       <find>&amp;&amp; gamePoss</find>
       <find>selLB2</find>
-      <find>home</find>
       <find>11</find>
       <find>RB</find>
       <find>Games</find>
@@ -276,10 +261,13 @@
       <find>Freshman</find>
       <find>Comp</find>
       <find>LineBacker</find>
+      <find>ratRunStop</find>
+      <find>;</find>
+      <find>Starter</find>
+      <find>home</find>
+      <find>gamesPla</find>
     </findStrings>
     <replaceStrings>
-      <replace>(int) (attrBase + 50 * Math.random());</replace>
-      <replace>maxStarRating</replace>
       <replace>recruitChance</replace>
       <replace>cost = ratOvr*rbImportance + (int)Math.random()*recruitTolerance</replace>
       <replace>cost = ratOvr*teImportance + (int)Math.random()*recruitTolerance;</replace>
@@ -301,13 +289,15 @@
       <replace>RB</replace>
       <replace>TE</replace>
       <replace>int[11</replace>
-      <replace>away</replace>
       <replace>7</replace>
       <replace>S</replace>
       <replace>gamesStarted = 0;</replace>
       <replace>games</replace>
       <replace>gamesStarted</replace>
       <replace>DLineman</replace>
+      <replace>ratTackle</replace>
+      <replace>= 0;</replace>
+      <replace>away</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1284,7 +1274,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamCompOffTalent.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamCompDefTalent.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamCompPrestige.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Rankings.java" />
@@ -1320,7 +1309,6 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/CompTeamWins.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerQB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerWR.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerTE.java" />
@@ -1331,21 +1319,23 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerS.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerRB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages ProjectPane="false" />
       <showMembers ProjectPane="false" />
       <showModules />
@@ -1358,185 +1348,7 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Simulation" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Simulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CFB-Coach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -1660,7 +1472,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515198840863" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515228153875" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1708,7 +1520,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515198840863" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515228153876" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1914,7 +1726,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515198840865" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515228153877" />
       </method>
     </configuration>
     <list size="1">
@@ -1965,33 +1777,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21736205" sideWeight="0.15256125" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294643" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24759358" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46547884" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19421965" sideWeight="0.40405118" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21736205" sideWeight="0.15256125" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32628062" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24387528" sideWeight="0.47121534" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294643" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25213677" sideWeight="0.49498746" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.52665246" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24466269" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6138728" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61358577" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5682303" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24759358" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.12666667" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46547884" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2003,7 +1816,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2066,15 +1878,9 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java</url>
-          <line>2500</line>
+          <line>2503</line>
           <properties />
           <option name="timeStamp" value="2275" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Simulation/PlayerRB.java</url>
-          <line>336</line>
-          <properties />
-          <option name="timeStamp" value="2304" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -2089,7 +1895,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2313" />
+      <option name="time" value="2341" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -2112,13 +1918,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Rankings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/widget/AdapterView.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -2321,23 +2120,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3978">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="205" column="92" lean-forward="false" selection-start-line="205" selection-start-column="92" selection-end-line="205" selection-end-column="92" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompTeamWins.java">
@@ -2369,14 +2168,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerWR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="320" column="42" lean-forward="false" selection-start-line="320" selection-start-column="42" selection-end-line="320" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerK.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
@@ -2389,14 +2180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="300" column="36" lean-forward="false" selection-start-line="300" selection-start-column="31" selection-end-line="300" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="331" column="42" lean-forward="false" selection-start-line="331" selection-start-column="42" selection-end-line="331" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -2425,14 +2208,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerRB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="336" column="0" lean-forward="false" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerQB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6375">
@@ -2449,14 +2224,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="880" column="71" lean-forward="false" selection-start-line="880" selection-start-column="71" selection-end-line="880" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompTeamSoS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -2464,10 +2231,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerWR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerRB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5712">
+          <caret line="336" column="0" lean-forward="false" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_dialog.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="2901" column="62" lean-forward="false" selection-start-line="2901" selection-start-column="58" selection-end-line="2901" selection-end-column="62" />
+        <state relative-caret-position="272">
+          <caret line="140" column="15" lean-forward="false" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
           <folding>
             <element signature="method#advanceHC#0;class#Team#0" expanded="false" />
             <element signature="method#coachContracts#0;class#Team#0" expanded="false" />
@@ -2477,118 +2287,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="485">
+          <caret line="924" column="22" lean-forward="false" selection-start-line="924" selection-start-column="22" selection-end-line="924" selection-end-column="22" />
+          <folding>
+            <element signature="e#23763#23920#0" expanded="true" />
+            <element signature="e#23919#23920#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1113">
-          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        <state relative-caret-position="142">
+          <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="343" column="0" lean-forward="false" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
+        <state relative-caret-position="969">
+          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
           <folding>
-            <element signature="docComment;class#Game#0" expanded="false" />
-            <element signature="docComment;method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#Game#0;class#Game#0" expanded="false" />
-            <element signature="e#3041#3084#0" expanded="false" />
-            <element signature="docComment;method#Game#1;class#Game#0" expanded="false" />
             <element signature="method#Game#1;class#Game#0" expanded="false" />
-            <element signature="e#5941#5984#0" expanded="false" />
-            <element signature="docComment;method#getHFadv#0;class#Game#0" expanded="false" />
             <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
             <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="docComment;method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="e#19607#19737#0" expanded="false" />
-            <element signature="docComment;method#passingPlay#0;class#Game#0" expanded="false" />
+            <element signature="e#12842#12972#0" expanded="false" />
+            <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
+            <element signature="method#rushingPlay#0;class#Game#0" expanded="false" />
             <element signature="method#passingPlayWR#0;class#Game#0" expanded="false" />
+            <element signature="method#passingTD#0;class#Game#0" expanded="false" />
+            <element signature="method#passAttempt#0;class#Game#0" expanded="false" />
             <element signature="method#passingPlayTE#0;class#Game#0" expanded="false" />
+            <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
+            <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
             <element signature="method#passingPlayRB#0;class#Game#0" expanded="false" />
-            <marker date="1515198450870" expanded="false" signature="29782:29920" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="33249:33376" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="38406:38458" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="42827:43120" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="43211:43656" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="43662:44004" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="44114:44525" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="44531:44826" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="44919:45348" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="50735:50787" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="54805:55098" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="55191:55639" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="55645:55987" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="56099:56510" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="56516:56811" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="56906:57335" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="62314:62366" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="66384:66677" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="66770:67218" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="67224:67566" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="67678:68031" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="68037:68332" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="68427:68826" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="68832:69009" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="69073:70077" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="69630:69828" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="70083:70230" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="70300:71824" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="70842:70934" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="71044:71105" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="71241:71336" ph="//..." />
-            <marker date="1515198450870" expanded="false" signature="71830:71935" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="71977:72653" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="72928:77875" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="78116:83066" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="83072:83324" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="83431:83741" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="83851:84264" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="84270:84508" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="84567:88150" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="88156:88379" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="88432:93029" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="93035:93163" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="93203:94919" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="94925:95174" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="95215:97004" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="97010:97171" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="97212:97548" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="97590:97703" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="97750:98789" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="98795:99088" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="99119:100991" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="100997:101146" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="101181:101981" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="102014:102784" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="102832:104221" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="104254:104435" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="123204:123371" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="123410:126945" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="126951:127158" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="127195:127836" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="127842:128032" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="128073:128212" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="128218:128408" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="128449:128660" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="128666:128828" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="128860:134468" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="134514:136293" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="136340:137860" ph="{...}" />
-            <marker date="1515198450870" expanded="false" signature="137866:138030" ph="/**...*/" />
-            <marker date="1515198450870" expanded="false" signature="138068:138079" ph=" { " />
-            <marker date="1515198450870" expanded="false" signature="138105:138111" ph=" }" />
+            <element signature="method#passingTDRB#0;class#Game#0" expanded="false" />
+            <element signature="method#passAttemptRB#0;class#Game#0" expanded="false" />
+            <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
+            <element signature="e#59206#59291#0" expanded="false" />
+            <element signature="method#qbSack#0;class#Game#0" expanded="false" />
+            <element signature="method#safety#0;class#Game#0" expanded="false" />
+            <element signature="method#RushPlayRB#0;class#Game#0" expanded="false" />
+            <element signature="method#RushPlayQB#0;class#Game#0" expanded="false" />
+            <element signature="method#rushAttempt#0;class#Game#0" expanded="false" />
+            <element signature="method#rushAttemptQB#0;class#Game#0" expanded="false" />
+            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
+            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
+            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
+            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
+            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
+            <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
+            <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
+            <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
+            <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
+            <element signature="method#recoup#0;class#Game#0" expanded="false" />
+            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
+            <element signature="method#getEventPrefix#0;class#Game#0" expanded="false" />
+            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
+            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
+            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
+            <marker date="1515228137752" expanded="false" signature="32504:32556" ph="//..." />
+            <marker date="1515228137752" expanded="false" signature="43375:43427" ph="//..." />
+            <marker date="1515228137752" expanded="false" signature="53563:53615" ph="//..." />
+            <marker date="1515228137752" expanded="false" signature="60348:60443" ph="//..." />
           </folding>
         </state>
       </provider>
