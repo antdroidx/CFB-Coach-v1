@@ -155,7 +155,7 @@ public class Team {
     public int subOL = 2;
     public int subK = 0;
     public int subDL = 2;
-    public int subLB = 1;
+    public int subLB = 2;
     public int subCB = 1;
     public int subS = 1;
 

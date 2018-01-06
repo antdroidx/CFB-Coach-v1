@@ -976,11 +976,11 @@ public class MainActivity extends AppCompatActivity {
                 scoreOT.setText("");
             }
 
-
             final TextView gameDialogScoreDashName = dialog.findViewById(R.id.gameDialogScoreDashName);
             if (g.numOT > 0) {
                 gameDialogScoreDashName.setText(g.numOT + "OT");
             } else gameDialogScoreDashName.setText("@");
+
 
             final TextView gameL = dialog.findViewById(R.id.gameDialogLeft);
             gameL.setText(gameStr[0]);
@@ -990,6 +990,9 @@ public class MainActivity extends AppCompatActivity {
             gameR.setText(gameStr[2]);
             final TextView gameB = dialog.findViewById(R.id.gameDialogBottom);
             gameB.setText(gameStr[3] + "\n\n");
+
+
+
         } else {
             // Show game scouting dialog
             gameStr = g.getGameScoutStr();

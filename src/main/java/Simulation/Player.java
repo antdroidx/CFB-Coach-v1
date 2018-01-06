@@ -68,11 +68,13 @@ public class Player {
     public double sImportance = 1.5;
 
     //game simulation data
+    public int gamePlayed;
     public int gameFatigue;
     public double gameSim; //will be used for game sim calculations
     public int posDepth;
     public int gamePassAtempts;
     public int gamePassComplete;
+    public int gamePassYards;
     public int gamePassTDs;
     public int gamePassInts;
     public int gameRushAttempts;
@@ -82,10 +84,13 @@ public class Player {
     public int gameReceptions;
     public int gameRecYards;
     public int gameRecTDs;
+    public int gameDrops;
     public int gameFumbles;
     public int gameTackles;
     public int gameSacks;
     public int gameInterceptions;
+    public int gameDefended;
+    public int gameIncomplete;
     public int gameFGAttempts;
     public int gameFGMade;
     public int gameXPAttempts;
