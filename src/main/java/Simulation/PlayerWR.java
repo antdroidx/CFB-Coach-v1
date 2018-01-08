@@ -23,7 +23,7 @@ public class PlayerWR extends Player {
     public int statsTargets;
     public int statsReceptions;
     public int statsRecYards;
-    public int statsTD;
+    public int statsRecTD;
     public int statsDrops;
     public int statsFumbles;
 
@@ -59,7 +59,7 @@ public class PlayerWR extends Player {
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;
-        statsTD = 0;
+        statsRecTD = 0;
         statsDrops = 0;
         statsFumbles = 0;
         wonHeisman = false;
@@ -110,7 +110,7 @@ public class PlayerWR extends Player {
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;
-        statsTD = 0;
+        statsRecTD = 0;
         statsDrops = 0;
         statsFumbles = 0;
         wonHeisman = false;
@@ -167,7 +167,7 @@ public class PlayerWR extends Player {
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;
-        statsTD = 0;
+        statsRecTD = 0;
         statsDrops = 0;
         statsFumbles = 0;
         wonHeisman = false;
@@ -213,7 +213,7 @@ public class PlayerWR extends Player {
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;
-        statsTD = 0;
+        statsRecTD = 0;
         statsDrops = 0;
         statsFumbles = 0;
         wonHeisman = false;
@@ -267,7 +267,7 @@ public class PlayerWR extends Player {
         careerTargets += statsTargets;
         careerReceptions += statsReceptions;
         careerRecYards += statsRecYards;
-        careerTD += statsTD;
+        careerTD += statsRecTD;
         careerDrops += statsDrops;
         careerFumbles += statsFumbles;
         careerGames += gamesPlayed;
@@ -280,7 +280,7 @@ public class PlayerWR extends Player {
         statsTargets = 0;
         statsReceptions = 0;
         statsRecYards = 0;
-        statsTD = 0;
+        statsRecTD = 0;
         statsDrops = 0;
         statsFumbles = 0;
 
@@ -292,13 +292,13 @@ public class PlayerWR extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsTD * 140 - statsFumbles * 100 - statsDrops * 75 + (int) (statsRecYards * 2.25) + team.confPrestige * 7;
+        return statsRecTD * 140 - statsFumbles * 100 - statsDrops * 75 + (int) (statsRecYards * 2.25) + team.confPrestige * 7;
     }
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + statsTD + ">Fumbles: " + statsFumbles);
+        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>Drops: " + statsDrops);
@@ -314,7 +314,7 @@ public class PlayerWR extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + statsTD + ">Fumbles: " + statsFumbles);
+        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>Drops: " + statsDrops);
@@ -331,7 +331,7 @@ public class PlayerWR extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("TDs: " + (statsTD + careerTD) + ">Fumbles: " + (statsFumbles + careerFumbles));
+        pStats.add("TDs: " + (statsRecTD + careerTD) + ">Fumbles: " + (statsFumbles + careerFumbles));
         pStats.add("Rec Yards: " + (statsRecYards + careerRecYards) + " yds>Receptions: " + (statsReceptions + careerReceptions));
         pStats.add("Catch Percent: " + (100 * (statsReceptions + careerReceptions) / (statsTargets + careerTargets + 1)) + ">Yards/Tgt: " + ((double) ((10 * statsRecYards + careerRecYards) / (statsTargets + careerTargets + 1)) / 10) + " yds");
         pStats.add("Yds/Game: " + ((statsRecYards + careerRecYards) / (getGames() + careerGames)) + " yds/g>Drops: " + (statsDrops + careerDrops));

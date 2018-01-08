@@ -3951,20 +3951,15 @@ public class Team {
         addGamePlayedList(teamLBs, startersLB, wonGame);
         addGamePlayedList(teamCBs, startersCB, wonGame);
         addGamePlayedList(teamSs, startersS, wonGame);
-        getRB(2).gamesPlayed++;
-        getWR(3).gamesPlayed++;
-        getTE(1).gamesPlayed++;
-        getDL(4).gamesPlayed++;
-        getDL(5).gamesPlayed++;
-        getLB(3).gamesPlayed++;
-        getCB(3).gamesPlayed++;
-        getS(1).gamesPlayed++;
+
+        for(int i=0; i <getAllPlayers().size(); ++i) {
+            if (getAllPlayers().get(i).gameSnaps > 0) getAllPlayers().get(i).gamesPlayed++;
+        }
     }
 
     private void addGamePlayedList(ArrayList<? extends Player> playerList, int starters, boolean wonGame) {
         for (int i = 0; i < starters; ++i) {
             playerList.get(i).gamesStarted++;
-            playerList.get(i).gamesPlayed++;
             if (wonGame) playerList.get(i).statsWins++;
         }
 
@@ -4100,7 +4095,7 @@ public class Team {
 
         for (int i = 0; i < teamWRs.size(); ++i) {
                 records.checkRecord("Rec Yards", getWR(i).statsRecYards, abbr + ": " + getWR(i).getInitialName(), league.getYear());
-                records.checkRecord("Rec TDs", getWR(i).statsTD, abbr + ": " + getWR(i).getInitialName(), league.getYear());
+                records.checkRecord("Rec TDs", getWR(i).statsRecTD, abbr + ": " + getWR(i).getInitialName(), league.getYear());
                 records.checkRecord("Catch Percent", (100 * getWR(i).statsReceptions) / (getWR(i).statsTargets + 1), abbr + ": " + getWR(i).getInitialName(), league.getYear());
         }
 
@@ -4162,7 +4157,7 @@ public class Team {
             } else if (p instanceof PlayerWR) {
                 PlayerWR wr = (PlayerWR) p;
                 records.checkRecord("Career Rec Yards", wr.statsRecYards + wr.careerRecYards, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Rec TDs", wr.statsTD + wr.careerTD, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Rec TDs", wr.statsRecTD + wr.careerTD, abbr + ": " + wr.getInitialName(), league.getYear() - 1);
             } else if (p instanceof PlayerTE) {
                 PlayerTE te = (PlayerTE) p;
                 records.checkRecord("Career Rec Yards", te.statsRecYards + te.careerRecYards, abbr + ": " + te.getInitialName(), league.getYear() - 1);
