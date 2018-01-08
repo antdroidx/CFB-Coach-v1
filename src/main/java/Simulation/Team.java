@@ -1879,7 +1879,7 @@ public class Team {
         int stars;
         int recruitChance;
         if (HC.get(0) != null) {
-            recruitChance = HC.get(0).ratTalent-45;
+            recruitChance = HC.get(0).ratTalent-40;
         } else {
             recruitChance = teamPrestige-50;
         }
