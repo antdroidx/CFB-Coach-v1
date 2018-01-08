@@ -1879,7 +1879,7 @@ public class Team {
         int stars;
         int recruitChance;
         if (HC.get(0) != null) {
-            recruitChance = HC.get(0).ratTalent-50;
+            recruitChance = HC.get(0).ratTalent-45;
         } else {
             recruitChance = teamPrestige-50;
         }
@@ -1887,7 +1887,7 @@ public class Team {
         for (int i = 0; i < qbNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1902,7 +1902,7 @@ public class Team {
         for (int i = 0; i < kNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1916,7 +1916,7 @@ public class Team {
         for (int i = 0; i < rbNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1930,7 +1930,7 @@ public class Team {
         for (int i = 0; i < wrNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1944,7 +1944,7 @@ public class Team {
         for (int i = 0; i < teNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1958,7 +1958,7 @@ public class Team {
         for (int i = 0; i < olNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1972,7 +1972,7 @@ public class Team {
         for (int i = 0; i < dlNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1986,7 +1986,7 @@ public class Team {
         for (int i = 0; i < lbNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -1999,7 +1999,7 @@ public class Team {
         for (int i = 0; i < cbNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);
@@ -2013,7 +2013,7 @@ public class Team {
         for (int i = 0; i < sNeeds; ++i) {
             stars = Math.round(teamPrestige / 10) + 1;
             if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance > Math.random()*50) {
+            if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
             } else {
                 stars -= Math.random()*(stars);

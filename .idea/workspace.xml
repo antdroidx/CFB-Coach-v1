@@ -111,28 +111,37 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+            <state relative-caret-position="-2443">
+              <caret line="2248" column="0" lean-forward="false" selection-start-line="2248" selection-start-column="0" selection-end-line="2248" selection-end-column="0" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#Game#0;class#Game#0" expanded="false" />
                 <element signature="method#Game#1;class#Game#0" expanded="false" />
                 <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
                 <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
-                <element signature="e#12842#12972#0" expanded="false" />
+                <element signature="method#runPlay#0;class#Game#0" expanded="false" />
+                <element signature="e#12905#13035#0" expanded="false" />
                 <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
                 <element signature="method#rushingPlay#0;class#Game#0" expanded="false" />
                 <element signature="method#passingPlayWR#0;class#Game#0" expanded="false" />
+                <element signature="e#33789#33801#0" expanded="false" />
                 <element signature="method#passingTD#0;class#Game#0" expanded="false" />
+                <element signature="method#passCompletion#0;class#Game#0" expanded="false" />
                 <element signature="method#passAttempt#0;class#Game#0" expanded="false" />
                 <element signature="method#passingPlayTE#0;class#Game#0" expanded="false" />
+                <element signature="e#44660#44672#0" expanded="false" />
                 <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
+                <element signature="method#passCompletionTE#0;class#Game#0" expanded="false" />
                 <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
                 <element signature="method#passingPlayRB#0;class#Game#0" expanded="false" />
+                <element signature="e#54848#54860#0" expanded="false" />
                 <element signature="method#passingTDRB#0;class#Game#0" expanded="false" />
+                <element signature="method#passCompletionRB#0;class#Game#0" expanded="false" />
                 <element signature="method#passAttemptRB#0;class#Game#0" expanded="false" />
                 <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
-                <element signature="e#59206#59291#0" expanded="false" />
+                <element signature="e#60491#60576#0" expanded="false" />
                 <element signature="method#qbSack#0;class#Game#0" expanded="false" />
+                <element signature="e#61633#61643#0" expanded="false" />
                 <element signature="method#safety#0;class#Game#0" expanded="false" />
                 <element signature="method#RushPlayRB#0;class#Game#0" expanded="false" />
                 <element signature="method#RushPlayQB#0;class#Game#0" expanded="false" />
@@ -148,77 +157,20 @@
                 <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
                 <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
                 <element signature="method#recoup#0;class#Game#0" expanded="false" />
-                <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-                <element signature="method#getEventPrefix#0;class#Game#0" expanded="false" />
-                <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-                <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
-                <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
-                <marker date="1515228137752" expanded="false" signature="32504:32556" ph="//..." />
-                <marker date="1515228137752" expanded="false" signature="43375:43427" ph="//..." />
-                <marker date="1515228137752" expanded="false" signature="53563:53615" ph="//..." />
-                <marker date="1515228137752" expanded="false" signature="60348:60443" ph="//..." />
+                <element signature="method#gameStatistics#0;class#Game#0" expanded="false" />
+                <element signature="e#105887#105888#0" expanded="true" />
+                <element signature="e#105950#105951#0" expanded="true" />
+                <marker date="1515385513797" expanded="false" signature="105991:109526" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="109564:110205" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="110247:110703" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="110745:111473" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="111554:111774" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="112037:117645" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="117691:119470" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="119517:121037" ph="{...}" />
+                <marker date="1515385513797" expanded="false" signature="121076:121087" ph=" { " />
+                <marker date="1515385513797" expanded="false" signature="121113:121119" ph=" }" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="924" column="22" lean-forward="false" selection-start-line="924" selection-start-column="22" selection-end-line="924" selection-end-column="22" />
-              <folding>
-                <element signature="e#23763#23920#0" expanded="true" />
-                <element signature="e#23919#23920#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="140" column="15" lean-forward="false" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
-              <folding>
-                <element signature="method#advanceHC#0;class#Team#0" expanded="false" />
-                <element signature="method#coachContracts#0;class#Team#0" expanded="false" />
-                <element signature="method#promoteCoach#0;class#Team#0" expanded="false" />
-                <element signature="method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="game_dialog.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_dialog.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="-32">
-              <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerCB.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -236,14 +188,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>promotion</find>
-      <find>promotionCan</find>
-      <find>int[7</find>
-      <find>Quarter</find>
-      <find>1800</find>
-      <find>gamePoss</find>
-      <find>gameTime</find>
-      <find>kickOff</find>
       <find>&amp;&amp; gamePoss</find>
       <find>selLB2</find>
       <find>11</find>
@@ -264,18 +208,18 @@
       <find>ratRunStop</find>
       <find>;</find>
       <find>Starter</find>
-      <find>home</find>
       <find>gamesPla</find>
+      <find>home</find>
+      <find>player.name</find>
+      <find>Rushing</find>
+      <find>QB</find>
+      <find>gameStrX</find>
+      <find>Integer.parseInt</find>
+      <find>INVISIBLE</find>
+      <find>VISIBLE</find>
+      <find>recruitChance &gt;</find>
     </findStrings>
     <replaceStrings>
-      <replace>recruitChance</replace>
-      <replace>cost = ratOvr*rbImportance + (int)Math.random()*recruitTolerance</replace>
-      <replace>cost = ratOvr*teImportance + (int)Math.random()*recruitTolerance;</replace>
-      <replace>cost = ratOvr*olImportance + (int)Math.random()*recruitTolerance;</replace>
-      <replace>cost = ratOvr*wrImportance + (int)Math.random()*recruitTolerance</replace>
-      <replace>cost = (int)((float)(ratOvr/100)*kImportance) + (int)Math.random()*recruitTolerance;</replace>
-      <replace>cost = (int)((float)(ratOvr/100)*wrImportance) + (int)Math.random()*recruitTolerance;</replace>
-      <replace>cost = (int)((float)(ratOvr/100)*teImportance) + (int)Math.random()*recruitTolerance;</replace>
       <replace>cost = (int)((float)(ratOvr/100)*qbImportance) + (int)Math.random()*recruitTolerance;</replace>
       <replace>cost = (int)((float)(ratOvr/100)*olImportance) + (int)Math.random()*recruitTolerance;</replace>
       <replace>cost = (int)((float)(ratOvr/100)*dlImportance) + (int)Math.random()*recruitTolerance;</replace>
@@ -298,6 +242,14 @@
       <replace>ratTackle</replace>
       <replace>= 0;</replace>
       <replace>away</replace>
+      <replace>player.getInitialName()</replace>
+      <replace>Receiving</replace>
+      <replace>Kick</replace>
+      <replace>VISIBLE</replace>
+      <replace>gameStr</replace>
+      <replace>Double.parseDouble</replace>
+      <replace>GONE</replace>
+      <replace>recruitChance*Math.random() &gt;</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1274,7 +1226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamCompDefTalent.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamCompPrestige.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Rankings.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamCompRecruit.java" />
@@ -1320,22 +1271,23 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerS.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerRB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GamePlaybyPlayLog.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1552" />
+    <option name="height" value="840" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages ProjectPane="false" />
       <showMembers ProjectPane="false" />
       <showModules />
@@ -1348,7 +1300,58 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CFB-Coach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CFB-Coach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CFB-Coach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CFB-Coach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CFB-Coach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CFB-Coach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cfbcoach" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -1472,7 +1475,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515228153875" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515386779386" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1520,7 +1523,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515228153876" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515386779387" />
       </method>
     </configuration>
     <configuration default="true" type="AppEngineRunConfiguration" factoryName="App Engine DevAppServer">
@@ -1726,7 +1729,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515228153877" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515386779388" />
       </method>
     </configuration>
     <list size="1">
@@ -1777,33 +1780,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1552" height="840" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21736205" sideWeight="0.15256125" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294643" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24759358" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46547884" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19421965" sideWeight="0.40405118" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19354838" sideWeight="0.40405118" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21736205" sideWeight="0.15256125" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6169265" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32628062" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24387528" sideWeight="0.47121534" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294643" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25213677" sideWeight="0.49498746" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.52665246" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24466269" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61358577" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24438503" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5682303" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24759358" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4648094" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.12666667" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1816,6 +1818,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61358577" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1878,7 +1881,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java</url>
-          <line>2503</line>
+          <line>2711</line>
           <properties />
           <option name="timeStamp" value="2275" />
         </line-breakpoint>
@@ -1895,7 +1898,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2341" />
+      <option name="time" value="2344" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -1918,76 +1921,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/widget/AdapterView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="160" column="18" lean-forward="false" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-346">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5338">
-          <caret line="302" column="24" lean-forward="false" selection-start-line="302" selection-start-column="24" selection-end-line="302" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompPlayerFGpct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompPlayerFGMade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompPlayerPassPCT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompPlayerPassInts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerDefense.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompPlayerFumblesRec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerOffense.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="402">
@@ -2073,14 +2006,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/HeadCoach.java">
@@ -2208,26 +2141,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerQB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6375">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-31014">
           <caret line="1841" column="12" lean-forward="false" selection-start-line="1841" selection-start-column="12" selection-end-line="1841" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompTeamSoS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2247,14 +2165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -2263,10 +2173,122 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/team_rankings_dialog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GamePlaybyPlayLog.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GameScheduleListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="21" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1258">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/widget/TextView.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="681" column="0" lean-forward="true" selection-start-line="681" selection-start-column="0" selection-end-line="681" selection-end-column="0" />
+          <folding>
+            <element signature="e#17986#17987#0" expanded="true" />
+            <element signature="e#18037#18038#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="70" column="19" lean-forward="false" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerQB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1479">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/CompTeamSoS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-171">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-188">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_dialog.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        <state relative-caret-position="-889">
+          <caret line="380" column="25" lean-forward="false" selection-start-line="380" selection-start-column="25" selection-end-line="380" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -2274,62 +2296,349 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1959">
+          <caret line="1081" column="67" lean-forward="false" selection-start-line="1081" selection-start-column="67" selection-end-line="1081" selection-end-column="67" />
+          <folding>
+            <element signature="e#118277#118278#0" expanded="false" />
+            <element signature="e#118674#118675#0" expanded="false" />
+            <marker date="1515385479707" expanded="false" signature="54262:54416" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="54479:54506" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="56952:56960" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="58180:58188" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="60169:60315" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="60370:60393" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="60608:60616" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="61241:61249" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="63033:63179" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="63234:63257" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="63472:63480" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="64256:64264" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="66004:66150" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="66205:66228" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="66933:67079" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="67134:67157" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="67589:67597" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="69878:70024" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="70079:70102" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="70317:70325" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="70695:70703" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="72481:72627" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="72682:72705" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="73111:73119" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="73742:73750" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="74858:75004" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="75059:75082" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="75444:75452" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="76766:76912" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="76967:76990" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="77384:77392" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="79483:79629" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="79684:79707" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="80071:80079" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="81273:81419" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="81474:81497" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="81712:81720" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="82845:82853" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="85294:85440" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="85495:85518" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="86907:86915" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="88078:88086" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="96497:96567" ph="(v) → {" />
+            <marker date="1515385479707" expanded="false" signature="96830:96845" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="96895:96965" ph="(v) → {" />
+            <marker date="1515385479707" expanded="false" signature="98883:98898" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="98946:99016" ph="(v) → {" />
+            <marker date="1515385479707" expanded="false" signature="99378:99524" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="99848:99871" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="99923:100069" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="100234:100257" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="100302:100317" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="100665:100819" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="100882:100909" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="100964:101118" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="101236:101263" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="101816:101981" ph="(buttonView, isChecked) → {" />
+            <marker date="1515385479707" expanded="false" signature="102077:102096" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="102165:102176" ph=" { " />
+            <marker date="1515385479707" expanded="false" signature="102200:102206" ph=" }" />
+            <marker date="1515385479707" expanded="false" signature="103091:103099" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="104760:104830" ph="(v) → {" />
+            <marker date="1515385479707" expanded="false" signature="104950:104965" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="105014:105084" ph="(v) → {" />
+            <marker date="1515385479707" expanded="false" signature="106175:106190" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="110588:110734" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="110788:110811" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="111764:111910" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="112981:113004" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="113405:113413" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="114946:114957" ph=" { " />
+            <marker date="1515385479707" expanded="false" signature="114976:114982" ph=" }" />
+            <marker date="1515385479707" expanded="false" signature="115418:115564" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="115790:115813" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="115860:116006" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="116061:116084" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="116614:116721" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="117611:117781" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="118367:118537" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="118988:119003" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="119050:119197" ph="(dialog, which) → { " />
+            <marker date="1515385479707" expanded="false" signature="119210:119234" ph=" }" />
+            <marker date="1515385479707" expanded="false" signature="120557:120703" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="120758:120781" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="120996:121004" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="121591:121599" ph="&lt;~&gt;" />
+            <marker date="1515385479707" expanded="false" signature="123948:124055" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="124822:124837" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="125689:125796" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="126554:126569" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="127665:127772" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="128835:128850" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="129836:129998" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="130082:130113" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="130246:130361" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="131634:131657" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="132350:132457" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="133229:133244" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="133564:133671" ph="(dialog, item) → {" />
+            <marker date="1515385479707" expanded="false" signature="134432:134447" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="136523:136593" ph="(v) → {" />
+            <marker date="1515385479707" expanded="false" signature="137138:137153" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="140939:141085" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="141426:141449" ph="}" />
+            <marker date="1515385479707" expanded="false" signature="141501:141647" ph="(dialog, which) → {" />
+            <marker date="1515385479707" expanded="false" signature="141989:142012" ph="}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="140" column="15" lean-forward="false" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
+        <state relative-caret-position="-565">
+          <caret line="1881" column="50" lean-forward="false" selection-start-line="1881" selection-start-column="50" selection-end-line="1881" selection-end-column="50" />
           <folding>
+            <element signature="docComment;method#Team#0;class#Team#0" expanded="false" />
+            <element signature="method#Team#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#Team#1;class#Team#0" expanded="false" />
+            <element signature="method#Team#1;class#Team#0" expanded="false" />
+            <element signature="method#setupTeamBenchmark#0;class#Team#0" expanded="false" />
+            <element signature="method#setupUserCoach#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#newRoster#0;class#Team#0" expanded="false" />
+            <element signature="method#newRoster#0;class#Team#0" expanded="false" />
+            <element signature="method#redshirtPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#newCustomHeadCoach#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#sortPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#sortPlayers#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updatePollScore#0;class#Team#0" expanded="false" />
+            <element signature="method#updatePollScore#0;class#Team#0" expanded="false" />
+            <element signature="method#updateSOS#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updateStrengthOfWins#0;class#Team#0" expanded="false" />
+            <element signature="method#updateStrengthOfWins#0;class#Team#0" expanded="false" />
+            <element signature="method#updateLossStrength#0;class#Team#0" expanded="false" />
+            <element signature="method#offenseRating#0;class#Team#0" expanded="false" />
+            <element signature="method#defenseRating#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updateTalentRatings#0;class#Team#0" expanded="false" />
+            <element signature="method#updateTalentRatings#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getOffTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getOffTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getOffSubTalent#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getDefTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getDefTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getDefSubTalent#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeFootIQ#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeFootIQ#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getTeamDiscipline#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamDiscipline#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getPassProf#0;class#Team#0" expanded="false" />
+            <element signature="method#getPassProf#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRushProf#0;class#Team#0" expanded="false" />
+            <element signature="method#getRushProf#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getPassDef#0;class#Team#0" expanded="false" />
+            <element signature="method#getPassDef#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRushDef#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeOLPass#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeOLPass#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeOLRush#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeOLRush#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeDLPass#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeDLPass#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeDLRush#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeDLRush#0;class#Team#0" expanded="false" />
+            <element signature="method#calcSeasonPrestige#0;class#Team#0" expanded="false" />
+            <element signature="e#38730#38747#0" expanded="false" />
+            <element signature="docComment;method#advanceSeason#0;class#Team#0" expanded="false" />
+            <element signature="method#advanceSeason#0;class#Team#0" expanded="false" />
             <element signature="method#advanceHC#0;class#Team#0" expanded="false" />
             <element signature="method#coachContracts#0;class#Team#0" expanded="false" />
             <element signature="method#promoteCoach#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
             <element signature="method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#getPlayersTransferring#0;class#Team#0" expanded="false" />
+            <element signature="e#59137#59156#0" expanded="false" />
+            <element signature="method#CPUrecruiting#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#recruitPlayersFreshman#0;class#Team#0" expanded="false" />
+            <marker date="1515386714201" expanded="false" signature="87591:87724" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="87758:92040" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="87786:87887" ph="//..." />
+            <marker date="1515386714201" expanded="false" signature="92080:92293" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="92343:92780" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="92830:93267" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="93317:93758" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="93808:94245" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="94295:94736" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="94784:95218" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="95268:95709" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="95759:96200" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="96250:96691" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="96739:97173" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="97180:97236" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="97294:97879" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="97885:98065" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="98133:116782" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="116789:116932" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="116972:117719" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="117757:118159" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="118166:118339" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="118382:121355" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="121361:121407" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="121437:122137" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="122144:122184" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="122221:123161" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="123200:124188" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="124194:124287" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="124329:124908" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="124946:125786" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="125833:126951" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="127048:127544" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="127582:127997" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="128003:128125" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="128159:128839" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="128932:129938" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="129944:130070" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="130109:131003" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="131009:131051" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="131082:131490" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="131566:131680" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="131729:132227" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="132266:132277" ph=" { " />
+            <marker date="1515386714201" expanded="false" signature="132294:132300" ph=" }" />
+            <marker date="1515386714201" expanded="false" signature="132339:132499" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="132538:132698" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="132737:132897" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="132936:133096" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="133133:133290" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="133329:133489" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="133528:133688" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="133727:133887" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="133926:134086" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="134123:134280" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="134289:134425" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="134465:137725" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="137731:137949" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="138004:138434" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="138440:138644" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="138682:141911" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="141918:142158" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="142213:143297" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="142262:142270" ph="&lt;~&gt;" />
+            <marker date="1515386714201" expanded="false" signature="143303:143553" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="143657:147039" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="143727:143749" ph="&lt;~&gt;" />
+            <marker date="1515386714201" expanded="false" signature="147088:148234" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="148240:148389" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="148428:148864" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="148870:149010" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="149057:150151" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="150157:150259" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="150286:150385" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="150419:150430" ph=" { " />
+            <marker date="1515386714201" expanded="false" signature="150477:150483" ph=" }" />
+            <marker date="1515386714201" expanded="false" signature="150524:150535" ph=" { " />
+            <marker date="1515386714201" expanded="false" signature="150583:150589" ph=" }" />
+            <marker date="1515386714201" expanded="false" signature="150595:150719" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="150749:151315" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="151321:151449" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="151481:152055" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="152137:152232" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="152238:152330" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="152357:152368" ph=" { " />
+            <marker date="1515386714201" expanded="false" signature="152413:152419" ph=" }" />
+            <marker date="1515386714201" expanded="false" signature="152425:152522" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="152565:152713" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="152719:152814" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="152854:152946" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="152981:152992" ph=" { " />
+            <marker date="1515386714201" expanded="false" signature="153031:153037" ph=" }" />
+            <marker date="1515386714201" expanded="false" signature="153043:153165" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="153201:153754" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="153760:153908" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="153950:154256" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="154262:154403" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="154450:154626" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="154632:154754" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="154804:155036" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="155042:155188" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="155233:155432" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="155475:155911" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="155920:156056" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="156101:160139" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="160145:160290" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="160333:167780" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="167787:167941" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="168012:172960" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="172966:173092" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="173147:173975" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="174083:174293" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="174363:174694" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="174727:174829" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="174835:174974" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="175024:175885" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="175892:176031" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="176081:177011" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="177018:177122" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="177157:177960" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="177967:178047" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="178106:184024" ph="{...}" />
+            <marker date="1515386714201" expanded="false" signature="184030:184151" ph="/**...*/" />
+            <marker date="1515386714201" expanded="false" signature="184210:189961" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="924" column="22" lean-forward="false" selection-start-line="924" selection-start-column="22" selection-end-line="924" selection-end-column="22" />
-          <folding>
-            <element signature="e#23763#23920#0" expanded="true" />
-            <element signature="e#23919#23920#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+        <state relative-caret-position="-2443">
+          <caret line="2248" column="0" lean-forward="false" selection-start-line="2248" selection-start-column="0" selection-end-line="2248" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#Game#1;class#Game#0" expanded="false" />
             <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
             <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
-            <element signature="e#12842#12972#0" expanded="false" />
+            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
+            <element signature="e#12905#13035#0" expanded="false" />
             <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
             <element signature="method#rushingPlay#0;class#Game#0" expanded="false" />
             <element signature="method#passingPlayWR#0;class#Game#0" expanded="false" />
+            <element signature="e#33789#33801#0" expanded="false" />
             <element signature="method#passingTD#0;class#Game#0" expanded="false" />
+            <element signature="method#passCompletion#0;class#Game#0" expanded="false" />
             <element signature="method#passAttempt#0;class#Game#0" expanded="false" />
             <element signature="method#passingPlayTE#0;class#Game#0" expanded="false" />
+            <element signature="e#44660#44672#0" expanded="false" />
             <element signature="method#passingTDTE#0;class#Game#0" expanded="false" />
+            <element signature="method#passCompletionTE#0;class#Game#0" expanded="false" />
             <element signature="method#passAttemptTE#0;class#Game#0" expanded="false" />
             <element signature="method#passingPlayRB#0;class#Game#0" expanded="false" />
+            <element signature="e#54848#54860#0" expanded="false" />
             <element signature="method#passingTDRB#0;class#Game#0" expanded="false" />
+            <element signature="method#passCompletionRB#0;class#Game#0" expanded="false" />
             <element signature="method#passAttemptRB#0;class#Game#0" expanded="false" />
             <element signature="method#qbInterception#0;class#Game#0" expanded="false" />
-            <element signature="e#59206#59291#0" expanded="false" />
+            <element signature="e#60491#60576#0" expanded="false" />
             <element signature="method#qbSack#0;class#Game#0" expanded="false" />
+            <element signature="e#61633#61643#0" expanded="false" />
             <element signature="method#safety#0;class#Game#0" expanded="false" />
             <element signature="method#RushPlayRB#0;class#Game#0" expanded="false" />
             <element signature="method#RushPlayQB#0;class#Game#0" expanded="false" />
@@ -2345,15 +2654,19 @@
             <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
             <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
             <element signature="method#recoup#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventPrefix#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
-            <marker date="1515228137752" expanded="false" signature="32504:32556" ph="//..." />
-            <marker date="1515228137752" expanded="false" signature="43375:43427" ph="//..." />
-            <marker date="1515228137752" expanded="false" signature="53563:53615" ph="//..." />
-            <marker date="1515228137752" expanded="false" signature="60348:60443" ph="//..." />
+            <element signature="method#gameStatistics#0;class#Game#0" expanded="false" />
+            <element signature="e#105887#105888#0" expanded="true" />
+            <element signature="e#105950#105951#0" expanded="true" />
+            <marker date="1515385513797" expanded="false" signature="105991:109526" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="109564:110205" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="110247:110703" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="110745:111473" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="111554:111774" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="112037:117645" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="117691:119470" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="119517:121037" ph="{...}" />
+            <marker date="1515385513797" expanded="false" signature="121076:121087" ph=" { " />
+            <marker date="1515385513797" expanded="false" signature="121113:121119" ph=" }" />
           </folding>
         </state>
       </provider>

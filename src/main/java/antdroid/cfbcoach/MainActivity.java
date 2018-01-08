@@ -910,12 +910,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showGameDialog(Game g) {
-        String[] gameStr;
+        final String[] gameStr;
         if (g.hasPlayed) {
             // Show game sumamry dialog
             gameStr = g.getGameSummaryStr();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
             builder.setTitle(g.awayTeam.abbr + " @ " + g.homeTeam.abbr + ": " + g.gameName)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -988,8 +989,215 @@ public class MainActivity extends AppCompatActivity {
             gameC.setText(gameStr[1]);
             final TextView gameR = dialog.findViewById(R.id.gameDialogRight);
             gameR.setText(gameStr[2]);
+
+            final TextView gameQL = dialog.findViewById(R.id.gameDialogQBLeft);
+            gameQL.setText(gameStr[3]);
+            final TextView gameQC = dialog.findViewById(R.id.gameDialogQBCenter);
+            gameQC.setText(gameStr[4]);
+            final TextView gameQR = dialog.findViewById(R.id.gameDialogQBRight);
+            gameQR.setText(gameStr[5]);
+
+            final TextView gameRL = dialog.findViewById(R.id.gameDialogRushLeft);
+            gameRL.setText(gameStr[6]);
+            final TextView gameRC = dialog.findViewById(R.id.gameDialogRushCenter);
+            gameRC.setText(gameStr[7]);
+            final TextView gameRR = dialog.findViewById(R.id.gameDialogRushRight);
+            gameRR.setText(gameStr[8]);
+
+            final TextView gameWL = dialog.findViewById(R.id.gameDialogRecLeft);
+            gameWL.setText(gameStr[9]);
+            final TextView gameWC = dialog.findViewById(R.id.gameDialogRecCenter);
+            gameWC.setText(gameStr[10]);
+            final TextView gameWR = dialog.findViewById(R.id.gameDialogRecRight);
+            gameWR.setText(gameStr[11]);
+            
+            final TextView gameDL = dialog.findViewById(R.id.gameDialogDefLeft);
+            gameDL.setText(gameStr[12]);
+            final TextView gameDC = dialog.findViewById(R.id.gameDialogDefCenter);
+            gameDC.setText(gameStr[13]);
+            final TextView gameDR = dialog.findViewById(R.id.gameDialogDefRight);
+            gameDR.setText(gameStr[14]);
+
+            final TextView gameKL = dialog.findViewById(R.id.gameDialogKickLeft);
+            gameKL.setText(gameStr[15]);
+            final TextView gameKC = dialog.findViewById(R.id.gameDialogKickCenter);
+            gameKC.setText(gameStr[16]);
+            final TextView gameKR = dialog.findViewById(R.id.gameDialogKickRight);
+            gameKR.setText(gameStr[17]);
+            
             final TextView gameB = dialog.findViewById(R.id.gameDialogBottom);
-            gameB.setText(gameStr[3] + "\n\n");
+            gameB.setText(gameStr[18] + "\n\n");
+
+            String[] selection;
+            selection = new String[5];
+            selection[0] = "Game Summary";
+            selection[1] = "Offense Stats";
+            selection[2] = "Defense Stats";
+            selection[3] = "Special Teams Stats";
+            selection[4] = "Game Play Log";
+
+            Spinner potySpinner = dialog.findViewById(R.id.boxscoreMenu);
+            final ArrayAdapter<String> boxMenu = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, selection);
+            boxMenu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            potySpinner.setAdapter(boxMenu);
+
+            potySpinner.setOnItemSelectedListener(
+                    new AdapterView.OnItemSelectedListener() {
+                        public void onItemSelected(
+                                AdapterView<?> parent, View view, int position, long id) {
+                            if (position == 0) {
+                                //Show Summary Only
+                                
+                                gameQL.setVisibility(View.GONE);
+                                gameQC.setVisibility(View.GONE);
+                                gameQR.setVisibility(View.GONE);
+
+                                gameRL.setVisibility(View.GONE);
+                                gameRC.setVisibility(View.GONE);
+                                gameRR.setVisibility(View.GONE);
+
+                                gameWL.setVisibility(View.GONE);
+                                gameWC.setVisibility(View.GONE);
+                                gameWR.setVisibility(View.GONE);
+
+                                gameDL.setVisibility(View.GONE);
+                                gameDC.setVisibility(View.GONE);
+                                gameDR.setVisibility(View.GONE);
+
+                                gameKL.setVisibility(View.GONE);
+                                gameKC.setVisibility(View.GONE);
+                                gameKR.setVisibility(View.GONE);
+                                
+                                gameB.setVisibility(View.GONE);
+
+                            } else if (position == 1) {
+                                //Show Summary + Offense Stats
+
+                                gameQL.setVisibility(View.VISIBLE);
+                                gameQC.setVisibility(View.VISIBLE);
+                                gameQR.setVisibility(View.VISIBLE);
+
+                                gameRL.setVisibility(View.VISIBLE);
+                                gameRC.setVisibility(View.VISIBLE);
+                                gameRR.setVisibility(View.VISIBLE);
+
+                                gameWL.setVisibility(View.VISIBLE);
+                                gameWC.setVisibility(View.VISIBLE);
+                                gameWR.setVisibility(View.VISIBLE);
+
+                                gameDL.setVisibility(View.GONE);
+                                gameDC.setVisibility(View.GONE);
+                                gameDR.setVisibility(View.GONE);
+
+                                gameKL.setVisibility(View.GONE);
+                                gameKC.setVisibility(View.GONE);
+                                gameKR.setVisibility(View.GONE);
+                                gameB.setVisibility(View.GONE);
+
+                            } else if (position == 2) {
+                                //Show Summary + Defense Stats
+
+                                gameQL.setVisibility(View.GONE);
+                                gameQC.setVisibility(View.GONE);
+                                gameQR.setVisibility(View.GONE);
+
+                                gameRL.setVisibility(View.GONE);
+                                gameRC.setVisibility(View.GONE);
+                                gameRR.setVisibility(View.GONE);
+
+                                gameWL.setVisibility(View.GONE);
+                                gameWC.setVisibility(View.GONE);
+                                gameWR.setVisibility(View.GONE);
+
+                                gameDL.setVisibility(View.VISIBLE);
+                                gameDC.setVisibility(View.VISIBLE);
+                                gameDR.setVisibility(View.VISIBLE);
+
+                                gameKL.setVisibility(View.GONE);
+                                gameKC.setVisibility(View.GONE);
+                                gameKR.setVisibility(View.GONE);
+                                gameB.setVisibility(View.GONE);
+
+                            } else if (position == 3) {
+                                //Show Summary + Specical Teams Stats
+
+                                gameQL.setVisibility(View.GONE);
+                                gameQC.setVisibility(View.GONE);
+                                gameQR.setVisibility(View.GONE);
+
+                                gameRL.setVisibility(View.GONE);
+                                gameRC.setVisibility(View.GONE);
+                                gameRR.setVisibility(View.GONE);
+
+                                gameWL.setVisibility(View.GONE);
+                                gameWC.setVisibility(View.GONE);
+                                gameWR.setVisibility(View.GONE);
+
+                                gameDL.setVisibility(View.GONE);
+                                gameDC.setVisibility(View.GONE);
+                                gameDR.setVisibility(View.GONE);
+
+                                gameKL.setVisibility(View.VISIBLE);
+                                gameKC.setVisibility(View.VISIBLE);
+                                gameKR.setVisibility(View.VISIBLE);
+                                gameB.setVisibility(View.GONE);
+
+                            } else if (position == 4) {
+                                //Show Summary + Play by Play
+
+                                gameQL.setVisibility(View.GONE);
+                                gameQC.setVisibility(View.GONE);
+                                gameQR.setVisibility(View.GONE);
+
+                                gameRL.setVisibility(View.GONE);
+                                gameRC.setVisibility(View.GONE);
+                                gameRR.setVisibility(View.GONE);
+
+                                gameWL.setVisibility(View.GONE);
+                                gameWC.setVisibility(View.GONE);
+                                gameWR.setVisibility(View.GONE);
+
+                                gameDL.setVisibility(View.GONE);
+                                gameDC.setVisibility(View.GONE);
+                                gameDR.setVisibility(View.GONE);
+
+                                gameKL.setVisibility(View.GONE);
+                                gameKC.setVisibility(View.GONE);
+                                gameKR.setVisibility(View.GONE);
+
+                                gameB.setVisibility(View.VISIBLE);
+
+                            } else {
+
+                                gameQL.setVisibility(View.GONE);
+                                gameQC.setVisibility(View.GONE);
+                                gameQR.setVisibility(View.GONE);
+
+                                gameRL.setVisibility(View.GONE);
+                                gameRC.setVisibility(View.GONE);
+                                gameRR.setVisibility(View.GONE);
+
+                                gameWL.setVisibility(View.GONE);
+                                gameWC.setVisibility(View.GONE);
+                                gameWR.setVisibility(View.GONE);
+
+                                gameDL.setVisibility(View.GONE);
+                                gameDC.setVisibility(View.GONE);
+                                gameDR.setVisibility(View.GONE);
+
+                                gameKL.setVisibility(View.GONE);
+                                gameKC.setVisibility(View.GONE);
+                                gameKR.setVisibility(View.GONE);
+
+                                gameB.setVisibility(View.GONE);
+                            }
+                        }
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            // do nothing
+                        }
+                    });
+
 
 
 

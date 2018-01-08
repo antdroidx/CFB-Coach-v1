@@ -16,6 +16,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <Spinner
+                android:id="@+id/boxscoreMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="?android:attr/colorPrimary"
+                android:padding="5dp"
+                android:textAlignment="center" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -365,52 +374,251 @@
 
             </TableLayout>
 
-            <RelativeLayout
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10sp">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/gameDialogLeft"
-                    android:layout_width="90.0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="21dp"
-                    android:layout_weight="1.0"
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="ha1"
-                    android:textAlignment="gravity"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/gameDialogCenter"
-                    android:layout_width="110.0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1.0"
+                    <TextView
+                        android:id="@+id/gameDialogLeft"
+                        android:layout_width="90.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:text="Summary"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gameDialogCenter"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/gameDialogLeft"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:text="Home Summary"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/gameDialogRight"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_toRightOf="@id/gameDialogCenter"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:text="Away Summary"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="ha3"
-                    android:textAlignment="gravity"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/gameDialogLeft" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/gameDialogRight"
-                    android:layout_width="110.0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_toRightOf="@id/gameDialogCenter"
-                    android:layout_weight="1.0"
+                    <TextView
+                        android:id="@+id/gameDialogQBLeft"
+                        android:layout_width="90.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_weight="1.0"
+                        android:text="Passing"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gameDialogQBCenter"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1.0"
+                        android:text="Home Passing"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/gameDialogQBRight"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="Away Passing"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="ha3"
-                    android:textAlignment="gravity"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </RelativeLayout>
+                    android:orientation="horizontal">
 
-            <TextView
+                    <TextView
+                        android:id="@+id/gameDialogRushLeft"
+                        android:layout_width="90.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_weight="1.0"
+                        android:text="Rushing"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gameDialogRushCenter"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1.0"
+                        android:text="Home Rushing"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/gameDialogRushRight"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="Away Rushing"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/gameDialogRecLeft"
+                        android:layout_width="90.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_weight="1.0"
+                        android:text="Receiving"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gameDialogRecCenter"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1.0"
+                        android:text="Home Receiving"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/gameDialogRecRight"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="Away Receiving"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/gameDialogDefLeft"
+                        android:layout_width="90.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_weight="1.0"
+                        android:text="Defense"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gameDialogDefCenter"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1.0"
+                        android:text="Home Defense"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/gameDialogDefRight"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="Away Defense"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/gameDialogKickLeft"
+                        android:layout_width="90.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_weight="1.0"
+                        android:text="Kicking"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gameDialogKickCenter"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1.0"
+                        android:text="Home Kicking"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/gameDialogKickRight"
+                        android:layout_width="110.0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="Away Kicking"
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+            </TableLayout>
+
+
+
+    <TextView
                 android:id="@+id/gameDialogBottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -418,7 +626,7 @@
                 android:gravity="center"
                 android:paddingEnd="3dp"
                 android:paddingStart="3dp"
-                android:text="ha3"
+                android:text="Play by Play"
                 android:textAlignment="gravity"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
