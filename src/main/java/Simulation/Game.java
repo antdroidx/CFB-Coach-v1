@@ -2110,8 +2110,8 @@ public class Game implements Serializable {
             String[] stats = awayPassingStats.get(i).split(",");
             gamePC.append(stats[0] + "\n" + stats[3] + "\n" + stats[4] + "/" + stats[5] + "\n" + stats[6] + "\n" + stats[7] + "\n" + stats[8] + "\n" + getPasserRating(Integer.parseInt(stats[3]), Integer.parseInt(stats[6]), Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Integer.parseInt(stats[7])) + "\n\n");
         }
-        for (int i = 0; i < awayPassingStats.size(); ++i) {
-            String[] stats = awayPassingStats.get(i).split(",");
+        for (int i = 0; i < homePassingStats.size(); ++i) {
+            String[] stats = homePassingStats.get(i).split(",");
             gamePR.append(stats[0] + "\n" + stats[3] + "\n" + stats[4] + "/" + stats[5] + "\n" + stats[6] + "\n" + stats[7] + "\n" + stats[8] + "\n" + getPasserRating(Integer.parseInt(stats[3]), Integer.parseInt(stats[6]), Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Integer.parseInt(stats[7])) + "\n\n");
         }
 
