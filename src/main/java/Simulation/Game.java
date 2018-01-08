@@ -66,7 +66,7 @@ public class Game implements Serializable {
     private int timePerPlay = 22; //affects snaps per game!
     private int intValue = 150; //higher less ints
     private int sackValue = 200; //higher less sacks
-    private int compValue = 135; //higher more completions
+    private int compValue = 150; //higher more completions
     private int fatigueDropHigh = 9;
     private int fatigueDropMed = 6;
     private int fatigueDropLow = 3;
@@ -471,6 +471,7 @@ public class Game implements Serializable {
         PlayerQB selQB;
         PlayerRB selRB;
         PlayerWR selWR;
+        PlayerWR selWR2;
         PlayerTE selTE;
         PlayerDL selDL;
         PlayerLB selLB;
@@ -601,6 +602,7 @@ public class Game implements Serializable {
         selRB = RunningBack.get(0);
         selTE = TightEnd.get(0);
         selWR = WideReceiver.get(0);
+        selWR2 = WideReceiver.get(1);
         selDL = DLineman.get(0);
         selLB = Linebacker.get(0);
         selLB2 = Linebacker.get(1);
@@ -617,12 +619,13 @@ public class Game implements Serializable {
         //Fatigue selected Action Players
         selRB.gameFatigue -= Math.round((100 - selRB.ratDur) / 10);
         selWR.gameFatigue -= fatigueDropHigh + Math.round((100 - selWR.ratDur) / 10);
+        selWR2.gameFatigue -= fatigueDropMed + Math.round((100 - selWR.ratDur) / 10);
         selTE.gameFatigue -= fatigueDropHigh + Math.round((100 - selTE.ratDur) / 10);
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
         selLB.gameFatigue -= fatigueDropLow + Math.round((100 - selLB.ratDur) / 10);
         selLB2.gameFatigue -= Math.round((100 - selLB2.ratDur) / 10);
         selCB.gameFatigue -= fatigueDropMed + Math.round((100 - selCB.ratDur) / 10);
-        selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
+        selS.gameFatigue -= fatigueDropHigh + Math.round((100 - selS.ratDur) / 10);
 
         String pos = receiver.get(0).position;
 
@@ -763,8 +766,7 @@ public class Game implements Serializable {
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
         selLB.gameFatigue -= fatigueDropLow + Math.round((100 - selLB.ratDur) / 10);
         selCB.gameFatigue -= Math.round((100 - selCB.ratDur) / 10);
-        selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
-
+        selS.gameFatigue -= fatigueDropHigh + Math.round((100 - selS.ratDur) / 10);
 
         RushPlay(offense, defense, selQB, selRB, selTE, selDL, selLB, selCB, selS);
 
@@ -824,7 +826,7 @@ public class Game implements Serializable {
                         selDL.gameSim = selDL.ratPassRush * Math.random() * 15;
                         selCB.gameSim = selCB.ratCoverage * Math.random() * 80;
                         selS.gameSim = selS.ratCoverage * Math.random() * 50;
-                        selLB.gameSim = selLB.ratCoverage * Math.random() * 50;
+                        selLB.gameSim = selLB.ratCoverage * Math.random() * 70;
                     }
 
                     recordInterception(offense, selQB, selDL, selLB, selCB, selS);
@@ -1391,10 +1393,10 @@ public class Game implements Serializable {
         if (yardsGain < 2 && !gotTD) {
             selDL.gameTackles++;
             selDL.statsTackles++;
-        } else if (yardsGain >= 2 && yardsGain < 11 && !gotTD) {
+        } else if (yardsGain >= 2 && yardsGain < 12 && !gotTD) {
             selLB.gameTackles++;
             selLB.statsTackles++;
-        } else if (yardsGain >= 11 && !gotTD) {
+        } else if (yardsGain >= 12 && !gotTD) {
             if (selCB.ratTackle * Math.random() * 50 >= selS.ratTackle * Math.random() * 100) {
                 selCB.gameTackles++;
                 selCB.statsTackles++;
