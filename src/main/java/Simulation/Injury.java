@@ -44,10 +44,10 @@ public class Injury {
             player.isMedicalRS = true;
             duration = 26;
             if (player.team.userControlled) {
-                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Medical Redshirt>" + player.name + " sustained a major " + description + " injury and will be out for the season. A medical redshirt has been granted.");
+                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Medical Redshirt>" + player.team.name + " " + player.position + " " + player.name + " sustained a major " + description + " injury and will be out for the season. A medical redshirt has been granted.");
             }
             if (!player.team.userControlled && player.ratOvr > 79) {
-                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Medical Redshirt>" + player.name + " sustained a major " + description + " injury and will be out for the season. A medical redshirt has been granted.");
+                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Medical Redshirt>"  + player.team.name + " " + player.position + " " + player.name + " sustained a major " + description + " injury and will be out for the season. A medical redshirt has been granted.");
             }
         }
 

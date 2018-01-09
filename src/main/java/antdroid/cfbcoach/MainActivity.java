@@ -345,7 +345,20 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setText("Off-Season: Transfer Players II");
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek == 21) {
-                        showNewsStoriesDialog();
+                        //showNewsStoriesDialog();
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                        builder1.setMessage(simLeague.sumTransfers)
+                                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Transfers")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                        AlertDialog dialog1 = builder1.create();
+                        dialog1.show();
+                        TextView textView1 = dialog1.findViewById(android.R.id.message);
+                        textView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setMessage(simLeague.userTransfers)
