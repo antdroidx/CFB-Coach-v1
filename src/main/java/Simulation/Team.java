@@ -881,10 +881,6 @@ public class Team {
 
     }
 
-    public int getDefSubTalent() {
-        return ( (getDL(4).ratOvr + getDL(5).ratOvr + getLB(3).ratOvr + getCB(4).ratOvr + getCB(5).ratOvr + getS(1).ratOvr) / 6);
-    }
-
     /**
      * Get the composite Football IQ of the team. Is used in game simulation.
      *
@@ -1507,7 +1503,7 @@ public class Team {
                 }
                 playersTransferring.add(teamQBs.get(i));
                 league.transferQBs.add(teamQBs.get(i));
-                league.tQBs.add(name);
+                league.tQBs.add(abbr);
                 teamQBs.remove(i);
             }
             ++i;
@@ -1535,7 +1531,7 @@ public class Team {
                     }
                     playersTransferring.add(teamRBs.get(i));
                     league.transferRBs.add(teamRBs.get(i));
-                    league.tRBs.add(name);
+                    league.tRBs.add(abbr);
                     teamRBs.remove(i);
                 }
             }
@@ -1564,7 +1560,7 @@ public class Team {
                     }
                     playersTransferring.add(teamWRs.get(i));
                     league.transferWRs.add(teamWRs.get(i));
-                    league.tWRs.add(name);
+                    league.tWRs.add(abbr);
                     teamWRs.remove(i);
                 }
             }
@@ -1592,7 +1588,7 @@ public class Team {
                 }
                 playersTransferring.add(teamTEs.get(i));
                 league.transferTEs.add(teamTEs.get(i));
-                league.tTEs.add(name);
+                league.tTEs.add(abbr);
                 teamTEs.remove(i);
             }
             ++i;
@@ -1620,7 +1616,7 @@ public class Team {
                     }
                     playersTransferring.add(teamOLs.get(i));
                     league.transferOLs.add(teamOLs.get(i));
-                    league.tOLs.add(name);
+                    league.tOLs.add(abbr);
                     teamOLs.remove(i);
                 }
             }
@@ -1648,7 +1644,7 @@ public class Team {
                 }
                 playersTransferring.add(teamKs.get(i));
                 league.transferKs.add(teamKs.get(i));
-                league.tKs.add(name);
+                league.tKs.add(abbr);
                 teamKs.remove(i);
             }
             ++i;
@@ -1676,7 +1672,7 @@ public class Team {
                     }
                     playersTransferring.add(teamDLs.get(i));
                     league.transferDLs.add(teamDLs.get(i));
-                    league.tDLs.add(name);
+                    league.tDLs.add(abbr);
                     teamDLs.remove(i);
                 }
             }
@@ -1705,7 +1701,7 @@ public class Team {
                     }
                     playersTransferring.add(teamLBs.get(i));
                     league.transferLBs.add(teamLBs.get(i));
-                    league.tLBs.add(name);
+                    league.tLBs.add(abbr);
                     teamLBs.remove(i);
                 }
             }
@@ -1734,7 +1730,7 @@ public class Team {
                     }
                     playersTransferring.add(teamCBs.get(i));
                     league.transferCBs.add(teamCBs.get(i));
-                    league.tCBs.add(name);
+                    league.tCBs.add(abbr);
                     teamCBs.remove(i);
                 }
             }
@@ -1762,7 +1758,7 @@ public class Team {
                 }
                 playersTransferring.add(teamSs.get(i));
                 league.transferSs.add(teamSs.get(i));
-                league.tSs.add(name);
+                league.tSs.add(abbr);
                 teamSs.remove(i);
             }
             ++i;

@@ -109,6 +109,9 @@ public class League extends Rankings {
     public ArrayList<PlayerCB> transferCBs;
     public ArrayList<PlayerS> transferSs;
     public String userTransfers;
+    public String sumTransfers;
+    public ArrayList<String> transfersList;
+    public ArrayList<Player> transfersPlayers;
 
     public ArrayList<Player> freshman;
     public ArrayList<Player> redshirts;
@@ -2911,11 +2914,17 @@ public class League extends Rankings {
         Random random = new Random();
         int max = 119;
         int min = 0;
+
+        //Transfer List Summary Builder
+        transfersList = new ArrayList<>();
+
+        //User Transfer Pop Up Dialog Builder
         userTransfers = "";
         StringBuilder tOut = new StringBuilder();
         StringBuilder tIn = new StringBuilder();
         tOut.append("Transfers Out:\n\n");
         tIn.append("Transfers In:\n\n");
+
 
         for (int loc = 1; loc < 4; ++loc) {
             
@@ -2938,9 +2947,11 @@ public class League extends Rankings {
                                 if (teamList.get(t).equals(userTeam) && !transferQBs.get(i).isTransfer) {
                                     tIn.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferQBs.get(i).ratOvr + " (" + tQBs.get(i) + ")\n\n");
                                 }
-                                if (tQBs.get(i).toString().equals(userTeam.name)) {
+                                if (tQBs.get(i).toString().equals(userTeam.abbr)) {
                                     tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                                 }
+                                
+                                transfersList.add(transferQBs.get(i).ratOvr + " " + transferQBs.get(i).position + " " + transferQBs.get(i).name + " [" + transferQBs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tQBs.get(i).toString() + ")");
                                 transferQBs.remove(i);
                                 tQBs.remove(i);
                                 break;
@@ -2964,9 +2975,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferRBs.get(i).isTransfer) {
                                 tIn.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferRBs.get(i).ratOvr + " (" + tRBs.get(i) + ")\n\n");
                             }
-                            if (tRBs.get(i).toString().equals(userTeam.name)) {
+                            if (tRBs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferRBs.get(i).ratOvr + " " + transferRBs.get(i).position + " " + transferRBs.get(i).name  + " [" + transferRBs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tRBs.get(i).toString() + ")");
                             transferRBs.remove(i);
                             tRBs.remove(i);
                             break;
@@ -2989,9 +3002,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferWRs.get(i).isTransfer) {
                                 tIn.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferWRs.get(i).ratOvr + " (" + tWRs.get(i) + ")\n\n");
                             }
-                            if (tWRs.get(i).toString().equals(userTeam.name)) {
+                            if (tWRs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferWRs.get(i).ratOvr + " " + transferWRs.get(i).position + " " + transferWRs.get(i).name  + " [" +  transferWRs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tWRs.get(i).toString() + ")");
                             transferWRs.remove(i);
                             tWRs.remove(i);
                             break;
@@ -3014,9 +3029,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferTEs.get(i).isTransfer) {
                                 tIn.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferTEs.get(i).ratOvr + " (" + tTEs.get(i) + ")\n\n");
                             }
-                            if (tTEs.get(i).toString().equals(userTeam.name)) {
+                            if (tTEs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferTEs.get(i).ratOvr + " " + transferTEs.get(i).position + " " + transferTEs.get(i).name  + " [" +  transferTEs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tTEs.get(i).toString() + ")");
                             transferTEs.remove(i);
                             tTEs.remove(i);
                             break;
@@ -3038,9 +3055,11 @@ public class League extends Rankings {
                         if (teamList.get(t).equals(userTeam) && !transferOLs.get(i).isTransfer) {
                             tIn.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferOLs.get(i).ratOvr + " (" + tOLs.get(i) + ")\n\n");
                         }
-                        if (tOLs.get(i).toString().equals(userTeam.name)) {
+                        if (tOLs.get(i).toString().equals(userTeam.abbr)) {
                             tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                         }
+
+                        transfersList.add(transferOLs.get(i).ratOvr + " " + transferOLs.get(i).position + " " + transferOLs.get(i).name  + " [" +  transferOLs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tOLs.get(i).toString() + ")");
                         transferOLs.remove(i);
                         tOLs.remove(i);
                         break;
@@ -3063,9 +3082,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferKs.get(i).isTransfer) {
                                 tIn.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferKs.get(i).ratOvr + " (" + tKs.get(i) + ")\n\n");
                             }
-                            if (tKs.get(i).toString().equals(userTeam.name)) {
+                            if (tKs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferKs.get(i).ratOvr + " " + transferKs.get(i).position + " " + transferKs.get(i).name  + " [" +  transferKs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tKs.get(i).toString() + ")");
                             transferKs.remove(i);
                             tKs.remove(i);
                             break;
@@ -3088,9 +3109,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferDLs.get(i).isTransfer) {
                                 tIn.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferDLs.get(i).ratOvr + " (" + tDLs.get(i) + ")\n\n");
                             }
-                            if (tDLs.get(i).toString().equals(userTeam.name)) {
+                            if (tDLs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferDLs.get(i).ratOvr + " " + transferDLs.get(i).position + " " + transferDLs.get(i).name  + " [" +  transferDLs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tDLs.get(i).toString() + ")");
                             transferDLs.remove(i);
                             tDLs.remove(i);
                             break;
@@ -3113,9 +3136,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferLBs.get(i).isTransfer) {
                                 tIn.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferLBs.get(i).ratOvr + " (" + tLBs.get(i) + ")\n\n");
                             }
-                            if (tLBs.get(i).toString().equals(userTeam.name)) {
+                            if (tLBs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferLBs.get(i).ratOvr + " " + transferLBs.get(i).position + " " + transferLBs.get(i).name  + " [" +  transferLBs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tLBs.get(i).toString() + ")");
                             transferLBs.remove(i);
                             tLBs.remove(i);
                             break;
@@ -3138,9 +3163,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferCBs.get(i).isTransfer) {
                                 tIn.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferCBs.get(i).ratOvr + " (" + tCBs.get(i) + ")\n\n");
                             }
-                            if (tCBs.get(i).toString().equals(userTeam.name)) {
+                            if (tCBs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferCBs.get(i).ratOvr + " " + transferCBs.get(i).position + " " + transferCBs.get(i).name  + " [" +  transferCBs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tCBs.get(i).toString() + ")");
                             transferCBs.remove(i);
                             tCBs.remove(i);
                             break;
@@ -3163,9 +3190,11 @@ public class League extends Rankings {
                             if (teamList.get(t).equals(userTeam) && !transferSs.get(i).isTransfer) {
                                 tIn.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + " [Grad]" + "  Ovr: " + transferSs.get(i).ratOvr + " (" + tSs.get(i) + ")\n\n");
                             }
-                            if (tSs.get(i).toString().equals(userTeam.name)) {
+                            if (tSs.get(i).toString().equals(userTeam.abbr)) {
                                 tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (" + teamList.get(t).name + ")\n\n");
                             }
+
+                            transfersList.add(transferSs.get(i).ratOvr + " " + transferSs.get(i).position + " " + transferSs.get(i).name  + " [" +  transferSs.get(i).getYrStr() + "] " + teamList.get(t).name + " (" + tSs.get(i).toString() + ")");
                             transferSs.remove(i);
                             tSs.remove(i);
                             break;
@@ -3175,63 +3204,76 @@ public class League extends Rankings {
             }
         }
 
+        //The remaining user players transfer to FCS/Div II Football
+
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).sortPlayers();
         }
         
         for (int i = 0; i < transferQBs.size(); ++i) {
-            if (tQBs.get(i).toString().equals(userTeam.name)) {
+            if (tQBs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferRBs.size(); ++i) {
-            if (tRBs.get(i).toString().equals(userTeam.name)) {
+            if (tRBs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferWRs.size(); ++i) {
-            if (tWRs.get(i).toString().equals(userTeam.name)) {
+            if (tWRs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferTEs.size(); ++i) {
-            if (tTEs.get(i).toString().equals(userTeam.name)) {
+            if (tTEs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferOLs.size(); ++i) {
-            if (tOLs.get(i).toString().equals(userTeam.name)) {
+            if (tOLs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferKs.size(); ++i) {
-            if (tKs.get(i).toString().equals(userTeam.name)) {
+            if (tKs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferDLs.size(); ++i) {
-            if (tDLs.get(i).toString().equals(userTeam.name)) {
+            if (tDLs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferLBs.size(); ++i) {
-            if (tLBs.get(i).toString().equals(userTeam.name)) {
+            if (tLBs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferCBs.size(); ++i) {
-            if (tCBs.get(i).toString().equals(userTeam.name)) {
+            if (tCBs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
         for (int i = 0; i < transferSs.size(); ++i) {
-            if (tSs.get(i).toString().equals(userTeam.name)) {
+            if (tSs.get(i).toString().equals(userTeam.abbr)) {
                 tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (Div II)\n\n");
             }
         }
 
         userTransfers = tIn + "\n" + tOut;
         newsStories.get(currentWeek+1).add("User Team Transfers>" + userTransfers);
+
+        Collections.sort(transfersList, Collections.<String>reverseOrder());
+        StringBuilder transferSum = new StringBuilder();
+
+        for(int i = 0; i < transfersList.size(); ++i) {
+            transferSum.append(transfersList.get(i).toString() + "\n\n");
+        }
+
+        newsStories.get(currentWeek+1).add("Transfers Summary>" + transferSum);
+        sumTransfers = "" + transferSum;
+
     }
 
     /*  IDEA: Conference Invites - Switch teams around with partner conference if criteria met:

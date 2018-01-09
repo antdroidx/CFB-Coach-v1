@@ -2100,11 +2100,11 @@ public class Game implements Serializable {
 
         if (homePassingStats.size() >= awayPassingStats.size()) {
             for (int i = 0; i < homePassingStats.size(); ++i) {
-                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TD:" + "\nInterceptions:" + "\nSacks:" + "\nRating:" + "\n\n");
+                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TD:" + "\nPass Ints:" + "\nSacks:" + "\nRating:" + "\n\n");
             }
         } else {
             for (int i = 0; i < awayPassingStats.size(); ++i) {
-                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TD:" + "\nInterceptions:" + "\nSacks:" + "\nRating:" + "\n\n");
+                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TD:" + "\nPass Ints:" + "\nSacks:" + "\nRating:" + "\n\n");
             }
         }
 
@@ -2408,7 +2408,6 @@ public class Game implements Serializable {
             return rating;
         }
     }
-
 
     public void addNewsStory() {
 
