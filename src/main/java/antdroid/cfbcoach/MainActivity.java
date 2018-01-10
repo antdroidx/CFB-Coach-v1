@@ -503,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
         playerStatsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                if (simLeague.currentWeek < 19) {
+                if (simLeague.currentWeek < 18) {
                     currTab = 1;
                     updatePlayerStats();
                 }
@@ -556,7 +556,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 currentTeam = userTeam;
-                if (simLeague.currentWeek < 19) showTeamLineupDialog();
+                if (simLeague.currentWeek < 18) showTeamLineupDialog();
             }
         });
 
@@ -627,7 +627,7 @@ public class MainActivity extends AppCompatActivity {
               Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
-        } else if (id == R.id.action_player_rankings) {
+        } else if (id == R.id.action_player_rankings && simLeague.currentWeek < 18) {
 
             showPlayerRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
@@ -2623,7 +2623,7 @@ public class MainActivity extends AppCompatActivity {
                 userTeam.HC.add(userHC);
                 userTeam.fired = false;
                 userHC.contractYear = 0;
-                userHC.contractLength = 4;
+                userHC.contractLength = 6;
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 updateTeamUI();
                 examineTeam(currentTeam.name);
