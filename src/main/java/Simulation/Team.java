@@ -1875,7 +1875,7 @@ public class Team {
         int stars;
         int recruitChance;
         if (HC.get(0) != null) {
-            recruitChance = HC.get(0).ratTalent-40;
+            recruitChance = HC.get(0).ratTalent-35;
         } else {
             recruitChance = teamPrestige-50;
         }
@@ -4043,14 +4043,19 @@ public class Team {
             int allAmer = p.careerAllAmerican + (p.wonAllAmerican ? 1 : 0);
             int poty = p.careerHeismans + (p.wonHeisman ? 1 : 0);
             int score = 10*allConf + 25*allAmer + 50*poty;
-            if ( score > 74 ) {
+            int statScore = p.getCareerScore();
+            int totalScore = 10*score + statScore;
+            int avgScore = totalScore / (p.year-1);
+            if ( score > 74 || statScore > 25000 || totalScore > 30000 || avgScore > 7000) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
                 sb.append(p.getPosNameYrOvr_Str() + "&");
+                sb.append("HoF Score: " + totalScore + " (" + score + ")> ");
                 for (String s : careerStats) {
                     sb.append(s + "&");
                 }
+
                 hallOfFame.add(sb.toString());
                 league.leagueHoF.add(sb.toString());
             }
@@ -4075,7 +4080,7 @@ public class Team {
                 records.checkRecord("Pass TDs", getQB(i).statsPassTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Ints Thrown", getQB(i).statsInt, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Comp Percent", (100 * getQB(i).statsPassComp) / (getQB(i).statsPassAtt + 1), abbr + ": " + getQB(i).getInitialName(), league.getYear());
-                records.checkRecord("QB Rating", getQB(i).getPasserRating(), abbr + ": " + getQB(i).getInitialName(), league.getYear());
+                records.checkRecord("QB Rating", (int)getQB(i).getPasserRating(), abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Rush Yards", getQB(i).statsRushYards, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Rush TDs", getQB(i).statsRushTD, abbr + ": " + getQB(i).getInitialName(), league.getYear());
                 records.checkRecord("Fumbles Lost", getQB(i).statsFumbles, abbr + ": " + getQB(i).getInitialName(), league.getYear());
@@ -4140,8 +4145,8 @@ public class Team {
                 records.checkRecord("Career Pass Yards", qb.statsPassYards + qb.careerPassYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Pass TDs", qb.statsPassTD + qb.careerTDs, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Ints Thrown", qb.statsInt + qb.careerInt, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career Comp PCT", qb.getCareerPassPCT(), abbr + ": " + qb.getInitialName(), league.getYear() - 1);
-                records.checkRecord("Career QB Rating", qb.getCareerPasserRating(), abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career Comp PCT", (int)qb.getCareerPassPCT(), abbr + ": " + qb.getInitialName(), league.getYear() - 1);
+                records.checkRecord("Career QB Rating", (int)qb.getCareerPasserRating(), abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Rush Yards", qb.statsRushYards + qb.careerRushYards, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Rush TDs", qb.statsRushTD + qb.careerRushTD, abbr + ": " + qb.getInitialName(), league.getYear() - 1);
                 records.checkRecord("Career Fumbles Lost", qb.statsFumbles + qb.careerFumbles, abbr + ": " + qb.getInitialName(), league.getYear() - 1);

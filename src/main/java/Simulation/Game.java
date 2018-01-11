@@ -2100,11 +2100,11 @@ public class Game implements Serializable {
 
         if (homePassingStats.size() >= awayPassingStats.size()) {
             for (int i = 0; i < homePassingStats.size(); ++i) {
-                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TD:" + "\nPass Ints:" + "\nSacks:" + "\nRating:" + "\n\n");
+                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TDs:" + "\nPass Ints:" + "\nSacks:" + "\nRating:" + "\n\n");
             }
         } else {
             for (int i = 0; i < awayPassingStats.size(); ++i) {
-                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TD:" + "\nPass Ints:" + "\nSacks:" + "\nRating:" + "\n\n");
+                gamePL.append("QB:" + "\nYards:" + "\nComp/Att:" + "\nPass TDs:" + "\nPass Ints:" + "\nSacks:" + "\nRating:" + "\n\n");
             }
         }
 
@@ -2131,11 +2131,11 @@ public class Game implements Serializable {
 
         if (awayRushingStats.size() >= awayRushingStats.size()) {
             for (int i = 0; i < awayRushingStats.size(); ++i) {
-                gameRL.append("Name:" + "\nPosition:" + "\nYards:" + "\nCarries:" + "\nYards/Carry:" + "\nTouchdowns:" + "\nFumbles:" + "\n\n");
+                gameRL.append("Name:" + "\nPosition:" + "\nYards:" + "\nCarries:" + "\nYards/Carry:" + "\nTDs:" + "\nFumbles:" + "\n\n");
             }
         } else {
             for (int i = 0; i < awayRushingStats.size(); ++i) {
-                gameRL.append("Name:" + "\nPosition:" + "\nYards:" + "\nCarries:" + "\nYards/Carry:" + "\nTouchdowns:" + "\nFumbles:" + "\n\n");
+                gameRL.append("Name:" + "\nPosition:" + "\nYards:" + "\nCarries:" + "\nYards/Carry:" + "\nTDs:" + "\nFumbles:" + "\n\n");
             }
         }
 
@@ -2162,11 +2162,11 @@ public class Game implements Serializable {
 
         if (homeReceivingStats.size() >= awayReceivingStats.size()) {
             for (int i = 0; i < homeReceivingStats.size(); ++i) {
-                gameWL.append("Name:" + "\nPosition:" + "\nYards:" + "\nReceptions:" + "\nYards/Rec:" + "\nRec/Targets:" + "\nTouchdowns:" + "\nDrops:" + "\n\n");
+                gameWL.append("Name:" + "\nPosition:" + "\nYards:" + "\nReceptions:" + "\nYards/Rec:" + "\nRec/Targets:" + "\nTDs:" + "\nDrops:" + "\n\n");
             }
         } else {
             for (int i = 0; i < awayReceivingStats.size(); ++i) {
-                gameWL.append("Name:" + "\nPosition:" + "\nYards:" + "\nReceptions:" + "\nYards/Rec:" + "\nRec/Targets:" + "\nTouchdowns:" + "\nDrops:" + "\n\n");
+                gameWL.append("Name:" + "\nPosition:" + "\nYards:" + "\nReceptions:" + "\nYards/Rec:" + "\nRec/Targets:" + "\nTDs:" + "\nDrops:" + "\n\n");
             }
         }
 
@@ -2192,11 +2192,11 @@ public class Game implements Serializable {
 
         if (homeDefenseStats.size() >= awayDefenseStats.size()) {
             for (int i = 0; i < homeDefenseStats.size(); ++i) {
-                gameDL.append("Name:" + "\nPosition:" + "\nTackles:" + "\nSacks:" + "\nFumbles:" + "\nInterceptions:" + "\nDefended:" + "\n\n");
+                gameDL.append("Name:" + "\nPosition:" + "\nTackles:" + "\nSacks:" + "\nFumbles:" + "\nInts:" + "\nDefended:" + "\n\n");
             }
         } else {
             for (int i = 0; i < awayDefenseStats.size(); ++i) {
-                gameDL.append("Name:" + "\nPosition:" + "\nTackles:" + "\nSacks:" + "\nFumbles:" + "\nInterceptions:" + "\nDefended:" + "\n\n");
+                gameDL.append("Name:" + "\nPosition:" + "\nTackles:" + "\nSacks:" + "\nFumbles:" + "\nInts:" + "\nDefended:" + "\n\n");
             }
         }
 

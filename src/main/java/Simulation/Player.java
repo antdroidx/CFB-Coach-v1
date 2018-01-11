@@ -1,5 +1,6 @@
 package Simulation;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -95,6 +96,7 @@ public class Player {
     public int gameFGMade;
     public int gameXPAttempts;
     public int gameXPMade;
+    public DecimalFormat df2 = new DecimalFormat(".##");
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
 
@@ -121,6 +123,11 @@ public class Player {
     public int getHeismanScore() {
         int adjGames = gamesStarted;
         if (adjGames > 11) adjGames = 11;
+        return ratOvr * adjGames + team.confPrestige * 5;
+    }
+
+    public int getCareerScore() {
+        int adjGames = careerGames;
         return ratOvr * adjGames + team.confPrestige * 5;
     }
 

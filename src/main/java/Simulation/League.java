@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -120,6 +121,9 @@ public class League extends Rankings {
             "Liberty Bowl", "Independence Bowl", "Vegas Bowl", "Military Bowl", "Aloha Bowl", "Humanitarian Bowl"};
 
     private boolean careerMode;
+
+    public DecimalFormat df2 = new DecimalFormat(".##");
+
 
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
@@ -4188,12 +4192,14 @@ public class League extends Rankings {
     //PLAYER RANKINGS STUFF
 
     public ArrayList<String> getPlayerRankStr(int selection) {
-        int rankNum = 120;
+        int rankNum = 0;
         ArrayList<PlayerQB> pQB = new ArrayList<PlayerQB>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamQBs.size(); ++p) {
-                if (teamList.get(i).teamQBs.get(p).statsPassAtt >= (10*currentWeek))
-                pQB.add(teamList.get(i).teamQBs.get(p));
+                if (teamList.get(i).teamQBs.get(p).statsPassAtt >= (10*currentWeek)) {
+                    rankNum++;
+                    pQB.add(teamList.get(i).teamQBs.get(p));
+                }
             }
         }
         ArrayList<PlayerRB> pRB = new ArrayList<PlayerRB>();
@@ -4358,7 +4364,7 @@ public class League extends Rankings {
             case 0:
                 Collections.sort(pQB, new CompPlayerPassRating());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).getPasserRating());
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + df2.format(pQB.get(i).getPasserRating()));
                 }
                 break;
             case 1:
@@ -4382,7 +4388,7 @@ public class League extends Rankings {
             case 4:
                 Collections.sort(pQB, new CompPlayerPassPCT());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).getPassPCT() + "%");
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + df2.format(pQB.get(i).getPassPCT()) + "%");
                 }
                 break;
             case 5:

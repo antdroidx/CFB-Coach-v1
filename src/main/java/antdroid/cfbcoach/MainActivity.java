@@ -1459,7 +1459,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] historySelection = {"League History", "League Records", "Hall of Fame", "League Stats"};
+        String[] historySelection = {"League History", "League Records", "League Stats", "Hall of Fame",};
         Spinner leagueHistorySpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, historySelection);
@@ -1480,10 +1480,10 @@ public class MainActivity extends AppCompatActivity {
                             final LeagueRecordsListArrayAdapter leagueRecordsAdapter =
                                     new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
-                        } else if (position == 2) {
+                        } else if (position == 3) {
                             HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
                             leagueHistoryList.setAdapter(hofAdapter);
-                        } else if (position == 3) {
+                        } else if (position == 2) {
                             showLeagueHistoryStats();
                         } else {
                             final LeagueHistoryListArrayAdapter leagueHistoryAdapter =
