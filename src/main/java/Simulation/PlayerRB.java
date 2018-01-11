@@ -308,15 +308,38 @@ public class PlayerRB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsRushTD * 140 - statsFumbles * 100 + statsRushYards * 3 + statsRecYards + statsRecTD * 140 + team.confPrestige * 7;
+        return statsRushTD * 150 - statsFumbles * 100 + statsRushYards * 3 + statsRecYards * 3 + statsRecTD * 150 + ratOvr * 7;
+    }
+
+    @Override
+    public int getCareerScore() {
+        return careerTDs * 150 - careerFumbles * 100 + careerRushYards * 3 + careerRecYards * 3 + careerRecTD * 150 + ratOvr*7*year;
+}
+
+    public double getCareerYardsperCarry() {
+        if (careerRushAtt < 1) {
+            return 0;
+        } else {
+            double rating = (statsRushYards + careerRushYards) / (statsRushAtt + careerRushAtt);
+            return rating;
+        }
+    }
+
+    public double getYardsperCarry() {
+        if (statsRushAtt < 1) {
+            return 0;
+        } else {
+            double rating = (double) (statsRushYards) / (statsRushAtt);
+            return rating;
+        }
     }
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Rush TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + ((double) (10 * statsRushYards / (statsRushAtt + 1)) / 10) + " yds");
-        pStats.add("Yds/Game: " + (statsRushYards / getGames()) + " yds/g>Rush Att: " + statsRushAtt);
+        pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
+        pStats.add("Yds/Game: " + df2.format((double)(statsRushYards / getGames())) + " yds/g>Rush Att: " + statsRushAtt);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions + " ");
         pStats.add("Rec TDs: " + statsRecTD + ">Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
@@ -331,8 +354,8 @@ public class PlayerRB extends Player {
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + ((double) (10 * statsRushYards / (statsRushAtt + 1)) / 10) + " yds");
-        pStats.add("Yds/Game: " + (statsRushYards / getGames()) + " yds/g>Rush Att: " + statsRushAtt);
+        pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
+        pStats.add("Yds/Game: " + df2.format((double)(statsRushYards / getGames())) + " yds/g>Rush Att: " + statsRushAtt);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions + " ");
         pStats.add("Rec TDs: " + statsRecTD + ">Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
@@ -348,8 +371,8 @@ public class PlayerRB extends Player {
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("TDs: " + (statsRushTD + careerTDs) + ">Fumbles: " + (statsFumbles + careerFumbles));
-        pStats.add("Rush Yards: " + (statsRushYards + careerRushYards) + " yds>Yards/Att: " + ((double) (10 * (statsRushYards + careerRushYards) / (statsRushAtt + careerRushAtt + 1)) / 10) + " yds");
-        pStats.add("Yds/Game: " + ((statsRushYards + careerRushYards) / (getGames() + careerGames)) + " yds/g>Rush Att: " + (statsRushAtt + careerRushAtt));
+        pStats.add("Rush Yards: " + (statsRushYards + careerRushYards) + " yds>Yards/Att: " + df2.format(getCareerYardsperCarry()) + " yds");
+        pStats.add("Yds/Game: " + df2.format((double)((statsRushYards + careerRushYards) / (getGames() + careerGames))) + " yds/g>Rush Att: " + (statsRushAtt + careerRushAtt));
         pStats.add("Rec Yards: " + (statsRecYards + careerRecYards) + " yds>Receptions: " + (statsReceptions + careerReceptions) + " ");
         pStats.add("Rec TDs: " + (statsRecTD + careerRecTD) + "> ");
         pStats.addAll(super.getCareerStatsList());

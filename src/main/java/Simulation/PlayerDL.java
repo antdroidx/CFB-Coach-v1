@@ -276,8 +276,14 @@ public class PlayerDL extends Player {
     
     @Override
     public int getHeismanScore() {
-        return statsTackles * 40 + statsSacks * 750 + statsFumbles * 750 + statsInts * 750 + 10 * ratOvr - (team.teamOppYards * 2) - (team.teamOppPoints * 2) + team.confPrestige * 7;
+        return statsTackles * 75 + statsSacks * 750 + statsFumbles * 750 + statsInts * 750 + 15 * ratOvr - (team.teamOppYards * 2) - (team.teamOppPoints * 2);
     }
+
+    @Override
+    public int getCareerScore() {
+        return careerTackles * 75 + careerSacks * 750 + careerFumbles * 750 + careerInts * 750 + 7*ratOvr*year;
+    }
+
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {

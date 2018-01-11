@@ -341,41 +341,48 @@ public class PlayerQB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsPassTD * 150 - statsInt * 300 + statsPassYards + statsRushTD * 150 + statsRushYards + team.confPrestige * 7;
+        return statsPassTD * 150 - statsInt * 300 + statsPassYards + statsRushTD * 150 + statsRushYards + ratOvr * 7;
     }
 
-    public int getPasserRating() {
+
+    //Career score for HoF :: target - 35000?
+    @Override
+    public int getCareerScore() {
+        return careerTDs * 150 - careerInt * 300 + careerPassYards + careerRushTD * 150 + careerRushYards + ratOvr*7*year;
+    }
+
+    public double getPasserRating() {
         if (statsPassAtt < 1) {
             return 0;
         } else {
-            int rating = (int) (((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt);
+            double rating = (((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt);
             return rating;
         }
     }
 
-    public int getPassPCT() {
+    public double getPassPCT() {
         if (statsPassAtt < 1) {
             return 0;
         } else {
-            int rating = 100 * statsPassComp / (statsPassAtt);
+            double rating = 100 * statsPassComp / (statsPassAtt);
             return rating;
         }
     }
 
-    public int getCareerPassPCT() {
-        if (statsPassAtt < 1) {
+    public double getCareerPassPCT() {
+        if (careerPassAtt + statsPassAtt < 1) {
             return 0;
         } else {
-            int rating = (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt));
+            double rating = (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt));
             return rating;
         }
     }
 
-    public int getCareerPasserRating() {
-        if (statsPassAtt < 1) {
+    public double getCareerPasserRating() {
+        if (statsPassAtt + careerPassAtt < 1) {
             return 0;
         } else {
-            int rating = (int) (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt));
+            double rating = (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt));
             return rating;
         }
     }
@@ -384,9 +391,9 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100 * statsPassComp / (statsPassAtt + 1)) + "%");
+        pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
-        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + ((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10) + " yds");
+        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + df2.format(((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10)) + " yds");
         pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
         pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
@@ -401,7 +408,7 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + getPasserRating() + ">Comp Percent: " + (100 * statsPassComp / (statsPassAtt + 1)) + "%");
+        pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
@@ -418,9 +425,9 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Passer Rating " + (int) (((8.4 * (statsPassYards + careerPassYards)) + (300 * (statsPassTD + careerTDs)) + (100 * (statsPassComp + careerPassComp)) - (200 * (statsInt + careerInt))) / (statsPassAtt + careerPassAtt + 1)) + ">Comp Percent: " + (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt+ 1)) + "%");
+        pStats.add("Passer Rating " + df2.format(getCareerPasserRating()) + ">Comp Percent: " + df2.format(getCareerPassPCT()) + "%");
         pStats.add("Touchdowns: " + (statsPassTD + careerTDs) + ">Interceptions: " + (statsInt + careerInt));
-        pStats.add("Pass Yards: " + (statsPassYards + careerPassYards) + " yds>Yards/Att: " + ((double) (10 * (statsPassYards + careerPassYards) / (statsPassAtt + careerPassAtt + 1)) / 10) + " yds");
+        pStats.add("Pass Yards: " + (statsPassYards + careerPassYards) + " yds>Yards/Att: " + df2.format(((double) (10 * (statsPassYards + careerPassYards) / (statsPassAtt + careerPassAtt + 1)) / 10)) + " yds");
         pStats.add("Yds/Game: " + ((statsPassYards + careerPassYards) / (getGames() + careerGames)) + " yds/g>Sacks: " + (statsSacked + careerSacked));
         pStats.add("Rush Yards: " + (statsRushYards + careerRushYards) + ">Rush TDs: " + (statsRushTD + careerRushTD));
         pStats.addAll(super.getCareerStatsList());

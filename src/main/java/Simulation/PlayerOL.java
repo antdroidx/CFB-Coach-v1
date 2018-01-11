@@ -214,7 +214,12 @@ public class PlayerOL extends Player {
 
     @Override
     public int getHeismanScore() {
-        return ratOvr * 10 + team.confPrestige * 5;
+        return ratOvr*65;
+    }
+
+    @Override
+    public int getCareerScore() {
+        return ratOvr*year&65;
     }
 
     @Override
