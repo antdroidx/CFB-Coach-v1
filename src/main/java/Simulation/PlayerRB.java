@@ -308,12 +308,13 @@ public class PlayerRB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsRushTD * 150 - statsFumbles * 100 + statsRushYards * 3 + statsRecYards * 3 + statsRecTD * 150 + ratOvr * 7;
+        return statsRushTD * 150 - statsFumbles*75 + (int)(statsRushYards*3.25) + 2*statsReceptions + (int)(statsRecYards*2.65) + statsRecTD*150 + ratOvr*10 + team.teamPrestige*4 + team.confPrestige*2;
     }
 
     @Override
     public int getCareerScore() {
-        return careerTDs * 150 - careerFumbles * 100 + careerRushYards * 3 + careerRecYards * 3 + careerRecTD * 150 + ratOvr*7*year;
+        return statsRushTD * 150 - statsFumbles*75 + (int)(statsRushYards*3.25) + 2*statsReceptions + (int)(statsRecYards*2.65) + statsRecTD*150 + ratOvr*10
+        + careerTDs * 150 - careerFumbles*75 + (int)(careerRushYards*3.25) + 2*careerReceptions + (int)(careerRecYards*2.65) + careerRecTD * 150 + ratOvr*10*year;
 }
 
     public double getCareerYardsperCarry() {

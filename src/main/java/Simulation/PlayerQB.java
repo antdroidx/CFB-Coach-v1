@@ -341,14 +341,15 @@ public class PlayerQB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsPassTD * 150 - statsInt * 300 + statsPassYards + statsRushTD * 150 + statsRushYards + ratOvr * 7;
+        return statsPassTD*150 - statsInt*215 + statsPassYards + statsRushTD*150 + 3*statsRushYards + ratOvr*10 + team.teamPrestige*4 + team.confPrestige*2;
     }
 
 
     //Career score for HoF :: target - 35000?
     @Override
     public int getCareerScore() {
-        return careerTDs * 150 - careerInt * 300 + careerPassYards + careerRushTD * 150 + careerRushYards + ratOvr*7*year;
+        return careerTDs*150 - careerInt*215 + careerPassYards + careerRushTD*150 + 3*careerRushYards + ratOvr*10*year +
+                statsPassTD*150 - statsInt*215 + statsPassYards + statsRushTD*150 + 3*statsRushYards + ratOvr*10;
     }
 
     public double getPasserRating() {

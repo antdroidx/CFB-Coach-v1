@@ -4045,8 +4045,8 @@ public class Team {
             int score = 10*allConf + 25*allAmer + 50*poty;
             int statScore = p.getCareerScore();
             int totalScore = 10*score + statScore;
-            int avgScore = totalScore / (p.year-1);
-            if ( score > 74 || statScore > 25000 || totalScore > 30000 || avgScore > 7000) {
+            int avgScore = totalScore / (p.year);
+            if ( score > 74 || statScore > 26000 || totalScore > 30000 || avgScore > 7000) {
                 // HOFer
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
