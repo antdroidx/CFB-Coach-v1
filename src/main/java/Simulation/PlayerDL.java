@@ -271,17 +271,19 @@ public class PlayerDL extends Player {
         careerSacks = 0;
         careerFumbles = 0;
         careerInts = 0;
-
     }
-    
+
+
+    //- (team.teamOppYards * 2) - (team.teamOppPoints * 2);
     @Override
     public int getHeismanScore() {
-        return statsTackles * 75 + statsSacks * 750 + statsFumbles * 750 + statsInts * 750 + 15 * ratOvr - (team.teamOppYards * 2) - (team.teamOppPoints * 2);
+        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + team.teamPrestige*4 + team.confPrestige*2;
     }
 
     @Override
     public int getCareerScore() {
-        return careerTackles * 75 + careerSacks * 750 + careerFumbles * 750 + careerInts * 750 + 7*ratOvr*year;
+        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + team.teamPrestige*4 +
+                careerTackles*25 + careerSacks*425 + careerFumbles*425 + careerInts*425 + ratOvr*year*10;
     }
 
 

@@ -261,12 +261,12 @@ public class PlayerK extends Player {
 
     @Override
     public int getHeismanScore() {
-        return (int) ((statsFGMade * 5 + statsXPMade) * (int)getFGpct()/100 + ratOvr * 15);
+        return (int) ((statsFGMade * 20 + statsXPMade*5) * (int)getFGpct()/100 + ratOvr * 10);
     }
 
     @Override
     public int getCareerScore() {
-        return (int) ((careerFGMade * 5 + careerXPMade) * (int)getCareerFGpct()/100 + ratOvr*15*year);
+        return (int) ((statsFGMade * 20 + statsXPMade*5) * (int)getFGpct()/100 + ratOvr * 10 + (int)(careerFGMade * 25 + careerXPMade *5) * (int)(getCareerFGpct()/100) + ratOvr*10*year);
     }
 
     public double getFGpct() {
