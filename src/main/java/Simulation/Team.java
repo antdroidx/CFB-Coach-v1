@@ -2569,7 +2569,7 @@ public class Team {
         int numFreshman = 0;
         ArrayList<Player> allPlayers = getAllPlayers();
         for (Player p : allPlayers) {
-            if (p.year == 1 && p.ratOvr > 40 && !p.isRedshirt || p.year == 0 && p.ratOvr > 40) {
+            if (p.year == 1 &&  !p.wasRedshirt || p.year == 0) {
                 int pRat;
                 if (p.ratOvr > five) pRat = 5;
                 else if (p.ratOvr > four) pRat = 4;

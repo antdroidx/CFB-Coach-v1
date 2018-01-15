@@ -41,6 +41,7 @@ public class Player {
     public int careerWins;
 
     public boolean isRedshirt;
+    public boolean wasRedshirt;
     public boolean isMedicalRS;
     public boolean isTransfer;
     public boolean isGradTransfer;
