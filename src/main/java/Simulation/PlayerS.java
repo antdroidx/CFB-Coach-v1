@@ -28,7 +28,7 @@ public class PlayerS extends Player {
     public int careerFumbles;
     public int careerInts;
 
-    public PlayerS(String nm, Team t, int yr, int pot, int iq, int cov, int spd, int tkl, boolean rs, int dur, int rstop, int reg, int trait) {
+    public PlayerS(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cov, int spd, int tkl, int rstop) {
         team = t;
         name = nm;
         year = yr;
@@ -48,6 +48,7 @@ public class PlayerS extends Player {
         position = "S";
         region = reg;
         personality = trait;
+        recruitRating = scout;
 
         troubledTimes = 0;
 
@@ -73,8 +74,8 @@ public class PlayerS extends Player {
         careerInts = 0;
     }
 
-    public PlayerS(String nm, Team t, int yr, int pot, int iq, int cov, int spd, int tkl, boolean rs, int dur, int rstop,
-                   int cGamesPlayed, int cTackles, int cSacks, int cFumbles, int cInts, int cHeismans, int cAA, int cAC, int cWins, boolean transfer, int reg, int trait) {
+    public PlayerS(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+                    int cov, int spd, int tkl, int rstop, int cTackles, int cSacks, int cFumbles, int cInts) {
         team = t;
         name = nm;
         year = yr;
@@ -96,6 +97,7 @@ public class PlayerS extends Player {
         personality = trait;
         position = "S";
         troubledTimes = 0;
+        recruitRating = scout;
 
         wonHeisman = false;
         wonAllAmerican = false;
@@ -139,7 +141,8 @@ public class PlayerS extends Player {
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
-        //cost = (int) (Math.pow((float) ratOvr - 55, 2) / 3.5) + 125 + (int) (Math.random() * 100) - 50;
+        recruitRating = getScoutingGrade();
+
         recruitTolerance = (int)((60 - team.teamPrestige)/sImportance);
         cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
 
@@ -191,6 +194,12 @@ public class PlayerS extends Player {
         position = "S";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
+
+        if (yr == 1) {
+            recruitRating = 0;
+        } else {
+            recruitRating = getScoutingGrade();
+        }
 
         troubledTimes = 0;
 
@@ -268,11 +277,9 @@ public class PlayerS extends Player {
         }
     }
 
-    //- (team.teamOppYards * 2) - (team.teamOppPoints * 2);
-
     @Override
     public int getHeismanScore() {
-        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + team.teamPrestige*4 + team.confPrestige*2;
+        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + team.teamPrestige*2 + team.confPrestige*3 + (120 - team.rankTeamPollScore)*2;
     }
 
     @Override
@@ -285,11 +292,11 @@ public class PlayerS extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + ">Durability: " + getLetterGrade(ratDur));
+        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Run Stop: " + getLetterGrade(ratRunStop));
+        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
+        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
         pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Football IQ: " + getLetterGrade(ratFootIQ) + ">Coverage: " + getLetterGrade(ratCoverage));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Tackling: " + getLetterGrade(ratTackle));
-        pStats.add("Run Stopping: " + getLetterGrade(ratRunStop) + ">Nothing");
+        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
         pStats.add(" > ");
         return pStats;
     }
@@ -299,11 +306,12 @@ public class PlayerS extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + ">Durability: " + ratDur);
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + personality);
-        pStats.add("Football IQ: " + ratFootIQ + ">Coverage: " + ratCoverage);
-        pStats.add("Speed: " + ratSpeed + ">Tackling: " + ratTackle);
-        pStats.add("Run Stopping: " + ratRunStop + ">Nothing");
+        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Run Stop: " + getLetterGrade(ratRunStop));
+        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
+        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
+        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
+        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+        pStats.add(" > ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

@@ -1772,7 +1772,7 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<String> rankings = simLeague.newsStories.get(position);
                         boolean isempty = false;
                         if (simLeague.currentWeek == 22 && rankings.size() == 0) {
-                            rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshman to their schools.");
+                            rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshmen to their schools.");
                         }
                         if (rankings.size() == 0) {
                             isempty = true;

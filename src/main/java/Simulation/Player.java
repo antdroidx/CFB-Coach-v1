@@ -43,7 +43,10 @@ public class Player {
     public boolean isRedshirt;
     public boolean isMedicalRS;
     public boolean isTransfer;
+    public boolean isGradTransfer;
     public boolean isWalkOn;
+
+    public int recruitRating; // 0 - 5 0 = walk-on ; 1-5 = star scout rating
 
     public boolean isInjured;
     public Injury injury;
@@ -134,6 +137,46 @@ public class Player {
     public String getInitialName() {
         String[] names = name.split(" ");
         return names[0].substring(0, 1) + ". " + names[1];
+    }
+
+    public int getScoutingGrade(){
+        int pRat;
+        if (year < 2) {
+            if (ratOvr > team.five) pRat = 5;
+            else if (ratOvr > team.four) pRat = 4;
+            else if (ratOvr > team.three) pRat = 3;
+            else if (ratOvr > team.two) pRat = 2;
+            else pRat = 1;
+        } else {
+            int calcOvr = ratOvr - (year * (100-ratPot)/7);
+            if (calcOvr > team.five) pRat = 5;
+            else if (calcOvr > team.four) pRat = 4;
+            else if (calcOvr > team.three) pRat = 3;
+            else if (calcOvr> team.two) pRat = 2;
+            else pRat = 1;
+        }
+
+        return pRat;
+    }
+
+    public String getScoutingGradeString() {
+        String grade;
+
+        if (recruitRating == 0) {
+            grade = "Walk-On";
+        } else if (recruitRating == 1) {
+            grade = "1 Star";
+        } else if (recruitRating == 2) {
+            grade = "2 Star";
+        } else if (recruitRating == 3) {
+            grade = "3 Star";
+        } else if (recruitRating == 4) {
+            grade = "4 star";
+        } else {
+            grade = "5 Star";
+        }
+
+        return grade;
     }
 
     public String getHCString() {
@@ -275,12 +318,11 @@ public class Player {
     }
 
     public String getInfoLineupTransfer() {
-        return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + ratPot + " Transfer";
-
+        return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + "  Transfer";
     }
 
     public String getInfoLineupSuspended() {
-        return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + ratPot + " Suspended";
+        return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + "  Suspended";
 
     }
         public int getGames() {
@@ -330,8 +372,36 @@ public class Player {
 
 
     public String getPersonality(int personality) {
-        String trait;
-        trait = "Team Player";
+        String trait = "";
+        if (personality > 91) trait = "Leader";
+        else if (personality > 84) trait = "Motivated";
+        else if (personality > 75) trait = "Team Player";
+        else if (personality > 67) trait = "Average";
+        else if (personality > 59) trait = "Team Player";
+        else if (personality > 54) trait = "Team Player";
+        else trait = "Undisciplined";
+
         return trait;
+    }
+
+    public String getStatus() {
+        if (isTransfer) {
+            return "Transfer";
+        } else if (isRedshirt) {
+            return "Redshirt";
+        } else if (isMedicalRS) {
+            return "Medical";
+        } else if (isInjured) {
+            return "Injured";
+        } else if (isSuspended) {
+            return "Suspended";
+        } else {
+            return "Active";
+        }
+    }
+
+    public String getTransferStatus() {
+        if (isGradTransfer) return "Grad";
+        else return getYrStr();
     }
 }
