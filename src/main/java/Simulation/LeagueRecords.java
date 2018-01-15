@@ -46,10 +46,10 @@ public class LeagueRecords {
 
     public final String[] recordsList = {"TEAM", "Team PPG", "Team Opp PPG", "Team YPG", "Team Opp YPG", "Team TO Diff",
             "SEASON: OFFENSE", "Pass Yards", "Pass TDs", "Ints Thrown", "Comp Percent", "QB Rating",
-            "Rush Yards", "Rush TDs", "Fumbles Lost",
+            "Rush Yards", "Rush TDs", "Fumbles Lost", "Receptions",
             "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended", "SEASON: KICKING", "Field Goals",
             "CAREER: OFFENSE", "Career Pass Yards", "Career Pass TDs", "Career Ints Thrown", "Career Comp PCT", "Career QB Rating",
-            "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost",
+            "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost", "Career Receptions",
             "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended",
             "CAREER: KICKING", "Career Field Goals",
             "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Coach Awards", "Coach Year Score", "Coach Career Score"};
@@ -80,6 +80,7 @@ public class LeagueRecords {
         records.put("Rush Yards", new Record(0, "XXX", 0));
         records.put("Rush TDs", new Record(0, "XXX", 0));
         records.put("Fumbles Lost", new Record(0, "XXX", 0));
+        records.put("Receptions", new Record(0, "XXX", 0));
         records.put("Rec Yards", new Record(0, "XXX", 0));
         records.put("Rec TDs", new Record(0, "XXX", 0));
         records.put("Catch Percent", new Record(0, "XXX", 0));
@@ -100,6 +101,7 @@ public class LeagueRecords {
         records.put("Career Rush Yards", new Record(0, "XXX", 0));
         records.put("Career Rush TDs", new Record(0, "XXX", 0));
         records.put("Career Fumbles Lost", new Record(0, "XXX", 0));
+        records.put("Career Receptions", new Record(0, "XXX", 0));
         records.put("Career Rec Yards", new Record(0, "XXX", 0));
         records.put("Career Rec TDs", new Record(0, "XXX", 0));
         records.put("CAREER: DEFENSE", null);

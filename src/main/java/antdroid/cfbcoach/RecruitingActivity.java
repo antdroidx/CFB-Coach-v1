@@ -30,7 +30,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import Simulation.League;
+
 public class RecruitingActivity extends AppCompatActivity {
+
+    League simLeague;
 
     // Variables use during recruiting
     private String teamName;
@@ -158,7 +162,6 @@ public class RecruitingActivity extends AppCompatActivity {
 
         avail50 = new ArrayList<String>();
         availAll = new ArrayList<String>();
-
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -418,7 +421,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     public int getRecruitCost(String p) {
         String[] pSplit = p.split(",");
-        return Integer.parseInt(pSplit[9]);
+        return Integer.parseInt(pSplit[11]);
     }
 
     /**
@@ -426,7 +429,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     public int getRecruitRegion(String p) {
         String[] pSplit = p.split(",");
-        return Integer.parseInt(pSplit[12]);
+        return Integer.parseInt(pSplit[3]);
     }
 
     @Override
@@ -501,7 +504,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[9] + " " + ps[0] + " " + ps[1] + ">Ovr: " + getGrade(ps[8]) + " | Pot: " + getGradePot(ps[3]);
+        return "$" + ps[11] + " " + ps[0] + " " + ps[1] + ">Ovr: " + getGrade(ps[10]) + " | Pot: " + getGradePot(ps[8]);
     }
 
     /**
@@ -522,65 +525,65 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return  "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nPass Strength: " + getGrade(ps[5]) +
-                    "\nPass Accuracy: " + getGrade(ps[6]) +
-                    "\nEvasion: " + getGrade(ps[7]) +
-                    "\nSpeed: " + getGrade(ps[11]);
+            return  "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nPass Strength: " + getGrade(ps[12]) +
+                    "\nPass Accuracy: " + getGrade(ps[13]) +
+                    "\nEvasion: " + getGrade(ps[14]) +
+                    "\nSpeed: " + getGrade(ps[15]);
         } else if (pos.equals("RB")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nPower: " + getGrade(ps[5]) +
-                    "\nSpeed: " + getGrade(ps[6]) +
-                    "\nEvasion: " + getGrade(ps[7]) +
-                    "\nCatching: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nPower: " + getGrade(ps[12]) +
+                    "\nSpeed: " + getGrade(ps[13]) +
+                    "\nEvasion: " + getGrade(ps[14]) +
+                    "\nCatching: " + getGrade(ps[15]);
         } else if (pos.equals("WR")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCatching: " + getGrade(ps[5]) +
-                    "\nSpeed: " + getGrade(ps[6]) +
-                    "\nEvasion: " + getGrade(ps[7]) +
-                    "\nJumping: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nCatching: " + getGrade(ps[12]) +
+                    "\nSpeed: " + getGrade(ps[13]) +
+                    "\nEvasion: " + getGrade(ps[14]) +
+                    "\nJumping: " + getGrade(ps[15]);
         } else if (pos.equals("TE")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCatching: " + getGrade(ps[5]) +
-                    "\nRush Blk: " + getGrade(ps[6]) +
-                    "\nEvasion: " + getGrade(ps[7]) +
-                    "\nSpeed: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nCatching: " + getGrade(ps[12]) +
+                    "\nRush Blk: " + getGrade(ps[13]) +
+                    "\nEvasion: " + getGrade(ps[14]) +
+                    "\nSpeed: " + getGrade(ps[15]);
         } else if (pos.equals("OL")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nStrength: " + getGrade(ps[5]) +
-                    "\nRush Blk: " + getGrade(ps[6]) +
-                    "\nPass Blk: " + getGrade(ps[7]) +
-                    "\nAwareness: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nStrength: " + getGrade(ps[12]) +
+                    "\nRush Blk: " + getGrade(ps[13]) +
+                    "\nPass Blk: " + getGrade(ps[14]) +
+                    "\nAwareness: " + getGrade(ps[15]);
         } else if (pos.equals("K")) {
-            return  "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nKick Power: " + getGrade(ps[5]) +
-                    "\nAccuracy: " + getGrade(ps[6]) +
-                    "\nClumsiness: " + getGrade(ps[7]) +
-                    "\nPressure: " + getGrade(ps[11]);
+            return  "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nKick Power: " + getGrade(ps[12]) +
+                    "\nAccuracy: " + getGrade(ps[13]) +
+                    "\nClumsiness: " + getGrade(ps[14]) +
+                    "\nPressure: " + getGrade(ps[15]);
         } else if (pos.equals("DL")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nStrength: " + getGrade(ps[5]) +
-                    "\nRun Stop: " + getGrade(ps[6]) +
-                    "\nPass Press: " + getGrade(ps[7]) +
-                    "\nTackling: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nStrength: " + getGrade(ps[12]) +
+                    "\nRun Stop: " + getGrade(ps[13]) +
+                    "\nPass Press: " + getGrade(ps[14]) +
+                    "\nTackling: " + getGrade(ps[15]);
         } else if (pos.equals("LB")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCoverage: " + getGrade(ps[5]) +
-                    "\nRun Stop: " + getGrade(ps[6]) +
-                    "\nTackling: " + getGrade(ps[7]) +
-                    "\nSpeed: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nCoverage: " + getGrade(ps[12]) +
+                    "\nRun Stop: " + getGrade(ps[13]) +
+                    "\nTackling: " + getGrade(ps[14]) +
+                    "\nSpeed: " + getGrade(ps[15]);
         } else if (pos.equals("CB")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCoverage: " + getGrade(ps[5]) +
-                    "\nSpeed: " + getGrade(ps[6]) +
-                    "\nTackling: " + getGrade(ps[7]) +
-                    "\nJumping: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nCoverage: " + getGrade(ps[12]) +
+                    "\nSpeed: " + getGrade(ps[13]) +
+                    "\nTackling: " + getGrade(ps[14]) +
+                    "\nJumping: " + getGrade(ps[15]);
         } else if (pos.equals("S")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[12])) +
-                    "\nCoverage: " + getGrade(ps[5]) +
-                    "\nSpeed: " + getGrade(ps[6]) +
-                    "\nTackling: " + getGrade(ps[7]) +
-                    "\nRun Stop: " + getGrade(ps[11]);
+            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+                    "\nCoverage: " + getGrade(ps[12]) +
+                    "\nSpeed: " + getGrade(ps[13]) +
+                    "\nTackling: " + getGrade(ps[14]) +
+                    "\nRun Stop: " + getGrade(ps[15]);
         }
         return "ERROR";
     }
@@ -610,9 +613,11 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getReadablePlayerInfo(String p) {
         String[] pi = p.split(",");
         String improveStr = "";
+        String transfer = "";
+        if (pi[7].equals("true")) transfer = " [T]";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
-            improveStr = "(+" + pi[9] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + pi[3] + " Pot " + improveStr;
+            improveStr = "(+" + pi[11] + ")";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[10] + " Ovr, " + pi[8] + " Pot " + improveStr + transfer;
     }
 
     /**
@@ -621,9 +626,11 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getReadablePlayerInfoPotDisplay(String p) {
         String[] pi = p.split(",");
         String improveStr = "";
+        String transfer = "";
+        if (pi[7].equals("true")) transfer = " [T]";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
-            improveStr = "(+" + pi[9] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[8] + " " + improveStr;
+            improveStr = "(+" + pi[11] + ")";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[10] + " " + improveStr + transfer;
     }
 
     /**
@@ -631,7 +638,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoNoPot(String p) {
         String[] pi = p.split(",");
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[10] + " Ovr";
     }
 
     /**
@@ -639,7 +646,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoDisplay(String p) {
         String[] pi = p.split(",");
-        return getInitialName(pi[1]) + " [Overall: " + getGrade(pi[8]) + "]";
+        return getInitialName(pi[1]) + " [Overall: " + getGrade(pi[10]) + "]";
     }
 
     /**
@@ -647,7 +654,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoPos(String p) {
         String[] pi = p.split(",");
-        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[8] + " Ovr, " + getGradePot(pi[3]) + " Pot";
+        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[10] + " Ovr, " + getGradePot(pi[8]) + " Pot";
     }
 
 
@@ -1298,9 +1305,9 @@ public class RecruitingActivity extends AppCompatActivity {
             final TextView potential = convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
-            potential.setText("\nFootball IQ: " + getGrade(playerCSV.split(",")[4]) + "\nPotential: " + getGradePot(playerCSV.split(",")[3]) + "\n" +
-                    "Personality: " + getGrade(playerCSV.split(",")[13])+ "\n" +
-                    "Durability: " + getGrade(playerCSV.split(",")[10]));
+            potential.setText("\nFootball IQ: " + getGrade(playerCSV.split(",")[5]) + "\nPotential: " + getGradePot(playerCSV.split(",")[8]) + "\n" +
+                    "Personality: " + getGrade(playerCSV.split(",")[4])+ "\n" +
+                    "Durability: " + getGrade(playerCSV.split(",")[9]));
 
             // Set up Recruit and Redshirt buttons to display the right price
             Button recruitPlayerButton = convertView.findViewById(R.id.buttonRecruitPlayer);
@@ -1402,8 +1409,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[8]);
-        int ovrB = Integer.parseInt(psB[8]);
+        int ovrA = Integer.parseInt(psA[10]);
+        int ovrB = Integer.parseInt(psB[10]);
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
