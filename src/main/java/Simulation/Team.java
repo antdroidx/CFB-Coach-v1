@@ -2360,8 +2360,8 @@ public class Team {
                         Integer.parseInt(playerInfo[21]), Integer.parseInt(playerInfo[22]),
                         Integer.parseInt(playerInfo[23]), Integer.parseInt(playerInfo[24]),
                         Integer.parseInt(playerInfo[25]), Integer.parseInt(playerInfo[26]),
-                        Integer.parseInt(playerInfo[26]), Integer.parseInt(playerInfo[27]),
-                        Integer.parseInt(playerInfo[28]), Integer.parseInt(playerInfo[29])
+                        Integer.parseInt(playerInfo[27]), Integer.parseInt(playerInfo[28]),
+                        Integer.parseInt(playerInfo[29]), Integer.parseInt(playerInfo[30])
                         ));
             else
                 teamQBs.add(new PlayerQB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
