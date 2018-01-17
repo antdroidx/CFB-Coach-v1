@@ -335,6 +335,8 @@ public class MainActivity extends AppCompatActivity {
                     } else if (simLeague.currentWeek == 19) {
                         userTeam.resetStats();
                         simLeague.advanceSeason();
+                        currTab = 0;
+                        updateTeamStats();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players");
                         simLeague.currentWeek++;
@@ -506,6 +508,8 @@ public class MainActivity extends AppCompatActivity {
                 if (simLeague.currentWeek < 18) {
                     currTab = 1;
                     updatePlayerStats();
+                } else {
+                    currTab = 0;
                 }
             }
         });
@@ -513,16 +517,23 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Schedule" Button
         teamScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                currTab = 2;
-                updateSchedule();
+                if (simLeague.currentWeek < 18) {
+                    currTab = 2;
+                    updateSchedule();
+                } else {
+                    currTab = 0;
+                }
             }
         });
 
         //Set up "Weekly Scoreboard" Button
         scoresButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                showWeeklyScores();
+                if (simLeague.currentWeek < 18) {
+                    showWeeklyScores();
+                } else {
+                    currTab = 0;
+                }
             }
         });
 
@@ -538,8 +549,12 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Polls" Button
         rankingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                currTab = 4;
-                updateRankings();
+                if (simLeague.currentWeek < 18) {
+                    currTab = 4;
+                    updateRankings();
+                } else {
+                    currTab = 0;
+                }
             }
         });
 
