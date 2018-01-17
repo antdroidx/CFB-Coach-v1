@@ -21,7 +21,7 @@ public class PlayerOL extends Player {
     public int statsRushYards;
     public int statsPassYards;
 
-    public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int pow, int bkr, int bkp, int awr) {
+    public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int bkr, int bkp, int awr) {
         team = t;
         name = nm;
         year = yr;
@@ -38,6 +38,8 @@ public class PlayerOL extends Player {
         ratAwareness = awr;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         position = "OL";
         region = reg;
         personality = trait;
@@ -58,7 +60,7 @@ public class PlayerOL extends Player {
     }
 
 
-    public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+    public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
                     int pow, int bkr, int bkp, int awr) {
         team = t;
         name = nm;
@@ -76,6 +78,8 @@ public class PlayerOL extends Player {
         ratAwareness = awr;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         isTransfer = transfer;
         region = reg;
         personality = trait;
@@ -220,6 +224,9 @@ public class PlayerOL extends Player {
             isTransfer = false;
             year -= 1;
         }
+
+        if (isRedshirt) wasRedshirt = true;
+
     }
 
     @Override

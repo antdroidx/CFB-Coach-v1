@@ -40,7 +40,7 @@ public class PlayerQB extends Player {
     public int careerRushTD;
     public int careerFumbles;
 
-    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int pow, int acc, int eva, int spd) {
+    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int acc, int eva, int spd) {
         team = t;
         name = nm;
         year = yr;
@@ -57,6 +57,7 @@ public class PlayerQB extends Player {
         ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
         region = reg;
         personality = trait;
         troubledTimes = 0;
@@ -95,7 +96,7 @@ public class PlayerQB extends Player {
         position = "QB";
     }
 
-    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
                     int pow, int acc, int eva, int spd, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
                     int cRushAtt, int cRushYards, int cRushTD, int cFumbles) {
         team = t;
@@ -114,6 +115,7 @@ public class PlayerQB extends Player {
         ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
         isTransfer = transfer;
         region = reg;
         personality = trait;
@@ -346,6 +348,8 @@ public class PlayerQB extends Player {
             isTransfer = false;
             year -= 1;
         }
+
+        if (isRedshirt) wasRedshirt = true;
     }
 
     @Override
