@@ -3667,52 +3667,52 @@ public class Team {
         StringBuilder sb = new StringBuilder();
         PlayerQB[] qbs = getQBRecruits(rating);
         for (PlayerQB qb : qbs) {
-            sb.append("QB," + qb.name + "," + qb.year + "," + qb.region + "," + qb.personality + "," + qb.ratFootIQ + "," + qb.recruitRating + "," + qb.isTransfer + "," + qb.ratPot + "," + qb.ratDur
+            sb.append("QB," + qb.name + "," + qb.year + "," + qb.region + "," + qb.personality + "," + qb.ratFootIQ + "," + qb.recruitRating + "," + qb.isTransfer  + "," + qb.wasRedshirt + "," + qb.ratPot + "," + qb.ratDur
                     + "," + qb.ratOvr + "," + qb.cost + "," + qb.ratPassPow  + "," + qb.ratPassAcc + "," + qb.ratEvasion + "," + qb.ratSpeed + "%\n");
         }
         PlayerRB[] rbs = getRBRecruits(rating);
         for (PlayerRB rb : rbs) {
-            sb.append("RB," + rb.name + "," + rb.year + "," + rb.region + "," + rb.personality + "," + rb.ratFootIQ + "," + rb.recruitRating + "," + rb.isTransfer + "," + rb.ratPot + "," + rb.ratDur
+            sb.append("RB," + rb.name + "," + rb.year + "," + rb.region + "," + rb.personality + "," + rb.ratFootIQ + "," + rb.recruitRating + "," + rb.isTransfer  + "," + rb.wasRedshirt+ "," + rb.ratPot + "," + rb.ratDur
                     + "," + rb.ratOvr + "," + rb.cost + "," + rb.ratRushPower  + "," + rb.ratSpeed + "," + rb.ratEvasion + "," + rb.ratCatch + "%\n");
         }
         PlayerWR[] wrs = getWRRecruits(rating);
         for (PlayerWR wr : wrs) {
-            sb.append("WR," + wr.name + "," + wr.year + "," + wr.region + "," + wr.personality + "," + wr.ratFootIQ + "," + wr.recruitRating + "," + wr.isTransfer + "," + wr.ratPot + "," + wr.ratDur
+            sb.append("WR," + wr.name + "," + wr.year + "," + wr.region + "," + wr.personality + "," + wr.ratFootIQ + "," + wr.recruitRating + "," + wr.isTransfer  + "," + wr.wasRedshirt+ "," + wr.ratPot + "," + wr.ratDur
                     + "," + wr.ratOvr + "," + wr.cost + "," + wr.ratCatch  + "," + wr.ratSpeed + "," + wr.ratEvasion + "," + wr.ratJump + "%\n");
         }
         PlayerTE[] tes = getTERecruits(rating);
         for (PlayerTE te : tes) {
-            sb.append("TE," + te.name + "," + te.year + "," + te.region + "," + te.personality + "," + te.ratFootIQ + "," + te.recruitRating + "," + te.isTransfer + "," + te.ratPot + "," + te.ratDur
+            sb.append("TE," + te.name + "," + te.year + "," + te.region + "," + te.personality + "," + te.ratFootIQ + "," + te.recruitRating + "," + te.isTransfer  + "," + te.wasRedshirt+ "," + te.ratPot + "," + te.ratDur
                     + "," + te.ratOvr + "," + te.cost + "," + te.ratCatch  + "," + te.ratRunBlock + "," + te.ratEvasion + "," + te.ratSpeed + "%\n");
         }
         PlayerK[] ks = getKRecruits(rating);
         for (PlayerK k : ks) {
-            sb.append("K," + k.name + "," + k.year + "," + k.region + "," + k.personality + "," + k.ratFootIQ + "," + k.recruitRating + "," + k.isTransfer + "," + k.ratPot + "," + k.ratDur
+            sb.append("K," + k.name + "," + k.year + "," + k.region + "," + k.personality + "," + k.ratFootIQ + "," + k.recruitRating + "," + k.isTransfer  + "," + k.wasRedshirt + "," + k.ratPot + "," + k.ratDur
                     + "," + k.ratOvr + "," + k.cost + "," + k.ratKickPow  + "," + k.ratKickAcc + "," + k.ratKickFum + "," + k.ratPressure + "%\n");
         }
         PlayerOL[] ols = getOLRecruits(rating);
         for (PlayerOL ol : ols) {
-            sb.append("OL," + ol.name + "," + ol.year + "," + ol.region + "," + ol.personality + "," + ol.ratFootIQ + "," + ol.recruitRating + "," + ol.isTransfer + "," + ol.ratPot + "," + ol.ratDur
+            sb.append("OL," + ol.name + "," + ol.year + "," + ol.region + "," + ol.personality + "," + ol.ratFootIQ + "," + ol.recruitRating + "," + ol.isTransfer  + "," + ol.wasRedshirt + "," + ol.ratPot + "," + ol.ratDur
                     + "," + ol.ratOvr + "," + ol.cost + "," + ol.ratStrength  + "," + ol.ratRunBlock + "," + ol.ratPassBlock + "," + ol.ratAwareness + "%\n");
         }
         PlayerDL[] dls = getDLRecruits(rating);
         for (PlayerDL dl : dls) {
-            sb.append("DL," + dl.name + "," + dl.year + "," + dl.region + "," + dl.personality + "," + dl.ratFootIQ + "," + dl.recruitRating + "," + dl.isTransfer + "," + dl.ratPot + "," + dl.ratDur
+            sb.append("DL," + dl.name + "," + dl.year + "," + dl.region + "," + dl.personality + "," + dl.ratFootIQ + "," + dl.recruitRating + "," + dl.isTransfer  + "," + dl.wasRedshirt+ "," + dl.ratPot + "," + dl.ratDur
                     + "," + dl.ratOvr + "," + dl.cost + "," + dl.ratStrength  + "," + dl.ratRunStop + "," + dl.ratPassRush + "," + dl.ratTackle + "%\n");
         }
         PlayerLB[] lbs = getLBRecruits(rating);
         for (PlayerLB lb : lbs) {
-            sb.append("LB," + lb.name + "," + lb.year + "," + lb.region + "," + lb.personality + "," + lb.ratFootIQ + "," + lb.recruitRating + "," + lb.isTransfer + "," + lb.ratPot + "," + lb.ratDur
+            sb.append("LB," + lb.name + "," + lb.year + "," + lb.region + "," + lb.personality + "," + lb.ratFootIQ + "," + lb.recruitRating + "," + lb.isTransfer  + "," + lb.wasRedshirt + "," + lb.ratPot + "," + lb.ratDur
                     + "," + lb.ratOvr + "," + lb.cost + "," + lb.ratCoverage  + "," + lb.ratRunStop + "," + lb.ratTackle + "," + lb.ratSpeed + "%\n");
         }
         PlayerCB[] cbs = getCBRecruits(rating);
         for (PlayerCB cb : cbs) {
-            sb.append("CB," + cb.name + "," + cb.year + "," + cb.region + "," + cb.personality + "," + cb.ratFootIQ + "," + cb.recruitRating + "," + cb.isTransfer + "," + cb.ratPot + "," + cb.ratDur
+            sb.append("CB," + cb.name + "," + cb.year + "," + cb.region + "," + cb.personality + "," + cb.ratFootIQ + "," + cb.recruitRating + "," + cb.isTransfer  + "," + cb.wasRedshirt + "," + cb.ratPot + "," + cb.ratDur
                     + "," + cb.ratOvr + "," + cb.cost + "," + cb.ratCoverage  + "," + cb.ratSpeed + "," + cb.ratTackle + "," + cb.ratJump + "%\n");
         }
         PlayerS[] ss = getSRecruits(rating);
         for (PlayerS s : ss) {
-            sb.append("S," + s.name + "," + s.year + "," + s.region + "," + s.personality + "," + s.ratFootIQ + "," + s.recruitRating + "," + s.isTransfer + "," + s.ratPot + "," + s.ratDur
+            sb.append("S," + s.name + "," + s.year + "," + s.region + "," + s.personality + "," + s.ratFootIQ + "," + s.recruitRating + "," + s.isTransfer  + "," + s.wasRedshirt + "," + s.ratPot + "," + s.ratDur
                     + "," + s.ratOvr + "," + s.cost + "," + s.ratCoverage  + "," + s.ratSpeed + "," + s.ratTackle + "," + s.ratRunStop + "%\n");
         }
 
