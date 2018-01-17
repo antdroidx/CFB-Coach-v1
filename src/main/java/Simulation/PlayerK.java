@@ -28,7 +28,7 @@ public class PlayerK extends Player {
     public int careerFGAtt;
     public int careerFGMade;
 
-    public PlayerK(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int pow, int acc, int fum, int prs) {
+    public PlayerK(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int acc, int fum, int prs) {
         team = t;
         name = nm;
         year = yr;
@@ -45,6 +45,8 @@ public class PlayerK extends Player {
         ratPressure = prs;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         position = "K";
         region = reg;
         personality = trait;
@@ -72,7 +74,7 @@ public class PlayerK extends Player {
         careerWins = 0;
     }
 
-    public PlayerK(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+    public PlayerK(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
                     int pow, int acc, int fum, int prs, int cXPA, int cXPM, int cFGA, int cFGM) {
         team = t;
         name = nm;
@@ -90,6 +92,8 @@ public class PlayerK extends Player {
         ratPressure = prs;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         isTransfer = transfer;
         region = reg;
         personality = trait;
@@ -265,6 +269,9 @@ public class PlayerK extends Player {
             isTransfer = false;
             year -= 1;
         }
+
+        if (isRedshirt) wasRedshirt = true;
+
     }
 
     @Override

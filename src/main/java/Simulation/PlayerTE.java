@@ -37,7 +37,7 @@ public class PlayerTE extends Player {
     public int careerDrops;
     public int careerFumbles;
 
-    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cat, int blk, int eva, int spd) {
+    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cat, int blk, int eva, int spd) {
         team = t;
         name = nm;
         year = yr;
@@ -54,6 +54,8 @@ public class PlayerTE extends Player {
         ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         region = reg;
         personality = trait;
         recruitRating = scout;
@@ -87,7 +89,7 @@ public class PlayerTE extends Player {
     }
 
 
-    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
                     int cat, int blk, int eva, int spd, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles) {
         team = t;
         name = nm;
@@ -105,6 +107,8 @@ public class PlayerTE extends Player {
         ratSpeed = spd;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         isTransfer = transfer;
         region = reg;
         personality = trait;
@@ -300,6 +304,9 @@ public class PlayerTE extends Player {
             isTransfer = false;
             year -= 1;
         }
+
+        if (isRedshirt) wasRedshirt = true;
+
     }
 
     @Override

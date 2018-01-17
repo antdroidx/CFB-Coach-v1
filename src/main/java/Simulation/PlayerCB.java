@@ -29,7 +29,7 @@ public class PlayerCB extends Player {
     public int careerIncomplete;
     public int careerDefended;
 
-    public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cov, int spd, int tkl, int jmp) {
+    public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cov, int spd, int tkl, int jmp) {
         team = t;
         name = nm;
         year = yr;
@@ -46,6 +46,8 @@ public class PlayerCB extends Player {
         ratJump = jmp;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         position = "CB";
         region = reg;
         personality = trait;
@@ -80,7 +82,7 @@ public class PlayerCB extends Player {
         careerDefended = 0;
     }
 
-    public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+    public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
                     int cov, int spd, int tkl, int jmp, int cTackles, int cSacks, int cFumbles, int cInts, int cTar, int cInc, int cDef) {
         team = t;
         name = nm;
@@ -98,6 +100,8 @@ public class PlayerCB extends Player {
         ratJump = jmp;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         isTransfer = transfer;
         region = reg;
         personality = trait;
@@ -318,6 +322,8 @@ public class PlayerCB extends Player {
             isTransfer = false;
             year -= 1;
         }
+
+        if (isRedshirt) wasRedshirt = true;
 
     }
 

@@ -40,7 +40,6 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamName;
     private String teamAbbr;
     private int recruitingBudget;
-    private final String[] starGrades = {"*", "*", "* *", "* * *", "* * * *", "* * * * *"};
     Random rand = new Random();
     private int HCtalent;
     private int ratingTolerance;
@@ -600,11 +599,10 @@ public class RecruitingActivity extends AppCompatActivity {
 
 
     private String getGradePot(String num) {
-        int ind = (Integer.parseInt(num));
-        ind = (ind + tolerance - 40) / 10;
-        if (ind > 5) ind = 5;
-        if (ind < 0) ind = 1;
-        return starGrades[ind];
+        int pRat = (Integer.parseInt(num));
+        if (pRat > 84) return "High";
+        if (pRat > 67) return "Med";
+        else return  "Low";
     }
 
     /**
@@ -616,8 +614,8 @@ public class RecruitingActivity extends AppCompatActivity {
         String transfer = "";
         if (pi[7].equals("true")) transfer = " [T]";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
-            improveStr = "(+" + pi[11] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[10] + " Ovr, " + pi[8] + " Pot " + improveStr + transfer;
+            improveStr = "(+" + pi[12] + ")";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr, " + pi[9] + " Pot " + improveStr + transfer;
     }
 
     /**
@@ -629,8 +627,8 @@ public class RecruitingActivity extends AppCompatActivity {
         String transfer = "";
         if (pi[7].equals("true")) transfer = " [T]";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
-            improveStr = "(+" + pi[11] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[10] + " " + improveStr + transfer;
+            improveStr = "(+" + pi[12] + ")";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[11] + " " + improveStr + transfer;
     }
 
     /**

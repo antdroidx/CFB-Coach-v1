@@ -31,7 +31,7 @@ public class PlayerDL extends Player {
 
     //public Vector ratingsVector;
 
-    public PlayerDL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int pow, int rsh, int pas, int tkl) {
+    public PlayerDL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int rsh, int pas, int tkl) {
         team = t;
         name = nm;
         year = yr;
@@ -48,6 +48,8 @@ public class PlayerDL extends Player {
         ratTackle = tkl;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         position = "DL";
         region = reg;
         personality = trait;
@@ -79,7 +81,7 @@ public class PlayerDL extends Player {
     }
 
 
-    public PlayerDL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
+    public PlayerDL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
                     int pow, int rsh, int pas, int tkl, int cTackles, int cSacks, int cFumbles, int cInts) {
         team = t;
         name = nm;
@@ -97,6 +99,8 @@ public class PlayerDL extends Player {
         ratTackle = tkl;
         isRedshirt = rs;
         if (isRedshirt) year = 0;
+        wasRedshirt = wasRS;
+
         isTransfer = transfer;
         region = reg;
         personality = trait;
@@ -280,6 +284,9 @@ public class PlayerDL extends Player {
             isTransfer = false;
             year -= 1;
         }
+
+        if (isRedshirt) wasRedshirt = true;
+
     }
 
     @Override
