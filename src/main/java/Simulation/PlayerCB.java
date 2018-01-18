@@ -273,11 +273,10 @@ public class PlayerCB extends Player {
 
         if (!isMedicalRS) {
             year++;
-            if (wonAllConference) ratPot++;
-            if (wonAllAmerican) ratPot++;
-            if (year > 2 && games < 4) ratPot -= (int) (Math.random() * 15);
-            // old: ratPot - 25
-            // new ratPot + games - 35
+            if (wonAllConference) ratPot += (int)Math.random()*allConfPotBonus;
+            if (wonAllAmerican) ratPot += (int)Math.random()*allAmericanBonus;
+            if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
+
             ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
             ratCoverage += (int) (Math.random() * (progression + games - 35)) / 10;
             ratSpeed += (int) (Math.random() * (progression + games - 35)) / 10;
