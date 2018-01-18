@@ -35,12 +35,12 @@ public class Injury {
         player.ratPot -= duration / 1.5;
         player.ratDur -= duration;
         if (player.ratDur < 0) player.ratDur = 0;
-        if (player.ratOvr > 80 && duration > 4) {
+        if (player.ratOvr > 79 && duration > 4) {
             player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Injury Report>A major injury was sustained by " + player.team.name + "'s star " + player.position + ", " + player.name + " today. During the game, " + player.name + " suffered a " + description
                     + " injury and will be out for " + duration + " weeks.");
         }
 
-        if (duration > 12 && player.team.league.currentWeek < 6 && player.gamesStarted < 4) {
+        if (duration > (12-player.team.league.currentWeek) && player.team.league.currentWeek < 6 && player.gamesStarted < 4) {
             player.isMedicalRS = true;
             duration = 26;
             if (player.team.userControlled) {

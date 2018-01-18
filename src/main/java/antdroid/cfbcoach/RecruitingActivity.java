@@ -420,7 +420,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     public int getRecruitCost(String p) {
         String[] pSplit = p.split(",");
-        return Integer.parseInt(pSplit[11]);
+        return Integer.parseInt(pSplit[12]);
     }
 
     /**

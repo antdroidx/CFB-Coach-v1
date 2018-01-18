@@ -23,6 +23,8 @@ public class Player {
     public int progression;
     public int region;
     public int personality;
+    public int height;
+    public int weight;
     public boolean isSuspended;
     public int weeksSuspended;
     public int troubledTimes;
@@ -52,6 +54,9 @@ public class Player {
     public boolean isInjured;
     public Injury injury;
 
+    public int heightBase = 60;
+    public int weightBase = 160;
+
     public int attrBase = 50;
     public int ratBase = 60;
     public int yearFactor = 5;
@@ -61,6 +66,10 @@ public class Player {
     public int recruitTolerance = 50;
     public int costBaseRating = 35;
     public int locationDiscount = 15;
+    public int minGamesPot = 4;
+    public int allConfPotBonus = 5;
+    public int allAmericanBonus = 5;
+
     public double qbImportance = 1;
     public double rbImportance = 1.5;
     public double wrImportance = 2;
@@ -404,5 +413,17 @@ public class Player {
     public String getTransferStatus() {
         if (isGradTransfer) return "Grad";
         else return getYrStr();
+    }
+
+    public String getHeight() {
+
+        int feet = height / 12;
+        int leftover = height % 12;
+
+        return feet + "'' " + leftover + "\"";
+    }
+
+    public String getWeight() {
+        return weight + " lbs";
     }
 }
