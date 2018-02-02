@@ -3953,6 +3953,7 @@ public class League extends Rankings {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.totalWins);
                 }
+                break;
             case 4:
                 Collections.sort(HC, new CompCoachCareer());
                 for (int i = 0; i < HC.size(); ++i) {
