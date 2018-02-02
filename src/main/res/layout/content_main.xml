@@ -65,7 +65,7 @@
             android:text="Current Team (W - L) "
             android:textAlignment="gravity"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/black"
+            android:textColor="@color/blueLight"
             android:textStyle="bold" />
 
         <LinearLayout
