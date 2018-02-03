@@ -1311,8 +1311,6 @@ public class Team {
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                     teamPrestige -= (int)Math.random()*8;
-                    league.coachList.add(HC.get(0));
-                    league.coachPrevTeam.add(name);
                     HC.remove(0);
                 } else {
                     HC.get(0).contractLength = 2;
