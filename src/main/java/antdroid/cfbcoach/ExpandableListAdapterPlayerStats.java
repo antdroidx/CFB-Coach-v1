@@ -185,7 +185,7 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
         if (ratSplit.length > 0 && rating.split(",").length == 1) {
             String letter = ratSplit[ratSplit.length - 1];
             if (letter.equals("A") || letter.equals("A+")) {
-                textV.setTextColor(Color.parseColor("#006600"));
+                textV.setTextColor(Color.parseColor("#5994de"));
             } else if (letter.equals("B") || letter.equals("B+")) {
                 textV.setTextColor(Color.parseColor("#00b300"));
             } else if (letter.equals("C") || letter.equals("C+")) {

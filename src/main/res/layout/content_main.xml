@@ -52,7 +52,7 @@
                 android:layout_marginBottom="72dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:text="Home"
-                android:textColor="@android:color/black"
+                android:textColor="?android:attr/textColorLink"
                 android:textSize="10sp"
                 android:visibility="visible" />
         </LinearLayout>
@@ -193,7 +193,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginStart="5dp"
                 android:layout_weight="0.72"
-                android:background="@drawable/button_shape_fc_accent"
+                android:background="@drawable/button_shape_fc_win"
                 android:paddingEnd="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
