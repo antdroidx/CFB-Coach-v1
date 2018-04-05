@@ -2175,7 +2175,7 @@ public class Team {
 
     public int calcMaxRecruitRating() {
         int rating;
-        rating = (int)Math.round(( maxStarRating + (double)((teamPrestige - 60)/10) ));
+        rating = (int)Math.round(( maxStarRating + (double)((teamPrestige - 65)/10) ));
         if (rating < 2) rating = 2;
         if (rating > 10) rating = 10;
 
@@ -4006,7 +4006,7 @@ public class Team {
                 "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 1, -2, 1);
 
         ts[3] = new TeamStrategy("Spread",
-                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 2, 0, 2, -1, 0, 1);
+                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 1, 0, 2, -1, 0, 1);
 
         ts[4] = new TeamStrategy("Read Option",
                 "QB Option heavy offense, where QB options based on coverage and LB position.", 6, -1, 1, 1, 5, -1, 0, 0);

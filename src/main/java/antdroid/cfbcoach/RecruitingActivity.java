@@ -503,7 +503,8 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Ovr: " + getGrade(ps[11]) + " | Pot: " + getGradePot(ps[9]);
+        //return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Ovr: " + getGrade(ps[11]) + " | Pot: " + getGradePot(ps[9]);
+        return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Grade: " + getScoutGrade((2*Integer.parseInt(ps[11]) + Integer.parseInt(ps[9]))/3);
     }
 
     /**
@@ -597,12 +598,20 @@ public class RecruitingActivity extends AppCompatActivity {
         else return "  *  ";
     }
 
+    private String getScoutGrade(int num) {
+        int pRat = num;
+        if (pRat > five) return "* * * * *";
+        else if (pRat > four) return " * * * *";
+        else if (pRat > three) return " * * * ";
+        else if (pRat > two) return "  * * ";
+        else return "  *  ";
+    }
 
     private String getGradePot(String num) {
         int pRat = (Integer.parseInt(num));
-        if (pRat > 84) return "High";
-        if (pRat > 67) return "Med";
-        else return  "Low";
+        if (pRat > 84) return "??";
+        if (pRat > 67) return "??";
+        else return  "??";
     }
 
     /**
@@ -1407,8 +1416,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[11]);
-        int ovrB = Integer.parseInt(psB[11]);
+        int ovrA = (2*Integer.parseInt(psA[11])+Integer.parseInt(psA[9])) / 3;
+        int ovrB = (2*Integer.parseInt(psB[11])+Integer.parseInt(psB[9])) / 3;
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
