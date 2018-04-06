@@ -3329,11 +3329,13 @@ public class Team {
             ph = playerStatsGroupHeaders.get(i);
             playerStatsMap.put(ph, getCB(i - 21).getDetailStatsList(numGames()));
         }
-        ph = playerStatsGroupHeaders.get(24);
-        playerStatsMap.put(ph, getS(0).getDetailStatsList(numGames()));
+        for (int i = 24; i < 26; ++i) {
+            ph = playerStatsGroupHeaders.get(i);
+            playerStatsMap.put(ph, getS(i - 24).getDetailStatsList(numGames()));
+        }
 
         //Bench
-        ph = playerStatsGroupHeaders.get(25);
+        ph = playerStatsGroupHeaders.get(26);
         ArrayList<String> benchStr = new ArrayList<>();
         for (int i = startersQB; i < teamQBs.size(); ++i) {
             benchStr.add(getQB(i).getPosNameYrOvrPot_Str());
