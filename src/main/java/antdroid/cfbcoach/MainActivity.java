@@ -2198,8 +2198,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)", "TE (1 starter)", "OL (5 starters)",
-                "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (1 starter)"};
-        final int[] positionNumberRequired = {1, 2, 3, 1, 5, 1, 4, 3, 3, 1};
+                "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (2 starter)"};
+        final int[] positionNumberRequired = {1, 2, 3, 1, 5, 1, 4, 3, 3, 2};
         final Spinner teamLineupPositionSpinner = dialog.findViewById(R.id.spinnerTeamLineupPosition);
         ArrayAdapter<String> teamLineupPositionSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positionSelection);
