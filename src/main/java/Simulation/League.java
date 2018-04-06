@@ -231,7 +231,7 @@ public class League extends Rankings {
         conferences.get(0).confTeams.add(new Team("Clemson", "CLEM", "Atlantic", 88, "WAKE", 3, this));
         conferences.get(0).confTeams.add(new Team("Duke", "DUKE", "Atlantic", 53, "UNC", 3, this));
         conferences.get(0).confTeams.add(new Team("Florida State", "FSU", "Atlantic", 70, "MIA", 3, this));
-        conferences.get(0).confTeams.add(new Team("Georgia Tech", "GT", "Atlantic", 48, "NCST", 3, this));
+        conferences.get(0).confTeams.add(new Team("Georgia IT", "GT", "Atlantic", 48, "NCST", 3, this));
         conferences.get(0).confTeams.add(new Team("Louisville", "LOUI", "Atlantic", 72, "PITT", 4, this));
         conferences.get(0).confTeams.add(new Team("Miami", "MIA", "Atlantic", 78, "FSU", 3, this));
         conferences.get(0).confTeams.add(new Team("North Carolina", "UNC", "Atlantic", 45, "DUKE", 3, this));
@@ -239,7 +239,7 @@ public class League extends Rankings {
         conferences.get(0).confTeams.add(new Team("Pittsburgh", "PITT", "Atlantic", 64, "LOUI", 3, this));
         conferences.get(0).confTeams.add(new Team("Wake Forest", "WAKE", "Atlantic", 52, "CLEM", 3, this));
         conferences.get(0).confTeams.add(new Team("Virginia", "VIR", "Atlantic", 50, "VTEC", 3, this));
-        conferences.get(0).confTeams.add(new Team("Virginia Tech", "VTEC", "Atlantic", 73, "VIR", 3, this));
+        conferences.get(0).confTeams.add(new Team("Virginia IT", "VTEC", "Atlantic", 73, "VIR", 3, this));
 
         //Big Ten - done x 12
         conferences.get(1).confTeams.add(new Team("Illinois", "ILL", "Great Lakes", 44, "NWU", 2, this));
@@ -252,14 +252,14 @@ public class League extends Rankings {
         conferences.get(1).confTeams.add(new Team("Chicago", "NWU", "Great Lakes", 68, "ILL", 2, this));
         conferences.get(1).confTeams.add(new Team("Ohio State", "OSU", "Great Lakes", 84, "MIC", 2, this));
         conferences.get(1).confTeams.add(new Team("Penn State", "PSU", "Great Lakes", 80, "MSU", 3, this));
-        conferences.get(1).confTeams.add(new Team("Purdue", "PUR", "Great Lakes", 50, "IND", 2, this));
+        conferences.get(1).confTeams.add(new Team("West Lafayette", "PUR", "Great Lakes", 50, "IND", 2, this));
         conferences.get(1).confTeams.add(new Team("Wisconsin", "WIS", "Great Lakes", 79, "MIN", 2, this));
 
         //Big 12 - done x 12
         conferences.get(2).confTeams.add(new Team("Waco", "BAY", "Southwest", 47, "TCU", 1, this));
         conferences.get(2).confTeams.add(new Team("Houston", "HOU", "Southwest", 57, "TTEC", 1, this));
         conferences.get(2).confTeams.add(new Team("Iowa State", "ISU", "Southwest", 66, "MIZ", 1, this));
-        conferences.get(2).confTeams.add(new Team("Texas Tech", "TTEC", "Southwest", 50, "HOU", 1, this));
+        conferences.get(2).confTeams.add(new Team("Texas IT", "TTEC", "Southwest", 50, "HOU", 1, this));
         conferences.get(2).confTeams.add(new Team("Kansas", "KAN", "Southwest", 40, "KSU", 1, this));
         conferences.get(2).confTeams.add(new Team("Kansas State", "KSU", "Southwest", 66, "KAN", 1, this));
         conferences.get(2).confTeams.add(new Team("Oklahoma", "OKL", "Southwest", 85, "TEX", 1, this));
@@ -2104,9 +2104,12 @@ public class League extends Rankings {
                 cbs.get(i).wonAllAmerican = true;
                 cbs.get(i).team.HC.get(0).allamericans++;
             }
-            allAmericans.add(ss.get(0));
-            ss.get(0).wonAllAmerican = true;
-            ss.get(0).team.HC.get(0).allamericans++;
+            for (int i = 0; i < 2; ++i) {
+                allAmericans.add(ss.get(0));
+                ss.get(i).wonAllAmerican = true;
+                ss.get(i).team.HC.get(0).allamericans++;
+            }
+
         }
 
         StringBuilder allAmerican = new StringBuilder();

@@ -136,7 +136,7 @@ public class Team {
     public int minDLs = 10;
     public int minLBs = 8;
     public int minCBs = 8;
-    public int minSs = 3;
+    public int minSs = 4;
     
     public int startersQB = 1;
     public int startersRB = 2;
@@ -3268,8 +3268,9 @@ public class Team {
             pList.add(getCB(i).getPosNameYrOvrPot_Str());
         }
 
-        pList.add(getS(0).getPosNameYrOvrPot_Str());
-
+        for (int i = 0; i < startersS; ++i) {
+            pList.add(getS(i).getPosNameYrOvrPot_Str());
+        }
         pList.add("BENCH > BENCH");
 
         return pList;
