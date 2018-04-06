@@ -493,9 +493,11 @@ public class Conference {
                 cbs.get(i).wonAllConference = true;
                 cbs.get(i).team.HC.get(0).allconference++;
             }
-            allConfPlayers.add(ss.get(0));
-            ss.get(0).wonAllConference = true;
-            ss.get(0).team.HC.get(0).allconference++;
+            for (int i = 0; i < 2; ++i) {
+                allConfPlayers.add(ss.get(0));
+                ss.get(i).wonAllConference = true;
+                ss.get(i).team.HC.get(0).allconference++;
+            }
         }
 
         return allConfPlayers;
