@@ -589,6 +589,17 @@ public class Game implements Serializable {
             }
         }
 
+        for (int i = 0 + x; i < defense.startersS + x; ++i) {
+            if (defense.getS(i).gameFatigue > 0) {
+                defense.getS(i).gameSim = Math.pow(defense.getS(i).ratCoverage, 1) * Math.random();
+                defense.getS(i).gameSnaps++;
+                Safety.add(defense.getS(i));
+            } else {
+                defense.getS(defense.startersS).gameSim = Math.pow(defense.getS(defense.startersS).ratCoverage, 1) * Math.random();
+                defense.getS(defense.startersS).gameSnaps++;
+                Safety.add(defense.getS(defense.startersS));
+            }
+        }
         //Rank Players
         Collections.sort(WideReceiver, new CompGamePlayerPicker());
         Collections.sort(TightEnd, new CompGamePlayerPicker());
@@ -596,6 +607,7 @@ public class Game implements Serializable {
         Collections.sort(receiver, new CompGamePlayerPicker());
         Collections.sort(Linebacker, new CompGamePlayerPicker());
         Collections.sort(DLineman, new CompGamePlayerPicker());
+        Collections.sort(Safety, new CompGamePlayerPicker());
 
 
         //Choose Action Players
@@ -608,13 +620,11 @@ public class Game implements Serializable {
         selLB = Linebacker.get(0);
         selLB2 = Linebacker.get(1);
         selCB = defense.getCB(WideReceiver.get(0).posDepth);
-        selS = defense.getS(0 + x);
+        selS = Safety.get(0);
 
         if (selCB.gameFatigue <= 0) selCB = defense.getCB(defense.startersCB);
-        if (selS.gameFatigue <= 0) selS = defense.getS(defense.startersS);
-
+        
         selQB.gameSnaps++;
-        selS.gameSnaps++;
 
 
         //Fatigue selected Action Players
@@ -626,7 +636,7 @@ public class Game implements Serializable {
         selLB.gameFatigue -= fatigueDropLow + Math.round((100 - selLB.ratDur) / 10);
         selLB2.gameFatigue -= Math.round((100 - selLB2.ratDur) / 10);
         selCB.gameFatigue -= fatigueDropMed + Math.round((100 - selCB.ratDur) / 10);
-        selS.gameFatigue -= fatigueDropHigh + Math.round((100 - selS.ratDur) / 10);
+        selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
 
         String pos = receiver.get(0).position;
 
@@ -656,6 +666,7 @@ public class Game implements Serializable {
         ArrayList<PlayerDL> DLineman = new ArrayList<>();
         ArrayList<PlayerLB> Linebacker = new ArrayList<>();
         ArrayList<PlayerCB> Cornerback = new ArrayList<>();
+        ArrayList<PlayerS> Safety = new ArrayList<>();
 
         //Action Players
 
@@ -738,6 +749,18 @@ public class Game implements Serializable {
             }
         }
 
+        for (int i = 0 + x; i < defense.startersS + x; ++i) {
+            if (defense.getS(i).gameFatigue > 0) {
+                defense.getS(i).gameSim = Math.pow(defense.getS(i).ratRunStop, 1) * Math.random();
+                defense.getS(i).gameSnaps++;
+                Safety.add(defense.getS(i));
+            } else {
+                defense.getS(defense.startersS).gameSim = Math.pow(defense.getS(defense.startersS).ratRunStop, 1) * Math.random();
+                defense.getS(defense.startersS).gameSnaps++;
+                Safety.add(defense.getS(defense.startersS));
+            }
+        }
+
         //Rank Players
         Collections.sort(TightEnd, new CompGamePlayerPicker());
         Collections.sort(RunningBack, new CompGamePlayerPicker());
@@ -767,7 +790,7 @@ public class Game implements Serializable {
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
         selLB.gameFatigue -= fatigueDropLow + Math.round((100 - selLB.ratDur) / 10);
         selCB.gameFatigue -= Math.round((100 - selCB.ratDur) / 10);
-        selS.gameFatigue -= fatigueDropHigh + Math.round((100 - selS.ratDur) / 10);
+        selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
 
         RushPlay(offense, defense, selQB, selRB, selTE, selDL, selLB, selCB, selS);
 
