@@ -198,7 +198,7 @@ public class Game implements Serializable {
                     awayTeam.abbr + " Def Strategy: " + awayTeam.teamStratDef.getStratName() + "\n" +
                     homeTeam.abbr + " Off Strategy: " + homeTeam.teamStratOff.getStratName() + "\n" +
                     homeTeam.abbr + " Def Strategy: " + homeTeam.teamStratDef.getStratName() + "\n" +
-                    "\n\n[ 1st QUARTER ]";
+                    "\n\n-- 1st QUARTER --";
             //probably establish some home field advantage before playing
             gameTime = 3600;
             gameDown = 1;

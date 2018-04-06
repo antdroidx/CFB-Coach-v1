@@ -147,7 +147,7 @@ public class Team {
     public int startersDL = 4;
     public int startersLB = 3;
     public int startersCB = 3;
-    public int startersS = 1;
+    public int startersS = 2;
 
     public int subQB = 0;
     public int subRB = 1;
@@ -158,7 +158,7 @@ public class Team {
     public int subDL = 2;
     public int subLB = 2;
     public int subCB = 1;
-    public int subS = 1;
+    public int subS = 2;
 
     public int maxPlayers = 70;
     public int minRecruitStar = 5;
@@ -898,7 +898,7 @@ public class Team {
             comp += getOL(i).ratFootIQ;
         }
         //Defense: 14
-        comp += getS(0).ratFootIQ * 4; //4
+        comp += getS(0).ratFootIQ * 4 + getS(1).ratFootIQ * 4; //8
         comp += getCB(0).ratFootIQ + getCB(1).ratFootIQ + getCB(2).ratFootIQ; //3
         for (int i = 0; i < 4; ++i) { //4
             comp += getDL(i).ratFootIQ;
@@ -912,9 +912,9 @@ public class Team {
 
         //subs: 1
         comp += (getRB(2).ratFootIQ + getWR(3).ratFootIQ + getWR(4).ratFootIQ + getTE(1).ratFootIQ + getOL(5).ratFootIQ + getOL(6).ratFootIQ +
-                getDL(4).ratFootIQ + getDL(5).ratFootIQ + getLB(3).ratFootIQ + getCB(4).ratFootIQ + 2*getS(1).ratFootIQ) / 12;
+                getDL(4).ratFootIQ + getDL(5).ratFootIQ + getLB(3).ratFootIQ + getCB(4).ratFootIQ + 2*getS(2).ratFootIQ) / 12;
 
-        return comp / 39;
+        return comp / 43;
     }
 
     /**
@@ -963,9 +963,9 @@ public class Team {
     public int getPassDef() {
         int avgCBs = (teamCBs.get(0).ratOvr + teamCBs.get(1).ratOvr + teamCBs.get(2).ratOvr) / 3;
         int avgLBs = (teamLBs.get(0).ratCoverage + teamLBs.get(1).ratCoverage + teamLBs.get(2).ratCoverage) / 3;
-        int S = (teamSs.get(0).ratCoverage);
+        int S = (teamSs.get(0).ratCoverage + teamSs.get(1).ratCoverage) / 2;
         int def = (3 * avgCBs + avgLBs + S) / 5;
-        int avgSub = (getLB(3).ratCoverage + getCB(3).ratOvr*2 + getS(1).ratCoverage) / 4;
+        int avgSub = (getLB(3).ratCoverage + getCB(3).ratOvr*2 + getS(2).ratCoverage) / 4;
 
 
         return (def*4 + teamSs.get(0).ratOvr + getCompositeDLPass()*2 + 2*HC.get(0).ratDef + avgSub) / 10;
@@ -1055,9 +1055,10 @@ public class Team {
         }
         compositeLB = compositeLB / 3;
 
-        compositeS += teamSs.get(0).ratRunStop;
+        compositeS += teamSs.get(0).ratRunStop + teamSs.get(1).ratRunStop;
+        compositeS = compositeS/2;
 
-        int avgSub = (2*getDL(4).ratOvr + 2*getDL(5).ratOvr + getLB(3).ratRunStop + getS(1).ratRunStop) / 6;
+        int avgSub = (2*getDL(4).ratOvr + 2*getDL(5).ratOvr + getLB(3).ratRunStop + getS(2).ratRunStop) / 6;
         return (4*compositeDL + 2*compositeLB + 2*compositeS + 2*HC.get(0).ratDef + avgSub) / 11;
     }
 
