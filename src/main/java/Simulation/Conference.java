@@ -494,7 +494,7 @@ public class Conference {
                 cbs.get(i).team.HC.get(0).allconference++;
             }
             for (int i = 0; i < 2; ++i) {
-                allConfPlayers.add(ss.get(0));
+                allConfPlayers.add(ss.get(i));
                 ss.get(i).wonAllConference = true;
                 ss.get(i).team.HC.get(0).allconference++;
             }

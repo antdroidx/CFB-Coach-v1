@@ -2105,7 +2105,7 @@ public class League extends Rankings {
                 cbs.get(i).team.HC.get(0).allamericans++;
             }
             for (int i = 0; i < 2; ++i) {
-                allAmericans.add(ss.get(0));
+                allAmericans.add(ss.get(i));
                 ss.get(i).wonAllAmerican = true;
                 ss.get(i).team.HC.get(0).allamericans++;
             }
