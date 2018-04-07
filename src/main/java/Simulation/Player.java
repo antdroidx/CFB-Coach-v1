@@ -35,6 +35,8 @@ public class Player {
     public boolean wonHeisman;
     public boolean wonAllAmerican;
     public boolean wonAllConference;
+    public boolean wonTopFreshman;
+    public boolean wonAllFreshman;
 
     public int careerGames;
     public int careerHeismans;

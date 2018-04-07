@@ -89,6 +89,20 @@ public class League extends Rankings {
 
     ArrayList<Player> allAmericans;
     private String allAmericanStr;
+    ArrayList<Player> allFreshman;
+    private String allFreshmanStr;
+
+    //Freshman Team
+    public ArrayList<PlayerQB> fQBs;
+    public ArrayList<PlayerRB> fRBs;
+    public ArrayList<PlayerWR> fWRs;
+    public ArrayList<PlayerTE> fTEs;
+    public ArrayList<PlayerK> fKs;
+    public ArrayList<PlayerOL> fOLs;
+    public ArrayList<PlayerDL> fDLs;
+    public ArrayList<PlayerLB> fLBs;
+    public ArrayList<PlayerCB> fCBs;
+    public ArrayList<PlayerS> fSs;
 
     //Transfer List
     public ArrayList<String> tQBs;
@@ -124,6 +138,7 @@ public class League extends Rankings {
             "Liberty Bowl", "Independence Bowl", "Vegas Bowl", "Military Bowl", "Aloha Bowl", "Humanitarian Bowl"};
 
     private boolean careerMode;
+    public boolean fullGameLog;
 
     public DecimalFormat df2 = new DecimalFormat(".##");
 
@@ -330,7 +345,7 @@ public class League extends Rankings {
         conferences.get(7).confTeams.add(new Team("Greenville", "ECU", "Bluegrass", 32, "WKU", 3, this));
         conferences.get(7).confTeams.add(new Team("Boca Raton", "FAU", "Bluegrass", 47, "FIU", 3, this));
         conferences.get(7).confTeams.add(new Team("Miami Intl", "FIU", "Bluegrass", 44, "FAU", 3, this));
-        conferences.get(7).confTeams.add(new Team("Louisiana Tech", "LTEC", "Bluegrass", 44, "TUL", 4, this));
+        conferences.get(7).confTeams.add(new Team("Louisiana IT", "LTEC", "Bluegrass", 44, "TUL", 4, this));
         conferences.get(7).confTeams.add(new Team("Huntington WV", "MARS", "Bluegrass", 47, "SMU", 3, this));
         conferences.get(7).confTeams.add(new Team("Navy", "NAVY", "Bluegrass", 50, "ARMY", 3, this));
         conferences.get(7).confTeams.add(new Team("Dallas", "SMU", "Bluegrass", 46, "MARS", 4, this));
@@ -669,7 +684,7 @@ public class League extends Rankings {
             line = bufferedReader.readLine();
             // Game Mode
             careerMode = line.substring(line.length() - 9, line.length()).equals("[CAREER]%");
-
+            //9
             //Next get league history
             leagueHistory = new ArrayList<String[]>();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HIST")) {
@@ -869,6 +884,10 @@ public class League extends Rankings {
                         teamList.get(i).hallOfFame.add(line);
                     }
                 }
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_SAVE_FILE")) {
+                fullGameLog = Boolean.parseBoolean(line);
             }
 
             // Always close files.
@@ -1681,16 +1700,23 @@ public class League extends Rankings {
         int heismanScore = 0;
         int tempScore = 0;
         ArrayList<Player> freshmanCandidates = new ArrayList<Player>();
+        fQBs = new ArrayList<>();
+        fRBs = new ArrayList<>();
+        fWRs = new ArrayList<>();
+        fTEs = new ArrayList<>();
+        fKs = new ArrayList<>();
+        fOLs = new ArrayList<>();
+        fDLs = new ArrayList<>();
+        fLBs = new ArrayList<>();
+        fCBs = new ArrayList<>();
+        fSs = new ArrayList<>();
+
         for (int i = 0; i < teamList.size(); ++i) {
             //qb
             for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
-                if (teamList.get(i).teamQBs.get(qb).year == 1){
+                if (teamList.get(i).teamQBs.get(qb).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamQBs.get(qb));
-                    tempScore = teamList.get(i).teamQBs.get(qb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamQBs.get(qb);
-                        heismanScore = tempScore;
-                    }
+                    fQBs.add(teamList.get(i).teamQBs.get(qb));
                 }
             }
 
@@ -1698,11 +1724,7 @@ public class League extends Rankings {
             for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
                 if (teamList.get(i).teamRBs.get(rb).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamRBs.get(rb));
-                    tempScore = teamList.get(i).teamRBs.get(rb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamRBs.get(rb);
-                        heismanScore = tempScore;
-                    }
+                    fRBs.add(teamList.get(i).teamRBs.get(rb));
                 }
             }
 
@@ -1710,11 +1732,7 @@ public class League extends Rankings {
             for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
                 if (teamList.get(i).teamWRs.get(wr).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamWRs.get(wr));
-                    tempScore = teamList.get(i).teamWRs.get(wr).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamWRs.get(wr);
-                        heismanScore = tempScore;
-                    }
+                    fWRs.add(teamList.get(i).teamWRs.get(wr));
                 }
             }
 
@@ -1722,11 +1740,7 @@ public class League extends Rankings {
             for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
                 if (teamList.get(i).teamTEs.get(te).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamTEs.get(te));
-                    tempScore = teamList.get(i).teamTEs.get(te).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamTEs.get(te);
-                        heismanScore = tempScore;
-                    }
+                    fTEs.add(teamList.get(i).teamTEs.get(te));
                 }
             }
 
@@ -1734,11 +1748,7 @@ public class League extends Rankings {
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
                 if (teamList.get(i).teamDLs.get(dl).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamDLs.get(dl));
-                    tempScore = teamList.get(i).teamDLs.get(dl).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamDLs.get(dl);
-                        heismanScore = tempScore;
-                    }
+                    fDLs.add(teamList.get(i).teamDLs.get(dl));
                 }
             }
 
@@ -1746,11 +1756,7 @@ public class League extends Rankings {
             for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
                 if (teamList.get(i).teamLBs.get(lb).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamLBs.get(lb));
-                    tempScore = teamList.get(i).teamLBs.get(lb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamLBs.get(lb);
-                        heismanScore = tempScore;
-                    }
+                    fLBs.add(teamList.get(i).teamLBs.get(lb));
                 }
             }
 
@@ -1758,11 +1764,7 @@ public class League extends Rankings {
             for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
                 if (teamList.get(i).teamCBs.get(cb).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamCBs.get(cb));
-                    tempScore = teamList.get(i).teamCBs.get(cb).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamCBs.get(cb);
-                        heismanScore = tempScore;
-                    }
+                    fCBs.add(teamList.get(i).teamCBs.get(cb));
                 }
             }
 
@@ -1770,15 +1772,21 @@ public class League extends Rankings {
             for (int s = 0; s < teamList.get(i).teamSs.size(); ++s) {
                 if (teamList.get(i).teamSs.get(s).year == 1) {
                     freshmanCandidates.add(teamList.get(i).teamSs.get(s));
-                    tempScore = teamList.get(i).teamSs.get(s).getHeismanScore() + teamList.get(i).wins * 100 + teamList.get(i).confPrestige * 10;
-                    if (tempScore > heismanScore) {
-                        freshman = teamList.get(i).teamSs.get(s);
-                        heismanScore = tempScore;
-                    }
+                    fSs.add(teamList.get(i).teamSs.get(s));
                 }
             }
         }
         Collections.sort(freshmanCandidates, new CompPlayerHeisman());
+        Collections.sort(fQBs, new CompPlayerHeisman());
+        Collections.sort(fRBs, new CompPlayerHeisman());
+        Collections.sort(fWRs, new CompPlayerHeisman());
+        Collections.sort(fTEs, new CompPlayerHeisman());
+        Collections.sort(fOLs, new CompPlayerHeisman());
+        Collections.sort(fKs, new CompPlayerHeisman());
+        Collections.sort(fDLs, new CompPlayerHeisman());
+        Collections.sort(fLBs, new CompPlayerHeisman());
+        Collections.sort(fCBs, new CompPlayerHeisman());
+        Collections.sort(fSs, new CompPlayerHeisman());
 
         return freshmanCandidates;
     }
@@ -1839,6 +1847,126 @@ public class League extends Rankings {
     }
 
     /**
+     * Gets All Freshman
+     *
+     * @return string list of all americans
+     */
+    public String getAllFreshmanStr() {
+        allFreshman = new ArrayList<Player>();
+
+        if(fQBs.size() > 0) {
+            allFreshman.add(fQBs.get(0));
+            fQBs.get(0).wonAllFreshman = true;
+        }
+
+        if (fRBs.size() > 1){
+            allFreshman.add(fRBs.get(0));
+            fRBs.get(0).wonAllFreshman = true;
+            allFreshman.add(fRBs.get(1));
+            fRBs.get(1).wonAllFreshman = true;
+        }
+
+        if (fWRs.size() > 2) {
+            for (int i = 0; i < 3; ++i) {
+                allFreshman.add(fWRs.get(i));
+                fWRs.get(i).wonAllFreshman = true;
+            }
+        }
+
+        if (fTEs.size() > 0) {
+            allFreshman.add(fTEs.get(0));
+            fTEs.get(0).wonAllFreshman = true;
+        }
+
+        if (fOLs.size()> 4) {
+            for (int i = 0; i < 5; ++i) {
+                allFreshman.add(fOLs.get(i));
+                fOLs.get(i).wonAllFreshman = true;
+            }
+        }
+
+        if(fKs.size() > 0) {
+            allFreshman.add(fKs.get(0));
+            fKs.get(0).wonAllFreshman = true;
+        }
+
+        if(fDLs.size() > 3) {
+            for (int i = 0; i < 4; ++i) {
+                allFreshman.add(fDLs.get(i));
+                fDLs.get(i).wonAllFreshman = true;
+            }
+        }
+
+        if(fLBs.size() > 2) {
+            for (int i = 0; i < 3; ++i) {
+                allFreshman.add(fLBs.get(i));
+                fLBs.get(i).wonAllFreshman = true;
+            }
+        }
+
+        if(fCBs.size() > 2) {
+            for (int i = 0; i < 3; ++i) {
+                allFreshman.add(fCBs.get(i));
+                fCBs.get(i).wonAllFreshman = true;
+            }
+        }
+        if(fSs.size() > 1) {
+            for (int i = 0; i < 2; ++i) {
+                allFreshman.add(fSs.get(i));
+                fSs.get(i).wonAllFreshman = true;
+            }
+        }
+
+        StringBuilder allFreshmanTeam = new StringBuilder();
+        for (int i = 0; i < allFreshman.size(); ++i) {
+            Player p = allFreshman.get(i);
+            allFreshmanTeam.append(p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ");
+            if (p instanceof PlayerQB) {
+                PlayerQB pqb = (PlayerQB) p;
+                allFreshmanTeam.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
+            } else if (p instanceof PlayerRB) {
+                PlayerRB prb = (PlayerRB) p;
+                allFreshmanTeam.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
+                        prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
+            } else if (p instanceof PlayerWR) {
+                PlayerWR pwr = (PlayerWR) p;
+                allFreshmanTeam.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
+                        pwr.statsRecTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerTE) {
+                PlayerTE pte = (PlayerTE) p;
+                allFreshmanTeam.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
+                        pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerK) {
+                PlayerK pk = (PlayerK) p;
+                allFreshmanTeam.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
+                        "FGs: " + pk.statsFGMade + "/" + pk.statsFGAtt + ", XPs: " + pk.statsXPMade + "/" + pk.statsXPAtt + "\n");
+            } else if (p instanceof PlayerDL) {
+                PlayerDL pdl = (PlayerDL) p;
+                allFreshmanTeam.append(" DL " + pdl.name + " [" + pdl.getYrStr() + "]\n \t\t" +
+                        pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum\n");
+            } else if (p instanceof PlayerLB) {
+                PlayerLB plb = (PlayerLB) p;
+                allFreshmanTeam.append(" LB " + plb.name + " [" + plb.getYrStr() + "]\n \t\t" +
+                        plb.statsTackles + " Tkl, " + plb.statsSacks + " Sacks, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int\n");
+            } else if (p instanceof PlayerCB) {
+                PlayerCB pcb = (PlayerCB) p;
+                allFreshmanTeam.append(" CB " + pcb.name + " [" + pcb.getYrStr() + "]\n \t\t" +
+                        pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int\n");
+            } else if (p instanceof PlayerS) {
+                PlayerS ps = (PlayerS) p;
+                allFreshmanTeam.append(" S " + ps.name + " [" + ps.getYrStr() + "]\n \t\t" +
+                        ps.statsTackles + " Tkl, " + ps.statsSacks + " Sacks, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int\n");
+            } else {
+                allFreshmanTeam.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
+            }
+            allFreshmanTeam.append(" \t\tOverall: " + p.ratOvr + ", Potential: " + p.getLetterGrade(p.ratPot) + "\n\n>");
+        }
+
+        return allFreshmanTeam.toString();
+    }
+
+    /**
      * Perform the heisman ceremony. Congratulate winner and give top 5 vote getters.
      *
      * @return string of the heisman ceremony.
@@ -1848,6 +1976,7 @@ public class League extends Rankings {
         if (!heismanDecided) {
             freshmanCandidates = getTopFreshman();
             freshman = freshmanCandidates.get(0);
+            freshman.wonTopFreshman = true;
             putNewsStory = true;
             //full results string
             String freshmanTop5 = "\n";
@@ -4697,6 +4826,9 @@ public class League extends Rankings {
         for (String s : leagueHoF) {
             sb.append(s + "\n");
         }        sb.append("END_LEAGUE_HALL_OF_FAME\n");
+
+        sb.append( fullGameLog );
+        sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(

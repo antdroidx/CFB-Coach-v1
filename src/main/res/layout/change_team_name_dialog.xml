@@ -144,6 +144,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/checkboxShowInjuryReport" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Show Full Game Play by Play:" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkboxShowFullGameLog" />
+
     </LinearLayout>
 
     <Button

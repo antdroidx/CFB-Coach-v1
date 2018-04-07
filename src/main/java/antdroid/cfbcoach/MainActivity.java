@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     int wantUpdateConf;
     boolean showToasts;
     boolean showInjuryReport;
+    boolean fullGameLog;
 
     //Universe Settings
     int teamsStart = 12;
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
         recruitingStage = -1;
         wantUpdateConf = 2; // 0 and 1, don't update, 2 update
-        showToasts = false;
+        showToasts = true;
         showInjuryReport = true;
         simLeague.setTeamBenchMarks();
 
@@ -886,13 +887,14 @@ public class MainActivity extends AppCompatActivity {
             selection = new String[1];
             selection[0] = "Player of the Year";
         } else {
-            selection = new String[14];
+            selection = new String[15];
             selection[0] = "Player of the Year";
             selection[1] = "Coach of the Year";
             selection[2] = "Freshman of the Year";
-            selection[3] = "All Americans";
+            selection[3] = "All-American Team";
+            selection[4] = "All-Freshman Team";
             for (int i = 0; i < confStart; ++i) {
-                selection[i + 4] = "All " + simLeague.conferences.get(i).confName + " Team";
+                selection[i + 5] = simLeague.conferences.get(i).confName + " All-Conf Team";
             }
         }
 
@@ -908,6 +910,7 @@ public class MainActivity extends AppCompatActivity {
         final String[] coachAwardList = simLeague.getCoachAwardStr().split(">");
         final String[] freshmanAwardList = simLeague.getFreshmanCeremonyStr().split(">");
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
+        final String[] allFreshman = simLeague.getAllFreshmanStr().split(">");
         final String[][] allConference = new String[confStart][];
         for (int i = 0; i < confStart; ++i) {
             allConference[i] = simLeague.getAllConfStr(i).split(">");
@@ -926,8 +929,10 @@ public class MainActivity extends AppCompatActivity {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, freshmanAwardList, userTeam.abbr));
                         } else if (position == 3) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allAmericans, userTeam.abbr));
+                        } else if (position == 4) {
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allFreshman, userTeam.abbr));
                         } else {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 4], userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 5], userTeam.abbr));
                         }
                     }
 
@@ -2059,6 +2064,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
         checkboxShowInjury.setChecked(showInjuryReport);
 
+        final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
+        checkboxGameLog.setChecked(simLeague.fullGameLog);
+
         Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
         Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
@@ -2068,6 +2076,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
+                simLeague.fullGameLog = checkboxGameLog.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
@@ -2103,6 +2112,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
+                simLeague.fullGameLog = checkboxGameLog.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
