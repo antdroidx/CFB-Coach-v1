@@ -24,14 +24,16 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java" line="63" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/Simulation/League.java" line="4255" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/Simulation/League.java" line="4384" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Player.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/change_team_name_dialog.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/change_team_name_dialog.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
@@ -105,7 +107,63 @@
     <favorites_list name="CFB-Coach" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-9">
+              <caret line="392" column="68" lean-forward="false" selection-start-line="392" selection-start-column="0" selection-end-line="393" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-155">
+              <caret line="2113" column="29" lean-forward="false" selection-start-line="2113" selection-start-column="29" selection-end-line="2113" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="content_home.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="205" column="46" lean-forward="false" selection-start-line="205" selection-start-column="46" selection-end-line="205" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="888" column="0" lean-forward="false" selection-start-line="888" selection-start-column="0" selection-end-line="888" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="1371" column="37" lean-forward="false" selection-start-line="1371" selection-start-column="37" selection-end-line="1371" selection-end-column="37" />
+              <folding>
+                <element signature="method#recordRecFumble#0;class#Game#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -118,23 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>this</find>
-      <find>QB</find>
-      <find>&gt;= 16</find>
-      <find>FreshmanScore</find>
-      <find>heisman</find>
-      <find>[5]</find>
-      <find>&gt;= 14</find>
-      <find>&gt; 14</find>
-      <find>&gt; 15</find>
-      <find>wr</find>
-      <find>&gt; 16</find>
-      <find>16</find>
-      <find>roster</find>
-      <find>tolerance</find>
-      <find>12</find>
-      <find>Cost</find>
-      <find>$</find>
       <find>Difficult</find>
       <find>Sun Belt</find>
       <find>getEventPrefix()</find>
@@ -148,23 +189,25 @@
       <find>Stat</find>
       <find>gameDown = 1</find>
       <find>gamePoss</find>
+      <find>heis</find>
+      <find>isf</find>
+      <find>QB</find>
+      <find>ss</find>
+      <find>allFreshman</find>
+      <find>getHei</find>
+      <find>getEvent</find>
+      <find>league.fullGameLog</find>
+      <find>Settings</find>
+      <find>showIn</find>
+      <find>league</find>
+      <find>league.full</find>
+      <find>FIRST</find>
+      <find>Heis</find>
+      <find>Kick-off</find>
+      <find>simLeague</find>
+      <find>fullGa</find>
     </findStrings>
     <replaceStrings>
-      <replace>gameStr</replace>
-      <replace>Double.parseDouble</replace>
-      <replace>GONE</replace>
-      <replace>recruitChance*Math.random() &gt;</replace>
-      <replace>DL</replace>
-      <replace>QB</replace>
-      <replace>ratTackle</replace>
-      <replace>home</replace>
-      <replace>OL</replace>
-      <replace>WR</replace>
-      <replace>K</replace>
-      <replace>CB</replace>
-      <replace>this, walkon</replace>
-      <replace>s</replace>
-      <replace>S</replace>
       <replace>&gt;= 14</replace>
       <replace>HeismanScore</replace>
       <replace>freshman</replace>
@@ -180,6 +223,21 @@
       <replace>getEventLogScoring()</replace>
       <replace>getEventLog</replace>
       <replace>Safety</replace>
+      <replace>lb</replace>
+      <replace>RB</replace>
+      <replace>WR</replace>
+      <replace>TE</replace>
+      <replace>OL</replace>
+      <replace>K</replace>
+      <replace>DL</replace>
+      <replace>LB</replace>
+      <replace>CB</replace>
+      <replace>S</replace>
+      <replace>fSs</replace>
+      <replace>allFreshmanTeam</replace>
+      <replace>fullGameLog</replace>
+      <replace>ist</replace>
+      <replace>homeTeam.league.full</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1314,7 +1372,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Suspension.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerDefense.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/menu/menu_main.xml" />
@@ -1338,7 +1395,6 @@
         <option value="$PROJECT_DIR$/src/main/java/Simulation/CompGamePlayerPicker.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GamePlaybyPlayLog.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/LeagueRecords.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerQB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerRB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerTE.java" />
@@ -1358,13 +1414,15 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/group_recruit.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/change_team_name_dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
       </list>
     </option>
   </component>
@@ -1375,7 +1433,7 @@
     <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages ProjectPane="false" />
       <showMembers ProjectPane="false" />
       <showModules />
@@ -1388,7 +1446,45 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="cfbcoach" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="Simulation" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -1411,7 +1507,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/ahngu/AndroidStudioProjects/CFB-Coach/src/main/java/Simulation/PlayerS.java" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1509006208751" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1523083119682" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1523141790056" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -1790,6 +1886,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="10" side_tool="false" content_ui="tabs" />
@@ -1808,11 +1905,12 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19296375" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.60932297" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5682303" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24759358" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4628191" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4628191" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.12666667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1827,8 +1925,46 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19153675" sideWeight="0.40405118" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.52665246" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.60932297" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21736205" sideWeight="0.15256125" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61618495" sideWeight="0.5021322" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.47403562" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294643" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6744868" sideWeight="0.4978678" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24946466" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Assistant" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32841823" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6158358" sideWeight="0.4978678" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24759358" sideWeight="0.48997495" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4628191" sideWeight="0.57675904" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.48590505" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19153675" sideWeight="0.40405118" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32628062" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.4925816" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24387528" sideWeight="0.47121534" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25213677" sideWeight="0.49498746" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.52665246" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19296375" sideWeight="0.84743875" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.60932297" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5682303" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489339" sideWeight="0.12666667" order="6" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1856,6 +1992,30 @@
           <properties />
           <option name="timeStamp" value="2371" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/League.java</url>
+          <line>888</line>
+          <properties />
+          <option name="timeStamp" value="2390" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/League.java</url>
+          <line>4830</line>
+          <properties />
+          <option name="timeStamp" value="2391" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/League.java</url>
+          <line>889</line>
+          <properties />
+          <option name="timeStamp" value="2392" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Simulation/League.java</url>
+          <line>890</line>
+          <properties />
+          <option name="timeStamp" value="2393" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog>
@@ -1869,7 +2029,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2380" />
+      <option name="time" value="2394" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -1892,27 +2052,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/res/menu/menu_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/menu/menu_home.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/simple_list_dialog.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -2074,13 +2213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -2146,6 +2278,7 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2208,10 +2341,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-50132">
-          <caret line="138" column="24" lean-forward="false" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
+        <state relative-caret-position="306">
+          <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/PlayerCB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -2294,34 +2435,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="386" column="0" lean-forward="false" selection-start-line="386" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
+        <state relative-caret-position="561">
+          <caret line="430" column="38" lean-forward="false" selection-start-line="430" selection-start-column="38" selection-end-line="430" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+        <state relative-caret-position="-442">
+          <caret line="71" column="35" lean-forward="true" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/change_team_name_dialog.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="162" column="47" lean-forward="true" selection-start-line="162" selection-start-column="47" selection-end-line="162" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="392" column="68" lean-forward="false" selection-start-line="392" selection-start-column="0" selection-end-line="393" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="1371" column="37" lean-forward="false" selection-start-line="1371" selection-start-column="37" selection-end-line="1371" selection-end-column="37" />
+          <folding>
+            <element signature="method#recordRecFumble#0;class#Game#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35180">
-          <caret line="2104" column="50" lean-forward="false" selection-start-line="2104" selection-start-column="50" selection-end-line="2104" selection-end-column="50" />
+        <state relative-caret-position="144">
+          <caret line="888" column="0" lean-forward="false" selection-start-line="888" selection-start-column="0" selection-end-line="888" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2006">
-          <caret line="492" column="51" lean-forward="false" selection-start-line="492" selection-start-column="51" selection-end-line="492" selection-end-column="51" />
+        <state relative-caret-position="-155">
+          <caret line="2113" column="29" lean-forward="false" selection-start-line="2113" selection-start-column="29" selection-end-line="2113" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -2331,67 +2501,9 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3117">
-          <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
+        <state relative-caret-position="183">
+          <caret line="205" column="46" lean-forward="false" selection-start-line="205" selection-start-column="46" selection-end-line="205" selection-end-column="46" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="652" column="46" lean-forward="false" selection-start-line="652" selection-start-column="38" selection-end-line="652" selection-end-column="46" />
-          <folding>
-            <element signature="method#Game#0;class#Game#0" expanded="false" />
-            <element signature="method#Game#1;class#Game#0" expanded="false" />
-            <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
-            <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLPass#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLRush#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLPass#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLRush#0;class#Game#0" expanded="false" />
-            <element signature="method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="e#14618#14748#0" expanded="false" />
-            <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#RushPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
-            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
-            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#recordRushAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#recordRushFumble#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassingTD#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassCompletion#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#recordDrop#0;class#Game#0" expanded="false" />
-            <element signature="method#recordDefended#0;class#Game#0" expanded="false" />
-            <element signature="method#recordInterception#0;class#Game#0" expanded="false" />
-            <element signature="e#74488#74573#0" expanded="false" />
-            <element signature="method#recordSack#0;class#Game#0" expanded="false" />
-            <element signature="e#76573#76583#0" expanded="false" />
-            <element signature="method#recordRecFumble#0;class#Game#0" expanded="false" />
-            <element signature="method#recordSafety#0;class#Game#0" expanded="false" />
-            <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
-            <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
-            <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
-            <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
-            <element signature="method#recoup#0;class#Game#0" expanded="false" />
-            <element signature="method#gameStatistics#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLogScoring#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLog#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLogScore#0;class#Game#0" expanded="false" />
-            <element signature="method#getPassYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getPasserRating#0;class#Game#0" expanded="false" />
-            <element signature="method#getRecYardsperCatch#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>

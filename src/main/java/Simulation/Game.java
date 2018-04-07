@@ -880,7 +880,7 @@ public class Game implements Serializable {
                 if (pos.equals("WR")) {
                     if (100 * Math.random() < (100 - selWR.ratCatch) / 3) {
                         //drop
-                        gameEventLog += getEventLog() + offense.abbr + " WR " + selWR.name + " dropped the catch.";
+                        if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " WR " + selWR.name + " dropped the catch.";
 
                         gameDown++;
                         recordDrop(selRB, selTE, selWR, pos);
@@ -893,7 +893,7 @@ public class Game implements Serializable {
                 if (pos.equals("TE")) {
                     if (compValue * Math.random() < (100 - selTE.ratCatch) / 3) {
                         //drop
-                        gameEventLog += getEventLog() + offense.abbr + "TE " + selTE.name + " dropped the catch.";
+                        if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + "TE " + selTE.name + " dropped the catch.";
 
                         gameDown++;
                         recordDrop(selRB, selTE, selWR, pos);
@@ -906,7 +906,7 @@ public class Game implements Serializable {
                 if (pos.equals("RB")) {
                     if (compValue * Math.random() < (100 - selTE.ratCatch) / 3) {
                         //drop
-                        gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " dropped the catch.";
+                        if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " dropped the catch.";
 
                         gameDown++;
                         recordDrop(selRB, selTE, selWR, pos);
@@ -919,7 +919,7 @@ public class Game implements Serializable {
 
 
                 //no completion, advance downs
-                gameEventLog += getEventLog() + offense.abbr + " QB " + selQB.name + " threw an incomplete pass to the " + pos + ".";
+                if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " QB " + selQB.name + " threw an incomplete pass to the " + pos + ".";
                     gameDown++;
                     //Incomplete pass stops the clock, so just run time for how long the play took, then move on
 
@@ -944,7 +944,7 @@ public class Game implements Serializable {
                     escapeChance = (normalize(selWR.ratEvasion) * 3 - selCB.ratTackle - selS.ratTackle) * Math.random()   //STRATEGIES
                             + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
 
-                    gameEventLog += getEventLog() + offense.abbr + " WR " + selWR.name + " caught the pass for a gain of ";
+                    if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " WR " + selWR.name + " caught the pass for a gain of ";
 
                 } else if (pos.equals("TE")) {
 
@@ -954,7 +954,7 @@ public class Game implements Serializable {
                     escapeChance = (normalize(selTE.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
                             + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
 
-                    gameEventLog += getEventLog() + offense.abbr + " TE " + selTE.name + " caught the pass for a gain of ";
+                    if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " TE " + selTE.name + " caught the pass for a gain of ";
 
                 } else {
 
@@ -964,7 +964,7 @@ public class Game implements Serializable {
                     escapeChance = (normalize(selRB.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
                             + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
 
-                    gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " caught the pass for a gain of ";
+                    if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " caught the pass for a gain of ";
 
                 }
 
@@ -1019,13 +1019,13 @@ public class Game implements Serializable {
                         selLB.gameSim = selLB.ratCoverage * Math.random() * 60;
                     }
 
-                    gameEventLog += yardsGain + " yards.";
+                    if(homeTeam.league.fullGameLog) gameEventLog += yardsGain + " yards.";
 
                     if (gameYardsNeed <= 0) {
                         // Only set new down and distance if there wasn't a TD
                         gameDown = 1;
                         gameYardsNeed = 10;
-                        gameEventLog += "\nFIRST DOWN!";
+                        if(homeTeam.league.fullGameLog) gameEventLog += "\nFIRST DOWN!";
 
                     } else gameDown++;
                 }
@@ -1145,7 +1145,7 @@ public class Game implements Serializable {
                 // Only set new down and distance if there wasn't a TD
                 gameDown = 1;
                 gameYardsNeed = 10;
-                gameEventLog += "\nFIRST DOWN!";
+                if(homeTeam.league.fullGameLog) gameEventLog += "\nFIRST DOWN!";
             } else gameDown++;
         }
 
@@ -1419,7 +1419,7 @@ public class Game implements Serializable {
             gameYardLine = 20;
         }
         gamePoss = !gamePoss;
-        gameEventLog += getEventLog() + offense.abbr + " WR " + offense.getWR(4).name + " returns the punt to the " + gameYardLine + " yard line.";
+        if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " WR " + offense.getWR(4).name + " returns the punt to the " + gameYardLine + " yard line.";
 
         gameDown = 1;
         gameYardsNeed = 10;
@@ -1486,7 +1486,7 @@ public class Game implements Serializable {
                 awayScore += 6;
             }
         } else {
-            gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " rushed for " + yardsGain + " yards, and was tackled by " + defender + ".";
+            if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " rushed for " + yardsGain + " yards, and was tackled by " + defender + ".";
 
         }
     }
@@ -1778,8 +1778,8 @@ public class Game implements Serializable {
             return; // Run recordSafety then get out of recordSack (recordSafety() will take care of free kick)
         }
 
-        gameEventLog += getEventLog() + "SACK!\n" + " QB " + offense.getQB(0).name +
-                " was sacked for a loss of " + sackloss + " by " + defender + ".";
+        if(homeTeam.league.fullGameLog) gameEventLog += getEventLog() + "SACK!\n" + " QB " + offense.getQB(0).name +
+                    " was sacked for a loss of " + sackloss + " by " + defender + ".";
 
         gameDown++; // Advance gameDown after checking for Safety, otherwise game log reports Safety occurring one down later than it did
         gameYardsNeed += sackloss;
