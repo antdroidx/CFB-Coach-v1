@@ -29,10 +29,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2e09813f-84ff-46b8-a6e9-d2302e2d466e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/APK_FILES/2018-04-06-CFB-Coach-debug.apk" afterPath="$PROJECT_DIR$/APK_FILES/2018-04-06-CFB-Coach-debug.apk" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
     </list>
     <ignored path="CFB-Coach.iws" />
@@ -119,8 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>RB</find>
-      <find>Done</find>
       <find>this</find>
       <find>QB</find>
       <find>&gt;= 16</find>
@@ -149,6 +146,8 @@
       <find>starters</find>
       <find>Cornerback</find>
       <find>Stat</find>
+      <find>gameDown = 1</find>
+      <find>gamePoss</find>
     </findStrings>
     <replaceStrings>
       <replace>gameStr</replace>
@@ -1360,12 +1359,12 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/group_recruit.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlayerS.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       </list>
     </option>
   </component>
@@ -1412,7 +1411,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/ahngu/AndroidStudioProjects/CFB-Coach/src/main/java/Simulation/PlayerS.java" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1509006208751" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1523027295377" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1523083119682" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -1870,7 +1869,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2377" />
+      <option name="time" value="2380" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Unnamed">
@@ -2217,63 +2216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="373" column="0" lean-forward="false" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
-          <folding>
-            <element signature="method#Game#0;class#Game#0" expanded="false" />
-            <element signature="method#Game#1;class#Game#0" expanded="false" />
-            <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
-            <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLPass#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLRush#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLPass#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLRush#0;class#Game#0" expanded="false" />
-            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="e#14543#14673#0" expanded="false" />
-            <element signature="method#passingPlay#1;class#Game#0" expanded="false" />
-            <element signature="method#RushPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
-            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
-            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#recordRushAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#recordRushFumble#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassingTD#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassCompletion#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#recordDrop#0;class#Game#0" expanded="false" />
-            <element signature="method#recordDefended#0;class#Game#0" expanded="false" />
-            <element signature="method#recordInterception#0;class#Game#0" expanded="false" />
-            <element signature="e#72688#72773#0" expanded="false" />
-            <element signature="method#recordSack#0;class#Game#0" expanded="false" />
-            <element signature="e#74773#74783#0" expanded="false" />
-            <element signature="method#recordRecFumble#0;class#Game#0" expanded="false" />
-            <element signature="method#recordSafety#0;class#Game#0" expanded="false" />
-            <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
-            <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
-            <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
-            <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
-            <element signature="method#recoup#0;class#Game#0" expanded="false" />
-            <element signature="method#gameStatistics#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLogScoring#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLog#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLogScore#0;class#Game#0" expanded="false" />
-            <element signature="method#getPassYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getPasserRating#0;class#Game#0" expanded="false" />
-            <element signature="method#getRecYardsperCatch#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/java/util/ArrayList.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
@@ -2368,30 +2310,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
+        <state relative-caret-position="35180">
+          <caret line="2104" column="50" lean-forward="false" selection-start-line="2104" selection-start-column="50" selection-end-line="2104" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7308">
-          <caret line="495" column="41" lean-forward="false" selection-start-line="495" selection-start-column="41" selection-end-line="495" selection-end-column="41" />
+        <state relative-caret-position="2006">
+          <caret line="492" column="51" lean-forward="false" selection-start-line="492" selection-start-column="51" selection-end-line="492" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17332">
-          <caret line="261" column="59" lean-forward="false" selection-start-line="261" selection-start-column="59" selection-end-line="261" selection-end-column="59" />
+        <state relative-caret-position="3117">
+          <caret line="205" column="40" lean-forward="false" selection-start-line="205" selection-start-column="40" selection-end-line="205" selection-end-column="40" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="652" column="46" lean-forward="false" selection-start-line="652" selection-start-column="38" selection-end-line="652" selection-end-column="46" />
+          <folding>
+            <element signature="method#Game#0;class#Game#0" expanded="false" />
+            <element signature="method#Game#1;class#Game#0" expanded="false" />
+            <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
+            <element signature="method#coachAdv#0;class#Game#0" expanded="false" />
+            <element signature="method#getCompositeOLPass#0;class#Game#0" expanded="false" />
+            <element signature="method#getCompositeOLRush#0;class#Game#0" expanded="false" />
+            <element signature="method#getCompositeDLPass#0;class#Game#0" expanded="false" />
+            <element signature="method#getCompositeDLRush#0;class#Game#0" expanded="false" />
+            <element signature="method#playGame#0;class#Game#0" expanded="false" />
+            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
+            <element signature="e#14618#14748#0" expanded="false" />
+            <element signature="method#passingPlay#0;class#Game#0" expanded="false" />
+            <element signature="method#RushPlay#0;class#Game#0" expanded="false" />
+            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
+            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
+            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
+            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
+            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
+            <element signature="method#recordRushAttempt#0;class#Game#0" expanded="false" />
+            <element signature="method#recordRushFumble#0;class#Game#0" expanded="false" />
+            <element signature="method#recordPassingTD#0;class#Game#0" expanded="false" />
+            <element signature="method#recordPassCompletion#0;class#Game#0" expanded="false" />
+            <element signature="method#recordPassAttempt#0;class#Game#0" expanded="false" />
+            <element signature="method#recordDrop#0;class#Game#0" expanded="false" />
+            <element signature="method#recordDefended#0;class#Game#0" expanded="false" />
+            <element signature="method#recordInterception#0;class#Game#0" expanded="false" />
+            <element signature="e#74488#74573#0" expanded="false" />
+            <element signature="method#recordSack#0;class#Game#0" expanded="false" />
+            <element signature="e#76573#76583#0" expanded="false" />
+            <element signature="method#recordRecFumble#0;class#Game#0" expanded="false" />
+            <element signature="method#recordSafety#0;class#Game#0" expanded="false" />
+            <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
+            <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
+            <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
+            <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
+            <element signature="method#recoup#0;class#Game#0" expanded="false" />
+            <element signature="method#gameStatistics#0;class#Game#0" expanded="false" />
+            <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
+            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
+            <element signature="method#getEventLogScoring#0;class#Game#0" expanded="false" />
+            <element signature="method#getEventLog#0;class#Game#0" expanded="false" />
+            <element signature="method#getEventLogScore#0;class#Game#0" expanded="false" />
+            <element signature="method#getPassYards#0;class#Game#0" expanded="false" />
+            <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
+            <element signature="method#getPasserRating#0;class#Game#0" expanded="false" />
+            <element signature="method#getRecYardsperCatch#0;class#Game#0" expanded="false" />
+            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
+            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
+            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
