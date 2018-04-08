@@ -289,7 +289,7 @@ public class PlayerQB extends Player {
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
-        progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 6;
+        progression = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 7;
         int games = gamesStarted + (gamesPlayed-gamesStarted)/3;
 
         if (!isMedicalRS) {
@@ -454,8 +454,8 @@ public class PlayerQB extends Player {
     @Override
     public String getInfoForLineup() {
         if (injury != null)
-            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " " + injury.toString();
-        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getLetterGrade(ratPot) + " (" +
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
+        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratPassPow) + ", " + getLetterGrade(ratPassAcc) + ", " + getLetterGrade(ratEvasion) + ", " + getLetterGrade(ratSpeed) + ")";
     }
 
