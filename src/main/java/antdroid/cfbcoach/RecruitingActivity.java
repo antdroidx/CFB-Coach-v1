@@ -99,7 +99,7 @@ public class RecruitingActivity extends AppCompatActivity {
     int minDLs = 10;
     int minLBs = 8;
     int minCBs = 8;
-    int minSs = 3;
+    int minSs = 4;
 
     int redshirtCount = 0;
     int maxRedshirt = 6;

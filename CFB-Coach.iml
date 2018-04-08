@@ -115,9 +115,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:multidex-1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.github.danielemaddaluno.androidupdatechecker:library-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-26.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.8.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:design-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-26.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.0" level="project" />

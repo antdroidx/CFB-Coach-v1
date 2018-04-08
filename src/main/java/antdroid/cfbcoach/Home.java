@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.madx.updatechecker.lib.UpdateRunnable;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

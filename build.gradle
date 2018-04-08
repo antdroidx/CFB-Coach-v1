@@ -4,9 +4,6 @@ buildscript {
     repositories {
         jcenter()
         google()
-        maven {
-            url "https://jitpack.io"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.0'
@@ -52,6 +49,4 @@ dependencies {
     //testCompile 'junit:junit:4.12'
     implementation 'com.android.support:appcompat-v7:26.0.0'
     implementation 'com.android.support:design:26.0.0'
-    compile 'com.github.javiersantos:AppUpdater:2.6.5'
-
 }
