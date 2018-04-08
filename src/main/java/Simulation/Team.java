@@ -136,7 +136,7 @@ public class Team {
     public int minDLs = 10;
     public int minLBs = 8;
     public int minCBs = 8;
-    public int minSs = 4;
+    public int minSs = 5;
     
     public int startersQB = 1;
     public int startersRB = 2;
@@ -158,7 +158,7 @@ public class Team {
     public int subDL = 2;
     public int subLB = 2;
     public int subCB = 1;
-    public int subS = 2;
+    public int subS = 1;
 
     public int maxPlayers = 70;
     public int minRecruitStar = 5;
