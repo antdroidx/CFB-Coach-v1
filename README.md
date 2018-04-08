@@ -1,6 +1,6 @@
 # CFB-Coach
 
-College Football Coach 2017
+College Football Coach: Career Edition
 After getting permission from /u/jonesguy14 to post this, I am now releasing my expansion of College Football Coach for android. It's still in development, but should be fully functional now.
 Please share comments, suggestions, bugs, etc.
 
