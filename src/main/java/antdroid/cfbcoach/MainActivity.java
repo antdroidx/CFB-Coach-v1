@@ -598,6 +598,25 @@ public class MainActivity extends AppCompatActivity {
             showRecruitingClassDialog();
         }
 
+/*        if(simLeague.currentWeek == 0 & simLeague.getYear() == seasonStart) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Welcome Coach!\nThis is the main screen in the game. \n\nYou can set your depth chart, play the week, or choose your team strategy at the bottom. " +
+                    "To view Settings or check rankings, history, SAVE or import data, the menu button can be found in the upper right. \n\nAcross the middle of the screen is a series of buttons. " +
+                    "The News will update weekly with new headlines and articles about weekly results, future matchups, injury reports, key players, suspensions, and other information.")
+                    .setTitle("Tutorial")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing?
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }*/
+
     }
 
     @Override
@@ -823,6 +842,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
+        if(simLeague.currentWeek == 0 & simLeague.getYear() == seasonStart) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("This is the Game Schedule Screen. Here you can see the results and upcoming games for the selected team. You can click on each score button to see game results or scout future games. In the game log screen, you can choose the blue menu at the top to view more stats.")
+                    .setTitle("Tutorial")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing?
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
+
         mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
 

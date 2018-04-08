@@ -114,6 +114,8 @@ public class Player {
     public DecimalFormat df2 = new DecimalFormat(".##");
 
     protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
+    protected final String[] potGrades = {"F", "F", "D", "D", "C", "C", "B", "B", "A", "A"};
+
 
     public String getYrStr() {
         if (year == 0) {
@@ -206,20 +208,24 @@ public class Player {
             return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended (" + weeksSuspended + "wk)";
         }
         if (isWalkOn) {
-            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot) + " [WO]";
+            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " [WO]";
         }
-        return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
+        return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
     }
 
     public String getPosNameYrOvrPotTra_Str() {
         return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + " [Transfer]";
     }
 
+    public String getGraduatingPlayerInfo() {
+        return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr;
+    }
+
     public String getPosNameYrOvrPot_OneLine() {
         if (injury != null) {
             return position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + " " + injury.toString();
         }
-        return position + " " + getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
+        return position + " " + getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr;
     }
 
     public String getPosNameYrOvr_Str() {
@@ -227,11 +233,11 @@ public class Player {
     }
 
     public String getYrOvrPot_Str() {
-        return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
+        return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
     }
 
     public String getPosNameYrOvrPot_NoInjury() {
-        return position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getLetterGrade(ratPot);
+        return position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
     }
 
     public String getMockDraftStr() {
@@ -271,11 +277,10 @@ public class Player {
     /**
      * Convert a rating into a letter grade for potential, so 50 is a C instead of F
      */
-    protected String getLetterGradePot(int num) {
-        int ind = num / 10;
-        if (ind > 9) ind = 9;
-        if (ind < 0) ind = 0;
-        return letterGrades[ind];
+    protected int getPotRating(int pot, int ovr, int year, int hc) {
+        int potential;
+        potential = ovr + ((3*pot+2*hc)/50)*(4-year);
+        return potential;
     }
 
     public ArrayList<String> getDetailStatsList(int games) {

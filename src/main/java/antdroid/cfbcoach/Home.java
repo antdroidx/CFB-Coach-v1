@@ -10,11 +10,13 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -166,6 +168,25 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Welcome to College Football Coach: Career Edition\n\nApril 07, 2018" +
+                "\n+Added second Safety position" +
+                "\n+Added in All-Freshman Team Awards" +
+                "\n+Hide Potential Rating (replaced with Predicted Future Rating)" +
+                "\n+Removed Overall/Potential rating from Recruiting / Replaced with Scout Grade" +
+                "\n+Balanced Offense Strategies (Spread/West Coast Offense tweaks)" +
+                "\n+Added Settings option for FULL Play-By-Play Game Log (slower!)")
+                .setTitle("Update Log")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
     }
 

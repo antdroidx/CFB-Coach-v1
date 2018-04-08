@@ -2798,7 +2798,7 @@ public class Team {
         String description = issue[(int) (Math.random() * issue.length)];
         if (player.personality*Math.random() < Math.random()*HC.get(0).ratDiscipline) {
             player.isSuspended = true;
-            player.ratPot -= duration  * 2;
+            player.ratPot -= duration  * 3;
             player.ratFootIQ -= duration * 2;
             player.weeksSuspended = duration;
             player.troubledTimes++;
@@ -3647,7 +3647,7 @@ public class Team {
     public String[] getGradPlayersList() {
         String[] playersLeavingList = new String[playersLeaving.size()];
         for (int i = 0; i < playersLeavingList.length; ++i) {
-            playersLeavingList[i] = playersLeaving.get(i).getPosNameYrOvrPot_Str();
+            playersLeavingList[i] = playersLeaving.get(i).getGraduatingPlayerInfo();
         }
         for (int i = 0; i < playersTransferring.size(); ++i) {
             playersLeavingList[i] = playersTransferring.get(i).getPosNameYrOvrPotTra_Str();

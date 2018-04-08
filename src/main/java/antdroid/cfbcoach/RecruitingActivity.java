@@ -621,10 +621,13 @@ public class RecruitingActivity extends AppCompatActivity {
         String[] pi = p.split(",");
         String improveStr = "";
         String transfer = "";
-        if (pi[7].equals("true")) transfer = " [T]";
-        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
+        if (pi[7].equals("true")) transfer = " (Transfer)";
+        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p)) {
             improveStr = "(+" + pi[12] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr, " + pi[9] + " Pot " + improveStr + transfer;
+        } else {
+            improveStr = " (Recruit)";
+        }
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[11] + " " + improveStr + transfer;
     }
 
     /**
@@ -634,7 +637,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String[] pi = p.split(",");
         String improveStr = "";
         String transfer = "";
-        if (pi[7].equals("true")) transfer = " [T]";
+        if (pi[7].equals("true")) transfer = "  (Transfer)";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
             improveStr = "(+" + pi[12] + ")";
         return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[11] + " " + improveStr + transfer;
@@ -661,7 +664,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoPos(String p) {
         String[] pi = p.split(",");
-        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr, " + getGradePot(pi[9]) + " Pot";
+        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr";
     }
 
 
@@ -1312,7 +1315,7 @@ public class RecruitingActivity extends AppCompatActivity {
             final TextView potential = convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
-            potential.setText("\nFootball IQ: " + getGrade(playerCSV.split(",")[5]) + "\nPotential: " + getGradePot(playerCSV.split(",")[9]) + "\n" +
+            potential.setText("\nFootball IQ: " + getGrade(playerCSV.split(",")[5]) + "\n" +
                     "Personality: " + getGrade(playerCSV.split(",")[4])+ "\n" +
                     "Durability: " + getGrade(playerCSV.split(",")[10]));
 
@@ -1427,8 +1430,8 @@ class PlayerTeamStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(" ");
         String[] psB = b.split(" ");
-        int ovrA = Integer.parseInt(psA[3]);
-        int ovrB = Integer.parseInt(psB[3]);
+        int ovrA = Integer.parseInt(psA[4]);
+        int ovrB = Integer.parseInt(psB[4]);
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
