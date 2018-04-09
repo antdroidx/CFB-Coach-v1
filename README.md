@@ -1,6 +1,7 @@
 # CFB-Coach
 
-College Football Coach 2017
+**College Football Coach: Career Edition**
+
 After getting permission from /u/jonesguy14 to post this, I am now releasing my expansion of College Football Coach for android. It's still in development, but should be fully functional now.
 Please share comments, suggestions, bugs, etc.
 
@@ -22,7 +23,7 @@ _Implemented Updates/Features:_
 
 
 **[Game Simulation]**
-* New Player Positions
+* New Player Positions (1 TE, 2 Safeties, 3 LBs, 4 DLs, Kick Returners, etc.)
 * New Head Coach position which affects player progression new
 * More Player Attributes new
 * New Sim Game logic updated
@@ -38,11 +39,13 @@ _Implemented Updates/Features:_
 * Medical Redshirting new
 * Undergrad & Graduate Transfers
 * Player Suspensions and Dismissals
+* Full Game Play-by-Play Logging Option
+* Year End Awards
 
 **[Interface]**
 * UI Re-Design (more buttons!)
-* Updated material design
-*  Full Teaam history
+* Updated Material Dark design
+* Full Teaam history
 * AP Poll History Menu
 * More team and player stats updated
 * Player Individual Rankings Menu new
@@ -53,16 +56,8 @@ _Implemented Updates/Features:_
 * Other things under the hood
 
 
-Future Features?!?
-* expand recruiting features
-* themes - changing over to material design slowly.
-* External saves for off-line editing
-* collapsible conference standings
-* import/export rosters
-
-
 Github source code & apk download:
-https://github.com/minotauri/CFB-Coach
+https://github.com/antdroidx/CFB-Coach/
 
 
 **Installation**
@@ -77,7 +72,7 @@ There are two versions available, "release" and "debug" -- the debug versions se
 
 
 DEBUGGING HELP:
-https://github.com/minotauri/CFB-Coach/wiki/Debugging
+https://github.com/antdroidx/CFB-Coach/wiki/Debugging
 
 Screenshots: https://imgur.com/a/ohO8g
 
