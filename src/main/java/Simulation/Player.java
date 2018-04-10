@@ -40,8 +40,10 @@ public class Player {
 
     public int careerGames;
     public int careerHeismans;
+    public int careerTopFreshman;
     public int careerAllAmerican;
     public int careerAllConference;
+    public int careerAllFreshman;
     public int careerWins;
 
     public boolean isRedshirt;
@@ -69,8 +71,10 @@ public class Player {
     public int costBaseRating = 35;
     public int locationDiscount = 15;
     public int minGamesPot = 4;
-    public int allConfPotBonus = 5;
+    public int allConfPotBonus = 4;
     public int allAmericanBonus = 5;
+    public int allFreshmanBonus = 4;
+    public int topBonus = 3;
 
     public double qbImportance = 1;
     public double rbImportance = 1.5;
@@ -169,6 +173,7 @@ public class Player {
             else if (calcOvr> team.two) pRat = 2;
             else pRat = 1;
         }
+        if (isWalkOn) pRat = 0;
 
         return pRat;
     }
@@ -198,19 +203,36 @@ public class Player {
     }
 
     public String getPosNameYrOvrPot_Str() {
-        if (injury != null) {
-            return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">" + injury.toString();
+        if (team.league.hidePotential) {
+            if (injury != null) {
+                return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">" + injury.toString();
+            }
+            if (isTransfer) {
+                return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
+            }
+            if (isSuspended) {
+                return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended (" + weeksSuspended + "wk)";
+            }
+            if (isWalkOn) {
+                return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + " [WO]";
+            }
+            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr;
+        } else {
+
+            if (injury != null) {
+                return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">" + injury.toString();
+            }
+            if (isTransfer) {
+                return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
+            }
+            if (isSuspended) {
+                return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended (" + weeksSuspended + "wk)";
+            }
+            if (isWalkOn) {
+                return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " [WO]";
+            }
+            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
         }
-        if (isTransfer) {
-            return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Transfer";
-        }
-        if (isSuspended) {
-            return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ">Suspended (" + weeksSuspended + "wk)";
-        }
-        if (isWalkOn) {
-            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " [WO]";
-        }
-        return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
     }
 
     public String getPosNameYrOvrPotTra_Str() {
@@ -278,6 +300,7 @@ public class Player {
      * Convert a rating into a letter grade for potential, so 50 is a C instead of F
      */
     protected int getPotRating(int pot, int ovr, int year, int hc) {
+        if (team.league.hidePotential) return 0;
         int potential;
         potential = ovr + ((3*pot+2*hc)/50)*(4-year);
         return potential;
@@ -313,6 +336,8 @@ public class Player {
         if (heis > 0) awards.add(heis + "x POTY");
         if (aa > 0) awards.add(aa + "x All-Amer");
         if (ac > 0) awards.add(ac + "x All-Conf");
+        if(careerTopFreshman  > 0 || wonTopFreshman) awards.add("Top Freshman");
+        if(careerAllFreshman > 0 || wonAllFreshman) awards.add("All-Fresh");
 
         String awardsStr = "";
         for (int i = 0; i < awards.size(); ++i) {

@@ -1,7 +1,6 @@
 package Simulation;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -204,31 +203,38 @@ public class Game implements Serializable {
         homeReturner = new ArrayList<>();
         awayReturner = new ArrayList<>();
         //Choose Kickoff Returners
-        for (int i = 1; i < homeTeam.startersWR + homeTeam.subWR; i++) {
-            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamWRs.get(i).name, "WR", homeTeam.teamWRs.get(i).ratSpeed, homeTeam.teamWRs.get(i).ratEvasion ));
+        for (int i = 0; i < homeTeam.startersWR + homeTeam.subWR; i++) {
+            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamWRs.get(i).name, "WR", homeTeam.teamWRs.get(i).ratSpeed, (float)(homeTeam.teamWRs.get(i).ratSpeed*Math.random()) ));
         }
-        for (int i = 1; i < homeTeam.startersRB + homeTeam.subRB; i++) {
-            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamRBs.get(i).name, "RB", homeTeam.teamRBs.get(i).ratSpeed, homeTeam.teamRBs.get(i).ratEvasion ));
+        for (int i = 0; i < homeTeam.startersRB + homeTeam.subRB; i++) {
+            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamRBs.get(i).name, "RB", homeTeam.teamRBs.get(i).ratSpeed, (float)(homeTeam.teamRBs.get(i).ratSpeed*Math.random()) ));
         }
-        /*for (int i = 1; i < homeTeam.startersCB + homeTeam.subCB; i++) {
-            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamCBs.get(i).name, "CB", homeTeam.teamCBs.get(i).ratSpeed, homeTeam.teamCBs.get(i).ratEvasion));
-        }*/
-        for (int i = 1; i < awayTeam.startersWR + awayTeam.subWR; i++) {
-            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamWRs.get(i).name, "WR", awayTeam.teamWRs.get(i).ratSpeed, awayTeam.teamWRs.get(i).ratEvasion));
+        for (int i = 0; i < homeTeam.startersCB + homeTeam.subCB; i++) {
+            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamCBs.get(i).name, "CB", homeTeam.teamCBs.get(i).ratSpeed, (float)(homeTeam.teamCBs.get(i).ratSpeed*Math.random()) ));
         }
-        for (int i = 1; i < awayTeam.startersRB + awayTeam.subRB; i++) {
-            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamRBs.get(i).name, "RB", awayTeam.teamRBs.get(i).ratSpeed, awayTeam.teamRBs.get(i).ratEvasion));
-/*        }
-        for (int i = 1; i < awayTeam.startersCB + awayTeam.subCB; i++) {
-            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamCBs.get(i).name, "CB", awayTeam.teamCBs.get(i).ratSpeed));
-            */
+        for (int i = 0; i < awayTeam.startersWR + awayTeam.subWR; i++) {
+            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamWRs.get(i).name, "WR", awayTeam.teamWRs.get(i).ratSpeed, (float)(awayTeam.teamWRs.get(i).ratSpeed*Math.random()) ));
+        }
+        for (int i = 0; i < awayTeam.startersRB + awayTeam.subRB; i++) {
+            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamRBs.get(i).name, "RB", awayTeam.teamRBs.get(i).ratSpeed, (float)(awayTeam.teamWRs.get(i).ratSpeed*Math.random()) ));
+        }
+        for (int i = 0; i < awayTeam.startersCB + awayTeam.subCB; i++) {
+            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamCBs.get(i).name, "CB", awayTeam.teamCBs.get(i).ratSpeed, (float)(awayTeam.teamWRs.get(i).ratSpeed*Math.random()) ));
         }
 
         Collections.sort(homeReturner, new CompReturners());
         Collections.sort(awayReturner, new CompReturners());
+        
+        homeReturner.get(0).gameSpeed = (float) (homeReturner.get(0).ratSpeed * Math.random() );
+        homeReturner.get(1).gameSpeed = (float) (homeReturner.get(1).ratSpeed * Math.random() );
+        awayReturner.get(0).gameSpeed = (float) (awayReturner.get(0).ratSpeed * Math.random() );
+        awayReturner.get(1).gameSpeed = (float) (awayReturner.get(1).ratSpeed * Math.random() );
+        
+        if(homeReturner.get(0).gameSpeed > homeReturner.get(1).gameSpeed) homeKickReturner = homeReturner.get(0);
+        else homeKickReturner = homeReturner.get(1);
 
-        homeKickReturner = homeReturner.get(0);
-        awayKickReturner = awayReturner.get(0);
+        if(awayReturner.get(0).gameSpeed > awayReturner.get(1).gameSpeed) awayKickReturner = awayReturner.get(0);
+        else awayKickReturner = awayReturner.get(1);
         
         homeKickReturner.kYards = 0;
         homeKickReturner.kReturns = 0;
@@ -1576,7 +1582,7 @@ public class Game implements Serializable {
             }
             tdInfo = returner.team + " " + returner.position + " " + returner.name + " returns the punt for a TOUCHDOWN!";
             homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Punt Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a punt this week for a touchdown!");
-            returner.kTD++;
+            returner.pTD++;
             kickXP(defense, offense);
             if (!playingOT) kickOff(defense, offense);
             else resetForOT();
@@ -1602,7 +1608,7 @@ public class Game implements Serializable {
     }
 
     private int returnPlay(int startYards, PlayerK kicker, PlayerReturner returner, int ST, boolean kickoff) {
-        int yards, rYards;
+        int yards, rYards=0;
         //Kicker kicks the ball
         if(kickoff) yards = startYards - (kicker.ratKickPow / 2) - (int) (25 * Math.random());
         else yards = startYards - (kicker.ratKickPow - (25 + (int)(20 * Math.random())));
@@ -1612,10 +1618,16 @@ public class Game implements Serializable {
             return yards;
         } else {
             //Returner receives ball and runs at defense
-            rYards = (int) (returner.ratSpeed*Math.random() - ST*Math.random() * Math.random() );
 
+            int ret = (int) (returner.ratSpeed * Math.random());
+            int def = (int) (ST*Math.random());
 
-            if (rYards <= 0) rYards = (int)(Math.random()*10) + 1;
+            //Returner tackled by playerST?
+            if(def >= ret) rYards = (int)(Math.random()*10) + 1;
+            else if (ret > def + 80) rYards += 100 - yards;
+            else if (ret > def + 50) rYards = (int)Math.random()*40 + 30;
+            else if (ret > def + 35) rYards = (int)Math.random()*20 + 20;
+            else rYards = ret - def;
 
             if (kickoff) {
                 returner.kYards += rYards;
@@ -2059,6 +2071,82 @@ public class Game implements Serializable {
         }
     }
 
+    private void recordReturnStats() {
+        if (homeKickReturner.position == "RB") {
+            for (int i = 0; i < homeTeam.startersRB + homeTeam.subRB; i++) {
+                if (homeTeam.getRB(i).name.equals(homeKickReturner.name)) {
+                    homeTeam.getRB(i).statsKickRets += homeKickReturner.kReturns;
+                    homeTeam.getRB(i).statsKickRetYards += homeKickReturner.kYards;
+                    homeTeam.getRB(i).statsKickRetTDs += homeKickReturner.kTD;
+                    homeTeam.getRB(i).statsPuntRets += homeKickReturner.pReturns;
+                    homeTeam.getRB(i).statsPuntRetYards += homeKickReturner.pYards;
+                    homeTeam.getRB(i).statsPuntRetTDs += homeKickReturner.pTD;
+                    homeTeam.getRB(i).statsRetGames++;
+                }
+            }
+        } else if (homeKickReturner.position == "WR") {
+            for (int i = 0; i < homeTeam.startersWR + homeTeam.subWR; i++) {
+                if (homeTeam.getWR(i).name.equals(homeKickReturner.name)) {
+                    homeTeam.getWR(i).statsKickRets += homeKickReturner.kReturns;
+                    homeTeam.getWR(i).statsKickRetYards += homeKickReturner.kYards;
+                    homeTeam.getWR(i).statsKickRetTDs += homeKickReturner.kTD;
+                    homeTeam.getWR(i).statsPuntRets += homeKickReturner.pReturns;
+                    homeTeam.getWR(i).statsPuntRetYards += homeKickReturner.pYards;
+                    homeTeam.getWR(i).statsPuntRetTDs += homeKickReturner.pTD;
+                    homeTeam.getWR(i).statsRetGames++;
+                }
+            }
+        } else {
+            for (int i = 0; i < homeTeam.startersCB + homeTeam.subCB; i++) {
+                if (homeTeam.getCB(i).name.equals(homeKickReturner.name)) {
+                    homeTeam.getCB(i).statsKickRets += homeKickReturner.kReturns;
+                    homeTeam.getCB(i).statsKickRetYards += homeKickReturner.kYards;
+                    homeTeam.getCB(i).statsKickRetTDs += homeKickReturner.kTD;
+                    homeTeam.getCB(i).statsPuntRets += homeKickReturner.pReturns;
+                    homeTeam.getCB(i).statsPuntRetYards += homeKickReturner.pYards;
+                    homeTeam.getCB(i).statsPuntRetTDs += homeKickReturner.pTD;
+                    homeTeam.getCB(i).statsRetGames++;
+                }
+            }
+        }
+
+        if (awayKickReturner.position == "RB") {
+            for (int i = 0; i < awayTeam.startersRB + awayTeam.subRB; i++) {
+                if (awayTeam.getRB(i).name.equals(awayKickReturner.name)) {
+                    awayTeam.getRB(i).statsKickRets += awayKickReturner.kReturns;
+                    awayTeam.getRB(i).statsKickRetYards += awayKickReturner.kYards;
+                    awayTeam.getRB(i).statsKickRetTDs += awayKickReturner.kTD;
+                    awayTeam.getRB(i).statsPuntRets += awayKickReturner.pReturns;
+                    awayTeam.getRB(i).statsPuntRetYards += awayKickReturner.pYards;
+                    awayTeam.getRB(i).statsPuntRetTDs += awayKickReturner.pTD;
+                }
+            }
+        } else if (awayKickReturner.position == "WR") {
+            for (int i = 0; i < awayTeam.startersWR + awayTeam.subWR; i++) {
+                if (awayTeam.getWR(i).name.equals(awayKickReturner.name)) {
+                    awayTeam.getWR(i).statsKickRets += awayKickReturner.kReturns;
+                    awayTeam.getWR(i).statsKickRetYards += awayKickReturner.kYards;
+                    awayTeam.getWR(i).statsKickRetTDs += awayKickReturner.kTD;
+                    awayTeam.getWR(i).statsPuntRets += awayKickReturner.pReturns;
+                    awayTeam.getWR(i).statsPuntRetYards += awayKickReturner.pYards;
+                    awayTeam.getWR(i).statsPuntRetTDs += awayKickReturner.pTD;
+                }
+            }
+        } else {
+            for (int i = 0; i < awayTeam.startersCB + awayTeam.subCB; i++) {
+                if (awayTeam.getCB(i).name.equals(awayKickReturner.name)) {
+                    awayTeam.getCB(i).statsKickRets += awayKickReturner.kReturns;
+                    awayTeam.getCB(i).statsKickRetYards += awayKickReturner.kYards;
+                    awayTeam.getCB(i).statsKickRetTDs += awayKickReturner.kTD;
+                    awayTeam.getCB(i).statsPuntRets += awayKickReturner.pReturns;
+                    awayTeam.getCB(i).statsPuntRetYards += awayKickReturner.pYards;
+                    awayTeam.getCB(i).statsPuntRetTDs += awayKickReturner.pTD;
+                }
+            }
+        }
+
+    }
+
     //CLOCK AND HEALTH MANAGEMENT
 
     private void addPointsQuarter(int points) {
@@ -2341,6 +2429,8 @@ public class Game implements Serializable {
 
         if (homeKickReturner.pReturns > 0) hpReturnAvg = (double)(homeKickReturner.pYards/homeKickReturner.pReturns);
         if (awayKickReturner.pReturns > 0) apReturnAvg = (double)(awayKickReturner.pYards/awayKickReturner.pReturns);
+
+        recordReturnStats();
 
     }
 

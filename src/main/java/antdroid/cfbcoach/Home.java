@@ -170,7 +170,15 @@ public class Home extends AppCompatActivity {
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Welcome to College Football Coach: Career Edition\n\nApril 07, 2018" +
+        builder.setMessage("Welcome to College Football Coach: Career Edition\n\n" +
+                "April 09, 2018" +
+                "\n+Implemented Special Teams into Game Simulation" +
+                "\n+Kick & Punt Returner Season Stats Tracking" +
+                "\n+Returner Stats added to Awards scoring" +
+                "\n+New In-Season Awards Watch Menu" +
+                "\n+Option to Enable/Disable Potential Rating Display" +
+                "\n+Player Height/Weight Info" +
+                "\n\nApril 07, 2018" +
                 "\n+Added second Safety position" +
                 "\n+Added in All-Freshman Team Awards" +
                 "\n+Hide Potential Rating (replaced with Predicted Future Rating)" +

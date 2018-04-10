@@ -40,7 +40,15 @@ public class PlayerQB extends Player {
     public int careerRushTD;
     public int careerFumbles;
 
-    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int acc, int eva, int spd) {
+    //Size Config
+    private int hAvg = 75;
+    private int hMax = 4;
+    private int hMin = -5;
+    private int wAvg = 223;
+    private int wMax = 30;
+    private int wMin = -35;
+
+    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int acc, int eva, int spd, int h, int w) {
         team = t;
         name = nm;
         year = yr;
@@ -62,6 +70,8 @@ public class PlayerQB extends Player {
         personality = trait;
         troubledTimes = 0;
         recruitRating = scout;
+        height = h;
+        weight = w;
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -76,6 +86,9 @@ public class PlayerQB extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+
         statsWins = 0;
 
         careerPassAtt = 0;
@@ -91,13 +104,15 @@ public class PlayerQB extends Player {
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
         careerWins = 0;
 
         position = "QB";
     }
 
-    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
-                    int pow, int acc, int eva, int spd, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
+    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int pow, int acc, int eva, int spd, int h, int w, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
                     int cRushAtt, int cRushYards, int cRushTD, int cFumbles) {
         team = t;
         name = nm;
@@ -117,10 +132,13 @@ public class PlayerQB extends Player {
         if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
         isTransfer = transfer;
+        isWalkOn = wo;
         region = reg;
         personality = trait;
         troubledTimes = 0;
         recruitRating = scout;
+        height = h;
+        weight = w;
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -136,6 +154,9 @@ public class PlayerQB extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+
         statsWins = 0;
 
         careerPassAtt = cPassAtt;
@@ -153,6 +174,8 @@ public class PlayerQB extends Player {
         careerHeismans = cHeismans;
         careerAllAmerican = cAA;
         careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
         careerWins = cWins;
 
         position = "QB";
@@ -204,6 +227,9 @@ public class PlayerQB extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+
         statsWins = 0;
 
         careerPassAtt = 0;
@@ -220,9 +246,13 @@ public class PlayerQB extends Player {
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
         careerWins = 0;
 
         position = "QB";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
     }
 
     public PlayerQB(String nm, int yr, int stars, Team t, Boolean custom) {
@@ -243,11 +273,8 @@ public class PlayerQB extends Player {
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
-        if (yr == 1) {
-            recruitRating = 0;
-        } else {
-            recruitRating = getScoutingGrade();
-        }
+        if(custom) isWalkOn = true;
+        recruitRating = getScoutingGrade();
 
         troubledTimes = 0;
 
@@ -265,6 +292,8 @@ public class PlayerQB extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
         statsWins = 0;
 
         careerPassAtt = 0;
@@ -281,9 +310,13 @@ public class PlayerQB extends Player {
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
         careerWins = 0;
 
         position = "QB";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
     }
 
     @Override
@@ -296,6 +329,11 @@ public class PlayerQB extends Player {
             year++;
             if (wonAllConference) ratPot += (int)Math.random()*allConfPotBonus;
             if (wonAllAmerican) ratPot += (int)Math.random()*allAmericanBonus;
+            if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
+            if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
+            if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+
+
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
 
             ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
@@ -332,6 +370,8 @@ public class PlayerQB extends Player {
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
         if (wonAllConference) careerAllConference++;
+        if (wonAllFreshman) careerAllFreshman++;
+        if (wonTopFreshman) careerTopFreshman++;
 
         statsPassAtt = 0;
         statsPassComp = 0;
@@ -405,6 +445,7 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + df2.format(((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10)) + " yds");
@@ -423,6 +464,7 @@ public class PlayerQB extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);

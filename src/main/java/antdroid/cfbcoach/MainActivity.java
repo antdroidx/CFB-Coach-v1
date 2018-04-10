@@ -639,20 +639,53 @@ public class MainActivity extends AppCompatActivity {
               Clicked Heisman watch in drop down menu
              */
             if (simLeague.currentWeek < 13) {
-                String heismanTop5Str = simLeague.getTop5HeismanStr();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(heismanTop5Str)
-                        .setTitle("Player of the Year Watch")
+                builder.setTitle("Player of the Year Watch")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //do nothing?
                             }
-                        });
+                        })
+                        .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                TextView textView = dialog.findViewById(android.R.id.message);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+                ArrayList<String> rankings = new ArrayList<String>();
+                String[] rankingsSelection =
+                        {"Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall"};
+                Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+                ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, rankingsSelection);
+                teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
+
+                final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
+                final TeamRankingsListArrayAdapter teamRankingsAdapter =
+                        new TeamRankingsListArrayAdapter(this, rankings, userTeam.abbr);
+                teamRankingsList.setAdapter(teamRankingsAdapter);
+
+                teamRankingsSpinner.setOnItemSelectedListener(
+                        new AdapterView.OnItemSelectedListener() {
+                            public void onItemSelected(
+                                    AdapterView<?> parent, View view, int position, long id) {
+                                ArrayList<String> rankings = simLeague.getAwardsWatch(position);
+                                if (position == 12) {
+                                    teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
+                                } else {
+                                    teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
+                                }
+                                teamRankingsAdapter.clear();
+                                teamRankingsAdapter.addAll(rankings);
+                                teamRankingsAdapter.notifyDataSetChanged();
+                            }
+
+                            public void onNothingSelected(AdapterView<?> parent) {
+                                // do nothing
+                            }
+                        });
+
             } else {
                 // Show dialog with All American spinner too
                 heismanCeremony();
@@ -1382,7 +1415,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showTeamRankingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Team Rankings")
+        builder.setTitle("Team Statistical Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1414,7 +1447,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
-                        if (position == 16) {
+                        if (position == 15) {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
                         } else {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
@@ -1432,7 +1465,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showPlayerRankingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Player Rankings")
+        builder.setTitle("Player Statistical Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1446,9 +1479,8 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
                 {"Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
-                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct",
-                        "Coach - Overall", "QB - Overall", "RB - Overall", "WR - Overall", "TE - Overall", "OL - Overall", "K - Overall", "DL - Overall", "LB - Overall", "CB - Overall", "S - Overall",
-                        "Coach - Career Score"
+                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct","Kick Return Yards", "Kick Return TDs", "Punt Return Yards", "Punt Return TDs",
+                        "Coach - Overall", "Coach - Career Score"
                 };
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
@@ -1466,7 +1498,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getPlayerRankStr(position);
-                        if (position == 21) {
+                        if (position == 22) {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
                         } else {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
@@ -2103,6 +2135,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
         checkboxGameLog.setChecked(simLeague.fullGameLog);
 
+        final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
+        checkboxPotential.setChecked(simLeague.hidePotential);
+
         Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
         Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
@@ -2113,6 +2148,7 @@ public class MainActivity extends AppCompatActivity {
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
+                simLeague.hidePotential = checkboxPotential.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
@@ -2149,6 +2185,7 @@ public class MainActivity extends AppCompatActivity {
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
+                simLeague.hidePotential = checkboxPotential.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
@@ -3140,7 +3177,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readRosterFile(Uri uri) throws IOException {
-        boolean custom = true;
+        boolean custom = false;
 
         //METHOD USED FOR CREATING NEW ROSTER FROM CUSTOM FILE
         for (int i = 0; i < simLeague.teamList.size(); ++i) {
