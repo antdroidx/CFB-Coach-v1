@@ -13,7 +13,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+import java.lang.String;
 import java.util.Random;
+import android.content.Context;
+
+
+import antdroid.cfbcoach.R;
 
 /**
  * League class. Has 6 conferences of 10 teams each.
@@ -237,6 +242,7 @@ public class League extends Rankings {
             if (isNameValid(n.trim()))
                 lastNameList.add(n.trim());
         }
+
         disciplineTimes = (int) (Math.random() * 2) + 1;
         disciplineWeekA = (int) (Math.random() * 13);
         disciplineWeekB = (int) (Math.random() * 13);
@@ -607,7 +613,6 @@ public class League extends Rankings {
                 conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
                 conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
                 conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
-
 
         //Create new Bowl Game Names from TXT
         try {
