@@ -9,8 +9,8 @@
     <string name="action_top_25_history">Poll History</string>
     <string name="action_current_team_history">Team History</string>
     <string name="action_team_history">Coach History</string>
-    <string name="action_rankings">Team Rankings</string>
-    <string name="action_player_rankings">Player Rankings</string>
+    <string name="action_rankings">Team Stats</string>
+    <string name="action_player_rankings">Individual Stats</string>
     <string name="action_heisman">Post-Season Awards</string>
     <string name="action_import">Import Data</string>
     <string name="action_news_stories">News Stories</string>

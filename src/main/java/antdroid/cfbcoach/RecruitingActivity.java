@@ -110,6 +110,9 @@ public class RecruitingActivity extends AppCompatActivity {
     int three = 68;
     int two = 58;
 
+    int height;
+    int weight;
+
     // Whether to show pop ups every recruit
     private boolean showPopUp;
 
@@ -525,61 +528,63 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return  "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return  "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nPass Strength: " + getGrade(ps[13]) +
                     "\nPass Accuracy: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nSpeed: " + getGrade(ps[16]);
         } else if (pos.equals("RB")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nPower: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nCatching: " + getGrade(ps[16]);
         } else if (pos.equals("WR")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nCatching: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nJumping: " + getGrade(ps[16]);
         } else if (pos.equals("TE")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nCatching: " + getGrade(ps[13]) +
                     "\nRush Blk: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nSpeed: " + getGrade(ps[16]);
         } else if (pos.equals("OL")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nStrength: " + getGrade(ps[13]) +
                     "\nRush Blk: " + getGrade(ps[14]) +
                     "\nPass Blk: " + getGrade(ps[15]) +
                     "\nAwareness: " + getGrade(ps[16]);
         } else if (pos.equals("K")) {
-            return  "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return  "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nKick Power: " + getGrade(ps[13]) +
                     "\nAccuracy: " + getGrade(ps[14]) +
                     "\nClumsiness: " + getGrade(ps[15]) +
                     "\nPressure: " + getGrade(ps[16]);
         } else if (pos.equals("DL")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nStrength: " + getGrade(ps[13]) +
                     "\nRun Stop: " + getGrade(ps[14]) +
                     "\nPass Press: " + getGrade(ps[15]) +
                     "\nTackling: " + getGrade(ps[16]);
         } else if (pos.equals("LB")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nCoverage: " + getGrade(ps[13]) +
                     "\nRun Stop: " + getGrade(ps[14]) +
                     "\nTackling: " + getGrade(ps[15]) +
                     "\nSpeed: " + getGrade(ps[16]);
         } else if (pos.equals("CB")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+
                     "\nCoverage: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nTackling: " + getGrade(ps[15]) +
                     "\nJumping: " + getGrade(ps[16]);
         } else if (pos.equals("S")) {
-            return "Home Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+
                     "\nCoverage: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nTackling: " + getGrade(ps[15]) +
@@ -794,7 +799,7 @@ public class RecruitingActivity extends AppCompatActivity {
         appendPlayers(sb, teamCBs, 3);
 
         sb.append("\nSs (Need: " + needSs + ")\n");
-        appendPlayers(sb, teamSs, 1);
+        appendPlayers(sb, teamSs, 2);
 
         sb.append("\nRedshirted Players:\n");
         for (String rp : playersRedshirted) {
@@ -1315,7 +1320,7 @@ public class RecruitingActivity extends AppCompatActivity {
             final TextView potential = convertView.findViewById(R.id.textRecruitPotential);
 
             details.setText(playerDetail);
-            potential.setText("\nFootball IQ: " + getGrade(playerCSV.split(",")[5]) + "\n" +
+            potential.setText("Height: " + getHeight(Integer.parseInt(playerCSV.split(",")[17])) + "\nWeight: " + getWeight(Integer.parseInt(playerCSV.split(",")[18])) + "\nFootball IQ: " + getGrade(playerCSV.split(",")[5]) + "\n" +
                     "Personality: " + getGrade(playerCSV.split(",")[4])+ "\n" +
                     "Durability: " + getGrade(playerCSV.split(",")[10]));
 
@@ -1410,6 +1415,18 @@ public class RecruitingActivity extends AppCompatActivity {
         else if (region == 3) location = "East";
         else location = "South";
         return location;
+    }
+
+    public String getHeight(int height) {
+
+        int feet = height / 12;
+        int leftover = height % 12;
+
+        return feet + "'' " + leftover + "\"";
+    }
+
+    public String getWeight(int weight) {
+        return weight + " lbs";
     }
 
 }

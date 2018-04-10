@@ -13,14 +13,27 @@ public class PlayerReturner {
     public int pReturns;
     public int pTD;
     public int startPos;
+    public float gameSpeed;
 
-    public PlayerReturner(String tm, String nm, String pos, int speed, int evasion) {
+    public PlayerReturner(String tm, String nm, String pos, int speed, float gs) {
         team = tm;
         name = nm;
         position = pos;
         ratSpeed = speed;
-        ratEvasion = evasion;
+        gameSpeed = gs;
         int yards = 0;
+    }
+
+    public PlayerReturner(String tm, String nm, String pos, int kr, int ky, int kt, int pr, int py, int pt) {
+        team = tm;
+        name = nm;
+        position = pos;
+        kReturns = kr;
+        kYards = ky;
+        kTD = kt;
+        pReturns = pr;
+        pYards = py;
+        pTD = pt;
     }
 
     public String getInitialName() {

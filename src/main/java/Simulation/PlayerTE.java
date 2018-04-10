@@ -37,7 +37,15 @@ public class PlayerTE extends Player {
     public int careerDrops;
     public int careerFumbles;
 
-    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cat, int blk, int eva, int spd) {
+    //Size Config
+    private int hAvg = 76;
+    private int hMax = 3;
+    private int hMin = -2;
+    private int wAvg = 254;
+    private int wMax = 30;
+    private int wMin = -20;
+
+    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cat, int blk, int eva, int spd, int h, int w) {
         team = t;
         name = nm;
         year = yr;
@@ -59,6 +67,8 @@ public class PlayerTE extends Player {
         region = reg;
         personality = trait;
         recruitRating = scout;
+        height = h;
+        weight = w;
 
         troubledTimes = 0;
 
@@ -71,6 +81,9 @@ public class PlayerTE extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+
         statsWins = 0;
 
         careerTargets = 0;
@@ -83,14 +96,16 @@ public class PlayerTE extends Player {
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
         careerWins = 0;
 
         position = "TE";
     }
 
 
-    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC,
-                    int cat, int blk, int eva, int spd, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles) {
+    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int cat, int blk, int eva, int spd, int h, int w, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles) {
         team = t;
         name = nm;
         year = yr;
@@ -110,9 +125,12 @@ public class PlayerTE extends Player {
         wasRedshirt = wasRS;
 
         isTransfer = transfer;
+        isWalkOn = wo;
         region = reg;
         personality = trait;
         recruitRating = scout;
+        height = h;
+        weight = w;
 
         troubledTimes = 0;
 
@@ -125,6 +143,9 @@ public class PlayerTE extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+
         statsWins = 0;
 
         careerTargets = cTargets;
@@ -137,6 +158,8 @@ public class PlayerTE extends Player {
         careerHeismans = cHeismans;
         careerAllAmerican = cAA;
         careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
         careerWins = cWins;
 
         position = "TE";
@@ -182,6 +205,9 @@ public class PlayerTE extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+
         statsWins = 0;
 
         careerTargets = 0;
@@ -194,9 +220,13 @@ public class PlayerTE extends Player {
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
         careerWins = 0;
 
         position = "TE";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
     }
 
     public PlayerTE(String nm, int yr, int stars, Team t, boolean custom) {
@@ -217,11 +247,8 @@ public class PlayerTE extends Player {
         region = (int)(Math.random()*5);
         personality = (int) (50 + 50 * Math.random());
 
-        if (yr == 1) {
-            recruitRating = 0;
-        } else {
-            recruitRating = getScoutingGrade();
-        }
+        if(custom) isWalkOn = true;
+        recruitRating = getScoutingGrade();
 
         troubledTimes = 0;
 
@@ -234,6 +261,8 @@ public class PlayerTE extends Player {
         wonHeisman = false;
         wonAllAmerican = false;
         wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
         statsWins = 0;
 
         careerTargets = 0;
@@ -246,9 +275,13 @@ public class PlayerTE extends Player {
         careerHeismans = 0;
         careerAllAmerican = 0;
         careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
         careerWins = 0;
 
         position = "TE";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
     }
 
     @Override
@@ -261,6 +294,10 @@ public class PlayerTE extends Player {
             year++;
             if (wonAllConference) ratPot += (int)Math.random()*allConfPotBonus;
             if (wonAllAmerican) ratPot += (int)Math.random()*allAmericanBonus;
+            if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
+            if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
+            if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
 
             ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
@@ -292,6 +329,8 @@ public class PlayerTE extends Player {
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
         if (wonAllConference) careerAllConference++;
+        if (wonAllFreshman) careerAllFreshman++;
+        if (wonTopFreshman) careerTopFreshman++;
 
         statsTargets = 0;
         statsReceptions = 0;
@@ -323,6 +362,7 @@ public class PlayerTE extends Player {
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
@@ -340,6 +380,7 @@ public class PlayerTE extends Player {
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
+        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
