@@ -57,7 +57,7 @@ public class PlayerRB extends Player {
     //Size Config
     private int hAvg = 71;
     private int hMax = 4;
-    private int hMin = -8;
+    private int hMin = -4;
     private int wAvg = 215;
     private int wMax = 30;
     private int wMin = -20;
