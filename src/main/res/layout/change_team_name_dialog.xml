@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,10 +21,11 @@
             android:text="Name:" />
 
         <EditText
+            android:id="@+id/editTextChangeName"
             android:layout_width="0dip"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextChangeName" />
+            android:layout_weight="3"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <TextView
@@ -41,14 +43,14 @@
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Abbr:" />
 
         <EditText
             android:id="@+id/editTextChangeAbbr"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="3" />
+            android:layout_weight="3"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <TextView
@@ -73,7 +75,8 @@
             android:id="@+id/editTextChangeConf"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="3" />
+            android:layout_weight="3"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -99,7 +102,8 @@
             android:id="@+id/editTextChangeHC"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="3" />
+            android:layout_weight="3"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -195,7 +199,8 @@
         android:id="@+id/buttonChangeTeams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resign Job" />
+        android:text="Resign Job"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -210,11 +215,11 @@
             android:id="@+id/buttonCancelChangeName" />
 
         <Button
+            android:id="@+id/buttonOkChangeName"
             android:layout_width="0dip"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="OK"
-            android:id="@+id/buttonOkChangeName" />
+            android:layout_weight="1"
+            android:text="OK" />
     </LinearLayout>
 
 </LinearLayout>
