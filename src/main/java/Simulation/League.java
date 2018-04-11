@@ -1499,61 +1499,6 @@ public class League extends Rankings {
     }
 
     /**
-     * Get string of the top 5 heisman candidates. If the heisman is already decided, get the ceremony str.
-     *
-     * @return string of top 5 players and their stats
-     */
-    public String getTop5HeismanStr() {
-        if (heismanDecided) {
-            return getHeismanCeremonyStr();
-        } else {
-            ArrayList<Player> heismanCandidates = getHeisman();
-            //full results string
-            String heismanTop5 = "";
-            for (int i = 0; i < 10; ++i) {
-                Player p = heismanCandidates.get(i);
-                heismanTop5 += (i + 1) + ". " + p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ";
-                if (p instanceof PlayerQB) {
-                    PlayerQB pqb = (PlayerQB) p;
-                    heismanTop5 += " QB " + pqb.name + " [" + pqb.getYrStr() +
-                            "]\n \t\t(" + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs\n\n";
-                } else if (p instanceof PlayerRB) {
-                    PlayerRB prb = (PlayerRB) p;
-                    heismanTop5 += " RB " + prb.name + " [" + prb.getYrStr() +
-                            "]\n \t\t(" + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
-                } else if (p instanceof PlayerWR) {
-                    PlayerWR pwr = (PlayerWR) p;
-                    heismanTop5 += " WR " + pwr.name + " [" + pwr.getYrStr() +
-                            "]\n \t\t(" + pwr.statsRecTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds)\n\n";
-                } else if (p instanceof PlayerTE) {
-                    PlayerTE pte = (PlayerTE) p;
-                    heismanTop5 += " WR " + pte.name + " [" + pte.getYrStr() +
-                            "]\n \t\t(" + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
-                } else if (p instanceof PlayerDL) {
-                    PlayerDL pdl = (PlayerDL) p;
-                    heismanTop5 += " DL " + pdl.name + " [" + pdl.getYrStr() +
-                            "]\n \t\t(" + pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum)\n\n";
-                } else if (p instanceof PlayerLB) {
-                    PlayerLB plb = (PlayerLB) p;
-                    heismanTop5 += " LB " + plb.name + " [" + plb.getYrStr() +
-                            "]\n \t\t(" + plb.statsTackles + " Tkl, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int)\n\n";
-                } else if (p instanceof PlayerCB) {
-                    PlayerCB pcb = (PlayerCB) p;
-                    heismanTop5 += " CB " + pcb.name + " [" + pcb.getYrStr() +
-                            "]\n \t\t(" + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
-                } else if (p instanceof PlayerS) {
-                    PlayerS ps = (PlayerS) p;
-                    heismanTop5 += " S " + ps.name + " [" + ps.getYrStr() +
-                            "]\n \t\t(" + ps.statsTackles + " Tkl, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int)\n\n";
-                }
-
-            }
-            return heismanTop5;
-        }
-    }
-
-    /**
      * Perform the heisman ceremony. Congratulate winner and give top 5 vote getters.
      *
      * @return string of the heisman ceremony.
@@ -1799,61 +1744,6 @@ public class League extends Rankings {
     }
 
     /**
-     * Get string of the top 5 heisman candidates. If the heisman is already decided, get the ceremony str.
-     *
-     * @return string of top 5 players and their stats
-     */
-    public String getTop5FreshmanStr() {
-        if (heismanDecided) {
-            return getFreshmanCeremonyStr();
-        } else {
-            ArrayList<Player> freshmanCandidates = getTopFreshman();
-            //full results string
-            String freshmanTop5 = "";
-            for (int i = 0; i < 10; ++i) {
-                Player p = freshmanCandidates.get(i);
-                freshmanTop5 += (i + 1) + ". " + p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ";
-                if (p instanceof PlayerQB) {
-                    PlayerQB pqb = (PlayerQB) p;
-                    freshmanTop5 += " QB " + pqb.name + " [" + pqb.getYrStr() +
-                            "]\n \t\t(" + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs)\n\n";
-                } else if (p instanceof PlayerRB) {
-                    PlayerRB prb = (PlayerRB) p;
-                    freshmanTop5 += " RB " + prb.name + " [" + prb.getYrStr() +
-                            "]\n \t\t(" + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
-                } else if (p instanceof PlayerWR) {
-                    PlayerWR pwr = (PlayerWR) p;
-                    freshmanTop5 += " WR " + pwr.name + " [" + pwr.getYrStr() +
-                            "]\n \t\t(" + pwr.statsRecTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds)\n\n";
-                } else if (p instanceof PlayerTE) {
-                    PlayerTE pte = (PlayerTE) p;
-                    freshmanTop5 += " TE " + pte.name + " [" + pte.getYrStr() +
-                            "]\n \t\t(" + pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds)\n\n";
-                } else if (p instanceof PlayerDL) {
-                    PlayerDL pdl = (PlayerDL) p;
-                    freshmanTop5 += " DL " + pdl.name + " [" + pdl.getYrStr() +
-                            "]\n \t\t(" + pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum)\n\n";
-                } else if (p instanceof PlayerLB) {
-                    PlayerLB plb = (PlayerLB) p;
-                    freshmanTop5 += " LB " + plb.name + " [" + plb.getYrStr() +
-                            "]\n \t\t(" + plb.statsTackles + " Tkl, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int)\n\n";
-                } else if (p instanceof PlayerCB) {
-                    PlayerCB pcb = (PlayerCB) p;
-                    freshmanTop5 += " CB " + pcb.name + " [" + pcb.getYrStr() +
-                            "]\n \t\t(" + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
-                } else if (p instanceof PlayerS) {
-                    PlayerS ps = (PlayerS) p;
-                    freshmanTop5 += " S " + ps.name + " [" + ps.getYrStr() +
-                            "]\n \t\t(" + ps.statsTackles + " Tkl, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int)\n\n";
-                }
-
-            }
-            return freshmanTop5;
-        }
-    }
-
-    /**
      * Gets All Freshman
      *
      * @return string list of all americans
@@ -1982,7 +1872,7 @@ public class League extends Rankings {
             } else {
                 allFreshmanTeam.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
-            allFreshmanTeam.append(" \t\tOverall: " + p.ratOvr + ", Potential: " + p.getLetterGrade(p.ratPot) + "\n\n>");
+            allFreshmanTeam.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
         }
 
         return allFreshmanTeam.toString();
@@ -2306,7 +2196,7 @@ public class League extends Rankings {
             } else {
                 allAmerican.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
-            allAmerican.append(" \t\tOverall: " + p.ratOvr + ", Potential: " + p.getLetterGrade(p.ratPot) + "\n\n>");
+            allAmerican.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
         }
 
 
@@ -2368,7 +2258,7 @@ public class League extends Rankings {
             } else {
                 sb.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
-            sb.append(" \t\tOverall: " + p.ratOvr + ", Potential: " + p.getLetterGrade(p.ratPot) + "\n\n>");
+            sb.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
         }
 
         return sb.toString();

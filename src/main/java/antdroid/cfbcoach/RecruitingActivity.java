@@ -76,6 +76,12 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> availSs;
     private ArrayList<String> availAll;
     private ArrayList<String> avail50;
+
+    private ArrayList<String> west;
+    private ArrayList<String> midwest;
+    private ArrayList<String> central;
+    private ArrayList<String> east;
+
     private ArrayList<String> recruitDisplay;
 
     private int needQBs;
@@ -164,6 +170,10 @@ public class RecruitingActivity extends AppCompatActivity {
 
         avail50 = new ArrayList<String>();
         availAll = new ArrayList<String>();
+        west = new ArrayList<>();
+        midwest = new ArrayList<>();
+        central = new ArrayList<>();
+        east = new ArrayList<>();
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -232,6 +242,19 @@ public class RecruitingActivity extends AppCompatActivity {
         while (i < lines.length) {
             playerInfo = lines[i].split(",");
             availAll.add(lines[i]);
+            if(playerInfo[3].equals("0")) {
+                west.add(lines[i]);
+            }
+            if(playerInfo[3].equals("1")) {
+                midwest.add(lines[i]);
+            }
+            if(playerInfo[3].equals("2")) {
+                central.add(lines[i]);
+            }
+            if(playerInfo[3].equals("3")) {
+                east.add(lines[i]);
+            }
+
             if (playerInfo[0].equals("QB")) {
                 availQBs.add(lines[i]);
             } else if (playerInfo[0].equals("RB")) {
@@ -294,7 +317,10 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("LB (Need: " + needLBs + ")");
         positions.add("CB (Need: " + needCBs + ")");
         positions.add("S (Need: " + needSs + ")");
-
+        positions.add("West (" + west.size() + ")");
+        positions.add("Midwest (" + midwest.size() + ")");
+        positions.add("Central (" + central.size() + ")");
+        positions.add("East (" + east.size() + ")");
 
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -380,6 +406,10 @@ public class RecruitingActivity extends AppCompatActivity {
                             removeUnaffordable(availLBs);
                             removeUnaffordable(availCBs);
                             removeUnaffordable(availSs);
+                            removeUnaffordable(west);
+                            removeUnaffordable(midwest);
+                            removeUnaffordable(central);
+                            removeUnaffordable(east);
                             // Notify that players were removed
                             expListAdapter.notifyDataSetChanged();
                         }
@@ -506,8 +536,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
-        //return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Ovr: " + getGrade(ps[11]) + " | Pot: " + getGradePot(ps[9]);
-        return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Grade: " + getScoutGrade((4*Integer.parseInt(ps[11]) + Integer.parseInt(ps[9]))/5);
+        return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Grade: " + getStarGrade(ps[6]);
     }
 
     /**
@@ -606,16 +635,20 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getScoutGrade(int num) {
         int pRat = num;
         if (pRat > five) return "* * * * *";
-        else if (pRat > four) return " * * * *";
+        else if (pRat > four) return " * * * * ";
         else if (pRat > three) return " * * * ";
         else if (pRat > two) return "  * * ";
         else return "  *  ";
     }
 
-    private String getGradePot(String num) {
+    private String getStarGrade(String num) {
         int pRat = (Integer.parseInt(num));
-        if (pRat > 84) return "??";
-        if (pRat > 67) return "??";
+        if (pRat == 5) return " * * * * *";
+        if (pRat == 4) return " * * * *  ";
+        if (pRat == 3) return " * * *    ";
+        if (pRat == 2) return " * *      ";
+        if (pRat == 1) return " *        ";
+
         else return  "??";
     }
 
@@ -628,32 +661,11 @@ public class RecruitingActivity extends AppCompatActivity {
         String transfer = "";
         if (pi[7].equals("true")) transfer = " (Transfer)";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p)) {
-            improveStr = "(+" + pi[12] + ")";
+            improveStr = "(+" + pi[13] + ")";
         } else {
             improveStr = " (Recruit)";
         }
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[11] + " " + improveStr + transfer;
-    }
-
-    /**
-     * Converts the lines from the file into readable lines
-     */
-    private String getReadablePlayerInfoPotDisplay(String p) {
-        String[] pi = p.split(",");
-        String improveStr = "";
-        String transfer = "";
-        if (pi[7].equals("true")) transfer = "  (Transfer)";
-        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p))
-            improveStr = "(+" + pi[12] + ")";
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[11] + " " + improveStr + transfer;
-    }
-
-    /**
-     * Converts the lines from the file into readable lines, without revealing potential - used for recruiting to database
-     */
-    private String getReadablePlayerInfoNoPot(String p) {
-        String[] pi = p.split(",");
-        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr";
+        return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[12] + " " + improveStr + transfer;
     }
 
     /**
@@ -661,7 +673,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoDisplay(String p) {
         String[] pi = p.split(",");
-        return getInitialName(pi[1]) + " [Overall: " + getGrade(pi[11]) + "]";
+        return pi[6] + "-Star " + pi[0] + " " + getInitialName(pi[1]);
     }
 
     /**
@@ -701,7 +713,7 @@ public class RecruitingActivity extends AppCompatActivity {
      * Called whenever new position is selected, updates all the components
      */
     private void updateForNewPosition(int position) {
-        if (position > 1) {
+        if (position > 1 && position < 12) {
             String[] splitty = currentPosition.split(" ");
             setPlayerList(splitty[0]);
             setPlayerInfoMap(splitty[0]);
@@ -710,9 +722,18 @@ public class RecruitingActivity extends AppCompatActivity {
             // See top 100 recruits
             if (position == 0) {
                 players = avail50;
+            } else if(position == 12) {
+                players = west;
+            } else if(position == 13) {
+                players = midwest;
+            } else if(position == 14) {
+                players = central;
+            } else if(position == 15) {
+                players = east;
             } else {
                 players = availAll;
             }
+
             playersInfo = new LinkedHashMap<String, List<String>>();
             for (String p : players) {
                 ArrayList<String> pInfoList = new ArrayList<String>();
@@ -753,6 +774,10 @@ public class RecruitingActivity extends AppCompatActivity {
             positions.add("LB (Need: " + needLBs + ")");
             positions.add("CB (Need: " + needCBs + ")");
             positions.add("S (Need: " + needSs + ")");
+            positions.add("West (" + west.size() + ")");
+            positions.add("Midwest (" + midwest.size() + ")");
+            positions.add("Central (" + central.size() + ")");
+            positions.add("East (" + east.size() + ")");
 
             dataAdapterPosition.clear();
             for (String p : positions) {
@@ -873,7 +898,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Recruiting");
-                builder.setMessage("Your team roster is at " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
+                builder.setMessage("Your team roster is at " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -994,7 +1019,18 @@ public class RecruitingActivity extends AppCompatActivity {
         if (availAll.contains(player)) {
             availAll.remove(player);
         }
-
+        if (west.contains(player)) {
+            west.remove(player);
+        }
+        if (midwest.contains(player)) {
+            midwest.remove(player);
+        }
+        if (central.contains(player)) {
+            central.remove(player);
+        }
+        if (east.contains(player)) {
+            east.remove(player);
+        }
         playersRecruited.add(player);
 
         // Also need to add recruited player to correct team list and remove from avail list
@@ -1187,7 +1223,18 @@ public class RecruitingActivity extends AppCompatActivity {
         if (availAll.contains(player)) {
             availAll.remove(player);
         }
-
+        if (west.contains(player)) {
+            west.remove(player);
+        }
+        if (midwest.contains(player)) {
+            midwest.remove(player);
+        }
+        if (central.contains(player)) {
+            central.remove(player);
+        }
+        if (east.contains(player)) {
+            east.remove(player);
+        }
         playersRedshirted.add(player);
 
         // Also need to add recruited player to correct team list and remove from avail list

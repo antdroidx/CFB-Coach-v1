@@ -42,8 +42,8 @@ public class PlayerQB extends Player {
 
     //Size Config
     private int hAvg = 75;
-    private int hMax = 4;
-    private int hMin = -5;
+    private int hMax = 3;
+    private int hMin = -4;
     private int wAvg = 223;
     private int wMax = 30;
     private int wMin = -35;

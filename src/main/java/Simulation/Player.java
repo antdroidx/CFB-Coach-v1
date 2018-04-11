@@ -8,7 +8,8 @@ import java.util.ArrayList;
  *
  * @author Achi
  */
-public class Player {
+public class
+Player {
 
     public Team team;
     public String name;
@@ -159,11 +160,12 @@ public class Player {
 
     public int getScoutingGrade(){
         int pRat;
+        int scout = (3*ratOvr + ratPot) / 4;
         if (year < 2) {
-            if (ratOvr > team.five) pRat = 5;
-            else if (ratOvr > team.four) pRat = 4;
-            else if (ratOvr > team.three) pRat = 3;
-            else if (ratOvr > team.two) pRat = 2;
+            if (scout > team.five) pRat = 5;
+            else if (scout > team.four) pRat = 4;
+            else if (scout > team.three) pRat = 3;
+            else if (scout > team.two) pRat = 2;
             else pRat = 1;
         } else {
             int calcOvr = ratOvr - (year * (100-ratPot)/7);
