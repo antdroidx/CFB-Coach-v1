@@ -52,7 +52,7 @@ public class PlayerWR extends Player {
 
     //Size Config
     private int hAvg = 73;
-    private int hMax = 5;
+    private int hMax = 4;
     private int hMin = -5;
     private int wAvg = 206;
     private int wMax = 30;

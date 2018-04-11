@@ -16,7 +16,7 @@
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Name:" />
 
         <EditText
@@ -41,7 +41,7 @@
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Abbr:" />
 
         <EditText
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Conf:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
             android:id="@+id/editTextChangeConf"
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="HC:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
             android:id="@+id/editTextChangeHC"
@@ -119,7 +119,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Show weekly pop-ups:" />
 
         <CheckBox
@@ -137,7 +137,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Show injury report:" />
 
         <CheckBox
@@ -156,7 +156,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Show Full Game Play by Play:" />
 
         <CheckBox
@@ -175,7 +175,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Hide Potential Rating:" />
 
         <CheckBox
@@ -188,7 +188,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15sp">
+        android:layout_marginTop="10sp">
     </LinearLayout>
 
     <Button

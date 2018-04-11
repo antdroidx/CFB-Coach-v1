@@ -47,7 +47,6 @@ import Simulation.League;
 import Simulation.Conference;
 import Simulation.Game;
 import Simulation.HeadCoach;
-import Simulation.League;
 import Simulation.Player;
 import Simulation.PlayerCB;
 import Simulation.PlayerDL;
@@ -741,7 +740,7 @@ public class MainActivity extends AppCompatActivity {
             /*
               Let user change their team name and abbr
              */
-            changeTeamNameDialog();
+            changeSettingsDialog();
         }
 
         return super.onOptionsItemSelected(item);
@@ -1967,7 +1966,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Open dialog that allows users to change their name and/or abbr.
      */
-    private void changeTeamNameDialog() {
+    private void changeSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Settings / Editor")
                 .setView(getLayoutInflater().inflate(R.layout.change_team_name_dialog, null));
@@ -2146,11 +2145,6 @@ public class MainActivity extends AppCompatActivity {
         cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                showToasts = checkboxShowPopup.isChecked();
-                showInjuryReport = checkboxShowInjury.isChecked();
-                simLeague.fullGameLog = checkboxGameLog.isChecked();
-                simLeague.hidePotential = checkboxPotential.isChecked();
-                userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
         });
