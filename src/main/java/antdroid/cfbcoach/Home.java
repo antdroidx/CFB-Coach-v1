@@ -169,7 +169,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+/*        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Welcome to College Football Coach: Career Edition\n\n" +
                 "April 09, 2018" +
                 "\n+Implemented Special Teams into Game Simulation" +
@@ -194,7 +194,7 @@ public class Home extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
         TextView textView = dialog.findViewById(android.R.id.message);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);*/
 
     }
 
