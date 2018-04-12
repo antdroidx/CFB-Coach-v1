@@ -290,6 +290,11 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new PlayerRecruitStrCompOverall());
+        Collections.sort(west, new PlayerRecruitStrCompOverall());
+        Collections.sort(midwest, new PlayerRecruitStrCompOverall());
+        Collections.sort(central, new PlayerRecruitStrCompOverall());
+        Collections.sort(east, new PlayerRecruitStrCompOverall());
+
         avail50 = new ArrayList<String>(availAll.subList(0, 49));
 
         // Get needs for each position
@@ -1562,8 +1567,8 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        int ovrA = (4*Integer.parseInt(psA[11])+Integer.parseInt(psA[9])) / 5;
-        int ovrB = (4*Integer.parseInt(psB[11])+Integer.parseInt(psB[9])) / 5;
+        float ovrA = (4*Integer.parseInt(psA[11])+Integer.parseInt(psA[9])) / 5;
+        float ovrB = (4*Integer.parseInt(psB[11])+Integer.parseInt(psB[9])) / 5;
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
