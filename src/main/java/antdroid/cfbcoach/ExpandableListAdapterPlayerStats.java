@@ -64,8 +64,8 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
             if (playerDetail.substring(0, 3).equals("[I]")) {
                 itemL.setText(detailSplit[0].substring(3));
                 itemR.setText(detailSplit[1]);
-                itemL.setTextColor(Color.RED);
-                itemR.setTextColor(Color.RED);
+                itemL.setTextColor(Color.YELLOW);
+                itemR.setTextColor(Color.YELLOW);
             } else if (playerDetail.substring(0, 3).equals("[T]")) {
                 itemL.setText(detailSplit[0].substring(3));
                 itemR.setText(detailSplit[1]);
@@ -74,8 +74,8 @@ public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter 
             } else if (playerDetail.substring(0, 3).equals("[S]")) {
                 itemL.setText(detailSplit[0].substring(3));
                 itemR.setText(detailSplit[1]);
-                itemL.setTextColor(Color.RED);
-                itemR.setTextColor(Color.RED);
+                itemL.setTextColor(Color.MAGENTA);
+                itemR.setTextColor(Color.MAGENTA);
             } else if (playerDetail.contains("[RS]")) {
                 itemL.setText(detailSplit[0]);
                 itemR.setText(detailSplit[1]);

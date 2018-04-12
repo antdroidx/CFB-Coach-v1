@@ -3382,11 +3382,17 @@ public class League extends Rankings {
         }
 
         Collections.sort(allPlayersLeaving, new CompPlayer());
+        ArrayList<Player> NFLPlayers = new ArrayList<>();
 
-        // Get 100 players (first 4 rounds)
-        ArrayList<Player> NFLPlayers = new ArrayList<>(96);
-        for (int i = 0; i < 96; ++i) {
-            NFLPlayers.add(allPlayersLeaving.get(i));
+        if(allPlayersLeaving.size() > 224) {
+            for (int i = 0; i < 224; ++i) {
+                NFLPlayers.add(allPlayersLeaving.get(i));
+            }
+        } else {
+            // Get 100 players (first 4 rounds)
+            for (int i = 0; i < 96; ++i) {
+                NFLPlayers.add(allPlayersLeaving.get(i));
+            }
         }
 
         String[] nflPlayers = new String[NFLPlayers.size()];
@@ -4544,7 +4550,7 @@ public class League extends Rankings {
     }
     
     public ArrayList<String> getAwardsWatch(int selection) {
-        int rankNum = 100;
+        int rankNum = 40;
         ArrayList<String> rankings = new ArrayList<String>();
         switch (selection) {
             case 0:

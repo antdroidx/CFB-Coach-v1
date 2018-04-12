@@ -350,7 +350,7 @@ public class PlayerTE extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsRecTD * 250 - statsFumbles * 75 + statsReceptions *2 - statsDrops * 25 + statsRecYards * 2 + ratOvr*10 + team.teamPrestige*2 + team.confPrestige*3 + (120 - team.rankTeamPollScore)*2;
+        return statsRecTD * 250 - statsFumbles * 75 + statsReceptions *2 - statsDrops * 25 + statsRecYards * 2 + ratOvr*10 + team.teamPrestige*3 + team.confPrestige*3 + (120 - team.rankTeamPollScore)*2;
     }
 
     @Override
