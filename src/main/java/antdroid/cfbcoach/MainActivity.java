@@ -2531,6 +2531,7 @@ public class MainActivity extends AppCompatActivity {
                         // Actually go back to main menu
                         Intent myIntent = new Intent(MainActivity.this, Home.class);
                         MainActivity.this.startActivity(myIntent);
+                        finish();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
