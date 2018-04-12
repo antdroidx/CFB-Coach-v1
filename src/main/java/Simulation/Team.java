@@ -93,7 +93,7 @@ public class Team {
     public int rankTeamSOS;
     public int teamCount = 12;
     public int totalTeamCount = teamCount * 10;
-    public int ratTransfer = 72;
+    public int ratTransfer = 71;
     public int promotionNum = -2;
 
     //prestige/talent improvements
@@ -128,14 +128,14 @@ public class Team {
     public ArrayList<Player> teamSRs;
 
     public int minQBs = 3;
-    public int minRBs = 6;
+    public int minRBs = 5;
     public int minWRs = 8;
     public int minTEs = 3;
-    public int minOLs = 12;
+    public int minOLs = 11;
     public int minKs = 2;
     public int minDLs = 10;
-    public int minLBs = 8;
-    public int minCBs = 8;
+    public int minLBs = 7;
+    public int minCBs = 7;
     public int minSs = 5;
     
     public int startersQB = 1;
@@ -161,6 +161,7 @@ public class Team {
     public int subS = 1;
 
     public int maxPlayers = 70;
+    public int minPlayers = 65;
     public int minRecruitStar = 5;
     public int maxStarRating = 10;
     int five = 84;
@@ -189,7 +190,9 @@ public class Team {
 
     public HeadCoach headcoach;
     private static final int NFL_OVR = 90;
+    private static final int sophNFL = 4;
     private static final double NFL_CHANCE = 0.67;
+    private static final double NFL_CHANCE_SOPH = 0.25;
 
     public int leagueOffTal;
     public int leagueDefTal;
@@ -1360,7 +1363,7 @@ public class Team {
 
         int i = 0;
         while (i < teamQBs.size()) {
-            if (teamQBs.get(i).year == 4 && !teamQBs.get(i).isTransfer || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamQBs.get(i).year == 4 && !teamQBs.get(i).isTransfer || (teamQBs.get(i).year == 3 && teamQBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE) || (teamQBs.get(i).year == 2 && teamQBs.get(i).ratOvr > NFL_OVR + sophNFL && Math.random() < NFL_CHANCE_SOPH)) {
                 playersLeaving.add(teamQBs.get(i));
                 teamQBs.remove(i);
             } else {
@@ -1371,7 +1374,7 @@ public class Team {
 
         i = 0;
         while (i < teamRBs.size()) {
-            if (teamRBs.get(i).year == 4  && !teamRBs.get(i).isTransfer || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamRBs.get(i).year == 4  && !teamRBs.get(i).isTransfer || (teamRBs.get(i).year == 3 && teamRBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)|| (teamRBs.get(i).year == 2 && teamRBs.get(i).ratOvr > NFL_OVR + sophNFL && Math.random() < NFL_CHANCE_SOPH)) {
                 playersLeaving.add(teamRBs.get(i));
                 teamRBs.remove(i);
             } else {
@@ -1382,7 +1385,7 @@ public class Team {
 
         i = 0;
         while (i < teamWRs.size()) {
-            if (teamWRs.get(i).year == 4  && !teamWRs.get(i).isTransfer || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamWRs.get(i).year == 4  && !teamWRs.get(i).isTransfer || (teamWRs.get(i).year == 3 && teamWRs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)|| (teamWRs.get(i).year == 2 && teamWRs.get(i).ratOvr > NFL_OVR + sophNFL && Math.random() < NFL_CHANCE_SOPH)) {
                 playersLeaving.add(teamWRs.get(i));
                 teamWRs.remove(i);
             } else {
@@ -1426,7 +1429,7 @@ public class Team {
 
         i = 0;
         while (i < teamDLs.size()) {
-            if (teamDLs.get(i).year == 4  && !teamDLs.get(i).isTransfer || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamDLs.get(i).year == 4  && !teamDLs.get(i).isTransfer || (teamDLs.get(i).year == 3 && teamDLs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE) || (teamDLs.get(i).year == 2 && teamDLs.get(i).ratOvr > NFL_OVR + sophNFL && Math.random() < NFL_CHANCE_SOPH)) {
                 playersLeaving.add(teamDLs.get(i));
                 teamDLs.remove(i);
             } else {
@@ -1437,7 +1440,7 @@ public class Team {
 
         i = 0;
         while (i < teamLBs.size()) {
-            if (teamLBs.get(i).year == 4  && !teamLBs.get(i).isTransfer || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamLBs.get(i).year == 4  && !teamLBs.get(i).isTransfer || (teamLBs.get(i).year == 3 && teamLBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)|| (teamLBs.get(i).year == 2 && teamLBs.get(i).ratOvr > NFL_OVR + sophNFL && Math.random() < NFL_CHANCE_SOPH)) {
                 playersLeaving.add(teamLBs.get(i));
                 teamLBs.remove(i);
             } else {
@@ -1448,7 +1451,7 @@ public class Team {
 
         i = 0;
         while (i < teamCBs.size()) {
-            if (teamCBs.get(i).year == 4  && !teamCBs.get(i).isTransfer || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)) {
+            if (teamCBs.get(i).year == 4  && !teamCBs.get(i).isTransfer || (teamCBs.get(i).year == 3 && teamCBs.get(i).ratOvr > NFL_OVR && Math.random() < NFL_CHANCE)|| (teamCBs.get(i).year == 2 && teamCBs.get(i).ratOvr > NFL_OVR + 5 && Math.random() < NFL_CHANCE_SOPH)) {
                 playersLeaving.add(teamCBs.get(i));
                 teamCBs.remove(i);
             } else {
@@ -1870,9 +1873,29 @@ public class Team {
             }
             int s = minSs - (teamSs.size() - numTransfers);
 
+            int rosterSize = getTeamSize();
+
+            for(int i = rosterSize; i < minPlayers; i++) {
+                int x = (int)(Math.random()*9) + 1;
+                if (x==1) qb++;
+                if (x==2) rb++;
+                if (x==3) wr++;
+                if (x==4) te++;
+                if (x==5) ol++;
+                if (x==6) dl++;
+                if (x==7) lb++;
+                if (x==8) cb++;
+                if (x==9) s++;
+            }
+
             recruitPlayersFreshman(qb, rb, wr, te, ol, k, dl, lb, cb, s);
             resetStats();
         }
+    }
+
+    public int getTeamSize() {
+        int size = teamQBs.size() + teamRBs.size() + teamWRs.size() + teamTEs.size() + teamOLs.size() + teamKs.size() + teamDLs.size() + teamLBs.size() + teamCBs.size() + teamSs.size();
+        return size;
     }
 
     /**
