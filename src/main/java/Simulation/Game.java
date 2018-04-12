@@ -83,6 +83,8 @@ public class Game implements Serializable {
     private int snapCount = 0;
 
     private double hkReturnAvg = 0, akReturnAvg = 0, hpReturnAvg = 0, apReturnAvg = 0;
+    
+    private int returnYards;
 
     Random rand = new Random();
 
@@ -1475,8 +1477,8 @@ public class Game implements Serializable {
                     } else {
                         awayScore += 6;
                     }
-                    tdInfo = returner.team + " " + returner.position + " "  + returner.name + " returns the kick for a TOUCHDOWN!";
-                    homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " KO Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a kick-off this week for a touchdown!");
+                    tdInfo = returner.team + " " + returner.position + " "  + returner.name + " returns the kick " + returnYards + " yards for a TOUCHDOWN!";
+                    homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Kick-Off Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a kick-off " + returnYards + " yards this week for a touchdown!");
                     returner.kTD++;
                     kickXP(defense, offense);
                     if (!playingOT) kickOff(defense, offense);
@@ -1542,8 +1544,8 @@ public class Game implements Serializable {
                     } else {
                         awayScore += 6;
                     }
-                    tdInfo = returner.team + " " + returner.position + " "  + returner.name + " returns the kick for a TOUCHDOWN!";
-                    homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " FK Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a kick this week for a touchdown!");
+                    tdInfo = returner.team + " " + returner.position + " "  + returner.name + " returns the kick " + returnYards + " yards for a TOUCHDOWN!";
+                    homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Free-Kick Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a free-kick " + returnYards + " yards this week for a touchdown!");
                     returner.kTD++;
                     kickXP(defense, offense);
                     if (!playingOT) kickOff(defense, offense);
@@ -1580,8 +1582,8 @@ public class Game implements Serializable {
             } else {
                 awayScore += 6;
             }
-            tdInfo = returner.team + " " + returner.position + " " + returner.name + " returns the punt for a TOUCHDOWN!";
-            homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Punt Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a punt this week for a touchdown!");
+            tdInfo = returner.team + " " + returner.position + " "  + returner.name + " returns the punt " + returnYards + " yards for a TOUCHDOWN!";
+            homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Punt Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a punt " + returnYards + " yards this week for a touchdown!");
             returner.pTD++;
             kickXP(defense, offense);
             if (!playingOT) kickOff(defense, offense);
@@ -1608,7 +1610,9 @@ public class Game implements Serializable {
     }
 
     private int returnPlay(int startYards, PlayerK kicker, PlayerReturner returner, int ST, boolean kickoff) {
-        int yards, rYards=0;
+        int yards;
+        returnYards = 0;
+
         //Kicker kicks the ball
         if(kickoff) yards = startYards - (kicker.ratKickPow / 2) - (int) (25 * Math.random());
         else yards = startYards - (kicker.ratKickPow - (25 + (int)(20 * Math.random())));
@@ -1623,20 +1627,20 @@ public class Game implements Serializable {
             int def = (int) (ST*Math.random());
 
             //Returner tackled by playerST?
-            if(def >= ret) rYards = (int)(Math.random()*10) + 1;
-            else if (ret > def + 80) rYards += 100 - yards;
-            else if (ret > def + 50) rYards = (int)Math.random()*40 + 30;
-            else if (ret > def + 35) rYards = (int)Math.random()*20 + 20;
-            else rYards = ret - def;
+            if(def >= ret) returnYards = (int)(Math.random()*10) + 1;
+            else if (ret > def + 80) returnYards += 100 - yards;
+            else if (ret > def + 50) returnYards = (int)Math.random()*40 + 30;
+            else if (ret > def + 35) returnYards = (int)Math.random()*20 + 20;
+            else returnYards = ret - def;
 
             if (kickoff) {
-                returner.kYards += rYards;
+                returner.kYards += returnYards;
                 returner.kReturns++;
             } else {
-                returner.pYards += rYards;
+                returner.pYards += returnYards;
                 returner.pReturns++;
             }
-            yards += rYards;
+            yards += returnYards;
             return yards;
         }
     }

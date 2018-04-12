@@ -1479,7 +1479,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> rankings = new ArrayList<String>();
         String[] rankingsSelection =
                 {"Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
-                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct","Kick Return Yards", "Kick Return TDs", "Punt Return Yards", "Punt Return TDs",
+                        "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct","Kickoff Return Yards", "Kickoff Return TDs", "Punt Return Yards", "Punt Return TDs",
                         "Coach - Overall", "Coach - Career Score"
                 };
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
