@@ -499,6 +499,7 @@ public class RecruitingActivity extends AppCompatActivity {
                         myIntent.putExtra("SAVE_FILE", "DONE_RECRUITING");
                         myIntent.putExtra("RECRUITS", getRecruitsStr());
                         RecruitingActivity.this.startActivity(myIntent);
+                        finish();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
