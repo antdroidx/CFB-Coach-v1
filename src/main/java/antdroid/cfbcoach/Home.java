@@ -64,7 +64,6 @@ public class Home extends AppCompatActivity {
                 intent.setType("text/plain");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(intent, READ_REQUEST_CODE);
-                finish();
             }
         });
 
@@ -88,7 +87,6 @@ public class Home extends AppCompatActivity {
                 intent.setType("text/plain");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(intent, READ_REQUEST_CODE);
-                finish();
             }
         });
 
@@ -412,6 +410,8 @@ public class Home extends AppCompatActivity {
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
             }
             Home.this.startActivity(myIntent);
+            finish();
+
         }
     }
 
