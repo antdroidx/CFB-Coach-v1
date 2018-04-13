@@ -467,6 +467,7 @@ public class PlayerQB extends Player {
         pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
+        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + df2.format(((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10)) + " yds");
         pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
         pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
