@@ -3606,7 +3606,15 @@ public class Team {
      * @return ranking abbr (w-l) BW
      */
     public String strRepWithBowlResults() {
-        return /*"#" + rankTeamPollScore + " " + */name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
+        return name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
+    }
+
+    public String strTeamRanking() {
+        return name;
+    }
+
+    public String strTeamRankingRecord() {
+        return " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
     }
 
     /**
