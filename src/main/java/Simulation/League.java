@@ -4027,15 +4027,27 @@ public class League extends Rankings {
         for (Conference c : conferences) {
             confTeams.addAll(c.confTeams);
             Collections.sort(confTeams, new CompTeamConfWins());
-            confStandings.add(" ," + c.confName + " Conference, ");
+            confStandings.add(" ," + c.confName + " Conference, , ");
             Team t;
             for (int i = 0; i < confTeams.size(); ++i) {
                 t = confTeams.get(i);
-                confStandings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithBowlResults() + "," + t.getConfWins() + "-" + t.getConfLosses());
+                confStandings.add(t.getRankStrStarUser(i + 1) + "," + t.strTeamRanking() + "," + t.strTeamRecord() + "," + t.getConfWins() + "-" + t.getConfLosses());
             }
             confTeams.clear();
         }
         return confStandings;
+    }
+
+    public ArrayList<String> getTeamRankings() {
+        ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
+        ArrayList<String> rankings = new ArrayList<String>();
+        Team t;
+        Collections.sort(teams, new CompTeamPoll());
+        for (int i = 0; i < teams.size(); ++i) {
+            t = teams.get(i);
+            rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strTeamRanking() + "," + t.strTeamRecord() + "," + t.teamPollScore);
+        }
+        return rankings;
     }
 
 

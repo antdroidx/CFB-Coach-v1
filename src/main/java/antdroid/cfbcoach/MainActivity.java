@@ -542,7 +542,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Conf Standings" Button
         standingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                currTab = 3;
+                currTab = 6;
                 updateStandings();
             }
         });
@@ -550,12 +550,8 @@ public class MainActivity extends AppCompatActivity {
         //Set up "Polls" Button
         rankingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (simLeague.currentWeek < 18) {
-                    currTab = 4;
-                    updateRankings();
-                } else {
-                    currTab = 0;
-                }
+                currTab = 7;
+                updateRankings();
             }
         });
 
@@ -787,7 +783,8 @@ public class MainActivity extends AppCompatActivity {
                         currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
                 if (currTab == 0) {
                     updateTeamStats();
-                } else if (currTab == 1) {
+                } else if (currTab == 1 || currTab > 5) {
+                    currTab = 1;
                     updatePlayerStats();
                 } else {
                     updateSchedule();
@@ -811,7 +808,7 @@ public class MainActivity extends AppCompatActivity {
                 currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
         if (currTab == 0) {
             updateTeamStats();
-        } else if (currTab == 1) {
+        } else if (currTab == 1 || currTab > 5) {
             updatePlayerStats();
         } else {
             updateSchedule();
@@ -875,7 +872,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
-        if(simLeague.currentWeek == 0 & simLeague.getYear() == seasonStart) {
+/*        if(simLeague.currentWeek == 0 & simLeague.getYear() == seasonStart) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("This is the Game Schedule Screen. Here you can see the results and upcoming games for the selected team. You can click on each score button to see game results or scout future games. In the game log screen, you can choose the blue menu at the top to view more stats.")
@@ -890,7 +887,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
             TextView textView = dialog.findViewById(android.R.id.message);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        }
+        }*/
 
         mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
@@ -919,7 +916,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> standings;
         standings = simLeague.getConfStandings();
 
-        final MainRankings teamRankings = new MainRankings(this, standings, userTeam.strRepWithBowlResults());
+        final MainRankings teamRankings = new MainRankings(this, standings, userTeam.name, this);
         mainList.setAdapter(teamRankings);
     }
 
@@ -931,9 +928,9 @@ public class MainActivity extends AppCompatActivity {
         expListPlayerStats.setVisibility(View.GONE);
 
         ArrayList<String> standings;
-        standings = simLeague.getTeamRankingsStr(0);
+        standings = simLeague.getTeamRankings();
 
-        final MainRankings teamRankings = new MainRankings(this, standings, userTeam.strRepWithBowlResults());
+        final MainRankings teamRankings = new MainRankings(this, standings, userTeam.name, this);
         mainList.setAdapter(teamRankings);
     }
 
@@ -2643,7 +2640,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
+        ArrayList<String> rankings = new ArrayList<String>();
         String[] weekSelection = new String[simLeague.currentWeek + 1];
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 13) weekSelection[i] = "Conf Champ Week";
@@ -2659,24 +2656,24 @@ public class MainActivity extends AppCompatActivity {
         weekSelectionSpinner.setSelection(simLeague.currentWeek);
 
         final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
-        final NewsStoriesListArrayAdapter newsStoriesAdapter = new NewsStoriesListArrayAdapter(this, rankings);
-        newsStoriesList.setAdapter(newsStoriesAdapter);
+        final NewsStoriesListArrayAdapter weeklyScoresAdapter = new NewsStoriesListArrayAdapter(this, rankings);
+        newsStoriesList.setAdapter(weeklyScoresAdapter);
 
         weekSelectionSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                        ArrayList<String> rankings = simLeague.weeklyScores.get(position);
+                        ArrayList<String> scores = simLeague.weeklyScores.get(position);
                         boolean isempty = false;
-                        if (rankings.size() == 0) {
+                        if (scores.size() == 0) {
                             isempty = true;
-                            rankings.add("No news stories.>I guess this week was a bit boring, huh?");
+                            scores.add("No news stories.>I guess this week was a bit boring, huh?");
                         }
-                        newsStoriesAdapter.clear();
-                        newsStoriesAdapter.addAll(rankings);
-                        newsStoriesAdapter.notifyDataSetChanged();
+                        weeklyScoresAdapter.clear();
+                        weeklyScoresAdapter.addAll(scores);
+                        weeklyScoresAdapter.notifyDataSetChanged();
                         if (isempty) {
-                            rankings.remove(0);
+                            scores.remove(0);
                         }
                     }
 

@@ -15,16 +15,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Simulation.Team;
+
 public class MainRankings extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;
+    private final MainActivity mainAct;
 
-    public MainRankings(Context context, ArrayList<String> values, String userTeamStrRep) {
+
+    public MainRankings(Context context, ArrayList<String> values, String userTeamStrRep, MainActivity mainAct) {
         super(context, R.layout.team_stats_list_item, values);
         this.context = context;
         this.values = values;
         this.userTeamStrRep = userTeamStrRep;
+        this.mainAct = mainAct;
     }
 
     @Override
@@ -33,13 +38,13 @@ public class MainRankings extends ArrayAdapter<String> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.rankings_main, parent, false);
         TextView textLeft = rowView.findViewById(R.id.textRankLeft);
-        TextView textCenter = rowView.findViewById(R.id.textRankCenter);
+        final TextView textCenter = rowView.findViewById(R.id.textRankCenter);
         TextView textRight = rowView.findViewById(R.id.textRankRight);
 
-        String[] teamStat = values.get(position).split(",");
+        final String[] teamStat = values.get(position).split(",");
         textLeft.setText(teamStat[0]);
-        textCenter.setText(teamStat[1]);
-        textRight.setText(teamStat[2]);
+        textCenter.setText(teamStat[1] + " " + teamStat[2]);
+        textRight.setText(teamStat[3]);
 
         if (teamStat[1].equals(userTeamStrRep)) {
             // Bold user team
@@ -50,6 +55,13 @@ public class MainRankings extends ArrayAdapter<String> {
             textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
             textRight.setTextColor(Color.parseColor("#1A75FF"));
         }
+
+        textCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            mainAct.examineTeam(teamStat[1]);
+            }
+        });
 
         return rowView;
     }

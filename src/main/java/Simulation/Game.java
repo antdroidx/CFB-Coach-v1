@@ -2810,7 +2810,6 @@ public class Game implements Serializable {
         //Weekly Scoreboard Update
         homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 1).add(gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " " + homeScore);
 
-
         if (numOT >= 3) {
             // Thriller in OT
             Team winner, loser;
