@@ -410,7 +410,7 @@ public class Home extends AppCompatActivity {
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
             }
             Home.this.startActivity(myIntent);
-            finish();
+            //finish();
 
         }
     }
