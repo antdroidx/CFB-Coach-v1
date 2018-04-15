@@ -338,6 +338,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.advanceSeason();
                         currTab = 0;
                         updateTeamStats();
+                        if (simLeague.confRealignment) simLeague.conferenceInvites();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players");
                         simLeague.currentWeek++;
@@ -1966,7 +1967,7 @@ public class MainActivity extends AppCompatActivity {
     private void changeSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Settings / Editor")
-                .setView(getLayoutInflater().inflate(R.layout.change_team_name_dialog, null));
+                .setView(getLayoutInflater().inflate(R.layout.settings_menu, null));
         final AlertDialog dialog = builder.create();
         dialog.show();
 
@@ -2135,6 +2136,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
         checkboxPotential.setChecked(simLeague.hidePotential);
 
+        final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
+        checkboxRealignment.setChecked(simLeague.confRealignment);
+
         Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
         Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
@@ -2178,6 +2182,7 @@ public class MainActivity extends AppCompatActivity {
                 showInjuryReport = checkboxShowInjury.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.hidePotential = checkboxPotential.isChecked();
+                simLeague.confRealignment = checkboxRealignment.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
