@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +31,6 @@ import java.util.Map;
 import java.util.Random;
 
 import Simulation.League;
-import Simulation.Player;
 
 public class RecruitingActivity extends AppCompatActivity {
 

@@ -15,10 +15,69 @@ import java.util.Collections;
 import java.util.Objects;
 import java.lang.String;
 import java.util.Random;
-import android.content.Context;
 
 
-import antdroid.cfbcoach.R;
+import Comparator.CompCoachCareer;
+import Comparator.CompCoachScore;
+import Comparator.CompKickRetTD;
+import Comparator.CompKickRetYards;
+import Comparator.CompPlayer;
+import Comparator.CompPlayerFGMade;
+import Comparator.CompPlayerFGpct;
+import Comparator.CompPlayerFumblesRec;
+import Comparator.CompPlayerHeisman;
+import Comparator.CompPlayerInterceptions;
+import Comparator.CompPlayerPassInts;
+import Comparator.CompPlayerPassPCT;
+import Comparator.CompPlayerPassRating;
+import Comparator.CompPlayerPassTDs;
+import Comparator.CompPlayerPassYards;
+import Comparator.CompPlayerRecTDs;
+import Comparator.CompPlayerRecYards;
+import Comparator.CompPlayerReceptions;
+import Comparator.CompPlayerRushTDs;
+import Comparator.CompPlayerRushYards;
+import Comparator.CompPlayerSacks;
+import Comparator.CompPlayerTackles;
+import Comparator.CompPuntRetTDs;
+import Comparator.CompPuntRetYards;
+import Comparator.CompTeamBowls;
+import Comparator.CompTeamCC;
+import Comparator.CompTeamConfWins;
+import Comparator.CompTeamDefTalent;
+import Comparator.CompTeamNC;
+import Comparator.CompTeamOPPG;
+import Comparator.CompTeamOPYPG;
+import Comparator.CompTeamORYPG;
+import Comparator.CompTeamOYPG;
+import Comparator.CompTeamOffTalent;
+import Comparator.CompTeamPPG;
+import Comparator.CompTeamPYPG;
+import Comparator.CompTeamPoll;
+import Comparator.CompTeamPrestige;
+import Comparator.CompTeamRYPG;
+import Comparator.CompTeamRecruitClass;
+import Comparator.CompTeamSoS;
+import Comparator.CompTeamSoW;
+import Comparator.CompTeamTODiff;
+import Comparator.CompTeamWins;
+import Comparator.CompTeamYPG;
+import Positions.HeadCoach;
+import Positions.Player;
+import Positions.PlayerDefense;
+import Positions.PlayerOffense;
+import Positions.PlayerReturner;
+import Positions.PlayerQB;
+import Positions.PlayerRB;
+import Positions.PlayerWR;
+import Positions.PlayerTE;
+import Positions.PlayerOL;
+import Positions.PlayerDL;
+import Positions.PlayerLB;
+import Positions.PlayerCB;
+import Positions.PlayerS;
+import Positions.PlayerK;
+
 
 /**
  * League class. Has 6 conferences of 10 teams each.
@@ -139,8 +198,8 @@ public class League extends Rankings {
     public ArrayList<Player> freshmen;
     public ArrayList<Player> redshirts;
 
-    public String[] bowlNames = {"Rose Bowl", "Orange Bowl", "Sugar Bowl", "Fiesta Bowl", "Peach Bowl", "Cotton Bowl", "Citrus Bowl", "Gator Bowl", "Cactus Bowl", "Alamo Bowl", "Holiday Bowl", "Sun Bowl",
-            "Liberty Bowl", "Independence Bowl", "Vegas Bowl", "Military Bowl", "Aloha Bowl", "Humanitarian Bowl"};
+    public String[] bowlNames = {"Carnation Bowl", "Mandarin Bowl", "Honey Bowl", "Fiesta Bowl", "Necatrine Bowl", "Polyester Bowl", "Lemon-Lime Bowl", "Aligator Bowl", "Desert Bowl", "Fort Bowl", "Vacation Bowl", "Star Bowl",
+            "Bell Bowl", "Freedom Bowl", "Casino Bowl", "American Bowl", "Island Bowl", "Philantropy Bowl"};
 
     private boolean careerMode;
     public boolean fullGameLog;
@@ -299,7 +358,7 @@ public class League extends Rankings {
         conferences.get(3).confTeams.add(new Team("Colorado", "COL", "Pacific", 53, "UTAH", 0, this));
         conferences.get(3).confTeams.add(new Team("Oregon", "OREG", "Pacific", 65, "ORST", 0, this));
         conferences.get(3).confTeams.add(new Team("Oregon State", "ORST", "Pacific", 44, "OREG", 0, this));
-        conferences.get(3).confTeams.add(new Team("Stanford", "STAN", "Pacific", 77, "CAL", 0, this));
+        conferences.get(3).confTeams.add(new Team("Palo Alto", "STAN", "Pacific", 77, "CAL", 0, this));
         conferences.get(3).confTeams.add(new Team("Pasadena", "UCLA", "Pacific", 60, "USC", 0, this));
         conferences.get(3).confTeams.add(new Team("Los Angeles", "USC", "Pacific", 82, "UCLA", 0, this));
         conferences.get(3).confTeams.add(new Team("Washington", "WASH", "Pacific", 78, "WSU", 0, this));

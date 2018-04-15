@@ -3,6 +3,26 @@ package Simulation;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import Comparator.CompCoachScore;
+import Comparator.CompPlayerHeisman;
+import Comparator.CompTeamConfWins;
+import Comparator.CompTeamPoll;
+import Positions.HeadCoach;
+import Positions.Player;
+import Positions.PlayerDefense;
+import Positions.PlayerOffense;
+import Positions.PlayerReturner;
+import Positions.PlayerQB;
+import Positions.PlayerRB;
+import Positions.PlayerWR;
+import Positions.PlayerTE;
+import Positions.PlayerOL;
+import Positions.PlayerDL;
+import Positions.PlayerLB;
+import Positions.PlayerCB;
+import Positions.PlayerS;
+import Positions.PlayerK;
+
 /**
  * Class for conferences, which each have 12 teams.
  */
