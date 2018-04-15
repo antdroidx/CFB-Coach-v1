@@ -23,9 +23,6 @@ import Positions.PlayerCB;
 import Positions.PlayerS;
 import Positions.PlayerK;
 
-/**
- * Class for conferences, which each have 12 teams.
- */
 public class Conference {
 
     public String confName;

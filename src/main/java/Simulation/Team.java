@@ -28,9 +28,6 @@ import Positions.PlayerS;
 import Positions.PlayerK;
 import Positions.PlayerST;
 
-/* TEAM class
-
- */
 
 public class Team {
 

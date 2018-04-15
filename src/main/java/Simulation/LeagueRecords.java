@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Class to hold all the all-time league season records like passing/rushing yards, TDs, etc
- * Created by Achi Jones on 3/19/2016.
- */
 public class LeagueRecords {
 
     public class Record {
