@@ -4,12 +4,7 @@ import java.util.Random;
 
 import Positions.Player;
 
-/**
- * Injury class.
- * Each injured player has one.
- * Describes what the injury is, and how long it lasts.
- * Created by Achi Jones on 4/3/2016.
- */
+
 public class Injury {
 
     private static final String[] injuries = {"Knee", "Thigh", "Shoulder", "Wrist", "Ankle", "Foot", "Arm", "Back", "Head"};

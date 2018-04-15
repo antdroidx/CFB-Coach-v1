@@ -84,12 +84,6 @@ import Positions.PlayerS;
 import Positions.PlayerK;
 import antdroid.cfbcoach.MainActivity;
 
-
-/**
- * League class. Has 6 conferences of 10 teams each.
- *
- * @author Achi
- */
 public class League {
     //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
@@ -965,6 +959,7 @@ public class League {
 
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
+            confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
 
             // Always close files.
             bufferedReader.close();
@@ -4905,6 +4900,7 @@ public class League {
 
         sb.append(fullGameLog + "\n");
         sb.append(hidePotential + "\n");
+        sb.append(confRealignment + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file

@@ -1,9 +1,5 @@
 package Simulation;
 
-/**
- * Team Strategy class. It works for both offense and defense, just applying the bonus different ways.
- * Created by Achi Jones on 3/10/2016. // completely re-written by antdroid 10/2017
- */
 public class TeamStrategy {
 
     public Team team;
