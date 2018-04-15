@@ -1890,7 +1890,7 @@ public class Team {
             }
             int s = minSs - (teamSs.size() - numTransfers);
 
-            int rosterSize = getTeamSize();
+            int rosterSize = getTeamSize() + qb + rb + wr + te + ol + dl + lb + cb + s;
 
             for(int i = rosterSize; i < minPlayers; i++) {
                 int x = (int)(Math.random()*9) + 1;
