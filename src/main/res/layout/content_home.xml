@@ -130,6 +130,14 @@
             android:textSize="14sp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/Links"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EXTERNAL LINKS"
+        android:textAlignment="center"
+        android:textSize="10sp" />
+
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -168,42 +176,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="0dip"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonProFootballCoach"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginRight="3dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_dark"
-            android:text="Pro Football Coach"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/buttonCollegeHoopsCoach"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="3dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_orange_light"
-            android:text="College Hoops Coach"
-            android:textSize="12sp" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="[Rev: 04-14-2018]\n© Achi Jones, 2016 | Anthony Nguyen, 2017-18"
+        android:text="[Rev: 04-15-2018]\n© Achi Jones, 2016 | Anthony Nguyen, 2017-18"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp" />

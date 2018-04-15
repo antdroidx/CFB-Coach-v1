@@ -336,9 +336,25 @@ public class MainActivity extends AppCompatActivity {
                     } else if (simLeague.currentWeek == 19) {
                         userTeam.resetStats();
                         simLeague.advanceSeason();
+                        if (simLeague.confRealignment) {
+                            simLeague.conferenceInvites();
+                            if (simLeague.countRealignment > 0) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                builder.setMessage(simLeague.newsRealignment)
+                                        .setTitle((seasonStart + userTeam.teamHistory.size()) + " Conference Realignment News")
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                                TextView textView = dialog.findViewById(android.R.id.message);
+                                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                            }
+                        }
                         currTab = 0;
                         updateTeamStats();
-                        if (simLeague.confRealignment) simLeague.conferenceInvites();
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Transfer Players");
                         simLeague.currentWeek++;

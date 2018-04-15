@@ -144,30 +144,8 @@ public class Home extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://github.com/minotauri/CFB-Coach"));
+                intent.setData(Uri.parse("https://github.com/antdroidx/CFB-Coach"));
                 startActivity(intent);
-            }
-        });
-
-        Button proButton = findViewById(R.id.buttonProFootballCoach);
-        proButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.achijones.profootballcoach")));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.achijones.profootballcoach")));
-                }
-            }
-        });
-
-        Button CollegeHoopsCoachButton = findViewById(R.id.buttonCollegeHoopsCoach);
-        CollegeHoopsCoachButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=io.coachapps.collegebasketballcoach")));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=io.coachapps.collegebasketballcoach")));
-                }
             }
         });
 

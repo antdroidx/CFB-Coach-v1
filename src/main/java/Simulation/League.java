@@ -1,5 +1,10 @@
 package Simulation;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.util.TypedValue;
+import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -77,6 +82,7 @@ import Positions.PlayerLB;
 import Positions.PlayerCB;
 import Positions.PlayerS;
 import Positions.PlayerK;
+import antdroid.cfbcoach.MainActivity;
 
 
 /**
@@ -130,8 +136,12 @@ public class League {
 
     int seasonWeeks = 26;
     double realignmentChance = 0.20;
-    int promotionPrestige = 70;
+    int promotionPrestige = 72;
     int relegationPrestige = 45;
+    public int countRealignment;
+    public String newsRealignment;
+    String crYear1 = "2";
+    String crYear2 = "7";
 
     //Bowl Games
     public boolean hasScheduledBowls;
@@ -3396,8 +3406,9 @@ public class League {
 
     public void conferenceInvites() {
         int year = getYear();
+        newsRealignment = ""; countRealignment = 0;
         String yearEnd = Integer.toString(year).substring(3, 4);
-        if (yearEnd.equals("2") || yearEnd.equals("7")) {
+        if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
             for (int i = 5; i < conferences.size(); ++i) {
                 for (int t = 0; t < conferences.get(i).confTeams.size(); ++t) {
                     if (conferences.get(i).confTeams.get(t).teamPrestige > promotionPrestige) {
@@ -3426,6 +3437,9 @@ public class League {
 
                                     //break the news
                                     newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + conferences.get(i - 5).confName + " announced today they will be adding " + teamA.name + " to their conference next season! They've agreed to swap " + teamB.name + ".");
+
+                                    newsRealignment += ("The " + conferences.get(i - 5).confName + " announced today they will be adding " + teamA.name + " to their conference next season! They've agreed to swap " + teamB.name + ".\n\n");
+                                    countRealignment++;
                                 }
 
                             }
