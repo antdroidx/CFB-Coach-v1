@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import Simulation.Player;
+import Positions.Player;
 
 /**
  * Created by Achi Jones on 3/18/2016.

@@ -8,6 +8,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import Comparator.CompPlayer;
+import Comparator.CompRecruit;
+import Comparator.CompTeamConfWins;
+import Positions.HeadCoach;
+import Positions.Player;
+import Positions.PlayerDefense;
+import Positions.PlayerOffense;
+import Positions.PlayerReturner;
+import Positions.PlayerQB;
+import Positions.PlayerRB;
+import Positions.PlayerWR;
+import Positions.PlayerTE;
+import Positions.PlayerOL;
+import Positions.PlayerDL;
+import Positions.PlayerLB;
+import Positions.PlayerCB;
+import Positions.PlayerS;
+import Positions.PlayerK;
+import Positions.PlayerST;
+
 /* TEAM class
 
  */
@@ -164,10 +184,10 @@ public class Team {
     public int minPlayers = 65;
     public int minRecruitStar = 5;
     public int maxStarRating = 10;
-    int five = 84;
-    int four = 78;
-    int three = 68;
-    int two = 58;
+    public int five = 84;
+    public int four = 78;
+    public int three = 68;
+    public int two = 58;
 
     public ArrayList<Player> playersLeaving;
     public ArrayList<Player> playersTransferring;
@@ -2218,7 +2238,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerQB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2231,7 +2251,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerRB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2244,7 +2264,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerWR(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2257,7 +2277,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerTE(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2270,7 +2290,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerOL(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2283,7 +2303,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerK(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2296,7 +2316,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerDL(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2309,7 +2329,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerLB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2322,7 +2342,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerCB(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
@@ -2335,7 +2355,7 @@ public class Team {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
         }
-        Arrays.sort(recruits, new RecruitComparator());
+        Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 

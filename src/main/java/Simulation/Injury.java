@@ -2,6 +2,8 @@ package Simulation;
 
 import java.util.Random;
 
+import Positions.Player;
+
 /**
  * Injury class.
  * Each injured player has one.
