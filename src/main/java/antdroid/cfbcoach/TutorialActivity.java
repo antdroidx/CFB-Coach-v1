@@ -46,6 +46,9 @@ public class TutorialActivity extends AppCompatActivity {
         titles.add("Team Strategies");
         contents.add(getString(R.string.tutTeamStrategy));
 
+        titles.add("Settings Menu");
+        contents.add(getString(R.string.tutSettings));
+
         titles.add("User Customization");
         contents.add(getString(R.string.tutCustomizations));
 
