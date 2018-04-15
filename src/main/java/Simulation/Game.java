@@ -1503,7 +1503,7 @@ public class Game implements Serializable {
                     else resetForOT();
                 } else {
                     if (gameYardLine <= 0) {
-                        gameYardLine = 20;
+                        gameYardLine = 25;
                         if (homeTeam.league.fullGameLog)
                             gameEventLog += "\n\nKick-off!\n" + returner.team + " " + returner.name + " lets it go for a touchback.";
                     } else {
@@ -1570,7 +1570,7 @@ public class Game implements Serializable {
                     else resetForOT();
                 } else {
                     if (gameYardLine <= 0) {
-                        gameYardLine = 20;
+                        gameYardLine = 25;
                         if (homeTeam.league.fullGameLog)
                             gameEventLog += "\n\nFree-Kick!\n" + returner.team + " " + returner.name + " lets it go for a touchback.";
                     } else {
@@ -1608,7 +1608,7 @@ public class Game implements Serializable {
             else resetForOT();
         } else {
             if (gameYardLine <= 0) {
-                gameYardLine = 20;
+                gameYardLine = 25;
                 if (homeTeam.league.fullGameLog)
                     gameEventLog += "\n\nPunt!\n" + returner.team + " " + returner.name + " lets it go for a touchback.";
             } else {

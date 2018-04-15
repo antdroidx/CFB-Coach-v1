@@ -1,10 +1,5 @@
 package Simulation;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.util.TypedValue;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,9 +13,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
-import java.lang.String;
 import java.util.Random;
-
 
 import Comparator.CompCoachCareer;
 import Comparator.CompCoachScore;
@@ -69,23 +62,21 @@ import Comparator.CompTeamWins;
 import Comparator.CompTeamYPG;
 import Positions.HeadCoach;
 import Positions.Player;
+import Positions.PlayerCB;
+import Positions.PlayerDL;
 import Positions.PlayerDefense;
+import Positions.PlayerK;
+import Positions.PlayerLB;
+import Positions.PlayerOL;
 import Positions.PlayerOffense;
-import Positions.PlayerReturner;
 import Positions.PlayerQB;
 import Positions.PlayerRB;
-import Positions.PlayerWR;
-import Positions.PlayerTE;
-import Positions.PlayerOL;
-import Positions.PlayerDL;
-import Positions.PlayerLB;
-import Positions.PlayerCB;
+import Positions.PlayerReturner;
 import Positions.PlayerS;
-import Positions.PlayerK;
-import antdroid.cfbcoach.MainActivity;
+import Positions.PlayerTE;
+import Positions.PlayerWR;
 
 public class League {
-    //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
     public ArrayList<String> heismanHistory;
     public ArrayList<String> leagueHoF;
@@ -125,18 +116,8 @@ public class League {
     public int currentWeek;
     public int randgm;
     public int randconf;
-    int seasonStart = 2017;
-    int countTeam = 120;
-
-    int seasonWeeks = 26;
-    double realignmentChance = 0.20;
-    int promotionPrestige = 72;
-    int relegationPrestige = 45;
     public int countRealignment;
     public String newsRealignment;
-    String crYear1 = "2";
-    String crYear2 = "7";
-
     //Bowl Games
     public boolean hasScheduledBowls;
     public Game semiG14;
@@ -147,20 +128,6 @@ public class League {
 
     //User Team
     public Team userTeam;
-
-    boolean heismanDecided;
-    Player heisman;
-    Player coachWinner;
-    Player freshman;
-    ArrayList<Player> heismanCandidates;
-    ArrayList<Player> freshmanCandidates;
-    private String heismanWinnerStrFull;
-    private String freshmanWinnerStrFull;
-
-    ArrayList<Player> allAmericans;
-    private String allAmericanStr;
-    ArrayList<Player> allFreshman;
-    private String allFreshmanStr;
 
     //Freshman Team
     public ArrayList<PlayerQB> fQBs;
@@ -173,7 +140,6 @@ public class League {
     public ArrayList<PlayerLB> fLBs;
     public ArrayList<PlayerCB> fCBs;
     public ArrayList<PlayerS> fSs;
-
     //Transfer List
     public ArrayList<String> tQBs;
     public ArrayList<String> tRBs;
@@ -185,7 +151,6 @@ public class League {
     public ArrayList<String> tLBs;
     public ArrayList<String> tCBs;
     public ArrayList<String> tSs;
-
     public ArrayList<PlayerQB> transferQBs;
     public ArrayList<PlayerRB> transferRBs;
     public ArrayList<PlayerWR> transferWRs;
@@ -199,19 +164,33 @@ public class League {
     public String userTransfers;
     public String sumTransfers;
     public ArrayList<String> transfersList;
-
     public ArrayList<Player> freshmen;
     public ArrayList<Player> redshirts;
-
     public String[] bowlNames = {"Carnation Bowl", "Mandarin Bowl", "Honey Bowl", "Fiesta Bowl", "Necatrine Bowl", "Polyester Bowl", "Lemon-Lime Bowl", "Aligator Bowl", "Desert Bowl", "Fort Bowl", "Vacation Bowl", "Star Bowl",
             "Bell Bowl", "Freedom Bowl", "Casino Bowl", "American Bowl", "Island Bowl", "Philantropy Bowl"};
-
-    private boolean careerMode;
     public boolean fullGameLog;
     public boolean hidePotential;
     public boolean confRealignment;
-
     public DecimalFormat df2 = new DecimalFormat(".##");
+    int seasonStart = 2017;
+    int countTeam = 120;
+    int seasonWeeks = 26;
+    double realignmentChance = 0.20;
+    int promotionPrestige = 72;
+    int relegationPrestige = 45;
+    String crYear1 = "2";
+    String crYear2 = "7";
+    boolean heismanDecided;
+    Player heisman;
+    Player coachWinner;
+    Player freshman;
+    ArrayList<Player> heismanCandidates;
+    ArrayList<Player> freshmanCandidates;
+    ArrayList<Player> allAmericans;
+    ArrayList<Player> allFreshman;
+    private String heismanWinnerStrFull;
+    private String freshmanWinnerStrFull;
+    private boolean careerMode;
 
 
     /**
@@ -221,19 +200,10 @@ public class League {
     public League(String namesCSV, String lastNamesCSV, boolean career) {
         careerMode = career;
         hidePotential = true;
-        heismanDecided = false;
-        hasScheduledBowls = false;
-        bowlGames = new Game[countBG];
-        leagueHistory = new ArrayList<String[]>();
-        heismanHistory = new ArrayList<String>();
-        leagueHoF = new ArrayList<>();
-        coachList = new ArrayList<>();
-        coachPrevTeam = new ArrayList<>();
-        coachStarList = new ArrayList<>();
-        coachStarPrevTeam = new ArrayList<>();
+        setupCommonInitalizers();
 
-        currentWeek = 0;
-        conferences = new ArrayList<Conference>();
+        setupNamesDB(namesCSV, lastNamesCSV);
+
         conferences.add(new Conference("Atlantic", this));
         conferences.add(new Conference("Great Lakes", this));
         conferences.add(new Conference("Southwest", this));
@@ -245,73 +215,6 @@ public class League {
         conferences.add(new Conference("Mountain", this));
         conferences.add(new Conference("Sunshine", this));
 
-
-        allAmericans = new ArrayList<Player>();
-        ArrayList<Team> coachList = new ArrayList<>();
-        coachPrevTeam = new ArrayList<>();
-        coachStarList = new ArrayList<>();
-        coachStarPrevTeam = new ArrayList<>();
-        tQBs = new ArrayList<>();
-        tRBs = new ArrayList<>();
-        tWRs = new ArrayList<>();
-        tTEs = new ArrayList<>();
-        tKs = new ArrayList<>();
-        tOLs = new ArrayList<>();
-        tDLs = new ArrayList<>();
-        tLBs = new ArrayList<>();
-        tCBs = new ArrayList<>();
-        tSs = new ArrayList<>();
-        transferQBs = new ArrayList<>();
-        transferRBs = new ArrayList<>();
-        transferWRs = new ArrayList<>();
-        transferTEs = new ArrayList<>();
-        transferKs = new ArrayList<>();
-        transferOLs = new ArrayList<>();
-        transferDLs = new ArrayList<>();
-        transferLBs = new ArrayList<>();
-        transferCBs = new ArrayList<>();
-        transferSs = new ArrayList<>();
-        freshmen = new ArrayList<>();
-        redshirts = new ArrayList<>();
-
-        // Initialize new stories lists
-        newsStories = new ArrayList<ArrayList<String>>();
-        weeklyScores = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i < seasonWeeks; ++i) {
-            newsStories.add(new ArrayList<String>());
-            weeklyScores.add(new ArrayList<String>());
-        }
-        newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
-                "on your mind, or just a winning season, good luck!");
-
-        weeklyScores.get(0).add("Scores:>No games this week.");
-
-        leagueRecords = new LeagueRecords();
-        userTeamRecords = new LeagueRecords();
-        longestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-        yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-        longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-
-        // Read first names from file
-        nameList = new ArrayList<String>();
-        String[] namesSplit = namesCSV.split(",");
-        for (String n : namesSplit) {
-            if (isNameValid(n.trim()))
-                nameList.add(n.trim());
-        }
-
-        // Read last names from file
-        lastNameList = new ArrayList<String>();
-        namesSplit = lastNamesCSV.split(",");
-        for (String n : namesSplit) {
-            if (isNameValid(n.trim()))
-                lastNameList.add(n.trim());
-        }
-
-        disciplineTimes = (int) (Math.random() * 2) + 1;
-        disciplineWeekA = (int) (Math.random() * 13);
-        disciplineWeekB = (int) (Math.random() * 13);
-        disciplineWeekC = (int) (Math.random() * 13);
         //Set up conference
         // FUTURE: READ FROM XML OR CSV FILE
 
@@ -456,7 +359,6 @@ public class League {
 
 
         //set teamList
-        teamList = new ArrayList<Team>();
         for (int i = 0; i < conferences.size(); ++i) {
             for (int j = 0; j < conferences.get(i).confTeams.size(); ++j) {
                 teamList.add(conferences.get(i).confTeams.get(j));
@@ -467,36 +369,7 @@ public class League {
             }
         }
 
-        //set up schedule
-        Random rand = new Random();
-        int max = 8;
-        int min = 5;
-        randgm = rand.nextInt((max - min) + 1) + min;
-        int maxc = 1;
-        int minc = 0;
-        randconf = rand.nextInt((maxc - minc) + 1) + minc;
-
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).setUpSchedule();
-        }
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).setUpOOCSchedule();
-        }
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).insertOOCSchedule();
-        }
-
-        newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
-                conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
-                conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
-                conferences.get(2).confName + ":  " + conferences.get(2).confPrestige + "\n" +
-                conferences.get(3).confName + ":  " + conferences.get(3).confPrestige + "\n" +
-                conferences.get(4).confName + ":  " + conferences.get(4).confPrestige + "\n" +
-                conferences.get(5).confName + ":  " + conferences.get(5).confPrestige + "\n" +
-                conferences.get(6).confName + ":  " + conferences.get(6).confPrestige + "\n" +
-                conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
-                conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
-                conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
+        setupSeason();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -504,21 +377,13 @@ public class League {
      * Creates a CUSTOM League Universe
      */
     public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl) {
-        String line = null;
         careerMode = career;
         hidePotential = true;
-        heismanDecided = false;
-        hasScheduledBowls = false;
-        bowlGames = new Game[countBG];
-        leagueHistory = new ArrayList<String[]>();
-        heismanHistory = new ArrayList<String>();
-        leagueHoF = new ArrayList<>();
-        coachList = new ArrayList<>();
-        coachPrevTeam = new ArrayList<>();
-        coachStarList = new ArrayList<>();
-        coachStarPrevTeam = new ArrayList<>();
-        currentWeek = 0;
-        conferences = new ArrayList<Conference>();
+
+        setupCommonInitalizers();
+        setupNamesDB(namesCSV, lastNamesCSV);
+
+        String line = null;
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -537,73 +402,6 @@ public class League {
                     "Error reading file");
         }
 
-        allAmericans = new ArrayList<Player>();
-        ArrayList<Team> coachList = new ArrayList<>();
-        coachPrevTeam = new ArrayList<>();
-        coachStarList = new ArrayList<>();
-        coachStarPrevTeam = new ArrayList<>();
-        tQBs = new ArrayList<>();
-        tRBs = new ArrayList<>();
-        tWRs = new ArrayList<>();
-        tTEs = new ArrayList<>();
-        tKs = new ArrayList<>();
-        tOLs = new ArrayList<>();
-        tDLs = new ArrayList<>();
-        tLBs = new ArrayList<>();
-        tCBs = new ArrayList<>();
-        tSs = new ArrayList<>();
-        transferQBs = new ArrayList<>();
-        transferRBs = new ArrayList<>();
-        transferWRs = new ArrayList<>();
-        transferTEs = new ArrayList<>();
-        transferKs = new ArrayList<>();
-        transferOLs = new ArrayList<>();
-        transferDLs = new ArrayList<>();
-        transferLBs = new ArrayList<>();
-        transferCBs = new ArrayList<>();
-        transferSs = new ArrayList<>();
-        freshmen = new ArrayList<>();
-        redshirts = new ArrayList<>();
-
-
-        // Initialize new stories lists
-        newsStories = new ArrayList<ArrayList<String>>();
-        weeklyScores = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i < seasonWeeks; ++i) {
-            newsStories.add(new ArrayList<String>());
-            weeklyScores.add(new ArrayList<String>());
-        }
-        newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
-                "on your mind, or just a winning season, good luck!");
-
-        weeklyScores.get(0).add("Scores:>No games this week.");
-
-        leagueRecords = new LeagueRecords();
-        userTeamRecords = new LeagueRecords();
-        longestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-        yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-        longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-
-        // Read first names from file
-        nameList = new ArrayList<String>();
-        String[] namesSplit = namesCSV.split(",");
-        for (String n : namesSplit) {
-            if (isNameValid(n.trim()))
-                nameList.add(n.trim());
-        }
-
-        // Read last names from file
-        lastNameList = new ArrayList<String>();
-        namesSplit = lastNamesCSV.split(",");
-        for (String n : namesSplit) {
-            if (isNameValid(n.trim()))
-                lastNameList.add(n.trim());
-        }
-
-        disciplineTimes = (int) (Math.random() * 2) + 1;
-        disciplineWeekA = (int) (Math.random() * 13);
-        disciplineWeekB = (int) (Math.random() * 13);
-        disciplineWeekC = (int) (Math.random() * 13);
 
         //Set up conference teams
         try {
@@ -636,7 +434,6 @@ public class League {
         }
 
         //set teamList
-        teamList = new ArrayList<Team>();
         for (int i = 0; i < conferences.size(); ++i) {
             for (int j = 0; j < conferences.get(i).confTeams.size(); ++j) {
                 teamList.add(conferences.get(i).confTeams.get(j));
@@ -646,37 +443,6 @@ public class League {
                 teamList.get(i).teamStratDef = teamList.get(i).getTeamStrategiesDef()[teamList.get(i).teamStratDefNum];
             }
         }
-
-        //set up schedule
-        Random rand = new Random();
-        int max = 8;
-        int min = 5;
-        randgm = rand.nextInt((max - min) + 1) + min;
-        int maxc = 1;
-        int minc = 0;
-        randconf = rand.nextInt((maxc - minc) + 1) + minc;
-
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).setUpSchedule();
-        }
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).setUpOOCSchedule();
-        }
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).insertOOCSchedule();
-        }
-
-        newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
-                conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
-                conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
-                conferences.get(2).confName + ":  " + conferences.get(2).confPrestige + "\n" +
-                conferences.get(3).confName + ":  " + conferences.get(3).confPrestige + "\n" +
-                conferences.get(4).confName + ":  " + conferences.get(4).confPrestige + "\n" +
-                conferences.get(5).confName + ":  " + conferences.get(5).confPrestige + "\n" +
-                conferences.get(6).confName + ":  " + conferences.get(6).confPrestige + "\n" +
-                conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
-                conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
-                conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
 
         //Create new Bowl Game Names from TXT
         try {
@@ -699,6 +465,7 @@ public class League {
                     "Error reading file");
         }
 
+        setupSeason();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -707,45 +474,10 @@ public class League {
      * @param saveFile file that league is saved in
      */
     public League(File saveFile, String namesCSV, String lastNamesCSV) {
-        heismanDecided = false;
-        hasScheduledBowls = false;
-        bowlGames = new Game[countBG];
-        // This will reference one line at a time
-        String line = null;
-        currentWeek = 0;
+        setupCommonInitalizers();
+        setupNamesDB(namesCSV, lastNamesCSV);
 
-        leagueRecords = new LeagueRecords();
-        userTeamRecords = new LeagueRecords();
-        leagueHoF = new ArrayList<>();
-        longestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
-        yearStartLongestWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
-        longestActiveWinStreak = new TeamStreak(seasonStart, seasonStart, 0, "XXX");
-        coachList = new ArrayList<>();
-        coachPrevTeam = new ArrayList<>();
-        coachStarList = new ArrayList<>();
-        coachStarPrevTeam = new ArrayList<>();
-        tQBs = new ArrayList<>();
-        tRBs = new ArrayList<>();
-        tWRs = new ArrayList<>();
-        tTEs = new ArrayList<>();
-        tKs = new ArrayList<>();
-        tOLs = new ArrayList<>();
-        tDLs = new ArrayList<>();
-        tLBs = new ArrayList<>();
-        tCBs = new ArrayList<>();
-        tSs = new ArrayList<>();
-        transferQBs = new ArrayList<>();
-        transferRBs = new ArrayList<>();
-        transferWRs = new ArrayList<>();
-        transferTEs = new ArrayList<>();
-        transferKs = new ArrayList<>();
-        transferOLs = new ArrayList<>();
-        transferDLs = new ArrayList<>();
-        transferLBs = new ArrayList<>();
-        transferCBs = new ArrayList<>();
-        transferSs = new ArrayList<>();
-        freshmen = new ArrayList<>();
-        redshirts = new ArrayList<>();
+        String line = null;
 
         try {
             // Always wrap FileReader in BufferedReader.
@@ -757,26 +489,21 @@ public class League {
             careerMode = line.substring(line.length() - 9, line.length()).equals("[CAREER]%");
             //9
             //Next get league history
-            leagueHistory = new ArrayList<String[]>();
+
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HIST")) {
                 leagueHistory.add(line.split("%"));
             }
 
             //Next get heismans
-            heismanHistory = new ArrayList<String>();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_HEISMAN_HIST")) {
                 heismanHistory.add(line);
             }
 
             //Next make all the conferences & teams
-            conferences = new ArrayList<Conference>();
-            teamList = new ArrayList<Team>();
-
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONFERENCES")) {
                 conferences.add(new Conference(line, this));
             }
 
-            allAmericans = new ArrayList<Player>();
             String[] splits;
             for (int i = 0; i < countTeam; ++i) { //Do for every team
                 StringBuilder sbTeam = new StringBuilder();
@@ -965,93 +692,6 @@ public class League {
             bufferedReader.close();
 
 
-            // Read first names from file
-            nameList = new ArrayList<String>();
-            String[] namesSplit = namesCSV.split(",");
-            for (String n : namesSplit) {
-                nameList.add(n.trim());
-            }
-
-            // Read last names from file
-            lastNameList = new ArrayList<String>();
-            namesSplit = lastNamesCSV.split(",");
-            for (String n : namesSplit) {
-                lastNameList.add(n.trim());
-            }
-
-            //Get longest active win streak
-            updateLongestActiveWinStreak();
-
-            //set up schedule
-            for (int i = 0; i < conferences.size(); ++i) {
-                conferences.get(i).setUpSchedule();
-            }
-
-            Random rand = new Random();
-            int max = 8;
-            int min = 5;
-            randgm = rand.nextInt((max - min) + 1) + min;
-            int maxc = 1;
-            int minc = 0;
-            randconf = rand.nextInt((maxc - minc) + 1) + minc;
-
-            for (int i = 0; i < conferences.size(); ++i) {
-                conferences.get(i).setUpOOCSchedule();
-            }
-            for (int i = 0; i < conferences.size(); ++i) {
-                conferences.get(i).insertOOCSchedule();
-            }
-
-            // Initialize new stories lists
-            newsStories = new ArrayList<ArrayList<String>>();
-            weeklyScores = new ArrayList<ArrayList<String>>();
-            for (int i = 0; i < seasonWeeks; ++i) {
-                newsStories.add(new ArrayList<String>());
-                weeklyScores.add(new ArrayList<String>());
-            }
-            newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
-                    "on your mind, or just a winning season, good luck!");
-            weeklyScores.get(0).add("Scores:>No games this week.");
-
-            newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
-                    conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
-                    conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
-                    conferences.get(2).confName + ":  " + conferences.get(2).confPrestige + "\n" +
-                    conferences.get(3).confName + ":  " + conferences.get(3).confPrestige + "\n" +
-                    conferences.get(4).confName + ":  " + conferences.get(4).confPrestige + "\n" +
-                    conferences.get(5).confName + ":  " + conferences.get(5).confPrestige + "\n" +
-                    conferences.get(6).confName + ":  " + conferences.get(6).confPrestige + "\n" +
-                    conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
-                    conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
-                    conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
-
-            if (saveLucky != null || saveLucky2 != null || saveLucky3 != null) {
-                newsStories.get(0).add("Facility Upgrades:>The following teams have had significant facility upgrades performed to their campus this off-season: \n\n" +
-                        saveLucky.name + "\n" + saveLucky2.name + "\n" + saveLucky3.name + "\n");
-            }
-            if (savePenalized != null) {
-                newsStories.get(0).add("Major Infraction: " + savePenalized.name + ">An administrative probe has determined that booster " + savePenalized.HC.get(0).name +
-                        " has tampered with several recruits. In addition, academic records at  " + savePenalized.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
-            }
-            if (savePenalized2 != null) {
-                newsStories.get(0).add("Minor Infraction: " + savePenalized2.name + ">Investigations have led to the discovery that " + savePenalized2.name + "'s head coach " + savePenalized2.HC.get(0).name +
-                        " was found violating recruiting policies over the past off-season. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped.");
-            }
-            if (savePenalized3 != null) {
-                newsStories.get(0).add("Incidental Infraction: " + savePenalized3.name + ">Several players from " + savePenalized3.name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
-            }
-            if (savePenalized4 != null) {
-                newsStories.get(0).add("Incidental Infraction: " + savePenalized4.name + ">An independent investigation determined " + savePenalized4.name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
-            }
-            if (savePenalized5 != null) {
-                newsStories.get(0).add("Incidental Infraction: " + savePenalized5.name + ">Newspapers are reporting " + savePenalized5.name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
-            }
-
-            disciplineTimes = (int) (Math.random() * 3) + 1;
-            disciplineWeekA = (int) (Math.random() * 13);
-            disciplineWeekB = (int) (Math.random() * 13);
-            disciplineWeekC = (int) (Math.random() * 13);
-
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file");
@@ -1059,9 +699,145 @@ public class League {
             System.out.println(
                     "Error reading file");
         }
+
+        //Get longest active win streak
+        updateLongestActiveWinStreak();
+
+        setupSeason();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void setupCommonInitalizers() {
+
+        nameList = new ArrayList<String>();
+        lastNameList = new ArrayList<String>();
+        heismanDecided = false;
+        hasScheduledBowls = false;
+        bowlGames = new Game[countBG];
+        leagueHistory = new ArrayList<String[]>();
+        heismanHistory = new ArrayList<String>();
+        leagueHoF = new ArrayList<>();
+        coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
+
+        conferences = new ArrayList<Conference>();
+        teamList = new ArrayList<Team>();
+
+
+        allAmericans = new ArrayList<Player>();
+        ArrayList<Team> coachList = new ArrayList<>();
+        coachPrevTeam = new ArrayList<>();
+        coachStarList = new ArrayList<>();
+        coachStarPrevTeam = new ArrayList<>();
+
+        tQBs = new ArrayList<>();
+        tRBs = new ArrayList<>();
+        tWRs = new ArrayList<>();
+        tTEs = new ArrayList<>();
+        tKs = new ArrayList<>();
+        tOLs = new ArrayList<>();
+        tDLs = new ArrayList<>();
+        tLBs = new ArrayList<>();
+        tCBs = new ArrayList<>();
+        tSs = new ArrayList<>();
+        transferQBs = new ArrayList<>();
+        transferRBs = new ArrayList<>();
+        transferWRs = new ArrayList<>();
+        transferTEs = new ArrayList<>();
+        transferKs = new ArrayList<>();
+        transferOLs = new ArrayList<>();
+        transferDLs = new ArrayList<>();
+        transferLBs = new ArrayList<>();
+        transferCBs = new ArrayList<>();
+        transferSs = new ArrayList<>();
+
+        freshmen = new ArrayList<>();
+        redshirts = new ArrayList<>();
+
+        leagueRecords = new LeagueRecords();
+        userTeamRecords = new LeagueRecords();
+        longestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
+        yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
+        longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
+
+
+    }
+
+    public void setupSeason() {
+
+        //set up schedule
+        for (int i = 0; i < conferences.size(); ++i) {
+            conferences.get(i).setUpSchedule();
+        }
+
+        Random rand = new Random();
+        int max = 8;
+        int min = 5;
+        randgm = rand.nextInt((max - min) + 1) + min;
+        int maxc = 1;
+        int minc = 0;
+        randconf = rand.nextInt((maxc - minc) + 1) + minc;
+
+        for (int i = 0; i < conferences.size(); ++i) {
+            conferences.get(i).setUpOOCSchedule();
+        }
+        for (int i = 0; i < conferences.size(); ++i) {
+            conferences.get(i).insertOOCSchedule();
+        }
+
+        // Initialize new stories lists
+        newsStories = new ArrayList<ArrayList<String>>();
+        weeklyScores = new ArrayList<ArrayList<String>>();
+        for (int i = 0; i < seasonWeeks; ++i) {
+            newsStories.add(new ArrayList<String>());
+            weeklyScores.add(new ArrayList<String>());
+        }
+        newsStories.get(0).add("New Season!>Ready for the new season, coach? Whether the National Championship is " +
+                "on your mind, or just a winning season, good luck!");
+        weeklyScores.get(0).add("Scores:>No games this week.");
+
+        newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" +
+                conferences.get(0).confName + ":  " + conferences.get(0).confPrestige + "\n" +
+                conferences.get(1).confName + ":  " + conferences.get(1).confPrestige + "\n" +
+                conferences.get(2).confName + ":  " + conferences.get(2).confPrestige + "\n" +
+                conferences.get(3).confName + ":  " + conferences.get(3).confPrestige + "\n" +
+                conferences.get(4).confName + ":  " + conferences.get(4).confPrestige + "\n" +
+                conferences.get(5).confName + ":  " + conferences.get(5).confPrestige + "\n" +
+                conferences.get(6).confName + ":  " + conferences.get(6).confPrestige + "\n" +
+                conferences.get(7).confName + ":  " + conferences.get(7).confPrestige + "\n" +
+                conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
+                conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
+
+        if (saveLucky != null || saveLucky2 != null || saveLucky3 != null) {
+            newsStories.get(0).add("Facility Upgrades:>The following teams have had significant facility upgrades performed to their campus this off-season: \n\n" +
+                    saveLucky.name + "\n" + saveLucky2.name + "\n" + saveLucky3.name + "\n");
+        }
+        if (savePenalized != null) {
+            newsStories.get(0).add("Major Infraction: " + savePenalized.name + ">An administrative probe has determined that booster " + savePenalized.HC.get(0).name +
+                    " has tampered with several recruits. In addition, academic records at  " + savePenalized.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
+        }
+        if (savePenalized2 != null) {
+            newsStories.get(0).add("Minor Infraction: " + savePenalized2.name + ">Investigations have led to the discovery that " + savePenalized2.name + "'s head coach " + savePenalized2.HC.get(0).name +
+                    " was found violating recruiting policies over the past off-season. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped.");
+        }
+        if (savePenalized3 != null) {
+            newsStories.get(0).add("Incidental Infraction: " + savePenalized3.name + ">Several players from " + savePenalized3.name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
+        }
+        if (savePenalized4 != null) {
+            newsStories.get(0).add("Incidental Infraction: " + savePenalized4.name + ">An independent investigation determined " + savePenalized4.name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
+        }
+        if (savePenalized5 != null) {
+            newsStories.get(0).add("Incidental Infraction: " + savePenalized5.name + ">Newspapers are reporting " + savePenalized5.name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
+        }
+
+        disciplineTimes = (int) (Math.random() * 3) + 1;
+        disciplineWeekA = (int) (Math.random() * 13);
+        disciplineWeekB = (int) (Math.random() * 13);
+        disciplineWeekC = (int) (Math.random() * 13);
+
+    }
 
     /**
      * Gets whether it is hard mode.
@@ -1071,6 +847,22 @@ public class League {
      */
     public boolean isCareerMode() {
         return careerMode;
+    }
+
+    public void setupNamesDB(String namesCSV, String lastNamesCSV) {
+        // Read first names from file
+        String[] namesSplit = namesCSV.split(",");
+        for (String n : namesSplit) {
+            if (isNameValid(n.trim()))
+                nameList.add(n.trim());
+        }
+
+        // Read last names from file
+        namesSplit = lastNamesCSV.split(",");
+        for (String n : namesSplit) {
+            if (isNameValid(n.trim()))
+                lastNameList.add(n.trim());
+        }
     }
 
     /**
@@ -1092,7 +884,6 @@ public class League {
             teamList.get(i).setupTeamBenchmark();
         }
     }
-
 
     /**
      * Gets the current year, starting from 2017
@@ -3401,13 +3192,14 @@ public class League {
 
     public void conferenceInvites() {
         int year = getYear();
-        newsRealignment = ""; countRealignment = 0;
+        newsRealignment = "";
+        countRealignment = 0;
         String yearEnd = Integer.toString(year).substring(3, 4);
         if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
             for (int i = 5; i < conferences.size(); ++i) {
                 for (int t = 0; t < conferences.get(i).confTeams.size(); ++t) {
                     if (conferences.get(i).confTeams.get(t).teamPrestige > promotionPrestige) {
-                        for (int x = conferences.get(i-5).confTeams.size()-1 ; x >= 0; --x) {
+                        for (int x = conferences.get(i - 5).confTeams.size() - 1; x >= 0; --x) {
                             if (conferences.get(i - 5).confTeams.get(x).teamPrestige < relegationPrestige) {
                                 //set teams to memory
                                 if (Math.random() < realignmentChance) {
@@ -3471,7 +3263,7 @@ public class League {
         Collections.sort(allPlayersLeaving, new CompPlayer());
         ArrayList<Player> NFLPlayers = new ArrayList<>();
 
-        if(allPlayersLeaving.size() > 224) {
+        if (allPlayersLeaving.size() > 224) {
             for (int i = 0; i < 224; ++i) {
                 NFLPlayers.add(allPlayersLeaving.get(i));
             }
@@ -4180,7 +3972,6 @@ public class League {
         return heismanCandidates;
     }
 
-
     public ArrayList<PlayerTE> rankTE() {
         heisman = null;
         int heismanScore = 0;
@@ -4647,7 +4438,7 @@ public class League {
         }
         return rankings;
     }
-    
+
     public ArrayList<String> getAwardsWatch(int selection) {
         int rankNum = 40;
         ArrayList<String> rankings = new ArrayList<String>();
@@ -4732,10 +4523,6 @@ public class League {
         }
         return rankings;
     }
-        
-
-    
-    
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4912,7 +4699,6 @@ public class League {
             return false;
         }
     }
-
 
     /**
      * See if team name is in use, or has illegal characters.

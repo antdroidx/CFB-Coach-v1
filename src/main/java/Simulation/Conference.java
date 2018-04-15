@@ -39,7 +39,6 @@ public class Conference {
     public int robinWeek;
     int teamCount = 12;
 
-    public String allConfStr;
     public ArrayList<Player> allConfPlayers;
 
     /**
@@ -50,7 +49,6 @@ public class Conference {
      */
     public Conference(String name, League league) {
         confName = name;
-        confPrestige = 75;
         confTeams = new ArrayList<Team>();
         this.league = league;
         week = 0;
