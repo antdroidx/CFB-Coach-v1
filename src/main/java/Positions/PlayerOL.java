@@ -32,12 +32,10 @@ public class PlayerOL extends Player {
     private int wMin = -35;
 
     public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int bkr, int bkp, int awr, int h, int w) {
+        position = "OL";
         team = t;
         name = nm;
         year = yr;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
         ratOvr = (pow * 3 + bkr * 2 + bkp * 2 + awr) / 8;
         ratPot = pot;
         ratFootIQ = iq;
@@ -52,39 +50,21 @@ public class PlayerOL extends Player {
         height = h;
         weight = w;
 
-        position = "OL";
         region = reg;
         personality = trait;
         recruitRating = scout;
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
+        resetSeasonStats();
+        resetCareerStats();
     }
 
 
     public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs,int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
                     int pow, int bkr, int bkp, int awr, int h, int w) {
+        position = "OL";
         team = t;
         name = nm;
         year = yr;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
         ratOvr = (pow * 3 + bkr * 2 + bkp * 2 + awr) / 8;
         ratPot = pot;
         ratFootIQ = iq;
@@ -101,19 +81,12 @@ public class PlayerOL extends Player {
         isWalkOn = wo;
         region = reg;
         personality = trait;
-        position = "OL";
         troubledTimes = 0;
         recruitRating = scout;
         height = h;
         weight = w;
 
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
+        resetSeasonStats();
 
         careerGames = cGamesPlayed;
         careerHeismans = cHeismans;
@@ -125,12 +98,13 @@ public class PlayerOL extends Player {
     }
 
     public PlayerOL(String nm, int yr, int stars, Team t) {
+        position = "OL";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -139,7 +113,6 @@ public class PlayerOL extends Player {
         ratPassBlock = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratAwareness = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratOvr = (ratStrength * 3 + ratRunBlock * 2 + ratPassBlock * 2 + ratAwareness) / 8;
-        position = "OL";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
@@ -154,37 +127,19 @@ public class PlayerOL extends Player {
         cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
         if (cost < 0) cost = (int)Math.random()*7+1;
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
 
     }
 
     public PlayerOL(String nm, int yr, int stars, Team t, boolean custom) {
+        position = "OL";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -193,32 +148,14 @@ public class PlayerOL extends Player {
         ratPassBlock = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratAwareness = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratOvr = (ratStrength * 3 + ratRunBlock * 2 + ratPassBlock * 2 + ratAwareness) / 8;
-        position = "OL";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
         if(custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
     }
     
     @Override
@@ -263,6 +200,8 @@ public class PlayerOL extends Player {
         if (wonAllFreshman) careerAllFreshman++;
         if (wonTopFreshman) careerTopFreshman++;
 
+        resetSeasonStats();
+
         if (isTransfer) {
             isTransfer = false;
             year -= 1;
@@ -271,6 +210,31 @@ public class PlayerOL extends Player {
         if (isRedshirt) wasRedshirt = true;
 
     }
+
+    private void resetSeasonStats() {
+        gamesStarted = 0;
+        gamesPlayed = 0;
+        isInjured = false;
+        troubledTimes = 0;
+
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+        statsWins = 0;
+    }
+
+    private void resetCareerStats() {
+        careerGames = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
+        careerWins = 0;
+    }
+
 
     @Override
     public int getHeismanScore() {

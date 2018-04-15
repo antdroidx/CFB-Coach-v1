@@ -65,12 +65,11 @@ public class PlayerRB extends Player {
     private int wMin = -20;
 
     public PlayerRB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int spd, int eva, int cat, int h, int w) {
+        position = "RB";
         team = t;
         name = nm;
         year = yr;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratOvr = (pow + spd + eva) / 3;
         ratPot = pot;
         ratFootIQ = iq;
@@ -84,64 +83,18 @@ public class PlayerRB extends Player {
         wasRedshirt = wasRS;
         region = reg;
         personality = trait;
-        troubledTimes = 0;
         recruitRating = scout;
         height = h;
         weight = w;
 
-        statsRushAtt = 0;
-        statsRushYards = 0;
-        statsRushTD = 0;
-        statsFumbles = 0;
-
-        statsReceptions = 0;
-        statsRecYards = 0;
-        statsRecTD = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        careerKickRets = 0;
-        careerKickRetYards = 0;
-        careerKickRetTDs = 0;
-        careerPuntRets = 0;
-        careerPuntRetYards = 0;
-        careerPuntRetTDs = 0;
-        careerRetGames = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerRushAtt = 0;
-        careerRushYards = 0;
-        careerTDs = 0;
-        careerFumbles = 0;
-        careerReceptions = 0;
-        careerRecYards = 0;
-        careerRecTD = 0;
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        position = "RB";
+       resetSeasonStats();
+       resetCareerStats();
     }
 
     public PlayerRB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
                     int pow, int spd, int eva, int cat, int h, int w, int cRushAtt, int cRushYards, int cTDs, int cFumbles, int cRec, int cRecYards, int cRecTD, int kret, int kyds, int ktd, int pret, int pyds, int ptd) {
+
+        position = "RB";
         team = t;
         name = nm;
         year = yr;
@@ -167,32 +120,7 @@ public class PlayerRB extends Player {
         height = h;
         weight = w;
 
-        troubledTimes = 0;
-
-        statsRushAtt = 0;
-        statsRushYards = 0;
-        statsRushTD = 0;
-        statsFumbles = 0;
-
-        statsReceptions = 0;
-        statsRecYards = 0;
-        statsRecTD = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
+        resetSeasonStats();
 
         careerRushAtt = cRushAtt;
         careerRushYards = cRushYards;
@@ -215,17 +143,15 @@ public class PlayerRB extends Player {
         careerPuntRets = pret;
         careerPuntRetYards = pyds;
         careerPuntRetTDs = ptd;
-
-        position = "RB";
     }
 
     public PlayerRB(String nm, int yr, int stars, Team t) {
-        name = nm;
+        position = "RB";
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin; name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -247,65 +173,18 @@ public class PlayerRB extends Player {
         cost = cost + (int) (Math.random() * (locFactor * locationDiscount));
         if (cost < 0) cost = (int) Math.random() * 7 + 1;
 
-        troubledTimes = 0;
-
-        statsRushAtt = 0;
-        statsRushYards = 0;
-        statsRushTD = 0;
-        statsFumbles = 0;
-
-        statsReceptions = 0;
-        statsRecYards = 0;
-        statsRecTD = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerRushAtt = 0;
-        careerRushYards = 0;
-        careerTDs = 0;
-        careerFumbles = 0;
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        careerKickRets = 0;
-        careerKickRetYards = 0;
-        careerKickRetTDs = 0;
-        careerPuntRets = 0;
-        careerPuntRetYards = 0;
-        careerPuntRetTDs = 0;
-        careerRetGames = 0;
-
-        position = "RB";
-        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
     }
 
     public PlayerRB(String nm, int yr, int stars, Team t, boolean custom) {
+        position = "RB";
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -320,55 +199,8 @@ public class PlayerRB extends Player {
         if(custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
-        troubledTimes = 0;
-
-        statsRushAtt = 0;
-        statsRushYards = 0;
-        statsRushTD = 0;
-        statsFumbles = 0;
-
-        statsReceptions = 0;
-        statsRecYards = 0;
-        statsRecTD = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-        statsWins = 0;
-
-        careerRushAtt = 0;
-        careerRushYards = 0;
-        careerTDs = 0;
-        careerFumbles = 0;
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        careerKickRets = 0;
-        careerKickRetYards = 0;
-        careerKickRetTDs = 0;
-        careerPuntRets = 0;
-        careerPuntRetYards = 0;
-        careerPuntRetTDs = 0;
-        careerRetGames = 0;
-
-        position = "RB";
-        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
     }
 
     @Override
@@ -427,10 +259,28 @@ public class PlayerRB extends Player {
         if (wonAllFreshman) careerAllFreshman++;
         if (wonTopFreshman) careerTopFreshman++;
 
+        resetSeasonStats();
+
+        if (isTransfer) {
+            isTransfer = false;
+            year -= 1;
+        }
+
+        if (isRedshirt) wasRedshirt = true;
+
+    }
+
+    private void resetSeasonStats() {
+        gamesStarted = 0;
+        gamesPlayed = 0;
+        isInjured = false;
+        troubledTimes = 0;
+
         statsRushAtt = 0;
         statsRushYards = 0;
         statsRushTD = 0;
         statsFumbles = 0;
+
         statsReceptions = 0;
         statsRecYards = 0;
         statsRecTD = 0;
@@ -443,13 +293,34 @@ public class PlayerRB extends Player {
         statsPuntRetTDs = 0;
         statsRetGames = 0;
 
-        if (isTransfer) {
-            isTransfer = false;
-            year -= 1;
-        }
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+        statsWins = 0;
+    }
 
-        if (isRedshirt) wasRedshirt = true;
+    private void resetCareerStats() {
+        careerRushAtt = 0;
+        careerRushYards = 0;
+        careerTDs = 0;
+        careerFumbles = 0;
+        careerGames = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
+        careerWins = 0;
 
+        careerKickRets = 0;
+        careerKickRetYards = 0;
+        careerKickRetTDs = 0;
+        careerPuntRets = 0;
+        careerPuntRetYards = 0;
+        careerPuntRetTDs = 0;
+        careerRetGames = 0;
     }
 
     @Override

@@ -98,12 +98,11 @@ public class PlayerDL extends Player {
 
     public PlayerDL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
                     int pow, int rsh, int pas, int tkl, int h, int w, int cTackles, int cSacks, int cFumbles, int cInts) {
+        position = "DL";
         team = t;
         name = nm;
         year = yr;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratOvr = (pow * 3 + rsh + pas + tkl) / 6;
         ratPot = pot;
         ratFootIQ = iq;
@@ -120,20 +119,11 @@ public class PlayerDL extends Player {
         isWalkOn = wo;
         region = reg;
         personality = trait;
-        position = "DL";
         recruitRating = scout;
         height = h;
         weight = w;
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
+        resetSeasonStats();
 
         careerGames = cGamesPlayed;
         careerHeismans = cHeismans;
@@ -143,11 +133,6 @@ public class PlayerDL extends Player {
         careerAllFreshman = cAF;
         careerWins = cWins;
 
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-
         careerTackles = cTackles;
         careerSacks = cSacks;
         careerFumbles = cFumbles;
@@ -155,12 +140,13 @@ public class PlayerDL extends Player {
     }
 
     public PlayerDL(String nm, int yr, int stars, Team t) {
+        position = "DL";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -169,7 +155,6 @@ public class PlayerDL extends Player {
         ratPassRush = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratTackle = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
-        position = "DL";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
@@ -184,46 +169,19 @@ public class PlayerDL extends Player {
         cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
         if (cost < 0) cost = (int)Math.random()*7+1;
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-
-        careerTackles = 0;
-        careerSacks = 0;
-        careerFumbles = 0;
-        careerInts = 0;
-
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
 
     }
 
     public PlayerDL(String nm, int yr, int stars, Team t, boolean custom) {
+        position = "DL";
+        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -232,42 +190,14 @@ public class PlayerDL extends Player {
         ratPassRush = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratTackle = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
-        position = "DL";
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
         if(custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-
-        careerTackles = 0;
-        careerSacks = 0;
-        careerFumbles = 0;
-        careerInts = 0;
-
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
     }
     @Override
     public void advanceSeason() {
@@ -310,10 +240,7 @@ public class PlayerDL extends Player {
         careerFumbles += statsFumbles;
         careerInts += statsInts;
 
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
+        resetSeasonStats();
 
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
@@ -329,6 +256,40 @@ public class PlayerDL extends Player {
         if (isRedshirt) wasRedshirt = true;
 
     }
+
+    private void resetSeasonStats() {
+        gamesStarted = 0;
+        gamesPlayed = 0;
+        isInjured = false;
+        troubledTimes = 0;
+
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+        statsWins = 0;
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+    }
+
+    private void resetCareerStats() {
+        careerGames = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
+        careerWins = 0;
+
+        careerTackles = 0;
+        careerSacks = 0;
+        careerFumbles = 0;
+        careerInts = 0;
+    }
+
 
     @Override
     public int getHeismanScore() {

@@ -56,6 +56,7 @@ public class PlayerCB extends Player {
     private int wMin = -40;
 
     public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cov, int spd, int tkl, int jmp, int h, int w) {
+        position = "CB";
         team = t;
         name = nm;
         year = yr;
@@ -74,72 +75,23 @@ public class PlayerCB extends Player {
         if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
-        position = "CB";
         region = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
         weight = w;
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-        statsTargets = 0;
-        statsIncomplete = 0;
-        statsDefended = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        careerTackles = 0;
-        careerSacks = 0;
-        careerFumbles = 0;
-        careerInts = 0;
-        careerTargets = 0;
-        careerDefended = 0;
-
-        careerKickRets = 0;
-        careerKickRetYards = 0;
-        careerKickRetTDs = 0;
-        careerPuntRets = 0;
-        careerPuntRetYards = 0;
-        careerPuntRetTDs = 0;
-        careerRetGames = 0;
-
+        resetSeasonStats();
+        resetCareerStats();
     }
 
     public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
                     int cov, int spd, int tkl, int jmp, int h, int w, int cTackles, int cSacks, int cFumbles, int cInts, int cTar, int cInc, int cDef, int kret, int kyds, int ktd, int pret, int pyds, int ptd) {
+        position = "CB";
         team = t;
         name = nm;
         year = yr;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratOvr = (cov * 2 + spd + tkl + jmp) / 5;
         ratPot = pot;
         ratFootIQ = iq;
@@ -161,15 +113,7 @@ public class PlayerCB extends Player {
         height = h;
         weight = w;
 
-        position = "CB";
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
+        resetSeasonStats();
 
         careerGames = cGamesPlayed;
         careerHeismans = cHeismans;
@@ -178,22 +122,6 @@ public class PlayerCB extends Player {
         careerTopFreshman = cTF;
         careerAllFreshman = cAF;
         careerWins = cWins;
-
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-        statsTargets = 0;
-        statsIncomplete = 0;
-        statsDefended = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
 
         careerTackles = cTackles;
         careerSacks = cSacks;
@@ -212,12 +140,13 @@ public class PlayerCB extends Player {
     }
 
     public PlayerCB(String nm, int yr, int stars, Team t) {
+        position = "CB";
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -241,67 +170,18 @@ public class PlayerCB extends Player {
         cost = cost + (int) (Math.random() * (locFactor * locationDiscount));
         if (cost < 0) cost = (int) Math.random() * 7 + 1;
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-        statsTargets = 0;
-        statsIncomplete = 0;
-        statsDefended = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        careerTackles = 0;
-        careerSacks = 0;
-        careerFumbles = 0;
-        careerInts = 0;
-        careerTargets = 0;
-        careerIncomplete = 0;
-        careerDefended = 0;
-
-        careerKickRets = 0;
-        careerKickRetYards = 0;
-        careerKickRetTDs = 0;
-        careerPuntRets = 0;
-        careerPuntRetYards = 0;
-        careerPuntRetTDs = 0;
-        careerRetGames = 0;
-
-        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
+        resetSeasonStats();
+        resetCareerStats();
     }
 
     public PlayerCB(String nm, int yr, int stars, Team t, boolean custom) {
+        position = "CB";
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
-        gamesStarted = 0;
-        gamesPlayed = 0;
-        isInjured = false;
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -317,69 +197,8 @@ public class PlayerCB extends Player {
         if(custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
-        troubledTimes = 0;
-
-        wonHeisman = false;
-        wonAllAmerican = false;
-        wonAllConference = false;
-        wonAllFreshman = false;
-        wonTopFreshman = false;
-        statsWins = 0;
-
-        careerGames = 0;
-        careerHeismans = 0;
-        careerAllAmerican = 0;
-        careerAllConference = 0;
-        careerAllFreshman = 0;
-        careerTopFreshman = 0;
-        careerWins = 0;
-
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-        statsTargets = 0;
-        statsIncomplete = 0;
-        statsDefended = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
-
-        careerTackles = 0;
-        careerSacks = 0;
-        careerFumbles = 0;
-        careerInts = 0;
-        careerTargets = 0;
-        careerIncomplete = 0;
-        careerDefended = 0;
-
-        careerKickRets = 0;
-        careerKickRetYards = 0;
-        careerKickRetTDs = 0;
-        careerPuntRets = 0;
-        careerPuntRetYards = 0;
-        careerPuntRetTDs = 0;
-        careerRetGames = 0;
-
-        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
-    }
-
-    @Override
-    public int getHeismanScore() {
-        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + statsDefended * 100 + statsKickRetYards + statsKickRetTDs * 150 + statsPuntRetYards + statsPuntRetTDs * 150 + ratOvr * 10 + team.teamPrestige * 3 + team.confPrestige * 3 + (120 - team.rankTeamPollScore) * 2;
-    }
-
-    @Override
-    public int getCareerScore() {
-        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + statsDefended * 100 + ratOvr * 10 +
-                careerTackles * 25 + careerSacks * 425 + careerFumbles * 425 + careerInts * 425 + careerDefended * 100
-                + statsPuntRetYards + statsPuntRetTDs * 150 + careerKickRetYards + careerKickRetTDs * 150 + careerPuntRetYards + careerPuntRetTDs * 150 + ratOvr * 10 * year;
+        resetSeasonStats();
+        resetCareerStats();
 
     }
 
@@ -436,21 +255,7 @@ public class PlayerCB extends Player {
         careerPuntRetTDs += statsPuntRetTDs;
         careerRetGames += statsRetGames;
 
-        statsTackles = 0;
-        statsSacks = 0;
-        statsFumbles = 0;
-        statsInts = 0;
-        statsTargets = 0;
-        statsIncomplete = 0;
-        statsDefended = 0;
-
-        statsKickRets = 0;
-        statsKickRetYards = 0;
-        statsKickRetTDs = 0;
-        statsPuntRets = 0;
-        statsPuntRetYards = 0;
-        statsPuntRetTDs = 0;
-        statsRetGames = 0;
+        resetSeasonStats();
 
         if (wonHeisman) careerHeismans++;
         if (wonAllAmerican) careerAllAmerican++;
@@ -466,6 +271,76 @@ public class PlayerCB extends Player {
         if (isRedshirt) wasRedshirt = true;
 
     }
+
+    private void resetSeasonStats() {
+        gamesStarted = 0;
+        gamesPlayed = 0;
+        isInjured = false;
+        troubledTimes = 0;
+
+        wonHeisman = false;
+        wonAllAmerican = false;
+        wonAllConference = false;
+        wonAllFreshman = false;
+        wonTopFreshman = false;
+        statsWins = 0;
+
+        statsTackles = 0;
+        statsSacks = 0;
+        statsFumbles = 0;
+        statsInts = 0;
+        statsTargets = 0;
+        statsIncomplete = 0;
+        statsDefended = 0;
+
+        statsKickRets = 0;
+        statsKickRetYards = 0;
+        statsKickRetTDs = 0;
+        statsPuntRets = 0;
+        statsPuntRetYards = 0;
+        statsPuntRetTDs = 0;
+        statsRetGames = 0;
+    }
+
+    private void resetCareerStats() {
+        careerGames = 0;
+        careerHeismans = 0;
+        careerAllAmerican = 0;
+        careerAllConference = 0;
+        careerAllFreshman = 0;
+        careerTopFreshman = 0;
+        careerWins = 0;
+
+        careerTackles = 0;
+        careerSacks = 0;
+        careerFumbles = 0;
+        careerInts = 0;
+        careerTargets = 0;
+        careerIncomplete = 0;
+        careerDefended = 0;
+
+        careerKickRets = 0;
+        careerKickRetYards = 0;
+        careerKickRetTDs = 0;
+        careerPuntRets = 0;
+        careerPuntRetYards = 0;
+        careerPuntRetTDs = 0;
+        careerRetGames = 0;
+    }
+
+    @Override
+    public int getHeismanScore() {
+        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + statsDefended * 100 + statsKickRetYards + statsKickRetTDs * 150 + statsPuntRetYards + statsPuntRetTDs * 150 + ratOvr * 10 + team.teamPrestige * 3 + team.confPrestige * 3 + (120 - team.rankTeamPollScore) * 2;
+    }
+
+    @Override
+    public int getCareerScore() {
+        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + statsDefended * 100 + ratOvr * 10 +
+                careerTackles * 25 + careerSacks * 425 + careerFumbles * 425 + careerInts * 425 + careerDefended * 100
+                + statsPuntRetYards + statsPuntRetTDs * 150 + careerKickRetYards + careerKickRetTDs * 150 + careerPuntRetYards + careerPuntRetTDs * 150 + ratOvr * 10 * year;
+
+    }
+
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
