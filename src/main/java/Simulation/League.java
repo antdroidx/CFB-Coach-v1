@@ -84,8 +84,7 @@ import Positions.PlayerK;
  *
  * @author Achi
  */
-public class League extends Rankings {
-    public Rankings rank;
+public class League {
     //Lists of conferences/teams
     public ArrayList<String[]> leagueHistory;
     public ArrayList<String> heismanHistory;
@@ -130,6 +129,9 @@ public class League extends Rankings {
     int countTeam = 120;
 
     int seasonWeeks = 26;
+    double realignmentChance = 0.20;
+    int promotionPrestige = 70;
+    int relegationPrestige = 45;
 
     //Bowl Games
     public boolean hasScheduledBowls;
@@ -193,7 +195,6 @@ public class League extends Rankings {
     public String userTransfers;
     public String sumTransfers;
     public ArrayList<String> transfersList;
-    public ArrayList<Player> transfersPlayers;
 
     public ArrayList<Player> freshmen;
     public ArrayList<Player> redshirts;
@@ -204,6 +205,7 @@ public class League extends Rankings {
     private boolean careerMode;
     public boolean fullGameLog;
     public boolean hidePotential;
+    public boolean confRealignment;
 
     public DecimalFormat df2 = new DecimalFormat(".##");
 
@@ -234,9 +236,9 @@ public class League extends Rankings {
         conferences.add(new Conference("Pacific", this));
         conferences.add(new Conference("Southern", this));
         conferences.add(new Conference("Patriot", this));
-        conferences.add(new Conference("Mountain", this));
-        conferences.add(new Conference("Bluegrass", this));
         conferences.add(new Conference("Central", this));
+        conferences.add(new Conference("Bluegrass", this));
+        conferences.add(new Conference("Mountain", this));
         conferences.add(new Conference("Sunshine", this));
 
 
@@ -393,19 +395,19 @@ public class League extends Rankings {
         conferences.get(5).confTeams.add(new Team("Connecticut", "UCON", "Patriot", 40, "SYR", 3, this));
         conferences.get(5).confTeams.add(new Team("West Virginia", "WVU", "Patriot", 70, "ND", 2, this));
 
-        //Mt West x 12
-        conferences.get(6).confTeams.add(new Team("Air Force", "AF", "Mountain", 42, "HAW", 0, this));
-        conferences.get(6).confTeams.add(new Team("Boise", "BOIS", "Mountain", 68, "SDSU", 0, this));
-        conferences.get(6).confTeams.add(new Team("Provo", "BYU", "Mountain", 32, "UTST", 0, this));
-        conferences.get(6).confTeams.add(new Team("Colorado State", "CSU", "Mountain", 47, "WYO", 0, this));
-        conferences.get(6).confTeams.add(new Team("Fresno", "FRES", "Mountain", 42, "SJSU", 0, this));
-        conferences.get(6).confTeams.add(new Team("Hawaii", "HAW", "Mountain", 35, "AF", 0, this));
-        conferences.get(6).confTeams.add(new Team("Nevada", "NEV", "Mountain", 35, "NMEX", 0, this));
-        conferences.get(6).confTeams.add(new Team("New Mexico", "NMEX", "Mountain", 38, "NEV", 1, this));
-        conferences.get(6).confTeams.add(new Team("San Diego", "SDSU", "Mountain", 64, "BOIS", 0, this));
-        conferences.get(6).confTeams.add(new Team("San Jose", "SJSU", "Mountain", 29, "FRES", 0, this));
-        conferences.get(6).confTeams.add(new Team("Utah State", "UTST", "Mountain", 42, "BYU", 0, this));
-        conferences.get(6).confTeams.add(new Team("Wyoming", "WYOM", "Mountain", 46, "CSU", 0, this));
+        // MAC - x 12
+        conferences.get(6).confTeams.add(new Team("Akron", "AKR", "Central", 35, "KNST", 2, this));
+        conferences.get(6).confTeams.add(new Team("Muncie", "BAL", "Central", 28, "NIU", 2, this));
+        conferences.get(6).confTeams.add(new Team("Bowling Green", "BG", "Central", 30, "TOL", 2, this));
+        conferences.get(6).confTeams.add(new Team("Buffalo", "BUF", "Central", 34, "EMU", 3, this));
+        conferences.get(6).confTeams.add(new Team("Middle Michigan", "CMU", "Central", 40, "WMU", 2, this));
+        conferences.get(6).confTeams.add(new Team("East Michigan", "EMU", "Central", 38, "BUF", 2, this));
+        conferences.get(6).confTeams.add(new Team("Kent", "KNST", "Central", 30, "KNST", 2, this));
+        conferences.get(6).confTeams.add(new Team("Miami OH", "MiOH", "Central", 34, "OHIO", 2, this));
+        conferences.get(6).confTeams.add(new Team("North Illinois", "NIU", "Central", 44, "BAL", 2, this));
+        conferences.get(6).confTeams.add(new Team("Ohio", "OHIO", "Central", 45, "MiOH", 2, this));
+        conferences.get(6).confTeams.add(new Team("Toledo", "TOL", "Central", 45, "BG", 2, this));
+        conferences.get(6).confTeams.add(new Team("West Michigan", "WMU", "Central", 44, "CMU", 2, this));
 
         //Conf USA x 12
         conferences.get(7).confTeams.add(new Team("Army", "ARMY", "Bluegrass", 43, "NAVY", 3, this));
@@ -421,20 +423,19 @@ public class League extends Rankings {
         conferences.get(7).confTeams.add(new Team("Birmingham", "UAB", "Bluegrass", 44, "SMIS", 4, this));
         conferences.get(7).confTeams.add(new Team("West Kentucky", "WKU", "Bluegrass", 44, "ECU", 4, this));
 
-        // MAC - x 12
-        conferences.get(8).confTeams.add(new Team("Akron", "AKR", "Central", 35, "KNST", 2, this));
-        conferences.get(8).confTeams.add(new Team("Muncie", "BAL", "Central", 28, "NIU", 2, this));
-        conferences.get(8).confTeams.add(new Team("Bowling Green", "BG", "Central", 30, "TOL", 2, this));
-        conferences.get(8).confTeams.add(new Team("Buffalo", "BUF", "Central", 34, "EMU", 3, this));
-        conferences.get(8).confTeams.add(new Team("Middle Michigan", "CMU", "Central", 40, "WMU", 2, this));
-        conferences.get(8).confTeams.add(new Team("East Michigan", "EMU", "Central", 38, "BUF", 2, this));
-        conferences.get(8).confTeams.add(new Team("Kent", "KNST", "Central", 30, "KNST", 2, this));
-        conferences.get(8).confTeams.add(new Team("Miami OH", "MiOH", "Central", 34, "OHIO", 2, this));
-        conferences.get(8).confTeams.add(new Team("North Illinois", "NIU", "Central", 44, "BAL", 2, this));
-        conferences.get(8).confTeams.add(new Team("Ohio", "OHIO", "Central", 45, "MiOH", 2, this));
-        conferences.get(8).confTeams.add(new Team("Toledo", "TOL", "Central", 45, "BG", 2, this));
-        conferences.get(8).confTeams.add(new Team("West Michigan", "WMU", "Central", 44, "CMU", 2, this));
-
+        //Mt West x 12
+        conferences.get(8).confTeams.add(new Team("Air Force", "AF", "Mountain", 42, "HAW", 0, this));
+        conferences.get(8).confTeams.add(new Team("Boise", "BOIS", "Mountain", 68, "SDSU", 0, this));
+        conferences.get(8).confTeams.add(new Team("Provo", "BYU", "Mountain", 32, "UTST", 0, this));
+        conferences.get(8).confTeams.add(new Team("Colorado State", "CSU", "Mountain", 47, "WYO", 0, this));
+        conferences.get(8).confTeams.add(new Team("Fresno", "FRES", "Mountain", 42, "SJSU", 0, this));
+        conferences.get(8).confTeams.add(new Team("Hawaii", "HAW", "Mountain", 35, "AF", 0, this));
+        conferences.get(8).confTeams.add(new Team("Nevada", "NEV", "Mountain", 35, "NMEX", 0, this));
+        conferences.get(8).confTeams.add(new Team("New Mexico", "NMEX", "Mountain", 38, "NEV", 1, this));
+        conferences.get(8).confTeams.add(new Team("San Diego", "SDSU", "Mountain", 64, "BOIS", 0, this));
+        conferences.get(8).confTeams.add(new Team("San Jose", "SJSU", "Mountain", 29, "FRES", 0, this));
+        conferences.get(8).confTeams.add(new Team("Utah State", "UTST", "Mountain", 42, "BYU", 0, this));
+        conferences.get(8).confTeams.add(new Team("Wyoming", "WYOM", "Mountain", 46, "CSU", 0, this));
         //Sun Belt
         conferences.get(9).confTeams.add(new Team("Appalachian", "APP", "Sunshine", 42, "ODOM", 2, this));
         conferences.get(9).confTeams.add(new Team("Monroe", "LMON", "Sunshine", 38, "TROY", 4, this));
@@ -3394,22 +3395,40 @@ public class League extends Rankings {
           4. Rivalries remain same or trade rivalries? */
 
     public void conferenceInvites() {
-        for (int i = 5; i < conferences.size(); ++i) {
-            for (int t = 0; t < conferences.get(i).confTeams.size(); ++t) {
-                if (conferences.get(i).confTeams.get(t).teamPrestige > 70) {
-                    for (int x = 0; x < conferences.get(i - 5).confTeams.size(); ++x) {
-                        if (conferences.get(i - 5).confTeams.get(x).teamPrestige < 50) {
-                            String oldTeamAbbr = conferences.get(i).confTeams.get(t).rivalTeam;
-                            conferences.get(i).confTeams.get(t).rivalTeam = conferences.get(i - 5).confTeams.get(x).rivalTeam;
-                            conferences.get(i - 5).confTeams.get(x).rivalTeam = oldTeamAbbr;
-                            Team oldTeam = conferences.get(i).confTeams.get(t);
-                            Team oldTeam2 = conferences.get(i - 5).confTeams.get(x);
-                            conferences.get(i).confTeams.remove(i);
-                            conferences.get(i - 5).confTeams.remove(x);
-                            conferences.get(i).confTeams.add(oldTeam2);
-                            conferences.get(i - 5).confTeams.add(oldTeam);
-                            newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + conferences.get(i - 5).confName + " announced today they will be adding " + oldTeam.name + " to their conference next season! They've agreed to swap " + oldTeam2.name + ".");
-                            break;
+        int year = getYear();
+        String yearEnd = Integer.toString(year).substring(3, 4);
+        if (yearEnd.equals("2") || yearEnd.equals("7")) {
+            for (int i = 5; i < conferences.size(); ++i) {
+                for (int t = 0; t < conferences.get(i).confTeams.size(); ++t) {
+                    if (conferences.get(i).confTeams.get(t).teamPrestige > promotionPrestige) {
+                        for (int x = conferences.get(i-5).confTeams.size()-1 ; x >= 0; --x) {
+                            if (conferences.get(i - 5).confTeams.get(x).teamPrestige < relegationPrestige) {
+                                //set teams to memory
+                                if (Math.random() < realignmentChance) {
+                                    final String teamArival = conferences.get(i).confTeams.get(t).rivalTeam;
+                                    final String teamBrival = conferences.get(i - 5).confTeams.get(x).rivalTeam;
+                                    final String teamAconf = conferences.get(i).confTeams.get(t).conference;
+                                    final String teamBconf = conferences.get(i - 5).confTeams.get(x).conference;
+
+                                    //transfer rivals and conf data
+                                    conferences.get(i).confTeams.get(t).rivalTeam = teamBrival;
+                                    conferences.get(i - 5).confTeams.get(x).rivalTeam = teamArival;
+                                    conferences.get(i).confTeams.get(t).conference = teamBconf;
+                                    conferences.get(i - 5).confTeams.get(x).conference = teamAconf;
+                                    Team teamA = conferences.get(i).confTeams.get(t);
+                                    Team teamB = conferences.get(i - 5).confTeams.get(x);
+
+                                    //remove + transfer teams
+                                    conferences.get(i).confTeams.remove(t);
+                                    conferences.get(i - 5).confTeams.remove(x);
+                                    conferences.get(i).confTeams.add(teamB);
+                                    conferences.get(i - 5).confTeams.add(teamA);
+
+                                    //break the news
+                                    newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + conferences.get(i - 5).confName + " announced today they will be adding " + teamA.name + " to their conference next season! They've agreed to swap " + teamB.name + ".");
+                                }
+
+                            }
                         }
                     }
                 }
