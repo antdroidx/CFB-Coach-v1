@@ -6,24 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b40a0c0-be50-4d9c-b271-c223543a2569" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Comparator/CompNFLTalent.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Comparator/CompPlayerReturners.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/Comparator/CompPlayerSTSpeed.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/APK_FILES/2018-04-15-A-CFB-Coach-debug.apk" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/APK_FILES/2018-04-15-B-CFB-Coach-debug.apk" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/release/output.json" afterPath="$PROJECT_DIR$/release/output.json" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/Player.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/Player.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/child_player_stats.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/child_player_stats.xml" />
-    </list>
+    <list default="true" id="4b40a0c0-be50-4d9c-b271-c223543a2569" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -219,7 +202,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5234">
-              <caret line="3874" column="4" lean-forward="false" selection-start-line="3874" selection-start-column="4" selection-end-line="3874" selection-end-column="4" />
+              <caret line="3874" column="0" lean-forward="false" selection-start-line="3874" selection-start-column="0" selection-end-line="3874" selection-end-column="0" />
               <folding>
                 <element signature="docComment;method#Team#0;class#Team#0" expanded="false" />
                 <element signature="method#Team#0;class#Team#0" expanded="false" />
@@ -2413,7 +2396,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5234">
-          <caret line="3874" column="4" lean-forward="false" selection-start-line="3874" selection-start-column="4" selection-end-line="3874" selection-end-column="4" />
+          <caret line="3874" column="0" lean-forward="false" selection-start-line="3874" selection-start-column="0" selection-end-line="3874" selection-end-column="0" />
           <folding>
             <element signature="docComment;method#Team#0;class#Team#0" expanded="false" />
             <element signature="method#Team#0;class#Team#0" expanded="false" />

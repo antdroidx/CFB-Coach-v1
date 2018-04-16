@@ -3872,7 +3872,7 @@ public class Team {
 
         return sb.toString();
     }
-    
+
     /**
      * Set the starters for a particular position.
      *
