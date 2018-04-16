@@ -2510,7 +2510,7 @@ public class MainActivity extends AppCompatActivity {
         final PlayerStatsListArrayAdapter playerStatsAdapter =
                 new PlayerStatsListArrayAdapter(this, userTeam.getGradPlayersList());
         final MockDraftListArrayAdapter mockDraftAdapter =
-                new MockDraftListArrayAdapter(this, simLeague.getMockDraftPlayersList(), userTeam.strRep());
+                new MockDraftListArrayAdapter(this, simLeague.getMockDraftPlayersList(), userTeam.name);
         playerList.setAdapter(playerStatsAdapter);
 
         beginRecruitingSpinner.setOnItemSelectedListener(

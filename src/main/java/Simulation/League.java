@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Random;
@@ -19,6 +21,7 @@ import Comparator.CompCoachCareer;
 import Comparator.CompCoachScore;
 import Comparator.CompKickRetTD;
 import Comparator.CompKickRetYards;
+import Comparator.CompNFLTalent;
 import Comparator.CompPlayer;
 import Comparator.CompPlayerFGMade;
 import Comparator.CompPlayerFGpct;
@@ -176,8 +179,8 @@ public class League {
     int countTeam = 120;
     int seasonWeeks = 26;
     double realignmentChance = 0.20;
-    int promotionPrestige = 72;
-    int relegationPrestige = 45;
+    int promotionPrestige = 71;
+    int relegationPrestige = 46;
     String crYear1 = "2";
     String crYear2 = "7";
     boolean heismanDecided;
@@ -192,6 +195,8 @@ public class League {
     private String freshmanWinnerStrFull;
     private boolean careerMode;
 
+    public String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
+            "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
 
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
@@ -200,6 +205,7 @@ public class League {
     public League(String namesCSV, String lastNamesCSV, boolean career) {
         careerMode = career;
         hidePotential = true;
+        confRealignment = true;
         setupCommonInitalizers();
 
         setupNamesDB(namesCSV, lastNamesCSV);
@@ -379,6 +385,7 @@ public class League {
     public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl) {
         careerMode = career;
         hidePotential = true;
+        confRealignment = true;
 
         setupCommonInitalizers();
         setupNamesDB(namesCSV, lastNamesCSV);
@@ -3256,11 +3263,11 @@ public class League {
         ArrayList<Player> allPlayersLeaving = new ArrayList<>();
         for (Team t : teamList) {
             for (Player p : t.playersLeaving) {
-                if (p.ratOvr > 75 && !p.position.equals("K")) allPlayersLeaving.add(p);
+                if (p.ratOvr > 70) allPlayersLeaving.add(p);
             }
         }
 
-        Collections.sort(allPlayersLeaving, new CompPlayer());
+        Collections.sort(allPlayersLeaving, new CompNFLTalent());
         ArrayList<Player> NFLPlayers = new ArrayList<>();
 
         if (allPlayersLeaving.size() > 224) {
@@ -3274,9 +3281,18 @@ public class League {
             }
         }
 
+        List<String> nfl = Arrays.asList(proTeams);
+        Collections.shuffle(nfl);
+
         String[] nflPlayers = new String[NFLPlayers.size()];
+        int n = 0, r = 1;
         for (int i = 0; i < nflPlayers.length; ++i) {
-            nflPlayers[i] = NFLPlayers.get(i).getMockDraftStr();
+            nflPlayers[i] = NFLPlayers.get(i).getMockDraftStr(r, n+1, nfl.get(n).toString());
+            n++;
+            if (n >= nfl.size()) {
+                n = 0;
+                r++;
+            }
         }
 
         return nflPlayers;
