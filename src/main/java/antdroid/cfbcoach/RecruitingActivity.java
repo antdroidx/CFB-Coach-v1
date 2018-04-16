@@ -187,7 +187,7 @@ public class RecruitingActivity extends AppCompatActivity {
         final String[] teamInfo = lines[0].split(",");
         teamName = teamInfo[1];
         teamAbbr = teamInfo[2];
-        recruitingBudget = Integer.parseInt(teamInfo[3]) * 18;
+        recruitingBudget = Integer.parseInt(teamInfo[3]) * 17;
         if (teamInfo[4].isEmpty()) {
             HCtalent = 70;
         } else {
@@ -233,7 +233,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
         // Add extra money if your team was fleeced
-        int recBonus = (minPlayers - teamPlayers.size())*18;
+        int recBonus = (minPlayers - teamPlayers.size())*17;
         int coachBonus = HCtalent*3;
         recruitingBudget += recBonus + coachBonus;
 

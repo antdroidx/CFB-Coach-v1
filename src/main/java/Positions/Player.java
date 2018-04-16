@@ -32,6 +32,7 @@ Player {
     public boolean isSuspended;
     public int weeksSuspended;
     public int troubledTimes;
+    public double talentNFL;
 
     public int gamesStarted;
     public int gamesPlayed;
@@ -136,6 +137,21 @@ Player {
             return "Jr";
         } else if (year == 4) {
             return "Sr";
+        }
+        return "ERROR";
+    }
+
+    public String getFullYrStr() {
+        if (year == 0) {
+            return "Redshirt";
+        } else if (year == 1) {
+            return "Freshman";
+        } else if (year == 2) {
+            return "Sophomore";
+        } else if (year == 3) {
+            return "Junior";
+        } else if (year == 4) {
+            return "Senior";
         }
         return "ERROR";
     }
@@ -269,12 +285,9 @@ Player {
         return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
     }
 
-    public String getPosNameYrOvrPot_NoInjury() {
-        return position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
-    }
-
-    public String getMockDraftStr() {
-        return position + " " + getInitialName() + " [" + getYrStr() + "]>" + team.strRep();
+    public String getMockDraftStr(int round, int selection, String nflTeam) {
+        return  "Round " + round + ", Pick " + selection + " : " + nflTeam + "\n" + position + " " + name + "\n" + getFullYrStr()
+                + ">\n" + team.name + "\n" + "Overall: " + ratOvr;
     }
 
     /**

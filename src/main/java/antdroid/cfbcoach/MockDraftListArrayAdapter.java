@@ -33,16 +33,18 @@ public class MockDraftListArrayAdapter extends ArrayAdapter<String> {
 
         String[] detailSplit = values[position].split(">");
         TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
-        itemL.setText((1 + position) + ". " + detailSplit[0]);
+        itemL.setText(detailSplit[0]);
         TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
         itemR.setText(detailSplit[1]);
 
         Button butt = rowView.findViewById(R.id.buttonPlayerStatsViewAll);
         butt.setVisibility(View.GONE);
 
-        if (detailSplit[1].equals(userTeamStrRep)) {
-            itemL.setTextColor(Color.parseColor("#1A75FF"));
-            itemR.setTextColor(Color.parseColor("#1A75FF"));
+        String[] split = detailSplit[1].split("\n");
+
+        if (split[1].equals(userTeamStrRep)) {
+            itemL.setTextColor(Color.YELLOW);
+            itemR.setTextColor(Color.YELLOW);
         }
 
         return rowView;
