@@ -30,8 +30,8 @@ android {
         applicationId "antdroid.cfbcoach"
         minSdkVersion 21
         targetSdkVersion 27
-        versionName '1.0.4'
-        versionCode 7
+        versionName 'v1.0.5'
+        versionCode 9
     }
     buildTypes {
         release {
@@ -39,10 +39,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            versionNameSuffix 'DEBUG'
+            versionNameSuffix '-DEBUG'
         }
     }
     productFlavors {
+    }
+    applicationVariants.all { variant ->
+        variant.resValue "string", "versionName", variant.versionName
     }
 }
 

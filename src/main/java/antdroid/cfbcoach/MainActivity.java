@@ -43,9 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import Simulation.League;
-import Simulation.Conference;
-import Simulation.Game;
 import Positions.HeadCoach;
 import Positions.Player;
 import Positions.PlayerCB;
@@ -58,6 +55,9 @@ import Positions.PlayerRB;
 import Positions.PlayerS;
 import Positions.PlayerTE;
 import Positions.PlayerWR;
+import Simulation.Conference;
+import Simulation.Game;
+import Simulation.League;
 import Simulation.Team;
 import Simulation.TeamStrategy;
 
@@ -287,6 +287,52 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        if (userTeam.teamHistory.size() > 0 && simLeague.currentWeek == 0) {
+            String goals = "";
+            int confPos=0;
+
+
+            for (int i = 0; i < simLeague.conferences.size(); ++i) {
+                Conference c = simLeague.conferences.get(i);
+                if (c.confName.equals(userTeam.conference)) {
+                    for (int x = 0; x < c.confTeams.size(); x++) {
+                        if (c.confTeams.get(x).name.equals(userTeam.name)) {
+                            confPos = x + 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            goals = "Welcome to the " + (seasonStart + userTeam.teamHistory.size()) + " College Football season!\n\n";
+            goals += "This season you're team is expected to finish ranked #" + (100-userTeam.teamPrestige) + " or higher!\n\n";
+            goals += "In conference play, your team is expected to finish #" + confPos + " in the " + userTeam.conference + " conference.\n\n";
+
+            if (simLeague.saveLucky.name.equals(userTeam.name) || simLeague.saveLucky2.name.equals(userTeam.name) || simLeague.saveLucky3.name.equals(userTeam.name)) {
+                goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
+            }
+
+            if (simLeague.savePenalized != null && simLeague.savePenalized.name.equals(userTeam.name) || simLeague.savePenalized2 != null && simLeague.savePenalized2.name.equals(userTeam.name)) {
+                    goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
+                }
+            if (simLeague.savePenalized3 != null && simLeague.savePenalized3.name.equals(userTeam.name) ||  simLeague.savePenalized4 != null &&  simLeague.savePenalized4.name.equals(userTeam.name) || simLeague.savePenalized5 != null &&  simLeague.savePenalized5.name.equals(userTeam.name)) {
+                    goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
+                }
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(goals)
+                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Goals")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
 
         /*
           Set up "Play Week" button
@@ -610,25 +656,6 @@ public class MainActivity extends AppCompatActivity {
             // Only show recruiting classes if it aint 2017
             showRecruitingClassDialog();
         }
-
-/*        if(simLeague.currentWeek == 0 & simLeague.getYear() == seasonStart) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Welcome Coach!\nThis is the main screen in the game. \n\nYou can set your depth chart, play the week, or choose your team strategy at the bottom. " +
-                    "To view Settings or check rankings, history, SAVE or import data, the menu button can be found in the upper right. \n\nAcross the middle of the screen is a series of buttons. " +
-                    "The News will update weekly with new headlines and articles about weekly results, future matchups, injury reports, key players, suspensions, and other information.")
-                    .setTitle("Tutorial")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //do nothing?
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            TextView textView = dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        }*/
 
     }
 
@@ -2499,7 +2526,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] spinnerSelection = {"Players Leaving", "Mock Draft"};
+        String[] spinnerSelection = {"Players Leaving", "Pro Mock Draft"};
         Spinner beginRecruitingSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> beginRecruitingSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerSelection);

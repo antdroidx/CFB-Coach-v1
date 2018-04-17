@@ -176,13 +176,21 @@
 
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="@string/versionName"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="[v1.0.4]\n© Achi Jones, 2016 | Anthony Nguyen, 2017-18"
+        android:text="© Achi Jones, 2016 | Anthony Nguyen, 2017-18"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp" />

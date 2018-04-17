@@ -484,7 +484,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private void exitRecruiting() {
         StringBuilder sb = new StringBuilder();
         sb.append("Are you sure you are done recruiting? Any unfilled positions will be filled by walk-ons.\n\n");
-        for (int i = 1; i < positions.size(); ++i) {
+        for (int i = 2; i < positions.size()-4; ++i) {
             sb.append("\t\t" + positions.get(i) + "\n");
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
@@ -668,10 +668,10 @@ public class RecruitingActivity extends AppCompatActivity {
         if (pi[7].equals("true")) transfer = " (Transfer)";
         if (!playersRecruited.contains(p) && !playersRedshirted.contains(p)) {
             improveStr = "(+" + pi[13] + ")";
-            return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[12] + " " + improveStr + transfer;
+            return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[12] + " " + improveStr + transfer;
         } else {
             improveStr = " (Recruit)";
-            return getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " Overall: " + pi[11] + " " + improveStr + transfer;
+            return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[11] + " " + improveStr + transfer;
         }
     }
 
@@ -680,7 +680,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoDisplay(String p) {
         String[] pi = p.split(",");
-        return pi[6] + "-Star " + pi[0] + " " + getInitialName(pi[1]);
+        return pi[6] + "-Star " + pi[0] + " " + pi[1];
     }
 
     /**
@@ -688,7 +688,7 @@ public class RecruitingActivity extends AppCompatActivity {
      */
     private String getReadablePlayerInfoPos(String p) {
         String[] pi = p.split(",");
-        return pi[0] + " " + getInitialName(pi[1]) + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr";
+        return pi[0] + " " + pi[1] + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr";
     }
 
 
