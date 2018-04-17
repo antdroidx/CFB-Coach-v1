@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">College Football Coach: Career Edition</string>
-    <string name="version">Version 1.5 BETA</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_team_strategy">Set Team Strategy</string>
     <string name="action_team_lineup">Set Team Lineup</string>

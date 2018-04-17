@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import Comparator.CompCoachScore;
+import Comparator.CompConfTeamRanking;
 import Comparator.CompPlayerHeisman;
 import Comparator.CompTeamConfWins;
 import Comparator.CompTeamPoll;
@@ -27,6 +28,8 @@ public class Conference {
 
     public String confName;
     public int confPrestige;
+    public int confRelegateMin;
+    public int confPromoteMin;
 
     public ArrayList<Team> confTeams;
     public boolean evenYear;
@@ -63,8 +66,6 @@ public class Conference {
         //schedule in conf matchups
         robinWeek = 0;
         evenYear = (league.leagueHistory.size() % 2 == 0);
-
-        updateConfPrestige();
 
         // Set up int arrays for each team's home/away rotation.
         // Theoretically every year you should change off between having 5 home games and 4 away games in conference
@@ -279,6 +280,13 @@ public class Conference {
             CP += confTeams.get(i).teamPrestige;
         }
         confPrestige = (CP / (confTeams.size() / 2));
+
+        confPromoteMin = (int)(CP/confTeams.size() * 1.25);
+        confRelegateMin = (int)(CP/confTeams.size() * 0.75);
+    }
+
+    public void updateConfRankings() {
+        Collections.sort(confTeams, new CompConfTeamRanking());
     }
 
     /**

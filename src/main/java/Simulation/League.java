@@ -178,7 +178,7 @@ public class League {
     int seasonStart = 2017;
     int countTeam = 120;
     int seasonWeeks = 26;
-    double realignmentChance = 0.20;
+    double realignmentChance = 0.99;
     int promotionPrestige = 71;
     int relegationPrestige = 46;
     String crYear1 = "2";
@@ -794,6 +794,10 @@ public class League {
             conferences.get(i).insertOOCSchedule();
         }
 
+        for (int c = 0; c < conferences.size(); ++c) {
+            conferences.get(c).updateConfPrestige();
+        }
+
         // Initialize new stories lists
         newsStories = new ArrayList<ArrayList<String>>();
         weeklyScores = new ArrayList<ArrayList<String>>();
@@ -886,7 +890,6 @@ public class League {
     }
 
     public void setTeamBenchMarks() {
-
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).setupTeamBenchmark();
         }
@@ -905,7 +908,7 @@ public class League {
     public String getRegion(int region) {
         String location;
         if (region == 0) location = "West";
-        else if (region == 1) location = "Mid-West";
+        else if (region == 1) location = "Midwest";
         else if (region == 2) location = "Central";
         else if (region == 3) location = "East";
         else location = "South";
@@ -1005,6 +1008,9 @@ public class League {
     public void updateTeamTalentRatings() {
         for (Team t : teamList) {
             t.updateTalentRatings();
+        }
+        for (Conference c : conferences) {
+            c.updateConfRankings();
         }
     }
 
@@ -3204,35 +3210,37 @@ public class League {
         String yearEnd = Integer.toString(year).substring(3, 4);
         if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
             for (int i = 5; i < conferences.size(); ++i) {
-                for (int t = 0; t < conferences.get(i).confTeams.size(); ++t) {
-                    if (conferences.get(i).confTeams.get(t).teamPrestige > promotionPrestige) {
-                        for (int x = conferences.get(i - 5).confTeams.size() - 1; x >= 0; --x) {
-                            if (conferences.get(i - 5).confTeams.get(x).teamPrestige < relegationPrestige) {
+                Conference g5Conf = conferences.get(i);
+                Conference p5Conf = conferences.get(i-5);
+                for (int t = 0; t < g5Conf.confTeams.size(); ++t) {
+                    if (g5Conf.confTeams.get(t).teamPrestige > p5Conf.confPromoteMin) {
+                        for (int x = p5Conf.confTeams.size() - 1; x >= 0; --x) {
+                            if (p5Conf.confTeams.get(x).teamPrestige < p5Conf.confRelegateMin) {
                                 //set teams to memory
                                 if (Math.random() < realignmentChance) {
-                                    final String teamArival = conferences.get(i).confTeams.get(t).rivalTeam;
-                                    final String teamBrival = conferences.get(i - 5).confTeams.get(x).rivalTeam;
-                                    final String teamAconf = conferences.get(i).confTeams.get(t).conference;
-                                    final String teamBconf = conferences.get(i - 5).confTeams.get(x).conference;
+                                    final String teamArival = g5Conf.confTeams.get(t).rivalTeam;
+                                    final String teamBrival = p5Conf.confTeams.get(x).rivalTeam;
+                                    final String teamAconf = g5Conf.confTeams.get(t).conference;
+                                    final String teamBconf = p5Conf.confTeams.get(x).conference;
 
                                     //transfer rivals and conf data
-                                    conferences.get(i).confTeams.get(t).rivalTeam = teamBrival;
-                                    conferences.get(i - 5).confTeams.get(x).rivalTeam = teamArival;
-                                    conferences.get(i).confTeams.get(t).conference = teamBconf;
-                                    conferences.get(i - 5).confTeams.get(x).conference = teamAconf;
-                                    Team teamA = conferences.get(i).confTeams.get(t);
-                                    Team teamB = conferences.get(i - 5).confTeams.get(x);
+                                    g5Conf.confTeams.get(t).rivalTeam = teamBrival;
+                                    p5Conf.confTeams.get(x).rivalTeam = teamArival;
+                                    g5Conf.confTeams.get(t).conference = teamBconf;
+                                    p5Conf.confTeams.get(x).conference = teamAconf;
+                                    Team teamA = g5Conf.confTeams.get(t);
+                                    Team teamB = p5Conf.confTeams.get(x);
 
                                     //remove + transfer teams
-                                    conferences.get(i).confTeams.remove(t);
-                                    conferences.get(i - 5).confTeams.remove(x);
-                                    conferences.get(i).confTeams.add(teamB);
-                                    conferences.get(i - 5).confTeams.add(teamA);
+                                    g5Conf.confTeams.remove(t);
+                                    p5Conf.confTeams.remove(x);
+                                    g5Conf.confTeams.add(teamB);
+                                    p5Conf.confTeams.add(teamA);
 
                                     //break the news
-                                    newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + conferences.get(i - 5).confName + " announced today they will be adding " + teamA.name + " to their conference next season! They've agreed to swap " + teamB.name + ".");
+                                    newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + p5Conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf + " conference has agreed to add " + teamB.name + " as part of the realignment.");
 
-                                    newsRealignment += ("The " + conferences.get(i - 5).confName + " announced today they will be adding " + teamA.name + " to their conference next season! They've agreed to swap " + teamB.name + ".\n\n");
+                                    newsRealignment += ("The " + p5Conf + " announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf + " conference has agreed to add " + teamB.name + " as part of the realignment.\n\n");
                                     countRealignment++;
                                 }
 
@@ -3345,7 +3353,7 @@ public class League {
 
         //Major Infraction to a good team
         int x = (int) (Math.random() * 11);
-        if (x > 7) {
+        if (x > 8) {
             int penalizedNumber = (int) (Math.random() * 50);
             Team penalizedTeam = teamList.get(penalizedNumber);
             if (penalizedTeam.teamPrestige > 60 && penalizedTeam.HC.get(0).ratDiscipline < (Math.random() * 100)) {
