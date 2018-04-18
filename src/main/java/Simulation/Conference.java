@@ -55,7 +55,6 @@ public class Conference {
         confTeams = new ArrayList<Team>();
         this.league = league;
         week = 0;
-        robinWeek = 0;
         allConfPlayers = new ArrayList<Player>();
     }
 

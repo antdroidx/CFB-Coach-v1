@@ -14,8 +14,6 @@ import Comparator.CompTeamConfWins;
 import Positions.HeadCoach;
 import Positions.Player;
 import Positions.PlayerDefense;
-import Positions.PlayerOffense;
-import Positions.PlayerReturner;
 import Positions.PlayerQB;
 import Positions.PlayerRB;
 import Positions.PlayerWR;
@@ -26,7 +24,6 @@ import Positions.PlayerLB;
 import Positions.PlayerCB;
 import Positions.PlayerS;
 import Positions.PlayerK;
-import Positions.PlayerST;
 
 
 public class Team {
@@ -44,7 +41,6 @@ public class Team {
     public LeagueRecords teamRecords;
     public boolean userControlled;
     public boolean showPopups;
-    public int numRecruits;
 
     public int wins;
     public int losses;
@@ -181,6 +177,8 @@ public class Team {
     public int minPlayers = 65;
     public int minRecruitStar = 5;
     public int maxStarRating = 10;
+    private int numRecruits = 30;
+
     public int five = 84;
     public int four = 78;
     public int three = 68;
@@ -230,64 +228,27 @@ public class Team {
      * @param prestige   prestige of that team, between 0-100
      */
     public Team(String name, String abbr, String conference, int prestige, String rivalTeamAbbr, int loc, League league) {
+        this.name = name;
+        this.abbr = abbr;
+        this.conference = conference;
         this.league = league;
-        userControlled = false;
-        showPopups = true;
-        teamHistory = new ArrayList<String>();
-        userHistory = new ArrayList<String>();
-        hallOfFame = new ArrayList<>();
-        teamRecords = new LeagueRecords();
-        playersInjuredAll = new ArrayList<>();
         location = loc;
-
-        HC = new ArrayList<HeadCoach>();
-        teamQBs = new ArrayList<PlayerQB>();
-        teamRBs = new ArrayList<PlayerRB>();
-        teamWRs = new ArrayList<PlayerWR>();
-        teamTEs = new ArrayList<PlayerTE>();
-        teamKs = new ArrayList<PlayerK>();
-        teamOLs = new ArrayList<PlayerOL>();
-        teamDLs = new ArrayList<PlayerDL>();
-        teamLBs = new ArrayList<PlayerLB>();
-        teamCBs = new ArrayList<PlayerCB>();
-        teamSs = new ArrayList<PlayerS>();
-
-
-        teamRSs = new ArrayList<Player>();
-        teamFRs = new ArrayList<Player>();
-        teamSOs = new ArrayList<Player>();
-        teamJRs = new ArrayList<Player>();
-        teamSRs = new ArrayList<Player>();
-
-        gameSchedule = new ArrayList<Game>();
-        gameOOCSchedule0 = null;
-        gameOOCSchedule1 = null;
-        gameOOCSchedule2 = null;
-        gameWinsAgainst = new ArrayList<Team>();
-        gameLossesAgainst = new ArrayList<Team>();
-        gameWLSchedule = new ArrayList<String>();
-        confChampion = "";
-        semiFinalWL = "";
-        natChampWL = "";
-
         teamPrestige = prestige;
+        rivalTeam = rivalTeamAbbr;
+        commonInitializer();
+
         newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs);
 
         //set stats
         totalWins = 0;
         totalLosses = 0;
-        winStreak = new TeamStreak(league.getYear(), league.getYear(), 0, abbr);
-        yearStartWinStreak = new TeamStreak(league.getYear(), league.getYear(), 0, abbr);
         totalCCs = 0;
         totalNCs = 0;
         totalCCLosses = 0;
         totalNCLosses = 0;
         totalBowls = 0;
         totalBowlLosses = 0;
-        this.name = name;
-        this.abbr = abbr;
-        this.conference = conference;
-        rivalTeam = rivalTeamAbbr;
+
         wonRivalryGame = false;
         teamPoints = 0;
         teamOppPoints = 0;
@@ -301,23 +262,16 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
         disciplinePts = 0;
-        teamDiscipline = getTeamDiscipline();
 
         teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
 
-        teamStratOff = new TeamStrategy();
-        teamStratDef = new TeamStrategy();
         teamStratOffNum = getCPUOffense();
         teamStratDefNum = getCPUDefense();
         teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
         teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
-        numRecruits = 30;
-        playersLeaving = new ArrayList<>();
-        playersTransferring = new ArrayList<>();
-        recruitNeeds = new int[10];
+
         hallOfFame.add("");
     }
-
 
     /**
      * Constructor for team that is being loaded from file.
@@ -326,44 +280,7 @@ public class Team {
      */
     public Team(String loadStr, League league) {
         this.league = league;
-        userControlled = false;
-        showPopups = true;
-        teamHistory = new ArrayList<String>();
-        userHistory = new ArrayList<String>();
-        hallOfFame = new ArrayList<>();
-        teamRecords = new LeagueRecords();
-        playersInjuredAll = new ArrayList<>();
-
-        HC = new ArrayList<HeadCoach>();
-        teamQBs = new ArrayList<PlayerQB>();
-        teamRBs = new ArrayList<PlayerRB>();
-        teamWRs = new ArrayList<PlayerWR>();
-        teamTEs = new ArrayList<PlayerTE>();
-        teamKs = new ArrayList<PlayerK>();
-        teamOLs = new ArrayList<PlayerOL>();
-        teamDLs = new ArrayList<PlayerDL>();
-        teamLBs = new ArrayList<PlayerLB>();
-        teamCBs = new ArrayList<PlayerCB>();
-        teamSs = new ArrayList<PlayerS>();
-        teamDefense = new ArrayList<PlayerDefense>();
-
-
-        teamRSs = new ArrayList<Player>();
-        teamFRs = new ArrayList<Player>();
-        teamSOs = new ArrayList<Player>();
-        teamJRs = new ArrayList<Player>();
-        teamSRs = new ArrayList<Player>();
-
-        gameSchedule = new ArrayList<Game>();
-        gameOOCSchedule0 = null;
-        gameOOCSchedule1 = null;
-        gameOOCSchedule2 = null;
-        gameWinsAgainst = new ArrayList<Team>();
-        gameLossesAgainst = new ArrayList<Team>();
-        gameWLSchedule = new ArrayList<String>();
-        confChampion = "";
-        semiFinalWL = "";
-        natChampWL = "";
+        commonInitializer();
 
         //set stats
         teamPoints = 0;
@@ -383,7 +300,7 @@ public class Team {
         disciplinePts = 0;
         teamTVDeal = false;
         confTVDeal = false;
-
+        wonRivalryGame = false;
 
         // Actually load the team from the string
         String[] lines = loadStr.split("%");
@@ -394,8 +311,6 @@ public class Team {
             conference = teamInfo[0];
             name = teamInfo[1];
             abbr = teamInfo[2];
-            winStreak = new TeamStreak(league.getYear(), league.getYear(), 0, abbr);
-            yearStartWinStreak = new TeamStreak(league.getYear(), league.getYear(), 0, abbr);
             teamPrestige = Integer.parseInt(teamInfo[3]);
             totalWins = Integer.parseInt(teamInfo[4]);
             totalLosses = Integer.parseInt(teamInfo[5]);
@@ -450,14 +365,57 @@ public class Team {
         // Group players by class standing (FRs, SOs, etc)
         groupPlayerStandingCSV();
 
+    }
 
-        wonRivalryGame = false;
-        teamDiscipline = getTeamDiscipline();
+    public void commonInitializer() {
+        userControlled = false;
+        showPopups = true;
+        teamHistory = new ArrayList<String>();
+        userHistory = new ArrayList<String>();
+        hallOfFame = new ArrayList<>();
+        teamRecords = new LeagueRecords();
+        playersInjuredAll = new ArrayList<>();
 
-        numRecruits = 30;
+        HC = new ArrayList<HeadCoach>();
+        teamQBs = new ArrayList<PlayerQB>();
+        teamRBs = new ArrayList<PlayerRB>();
+        teamWRs = new ArrayList<PlayerWR>();
+        teamTEs = new ArrayList<PlayerTE>();
+        teamKs = new ArrayList<PlayerK>();
+        teamOLs = new ArrayList<PlayerOL>();
+        teamDLs = new ArrayList<PlayerDL>();
+        teamLBs = new ArrayList<PlayerLB>();
+        teamCBs = new ArrayList<PlayerCB>();
+        teamSs = new ArrayList<PlayerS>();
+        teamDefense = new ArrayList<PlayerDefense>();
+
+        teamRSs = new ArrayList<Player>();
+        teamFRs = new ArrayList<Player>();
+        teamSOs = new ArrayList<Player>();
+        teamJRs = new ArrayList<Player>();
+        teamSRs = new ArrayList<Player>();
+
+        teamStratOff = new TeamStrategy();
+        teamStratDef = new TeamStrategy();
+
+        gameSchedule = new ArrayList<Game>();
+        gameOOCSchedule0 = null;
+        gameOOCSchedule1 = null;
+        gameOOCSchedule2 = null;
+        gameWinsAgainst = new ArrayList<Team>();
+        gameLossesAgainst = new ArrayList<Team>();
+        gameWLSchedule = new ArrayList<String>();
+        confChampion = "";
+        semiFinalWL = "";
+        natChampWL = "";
+
+        winStreak = new TeamStreak(league.getYear(), league.getYear(), 0, abbr);
+        yearStartWinStreak = new TeamStreak(league.getYear(), league.getYear(), 0, abbr);
+
         playersLeaving = new ArrayList<>();
         playersTransferring = new ArrayList<>();
         recruitNeeds = new int[10];
+
     }
 
     public void setupTeamBenchmark() {
@@ -1115,7 +1073,7 @@ public class Team {
         }
 
         // Don't add/subtract prestige if they are a blessed/cursed team from last season
-        if (this != league.savePenalized && this != league.savePenalized2 && this != league.savePenalized3) {
+        if (this != league.penalizedTeam1 && this != league.penalizedTeam2 && this != league.penalizedTeam3) {
 
             //RIVALRY POINTS!
             //Only call it if there's not a huge difference in team strength
@@ -3260,7 +3218,7 @@ public class Team {
 
         String summary = "Season Analysis:\n\nYour team, " + name + ", finished the season ranked #" + rankTeamPollScore + " with " + wins + " wins and " + losses + " losses.";
 
-        if (this == league.savePenalized || this == league.savePenalized2 || this == league.savePenalized3) {
+        if (this == league.penalizedTeam1 || this == league.penalizedTeam2 || this == league.penalizedTeam3) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[1]) > 0) {
             summary += "\n\nGreat job coach! You exceeded expectations and gained " + prestigePts[1] + " prestige points! This will help your recruiting.";
