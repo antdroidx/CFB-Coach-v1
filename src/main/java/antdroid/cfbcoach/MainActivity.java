@@ -308,14 +308,14 @@ public class MainActivity extends AppCompatActivity {
             goals += "This season you're team is expected to finish ranked #" + (100-userTeam.teamPrestige) + " or higher!\n\n";
             goals += "In conference play, your team is expected to finish #" + confPos + " in the " + userTeam.conference + " conference.\n\n";
 
-            if (simLeague.saveLucky.name.equals(userTeam.name) || simLeague.saveLucky2.name.equals(userTeam.name) || simLeague.saveLucky3.name.equals(userTeam.name)) {
+            if (simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3.name.equals(userTeam.name)) {
                 goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
             }
 
-            if (simLeague.savePenalized != null && simLeague.savePenalized.name.equals(userTeam.name) || simLeague.savePenalized2 != null && simLeague.savePenalized2.name.equals(userTeam.name)) {
+            if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
                     goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
                 }
-            if (simLeague.savePenalized3 != null && simLeague.savePenalized3.name.equals(userTeam.name) ||  simLeague.savePenalized4 != null &&  simLeague.savePenalized4.name.equals(userTeam.name) || simLeague.savePenalized5 != null &&  simLeague.savePenalized5.name.equals(userTeam.name)) {
+            if (simLeague.penalizedTeam3 != null && simLeague.penalizedTeam3.name.equals(userTeam.name) ||  simLeague.penalizedTeam4 != null &&  simLeague.penalizedTeam4.name.equals(userTeam.name) || simLeague.penalizedTeam5 != null &&  simLeague.penalizedTeam5.name.equals(userTeam.name)) {
                     goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
                 }
 

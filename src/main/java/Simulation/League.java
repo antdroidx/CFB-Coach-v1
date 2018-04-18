@@ -106,14 +106,14 @@ public class League {
     public TeamStreak longestActiveWinStreak;
 
     // News Story Variables
-    public Team saveLucky;
-    public Team saveLucky2;
-    public Team saveLucky3;
-    public Team savePenalized;
-    public Team savePenalized2;
-    public Team savePenalized3;
-    public Team savePenalized4;
-    public Team savePenalized5;
+    public Team bonusTeam1;
+    public Team bonusTeam2;
+    public Team bonusTeam3;
+    public Team penalizedTeam1;
+    public Team penalizedTeam2;
+    public Team penalizedTeam3;
+    public Team penalizedTeam4;
+    public Team penalizedTeam5;
 
     //Current week, 1-14
     public int currentWeek;
@@ -174,6 +174,8 @@ public class League {
     public boolean fullGameLog;
     public boolean hidePotential;
     public boolean confRealignment;
+    public boolean gameEditor;
+
     public DecimalFormat df2 = new DecimalFormat(".##");
     int seasonStart = 2017;
     int countTeam = 120;
@@ -558,11 +560,9 @@ public class League {
                 sbLucky.append(line);
             }
             if (!sbLucky.toString().equals("NULL")) {
-                saveLucky = findTeamAbbr(sbLucky.toString());
-                saveLucky.sortPlayers();
-                findTeamAbbr(saveLucky.rivalTeam).sortPlayers();
+                bonusTeam1 = findTeamAbbr(sbLucky.toString());
             } else {
-                saveLucky = null;
+                bonusTeam1 = null;
             }
 
             StringBuilder sbLucky2 = new StringBuilder();
@@ -570,11 +570,9 @@ public class League {
                 sbLucky2.append(line);
             }
             if (!sbLucky2.toString().equals("NULL")) {
-                saveLucky2 = findTeamAbbr(sbLucky2.toString());
-                saveLucky2.sortPlayers();
-                findTeamAbbr(saveLucky2.rivalTeam).sortPlayers();
+                bonusTeam2 = findTeamAbbr(sbLucky2.toString());
             } else {
-                saveLucky2 = null;
+                bonusTeam2 = null;
             }
 
             StringBuilder sbLucky3 = new StringBuilder();
@@ -582,11 +580,9 @@ public class League {
                 sbLucky3.append(line);
             }
             if (!sbLucky3.toString().equals("NULL")) {
-                saveLucky3 = findTeamAbbr(sbLucky3.toString());
-                saveLucky3.sortPlayers();
-                findTeamAbbr(saveLucky3.rivalTeam).sortPlayers();
+                bonusTeam3 = findTeamAbbr(sbLucky3.toString());
             } else {
-                saveLucky3 = null;
+                bonusTeam3 = null;
             }
 
 
@@ -595,11 +591,9 @@ public class League {
                 sbPenalized.append(line);
             }
             if (!sbPenalized.toString().equals("NULL")) {
-                savePenalized = findTeamAbbr(sbPenalized.toString());
-                savePenalized.sortPlayers();
-                findTeamAbbr(savePenalized.rivalTeam).sortPlayers();
+                penalizedTeam1 = findTeamAbbr(sbPenalized.toString());
             } else {
-                savePenalized = null;
+                penalizedTeam1 = null;
             }
 
             StringBuilder sbPenalized2 = new StringBuilder();
@@ -607,11 +601,9 @@ public class League {
                 sbPenalized2.append(line);
             }
             if (!sbPenalized2.toString().equals("NULL")) {
-                savePenalized2 = findTeamAbbr(sbPenalized2.toString());
-                savePenalized2.sortPlayers();
-                findTeamAbbr(savePenalized2.rivalTeam).sortPlayers();
+                penalizedTeam2 = findTeamAbbr(sbPenalized2.toString());
             } else {
-                savePenalized2 = null;
+                penalizedTeam2 = null;
             }
 
             StringBuilder sbPenalized3 = new StringBuilder();
@@ -619,11 +611,9 @@ public class League {
                 sbPenalized3.append(line);
             }
             if (!sbPenalized3.toString().equals("NULL")) {
-                savePenalized3 = findTeamAbbr(sbPenalized3.toString());
-                savePenalized3.sortPlayers();
-                findTeamAbbr(savePenalized3.rivalTeam).sortPlayers();
+                penalizedTeam3 = findTeamAbbr(sbPenalized3.toString());
             } else {
-                savePenalized3 = null;
+                penalizedTeam3 = null;
             }
 
             StringBuilder sbPenalized4 = new StringBuilder();
@@ -631,11 +621,9 @@ public class League {
                 sbPenalized4.append(line);
             }
             if (!sbPenalized4.toString().equals("NULL")) {
-                savePenalized4 = findTeamAbbr(sbPenalized4.toString());
-                savePenalized4.sortPlayers();
-                findTeamAbbr(savePenalized4.rivalTeam).sortPlayers();
+                penalizedTeam4 = findTeamAbbr(sbPenalized4.toString());
             } else {
-                savePenalized4 = null;
+                penalizedTeam4 = null;
             }
 
             StringBuilder sbPenalized5 = new StringBuilder();
@@ -643,11 +631,9 @@ public class League {
                 sbPenalized5.append(line);
             }
             if (!sbPenalized5.toString().equals("NULL")) {
-                savePenalized5 = findTeamAbbr(sbPenalized5.toString());
-                savePenalized5.sortPlayers();
-                findTeamAbbr(savePenalized5.rivalTeam).sortPlayers();
+                penalizedTeam5 = findTeamAbbr(sbPenalized5.toString());
             } else {
-                savePenalized5 = null;
+                penalizedTeam5 = null;
             }
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
                 for (int b = 0; b < bowlNames.length; ++b) {
@@ -821,26 +807,26 @@ public class League {
                 conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
                 conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
 
-        if (saveLucky != null || saveLucky2 != null || saveLucky3 != null) {
+        if (bonusTeam1 != null || bonusTeam2 != null || bonusTeam3 != null) {
             newsStories.get(0).add("Facility Upgrades:>The following teams have had significant facility upgrades performed to their campus this off-season: \n\n" +
-                    saveLucky.name + "\n" + saveLucky2.name + "\n" + saveLucky3.name + "\n");
+                    bonusTeam1.name + "\n" + bonusTeam2.name + "\n" + bonusTeam3.name + "\n");
         }
-        if (savePenalized != null) {
-            newsStories.get(0).add("Major Infraction: " + savePenalized.name + ">An administrative probe has determined that booster " + savePenalized.HC.get(0).name +
-                    " has tampered with several recruits. In addition, academic records at  " + savePenalized.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
+        if (penalizedTeam1 != null) {
+            newsStories.get(0).add("Major Infraction: " + penalizedTeam1.name + ">An administrative probe has determined that booster " + penalizedTeam1.HC.get(0).name +
+                    " has tampered with several recruits. In addition, academic records at  " + penalizedTeam1.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
         }
-        if (savePenalized2 != null) {
-            newsStories.get(0).add("Minor Infraction: " + savePenalized2.name + ">Investigations have led to the discovery that " + savePenalized2.name + "'s head coach " + savePenalized2.HC.get(0).name +
+        if (penalizedTeam2 != null) {
+            newsStories.get(0).add("Minor Infraction: " + penalizedTeam2.name + ">Investigations have led to the discovery that " + penalizedTeam2.name + "'s head coach " + penalizedTeam2.HC.get(0).name +
                     " was found violating recruiting policies over the past off-season. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped.");
         }
-        if (savePenalized3 != null) {
-            newsStories.get(0).add("Incidental Infraction: " + savePenalized3.name + ">Several players from " + savePenalized3.name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
+        if (penalizedTeam3 != null) {
+            newsStories.get(0).add("Incidental Infraction: " + penalizedTeam3.name + ">Several players from " + penalizedTeam3.name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
         }
-        if (savePenalized4 != null) {
-            newsStories.get(0).add("Incidental Infraction: " + savePenalized4.name + ">An independent investigation determined " + savePenalized4.name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
+        if (penalizedTeam4 != null) {
+            newsStories.get(0).add("Incidental Infraction: " + penalizedTeam4.name + ">An independent investigation determined " + penalizedTeam4.name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
         }
-        if (savePenalized5 != null) {
-            newsStories.get(0).add("Incidental Infraction: " + savePenalized5.name + ">Newspapers are reporting " + savePenalized5.name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
+        if (penalizedTeam5 != null) {
+            newsStories.get(0).add("Incidental Infraction: " + penalizedTeam5.name + ">Newspapers are reporting " + penalizedTeam5.name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
         }
 
         disciplineTimes = (int) (Math.random() * 3) + 1;
@@ -2157,7 +2143,7 @@ public class League {
 
             for (int i = 0; i < teamList.size(); ++i) {
                 teamList.get(i).updatePollScore();
-                if (teamList.get(i) == savePenalized) teamList.get(i).teamPollScore = 0;
+                if (teamList.get(i) == penalizedTeam1) teamList.get(i).teamPollScore = 0;
             }
             Collections.sort(teamList, new CompTeamPoll());
 
@@ -2282,10 +2268,10 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
             //bowl ban!
-            if (savePenalized != null && Objects.equals(teamList.get(i).abbr, savePenalized.abbr)) {
+            if (penalizedTeam1 != null && Objects.equals(teamList.get(i).abbr, penalizedTeam1.abbr)) {
                 teamList.get(i).teamPollScore = 0;
             }
-            if (savePenalized2 != null && Objects.equals(teamList.get(i).abbr, savePenalized2.abbr)) {
+            if (penalizedTeam2 != null && Objects.equals(teamList.get(i).abbr, penalizedTeam2.abbr)) {
                 teamList.get(i).teamPollScore = 0;
             }
             //minimum wins for bowl eligibility
@@ -3324,7 +3310,7 @@ public class League {
         int luckyNumber = (int) (Math.random() * 40);
         Team luckyTeam = teamList.get(luckyNumber);
         luckyTeam.teamPrestige += (int) (Math.random() * 4);
-        saveLucky = luckyTeam;
+        bonusTeam1 = luckyTeam;
         if (luckyTeam.teamPrestige > 99) {
             luckyTeam.teamPrestige = 95;
         }
@@ -3333,7 +3319,7 @@ public class League {
         luckyNumber = (int) (Math.random() * 40);
         Team luckyTeam2 = teamList.get(40 + luckyNumber);
         luckyTeam2.teamPrestige += (int) (Math.random() * 6);
-        saveLucky2 = luckyTeam2;
+        bonusTeam2 = luckyTeam2;
         if (luckyTeam2.teamPrestige > 99) {
             luckyTeam2.teamPrestige = 95;
         }
@@ -3343,7 +3329,7 @@ public class League {
         if (luckyNumber > 39) luckyNumber = 39;
         Team luckyTeam3 = teamList.get(80 + luckyNumber);
         luckyTeam3.teamPrestige += (int) (Math.random() * 8);
-        saveLucky3 = luckyTeam3;
+        bonusTeam3 = luckyTeam3;
         if (luckyTeam3.teamPrestige > 99) {
             luckyTeam3.teamPrestige = 95;
         }
@@ -3358,13 +3344,13 @@ public class League {
             Team penalizedTeam = teamList.get(penalizedNumber);
             if (penalizedTeam.teamPrestige > 60 && penalizedTeam.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam.teamPrestige -= (25 + x);
-                savePenalized = penalizedTeam;
+                penalizedTeam1 = penalizedTeam;
                 penalizedTeam.HC.get(0).ratDiscipline -= 20;
             } else {
-                savePenalized = null;
+                penalizedTeam1 = null;
                 penalizedTeam.HC.get(0).ratDiscipline += 15;
             }
-        } else savePenalized = null;
+        } else penalizedTeam1 = null;
 
         //Minor infraction to an avg team
         x = (int) (Math.random() * 11);
@@ -3373,13 +3359,13 @@ public class League {
             Team penalizedTeam2 = teamList.get(penalizedNumber);
             if (penalizedTeam2.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam2.teamPrestige -= (10 + x);
-                savePenalized2 = penalizedTeam2;
+                this.penalizedTeam2 = penalizedTeam2;
                 penalizedTeam2.HC.get(0).ratDiscipline -= 10;
             } else {
-                savePenalized2 = null;
+                this.penalizedTeam2 = null;
                 penalizedTeam2.HC.get(0).ratDiscipline += 7;
             }
-        } else savePenalized2 = null;
+        } else penalizedTeam2 = null;
 
         //Discipline a team
         x = (int) (Math.random() * 11);
@@ -3389,12 +3375,12 @@ public class League {
             if (penalizedTeam3.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam3.teamPrestige -= (6 + x);
                 penalizedTeam3.HC.get(0).ratDiscipline -= 8;
-                savePenalized3 = penalizedTeam3;
+                this.penalizedTeam3 = penalizedTeam3;
             } else {
-                savePenalized3 = null;
+                this.penalizedTeam3 = null;
                 penalizedTeam3.HC.get(0).ratDiscipline += 5;
             }
-        } else savePenalized3 = null;
+        } else penalizedTeam3 = null;
 
         //Discipline a team
         x = (int) (Math.random() * 11);
@@ -3404,12 +3390,12 @@ public class League {
             if (penalizedTeam4.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam4.teamPrestige -= (5 + x);
                 penalizedTeam4.HC.get(0).ratDiscipline -= 5;
-                savePenalized4 = penalizedTeam4;
+                this.penalizedTeam4 = penalizedTeam4;
             } else {
-                savePenalized4 = null;
+                this.penalizedTeam4 = null;
                 penalizedTeam4.HC.get(0).ratDiscipline += 5;
             }
-        } else savePenalized4 = null;
+        } else penalizedTeam4 = null;
 
         //Discipline a team
         x = (int) (Math.random() * 11);
@@ -3419,12 +3405,12 @@ public class League {
             if (penalizedTeam5.HC.get(0).ratDiscipline < (Math.random() * 100)) {
                 penalizedTeam5.teamPrestige -= (3 + x);
                 penalizedTeam5.HC.get(0).ratDiscipline -= 5;
-                savePenalized5 = penalizedTeam5;
+                this.penalizedTeam5 = penalizedTeam5;
             } else {
-                savePenalized = null;
+                penalizedTeam1 = null;
                 penalizedTeam5.HC.get(0).ratDiscipline += 5;
             }
-        } else savePenalized5 = null;
+        } else penalizedTeam5 = null;
 
         //FINISH INFRACTIONS
 
@@ -4628,57 +4614,57 @@ public class League {
         sb.append("END_COACH_HISTORY\n");
 
         // Save who was luckyed and penalizedd this year for news stories the following year
-        if (saveLucky != null) {
-            sb.append(saveLucky.abbr + "\n");
+        if (bonusTeam1 != null) {
+            sb.append(bonusTeam1.abbr + "\n");
             sb.append("END_LUCKY_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_LUCKY_TEAM\n");
         }
-        if (saveLucky2 != null) {
-            sb.append(saveLucky2.abbr + "\n");
+        if (bonusTeam2 != null) {
+            sb.append(bonusTeam2.abbr + "\n");
             sb.append("END_LUCKY2_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_LUCKY2_TEAM\n");
         }
-        if (saveLucky3 != null) {
-            sb.append(saveLucky3.abbr + "\n");
+        if (bonusTeam3 != null) {
+            sb.append(bonusTeam3.abbr + "\n");
             sb.append("END_LUCKY3_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_LUCKY3_TEAM\n");
         }
-        if (savePenalized != null) {
-            sb.append(savePenalized.abbr + "\n");
+        if (penalizedTeam1 != null) {
+            sb.append(penalizedTeam1.abbr + "\n");
             sb.append("END_PENALIZED_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_PENALIZED_TEAM\n");
         }
-        if (savePenalized2 != null) {
-            sb.append(savePenalized2.abbr + "\n");
+        if (penalizedTeam2 != null) {
+            sb.append(penalizedTeam2.abbr + "\n");
             sb.append("END_PENALIZED2_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_PENALIZED2_TEAM\n");
         }
-        if (savePenalized3 != null) {
-            sb.append(savePenalized3.abbr + "\n");
+        if (penalizedTeam3 != null) {
+            sb.append(penalizedTeam3.abbr + "\n");
             sb.append("END_PENALIZED3_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_PENALIZED3_TEAM\n");
         }
-        if (savePenalized4 != null) {
-            sb.append(savePenalized4.abbr + "\n");
+        if (penalizedTeam4 != null) {
+            sb.append(penalizedTeam4.abbr + "\n");
             sb.append("END_PENALIZED4_TEAM\n");
         } else {
             sb.append("NULL\n");
             sb.append("END_PENALIZED4_TEAM\n");
         }
-        if (savePenalized5 != null) {
-            sb.append(savePenalized5.abbr + "\n");
+        if (penalizedTeam5 != null) {
+            sb.append(penalizedTeam5.abbr + "\n");
             sb.append("END_PENALIZED5_TEAM\n");
         } else {
             sb.append("NULL\n");

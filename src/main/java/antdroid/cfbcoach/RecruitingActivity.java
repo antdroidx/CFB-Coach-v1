@@ -1502,8 +1502,8 @@ class PlayerTeamStrCompOverall implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(" ");
         String[] psB = b.split(" ");
-        int ovrA = Integer.parseInt(psA[4]);
-        int ovrB = Integer.parseInt(psB[4]);
+        int ovrA = Integer.parseInt(psA[5]);
+        int ovrB = Integer.parseInt(psB[5]);
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
