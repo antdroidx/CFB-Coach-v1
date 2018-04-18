@@ -31,10 +31,9 @@ import java.util.Map;
 import java.util.Random;
 
 import Simulation.League;
+import Simulation.Team;
 
 public class RecruitingActivity extends AppCompatActivity {
-
-    League simLeague;
 
     // Variables use during recruiting
     private String teamName;
@@ -95,17 +94,17 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needCBs;
     private int needSs;
 
-    int minPlayers = 50;
+    int minPlayers = 65;
     int minQBs = 3;
-    int minRBs = 6;
+    int minRBs = 5;
     int minWRs = 8;
     int minTEs = 3;
-    int minOLs = 12;
+    int minOLs = 11;
     int minKs = 2;
     int minDLs = 10;
-    int minLBs = 8;
-    int minCBs = 8;
-    int minSs = 4;
+    int minLBs = 7;
+    int minCBs = 7;
+    int minSs = 5;
 
     int redshirtCount = 0;
     int maxRedshirt = 6;
@@ -187,7 +186,7 @@ public class RecruitingActivity extends AppCompatActivity {
         final String[] teamInfo = lines[0].split(",");
         teamName = teamInfo[1];
         teamAbbr = teamInfo[2];
-        recruitingBudget = Integer.parseInt(teamInfo[3]) * 17;
+        recruitingBudget = Integer.parseInt(teamInfo[3]) * 15;
         if (teamInfo[4].isEmpty()) {
             HCtalent = 70;
         } else {
@@ -233,7 +232,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
         // Add extra money if your team was fleeced
-        int recBonus = (minPlayers - teamPlayers.size())*17;
+        int recBonus = (minPlayers - teamPlayers.size())*15;
         int coachBonus = HCtalent*3;
         recruitingBudget += recBonus + coachBonus;
 
