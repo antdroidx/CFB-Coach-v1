@@ -115,6 +115,17 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button youtubeButton = findViewById(R.id.youtubeTutorial);
+        youtubeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://youtu.be/_zEuX0JAYBg"));
+                startActivity(intent);
+            }
+        });
+
         Button subredditButton = findViewById(R.id.buttonSubreddit);
         subredditButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

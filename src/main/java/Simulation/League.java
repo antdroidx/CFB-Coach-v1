@@ -4613,7 +4613,7 @@ public class League {
         }
         sb.append("END_COACH_HISTORY\n");
 
-        // Save who was luckyed and penalizedd this year for news stories the following year
+
         if (bonusTeam1 != null) {
             sb.append(bonusTeam1.abbr + "\n");
             sb.append("END_LUCKY_TEAM\n");
