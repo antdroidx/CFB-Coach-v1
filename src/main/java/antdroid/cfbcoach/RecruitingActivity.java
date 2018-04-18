@@ -94,7 +94,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needCBs;
     private int needSs;
 
-    int minPlayers = 65;
+    int minPlayers = 50;
     int minQBs = 3;
     int minRBs = 5;
     int minWRs = 8;
