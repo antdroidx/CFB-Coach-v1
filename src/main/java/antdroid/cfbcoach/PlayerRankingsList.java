@@ -1,9 +1,5 @@
 package antdroid.cfbcoach;
 
-/*
-  Created by Achi Jones on 2/20/2016.
- */
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -15,12 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TeamRankingsListArrayAdapter extends ArrayAdapter<String> {
+public class PlayerRankingsList extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;
 
-    public TeamRankingsListArrayAdapter(Context context, ArrayList<String> values, String userTeamStrRep) {
+    public PlayerRankingsList(Context context, ArrayList<String> values, String userTeamStrRep) {
         super(context, R.layout.team_rankings_list_item, values);
         this.context = context;
         this.values = values;
@@ -39,10 +35,10 @@ public class TeamRankingsListArrayAdapter extends ArrayAdapter<String> {
 
         String[] teamStat = values.get(position).split(",");
         textLeft.setText(teamStat[0]);
-        textCenter.setText(teamStat[1]);
-        textRight.setText(teamStat[2]);
+        textCenter.setText(teamStat[1] + " (" + teamStat[2] + ")");
+        textRight.setText(teamStat[3]);
 
-        if (teamStat[1].equals(userTeamStrRep)) {
+        if (teamStat[2].equals(userTeamStrRep)) {
             // Bold user team
             textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
             textLeft.setTextColor(Color.parseColor("#1A75FF"));

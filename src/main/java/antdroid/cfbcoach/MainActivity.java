@@ -1523,30 +1523,30 @@ public class MainActivity extends AppCompatActivity {
                         "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct","Kickoff Return Yards", "Kickoff Return TDs", "Punt Return Yards", "Punt Return TDs",
                         "Coach - Overall", "Coach - Career Score"
                 };
-        Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
-        ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
+        Spinner playerRankingssSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+        ArrayAdapter<String> playerRankingssSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
-        teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
+        playerRankingssSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerRankingssSpinner.setAdapter(playerRankingssSpinnerAdapter);
 
-        final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
-        final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, rankings, userTeam.abbr);
-        teamRankingsList.setAdapter(teamRankingsAdapter);
+        final ListView playerRankingssList = dialog.findViewById(R.id.listViewTeamRankings);
+        final PlayerRankingsList playerRankingssAdapter =
+                new PlayerRankingsList(this, rankings, userTeam.abbr);
+        playerRankingssList.setAdapter(playerRankingssAdapter);
 
-        teamRankingsSpinner.setOnItemSelectedListener(
+        playerRankingssSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getPlayerRankStr(position);
                         if (position == 22) {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
+                            playerRankingssAdapter.setUserTeamStrRep(userTeam.abbr);
                         } else {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.abbr);
+                            playerRankingssAdapter.setUserTeamStrRep(userTeam.abbr);
                         }
-                        teamRankingsAdapter.clear();
-                        teamRankingsAdapter.addAll(rankings);
-                        teamRankingsAdapter.notifyDataSetChanged();
+                        playerRankingssAdapter.clear();
+                        playerRankingssAdapter.addAll(rankings);
+                        playerRankingssAdapter.notifyDataSetChanged();
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
