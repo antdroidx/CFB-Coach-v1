@@ -1168,11 +1168,7 @@ public class Team {
             cLimiter = confMax + confLimit;
             newPrestige = cLimiter;
         }
-        if (newPrestige < confMin + confLimit) {
-            cLimiter = confMin + confLimit;
-            newPrestige = cLimiter;
-        }
-        if (newPrestige > maxPrestige) newPrestige = maxPrestige;
+
         if (newPrestige < minPrestige) newPrestige = minPrestige;
 
         int PrestigeScore[] = {newPrestige, prestigeChange, rivalryPts, ccPts, ncwPts, nflPts, disPts, rgameplayed};
@@ -3266,7 +3262,7 @@ public class Team {
 
         summary += "\n\nNEW PRESTIGE:  " + prestigePts[0] + " pts\n";
 
-        if(teamPrestige + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5] + prestigePts[6] != prestigePts[0]) {
+        if(teamPrestige + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5] + prestigePts[6] != prestigePts[0] && prestigePts[4] == 0) {
             summary += "\n\nDue to your conference's playing level, your prestige change has been limited. The conference prestige cut-off for this season was set at:\n[min] " + (confMin+confLimit) + "\n[max] " + (confMax+confLimit) + "\n";
         }
 

@@ -4316,133 +4316,133 @@ public class League {
             case 0:
                 Collections.sort(pQB, new CompPlayerPassRating());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + df2.format(pQB.get(i).getPasserRating()));
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + "," + pQB.get(i).team.abbr + "," + df2.format(pQB.get(i).getPasserRating()));
                 }
                 break;
             case 1:
                 Collections.sort(pQB, new CompPlayerPassYards());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).statsPassYards);
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + "," + pQB.get(i).team.abbr + "," + pQB.get(i).statsPassYards);
                 }
                 break;
             case 2:
                 Collections.sort(pQB, new CompPlayerPassTDs());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).statsPassTD);
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + "," + pQB.get(i).team.abbr + "," + pQB.get(i).statsPassTD);
                 }
                 break;
             case 3:
                 Collections.sort(pQB, new CompPlayerPassInts());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + pQB.get(i).statsInt);
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + "," + pQB.get(i).team.abbr + "," + pQB.get(i).statsInt);
                 }
                 break;
             case 4:
                 Collections.sort(pQB, new CompPlayerPassPCT());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pQB.get(i).name + " (" + pQB.get(i).team.abbr + ")," + df2.format(pQB.get(i).getPassPCT()) + "%");
+                    rankings.add((i + 1) + ". ," + pQB.get(i).name + "," + pQB.get(i).team.abbr + "," + df2.format(pQB.get(i).getPassPCT()) + "%");
                 }
                 break;
             case 5:
                 Collections.sort(off, new CompPlayerRushYards());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + " (" + off.get(i).team.abbr + ")," + off.get(i).rushYards);
+                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + "," + off.get(i).team.abbr + "," + off.get(i).rushYards);
                 }
                 break;
             case 6:
                 Collections.sort(off, new CompPlayerRushTDs());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + " (" + off.get(i).team.abbr + ")," + off.get(i).rushTDs);
+                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + "," + off.get(i).team.abbr + "," + off.get(i).rushTDs);
                 }
                 break;
             case 7:
                 Collections.sort(off, new CompPlayerReceptions());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + " (" + off.get(i).team.abbr + ")," + off.get(i).receptions);
+                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + "," + off.get(i).team.abbr + "," + off.get(i).receptions);
                 }
                 break;
             case 8:
                 Collections.sort(off, new CompPlayerRecYards());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + " (" + off.get(i).team.abbr + ")," + off.get(i).receptionYards);
+                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + "," + off.get(i).team.abbr + "," + off.get(i).receptionYards);
                 }
                 break;
             case 9:
                 Collections.sort(off, new CompPlayerRecTDs());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + " (" + off.get(i).team.abbr + ")," + off.get(i).receptionTDs);
+                    rankings.add((i + 1) + ". ," + off.get(i).position + " " + off.get(i).name + "," + off.get(i).team.abbr + "," + off.get(i).receptionTDs);
                 }
                 break;
             case 10:
                 Collections.sort(def, new CompPlayerTackles());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).tackles);
+                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + "," + def.get(i).team.abbr + "," + def.get(i).tackles);
                 }
                 break;
             case 11:
                 Collections.sort(def, new CompPlayerSacks());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).sacks);
+                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + "," + def.get(i).team.abbr + "," + def.get(i).sacks);
                 }
                 break;
             case 12:
                 Collections.sort(def, new CompPlayerFumblesRec());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).fumbles);
+                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + "," + def.get(i).team.abbr + "," + def.get(i).fumbles);
                 }
                 break;
             case 13:
                 Collections.sort(def, new CompPlayerInterceptions());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + " (" + def.get(i).team.abbr + ")," + def.get(i).interceptions);
+                    rankings.add((i + 1) + ". ," + def.get(i).position + " " + def.get(i).name + "," + def.get(i).team.abbr + "," + def.get(i).interceptions);
                 }
                 break;
             case 14:
                 Collections.sort(pK, new CompPlayerFGMade());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pK.get(i).name + " (" + pK.get(i).team.abbr + ")," + pK.get(i).statsFGMade);
+                    rankings.add((i + 1) + ". ," + pK.get(i).name + "," + pK.get(i).team.abbr + "," + pK.get(i).statsFGMade);
                 }
                 break;
             case 15:
                 Collections.sort(pK, new CompPlayerFGpct());
                 for (int i = 0; i < rankNum; ++i) {
-                    rankings.add((i + 1) + ". ," + pK.get(i).name + " (" + pK.get(i).team.abbr + ")," + pK.get(i).getFGpct() + "%");
+                    rankings.add((i + 1) + ". ," + pK.get(i).name + "," + pK.get(i).team.abbr + "," + pK.get(i).getFGpct() + "%");
                 }
                 break;
             case 16:
                 Collections.sort(returner, new CompKickRetYards());
                 for (int i = 0; i < retNum; ++i) {
-                    rankings.add((i + 1) + ". ," + returner.get(i).name + " (" + returner.get(i).team + ")," + returner.get(i).kYards);
+                    rankings.add((i + 1) + ". ," + returner.get(i).name + "," + returner.get(i).team + "," + returner.get(i).kYards);
                 }
                 break;
             case 17:
                 Collections.sort(returner, new CompKickRetTD());
                 for (int i = 0; i < retNum; ++i) {
-                    rankings.add((i + 1) + ". ," + returner.get(i).name + " (" + returner.get(i).team + ")," + returner.get(i).kTD);
+                    rankings.add((i + 1) + ". ," + returner.get(i).name + "," + returner.get(i).team + "," + returner.get(i).kTD);
                 }
                 break;
             case 18:
                 Collections.sort(returner, new CompPuntRetYards());
                 for (int i = 0; i < retNum; ++i) {
-                    rankings.add((i + 1) + ". ," + returner.get(i).name + " (" + returner.get(i).team + ")," + returner.get(i).pYards);
+                    rankings.add((i + 1) + ". ," + returner.get(i).name + "," + returner.get(i).team + "," + returner.get(i).pYards);
                 }
                 break;
             case 19:
                 Collections.sort(returner, new CompPuntRetTDs());
                 for (int i = 0; i < retNum; ++i) {
-                    rankings.add((i + 1) + ". ," + returner.get(i).name + " (" + returner.get(i).team + ")," + returner.get(i).pTD);
+                    rankings.add((i + 1) + ". ," + returner.get(i).name + "," + returner.get(i).team + "," + returner.get(i).pTD);
                 }
                 break;
             case 20:
                 Collections.sort(HC, new CompCoachScore());
                 for (int i = 0; i < HC.size(); ++i) {
-                    rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachScore());
+                    rankings.add((i + 1) + ". ," + HC.get(i).name + "," + HC.get(i).team.abbr + "," + HC.get(i).getCoachScore());
                 }
                 break;
             case 21:
                 Collections.sort(HC, new CompCoachCareer());
                 for (int i = 0; i < HC.size(); ++i) {
-                    rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachCareerScore());
+                    rankings.add((i + 1) + ". ," + HC.get(i).name + "," + HC.get(i).team.abbr + "," + HC.get(i).getCoachCareerScore());
                 }
                 break;
         }
