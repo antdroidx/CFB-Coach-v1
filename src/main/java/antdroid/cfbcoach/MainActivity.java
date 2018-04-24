@@ -2932,10 +2932,10 @@ public class MainActivity extends AppCompatActivity {
     private void newGameHardDialog() {
         int offers = (int) (Math.random() * 5);
         if (offers < 1) offers = 1;
-        final ArrayList<Team> coachList = simLeague.getCoachList(50, offers);
+        final ArrayList<Team> coachList = simLeague.getCoachList(47, offers);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr(50, offers);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr(47, offers);
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
