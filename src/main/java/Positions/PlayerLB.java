@@ -272,7 +272,7 @@ public class PlayerLB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + team.teamPrestige*3 + team.confPrestige*3 + (120 - team.rankTeamPollScore)*2;
+        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + getConfPrestigeBonus();
     }
 
     @Override

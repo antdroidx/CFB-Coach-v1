@@ -36,7 +36,7 @@ public class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
             TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
             itemR.setPadding(5, 0, 5, 0);
             itemR.setText(detailSplit[1]);
-            if (detailSplit[1].equals("[CAREER]"))
+            if (detailSplit[1].equals("[C]"))
                 itemR.setTextColor(Color.RED);
             else itemR.setTextColor(Color.parseColor("#008066"));
         } else {

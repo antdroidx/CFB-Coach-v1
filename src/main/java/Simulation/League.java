@@ -56,6 +56,7 @@ import Comparator.CompTeamPPG;
 import Comparator.CompTeamPYPG;
 import Comparator.CompTeamPoll;
 import Comparator.CompTeamPrestige;
+import Comparator.CompTeamProjPoll;
 import Comparator.CompTeamRYPG;
 import Comparator.CompTeamRecruitClass;
 import Comparator.CompTeamSoS;
@@ -180,9 +181,7 @@ public class League {
     int seasonStart = 2017;
     int countTeam = 120;
     int seasonWeeks = 26;
-    double realignmentChance = 0.99;
-    int promotionPrestige = 71;
-    int relegationPrestige = 46;
+    double realignmentChance = 0.25;
     String crYear1 = "2";
     String crYear2 = "7";
     boolean heismanDecided;
@@ -669,7 +668,7 @@ public class League {
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HALL_OF_FAME")) {
                 leagueHoF.add(line);
-                String[] fileSplit = line.split(" ");
+                String[] fileSplit = line.split(":");
                 for (int i = 0; i < countTeam; ++i) {
                     if (teamList.get(i).name.equals(fileSplit[0])) {
                         teamList.get(i).hallOfFame.add(line);
@@ -878,6 +877,16 @@ public class League {
     public void setTeamBenchMarks() {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).setupTeamBenchmark();
+        }
+
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).projectTeamWins();
+            teamList.get(i).projectPollRank();
+        }
+
+        Collections.sort(teamList, new CompTeamProjPoll());
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).projectedPoll = i+1;
         }
     }
 
@@ -2073,7 +2082,7 @@ public class League {
             sb.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
             if (p instanceof HeadCoach) {
                 HeadCoach hc = (HeadCoach) p;
-                sb.append(" HC " + hc.name + "\n \t\tAge: :" + hc.age + " Season " + hc.year + "\n");
+                sb.append(" HC " + hc.name + "\n \t\tAge: " + hc.age + " Season " + hc.year + "\n");
             } else if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 sb.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
@@ -3224,9 +3233,9 @@ public class League {
                                     p5Conf.confTeams.add(teamA);
 
                                     //break the news
-                                    newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + p5Conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf + " conference has agreed to add " + teamB.name + " as part of the realignment.");
+                                    newsStories.get(currentWeek + 1).add("Conference Realignment News>The " + p5Conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf.confName + " conference has agreed to add " + teamB.name + " as part of the realignment.");
 
-                                    newsRealignment += ("The " + p5Conf + " announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf + " conference has agreed to add " + teamB.name + " as part of the realignment.\n\n");
+                                    newsRealignment += ("The " + p5Conf.confName + " announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf.confName + " conference has agreed to add " + teamB.name + " as part of the realignment.\n\n");
                                     countRealignment++;
                                 }
 
@@ -4550,11 +4559,11 @@ public class League {
 
         // Save information about the save file, user team info
         if (isCareerMode()) {
-            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
-                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[CAREER]%\n");
+            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+                    userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[C]%\n");
         } else {
             sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
-                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[DYNASTY]%\n");
+                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[D]%\n");
         }
 
 

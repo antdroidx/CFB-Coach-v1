@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     String username;
     Uri dataUri;
     String loadData;
+    String goals;
 
     List<String> teamList;
     List<String> confList;
@@ -193,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
         wantUpdateConf = 2; // 0 and 1, don't update, 2 update
         showToasts = true;
         showInjuryReport = true;
-        simLeague.setTeamBenchMarks();
 
         if (!loadedLeague) {
             // Set it to 1st team until one selected
@@ -288,50 +288,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         if (userTeam.teamHistory.size() > 0 && simLeague.currentWeek == 0) {
-            String goals = "";
-            int confPos=0;
-
-
-            for (int i = 0; i < simLeague.conferences.size(); ++i) {
-                Conference c = simLeague.conferences.get(i);
-                if (c.confName.equals(userTeam.conference)) {
-                    for (int x = 0; x < c.confTeams.size(); x++) {
-                        if (c.confTeams.get(x).name.equals(userTeam.name)) {
-                            confPos = x + 1;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            goals = "Welcome to the " + (seasonStart + userTeam.teamHistory.size()) + " College Football season!\n\n";
-            goals += "This season you're team is expected to finish ranked #" + (100-userTeam.teamPrestige) + " or higher!\n\n";
-            goals += "In conference play, your team is expected to finish #" + confPos + " in the " + userTeam.conference + " conference.\n\n";
-
-            if (simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3.name.equals(userTeam.name)) {
-                goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
-            }
-
-            if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
-                    goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
-                }
-            if (simLeague.penalizedTeam3 != null && simLeague.penalizedTeam3.name.equals(userTeam.name) ||  simLeague.penalizedTeam4 != null &&  simLeague.penalizedTeam4.name.equals(userTeam.name) || simLeague.penalizedTeam5 != null &&  simLeague.penalizedTeam5.name.equals(userTeam.name)) {
-                    goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
-                }
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage(goals)
-                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Goals")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            TextView textView = dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+           seasonGoals();
         }
 
         /*
@@ -785,6 +742,60 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void seasonGoals() {
+        simLeague.updateTeamTalentRatings();
+        simLeague.setTeamBenchMarks();
+
+        goals = "";
+        int confPos = 0;
+
+        for (int i = 0; i < simLeague.conferences.size(); ++i) {
+            Conference c = simLeague.conferences.get(i);
+            if (c.confName.equals(userTeam.conference)) {
+                for (int x = 0; x < c.confTeams.size(); x++) {
+                    if (c.confTeams.get(x).name.equals(userTeam.name)) {
+                        confPos = x + 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+            goals = "Welcome to the " + (seasonStart + userTeam.teamHistory.size()) + " College Football season!\n\n";
+            goals += "This season your team is expected to finish ranked #" + userTeam.projectedPoll + "!\n\n";
+            goals += "In conference play, your team is expected to finish #" + confPos + " in the " + userTeam.conference + " conference.\n\n";
+            goals += "Your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
+
+            if (simLeague.bonusTeam1 != null && simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2 != null &&  simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3 != null &&  simLeague.bonusTeam3.name.equals(userTeam.name)) {
+                goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
+            }
+
+            if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
+                goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
+            }
+            if (simLeague.penalizedTeam3 != null && simLeague.penalizedTeam3.name.equals(userTeam.name) ||  simLeague.penalizedTeam4 != null &&  simLeague.penalizedTeam4.name.equals(userTeam.name) || simLeague.penalizedTeam5 != null &&  simLeague.penalizedTeam5.name.equals(userTeam.name)) {
+                goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
+            }
+
+            simLeague.newsStories.get(simLeague.currentWeek).add("Season Goals>" + goals);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(goals)
+                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Goals")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+
+    }
+
 
     public void examineTeam(String teamName) {
         wantUpdateConf = 0;
@@ -1610,7 +1621,7 @@ public class MainActivity extends AppCompatActivity {
                                     new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
                         } else if (position == 3) {
-                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
+                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers, userTeam.name);
                             leagueHistoryList.setAdapter(hofAdapter);
                         } else if (position == 2) {
                             showLeagueHistoryStats();
@@ -1799,7 +1810,7 @@ public class MainActivity extends AppCompatActivity {
                                     new LeagueRecordsListArrayAdapter(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---");
                             teamHistoryList.setAdapter(leagueRecordsAdapter);
                         } else {
-                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers);
+                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers, userTeam.name);
                             teamHistoryList.setAdapter(hofAdapter);
                         }
                     }
@@ -2939,6 +2950,9 @@ public class MainActivity extends AppCompatActivity {
                 userTeam.setupUserCoach(username);
                 // set rankings so that not everyone is rank #0
                 simLeague.setTeamRanks();
+                simLeague.setTeamBenchMarks();
+                simLeague.updateTeamTalentRatings();
+                seasonGoals();
                 simLeague.preseasonNews();
                 userHC = userTeam.HC.get(0);
                 // Set toolbar text to '2017 Season' etc
@@ -2967,6 +2981,9 @@ public class MainActivity extends AppCompatActivity {
                 userTeam.setupUserCoach(username);
                 // set rankings so that not everyone is rank #0
                 simLeague.setTeamRanks();
+                simLeague.setTeamBenchMarks();
+                simLeague.updateTeamTalentRatings();
+                seasonGoals();
                 simLeague.preseasonNews();
                 userHC = userTeam.HC.get(0);
                 // Set toolbar text to '2017 Season' etc
