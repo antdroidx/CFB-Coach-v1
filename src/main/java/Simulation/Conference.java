@@ -281,7 +281,7 @@ public class Conference {
         confPrestige = (CP / (confTeams.size() / 2));
 
         confPromoteMin = (int)(CP/confTeams.size() * 1.25);
-        confRelegateMin = (int)(CP/confTeams.size() * 0.75);
+        confRelegateMin = (int)(CP/confTeams.size() * 0.67);
     }
 
     public void updateConfRankings() {

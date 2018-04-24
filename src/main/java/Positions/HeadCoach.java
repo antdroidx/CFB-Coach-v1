@@ -54,7 +54,7 @@ public class HeadCoach extends Player {
         year = yr;
         contractYear = cyr;
         contractLength = clength;
-        ratOvr = (off + def + tal + dis) / 4;
+        ratOvr = (off + def + tal + dis)/4;
         ratPot = pot;
         ratOff = off;
         ratDef = def;
@@ -154,7 +154,7 @@ public class HeadCoach extends Player {
 
         position = "HC";
     }
-    //@Override
+
     public void advanceSeason(int prestigeDiff, int avgYards, int offTalent, int defTalent) {
         int oldOvr = ratOvr;
         int bowl = (team.wins + team.losses - 12);

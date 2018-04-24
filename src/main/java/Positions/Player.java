@@ -278,7 +278,7 @@ Player {
     }
 
     public String getPosNameYrOvr_Str() {
-        return team.name + " " + position + " " + name + " [" + getYrStr() + "] Ovr: " + ratOvr;
+        return team.name + ": " + position + " " + name + " [" + getYrStr() + "] Ovr: " + ratOvr;
     }
 
     public String getYrOvrPot_Str() {
@@ -370,6 +370,10 @@ Player {
         }
 
         return awardsStr;
+    }
+
+    public int getConfPrestigeBonus() {
+        return team.teamPrestige * 3 + team.confPrestige * 5 + ((120 - team.rankTeamPollScore) * 3);
     }
 
     public String getInfoForLineup() {

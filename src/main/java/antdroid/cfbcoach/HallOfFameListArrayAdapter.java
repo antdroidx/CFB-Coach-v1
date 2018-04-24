@@ -6,6 +6,7 @@ package antdroid.cfbcoach;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -14,11 +15,13 @@ import android.widget.TextView;
 public class HallOfFameListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
+    private final String userTeam;
 
-    public HallOfFameListArrayAdapter(Context context, String[] values) {
+    public HallOfFameListArrayAdapter(Context context, String[] values, String userTeam) {
         super(context, R.layout.hall_fame_list_item, values);
         this.context = context;
         this.values = values;
+        this.userTeam = userTeam;
     }
 
     @Override
@@ -33,6 +36,9 @@ public class HallOfFameListArrayAdapter extends ArrayAdapter<String> {
         String[] hof = values[position].split("&");
         if (hof.length > 1) {
             textTop.setText(hof[0]);
+            if (hof[0].split(":")[0].equals(userTeam)) {
+                textTop.setTextColor(Color.RED);
+            }
             StringBuilder left = new StringBuilder();
             StringBuilder right = new StringBuilder();
             for (int i = 1; i < hof.length; ++i) {

@@ -44,10 +44,19 @@ public class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
             // Only show record if it exists
             textLeft.setText(record[1]);
             textCenter.setText(record[0]);
-            textRight.setText(record[2] + "\n" + record[3]);
-            if (record[2].split(" ")[0].equals(userTeamAbbr)) {
-                // User team record, make it special color
-                textRight.setTextColor(Color.parseColor("#1A75FF"));
+            if (record[2].contains("%")) {
+                String namesplit[] = record[2].split("%");
+                textRight.setText(record[2].split("%")[0] + "\n" + record[2].split("%")[1] + " " + record[3]);
+                if (record[2].split("%")[1].equals(userTeamAbbr)) {
+                    // User team record, make it special color
+                    textRight.setTextColor(Color.parseColor("#1A75FF"));
+                }
+            } else {
+                textRight.setText(record[2] + "\n" + record[3]);
+                if (record[2].equals(userTeamAbbr)) {
+                    // User team record, make it special color
+                    textRight.setTextColor(Color.parseColor("#1A75FF"));
+                }
             }
         }
 
