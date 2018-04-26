@@ -2,7 +2,7 @@
 Air Force,Troy Calhoun,4
 Akron,Terry Bowden,5
 Alabama,Nick Saban,10
-Arizona,Rich Rodriguez,6
+Arizona,Kevin Sumlin,6
 Arizona State,Herm Edwards,4
 Arkansas,Chad Morris,7
 Arkansas State,Blake Anderson,4
@@ -20,7 +20,7 @@ Central Florida,Josh Heupel,6
 Central Michigan,John Bonamego,4
 Cincinnati,Luke Fickell,3
 Clemson,Dabo Swinney,10
-Colorado,Mike MacIntyre,6
+Colorado,Mike MacIntyre,7
 Colorado State,Mike Bobo,5
 Duke,David Cutcliffe,4
 East Carolina,Scottie Montgomery,2
@@ -51,7 +51,7 @@ Maryland,D.J. Durkin4
 Memphis,Mike Norvell,7
 Miami,Mark Richt,8
 Miami OH,Chuck Martin,2
-Michigan,Jim Harbaugh,9
+Michigan,Jim Harbaugh,8
 Michigan State,Mark Dantonio,7
 Mid Tenn State,Rick Stockstill,3
 Minnesota,PJ Fleck,8
@@ -76,7 +76,7 @@ Oklahoma State,Mike Gundy,8
 Ole Miss,Matt Luke,4
 Oregon,Mario Cristobal,6
 Oregon State,Jonathan Smith,5
-Penn State,James Franklin,8
+Penn State,James Franklin,9
 Pittsburgh,Pat Narduzzi,5
 Purdue,Jeff Brohm,8
 Rice,Mike Bloomgreen,3
@@ -111,7 +111,7 @@ Vanderbilt,Derek Mason,5
 Virginia,Bronco Mendenhall,5
 Virginia Tech,Justin Fuente,7
 Wake Forest,Dave Clawson,4
-Washington,Chris Petersen,8
+Washington,Chris Petersen,9
 Washington State,Mike Leach,8
 West Virginia,Dana Holgorsen,6
 Western Kentucky,Mike Sanford,5
