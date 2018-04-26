@@ -28,28 +28,26 @@ import Positions.PlayerWR;
 
 public class Game implements Serializable {
 
-    public League league;
-
-    public Team homeTeam;
-    public Team awayTeam;
+    public final Team homeTeam;
+    public final Team awayTeam;
 
     public boolean hasPlayed;
-    public boolean QT1;
-    public boolean QT2;
-    public boolean QT3;
+    private boolean QT1;
+    private boolean QT2;
+    private boolean QT3;
 
     public String gameName;
 
     public int homeScore;
-    public int[] homeQScore;
+    public final int[] homeQScore;
     public int awayScore;
-    public int[] awayQScore;
-    public int homeYards;
-    public int awayYards;
+    public final int[] awayQScore;
+    private int homeYards;
+    private int awayYards;
 
     public int numOT;
-    public int homeTOs;
-    public int awayTOs;
+    private int homeTOs;
+    private int awayTOs;
 
     private ArrayList<PlayerReturner> homeReturner;
     private ArrayList<PlayerReturner> awayReturner;
@@ -77,8 +75,8 @@ public class Game implements Serializable {
     private int homeRushYards;
     private int awayRushYards;
 
-    String gameEventLog;
-    String tdInfo;
+    private String gameEventLog;
+    private String tdInfo;
 
     //private variables used when simming games
     private int gameTime;
@@ -90,22 +88,20 @@ public class Game implements Serializable {
     private boolean playingOT;
     private boolean bottomOT;
 
-    private int timePerPlay = 22; //affects snaps per game!
-    private int intValue = 150; //higher less ints
-    private int sackValue = 200; //higher less sacks
-    private int compValue = 150; //higher more completions
-    private int fatigueDropHigh = 9;
-    private int fatigueDropMed = 6;
-    private int fatigueDropLow = 3;
-    private int fatigueGain = 4;
+    private final int timePerPlay = 22; //affects snaps per game!
+    private final int intValue = 150; //higher less ints
+    private final int sackValue = 200; //higher less sacks
+    private final int compValue = 150; //higher more completions
+    private final int fatigueDropHigh = 9;
+    private final int fatigueDropMed = 6;
+    private final int fatigueDropLow = 3;
+    private final int fatigueGain = 4;
     private int snapCount = 0;
-    private int touchback = 25;
+    private final int touchback = 25;
 
     private double hkReturnAvg = 0, akReturnAvg = 0, hpReturnAvg = 0, apReturnAvg = 0;
 
     private int returnYards;
-
-    Random rand = new Random();
 
     public Game(Team home, Team away, String name) {
         homeTeam = home;
@@ -177,7 +173,7 @@ public class Game implements Serializable {
         return adv;
     }
 
-    public int getCompositeOLPass() {
+    private int getCompositeOLPass() {
         int compositeOL = 0;
         for (int i = 0; i < 5; ++i) {
             compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
@@ -187,7 +183,7 @@ public class Game implements Serializable {
         return (compositeOL);
     }
 
-    public int getCompositeOLRush(PlayerTE selTE) {
+    private int getCompositeOLRush(PlayerTE selTE) {
         int compositeOL = 0;
         for (int i = 0; i < 5; ++i) {
             compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
@@ -198,7 +194,7 @@ public class Game implements Serializable {
         return compositeOL;
     }
 
-    public int getCompositeDLPass(PlayerLB selLB) {
+    private int getCompositeDLPass(PlayerLB selLB) {
         int compositeDL = 0;
         for (int i = 0; i < 4; ++i) {
             compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
@@ -209,7 +205,7 @@ public class Game implements Serializable {
         return compositeDL;
     }
 
-    public int getCompositeDLRush(PlayerLB selLB, PlayerS selS) {
+    private int getCompositeDLRush(PlayerLB selLB, PlayerS selS) {
         int compositeDL = 0;
         for (int i = 0; i < 4; ++i) {
             compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
@@ -220,7 +216,7 @@ public class Game implements Serializable {
         return compositeDL;
     }
 
-    public void getReturner() {
+    private void getReturner() {
         homeReturner = new ArrayList<>();
         awayReturner = new ArrayList<>();
         //Choose Kickoff Returners
@@ -276,7 +272,7 @@ public class Game implements Serializable {
         awayKickReturner.startPos = 0;
     }
 
-    public int getSpecialTeamsD(Team specialTeams) {
+    private int getSpecialTeamsD(Team specialTeams) {
         int ST = 0;
         teamST = new ArrayList<>();
 
@@ -1502,7 +1498,6 @@ public class Game implements Serializable {
                         awayScore += 6;
                     }
                     tdInfo = returner.team + " " + returner.position + " " + returner.name + " returns the kick " + returnYards + " yards for a TOUCHDOWN!";
-                    homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Kick-Off Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a kick-off " + returnYards + " yards this week for a touchdown!");
                     returner.kTD++;
                     kickXP(defense, offense);
                     if (!playingOT) kickOff(defense, offense);
@@ -1569,7 +1564,6 @@ public class Game implements Serializable {
                         awayScore += 6;
                     }
                     tdInfo = returner.team + " " + returner.position + " " + returner.name + " returns the kick " + returnYards + " yards for a TOUCHDOWN!";
-                    homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Free-Kick Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a free-kick " + returnYards + " yards this week for a touchdown!");
                     returner.kTD++;
                     kickXP(defense, offense);
                     if (!playingOT) kickOff(defense, offense);
@@ -1607,7 +1601,6 @@ public class Game implements Serializable {
                 awayScore += 6;
             }
             tdInfo = returner.team + " " + returner.position + " " + returner.name + " returns the punt " + returnYards + " yards for a TOUCHDOWN!";
-            homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(returner.team + " Punt Returner runs for the End Zone>" + returner.team + " " + returner.position + " " + returner.name + " returned a punt " + returnYards + " yards this week for a touchdown!");
             returner.pTD++;
             kickXP(defense, offense);
             if (!playingOT) kickOff(defense, offense);
@@ -2282,7 +2275,7 @@ public class Game implements Serializable {
         }
     }
 
-    public void quarterCheck() {
+    private void quarterCheck() {
         if (gameTime < 2700 && !QT1) {
             QT1 = true;
             //Set Player Fatigue +50
@@ -2309,7 +2302,7 @@ public class Game implements Serializable {
 
     }
 
-    public void recoup(boolean endQT, int qt) {
+    private void recoup(boolean endQT, int qt) {
         int gain = fatigueGain;
         if (endQT && qt != 2) gain = (int) Math.random() * 35 + 35;
         if (endQT && qt == 2) gain = 100;
@@ -2378,7 +2371,7 @@ public class Game implements Serializable {
 
     //PREVIEW & BOXSCORE
 
-    public void gameStatistics() {
+    private void gameStatistics() {
         Player player;
         homePassingStats = new ArrayList<>();
         awayPassingStats = new ArrayList<>();
@@ -2679,7 +2672,7 @@ public class Game implements Serializable {
 
     }
 
-    public String getPlaybyPlay() {
+    private String getPlaybyPlay() {
         return "GAME PLAY-BY-PLAY LOG\n" + gameEventLog;
     }
 
@@ -2776,7 +2769,7 @@ public class Game implements Serializable {
         return "\n\n" + homeTeam.abbr + " " + homeScore + " - " + awayScore + " " + awayTeam.abbr;
     }
 
-    public int getPassYards(boolean ha) {
+    private int getPassYards(boolean ha) {
         //ha = home/away, false for home, true for away
         int yards = 0;
         if (!ha) {
@@ -2792,7 +2785,7 @@ public class Game implements Serializable {
         }
     }
 
-    public int getRushYards(boolean ha) {
+    private int getRushYards(boolean ha) {
         //ha = home/away, false for home, true for away
         int yards = 0;
         if (!ha) {
@@ -2814,7 +2807,7 @@ public class Game implements Serializable {
         }
     }
 
-    public int getPasserRating(int yards, int td, int comp, int att, int ints) {
+    private int getPasserRating(int yards, int td, int comp, int att, int ints) {
         int rating;
         if (att < 1) {
             return 0;
@@ -2824,7 +2817,7 @@ public class Game implements Serializable {
         }
     }
 
-    public double getRecYardsperCatch(double yards, double rec) {
+    private double getRecYardsperCatch(double yards, double rec) {
         double rating;
         if (rec < 1) {
             return 0;
@@ -2834,7 +2827,7 @@ public class Game implements Serializable {
         }
     }
 
-    public void addNewsStory() {
+    private void addNewsStory() {
 
         //Weekly Scoreboard Update
         homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 1).add(gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " " + homeScore);

@@ -17,10 +17,10 @@ import Positions.Player;
 /**
  * Created by Achi Jones on 3/18/2016.
  */
-public class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
+class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
     private final Context context;
     public final ArrayList<Player> players;
-    public ArrayList<Player> playersSelected;
+    public final ArrayList<Player> playersSelected;
     public int playersRequired;
 
     public TeamLineupArrayAdapter(Context context, ArrayList<Player> values, int playersRequired) {

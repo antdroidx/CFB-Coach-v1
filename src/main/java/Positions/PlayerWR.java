@@ -50,15 +50,15 @@ public class PlayerWR extends Player {
     public int careerPuntRets;
     public int careerPuntRetYards;
     public int careerPuntRetTDs;
-    public int careerRetGames;
+    private int careerRetGames;
 
     //Size Config
-    private int hAvg = 73;
-    private int hMax = 4;
-    private int hMin = -5;
-    private int wAvg = 206;
-    private int wMax = 30;
-    private int wMin = -40;
+    private final int hAvg = 73;
+    private final int hMax = 4;
+    private final int hMin = -5;
+    private final int wAvg = 206;
+    private final int wMax = 30;
+    private final int wMin = -40;
 
     public PlayerWR(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cat, int spd, int eva, int jmp, int h, int w) {
         position = "WR";

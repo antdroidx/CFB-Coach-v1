@@ -33,7 +33,7 @@ import java.io.Writer;
 
 public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
-    public boolean customCareer;
+    private boolean customCareer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -306,7 +306,7 @@ public class Home extends AppCompatActivity {
     }
 
     /* Checks if external storage is available to at least read */
-    public boolean isExternalStorageReadable() {
+    private boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state) ||
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);

@@ -31,18 +31,18 @@ public class Conference {
     public int confRelegateMin;
     public int confPromoteMin;
 
-    public ArrayList<Team> confTeams;
-    public boolean evenYear;
+    public final ArrayList<Team> confTeams;
+    private boolean evenYear;
 
-    public League league;
+    private final League league;
 
     private Game ccg;
 
     public int week;
     public int robinWeek;
-    int teamCount = 12;
+    private final int teamCount = 12;
 
-    public ArrayList<Player> allConfPlayers;
+    public final ArrayList<Player> allConfPlayers;
 
     /**
      * Sets up Conference with empty list of teams.
@@ -194,7 +194,7 @@ public class Conference {
 
     }
 
-    public void scheduleOOC(int offsetOOC, int selConf, ArrayList<Team> availTeams) {
+    private void scheduleOOC(int offsetOOC, int selConf, ArrayList<Team> availTeams) {
         for (int i = 0; i < teamCount; ++i) {
             availTeams.add(league.conferences.get(selConf).confTeams.get(i));
         }
@@ -291,7 +291,7 @@ public class Conference {
     /**
      * Schedule the CCG based on team rankings.
      */
-    public void schedConfChamp() {
+    private void schedConfChamp() {
         // Play CCG between top 2 teams
         for (int i = 0; i < confTeams.size(); ++i) {
             confTeams.get(i).updatePollScore();
@@ -343,7 +343,7 @@ public class Conference {
     /**
      * Play the CCG. Add the "CC" tag to the winner.
      */
-    public void playConfChamp() {
+    private void playConfChamp() {
         // Play CCG between top 2 teams
         ccg.playGame();
         if (ccg.homeScore > ccg.awayScore) {

@@ -9,14 +9,14 @@ import Simulation.Team;
  */
 public class PlayerDefense {
 
-    public Team team;
-    public String name;
-    public String position;
-    public int year;
-    public int tackles;
-    public int sacks;
-    public int fumbles;
-    public int interceptions;
+    public final Team team;
+    public final String name;
+    public final String position;
+    private final int year;
+    public final int tackles;
+    public final int sacks;
+    public final int fumbles;
+    public final int interceptions;
 
     public PlayerDefense(Team tm, String nm, String pos, int yr, int tkl, int sk, int fmb, int ints) {
         team = tm;

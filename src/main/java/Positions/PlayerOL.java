@@ -24,12 +24,12 @@ public class PlayerOL extends Player {
     public int statsPassYards;
 
     //Size Config
-    private int hAvg = 76;
-    private int hMax = 5;
-    private int hMin = -3;
-    private int wAvg = 310;
-    private int wMax = 40;
-    private int wMin = -35;
+    private final int hAvg = 76;
+    private final int hMax = 5;
+    private final int hMin = -3;
+    private final int wAvg = 310;
+    private final int wMax = 40;
+    private final int wMin = -35;
 
     public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int bkr, int bkp, int awr, int h, int w) {
         position = "OL";

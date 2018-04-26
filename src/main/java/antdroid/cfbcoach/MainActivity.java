@@ -63,49 +63,49 @@ import Simulation.TeamStrategy;
 
 public class MainActivity extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 43;
-    public String oldConf;
-    public HeadCoach userHC;
-    int season;
-    League simLeague;
-    Conference currentConference;
-    Team currentTeam;
-    int currentConferenceID;
-    Team userTeam;
-    File saveLeagueFile;
-    String username;
-    Uri dataUri;
-    String loadData;
-    String goals;
+    private String oldConf;
+    private HeadCoach userHC;
+    private int season;
+    private League simLeague;
+    private Conference currentConference;
+    private Team currentTeam;
+    private int currentConferenceID;
+    private Team userTeam;
+    private File saveLeagueFile;
+    private String username;
+    private Uri dataUri;
+    private String loadData;
+    private String goals;
 
-    List<String> teamList;
-    List<String> confList;
+    private List<String> teamList;
+    private List<String> confList;
 
-    int currTab;
-    String userTeamStr;
-    Spinner examineTeamSpinner;
-    ArrayAdapter<String> dataAdapterTeam;
-    Spinner examineConfSpinner;
-    ArrayAdapter<String> dataAdapterConf;
-    ListView mainList;
-    ExpandableListView expListPlayerStats;
+    private int currTab;
+    private String userTeamStr;
+    private Spinner examineTeamSpinner;
+    private ArrayAdapter<String> dataAdapterTeam;
+    private Spinner examineConfSpinner;
+    private ArrayAdapter<String> dataAdapterConf;
+    private ListView mainList;
+    private ExpandableListView expListPlayerStats;
 
     //recruiting
-    int recruitingStage;
-    int wantUpdateConf;
-    boolean showToasts;
-    boolean showInjuryReport;
+    private int recruitingStage;
+    private int wantUpdateConf;
+    private boolean showToasts;
+    private boolean showInjuryReport;
     boolean fullGameLog;
 
     //Universe Settings
-    int teamsStart = 12;
-    int confStart = 10;
-    int seasonStart = 2017;
+    private final int teamsStart = 12;
+    private final int confStart = 10;
+    private final int seasonStart = 2017;
 
     String saveLeagueFileStr;
-    File customConfs;
-    File customTeams;
-    File customBowls;
-    String customUri;
+    private File customConfs;
+    private File customTeams;
+    private File customBowls;
+    private String customUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                                 newGameDialog();
                             }
                         });
+                mode.setCancelable(false);
                 AlertDialog dialog = mode.create();
                 dialog.show();
                 TextView msgTxt = dialog.findViewById(android.R.id.message);
@@ -320,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setText("Off-Season: Contracts");
                         simLeague.currentWeek++;
                     } else if (simLeague.currentWeek == 17 && userTeam.fired) {
-                        newJobV2(userHC);
+                        jobOffers(userHC);
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Coaching Changes");
                         simLeague.currentWeek++;
@@ -426,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialog, int which) {
                                         }
                                     });
+                            builder.setCancelable(false);
                             AlertDialog dialog = builder.create();
                             dialog.show();
                             TextView textView = dialog.findViewById(android.R.id.message);
@@ -743,7 +745,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void seasonGoals() {
+    private void seasonGoals() {
         simLeague.updateTeamTalentRatings();
         simLeague.setTeamBenchMarks();
 
@@ -788,6 +790,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
+            builder.setCancelable(false);
             AlertDialog dialog = builder.create();
             dialog.show();
             TextView textView = dialog.findViewById(android.R.id.message);
@@ -1465,7 +1468,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showTeamRankingsDialog() {
+    private void showTeamRankingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Team Statistical Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1515,7 +1518,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showPlayerRankingsDialog() {
+    private void showPlayerRankingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Player Statistical Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1567,7 +1570,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void showRecruitingClassDialog() {
+    private void showRecruitingClassDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Recruiting Class Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1586,7 +1589,7 @@ public class MainActivity extends AppCompatActivity {
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 
-    public void showLeagueHistoryDialog() {
+    private void showLeagueHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("League History / Records")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1638,7 +1641,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showLeagueHistoryStats() {
+    private void showLeagueHistoryStats() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("League Stats")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1686,7 +1689,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showTop25History() {
+    private void showTop25History() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("AP Poll History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1732,7 +1735,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showCoachHistoryDialog() {
+    private void showCoachHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1771,7 +1774,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showCurrTeamHistoryDialog() {
+    private void showCurrTeamHistoryDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Team History: " + currentTeam.name)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1822,7 +1825,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void showBowlCCGDialog() {
+    private void showBowlCCGDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Post-Season Games")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -1861,7 +1864,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void showNewsStoriesDialog() {
+    private void showNewsStoriesDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("News Stories")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -2255,7 +2258,7 @@ public class MainActivity extends AppCompatActivity {
                         // Perform action on click
                         userHC = userTeam.HC.get(0);
                         //switchTeams();
-                        if (simLeague.isCareerMode()) newJob(userHC);
+                        if (simLeague.isCareerMode()) jobOffers(userHC);
                         else switchTeams(userHC);
                         dialog.dismiss();
                     }
@@ -2279,7 +2282,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Show injury report.
      */
-    public void showInjuryReportDialog() {
+    private void showInjuryReportDialog() {
         String[] injuries = userTeam.getInjuryReport();
         if (injuries != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -2317,7 +2320,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setShowInjuryReport(boolean show) {
+    private void setShowInjuryReport(boolean show) {
         showInjuryReport = show;
     }
 
@@ -2686,7 +2689,7 @@ public class MainActivity extends AppCompatActivity {
         return infos;
     }
 
-    public void showWeeklyScores() {
+    private void showWeeklyScores() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Weekly Scoreboard")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -2743,7 +2746,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void updateTeamUI() {
+    private void updateTeamUI() {
         if (simLeague.isCareerMode()) {
             getSupportActionBar().setTitle(season + " | " + userTeam.name + " | Career Mode");
         } else {
@@ -2752,7 +2755,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Choose ANY team
-    public void switchTeams(HeadCoach headCoach) {
+    private void switchTeams(HeadCoach headCoach) {
         userHC = headCoach;
         updateTeamUI();
         //get user team from list dialog
@@ -2779,51 +2782,14 @@ public class MainActivity extends AppCompatActivity {
                 examineTeam(currentTeam.name);
             }
         });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-    //Only schools lower than Coach Rating will offer jobs
-    public void newJob(HeadCoach headCoach) {
-        userHC = headCoach;
-        int ratOvr = userHC.ratOvr;
-        if (ratOvr < 40) ratOvr = 40;
-        int offers = (int) (Math.random() * 5);
-        if (offers < 1) offers = 1;
-        updateTeamUI();
-        //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr((ratOvr - 10), offers);
-        final ArrayList<Team> coachList = simLeague.getCoachList((ratOvr - 10), offers);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Job Offers Available:");
-        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
-        builder.setItems(teams, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                // Do something with the selection
-                userTeam.userControlled = false;
-                userTeam.HC.clear();
-                userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                simLeague.newJobtransfer(coachList.get(item).name);
-                userTeam = simLeague.userTeam;
-                userTeamStr = userTeam.name;
-                currentTeam = userTeam;
-                userTeam.HC.clear();
-                userTeam.HC.add(userHC);
-                userTeam.fired = false;
-                userHC.contractYear = 0;
-                userHC.contractLength = 6;
-                userHC.baselinePrestige = userTeam.teamPrestige;
-                updateTeamUI();
-                examineTeam(currentTeam.name);
-            }
-        });
+        builder.setCancelable(false);
         AlertDialog alert = builder.create();
         alert.show();
     }
 
     //Only schools lower than Coach Rating will offer jobs
     //Version 2 will only have offers from schools with coaching vacancies and teams looking to improve
-    public void newJobV2(HeadCoach headCoach) {
+    private void jobOffers(HeadCoach headCoach) {
         userHC = headCoach;
         int ratOvr = userHC.ratOvr;
         if (ratOvr < 40) ratOvr = 40;
@@ -2861,12 +2827,13 @@ public class MainActivity extends AppCompatActivity {
                 examineTeam(currentTeam.name);
             }
         });
+        builder.setCancelable(false);
         AlertDialog alert = builder.create();
         alert.show();
     }
 
     //Job offers promotions
-    public void promotions(HeadCoach headCoach) {
+    private void promotions(HeadCoach headCoach) {
         userHC = headCoach;
         if (userHC.promotionCandidate) {
 
@@ -2960,6 +2927,7 @@ public class MainActivity extends AppCompatActivity {
                 examineTeam(currentTeam.name);
             }
         });
+        builder.setCancelable(false);
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -2991,6 +2959,7 @@ public class MainActivity extends AppCompatActivity {
                 examineTeam(currentTeam.name);
             }
         });
+        builder.setCancelable(false);
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -3001,6 +2970,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Name:")
                 .setView(getLayoutInflater().inflate(R.layout.username_dialog, null));
+        builder.setCancelable(false);
         final AlertDialog dialog = builder.create();
         dialog.show();
 
@@ -3132,7 +3102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //* Checks if external storage is available to at least read *//*
-    public boolean isExternalStorageReadable() {
+    private boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state) ||
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
@@ -3150,7 +3120,7 @@ public class MainActivity extends AppCompatActivity {
         return file;
     }
 
-    public void importData() {
+    private void importData() {
         isExternalStorageReadable();
 
         //ALERT DIALOG - ROSTER or COACH
@@ -3210,7 +3180,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void readCoachFile(Uri uri) throws IOException {
+    private void readCoachFile(Uri uri) throws IOException {
         String line;
         InputStream inputStream = getContentResolver().openInputStream(uri);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -3220,12 +3190,12 @@ public class MainActivity extends AppCompatActivity {
         while ((line = reader.readLine()) != null && !line.equals("END_COACHES")) {
             String[] fileSplit = line.split(",");
             for (int i = 0; i < simLeague.teamList.size(); ++i) {
-                if (fileSplit[0].toString().equals(simLeague.teamList.get(i).name)) {
+                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
                     if (fileSplit.length > 2) {
                         simLeague.teamList.get(i).HC.clear();
-                        simLeague.teamList.get(i).newCustomHeadCoach(fileSplit[1].toString(), Integer.parseInt(fileSplit[2]));
+                        simLeague.teamList.get(i).newCustomHeadCoach(fileSplit[1], Integer.parseInt(fileSplit[2]));
                     } else {
-                        simLeague.teamList.get(i).HC.get(0).name = fileSplit[1].toString();
+                        simLeague.teamList.get(i).HC.get(0).name = fileSplit[1];
                     }
                 }
             }
@@ -3234,7 +3204,7 @@ public class MainActivity extends AppCompatActivity {
         userTeam.setupUserCoach(userHC.name);
     }
 
-    public void readRosterFile(Uri uri) throws IOException {
+    private void readRosterFile(Uri uri) throws IOException {
         boolean custom = false;
 
         //METHOD USED FOR CREATING NEW ROSTER FROM CUSTOM FILE
@@ -3309,8 +3279,8 @@ public class MainActivity extends AppCompatActivity {
             teamRoster.recruitWalkOns();
         }
         simLeague.updateTeamTalentRatings();
-        simLeague.newsStories.get(0).remove(2);
-        simLeague.newsStories.get(0).remove(2);
+        simLeague.newsStories.get(0).remove(3);
+        simLeague.newsStories.get(0).remove(3);
         simLeague.topRecruits();
     }
 

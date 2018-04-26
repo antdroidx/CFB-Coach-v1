@@ -11,8 +11,8 @@ public class Injury {
     private static final Random rando = new Random();
     public League league;
     private int duration; // Duration of the injury (in games)
-    private String description; // What the injury is
-    private Player player; // Player that has this injury
+    private final String description; // What the injury is
+    private final Player player; // Player that has this injury
 
     public Injury(int dur, String descrip, Player p) {
         duration = dur;

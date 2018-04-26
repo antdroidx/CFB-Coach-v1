@@ -45,15 +45,15 @@ public class PlayerCB extends Player {
     public int careerPuntRets;
     public int careerPuntRetYards;
     public int careerPuntRetTDs;
-    public int careerRetGames;
+    private int careerRetGames;
 
     //Size Config
-    private int hAvg = 71;
-    private int hMax = 4;
-    private int hMin = -4;
-    private int wAvg = 193;
-    private int wMax = 30;
-    private int wMin = -40;
+    private final int hAvg = 71;
+    private final int hMax = 4;
+    private final int hMin = -4;
+    private final int wAvg = 193;
+    private final int wMax = 30;
+    private final int wMin = -40;
 
     public PlayerCB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cov, int spd, int tkl, int jmp, int h, int w) {
         position = "CB";

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
+class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeamAbbr;

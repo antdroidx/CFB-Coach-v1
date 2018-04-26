@@ -24,7 +24,7 @@ Player {
     public int ratDur;
     public int ratImprovement;
     public int cost;
-    public int progression;
+    int progression;
     public int region;
     public int personality;
     public int height;
@@ -66,31 +66,31 @@ Player {
     public int heightBase = 60;
     public int weightBase = 160;
 
-    public int attrBase = 50;
-    public int ratBase = 60;
-    public int yearFactor = 5;
-    public double starFactor = 2.5;
-    public double customFactor = 4.5;
-    public int ratTolerance = 20;
-    public int recruitTolerance = 50;
-    public int costBaseRating = 35;
-    public int locationDiscount = 15;
-    public int minGamesPot = 4;
-    public int allConfPotBonus = 4;
-    public int allAmericanBonus = 5;
-    public int allFreshmanBonus = 4;
-    public int topBonus = 3;
+    final int attrBase = 50;
+    final int ratBase = 60;
+    final int yearFactor = 5;
+    final double starFactor = 2.5;
+    final double customFactor = 4.5;
+    final int ratTolerance = 20;
+    int recruitTolerance = 50;
+    final int costBaseRating = 35;
+    final int locationDiscount = 15;
+    final int minGamesPot = 4;
+    final int allConfPotBonus = 4;
+    final int allAmericanBonus = 5;
+    final int allFreshmanBonus = 4;
+    final int topBonus = 3;
 
-    public double qbImportance = 1;
-    public double rbImportance = 1.5;
-    public double wrImportance = 2;
-    public double teImportance = 4;
-    public double olImportance = 2.5;
-    public double kImportance = 5;
-    public double dlImportance = 2.5;
-    public double lbImportance = 2.5;
-    public double cbImportance = 2.5;
-    public double sImportance = 1.5;
+    final double qbImportance = 1;
+    final double rbImportance = 1.5;
+    final double wrImportance = 2;
+    final double teImportance = 4;
+    final double olImportance = 2.5;
+    final double kImportance = 5;
+    final double dlImportance = 2.5;
+    final double lbImportance = 2.5;
+    final double cbImportance = 2.5;
+    final double sImportance = 1.5;
 
     //game simulation data
     public int gameSnaps;
@@ -120,9 +120,9 @@ Player {
     public int gameFGMade;
     public int gameXPAttempts;
     public int gameXPMade;
-    public DecimalFormat df2 = new DecimalFormat(".##");
+    final DecimalFormat df2 = new DecimalFormat(".##");
 
-    protected final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
+    private final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
     protected final String[] potGrades = {"F", "F", "D", "D", "C", "C", "B", "B", "A", "A"};
 
 
@@ -141,7 +141,7 @@ Player {
         return "ERROR";
     }
 
-    public String getFullYrStr() {
+    private String getFullYrStr() {
         if (year == 0) {
             return "Redshirt";
         } else if (year == 1) {
@@ -174,10 +174,14 @@ Player {
 
     public String getInitialName() {
         String[] names = name.split(" ");
-        return names[0].substring(0, 1) + ". " + names[1];
+        if (names.length > 1) {
+            return names[0].substring(0, 1) + ". " + names[1];
+        } else {
+            return name;
+        }
     }
 
-    public int getScoutingGrade(){
+    int getScoutingGrade(){
         int pRat;
         int scout = (4*ratOvr + ratPot) / 5;
         if (year < 2) {
@@ -199,7 +203,7 @@ Player {
         return pRat;
     }
 
-    public String getScoutingGradeString() {
+    String getScoutingGradeString() {
         String grade;
 
         if (recruitRating == 0) {
@@ -313,7 +317,7 @@ Player {
     /**
      * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
      */
-    protected String getLetterGrade(int num) {
+    String getLetterGrade(int num) {
         int ind = (num - 50) / 5;
         if (ind > 9) ind = 9;
         if (ind < 0) ind = 0;
@@ -323,7 +327,7 @@ Player {
     /**
      * Convert a rating into a letter grade for potential, so 50 is a C instead of F
      */
-    protected int getPotRating(int pot, int ovr, int year, int hc) {
+    int getPotRating(int pot, int ovr, int year, int hc) {
         if (team.league.hidePotential) return 0;
         int potential;
         potential = ovr + ((3*pot+2*hc)/50)*(4-year);
@@ -346,13 +350,13 @@ Player {
         return pStats;
     }
 
-    public String getYearsPlayed() {
+    private String getYearsPlayed() {
         int startYear = team.league.getYear() - year + 1;
         int endYear = team.league.getYear();
         return startYear + "-" + endYear;
     }
 
-    public String getAwards() {
+    private String getAwards() {
         ArrayList<String> awards = new ArrayList<>();
         int heis = careerHeismans + (wonHeisman ? 1 : 0);
         int aa = careerAllAmerican + (wonAllAmerican ? 1 : 0);
@@ -372,7 +376,7 @@ Player {
         return awardsStr;
     }
 
-    public int getConfPrestigeBonus() {
+    int getConfPrestigeBonus() {
         return team.teamPrestige * 3 + team.confPrestige * 5 + ((120 - team.rankTeamPollScore) * 3);
     }
 
@@ -395,7 +399,7 @@ Player {
         return getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr + "  Suspended";
 
     }
-        public int getGames() {
+        int getGames() {
         int games = gamesStarted + (gamesPlayed - gamesStarted);
         if (games == 0) return 1;
         else return games;
@@ -430,7 +434,7 @@ Player {
     }
 
 
-    public String getRegion(int region) {
+    String getRegion(int region) {
         String location;
         if (region == 0) location = "West";
         else if (region == 1) location = "Midwest";
@@ -454,7 +458,7 @@ Player {
         return trait;
     }
 
-    public String getStatus() {
+    String getStatus() {
         if (isTransfer) {
             return "Transfer";
         } else if (isRedshirt) {
@@ -475,7 +479,7 @@ Player {
         else return getYrStr();
     }
 
-    public String getHeight() {
+    String getHeight() {
 
         int feet = height / 12;
         int leftover = height % 12;
@@ -483,7 +487,7 @@ Player {
         return feet + "'' " + leftover + "\"";
     }
 
-    public String getWeight() {
+    String getWeight() {
         return weight + " lbs";
     }
 }

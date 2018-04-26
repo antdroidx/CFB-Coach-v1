@@ -10,14 +10,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 import Comparator.CompCoachCareer;
+import Comparator.CompCoachOvr;
 import Comparator.CompCoachScore;
 import Comparator.CompKickRetTD;
 import Comparator.CompKickRetYards;
@@ -82,7 +83,7 @@ import Positions.PlayerWR;
 
 public class League {
     public ArrayList<String[]> leagueHistory;
-    public ArrayList<String> heismanHistory;
+    private ArrayList<String> heismanHistory;
     public ArrayList<String> leagueHoF;
     public ArrayList<Conference> conferences;
     public ArrayList<Team> teamList;
@@ -90,21 +91,22 @@ public class League {
     public ArrayList<String> coachPrevTeam;
     public ArrayList<HeadCoach> coachStarList;
     public ArrayList<String> coachStarPrevTeam;
-    public ArrayList<String> nameList;
-    public ArrayList<String> lastNameList;
+    private ArrayList<HeadCoach> coachFreeAgents;
+    private ArrayList<String> nameList;
+    private ArrayList<String> lastNameList;
     public ArrayList<ArrayList<String>> newsStories;
     public ArrayList<ArrayList<String>> weeklyScores;
-    public ArrayList<String> teamDiscipline;
-    public int disciplineWeekA;
-    public int disciplineWeekB;
-    public int disciplineWeekC;
-    public int disciplineTimes;
+    private ArrayList<String> teamDiscipline;
+    private int disciplineWeekA;
+    private int disciplineWeekB;
+    private int disciplineWeekC;
+    private int disciplineTimes;
 
     public LeagueRecords leagueRecords;
     public LeagueRecords userTeamRecords;
-    public TeamStreak longestWinStreak;
-    public TeamStreak yearStartLongestWinStreak;
-    public TeamStreak longestActiveWinStreak;
+    private TeamStreak longestWinStreak;
+    private TeamStreak yearStartLongestWinStreak;
+    private TeamStreak longestActiveWinStreak;
 
     // News Story Variables
     public Team bonusTeam1;
@@ -123,27 +125,27 @@ public class League {
     public int countRealignment;
     public String newsRealignment;
     //Bowl Games
-    public boolean hasScheduledBowls;
-    public Game semiG14;
-    public Game semiG23;
-    public Game ncg;
-    public Game[] bowlGames;
-    public int countBG = 18;
+    private boolean hasScheduledBowls;
+    private Game semiG14;
+    private Game semiG23;
+    private Game ncg;
+    private Game[] bowlGames;
+    private final int countBG = 18;
 
     //User Team
     public Team userTeam;
 
     //Freshman Team
-    public ArrayList<PlayerQB> fQBs;
-    public ArrayList<PlayerRB> fRBs;
-    public ArrayList<PlayerWR> fWRs;
-    public ArrayList<PlayerTE> fTEs;
-    public ArrayList<PlayerK> fKs;
-    public ArrayList<PlayerOL> fOLs;
-    public ArrayList<PlayerDL> fDLs;
-    public ArrayList<PlayerLB> fLBs;
-    public ArrayList<PlayerCB> fCBs;
-    public ArrayList<PlayerS> fSs;
+    private ArrayList<PlayerQB> fQBs;
+    private ArrayList<PlayerRB> fRBs;
+    private ArrayList<PlayerWR> fWRs;
+    private ArrayList<PlayerTE> fTEs;
+    private ArrayList<PlayerK> fKs;
+    private ArrayList<PlayerOL> fOLs;
+    private ArrayList<PlayerDL> fDLs;
+    private ArrayList<PlayerLB> fLBs;
+    private ArrayList<PlayerCB> fCBs;
+    private ArrayList<PlayerS> fSs;
     //Transfer List
     public ArrayList<String> tQBs;
     public ArrayList<String> tRBs;
@@ -167,36 +169,35 @@ public class League {
     public ArrayList<PlayerS> transferSs;
     public String userTransfers;
     public String sumTransfers;
-    public ArrayList<String> transfersList;
+    private ArrayList<String> transfersList;
     public ArrayList<Player> freshmen;
     public ArrayList<Player> redshirts;
-    public String[] bowlNames = {"Carnation Bowl", "Mandarin Bowl", "Honey Bowl", "Fiesta Bowl", "Necatrine Bowl", "Polyester Bowl", "Lemon-Lime Bowl", "Aligator Bowl", "Desert Bowl", "Fort Bowl", "Vacation Bowl", "Star Bowl",
+    private final String[] bowlNames = {"Carnation Bowl", "Mandarin Bowl", "Honey Bowl", "Fiesta Bowl", "Necatrine Bowl", "Polyester Bowl", "Lemon-Lime Bowl", "Aligator Bowl", "Desert Bowl", "Fort Bowl", "Vacation Bowl", "Star Bowl",
             "Bell Bowl", "Freedom Bowl", "Casino Bowl", "American Bowl", "Island Bowl", "Philantropy Bowl"};
     public boolean fullGameLog;
     public boolean hidePotential;
     public boolean confRealignment;
-    public boolean gameEditor;
 
-    public DecimalFormat df2 = new DecimalFormat(".##");
-    int seasonStart = 2017;
-    int countTeam = 120;
-    int seasonWeeks = 26;
-    double realignmentChance = 0.25;
-    String crYear1 = "2";
-    String crYear2 = "7";
-    boolean heismanDecided;
-    Player heisman;
-    Player coachWinner;
-    Player freshman;
-    ArrayList<Player> heismanCandidates;
-    ArrayList<Player> freshmanCandidates;
-    ArrayList<Player> allAmericans;
-    ArrayList<Player> allFreshman;
+    private final DecimalFormat df2 = new DecimalFormat(".##");
+    private final int seasonStart = 2017;
+    final int countTeam = 120;
+    private final int seasonWeeks = 26;
+    private final double realignmentChance = 0.25;
+    private final String crYear1 = "2";
+    private final String crYear2 = "7";
+    private boolean heismanDecided;
+    private Player heisman;
+    private Player coachWinner;
+    private Player freshman;
+    private ArrayList<Player> heismanCandidates;
+    private ArrayList<Player> freshmanCandidates;
+    private ArrayList<Player> allAmericans;
+    private ArrayList<Player> allFreshman;
     private String heismanWinnerStrFull;
     private String freshmanWinnerStrFull;
     private boolean careerMode;
 
-    public String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
+    private final String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
             "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
 
     /**
@@ -494,7 +495,7 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             // Game Mode
-            careerMode = line.substring(line.length() - 9, line.length()).equals("[CAREER]%");
+            careerMode = line.substring(line.length() - 4, line.length()).equals("[C]%");
             //9
             //Next get league history
 
@@ -512,7 +513,6 @@ public class League {
                 conferences.add(new Conference(line, this));
             }
 
-            String[] splits;
             for (int i = 0; i < countTeam; ++i) { //Do for every team
                 StringBuilder sbTeam = new StringBuilder();
                 while ((line = bufferedReader.readLine()) != null && !line.equals("END_PLAYERS")) {
@@ -676,6 +676,13 @@ public class League {
                 }
             }
 
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES") ) {
+                String c[] = line.split(",");
+                coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                        , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                        , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20])));
+            }
+
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
@@ -699,7 +706,7 @@ public class League {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setupCommonInitalizers() {
+    private void setupCommonInitalizers() {
 
         nameList = new ArrayList<String>();
         lastNameList = new ArrayList<String>();
@@ -713,16 +720,12 @@ public class League {
         coachPrevTeam = new ArrayList<>();
         coachStarList = new ArrayList<>();
         coachStarPrevTeam = new ArrayList<>();
+        coachFreeAgents = new ArrayList<>();
 
         conferences = new ArrayList<Conference>();
         teamList = new ArrayList<Team>();
 
-
         allAmericans = new ArrayList<Player>();
-        ArrayList<Team> coachList = new ArrayList<>();
-        coachPrevTeam = new ArrayList<>();
-        coachStarList = new ArrayList<>();
-        coachStarPrevTeam = new ArrayList<>();
 
         tQBs = new ArrayList<>();
         tRBs = new ArrayList<>();
@@ -754,10 +757,9 @@ public class League {
         yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
         longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
 
-
     }
 
-    public void setupSeason() {
+    private void setupSeason() {
 
         //set up schedule
         for (int i = 0; i < conferences.size(); ++i) {
@@ -845,7 +847,7 @@ public class League {
         return careerMode;
     }
 
-    public void setupNamesDB(String namesCSV, String lastNamesCSV) {
+    private void setupNamesDB(String namesCSV, String lastNamesCSV) {
         // Read first names from file
         String[] namesSplit = namesCSV.split(",");
         for (String n : namesSplit) {
@@ -1178,7 +1180,7 @@ public class League {
 
 
     //Coaching Discipline Opportunities
-    public void disciplineAction() {
+    private void disciplineAction() {
         teamDiscipline = new ArrayList<>();
         String news = "";
         for (int t = 0; t < teamList.size(); ++t) {
@@ -1199,14 +1201,14 @@ public class League {
         newsStories.get(currentWeek + 1).add("In-Season Disciplinary Action>The following teams have had issues with discipline in the past week:\n" + news);
     }
 
-    public void updateSuspensions() {
+    private void updateSuspensions() {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updateSuspensions();
         }
     }
 
     //Player Spotlight
-    public void playerSpotlight() {
+    private void playerSpotlight() {
         ArrayList<PlayerQB> QB = rankQB();
         ArrayList<PlayerRB> RB = rankRB();
         ArrayList<PlayerWR> WR = rankWR();
@@ -1247,7 +1249,7 @@ public class League {
     }
 
     //Committee News
-    public void cfbPlayoffsNews() {
+    private void cfbPlayoffsNews() {
         setTeamRanks();
         ArrayList<Team> teams = teamList;
         Collections.sort(teams, new CompTeamPoll());
@@ -1271,7 +1273,7 @@ public class League {
      *
      * @return Heisman Winner
      */
-    public ArrayList<Player> getHeisman() {
+    private ArrayList<Player> getHeisman() {
         heisman = null;
         int heismanScore = 0;
         int tempScore = 0;
@@ -1511,10 +1513,8 @@ public class League {
         }
     }
 
-    public ArrayList<Player> getTopFreshman() {
+    private ArrayList<Player> getTopFreshman() {
         freshman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<Player> freshmanCandidates = new ArrayList<Player>();
         fQBs = new ArrayList<>();
         fRBs = new ArrayList<>();
@@ -2272,7 +2272,7 @@ public class League {
     /**
      * Schedules bowl games based on team rankings.
      */
-    public void schedBowlGames() {
+    private void schedBowlGames() {
         //bowl week
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
@@ -2438,7 +2438,7 @@ public class League {
      * Actually plays each bowl game.
      */
 
-    public void playBowlGames() {
+    private void playBowlGames() {
         for (Game g : bowlGames) {
             playBowl(g);
         }
@@ -2558,7 +2558,7 @@ public class League {
      * @param g Bowl game to be examined
      * @return string of its summary, ALA W 24 - 40 @ GEO, etc
      */
-    public String getGameSummaryBowl(Game g) {
+    private String getGameSummaryBowl(Game g) {
         StringBuilder sb = new StringBuilder();
         Team winner, loser;
         if (!g.hasPlayed) {
@@ -2588,7 +2588,7 @@ public class League {
      *
      * @return string of summary
      */
-    public String ncgSummaryStr() {
+    private String ncgSummaryStr() {
         // Give summary of what happened in the NCG
         if (ncg.homeScore > ncg.awayScore) {
             return ncg.homeTeam.name + " (" + ncg.homeTeam.wins + "-" + ncg.homeTeam.losses + ") won the National Championship, " +
@@ -2760,12 +2760,11 @@ public class League {
                                 if (Math.random() > 0.50) {
                                     teamList.get(j).promoteCoach();
                                     teamList.get(j).HC.get(0).history.add("");
-                                    newsStories.get(currentWeek + 1).add("Replacement Hired: " + teamList.get(j).name + ">" + teamList.get(j).name +
+                                    newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).name +
                                             " hopes to continue their recent success, despite the recent loss of coach " + teamList.get(t).HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
                                 }
                             }
                         }
-
                         break;
                     }
                 }
@@ -2773,6 +2772,7 @@ public class League {
         }
 
         //Coaches who were fired
+        Collections.sort(coachList, new CompCoachOvr());
         for (int i = 0; i < coachList.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
                 if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.50) {
@@ -2780,12 +2780,34 @@ public class League {
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
                     teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
-                    newsStories.get(currentWeek + 1).add("Coaching Hire: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                    newsStories.get(currentWeek + 1).add("Coaching Change: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
+                    coachList.remove(i);
+                    coachPrevTeam.remove(i);
                     break;
                 }
             }
         }
+
+        //Coaches who were fired previous years
+        Collections.sort(coachFreeAgents, new CompCoachOvr());
+        for (int i = 0; i < coachFreeAgents.size(); ++i) {
+            for (int t = 0; t < teamList.size(); ++t) {
+                if (teamList.get(t).HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && Math.random() > 0.50) {
+                    teamList.get(t).HC.add(coachFreeAgents.get(i));
+                    teamList.get(t).HC.get(0).contractLength = 6;
+                    teamList.get(t).HC.get(0).contractYear = 0;
+                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
+                    newsStories.get(currentWeek + 1).add("A Return to Coaching: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                            " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " has been out of football for a while, but is returning this season!");
+                    coachFreeAgents.remove(i);
+                    break;
+                }
+            }
+        }
+
+
+        //Assistants Promoted
         for (int t = 0; t < teamList.size(); ++t) {
             if (teamList.get(t).HC.isEmpty()) {
                 teamList.get(t).promoteCoach();
@@ -2797,7 +2819,7 @@ public class League {
     }
 
     //Coaching Hot Seat News
-    public void coachingHotSeat() {
+    private void coachingHotSeat() {
         if (currentWeek == 0) {
             for (int i = 0; i < teamList.size(); ++i) {
                 if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength) {
@@ -3252,10 +3274,6 @@ public class League {
     Contracts every Nth year will be awarded to conferences. increases prestige temporarily
     */
 
-    public void conferenceTVContracts() {
-
-    }
-
 
     /**
      * Get a mock draft of all players who are leaving, sorted by overall.
@@ -3449,7 +3467,7 @@ public class League {
     /**
      * Gets the longest active win streak.
      */
-    public void updateLongestActiveWinStreak() {
+    private void updateLongestActiveWinStreak() {
         for (Team t : teamList) {
             if (t.winStreak.getStreakLength() > longestActiveWinStreak.getStreakLength()) {
                 longestActiveWinStreak = t.winStreak;
@@ -3460,7 +3478,7 @@ public class League {
     /**
      * Advance season for win streaks, so no save-load whackiness.
      */
-    public void advanceSeasonWinStreaks() {
+    private void advanceSeasonWinStreaks() {
         yearStartLongestWinStreak = longestWinStreak;
         for (Team t : teamList) {
             t.yearStartWinStreak = t.winStreak;
@@ -3473,7 +3491,7 @@ public class League {
      * @param oldAbbr old abbreviation
      * @param newAbbr new abbreviation
      */
-    public void changeAbbrWinStreaks(String oldAbbr, String newAbbr) {
+    private void changeAbbrWinStreaks(String oldAbbr, String newAbbr) {
         if (longestWinStreak.getTeam().equals(oldAbbr)) {
             longestWinStreak.changeAbbr(newAbbr);
         }
@@ -3949,10 +3967,8 @@ public class League {
     }
 
 
-    public ArrayList<PlayerQB> rankQB() {
+    private ArrayList<PlayerQB> rankQB() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerQB> heismanCandidates = new ArrayList<PlayerQB>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
@@ -3963,10 +3979,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerRB> rankRB() {
+    private ArrayList<PlayerRB> rankRB() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerRB> heismanCandidates = new ArrayList<PlayerRB>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
@@ -3977,10 +3991,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerWR> rankWR() {
+    private ArrayList<PlayerWR> rankWR() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerWR> heismanCandidates = new ArrayList<PlayerWR>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
@@ -3991,10 +4003,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerTE> rankTE() {
+    private ArrayList<PlayerTE> rankTE() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerTE> heismanCandidates = new ArrayList<PlayerTE>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
@@ -4005,10 +4015,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerOL> rankOL() {
+    private ArrayList<PlayerOL> rankOL() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerOL> heismanCandidates = new ArrayList<PlayerOL>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamOLs.size(); ++te) {
@@ -4019,10 +4027,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerK> rankK() {
+    private ArrayList<PlayerK> rankK() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerK> heismanCandidates = new ArrayList<PlayerK>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamKs.size(); ++te) {
@@ -4033,10 +4039,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerDL> rankDL() {
+    private ArrayList<PlayerDL> rankDL() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerDL> heismanCandidates = new ArrayList<PlayerDL>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
@@ -4047,10 +4051,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerLB> rankLB() {
+    private ArrayList<PlayerLB> rankLB() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerLB> heismanCandidates = new ArrayList<PlayerLB>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
@@ -4061,10 +4063,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerCB> rankCB() {
+    private ArrayList<PlayerCB> rankCB() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerCB> heismanCandidates = new ArrayList<PlayerCB>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
@@ -4075,10 +4075,8 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<PlayerS> rankS() {
+    private ArrayList<PlayerS> rankS() {
         heisman = null;
-        int heismanScore = 0;
-        int tempScore = 0;
         ArrayList<PlayerS> heismanCandidates = new ArrayList<PlayerS>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int s = 0; s < teamList.get(i).teamSs.size(); ++s) {
@@ -4089,7 +4087,7 @@ public class League {
         return heismanCandidates;
     }
 
-    public ArrayList<HeadCoach> rankHC() {
+    private ArrayList<HeadCoach> rankHC() {
         heisman = null;
         ArrayList<HeadCoach> coachCandidates = new ArrayList<HeadCoach>();
         for (int i = 0; i < teamList.size(); ++i) {
@@ -4703,6 +4701,29 @@ public class League {
             sb.append(s + "\n");
         }
         sb.append("END_LEAGUE_HALL_OF_FAME\n");
+
+        //Adding to the Available Coach List Pool
+        for (HeadCoach h: coachList) {
+            coachFreeAgents.add(h);
+        }
+        Collections.sort(coachFreeAgents, new CompCoachOvr());
+
+        for (HeadCoach h : coachFreeAgents) {
+            if(h.age < 58){
+                sb.append(h.name + "," + (h.age + 1) + "," + h.year + "," + h.ratPot + "," + h.ratOff + "," + h.ratDef + "," + h.ratTalent + "," + h.ratDiscipline
+                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
+                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "\n");
+            }
+        }
+/*        for (HeadCoach h : coachList) {
+            if (h.age < 59) {
+                sb.append(h.name + "," + h.age + "," + h.year + "," + h.ratPot + "," + h.ratOff + "," + h.ratDef + "," + h.ratTalent + "," + h.ratDiscipline
+                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
+                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "\n");
+            }
+        }*/
+
+        sb.append("END_COACHES\n");
 
         sb.append(fullGameLog + "\n");
         sb.append(hidePotential + "\n");

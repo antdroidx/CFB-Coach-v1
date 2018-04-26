@@ -1,9 +1,9 @@
 package Positions;
 
 public class PlayerReturner {
-    public String team;
-    public String name;
-    public String position;
+    public final String team;
+    public final String name;
+    public final String position;
     public int ratSpeed;
     public int ratEvasion;
     public int kYards;
