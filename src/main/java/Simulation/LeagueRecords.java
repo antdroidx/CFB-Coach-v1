@@ -6,26 +6,26 @@ import java.util.Map;
 
 public class LeagueRecords {
 
-    public class Record {
-        private int number;
+    class Record {
+        private final int number;
         private String holder;
-        private int year;
+        private final int year;
 
-        public Record(int n, String h, int y) {
+        Record(int n, String h, int y) {
             number = n;
             holder = h;
             year = y;
         }
 
-        public int getNumber() {
+        int getNumber() {
             return number;
         }
 
-        public String getHolder() {
+        String getHolder() {
             return holder;
         }
 
-        public int getYear() {
+        int getYear() {
             return year;
         }
 
@@ -38,9 +38,9 @@ public class LeagueRecords {
         }
     }
 
-    private HashMap<String, Record> records;
+    private final HashMap<String, Record> records;
 
-    public final String[] recordsList = {"TEAM", "Team PPG", "Team Opp PPG", "Team YPG", "Team Opp YPG", "Team TO Diff",
+    private final String[] recordsList = {"TEAM", "Team PPG", "Team Opp PPG", "Team YPG", "Team Opp YPG", "Team TO Diff",
             "SEASON: OFFENSE", "Pass Yards", "Pass TDs", "Ints Thrown", "Comp Percent", "QB Rating",
             "Rush Yards", "Rush TDs", "Fumbles Lost", "Receptions",
             "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended", "SEASON: ST", "Field Goals","Kick Ret Yards", "Kick Ret TDs", "Punt Ret Yards", "Punt Ret TDs",

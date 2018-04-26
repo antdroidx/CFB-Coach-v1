@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class TeamStatsListArrayAdapter extends ArrayAdapter<String> {
+class TeamStatsListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 

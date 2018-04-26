@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 public class TutorialActivity extends AppCompatActivity {
 
-    Spinner tutorialSpinner;
-    TextView tutorialTitle;
-    TextView tutorialContent;
-    ArrayList<String> titles;
-    ArrayList<String> contents;
-    ArrayAdapter dataAdapterTutorial;
+    private Spinner tutorialSpinner;
+    private TextView tutorialTitle;
+    private TextView tutorialContent;
+    private ArrayList<String> titles;
+    private ArrayList<String> contents;
+    private ArrayAdapter dataAdapterTutorial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

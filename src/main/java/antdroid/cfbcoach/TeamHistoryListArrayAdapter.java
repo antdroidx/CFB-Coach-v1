@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class TeamHistoryListArrayAdapter extends ArrayAdapter<String> {
+class TeamHistoryListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 

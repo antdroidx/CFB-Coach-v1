@@ -25,8 +25,8 @@ public class HeadCoach extends Player {
     public int offStrat;
     public int defStrat;
     public int baselinePrestige;
-    public int teamWins;
-    public int teamLosses;
+    private final int teamWins;
+    private final int teamLosses;
     public int wins;
     public int losses;
     public int bowlwins;
@@ -37,11 +37,11 @@ public class HeadCoach extends Player {
     public int allconference;
     public int confAward;
     public int awards;
-    Random rand = new Random();
-    int max = 4;
-    int min = 0;
-    public ArrayList<String> history;
-    double potFactor = 1.33;
+    private final Random rand = new Random();
+    private final int max = 4;
+    private final int min = 0;
+    public final ArrayList<String> history;
+    private final double potFactor = 1.33;
 
     public boolean promotionCandidate;
 
@@ -55,6 +55,40 @@ public class HeadCoach extends Player {
         contractYear = cyr;
         contractLength = clength;
         ratOvr = (off + def + tal + dis)/4;
+        ratPot = pot;
+        ratOff = off;
+        ratDef = def;
+        ratTalent = tal;
+        ratDiscipline = dis;
+        offStrat = ostrat;
+        defStrat = dstrat;
+        baselinePrestige = sPrs;
+        teamWins = 0;
+        teamLosses = 0;
+        wins = cWins;
+        losses = cLosses;
+        confchamp = cchamps;
+        natchamp = nchamps;
+        bowlwins = bwins;
+        bowllosses = blosses;
+        allamericans = allams;
+        allconference = allconf;
+        confAward = caw;
+        awards = aw;
+        history = new ArrayList<>();
+
+        position = "HC";
+    }
+
+    //This one is for HC Free Agency Pool
+    public HeadCoach(String nm, int a, int yr, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
+        name = nm;
+        age = a;
+        year = yr;
+        contractYear = 0;
+        contractLength = 0;
+        ratOvr = (2*off + 2*def + tal + dis)/6;
         ratPot = pot;
         ratOff = off;
         ratDef = def;
@@ -168,17 +202,23 @@ public class HeadCoach extends Player {
         float def = avgYards - team.teamOppYards;
         float offTal = offTalent - team.teamOffTalent;
         float defTal = defTalent - team.teamDefTalent;
-        float offpts = ((off / avgYards) + (offTal / offTalent)) * 10;
-        float defpts = ((def / avgYards) + (defTal / defTalent)) * 10;
+        float offpts = ((off / avgYards) + (offTal / offTalent)) * 5;
+        float defpts = ((def / avgYards) + (defTal / defTalent)) * 5;
 
         ratOff += Math.round((prestigeDiff + offpts)*((potFactor*ratPot)/100));
         if (ratOff > 99) ratOff = 99;
+        if (ratOff < 20) ratOff = 20;
 
         ratDef += Math.round((prestigeDiff + defpts)*((potFactor*ratPot)/100));
         if (ratDef > 99) ratDef = 99;
+        if (ratDef < 20) ratDef = 20;
 
         if (ratDiscipline > 95) ratDiscipline = 95;
+        if (ratDiscipline < 20) ratDiscipline = 20;
+
         if (ratTalent > 95) ratTalent = 95;
+        if (ratTalent < 20) ratTalent = 20;
+
 
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
         ratImprovement = ratOvr - oldOvr;

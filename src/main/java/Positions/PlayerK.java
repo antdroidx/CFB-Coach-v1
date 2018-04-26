@@ -31,12 +31,12 @@ public class PlayerK extends Player {
     public int careerFGMade;
 
     //Size Config
-    private int hAvg = 69;
-    private int hMax = 4;
-    private int hMin = -5;
-    private int wAvg = 165;
-    private int wMax = 35;
-    private int wMin = 15;
+    private final int hAvg = 69;
+    private final int hMax = 4;
+    private final int hMin = -5;
+    private final int wAvg = 165;
+    private final int wMax = 35;
+    private final int wMin = 15;
 
     public PlayerK(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int acc, int fum, int prs, int h, int w) {
         position = "K";
@@ -278,7 +278,7 @@ public class PlayerK extends Player {
         }
     }
 
-    public double getCareerFGpct() {
+    private double getCareerFGpct() {
         if (statsFGAtt + careerFGAtt < 1) {
             return 0;
         } else {

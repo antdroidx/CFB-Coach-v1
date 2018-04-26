@@ -36,12 +36,12 @@ public class PlayerLB extends Player {
     public int careerInts;
 
     //Size Config
-    private int hAvg = 74;
-    private int hMax = 3;
-    private int hMin = -5;
-    private int wAvg = 246;
-    private int wMax = 30;
-    private int wMin = -30;
+    private final int hAvg = 74;
+    private final int hMax = 3;
+    private final int hMin = -5;
+    private final int wAvg = 246;
+    private final int wMax = 30;
+    private final int wMin = -30;
 
     public PlayerLB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int cov, int rsh, int tkl, int spd, int h, int w) {
         position = "LB";

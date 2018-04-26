@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PlayerRankingsList extends ArrayAdapter<String> {
+class PlayerRankingsList extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;

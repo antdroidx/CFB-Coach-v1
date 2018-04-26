@@ -43,12 +43,12 @@ public class PlayerQB extends Player {
     public int careerFumbles;
 
     //Size Config
-    private int hAvg = 75;
-    private int hMax = 3;
-    private int hMin = -4;
-    private int wAvg = 223;
-    private int wMax = 30;
-    private int wMin = -35;
+    private final int hAvg = 75;
+    private final int hMax = 3;
+    private final int hMin = -4;
+    private final int wAvg = 223;
+    private final int wMax = 30;
+    private final int wMin = -35;
 
     public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int acc, int eva, int spd, int h, int w) {
         position = "QB";

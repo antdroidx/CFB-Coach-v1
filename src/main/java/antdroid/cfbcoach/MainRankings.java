@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import Simulation.Team;
 
-public class MainRankings extends ArrayAdapter<String> {
+class MainRankings extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;

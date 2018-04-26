@@ -54,15 +54,15 @@ public class PlayerRB extends Player {
     public int careerPuntRets;
     public int careerPuntRetYards;
     public int careerPuntRetTDs;
-    public int careerRetGames;
+    private int careerRetGames;
 
     //Size Config
-    private int hAvg = 71;
-    private int hMax = 4;
-    private int hMin = -4;
-    private int wAvg = 215;
-    private int wMax = 30;
-    private int wMin = -20;
+    private final int hAvg = 71;
+    private final int hMax = 4;
+    private final int hMin = -4;
+    private final int wAvg = 215;
+    private final int wMax = 30;
+    private final int wMin = -20;
 
     public PlayerRB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int spd, int eva, int cat, int h, int w) {
         position = "RB";
@@ -335,7 +335,7 @@ public class PlayerRB extends Player {
                 + statsPuntRetYards + statsPuntRetTDs * 150 + careerKickRetYards + careerKickRetTDs * 150 + careerPuntRetYards + careerPuntRetTDs * 150 + ratOvr * 10 * year;
     }
 
-    public double getCareerYardsperCarry() {
+    private double getCareerYardsperCarry() {
         if (careerRushAtt < 1) {
             return 0;
         } else {
@@ -344,7 +344,7 @@ public class PlayerRB extends Player {
         }
     }
 
-    public double getYardsperCarry() {
+    private double getYardsperCarry() {
         if (statsRushAtt < 1) {
             return 0;
         } else {

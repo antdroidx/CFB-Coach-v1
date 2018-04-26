@@ -15,7 +15,7 @@ import android.widget.TextView;
 import Simulation.Game;
 import Simulation.Team;
 
-public class GameScheduleListArrayAdapter extends ArrayAdapter<Game> {
+class GameScheduleListArrayAdapter extends ArrayAdapter<Game> {
     private final Context context;
     private final Game[] games;
     private final Team team;

@@ -39,7 +39,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private String teamName;
     private String teamAbbr;
     private int recruitingBudget;
-    Random rand = new Random();
+    private final Random rand = new Random();
     private int HCtalent;
     private int ratingTolerance;
     private int tolerance;
@@ -94,26 +94,26 @@ public class RecruitingActivity extends AppCompatActivity {
     private int needCBs;
     private int needSs;
 
-    int minPlayers = 50;
-    int minQBs = 3;
-    int minRBs = 5;
-    int minWRs = 8;
-    int minTEs = 3;
-    int minOLs = 11;
-    int minKs = 2;
-    int minDLs = 10;
-    int minLBs = 7;
-    int minCBs = 7;
-    int minSs = 5;
+    private final int minPlayers = 50;
+    private final int minQBs = 3;
+    private final int minRBs = 5;
+    private final int minWRs = 8;
+    private final int minTEs = 3;
+    private final int minOLs = 11;
+    private final int minKs = 2;
+    private final int minDLs = 10;
+    private final int minLBs = 7;
+    private final int minCBs = 7;
+    private final int minSs = 5;
 
-    int redshirtCount = 0;
-    int maxRedshirt = 6;
-    int maxPlayers = 70;
+    private int redshirtCount = 0;
+    private final int maxRedshirt = 6;
+    private final int maxPlayers = 70;
 
-    int five = 84;
-    int four = 78;
-    int three = 68;
-    int two = 58;
+    private final int five = 84;
+    private final int four = 78;
+    private final int three = 68;
+    private final int two = 58;
 
     int height;
     int weight;
@@ -232,7 +232,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
         // Add extra money if your team was fleeced
-        int recBonus = (minPlayers - teamPlayers.size())*15;
+        int recBonus = (minPlayers - teamPlayers.size())*16;
         int coachBonus = HCtalent*3;
         recruitingBudget += recBonus + coachBonus;
 
@@ -428,7 +428,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
     }
 
-    public void removeUnaffordable(List<String> list) {
+    private void removeUnaffordable(List<String> list) {
         int i = 0;
         while (i < list.size()) {
             if (getRecruitCost(list.get(i)) > recruitingBudget) {
@@ -455,7 +455,7 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Used for parsing through string to get cost
      */
-    public int getRecruitCost(String p) {
+    private int getRecruitCost(String p) {
         String[] pSplit = p.split(",");
         return Integer.parseInt(pSplit[12]);
     }
@@ -463,7 +463,7 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Used for parsing through string to get region
      */
-    public int getRecruitRegion(String p) {
+    private int getRecruitRegion(String p) {
         String[] pSplit = p.split(",");
         return Integer.parseInt(pSplit[3]);
     }
@@ -473,7 +473,7 @@ public class RecruitingActivity extends AppCompatActivity {
         exitRecruiting();
     }
 
-    public void setShowPopUp(boolean tf) {
+    private void setShowPopUp(boolean tf) {
         showPopUp = tf;
     }
 
@@ -853,7 +853,7 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Gets all the recruits in a string to send back to MainActivity to be added to user team
      */
-    public String getRecruitsStr() {
+    private String getRecruitsStr() {
         StringBuilder sb = new StringBuilder();
 
         for (String p : playersRecruited) {
@@ -1341,11 +1341,11 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Inner Class used for the recruiting expandable list view
      */
-    public class ExpandableListAdapterRecruiting extends BaseExpandableListAdapter {
+    class ExpandableListAdapterRecruiting extends BaseExpandableListAdapter {
 
-        private Activity context;
+        private final Activity context;
 
-        public ExpandableListAdapterRecruiting(Activity context) {
+        ExpandableListAdapterRecruiting(Activity context) {
             this.context = context;
         }
 
@@ -1460,7 +1460,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
     } //end class
 
-    public String getRegion(int region) {
+    private String getRegion(int region) {
         String location;
         if (region == 0) location = "West";
         else if (region == 1) location = "Mid-West";
@@ -1470,7 +1470,7 @@ public class RecruitingActivity extends AppCompatActivity {
         return location;
     }
 
-    public String getHeight(int height) {
+    private String getHeight(int height) {
 
         int feet = height / 12;
         int leftover = height % 12;
@@ -1478,7 +1478,7 @@ public class RecruitingActivity extends AppCompatActivity {
         return feet + "'' " + leftover + "\"";
     }
 
-    public String getWeight(int weight) {
+    private String getWeight(int weight) {
         return weight + " lbs";
     }
 

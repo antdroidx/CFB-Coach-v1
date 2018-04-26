@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
+class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 

@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MockDraftListArrayAdapter extends ArrayAdapter<String> {
+class MockDraftListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeamStrRep;

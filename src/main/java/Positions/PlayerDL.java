@@ -32,12 +32,12 @@ public class PlayerDL extends Player {
     public int careerInts;
 
     //Size Config
-    private int hAvg = 75;
-    private int hMax = 5;
-    private int hMin = -5;
-    private int wAvg = 290;
-    private int wMax = 60;
-    private int wMin = -50;
+    private final int hAvg = 75;
+    private final int hMax = 5;
+    private final int hMin = -5;
+    private final int wAvg = 290;
+    private final int wMax = 60;
+    private final int wMin = -50;
 
     public PlayerDL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, int pot, int dur, boolean rs, int pow, int rsh, int pas, int tkl, int h, int w) {
         team = t;

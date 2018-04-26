@@ -3,17 +3,17 @@ package Simulation;
 public class TeamStrategy {
 
     public Team team;
-    private int runPref;
-    private int runProtection;
-    private int runPotential;
-    private int runUsage;
-    private int passPref;
-    private int passProtection;
-    private int passPotential;
-    private int passUsage;
+    private final int runPref;
+    private final int runProtection;
+    private final int runPotential;
+    private final int runUsage;
+    private final int passPref;
+    private final int passProtection;
+    private final int passPotential;
+    private final int passUsage;
 
-    private String stratName;
-    private String stratDescription;
+    private final String stratName;
+    private final String stratDescription;
 
     public TeamStrategy(String name, String descrip, int rPref, int rProtection, int rPotential, int rUsage, int pPref, int pProtection, int pPotential, int pUsage) {
         stratName = name;

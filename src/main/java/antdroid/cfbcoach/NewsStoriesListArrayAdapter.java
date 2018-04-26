@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Achi on 3/1/2016.
  */
-public class NewsStoriesListArrayAdapter extends ArrayAdapter<String> {
+class NewsStoriesListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
 

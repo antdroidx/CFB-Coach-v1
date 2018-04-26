@@ -21,12 +21,12 @@ import java.util.Map;
 /**
  * Class used for the recruiting expandable list view
  */
-public class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter {
+class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter {
 
-    private Activity context;
-    private Map<String, List<String>> playersInfo;
-    private List<String> players;
-    private MainActivity mainAct;
+    private final Activity context;
+    private final Map<String, List<String>> playersInfo;
+    private final List<String> players;
+    private final MainActivity mainAct;
 
     public ExpandableListAdapterPlayerStats(Activity context, MainActivity mainAct, List<String> players, Map<String, List<String>> playersInfo) {
         this.context = context;

@@ -1,11 +1,11 @@
 package Positions;
 
 public class PlayerST {
-    public String team;
-    public String name;
-    public String position;
-    public int ratSpeed;
-    public int ratTackle;
+    private final String team;
+    private final String name;
+    private final String position;
+    public final int ratSpeed;
+    private final int ratTackle;
 
     public PlayerST(String tm, String nm, String pos, int speed, int tackle) {
         team = tm;
