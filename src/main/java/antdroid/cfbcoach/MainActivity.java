@@ -2886,6 +2886,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+                builder.setCancelable(false);
 
                 AlertDialog alert = builder.create();
                 alert.show();

@@ -2757,7 +2757,7 @@ public class League {
                         for (int j = 0; j < teamList.size(); ++j) {
                             if (teamList.get(j).name.equals(tmName)) {
                                 teamList.get(j).HC.remove(0);
-                                if (Math.random() > 0.50) {
+                                if (Math.random() > 0.25) {
                                     teamList.get(j).promoteCoach();
                                     teamList.get(j).HC.get(0).history.add("");
                                     newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).name +
@@ -2775,7 +2775,7 @@ public class League {
         Collections.sort(coachList, new CompCoachOvr());
         for (int i = 0; i < coachList.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.50) {
+                if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.50) {
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -2793,7 +2793,7 @@ public class League {
         Collections.sort(coachFreeAgents, new CompCoachOvr());
         for (int i = 0; i < coachFreeAgents.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && Math.random() > 0.50) {
+                if (teamList.get(t).HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && Math.random() < 0.50) {
                     teamList.get(t).HC.add(coachFreeAgents.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -4702,6 +4702,9 @@ public class League {
         }
         sb.append("END_LEAGUE_HALL_OF_FAME\n");
 
+        for(HeadCoach h: coachFreeAgents) {
+            h.age++;
+        }
         //Adding to the Available Coach List Pool
         for (HeadCoach h: coachList) {
             coachFreeAgents.add(h);
@@ -4710,18 +4713,13 @@ public class League {
 
         for (HeadCoach h : coachFreeAgents) {
             if(h.age < 58){
-                sb.append(h.name + "," + (h.age + 1) + "," + h.year + "," + h.ratPot + "," + h.ratOff + "," + h.ratDef + "," + h.ratTalent + "," + h.ratDiscipline
+                int rand = (int)Math.random()*2;
+                int randx = (int)Math.random()*2;
+                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff+randx) + "," + (h.ratDef+rand) + "," + (h.ratTalent+randx) + "," + (h.ratDiscipline+rand)
                         + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
                         + "," + h.allamericans + "," + h.confAward + "," + h.awards + "\n");
             }
         }
-/*        for (HeadCoach h : coachList) {
-            if (h.age < 59) {
-                sb.append(h.name + "," + h.age + "," + h.year + "," + h.ratPot + "," + h.ratOff + "," + h.ratDef + "," + h.ratTalent + "," + h.ratDiscipline
-                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
-                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "\n");
-            }
-        }*/
 
         sb.append("END_COACHES\n");
 
