@@ -188,11 +188,25 @@ public class PlayerQB extends Player {
         resetCareerStats();
     }
 
+    public void midSeasonProgression() {
+        int oldOvr = ratOvr;
+        progression = getProgressionOff();
+        int games = getGamesBonus();
+
+        ratFootIQ += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
+        ratPassPow += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
+        ratPassAcc += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
+        ratEvasion += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
+        ratSpeed += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
+
+        ratOvr = (ratPassPow * 3 + ratPassAcc * 4 + ratEvasion + ratSpeed) / 9;
+        ratImprovement = ratOvr - oldOvr;
+    }
+
     @Override
     public void advanceSeason() {
         int oldOvr = ratOvr;
-        progression = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 7;
-        int games = gamesStarted + (gamesPlayed-gamesStarted)/3;
+        int games = getGamesBonus();
 
         if (!isMedicalRS) {
             year++;
@@ -202,21 +216,22 @@ public class PlayerQB extends Player {
             if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
             if (wonHeisman) ratPot += (int)Math.random()*topBonus;
 
+            progression = getProgressionOff();
 
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
 
-            ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratPassPow += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratPassAcc += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratEvasion += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratSpeed += (int) (Math.random() * (progression + games - 20)) / 10;
+            ratFootIQ += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratPassPow += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratPassAcc += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratEvasion += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratSpeed += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
 
             if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratPassPow += (int) (Math.random() * (progression + games - 40)) / 10;
-                ratPassAcc += (int) (Math.random() * (progression + games - 40)) / 10;
-                ratEvasion += (int) (Math.random() * (progression + games - 40)) / 10;
-                ratSpeed += (int) (Math.random() * (progression + games - 25)) / 10;
+                ratPassPow += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratPassAcc += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratEvasion += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratSpeed += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
             }
         }
 
@@ -241,8 +256,6 @@ public class PlayerQB extends Player {
         if (wonAllConference) careerAllConference++;
         if (wonAllFreshman) careerAllFreshman++;
         if (wonTopFreshman) careerTopFreshman++;
-
-        resetSeasonStats();
 
         if (isTransfer) {
             isTransfer = false;

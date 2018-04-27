@@ -81,6 +81,13 @@ Player {
     final int allFreshmanBonus = 4;
     final int topBonus = 3;
 
+    final int midseason = 60;
+    final int midseasonFactor = 20;
+    final int midseasonWeek = 3;
+    final int endseason = 35;
+    final int endseasonFactor = 15;
+    final int endseasonBonus = 25;
+
     final double qbImportance = 1;
     final double rbImportance = 1.5;
     final double wrImportance = 2;
@@ -490,4 +497,27 @@ Player {
     String getWeight() {
         return weight + " lbs";
     }
+
+    public int getProgression() {
+        int num = (ratPot * 2 + team.HC.get(0).ratTalent * 1) / 3;
+        return num;
+    }
+
+    public int getProgressionOff() {
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 7;
+        return num;
+    }
+
+    public int getProgressionDef() {
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef) / 7;
+        return num;
+    }
+
+    public int getGamesBonus() {
+        int games = gamesStarted + (gamesPlayed - gamesStarted) / 3;
+        games = (int)(games*2.5);
+        return games;
+    }
+
+
 }

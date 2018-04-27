@@ -241,6 +241,16 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView currentTeamText = findViewById(R.id.currentTeamText);
         currentTeamText.setText(currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ")");
+        final Button homeButton = findViewById(R.id.buttonHome);
+        final Button newsButton = findViewById(R.id.buttonNews);
+        final Button teamStatsButton = findViewById(R.id.teamStatsButton);
+        final Button playerStatsButton = findViewById(R.id.playerStatsButton);
+        final Button teamScheduleButton = findViewById(R.id.teamScheduleButton);
+        final Button scoresButton = findViewById(R.id.buttonScores);
+        final Button standingsButton = findViewById(R.id.standingsButton);
+        final Button rankingsButton = findViewById(R.id.rankingsButton);
+        final Button depthchartButton = findViewById(R.id.buttonDepthChart);
+        final Button strategyButton = findViewById(R.id.buttonStrategy);
 
         //Set up spinner for examining team.
         examineConfSpinner = findViewById(R.id.examineConfSpinner);
@@ -316,6 +326,10 @@ public class MainActivity extends AppCompatActivity {
                             dialog.show();
                             TextView textView = dialog.findViewById(android.R.id.message);
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+                            //remove buttons from view
+                            depthchartButton.setVisibility(View.INVISIBLE);
+                            strategyButton.setVisibility(View.INVISIBLE);
                         }
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Contracts");
@@ -325,7 +339,6 @@ public class MainActivity extends AppCompatActivity {
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Coaching Changes");
                         simLeague.currentWeek++;
-                        showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
                         promotions(userHC);
                         simGameButton.setTextSize(12);
@@ -338,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.currentWeek++;
                         showNewsStoriesDialog();
                     } else if (simLeague.currentWeek == 19) {
-                        userTeam.resetStats();
+                        //userTeam.resetStats();
                         simLeague.advanceSeason();
                         if (simLeague.confRealignment) {
                             simLeague.conferenceInvites();
@@ -492,20 +505,30 @@ public class MainActivity extends AppCompatActivity {
                     //in process of recruiting
                     beginRecruiting();
                 }
+
+/*                if (simLeague.currentWeek == 7) {
+                    String string = "";
+                    simLeague.midSeasonProgression();
+                    string = userTeam.midseasonUserProgression();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage(string)
+                            .setTitle("Mid-Season Progression Update")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    TextView textView = dialog.findViewById(android.R.id.message);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+                }*/
             }
         });
 
 
-        final Button homeButton = findViewById(R.id.buttonHome);
-        final Button newsButton = findViewById(R.id.buttonNews);
-        final Button teamStatsButton = findViewById(R.id.teamStatsButton);
-        final Button playerStatsButton = findViewById(R.id.playerStatsButton);
-        final Button teamScheduleButton = findViewById(R.id.teamScheduleButton);
-        final Button scoresButton = findViewById(R.id.buttonScores);
-        final Button standingsButton = findViewById(R.id.standingsButton);
-        final Button rankingsButton = findViewById(R.id.rankingsButton);
-        final Button depthchartButton = findViewById(R.id.buttonDepthChart);
-        final Button strategyButton = findViewById(R.id.buttonStrategy);
+
 
         //News
         newsButton.setOnClickListener(new View.OnClickListener() {
@@ -528,35 +551,23 @@ public class MainActivity extends AppCompatActivity {
         playerStatsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                if (simLeague.currentWeek < 18) {
-                    currTab = 1;
-                    updatePlayerStats();
-                } else {
-                    currTab = 0;
-                }
+                currTab = 1;
+                updatePlayerStats();
             }
         });
 
         //Set up "Schedule" Button
         teamScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (simLeague.currentWeek < 18) {
                     currTab = 2;
                     updateSchedule();
-                } else {
-                    currTab = 0;
-                }
             }
         });
 
         //Set up "Weekly Scoreboard" Button
         scoresButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (simLeague.currentWeek < 18) {
-                    showWeeklyScores();
-                } else {
-                    currTab = 0;
-                }
+                showWeeklyScores();
             }
         });
 
@@ -930,23 +941,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
-/*        if(simLeague.currentWeek == 0 & simLeague.getYear() == seasonStart) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("This is the Game Schedule Screen. Here you can see the results and upcoming games for the selected team. You can click on each score button to see game results or scout future games. In the game log screen, you can choose the blue menu at the top to view more stats.")
-                    .setTitle("Tutorial")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //do nothing?
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            TextView textView = dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        }*/
-
         mainList.setVisibility(View.VISIBLE);
         expListPlayerStats.setVisibility(View.GONE);
 
@@ -1621,7 +1615,7 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 1) {
                             final LeagueRecordsListArrayAdapter leagueRecordsAdapter =
-                                    new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr);
+                                    new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr, userTeam.name);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
                         } else if (position == 3) {
                             HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers, userTeam.name);
@@ -1810,7 +1804,7 @@ public class MainActivity extends AppCompatActivity {
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         } else if (position == 1) {
                             LeagueRecordsListArrayAdapter leagueRecordsAdapter =
-                                    new LeagueRecordsListArrayAdapter(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---");
+                                    new LeagueRecordsListArrayAdapter(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---", "---");
                             teamHistoryList.setAdapter(leagueRecordsAdapter);
                         } else {
                             HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers, userTeam.name);
@@ -2703,7 +2697,11 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         ArrayList<String> rankings = new ArrayList<String>();
-        String[] weekSelection = new String[simLeague.currentWeek + 1];
+        int dbSize;
+        if (simLeague.currentWeek+1 <= 16) dbSize = simLeague.currentWeek+1;
+        else dbSize = 16;
+
+        String[] weekSelection = new String[dbSize];
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 13) weekSelection[i] = "Conf Champ Week";
             else if (i == 14) weekSelection[i] = "Bowl Game Week";
@@ -2715,7 +2713,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, weekSelection);
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
-        weekSelectionSpinner.setSelection(simLeague.currentWeek);
+        weekSelectionSpinner.setSelection(dbSize-1);
 
         final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
         final NewsStoriesListArrayAdapter weeklyScoresAdapter = new NewsStoriesListArrayAdapter(this, rankings);
@@ -2767,7 +2765,7 @@ public class MainActivity extends AppCompatActivity {
                 // Do something with the selection
                 userTeam.userControlled = false;
                 userTeam.HC.clear();
-                userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                simLeague.coachHiringSingleTeam(userTeam);
                 simLeague.newJobtransfer(simLeague.teamList.get(item).name);
                 userTeam = simLeague.userTeam;
                 userTeamStr = userTeam.name;
@@ -2793,23 +2791,22 @@ public class MainActivity extends AppCompatActivity {
         userHC = headCoach;
         int ratOvr = userHC.ratOvr;
         if (ratOvr < 40) ratOvr = 40;
-/*        int offers = (int) (Math.random() * 5);
-        if (offers < 1) offers = 1;*/
-        int offers = 8;  //skip every 'offers' teams during for loop
+        int offers = 8;
         String oldTeam = userHC.team.name;
         updateTeamUI();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStrV2((ratOvr - 10), offers, oldTeam);
-        final ArrayList<Team> coachList = simLeague.getCoachListV2((ratOvr - 10), offers, oldTeam);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStrFired((ratOvr - 10), offers, oldTeam);
+        final ArrayList<Team> coachList = simLeague.getCoachListFired((ratOvr - 10), offers, oldTeam);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
+        builder.setCancelable(false);
         final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
                 userTeam.userControlled = false;
                 userTeam.HC.clear();
-                userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                simLeague.coachHiringSingleTeam(userTeam);
                 simLeague.newJobtransfer(coachList.get(item).name);
                 userTeam = simLeague.userTeam;
                 userTeamStr = userTeam.name;
@@ -2827,7 +2824,6 @@ public class MainActivity extends AppCompatActivity {
                 examineTeam(currentTeam.name);
             }
         });
-        builder.setCancelable(false);
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -2861,12 +2857,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                 final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
+                builder.setCancelable(false);
                 builder.setItems(teams, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
                         userTeam.userControlled = false;
                         userTeam.HC.clear();
-                        userTeam.newRoster(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                        simLeague.coachHiringSingleTeam(userTeam);
                         simLeague.newJobtransfer(coachList.get(item).name);
                         userTeam = simLeague.userTeam;
                         userTeamStr = userTeam.name;
@@ -2882,11 +2879,8 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.coachCarousel();
                         updateTeamUI();
                         examineTeam(currentTeam.name);
-                        showNewsStoriesDialog();
-
                     }
                 });
-                builder.setCancelable(false);
 
                 AlertDialog alert = builder.create();
                 alert.show();
@@ -2898,13 +2892,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newGameHardDialog() {
-        int offers = (int) (Math.random() * 5);
-        if (offers < 1) offers = 1;
-        final ArrayList<Team> coachList = simLeague.getCoachList(47, offers);
+        //rank teams within conferences
+        simLeague.updateTeamTalentRatings();
+        //choose last 3 teams in each conference
+        final ArrayList<Team> coachList = simLeague.getCoachList();
+        final ArrayList<String> teamsArray = simLeague.getCoachListStr();
+        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr(47, offers);
-        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
@@ -2964,7 +2960,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-
 
     private void userNameDialog() {
 

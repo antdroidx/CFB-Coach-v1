@@ -182,7 +182,7 @@ public class League {
     private final int seasonStart = 2017;
     final int countTeam = 120;
     private final int seasonWeeks = 26;
-    private final double realignmentChance = 0.25;
+    private final double realignmentChance = 0.30;
     private final String crYear1 = "2";
     private final String crYear2 = "7";
     private boolean heismanDecided;
@@ -675,12 +675,24 @@ public class League {
                     }
                 }
             }
-
+            int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES") ) {
-                String c[] = line.split(",");
-                coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
-                        , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                        , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20])));
+                String h[] = line.split("%");
+                if(h.length == 1) {
+                    String c[] = line.split(",");
+                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20])));
+                } else if(h.length == 2){
+                    String c[] = h[0].split(",");
+                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20])));
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
+                        coachFreeAgents.get(coachFA).history.add(line);
+                    }
+                    coachFA++;
+                }
             }
 
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
@@ -1381,12 +1393,12 @@ public class League {
             String heismanTop5 = "\n";
             for (int i = 0; i < 5; ++i) {
                 Player p = heismanCandidates.get(i);
-                heismanTop5 += (i + 1) + ". " + p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ";
+                heismanTop5 += (i + 1) + ". " + p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ";
                 if (p instanceof PlayerQB) {
                     PlayerQB pqb = (PlayerQB) p;
                     heismanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
                             + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + pqb.statsRushTD + " TDs\n\n";
+                            + df2.format(pqb.getPasserRating()) + " QBR)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
                     heismanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1426,7 +1438,7 @@ public class League {
                 heismanWinnerStr = "Congratulations to the Player of the Year, " + heisQB.team.abbr +
                         " QB " + heisQB.name + " [" + heisman.getYrStr() + "], who had " +
                         heisQB.statsPassTD + " TDs, just " + heisQB.statsInt + " interceptions, and " +
-                        heisQB.statsPassYards + " passing yards. In addition, he ran for " + heisQB.statsRushYards + "yards and scored " + heisQB.statsRushTD + " touchdowns. He led " + heisQB.team.name +
+                        heisQB.statsPassYards + " passing yards. In addition, he ran for " + heisQB.statsRushYards + " rushing yards and scored " + heisQB.statsRushTD + " touchdowns. He led " + heisQB.team.name +
                         " to a " + heisQB.team.wins + "-" + heisQB.team.losses + " record and a #" + heisQB.team.rankTeamPollScore +
                         " poll ranking.";
                 heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
@@ -1696,7 +1708,7 @@ public class League {
         StringBuilder allFreshmanTeam = new StringBuilder();
         for (int i = 0; i < allFreshman.size(); ++i) {
             Player p = allFreshman.get(i);
-            allFreshmanTeam.append(p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ");
+            allFreshmanTeam.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
             if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 allFreshmanTeam.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
@@ -1758,7 +1770,7 @@ public class League {
             String freshmanTop5 = "\n";
             for (int i = 0; i < 5; ++i) {
                 Player p = freshmanCandidates.get(i);
-                freshmanTop5 += (i + 1) + ". " + p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ";
+                freshmanTop5 += (i + 1) + ". " + p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ";
                 if (p instanceof PlayerQB) {
                     PlayerQB pqb = (PlayerQB) p;
                     freshmanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
@@ -1898,7 +1910,7 @@ public class League {
             Player p = coachCandidates.get(i);
             HeadCoach hc = (HeadCoach) p;
             coachAwardTopList += (i + 1) + ". " + hc.name + ": " + ((HeadCoach) p).getCoachScore() + " votes\n";
-            coachAwardTopList += p.team.name + " (" + p.team.wins + "-" + p.team.losses + ")" + "\n\n";
+            coachAwardTopList += p.team.name + " (" + p.team.wins + "-" + p.team.losses + ")  Overall: " + hc.ratOvr + "\n\n";
         }
         String coachStats = "";
         String coachWinnerStr = "";
@@ -2020,7 +2032,7 @@ public class League {
         StringBuilder allAmerican = new StringBuilder();
         for (int i = 0; i < allAmericans.size(); ++i) {
             Player p = allAmericans.get(i);
-            allAmerican.append(p.team.abbr + "(" + p.team.wins + "-" + p.team.losses + ")" + " - ");
+            allAmerican.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
             if (p instanceof PlayerQB) {
                 PlayerQB pqb = (PlayerQB) p;
                 allAmerican.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
@@ -2122,7 +2134,11 @@ public class League {
             } else {
                 sb.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
-            sb.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
+            if (p instanceof HeadCoach){
+                sb.append(" \t\tOverall: " + ((HeadCoach) p).getHCOverall() + "\n\n>");
+            } else {
+                sb.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
+            }
         }
 
         return sb.toString();
@@ -2632,34 +2648,33 @@ public class League {
         }
 
     }
-
-
-    //Get Coaching Job Offers
-    public ArrayList<String> getCoachListStr(int rating, int offers) {
-        ArrayList<String> teams = new ArrayList<>();
+    
+    //New Hard Game dialog
+    public ArrayList<Team> getCoachList() {
         ArrayList<Team> teamVacancies = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); i += offers) {
-            if (teamList.get(i).teamPrestige < rating) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
-                teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
-            }
-        }
-        return teams;
-    }
 
-    //Get Coach Job Offers List for Team Transfer
-    public ArrayList<Team> getCoachList(int rating, int offers) {
-        ArrayList<Team> teamVacancies = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); i += offers) {
-            if (teamList.get(i).teamPrestige < rating) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
-            }
+        for (int c = 0; c < conferences.size(); c++) {
+            teamVacancies.add(new Team(conferences.get(c).confTeams.get(9).name, conferences.get(c).confTeams.get(9).abbr, conferences.get(c).confName, conferences.get(c).confTeams.get(9).teamPrestige, conferences.get(c).confTeams.get(9).rivalTeam, conferences.get(c).confTeams.get(9).location, this));
+            teamVacancies.add(new Team(conferences.get(c).confTeams.get(10).name, conferences.get(c).confTeams.get(10).abbr, conferences.get(c).confName, conferences.get(c).confTeams.get(10).teamPrestige, conferences.get(c).confTeams.get(10).rivalTeam, conferences.get(c).confTeams.get(10).location, this));
+            teamVacancies.add(new Team(conferences.get(c).confTeams.get(11).name, conferences.get(c).confTeams.get(11).abbr, conferences.get(c).confName, conferences.get(c).confTeams.get(11).teamPrestige, conferences.get(c).confTeams.get(11).rivalTeam, conferences.get(c).confTeams.get(11).location, this));
         }
         return teamVacancies;
     }
 
-    //Get Coaching Job Offers
-    public ArrayList<String> getCoachListStrV2(int rating, int offers, String oldTeam) {
+    //New Hard Game Dialog
+    public ArrayList<String> getCoachListStr() {
+        ArrayList<String> teams = new ArrayList<>();
+        for (int c = 0; c < conferences.size(); c++) {
+            teams.add(new String(conferences.get(c).confName + ":  " + conferences.get(c).confTeams.get(9).name + "  [" + conferences.get(c).confTeams.get(9).teamPrestige + "]"));
+            teams.add(new String(conferences.get(c).confName + ":  " + conferences.get(c).confTeams.get(10).name + "  [" + conferences.get(c).confTeams.get(10).teamPrestige + "]"));
+            teams.add(new String(conferences.get(c).confName + ":  " + conferences.get(c).confTeams.get(11).name + "  [" + conferences.get(c).confTeams.get(11).teamPrestige + "]"));
+        }
+        return teams;
+    }
+    
+
+    //Get Coaching Job Offers if fired or quit
+    public ArrayList<String> getCoachListStrFired(int rating, int offers, String oldTeam) {
         ArrayList<String> teams = new ArrayList<>();
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
@@ -2680,8 +2695,8 @@ public class League {
         return teams;
     }
 
-    //Get Coach Job Offers List for Team Transfer
-    public ArrayList<Team> getCoachListV2(int rating, int offers, String oldTeam) {
+    //Get Coach Job Offers List if fired or quit
+    public ArrayList<Team> getCoachListFired(int rating, int offers, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
@@ -2737,7 +2752,7 @@ public class League {
     //THIS METHOD TAKES THE COACH LIST CREATED AFTER FIRING AND PUTS IT INTO A POPULATION FOR TEAMS WITH NO COACHES TO HIRE FROM
 
     public void coachCarousel() {
-
+        Collections.sort(teamList, new CompTeamPrestige());
         //Rising Star Coaches
         for (int i = 0; i < coachStarList.size(); ++i) {
             String[] coachSplit = coachStarPrevTeam.get(i).split(",");
@@ -2757,7 +2772,7 @@ public class League {
                         for (int j = 0; j < teamList.size(); ++j) {
                             if (teamList.get(j).name.equals(tmName)) {
                                 teamList.get(j).HC.remove(0);
-                                if (Math.random() > 0.25) {
+                                if (Math.random() > 0.20) {
                                     teamList.get(j).promoteCoach();
                                     teamList.get(j).HC.get(0).history.add("");
                                     newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).name +
@@ -2775,7 +2790,7 @@ public class League {
         Collections.sort(coachList, new CompCoachOvr());
         for (int i = 0; i < coachList.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.50) {
+                if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 6) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.60) {
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -2793,7 +2808,7 @@ public class League {
         Collections.sort(coachFreeAgents, new CompCoachOvr());
         for (int i = 0; i < coachFreeAgents.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && Math.random() < 0.50) {
+                if (teamList.get(t).HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && Math.random() < 0.60) {
                     teamList.get(t).HC.add(coachFreeAgents.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -2818,6 +2833,84 @@ public class League {
         }
     }
 
+    public void coachHiringSingleTeam(Team school) {
+        //Rising Star Coaches
+        for (int i = 0; i < coachStarList.size(); ++i) {
+            String[] coachSplit = coachStarPrevTeam.get(i).split(",");
+            String tmName = coachSplit[0].toString();
+            int tmPres = Integer.parseInt(coachSplit[1]);
+            int cPres = Integer.parseInt(coachSplit[2]);
+            if ((coachStarList.get(i).ratOvr + 5) >= school.teamPrestige && school.name != tmName && Math.random() > 0.60) {
+                if (school.teamPrestige > tmPres && school.confPrestige > cPres || school.teamPrestige > tmPres + 5 || school.confPrestige + 10 > cPres) {
+                    school.HC.add(coachStarList.get(i));
+                    school.HC.get(0).contractLength = 6;
+                    school.HC.get(0).contractYear = 0;
+                    school.HC.get(0).baselinePrestige = school.calcSeasonPrestige()[0];
+                    newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + school.name + ">Rising star head coach " + school.HC.get(0).name + " has announced his departure from " +
+                            tmName + " after being selected by " + school.name + " as their new head coach. His previous track record has had him on the top list of many schools.");
+
+                    for (int j = 0; j < teamList.size(); ++j) {
+                        if (teamList.get(j).name.equals(tmName)) {
+                            teamList.get(j).HC.remove(0);
+                            if (Math.random() > 0.25) {
+                                teamList.get(j).promoteCoach();
+                                teamList.get(j).HC.get(0).history.add("");
+                                newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).name +
+                                        " hopes to continue their recent success, despite the recent loss of coach " + school.HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
+                            } else {
+                                coachHiringSingleTeam(teamList.get(j));
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (school.HC.isEmpty()) {
+            //Coaches who were fired
+            Collections.sort(coachList, new CompCoachOvr());
+            for (int i = 0; i < coachList.size(); ++i) {
+                if (school.HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= school.teamPrestige && school.name != coachPrevTeam.get(i) && Math.random() > 0.45) {
+                    school.HC.add(coachList.get(i));
+                    school.HC.get(0).contractLength = 6;
+                    school.HC.get(0).contractYear = 0;
+                    school.HC.get(0).baselinePrestige = school.calcSeasonPrestige()[0];
+                    newsStories.get(currentWeek + 1).add("Coaching Change: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
+                            " to lead the team. Coach " + school.HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
+                    coachList.remove(i);
+                    coachPrevTeam.remove(i);
+                    break;
+                }
+            }
+        }
+
+        if (school.HC.isEmpty()) {
+            //Coaches who were fired previous years
+            Collections.sort(coachFreeAgents, new CompCoachOvr());
+            for (int i = 0; i < coachFreeAgents.size(); ++i) {
+                if (school.HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= school.teamPrestige && Math.random() < 0.65) {
+                    school.HC.add(coachFreeAgents.get(i));
+                    school.HC.get(0).contractLength = 6;
+                    school.HC.get(0).contractYear = 0;
+                    school.HC.get(0).baselinePrestige = school.calcSeasonPrestige()[0];
+                    newsStories.get(currentWeek + 1).add("A Return to Coaching: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
+                            " to lead the team. Coach " + school.HC.get(0).name + " has been out of football for a while, but is returning this season!");
+                    coachFreeAgents.remove(i);
+                    break;
+                }
+            }
+        }
+
+        if (school.HC.isEmpty()) {
+            school.promoteCoach();
+            school.HC.get(0).history.add("");
+            newsStories.get(currentWeek + 1).add("Coaching Promotion: " + school.name + ">Following the departure of their previous head coach, " + school.name + " has promoted assistant " + school.HC.get(0).name +
+                    " to lead the team.");
+        }
+    }
+    
+    
     //Coaching Hot Seat News
     private void coachingHotSeat() {
         if (currentWeek == 0) {
@@ -3325,8 +3418,13 @@ public class League {
         }
     }
 
-    //Advances season for each team and sets up schedules for the new year.
+    public void midSeasonProgression() {
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).midSeasonProgression();
+        }
+    }
 
+    //Advances season for each team and sets up schedules for the new year.
     public void advanceSeason() {
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceSeason();
@@ -4707,17 +4805,20 @@ public class League {
         }
         //Adding to the Available Coach List Pool
         for (HeadCoach h: coachList) {
+            h.ratPot = h.ratPot+(int)Math.random()*15;
             coachFreeAgents.add(h);
         }
         Collections.sort(coachFreeAgents, new CompCoachOvr());
 
         for (HeadCoach h : coachFreeAgents) {
             if(h.age < 58){
-                int rand = (int)Math.random()*2;
-                int randx = (int)Math.random()*2;
-                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff+randx) + "," + (h.ratDef+rand) + "," + (h.ratTalent+randx) + "," + (h.ratDiscipline+rand)
+                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff+(int)Math.random()*3) + "," + (h.ratDef+(int)Math.random()*3) + "," + (h.ratTalent+(int)Math.random()*3) + "," + (h.ratDiscipline+(int)Math.random()*3)
                         + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
-                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "\n");
+                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "% " + "\n");
+                for (String s : h.history) {
+                    sb.append(s + "\n");
+                }
+                sb.append("END_FREE_AGENT\n");
             }
         }
 

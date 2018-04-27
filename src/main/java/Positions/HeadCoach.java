@@ -240,6 +240,7 @@ public class HeadCoach extends Player {
         return prestigeDiff * 10 + team.wins * 2 + (team.teamStrengthOfWins / 25);
     }
 
+    //For future implementation: tally up the total prestige change over the years for scoring
     public int getCoachCareerScore() {
         if (year < 1) return 0;
         else return (5*wins - 2*losses + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans)/year;
@@ -305,5 +306,10 @@ public class HeadCoach extends Player {
             hist[i] = history.get(i);
         }
         return hist;
+    }
+
+    public int getHCOverall() {
+        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
+        return ratOvr;
     }
 }

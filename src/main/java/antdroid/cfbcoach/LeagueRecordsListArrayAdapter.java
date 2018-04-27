@@ -17,12 +17,14 @@ class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeamAbbr;
+    private final String userTeamName;
 
-    public LeagueRecordsListArrayAdapter(Context context, String[] values, String userTeamAbbr) {
+    public LeagueRecordsListArrayAdapter(Context context, String[] values, String userTeamAbbr, String userTeamName) {
         super(context, R.layout.league_record_list_item, values);
         this.context = context;
         this.values = values;
         this.userTeamAbbr = userTeamAbbr;
+        this.userTeamName = userTeamName;
     }
 
     @Override
@@ -47,13 +49,13 @@ class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
             if (record[2].contains("%")) {
                 String namesplit[] = record[2].split("%");
                 textRight.setText(record[2].split("%")[0] + "\n" + record[2].split("%")[1] + " " + record[3]);
-                if (record[2].split("%")[1].equals(userTeamAbbr)) {
+                if (record[2].split("%")[1].equals(userTeamAbbr) || record[2].split("%")[1].equals(userTeamName)) {
                     // User team record, make it special color
                     textRight.setTextColor(Color.parseColor("#1A75FF"));
                 }
             } else {
                 textRight.setText(record[2] + "\n" + record[3]);
-                if (record[2].equals(userTeamAbbr)) {
+                if (record[2].split("%")[1].equals(userTeamAbbr) || record[2].split("%")[1].equals(userTeamName)) {
                     // User team record, make it special color
                     textRight.setTextColor(Color.parseColor("#1A75FF"));
                 }
