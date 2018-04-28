@@ -278,10 +278,10 @@ public class Conference {
         for (int i = 0; i < confTeams.size(); ++i) {
             CP += confTeams.get(i).teamPrestige;
         }
-        confPrestige = (CP / (confTeams.size() / 2));
+        confPrestige = CP / (confTeams.size());
 
-        confPromoteMin = (int)(CP/confTeams.size() * 1.25);
-        confRelegateMin = (int)(CP/confTeams.size() * 0.67);
+        confPromoteMin = (int)(CP/confTeams.size() * 1.20);
+        confRelegateMin = (int)(CP/confTeams.size() * 0.80);
     }
 
     public void updateConfRankings() {

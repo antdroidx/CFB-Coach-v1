@@ -46,7 +46,6 @@ public class PlayerDL extends Player {
         gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow * 3 + rsh + pas + tkl) / 6;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -64,6 +63,7 @@ public class PlayerDL extends Player {
         recruitRating = scout;
         height = h;
         weight = w;
+        ratOvr = getOverall();
 
         troubledTimes = 0;
 
@@ -103,7 +103,6 @@ public class PlayerDL extends Player {
         name = nm;
         year = yr;
 
-        ratOvr = (pow * 3 + rsh + pas + tkl) / 6;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -122,6 +121,7 @@ public class PlayerDL extends Player {
         recruitRating = scout;
         height = h;
         weight = w;
+        ratOvr = getOverall();
 
         resetSeasonStats();
 
@@ -154,7 +154,7 @@ public class PlayerDL extends Player {
         ratRunStop = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratPassRush = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratTackle = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
+        ratOvr = getOverall();
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
@@ -189,7 +189,7 @@ public class PlayerDL extends Player {
         ratRunStop = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratPassRush = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratTackle = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
-        ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
+        ratOvr = getOverall();
         region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
 
@@ -202,25 +202,24 @@ public class PlayerDL extends Player {
 
 
     public void midSeasonProgression() {
-        int oldOvr = ratOvr;
+        final int ratOvrStart = ratOvr;
         progression = getProgressionDef();
-        int games = getGamesBonus();
+        double games = getMidSeasonBonus();
 
-        ratFootIQ += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
-        ratStrength += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
-        ratRunStop += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
-        ratPassRush += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
-        ratTackle += (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;
+        ratFootIQ += (int) (Math.random() * games);
+        ratStrength += (int) (Math.random() * games);
+        ratRunStop += (int) (Math.random() * games);
+        ratPassRush += (int) (Math.random() * games);
+        ratTackle += (int) (Math.random() * games);
 
-        ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
-        ratImprovement = ratOvr - oldOvr;
+        ratOvr = getOverall();
+        ratImprovement = ratOvr - ratOvrStart;
     }
     
 
     @Override
     public void advanceSeason() {
-        int oldOvr = ratOvr;
-        int games = getGamesBonus();
+        double games = getGamesBonus();
 
         if (!isMedicalRS) {
             year++;
@@ -247,8 +246,8 @@ public class PlayerDL extends Player {
             }
         }
 
-        ratOvr = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
-        ratImprovement = ratOvr - oldOvr;
+        ratOvr = getOverall();
+        ratImprovement = ratOvr - ratOvrStart;
 
         careerGames += gamesPlayed;
         careerWins += statsWins;
@@ -369,6 +368,12 @@ public class PlayerDL extends Player {
             return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
         return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratStrength) + ", " + getLetterGrade(ratRunStop) + ", " + getLetterGrade(ratPassRush) + ", " + getLetterGrade(ratTackle) + ")";
+    }
+
+    public int getOverall() {
+        int ovr;
+        ovr  = (ratStrength * 3 + ratRunStop + ratPassRush + ratTackle) / 6;
+        return ovr;
     }
 
 }

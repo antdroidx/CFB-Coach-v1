@@ -8,11 +8,75 @@
   <component name="ChangeListManager">
     <list default="true" id="15e17877-69f7-439f-a07c-d7c40efceb27" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CFB-Coach.iml" afterPath="$PROJECT_DIR$/CFB-Coach.iml" />
       <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-04-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-04-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-08-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-11-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-11-B-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-11-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-12-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-13-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-14-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-14-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-15-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-15-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-17-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-20-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-27-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-29-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-29-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-30-A_CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-30-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-31-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2017-12-31-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-01-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-01-B-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-01-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-02-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-07-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-08-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-08-Test-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-09-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-10-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-11-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-13-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-14-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-14A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-16-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-17-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-01-17-B-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-02-01-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-02-02-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-02-10-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-04-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-06-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-07-B-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-07-C-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-07-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-07A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-08-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-09-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-10-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-11-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-12-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-14-v1CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-15-A-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-15-B-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-15-C-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-15-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-16-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-17-B-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-17-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/2018-04-20-CFB-Coach-debug.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/debug/Archive/conf-realignment-test-CFB-Coach-debug.apk" afterPath="" />
       <change beforePath="$PROJECT_DIR$/release/output.json" afterPath="$PROJECT_DIR$/release/output.json" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" />
+      <change beforePath="$PROJECT_DIR$/release/vc21-2018-04-25-v1.1.1-CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/release/vc22-2018-04-25-v1.1.10-CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/release/vc23-2018-04-26-v1.1.2--CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/release/vc24-2018-04-25-v1.1.2CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/release/vc25-2018-04-27-CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/release/vc26-CFB-Coach-release.apk" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Positions/Player.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/Player.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" />
@@ -24,12 +88,15 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,323 +136,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11815">
-              <caret line="1024" column="70" lean-forward="false" selection-start-line="1024" selection-start-column="70" selection-end-line="1024" selection-end-column="70" />
-              <folding>
-                <element signature="class#11335:11897" expanded="false" />
-                <element signature="method#onItemSelected#0;class#11335:11897" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#11335:11897" expanded="false" />
-                <element signature="class#12481:12939" expanded="false" />
-                <element signature="method#onItemSelected#0;class#12481:12939" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#12481:12939" expanded="false" />
-                <element signature="class#13953:14215" expanded="false" />
-                <element signature="method#onClick#0;class#13953:14215" expanded="false" />
-                <element signature="class#16587:16865" expanded="false" />
-                <element signature="method#onClick#0;class#16587:16865" expanded="false" />
-                <element signature="class#18280:18526" expanded="false" />
-                <element signature="method#onClick#0;class#18280:18526" expanded="false" />
-                <element signature="class#19132:19378" expanded="false" />
-                <element signature="method#onClick#0;class#19132:19378" expanded="false" />
-                <element signature="class#21278:21540" expanded="false" />
-                <element signature="method#onClick#0;class#21278:21540" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#29939#29997#0" expanded="false" />
-                <element signature="class#32232:33250" expanded="false" />
-                <element signature="method#onItemSelected#0;class#32232:33250" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#32232:33250" expanded="false" />
-                <element signature="method#seasonGoals#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#37961:38159" expanded="false" />
-                <element signature="method#onClick#0;class#37961:38159" expanded="false" />
-                <element signature="method#examineTeam#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateCurrTeam#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateCurrConference#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateTeamStats#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updatePlayerStats#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateSchedule#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#scrollToLatestGame#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateStandings#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateRankings#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#47444:48944" expanded="false" />
-                <element signature="method#onItemSelected#0;class#47444:48944" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#47444:48944" expanded="false" />
-                <element signature="method#showGameDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#55853:63263" expanded="false" />
-                <element signature="method#onItemSelected#0;class#55853:63263" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#55853:63263" expanded="false" />
-                <element signature="class#66722:67269" expanded="false" />
-                <element signature="method#onItemSelected#0;class#66722:67269" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#66722:67269" expanded="false" />
-                <element signature="class#67950:68497" expanded="false" />
-                <element signature="method#onItemSelected#0;class#67950:68497" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#67950:68497" expanded="false" />
-                <element signature="method#showTeamRankingsDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#71228:72157" expanded="false" />
-                <element signature="method#onItemSelected#0;class#71228:72157" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#71228:72157" expanded="false" />
-                <element signature="method#showPlayerRankingsDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#74150:75057" expanded="false" />
-                <element signature="method#onItemSelected#0;class#74150:75057" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#74150:75057" expanded="false" />
-                <element signature="method#showRecruitingClassDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#showLeagueHistoryDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#77506:78981" expanded="false" />
-                <element signature="method#showLeagueHistoryStats#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#80657:81588" expanded="false" />
-                <element signature="method#onItemSelected#0;class#80657:81588" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#80657:81588" expanded="false" />
-                <element signature="method#showTop25History#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#83455:83921" expanded="false" />
-                <element signature="method#onItemSelected#0;class#83455:83921" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#83455:83921" expanded="false" />
-                <element signature="method#showCoachHistoryDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#85146:85848" expanded="false" />
-                <element signature="method#onItemSelected#0;class#85146:85848" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#85146:85848" expanded="false" />
-                <element signature="method#showCurrTeamHistoryDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#87301:88611" expanded="false" />
-                <element signature="method#showBowlCCGDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#89792:90404" expanded="false" />
-                <element signature="method#onItemSelected#0;class#89792:90404" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#89792:90404" expanded="false" />
-                <element signature="method#showNewsStoriesDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#93017:94324" expanded="false" />
-                <element signature="method#onItemSelected#0;class#93017:94324" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#93017:94324" expanded="false" />
-                <element signature="docComment;method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#96644:97211" expanded="false" />
-                <element signature="method#onItemSelected#0;class#96644:97211" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#96644:97211" expanded="false" />
-                <element signature="class#97815:98382" expanded="false" />
-                <element signature="method#onItemSelected#0;class#97815:98382" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#97815:98382" expanded="false" />
-                <element signature="docComment;method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#99939:101208" expanded="false" />
-                <element signature="method#beforeTextChanged#0;class#99939:101208" expanded="false" />
-                <element signature="method#onTextChanged#0;class#99939:101208" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#99939:101208" expanded="false" />
-                <element signature="class#101266:102593" expanded="false" />
-                <element signature="method#beforeTextChanged#0;class#101266:102593" expanded="false" />
-                <element signature="method#onTextChanged#0;class#101266:102593" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#101266:102593" expanded="false" />
-                <element signature="class#102651:103921" expanded="false" />
-                <element signature="method#beforeTextChanged#0;class#102651:103921" expanded="false" />
-                <element signature="method#onTextChanged#0;class#102651:103921" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#102651:103921" expanded="false" />
-                <element signature="class#103977:105221" expanded="false" />
-                <element signature="method#beforeTextChanged#0;class#103977:105221" expanded="false" />
-                <element signature="method#onTextChanged#0;class#103977:105221" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#103977:105221" expanded="false" />
-                <element signature="docComment;method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="docComment;method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#113890:114382" expanded="false" />
-                <element signature="method#onItemSelected#0;class#113890:114382" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#113890:114382" expanded="false" />
-                <element signature="docComment;method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-                <element signature="docComment;method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-                <element signature="docComment;method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-                <element signature="docComment;method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#124053:124735" expanded="false" />
-                <element signature="method#onItemSelected#0;class#124053:124735" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#124053:124735" expanded="false" />
-                <element signature="docComment;method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-                <element signature="docComment;method#saveLeague#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#saveLeague#0;class#MainActivity#0" expanded="false" />
-                <element signature="docComment;method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#showWeeklyScores#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#onItemSelected#0;class#132191:133191" expanded="false" />
-                <element signature="method#onNothingSelected#0;class#132191:133191" expanded="false" />
-                <element signature="method#updateTeamUI#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#switchTeams#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#jobOffers#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#promotions#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#newGameHardDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#newGameDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#userNameDialog#0;class#MainActivity#0" expanded="false" />
-                <element signature="class#143677:144921" expanded="false" />
-                <element signature="method#beforeTextChanged#0;class#143677:144921" expanded="false" />
-                <element signature="method#onTextChanged#0;class#143677:144921" expanded="false" />
-                <element signature="method#afterTextChanged#0;class#143677:144921" expanded="false" />
-                <element signature="method#customLeague#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#isExternalStorageWritable#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#isExternalStorageReadable#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#getExtSaveDir#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#importData#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#150769#150834#0" expanded="false" />
-                <element signature="e#151095#151164#0" expanded="false" />
-                <element signature="method#readCoachFile#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#readRosterFile#0;class#MainActivity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SeasonAwardsListArrayAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="2021" column="57" lean-forward="false" selection-start-line="2021" selection-start-column="57" selection-end-line="2021" selection-end-column="57" />
-              <folding>
-                <element signature="docComment;method#League#0;class#League#0" expanded="false" />
-                <element signature="e#8347#8366#0" expanded="false" />
-                <element signature="docComment;method#League#1;class#League#0" expanded="false" />
-                <element signature="e#26902#26905#0" expanded="false" />
-                <element signature="method#setupSeason#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#isCareerMode#0;class#League#0" expanded="false" />
-                <element signature="method#setupNamesDB#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getRandName#0;class#League#0" expanded="false" />
-                <element signature="method#getRandName#0;class#League#0" expanded="false" />
-                <element signature="method#setTeamBenchMarks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getYear#0;class#League#0" expanded="false" />
-                <element signature="method#getRegion#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getTeamListStr#0;class#League#0" expanded="false" />
-                <element signature="method#getTeamListStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#findTeam#0;class#League#0" expanded="false" />
-                <element signature="method#findTeam#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#findTeamAbbr#0;class#League#0" expanded="false" />
-                <element signature="method#findTeamAbbr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#findConference#0;class#League#0" expanded="false" />
-                <element signature="method#findConference#0;class#League#0" expanded="false" />
-                <element signature="method#updateTeamConf#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getConfNumber#0;class#League#0" expanded="false" />
-                <element signature="method#getConfNumber#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-                <element signature="method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-                <element signature="method#getAverageYards#0;class#League#0" expanded="false" />
-                <element signature="method#getAverageOffTalent#0;class#League#0" expanded="false" />
-                <element signature="method#getAverageDefTalent#0;class#League#0" expanded="false" />
-                <element signature="method#averageConfPrestige#0;class#League#0" expanded="false" />
-                <element signature="method#preseasonNews#0;class#League#0" expanded="false" />
-                <element signature="method#topRecruits#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#playWeek#0;class#League#0" expanded="false" />
-                <element signature="method#playWeek#0;class#League#0" expanded="false" />
-                <element signature="method#disciplineAction#0;class#League#0" expanded="false" />
-                <element signature="method#updateSuspensions#0;class#League#0" expanded="false" />
-                <element signature="method#playerSpotlight#0;class#League#0" expanded="false" />
-                <element signature="method#cfbPlayoffsNews#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
-                <element signature="method#getHeisman#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
-                <element signature="method#getTopFreshman#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getAllFreshmanStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getAllAmericanStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getAllConfStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getCCGsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCCGsStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
-                <element signature="method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#schedBowlGames#0;class#League#0" expanded="false" />
-                <element signature="method#schedBowlGames#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#playBowlGames#0;class#League#0" expanded="false" />
-                <element signature="method#playBowlGames#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#playBowl#0;class#League#0" expanded="false" />
-                <element signature="method#playBowl#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getGameSummaryBowl#0;class#League#0" expanded="false" />
-                <element signature="method#getGameSummaryBowl#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#ncgSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="method#ncgSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#seasonSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="method#seasonSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="method#advanceHC#0;class#League#0" expanded="false" />
-                <element signature="method#updateHCHistory#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachList#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachListStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachListStrFired#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachListFired#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachPromotionListStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachPromotionList#0;class#League#0" expanded="false" />
-                <element signature="method#newJobtransfer#0;class#League#0" expanded="false" />
-                <element signature="e#141279#141312#0" expanded="false" />
-                <element signature="method#coachCarousel#0;class#League#0" expanded="false" />
-                <element signature="method#coachHiringSingleTeam#0;class#League#0" expanded="false" />
-                <element signature="method#coachingHotSeat#0;class#League#0" expanded="false" />
-                <element signature="method#transferPlayers#0;class#League#0" expanded="false" />
-                <element signature="method#conferenceInvites#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
-                <element signature="method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
-                <element signature="method#recruitPlayers#0;class#League#0" expanded="false" />
-                <element signature="method#advanceSeason#0;class#League#0" expanded="false" />
-                <element signature="e#189496#189516#0" expanded="false" />
-                <element signature="docComment;method#checkLongestWinStreak#0;class#League#0" expanded="false" />
-                <element signature="method#checkLongestWinStreak#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
-                <element signature="method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#advanceSeasonWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="method#advanceSeasonWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#changeAbbrWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="method#changeAbbrWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#changeAbbrHistoryRecords#0;class#League#0" expanded="false" />
-                <element signature="method#changeAbbrHistoryRecords#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#checkLeagueRecords#0;class#League#0" expanded="false" />
-                <element signature="method#checkLeagueRecords#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#curePlayers#0;class#League#0" expanded="false" />
-                <element signature="method#curePlayers#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateLeagueHistory#0;class#League#0" expanded="false" />
-                <element signature="method#updateLeagueHistory#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueTop25History#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getLeagueHistoryStr#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueHistoryStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateTeamHistories#0;class#League#0" expanded="false" />
-                <element signature="method#updateTeamHistories#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#setTeamRanks#0;class#League#0" expanded="false" />
-                <element signature="method#setTeamRanks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getTeamRankingsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getTeamRankingsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueHistoryStats#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getConfStandings#0;class#League#0" expanded="false" />
-                <element signature="method#getConfStandings#0;class#League#0" expanded="false" />
-                <element signature="method#getTeamRankings#0;class#League#0" expanded="false" />
-                <element signature="method#rankQB#0;class#League#0" expanded="false" />
-                <element signature="method#rankRB#0;class#League#0" expanded="false" />
-                <element signature="method#rankWR#0;class#League#0" expanded="false" />
-                <element signature="method#rankTE#0;class#League#0" expanded="false" />
-                <element signature="method#rankOL#0;class#League#0" expanded="false" />
-                <element signature="method#rankK#0;class#League#0" expanded="false" />
-                <element signature="method#rankDL#0;class#League#0" expanded="false" />
-                <element signature="method#rankLB#0;class#League#0" expanded="false" />
-                <element signature="method#rankCB#0;class#League#0" expanded="false" />
-                <element signature="method#rankS#0;class#League#0" expanded="false" />
-                <element signature="method#rankHC#0;class#League#0" expanded="false" />
-                <element signature="method#getAwardsWatch#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#saveLeague#0;class#League#0" expanded="false" />
-                <element signature="method#saveLeague#0;class#League#0" expanded="false" />
-                <element signature="e#242168#242209#0" expanded="false" />
-                <element signature="docComment;method#isNameValid#0;class#League#0" expanded="false" />
-                <element signature="method#isNameValid#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#isAbbrValid#0;class#League#0" expanded="false" />
-                <element signature="method#isAbbrValid#0;class#League#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -396,13 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rankTeamPo</find>
-      <find>rankTeam</find>
-      <find>setTea</find>
-      <find>projectedPol</find>
-      <find>calc</find>
-      <find>hall</find>
-      <find>ratOvr</find>
       <find>6</find>
       <find>freshman</find>
       <find>redshirt</find>
@@ -426,6 +170,13 @@
       <find>Rating:</find>
       <find>records</find>
       <find>league</find>
+      <find>confnMin</find>
+      <find>confPrestige</find>
+      <find>showPopups</find>
+      <find>showToast</find>
+      <find>+= (int) (Math.random() * (progression + games - midseason)) / midseasonFactor;</find>
+      <find>(int) (Math.random() * (progression/100 * games));</find>
+      <find>void rush</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -447,6 +198,8 @@
       <replace>midseason</replace>
       <replace>midseasonProgression</replace>
       <replace>S</replace>
+      <replace>+= (int) (Math.random() * (progression/100 * games));</replace>
+      <replace>(int) (Math.random() * games);</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1580,12 +1333,9 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerRankingsList.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/LeagueRecords.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/Comparator/CompTeamProjPoll.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Comparator/CompCoachOvr.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/last_names.xml" />
         <option value="$PROJECT_DIR$/src/main/res/values/first_names.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
@@ -1593,30 +1343,37 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerOL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerK.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerQB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Positions/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerQB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerK.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerOL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Positions/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/TeamStrategy.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/child_recruit.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="y" value="3" />
-    <option name="width" value="974" />
-    <option name="height" value="1044" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="972" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator currentView="AndroidView" proportions="" version="1">
@@ -1633,27 +1390,43 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="Simulation" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="Shelf.Project.Settings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cfbccareer.jks" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-16-2018_15_02_51/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
     <property name="android.project.structure.last.selected" value="CFB-Coach" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="device.picker.selection" value="Pixel_XL_API_25" />
@@ -1664,6 +1437,7 @@
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/ahngu/AndroidStudioProjects/CFB-Coach/src/main/java/Positions/PlayerQB.java" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-16-2018_15_02_51/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -1846,15 +1620,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2675906" sideWeight="0.509434" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847533" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1862,13 +1635,13 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17270789" sideWeight="0.49056605" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263041" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18550107" sideWeight="0.49056605" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32297447" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3163152" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31520534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1879,7 +1652,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43174252" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1887,82 +1660,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="222" />
+      <option name="time" value="270" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/LeagueRecords.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1839">
-          <caret line="64" column="36" lean-forward="false" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/android/app/Activity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="1116" column="0" lean-forward="false" selection-start-line="1116" selection-start-column="0" selection-end-line="1116" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="38" column="41" lean-forward="false" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompTeamPoll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompTeamProjPoll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamHistoryListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="28" column="75" lean-forward="true" selection-start-line="28" selection-start-column="75" selection-end-line="28" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_dialog.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="155" column="28" lean-forward="false" selection-start-line="155" selection-start-column="28" selection-end-line="155" selection-end-column="28" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/dimens.xml">
@@ -2005,52 +1715,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Injury.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="200" column="22" lean-forward="false" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="118" column="12" lean-forward="true" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerRankingsList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/values/last_names.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="3537" column="861" lean-forward="false" selection-start-line="3537" selection-start-column="861" selection-end-line="3537" selection-end-column="861" />
-        </state>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/first_names.xml">
@@ -2060,24 +1742,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompConfTeamRanking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="286" column="21" lean-forward="false" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -2121,13 +1789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1770">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -2135,66 +1796,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/TeamStreak.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/LeagueRecords.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="17">
+          <caret line="64" column="36" lean-forward="false" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="224" column="108" lean-forward="false" selection-start-line="224" selection-start-column="108" selection-end-line="224" selection-end-column="108" />
+        <state relative-caret-position="578">
+          <caret line="57" column="111" lean-forward="false" selection-start-line="57" selection-start-column="111" selection-end-line="57" selection-end-column="111" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerK.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="213" column="111" lean-forward="false" selection-start-line="213" selection-start-column="111" selection-end-line="213" selection-end-column="111" />
+        <state relative-caret-position="561">
+          <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/last_names.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="245" column="109" lean-forward="false" selection-start-line="245" selection-start-column="109" selection-end-line="245" selection-end-column="109" />
+        <state relative-caret-position="30566">
+          <caret line="1798" column="10" lean-forward="true" selection-start-line="1798" selection-start-column="10" selection-end-line="1798" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/username_dialog.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="223" column="108" lean-forward="false" selection-start-line="223" selection-start-column="108" selection-end-line="223" selection-end-column="108" />
+        <state relative-caret-position="158">
+          <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/settings_menu.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="233" column="58" lean-forward="false" selection-start-line="233" selection-start-column="58" selection-end-line="233" selection-end-column="58" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="93" column="19" lean-forward="false" selection-start-line="93" selection-start-column="19" selection-end-line="93" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="247" column="107" lean-forward="false" selection-start-line="247" selection-start-column="107" selection-end-line="247" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1064">
-          <caret line="214" column="98" lean-forward="true" selection-start-line="214" selection-start-column="98" selection-end-line="214" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerOL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="202" column="112" lean-forward="false" selection-start-line="202" selection-start-column="112" selection-end-line="202" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="246" column="108" lean-forward="false" selection-start-line="246" selection-start-column="108" selection-end-line="246" selection-end-column="108" />
+        <state relative-caret-position="-238">
+          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2205,220 +1865,148 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="232" column="91" lean-forward="false" selection-start-line="232" selection-start-column="91" selection-end-line="232" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="1441" column="22" lean-forward="true" selection-start-line="1441" selection-start-column="22" selection-end-line="1441" selection-end-column="22" />
+        <state relative-caret-position="136">
+          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerQB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2930">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state relative-caret-position="761">
+          <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="217" column="35" lean-forward="false" selection-start-line="217" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="213" column="0" lean-forward="false" selection-start-line="213" selection-start-column="0" selection-end-line="213" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerOL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="188" column="0" lean-forward="false" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="222" column="0" lean-forward="false" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="191" column="0" lean-forward="false" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Positions/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="244" column="16" lean-forward="false" selection-start-line="244" selection-start-column="16" selection-end-line="244" selection-end-column="16" />
+        <state relative-caret-position="-3210">
+          <caret line="84" column="28" lean-forward="false" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/TeamStreak.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="60" column="17" lean-forward="true" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+        <state relative-caret-position="102">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/TeamStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="42" column="4" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Injury.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/NewsStoriesListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11815">
-          <caret line="1024" column="70" lean-forward="false" selection-start-line="1024" selection-start-column="70" selection-end-line="1024" selection-end-column="70" />
-          <folding>
-            <element signature="class#11335:11897" expanded="false" />
-            <element signature="method#onItemSelected#0;class#11335:11897" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#11335:11897" expanded="false" />
-            <element signature="class#12481:12939" expanded="false" />
-            <element signature="method#onItemSelected#0;class#12481:12939" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#12481:12939" expanded="false" />
-            <element signature="class#13953:14215" expanded="false" />
-            <element signature="method#onClick#0;class#13953:14215" expanded="false" />
-            <element signature="class#16587:16865" expanded="false" />
-            <element signature="method#onClick#0;class#16587:16865" expanded="false" />
-            <element signature="class#18280:18526" expanded="false" />
-            <element signature="method#onClick#0;class#18280:18526" expanded="false" />
-            <element signature="class#19132:19378" expanded="false" />
-            <element signature="method#onClick#0;class#19132:19378" expanded="false" />
-            <element signature="class#21278:21540" expanded="false" />
-            <element signature="method#onClick#0;class#21278:21540" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#29939#29997#0" expanded="false" />
-            <element signature="class#32232:33250" expanded="false" />
-            <element signature="method#onItemSelected#0;class#32232:33250" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#32232:33250" expanded="false" />
-            <element signature="method#seasonGoals#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#37961:38159" expanded="false" />
-            <element signature="method#onClick#0;class#37961:38159" expanded="false" />
-            <element signature="method#examineTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrConference#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateTeamStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updatePlayerStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateSchedule#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#scrollToLatestGame#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateStandings#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateRankings#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#47444:48944" expanded="false" />
-            <element signature="method#onItemSelected#0;class#47444:48944" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#47444:48944" expanded="false" />
-            <element signature="method#showGameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#55853:63263" expanded="false" />
-            <element signature="method#onItemSelected#0;class#55853:63263" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#55853:63263" expanded="false" />
-            <element signature="class#66722:67269" expanded="false" />
-            <element signature="method#onItemSelected#0;class#66722:67269" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#66722:67269" expanded="false" />
-            <element signature="class#67950:68497" expanded="false" />
-            <element signature="method#onItemSelected#0;class#67950:68497" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#67950:68497" expanded="false" />
-            <element signature="method#showTeamRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#71228:72157" expanded="false" />
-            <element signature="method#onItemSelected#0;class#71228:72157" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#71228:72157" expanded="false" />
-            <element signature="method#showPlayerRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#74150:75057" expanded="false" />
-            <element signature="method#onItemSelected#0;class#74150:75057" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#74150:75057" expanded="false" />
-            <element signature="method#showRecruitingClassDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showLeagueHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#77506:78981" expanded="false" />
-            <element signature="method#showLeagueHistoryStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#80657:81588" expanded="false" />
-            <element signature="method#onItemSelected#0;class#80657:81588" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#80657:81588" expanded="false" />
-            <element signature="method#showTop25History#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#83455:83921" expanded="false" />
-            <element signature="method#onItemSelected#0;class#83455:83921" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#83455:83921" expanded="false" />
-            <element signature="method#showCoachHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#85146:85848" expanded="false" />
-            <element signature="method#onItemSelected#0;class#85146:85848" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#85146:85848" expanded="false" />
-            <element signature="method#showCurrTeamHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#87301:88611" expanded="false" />
-            <element signature="method#showBowlCCGDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#89792:90404" expanded="false" />
-            <element signature="method#onItemSelected#0;class#89792:90404" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#89792:90404" expanded="false" />
-            <element signature="method#showNewsStoriesDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#93017:94324" expanded="false" />
-            <element signature="method#onItemSelected#0;class#93017:94324" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#93017:94324" expanded="false" />
-            <element signature="docComment;method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#96644:97211" expanded="false" />
-            <element signature="method#onItemSelected#0;class#96644:97211" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#96644:97211" expanded="false" />
-            <element signature="class#97815:98382" expanded="false" />
-            <element signature="method#onItemSelected#0;class#97815:98382" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#97815:98382" expanded="false" />
-            <element signature="docComment;method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#99939:101208" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#99939:101208" expanded="false" />
-            <element signature="method#onTextChanged#0;class#99939:101208" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#99939:101208" expanded="false" />
-            <element signature="class#101266:102593" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#101266:102593" expanded="false" />
-            <element signature="method#onTextChanged#0;class#101266:102593" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#101266:102593" expanded="false" />
-            <element signature="class#102651:103921" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#102651:103921" expanded="false" />
-            <element signature="method#onTextChanged#0;class#102651:103921" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#102651:103921" expanded="false" />
-            <element signature="class#103977:105221" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#103977:105221" expanded="false" />
-            <element signature="method#onTextChanged#0;class#103977:105221" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#103977:105221" expanded="false" />
-            <element signature="docComment;method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#113890:114382" expanded="false" />
-            <element signature="method#onItemSelected#0;class#113890:114382" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#113890:114382" expanded="false" />
-            <element signature="docComment;method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#124053:124735" expanded="false" />
-            <element signature="method#onItemSelected#0;class#124053:124735" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#124053:124735" expanded="false" />
-            <element signature="docComment;method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#saveLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#saveLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showWeeklyScores#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onItemSelected#0;class#132191:133191" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#132191:133191" expanded="false" />
-            <element signature="method#updateTeamUI#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#switchTeams#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#jobOffers#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#promotions#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#newGameHardDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#newGameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#userNameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#143677:144921" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#143677:144921" expanded="false" />
-            <element signature="method#onTextChanged#0;class#143677:144921" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#143677:144921" expanded="false" />
-            <element signature="method#customLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isExternalStorageWritable#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isExternalStorageReadable#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getExtSaveDir#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#importData#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#150769#150834#0" expanded="false" />
-            <element signature="e#151095#151164#0" expanded="false" />
-            <element signature="method#readCoachFile#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#readRosterFile#0;class#MainActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="68">
+          <caret line="63" column="13" lean-forward="false" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="2021" column="57" lean-forward="false" selection-start-line="2021" selection-start-column="57" selection-end-line="2021" selection-end-column="57" />
+        <state relative-caret-position="377">
+          <caret line="185" column="49" lean-forward="false" selection-start-line="185" selection-start-column="49" selection-end-line="185" selection-end-column="49" />
           <folding>
             <element signature="docComment;method#League#0;class#League#0" expanded="false" />
-            <element signature="e#8347#8366#0" expanded="false" />
+            <element signature="method#League#0;class#League#0" expanded="false" />
+            <element signature="e#8380#8399#0" expanded="false" />
             <element signature="docComment;method#League#1;class#League#0" expanded="false" />
-            <element signature="e#26902#26905#0" expanded="false" />
+            <element signature="method#League#1;class#League#0" expanded="false" />
+            <element signature="method#League#2;class#League#0" expanded="false" />
+            <element signature="e#26935#26938#0" expanded="false" />
+            <element signature="method#setupCommonInitalizers#0;class#League#0" expanded="false" />
             <element signature="method#setupSeason#0;class#League#0" expanded="false" />
             <element signature="docComment;method#isCareerMode#0;class#League#0" expanded="false" />
             <element signature="method#setupNamesDB#0;class#League#0" expanded="false" />
@@ -2439,15 +2027,12 @@
             <element signature="docComment;method#getConfNumber#0;class#League#0" expanded="false" />
             <element signature="method#getConfNumber#0;class#League#0" expanded="false" />
             <element signature="docComment;method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-            <element signature="method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
             <element signature="method#getAverageYards#0;class#League#0" expanded="false" />
             <element signature="method#getAverageOffTalent#0;class#League#0" expanded="false" />
             <element signature="method#getAverageDefTalent#0;class#League#0" expanded="false" />
-            <element signature="method#averageConfPrestige#0;class#League#0" expanded="false" />
             <element signature="method#preseasonNews#0;class#League#0" expanded="false" />
             <element signature="method#topRecruits#0;class#League#0" expanded="false" />
             <element signature="docComment;method#playWeek#0;class#League#0" expanded="false" />
-            <element signature="method#playWeek#0;class#League#0" expanded="false" />
             <element signature="method#disciplineAction#0;class#League#0" expanded="false" />
             <element signature="method#updateSuspensions#0;class#League#0" expanded="false" />
             <element signature="method#playerSpotlight#0;class#League#0" expanded="false" />
@@ -2455,11 +2040,17 @@
             <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
             <element signature="method#getHeisman#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
+            <element signature="method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
             <element signature="method#getTopFreshman#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getAllFreshmanStr#0;class#League#0" expanded="false" />
+            <element signature="method#getAllFreshmanStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
+            <element signature="method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
+            <element signature="method#getCoachAwardStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getAllAmericanStr#0;class#League#0" expanded="false" />
+            <element signature="method#getAllAmericanStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getAllConfStr#0;class#League#0" expanded="false" />
+            <element signature="method#getAllConfStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getCCGsStr#0;class#League#0" expanded="false" />
             <element signature="method#getCCGsStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
@@ -2485,17 +2076,19 @@
             <element signature="method#getCoachPromotionListStr#0;class#League#0" expanded="false" />
             <element signature="method#getCoachPromotionList#0;class#League#0" expanded="false" />
             <element signature="method#newJobtransfer#0;class#League#0" expanded="false" />
-            <element signature="e#141279#141312#0" expanded="false" />
+            <element signature="e#140144#140177#0" expanded="false" />
             <element signature="method#coachCarousel#0;class#League#0" expanded="false" />
             <element signature="method#coachHiringSingleTeam#0;class#League#0" expanded="false" />
             <element signature="method#coachingHotSeat#0;class#League#0" expanded="false" />
             <element signature="method#transferPlayers#0;class#League#0" expanded="false" />
             <element signature="method#conferenceInvites#0;class#League#0" expanded="false" />
+            <element signature="method#promotionRelegation#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
             <element signature="method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
             <element signature="method#recruitPlayers#0;class#League#0" expanded="false" />
+            <element signature="method#midSeasonProgression#0;class#League#0" expanded="false" />
             <element signature="method#advanceSeason#0;class#League#0" expanded="false" />
-            <element signature="e#189496#189516#0" expanded="false" />
+            <element signature="e#189876#189896#0" expanded="false" />
             <element signature="docComment;method#checkLongestWinStreak#0;class#League#0" expanded="false" />
             <element signature="method#checkLongestWinStreak#0;class#League#0" expanded="false" />
             <element signature="docComment;method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
@@ -2509,6 +2102,7 @@
             <element signature="docComment;method#checkLeagueRecords#0;class#League#0" expanded="false" />
             <element signature="method#checkLeagueRecords#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
+            <element signature="method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#curePlayers#0;class#League#0" expanded="false" />
             <element signature="method#curePlayers#0;class#League#0" expanded="false" />
             <element signature="docComment;method#updateLeagueHistory#0;class#League#0" expanded="false" />
@@ -2524,8 +2118,6 @@
             <element signature="method#getTeamRankingsStr#0;class#League#0" expanded="false" />
             <element signature="method#getLeagueHistoryStats#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getConfStandings#0;class#League#0" expanded="false" />
-            <element signature="method#getConfStandings#0;class#League#0" expanded="false" />
-            <element signature="method#getTeamRankings#0;class#League#0" expanded="false" />
             <element signature="method#rankQB#0;class#League#0" expanded="false" />
             <element signature="method#rankRB#0;class#League#0" expanded="false" />
             <element signature="method#rankWR#0;class#League#0" expanded="false" />
@@ -2537,14 +2129,257 @@
             <element signature="method#rankCB#0;class#League#0" expanded="false" />
             <element signature="method#rankS#0;class#League#0" expanded="false" />
             <element signature="method#rankHC#0;class#League#0" expanded="false" />
+            <element signature="method#getPlayerRankStr#0;class#League#0" expanded="false" />
             <element signature="method#getAwardsWatch#0;class#League#0" expanded="false" />
             <element signature="docComment;method#saveLeague#0;class#League#0" expanded="false" />
             <element signature="method#saveLeague#0;class#League#0" expanded="false" />
-            <element signature="e#242168#242209#0" expanded="false" />
+            <element signature="e#242538#242579#0" expanded="false" />
             <element signature="docComment;method#isNameValid#0;class#League#0" expanded="false" />
             <element signature="method#isNameValid#0;class#League#0" expanded="false" />
             <element signature="docComment;method#isAbbrValid#0;class#League#0" expanded="false" />
             <element signature="method#isAbbrValid#0;class#League#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="275" column="37" lean-forward="false" selection-start-line="275" selection-start-column="37" selection-end-line="275" selection-end-column="37" />
+          <folding>
+            <element signature="docComment;method#Conference#0;class#Conference#0" expanded="false" />
+            <element signature="method#Conference#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#setUpSchedule#0;class#Conference#0" expanded="false" />
+            <element signature="method#setUpSchedule#0;class#Conference#0" expanded="false" />
+            <element signature="e#1690#1746#0" expanded="false" />
+            <element signature="docComment;method#setUpOOCSchedule#0;class#Conference#0" expanded="false" />
+            <element signature="method#setUpOOCSchedule#0;class#Conference#0" expanded="false" />
+            <element signature="method#scheduleOOC#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#insertOOCSchedule#0;class#Conference#0" expanded="false" />
+            <element signature="method#insertOOCSchedule#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#playWeek#0;class#Conference#0" expanded="false" />
+            <element signature="method#playWeek#0;class#Conference#0" expanded="false" />
+            <element signature="method#newsMatchups#0;class#Conference#0" expanded="false" />
+            <element signature="method#newsNSMatchups#0;class#Conference#0" expanded="false" />
+            <element signature="method#updateConfPrestige#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#schedConfChamp#0;class#Conference#0" expanded="false" />
+            <element signature="method#schedConfChamp#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#playConfChamp#0;class#Conference#0" expanded="false" />
+            <element signature="method#playConfChamp#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#getCCGStr#0;class#Conference#0" expanded="false" />
+            <element signature="method#getCCGStr#0;class#Conference#0" expanded="false" />
+            <element signature="docComment;method#getAllConfPlayers#0;class#Conference#0" expanded="false" />
+            <element signature="method#getAllConfPlayers#0;class#Conference#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerRankingsList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/child_recruit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="33" column="54" lean-forward="true" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="1285" column="70" lean-forward="false" selection-start-line="1285" selection-start-column="70" selection-end-line="1285" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10648">
+          <caret line="1210" column="120" lean-forward="true" selection-start-line="1210" selection-start-column="120" selection-end-line="1210" selection-end-column="120" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="1481" column="103" lean-forward="false" selection-start-line="1481" selection-start-column="103" selection-end-line="1481" selection-end-column="103" />
+          <folding>
+            <element signature="docComment;method#Team#0;class#Team#0" expanded="false" />
+            <element signature="method#Team#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#Team#1;class#Team#0" expanded="false" />
+            <element signature="method#Team#1;class#Team#0" expanded="false" />
+            <element signature="method#commonInitializer#0;class#Team#0" expanded="false" />
+            <element signature="method#setupTeamBenchmark#0;class#Team#0" expanded="false" />
+            <element signature="method#projectTeamWins#0;class#Team#0" expanded="false" />
+            <element signature="method#teamPowerRating#0;class#Team#0" expanded="false" />
+            <element signature="method#setupUserCoach#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#newRoster#0;class#Team#0" expanded="false" />
+            <element signature="method#newRoster#0;class#Team#0" expanded="false" />
+            <element signature="method#redshirtPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#newCustomHeadCoach#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#sortPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#sortPlayers#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updatePollScore#0;class#Team#0" expanded="false" />
+            <element signature="method#updatePollScore#0;class#Team#0" expanded="false" />
+            <element signature="method#updateSOS#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updateStrengthOfWins#0;class#Team#0" expanded="false" />
+            <element signature="method#updateStrengthOfWins#0;class#Team#0" expanded="false" />
+            <element signature="method#updateLossStrength#0;class#Team#0" expanded="false" />
+            <element signature="method#offenseRating#0;class#Team#0" expanded="false" />
+            <element signature="method#defenseRating#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updateTalentRatings#0;class#Team#0" expanded="false" />
+            <element signature="method#updateTalentRatings#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getOffTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getOffTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getOffSubTalent#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getDefTalent#0;class#Team#0" expanded="false" />
+            <element signature="method#getDefTalent#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeFootIQ#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeFootIQ#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getTeamDiscipline#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamDiscipline#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getPassProf#0;class#Team#0" expanded="false" />
+            <element signature="method#getPassProf#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRushProf#0;class#Team#0" expanded="false" />
+            <element signature="method#getRushProf#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getPassDef#0;class#Team#0" expanded="false" />
+            <element signature="method#getPassDef#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRushDef#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeOLPass#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeOLPass#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeOLRush#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeOLRush#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeDLPass#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeDLPass#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getCompositeDLRush#0;class#Team#0" expanded="false" />
+            <element signature="method#getCompositeDLRush#0;class#Team#0" expanded="false" />
+            <element signature="method#calcSeasonPrestige#0;class#Team#0" expanded="false" />
+            <element signature="e#39613#39630#0" expanded="false" />
+            <element signature="docComment;method#seasonSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="method#seasonSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#advanceSeason#0;class#Team#0" expanded="false" />
+            <element signature="method#advanceSeason#0;class#Team#0" expanded="false" />
+            <element signature="method#advanceHC#0;class#Team#0" expanded="false" />
+            <element signature="method#coachContracts#0;class#Team#0" expanded="false" />
+            <element signature="method#promoteCoach#0;class#Team#0" expanded="false" />
+            <element signature="method#midSeasonProgression#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#getPlayersTransferring#0;class#Team#0" expanded="false" />
+            <element signature="e#65048#65067#0" expanded="false" />
+            <element signature="method#CPUrecruiting#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamSize#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#recruitPlayersFreshman#0;class#Team#0" expanded="false" />
+            <element signature="method#recruitPlayersFreshman#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#recruitWalkOns#0;class#Team#0" expanded="false" />
+            <element signature="method#recruitWalkOns#0;class#Team#0" expanded="false" />
+            <element signature="e#96955#97024#0" expanded="false" />
+            <element signature="method#calcMaxRecruitRating#0;class#Team#0" expanded="false" />
+            <element signature="method#getQBRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getRBRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getWRRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getTERecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getOLRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getKRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getDLRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getLBRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getCBRecruits#0;class#Team#0" expanded="false" />
+            <element signature="method#getSRecruits#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#recruitPlayersFromStr#0;class#Team#0" expanded="false" />
+            <element signature="method#recruitPlayersFromStr#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#recruitPlayerCSV#0;class#Team#0" expanded="false" />
+            <element signature="method#recruitPlayerCSV#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRecruitingClassRat#0;class#Team#0" expanded="false" />
+            <element signature="method#getRecruitingClassRat#0;class#Team#0" expanded="false" />
+            <element signature="method#getLeagueFreshman#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#groupPlayerStandingCSV#0;class#Team#0" expanded="false" />
+            <element signature="method#groupPlayerStandingCSV#0;class#Team#0" expanded="false" />
+            <element signature="method#resetStats#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#updateTeamHistory#0;class#Team#0" expanded="false" />
+            <element signature="method#updateTeamHistory#0;class#Team#0" expanded="false" />
+            <element signature="method#updateCoachHistory#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getTeamHistoryList#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamHistoryList#0;class#Team#0" expanded="false" />
+            <element signature="method#disciplinePlayer#0;class#Team#0" expanded="false" />
+            <element signature="method#suspendPlayer#0;class#Team#0" expanded="false" />
+            <element signature="method#checkSuspensionPosition#0;class#Team#0" expanded="false" />
+            <element signature="method#updateSuspensions#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#checkForInjury#0;class#Team#0" expanded="false" />
+            <element signature="method#checkForInjury#0;class#Team#0" expanded="false" />
+            <element signature="method#checkInjuryPosition#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getInjuryReport#0;class#Team#0" expanded="false" />
+            <element signature="method#getInjuryReport#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#curePlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#curePlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#curePlayersPosition#0;class#Team#0" expanded="false" />
+            <element signature="method#getAllPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#getQB#0;class#Team#0" expanded="false" />
+            <element signature="method#getRB#0;class#Team#0" expanded="false" />
+            <element signature="method#getWR#0;class#Team#0" expanded="false" />
+            <element signature="method#getTE#0;class#Team#0" expanded="false" />
+            <element signature="method#getK#0;class#Team#0" expanded="false" />
+            <element signature="method#getOL#0;class#Team#0" expanded="false" />
+            <element signature="method#getDL#0;class#Team#0" expanded="false" />
+            <element signature="method#getLB#0;class#Team#0" expanded="false" />
+            <element signature="method#getCB#0;class#Team#0" expanded="false" />
+            <element signature="method#getS#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getTeamStatsStrCSV#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamStatsStrCSV#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getGameSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="method#getGameSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="method#getPlayerStatsExpandListMap#0;class#Team#0" expanded="false" />
+            <element signature="method#findBenchPlayer#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRankStr#0;class#Team#0" expanded="false" />
+            <element signature="method#getRankStr#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRankStrStarUser#0;class#Team#0" expanded="false" />
+            <element signature="method#getRankStrStarUser#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#numGames#0;class#Team#0" expanded="false" />
+            <element signature="method#numGames#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getConfWins#0;class#Team#0" expanded="false" />
+            <element signature="method#getConfWins#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getConfLosses#0;class#Team#0" expanded="false" />
+            <element signature="method#getConfLosses#0;class#Team#0" expanded="false" />
+            <element signature="method#strRankTeamRecord#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#strRep#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#strRepWithBowlResults#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#strRepWithPrestige#0;class#Team#0" expanded="false" />
+            <element signature="method#strRepWithPrestige#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#weekSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="method#weekSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#gameSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="method#gameSummaryStr#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#gameSummaryStrScore#0;class#Team#0" expanded="false" />
+            <element signature="method#gameSummaryStrScore#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#gameSummaryStrOpponent#0;class#Team#0" expanded="false" />
+            <element signature="method#gameSummaryStrOpponent#0;class#Team#0" expanded="false" />
+            <element signature="method#getGradPlayersList#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getRecruitsInfoSaveFile#0;class#Team#0" expanded="false" />
+            <element signature="method#getRecruitsInfoSaveFile#0;class#Team#0" expanded="false" />
+            <element signature="method#getPlayerInfoSaveFile#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#setStarters#0;class#Team#0" expanded="false" />
+            <element signature="method#setStarters#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#addGamePlayedPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#addGamePlayedPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#addGamePlayedList#0;class#Team#0" expanded="false" />
+            <element signature="method#getCPUOffense#0;class#Team#0" expanded="false" />
+            <element signature="method#getCPUDefense#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getTeamStrategiesOff#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamStrategiesOff#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#getTeamStrategiesDef#0;class#Team#0" expanded="false" />
+            <element signature="method#getTeamStrategiesDef#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#checkHallofFame#0;class#Team#0" expanded="false" />
+            <element signature="method#checkHallofFame#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#checkLeagueRecords#0;class#Team#0" expanded="false" />
+            <element signature="method#checkLeagueRecords#0;class#Team#0" expanded="false" />
+            <element signature="docComment;method#checkCareerRecords#0;class#Team#0" expanded="false" />
+            <element signature="method#checkCareerRecords#0;class#Team#0" expanded="false" />
           </folding>
         </state>
       </provider>

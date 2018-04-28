@@ -328,8 +328,8 @@ public class MainActivity extends AppCompatActivity {
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
                             //remove buttons from view
-                            depthchartButton.setVisibility(View.INVISIBLE);
-                            strategyButton.setVisibility(View.INVISIBLE);
+                            //depthchartButton.setVisibility(View.INVISIBLE);
+                            //strategyButton.setVisibility(View.INVISIBLE);
                         }
                         simGameButton.setTextSize(12);
                         simGameButton.setText("Off-Season: Contracts");
@@ -353,6 +353,25 @@ public class MainActivity extends AppCompatActivity {
                     } else if (simLeague.currentWeek == 19) {
                         //userTeam.resetStats();
                         simLeague.advanceSeason();
+
+
+                        //Promotion/Relegation!
+                        if (simLeague.enableProRel) {
+                            simLeague.promotionRelegation();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                builder.setMessage(simLeague.newsRealignment)
+                                        .setTitle((seasonStart + userTeam.teamHistory.size()) + " Promotion/Relegation Update")
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                                TextView textView = dialog.findViewById(android.R.id.message);
+                                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                        }
+
                         if (simLeague.confRealignment) {
                             simLeague.conferenceInvites();
                             if (simLeague.countRealignment > 0) {
@@ -506,7 +525,7 @@ public class MainActivity extends AppCompatActivity {
                     beginRecruiting();
                 }
 
-/*                if (simLeague.currentWeek == 7) {
+                if (simLeague.currentWeek == 6) {
                     String string = "";
                     simLeague.midSeasonProgression();
                     string = userTeam.midseasonUserProgression();
@@ -523,7 +542,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView textView = dialog.findViewById(android.R.id.message);
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-                }*/
+                }
             }
         });
 
@@ -601,7 +620,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 currentTeam = userTeam;
-                if (simLeague.currentWeek < 18) showTeamLineupDialog();
+                //if (simLeague.currentWeek < 18)
+                    showTeamLineupDialog();
             }
         });
 
@@ -740,7 +760,12 @@ public class MainActivity extends AppCompatActivity {
             /*
               Clicked Save League in drop down menu
              */
-            saveLeague();
+            if (simLeague.currentWeek < 15) {
+                saveLeague();
+            } else  {
+                Toast.makeText(MainActivity.this, "Save Function disabled in Off-Season",
+                        Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.action_return_main_menu) {
             /*
               Let user confirm that they actually do want to go to main menu
@@ -776,9 +801,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
             goals = "Welcome to the " + (seasonStart + userTeam.teamHistory.size()) + " College Football season!\n\n";
-            goals += "This season your team is expected to finish ranked #" + userTeam.projectedPoll + "!\n\n";
+            goals += "This season your team is projected to finish ranked #" + userTeam.projectedPoll + "!\n\n";
+
+            if (userTeam.projectedPoll > 100) {
+                goals += "Despite being projected at #" + userTeam.projectedPoll + ", your goal is to finish in the Top 100.\n\n";
+            }
+
             goals += "In conference play, your team is expected to finish #" + confPos + " in the " + userTeam.conference + " conference.\n\n";
-            goals += "Your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
+
+            goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
 
             if (simLeague.bonusTeam1 != null && simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2 != null &&  simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3 != null &&  simLeague.bonusTeam3.name.equals(userTeam.name)) {
                 goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
@@ -2190,6 +2221,29 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
+        final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
+        checkboxProRelegation.setChecked(simLeague.enableProRel);
+
+        checkboxRealignment.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View view) {
+                                                       if(checkboxRealignment.isChecked()) {
+                                                           checkboxProRelegation.setChecked(false);
+                                                       }
+                                                   }
+                                               }
+        );
+
+        checkboxProRelegation.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View view) {
+                                                       if(checkboxProRelegation.isChecked()) {
+                                                           checkboxRealignment.setChecked(false);
+                                                       }
+                                                   }
+                                               }
+        );
+
         Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
         Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
@@ -2234,6 +2288,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.hidePotential = checkboxPotential.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
+                simLeague.enableProRel = checkboxProRelegation.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
             }
@@ -2329,8 +2384,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)", "TE (1 starter)", "OL (5 starters)",
-                "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (2 starter)"};
-        final int[] positionNumberRequired = {1, 2, 3, 1, 5, 1, 4, 3, 3, 2};
+                "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (2 starters)"};
+        final int[] positionNumberRequired = {userTeam.startersQB, userTeam.startersRB, userTeam.startersWR, userTeam.startersTE, userTeam.startersOL, userTeam.startersK, userTeam.startersDL, userTeam.startersLB, userTeam.startersCB, userTeam.startersS};
         final Spinner teamLineupPositionSpinner = dialog.findViewById(R.id.spinnerTeamLineupPosition);
         ArrayAdapter<String> teamLineupPositionSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positionSelection);
@@ -2791,12 +2846,11 @@ public class MainActivity extends AppCompatActivity {
         userHC = headCoach;
         int ratOvr = userHC.ratOvr;
         if (ratOvr < 40) ratOvr = 40;
-        int offers = 8;
         String oldTeam = userHC.team.name;
         updateTeamUI();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStrFired((ratOvr - 10), offers, oldTeam);
-        final ArrayList<Team> coachList = simLeague.getCoachListFired((ratOvr - 10), offers, oldTeam);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStrFired((ratOvr - 10), oldTeam);
+        final ArrayList<Team> coachList = simLeague.getCoachListFired((ratOvr - 10), oldTeam);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
         builder.setCancelable(false);
@@ -2822,6 +2876,14 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.coachCarousel();
                 updateTeamUI();
                 examineTeam(currentTeam.name);
+            }
+        });
+        builder.setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform action on click
+
+                dialog.dismiss();
             }
         });
         AlertDialog alert = builder.create();

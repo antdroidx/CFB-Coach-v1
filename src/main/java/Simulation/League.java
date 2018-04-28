@@ -177,12 +177,13 @@ public class League {
     public boolean fullGameLog;
     public boolean hidePotential;
     public boolean confRealignment;
+    public boolean enableProRel;
 
     private final DecimalFormat df2 = new DecimalFormat(".##");
     private final int seasonStart = 2017;
     final int countTeam = 120;
     private final int seasonWeeks = 26;
-    private final double realignmentChance = 0.30;
+    private final double realignmentChance = 0.38;
     private final String crYear1 = "2";
     private final String crYear2 = "7";
     private boolean heismanDecided;
@@ -698,6 +699,10 @@ public class League {
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
+            enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
+
+            if (enableProRel) confRealignment = false;
+            if (confRealignment) enableProRel = false;
 
             // Always close files.
             bufferedReader.close();
@@ -1396,36 +1401,36 @@ public class League {
                 heismanTop5 += (i + 1) + ". " + p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ";
                 if (p instanceof PlayerQB) {
                     PlayerQB pqb = (PlayerQB) p;
-                    heismanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " QB " + pqb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
                             + df2.format(pqb.getPasserRating()) + " QBR)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
-                    heismanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " RB " + prb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
                 } else if (p instanceof PlayerWR) {
                     PlayerWR pwr = (PlayerWR) p;
-                    heismanTop5 += " WR " + pwr.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " WR " + pwr.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pwr.statsRecTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerTE) {
                     PlayerTE pte = (PlayerTE) p;
-                    heismanTop5 += " TE " + pte.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " TE " + pte.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
-                    heismanTop5 += " DL " + pdl.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " DL " + pdl.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum)\n\n";
                 } else if (p instanceof PlayerLB) {
                     PlayerLB plb = (PlayerLB) p;
-                    heismanTop5 += " LB " + plb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " LB " + plb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + plb.statsTackles + " Tkl, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int)\n\n";
                 } else if (p instanceof PlayerCB) {
                     PlayerCB pcb = (PlayerCB) p;
-                    heismanTop5 += " CB " + pcb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " CB " + pcb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
                 } else if (p instanceof PlayerS) {
                     PlayerS ps = (PlayerS) p;
-                    heismanTop5 += " S " + ps.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    heismanTop5 += " S " + ps.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + ps.statsTackles + " Tkl, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int)\n\n";
                 }
             }
@@ -1773,36 +1778,36 @@ public class League {
                 freshmanTop5 += (i + 1) + ". " + p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ";
                 if (p instanceof PlayerQB) {
                     PlayerQB pqb = (PlayerQB) p;
-                    freshmanTop5 += " QB " + pqb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " QB " + pqb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
                             + pqb.statsRushTD + " TDs)\n\n";
                 } else if (p instanceof PlayerRB) {
                     PlayerRB prb = (PlayerRB) p;
-                    freshmanTop5 += " RB " + prb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " RB " + prb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds)\n\n";
                 } else if (p instanceof PlayerWR) {
                     PlayerWR pwr = (PlayerWR) p;
-                    freshmanTop5 += " WR " + pwr.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " WR " + pwr.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pwr.statsRecTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerTE) {
                     PlayerTE pte = (PlayerTE) p;
-                    freshmanTop5 += " TE " + pte.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " TE " + pte.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds)\n\n";
                 } else if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
-                    freshmanTop5 += " DL " + pdl.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " DL " + pdl.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum)\n\n";
                 } else if (p instanceof PlayerLB) {
                     PlayerLB plb = (PlayerLB) p;
-                    freshmanTop5 += " LB " + plb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " LB " + plb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + plb.statsTackles + " Tkl, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int)\n\n";
                 } else if (p instanceof PlayerCB) {
                     PlayerCB pcb = (PlayerCB) p;
-                    freshmanTop5 += " CB " + pcb.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " CB " + pcb.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + pcb.statsTackles + " Tkl, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int)\n\n";
                 } else if (p instanceof PlayerS) {
                     PlayerS ps = (PlayerS) p;
-                    freshmanTop5 += " S " + ps.getInitialName() + ": " + p.getHeismanScore() + " votes\n\t("
+                    freshmanTop5 += " S " + ps.name + ": " + p.getHeismanScore() + " votes\n\t("
                             + ps.statsTackles + " Tkl, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int)\n\n";
                 }
             }
@@ -2674,29 +2679,24 @@ public class League {
     
 
     //Get Coaching Job Offers if fired or quit
-    public ArrayList<String> getCoachListStrFired(int rating, int offers, String oldTeam) {
+    public ArrayList<String> getCoachListStrFired(int rating, String oldTeam) {
+
         ArrayList<String> teams = new ArrayList<>();
-        ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
         }
 
-        if (teamVacancies.isEmpty()) {
-            for (int i = 0; i < teamList.size(); i += offers) {
-                if (teamList.get(i).teamPrestige < rating && teamList.get(i).name != oldTeam) {
-                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
-                    teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
-                }
-            }
+        if (teams.isEmpty()) {
+            teams = getCoachListStr();
         }
+
         return teams;
     }
 
     //Get Coach Job Offers List if fired or quit
-    public ArrayList<Team> getCoachListFired(int rating, int offers, String oldTeam) {
+    public ArrayList<Team> getCoachListFired(int rating, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
@@ -2705,11 +2705,7 @@ public class League {
         }
 
         if (teamVacancies.isEmpty()) {
-            for (int i = 0; i < teamList.size(); i += offers) {
-                if (teamList.get(i).teamPrestige < rating && teamList.get(i).name != oldTeam) {
-                    teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
-                }
-            }
+            teamVacancies = getCoachList();
         }
         return teamVacancies;
     }
@@ -3362,10 +3358,45 @@ public class League {
         }
     }
 
+    //Promotion/Relegation System - just like in Soccer. Can be enabled. Disabled by default.
 
-    /* IDEA: Conference TV Contracts -
-    Contracts every Nth year will be awarded to conferences. increases prestige temporarily
-    */
+    public void promotionRelegation() {
+        StringBuilder string = new StringBuilder();
+
+        for (int i = 5; i < conferences.size(); ++i) {
+            Conference g5Conf = conferences.get(i);
+            Conference p5Conf = conferences.get(i - 5);
+            string.append(p5Conf.confName + " & " + g5Conf.confName + "\n");
+
+            for (int t = 0; t < 2; ++t) {
+                //set teams to memory
+                final String teamAconf = g5Conf.confTeams.get(t).conference;
+                final String teamBconf = p5Conf.confTeams.get(p5Conf.confTeams.size() - (t + 1)).conference;
+
+                //transfer rivals and conf data
+                g5Conf.confTeams.get(t).conference = teamBconf;
+                p5Conf.confTeams.get(p5Conf.confTeams.size() - (t + 1)).conference = teamAconf;
+                Team teamA = g5Conf.confTeams.get(t);
+                Team teamB = p5Conf.confTeams.get(p5Conf.confTeams.size() - (t + 1));
+
+                //remove + transfer teams
+                g5Conf.confTeams.remove(t);
+                p5Conf.confTeams.remove(p5Conf.confTeams.size() - (t + 1));
+                g5Conf.confTeams.add(teamB);
+                p5Conf.confTeams.add(teamA);
+
+                //break the news
+                string.append( teamB.name + " switches with " + teamA.name + "\n");
+            }
+                string.append("\n");
+        }
+
+        //post news in News
+        newsRealignment = string.toString();
+        newsStories.get(currentWeek + 1).add("Promotion/Relegation Update>" + newsRealignment);
+
+    }
+
 
 
     /**
@@ -4045,7 +4076,7 @@ public class League {
             Team t;
             for (int i = 0; i < confTeams.size(); ++i) {
                 t = confTeams.get(i);
-                confStandings.add(t.getRankStrStarUser(i + 1) + "," + t.strTeamRanking() + "," + t.strTeamRecord() + "," + t.getConfWins() + "-" + t.getConfLosses());
+                confStandings.add(t.getRankStrStarUser(i + 1) + "," + t.strConfStandings() + "," + t.strTeamRecord() + "," + t.getConfWins() + "-" + t.getConfLosses());
             }
             confTeams.clear();
         }
@@ -4059,7 +4090,7 @@ public class League {
         Collections.sort(teams, new CompTeamPoll());
         for (int i = 0; i < teams.size(); ++i) {
             t = teams.get(i);
-            rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strTeamRanking() + "," + t.strTeamRecord() + "," + t.teamPollScore);
+            rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.strTeamRecord() + "," + t.teamPollScore);
         }
         return rankings;
     }
@@ -4827,6 +4858,7 @@ public class League {
         sb.append(fullGameLog + "\n");
         sb.append(hidePotential + "\n");
         sb.append(confRealignment + "\n");
+        sb.append(enableProRel + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
@@ -4869,5 +4901,6 @@ public class League {
         return !(abbr.contains(",") || abbr.contains(">") || abbr.contains("%") || abbr.contains("\\") || abbr.contains(" "));
 
     }
+
 
 }

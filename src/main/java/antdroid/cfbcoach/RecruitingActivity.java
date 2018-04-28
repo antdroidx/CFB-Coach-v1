@@ -440,32 +440,12 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
-    public void filterRegion(List<String> list, int region) {
-        int i = 0;
-        while (i < list.size()) {
-            if (getRecruitRegion(list.get(i)) != region) {
-                list.remove(i);
-            } else {
-                ++i;
-            }
-        }
-        expListAdapter.notifyDataSetChanged();
-    }
-
     /**
      * Used for parsing through string to get cost
      */
     private int getRecruitCost(String p) {
         String[] pSplit = p.split(",");
         return Integer.parseInt(pSplit[12]);
-    }
-
-    /**
-     * Used for parsing through string to get region
-     */
-    private int getRecruitRegion(String p) {
-        String[] pSplit = p.split(",");
-        return Integer.parseInt(pSplit[3]);
     }
 
     @Override
