@@ -2822,7 +2822,11 @@ public class Game implements Serializable {
     private void addNewsStory() {
 
         //Weekly Scoreboard Update
-        homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 1).add(gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " " + homeScore);
+        if (gameName.equals("Conference"))
+            homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 1).add(homeTeam.conference + " " + gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " " + homeScore);
+        else
+            homeTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 1).add(gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " " + awayScore + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " " + homeScore);
+
 
         if (numOT >= 3) {
             // Thriller in OT

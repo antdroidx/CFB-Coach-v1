@@ -41,11 +41,11 @@ class PlayerRankingsList extends ArrayAdapter<String> {
         if (teamStat[2].equals(userTeamStrRep)) {
             // Bold user team
             textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
-            textLeft.setTextColor(Color.parseColor("#1A75FF"));
+            textLeft.setTextColor(Color.parseColor("#5994de"));
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
-            textCenter.setTextColor(Color.parseColor("#1A75FF"));
+            textCenter.setTextColor(Color.parseColor("#5994de"));
             textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
-            textRight.setTextColor(Color.parseColor("#1A75FF"));
+            textRight.setTextColor(Color.parseColor("#5994de"));
         }
 
         return rowView;

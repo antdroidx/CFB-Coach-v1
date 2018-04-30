@@ -51,13 +51,13 @@ class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
                 textRight.setText(record[2].split("%")[0] + "\n" + record[2].split("%")[1] + " " + record[3]);
                 if (record[2].split("%")[1].equals(userTeamAbbr) || record[2].split("%")[1].equals(userTeamName)) {
                     // User team record, make it special color
-                    textRight.setTextColor(Color.parseColor("#1A75FF"));
+                    textRight.setTextColor(Color.parseColor("#5994de"));
                 }
             } else {
                 textRight.setText(record[2] + "\n" + record[3]);
                 if (record[2].split(" ")[0].equals(userTeamAbbr) || record[2].split(" ")[0].equals(userTeamName)  ) {
                     // User team record, make it special color
-                    textRight.setTextColor(Color.parseColor("#1A75FF"));
+                    textRight.setTextColor(Color.parseColor("#5994de"));
                 }
             }
         }

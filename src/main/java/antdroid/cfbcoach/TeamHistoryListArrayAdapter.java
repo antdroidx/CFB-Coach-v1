@@ -43,7 +43,7 @@ class TeamHistoryListArrayAdapter extends ArrayAdapter<String> {
 
             if (wonNC) textTop.setTextColor(Color.parseColor("#FF9933"));
             else if (wonCC) textTop.setTextColor(Color.parseColor("#00B300"));
-            else if (wonB) textTop.setTextColor(Color.parseColor("#1A75FF"));
+            else if (wonB) textTop.setTextColor(Color.parseColor("#5994de"));
 
             String detail = "";
             for (int i = 1; i < teamHist.length; ++i) {
@@ -64,7 +64,7 @@ class TeamHistoryListArrayAdapter extends ArrayAdapter<String> {
 
             if (wonNC) textTop.setTextColor(Color.parseColor("#FF9933"));
             else if (wonCC) textTop.setTextColor(Color.parseColor("#00B300"));
-            else if (wonB) textTop.setTextColor(Color.parseColor("#1A75FF"));
+            else if (wonB) textTop.setTextColor(Color.parseColor("#5994de"));
 
             textBottom.setVisibility(View.GONE);
         }

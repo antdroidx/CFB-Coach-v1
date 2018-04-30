@@ -33,6 +33,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.enums.Display;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
+
+
 public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
     private boolean customCareer;
@@ -46,6 +51,19 @@ public class Home extends AppCompatActivity {
 
         ImageView imageLogo = findViewById(R.id.imageLogo);
         imageLogo.setImageResource(R.drawable.main_menu_logo);
+
+        //check for app updates in play store
+        AppUpdater appUpdater = new AppUpdater(this)
+                .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
+                .setDisplay(Display.DIALOG)
+                .showAppUpdated(true)
+                .setTitleOnUpdateAvailable("Update available")
+                .setContentOnUpdateAvailable("A new version of this game is available in the Play Store")
+                .setTitleOnUpdateNotAvailable("Update not available")
+                .setContentOnUpdateNotAvailable("No update available. You are running the latest version!")
+                .setButtonUpdate("Update Now")
+                .setButtonDismiss("Ignore");
+        appUpdater.start();
 
         Button newGameButton = findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {

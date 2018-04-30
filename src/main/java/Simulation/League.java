@@ -4027,7 +4027,7 @@ public class League {
 
         ArrayList<HeadCoach> HC = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            HC.add(teamList.get(i).HC.get(0));
+            if(teamList.get(i).HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
         }
 
         switch (selection) {
@@ -4087,6 +4087,7 @@ public class League {
                 confStandings.add(t.getRankStrStarUser(i + 1) + "," + t.strConfStandings() + "," + t.strTeamRecord() + "," + t.getConfWins() + "-" + t.getConfLosses());
             }
             confTeams.clear();
+            confStandings.add(" , , , ");
         }
         return confStandings;
     }

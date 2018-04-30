@@ -10,6 +10,7 @@ import Simulation.Team;
 public class CompTeamWins implements Comparator<Team> {
     @Override
     public int compare(Team a, Team b) {
-        return a.totalWins > b.totalWins ? -1 : a.totalWins == b.totalWins ? 0 : 1;
+        if (a.league.currentWeek > 15) return a.totalWins > b.totalWins ? -1 : a.totalWins == b.totalWins ? 0 : 1;
+         else return a.totalWins + a.wins > b.totalWins + b.wins ? -1 : a.totalWins + a.wins == b.totalWins + b.wins ? 0 : 1;
     }
 }

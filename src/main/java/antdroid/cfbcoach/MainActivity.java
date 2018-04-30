@@ -384,7 +384,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Simulate Week Button
         final Button simGameButton = findViewById(R.id.simGameButton);
-
         simGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (recruitingStage == -1) {
@@ -464,7 +463,6 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.updateHCHistory();
                         simLeague.updateTeamHistories();
                         simLeague.updateLeagueHistory();
-                        simLeague.curePlayers(); // get rid of all injuries -- why?
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setMessage(simLeague.seasonSummaryStr())
                                 .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Summary")
@@ -570,9 +568,7 @@ public class MainActivity extends AppCompatActivity {
                         showNewsStoriesDialog();
 
                     } else if (simLeague.currentWeek == 19) {
-                        //userTeam.resetStats();
                         simLeague.advanceSeason();
-                        currTab = 0;
                         updateTeamStats();
                         simLeague.currentWeek++;
                         simGameButton.setTextSize(12);
@@ -711,7 +707,6 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.setTeamRanks();
                 simLeague.setTeamBenchMarks();
                 simLeague.updateTeamTalentRatings();
-                seasonGoals();
                 simLeague.preseasonNews();
                 userHC = userTeam.HC.get(0);
                 // Set toolbar text to '2017 Season' etc
@@ -743,7 +738,6 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.setTeamRanks();
                 simLeague.setTeamBenchMarks();
                 simLeague.updateTeamTalentRatings();
-                seasonGoals();
                 simLeague.preseasonNews();
                 userHC = userTeam.HC.get(0);
                 // Set toolbar text to '2017 Season' etc
@@ -815,6 +809,7 @@ public class MainActivity extends AppCompatActivity {
                 String newHC = changeHCEditText.getText().toString().trim();
                 if (isNameValid((newHC))) {
                     userTeam.HC.get(0).name = newHC;
+                    seasonGoals();
                     dialog.dismiss();
                 } else {
                     if (showToasts)
@@ -862,7 +857,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < currentConference.confTeams.size(); ++i) {
             String[] spinnerSplit = dataAdapterTeam.getItem(i).split(" ");
-            if (spinnerSplit[1].equals(tempT.abbr)) {
+            if (spinnerSplit[1].equals(tempT.name)) {
                 examineTeamSpinner.setSelection(i);
                 currentTeam = tempT;
                 TextView currentTeamText = findViewById(R.id.currentTeamText);
@@ -894,13 +889,13 @@ public class MainActivity extends AppCompatActivity {
         currentTeamText.setText("#" + currentTeam.rankTeamPollScore +
                 " " + currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ") " +
                 currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
-        if (currTab == 0) {
+/*        if (currTab == 0) {
             updateTeamStats();
         } else if (currTab == 1 || currTab > 5) {
             updatePlayerStats();
         } else {
             updateSchedule();
-        }
+        }*/
     }
 
     private void updateCurrConference() {
@@ -2355,7 +2350,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, rankings, userTeam.strRepWithBowlResults());
+                new TeamRankingsListArrayAdapter(this, rankings, userTeam.name);
         teamRankingsList.setAdapter(teamRankingsAdapter);
 
         teamRankingsSpinner.setOnItemSelectedListener(
@@ -2364,9 +2359,9 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getLeagueHistoryStats(position);
                         if (position == 4) {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.HC.get(0).name + " (" + userTeam.abbr + ")");
                         } else {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
                         }
                         teamRankingsAdapter.clear();
                         teamRankingsAdapter.addAll(rankings);
@@ -3100,10 +3095,16 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.startActivity(myIntent);
                     }
                 })
+                .setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                })
                 .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
         AlertDialog dialog = builder.create();
         dialog.show();
-
         String[] spinnerSelection = {"Players Leaving", "Pro Mock Draft"};
         Spinner beginRecruitingSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> beginRecruitingSpinnerAdapter = new ArrayAdapter<String>(this,
@@ -3135,6 +3136,7 @@ public class MainActivity extends AppCompatActivity {
                         // do nothing
                     }
                 });
+
     }
 
     //Recruiting Score

@@ -40,7 +40,7 @@ class SeasonAwardsListArrayAdapter extends ArrayAdapter<String> {
             textBottom.setText(player[2]);
             if (player[0].split(" ")[0].equals(userTeamAbbr)) {
                 // highlight user team players
-                textTop.setTextColor(Color.parseColor("#1A75FF"));
+                textTop.setTextColor(Color.parseColor("#5994de"));
             }
         } else if (player.length == 2) {
             textTop.setText(player[0]);
@@ -48,7 +48,7 @@ class SeasonAwardsListArrayAdapter extends ArrayAdapter<String> {
             textBottom.setVisibility(View.GONE);
             if (player[0].split(" ")[0].equals(userTeamAbbr)) {
                 // highlight user team players
-                textTop.setTextColor(Color.parseColor("#1A75FF"));
+                textTop.setTextColor(Color.parseColor("#5994de"));
             }
         } else {
             textMiddle.setText(values[position]);

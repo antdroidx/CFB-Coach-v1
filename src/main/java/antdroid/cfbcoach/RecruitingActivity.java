@@ -30,9 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import Simulation.League;
-import Simulation.Team;
-
 public class RecruitingActivity extends AppCompatActivity {
 
     // Variables use during recruiting
@@ -286,11 +283,11 @@ public class RecruitingActivity extends AppCompatActivity {
         tolerance = rand.nextInt((max - min) + 1) + min;
 
         // Sort to get top 100 overall players
-        Collections.sort(availAll, new PlayerRecruitStrCompOverall());
-        Collections.sort(west, new PlayerRecruitStrCompOverall());
-        Collections.sort(midwest, new PlayerRecruitStrCompOverall());
-        Collections.sort(central, new PlayerRecruitStrCompOverall());
-        Collections.sort(east, new PlayerRecruitStrCompOverall());
+        Collections.sort(availAll, new CompRecruitScoutGrade());
+        Collections.sort(west, new CompRecruitScoutGrade());
+        Collections.sort(midwest, new CompRecruitScoutGrade());
+        Collections.sort(central, new CompRecruitScoutGrade());
+        Collections.sort(east, new CompRecruitScoutGrade());
 
         avail50 = new ArrayList<String>(availAll.subList(0, 49));
 
@@ -309,22 +306,7 @@ public class RecruitingActivity extends AppCompatActivity {
          */
         positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
-        positions.add("Top 50 Recruits");
-        positions.add("All Players");
-        positions.add("QB (Need: " + needQBs + ")");
-        positions.add("RB (Need: " + needRBs + ")");
-        positions.add("WR (Need: " + needWRs + ")");
-        positions.add("TE (Need: " + needTEs + ")");
-        positions.add("OL (Need: " + needOLs + ")");
-        positions.add("K (Need: " + needKs + ")");
-        positions.add("DL (Need: " + needDLs + ")");
-        positions.add("LB (Need: " + needLBs + ")");
-        positions.add("CB (Need: " + needCBs + ")");
-        positions.add("S (Need: " + needSs + ")");
-        positions.add("West (" + west.size() + ")");
-        positions.add("Midwest (" + midwest.size() + ")");
-        positions.add("Central (" + central.size() + ")");
-        positions.add("East (" + east.size() + ")");
+        positions = getFilterMenu();
 
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -339,7 +321,6 @@ public class RecruitingActivity extends AppCompatActivity {
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
-                        //heh
                     }
                 });
 
@@ -380,8 +361,8 @@ public class RecruitingActivity extends AppCompatActivity {
         buttonExpandAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
-                builder.setTitle("Filter Recruits");
-                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players"};
+                builder.setTitle("DISPLAY OPTIONS");
+                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players", "Sort by Grade", "Sort by Cost"};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
@@ -416,6 +397,12 @@ public class RecruitingActivity extends AppCompatActivity {
                             removeUnaffordable(east);
                             // Notify that players were removed
                             expListAdapter.notifyDataSetChanged();
+                        } else if (item == 3) {
+                            sortByGrade();
+                            expListAdapter.notifyDataSetChanged();
+                        } else if (item == 4) {
+                            sortByCost();
+                            expListAdapter.notifyDataSetChanged();
                         }
 
                         dialog.dismiss();
@@ -428,70 +415,172 @@ public class RecruitingActivity extends AppCompatActivity {
 
     }
 
-    private void removeUnaffordable(List<String> list) {
-        int i = 0;
-        while (i < list.size()) {
-            if (getRecruitCost(list.get(i)) > recruitingBudget) {
-                // Can't afford him
-                list.remove(i);
-            } else {
-                ++i;
+
+    //Create the Drop Down Spinner Menu
+    private void updatePositionNeeds() {
+        // Get needs for each position
+        needQBs = minQBs - teamQBs.size();
+        needRBs = minRBs - teamRBs.size();
+        needWRs = minWRs - teamWRs.size();
+        needTEs = minTEs - teamTEs.size();
+        needOLs = minOLs - teamOLs.size();
+        needKs = minKs - teamKs.size();
+        needDLs = minDLs - teamDLs.size();
+        needLBs = minLBs - teamLBs.size();
+        needCBs = minCBs - teamCBs.size();
+        needSs = minSs - teamSs.size();
+    }
+
+    private ArrayList<String> getFilterMenu() {
+        // Get needs for each position
+        updatePositionNeeds();
+
+        ArrayList<String> array = new ArrayList();
+        array.add("Top 50 Recruits");
+        array.add("All Players");
+        array.add("QB (Need: " + needQBs + ")");
+        array.add("RB (Need: " + needRBs + ")");
+        array.add("WR (Need: " + needWRs + ")");
+        array.add("TE (Need: " + needTEs + ")");
+        array.add("OL (Need: " + needOLs + ")");
+        array.add("K (Need: " + needKs + ")");
+        array.add("DL (Need: " + needDLs + ")");
+        array.add("LB (Need: " + needLBs + ")");
+        array.add("CB (Need: " + needCBs + ")");
+        array.add("S (Need: " + needSs + ")");
+        array.add("West (" + west.size() + ")");
+        array.add("Midwest (" + midwest.size() + ")");
+        array.add("Central (" + central.size() + ")");
+        array.add("East (" + east.size() + ")");
+
+        if(dataAdapterPosition !=null) {
+            dataAdapterPosition.clear();
+            for (String p : positions) {
+                dataAdapterPosition.add(p);
             }
+            dataAdapterPosition.notifyDataSetChanged();
         }
+        
+        return array;
     }
 
-    /**
-     * Used for parsing through string to get cost
-     */
-    private int getRecruitCost(String p) {
-        String[] pSplit = p.split(",");
-        return Integer.parseInt(pSplit[12]);
-    }
 
-    @Override
-    public void onBackPressed() {
-        exitRecruiting();
-    }
 
-    private void setShowPopUp(boolean tf) {
-        showPopUp = tf;
-    }
-
-    /**
-     * Exit the recruiting activity. Called when the "Done" button is pressed or when user presses back button.
-     */
-    private void exitRecruiting() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Are you sure you are done recruiting? Any unfilled positions will be filled by walk-ons.\n\n");
-        for (int i = 2; i < positions.size()-4; ++i) {
-            sb.append("\t\t" + positions.get(i) + "\n");
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
-        builder.setMessage(sb.toString())
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    //Create Roster Screen
+    private void makeRosterDialog() {
+        String rosterStr = getRosterStr();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(rosterStr)
+                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size())  )
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Send info about what recruits were selected back
-                        Intent myIntent = new Intent(RecruitingActivity.this, MainActivity.class);
-                        myIntent.putExtra("SAVE_FILE", "DONE_RECRUITING");
-                        myIntent.putExtra("RECRUITS", getRecruitsStr());
-                        RecruitingActivity.this.startActivity(myIntent);
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing
+                        //Dismiss dialog
                     }
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+        TextView msgTxt = dialog.findViewById(android.R.id.message);
+        msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
-    /**
-     * Set current player list used by expandable list to correct position players
-     */
+    private String getRosterStr() {
+        updatePositionNeeds();
+        StringBuilder sb = new StringBuilder();
+        String stbn = ""; //ST for starter, BN for bench
+        String p = ""; //player string
+
+        sb.append("QBs (Need: " + needQBs + ")\n");
+        appendPlayers(sb, teamQBs, 1);
+
+        sb.append("\nRBs (Need: " + needRBs + ")\n");
+        appendPlayers(sb, teamRBs, 2);
+
+        sb.append("\nWRs (Need: " + needWRs + ")\n");
+        appendPlayers(sb, teamWRs, 3);
+
+        sb.append("\nTEs (Need: " + needTEs + ")\n");
+        appendPlayers(sb, teamTEs, 1);
+
+        sb.append("\nOLs (Need: " + needOLs + ")\n");
+        appendPlayers(sb, teamOLs, 5);
+
+        sb.append("\nKs (Need: " + needKs + ")\n");
+        appendPlayers(sb, teamKs, 1);
+
+        sb.append("\nDLs (Need: " + needDLs + ")\n");
+        appendPlayers(sb, teamDLs, 4);
+
+        sb.append("\nLBs (Need: " + needLBs + ")\n");
+        appendPlayers(sb, teamLBs, 3);
+
+        sb.append("\nCBs (Need: " + needCBs + ")\n");
+        appendPlayers(sb, teamCBs, 3);
+
+        sb.append("\nSs (Need: " + needSs + ")\n");
+        appendPlayers(sb, teamSs, 2);
+
+        sb.append("\nRedshirted Players:\n");
+        for (String rp : playersRedshirted) {
+            sb.append("\t" + getReadablePlayerInfoPos(rp) + "\n");
+        }
+
+        return sb.toString();
+    }
+
+    private void appendPlayers(StringBuilder sb, ArrayList<String> players, int numStart) {
+        String p, stbn;
+        for (int i = 0; i < players.size(); ++i) {
+            if (i > numStart - 1) stbn = "BN";
+            else stbn = "ST";
+            p = players.get(i);
+            sb.append("\t" + stbn + " " + p + "\n");
+        }
+    }
+
+    private String getReadablePlayerInfoPos(String p) {
+        String[] pi = p.split(",");
+        return pi[0] + " " + pi[1] + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr";
+    }
+
+
+    //FILTERS & SORTINGS
+
+
+    //UPDATE DATA AFTER CHOOSING FILTER
+    private void updateForNewPosition(int position) {
+        if (position > 1 && position < 12) {
+            String[] splitty = currentPosition.split(" ");
+            setPlayerList(splitty[0]);
+            setPlayerInfoMap(splitty[0]);
+            expListAdapter.notifyDataSetChanged();
+        } else {
+            // See top 100 recruits
+            if (position == 0) {
+                players = avail50;
+            } else if(position == 12) {
+                players = west;
+            } else if(position == 13) {
+                players = midwest;
+            } else if(position == 14) {
+                players = central;
+            } else if(position == 15) {
+                players = east;
+            } else {
+                players = availAll;
+            }
+
+            playersInfo = new LinkedHashMap<String, List<String>>();
+            for (String p : players) {
+                ArrayList<String> pInfoList = new ArrayList<String>();
+                pInfoList.add(getPlayerDetails(p, p.split(",")[0]));
+                playersInfo.put(p.substring(0, p.length() - 2), pInfoList);
+            }
+            expListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    //Get Players
     private void setPlayerList(String pos) {
         if (pos.equals("QB")) {
             players = availQBs;
@@ -516,17 +605,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Converts player string into '$500 QB A. Name, Overall: 89' or similar
-     */
-    private String getPlayerNameCost(String player) {
-        String[] ps = player.split(",");
-        return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Grade: " + getStarGrade(ps[6]);
-    }
-
-    /**
-     * Sets up map to align player's info with correct player
-     */
+    //Player General Display
     private void setPlayerInfoMap(String pos) {
         playersInfo = new LinkedHashMap<String, List<String>>();
         for (String p : players) {
@@ -536,9 +615,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Converts the player string into details, i.e. Accuracy: A, Evasion: A, etc
-     */
+    //Player Attributes (Profile)
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
@@ -607,273 +684,59 @@ public class RecruitingActivity extends AppCompatActivity {
         return "ERROR";
     }
 
-
-    private String getGrade(String num) {
-        int pRat = (Integer.parseInt(num));
-        if (pRat > five) return "* * * * *";
-        else if (pRat > four) return " * * * *";
-        else if (pRat > three) return " * * * ";
-        else if (pRat > two) return "  * * ";
-        else return "  *  ";
-    }
-
-    private String getScoutGrade(int num) {
-        int pRat = num;
-        if (pRat > five) return "* * * * *";
-        else if (pRat > four) return " * * * * ";
-        else if (pRat > three) return " * * * ";
-        else if (pRat > two) return "  * * ";
-        else return "  *  ";
-    }
-
-    private String getStarGrade(String num) {
-        int pRat = (Integer.parseInt(num));
-        if (pRat == 5) return " * * * * *";
-        if (pRat == 4) return " * * * *  ";
-        if (pRat == 3) return " * * *    ";
-        if (pRat == 2) return " * *      ";
-        if (pRat == 1) return " *        ";
-
-        else return  "??";
-    }
-
-    /**
-     * Converts the lines from the file into readable lines
-     */
-    private String getReadablePlayerInfo(String p) {
-        String[] pi = p.split(",");
-        String improveStr = "";
-        String transfer = "";
-        if (pi[7].equals("true")) transfer = " (Transfer)";
-        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p)) {
-            improveStr = "(+" + pi[13] + ")";
-            return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[12] + " " + improveStr + transfer;
-        } else {
-            improveStr = " (Recruit)";
-            return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[11] + " " + improveStr + transfer;
-        }
-    }
-
-    /**
-     * Converts the lines from the file into readable lines, without revealing potential used for displaying
-     */
-    private String getReadablePlayerInfoDisplay(String p) {
-        String[] pi = p.split(",");
-        return pi[6] + "-Star " + pi[0] + " " + pi[1];
-    }
-
-    /**
-     * Converts the lines from the file into readable lines, include position
-     */
-    private String getReadablePlayerInfoPos(String p) {
-        String[] pi = p.split(",");
-        return pi[0] + " " + pi[1] + " " + getYrStr(pi[2]) + " " + pi[11] + " Ovr";
-    }
-
-
-    /**
-     * Convert year from number to String, i.e. 3 -> Junior
-     */
-    private String getYrStr(String yr) {
-        if (yr.equals("1")) {
-            return "[Fr]";
-        } else if (yr.equals("2")) {
-            return "[So]";
-        } else if (yr.equals("3")) {
-            return "[Jr]";
-        } else if (yr.equals("4")) {
-            return "[Sr]";
-        }
-        return "[XX]";
-    }
-
-    /**
-     * Convert full name into initial name
-     */
-    private String getInitialName(String name) {
-        String[] names = name.split(" ");
-        return names[0].substring(0, 1) + ". " + names[1];
-    }
-
-    /**
-     * Called whenever new position is selected, updates all the components
-     */
-    private void updateForNewPosition(int position) {
-        if (position > 1 && position < 12) {
-            String[] splitty = currentPosition.split(" ");
-            setPlayerList(splitty[0]);
-            setPlayerInfoMap(splitty[0]);
-            expListAdapter.notifyDataSetChanged();
-        } else {
-            // See top 100 recruits
-            if (position == 0) {
-                players = avail50;
-            } else if(position == 12) {
-                players = west;
-            } else if(position == 13) {
-                players = midwest;
-            } else if(position == 14) {
-                players = central;
-            } else if(position == 15) {
-                players = east;
+    //FILTER OUT UNAFFORDABLE PLAYERS
+    private void removeUnaffordable(List<String> list) {
+        int i = 0;
+        while (i < list.size()) {
+            if (getRecruitCost(list.get(i)) > recruitingBudget) {
+                // Can't afford him
+                list.remove(i);
             } else {
-                players = availAll;
+                ++i;
             }
-
-            playersInfo = new LinkedHashMap<String, List<String>>();
-            for (String p : players) {
-                ArrayList<String> pInfoList = new ArrayList<String>();
-                pInfoList.add(getPlayerDetails(p, p.split(",")[0]));
-                playersInfo.put(p.substring(0, p.length() - 2), pInfoList);
-            }
-            expListAdapter.notifyDataSetChanged();
         }
     }
 
-    /**
-     * Update needs for each position
-     */
-    private void updatePositionNeeds() {
-        // Get needs for each position
-        needQBs = minQBs - teamQBs.size();
-        needRBs = minRBs - teamRBs.size();
-        needWRs = minWRs - teamWRs.size();
-        needTEs = minTEs - teamTEs.size();
-        needOLs = minOLs - teamOLs.size();
-        needKs = minKs - teamKs.size();
-        needDLs = minDLs - teamDLs.size();
-        needLBs = minLBs - teamLBs.size();
-        needCBs = minCBs - teamCBs.size();
-        needSs = minSs - teamSs.size();
-
-        if (dataAdapterPosition != null) {
-            positions = new ArrayList<String>();
-            positions.add("Top 50 Recruits");
-            positions.add("All Players");
-            positions.add("QB (Need: " + needQBs + ")");
-            positions.add("RB (Need: " + needRBs + ")");
-            positions.add("WR (Need: " + needWRs + ")");
-            positions.add("TE (Need: " + needTEs + ")");
-            positions.add("OL (Need: " + needOLs + ")");
-            positions.add("K (Need: " + needKs + ")");
-            positions.add("DL (Need: " + needDLs + ")");
-            positions.add("LB (Need: " + needLBs + ")");
-            positions.add("CB (Need: " + needCBs + ")");
-            positions.add("S (Need: " + needSs + ")");
-            positions.add("West (" + west.size() + ")");
-            positions.add("Midwest (" + midwest.size() + ")");
-            positions.add("Central (" + central.size() + ")");
-            positions.add("East (" + east.size() + ")");
-
-            dataAdapterPosition.clear();
-            for (String p : positions) {
-                dataAdapterPosition.add(p);
-            }
-            dataAdapterPosition.notifyDataSetChanged();
-        }
+    //SORT - GRADE(Default)
+    private void sortByGrade() {
+        Collections.sort(availAll , new CompRecruitScoutGrade());
+        Collections.sort(availQBs, new CompRecruitScoutGrade());
+        Collections.sort(availRBs, new CompRecruitScoutGrade());
+        Collections.sort(availWRs, new CompRecruitScoutGrade());
+        Collections.sort(availTEs, new CompRecruitScoutGrade());
+        Collections.sort(availOLs, new CompRecruitScoutGrade());
+        Collections.sort(availKs, new CompRecruitScoutGrade());
+        Collections.sort(availDLs, new CompRecruitScoutGrade());
+        Collections.sort(availLBs, new CompRecruitScoutGrade());
+        Collections.sort(availCBs, new CompRecruitScoutGrade());
+        Collections.sort(availSs, new CompRecruitScoutGrade());
+        Collections.sort(west, new CompRecruitScoutGrade());
+        Collections.sort(midwest, new CompRecruitScoutGrade());
+        Collections.sort(central, new CompRecruitScoutGrade());
+        Collections.sort(east, new CompRecruitScoutGrade());
     }
-
-    /**
-     * Get String of team roster, used for displaying in dialog
-     */
-    private String getRosterStr() {
-        updatePositionNeeds();
-        StringBuilder sb = new StringBuilder();
-        String stbn = ""; //ST for starter, BN for bench
-        String p = ""; //player string
-
-        sb.append("QBs (Need: " + needQBs + ")\n");
-        appendPlayers(sb, teamQBs, 1);
-
-        sb.append("\nRBs (Need: " + needRBs + ")\n");
-        appendPlayers(sb, teamRBs, 2);
-
-        sb.append("\nWRs (Need: " + needWRs + ")\n");
-        appendPlayers(sb, teamWRs, 3);
-
-        sb.append("\nTEs (Need: " + needTEs + ")\n");
-        appendPlayers(sb, teamTEs, 1);
-
-        sb.append("\nOLs (Need: " + needOLs + ")\n");
-        appendPlayers(sb, teamOLs, 5);
-
-        sb.append("\nKs (Need: " + needKs + ")\n");
-        appendPlayers(sb, teamKs, 1);
-
-        sb.append("\nDLs (Need: " + needDLs + ")\n");
-        appendPlayers(sb, teamDLs, 4);
-
-        sb.append("\nLBs (Need: " + needLBs + ")\n");
-        appendPlayers(sb, teamLBs, 3);
-
-        sb.append("\nCBs (Need: " + needCBs + ")\n");
-        appendPlayers(sb, teamCBs, 3);
-
-        sb.append("\nSs (Need: " + needSs + ")\n");
-        appendPlayers(sb, teamSs, 2);
-
-        sb.append("\nRedshirted Players:\n");
-        for (String rp : playersRedshirted) {
-            sb.append("\t" + getReadablePlayerInfoPos(rp) + "\n");
-        }
-
-        return sb.toString();
+    
+    //SORT - COST
+    private void sortByCost() {
+        Collections.sort(availAll , new CompRecruitCost());
+        Collections.sort(availQBs, new CompRecruitCost());
+        Collections.sort(availRBs, new CompRecruitCost());
+        Collections.sort(availWRs, new CompRecruitCost());
+        Collections.sort(availTEs, new CompRecruitCost());
+        Collections.sort(availOLs, new CompRecruitCost());
+        Collections.sort(availKs, new CompRecruitCost());
+        Collections.sort(availDLs, new CompRecruitCost());
+        Collections.sort(availLBs, new CompRecruitCost());
+        Collections.sort(availCBs, new CompRecruitCost());
+        Collections.sort(availSs, new CompRecruitCost());
+        Collections.sort(west, new CompRecruitCost());
+        Collections.sort(midwest, new CompRecruitCost());
+        Collections.sort(central, new CompRecruitCost());
+        Collections.sort(east, new CompRecruitCost());
     }
-
-    private void appendPlayers(StringBuilder sb, ArrayList<String> players, int numStart) {
-        String p, stbn;
-        for (int i = 0; i < players.size(); ++i) {
-            if (i > numStart - 1) stbn = "BN";
-            else stbn = "ST";
-            p = players.get(i);
-            sb.append("\t" + stbn + " " + p + "\n");
-        }
-    }
-
-    /**
-     * Gets all the recruits in a string to send back to MainActivity to be added to user team
-     */
-    private String getRecruitsStr() {
-        StringBuilder sb = new StringBuilder();
-
-        for (String p : playersRecruited) {
-            sb.append(p + "%\n");
-        }
-        sb.append("END_RECRUITS%\n");
-
-        for (String rp : playersRedshirted) {
-            sb.append(rp + "%\n");
-        }
-        sb.append("END_REDSHIRTS%\n");
-
-        return sb.toString();
-    }
-
-    /**
-     * Makes the Roster dialog for viewing who is on team
-     */
-    private void makeRosterDialog() {
-        String rosterStr = getRosterStr();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(rosterStr)
-                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size())  )
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Dismiss dialog
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        TextView msgTxt = dialog.findViewById(android.R.id.message);
-        msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-    }
-
-
-
-    /**
-     * Recruit player, add to correct list and remove from available players list
-     */
+    
+    
+    //RECRUIT PLAYER
     private void recruitPlayerDialog(String p, int pos, List<Integer> groupsExp) {
         final String player = p;
         final int groupPosition = pos;
@@ -1024,43 +887,43 @@ public class RecruitingActivity extends AppCompatActivity {
         if (ps[0].equals("QB")) {
             availQBs.remove(player);
             teamQBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamQBs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamQBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("RB")) {
             availRBs.remove(player);
             teamRBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamRBs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamRBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("WR")) {
             availWRs.remove(player);
             teamWRs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamWRs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamWRs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("TE")) {
             availTEs.remove(player);
             teamTEs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamTEs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamTEs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("OL")) {
             availOLs.remove(player);
             teamOLs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamOLs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamOLs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("K")) {
             availKs.remove(player);
             teamKs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamKs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamKs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("DL")) {
             availDLs.remove(player);
             teamDLs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamDLs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamDLs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("LB")) {
             availLBs.remove(player);
             teamLBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamLBs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamLBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("CB")) {
             availCBs.remove(player);
             teamCBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamCBs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamCBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("S")) {
             availSs.remove(player);
             teamSs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamSs, new PlayerTeamStrCompOverall());
+            Collections.sort(teamSs, new CompRecruitTeamRosterOvr());
         }
 
         players.remove(player);
@@ -1071,9 +934,7 @@ public class RecruitingActivity extends AppCompatActivity {
         updatePositionNeeds();
     }
 
-    /**
-     * Recruit player, add to correct list and remove from available players list
-     */
+    //REDSHIRT PLAYER
     private void redshirtPlayerDialog(String p, int pos, List<Integer> groupsExp) {
         final String player = p;
         final int groupPosition = pos;
@@ -1255,12 +1116,13 @@ public class RecruitingActivity extends AppCompatActivity {
         updatePositionNeeds();
     }
 
-    /**
-     * Scout player, revealing the attribute ratings.
-     *
-     * @param player
-     * @return true if had enough money, false if not
-     */
+    //PLAYER INFO FOR RECRUIT/REDSHIRTING DIALOG
+    private String getReadablePlayerInfoDisplay(String p) {
+        String[] pi = p.split(",");
+        return pi[6] + "-Star " + pi[0] + " " + pi[1];
+    }
+
+    //SCOUT PLAYER - created by Achi Jones - never used
     private boolean scoutPlayer(String player) {
         int scoutCost = getRecruitCost(player) / 10;
         if (scoutCost < 10) scoutCost = 10;
@@ -1318,9 +1180,177 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
+
+
+    //PLAYER DISPLAY INFO
+    private String getReadablePlayerInfo(String p) {
+        String[] pi = p.split(",");
+        String improveStr = "";
+        String transfer = "";
+        if (pi[7].equals("true")) transfer = " (Transfer)";
+        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p)) {
+            improveStr = "(+" + pi[13] + ")";
+            return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[12] + " " + improveStr + transfer;
+        } else {
+            improveStr = " (Recruit)";
+            return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[11] + " " + improveStr + transfer;
+        }
+    }
+
+
+
+
     /**
-     * Inner Class used for the recruiting expandable list view
+     * Converts the lines from the file into readable lines, include position
      */
+
+
+    /**
+     * Converts player string into '$500 QB A. Name, Overall: 89' or similar
+     */
+    private String getPlayerNameCost(String player) {
+        String[] ps = player.split(",");
+        return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Grade: " + getStarGrade(ps[6]);
+    }
+
+    /**
+     * Used for parsing through string to get cost
+     */
+    private int getRecruitCost(String p) {
+        String[] pSplit = p.split(",");
+        return Integer.parseInt(pSplit[12]);
+    }
+
+    /**
+     * Convert year from number to String, i.e. 3 -> Junior
+     */
+    private String getYrStr(String yr) {
+        if (yr.equals("1")) {
+            return "[Fr]";
+        } else if (yr.equals("2")) {
+            return "[So]";
+        } else if (yr.equals("3")) {
+            return "[Jr]";
+        } else if (yr.equals("4")) {
+            return "[Sr]";
+        }
+        return "[XX]";
+    }
+
+    /**
+     * Convert full name into initial name
+     */
+    private String getInitialName(String name) {
+        String[] names = name.split(" ");
+        return names[0].substring(0, 1) + ". " + names[1];
+    }
+
+    private String getGrade(String num) {
+        int pRat = (Integer.parseInt(num));
+        if (pRat > five) return "* * * * *";
+        else if (pRat > four) return " * * * *";
+        else if (pRat > three) return " * * * ";
+        else if (pRat > two) return "  * * ";
+        else return "  *  ";
+    }
+
+    private String getStarGrade(String num) {
+        int pRat = (Integer.parseInt(num));
+        if (pRat == 5) return " * * * * *";
+        if (pRat == 4) return " * * * *  ";
+        if (pRat == 3) return " * * *    ";
+        if (pRat == 2) return " * *      ";
+        if (pRat == 1) return " *        ";
+
+        else return  "??";
+    }
+
+    private String getRegion(int region) {
+        String location;
+        if (region == 0) location = "West";
+        else if (region == 1) location = "Mid-West";
+        else if (region == 2) location = "Central";
+        else if (region == 3) location = "East";
+        else location = "South";
+        return location;
+    }
+
+    private String getHeight(int height) {
+
+        int feet = height / 12;
+        int leftover = height % 12;
+
+        return feet + "'' " + leftover + "\"";
+    }
+
+    private String getWeight(int weight) {
+        return weight + " lbs";
+    }
+
+
+
+    /**
+     * Exit the recruiting activity. Called when the "Done" button is pressed or when user presses back button.
+     */
+    private void exitRecruiting() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Are you sure you are done recruiting? Any unfilled positions will be filled by walk-ons.\n\n");
+        for (int i = 2; i < positions.size()-4; ++i) {
+            sb.append("\t\t" + positions.get(i) + "\n");
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
+        builder.setMessage(sb.toString())
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Send info about what recruits were selected back
+                        Intent myIntent = new Intent(RecruitingActivity.this, MainActivity.class);
+                        myIntent.putExtra("SAVE_FILE", "DONE_RECRUITING");
+                        myIntent.putExtra("RECRUITS", getRecruitsStr());
+                        RecruitingActivity.this.startActivity(myIntent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    /**
+     * Gets all the recruits in a string to send back to MainActivity to be added to user team
+     */
+    private String getRecruitsStr() {
+        StringBuilder sb = new StringBuilder();
+
+        for (String p : playersRecruited) {
+            sb.append(p + "%\n");
+        }
+        sb.append("END_RECRUITS%\n");
+
+        for (String rp : playersRedshirted) {
+            sb.append(rp + "%\n");
+        }
+        sb.append("END_REDSHIRTS%\n");
+
+        return sb.toString();
+    }
+
+    @Override
+    public void onBackPressed() {
+        exitRecruiting();
+    }
+
+
+    private void setShowPopUp(boolean tf) {
+        showPopUp = tf;
+    }
+
+    //MAIN UI FOR PLAYER DATA IN RECRUITING SCREEN
     class ExpandableListAdapterRecruiting extends BaseExpandableListAdapter {
 
         private final Activity context;
@@ -1438,34 +1468,11 @@ public class RecruitingActivity extends AppCompatActivity {
             return true;
         }
 
-    } //end class
-
-    private String getRegion(int region) {
-        String location;
-        if (region == 0) location = "West";
-        else if (region == 1) location = "Mid-West";
-        else if (region == 2) location = "Central";
-        else if (region == 3) location = "East";
-        else location = "South";
-        return location;
     }
-
-    private String getHeight(int height) {
-
-        int feet = height / 12;
-        int leftover = height % 12;
-
-        return feet + "'' " + leftover + "\"";
-    }
-
-    private String getWeight(int weight) {
-        return weight + " lbs";
-    }
-
 
 }
 
-class PlayerRecruitStrCompOverall implements Comparator<String> {
+class CompRecruitScoutGrade implements Comparator<String> {
     @Override
     public int compare(String a, String b) {
         String[] psA = a.split(",");
@@ -1476,7 +1483,7 @@ class PlayerRecruitStrCompOverall implements Comparator<String> {
     }
 }
 
-class PlayerTeamStrCompOverall implements Comparator<String> {
+class CompRecruitTeamRosterOvr implements Comparator<String> {
     @Override
     public int compare(String a, String b) {
         String[] psA = a.split(" ");
@@ -1487,3 +1494,13 @@ class PlayerTeamStrCompOverall implements Comparator<String> {
     }
 }
 
+class CompRecruitCost implements Comparator<String> {
+    @Override
+    public int compare(String a, String b) {
+        String[] psA = a.split(",");
+        String[] psB = b.split(",");
+        int ovrA = Integer.parseInt(psA[12]);
+        int ovrB = Integer.parseInt(psB[12]);
+        return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
+    }
+}

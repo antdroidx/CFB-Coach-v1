@@ -811,11 +811,19 @@ public class Team {
         }
         if ("NCW".equals(natChampWL)) {
             //bonus for winning champ game
-            teamPollScore += 750;
+            teamPollScore += 500;
         }
         if ("NCL".equals(natChampWL)) {
             //bonus for winning champ game
-            teamPollScore += 350;
+            teamPollScore += 250;
+        }
+        if ("SFW".equals(semiFinalWL)) {
+            //bonus for winning champ game
+            teamPollScore += 50;
+        }
+        if ("SFL".equals(semiFinalWL)) {
+            //bonus for winning champ game
+            teamPollScore += 50;
         }
     }
 
@@ -1247,6 +1255,7 @@ public class Team {
      * Advance season, hiring new coach if needed and calculating new prestige level.
      */
     public void advanceTeamPlayers() {
+        curePlayers();
         advanceSeasonPlayers();
         checkHallofFame();
         checkCareerRecords(league.leagueRecords);
@@ -3725,7 +3734,7 @@ public class Team {
      * @return ranking abbr (w-l)
      */
     public String strRep() {
-        return "[" + rankTeamPollScore + "] " + abbr;
+        return "#" + rankTeamPollScore + " " + name;
     }
 
     /**
