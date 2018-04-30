@@ -85,6 +85,7 @@ public class Team {
     public int teamDefTalent;
     public int teamPrestige;
     public int teamPrestigeStart;
+    public int prestigePts[];
     public int teamPollScore;
     public int teamStrengthOfWins;
     private int teamStrengthOfLosses;
@@ -110,7 +111,7 @@ public class Team {
     private final int teamCount = 12;
     private final int totalTeamCount = teamCount * 10;
     private final int ratTransfer = 71;
-    private final int promotionNum = -1;
+    private final int promotionNum = 0;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -1076,7 +1077,12 @@ public class Team {
         return (4*compositeDL + 2*compositeLB + 2*compositeS + 2*HC.get(0).ratDef + avgSub) / 11;
     }
 
-
+    public void enterOffSeason() {
+        prestigePts = calcSeasonPrestige();
+        teamPrestige = prestigePts[0];
+        totalWins += wins;
+        totalLosses += losses;
+    }
     //Calculates Prestige Change at end of season
     public int[] calcSeasonPrestige() {
         int goal = projectedPoll;
@@ -1165,14 +1171,12 @@ public class Team {
      * @return String of season summary
      */
     public String seasonSummaryStr() {
-        int prestigePts[] = calcSeasonPrestige();
-
         String summary = "Season Analysis:\n\nYour team, " + name + ", finished the season ranked #" + rankTeamPollScore + " with " + wins + " wins and " + losses + " losses.";
 
         summary += "\n\nYour team was projected to finish ranked #" + projectedPoll + " with a record of " + projectedWins + " wins and " + (12-projectedWins) + " losses.";
 
         if (projectedPoll > 100) {
-            summary += "Despite being projected at #" + projectedPoll + ", your goal is to finish in the Top 100.\n\n";
+            summary += "\nDespite being projected at #" + projectedPoll + ", your goal was to finish in the Top 100.\n\n";
         }
         if (this == league.penalizedTeam1 || this == league.penalizedTeam2 || this == league.penalizedTeam3) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
@@ -1212,7 +1216,7 @@ public class Team {
         //newPrestige, prestigeChange, rivalryPts, ccPts, ncwPts, nflPts, disPts, rgameplayed, cLimiter
 
         summary += "\n\nPRESTIGE SUMMARY:\n\n";
-        summary += "Current Prestige:  " + teamPrestige + " pts\n";
+        summary += "Current Prestige:  " + teamPrestigeStart + " pts\n";
         summary += "Performance Points:  " + prestigePts[1] + " pts\n";
         if (prestigePts[7] > 0) summary += "Rivalry Bonus:  " + prestigePts[2] + " pts\n";
         if (prestigePts[3] > 0) summary += "Conf Champ Bonus:  " + prestigePts[3] + " pts\n";
@@ -1220,13 +1224,13 @@ public class Team {
         if (prestigePts[5] > 0) summary += "Pro Draft Bonus:  " + prestigePts[5] + " pts\n";
         summary += "Disciplinary Points:  " + prestigePts[6] + " pts\n";
 
-        summary += "\n\nNEW PRESTIGE:  " + prestigePts[0] + " pts\n";
+        summary += "\n\nNEW PRESTIGE:  " + teamPrestige + " pts\n";
 
-        if(teamPrestige + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5] + prestigePts[6] != prestigePts[0] && prestigePts[4] == 0) {
+        if(teamPrestigeStart + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5] + prestigePts[6] != prestigePts[0] && prestigePts[4] == 0) {
             summary += "\n\nDue to your conference's playing level, your prestige change has been limited. The conference prestige cut-off for this season was set at:\n[min] " + (confMin+confLimit) + "\n[max] " + (confMax+confLimit)
-                    + "\nNote: " + maxPrestige + " is the maximum Prestige level possible unless the team wins a national title.\n";
+                    + "\n\nNote: " + maxPrestige + " is the maximum Prestige level possible unless the team wins a national title.\n";
             if(teamPrestige >= confMax + confLimit) {
-                summary += "\nBecause your team's prestige level was above the conference prestige range, you will retain your old prestige.\n";
+                summary += "\n\nBecause your team's prestige level was above the conference prestige range, you will retain your old prestige.\n";
             }
 
         }
@@ -1242,18 +1246,12 @@ public class Team {
     /**
      * Advance season, hiring new coach if needed and calculating new prestige level.
      */
-    public void advanceSeason() {
-        int newPrestige[] = calcSeasonPrestige();
-        teamPrestige = newPrestige[0];
-        totalWins += wins;
-        totalLosses += losses;
-
+    public void advanceTeamPlayers() {
         advanceSeasonPlayers();
         checkHallofFame();
         checkCareerRecords(league.leagueRecords);
         checkCareerRecords(teamRecords);
         if (league.userTeam == this) checkCareerRecords(league.userTeamRecords);
-
     }
 
     // OFF-SEASON HEAD COACH PROGRESSION
@@ -1262,12 +1260,11 @@ public class Team {
         newContract = false;
         fired = false;
         retired = false;
-        int newPrestige[] = calcSeasonPrestige();
         int avgOff = league.getAverageYards();
 
         if(HC.get(0) != null) {
 
-            int totalPDiff = newPrestige[0] - HC.get(0).baselinePrestige;
+            int totalPDiff = teamPrestige - HC.get(0).baselinePrestige;
             HC.get(0).advanceSeason(totalPDiff, avgOff, leagueOffTal, leagueDefTal);
 
             teamRecords.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), HC.get(0).name + "%" + abbr, league.getYear());
@@ -1281,9 +1278,9 @@ public class Team {
             if (HC.get(0).year > 4)
                 records.checkRecord("Coach Career Score", HC.get(0).getCoachCareerScore(), HC.get(0).name + "%" + abbr, league.getYear());
 
-            coachContracts(totalPDiff, newPrestige[0]);
+            coachContracts(totalPDiff, teamPrestige);
 
-            if (userControlled && totalPDiff > promotionNum && teamPrestige+1 >= HC.get(0).baselinePrestige) {
+            if (userControlled && totalPDiff > promotionNum && teamPrestige >= HC.get(0).baselinePrestige) {
                 HC.get(0).promotionCandidate = true;
             }
         } else {}
@@ -1385,9 +1382,8 @@ public class Team {
             } else if (fired) {
                 contractString = "Due to your poor performance as head coach, the Athletic Director has terminated your contract and you are no longer Head Coach of this school.";
             } else {
-                int[] newPres = calcSeasonPrestige();
                 contractString = "You have " + (HC.get(0).contractLength - HC.get(0).contractYear)
-                        + " years left on your contract. Your team prestige is currently at " + newPres[0] + " and your baseline " +
+                        + " years left on your contract. Your team prestige is currently at " + teamPrestige + " and your baseline " +
                         "prestige was " + HC.get(0).baselinePrestige;
             }
         }
@@ -2876,14 +2872,13 @@ public class Team {
      * Updates team history.
      */
     public void updateTeamHistory() {
-        int[] newPres = calcSeasonPrestige();
         String histYear;
-        if (newPres[0] > teamPrestige)
+        if (teamPrestige > teamPrestigeStart)
             histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (+" + (newPres[0] - teamPrestige) + ")";
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige + " (+" + (teamPrestige - teamPrestigeStart) + ")";
         else
             histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (" + (newPres[0] - teamPrestige) + ")";
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige + " (" + (teamPrestige - teamPrestigeStart) + ")";
 
         for (int i = 12; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);
@@ -2896,14 +2891,13 @@ public class Team {
     }
 
     public void updateCoachHistory() {
-        int[] newPres = calcSeasonPrestige();
         String histYear;
-        if (newPres[0] > teamPrestige)
+        if (teamPrestige > teamPrestigeStart)
             histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (+" + (newPres[0] - teamPrestige) + ")";
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige + " (+" + (teamPrestige - teamPrestigeStart) + ")";
         else
             histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
-                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + newPres[0] + " (" + (newPres[0] - teamPrestige) + ")";
+                    + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige + " (" + (teamPrestige - teamPrestigeStart) + ")";
 
         for (int i = 12; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);

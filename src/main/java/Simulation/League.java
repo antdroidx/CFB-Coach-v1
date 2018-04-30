@@ -1154,7 +1154,7 @@ public class League {
                 ncg.awayTeam.HC.get(0).bowllosses++;
                 newsStories.get(15).add(
                         ncg.homeTeam.name + " wins the National Championship!>" +
-                                ncg.homeTeam.strRep() + " defeats " + ncg.awayTeam.strRep() +
+                                ncg.homeTeam.name + " defeats " + ncg.awayTeam.name +
                                 " in the national championship game " + ncg.homeScore + " to " + ncg.awayScore + "." +
                                 " Congratulations " + ncg.homeTeam.name + "!"
                 );
@@ -1171,7 +1171,7 @@ public class League {
                 ncg.homeTeam.HC.get(0).bowllosses++;
                 newsStories.get(15).add(
                         ncg.awayTeam.name + " wins the National Championship!>" +
-                                ncg.awayTeam.strRep() + " defeats " + ncg.homeTeam.strRep() +
+                                ncg.awayTeam.name + " defeats " + ncg.homeTeam.name +
                                 " in the national championship game " + ncg.awayScore + " to " + ncg.homeScore + "." +
                                 " Congratulations " + ncg.awayTeam.name + "!"
                 );
@@ -2627,6 +2627,12 @@ public class League {
      *
      * @return ncgSummary, userTeam's summary
      */
+    public void enterOffseason() {
+        for (Team t:teamList) {
+            t.enterOffSeason();
+        }
+    }
+
     public String seasonSummaryStr() {
         setTeamRanks();
         StringBuilder sb = new StringBuilder();
@@ -2761,7 +2767,7 @@ public class League {
                         teamList.get(t).HC.add(coachStarList.get(i));
                         teamList.get(t).HC.get(0).contractLength = 6;
                         teamList.get(t).HC.get(0).contractYear = 0;
-                        teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
+                        teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                         newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                                 tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
@@ -2790,7 +2796,7 @@ public class League {
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
-                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
+                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                     newsStories.get(currentWeek + 1).add("Coaching Change: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     coachList.remove(i);
@@ -2808,7 +2814,7 @@ public class League {
                     teamList.get(t).HC.add(coachFreeAgents.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
-                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).calcSeasonPrestige()[0];
+                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                     newsStories.get(currentWeek + 1).add("A Return to Coaching: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " has been out of football for a while, but is returning this season!");
                     coachFreeAgents.remove(i);
@@ -2841,7 +2847,7 @@ public class League {
                     school.HC.add(coachStarList.get(i));
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
-                    school.HC.get(0).baselinePrestige = school.calcSeasonPrestige()[0];
+                    school.HC.get(0).baselinePrestige = school.teamPrestige;
                     newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + school.name + ">Rising star head coach " + school.HC.get(0).name + " has announced his departure from " +
                             tmName + " after being selected by " + school.name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
@@ -2871,7 +2877,7 @@ public class League {
                     school.HC.add(coachList.get(i));
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
-                    school.HC.get(0).baselinePrestige = school.calcSeasonPrestige()[0];
+                    school.HC.get(0).baselinePrestige = school.teamPrestige;
                     newsStories.get(currentWeek + 1).add("Coaching Change: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
                             " to lead the team. Coach " + school.HC.get(0).name + " previously coached at " + coachPrevTeam.get(i) + ", before being let go this past season.");
                     coachList.remove(i);
@@ -2889,7 +2895,7 @@ public class League {
                     school.HC.add(coachFreeAgents.get(i));
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
-                    school.HC.get(0).baselinePrestige = school.calcSeasonPrestige()[0];
+                    school.HC.get(0).baselinePrestige = school.teamPrestige;
                     newsStories.get(currentWeek + 1).add("A Return to Coaching: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
                             " to lead the team. Coach " + school.HC.get(0).name + " has been out of football for a while, but is returning this season!");
                     coachFreeAgents.remove(i);
@@ -3471,10 +3477,10 @@ public class League {
         }
     }
 
-    //Advances season for each team and sets up schedules for the new year.
+    //advances team players
     public void advanceSeason() {
         for (int t = 0; t < teamList.size(); ++t) {
-            teamList.get(t).advanceSeason();
+            teamList.get(t).advanceTeamPlayers();
         }
 
 

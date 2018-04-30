@@ -178,7 +178,7 @@ public class HeadCoach extends Player {
         if (offStrat > 4) offStrat = 4;
         defStrat = rand.nextInt((max - min) + 1) + min;
         if (defStrat > 4) defStrat = 4;
-        baselinePrestige = team.calcSeasonPrestige()[0];
+        baselinePrestige = team.teamPrestige;
         teamWins = 0;
         teamLosses = 0;
         wins = 0;
@@ -241,8 +241,13 @@ public class HeadCoach extends Player {
     }
 
     public int getCoachScore() {
-        int[] newPrestige = team.calcSeasonPrestige();
-        int prestigeDiff = newPrestige[0] - team.teamPrestige;
+        int prestigeDiff;
+        if (team.league.currentWeek < 14) {
+            int[] newPrestige = team.calcSeasonPrestige();
+            prestigeDiff = newPrestige[0] - team.teamPrestige;
+        } else {
+            prestigeDiff = team.teamPrestige - team.teamPrestigeStart;
+        }
 
         return prestigeDiff * 10 + team.wins * 2 + (team.teamStrengthOfWins / 25);
     }
