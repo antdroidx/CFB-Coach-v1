@@ -45,6 +45,13 @@ public class HeadCoach extends Player {
 
     public boolean promotionCandidate;
 
+    //Leaderboard Stats
+    public float careerScore;
+    final public int leaderboardAge = 50;
+    final public int leaderboardAge2 = 65;
+    final public int leaderboardAge3 = 80;
+    final public int leaderboardAge4 = 100;
+    final public int leaderboardAge5 = 150;
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
                      int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
@@ -206,25 +213,25 @@ public class HeadCoach extends Player {
         float defpts = ((def / avgYards) + (defTal / defTalent)) * 5;
 
         ratOff += Math.round((prestigeDiff + offpts)*((potFactor*ratPot)/100));
-        if (ratOff > 99) ratOff = 99;
+        if (ratOff > 95) ratOff = 95;
         if (ratOff < 20) ratOff = 20;
 
         ratDef += Math.round((prestigeDiff + defpts)*((potFactor*ratPot)/100));
-        if (ratDef > 99) ratDef = 99;
+        if (ratDef > 95) ratDef = 95;
         if (ratDef < 20) ratDef = 20;
 
-        if (ratDiscipline > 95) ratDiscipline = 95;
-        if (ratDiscipline < 20) ratDiscipline = 20;
+        if (ratDiscipline > 90) ratDiscipline = 90;
+        if (ratDiscipline < 15) ratDiscipline = 15;
 
-        if (ratTalent > 95) ratTalent = 95;
+        if (ratTalent > 90) ratTalent = 90;
         if (ratTalent < 20) ratTalent = 20;
 
 
         ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
         ratImprovement = ratOvr - oldOvr;
 
-        wins += 0;
-        losses += 0;
+        wins += team.wins;
+        losses += team.losses;
         confchamp += 0;
         natchamp += 0;
         allamericans += 0;
@@ -240,9 +247,10 @@ public class HeadCoach extends Player {
         return prestigeDiff * 10 + team.wins * 2 + (team.teamStrengthOfWins / 25);
     }
 
+    //For future implementation: tally up the total prestige change over the years for scoring
     public int getCoachCareerScore() {
         if (year < 1) return 0;
-        else return (5*wins - 2*losses + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans)/year;
+        else return (5*(wins) - 2*(losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans)/year;
     }
 
     @Override
@@ -305,5 +313,24 @@ public class HeadCoach extends Player {
             hist[i] = history.get(i);
         }
         return hist;
+    }
+
+    public int getHCOverall() {
+        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
+        return ratOvr;
+    }
+
+
+    /* Leaderboard Google Play API Future Implementation
+       This will be used to score players at various ages (50, 65, 80, 100, 150, etc)
+       Score should only apply if they play Challenge Mode.
+       Score will be a combination of Prestige gained over time, number of CCs, NCs, etc.
+
+     */
+    public float getLeaderboardScore() {
+        float score = 0;
+
+
+        return score;
     }
 }

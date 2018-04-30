@@ -70,7 +70,6 @@ public class PlayerRB extends Player {
         name = nm;
         year = yr;
 
-        ratOvr = (pow + spd + eva) / 3;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -86,8 +85,9 @@ public class PlayerRB extends Player {
         recruitRating = scout;
         height = h;
         weight = w;
+        ratOvr = getOverall();
 
-       resetSeasonStats();
+        resetSeasonStats();
        resetCareerStats();
     }
 
@@ -101,7 +101,6 @@ public class PlayerRB extends Player {
         gamesStarted = 0;
         gamesPlayed = 0;
         isInjured = false;
-        ratOvr = (pow + spd + eva) / 3;
         ratPot = pot;
         ratFootIQ = iq;
         ratDur = dur;
@@ -119,6 +118,7 @@ public class PlayerRB extends Player {
         recruitRating = scout;
         height = h;
         weight = w;
+        ratOvr = getOverall();
 
         resetSeasonStats();
 
@@ -159,7 +159,7 @@ public class PlayerRB extends Player {
         ratSpeed = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratEvasion = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratCatch = (int) ((ratBase - 15) + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
-        ratOvr = (ratRushPower + ratSpeed + ratEvasion) / 3;
+        ratOvr = getOverall();
         region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
         recruitRating = getScoutingGrade();
@@ -192,7 +192,7 @@ public class PlayerRB extends Player {
         ratSpeed = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratEvasion = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratCatch = (int) ((ratBase - 15) + stars * customFactor - ratTolerance * Math.random());
-        ratOvr = (ratRushPower + ratSpeed + ratEvasion) / 3;
+        ratOvr = getOverall();
         region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
@@ -203,11 +203,24 @@ public class PlayerRB extends Player {
         resetCareerStats();
     }
 
+    public void midSeasonProgression() {
+        final int ratOvrStart = ratOvr;
+        progression = getProgressionOff();
+        double games = getMidSeasonBonus();
+
+        ratFootIQ += (int) (Math.random() * games);
+        ratRushPower += (int) (Math.random() * games);
+        ratSpeed += (int) (Math.random() * games);
+        ratEvasion += (int) (Math.random() * games);
+        ratCatch += (int) (Math.random() * games);
+
+        ratOvr = getOverall();
+        ratImprovement = ratOvr - ratOvrStart;
+    }
+    
     @Override
     public void advanceSeason() {
-        int oldOvr = ratOvr;
-        progression = (ratPot * 3 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 6;
-        int games = gamesStarted + (gamesPlayed - gamesStarted) / 3;
+        double games = getGamesBonus();
 
         if (!isMedicalRS) {
             year++;
@@ -216,24 +229,25 @@ public class PlayerRB extends Player {
             if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
             if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
             if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+            progression = getProgressionOff();
 
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
 
-            ratFootIQ += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratRushPower += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratSpeed += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratEvasion += (int) (Math.random() * (progression + games - 35)) / 10;
-            ratCatch += (int) (Math.random() * (progression + games - 30)) / 10;
+            ratFootIQ += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratRushPower += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratSpeed += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratEvasion += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratCatch += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             if (Math.random() * 100 < progression) {
                 //breakthrough
-                ratRushPower += (int) (Math.random() * (progression + games - 40)) / 10;
-                ratSpeed += (int) (Math.random() * (progression + games - 40)) / 10;
-                ratEvasion += (int) (Math.random() * (progression + games - 40)) / 10;
-                ratCatch += (int) (Math.random() * (progression + games - 35)) / 10;
+                ratRushPower += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratSpeed += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratEvasion += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratCatch += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
             }
         }
-        ratOvr = (ratRushPower + ratSpeed + ratEvasion) / 3;
-        ratImprovement = ratOvr - oldOvr;
+        ratOvr = getOverall();
+        ratImprovement = ratOvr - ratOvrStart;
         //reset stats (keep career stats?)
         careerRushAtt += statsRushAtt;
         careerRushYards += statsRushYards;
@@ -258,8 +272,6 @@ public class PlayerRB extends Player {
         if (wonAllConference) careerAllConference++;
         if (wonAllFreshman) careerAllFreshman++;
         if (wonTopFreshman) careerTopFreshman++;
-
-        resetSeasonStats();
 
         if (isTransfer) {
             isTransfer = false;
@@ -435,4 +447,9 @@ public class PlayerRB extends Player {
                 getLetterGrade(ratRushPower) + ", " + getLetterGrade(ratSpeed) + ", " + getLetterGrade(ratEvasion) + ", " + getLetterGrade(ratCatch) + ")";
     }
 
+    public int getOverall() {
+        int ovr;
+        ovr = (ratRushPower + ratSpeed + ratEvasion) / 3;
+        return ovr;
+    }
 }

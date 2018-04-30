@@ -14,3 +14,7 @@
 .gradle/3.3/tasks/_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock
 .gradle/3.3/tasks/_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock
 .gradle/3.3/taskArtifacts/taskArtifacts.lock
+*.gradle
+*.xml
+.idea/workspace.xml
+.idea/misc.xml

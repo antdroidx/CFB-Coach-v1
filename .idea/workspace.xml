@@ -6,11 +6,35 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15e17877-69f7-439f-a07c-d7c40efceb27" name="Default" comment="">
+    <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/CFB-Coach.iml" afterPath="$PROJECT_DIR$/CFB-Coach.iml" />
       <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/Player.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/Player.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerK.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerK.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerOL.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerOL.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerQB.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerQB.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerTE.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TutorialActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TutorialActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,153 +74,13 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="2773" column="23" lean-forward="false" selection-start-line="2773" selection-start-column="22" selection-end-line="2773" selection-end-column="23" />
-              <folding>
-                <element signature="docComment;method#League#0;class#League#0" expanded="false" />
-                <element signature="method#League#0;class#League#0" expanded="false" />
-                <element signature="e#8347#8366#0" expanded="false" />
-                <element signature="docComment;method#League#1;class#League#0" expanded="false" />
-                <element signature="method#League#1;class#League#0" expanded="false" />
-                <element signature="method#League#2;class#League#0" expanded="false" />
-                <element signature="e#26902#26905#0" expanded="false" />
-                <element signature="method#setupCommonInitalizers#0;class#League#0" expanded="false" />
-                <element signature="method#setupSeason#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#isCareerMode#0;class#League#0" expanded="false" />
-                <element signature="method#setupNamesDB#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getRandName#0;class#League#0" expanded="false" />
-                <element signature="method#getRandName#0;class#League#0" expanded="false" />
-                <element signature="method#setTeamBenchMarks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getYear#0;class#League#0" expanded="false" />
-                <element signature="method#getRegion#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getTeamListStr#0;class#League#0" expanded="false" />
-                <element signature="method#getTeamListStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#findTeam#0;class#League#0" expanded="false" />
-                <element signature="method#findTeam#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#findTeamAbbr#0;class#League#0" expanded="false" />
-                <element signature="method#findTeamAbbr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#findConference#0;class#League#0" expanded="false" />
-                <element signature="method#findConference#0;class#League#0" expanded="false" />
-                <element signature="method#updateTeamConf#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getConfNumber#0;class#League#0" expanded="false" />
-                <element signature="method#getConfNumber#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-                <element signature="method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-                <element signature="method#getAverageYards#0;class#League#0" expanded="false" />
-                <element signature="method#getAverageOffTalent#0;class#League#0" expanded="false" />
-                <element signature="method#getAverageDefTalent#0;class#League#0" expanded="false" />
-                <element signature="method#averageConfPrestige#0;class#League#0" expanded="false" />
-                <element signature="method#preseasonNews#0;class#League#0" expanded="false" />
-                <element signature="method#topRecruits#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#playWeek#0;class#League#0" expanded="false" />
-                <element signature="method#playWeek#0;class#League#0" expanded="false" />
-                <element signature="method#disciplineAction#0;class#League#0" expanded="false" />
-                <element signature="method#updateSuspensions#0;class#League#0" expanded="false" />
-                <element signature="method#playerSpotlight#0;class#League#0" expanded="false" />
-                <element signature="method#cfbPlayoffsNews#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
-                <element signature="method#getHeisman#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
-                <element signature="method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
-                <element signature="method#getTopFreshman#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getAllFreshmanStr#0;class#League#0" expanded="false" />
-                <element signature="method#getAllFreshmanStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
-                <element signature="method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachAwardStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getAllAmericanStr#0;class#League#0" expanded="false" />
-                <element signature="method#getAllAmericanStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getAllConfStr#0;class#League#0" expanded="false" />
-                <element signature="method#getAllConfStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getCCGsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCCGsStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
-                <element signature="method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#schedBowlGames#0;class#League#0" expanded="false" />
-                <element signature="method#schedBowlGames#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#playBowlGames#0;class#League#0" expanded="false" />
-                <element signature="method#playBowlGames#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#playBowl#0;class#League#0" expanded="false" />
-                <element signature="method#playBowl#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getGameSummaryBowl#0;class#League#0" expanded="false" />
-                <element signature="method#getGameSummaryBowl#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#ncgSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="method#ncgSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#seasonSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="method#seasonSummaryStr#0;class#League#0" expanded="false" />
-                <element signature="method#advanceHC#0;class#League#0" expanded="false" />
-                <element signature="method#updateHCHistory#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachListStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachList#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachListStrV2#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachListV2#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachPromotionListStr#0;class#League#0" expanded="false" />
-                <element signature="method#getCoachPromotionList#0;class#League#0" expanded="false" />
-                <element signature="method#newJobtransfer#0;class#League#0" expanded="false" />
-                <element signature="e#139319#139352#0" expanded="false" />
-                <element signature="method#coachingHotSeat#0;class#League#0" expanded="false" />
-                <element signature="method#transferPlayers#0;class#League#0" expanded="false" />
-                <element signature="method#conferenceInvites#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
-                <element signature="method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
-                <element signature="method#recruitPlayers#0;class#League#0" expanded="false" />
-                <element signature="method#advanceSeason#0;class#League#0" expanded="false" />
-                <element signature="e#182342#182362#0" expanded="false" />
-                <element signature="docComment;method#checkLongestWinStreak#0;class#League#0" expanded="false" />
-                <element signature="method#checkLongestWinStreak#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
-                <element signature="method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#advanceSeasonWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="method#advanceSeasonWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#changeAbbrWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="method#changeAbbrWinStreaks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#changeAbbrHistoryRecords#0;class#League#0" expanded="false" />
-                <element signature="method#changeAbbrHistoryRecords#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#checkLeagueRecords#0;class#League#0" expanded="false" />
-                <element signature="method#checkLeagueRecords#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#curePlayers#0;class#League#0" expanded="false" />
-                <element signature="method#curePlayers#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateLeagueHistory#0;class#League#0" expanded="false" />
-                <element signature="method#updateLeagueHistory#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueTop25History#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getLeagueHistoryStr#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueHistoryStr#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#updateTeamHistories#0;class#League#0" expanded="false" />
-                <element signature="method#updateTeamHistories#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#setTeamRanks#0;class#League#0" expanded="false" />
-                <element signature="method#setTeamRanks#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getTeamRankingsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getTeamRankingsStr#0;class#League#0" expanded="false" />
-                <element signature="method#getLeagueHistoryStats#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#getConfStandings#0;class#League#0" expanded="false" />
-                <element signature="method#getConfStandings#0;class#League#0" expanded="false" />
-                <element signature="method#getTeamRankings#0;class#League#0" expanded="false" />
-                <element signature="method#rankQB#0;class#League#0" expanded="false" />
-                <element signature="method#rankRB#0;class#League#0" expanded="false" />
-                <element signature="method#rankWR#0;class#League#0" expanded="false" />
-                <element signature="method#rankTE#0;class#League#0" expanded="false" />
-                <element signature="method#rankOL#0;class#League#0" expanded="false" />
-                <element signature="method#rankK#0;class#League#0" expanded="false" />
-                <element signature="method#rankDL#0;class#League#0" expanded="false" />
-                <element signature="method#rankLB#0;class#League#0" expanded="false" />
-                <element signature="method#rankCB#0;class#League#0" expanded="false" />
-                <element signature="method#rankS#0;class#League#0" expanded="false" />
-                <element signature="method#rankHC#0;class#League#0" expanded="false" />
-                <element signature="method#getPlayerRankStr#0;class#League#0" expanded="false" />
-                <element signature="method#getAwardsWatch#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#saveLeague#0;class#League#0" expanded="false" />
-                <element signature="e#235014#235055#0" expanded="false" />
-                <element signature="docComment;method#isNameValid#0;class#League#0" expanded="false" />
-                <element signature="method#isNameValid#0;class#League#0" expanded="false" />
-                <element signature="docComment;method#isAbbrValid#0;class#League#0" expanded="false" />
-                <element signature="method#isAbbrValid#0;class#League#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="37086">
+              <caret line="2589" column="0" lean-forward="false" selection-start-line="2589" selection-start-column="0" selection-end-line="2589" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1065,147 +949,78 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.1.2/79231e42158f711cbe81eb766d7c3578e38557a4/gradle-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.1.2/1608fa49add4d13366db7844998c6e59711f7e2a/gradle-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/3.1.2/36e59348ddd26cbed10061dd4760e8ee030b88e4/gradle-core-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/3.1.2/ccab33656c1baa6514d88f4d9356db19d0e9823b/gradle-core-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/bundletool/0.1.0-alpha01/f7c303e37818223bd98566fcbea29aa0964c4d06/bundletool-0.1.0-alpha01.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/3.1.2/84b5fe203cd814a6a48fac7902c7b0bf0d455451/builder-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/3.1.2/133b1f665104f0ebf01f71b61e4794385d7b5f1b/builder-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-gradle-api/26.1.2/2e0f2d982094f220ddc62f94180ee5187c9c0cdf/lint-gradle-api-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-gradle-api/26.1.2/8c54aedfe9da66e64402de04883cee083c127a3b/lint-gradle-api-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-api/3.1.2/7239d441f5d79f12ff8f6066703e86ddd16a29cf/gradle-api-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-api/3.1.2/427e25639a55911cadcf70657c9b2ded2ad6af2b/gradle-api-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/compilerCommon/3.1.2/a77b04ed519b3ac7c0e8946ee7e0eb156808f661/compilerCommon-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/compilerCommon/3.1.2/be65c11ded4242932046f23ecfa5c7ccb0e98f46/compilerCommon-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre8/1.2.0/3d425bfaaa7f8b1affb652c4257aa57e6597e163/kotlin-stdlib-jre8-1.2.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre8/1.2.0/505f55b9619bbc5f5e26c77427dd24a6a441eef1/kotlin-stdlib-jre8-1.2.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/e4075c49e16e086140fe40eea56b2de7516874ee/transform-api-2.0.0-deprecated-use-gradle-api-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/85bee1acea9e27152b920746c68133b30b11431/transform-api-2.0.0-deprecated-use-gradle-api.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-5.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.1/5ef31c4fe953b1fd00b8a88fa1d6820e8785bb45/asm-5.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-analysis-5.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.1/6d1bf8989fc7901f868bee3863c44f21aa63d110/asm-analysis-5.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-commons-5.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.1/25d8a575034dd9cfcb375a39b5334f0ba9c8474e/asm-commons-5.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-util-5.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/5.1/b60e33a6bd0d71831e0c249816d01e6c1dd90a47/asm-util-5.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/d965219b87f79e81b07116d451e684ab2f3acc27/jopt-simple-4.9-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/ee9e9eaa0a35360dcfeac129ff4923215fd65904/jopt-simple-4.9.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/5.3.3/186a5a9fd2f4fee04dced62b8d4d97c88337b53d/proguard-gradle-5.3.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/5.3.3/ad23a0505f58d0dfc95bb1472decc397460406c9/proguard-gradle-5.3.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/e96b1f4a9e6630a405434fca857c6b8f777163cf/auto-value-1.5.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/1b94ab7ec707e2220a0d1a7517488d1843236345/auto-value-1.5.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/22.0/55edc69e4fc937f4e58e577bb144b824c0ec7c55/guava-22.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/22.0/3564ef3803de51fb0530a8377ec6100b33b0d073/guava-22.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/c57c9f6bcbdb783260d00b80c455d82a6a8b02db/protobuf-java-3.4.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/b32aba0cbe737a4ca953f71688725972e3ee927c/protobuf-java-3.4.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.4.0/6d5f8e6d209c309d9ef3e30aa81135ee94cc7d49/protobuf-java-util-3.4.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.4.0/96aba8ab71c16018c6adf66771ce15c6491bc0fe/protobuf-java-util-3.4.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/380fceb109283ad515a05ca6955f97290e392cd8/error_prone_annotations-2.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/6dcc08f90f678ac33e5ef78c3c752b6f59e63e0c/error_prone_annotations-2.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2-proto/0.1.0/d1eb93a21a8d3590c3bfac574a8b6dffb2dbd21c/aapt2-proto-0.1.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/3.1.2/e74f8c12d313fb638cd3e199ea13a544870636d5/builder-model-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/3.1.2/4504b655fa8fe72302020ca9a2387f3f23fbfb57/builder-model-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/3.1.2/57f0b608e34a9493508d21f6a07cf34989901602/builder-test-api-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/3.1.2/ffb00b786822df6538377a90df9f2d11c022efc3/builder-test-api-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/26.1.2/eeb14343985046cf8c8504a06327db5a50e740ea/sdklib-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/26.1.2/94697a9dff499b64b6e101bedb89a89825150af/sdklib-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/26.1.2/569e3d1db94b053b15c81f7662ff8cecc4df785/sdk-common-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/26.1.2/2cf773af3fb0e1bbd56a80fc6903a9d2a40a248/sdk-common-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/26.1.2/fb215315bdbd152415f1fab7358015da3928d7ff/common-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/26.1.2/c31bbd68c51ed0ef3b8d7cdd5615acf762473887/common-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/26.1.2/58ada075a3be42ac5afe8a752a3fdebfcfdaae2b/manifest-merger-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/26.1.2/79f398427650c76f0c66c89f10e4886a1fe68c26/manifest-merger-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/26.1.2/8753f005a819994ebc56c3e567168c1fea745cc3/ddmlib-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/26.1.2/1d423e621fb5c89fed13e41d0ed026cf5d8d7e7b/ddmlib-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/protos/26.1.2/2791dabd9906f673a77b755ca2f4950fd5248729/protos-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/protos/26.1.2/ba53bcde9703b2bf9871128952dce844c5d743fa/protos-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/shared/26.1.2/eb4223fe1e164a7c37cd1448f3d89fdc016901de/shared-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/shared/26.1.2/bc21fe64fdaa64e59672e7d546d373f430e7557c/shared-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/26.1.2/37aae3a59f7220f45f85336f7374d5eaf37e5f7/tracker-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/26.1.2/2d2260da92e50ac072f89d60a596d03aab3a8757/tracker-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.1.2/93d9b522f74c2096cbaf84b088526f205d6b4a89/apksig-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.1.2/5af360dd30015a9a47c8ab0af0e6b05f64760edc/apksig-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/1b2a0925ff06220c0261b6fd468183cd9e9a9a47/javawriter-2.5.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/81241ff7078ef14f42ea2a8995fa09c096256e6b/javawriter-2.5.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/118b4633c59394749b2b2f278138beb31c930663/bcpkix-jdk15on-1.56-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/4648af70268b6fdb24674fb1fd7c1fcc73db1231/bcpkix-jdk15on-1.56.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/93c7b191596378df51c31b7d8717f71b0aeee53c/bcprov-jdk15on-1.56-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/a153c6f9744a3e9dd6feab5e210e1c9861362ec7/bcprov-jdk15on-1.56.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-tree-5.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.1/87b38c12a0ea645791ead9d3e74ae5268d1d6c34/asm-tree-5.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/a1a8e178d7813bb9596ee4e3d5e07b90ebe660af/fastutil-7.2.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/5ad3a2bb04143f70aa0765fc29fc29571a7d6b34/fastutil-7.2.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/19c6d8dee6803c520d855ff7e8a8c3d97f1271ec/json-simple-1.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/5e303a03d04e6788dddfa3655272580ae0fc13bb/json-simple-1.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.0/7fb1210ceec26e7e5195894fa83e9e67ea4d2ba/kotlin-reflect-1.2.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.0/4bbda3b5425aa38a9f6960468a29c5ef3e8a28c9/kotlin-reflect-1.2.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.1.2/83a5696fb290f745f291d24d3b794beb267e124b/baseLibrary-3.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.1.2/1b6a1add6a577708b62737dc31c479549f77750d/baseLibrary-3.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/e836b2a7348320a86c3bbd91a032486798e6ab98/antlr4-4.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/f35db7e4b2446e4174ba6a73db7bd6b3e6bb5da1/antlr4-4.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/77979eaa98f90806f984155f44f63cc1fb60ac25/juniversalchardet-1.0.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/cd49678784c46aa8789c060538e0154013bb421b/juniversalchardet-1.0.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/499341a875fe72e8fcf4ba856ba15f498d348e38/javapoet-1.8.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/e858dc62ef484048540d27d36f3ec2177a3fa9b1/javapoet-1.8.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/bbb63ca253b483da8ee53a50374593923e3de2e2/gson-2.7-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.1.2/7bc3fd2df32838e5b9b59804cc4c139bb89d26a5/annotations-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.1.2/4f4e0ee71b9ccaa4a70cc86e40fb84ada2ed99a3/annotations-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/5.3.3/6c73d839fa1603c38b067bc04d7950e05aef3d22/proguard-base-5.3.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/5.3.3/988b6b0636ce343d4962b3b37f6319dcc6e99a61/proguard-base-5.3.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.1.2/63d02e9088ee06e7b37f7314c145b5db7f39812e/layoutlib-api-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.1.2/3697abf628d30042c1082ea846454dfd1e8da3e/layoutlib-api-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/26.1.2/2a9e859006c73fc73b7642cd6560b6daac0b183f/dvlib-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/26.1.2/eb39925fee6e726468fc10344ec988c086301ed7/dvlib-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.1.2/ee0b2246a08385bd55f034c90ba0998b6d3a4213/repository-26.1.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.1.2/c8209ccb8ee0e5e3f293fd71d2a827f440ab811c/repository-26.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/1fdd1a2fed15cdf08780ed564279c0ddbff46419/commons-compress-1.12-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/84caa68576e345eb5e7ae61a0e5a9229eb100d7b/commons-compress-1.12.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6/b4e00fa279b1d45af3cb6daebcc1fee3f5402392/httpclient-4.2.6-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6/e4ca30a6a3a075053a61c6fc850d2432dc012ba7/httpclient-4.2.6.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/3ac83213baeab2b21fde6c0bf47ed68ea3e6a8da/httpmime-4.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/9ba2dcdf94ce35c8a8e9bff242db0618ca932e92/httpmime-4.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/309cd2cff7260e465792fda3dcbb063b730d8050/kxml2-2.3.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/ccbc77a5fd907ef863c29f3596c6f54ffa4e9442/kxml2-2.3.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/5b034823866d38f38f02bdad7ed8a14e650c61b6/javax.activation-1.2.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/bf744c1e2776ed1de3c55c8dac1057ec331ef744/javax.activation-1.2.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/2.2.11/29441ae1840574f4ca07a72cd1785ea8a4b8457e/jaxb-runtime-2.2.11-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/2.2.11/65510afc78679e347b0d774617a97fedac94f8/jaxb-runtime-2.2.11.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/a2e6f6d75b7fa7e8eedb3062e5bfd24cc9fe8591/jimfs-1.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/8fbd0579dc68aba6186935cc1bee21d2f3e7ec1c/jimfs-1.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.5/4fd9ac94cd3c26551bc7aecd62fce8e49f076635/httpcore-4.2.5-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.5/472f0f5f8dba5d1962cb9d7739feed739a31c30d/httpcore-4.2.5.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/f3f156cbff0e0fb0d64bfce31a352cce4a33bc19/commons-logging-1.1.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/5043bfebc3db072ed80fbd362e7caf00e885d8ae/commons-logging-1.1.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/61e9f9d11fe3e12ec62f633006e99d75fd7f19c8/commons-codec-1.6-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.0/180a4946e471f9f47d4b6139c5dbc5e7603a8424/kotlin-stdlib-1.2.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.0/25eb440d6eeb9fc60299121020fe726eb2100d03/kotlin-stdlib-1.2.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/2.2.11/57f27d326da0d4eddc4077933a4cc77cb50002d2/jaxb-core-2.2.11-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/2.2.11/f5745049f5fb9cb9d9b5f513c207727f475983e9/jaxb-core-2.2.11.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jvnet.staxex/stax-ex/1.7.7/555d23df1be863aeda3846afcb76444fa17880d2/stax-ex-1.7.7-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jvnet.staxex/stax-ex/1.7.7/18bed5a0da27a6b43efe01282f2dc911b1cb3a72/stax-ex-1.7.7.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.xml.fastinfoset/FastInfoset/1.2.13/7e43a54348e59360ebcaa73d34f0ecb122f1c741/FastInfoset-1.2.13-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.xml.fastinfoset/FastInfoset/1.2.13/98f56b9354e27bd2941cc5d461344e240ae51ae/FastInfoset-1.2.13.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/d6ced6c0bf21af19fb83f24bb6ff28ea43ddc61f/kotlin-stdlib-jre7-1.2.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/ec8b969e26fbcf2265a4d1a1539c4d1d4c5af380/kotlin-stdlib-jre7-1.2.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/1.3.9/40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf/jsr305-1.3.9.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/dcd31de68a90e41e336f6b7afce0d39285c433d7/j2objc-annotations-1.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/976d8d30bebc251db406f2bdb3eb01962b5685b3/j2objc-annotations-1.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/886474da3f761d39fcbb723d97ecc5089e731f42/animal-sniffer-annotations-1.14-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/775b7e22fb10026eed3f86e8dc556dfafe35f2d5/animal-sniffer-annotations-1.14.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/d59f43002d3d07c6adaaeedd93e7944c273821d2/jaxb-api-2.2.12-b140109.1041-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/7ed0e0d01198614194d56dfb03d9d95aa311824c/jaxb-api-2.2.12-b140109.1041.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/txw2/2.2.11/7745afc4dcc863b724f4a21fb3fc517cd5aaf891/txw2-2.2.11-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/txw2/2.2.11/2df047d8c187a62f2177bf6013f1f9786cdfc8a2/txw2-2.2.11.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.istack/istack-commons-runtime/2.21/5d42dda44aa68ff87756e93ae0042cd66d2daa78/istack-commons-runtime-2.21-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.istack/istack-commons-runtime/2.21/c969d8f15c467f0ef7d7b04889afbe7b5d48e22f/istack-commons-runtime-2.21.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/3.1.2/gradle-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/3.1.2/gradle-core-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/bundletool/0.1.0-alpha01/bundletool-0.1.0-alpha01.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/3.1.2/builder-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-gradle-api/26.1.2/lint-gradle-api-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-api/3.1.2/gradle-api-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/compilerCommon/3.1.2/compilerCommon-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/kotlin/kotlin-stdlib-jre8/1.2.0/kotlin-stdlib-jre8-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.1/asm-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.1/asm-analysis-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-commons/5.1/asm-commons-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-util/5.1/asm-util-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.3.3/proguard-gradle-5.3.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/auto/value/auto-value/1.5.2/auto-value-1.5.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/22.0/guava-22.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/protobuf/protobuf-java/3.4.0/protobuf-java-3.4.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/protobuf/protobuf-java-util/3.4.0/protobuf-java-util-3.4.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/errorprone/error_prone_annotations/2.1.2/error_prone_annotations-2.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/aapt2-proto/0.1.0/aapt2-proto-0.1.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/3.1.2/builder-model-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/3.1.2/builder-test-api-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/26.1.2/sdklib-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/26.1.2/sdk-common-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/26.1.2/common-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/26.1.2/manifest-merger-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/26.1.2/ddmlib-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/analytics-library/protos/26.1.2/protos-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/analytics-library/shared/26.1.2/shared-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/analytics-library/tracker/26.1.2/tracker-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/apksig/3.1.2/apksig-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.56/bcpkix-jdk15on-1.56.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.56/bcprov-jdk15on-1.56.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.1/asm-tree-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/it/unimi/dsi/fastutil/7.2.0/fastutil-7.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/googlecode/json-simple/json-simple/1.1/json-simple-1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/kotlin/kotlin-reflect/1.2.0/kotlin-reflect-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/baseLibrary/3.1.2/baseLibrary-3.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/antlr4/4.5.3/antlr4-4.5.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javapoet/1.8.0/javapoet-1.8.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.7/gson-2.7.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/26.1.2/annotations-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.3.3/proguard-base-5.3.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/26.1.2/layoutlib-api-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/26.1.2/dvlib-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/repository/26.1.2/repository-26.1.2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.12/commons-compress-1.12.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.2.6/httpclient-4.2.6.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/annotations/13.0/annotations-13.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/glassfish/jaxb/jaxb-runtime/2.2.11/jaxb-runtime-2.2.11.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/jimfs/jimfs/1.1/jimfs-1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpcore/4.2.5/httpcore-4.2.5.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/kotlin/kotlin-stdlib/1.2.0/kotlin-stdlib-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/glassfish/jaxb/jaxb-core/2.2.11/jaxb-core-2.2.11.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jvnet/staxex/stax-ex/1.7.7/stax-ex-1.7.7.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/sun/xml/fastinfoset/FastInfoset/1.2.13/FastInfoset-1.2.13.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/kotlin/kotlin-stdlib-jre7/1.2.0/kotlin-stdlib-jre7-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/javax/xml/bind/jaxb-api/2.2.12-b140109.1041/jaxb-api-2.2.12-b140109.1041.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/glassfish/jaxb/txw2/2.2.11/txw2-2.2.11.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/sun/istack/istack-commons-runtime/2.21/istack-commons-runtime-2.21.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$" />
@@ -1416,14 +1231,14 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="180" />
-    <option name="y" value="74" />
-    <option name="width" value="974" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="377" />
+    <option name="y" value="30" />
+    <option name="width" value="1226" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -1436,7 +1251,40 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="cfbcoach" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="Simulation" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -1623,7 +1471,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="15e17877-69f7-439f-a07c-d7c40efceb27" name="Default" comment="" />
+      <changelist id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="" />
       <created>1523938343909</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -1632,30 +1480,31 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2675906" sideWeight="0.5053192" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2675906" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31742507" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1673,20 +1522,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Simulation/League.java</url>
-          <line>2775</line>
-          <properties />
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Simulation/League.java</url>
-          <line>2793</line>
-          <properties />
-          <option name="timeStamp" value="157" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="158" />
     </breakpoint-manager>
     <watches-manager />
@@ -1703,7 +1538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
           <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1760,7 +1594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1768,7 +1601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1797,7 +1629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="790">
           <caret line="353" column="5" lean-forward="false" selection-start-line="353" selection-start-column="5" selection-end-line="353" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1805,7 +1636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
           <caret line="267" column="119" lean-forward="false" selection-start-line="267" selection-start-column="119" selection-end-line="267" selection-end-column="119" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1813,7 +1643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="274" column="119" lean-forward="false" selection-start-line="274" selection-start-column="119" selection-end-line="274" selection-end-column="119" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1821,7 +1650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13">
           <caret line="296" column="30" lean-forward="false" selection-start-line="296" selection-start-column="30" selection-end-line="296" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1829,7 +1657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="295" column="119" lean-forward="false" selection-start-line="295" selection-start-column="119" selection-end-line="295" selection-end-column="119" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1837,7 +1664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3812">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1845,7 +1671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="386">
           <caret line="282" column="147" lean-forward="false" selection-start-line="282" selection-start-column="147" selection-end-line="282" selection-end-column="147" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1853,7 +1678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="319" column="249" lean-forward="false" selection-start-line="319" selection-start-column="249" selection-end-line="319" selection-end-column="249" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1861,7 +1685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
           <caret line="302" column="137" lean-forward="false" selection-start-line="302" selection-start-column="137" selection-end-line="302" selection-end-column="137" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1874,14 +1697,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_dialog.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="155" column="28" lean-forward="false" selection-start-line="155" selection-start-column="28" selection-end-line="155" selection-end-column="28" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/dimens.xml">
@@ -1953,7 +1775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1961,29 +1782,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="200" column="22" lean-forward="false" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
@@ -1998,7 +1817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="118" column="12" lean-forward="true" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2031,15 +1849,6 @@
           <caret line="179" column="24" lean-forward="false" selection-start-line="179" selection-start-column="24" selection-end-line="179" selection-end-column="24" />
           <folding>
             <element signature="e#6168#6169#0" expanded="false" />
-            <element signature="e#6218#6219#0" expanded="false" />
-            <element signature="e#10793#10794#0" expanded="false" />
-            <element signature="e#10820#10821#0" expanded="false" />
-            <element signature="e#10885#10886#0" expanded="false" />
-            <element signature="e#10912#10913#0" expanded="false" />
-            <element signature="e#12495#12496#0" expanded="false" />
-            <element signature="e#12522#12523#0" expanded="false" />
-            <element signature="e#15388#15389#0" expanded="false" />
-            <element signature="e#15426#15427#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2073,165 +1882,6 @@
         <state relative-caret-position="136">
           <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="2522" column="0" lean-forward="false" selection-start-line="2522" selection-start-column="0" selection-end-line="2522" selection-end-column="0" />
-          <folding>
-            <element signature="class#10603:11165" expanded="false" />
-            <element signature="method#onItemSelected#0;class#10603:11165" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#10603:11165" expanded="false" />
-            <element signature="class#11749:12207" expanded="false" />
-            <element signature="method#onItemSelected#0;class#11749:12207" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#11749:12207" expanded="false" />
-            <element signature="class#13221:13483" expanded="false" />
-            <element signature="method#onClick#0;class#13221:13483" expanded="false" />
-            <element signature="class#15696:15974" expanded="false" />
-            <element signature="method#onClick#0;class#15696:15974" expanded="false" />
-            <element signature="class#17389:17635" expanded="false" />
-            <element signature="method#onClick#0;class#17389:17635" expanded="false" />
-            <element signature="class#18241:18487" expanded="false" />
-            <element signature="method#onClick#0;class#18241:18487" expanded="false" />
-            <element signature="class#20387:20649" expanded="false" />
-            <element signature="method#onClick#0;class#20387:20649" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#29182#29240#0" expanded="false" />
-            <element signature="class#31475:32493" expanded="false" />
-            <element signature="method#onItemSelected#0;class#31475:32493" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#31475:32493" expanded="false" />
-            <element signature="method#seasonGoals#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#37204:37402" expanded="false" />
-            <element signature="method#onClick#0;class#37204:37402" expanded="false" />
-            <element signature="method#examineTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrConference#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateTeamStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updatePlayerStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateSchedule#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#scrollToLatestGame#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateStandings#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateRankings#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#heismanCeremony#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#47708:49208" expanded="false" />
-            <element signature="method#onItemSelected#0;class#47708:49208" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#47708:49208" expanded="false" />
-            <element signature="method#showGameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#56117:63527" expanded="false" />
-            <element signature="method#onItemSelected#0;class#56117:63527" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#56117:63527" expanded="false" />
-            <element signature="class#66986:67533" expanded="false" />
-            <element signature="method#onItemSelected#0;class#66986:67533" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#66986:67533" expanded="false" />
-            <element signature="class#68214:68761" expanded="false" />
-            <element signature="method#onItemSelected#0;class#68214:68761" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#68214:68761" expanded="false" />
-            <element signature="method#showTeamRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#71492:72421" expanded="false" />
-            <element signature="method#onItemSelected#0;class#71492:72421" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#71492:72421" expanded="false" />
-            <element signature="method#showPlayerRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#74414:75321" expanded="false" />
-            <element signature="method#onItemSelected#0;class#74414:75321" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#74414:75321" expanded="false" />
-            <element signature="method#showRecruitingClassDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showLeagueHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#77770:79230" expanded="false" />
-            <element signature="method#showLeagueHistoryStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#80906:81837" expanded="false" />
-            <element signature="method#onItemSelected#0;class#80906:81837" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#80906:81837" expanded="false" />
-            <element signature="method#showTop25History#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#83704:84170" expanded="false" />
-            <element signature="method#onItemSelected#0;class#83704:84170" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#83704:84170" expanded="false" />
-            <element signature="method#showCoachHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#85395:86097" expanded="false" />
-            <element signature="method#onItemSelected#0;class#85395:86097" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#85395:86097" expanded="false" />
-            <element signature="method#showCurrTeamHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#87550:88853" expanded="false" />
-            <element signature="method#showBowlCCGDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#90034:90646" expanded="false" />
-            <element signature="method#onItemSelected#0;class#90034:90646" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#90034:90646" expanded="false" />
-            <element signature="method#showNewsStoriesDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#93259:94566" expanded="false" />
-            <element signature="method#onItemSelected#0;class#93259:94566" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#93259:94566" expanded="false" />
-            <element signature="docComment;method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#96886:97453" expanded="false" />
-            <element signature="method#onItemSelected#0;class#96886:97453" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#96886:97453" expanded="false" />
-            <element signature="class#98057:98624" expanded="false" />
-            <element signature="method#onItemSelected#0;class#98057:98624" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#98057:98624" expanded="false" />
-            <element signature="docComment;method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#100181:101450" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#100181:101450" expanded="false" />
-            <element signature="method#onTextChanged#0;class#100181:101450" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#100181:101450" expanded="false" />
-            <element signature="class#101508:102835" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#101508:102835" expanded="false" />
-            <element signature="method#onTextChanged#0;class#101508:102835" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#101508:102835" expanded="false" />
-            <element signature="class#102893:104163" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#102893:104163" expanded="false" />
-            <element signature="method#onTextChanged#0;class#102893:104163" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#102893:104163" expanded="false" />
-            <element signature="class#104219:105463" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#104219:105463" expanded="false" />
-            <element signature="method#onTextChanged#0;class#104219:105463" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#104219:105463" expanded="false" />
-            <element signature="docComment;method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#114132:114624" expanded="false" />
-            <element signature="method#onItemSelected#0;class#114132:114624" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#114132:114624" expanded="false" />
-            <element signature="docComment;method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#124295:124977" expanded="false" />
-            <element signature="method#onItemSelected#0;class#124295:124977" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#124295:124977" expanded="false" />
-            <element signature="docComment;method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#saveLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#saveLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="docComment;method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showWeeklyScores#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#132341:133341" expanded="false" />
-            <element signature="method#onItemSelected#0;class#132341:133341" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#132341:133341" expanded="false" />
-            <element signature="method#updateTeamUI#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#switchTeams#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#jobOffers#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#143995:145239" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#143995:145239" expanded="false" />
-            <element signature="method#onTextChanged#0;class#143995:145239" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#143995:145239" expanded="false" />
-            <element signature="method#customLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isExternalStorageWritable#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isExternalStorageReadable#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getExtSaveDir#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#importData#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#151087#151152#0" expanded="false" />
-            <element signature="e#151413#151482#0" expanded="false" />
-            <element signature="method#readRosterFile#0;class#MainActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2290,7 +1940,6 @@
             <element signature="docComment;method#getCompositeDLRush#0;class#Team#0" expanded="false" />
             <element signature="method#getCompositeDLRush#0;class#Team#0" expanded="false" />
             <element signature="method#calcSeasonPrestige#0;class#Team#0" expanded="false" />
-            <element signature="e#39607#39624#0" expanded="false" />
             <element signature="docComment;method#seasonSummaryStr#0;class#Team#0" expanded="false" />
             <element signature="method#seasonSummaryStr#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#advanceSeason#0;class#Team#0" expanded="false" />
@@ -2300,14 +1949,12 @@
             <element signature="docComment;method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
             <element signature="method#advanceSeasonPlayers#0;class#Team#0" expanded="false" />
             <element signature="method#getPlayersTransferring#0;class#Team#0" expanded="false" />
-            <element signature="e#64809#64828#0" expanded="false" />
             <element signature="method#CPUrecruiting#0;class#Team#0" expanded="false" />
             <element signature="method#getTeamSize#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#recruitPlayersFreshman#0;class#Team#0" expanded="false" />
             <element signature="method#recruitPlayersFreshman#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#recruitWalkOns#0;class#Team#0" expanded="false" />
             <element signature="method#recruitWalkOns#0;class#Team#0" expanded="false" />
-            <element signature="e#96714#96783#0" expanded="false" />
             <element signature="method#calcMaxRecruitRating#0;class#Team#0" expanded="false" />
             <element signature="method#getQBRecruits#0;class#Team#0" expanded="false" />
             <element signature="method#getRBRecruits#0;class#Team#0" expanded="false" />
@@ -2328,7 +1975,6 @@
             <element signature="method#getLeagueFreshman#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#groupPlayerStandingCSV#0;class#Team#0" expanded="false" />
             <element signature="method#groupPlayerStandingCSV#0;class#Team#0" expanded="false" />
-            <element signature="docComment;method#resetStats#0;class#Team#0" expanded="false" />
             <element signature="method#resetStats#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#updateTeamHistory#0;class#Team#0" expanded="false" />
             <element signature="method#updateTeamHistory#0;class#Team#0" expanded="false" />
@@ -2362,9 +2008,7 @@
             <element signature="method#getTeamStatsStrCSV#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#getGameSummaryStr#0;class#Team#0" expanded="false" />
             <element signature="method#getGameSummaryStr#0;class#Team#0" expanded="false" />
-            <element signature="docComment;method#getPlayerStatsExpandListStr#0;class#Team#0" expanded="false" />
             <element signature="method#getPlayerStatsExpandListStr#0;class#Team#0" expanded="false" />
-            <element signature="docComment;method#getPlayerStatsExpandListMap#0;class#Team#0" expanded="false" />
             <element signature="method#getPlayerStatsExpandListMap#0;class#Team#0" expanded="false" />
             <element signature="method#findBenchPlayer#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#getRankStr#0;class#Team#0" expanded="false" />
@@ -2418,149 +2062,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="2773" column="23" lean-forward="false" selection-start-line="2773" selection-start-column="22" selection-end-line="2773" selection-end-column="23" />
-          <folding>
-            <element signature="docComment;method#League#0;class#League#0" expanded="false" />
-            <element signature="method#League#0;class#League#0" expanded="false" />
-            <element signature="e#8347#8366#0" expanded="false" />
-            <element signature="docComment;method#League#1;class#League#0" expanded="false" />
-            <element signature="method#League#1;class#League#0" expanded="false" />
-            <element signature="method#League#2;class#League#0" expanded="false" />
-            <element signature="e#26902#26905#0" expanded="false" />
-            <element signature="method#setupCommonInitalizers#0;class#League#0" expanded="false" />
-            <element signature="method#setupSeason#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#isCareerMode#0;class#League#0" expanded="false" />
-            <element signature="method#setupNamesDB#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getRandName#0;class#League#0" expanded="false" />
-            <element signature="method#getRandName#0;class#League#0" expanded="false" />
-            <element signature="method#setTeamBenchMarks#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getYear#0;class#League#0" expanded="false" />
-            <element signature="method#getRegion#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getTeamListStr#0;class#League#0" expanded="false" />
-            <element signature="method#getTeamListStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#findTeam#0;class#League#0" expanded="false" />
-            <element signature="method#findTeam#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#findTeamAbbr#0;class#League#0" expanded="false" />
-            <element signature="method#findTeamAbbr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#findConference#0;class#League#0" expanded="false" />
-            <element signature="method#findConference#0;class#League#0" expanded="false" />
-            <element signature="method#updateTeamConf#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getConfNumber#0;class#League#0" expanded="false" />
-            <element signature="method#getConfNumber#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-            <element signature="method#updateTeamTalentRatings#0;class#League#0" expanded="false" />
-            <element signature="method#getAverageYards#0;class#League#0" expanded="false" />
-            <element signature="method#getAverageOffTalent#0;class#League#0" expanded="false" />
-            <element signature="method#getAverageDefTalent#0;class#League#0" expanded="false" />
-            <element signature="method#averageConfPrestige#0;class#League#0" expanded="false" />
-            <element signature="method#preseasonNews#0;class#League#0" expanded="false" />
-            <element signature="method#topRecruits#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#playWeek#0;class#League#0" expanded="false" />
-            <element signature="method#playWeek#0;class#League#0" expanded="false" />
-            <element signature="method#disciplineAction#0;class#League#0" expanded="false" />
-            <element signature="method#updateSuspensions#0;class#League#0" expanded="false" />
-            <element signature="method#playerSpotlight#0;class#League#0" expanded="false" />
-            <element signature="method#cfbPlayoffsNews#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getHeisman#0;class#League#0" expanded="false" />
-            <element signature="method#getHeisman#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
-            <element signature="method#getHeismanCeremonyStr#0;class#League#0" expanded="false" />
-            <element signature="method#getTopFreshman#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getAllFreshmanStr#0;class#League#0" expanded="false" />
-            <element signature="method#getAllFreshmanStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
-            <element signature="method#getFreshmanCeremonyStr#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachAwardStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getAllAmericanStr#0;class#League#0" expanded="false" />
-            <element signature="method#getAllAmericanStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getAllConfStr#0;class#League#0" expanded="false" />
-            <element signature="method#getAllConfStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getCCGsStr#0;class#League#0" expanded="false" />
-            <element signature="method#getCCGsStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
-            <element signature="method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#schedBowlGames#0;class#League#0" expanded="false" />
-            <element signature="method#schedBowlGames#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#playBowlGames#0;class#League#0" expanded="false" />
-            <element signature="method#playBowlGames#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#playBowl#0;class#League#0" expanded="false" />
-            <element signature="method#playBowl#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getGameSummaryBowl#0;class#League#0" expanded="false" />
-            <element signature="method#getGameSummaryBowl#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#ncgSummaryStr#0;class#League#0" expanded="false" />
-            <element signature="method#ncgSummaryStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#seasonSummaryStr#0;class#League#0" expanded="false" />
-            <element signature="method#seasonSummaryStr#0;class#League#0" expanded="false" />
-            <element signature="method#advanceHC#0;class#League#0" expanded="false" />
-            <element signature="method#updateHCHistory#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachListStr#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachList#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachListStrV2#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachListV2#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachPromotionListStr#0;class#League#0" expanded="false" />
-            <element signature="method#getCoachPromotionList#0;class#League#0" expanded="false" />
-            <element signature="method#newJobtransfer#0;class#League#0" expanded="false" />
-            <element signature="e#139319#139352#0" expanded="false" />
-            <element signature="method#coachingHotSeat#0;class#League#0" expanded="false" />
-            <element signature="method#transferPlayers#0;class#League#0" expanded="false" />
-            <element signature="method#conferenceInvites#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
-            <element signature="method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
-            <element signature="method#recruitPlayers#0;class#League#0" expanded="false" />
-            <element signature="method#advanceSeason#0;class#League#0" expanded="false" />
-            <element signature="e#182342#182362#0" expanded="false" />
-            <element signature="docComment;method#checkLongestWinStreak#0;class#League#0" expanded="false" />
-            <element signature="method#checkLongestWinStreak#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
-            <element signature="method#updateLongestActiveWinStreak#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#advanceSeasonWinStreaks#0;class#League#0" expanded="false" />
-            <element signature="method#advanceSeasonWinStreaks#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#changeAbbrWinStreaks#0;class#League#0" expanded="false" />
-            <element signature="method#changeAbbrWinStreaks#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#changeAbbrHistoryRecords#0;class#League#0" expanded="false" />
-            <element signature="method#changeAbbrHistoryRecords#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#checkLeagueRecords#0;class#League#0" expanded="false" />
-            <element signature="method#checkLeagueRecords#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
-            <element signature="method#getLeagueRecordsStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#curePlayers#0;class#League#0" expanded="false" />
-            <element signature="method#curePlayers#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#updateLeagueHistory#0;class#League#0" expanded="false" />
-            <element signature="method#updateLeagueHistory#0;class#League#0" expanded="false" />
-            <element signature="method#getLeagueTop25History#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getLeagueHistoryStr#0;class#League#0" expanded="false" />
-            <element signature="method#getLeagueHistoryStr#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#updateTeamHistories#0;class#League#0" expanded="false" />
-            <element signature="method#updateTeamHistories#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#setTeamRanks#0;class#League#0" expanded="false" />
-            <element signature="method#setTeamRanks#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getTeamRankingsStr#0;class#League#0" expanded="false" />
-            <element signature="method#getTeamRankingsStr#0;class#League#0" expanded="false" />
-            <element signature="method#getLeagueHistoryStats#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#getConfStandings#0;class#League#0" expanded="false" />
-            <element signature="method#getConfStandings#0;class#League#0" expanded="false" />
-            <element signature="method#getTeamRankings#0;class#League#0" expanded="false" />
-            <element signature="method#rankQB#0;class#League#0" expanded="false" />
-            <element signature="method#rankRB#0;class#League#0" expanded="false" />
-            <element signature="method#rankWR#0;class#League#0" expanded="false" />
-            <element signature="method#rankTE#0;class#League#0" expanded="false" />
-            <element signature="method#rankOL#0;class#League#0" expanded="false" />
-            <element signature="method#rankK#0;class#League#0" expanded="false" />
-            <element signature="method#rankDL#0;class#League#0" expanded="false" />
-            <element signature="method#rankLB#0;class#League#0" expanded="false" />
-            <element signature="method#rankCB#0;class#League#0" expanded="false" />
-            <element signature="method#rankS#0;class#League#0" expanded="false" />
-            <element signature="method#rankHC#0;class#League#0" expanded="false" />
-            <element signature="method#getPlayerRankStr#0;class#League#0" expanded="false" />
-            <element signature="method#getAwardsWatch#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#saveLeague#0;class#League#0" expanded="false" />
-            <element signature="e#235014#235055#0" expanded="false" />
-            <element signature="docComment;method#isNameValid#0;class#League#0" expanded="false" />
-            <element signature="method#isNameValid#0;class#League#0" expanded="false" />
-            <element signature="docComment;method#isAbbrValid#0;class#League#0" expanded="false" />
-            <element signature="method#isAbbrValid#0;class#League#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="2784" column="23" lean-forward="false" selection-start-line="2784" selection-start-column="23" selection-end-line="2784" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37086">
+          <caret line="2589" column="0" lean-forward="false" selection-start-line="2589" selection-start-column="0" selection-end-line="2589" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

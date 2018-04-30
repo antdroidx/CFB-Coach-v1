@@ -19,6 +19,7 @@ Player {
     public String position;
     public int year;
     public int ratOvr;
+    public int ratOvrStart;
     public int ratPot;
     public int ratFootIQ;
     public int ratDur;
@@ -80,6 +81,10 @@ Player {
     final int allAmericanBonus = 5;
     final int allFreshmanBonus = 4;
     final int topBonus = 3;
+
+    final int endseason = 40;
+    final int endseasonFactor = 15;
+    final int endseasonBonus = 30;
 
     final double qbImportance = 1;
     final double rbImportance = 1.5;
@@ -228,6 +233,46 @@ Player {
     }
 
     public String getPosNameYrOvrPot_Str() {
+        if (ratImprovement > 0 && team.league.currentWeek > 5 && team.league.currentWeek < 8 || team.league.currentWeek > 19) {
+            if (team.league.hidePotential) {
+                if (injury != null) {
+                    return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isTransfer) {
+                    return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Transfer  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isRedshirt) {
+                    return position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Redshirt  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isSuspended) {
+                    return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isWalkOn) {
+                    return position + " " + name + " [" + getYrStr() + "]>" + " [WO]  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr  + " (+" + ratImprovement + ")";
+            } else {
+
+                if (injury != null) {
+                    return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isTransfer) {
+                    return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Transfer  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isRedshirt) {
+                    return position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Redshirt  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isSuspended) {
+                    return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                }
+                if (isWalkOn) {
+                    return position + " " + name + " [" + getYrStr() + "]>" + "[WO]  Ovr: " + ratOvr  + " (+" + ratImprovement + ")" +  ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
+                }
+                return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr  + " (+" + ratImprovement + ")" + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
+            }
+        }
+
+
         if (team.league.hidePotential) {
             if (injury != null) {
                 return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]"+  ">" + injury.toString() + "  Ovr: " + ratOvr;
@@ -489,5 +534,32 @@ Player {
 
     String getWeight() {
         return weight + " lbs";
+    }
+
+    public int getProgression() {
+        int num = (ratPot * 2 + team.HC.get(0).ratTalent * 1) / 3;
+        return num;
+    }
+
+    public int getProgressionOff() {
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 7;
+        return num;
+    }
+
+    public int getProgressionDef() {
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef) / 7;
+        return num;
+    }
+
+    public double getGamesBonus() {
+        double games = (double)(gamesStarted) + (double)((gamesPlayed - gamesStarted) / 3);
+        games =(games*2.5);
+        return games;
+    }
+
+    public double getMidSeasonBonus() {
+        ratOvrStart = ratOvr;
+        double games = (double)(gamesStarted/2) + (double)((gamesPlayed-gamesStarted)/3);
+        return games;
     }
 }

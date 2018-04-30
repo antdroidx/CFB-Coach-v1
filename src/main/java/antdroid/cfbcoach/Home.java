@@ -1,5 +1,7 @@
 package antdroid.cfbcoach;
 
+//Google Play Services ID: 116207837258
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -48,10 +50,10 @@ public class Home extends AppCompatActivity {
         Button newGameButton = findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                finish();
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
                 Home.this.startActivity(myIntent);
-                finish();
             }
         });
 
@@ -71,10 +73,10 @@ public class Home extends AppCompatActivity {
         Button newCareerButton = findViewById(R.id.buttonCareer);
         newCareerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                finish();
                 Intent myIntent = new Intent(Home.this, MainActivity.class);
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER");
                 Home.this.startActivity(myIntent);
-                finish();
             }
         });
 
@@ -160,33 +162,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-/*        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Welcome to College Football Coach: Career Edition\n\n" +
-                "April 09, 2018" +
-                "\n+Implemented Special Teams into Game Simulation" +
-                "\n+Kick & Punt Returner Season Stats Tracking" +
-                "\n+Returner Stats added to Awards scoring" +
-                "\n+New In-Season Awards Watch Menu" +
-                "\n+Option to Enable/Disable Potential Rating Display" +
-                "\n+Player Height/Weight Info" +
-                "\n\nApril 07, 2018" +
-                "\n+Added second Safety position" +
-                "\n+Added in All-Freshman Team Awards" +
-                "\n+Hide Potential Rating (replaced with Predicted Future Rating)" +
-                "\n+Removed Overall/Potential rating from Recruiting / Replaced with Scout Grade" +
-                "\n+Balanced Offense Strategies (Spread/West Coast Offense tweaks)" +
-                "\n+Added Settings option for FULL Play-By-Play Game Log (slower!)")
-                .setTitle("Update Log")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        TextView textView = dialog.findViewById(android.R.id.message);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);*/
-
     }
 
 
@@ -219,6 +194,7 @@ public class Home extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
                 if (!fileInfos[item].equals("EMPTY")) {
+                    finish();
                     Intent myIntent = new Intent(Home.this, MainActivity.class);
                     myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb");
                     Home.this.startActivity(myIntent);
@@ -323,53 +299,6 @@ public class Home extends AppCompatActivity {
         return file;
     }
 
-    //Takes Custom Universe file and converts it to separate csv files
-    private void customLeague(Uri uri) {
-        Intent myIntent = new Intent(Home.this, MainActivity.class);
-
-        try {
-            File conferences = new File(getFilesDir(), "conferences.txt");
-            File teams = new File(getFilesDir(), "teams.txt");
-            String line;
-            InputStream inputStream = getContentResolver().openInputStream(uri);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder sb = new StringBuilder();
-            //First ignore the save file info
-            line = reader.readLine();
-            //Next get league history
-            while ((line = reader.readLine()) != null && !line.equals("[END_CONFERENCES]")) {
-                sb.append(line + ",");
-            }
-            sb.append("END_CONFERENCES");
-
-            // Actually write to the file
-            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(conferences)))) {
-                writer.write(sb.toString());
-            } catch (Exception e) {
-            }
-            StringBuilder sb1 = new StringBuilder();
-
-            //Next get heismans
-            while ((line = reader.readLine()) != null && !line.equals("END_TEAMS")) {
-                sb1.append(line + ",");
-            }
-            sb1.append("END_TEAMS");
-            // Actually write to the file
-            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(teams)))) {
-                writer.write(sb1.toString());
-            } catch (Exception e) {
-            }
-            // Always close files.
-            reader.close();
-            myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM");
-            Home.this.startActivity(myIntent);
-        } catch (Exception e) {
-            Toast.makeText(Home.this, "Error! Bad URL or unable to read file.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private Uri getURI(Intent intent) {
         Uri uri = intent.getData();
         return uri;
@@ -398,8 +327,8 @@ public class Home extends AppCompatActivity {
             } else {
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
             }
+            finish();
             Home.this.startActivity(myIntent);
-            //finish();
 
         }
     }

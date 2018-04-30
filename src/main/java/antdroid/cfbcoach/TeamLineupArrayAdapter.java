@@ -29,8 +29,14 @@ class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
         this.players = values;
         this.playersRequired = playersRequired;
         playersSelected = new ArrayList<>();
-        for (int i = 0; i < playersRequired; ++i) {
-            playersSelected.add(players.get(i));
+        if (players.size() >= playersRequired) {
+            for (int i = 0; i < playersRequired; ++i) {
+                playersSelected.add(players.get(i));
+            }
+        } else {
+            for (int i = 0; i < players.size(); ++i) {
+                playersSelected.add(players.get(i));
+            }
         }
     }
 

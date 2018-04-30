@@ -409,32 +409,24 @@ public class Game implements Serializable {
             //game over, add wins
             if (homeScore > awayScore) {
                 homeTeam.wins++;
-                homeTeam.totalWins++;
                 homeTeam.gameWLSchedule.add("W");
                 awayTeam.losses++;
-                awayTeam.totalLosses++;
                 awayTeam.gameWLSchedule.add("L");
                 homeTeam.gameWinsAgainst.add(awayTeam);
                 awayTeam.gameLossesAgainst.add(homeTeam);
                 homeTeam.winStreak.addWin(homeTeam.league.getYear());
                 homeTeam.league.checkLongestWinStreak(homeTeam.winStreak);
                 awayTeam.winStreak.resetStreak(awayTeam.league.getYear());
-                homeTeam.HC.get(0).wins++;
-                awayTeam.HC.get(0).losses++;
             } else {
                 homeTeam.losses++;
-                homeTeam.totalLosses++;
                 homeTeam.gameWLSchedule.add("L");
                 awayTeam.wins++;
-                awayTeam.totalWins++;
                 awayTeam.gameWLSchedule.add("W");
                 awayTeam.gameWinsAgainst.add(homeTeam);
                 homeTeam.gameLossesAgainst.add(awayTeam);
                 awayTeam.winStreak.addWin(awayTeam.league.getYear());
                 awayTeam.league.checkLongestWinStreak(awayTeam.winStreak);
                 homeTeam.winStreak.resetStreak(homeTeam.league.getYear());
-                homeTeam.HC.get(0).losses++;
-                awayTeam.HC.get(0).wins++;
             }
 
             // Add points/opp points
@@ -1207,8 +1199,8 @@ public class Game implements Serializable {
         boolean gotTD;
         gotTD = false;
         int yardsGain;
-        int blockAdv = getCompositeOLRush(selTE) - getCompositeDLRush(selLB, selS) + (offense.teamStratDef.getRunProtection() - defense.teamStratDef.getRunProtection());
-        int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.teamStratDef.getRunUsage() - defense.teamStratDef.getRunUsage());
+        int blockAdv = getCompositeOLRush(selTE) - getCompositeDLRush(selLB, selS) + (offense.teamStratOff.getRunProtection() - defense.teamStratDef.getRunProtection());
+        int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.teamStratOff.getRunUsage() - defense.teamStratDef.getRunUsage());
 
         //Start Rush Play
         if (selRB.gameSim >= selQB.gameSim) {
