@@ -16,9 +16,6 @@ allprojects {
     repositories {
         jcenter()
         google()
-        maven {
-            url "https://jitpack.io"
-        }
     }
 }
 
@@ -36,7 +33,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionName 'v1.1.10'
-        versionCode 33
+        versionCode 35
     }
     buildTypes {
         release {
@@ -61,6 +58,4 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.0'
     implementation 'com.android.support:design:27.0.0'
     implementation 'com.google.android.gms:play-services-games:15.0.0'
-    implementation 'com.github.javiersantos:AppUpdater:2.6.5'
-
 }

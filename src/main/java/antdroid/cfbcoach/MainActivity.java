@@ -667,10 +667,6 @@ public class MainActivity extends AppCompatActivity {
             // Only show recruiting classes if it aint 2017
             showRecruitingClassDialog();
         }
-
-        if (userTeam.teamHistory.size() > 0 && simLeague.currentWeek == 0) {
-            seasonGoals();
-        }
     }
 
     //Update Header Bar
@@ -3142,11 +3138,12 @@ public class MainActivity extends AppCompatActivity {
     //Recruiting Score
     private void showRecruitingClassDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
         builder.setTitle("Recruiting Class Rankings")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //do nothing?
+                        seasonGoals();
                     }
                 })
                 .setView(getLayoutInflater().inflate(R.layout.simple_list_dialog, null));
