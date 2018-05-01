@@ -37,7 +37,7 @@ class HallOfFameListArrayAdapter extends ArrayAdapter<String> {
         if (hof.length > 1) {
             textTop.setText(hof[0]);
             if (hof[0].split(":")[0].equals(userTeam)) {
-                textTop.setTextColor(Color.RED);
+                textTop.setTextColor(Color.parseColor("#5994de"));
             }
             StringBuilder left = new StringBuilder();
             StringBuilder right = new StringBuilder();

@@ -8,15 +8,19 @@
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CFB-Coach.iml" afterPath="$PROJECT_DIR$/CFB-Coach.iml" />
       <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change beforePath="$PROJECT_DIR$/release/output.json" afterPath="$PROJECT_DIR$/release/output.json" />
-      <change beforePath="$PROJECT_DIR$/release/vc21-2018-04-25-v1.1.1-CFB-Coach-release.apk" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/release/vc32-2018-04-30-CFB-Coach-release.apk" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/release/vc33-04-30-2018-CFB-Coach-release.apk" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
+      <change beforePath="$PROJECT_DIR$/release/vc35-04-30-2018-CFB-Coach-release.apk" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/content_main.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_main.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -57,12 +61,174 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Conference.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4180">
-              <caret line="368" column="41" lean-forward="false" selection-start-line="368" selection-start-column="41" selection-end-line="368" selection-end-column="41" />
-              <folding />
+            <state relative-caret-position="17">
+              <caret line="280" column="23" lean-forward="false" selection-start-line="280" selection-start-column="16" selection-end-line="280" selection-end-column="23" />
+              <folding>
+                <element signature="e#3507#3523#0" expanded="false" />
+                <element signature="class#9246:9808" expanded="false" />
+                <element signature="method#onItemSelected#0;class#9246:9808" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#9246:9808" expanded="false" />
+                <element signature="class#10392:10850" expanded="false" />
+                <element signature="method#onItemSelected#0;class#10392:10850" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#10392:10850" expanded="false" />
+                <element signature="method#updateHeaderBar#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#newGameHardDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#newGameDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#userNameDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#18951:20195" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#18951:20195" expanded="false" />
+                <element signature="method#onTextChanged#0;class#18951:20195" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#18951:20195" expanded="false" />
+                <element signature="method#resetTeamUI#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#seasonGoals#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#29090:29272" expanded="false" />
+                <element signature="method#onClick#0;class#29090:29272" expanded="false" />
+                <element signature="method#scrollToLatestGame#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#showNewsStoriesDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#32635:33942" expanded="false" />
+                <element signature="method#onItemSelected#0;class#32635:33942" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#32635:33942" expanded="false" />
+                <element signature="method#updateTeamStats#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#examinePlayer#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#updateSchedule#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#showGameDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#44285:51632" expanded="false" />
+                <element signature="method#onItemSelected#0;class#44285:51632" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#44285:51632" expanded="false" />
+                <element signature="class#55089:55636" expanded="false" />
+                <element signature="method#onItemSelected#0;class#55089:55636" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#55089:55636" expanded="false" />
+                <element signature="class#56317:56864" expanded="false" />
+                <element signature="method#onItemSelected#0;class#56317:56864" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#56317:56864" expanded="false" />
+                <element signature="method#showWeeklyScores#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#59640:60640" expanded="false" />
+                <element signature="method#onItemSelected#0;class#59640:60640" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#59640:60640" expanded="false" />
+                <element signature="method#updateStandings#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#updateRankings#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#63430:63922" expanded="false" />
+                <element signature="method#onItemSelected#0;class#63430:63922" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#63430:63922" expanded="false" />
+                <element signature="method#updateLineupList#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#70899:71466" expanded="false" />
+                <element signature="method#onItemSelected#0;class#70899:71466" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#70899:71466" expanded="false" />
+                <element signature="class#72070:72637" expanded="false" />
+                <element signature="method#onItemSelected#0;class#72070:72637" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#72070:72637" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#79730#79788#0" expanded="false" />
+                <element signature="class#82023:83041" expanded="false" />
+                <element signature="method#onItemSelected#0;class#82023:83041" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#82023:83041" expanded="false" />
+                <element signature="class#86786:88055" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#86786:88055" expanded="false" />
+                <element signature="method#onTextChanged#0;class#86786:88055" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#86786:88055" expanded="false" />
+                <element signature="class#88113:89440" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#88113:89440" expanded="false" />
+                <element signature="method#onTextChanged#0;class#88113:89440" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#88113:89440" expanded="false" />
+                <element signature="class#89498:90768" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#89498:90768" expanded="false" />
+                <element signature="method#onTextChanged#0;class#89498:90768" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#89498:90768" expanded="false" />
+                <element signature="class#90824:92068" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#90824:92068" expanded="false" />
+                <element signature="method#onTextChanged#0;class#90824:92068" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#90824:92068" expanded="false" />
+                <element signature="method#showLeagueHistoryDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#99996:101471" expanded="false" />
+                <element signature="method#onItemSelected#0;class#99996:101471" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#99996:101471" expanded="false" />
+                <element signature="method#showLeagueHistoryStats#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#103154:104089" expanded="false" />
+                <element signature="method#onItemSelected#0;class#103154:104089" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#103154:104089" expanded="false" />
+                <element signature="method#showTop25History#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#105978:106444" expanded="false" />
+                <element signature="method#onItemSelected#0;class#105978:106444" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#105978:106444" expanded="false" />
+                <element signature="method#showCurrTeamHistoryDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#107926:109236" expanded="false" />
+                <element signature="method#onItemSelected#0;class#107926:109236" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#107926:109236" expanded="false" />
+                <element signature="method#showCoachHistoryDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#110471:111173" expanded="false" />
+                <element signature="method#onItemSelected#0;class#110471:111173" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#110471:111173" expanded="false" />
+                <element signature="method#showTeamRankingsDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#113142:114071" expanded="false" />
+                <element signature="method#onItemSelected#0;class#113142:114071" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#113142:114071" expanded="false" />
+                <element signature="method#showPlayerRankingsDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#116093:117000" expanded="false" />
+                <element signature="method#onItemSelected#0;class#116093:117000" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#116093:117000" expanded="false" />
+                <element signature="method#showBowlCCGDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#118206:118818" expanded="false" />
+                <element signature="method#onItemSelected#0;class#118206:118818" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#118206:118818" expanded="false" />
+                <element signature="method#heismanCeremony#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#121121:122621" expanded="false" />
+                <element signature="method#onItemSelected#0;class#121121:122621" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#121121:122621" expanded="false" />
+                <element signature="method#importData#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#saveLeague#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#midseasonSummary#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#132775:132957" expanded="false" />
+                <element signature="method#onClick#0;class#132775:132957" expanded="false" />
+                <element signature="method#seasonSummary#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#133508:133690" expanded="false" />
+                <element signature="method#onClick#0;class#133508:133690" expanded="false" />
+                <element signature="method#contractDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#134277:134459" expanded="false" />
+                <element signature="method#onClick#0;class#134277:134459" expanded="false" />
+                <element signature="method#jobOffers#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#promotions#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#138203:138417" expanded="false" />
+                <element signature="method#onClick#0;class#138203:138417" expanded="false" />
+                <element signature="class#138726:138941" expanded="false" />
+                <element signature="method#onClick#0;class#138726:138941" expanded="false" />
+                <element signature="class#140909:141107" expanded="false" />
+                <element signature="method#onClick#0;class#140909:141107" expanded="false" />
+                <element signature="method#switchTeams#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#conferenceRealignment#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#143115:143329" expanded="false" />
+                <element signature="method#onClick#0;class#143115:143329" expanded="false" />
+                <element signature="method#promotionRelegation#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#144061:144259" expanded="false" />
+                <element signature="method#onClick#0;class#144061:144259" expanded="false" />
+                <element signature="method#transfers#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#144817:144999" expanded="false" />
+                <element signature="method#onClick#0;class#144817:144999" expanded="false" />
+                <element signature="class#145577:145823" expanded="false" />
+                <element signature="method#onClick#0;class#145577:145823" expanded="false" />
+                <element signature="method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#147957:148141" expanded="false" />
+                <element signature="method#onClick#0;class#147957:148141" expanded="false" />
+                <element signature="class#149345:150027" expanded="false" />
+                <element signature="method#onItemSelected#0;class#149345:150027" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#149345:150027" expanded="false" />
+                <element signature="method#showRecruitingClassDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#customLeague#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#isExternalStorageWritable#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#isExternalStorageReadable#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#getExtSaveDir#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#154651#154716#0" expanded="false" />
+                <element signature="e#154977#155046#0" expanded="false" />
+                <element signature="method#isNameValid#0;class#MainActivity#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,10 +244,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>TeamRankingsListArrayAdapter</find>
-      <find>poll</find>
-      <find>league.get</find>
-      <find>.getInitialName()</find>
       <find>&quot;, &quot;</find>
       <find>$</find>
       <find>winStreak</find>
@@ -108,6 +270,10 @@
       <find>positions</find>
       <find>ScoutGrade</find>
       <find>seasonGoal</find>
+      <find>wantUpdate</find>
+      <find>abbr</find>
+      <find>star</find>
+      <find>currTab</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -123,6 +289,7 @@
       <replace>teamPrestige</replace>
       <replace>array</replace>
       <replace>Cost</replace>
+      <replace>itemRR</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -170,6 +337,11 @@
           <value>
             <list>
               <ExternalTaskPojo>
+                <option name="description" value="Uninstalls the Beta build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="uninstallBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Displays the sub-projects of root project 'CFB-Coach'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
@@ -180,15 +352,15 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processBetaResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="validateSigningDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformClassesWithDexBuilderForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assembleReleaseUnitTest" />
+                <option name="name" value="compileBetaSources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -196,20 +368,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="processReleaseJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateReleaseAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs lint on the Debug build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="lintDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_JAVA_RESReleaseForPublishing" />
+                <option name="name" value="preBetaUnitTestBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -220,18 +379,9 @@
                 <option name="name" value="assembleDebugUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="createReleaseCompatibleScreenManifests" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Creates a version of android.jar that's suitable for unit tests." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mockableAndroidJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'CFB-Coach'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="model" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -239,25 +389,15 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="bundleAppClassesDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'CFB-Coach'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="tasks" />
+                <option name="name" value="bundleAppClassesBetaUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileDebugSources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Initializes a new Gradle build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="init" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="bundleDebugAndroidTestResources" />
+                <option name="name" value="preparePUBLISHED_JAVA_RESBetaForPublishing" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
@@ -265,9 +405,8 @@
                 <option name="name" value="deviceCheck" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'CFB-Coach'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="dependencies" />
+                <option name="name" value="generateBetaResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -280,7 +419,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="packageDebug" />
+                <option name="name" value="processBetaManifest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -288,15 +427,11 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleBetaResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileReleaseNdk" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="bundleAppClassesReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -304,25 +439,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mainApkListPersistenceDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles and tests this project and all projects it depends on." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="buildNeeded" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateDebugAndroidTestBuildConfig" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="processDebugUnitTestJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Run unit tests for the release build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="testReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Deletes the build cache directory." />
@@ -335,7 +452,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mergeDebugShaders" />
+                <option name="name" value="reportBuildArtifactsBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -352,12 +469,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileReleaseRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all Debug builds." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assembleDebug" />
+                <option name="name" value="javaPreCompileBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -369,7 +481,19 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="javaPreCompileBetaUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeBetaJniLibFolders" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformResourcesWithMergeJavaResForReleaseUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processBetaUnitTestJavaRes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -388,22 +512,6 @@
                 <option name="name" value="reportBuildArtifactsDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="javaPreCompileDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="splitsDiscoveryTaskDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="bundleAppClassesDebugUnitTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Release build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="uninstallRelease" />
@@ -418,10 +526,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateDebugAndroidTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="checkReleaseManifest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -430,15 +534,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileDebugAndroidTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="createDebugCompatibleScreenManifests" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_NATIVE_LIBSReleaseForPublishing" />
+                <option name="name" value="splitsDiscoveryTaskBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -463,16 +559,483 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_NATIVE_LIBSDebugForPublishing" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processReleaseManifest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the android (on device) tests for the Debug build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="uninstallDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_DEXBetaForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="writeDebugApplicationId" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all variants of all applications and secondary packages." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assemble" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileReleaseUnitTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the android (on device) tests for the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="installDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mainApkListPersistenceDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_DEXDebugAndroidTestForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="splitsDiscoveryTaskRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all device checks on currently connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="connectedCheck" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs and runs the tests for debug on connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="connectedDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all the Test applications." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processDebugAndroidTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_DEXDebugForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="validateSigningDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeDebugResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileBetaAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preDebugUnitTestBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileLint" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mainApkListPersistenceRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformNativeLibsWithMergeJniLibsForDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileBetaShaders" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeReleaseShaders" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileDebugAndroidTestNdk" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformNativeLibsWithMergeJniLibsForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeDebugAndroidTestJniLibFolders" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="extractProguardFiles" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateBetaResValues" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_JAVA_RESDebugForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="consumeConfigAttr" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateDebugAndroidTestAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processBetaJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformResourcesWithMergeJavaResForDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for all variants." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="test" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeDebugAndroidTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preReleaseUnitTestBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateDebugResValues" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all checks." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="check" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for the debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="testDebugUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="installDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for the beta build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="testBetaUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileReleaseAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on the Release build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="lintRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateDebugAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the dependent components of components in root project 'CFB-Coach'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="dependentComponents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'CFB-Coach'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="buildEnvironment" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="checkDebugManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prints out all the source sets defined in this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="sourceSets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformResourcesWithMergeJavaResForDebugUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="createBetaCompatibleScreenManifests" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleDebugResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileBetaNdk" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="writeBetaApplicationId" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileDebugRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_NATIVE_LIBSDebugAndroidTestForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateReleaseResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on just the fatal issues in the release build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="lintVitalRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all Beta builds." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformNativeLibsWithMergeJniLibsForBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Uninstalls the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="uninstallDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleAppClassesDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preDebugBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateDebugBuildConfig" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all Release builds." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="writeReleaseApplicationId" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateReleaseResValues" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileBetaJavaWithJavac" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_NATIVE_LIBSBetaForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithDexBuilderForDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleAppClassesBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleReleaseUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformDexArchiveWithDexMergerForBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processReleaseJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateReleaseAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on the Debug build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="lintDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_JAVA_RESReleaseForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="createReleaseCompatibleScreenManifests" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the configuration model of root project 'CFB-Coach'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="model" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleAppClassesDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the tasks runnable from root project 'CFB-Coach'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="tasks" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateBetaSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Initializes a new Gradle build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="init" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleDebugAndroidTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateBetaAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all dependencies declared in root project 'CFB-Coach'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="dependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="packageDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateDebugResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleAppClassesReleaseUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mainApkListPersistenceDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects it depends on." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="buildNeeded" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="processDebugUnitTestJavaRes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Run unit tests for the release build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="testReleaseUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs lint on the Beta build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="lintBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeDebugShaders" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileReleaseRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles all Debug builds." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="mergeBetaAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForBeta" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preBetaBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleBetaUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="javaPreCompileDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="splitsDiscoveryTaskDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="bundleAppClassesDebugUnitTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="generateDebugAndroidTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="compileDebugAndroidTestSources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="createDebugCompatibleScreenManifests" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_NATIVE_LIBSReleaseForPublishing" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preparePUBLISHED_NATIVE_LIBSDebugForPublishing" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the insight into a specific dependency in root project 'CFB-Coach'." />
@@ -493,12 +1056,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="writeDebugApplicationId" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all variants of all applications and secondary packages." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assemble" />
+                <option name="name" value="compileBetaUnitTestSources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays a help message." />
@@ -507,16 +1065,11 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileReleaseUnitTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs the android (on device) tests for the Debug build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="installDebugAndroidTest" />
+                <option name="name" value="compileBetaUnitTestJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mainApkListPersistenceDebug" />
+                <option name="name" value="packageBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -532,25 +1085,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_DEXDebugAndroidTestForPublishing" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="javaPreCompileRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="splitsDiscoveryTaskRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs all device checks on currently connected devices." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="connectedCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs the tests for debug on connected devices." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="connectedDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -566,25 +1101,8 @@
                 <option name="name" value="transformNativeLibsWithMergeJniLibsForDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Assembles all the Test applications." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assembleAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="processDebugAndroidTestResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_DEXDebugForPublishing" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="packageRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="validateSigningDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -592,11 +1110,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mergeDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preDebugUnitTestBuild" />
+                <option name="name" value="mainApkListPersistenceBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Generates Gradle wrapper files." />
@@ -605,23 +1119,11 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileLint" />
+                <option name="name" value="checkBetaManifest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateDebugAndroidTestResValues" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mainApkListPersistenceRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformNativeLibsWithMergeJniLibsForDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mergeReleaseShaders" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the Android dependencies of the project." />
@@ -630,15 +1132,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileDebugAndroidTestNdk" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileDebugUnitTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformNativeLibsWithMergeJniLibsForRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -650,31 +1144,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mergeDebugAndroidTestJniLibFolders" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="extractProguardFiles" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assembleDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_JAVA_RESDebugForPublishing" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processDebugJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="consumeConfigAttr" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateDebugAndroidTestAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -682,42 +1152,15 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformResourcesWithMergeJavaResForDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Run unit tests for all variants." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="test" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileDebugNdk" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mergeDebugAndroidTestResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preReleaseUnitTestBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateDebugResValues" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs all checks." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="check" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="javaPreCompileDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Run unit tests for the debug build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="testDebugUnitTest" />
+                <option name="name" value="transformClassesWithDexBuilderForBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
@@ -725,17 +1168,12 @@
                 <option name="name" value="connectedAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Installs the Debug build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="installDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformResourcesWithMergeJavaResForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformResourcesWithMergeJavaResForBetaUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -754,57 +1192,29 @@
                 <option name="name" value="transformResourcesWithMergeJavaResForDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileReleaseAidl" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs lint on the Release build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="lintRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Assembles and tests this project and all projects that depend on it." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildDependents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateDebugAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformDexArchiveWithDexMergerForDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in root project 'CFB-Coach'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'CFB-Coach'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="checkDebugManifest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeDebugJniLibFolders" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prints out all the source sets defined in this project." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="sourceSets" />
+                <option name="name" value="transformResourcesWithMergeJavaResForBeta" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformResourcesWithMergeJavaResForDebugUnitTest" />
+                <option name="name" value="compileBetaRenderscript" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="bundleDebugResources" />
+                <option name="name" value="mergeBetaResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -812,33 +1222,15 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="compileDebugRenderscript" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateReleaseBuildConfig" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preparePUBLISHED_NATIVE_LIBSDebugAndroidTestForPublishing" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateReleaseResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Runs lint on just the fatal issues in the release build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="lintVitalRelease" />
+                <option name="name" value="mergeBetaShaders" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="platformAttrExtractor" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Uninstalls the Debug build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="uninstallDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the signing info for each variant." />
@@ -851,11 +1243,11 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="mergeDebugAndroidTestShaders" />
+                <option name="name" value="generateBetaBuildConfig" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="bundleAppClassesDebugAndroidTest" />
+                <option name="name" value="mergeDebugAndroidTestShaders" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Deletes the build directory." />
@@ -863,26 +1255,9 @@
                 <option name="name" value="clean" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="preDebugBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateDebugBuildConfig" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Assembles and tests this project." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="build" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles all Release builds." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="assembleRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -902,15 +1277,7 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="writeReleaseApplicationId" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="packageDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateReleaseResValues" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the properties of root project 'CFB-Coach'." />
@@ -1186,9 +1553,7 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/content_home.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/LeagueRecords.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/Comparator/CompTeamProjPoll.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerQB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerWR.java" />
@@ -1206,22 +1571,26 @@
         <option value="$PROJECT_DIR$/src/main/java/Comparator/CompTeamWins.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SeasonAwardsListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamHistoryListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerRankingsList.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsListArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_recruiting.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/Comparator/CompNFLTalent.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/content_main.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1245,8 +1614,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
@@ -1270,11 +1639,8 @@
             <path>
               <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
               <item name="CFB-Coach" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="CFB-Coach" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="Positions" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1285,17 +1651,17 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="Shelf.Project.Settings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-28-2018_10_05_29/main/java/antdroid/cfbcoach/MainActivity.java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-30-2018_18_05_14/main/java/antdroid/cfbcoach/MainActivity.java" />
     <property name="android.project.structure.last.selected" value="CFB-Coach" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="device.picker.selection" value="Pixel_XL_API_25" />
+    <property name="device.picker.selection" value="00b5160227d7c603" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="ExportApk.ApkPath" value="C:\Users\ahngu\AndroidStudioProjects\CFB-Coach" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-28-2018_10_05_29/main/java/antdroid/cfbcoach/MainActivity.java" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-30-2018_18_05_14/main/java/antdroid/cfbcoach/MainActivity.java" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -1478,16 +1844,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2675906" sideWeight="0.5053192" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1495,8 +1859,8 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17324094" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17590618" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32741398" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -1511,6 +1875,7 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1519,18 +1884,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="199" />
+      <option name="time" value="243" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/lang/Integer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompCoachOvr.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1542,13 +1900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Injury.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1595,9 +1946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1669,7 +2017,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -1680,7 +2027,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -1691,7 +2037,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -1710,7 +2055,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -1721,7 +2065,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -1732,7 +2075,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -1743,7 +2085,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -1758,43 +2099,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="55" column="60" lean-forward="false" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GameScheduleListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="17" column="6" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="45" column="65" lean-forward="false" selection-start-line="45" selection-start-column="65" selection-end-line="45" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueRecordsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="53" column="68" lean-forward="false" selection-start-line="53" selection-start-column="68" selection-end-line="53" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1802,7 +2110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="42" column="62" lean-forward="false" selection-start-line="42" selection-start-column="62" selection-end-line="42" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1810,7 +2117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="66" column="73" lean-forward="false" selection-start-line="66" selection-start-column="73" selection-end-line="66" selection-end-column="73" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1822,30 +2128,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamStatsListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
           <caret line="57" column="25" lean-forward="false" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
-          <folding>
-            <element signature="e#2159#2160#0" expanded="false" />
-            <element signature="e#2211#2212#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1853,15 +2139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2040">
-          <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1880,7 +2157,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -1891,6 +2167,16 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1898,10 +2184,98 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="200" column="22" lean-forward="false" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompNFLTalent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="29" column="66" lean-forward="false" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_recruiting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="33" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompTeamConfWins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5644">
+          <caret line="368" column="41" lean-forward="false" selection-start-line="368" selection-start-column="41" selection-end-line="368" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Injury.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="52" column="21" lean-forward="true" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GameScheduleListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="43" column="23" lean-forward="false" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="950" column="34" lean-forward="false" selection-start-line="950" selection-start-column="34" selection-end-line="950" selection-end-column="34" />
+        <state relative-caret-position="17">
+          <caret line="3482" column="39" lean-forward="false" selection-start-line="3482" selection-start-column="39" selection-end-line="3482" selection-end-column="39" />
           <folding>
             <element signature="docComment;method#League#0;class#League#0" expanded="false" />
             <element signature="method#League#0;class#League#0" expanded="false" />
@@ -1911,6 +2285,7 @@
             <element signature="method#League#2;class#League#0" expanded="false" />
             <element signature="e#26935#26938#0" expanded="false" />
             <element signature="method#setupCommonInitalizers#0;class#League#0" expanded="false" />
+            <element signature="method#setupSeason#0;class#League#0" expanded="false" />
             <element signature="docComment;method#isCareerMode#0;class#League#0" expanded="false" />
             <element signature="method#setupNamesDB#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getRandName#0;class#League#0" expanded="false" />
@@ -1921,6 +2296,7 @@
             <element signature="docComment;method#getTeamListStr#0;class#League#0" expanded="false" />
             <element signature="method#getTeamListStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#findTeam#0;class#League#0" expanded="false" />
+            <element signature="method#findTeam#0;class#League#0" expanded="false" />
             <element signature="docComment;method#findTeamAbbr#0;class#League#0" expanded="false" />
             <element signature="method#findTeamAbbr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#findConference#0;class#League#0" expanded="false" />
@@ -1959,14 +2335,19 @@
             <element signature="docComment;method#getCCGsStr#0;class#League#0" expanded="false" />
             <element signature="method#getCCGsStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
+            <element signature="method#getBowlGameWatchStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#schedBowlGames#0;class#League#0" expanded="false" />
             <element signature="method#schedBowlGames#0;class#League#0" expanded="false" />
             <element signature="docComment;method#playBowlGames#0;class#League#0" expanded="false" />
+            <element signature="method#playBowlGames#0;class#League#0" expanded="false" />
             <element signature="docComment;method#playBowl#0;class#League#0" expanded="false" />
+            <element signature="method#playBowl#0;class#League#0" expanded="false" />
             <element signature="docComment;method#getGameSummaryBowl#0;class#League#0" expanded="false" />
+            <element signature="method#getGameSummaryBowl#0;class#League#0" expanded="false" />
             <element signature="docComment;method#ncgSummaryStr#0;class#League#0" expanded="false" />
             <element signature="method#ncgSummaryStr#0;class#League#0" expanded="false" />
             <element signature="docComment;method#enterOffseason#0;class#League#0" expanded="false" />
+            <element signature="method#enterOffseason#0;class#League#0" expanded="false" />
             <element signature="method#seasonSummaryStr#0;class#League#0" expanded="false" />
             <element signature="method#advanceHC#0;class#League#0" expanded="false" />
             <element signature="method#updateHCHistory#0;class#League#0" expanded="false" />
@@ -1988,7 +2369,6 @@
             <element signature="method#getMockDraftPlayersList#0;class#League#0" expanded="false" />
             <element signature="method#recruitPlayers#0;class#League#0" expanded="false" />
             <element signature="method#midSeasonProgression#0;class#League#0" expanded="false" />
-            <element signature="method#advanceSeason#0;class#League#0" expanded="false" />
             <element signature="e#190765#190785#0" expanded="false" />
             <element signature="docComment;method#checkLongestWinStreak#0;class#League#0" expanded="false" />
             <element signature="method#checkLongestWinStreak#0;class#League#0" expanded="false" />
@@ -2034,6 +2414,7 @@
             <element signature="method#getPlayerRankStr#0;class#League#0" expanded="false" />
             <element signature="method#getAwardsWatch#0;class#League#0" expanded="false" />
             <element signature="docComment;method#saveLeague#0;class#League#0" expanded="false" />
+            <element signature="method#saveLeague#0;class#League#0" expanded="false" />
             <element signature="e#242806#242847#0" expanded="false" />
             <element signature="docComment;method#isNameValid#0;class#League#0" expanded="false" />
             <element signature="method#isNameValid#0;class#League#0" expanded="false" />
@@ -2043,32 +2424,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="200" column="22" lean-forward="false" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+        <state relative-caret-position="2516">
+          <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2078,8 +2437,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="3866" column="44" lean-forward="false" selection-start-line="3866" selection-start-column="44" selection-end-line="3866" selection-end-column="44" />
+        <state relative-caret-position="318">
+          <caret line="1180" column="37" lean-forward="false" selection-start-line="1180" selection-start-column="37" selection-end-line="1180" selection-end-column="37" />
           <folding>
             <element signature="docComment;method#Team#0;class#Team#0" expanded="false" />
             <element signature="method#Team#0;class#Team#0" expanded="false" />
@@ -2097,6 +2456,7 @@
             <element signature="docComment;method#sortPlayers#0;class#Team#0" expanded="false" />
             <element signature="method#sortPlayers#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#updatePollScore#0;class#Team#0" expanded="false" />
+            <element signature="method#updatePollScore#0;class#Team#0" expanded="false" />
             <element signature="method#updateSOS#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#updateStrengthOfWins#0;class#Team#0" expanded="false" />
             <element signature="method#updateStrengthOfWins#0;class#Team#0" expanded="false" />
@@ -2134,6 +2494,7 @@
             <element signature="docComment;method#seasonSummaryStr#0;class#Team#0" expanded="false" />
             <element signature="method#seasonSummaryStr#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#advanceTeamPlayers#0;class#Team#0" expanded="false" />
+            <element signature="method#advanceTeamPlayers#0;class#Team#0" expanded="false" />
             <element signature="method#advanceHC#0;class#Team#0" expanded="false" />
             <element signature="method#coachContracts#0;class#Team#0" expanded="false" />
             <element signature="method#promoteCoach#0;class#Team#0" expanded="false" />
@@ -2229,6 +2590,7 @@
             <element signature="method#gameSummaryStrOpponent#0;class#Team#0" expanded="false" />
             <element signature="method#getGradPlayersList#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#getRecruitsInfoSaveFile#0;class#Team#0" expanded="false" />
+            <element signature="method#getRecruitsInfoSaveFile#0;class#Team#0" expanded="false" />
             <element signature="method#getPlayerInfoSaveFile#0;class#Team#0" expanded="false" />
             <element signature="docComment;method#setStarters#0;class#Team#0" expanded="false" />
             <element signature="method#setStarters#0;class#Team#0" expanded="false" />
@@ -2252,296 +2614,230 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompNFLTalent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/SaveFilesListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="66" lean-forward="false" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
-          <folding />
+        <state relative-caret-position="646">
+          <caret line="45" column="45" lean-forward="false" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_recruiting.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="595">
+          <caret line="41" column="40" lean-forward="true" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="67" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/HallOfFameListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="39" column="64" lean-forward="false" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Comparator/CompTeamConfWins.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="663">
+          <caret line="46" column="58" lean-forward="false" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamStatsListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="196" column="13" lean-forward="false" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-952">
-          <caret line="401" column="66" lean-forward="false" selection-start-line="401" selection-start-column="66" selection-end-line="401" selection-end-column="66" />
-          <folding>
-            <element signature="method#updatePositionNeeds#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getFilterMenu#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#makeRosterDialog#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getRosterStr#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#appendPlayers#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getReadablePlayerInfoPos#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#updateForNewPosition#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#setPlayerList#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#setPlayerInfoMap#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getPlayerDetails#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#removeUnaffordable#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#recruitPlayerDialog#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#recruitPlayer#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#redshirtPlayerDialog#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#redshirtPlayer#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getReadablePlayerInfoDisplay#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#scoutPlayer#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getReadablePlayerInfo#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="docComment;method#getPlayerNameCost#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getPlayerNameCost#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="docComment;method#getRecruitCost#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getRecruitCost#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="docComment;method#getYrStr#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getYrStr#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="docComment;method#getInitialName#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getInitialName#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getGrade#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getStarGrade#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getRegion#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getHeight#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="e#51299#51300#0" expanded="true" />
-            <element signature="e#51337#51338#0" expanded="true" />
-            <element signature="docComment;method#exitRecruiting#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#exitRecruiting#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="docComment;method#getRecruitsStr#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getRecruitsStr#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="e#53465#53466#0" expanded="true" />
-            <element signature="e#53497#53498#0" expanded="true" />
-            <element signature="e#53543#53544#0" expanded="true" />
-            <element signature="e#53573#53574#0" expanded="true" />
-            <element signature="class#ExpandableListAdapterRecruiting#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getChild#0;class#ExpandableListAdapterRecruiting#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getChildView#0;class#ExpandableListAdapterRecruiting#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#getChildrenCount#0;class#ExpandableListAdapterRecruiting#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="class#CompRecruitScoutGrade#0" expanded="false" />
-            <element signature="method#compare#0;class#CompRecruitScoutGrade#0" expanded="false" />
-            <element signature="class#CompRecruitTeamRosterOvr#0" expanded="false" />
-            <element signature="method#compare#0;class#CompRecruitTeamRosterOvr#0" expanded="false" />
-            <element signature="class#CompRecruitCost#0" expanded="false" />
-            <element signature="method#compare#0;class#CompRecruitCost#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="1428" column="39" lean-forward="false" selection-start-line="1428" selection-start-column="39" selection-end-line="1428" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="94" column="12" lean-forward="false" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="3140" column="37" lean-forward="false" selection-start-line="3140" selection-start-column="37" selection-end-line="3140" selection-end-column="37" />
+        <state relative-caret-position="17">
+          <caret line="280" column="23" lean-forward="false" selection-start-line="280" selection-start-column="16" selection-end-line="280" selection-end-column="23" />
           <folding>
-            <element signature="class#10631:11193" expanded="false" />
-            <element signature="method#onItemSelected#0;class#10631:11193" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#10631:11193" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#11777:12235" expanded="false" />
-            <element signature="class#20502:20748" expanded="false" />
-            <element signature="method#onClick#0;class#20502:20748" expanded="false" />
-            <element signature="class#21819:22081" expanded="false" />
-            <element signature="method#onClick#0;class#21819:22081" expanded="false" />
-            <element signature="class#23337:23599" expanded="false" />
-            <element signature="method#onClick#0;class#23337:23599" expanded="false" />
-            <element signature="class#24475:24753" expanded="false" />
-            <element signature="method#onClick#0;class#24475:24753" expanded="false" />
-            <element signature="class#27494:27740" expanded="false" />
-            <element signature="method#onClick#0;class#27494:27740" expanded="false" />
-            <element signature="class#28446:28756" expanded="false" />
-            <element signature="method#onClick#0;class#28446:28756" expanded="false" />
-            <element signature="class#30469:30699" expanded="false" />
-            <element signature="method#onClick#0;class#30469:30699" expanded="false" />
-            <element signature="method#updateTeamUI#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#3507#3523#0" expanded="false" />
+            <element signature="class#9246:9808" expanded="false" />
+            <element signature="method#onItemSelected#0;class#9246:9808" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#9246:9808" expanded="false" />
+            <element signature="class#10392:10850" expanded="false" />
+            <element signature="method#onItemSelected#0;class#10392:10850" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#10392:10850" expanded="false" />
+            <element signature="method#updateHeaderBar#0;class#MainActivity#0" expanded="false" />
             <element signature="method#newGameHardDialog#0;class#MainActivity#0" expanded="false" />
             <element signature="method#newGameDialog#0;class#MainActivity#0" expanded="false" />
             <element signature="method#userNameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#35534:36778" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#35534:36778" expanded="false" />
-            <element signature="method#onTextChanged#0;class#35534:36778" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#35534:36778" expanded="false" />
+            <element signature="class#18951:20195" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#18951:20195" expanded="false" />
+            <element signature="method#onTextChanged#0;class#18951:20195" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#18951:20195" expanded="false" />
             <element signature="method#resetTeamUI#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#examineTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrConference#0;class#MainActivity#0" expanded="false" />
             <element signature="method#seasonGoals#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#44292:44474" expanded="false" />
-            <element signature="method#onClick#0;class#44292:44474" expanded="false" />
+            <element signature="class#29090:29272" expanded="false" />
+            <element signature="method#onClick#0;class#29090:29272" expanded="false" />
             <element signature="method#scrollToLatestGame#0;class#MainActivity#0" expanded="false" />
             <element signature="method#showNewsStoriesDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#47837:49144" expanded="false" />
-            <element signature="method#onItemSelected#0;class#47837:49144" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#47837:49144" expanded="false" />
+            <element signature="class#32635:33942" expanded="false" />
+            <element signature="method#onItemSelected#0;class#32635:33942" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#32635:33942" expanded="false" />
             <element signature="method#updateTeamStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updatePlayerStats#0;class#MainActivity#0" expanded="false" />
             <element signature="method#examinePlayer#0;class#MainActivity#0" expanded="false" />
             <element signature="method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
             <element signature="method#updateSchedule#0;class#MainActivity#0" expanded="false" />
             <element signature="method#showGameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#59487:66834" expanded="false" />
-            <element signature="method#onItemSelected#0;class#59487:66834" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#59487:66834" expanded="false" />
-            <element signature="class#70291:70838" expanded="false" />
-            <element signature="method#onItemSelected#0;class#70291:70838" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#70291:70838" expanded="false" />
-            <element signature="class#71519:72066" expanded="false" />
-            <element signature="method#onItemSelected#0;class#71519:72066" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#71519:72066" expanded="false" />
+            <element signature="class#44285:51632" expanded="false" />
+            <element signature="method#onItemSelected#0;class#44285:51632" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#44285:51632" expanded="false" />
+            <element signature="class#55089:55636" expanded="false" />
+            <element signature="method#onItemSelected#0;class#55089:55636" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#55089:55636" expanded="false" />
+            <element signature="class#56317:56864" expanded="false" />
+            <element signature="method#onItemSelected#0;class#56317:56864" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#56317:56864" expanded="false" />
             <element signature="method#showWeeklyScores#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#74842:75842" expanded="false" />
-            <element signature="method#onItemSelected#0;class#74842:75842" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#74842:75842" expanded="false" />
+            <element signature="class#59640:60640" expanded="false" />
+            <element signature="method#onItemSelected#0;class#59640:60640" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#59640:60640" expanded="false" />
             <element signature="method#updateStandings#0;class#MainActivity#0" expanded="false" />
             <element signature="method#updateRankings#0;class#MainActivity#0" expanded="false" />
             <element signature="method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#78632:79124" expanded="false" />
-            <element signature="method#onItemSelected#0;class#78632:79124" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#78632:79124" expanded="false" />
+            <element signature="class#63430:63922" expanded="false" />
+            <element signature="method#onItemSelected#0;class#63430:63922" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#63430:63922" expanded="false" />
             <element signature="method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#86101:86668" expanded="false" />
-            <element signature="method#onItemSelected#0;class#86101:86668" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#86101:86668" expanded="false" />
-            <element signature="class#87272:87839" expanded="false" />
-            <element signature="method#onItemSelected#0;class#87272:87839" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#87272:87839" expanded="false" />
+            <element signature="class#70899:71466" expanded="false" />
+            <element signature="method#onItemSelected#0;class#70899:71466" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#70899:71466" expanded="false" />
+            <element signature="class#72070:72637" expanded="false" />
+            <element signature="method#onItemSelected#0;class#72070:72637" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#72070:72637" expanded="false" />
             <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#88183#88241#0" expanded="false" />
-            <element signature="class#90476:91494" expanded="false" />
-            <element signature="method#onItemSelected#0;class#90476:91494" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#90476:91494" expanded="false" />
-            <element signature="method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#95239:96508" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#95239:96508" expanded="false" />
-            <element signature="method#onTextChanged#0;class#95239:96508" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#95239:96508" expanded="false" />
-            <element signature="class#96566:97893" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#96566:97893" expanded="false" />
-            <element signature="method#onTextChanged#0;class#96566:97893" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#96566:97893" expanded="false" />
-            <element signature="class#97951:99221" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#97951:99221" expanded="false" />
-            <element signature="method#onTextChanged#0;class#97951:99221" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#97951:99221" expanded="false" />
-            <element signature="class#99277:100521" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#99277:100521" expanded="false" />
-            <element signature="method#onTextChanged#0;class#99277:100521" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#99277:100521" expanded="false" />
+            <element signature="e#79730#79788#0" expanded="false" />
+            <element signature="class#82023:83041" expanded="false" />
+            <element signature="method#onItemSelected#0;class#82023:83041" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#82023:83041" expanded="false" />
+            <element signature="class#86786:88055" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#86786:88055" expanded="false" />
+            <element signature="method#onTextChanged#0;class#86786:88055" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#86786:88055" expanded="false" />
+            <element signature="class#88113:89440" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#88113:89440" expanded="false" />
+            <element signature="method#onTextChanged#0;class#88113:89440" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#88113:89440" expanded="false" />
+            <element signature="class#89498:90768" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#89498:90768" expanded="false" />
+            <element signature="method#onTextChanged#0;class#89498:90768" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#89498:90768" expanded="false" />
+            <element signature="class#90824:92068" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#90824:92068" expanded="false" />
+            <element signature="method#onTextChanged#0;class#90824:92068" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#90824:92068" expanded="false" />
             <element signature="method#showLeagueHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#108446:109921" expanded="false" />
-            <element signature="method#onItemSelected#0;class#108446:109921" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#108446:109921" expanded="false" />
+            <element signature="class#99996:101471" expanded="false" />
+            <element signature="method#onItemSelected#0;class#99996:101471" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#99996:101471" expanded="false" />
             <element signature="method#showLeagueHistoryStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#111604:112539" expanded="false" />
-            <element signature="method#onItemSelected#0;class#111604:112539" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#111604:112539" expanded="false" />
+            <element signature="class#103154:104089" expanded="false" />
+            <element signature="method#onItemSelected#0;class#103154:104089" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#103154:104089" expanded="false" />
             <element signature="method#showTop25History#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#114428:114894" expanded="false" />
-            <element signature="method#onItemSelected#0;class#114428:114894" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#114428:114894" expanded="false" />
+            <element signature="class#105978:106444" expanded="false" />
+            <element signature="method#onItemSelected#0;class#105978:106444" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#105978:106444" expanded="false" />
             <element signature="method#showCurrTeamHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#116376:117686" expanded="false" />
-            <element signature="method#onItemSelected#0;class#116376:117686" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#116376:117686" expanded="false" />
+            <element signature="class#107926:109236" expanded="false" />
+            <element signature="method#onItemSelected#0;class#107926:109236" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#107926:109236" expanded="false" />
             <element signature="method#showCoachHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#118921:119623" expanded="false" />
-            <element signature="method#onItemSelected#0;class#118921:119623" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#118921:119623" expanded="false" />
+            <element signature="class#110471:111173" expanded="false" />
+            <element signature="method#onItemSelected#0;class#110471:111173" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#110471:111173" expanded="false" />
             <element signature="method#showTeamRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#121592:122521" expanded="false" />
-            <element signature="method#onItemSelected#0;class#121592:122521" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#121592:122521" expanded="false" />
+            <element signature="class#113142:114071" expanded="false" />
+            <element signature="method#onItemSelected#0;class#113142:114071" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#113142:114071" expanded="false" />
             <element signature="method#showPlayerRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#124543:125450" expanded="false" />
-            <element signature="method#onItemSelected#0;class#124543:125450" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#124543:125450" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#126656:127268" expanded="false" />
+            <element signature="class#116093:117000" expanded="false" />
+            <element signature="method#onItemSelected#0;class#116093:117000" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#116093:117000" expanded="false" />
+            <element signature="method#showBowlCCGDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#118206:118818" expanded="false" />
+            <element signature="method#onItemSelected#0;class#118206:118818" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#118206:118818" expanded="false" />
             <element signature="method#heismanCeremony#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#129571:131071" expanded="false" />
-            <element signature="method#onItemSelected#0;class#129571:131071" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#129571:131071" expanded="false" />
+            <element signature="class#121121:122621" expanded="false" />
+            <element signature="method#onItemSelected#0;class#121121:122621" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#121121:122621" expanded="false" />
             <element signature="method#importData#0;class#MainActivity#0" expanded="false" />
             <element signature="method#saveLeague#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
             <element signature="method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#midseasonSummary#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#132775:132957" expanded="false" />
+            <element signature="method#onClick#0;class#132775:132957" expanded="false" />
+            <element signature="method#seasonSummary#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#133508:133690" expanded="false" />
+            <element signature="method#onClick#0;class#133508:133690" expanded="false" />
+            <element signature="method#contractDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#134277:134459" expanded="false" />
+            <element signature="method#onClick#0;class#134277:134459" expanded="false" />
+            <element signature="method#jobOffers#0;class#MainActivity#0" expanded="false" />
             <element signature="method#promotions#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#142837:143051" expanded="false" />
-            <element signature="method#onClick#0;class#142837:143051" expanded="false" />
-            <element signature="class#143360:143575" expanded="false" />
-            <element signature="method#onClick#0;class#143360:143575" expanded="false" />
-            <element signature="class#145540:145738" expanded="false" />
-            <element signature="method#onClick#0;class#145540:145738" expanded="false" />
+            <element signature="class#138203:138417" expanded="false" />
+            <element signature="method#onClick#0;class#138203:138417" expanded="false" />
+            <element signature="class#138726:138941" expanded="false" />
+            <element signature="method#onClick#0;class#138726:138941" expanded="false" />
+            <element signature="class#140909:141107" expanded="false" />
+            <element signature="method#onClick#0;class#140909:141107" expanded="false" />
             <element signature="method#switchTeams#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#conferenceRealignment#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#143115:143329" expanded="false" />
+            <element signature="method#onClick#0;class#143115:143329" expanded="false" />
+            <element signature="method#promotionRelegation#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#144061:144259" expanded="false" />
+            <element signature="method#onClick#0;class#144061:144259" expanded="false" />
+            <element signature="method#transfers#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#144817:144999" expanded="false" />
+            <element signature="method#onClick#0;class#144817:144999" expanded="false" />
+            <element signature="class#145577:145823" expanded="false" />
+            <element signature="method#onClick#0;class#145577:145823" expanded="false" />
             <element signature="method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#148815:148999" expanded="false" />
-            <element signature="method#onClick#0;class#148815:148999" expanded="false" />
-            <element signature="class#150203:150885" expanded="false" />
-            <element signature="method#onItemSelected#0;class#150203:150885" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#150203:150885" expanded="false" />
+            <element signature="class#147957:148141" expanded="false" />
+            <element signature="method#onClick#0;class#147957:148141" expanded="false" />
+            <element signature="class#149345:150027" expanded="false" />
+            <element signature="method#onItemSelected#0;class#149345:150027" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#149345:150027" expanded="false" />
+            <element signature="method#showRecruitingClassDialog#0;class#MainActivity#0" expanded="false" />
             <element signature="method#customLeague#0;class#MainActivity#0" expanded="false" />
             <element signature="method#isExternalStorageWritable#0;class#MainActivity#0" expanded="false" />
             <element signature="method#isExternalStorageReadable#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getExtSaveDir#0;class#MainActivity#0" expanded="false" />
             <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#155507#155572#0" expanded="false" />
-            <element signature="e#155833#155902#0" expanded="false" />
-            <element signature="method#readCoachFile#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#readRosterFile#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#154651#154716#0" expanded="false" />
+            <element signature="e#154977#155046#0" expanded="false" />
             <element signature="method#isNameValid#0;class#MainActivity#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1605">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proguard-rules.pro">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MockDraftListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="46" column="43" lean-forward="false" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4180">
-          <caret line="368" column="41" lean-forward="false" selection-start-line="368" selection-start-column="41" selection-end-line="368" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>

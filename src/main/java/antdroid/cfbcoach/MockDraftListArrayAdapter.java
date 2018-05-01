@@ -43,8 +43,8 @@ class MockDraftListArrayAdapter extends ArrayAdapter<String> {
         String[] split = detailSplit[1].split("\n");
 
         if (split[1].equals(userTeamStrRep)) {
-            itemL.setTextColor(Color.YELLOW);
-            itemR.setTextColor(Color.YELLOW);
+            itemL.setTextColor(Color.parseColor("#5994de"));
+            itemR.setTextColor(Color.parseColor("#5994de"));
         }
 
         return rowView;

@@ -33,15 +33,19 @@
 
             <Spinner
                 android:id="@+id/examineConfSpinner"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.70" />
+                android:layout_weight="4.70"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
 
             <Spinner
                 android:id="@+id/examineTeamSpinner"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.80" />
+                android:layout_weight="4.80"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
 
             <Button
                 android:id="@+id/buttonHome"
@@ -158,8 +162,8 @@
                 android:id="@+id/mainList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"></ListView>
+                android:backgroundTintMode="src_over"
+                android:padding="5dp"></ListView>
         </LinearLayout>
 
         <LinearLayout

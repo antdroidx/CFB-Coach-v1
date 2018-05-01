@@ -59,7 +59,7 @@ class MainRankings extends ArrayAdapter<String> {
         textCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            mainAct.examineTeam(teamStat[1]);
+            mainAct.examineTeam(teamStat[1].toString());
             }
         });
 

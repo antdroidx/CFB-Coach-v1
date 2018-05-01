@@ -189,11 +189,11 @@ class ExpandableListAdapterPlayerStats extends BaseExpandableListAdapter {
             } else if (letter.equals("B") || letter.equals("B+")) {
                 textV.setTextColor(Color.parseColor("#00b300"));
             } else if (letter.equals("C") || letter.equals("C+")) {
-                textV.setTextColor(Color.parseColor("#e68a00"));
+                textV.setTextColor(Color.YELLOW);
             } else if (letter.equals("D") || letter.equals("D+")) {
-                textV.setTextColor(Color.parseColor("#cc3300"));
+                textV.setTextColor(Color.parseColor("#e68a00"));
             } else if (letter.equals("F") || letter.equals("F+")) {
-                textV.setTextColor(Color.parseColor("#990000"));
+                textV.setTextColor(Color.RED);
             }
         }
     }

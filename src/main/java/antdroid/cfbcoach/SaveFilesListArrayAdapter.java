@@ -38,12 +38,12 @@ class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
             itemR.setText(detailSplit[1]);
             if (detailSplit[1].equals("[C]"))
                 itemR.setTextColor(Color.RED);
-            else itemR.setTextColor(Color.parseColor("#008066"));
+            else itemR.setTextColor(Color.YELLOW);
         } else {
             TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
             itemR.setPadding(5, 0, 5, 0);
             //itemR.setText("[DYNASTY]");
-            itemR.setTextColor(Color.parseColor("#008066"));
+            itemR.setTextColor(Color.YELLOW);
         }
 
         return rowView;

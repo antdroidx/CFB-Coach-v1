@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,15 +35,9 @@ public class RecruitingActivity extends AppCompatActivity {
 
     // Variables use during recruiting
     private String teamName;
-    private String teamAbbr;
     private int recruitingBudget;
     private final Random rand = new Random();
     private int HCtalent;
-    private int ratingTolerance;
-    private int tolerance;
-    private int min;
-    private int max;
-
 
     private ArrayList<String> playersRecruited;
     private ArrayList<String> playersRedshirted;
@@ -77,8 +72,6 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> midwest;
     private ArrayList<String> central;
     private ArrayList<String> east;
-
-    private ArrayList<String> recruitDisplay;
 
     private int needQBs;
     private int needRBs;
@@ -182,7 +175,6 @@ public class RecruitingActivity extends AppCompatActivity {
         String[] lines = userTeamStr.split("%\n");
         final String[] teamInfo = lines[0].split(",");
         teamName = teamInfo[1];
-        teamAbbr = teamInfo[2];
         recruitingBudget = Integer.parseInt(teamInfo[3]) * 15;
         if (teamInfo[4].isEmpty()) {
             HCtalent = 70;
@@ -275,12 +267,6 @@ public class RecruitingActivity extends AppCompatActivity {
             ++i;
         }
 
-
-        //ratingTolerance = Math.round((140-HCtalent)/10);
-        ratingTolerance = 0;
-        max = ratingTolerance;
-        min = -ratingTolerance;
-        tolerance = rand.nextInt((max - min) + 1) + min;
 
         // Sort to get top 100 overall players
         Collections.sort(availAll, new CompRecruitScoutGrade());
@@ -1197,14 +1183,6 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-    /**
-     * Converts the lines from the file into readable lines, include position
-     */
-
-
     /**
      * Converts player string into '$500 QB A. Name, Overall: 89' or similar
      */
@@ -1237,21 +1215,13 @@ public class RecruitingActivity extends AppCompatActivity {
         return "[XX]";
     }
 
-    /**
-     * Convert full name into initial name
-     */
-    private String getInitialName(String name) {
-        String[] names = name.split(" ");
-        return names[0].substring(0, 1) + ". " + names[1];
-    }
-
     private String getGrade(String num) {
         int pRat = (Integer.parseInt(num));
-        if (pRat > five) return "* * * * *";
+        if (pRat > five) return " * * * * *";
         else if (pRat > four) return " * * * *";
-        else if (pRat > three) return " * * * ";
-        else if (pRat > two) return "  * * ";
-        else return "  *  ";
+        else if (pRat > three) return " * * *";
+        else if (pRat > two) return " * *";
+        else return " *";
     }
 
     private String getStarGrade(String num) {

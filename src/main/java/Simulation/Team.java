@@ -1235,7 +1235,7 @@ public class Team {
         summary += "\n\nNEW PRESTIGE:  " + teamPrestige + " pts\n";
 
         if(teamPrestigeStart + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5] + prestigePts[6] != prestigePts[0] && prestigePts[4] == 0) {
-            summary += "\n\nDue to your conference's playing level, your prestige change has been limited. The conference prestige cut-off for this season was set at:\n[min] " + (confMin+confLimit) + "\n[max] " + (confMax+confLimit)
+            summary += "\n\nDue to your conference's playing level, your prestige change has been limited. The conference prestige cut-off for this season was set at:\nmin: " + (confMin+confLimit) + " and max: " + (confMax+confLimit)
                     + "\n\nNote: " + maxPrestige + " is the maximum Prestige level possible unless the team wins a national title.\n";
             if(teamPrestige >= confMax + confLimit) {
                 summary += "\n\nBecause your team's prestige level was above the conference prestige range, you will retain your old prestige.\n";
