@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:gravity="center"
-    android:padding="5dp">
+    android:orientation="horizontal"
+    android:padding="3dp">
 
     <TextView
         android:id="@+id/textRankLeft"
@@ -24,7 +24,7 @@
         android:layout_weight="1.79"
         android:gravity="left"
         android:text="Team"
-        android:textAlignment="gravity"
+        android:textAlignment="textStart"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
         android:layout_weight="0.46"
         android:gravity="left"
         android:text="Value"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

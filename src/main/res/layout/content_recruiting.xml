@@ -21,11 +21,17 @@
 
         <Button
             android:id="@+id/buttonRecruitExpandCollapse"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:text="OPTIONS" />
+
+        <Switch
+            android:id="@+id/filterSwitch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAlignment="center" />
 
         <Spinner
             android:layout_width="0dip"

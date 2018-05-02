@@ -3,40 +3,41 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center"
-    android:padding="3dp">
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/textTeamRankingsLeft"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAlignment="gravity"
-        android:gravity="center"
         android:layout_width="75.0dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:paddingEnd="5dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <RelativeLayout
+        android:id="@+id/relativeCenter"
         android:layout_width="175.0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeCenter"
-        android:gravity="center"
-        android:layout_toRightOf="@id/textTeamRankingsLeft">
+        android:layout_toRightOf="@id/textTeamRankingsLeft"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/textTeamRankingsCenter"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textAlignment="gravity"
-            android:gravity="left"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingStart="5dp"
+            android:textAlignment="gravity"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/textTeamRankingsRight"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAlignment="gravity"
-        android:gravity="center"
-        android:layout_width="75.0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/relativeCenter" />
+        android:layout_toRightOf="@id/relativeCenter"
+        android:gravity="right|end"
+        android:textAlignment="textStart"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

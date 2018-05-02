@@ -1094,9 +1094,6 @@ public class Team {
     //Calculates Prestige Change at end of season
     public int[] calcSeasonPrestige() {
         int goal = projectedPoll;
-        if (goal < 10) goal = 10;
-        else if (goal < 20) goal = 20;
-        else if (goal < 25) goal = 25;
         if (goal > 95) goal = 95;
         int diffExpected = goal - rankTeamPollScore;
         int newPrestige = teamPrestige;
@@ -1110,7 +1107,7 @@ public class Team {
 
         // Don't add/subtract prestige if they are a penalized team from last season
         if (this != league.penalizedTeam1 && this != league.penalizedTeam2 && this != league.penalizedTeam3) {
-        prestigeChange = Math.round((float)(diffExpected/10));
+        prestigeChange = Math.round((float)(diffExpected/7.5));
         }
 
         //RIVALRY POINTS!
@@ -3735,6 +3732,15 @@ public class Team {
      */
     public String strRep() {
         return "#" + rankTeamPollScore + " " + name;
+    }
+
+    /**
+     * Str rep of team, no bowl results
+     *
+     * @return ranking abbr (w-l)
+     */
+    public String teamStringforStatRankings() {
+        return name + " (" + wins + "-" + losses + ") ";
     }
 
     /**

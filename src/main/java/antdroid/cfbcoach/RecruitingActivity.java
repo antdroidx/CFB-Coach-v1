@@ -18,8 +18,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,6 +112,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
     // Whether to show pop ups every recruit
     private boolean showPopUp;
+    private boolean autoFilter;
 
     // Keep track of which position is selected in spinner
     private String currentPosition;
@@ -292,7 +295,22 @@ public class RecruitingActivity extends AppCompatActivity {
          */
         positionSpinner = findViewById(R.id.spinnerRec);
         positions = new ArrayList<String>();
-        positions = getFilterMenu();
+        positions.add("Top 50 Recruits");
+        positions.add("All Players");
+        positions.add("QB (Need: " + needQBs + ")");
+        positions.add("RB (Need: " + needRBs + ")");
+        positions.add("WR (Need: " + needWRs + ")");
+        positions.add("TE (Need: " + needTEs + ")");
+        positions.add("OL (Need: " + needOLs + ")");
+        positions.add("K (Need: " + needKs + ")");
+        positions.add("DL (Need: " + needDLs + ")");
+        positions.add("LB (Need: " + needLBs + ")");
+        positions.add("CB (Need: " + needCBs + ")");
+        positions.add("S (Need: " + needSs + ")");
+        positions.add("West (" + west.size() + ")");
+        positions.add("Midwest (" + midwest.size() + ")");
+        positions.add("Central (" + central.size() + ")");
+        positions.add("East (" + east.size() + ")");
 
         dataAdapterPosition = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -317,6 +335,19 @@ public class RecruitingActivity extends AppCompatActivity {
         doneRecrutingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 exitRecruiting();
+            }
+        });
+
+        Switch filterSwitch = findViewById(R.id.filterSwitch);
+        filterSwitch.setText("Filter Unaffordable");
+        filterSwitch.setChecked(autoFilter);
+        filterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    autoFilter = true;
+                } else {
+                    autoFilter = false;
+                }
             }
         });
 
@@ -348,7 +379,9 @@ public class RecruitingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
                 builder.setTitle("DISPLAY OPTIONS");
-                final String[] sels = {"Expand All", "Collapse All", "Remove Unaffordable Players", "Sort by Grade", "Sort by Cost"};
+                String filter = "Enable Auto-Remove Unaffordable Players";
+                if(autoFilter) filter = "Disable Auto-Remove Unaffordable Players";
+                final String[] sels = {"Expand All", "Collapse All", "Sort by Grade", "Sort by Cost", filter};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
@@ -363,32 +396,14 @@ public class RecruitingActivity extends AppCompatActivity {
                                 recruitList.collapseGroup(i);
                             }
                         } else if (item == 2) {
-                            // Remove unaffordable
-                            removeUnaffordable(players);
-                            removeUnaffordable(avail50);
-                            removeUnaffordable(availAll);
-                            removeUnaffordable(availQBs);
-                            removeUnaffordable(availRBs);
-                            removeUnaffordable(availWRs);
-                            removeUnaffordable(availTEs);
-                            removeUnaffordable(availOLs);
-                            removeUnaffordable(availKs);
-                            removeUnaffordable(availDLs);
-                            removeUnaffordable(availLBs);
-                            removeUnaffordable(availCBs);
-                            removeUnaffordable(availSs);
-                            removeUnaffordable(west);
-                            removeUnaffordable(midwest);
-                            removeUnaffordable(central);
-                            removeUnaffordable(east);
-                            // Notify that players were removed
-                            expListAdapter.notifyDataSetChanged();
-                        } else if (item == 3) {
                             sortByGrade();
                             expListAdapter.notifyDataSetChanged();
-                        } else if (item == 4) {
+                        } else if (item == 3) {
                             sortByCost();
                             expListAdapter.notifyDataSetChanged();
+                        } else if (item == 4) {
+                            if (autoFilter) autoFilter = false;
+                            else autoFilter = true;
                         }
 
                         dialog.dismiss();
@@ -400,57 +415,6 @@ public class RecruitingActivity extends AppCompatActivity {
         });
 
     }
-
-
-    //Create the Drop Down Spinner Menu
-    private void updatePositionNeeds() {
-        // Get needs for each position
-        needQBs = minQBs - teamQBs.size();
-        needRBs = minRBs - teamRBs.size();
-        needWRs = minWRs - teamWRs.size();
-        needTEs = minTEs - teamTEs.size();
-        needOLs = minOLs - teamOLs.size();
-        needKs = minKs - teamKs.size();
-        needDLs = minDLs - teamDLs.size();
-        needLBs = minLBs - teamLBs.size();
-        needCBs = minCBs - teamCBs.size();
-        needSs = minSs - teamSs.size();
-    }
-
-    private ArrayList<String> getFilterMenu() {
-        // Get needs for each position
-        updatePositionNeeds();
-
-        ArrayList<String> array = new ArrayList();
-        array.add("Top 50 Recruits");
-        array.add("All Players");
-        array.add("QB (Need: " + needQBs + ")");
-        array.add("RB (Need: " + needRBs + ")");
-        array.add("WR (Need: " + needWRs + ")");
-        array.add("TE (Need: " + needTEs + ")");
-        array.add("OL (Need: " + needOLs + ")");
-        array.add("K (Need: " + needKs + ")");
-        array.add("DL (Need: " + needDLs + ")");
-        array.add("LB (Need: " + needLBs + ")");
-        array.add("CB (Need: " + needCBs + ")");
-        array.add("S (Need: " + needSs + ")");
-        array.add("West (" + west.size() + ")");
-        array.add("Midwest (" + midwest.size() + ")");
-        array.add("Central (" + central.size() + ")");
-        array.add("East (" + east.size() + ")");
-
-        if(dataAdapterPosition !=null) {
-            dataAdapterPosition.clear();
-            for (String p : positions) {
-                dataAdapterPosition.add(p);
-            }
-            dataAdapterPosition.notifyDataSetChanged();
-        }
-        
-        return array;
-    }
-
-
 
     //Create Roster Screen
     private void makeRosterDialog() {
@@ -671,6 +635,26 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
     //FILTER OUT UNAFFORDABLE PLAYERS
+    private void removeUnaffordableRecruits() {
+        removeUnaffordable(players);
+        removeUnaffordable(avail50);
+        removeUnaffordable(availAll);
+        removeUnaffordable(availQBs);
+        removeUnaffordable(availRBs);
+        removeUnaffordable(availWRs);
+        removeUnaffordable(availTEs);
+        removeUnaffordable(availOLs);
+        removeUnaffordable(availKs);
+        removeUnaffordable(availDLs);
+        removeUnaffordable(availLBs);
+        removeUnaffordable(availCBs);
+        removeUnaffordable(availSs);
+        removeUnaffordable(west);
+        removeUnaffordable(midwest);
+        removeUnaffordable(central);
+        removeUnaffordable(east);
+    }
+
     private void removeUnaffordable(List<String> list) {
         int i = 0;
         while (i < list.size()) {
@@ -681,7 +665,57 @@ public class RecruitingActivity extends AppCompatActivity {
                 ++i;
             }
         }
+
+            playersInfo = new LinkedHashMap<String, List<String>>();
+            for (String p : players) {
+                ArrayList<String> pInfoList = new ArrayList<String>();
+                pInfoList.add(getPlayerDetails(p, p.split(",")[0]));
+                playersInfo.put(p.substring(0, p.length() - 2), pInfoList);
+            }
+            expListAdapter.notifyDataSetChanged();
     }
+
+    //Update Position Spinner & Team Needs
+    private void updatePositionNeeds() {
+        // Get needs for each position
+        needQBs = minQBs - teamQBs.size();
+        needRBs = minRBs - teamRBs.size();
+        needWRs = minWRs - teamWRs.size();
+        needTEs = minTEs - teamTEs.size();
+        needOLs = minOLs - teamOLs.size();
+        needKs = minKs - teamKs.size();
+        needDLs = minDLs - teamDLs.size();
+        needLBs = minLBs - teamLBs.size();
+        needCBs = minCBs - teamCBs.size();
+        needSs = minSs - teamSs.size();
+
+        if (dataAdapterPosition != null) {
+            positions = new ArrayList<String>();
+            positions.add("Top 50 Recruits");
+            positions.add("All Players");
+            positions.add("QB (Need: " + needQBs + ")");
+            positions.add("RB (Need: " + needRBs + ")");
+            positions.add("WR (Need: " + needWRs + ")");
+            positions.add("TE (Need: " + needTEs + ")");
+            positions.add("OL (Need: " + needOLs + ")");
+            positions.add("K (Need: " + needKs + ")");
+            positions.add("DL (Need: " + needDLs + ")");
+            positions.add("LB (Need: " + needLBs + ")");
+            positions.add("CB (Need: " + needCBs + ")");
+            positions.add("S (Need: " + needSs + ")");
+            positions.add("West (" + west.size() + ")");
+            positions.add("Midwest (" + midwest.size() + ")");
+            positions.add("Central (" + central.size() + ")");
+            positions.add("East (" + east.size() + ")");
+
+            dataAdapterPosition.clear();
+            for (String p : positions) {
+                dataAdapterPosition.add(p);
+            }
+            dataAdapterPosition.notifyDataSetChanged();
+        }
+    }
+
 
     //SORT - GRADE(Default)
     private void sortByGrade() {
@@ -917,6 +951,7 @@ public class RecruitingActivity extends AppCompatActivity {
         Toast.makeText(this, "Recruited " + ps[0] + " " + ps[1],
                 Toast.LENGTH_SHORT).show();
 
+        if (autoFilter)  removeUnaffordableRecruits();
         updatePositionNeeds();
     }
 
@@ -1099,7 +1134,9 @@ public class RecruitingActivity extends AppCompatActivity {
         Toast.makeText(this, "Redshirted " + ps[0] + " " + ps[1],
                 Toast.LENGTH_SHORT).show();
 
+        if (autoFilter)  removeUnaffordableRecruits();
         updatePositionNeeds();
+
     }
 
     //PLAYER INFO FOR RECRUIT/REDSHIRTING DIALOG

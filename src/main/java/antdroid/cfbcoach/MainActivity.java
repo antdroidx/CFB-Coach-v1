@@ -1871,9 +1871,126 @@ public class MainActivity extends AppCompatActivity {
     //User Settings
     private void changeSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Settings / Editor")
+        builder.setTitle("Game Settings")
                 .setView(getLayoutInflater().inflate(R.layout.settings_menu, null));
         final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        final CheckBox checkboxShowPopup = dialog.findViewById(R.id.checkboxShowPopups);
+        checkboxShowPopup.setChecked(showToasts);
+
+        final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
+        checkboxShowInjury.setChecked(showInjuryReport);
+
+        final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
+        checkboxGameLog.setChecked(simLeague.fullGameLog);
+
+        final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
+        checkboxPotential.setChecked(simLeague.hidePotential);
+
+        final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
+        checkboxRealignment.setChecked(simLeague.confRealignment);
+
+        final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
+        checkboxProRelegation.setChecked(simLeague.enableProRel);
+
+        checkboxRealignment.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View view) {
+                                                       if (checkboxRealignment.isChecked()) {
+                                                           checkboxProRelegation.setChecked(false);
+                                                       }
+                                                   }
+                                               }
+        );
+
+        checkboxProRelegation.setOnClickListener(new View.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(View view) {
+                                                         if (checkboxProRelegation.isChecked()) {
+                                                             checkboxRealignment.setChecked(false);
+                                                         }
+                                                     }
+                                                 }
+        );
+
+        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelSettings);
+        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkSettings);
+        Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
+        Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
+
+        cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                dialog.dismiss();
+            }
+        });
+
+        gameEditorButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                dialog.dismiss();
+                gameEditor();
+
+            }
+        });
+
+        okChangeNameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                    showToasts = checkboxShowPopup.isChecked();
+                    showInjuryReport = checkboxShowInjury.isChecked();
+                    simLeague.fullGameLog = checkboxGameLog.isChecked();
+                    simLeague.hidePotential = checkboxPotential.isChecked();
+                    simLeague.confRealignment = checkboxRealignment.isChecked();
+                    simLeague.enableProRel = checkboxProRelegation.isChecked();
+                    userTeam.showPopups = showToasts;
+                    dialog.dismiss();
+
+            }
+        });
+        changeTeamsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dialog.dismiss();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Are you sure you want to resign from this position?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Perform action on click
+                        userHC = userTeam.HC.get(0);
+                        //switchTeams();
+                        if (simLeague.isCareerMode()) jobOffers(userHC);
+                        else switchTeams(userHC);
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+    }
+
+    //Game Editor - Customize Names
+    private void gameEditor() {
+
+        AlertDialog.Builder GameEditor = new AlertDialog.Builder(this);
+        GameEditor.setTitle("Game Editor")
+                .setView(getLayoutInflater().inflate(R.layout.game_editor, null));
+        final AlertDialog dialog = GameEditor.create();
         dialog.show();
 
         final EditText changeNameEditText = dialog.findViewById(R.id.editTextChangeName);
@@ -2029,47 +2146,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        final CheckBox checkboxShowPopup = dialog.findViewById(R.id.checkboxShowPopups);
-        checkboxShowPopup.setChecked(showToasts);
-
-        final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
-        checkboxShowInjury.setChecked(showInjuryReport);
-
-        final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
-        checkboxGameLog.setChecked(simLeague.fullGameLog);
-
-        final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
-        checkboxPotential.setChecked(simLeague.hidePotential);
-
-        final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
-        checkboxRealignment.setChecked(simLeague.confRealignment);
-
-        final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
-        checkboxProRelegation.setChecked(simLeague.enableProRel);
-
-        checkboxRealignment.setOnClickListener(new View.OnClickListener() {
-                                                   @Override
-                                                   public void onClick(View view) {
-                                                       if (checkboxRealignment.isChecked()) {
-                                                           checkboxProRelegation.setChecked(false);
-                                                       }
-                                                   }
-                                               }
-        );
-
-        checkboxProRelegation.setOnClickListener(new View.OnClickListener() {
-                                                     @Override
-                                                     public void onClick(View view) {
-                                                         if (checkboxProRelegation.isChecked()) {
-                                                             checkboxRealignment.setChecked(false);
-                                                         }
-                                                     }
-                                                 }
-        );
-
         Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
         Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
-        Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
 
         cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -2097,17 +2175,10 @@ public class MainActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(season + " | " + userTeam.name);
                     Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);  // Have to update rival's rival too!
                     rival.rivalTeam = currentTeam.abbr;
-                    //examineTeam(currentTeam.name);
                     wantUpdateConf = true;
                     updateCurrConference();  //updates the UI
+                    examineTeam(currentTeam.name);
 
-                    showToasts = checkboxShowPopup.isChecked();
-                    showInjuryReport = checkboxShowInjury.isChecked();
-                    simLeague.fullGameLog = checkboxGameLog.isChecked();
-                    simLeague.hidePotential = checkboxPotential.isChecked();
-                    simLeague.confRealignment = checkboxRealignment.isChecked();
-                    simLeague.enableProRel = checkboxProRelegation.isChecked();
-                    userTeam.showPopups = showToasts;
                     dialog.dismiss();
 
                 } else {
@@ -2115,39 +2186,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
                                 Toast.LENGTH_SHORT).show();
                 }
-
-            }
-        });
-        changeTeamsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                dialog.dismiss();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Confirmation");
-                builder.setMessage("Are you sure you want to resign from this position?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Perform action on click
-                        userHC = userTeam.HC.get(0);
-                        //switchTeams();
-                        if (simLeague.isCareerMode()) jobOffers(userHC);
-                        else switchTeams(userHC);
-                        dialog.dismiss();
-                    }
-                });
-
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-
-                    }
-                });
-
-                builder.show();
 
             }
         });
@@ -2206,7 +2244,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    //League History Data
+    //League History Stats
     private void showLeagueHistoryStats() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("League Stats")
@@ -2409,9 +2447,9 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<String>();// = simLeague.getTeamRankingsStr(0);
         String[] rankingsSelection =
-                {"Poll Votes", "Conference Standings", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
+                {"Poll Votes", "Prestige", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
-                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Prestige", "Recruiting Class"};
+                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -2420,7 +2458,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
         final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, rankings, userTeam.strRepWithBowlResults());
+                new TeamRankingsListArrayAdapter(this, rankings, userTeam.name);
         teamRankingsList.setAdapter(teamRankingsAdapter);
 
         teamRankingsSpinner.setOnItemSelectedListener(
@@ -2428,11 +2466,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
-                        if (position == 15) {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
-                        } else {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithBowlResults());
-                        }
+
+                        teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
                         teamRankingsAdapter.clear();
                         teamRankingsAdapter.addAll(rankings);
                         teamRankingsAdapter.notifyDataSetChanged();
