@@ -47,7 +47,7 @@ Louisiana Tech,Skip Holtz,5
 Louisville,Bobby Petrino,6
 LSU,Ed Orgeron,7
 Marshall,Doc Holliday,4
-Maryland,D.J. Durkin4
+Maryland,D.J. Durkin,4
 Memphis,Mike Norvell,7
 Miami,Mark Richt,8
 Miami OH,Chuck Martin,2
