@@ -129,6 +129,18 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button googleButton = findViewById(R.id.buttonForum);
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://groups.google.com/forum/#!forum/college-football-coach-career-edition"));
+                startActivity(intent);
+            }
+        });
+
+
         Button subredditButton = findViewById(R.id.buttonSubreddit);
         subredditButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -181,6 +193,22 @@ public class Home extends AppCompatActivity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void welcomeMessage() {
+        AlertDialog.Builder welcome = new AlertDialog.Builder(this);
+        welcome.setMessage("Thank you for participating in the beta program for College Football Coach: Career Edition!\n\nPlease share any feedback to the developer on how to improve this game!")
+                .setTitle("Welcome!")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        welcome.setCancelable(false);
+        AlertDialog dialog = welcome.create();
+        dialog.show();
+        TextView msgTxt = dialog.findViewById(android.R.id.message);
+        msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
     /**

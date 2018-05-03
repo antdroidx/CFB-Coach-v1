@@ -429,7 +429,7 @@ public class Team {
         leagueDefTal = league.getAverageDefTalent();
         confAvg = league.averageConfPrestige();
         confLimit = confPrestige - confAvg;
-        projectedPollScore = 3*teamPrestige + teamOffTalent + teamDefTalent + confPrestige/2;
+        projectedPollScore = (teamOffTalent + teamDefTalent + 3*teamPrestige + confPrestige);
     }
 
     public void projectTeamWins(){
@@ -437,12 +437,10 @@ public class Team {
         projectedWins = 0;
         for (int i = 0; i < gameSchedule.size(); i++) {
             if (gameSchedule.get(i).homeTeam == this) {
-                //if ((teamOffTalent + teamDefTalent) > gameSchedule.get(i).awayTeam.teamOffTalent + gameSchedule.get(i).awayTeam.teamDefTalent)
                 if ((projectedPollScore) > gameSchedule.get(i).awayTeam.projectedPollScore){
                     projectedWins++;
                 }
             } else {
-                //if ((teamOffTalent + teamDefTalent) > gameSchedule.get(i).homeTeam.teamOffTalent + gameSchedule.get(i).homeTeam.teamDefTalent)
                 if ((projectedPollScore) > gameSchedule.get(i).homeTeam.projectedPollScore) {
                     projectedWins++;
                 }
@@ -451,7 +449,7 @@ public class Team {
     }
 
     public void projectPollRank() {
-        projectedPollScore = projectedPollScore + projectedWins*5;
+        projectedPollScore = projectedPollScore + projectedWins*6;
     }
 
     public double teamPowerRating() {
@@ -799,7 +797,7 @@ public class Team {
         if (preseasonBias < 0) preseasonBias = 0;
         preseasonBias = preseasonBias/15;
         teamPollScore =
-                (int)(preseasonBias * (teamOffTalent + teamDefTalent + (teamPrestige/2) + (confPrestige/3))) +
+                (int)(preseasonBias * (teamOffTalent + teamDefTalent + (teamPrestige/2) + (confPrestige/2))) +
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
                         1000)/2;
 
@@ -1316,6 +1314,7 @@ public class Team {
         int age = HC.get(0).age;
         int wins = HC.get(0).wins;
         int losses = HC.get(0).losses;
+        boolean proveIt = false;
 
         //RETIREMENT
         if (HC.get(0).age > retire && !userControlled) {
@@ -1366,7 +1365,28 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < 35) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && (teamPrestige-teamPrestigeStart) > 3 || teamPrestige < 32 && (teamPrestige-teamPrestigeStart) > 3) {
+                    if (Math.random() > 0.40) {
+                        HC.get(0).contractLength = 2;
+                        HC.get(0).contractYear = 0;
+                        HC.get(0).baselinePrestige = HC.get(0).baselinePrestige;
+                        league.newsStories.get(league.currentWeek + 1).add("2-Year Prove-It Contract Given by " + name + ">" + name + " has an additional 2-year contract to " + HC.get(0).name +
+                            " despite a disappointing tenure. He has a career record of " + wins + "-" + losses + ", however the recent success of the team this season has inspired some confidence with the head coach from the AD.");
+                        newContract = true;
+                        proveIt = true;
+                    } else {
+                        fired = true;
+                        league.newsStories.get(league.currentWeek + 1).add("Polarizing Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
+                            " despite finally getting the team on the right track. The team struggled during his first few seasons at the school, but had shown some promise this season." +
+                             " He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
+                        teamPrestige -= (int)Math.random()*8;
+                        if(!userControlled) {
+                        league.coachList.add(HC.get(0));
+                        league.coachPrevTeam.add(name);
+                    }
+                    HC.remove(0);
+                    }
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < 32) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
@@ -1374,7 +1394,7 @@ public class Team {
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && league.isCareerMode() || teamPrestige < 35) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && league.isCareerMode() || teamPrestige < 32) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -1387,13 +1407,14 @@ public class Team {
                 } else {
                     HC.get(0).contractLength = 2;
                     HC.get(0).contractYear = 0;
-                    HC.get(0).baselinePrestige = (2 * HC.get(0).baselinePrestige + teamPrestige) / 3;
+                    HC.get(0).baselinePrestige = (3 * HC.get(0).baselinePrestige + teamPrestige) / 4;
                     newContract = true;
                 }
             }
         }
         if (userControlled) {
-            if (newContract) {
+            if (newContract && proveIt) contractString = "Congratulations! You've been given an additional " + HC.get(0).contractLength + " year contract based on the recent success of your team and not the disappointing past history!";
+            else if (newContract) {
                 contractString = "Congratulations! You've been award with a new contract extension for " + HC.get(0).contractLength + " years!";
             } else if (fired) {
                 contractString = "Due to your poor performance as head coach, the Athletic Director has terminated your contract and you are no longer Head Coach of this school.";
@@ -3850,172 +3871,7 @@ public class Team {
         return playersLeavingList;
     }
 
-
-    /**
-     * Save all the recruits into a string to be used by RecruitingActivity
-     *
-     * @return String of all the recruits
-     */
-    public String getRecruitsInfoSaveFile() {
-        int rating = calcMaxRecruitRating();
-
-        StringBuilder sb = new StringBuilder();
-        PlayerQB[] qbs = getQBRecruits(rating);
-        for (PlayerQB p : qbs) {
-            sb.append("QB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratPassPow  + "," + p.ratPassAcc + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerRB[] rbs = getRBRecruits(rating);
-        for (PlayerRB p : rbs) {
-            sb.append("RB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratRushPower  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratCatch + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerWR[] wrs = getWRRecruits(rating);
-        for (PlayerWR p : wrs) {
-            sb.append("WR," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCatch  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratJump + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerTE[] tes = getTERecruits(rating);
-        for (PlayerTE p : tes) {
-            sb.append("TE," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCatch  + "," + p.ratRunBlock + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerK[] ks = getKRecruits(rating);
-        for (PlayerK p : ks) {
-            sb.append("K," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratKickPow  + "," + p.ratKickAcc + "," + p.ratKickFum + "," + p.ratPressure + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerOL[] ols = getOLRecruits(rating);
-        for (PlayerOL p : ols) {
-            sb.append("OL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratStrength  + "," + p.ratRunBlock + "," + p.ratPassBlock + "," + p.ratAwareness + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerDL[] dls = getDLRecruits(rating);
-        for (PlayerDL p : dls) {
-            sb.append("DL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratStrength  + "," + p.ratRunStop + "," + p.ratPassRush + "," + p.ratTackle + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerLB[] lbs = getLBRecruits(rating);
-        for (PlayerLB p : lbs) {
-            sb.append("LB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCoverage  + "," + p.ratRunStop + "," + p.ratTackle + "," + p.ratSpeed + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerCB[] cbs = getCBRecruits(rating);
-        for (PlayerCB p : cbs) {
-            sb.append("CB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratJump + "," + p.height + "," + p.weight + "%\n");
-        }
-        PlayerS[] ss = getSRecruits(rating);
-        for (PlayerS p : ss) {
-            sb.append("S," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratRunStop + "," + p.height + "," + p.weight + "%\n");
-        }
-
-        return sb.toString();
-    }
-
-    public String getPlayerInfoSaveFile() {
-        StringBuilder sb = new StringBuilder();
-        for (HeadCoach hc : HC) {
-            sb.append("HC," + hc.name + "," + hc.age + "," + hc.year + "," + hc.contractYear + "," + hc.contractLength + "," + hc.ratPot
-                    + "," + hc.ratOff + "," + hc.ratDef + "," + hc.ratTalent + "," + hc.ratDiscipline + "," + hc.offStrat + "," + hc.defStrat + "," + hc.baselinePrestige
-                    + "," + hc.wins + "," + hc.losses + "," + hc.bowlwins + "," + hc.bowllosses + "," + hc.confchamp + "," + hc.natchamp + "," + hc.allconference
-                    + "," + hc.allamericans + "," + hc.confAward + "," + hc.awards
-                    + "%\n");
-        }
-        for (PlayerQB p : teamQBs) {
-            sb.append("QB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratPassPow  + "," + p.ratPassAcc + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight
-                    + "," + p.careerPassAtt + "," + p.careerPassComp + "," + p.careerTDs + "," + p.careerInt
-                    + "," + p.careerPassYards + "," + p.careerSacked + "," + p.careerRushAtt + "," + p.careerRushYards + "," + p.careerRushTD + "," + p.careerFumbles
-                    + "%\n");
-        }
-
-        for (PlayerRB p : teamRBs) {
-            sb.append("RB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratRushPower  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratCatch + "," + p.height + "," + p.weight
-                    + "," + p.careerRushAtt + "," + p.careerRushYards + "," + p.careerTDs + "," + p.careerFumbles + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerRecTD
-                    + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
-                    + "%\n");
-        }
-        
-        for (PlayerWR p : teamWRs) {
-            sb.append("WR," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratCatch  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratJump  + "," + p.height + "," + p.weight
-                    + "," + p.careerTargets + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerTD + "," + p.careerDrops + "," + p.careerFumbles
-                    + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
-                    + "%\n");
-        }
-
-
-        for (PlayerTE p : teamTEs) {
-            sb.append("TE," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratCatch  + "," + p.ratRunBlock + "," + p.ratEvasion + "," + p.ratSpeed  + "," + p.height + "," + p.weight
-                    + "," + p.careerTargets + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerTD + "," + p.careerDrops + "," + p.careerFumbles
-                    + "%\n");
-        }
-
-        for (PlayerOL p : teamOLs) {
-            sb.append("OL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratStrength  + "," + p.ratRunBlock + "," + p.ratPassBlock + "," + p.ratAwareness + "," + p.height + "," + p.weight
-                    + "%\n");
-        }
-
-        for (PlayerK p : teamKs) {
-            sb.append("K," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratKickPow  + "," + p.ratKickAcc + "," + p.ratKickFum + "," + p.ratPressure  + "," + p.height + "," + p.weight
-                    + "," + p.careerXPAtt + "," + p.careerXPMade + "," + p.careerFGAtt + "," + p.careerFGMade
-                    + "%\n");
-        }
-
-        for (PlayerDL p : teamDLs) {
-            sb.append("DL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratStrength  + "," + p.ratRunStop + "," + p.ratPassRush + "," + p.ratTackle  + "," + p.height + "," + p.weight
-                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
-                    + "%\n");
-        }
-
-        for (PlayerLB p : teamLBs) {
-            sb.append("LB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratCoverage  + "," + p.ratRunStop + "," + p.ratTackle + "," + p.ratSpeed  + "," + p.height + "," + p.weight
-                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
-                    + "%\n");
-        }
-
-        for (PlayerCB p : teamCBs) {
-            sb.append("CB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratJump  + "," + p.height + "," + p.weight
-                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts + "," + p.careerTargets + "," + p.careerIncomplete + "," + p.careerDefended
-                    + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
-                    + "%\n");
-        }
-
-        for (PlayerS p : teamSs) {
-            sb.append("S," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
-                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
-                    + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratRunStop  + "," + p.height + "," + p.weight
-                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
-                    + "%\n");
-        }
-
-        return sb.toString();
-    }
-
-    /**
-     * Set the starters for a particular position.
-     *
-     * @param starters new starters to be set
-     * @param position position, 0 - 7
-     */
+    //Set Starters
     public void setStarters(ArrayList<Player> starters, int position) {
         switch (position) {
             case 0:
@@ -4144,10 +4000,7 @@ public class Team {
         league.setTeamRanks();
     }
 
-    /**
-     * Add one gamePlayed to all the starters.
-     * The number of games played affects how much players improve.
-     */
+    //Adds a Game Start to each Starter
     public void addGamePlayedPlayers(boolean wonGame) {
         addGamePlayedList(teamQBs, startersQB, wonGame);
         addGamePlayedList(teamRBs, startersRB, wonGame);
@@ -4175,7 +4028,6 @@ public class Team {
 
 
     // Generate CPU Strategy
-    //
     public int getCPUOffense() {
         if(HC.size() < 1 || teamQBs.size() < 1) return 0;
         if(HC.get(0).offStrat < 0 || HC.get(0).offStrat > 4) HC.get(0).offStrat = 0;
@@ -4196,11 +4048,7 @@ public class Team {
         return HC.get(0).defStrat;
     }
 
-    /**
-     * Generate all the offense team strategies that can be selected
-     *
-     * @return array of all the offense team strats
-     */
+    //Pulls available playbooks
     public PlaybookOffense[] getPlaybookOff() {
         PlaybookOffense[] ts = new PlaybookOffense[playbookOff.numPlaybooks];
 
@@ -4211,11 +4059,7 @@ public class Team {
     }
 
 
-    /**
-     * Generate all the defense team strategies that can be selected
-     *
-     * @return array of all the defense team strats
-     */
+    //Pulls available playbooks
     public PlaybookDefense[] getPlaybookDef() {
         PlaybookDefense[] ts = new PlaybookDefense[playbookDef.numPlaybooks];
 
@@ -4226,9 +4070,7 @@ public class Team {
     }
 
 
-    /**
-     * Checks all the players leaving to see if they should be inducted to the hall of fame.
-     */
+    //Hall of Fame Credentials
     private void checkHallofFame() {
 
         for (Player p : playersLeaving) {
@@ -4258,9 +4100,7 @@ public class Team {
     }
 
 
-    /**
-     * Checks if any of the league records were broken by this team.
-     */
+    //Checks if any of the league records were broken by this team.
     public void checkLeagueRecords(LeagueRecords records) {
         records.checkRecord("Team PPG", teamPoints / numGames(), name, league.getYear());
         records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), name, league.getYear());
@@ -4338,9 +4178,7 @@ public class Team {
         }
     }
 
-    /**
-     * Checks the career records for all the leaving players. Must be done after playersLeaving is populated.
-     */
+    // Checks the career records for all the leaving players. Must be done after playersLeaving is populated.
     private void checkCareerRecords(LeagueRecords records) {
         for (Player p : playersLeaving) {
             if (p instanceof PlayerQB) {
@@ -4417,6 +4255,164 @@ public class Team {
     public void getLeaderboard() {
         //Google Play Games Leaderboard Implementation
 
+    }
+
+
+
+    //Saves generated recruits to a file for Recruiting Activity
+    public String getRecruitsInfoSaveFile() {
+        int rating = calcMaxRecruitRating();
+
+        StringBuilder sb = new StringBuilder();
+        PlayerQB[] qbs = getQBRecruits(rating);
+        for (PlayerQB p : qbs) {
+            sb.append("QB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratPassPow  + "," + p.ratPassAcc + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerRB[] rbs = getRBRecruits(rating);
+        for (PlayerRB p : rbs) {
+            sb.append("RB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratRushPower  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratCatch + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerWR[] wrs = getWRRecruits(rating);
+        for (PlayerWR p : wrs) {
+            sb.append("WR," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCatch  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratJump + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerTE[] tes = getTERecruits(rating);
+        for (PlayerTE p : tes) {
+            sb.append("TE," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCatch  + "," + p.ratRunBlock + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerK[] ks = getKRecruits(rating);
+        for (PlayerK p : ks) {
+            sb.append("K," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratKickPow  + "," + p.ratKickAcc + "," + p.ratKickFum + "," + p.ratPressure + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerOL[] ols = getOLRecruits(rating);
+        for (PlayerOL p : ols) {
+            sb.append("OL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratStrength  + "," + p.ratRunBlock + "," + p.ratPassBlock + "," + p.ratAwareness + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerDL[] dls = getDLRecruits(rating);
+        for (PlayerDL p : dls) {
+            sb.append("DL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt+ "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratStrength  + "," + p.ratRunStop + "," + p.ratPassRush + "," + p.ratTackle + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerLB[] lbs = getLBRecruits(rating);
+        for (PlayerLB p : lbs) {
+            sb.append("LB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCoverage  + "," + p.ratRunStop + "," + p.ratTackle + "," + p.ratSpeed + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerCB[] cbs = getCBRecruits(rating);
+        for (PlayerCB p : cbs) {
+            sb.append("CB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratJump + "," + p.height + "," + p.weight + "%\n");
+        }
+        PlayerS[] ss = getSRecruits(rating);
+        for (PlayerS p : ss) {
+            sb.append("S," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer  + "," + p.wasRedshirt + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.cost + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratRunStop + "," + p.height + "," + p.weight + "%\n");
+        }
+
+        return sb.toString();
+    }
+
+    //Creates a Save File for Team Roster
+    public String getPlayerInfoSaveFile() {
+        StringBuilder sb = new StringBuilder();
+        for (HeadCoach hc : HC) {
+            sb.append("HC," + hc.name + "," + hc.age + "," + hc.year + "," + hc.contractYear + "," + hc.contractLength + "," + hc.ratPot
+                    + "," + hc.ratOff + "," + hc.ratDef + "," + hc.ratTalent + "," + hc.ratDiscipline + "," + hc.offStrat + "," + hc.defStrat + "," + hc.baselinePrestige
+                    + "," + hc.wins + "," + hc.losses + "," + hc.bowlwins + "," + hc.bowllosses + "," + hc.confchamp + "," + hc.natchamp + "," + hc.allconference
+                    + "," + hc.allamericans + "," + hc.confAward + "," + hc.awards
+                    + "%\n");
+        }
+        for (PlayerQB p : teamQBs) {
+            sb.append("QB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratPassPow  + "," + p.ratPassAcc + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight
+                    + "," + p.careerPassAtt + "," + p.careerPassComp + "," + p.careerTDs + "," + p.careerInt
+                    + "," + p.careerPassYards + "," + p.careerSacked + "," + p.careerRushAtt + "," + p.careerRushYards + "," + p.careerRushTD + "," + p.careerFumbles
+                    + "%\n");
+        }
+
+        for (PlayerRB p : teamRBs) {
+            sb.append("RB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratRushPower  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratCatch + "," + p.height + "," + p.weight
+                    + "," + p.careerRushAtt + "," + p.careerRushYards + "," + p.careerTDs + "," + p.careerFumbles + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerRecTD
+                    + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
+                    + "%\n");
+        }
+
+        for (PlayerWR p : teamWRs) {
+            sb.append("WR," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratCatch  + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratJump  + "," + p.height + "," + p.weight
+                    + "," + p.careerTargets + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerTD + "," + p.careerDrops + "," + p.careerFumbles
+                    + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
+                    + "%\n");
+        }
+
+
+        for (PlayerTE p : teamTEs) {
+            sb.append("TE," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratCatch  + "," + p.ratRunBlock + "," + p.ratEvasion + "," + p.ratSpeed  + "," + p.height + "," + p.weight
+                    + "," + p.careerTargets + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerTD + "," + p.careerDrops + "," + p.careerFumbles
+                    + "%\n");
+        }
+
+        for (PlayerOL p : teamOLs) {
+            sb.append("OL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratStrength  + "," + p.ratRunBlock + "," + p.ratPassBlock + "," + p.ratAwareness + "," + p.height + "," + p.weight
+                    + "%\n");
+        }
+
+        for (PlayerK p : teamKs) {
+            sb.append("K," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratKickPow  + "," + p.ratKickAcc + "," + p.ratKickFum + "," + p.ratPressure  + "," + p.height + "," + p.weight
+                    + "," + p.careerXPAtt + "," + p.careerXPMade + "," + p.careerFGAtt + "," + p.careerFGMade
+                    + "%\n");
+        }
+
+        for (PlayerDL p : teamDLs) {
+            sb.append("DL," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratStrength  + "," + p.ratRunStop + "," + p.ratPassRush + "," + p.ratTackle  + "," + p.height + "," + p.weight
+                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
+                    + "%\n");
+        }
+
+        for (PlayerLB p : teamLBs) {
+            sb.append("LB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratCoverage  + "," + p.ratRunStop + "," + p.ratTackle + "," + p.ratSpeed  + "," + p.height + "," + p.weight
+                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
+                    + "%\n");
+        }
+
+        for (PlayerCB p : teamCBs) {
+            sb.append("CB," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratJump  + "," + p.height + "," + p.weight
+                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts + "," + p.careerTargets + "," + p.careerIncomplete + "," + p.careerDefended
+                    + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
+                    + "%\n");
+        }
+
+        for (PlayerS p : teamSs) {
+            sb.append("S," + p.name + "," + p.year + "," + p.region + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
+                    + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames  + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
+                    + "," + p.ratCoverage  + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratRunStop  + "," + p.height + "," + p.weight
+                    + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
+                    + "%\n");
+        }
+
+        return sb.toString();
     }
 
 }

@@ -208,8 +208,8 @@ public class HeadCoach extends Player {
         float def = avgYards - team.teamOppYards;
         float offTal = offTalent - team.teamOffTalent;
         float defTal = defTalent - team.teamDefTalent;
-        float offpts = ((off / avgYards) + (offTal / offTalent)) * 5;
-        float defpts = ((def / avgYards) + (defTal / defTalent)) * 5;
+        float offpts = ((off / avgYards) + (offTal / offTalent)) * 4;
+        float defpts = ((def / avgYards) + (defTal / defTalent)) * 4;
 
         ratOff += ((prestigeDiff + offpts) * ((double)ratTalent/100));
         if (ratOff > 95) ratOff = 95;

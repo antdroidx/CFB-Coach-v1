@@ -162,6 +162,16 @@
         android:layout_margin="0dp">
 
         <Button
+            android:id="@+id/buttonForum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:text="Forum"
+            android:textSize="10sp" />
+
+        <Button
             android:id="@+id/buttonSubreddit"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -169,7 +179,7 @@
             android:layout_weight="1"
             android:padding="0dp"
             android:text="Reddit"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/buttonAntdroid"
@@ -179,7 +189,7 @@
             android:layout_weight="1"
             android:padding="0dp"
             android:text="Antdroid"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/buttonGitHub"
@@ -189,7 +199,7 @@
             android:layout_weight="1"
             android:padding="0dp"
             android:text="GitHub"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
     </LinearLayout>
 
