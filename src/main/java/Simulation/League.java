@@ -1208,8 +1208,7 @@ public class League {
                 teamDiscipline.add(teamList.get(t).name);
                 teamList.get(t).disciplinePlayer();
             } else {
-                teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 4);
-                teamList.get(t).disciplinePts += (int) (Math.random() * 2);
+                teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
             }
         }
         for (int i = 0; i < teamDiscipline.size(); ++i) {
@@ -3904,6 +3903,7 @@ public class League {
                     else if(currentWeek > 15 && (t.teamPrestige-t.teamPrestigeStart) < 0) rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamPrestige + "  (" + (t.teamPrestige - t.teamPrestigeStart) + ")");
                     else rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamPrestige);
                 }
+                break;
             case 2:
                 Collections.sort(teams, new CompTeamSoS());
                 for (int i = 0; i < teams.size(); ++i) {

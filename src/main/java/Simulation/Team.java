@@ -1110,6 +1110,10 @@ public class Team {
         prestigeChange = Math.round((float)(diffExpected/7.5));
         }
 
+        if(prestigeChange <=0 && wins > projectedWins) prestigeChange++;
+        if(prestigeChange >=0 && losses > (12 - projectedWins) && (wins + losses) <= 12 || prestigeChange >=0 && losses -1  > (12 - projectedWins) && (wins + losses) > 12) prestigeChange--;
+
+
         //RIVALRY POINTS!
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {

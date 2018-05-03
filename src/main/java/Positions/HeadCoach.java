@@ -198,13 +198,12 @@ public class HeadCoach extends Player {
 
     public void advanceSeason(int prestigeDiff, int avgYards, int offTalent, int defTalent) {
         int oldOvr = ratOvr;
-        int bowl = (team.wins + team.losses - 12);
         age++;
         year++;
         contractYear++;
 
         // WIP
-        ratTalent += (prestigeDiff+bowl) * (potFactor*ratPot/100);
+        ratTalent += Math.random()*prestigeDiff;
         float off = team.teamYards - avgYards;
         float def = avgYards - team.teamOppYards;
         float offTal = offTalent - team.teamOffTalent;
@@ -212,18 +211,18 @@ public class HeadCoach extends Player {
         float offpts = ((off / avgYards) + (offTal / offTalent)) * 5;
         float defpts = ((def / avgYards) + (defTal / defTalent)) * 5;
 
-        ratOff += Math.round((prestigeDiff + offpts)*((potFactor*ratPot)/100));
+        ratOff += ((prestigeDiff + offpts) * ((double)ratTalent/100));
         if (ratOff > 95) ratOff = 95;
         if (ratOff < 20) ratOff = 20;
 
-        ratDef += Math.round((prestigeDiff + defpts)*((potFactor*ratPot)/100));
+        ratDef += ((prestigeDiff + defpts) * ((double)ratTalent/100));
         if (ratDef > 95) ratDef = 95;
         if (ratDef < 20) ratDef = 20;
 
         if (ratDiscipline > 90) ratDiscipline = 90;
         if (ratDiscipline < 15) ratDiscipline = 15;
 
-        if (ratTalent > 90) ratTalent = 90;
+        if (ratTalent > 95) ratTalent = 95;
         if (ratTalent < 20) ratTalent = 20;
 
 

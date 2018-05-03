@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -184,9 +183,10 @@ public class RecruitingActivity extends AppCompatActivity {
         } else {
             HCtalent = Integer.parseInt(teamInfo[4]);
         }
-        getSupportActionBar().setTitle(teamName + " | Recruiting" );
+        getSupportActionBar().setTitle(teamName + " | Recruiting");
 
         showPopUp = true;
+        autoFilter = true;
 
         // First get user team's roster info
         String[] playerInfo;
@@ -224,8 +224,8 @@ public class RecruitingActivity extends AppCompatActivity {
         }
 
         // Add extra money if your team was fleeced
-        int recBonus = (minPlayers - teamPlayers.size())*16;
-        int coachBonus = HCtalent*3;
+        int recBonus = (minPlayers - teamPlayers.size()) * 16;
+        int coachBonus = HCtalent * 3;
         recruitingBudget += recBonus + coachBonus;
 
         // Next get recruits info
@@ -233,16 +233,16 @@ public class RecruitingActivity extends AppCompatActivity {
         while (i < lines.length) {
             playerInfo = lines[i].split(",");
             availAll.add(lines[i]);
-            if(playerInfo[3].equals("0")) {
+            if (playerInfo[3].equals("0")) {
                 west.add(lines[i]);
             }
-            if(playerInfo[3].equals("1")) {
+            if (playerInfo[3].equals("1")) {
                 midwest.add(lines[i]);
             }
-            if(playerInfo[3].equals("2")) {
+            if (playerInfo[3].equals("2")) {
                 central.add(lines[i]);
             }
-            if(playerInfo[3].equals("3")) {
+            if (playerInfo[3].equals("3")) {
                 east.add(lines[i]);
             }
 
@@ -380,7 +380,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
                 builder.setTitle("DISPLAY OPTIONS");
                 String filter = "Enable Auto-Remove Unaffordable Players";
-                if(autoFilter) filter = "Disable Auto-Remove Unaffordable Players";
+                if (autoFilter) filter = "Disable Auto-Remove Unaffordable Players";
                 final String[] sels = {"Expand All", "Collapse All", "Sort by Grade", "Sort by Cost", filter};
                 builder.setItems(sels, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -421,7 +421,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String rosterStr = getRosterStr();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(rosterStr)
-                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size())  )
+                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()))
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -508,13 +508,13 @@ public class RecruitingActivity extends AppCompatActivity {
             // See top 100 recruits
             if (position == 0) {
                 players = avail50;
-            } else if(position == 12) {
+            } else if (position == 12) {
                 players = west;
-            } else if(position == 13) {
+            } else if (position == 13) {
                 players = midwest;
-            } else if(position == 14) {
+            } else if (position == 14) {
                 players = central;
-            } else if(position == 15) {
+            } else if (position == 15) {
                 players = east;
             } else {
                 players = availAll;
@@ -569,7 +569,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return  "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nPass Strength: " + getGrade(ps[13]) +
                     "\nPass Accuracy: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
@@ -599,7 +599,7 @@ public class RecruitingActivity extends AppCompatActivity {
                     "\nPass Blk: " + getGrade(ps[15]) +
                     "\nAwareness: " + getGrade(ps[16]);
         } else if (pos.equals("K")) {
-            return  "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nKick Power: " + getGrade(ps[13]) +
                     "\nAccuracy: " + getGrade(ps[14]) +
                     "\nClumsiness: " + getGrade(ps[15]) +
@@ -653,6 +653,8 @@ public class RecruitingActivity extends AppCompatActivity {
         removeUnaffordable(midwest);
         removeUnaffordable(central);
         removeUnaffordable(east);
+
+        dataAdapterPosition.notifyDataSetChanged();
     }
 
     private void removeUnaffordable(List<String> list) {
@@ -665,14 +667,6 @@ public class RecruitingActivity extends AppCompatActivity {
                 ++i;
             }
         }
-
-            playersInfo = new LinkedHashMap<String, List<String>>();
-            for (String p : players) {
-                ArrayList<String> pInfoList = new ArrayList<String>();
-                pInfoList.add(getPlayerDetails(p, p.split(",")[0]));
-                playersInfo.put(p.substring(0, p.length() - 2), pInfoList);
-            }
-            expListAdapter.notifyDataSetChanged();
     }
 
     //Update Position Spinner & Team Needs
@@ -719,7 +713,8 @@ public class RecruitingActivity extends AppCompatActivity {
 
     //SORT - GRADE(Default)
     private void sortByGrade() {
-        Collections.sort(availAll , new CompRecruitScoutGrade());
+        Collections.sort(availAll, new CompRecruitScoutGrade());
+        Collections.sort(avail50, new CompRecruitScoutGrade());
         Collections.sort(availQBs, new CompRecruitScoutGrade());
         Collections.sort(availRBs, new CompRecruitScoutGrade());
         Collections.sort(availWRs, new CompRecruitScoutGrade());
@@ -735,10 +730,11 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(central, new CompRecruitScoutGrade());
         Collections.sort(east, new CompRecruitScoutGrade());
     }
-    
+
     //SORT - COST
     private void sortByCost() {
-        Collections.sort(availAll , new CompRecruitCost());
+        Collections.sort(availAll, new CompRecruitCost());
+        Collections.sort(avail50, new CompRecruitCost());
         Collections.sort(availQBs, new CompRecruitCost());
         Collections.sort(availRBs, new CompRecruitCost());
         Collections.sort(availWRs, new CompRecruitCost());
@@ -754,8 +750,8 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(central, new CompRecruitCost());
         Collections.sort(east, new CompRecruitCost());
     }
-    
-    
+
+
     //RECRUIT PLAYER
     private void recruitPlayerDialog(String p, int pos, List<Integer> groupsExp) {
         final String player = p;
@@ -767,7 +763,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Recruiting");
-                builder.setMessage("Your team roster is at " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
+                builder.setMessage("Your team roster is at " + (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -783,9 +779,7 @@ public class RecruitingActivity extends AppCompatActivity {
                                 recruitPlayer(player);
 
                                 expListAdapter.notifyDataSetChanged();
-                                for (int group : groupsExpanded) {
-                                    recruitList.expandGroup(group - 1);
-                                }
+
                                 dialog.dismiss();
                             }
                         });
@@ -806,9 +800,7 @@ public class RecruitingActivity extends AppCompatActivity {
                                 setShowPopUp(false);
 
                                 expListAdapter.notifyDataSetChanged();
-                                for (int group : groupsExpanded) {
-                                    recruitList.expandGroup(group - 1);
-                                }
+
                                 dialog.dismiss();
                             }
                         });
@@ -951,7 +943,7 @@ public class RecruitingActivity extends AppCompatActivity {
         Toast.makeText(this, "Recruited " + ps[0] + " " + ps[1],
                 Toast.LENGTH_SHORT).show();
 
-        if (autoFilter)  removeUnaffordableRecruits();
+        if (autoFilter) removeUnaffordableRecruits();
         updatePositionNeeds();
     }
 
@@ -966,7 +958,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Redshirting");
-                builder.setMessage("Your team roster is at " + (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) + " (Max: 70).\n" +
+                builder.setMessage("Your team roster is at " + (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()) + " (Max: 70).\n" +
                         "You currently have redshirted " + redshirtCount + " players (Max: " + maxRedshirt + ").\n\n" +
                         "Are you sure you want to redshirt " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?\n" +
                         "He will be unavailable to play for the first year.");
@@ -985,9 +977,6 @@ public class RecruitingActivity extends AppCompatActivity {
                                 redshirtPlayer(player);
 
                                 expListAdapter.notifyDataSetChanged();
-                                for (int group : groupsExpanded) {
-                                    recruitList.expandGroup(group - 1);
-                                }
                                 redshirtCount++;
                                 dialog.dismiss();
                             }
@@ -1009,9 +998,6 @@ public class RecruitingActivity extends AppCompatActivity {
                                 setShowPopUp(false);
 
                                 expListAdapter.notifyDataSetChanged();
-                                for (int group : groupsExpanded) {
-                                    recruitList.expandGroup(group - 1);
-                                }
                                 dialog.dismiss();
                             }
                         });
@@ -1134,7 +1120,7 @@ public class RecruitingActivity extends AppCompatActivity {
         Toast.makeText(this, "Redshirted " + ps[0] + " " + ps[1],
                 Toast.LENGTH_SHORT).show();
 
-        if (autoFilter)  removeUnaffordableRecruits();
+        if (autoFilter) removeUnaffordableRecruits();
         updatePositionNeeds();
 
     }
@@ -1204,7 +1190,6 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
 
-
     //PLAYER DISPLAY INFO
     private String getReadablePlayerInfo(String p) {
         String[] pi = p.split(",");
@@ -1269,7 +1254,7 @@ public class RecruitingActivity extends AppCompatActivity {
         if (pRat == 2) return " * *      ";
         if (pRat == 1) return " *        ";
 
-        else return  "??";
+        else return "??";
     }
 
     private String getRegion(int region) {
@@ -1295,14 +1280,13 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Exit the recruiting activity. Called when the "Done" button is pressed or when user presses back button.
      */
     private void exitRecruiting() {
         StringBuilder sb = new StringBuilder();
         sb.append("Are you sure you are done recruiting? Any unfilled positions will be filled by walk-ons.\n\n");
-        for (int i = 2; i < positions.size()-4; ++i) {
+        for (int i = 2; i < positions.size() - 4; ++i) {
             sb.append("\t\t" + positions.get(i) + "\n");
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);
@@ -1391,13 +1375,13 @@ public class RecruitingActivity extends AppCompatActivity {
 
             details.setText(playerDetail);
             potential.setText("Height: " + getHeight(Integer.parseInt(playerCSV.split(",")[17])) + "\nWeight: " + getWeight(Integer.parseInt(playerCSV.split(",")[18])) + "\nFootball IQ: " + getGrade(playerCSV.split(",")[5]) + "\n" +
-                    "Personality: " + getGrade(playerCSV.split(",")[4])+ "\n" +
+                    "Personality: " + getGrade(playerCSV.split(",")[4]) + "\n" +
                     "Durability: " + getGrade(playerCSV.split(",")[10]));
 
             // Set up Recruit and Redshirt buttons to display the right price
             Button recruitPlayerButton = convertView.findViewById(R.id.buttonRecruitPlayer);
 
-            if(teamPlayers.size()+playersRecruited.size()+playersRedshirted.size() < maxPlayers) {
+            if (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size() < maxPlayers) {
                 recruitPlayerButton.setText("Recruit: $" + getRecruitCost(playerCSV));
             } else recruitPlayerButton.setVisibility(View.INVISIBLE);
 
@@ -1410,7 +1394,7 @@ public class RecruitingActivity extends AppCompatActivity {
             recruitPlayerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Save who is currently expanded
-                    if(teamPlayers.size()+playersRecruited.size()+playersRedshirted.size() < maxPlayers) {
+                    if (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size() < maxPlayers) {
                         List<Integer> groupsExpanded = new ArrayList<>();
                         recruitPlayerDialog(playerCSV, groupPosition, groupsExpanded);
                     }
@@ -1421,7 +1405,7 @@ public class RecruitingActivity extends AppCompatActivity {
             redshirtPlayerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Save who is currently expanded
-                    if (redshirtCount < maxRedshirt && (teamPlayers.size()+playersRecruited.size()+playersRedshirted.size()) < maxPlayers) {
+                    if (redshirtCount < maxRedshirt && (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()) < maxPlayers) {
                         List<Integer> groupsExpanded = new ArrayList<>();
                         redshirtPlayerDialog(playerCSV, groupPosition, groupsExpanded);
                     }
@@ -1484,8 +1468,8 @@ class CompRecruitScoutGrade implements Comparator<String> {
     public int compare(String a, String b) {
         String[] psA = a.split(",");
         String[] psB = b.split(",");
-        float ovrA = (4*Integer.parseInt(psA[11])+Integer.parseInt(psA[9])) / 5;
-        float ovrB = (4*Integer.parseInt(psB[11])+Integer.parseInt(psB[9])) / 5;
+        float ovrA = (4 * Integer.parseInt(psA[11]) + Integer.parseInt(psA[9])) / 5;
+        float ovrB = (4 * Integer.parseInt(psB[11]) + Integer.parseInt(psB[9])) / 5;
         return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
     }
 }
