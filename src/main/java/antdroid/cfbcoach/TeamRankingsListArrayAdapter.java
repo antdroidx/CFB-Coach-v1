@@ -51,6 +51,12 @@ class TeamRankingsListArrayAdapter extends ArrayAdapter<String> {
             textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
             textRight.setTextColor(Color.parseColor("#5994de"));
         }
+        if (teamStat[2].split(" ").length > 1 && teamStat[2].split(" ")[2].contains("+")) {
+            // Highlight Prestige Changes in off-season
+            textRight.setTextColor(Color.GREEN);
+        } else if (teamStat[2].split(" ").length > 1 && teamStat[2].split(" ")[2].contains("-")) {
+            textRight.setTextColor(Color.RED);
+        }
 
         return rowView;
     }

@@ -134,33 +134,33 @@ public class RecruitingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Init all the ArrayLists
-        playersRecruited = new ArrayList<String>();
-        playersRedshirted = new ArrayList<String>();
-        playersGraduating = new ArrayList<String>();
-        teamQBs = new ArrayList<String>();
-        teamRBs = new ArrayList<String>();
-        teamWRs = new ArrayList<String>();
-        teamTEs = new ArrayList<String>();
-        teamOLs = new ArrayList<String>();
-        teamKs = new ArrayList<String>();
-        teamDLs = new ArrayList<String>();
-        teamLBs = new ArrayList<String>();
-        teamCBs = new ArrayList<String>();
-        teamSs = new ArrayList<String>();
-        teamPlayers = new ArrayList<String>();
-        availQBs = new ArrayList<String>();
-        availRBs = new ArrayList<String>();
-        availWRs = new ArrayList<String>();
-        availTEs = new ArrayList<String>();
-        availOLs = new ArrayList<String>();
-        availKs = new ArrayList<String>();
-        availDLs = new ArrayList<String>();
-        availLBs = new ArrayList<String>();
-        availCBs = new ArrayList<String>();
-        availSs = new ArrayList<String>();
+        playersRecruited = new ArrayList<>();
+        playersRedshirted = new ArrayList<>();
+        playersGraduating = new ArrayList<>();
+        teamQBs = new ArrayList<>();
+        teamRBs = new ArrayList<>();
+        teamWRs = new ArrayList<>();
+        teamTEs = new ArrayList<>();
+        teamOLs = new ArrayList<>();
+        teamKs = new ArrayList<>();
+        teamDLs = new ArrayList<>();
+        teamLBs = new ArrayList<>();
+        teamCBs = new ArrayList<>();
+        teamSs = new ArrayList<>();
+        teamPlayers = new ArrayList<>();
+        availQBs = new ArrayList<>();
+        availRBs = new ArrayList<>();
+        availWRs = new ArrayList<>();
+        availTEs = new ArrayList<>();
+        availOLs = new ArrayList<>();
+        availKs = new ArrayList<>();
+        availDLs = new ArrayList<>();
+        availLBs = new ArrayList<>();
+        availCBs = new ArrayList<>();
+        availSs = new ArrayList<>();
 
-        avail50 = new ArrayList<String>();
-        availAll = new ArrayList<String>();
+        avail50 = new ArrayList<>();
+        availAll = new ArrayList<>();
         west = new ArrayList<>();
         midwest = new ArrayList<>();
         central = new ArrayList<>();
@@ -278,7 +278,7 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(central, new CompRecruitScoutGrade());
         Collections.sort(east, new CompRecruitScoutGrade());
 
-        avail50 = new ArrayList<String>(availAll.subList(0, 49));
+        avail50 = new ArrayList<>(availAll.subList(0, 49));
 
         // Get needs for each position
         updatePositionNeeds();
@@ -294,7 +294,7 @@ public class RecruitingActivity extends AppCompatActivity {
           Set up spinner for examining choosing position to recruit
          */
         positionSpinner = findViewById(R.id.spinnerRec);
-        positions = new ArrayList<String>();
+        positions = new ArrayList<>();
         positions.add("Top 50 Recruits");
         positions.add("All Players");
         positions.add("QB (Need: " + needQBs + ")");
@@ -312,7 +312,7 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("Central (" + central.size() + ")");
         positions.add("East (" + east.size() + ")");
 
-        dataAdapterPosition = new ArrayAdapter<String>(this,
+        dataAdapterPosition = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, positions);
         dataAdapterPosition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         positionSpinner.setAdapter(dataAdapterPosition);
@@ -520,9 +520,9 @@ public class RecruitingActivity extends AppCompatActivity {
                 players = availAll;
             }
 
-            playersInfo = new LinkedHashMap<String, List<String>>();
+            playersInfo = new LinkedHashMap<>();
             for (String p : players) {
-                ArrayList<String> pInfoList = new ArrayList<String>();
+                ArrayList<String> pInfoList = new ArrayList<>();
                 pInfoList.add(getPlayerDetails(p, p.split(",")[0]));
                 playersInfo.put(p.substring(0, p.length() - 2), pInfoList);
             }
@@ -557,9 +557,9 @@ public class RecruitingActivity extends AppCompatActivity {
 
     //Player General Display
     private void setPlayerInfoMap(String pos) {
-        playersInfo = new LinkedHashMap<String, List<String>>();
+        playersInfo = new LinkedHashMap<>();
         for (String p : players) {
-            ArrayList<String> pInfoList = new ArrayList<String>();
+            ArrayList<String> pInfoList = new ArrayList<>();
             pInfoList.add(getPlayerDetails(p, pos));
             playersInfo.put(p.substring(0, p.length() - 2), pInfoList);
         }
@@ -684,7 +684,7 @@ public class RecruitingActivity extends AppCompatActivity {
         needSs = minSs - teamSs.size();
 
         if (dataAdapterPosition != null) {
-            positions = new ArrayList<String>();
+            positions = new ArrayList<>();
             positions.add("Top 50 Recruits");
             positions.add("All Players");
             positions.add("QB (Need: " + needQBs + ")");

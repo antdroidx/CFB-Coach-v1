@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import com.google.android.gms.games.Games;
-import com.google.android.gms.games.LeaderboardsClient;
 
 import Comparator.CompPlayer;
 import Comparator.CompRecruit;
@@ -203,10 +201,10 @@ public class Team {
     public ArrayList<Player> playersInjuredAll;
     private ArrayList<Player> playersDis;
 
-    public TeamStrategy teamStratOff;
-    public TeamStrategy teamStratDef;
-    public int teamStratOffNum;
-    public int teamStratDefNum;
+    public PlaybookOffense playbookOff;
+    public PlaybookDefense playbookDef;
+    public int playbookOffNum;
+    public int playbookDefNum;
 
     public boolean confTVDeal;
     public boolean teamTVDeal;
@@ -272,10 +270,10 @@ public class Team {
 
         teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
 
-        teamStratOffNum = getCPUOffense();
-        teamStratDefNum = getCPUDefense();
-        teamStratOff = getTeamStrategiesOff()[teamStratOffNum];
-        teamStratDef = getTeamStrategiesDef()[teamStratDefNum];
+        playbookOffNum = getCPUOffense();
+        playbookDefNum = getCPUDefense();
+        playbookOff = getPlaybookOff()[playbookOffNum];
+        playbookDef = getPlaybookDef()[playbookDefNum];
 
         hallOfFame.add("");
     }
@@ -302,8 +300,8 @@ public class Team {
         teamOffTalent = 0;
         teamDefTalent = 0;
         teamPollScore = 0;
-        teamStratOffNum = 0;
-        teamStratDefNum = 0;
+        playbookOffNum = 0;
+        playbookDefNum = 0;
         disciplinePts = 0;
         teamTVDeal = false;
         confTVDeal = false;
@@ -331,8 +329,8 @@ public class Team {
                 totalBowls = Integer.parseInt(teamInfo[12]);
                 totalBowlLosses = Integer.parseInt(teamInfo[13]);
                 if (teamInfo.length >= 17) {
-                    teamStratOffNum = Integer.parseInt(teamInfo[13]);
-                    teamStratDefNum = Integer.parseInt(teamInfo[15]);
+                    playbookOffNum = Integer.parseInt(teamInfo[13]);
+                    playbookDefNum = Integer.parseInt(teamInfo[15]);
                     showPopups = (Integer.parseInt(teamInfo[16]) == 1);
                     if (teamInfo.length >= 21) {
                         winStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
@@ -377,41 +375,41 @@ public class Team {
     private void commonInitializer() {
         userControlled = false;
         showPopups = true;
-        teamHistory = new ArrayList<String>();
-        userHistory = new ArrayList<String>();
+        teamHistory = new ArrayList<>();
+        userHistory = new ArrayList<>();
         hallOfFame = new ArrayList<>();
         teamRecords = new LeagueRecords();
         playersInjuredAll = new ArrayList<>();
 
-        HC = new ArrayList<HeadCoach>();
-        teamQBs = new ArrayList<PlayerQB>();
-        teamRBs = new ArrayList<PlayerRB>();
-        teamWRs = new ArrayList<PlayerWR>();
-        teamTEs = new ArrayList<PlayerTE>();
-        teamKs = new ArrayList<PlayerK>();
-        teamOLs = new ArrayList<PlayerOL>();
-        teamDLs = new ArrayList<PlayerDL>();
-        teamLBs = new ArrayList<PlayerLB>();
-        teamCBs = new ArrayList<PlayerCB>();
-        teamSs = new ArrayList<PlayerS>();
-        teamDefense = new ArrayList<PlayerDefense>();
+        HC = new ArrayList<>();
+        teamQBs = new ArrayList<>();
+        teamRBs = new ArrayList<>();
+        teamWRs = new ArrayList<>();
+        teamTEs = new ArrayList<>();
+        teamKs = new ArrayList<>();
+        teamOLs = new ArrayList<>();
+        teamDLs = new ArrayList<>();
+        teamLBs = new ArrayList<>();
+        teamCBs = new ArrayList<>();
+        teamSs = new ArrayList<>();
+        teamDefense = new ArrayList<>();
 
-        teamRSs = new ArrayList<Player>();
-        teamFRs = new ArrayList<Player>();
-        teamSOs = new ArrayList<Player>();
-        teamJRs = new ArrayList<Player>();
-        teamSRs = new ArrayList<Player>();
+        teamRSs = new ArrayList<>();
+        teamFRs = new ArrayList<>();
+        teamSOs = new ArrayList<>();
+        teamJRs = new ArrayList<>();
+        teamSRs = new ArrayList<>();
 
-        teamStratOff = new TeamStrategy();
-        teamStratDef = new TeamStrategy();
+        playbookOff = new PlaybookOffense(0);
+        playbookDef = new PlaybookDefense(0);
 
-        gameSchedule = new ArrayList<Game>();
+        gameSchedule = new ArrayList<>();
         gameOOCSchedule0 = null;
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
-        gameWinsAgainst = new ArrayList<Team>();
-        gameLossesAgainst = new ArrayList<Team>();
-        gameWLSchedule = new ArrayList<String>();
+        gameWinsAgainst = new ArrayList<>();
+        gameLossesAgainst = new ArrayList<>();
+        gameWLSchedule = new ArrayList<>();
         confChampion = "";
         semiFinalWL = "";
         natChampWL = "";
@@ -1093,17 +1091,26 @@ public class Team {
     }
     //Calculates Prestige Change at end of season
     public int[] calcSeasonPrestige() {
+
         int goal = projectedPoll;
-        if (goal > 95) goal = 95;
+        if (goal > 100) goal = 100;
+        if (goal <= 10) goal = 10;
+        else if (goal <= 25) goal = 25;
         int diffExpected = goal - rankTeamPollScore;
+
         int newPrestige = teamPrestige;
         int prestigeChange = 0;
+
+        int rgameplayed = 0;
         int rivalryPts = 0;
+
         int ccPts = 0;
         int ncwPts = 0;
         int nflPts = 0;
+
+        if (disciplinePts > 1) disciplinePts = 1;
         int disPts = disciplinePts;
-        int rgameplayed = 0;
+
 
         // Don't add/subtract prestige if they are a penalized team from last season
         if (this != league.penalizedTeam1 && this != league.penalizedTeam2 && this != league.penalizedTeam3) {
@@ -1112,7 +1119,6 @@ public class Team {
 
         if(prestigeChange <=0 && wins > projectedWins) prestigeChange++;
         if(prestigeChange >=0 && losses > (12 - projectedWins) && (wins + losses) <= 12 || prestigeChange >=0 && losses -1  > (12 - projectedWins) && (wins + losses) > 12) prestigeChange--;
-
 
         //RIVALRY POINTS!
         Game g;
@@ -2852,13 +2858,13 @@ public class Team {
     //Reset Team Stats - not really needed actually and now deprecated
     public void resetStats() {
         //reset stats
-        gameSchedule = new ArrayList<Game>();
+        gameSchedule = new ArrayList<>();
         gameOOCSchedule0 = null;
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
-        gameWinsAgainst = new ArrayList<Team>();
-        gameLossesAgainst = new ArrayList<Team>();
-        gameWLSchedule = new ArrayList<String>();
+        gameWinsAgainst = new ArrayList<>();
+        gameLossesAgainst = new ArrayList<>();
+        gameWLSchedule = new ArrayList<>();
         confChampion = "";
         semiFinalWL = "";
         natChampWL = "";
@@ -3333,7 +3339,7 @@ public class Team {
     }
 
     public List<String> getPlayerStatsExpandListStr() {
-        ArrayList<String> pList = new ArrayList<String>();
+        ArrayList<String> pList = new ArrayList<>();
 
         for (int i = 0; i < startersQB; ++i) {
             if(HC.size() > (i)) {
@@ -3428,7 +3434,7 @@ public class Team {
     }
 
     public Map<String, List<String>> getPlayerStatsExpandListMap(List<String> playerStatsGroupHeaders) {
-        Map<String, List<String>> playerStatsMap = new LinkedHashMap<String, List<String>>();
+        Map<String, List<String>> playerStatsMap = new LinkedHashMap<>();
 
         String ph; //player header
         ArrayList<String> blank = new ArrayList<>();
@@ -4195,24 +4201,12 @@ public class Team {
      *
      * @return array of all the offense team strats
      */
-    public TeamStrategy[] getTeamStrategiesOff() {
-        TeamStrategy[] ts = new TeamStrategy[5];
+    public PlaybookOffense[] getPlaybookOff() {
+        PlaybookOffense[] ts = new PlaybookOffense[playbookOff.numPlaybooks];
 
-        ts[0] = new TeamStrategy("Pro-Style",
-                "Play a normal balanced offense.", 1, 0, 0, 1, 1, 0, 0, 1);
-
-        ts[1] = new TeamStrategy("Smash Mouth",
-                "Play a conservative run-heavy offense, setting up the passes as necessary.", 2, 2, -2, 1, 1, 1, 1, 0);
-
-        ts[2] = new TeamStrategy("West Coast",
-                "Passing game dictates the run game with short accurate passes.", 2, 0, 1, 0, 3, 1, -2, 1);
-
-        ts[3] = new TeamStrategy("Spread",
-                "Pass-heavy offense using many receivers with big play potential with risk.", 1, -2, 1, 0, 2, -1, 0, 1);
-
-        ts[4] = new TeamStrategy("Read Option",
-                "QB Option heavy offense, where QB options based on coverage and LB position.", 3, -1, 1, 1, 2, -1, 0, 0);
-
+        for(int i = 0; i < playbookOff.numPlaybooks; ++i) {
+            ts[i] = new PlaybookOffense(i+1);
+        }
         return ts;
     }
 
@@ -4222,23 +4216,12 @@ public class Team {
      *
      * @return array of all the defense team strats
      */
-    public TeamStrategy[] getTeamStrategiesDef() {
-        TeamStrategy[] ts = new TeamStrategy[5];
+    public PlaybookDefense[] getPlaybookDef() {
+        PlaybookDefense[] ts = new PlaybookDefense[playbookDef.numPlaybooks];
 
-        ts[0] = new TeamStrategy("4-3 Man",
-                "Play a standard 4-3 man-to-man balanced defense.", 1, 0, 0, 1, 1, 0, 0, 1);
-
-        ts[1] = new TeamStrategy("4-6 Bear",
-                "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from runing.", 2, 0, 2, 1, 1, -1, -1, 0);
-
-        ts[2] = new TeamStrategy("Cover 0", "Play a pure man-to-man defense with no deep defenders.", 1, 1, 1, 1, 1, 2, -2, 1);
-
-        ts[3] = new TeamStrategy("Cover 2",
-                "Play a zone defense with safety help in the back against the pass, while LBs cover the run game. ", 2, 0, -1, 1, 3, 2, 0, 1);
-
-        ts[4] = new TeamStrategy("Cover 3",
-                "Play a zone defense to stop the big plays, but allows soft zone coverage underneath.", 3, 0, -2, 1, 7, 2, 2, 1);
-
+        for(int i = 0; i < playbookDef.numPlaybooks; ++i) {
+            ts[i] = new PlaybookDefense(i+1);
+        }
         return ts;
     }
 

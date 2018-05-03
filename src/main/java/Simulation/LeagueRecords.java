@@ -51,7 +51,7 @@ public class LeagueRecords {
             "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Coach Awards", "Coach Year Score", "Coach Career Score"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
-        records = new HashMap<String, Record>();
+        records = new HashMap<>();
         String[] csv;
         for (String str : recordStrings) {
             csv = str.split(",");
@@ -60,7 +60,7 @@ public class LeagueRecords {
     }
 
     public LeagueRecords() {
-        records = new HashMap<String, Record>();
+        records = new HashMap<>();
         records.put("TEAM", null);
         records.put("Team PPG", new Record(0, "XXX", 0));
         records.put("Team Opp PPG", new Record(1000, "XXX", 0));

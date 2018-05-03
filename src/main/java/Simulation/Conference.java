@@ -52,10 +52,10 @@ public class Conference {
      */
     public Conference(String name, League league) {
         confName = name;
-        confTeams = new ArrayList<Team>();
+        confTeams = new ArrayList<>();
         this.league = league;
         week = 0;
-        allConfPlayers = new ArrayList<Player>();
+        allConfPlayers = new ArrayList<>();
     }
 
     /**
@@ -160,7 +160,7 @@ public class Conference {
 
         if (confNum != -1 && league.randconf == 1) {
             for (int offsetOOC = 5; offsetOOC < 11; ++offsetOOC) {
-                ArrayList<Team> availTeams = new ArrayList<Team>();
+                ArrayList<Team> availTeams = new ArrayList<>();
                 int selConf = confNum + offsetOOC * 2;
                 if (selConf == 11) selConf = 0;
                 if (selConf == 13) selConf = 2;
@@ -181,7 +181,7 @@ public class Conference {
             }
         } else if (confNum != -1 && league.randconf == 0) {
             for (int offsetOOC = 5; offsetOOC < 11; ++offsetOOC) {
-                ArrayList<Team> availTeams = new ArrayList<Team>();
+                ArrayList<Team> availTeams = new ArrayList<>();
                 int selConf = confNum + offsetOOC;
                 if (selConf == 10) selConf = 5;
                 if (selConf == 11) selConf = 6;

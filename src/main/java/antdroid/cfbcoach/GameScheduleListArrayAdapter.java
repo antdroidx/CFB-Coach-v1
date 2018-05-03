@@ -1,9 +1,5 @@
 package antdroid.cfbcoach;
 
-/*
-  Created by Achi Jones on 2/21/2016.
- */
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

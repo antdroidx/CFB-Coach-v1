@@ -371,10 +371,10 @@ public class League {
         for (int i = 0; i < conferences.size(); ++i) {
             for (int j = 0; j < conferences.get(i).confTeams.size(); ++j) {
                 teamList.add(conferences.get(i).confTeams.get(j));
-                teamList.get(i).teamStratOffNum = teamList.get(i).getCPUOffense();
-                teamList.get(i).teamStratDefNum = teamList.get(i).getCPUDefense();
-                teamList.get(i).teamStratOff = teamList.get(i).getTeamStrategiesOff()[teamList.get(i).teamStratOffNum];
-                teamList.get(i).teamStratDef = teamList.get(i).getTeamStrategiesDef()[teamList.get(i).teamStratDefNum];
+                teamList.get(i).playbookOffNum = teamList.get(i).getCPUOffense();
+                teamList.get(i).playbookDefNum = teamList.get(i).getCPUDefense();
+                teamList.get(i).playbookOff = teamList.get(i).getPlaybookOff()[teamList.get(i).playbookOffNum];
+                teamList.get(i).playbookDef = teamList.get(i).getPlaybookDef()[teamList.get(i).playbookDefNum];
             }
         }
 
@@ -447,10 +447,10 @@ public class League {
         for (int i = 0; i < conferences.size(); ++i) {
             for (int j = 0; j < conferences.get(i).confTeams.size(); ++j) {
                 teamList.add(conferences.get(i).confTeams.get(j));
-                teamList.get(i).teamStratOffNum = teamList.get(i).getCPUOffense();
-                teamList.get(i).teamStratDefNum = teamList.get(i).getCPUDefense();
-                teamList.get(i).teamStratOff = teamList.get(i).getTeamStrategiesOff()[teamList.get(i).teamStratOffNum];
-                teamList.get(i).teamStratDef = teamList.get(i).getTeamStrategiesDef()[teamList.get(i).teamStratDefNum];
+                teamList.get(i).playbookOffNum = teamList.get(i).getCPUOffense();
+                teamList.get(i).playbookDefNum = teamList.get(i).getCPUDefense();
+                teamList.get(i).playbookOff = teamList.get(i).getPlaybookOff()[teamList.get(i).playbookOffNum];
+                teamList.get(i).playbookDef = teamList.get(i).getPlaybookDef()[teamList.get(i).playbookDefNum];
             }
         }
 
@@ -522,10 +522,10 @@ public class League {
                 Team t = new Team(sbTeam.toString(), this);
                 conferences.get(getConfNumber(t.conference)).confTeams.add(t);
                 teamList.add(t);
-                teamList.get(i).teamStratOffNum = teamList.get(i).getCPUOffense();
-                teamList.get(i).teamStratDefNum = teamList.get(i).getCPUDefense();
-                teamList.get(i).teamStratOff = teamList.get(i).getTeamStrategiesOff()[teamList.get(i).teamStratOffNum];
-                teamList.get(i).teamStratDef = teamList.get(i).getTeamStrategiesDef()[teamList.get(i).teamStratDefNum];
+                teamList.get(i).playbookOffNum = teamList.get(i).getCPUOffense();
+                teamList.get(i).playbookDefNum = teamList.get(i).getCPUDefense();
+                teamList.get(i).playbookOff = teamList.get(i).getPlaybookOff()[teamList.get(i).playbookOffNum];
+                teamList.get(i).playbookDef = teamList.get(i).getPlaybookDef()[teamList.get(i).playbookDefNum];
             }
 
             //Set up user team
@@ -725,13 +725,13 @@ public class League {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setupCommonInitalizers() {
 
-        nameList = new ArrayList<String>();
-        lastNameList = new ArrayList<String>();
+        nameList = new ArrayList<>();
+        lastNameList = new ArrayList<>();
         heismanDecided = false;
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
-        leagueHistory = new ArrayList<String[]>();
-        heismanHistory = new ArrayList<String>();
+        leagueHistory = new ArrayList<>();
+        heismanHistory = new ArrayList<>();
         leagueHoF = new ArrayList<>();
         coachList = new ArrayList<>();
         coachPrevTeam = new ArrayList<>();
@@ -739,10 +739,10 @@ public class League {
         coachStarPrevTeam = new ArrayList<>();
         coachFreeAgents = new ArrayList<>();
 
-        conferences = new ArrayList<Conference>();
-        teamList = new ArrayList<Team>();
+        conferences = new ArrayList<>();
+        teamList = new ArrayList<>();
 
-        allAmericans = new ArrayList<Player>();
+        allAmericans = new ArrayList<>();
 
         tQBs = new ArrayList<>();
         tRBs = new ArrayList<>();
@@ -803,8 +803,8 @@ public class League {
         }
 
         // Initialize new stories lists
-        newsStories = new ArrayList<ArrayList<String>>();
-        weeklyScores = new ArrayList<ArrayList<String>>();
+        newsStories = new ArrayList<>();
+        weeklyScores = new ArrayList<>();
         for (int i = 0; i < seasonWeeks; ++i) {
             newsStories.add(new ArrayList<String>());
             weeklyScores.add(new ArrayList<String>());
@@ -1209,6 +1209,7 @@ public class League {
                 teamList.get(t).disciplinePlayer();
             } else {
                 teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
+                teamList.get(t).disciplinePts += (int) (Math.random() * 2);
             }
         }
         for (int i = 0; i < teamDiscipline.size(); ++i) {
@@ -1293,7 +1294,7 @@ public class League {
         heisman = null;
         int heismanScore = 0;
         int tempScore = 0;
-        ArrayList<Player> heismanCandidates = new ArrayList<Player>();
+        ArrayList<Player> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             //qb
             for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
@@ -1531,7 +1532,7 @@ public class League {
 
     private ArrayList<Player> getTopFreshman() {
         freshman = null;
-        ArrayList<Player> freshmanCandidates = new ArrayList<Player>();
+        ArrayList<Player> freshmanCandidates = new ArrayList<>();
         fQBs = new ArrayList<>();
         fRBs = new ArrayList<>();
         fWRs = new ArrayList<>();
@@ -1629,7 +1630,7 @@ public class League {
      * @return string list of all americans
      */
     public String getAllFreshmanStr() {
-        allFreshman = new ArrayList<Player>();
+        allFreshman = new ArrayList<>();
 
         if (fQBs.size() > 0) {
             allFreshman.add(fQBs.get(0));
@@ -3885,7 +3886,7 @@ public class League {
         /*
          */
         ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
-        ArrayList<String> rankings = new ArrayList<String>();
+        ArrayList<String> rankings = new ArrayList<>();
         Team t;
         switch (selection) {
             case 0:
@@ -4021,7 +4022,7 @@ public class League {
         /*
          */
         ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
-        ArrayList<String> rankings = new ArrayList<String>();
+        ArrayList<String> rankings = new ArrayList<>();
         Team t;
 
         ArrayList<HeadCoach> HC = new ArrayList<>();
@@ -4093,7 +4094,7 @@ public class League {
 
     public ArrayList<String> getTeamRankings() {
         ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
-        ArrayList<String> rankings = new ArrayList<String>();
+        ArrayList<String> rankings = new ArrayList<>();
         Team t;
         Collections.sort(teams, new CompTeamPoll());
         for (int i = 0; i < teams.size(); ++i) {
@@ -4106,7 +4107,7 @@ public class League {
 
     private ArrayList<PlayerQB> rankQB() {
         heisman = null;
-        ArrayList<PlayerQB> heismanCandidates = new ArrayList<PlayerQB>();
+        ArrayList<PlayerQB> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int qb = 0; qb < teamList.get(i).teamQBs.size(); ++qb) {
                 heismanCandidates.add(teamList.get(i).teamQBs.get(qb));
@@ -4118,7 +4119,7 @@ public class League {
 
     private ArrayList<PlayerRB> rankRB() {
         heisman = null;
-        ArrayList<PlayerRB> heismanCandidates = new ArrayList<PlayerRB>();
+        ArrayList<PlayerRB> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int rb = 0; rb < teamList.get(i).teamRBs.size(); ++rb) {
                 heismanCandidates.add(teamList.get(i).teamRBs.get(rb));
@@ -4130,7 +4131,7 @@ public class League {
 
     private ArrayList<PlayerWR> rankWR() {
         heisman = null;
-        ArrayList<PlayerWR> heismanCandidates = new ArrayList<PlayerWR>();
+        ArrayList<PlayerWR> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int wr = 0; wr < teamList.get(i).teamWRs.size(); ++wr) {
                 heismanCandidates.add(teamList.get(i).teamWRs.get(wr));
@@ -4142,7 +4143,7 @@ public class League {
 
     private ArrayList<PlayerTE> rankTE() {
         heisman = null;
-        ArrayList<PlayerTE> heismanCandidates = new ArrayList<PlayerTE>();
+        ArrayList<PlayerTE> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamTEs.size(); ++te) {
                 heismanCandidates.add(teamList.get(i).teamTEs.get(te));
@@ -4154,7 +4155,7 @@ public class League {
 
     private ArrayList<PlayerOL> rankOL() {
         heisman = null;
-        ArrayList<PlayerOL> heismanCandidates = new ArrayList<PlayerOL>();
+        ArrayList<PlayerOL> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamOLs.size(); ++te) {
                 heismanCandidates.add(teamList.get(i).teamOLs.get(te));
@@ -4166,7 +4167,7 @@ public class League {
 
     private ArrayList<PlayerK> rankK() {
         heisman = null;
-        ArrayList<PlayerK> heismanCandidates = new ArrayList<PlayerK>();
+        ArrayList<PlayerK> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int te = 0; te < teamList.get(i).teamKs.size(); ++te) {
                 heismanCandidates.add(teamList.get(i).teamKs.get(te));
@@ -4178,7 +4179,7 @@ public class League {
 
     private ArrayList<PlayerDL> rankDL() {
         heisman = null;
-        ArrayList<PlayerDL> heismanCandidates = new ArrayList<PlayerDL>();
+        ArrayList<PlayerDL> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
                 heismanCandidates.add(teamList.get(i).teamDLs.get(dl));
@@ -4190,7 +4191,7 @@ public class League {
 
     private ArrayList<PlayerLB> rankLB() {
         heisman = null;
-        ArrayList<PlayerLB> heismanCandidates = new ArrayList<PlayerLB>();
+        ArrayList<PlayerLB> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int lb = 0; lb < teamList.get(i).teamLBs.size(); ++lb) {
                 heismanCandidates.add(teamList.get(i).teamLBs.get(lb));
@@ -4202,7 +4203,7 @@ public class League {
 
     private ArrayList<PlayerCB> rankCB() {
         heisman = null;
-        ArrayList<PlayerCB> heismanCandidates = new ArrayList<PlayerCB>();
+        ArrayList<PlayerCB> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int cb = 0; cb < teamList.get(i).teamCBs.size(); ++cb) {
                 heismanCandidates.add(teamList.get(i).teamCBs.get(cb));
@@ -4214,7 +4215,7 @@ public class League {
 
     private ArrayList<PlayerS> rankS() {
         heisman = null;
-        ArrayList<PlayerS> heismanCandidates = new ArrayList<PlayerS>();
+        ArrayList<PlayerS> heismanCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int s = 0; s < teamList.get(i).teamSs.size(); ++s) {
                 heismanCandidates.add(teamList.get(i).teamSs.get(s));
@@ -4226,7 +4227,7 @@ public class League {
 
     private ArrayList<HeadCoach> rankHC() {
         heisman = null;
-        ArrayList<HeadCoach> coachCandidates = new ArrayList<HeadCoach>();
+        ArrayList<HeadCoach> coachCandidates = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (!teamList.get(i).HC.isEmpty()) {
                 coachCandidates.add(teamList.get(i).HC.get(0));
@@ -4241,7 +4242,7 @@ public class League {
 
     public ArrayList<String> getPlayerRankStr(int selection) {
         int rankNum = 0;
-        ArrayList<PlayerQB> pQB = new ArrayList<PlayerQB>();
+        ArrayList<PlayerQB> pQB = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamQBs.size(); ++p) {
                 if (teamList.get(i).teamQBs.get(p).statsPassAtt >= (10 * currentWeek)) {
@@ -4250,55 +4251,55 @@ public class League {
                 }
             }
         }
-        ArrayList<PlayerRB> pRB = new ArrayList<PlayerRB>();
+        ArrayList<PlayerRB> pRB = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamRBs.size(); ++p) {
                 pRB.add(teamList.get(i).teamRBs.get(p));
             }
         }
-        ArrayList<PlayerWR> pWR = new ArrayList<PlayerWR>();
+        ArrayList<PlayerWR> pWR = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamWRs.size(); ++p) {
                 pWR.add(teamList.get(i).teamWRs.get(p));
             }
         }
-        ArrayList<PlayerTE> pTE = new ArrayList<PlayerTE>();
+        ArrayList<PlayerTE> pTE = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamTEs.size(); ++p) {
                 pTE.add(teamList.get(i).teamTEs.get(p));
             }
         }
-        ArrayList<PlayerOL> pOL = new ArrayList<PlayerOL>();
+        ArrayList<PlayerOL> pOL = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamOLs.size(); ++p) {
                 pOL.add(teamList.get(i).teamOLs.get(p));
             }
         }
-        ArrayList<PlayerK> pK = new ArrayList<PlayerK>();
+        ArrayList<PlayerK> pK = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamKs.size(); ++p) {
                 pK.add(teamList.get(i).teamKs.get(p));
             }
         }
-        ArrayList<PlayerDL> pDL = new ArrayList<PlayerDL>();
+        ArrayList<PlayerDL> pDL = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamDLs.size(); ++p) {
                 pDL.add(teamList.get(i).teamDLs.get(p));
             }
         }
-        ArrayList<PlayerLB> pLB = new ArrayList<PlayerLB>();
+        ArrayList<PlayerLB> pLB = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamLBs.size(); ++p) {
                 pLB.add(teamList.get(i).teamLBs.get(p));
             }
         }
-        ArrayList<PlayerCB> pCB = new ArrayList<PlayerCB>();
+        ArrayList<PlayerCB> pCB = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamCBs.size(); ++p) {
                 pCB.add(teamList.get(i).teamCBs.get(p));
             }
         }
-        ArrayList<PlayerS> pS = new ArrayList<PlayerS>();
+        ArrayList<PlayerS> pS = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             for (int p = 0; p < teamList.get(i).teamSs.size(); ++p) {
                 pS.add(teamList.get(i).teamSs.get(p));
@@ -4455,7 +4456,7 @@ public class League {
         }
 
 
-        ArrayList<String> rankings = new ArrayList<String>();
+        ArrayList<String> rankings = new ArrayList<>();
         switch (selection) {
             case 0:
                 Collections.sort(pQB, new CompPlayerPassRating());
@@ -4595,7 +4596,7 @@ public class League {
 
     public ArrayList<String> getAwardsWatch(int selection) {
         int rankNum = 40;
-        ArrayList<String> rankings = new ArrayList<String>();
+        ArrayList<String> rankings = new ArrayList<>();
         switch (selection) {
             case 0:
                 ArrayList<HeadCoach> HC = rankHC();
@@ -4727,7 +4728,7 @@ public class League {
 
         // Save information about each team like W-L records, as well as all the players
         for (Team t : teamList) {
-            sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," + t.totalWins + "," + t.totalLosses + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," + t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," + t.teamStratOffNum + "," + t.teamStratDefNum + "," + (t.showPopups ? 1 : 0) + "," + t.yearStartWinStreak.getStreakCSV() + "," + t.teamTVDeal + "," + t.confTVDeal + "%" + t.evenYearHomeOpp + "%\n");
+            sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," + t.totalWins + "," + t.totalLosses + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," + t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," + t.playbookOffNum + "," + t.playbookDefNum + "," + (t.showPopups ? 1 : 0) + "," + t.yearStartWinStreak.getStreakCSV() + "," + t.teamTVDeal + "," + t.confTVDeal + "%" + t.evenYearHomeOpp + "%\n");
             sb.append(t.getPlayerInfoSaveFile());
             sb.append("END_PLAYERS\n");
         }
@@ -4811,8 +4812,8 @@ public class League {
             sb.append("END_PENALIZED5_TEAM\n");
         }
 
-        for (int b = 0; b < bowlNames.length; ++b) {
-            sb.append(bowlNames[b] + ",");
+        for (String bowlName : bowlNames) {
+            sb.append(bowlName + ",");
         }
         sb.append("\nEND_BOWL_NAMES\n");
 

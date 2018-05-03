@@ -265,7 +265,7 @@ public class HeadCoach extends Player {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
         pStats.add("Offense Playcalling: " + getLetterGrade(ratOff) + ">Defense Playcalling: " + getLetterGrade(ratDef));
-        pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
+        pStats.add("Offense Style: " + team.playbookOff.getStratName() + ">Defense Style: " + team.playbookDef.getStratName());
         pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add(" > ");
@@ -280,7 +280,7 @@ public class HeadCoach extends Player {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
         pStats.add("Offense Philosophy: " + ratOff + ">Defense Philosophy: " + ratDef);
-        pStats.add("Offense Style: " + team.teamStratOff.getStratName() + ">Defense Style: " + team.teamStratDef.getStratName());
+        pStats.add("Offense Style: " + team.playbookOff.getStratName() + ">Defense Style: " + team.playbookDef.getStratName());
         pStats.add("Talent Progression: " + ratTalent + ">Discipline: " + ratDiscipline);
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add("[B]CAREER STATS:");

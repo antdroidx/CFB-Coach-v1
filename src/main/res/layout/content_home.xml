@@ -193,6 +193,7 @@
 
     </LinearLayout>
 
+    <!--suppress AndroidDomInspection -->
     <TextView
         android:id="@+id/versionText"
         android:layout_width="wrap_content"

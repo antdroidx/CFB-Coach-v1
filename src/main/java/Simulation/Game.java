@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
 
 import Comparator.CompGamePlayerPicker;
 import Comparator.CompPlayerPosition;
@@ -302,10 +300,10 @@ public class Game implements Serializable {
             gameEventLog = "LOG: #" + awayTeam.rankTeamPollScore + " " + awayTeam.abbr + " (" + awayTeam.wins + "-" + awayTeam.losses + ") @ #" +
                     homeTeam.rankTeamPollScore + " " + homeTeam.abbr + " (" + homeTeam.wins + "-" + homeTeam.losses + ")" + "\n" +
                     "---------------------------------------------------------\n\n" +
-                    awayTeam.abbr + " Off Strategy: " + awayTeam.teamStratOff.getStratName() + "\n" +
-                    awayTeam.abbr + " Def Strategy: " + awayTeam.teamStratDef.getStratName() + "\n" +
-                    homeTeam.abbr + " Off Strategy: " + homeTeam.teamStratOff.getStratName() + "\n" +
-                    homeTeam.abbr + " Def Strategy: " + homeTeam.teamStratDef.getStratName() + "\n" +
+                    awayTeam.abbr + " Off Strategy: " + awayTeam.playbookOff.getStratName() + "\n" +
+                    awayTeam.abbr + " Def Strategy: " + awayTeam.playbookDef.getStratName() + "\n" +
+                    homeTeam.abbr + " Off Strategy: " + homeTeam.playbookOff.getStratName() + "\n" +
+                    homeTeam.abbr + " Def Strategy: " + homeTeam.playbookDef.getStratName() + "\n" +
                     "\n\n-- 1st QUARTER --";
             //probably establish some home field advantage before playing
             gameTime = 3600;
@@ -507,8 +505,8 @@ public class Game implements Serializable {
 
             }
         } else {
-            double preferPass = (offense.getPassProf() - defense.getPassDef()) / 100 + Math.random() * offense.teamStratOff.getPassPref();       //STRATEGIES
-            double preferRush = (offense.getRushProf() - defense.getRushDef()) / 90 + Math.random() * offense.teamStratOff.getRunPref();
+            double preferPass = (offense.getPassProf() - defense.getPassDef()) / 100 + Math.random() * offense.playbookOff.getPassPref();       //STRATEGIES
+            double preferRush = (offense.getRushProf() - defense.getRushDef()) / 90 + Math.random() * offense.playbookOff.getRunPref();
 
             // If it's 1st and Goal to go, adjust yards needed to reflect distance for a TD so that play selection reflects actual yards to go
             // If we don't do this, gameYardsNeed may be higher than the actually distance for a TD and suboptimal plays may be chosen
@@ -788,7 +786,7 @@ public class Game implements Serializable {
             }
         }
 
-        if (offense.teamStratOffNum == 4)
+        if (offense.playbookOffNum == 4)
             offense.getQB(0 + x).gameSim = Math.pow(offense.getQB(0 + x).ratSpeed, 1.5) * Math.random();
         else
             offense.getQB(0 + x).gameSim = 0.25 * Math.pow(offense.getQB(0 + x).ratSpeed, 1.5) * Math.random();
@@ -908,7 +906,7 @@ public class Game implements Serializable {
         boolean gotFumble = false;
 
         //get how much pressure there is on qb, check if sack
-        int pressureOnQB = getCompositeDLPass(selLB2) * 2 - getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.teamStratDef.getRunProtection() * 2 - offense.teamStratDef.getRunProtection());
+        int pressureOnQB = getCompositeDLPass(selLB2) * 2 - getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.playbookDef.getRunStop() * 2 - offense.playbookDef.getRunStop());
         // SACK OUTCOME
         if (Math.random() * sackValue < pressureOnQB / 8) {
 
@@ -936,7 +934,7 @@ public class Game implements Serializable {
             //check for int
             if (!pos.equals("RB")) {
                 double intChance = (pressureOnQB + defense.getS(0).ratOvr - (selQB.ratPassAcc + selQB.ratFootIQ + 100) / 3) / 18    //STRATEGIES
-                        - offense.teamStratOff.getPassProtection() + defense.teamStratDef.getPassProtection();
+                        - offense.playbookOff.getPassProtection() + defense.playbookDef.getPassRush();
                 if (intChance < 0.015) intChance = 0.015;
                 if (intValue * Math.random() < intChance) {
                     //Interception
@@ -968,13 +966,13 @@ public class Game implements Serializable {
 
             if (pos.equals("WR")) {
                 completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(selQB.ratPassAcc) + normalize(selWR.ratCatch)
-                        - normalize(selCB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();
+                        - normalize(selCB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush();
             } else if (pos.equals("TE")) {
                 completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(selQB.ratPassAcc) + normalize(selTE.ratCatch)
-                        - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();
+                        - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush();
             } else {
                 completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(selQB.ratPassAcc) + normalize(selRB.ratCatch)
-                        - normalize(selLB2.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.teamStratOff.getPassProtection() - defense.teamStratDef.getPassProtection();
+                        - normalize(selLB2.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush();
             }
 
 
@@ -1045,24 +1043,24 @@ public class Game implements Serializable {
                 if (pos.equals("WR")) {
 
                     yardsGain = (int) ((normalize(selQB.ratPassPow) + normalize(selWR.ratSpeed) - normalize(selCB.ratSpeed)) * Math.random() / 4.8 //STRATEGIES
-                            + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
+                            + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
                     //see if receiver can get yards after catch
                     escapeChance = (normalize(selWR.ratEvasion) * 3 - selCB.ratTackle - selS.ratTackle) * Math.random()   //STRATEGIES
-                            + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
+                            + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage();
                 } else if (pos.equals("TE")) {
 
                     yardsGain = (int) ((normalize(selQB.ratPassPow) + normalize(selTE.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 4.8 //STRATEGIES
-                            + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential());
+                            + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
                     //see if receiver can get yards after catch
                     escapeChance = (normalize(selTE.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
-                            + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
+                            + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage();
                 } else {
 
                     yardsGain = (int) ((normalize(selQB.ratPassPow) + normalize(selRB.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 4.8 //STRATEGIES
-                            + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential()) - 2;  //subtract 2 for screen pass behind line of scrimmage
+                            + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage()) - 2;  //subtract 2 for screen pass behind line of scrimmage
                     //see if receiver can get yards after catch
                     escapeChance = (normalize(selRB.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
-                            + offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential();
+                            + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage();
                 }
 
                 //BIG GAIN
@@ -1077,7 +1075,7 @@ public class Game implements Serializable {
                 }
 
                 //BREAK AWAY FOR TD
-                if (escapeChance > 80 && Math.random() < (0.1 + (offense.teamStratOff.getPassPotential() - defense.teamStratDef.getPassPotential()) / 200)) {
+                if (escapeChance > 80 && Math.random() < (0.1 + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage()) / 200)) {
                     yardsGain += 100;
                 }
 
@@ -1199,32 +1197,32 @@ public class Game implements Serializable {
         boolean gotTD;
         gotTD = false;
         int yardsGain;
-        int blockAdv = getCompositeOLRush(selTE) - getCompositeDLRush(selLB, selS) + (offense.teamStratOff.getRunProtection() - defense.teamStratDef.getRunProtection());
-        int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.teamStratOff.getRunUsage() - defense.teamStratDef.getRunUsage());
+        int blockAdv = getCompositeOLRush(selTE) - getCompositeDLRush(selLB, selS) + (offense.playbookOff.getRunProtection() - defense.playbookDef.getRunStop());
+        int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.playbookOff.getRunUsage() - defense.playbookDef.getRunSpy());
 
         //Start Rush Play
         if (selRB.gameSim >= selQB.gameSim) {
-            yardsGain = (int) ((selRB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);
+            yardsGain = (int) ((selRB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.playbookOff.getRunPotential() / 2 - (double) defense.playbookDef.getRunCoverage() / 2);
         } else {
-            yardsGain = (int) ((selQB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.teamStratOff.getRunPotential() / 2 - (double) defense.teamStratDef.getRunPotential() / 2);
+            yardsGain = (int) ((selQB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.playbookOff.getRunPotential() / 2 - (double) defense.playbookDef.getRunCoverage() / 2);
         }
 
         //Break past neutral zone
         if (selRB.gameSim >= selQB.gameSim) {
             if (yardsGain < 2) {
-                yardsGain += selRB.ratRushPower / 20 - 3 - (double) defense.teamStratDef.getRunPotential() / 2;
+                yardsGain += selRB.ratRushPower / 20 - 3 - (double) defense.playbookDef.getRunCoverage() / 2;
             } else {
                 //break free from tackles
-                if (Math.random() < (0.28 + (offense.teamStratOff.getRunPotential() - (double) defense.teamStratDef.getRunPotential() / 2) / 50)) {
+                if (Math.random() < (0.28 + (offense.playbookOff.getRunPotential() - (double) defense.playbookDef.getRunCoverage() / 2) / 50)) {
                     yardsGain += (selRB.ratEvasion - blockAdvOutside) / 5 * Math.random();
                 }
             }
         } else {
             if (yardsGain < 2) {
-                yardsGain += selQB.ratEvasion / 20 - 3 - (double) defense.teamStratDef.getRunPotential() / 2;
+                yardsGain += selQB.ratEvasion / 20 - 3 - (double) defense.playbookDef.getRunCoverage() / 2;
             } else {
                 //break free from tackles
-                if (Math.random() < (0.20 + (offense.teamStratOff.getRunPotential() - (double) defense.teamStratDef.getRunPotential() / 2) / 50)) {
+                if (Math.random() < (0.20 + (offense.playbookOff.getRunPotential() - (double) defense.playbookDef.getRunCoverage() / 2) / 50)) {
                     yardsGain += (selQB.ratEvasion - blockAdvOutside) / 5 * Math.random();
                 }
             }
@@ -1264,7 +1262,7 @@ public class Game implements Serializable {
         } else {
             gameTime -= timePerPlay + timePerPlay * Math.random();
             //check for fumble
-            double fumChance = ((defense.getS(0).ratTackle + selLB.ratTackle) / 2 + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.teamStratOff.getRunProtection();  //STRATEGIES
+            double fumChance = ((defense.getS(0).ratTackle + selLB.ratTackle) / 2 + defense.getCompositeDLRush() - getHFadv()) / 2 + offense.playbookOff.getRunProtection();  //STRATEGIES
             if (100 * Math.random() < fumChance / 50) {
                 //Fumble!
 
@@ -2690,7 +2688,7 @@ public class Game implements Serializable {
                 t.teamPassYards / g + " (" + t.rankTeamPassYards + ")\n" + t.teamRushYards / g + " (" + t.rankTeamRushYards + ")\n" +
                 t.teamOppPassYards / g + " (" + t.rankTeamOppPassYards + ")\n" + t.teamOppRushYards / g + " (" + t.rankTeamOppRushYards + ")\n\n" +
                 t.teamOffTalent + " (" + t.rankTeamOffTalent + ")\n" + t.teamDefTalent + " (" + t.rankTeamDefTalent + ")\n" +
-                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n" + t.teamStratOff.getStratName() + "\n" + t.teamStratDef.getStratName() + "\n");
+                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n" + t.playbookOff.getStratName() + "\n" + t.playbookDef.getStratName() + "\n");
         g = homeTeam.numGames();
         t = homeTeam;
         gameR.append("#" + t.rankTeamPollScore + " " + t.abbr + "\n" + t.wins + "-" + t.losses + "\n" +
@@ -2699,7 +2697,7 @@ public class Game implements Serializable {
                 t.teamPassYards / g + " (" + t.rankTeamPassYards + ")\n" + t.teamRushYards / g + " (" + t.rankTeamRushYards + ")\n" +
                 t.teamOppPassYards / g + " (" + t.rankTeamOppPassYards + ")\n" + t.teamOppRushYards / g + " (" + t.rankTeamOppRushYards + ")\n\n" +
                 t.teamOffTalent + " (" + t.rankTeamOffTalent + ")\n" + t.teamDefTalent + " (" + t.rankTeamDefTalent + ")\n" +
-                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n" + t.teamStratOff.getStratName() + "\n" + t.teamStratDef.getStratName() + "\n");
+                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n" + t.playbookOff.getStratName() + "\n" + t.playbookDef.getStratName() + "\n");
 
         gameSum[0] = gameL.toString();
         gameSum[1] = gameC.toString();
@@ -2900,13 +2898,13 @@ public class Game implements Serializable {
             if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11) {
                 homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add("Upcoming Game: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">The premier game of the week has " + awayTeam.getStrAbbrWL() + " visiting " + homeTeam.getStrAbbrWL() + ", as these two Top Ten teams fight for a crucial playoff spot. " +
-                        awayTeam.name + " plays a " + awayTeam.teamStratOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards / awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
-                        homeTeam.teamStratOff.getStratName() + " offense, averaging " + (homeTeam.teamYards / homeTeam.numGames()) + " yards per game.");
+                        awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards / awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
+                        homeTeam.playbookOff.getStratName() + " offense, averaging " + (homeTeam.teamYards / homeTeam.numGames()) + " yards per game.");
             } else if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26) {
                 homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add("Upcoming Game: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">Next week, " + awayTeam.getStrAbbrWL() + " visits " + homeTeam.getStrAbbrWL() + " in a battle of two ranked schools. " +
-                        awayTeam.name + " plays a " + awayTeam.teamStratOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards / awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
-                        homeTeam.teamStratOff.getStratName() + " offense, averaging " + (homeTeam.teamYards / homeTeam.numGames()) + " yards per game.");
+                        awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards / awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
+                        homeTeam.playbookOff.getStratName() + " offense, averaging " + (homeTeam.teamYards / homeTeam.numGames()) + " yards per game.");
             }
         }
     }
@@ -2916,14 +2914,14 @@ public class Game implements Serializable {
             if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11) {
                 homeTeam.league.newsStories.get(0).add("Kick-Off: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">The season kicks off with an exciting game between vistors " + awayTeam.name + " and home team, " + homeTeam.name + ". " +
-                        "These two teams are in the pre-season Top Ten, and both are expected to have big seasons this year. " + awayTeam.name + " plays a " + awayTeam.teamStratOff.getStratName() + " offense, while " + homeTeam.name + " plays a " +
-                        homeTeam.teamStratOff.getStratName() + " offense.");
+                        "These two teams are in the pre-season Top Ten, and both are expected to have big seasons this year. " + awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, while " + homeTeam.name + " plays a " +
+                        homeTeam.playbookOff.getStratName() + " offense.");
 
             } else if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26) {
                 homeTeam.league.newsStories.get(0).add("Kick-Off: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">The " + homeTeam.league.getYear() + " season starts off with " + awayTeam.name + " visiting " + homeTeam.name
-                        + " in one of the interesting early season games pitting two ranked teams. " + awayTeam.name + " plays a " + awayTeam.teamStratOff.getStratName() + " offense, while " + homeTeam.name + " plays a " +
-                        homeTeam.teamStratOff.getStratName() + " offense.");
+                        + " in one of the interesting early season games pitting two ranked teams. " + awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, while " + homeTeam.name + " plays a " +
+                        homeTeam.playbookOff.getStratName() + " offense.");
             }
         }
     }
