@@ -669,6 +669,38 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
+    //REMOVE RECRUITS OFF THE BOARD
+    private void removeRecruits() {
+        removeRecruits(players);
+        removeRecruits(avail50);
+        removeRecruits(availAll);
+        removeRecruits(availQBs);
+        removeRecruits(availRBs);
+        removeRecruits(availWRs);
+        removeRecruits(availTEs);
+        removeRecruits(availOLs);
+        removeRecruits(availKs);
+        removeRecruits(availDLs);
+        removeRecruits(availLBs);
+        removeRecruits(availCBs);
+        removeRecruits(availSs);
+        removeRecruits(west);
+        removeRecruits(midwest);
+        removeRecruits(central);
+        removeRecruits(east);
+
+        dataAdapterPosition.notifyDataSetChanged();
+    }
+
+    private void removeRecruits(List<String> list) {
+        
+        for(int i = 0; i < list.size(); ++i) {
+            if (Math.random() > 0.915 ) {
+                list.remove(i);
+            }
+        }
+    }
+
     //Update Position Spinner & Team Needs
     private void updatePositionNeeds() {
         // Get needs for each position
@@ -944,6 +976,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
 
         if (autoFilter) removeUnaffordableRecruits();
+        removeRecruits();
         updatePositionNeeds();
     }
 
@@ -1121,6 +1154,7 @@ public class RecruitingActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
 
         if (autoFilter) removeUnaffordableRecruits();
+        removeRecruits();
         updatePositionNeeds();
 
     }

@@ -334,6 +334,7 @@ public class HeadCoach extends Player {
     public float getLeaderboardScore() {
         float score = 0;
 
+        score = careerScore + (5*(wins) - 2*(losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans);
 
         return score;
     }

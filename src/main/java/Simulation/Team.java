@@ -180,7 +180,7 @@ public class Team {
 
     public int maxPlayers = 70;
     private final int minPlayers = 65;
-    private final int minRecruitStar = 5;
+    private final int minRecruitStar = 4;
     private final int maxStarRating = 10;
     private final int numRecruits = 30;
 
@@ -194,7 +194,7 @@ public class Team {
     private int dismissalChance = 3;
     private final int gradTransferMinGames = 6;
     private final int dismissalRat = 63;
-    private final int gradTransferRat = 83;
+    private final int gradTransferRat = 77;
 
     private ArrayList<Player> playersInjured;
     private ArrayList<Player> playersRecovered;
@@ -213,7 +213,7 @@ public class Team {
     private static final int sophNFL = 2;
     private static final double NFL_CHANCE = 0.65;
     private static final double NFL_CHANCE_SOPH = 0.350;
-    public final int confMin = 25;
+    public final int confMin = 30;
     public final int confMax = 80;
     private int maxPrestige = 95;
     private final int minPrestige = 20;
@@ -428,8 +428,8 @@ public class Team {
         leagueOffTal = league.getAverageOffTalent();
         leagueDefTal = league.getAverageDefTalent();
         confAvg = league.averageConfPrestige();
-        confLimit = confPrestige - confAvg;
-        projectedPollScore = (teamOffTalent + teamDefTalent + 3*teamPrestige + confPrestige);
+        confLimit = (int)1.25*(confPrestige - confAvg);
+        projectedPollScore = (teamOffTalent + teamDefTalent) + 2*teamPrestige + (3*confPrestige/4);
     }
 
     public void projectTeamWins(){
@@ -449,7 +449,7 @@ public class Team {
     }
 
     public void projectPollRank() {
-        projectedPollScore = projectedPollScore + projectedWins*6;
+        projectedPollScore = projectedPollScore + projectedWins*10;
     }
 
     public double teamPowerRating() {
@@ -797,7 +797,7 @@ public class Team {
         if (preseasonBias < 0) preseasonBias = 0;
         preseasonBias = preseasonBias/15;
         teamPollScore =
-                (int)(preseasonBias * (teamOffTalent + teamDefTalent + (teamPrestige/2) + (confPrestige/2))) +
+                (int)(preseasonBias * (teamOffTalent + teamDefTalent + teamPrestige + 1.5*confPrestige))+
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
                         1000)/2;
 
@@ -1087,20 +1087,18 @@ public class Team {
         totalWins += wins;
         totalLosses += losses;
     }
+
     //Calculates Prestige Change at end of season
     public int[] calcSeasonPrestige() {
 
         int goal = projectedPoll;
-        if (goal > 100) goal = 100;
-        if (goal <= 10) goal = 10;
+        if (goal > 90) goal = 90;
+        if (goal <= 15) goal = 15;
         else if (goal <= 25) goal = 25;
         int diffExpected = goal - rankTeamPollScore;
 
         int newPrestige = teamPrestige;
         int prestigeChange = 0;
-
-        int rgameplayed = 0;
-        int rivalryPts = 0;
 
         int ccPts = 0;
         int ncwPts = 0;
@@ -1118,34 +1116,13 @@ public class Team {
         if(prestigeChange <=0 && wins > projectedWins) prestigeChange++;
         if(prestigeChange >=0 && losses > (12 - projectedWins) && (wins + losses) <= 12 || prestigeChange >=0 && losses -1  > (12 - projectedWins) && (wins + losses) > 12) prestigeChange--;
 
-        //RIVALRY POINTS!
-        Game g;
-        for (int i = 0; i < gameWLSchedule.size(); ++i) {
-            g = gameSchedule.get(i);
-            if (g.gameName.equals("Rivalry Game")) {
-                rgameplayed = 1;
-            }
-        }
-        if (Math.abs(teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 20 && rgameplayed == 1) {
-            if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                rivalryPts += 1;
-            } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) > 0) {
-                rivalryPts -= 1;
-                //If you're the underdog, you get points, unless you lose ;)
-            } else if (wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                rivalryPts += 1;
-            } else if (!wonRivalryGame && (teamPrestige - league.findTeamAbbr(rivalTeam).teamPrestige) < 0) {
-                rivalryPts -= 1;
-            }
-        }
-
         //National Title Winner
         if (rankTeamPollScore == 1) {
             ncwPts += 3;
         }
 
         //bonus for winning conference
-        if ("CC".equals(confChampion)) {
+        if ("CC".equals(confChampion) && confPrestige > confAvg) {
             ccPts += 1;
         }
 
@@ -1159,7 +1136,7 @@ public class Team {
             if(nflPts > 2) nflPts = 2;
         }
 
-        newPrestige += prestigeChange + rivalryPts + ccPts + ncwPts + nflPts + disPts;
+        newPrestige += prestigeChange + ccPts + ncwPts + nflPts + disPts;
 
         //Sets the bounds for Prestige
         int cLimiter = 0;
@@ -1173,7 +1150,9 @@ public class Team {
         if (newPrestige < minPrestige) newPrestige = minPrestige;
         if (newPrestige > maxPrestige && !natChampWL.equals("NCW")) newPrestige = maxPrestige;
 
-        int PrestigeScore[] = {newPrestige, prestigeChange, rivalryPts, ccPts, ncwPts, nflPts, disPts, rgameplayed};
+        if (newPrestige > 100) newPrestige = 100;
+
+        int PrestigeScore[] = {newPrestige, prestigeChange, ccPts, ncwPts, nflPts, disPts};
         return PrestigeScore;
     }
 
@@ -1187,6 +1166,7 @@ public class Team {
         String summary = "Season Analysis:\n\nYour team, " + name + ", finished the season ranked #" + rankTeamPollScore + " with " + wins + " wins and " + losses + " losses.";
 
         summary += "\n\nYour team was projected to finish ranked #" + projectedPoll + " with a record of " + projectedWins + " wins and " + (12-projectedWins) + " losses.";
+        if ("CC".equals(confChampion)) summary += "\n\nCongratulations on winning the " + conference + " Championship!";
 
         if (projectedPoll > 100) {
             summary += "\nDespite being projected at #" + projectedPoll + ", your goal was to finish in the Top 100.\n\n";
@@ -1202,22 +1182,14 @@ public class Team {
         }
 
         if (natChampWL.equals("NCW")) {
-            summary += "\n\nYou won the National Championship! Recruits want to play for winners and you have proved that you are one. You gain " + prestigePts[4] + " prestige points!";
+            summary += "\n\nYou won the National Championship! Recruits want to play for winners and you have proved that you are one. You gain " + prestigePts[3] + " prestige points!";
         }
 
-        if (prestigePts[7] > 0) {
-            if (wonRivalryGame) {
-                summary += "\n\nCongrats on beating your rival! You will gain " + prestigePts[2] + " prestige points in the off-season!";
-            } else {
-                summary += "\n\nUnfortunately you lost to your rival! You lose " + Math.abs(prestigePts[2]) + " prestige points this off-season!";
-            }
-        }
-
-        if (prestigePts[3] > 0) {
+        if (prestigePts[2] > 0) {
             summary += "\n\nSince you won your conference championship, your team gained " + prestigePts[3] + " prestige points!";
         }
-        if (prestigePts[5] > 0) {
-            summary += "\n\nYou have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[5] + " prestige points in the off-season!";
+        if (prestigePts[4] > 0) {
+            summary += "\n\nYou have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
         }
 
         if (disciplinePts < 0) {
@@ -1226,20 +1198,19 @@ public class Team {
             summary += "\n\nYour team stayed out of trouble this season and bonded together. Your team gained " + disciplinePts + " prestige points.";
         }
 
-        //newPrestige, prestigeChange, rivalryPts, ccPts, ncwPts, nflPts, disPts, rgameplayed, cLimiter
+        //newPrestige, prestigeChange, ccPts, ncwPts, nflPts, disPts, rgameplayed, cLimiter
 
         summary += "\n\nPRESTIGE SUMMARY:\n\n";
         summary += "Current Prestige:  " + teamPrestigeStart + " pts\n";
         summary += "Performance Points:  " + prestigePts[1] + " pts\n";
-        if (prestigePts[7] > 0) summary += "Rivalry Bonus:  " + prestigePts[2] + " pts\n";
-        if (prestigePts[3] > 0) summary += "Conf Champ Bonus:  " + prestigePts[3] + " pts\n";
-        if (natChampWL.equals("NCW")) summary += "Nat Title Bonus:  " + prestigePts[4] + " pts\n";
-        if (prestigePts[5] > 0) summary += "Pro Draft Bonus:  " + prestigePts[5] + " pts\n";
-        summary += "Disciplinary Points:  " + prestigePts[6] + " pts\n";
+        if (prestigePts[2] > 0) summary += "Conf Champ Bonus:  " + prestigePts[2] + " pts\n";
+        if (natChampWL.equals("NCW")) summary += "Nat Title Bonus:  " + prestigePts[3] + " pts\n";
+        if (prestigePts[4] > 0) summary += "Pro Draft Bonus:  " + prestigePts[4] + " pts\n";
+        summary += "Disciplinary Points:  " + prestigePts[5] + " pts\n";
 
         summary += "\n\nNEW PRESTIGE:  " + teamPrestige + " pts\n";
 
-        if(teamPrestigeStart + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5] + prestigePts[6] != prestigePts[0] && prestigePts[4] == 0) {
+        if(teamPrestigeStart + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5]  != prestigePts[0] && prestigePts[3] == 0) {
             summary += "\n\nDue to your conference's playing level, your prestige change has been limited. The conference prestige cut-off for this season was set at:\nmin: " + (confMin+confLimit) + " and max: " + (confMax+confLimit)
                     + "\n\nNote: " + maxPrestige + " is the maximum Prestige level possible unless the team wins a national title.\n";
             if(teamPrestige >= confMax + confLimit) {
@@ -1365,7 +1336,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && (teamPrestige-teamPrestigeStart) > 3 || teamPrestige < 32 && (teamPrestige-teamPrestigeStart) > 3) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && (teamPrestige-teamPrestigeStart) > 2 || teamPrestige < 32 && (teamPrestige-teamPrestigeStart) > 2) {
                     if (Math.random() > 0.40) {
                         HC.get(0).contractLength = 2;
                         HC.get(0).contractYear = 0;
@@ -2234,7 +2205,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamQBs.add(new PlayerQB(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2246,7 +2217,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamRBs.add(new PlayerRB(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2258,7 +2229,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamWRs.add(new PlayerWR(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2270,7 +2241,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamTEs.add(new PlayerTE(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2282,7 +2253,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamOLs.add(new PlayerOL(league.getRandName(), 1, star, this, walkon));
         }
     
@@ -2294,7 +2265,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamKs.add(new PlayerK(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2306,7 +2277,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamDLs.add(new PlayerDL(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2318,7 +2289,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamLBs.add(new PlayerLB(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2330,7 +2301,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamCBs.add(new PlayerCB(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2342,7 +2313,7 @@ public class Team {
             }
         }
         for (int i = 0; i < needs; ++i) {
-            star = (int)Math.random()*3 + 1;
+            star = (int)Math.random()*2 + 1;
             teamSs.add(new PlayerS(league.getRandName(), 1, star, this, walkon));
         }
 
@@ -2352,7 +2323,7 @@ public class Team {
 
     private int calcMaxRecruitRating() {
         int rating;
-        rating = Math.round((float)( maxStarRating + ((teamPrestige - 70)/10) ));
+        rating = Math.round((float)( maxStarRating + ((teamPrestige - 80)/10) ));
         if (rating < 2) rating = 2;
         if (rating > 10) rating = 10;
 

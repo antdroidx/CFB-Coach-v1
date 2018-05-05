@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     season = seasonStart;
                     //NEW DYNASTY DEFAULT DATABASE
                 } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false);
                     season = seasonStart;
                 }
                 //NEW CAREER GAME
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     season = seasonStart;
                     //NEW CAREER GAME WITH DEFAULT DATABASE
                 } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true);
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true);
                     season = seasonStart;
                 }
                 //LOADING A CURRENT GAME AFTER RECRUITING PERIOD
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             //STARTS A NEW GAME WITH NO EXTRAS - NOT USED CURRENTLY
-            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false);
+            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false);
             season = seasonStart;
         }
 
@@ -601,8 +601,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (currTab == 2) {
             currTab = 2;
             updateTeamStats();
-        }
-        else {
+        } else {
             currTab = 3;
             updatePlayerStats();
         }
@@ -628,8 +627,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (currTab == 2) {
             currTab = 2;
             updateTeamStats();
-        }
-        else {
+        } else {
             currTab = 3;
             updatePlayerStats();
         }
@@ -1524,144 +1522,145 @@ public class MainActivity extends AppCompatActivity {
     //Simulate Week
     private void simulateWeek() {
         Button simGameButton = findViewById(R.id.simGameButton);
-            // In-Season
+        // In-Season
 
-            if (simLeague.currentWeek <= 14) {
-                int numGamesPlayed = userTeam.gameWLSchedule.size();
-                simLeague.playWeek();
+        if (simLeague.currentWeek <= 14) {
+            int numGamesPlayed = userTeam.gameWLSchedule.size();
+            simLeague.playWeek();
 
-                if (simLeague.currentWeek == 6) {
-                    midseasonSummary();
-                }
+            if (simLeague.currentWeek == 6) {
+                midseasonSummary();
+            }
 
-                // Get injury report if there are injuries and just played a game
-                if (userTeam.gameWLSchedule.size() > numGamesPlayed) {
-                    if (showInjuryReport)
-                        showInjuryReportDialog();
-                    if (showToasts)
-                        Toast.makeText(MainActivity.this, userTeam.weekSummaryStr(),
-                                Toast.LENGTH_SHORT).show();
-                }
+            // Get injury report if there are injuries and just played a game
+            if (userTeam.gameWLSchedule.size() > numGamesPlayed) {
+                if (showInjuryReport)
+                    showInjuryReportDialog();
+                if (showToasts)
+                    Toast.makeText(MainActivity.this, userTeam.weekSummaryStr(),
+                            Toast.LENGTH_SHORT).show();
+            }
 
-                // Show notification for being invited/not invited to bowl or CCG
-                if (simLeague.currentWeek >= 12) {
-                    if (!userTeam.gameSchedule.get(userTeam.gameSchedule.size() - 1).hasPlayed) {
-                        String weekGameName = userTeam.gameSchedule.get(userTeam.gameSchedule.size() - 1).gameName;
-                        if (weekGameName.equals("NCG")) {
-                            if (showToasts)
-                                Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the National Championship Game!",
-                                        Toast.LENGTH_SHORT).show();
-                        } else {
-                            if (showToasts)
-                                Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the " +
-                                                weekGameName + "!",
-                                        Toast.LENGTH_SHORT).show();
-                        }
-                    } else if (simLeague.currentWeek == 12) {
+            // Show notification for being invited/not invited to bowl or CCG
+            if (simLeague.currentWeek >= 12) {
+                if (!userTeam.gameSchedule.get(userTeam.gameSchedule.size() - 1).hasPlayed) {
+                    String weekGameName = userTeam.gameSchedule.get(userTeam.gameSchedule.size() - 1).gameName;
+                    if (weekGameName.equals("NCG")) {
                         if (showToasts)
-                            Toast.makeText(MainActivity.this, userTeam.name + " was not invited to the Conference Championship.",
+                            Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the National Championship Game!",
                                     Toast.LENGTH_SHORT).show();
-                    } else if (simLeague.currentWeek == 13) {
+                    } else {
                         if (showToasts)
-                            Toast.makeText(MainActivity.this, userTeam.name + " was not invited to a bowl game.",
+                            Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the " +
+                                            weekGameName + "!",
                                     Toast.LENGTH_SHORT).show();
                     }
-                }
-
-                if (simLeague.currentWeek < 12) {
-                    simGameButton.setTextSize(14);
-                    simGameButton.setText("Play Week " + (simLeague.currentWeek + 1));
                 } else if (simLeague.currentWeek == 12) {
-                    simGameButton.setTextSize(11);
-                    simGameButton.setText("Play Conf Championships");
-                    examineTeam(currentTeam.name);
+                    if (showToasts)
+                        Toast.makeText(MainActivity.this, userTeam.name + " was not invited to the Conference Championship.",
+                                Toast.LENGTH_SHORT).show();
                 } else if (simLeague.currentWeek == 13) {
-                    heismanCeremony();
-                    simGameButton.setTextSize(12);
-                    simGameButton.setText("Play Bowl Games");
-                    examineTeam(currentTeam.name);
-                } else if (simLeague.currentWeek == 14) {
-                    simGameButton.setTextSize(10);
-                    simGameButton.setText("Play National Championship");
-                } else if (simLeague.currentWeek == 15) {
-                    simGameButton.setTextSize(10);
-                    simGameButton.setText("Season Summary");
-                    showNewsStoriesDialog();
+                    if (showToasts)
+                        Toast.makeText(MainActivity.this, userTeam.name + " was not invited to a bowl game.",
+                                Toast.LENGTH_SHORT).show();
                 }
-
-
-                updateCurrTeam();
-                scrollToLatestGame();
-
-                //Off-Season
-            } else if (simLeague.currentWeek == 15) {
-                // Show NCG summary and check league records
-                simLeague.enterOffseason();
-                simLeague.checkLeagueRecords();
-                simLeague.updateHCHistory();
-                simLeague.updateTeamHistories();
-                simLeague.updateLeagueHistory();
-                seasonSummary();
-                simLeague.currentWeek++;
-                simGameButton.setTextSize(12);
-                simGameButton.setText("Off-Season: Contracts");
-
-            } else if (simLeague.currentWeek == 16) {
-                userHC = userTeam.HC.get(0);
-                simLeague.advanceHC();
-                if (simLeague.isCareerMode()) contractDialog();
-                //conf realignment
-                conferenceRealignment();
-                //Promotion/Relegation!
-                promotionRelegation();
-                simGameButton.setTextSize(12);
-                if (simLeague.isCareerMode())
-                    simGameButton.setText("Off-Season: Job Offers");
-                else simGameButton.setText("Off-Season: Continue");
-                simLeague.currentWeek++;
-
-            } else if (simLeague.currentWeek == 17 && userTeam.fired) {
-                if (simLeague.isCareerMode()) jobOffers(userHC);
-                simLeague.currentWeek++;
-                simGameButton.setTextSize(12);
-                simGameButton.setText("Off-Season: Coaching Changes");
-
-            } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
-                if (simLeague.isCareerMode()) promotions(userHC);
-                simLeague.currentWeek++;
-                simGameButton.setTextSize(12);
-                simGameButton.setText("Off-Season: Coaching Changes");
-
-            } else if (simLeague.currentWeek == 18) {
-                simLeague.coachCarousel();
-                simGameButton.setTextSize(12);
-                simLeague.currentWeek++;
-                simGameButton.setText("Off-Season: Graduation");
-                showNewsStoriesDialog();
-
-            } else if (simLeague.currentWeek == 19) {
-                simLeague.advanceSeason();
-                simLeague.currentWeek++;
-                simGameButton.setTextSize(12);
-                simGameButton.setText("Off-Season: Transfer List");
-
-            } else if (simLeague.currentWeek == 20) {
-                simLeague.transferPlayers();
-                showNewsStoriesDialog(); //shows significant transfer options
-                simLeague.currentWeek++;
-                simGameButton.setTextSize(12);
-                simGameButton.setText("Off-Season: Complete Transfers");
-
-            } else if (simLeague.currentWeek == 21) {
-                transfers(); //displays list of transfers
-                simLeague.currentWeek++;
-                simGameButton.setTextSize(12);
-                simGameButton.setText("Begin Recruiting");
-
-            } else if (simLeague.currentWeek >= 22) {
-                beginRecruiting();
-
             }
+
+            if (simLeague.currentWeek < 12) {
+                simGameButton.setTextSize(14);
+                simGameButton.setText("Play Week " + (simLeague.currentWeek + 1));
+            } else if (simLeague.currentWeek == 12) {
+                simGameButton.setTextSize(11);
+                simGameButton.setText("Play Conf Championships");
+                examineTeam(currentTeam.name);
+            } else if (simLeague.currentWeek == 13) {
+                heismanCeremony();
+                simGameButton.setTextSize(12);
+                simGameButton.setText("Play Bowl Games");
+                examineTeam(currentTeam.name);
+            } else if (simLeague.currentWeek == 14) {
+                simGameButton.setTextSize(10);
+                simGameButton.setText("Play National Championship");
+            } else if (simLeague.currentWeek == 15) {
+                simGameButton.setTextSize(10);
+                simGameButton.setText("Season Summary");
+                showNewsStoriesDialog();
+            }
+
+
+            updateCurrTeam();
+            scrollToLatestGame();
+
+            //Off-Season
+        } else if (simLeague.currentWeek == 15) {
+            // Show NCG summary and check league records
+            simLeague.enterOffseason();
+            simLeague.checkLeagueRecords();
+            simLeague.updateHCHistory();
+            simLeague.updateTeamHistories();
+            simLeague.updateLeagueHistory();
+            seasonSummary();
+            //netTotalPrestige();
+            simLeague.currentWeek++;
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Off-Season: Contracts");
+
+        } else if (simLeague.currentWeek == 16) {
+            userHC = userTeam.HC.get(0);
+            simLeague.advanceHC();
+            if (simLeague.isCareerMode()) contractDialog();
+            //conf realignment
+            conferenceRealignment();
+            //Promotion/Relegation!
+            promotionRelegation();
+            simGameButton.setTextSize(12);
+            if (simLeague.isCareerMode())
+                simGameButton.setText("Off-Season: Job Offers");
+            else simGameButton.setText("Off-Season: Continue");
+            simLeague.currentWeek++;
+
+        } else if (simLeague.currentWeek == 17 && userTeam.fired) {
+            if (simLeague.isCareerMode()) jobOffers(userHC);
+            simLeague.currentWeek++;
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Off-Season: Coaching Changes");
+
+        } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
+            if (simLeague.isCareerMode()) promotions(userHC);
+            simLeague.currentWeek++;
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Off-Season: Coaching Changes");
+
+        } else if (simLeague.currentWeek == 18) {
+            simLeague.coachCarousel();
+            simGameButton.setTextSize(12);
+            simLeague.currentWeek++;
+            simGameButton.setText("Off-Season: Graduation");
+            showNewsStoriesDialog();
+
+        } else if (simLeague.currentWeek == 19) {
+            simLeague.advanceSeason();
+            simLeague.currentWeek++;
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Off-Season: Transfer List");
+
+        } else if (simLeague.currentWeek == 20) {
+            simLeague.transferPlayers();
+            showNewsStoriesDialog(); //shows significant transfer options
+            simLeague.currentWeek++;
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Off-Season: Complete Transfers");
+
+        } else if (simLeague.currentWeek == 21) {
+            transfers(); //displays list of transfers
+            simLeague.currentWeek++;
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Begin Recruiting");
+
+        } else if (simLeague.currentWeek >= 22) {
+            beginRecruiting();
+
+        }
         resetTeamUI();
 
     }
@@ -1873,14 +1872,14 @@ public class MainActivity extends AppCompatActivity {
         okChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                    showToasts = checkboxShowPopup.isChecked();
-                    showInjuryReport = checkboxShowInjury.isChecked();
-                    simLeague.fullGameLog = checkboxGameLog.isChecked();
-                    simLeague.hidePotential = checkboxPotential.isChecked();
-                    simLeague.confRealignment = checkboxRealignment.isChecked();
-                    simLeague.enableProRel = checkboxProRelegation.isChecked();
-                    userTeam.showPopups = showToasts;
-                    dialog.dismiss();
+                showToasts = checkboxShowPopup.isChecked();
+                showInjuryReport = checkboxShowInjury.isChecked();
+                simLeague.fullGameLog = checkboxGameLog.isChecked();
+                simLeague.hidePotential = checkboxPotential.isChecked();
+                simLeague.confRealignment = checkboxRealignment.isChecked();
+                simLeague.enableProRel = checkboxProRelegation.isChecked();
+                userTeam.showPopups = showToasts;
+                dialog.dismiss();
 
             }
         });
@@ -2403,7 +2402,8 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
 
                         teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
-                        if(position == 15) teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
+                        if (position == 15)
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
 
                         teamRankingsAdapter.clear();
                         teamRankingsAdapter.addAll(rankings);
@@ -2887,18 +2887,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton("All Prestige Changes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                showPrestigeChange();
-                            }
-                        });
-                        builder.setCancelable(false);
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        showPrestigeChange();
+                    }
+                });
+        builder.setCancelable(false);
         AlertDialog dialog = builder.create();
         dialog.show();
         TextView textView = dialog.findViewById(android.R.id.message);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-        simLeague.newsStories.get(simLeague.currentWeek+1).add("Season Summary>"+simLeague.seasonSummaryStr());
+        simLeague.newsStories.get(simLeague.currentWeek + 1).add("Season Summary>" + simLeague.seasonSummaryStr());
     }
 
     private void showPrestigeChange() {
@@ -3510,4 +3510,139 @@ public class MainActivity extends AppCompatActivity {
         exitMainActivity();
     }
 
+    //GAME EDITOR V2
+/*
+    public void gameEditorV2() {
+        final List<String> teamEditor = new ArrayList<>();
+        final List<String> confEditor = new ArrayList<>();
+        final Conference editConference = new Conference("Name", simLeague);
+        final Team editTeam = new Team("Name", "abbr", "Conf", 50, 2, simLeague);
+
+        AlertDialog.Builder GameEditor = new AlertDialog.Builder(this);
+        GameEditor.setTitle("Game Universe Editor")
+                .setView(getLayoutInflater().inflate(R.layout.game_editor_full, null));
+        final AlertDialog dialog = GameEditor.create();
+        dialog.show();
+
+        final Spinner confList = dialog.findViewById(R.id.confList);
+        final Spinner teamList = dialog.findViewById(R.id.teamList);
+        final EditText changeNameEditText = dialog.findViewById(R.id.editTextChangeName);
+        final EditText changeAbbrEditText = dialog.findViewById(R.id.editTextChangeAbbr);
+        final EditText changeConfEditText = dialog.findViewById(R.id.editTextChangeConf);
+        final EditText changeHCEditText = dialog.findViewById(R.id.editTextChangeHC);
+
+        for (int i = 0; i < confStart; i++) {
+            confEditor.add(simLeague.conferences.get(i).confName);
+        }
+        for (int i = 0; i < simLeague.conferences.get(0).confTeams.size(); i++) {
+            teamEditor.add(simLeague.conferences.get(0).confTeams.get(i).name);
+        }
+
+        changeNameEditText.setText(currentTeam.name);  //updated from userTeam to currentTeam
+        changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
+        changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
+        changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
+
+        ArrayAdapter<String> editorAdaptorConf = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, confEditor);
+        editorAdaptorConf.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        confList.setAdapter(editorAdaptorConf);
+        confList.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        editConference = simLeague.conferences.get(position);
+                        for (int i = 0; i < simLeague.conferences.get(position).confTeams.size(); i++) {
+                            teamEditor.add(simLeague.conferences.get(position).confTeams.get(i).name);
+                        }
+                        teamList.notify();
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+
+        ArrayAdapter<String> editorAdaptorTeam = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, teamEditor);
+        editorAdaptorTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamList.setAdapter(editorAdaptorTeam);
+        teamList.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        Team tm = simLeague.conferences.get(position).confTeams.get(position);
+                        changeNameEditText.setText(.name);  //updated from userTeam to currentTeam
+                        changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
+                        changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
+                        changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+
+
+
+
+        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
+        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
+
+        cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                dialog.dismiss();
+            }
+        });
+
+        okChangeNameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                String newName = changeNameEditText.getText().toString().trim();
+                String newAbbr = changeAbbrEditText.getText().toString().trim().toUpperCase();
+                String newConf = changeConfEditText.getText().toString().trim();
+                String newHC = changeHCEditText.getText().toString().trim();
+
+                if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr) && simLeague.isNameValid(newConf) && isNameValid((newHC))) {
+                    simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
+                    currentTeam.name = newName; //set new team name
+                    currentTeam.abbr = newAbbr; //set new conference name
+                    oldConf = currentConference.confName;
+                    currentConference.confName = newConf;
+                    currentTeam.HC.get(0).name = newHC;
+                    simLeague.updateTeamConf(newConf, oldConf, currentConferenceID);  //update all other conf teams
+                    getSupportActionBar().setTitle(season + " | " + userTeam.name);
+                    Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);  // Have to update rival's rival too!
+                    rival.rivalTeam = currentTeam.abbr;
+                    wantUpdateConf = true;
+                    updateCurrConference();  //updates the UI
+                    examineTeam(currentTeam.name);
+
+                    dialog.dismiss();
+
+                } else {
+                    if (showToasts)
+                        Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
+                                Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }*/
+
+    //DEBUG STUFF
+
+    private void netTotalPrestige() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage(simLeague.netTotalPrestige() + " Total Net Prestige Change")
+                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Prestige Change")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    }
 }
