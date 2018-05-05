@@ -2382,7 +2382,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
 
         String[] selection = {"Team History", "Graph View"};
@@ -2403,6 +2403,7 @@ public class MainActivity extends AppCompatActivity {
                                     new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         } else if (position == 1) {
+                            dialog.dismiss();
                             coachGraphView();
                         }
                     }

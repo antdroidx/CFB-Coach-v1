@@ -33,7 +33,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionName 'v1.1.20'
-        versionCode 48
+        versionCode 49
     }
     buildTypes {
         release {
