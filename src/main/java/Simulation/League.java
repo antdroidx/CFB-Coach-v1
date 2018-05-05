@@ -215,13 +215,13 @@ public class League {
         setupNamesDB(namesCSV, lastNamesCSV);
 
         //Set up bowls from XML
-        bowlNames = new String[bowlText.split(",").length];
-        for (int b = 0; b < bowlText.split(",").length; ++b) {
-            bowlNames[b] = bowlText.split(",")[b];
+        bowlNames = new String[bowlText.split(", ").length];
+        for (int b = 0; b < bowlText.split(", ").length; ++b) {
+            bowlNames[b] = bowlText.split(", ")[b];
         }
 
         //Set up conferences from XML
-        String[] confSplit = confText.split(",");
+        String[] confSplit = confText.split(", ");
         for (String n : confSplit) {
           conferences.add(new Conference(n, this));
         }
@@ -608,6 +608,7 @@ public class League {
         heismanDecided = false;
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
+        bowlNames = new String[countBG];
         leagueHistory = new ArrayList<>();
         heismanHistory = new ArrayList<>();
         leagueHoF = new ArrayList<>();

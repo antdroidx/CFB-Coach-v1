@@ -123,27 +123,30 @@
 
         <Button
             android:id="@+id/buttonTutorial"
-            android:layout_width="247dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Tutorials"
-            android:textSize="14sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="0dp">
-
-        <Button
-            android:id="@+id/youtubeTutorial"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:layout_weight="1"
             android:padding="0dp"
-            android:text="Importing Data Tutorial"
+            android:text="Tutorials"
             android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/buttonCredits"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:text="Credits"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="0dp">
 
     </LinearLayout>
 

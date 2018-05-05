@@ -182,7 +182,7 @@ public class Team {
     private final int minPlayers = 65;
     private final int minRecruitStar = 4;
     private final int maxStarRating = 10;
-    private final int numRecruits = 30;
+    private final int numRecruits = 32;
 
     public final int five = 84;
     public final int four = 78;
@@ -1092,7 +1092,7 @@ public class Team {
     public int[] calcSeasonPrestige() {
 
         int goal = projectedPoll;
-        if (goal > 90) goal = 90;
+        if (goal > 95) goal = 95;
         if (goal <= 15) goal = 15;
         else if (goal <= 25) goal = 25;
         int diffExpected = goal - rankTeamPollScore;

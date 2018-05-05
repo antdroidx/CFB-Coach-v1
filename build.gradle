@@ -32,8 +32,8 @@ android {
         applicationId "antdroid.cfbcoach"
         minSdkVersion 21
         targetSdkVersion 27
-        versionName 'v1.1.17'
-        versionCode 45
+        versionName 'v1.1.20'
+        versionCode 48
     }
     buildTypes {
         release {
@@ -61,4 +61,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.google.android.gms:play-services-games:15.0.0'
+    implementation 'com.jjoe64:graphview:4.2.2'
 }

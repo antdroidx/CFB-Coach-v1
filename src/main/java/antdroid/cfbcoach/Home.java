@@ -118,14 +118,22 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button youtubeButton = findViewById(R.id.youtubeTutorial);
-        youtubeButton.setOnClickListener(new View.OnClickListener() {
+        Button creditsButton = findViewById(R.id.buttonCredits);
+        creditsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://youtu.be/_zEuX0JAYBg"));
-                startActivity(intent);
+                AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
+                welcome.setMessage(getString(R.string.credits))
+                        .setTitle("Game Acknowledgements")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                welcome.setCancelable(false);
+                AlertDialog dialog = welcome.create();
+                dialog.show();
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
+                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
         });
 

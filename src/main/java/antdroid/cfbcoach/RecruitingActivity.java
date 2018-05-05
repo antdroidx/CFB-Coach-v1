@@ -701,6 +701,7 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
+
     //Update Position Spinner & Team Needs
     private void updatePositionNeeds() {
         // Get needs for each position
