@@ -2432,8 +2432,10 @@ public class MainActivity extends AppCompatActivity {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
         for(int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
-            series.appendData(new DataPoint(Integer.parseInt( currentTeam.HC.get(0).history.get(i).split(": ")[0]), Integer.parseInt( currentTeam.HC.get(0).history.get(i).split(":")[2].split(" ")[1])), true, i+1, false);
-            yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
+            if(!currentTeam.HC.get(0).history.get(i).equals("")) {
+                series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("Prs: ")[1].split(" ")[0])), true, i + 1, false);
+                yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
+            }
         }
         graph.addSeries(series);
 

@@ -428,8 +428,8 @@ public class Team {
         leagueOffTal = league.getAverageOffTalent();
         leagueDefTal = league.getAverageDefTalent();
         confAvg = league.averageConfPrestige();
-        confLimit = (int)1.25*(confPrestige - confAvg);
-        projectedPollScore = (teamOffTalent + teamDefTalent) + 2*teamPrestige + (3*confPrestige/4);
+        confLimit = (int)1.15*(confPrestige - confAvg);
+        projectedPollScore = (teamOffTalent + teamDefTalent) + 2*teamPrestige + (confPrestige/2);
     }
 
     public void projectTeamWins(){
@@ -471,7 +471,6 @@ public class Team {
         HC.get(0).ratDef = 70;
         HC.get(0).ratTalent = 70;
         HC.get(0).ratDiscipline = 70;
-        HC.get(0).ratOvr = (HC.get(0).ratOff + HC.get(0).ratDef + HC.get(0).ratTalent + HC.get(0).ratDiscipline) / 4;
         HC.get(0).offStrat = 0;
         HC.get(0).defStrat = 0;
     }
@@ -797,7 +796,7 @@ public class Team {
         if (preseasonBias < 0) preseasonBias = 0;
         preseasonBias = preseasonBias/15;
         teamPollScore =
-                (int)(preseasonBias * (teamOffTalent + teamDefTalent + teamPrestige + 1.5*confPrestige))+
+                (int)(preseasonBias * (teamOffTalent + teamDefTalent + 1.25*teamPrestige + 1.25*confPrestige))+
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
                         1000)/2;
 
@@ -2052,8 +2051,6 @@ public class Team {
             } else {
                 stars -= Math.random()*(stars);
             }
-
-
             if (stars > 10) stars = 10;
             //make QBs
             teamQBs.add(new PlayerQB(league.getRandName(), 1, stars, this));

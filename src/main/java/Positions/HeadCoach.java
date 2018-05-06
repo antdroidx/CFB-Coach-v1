@@ -135,7 +135,7 @@ public class HeadCoach extends Player {
         ratDef = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random() );
         ratTalent = (int) (45 + 50*Math.random());
         ratDiscipline = (int) (45 + 50 * Math.random());
-        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
+        ratOvr = getHCOverall();
         offStrat = rand.nextInt((max - min) + 1) + min;
         if (offStrat > 4) offStrat = 4;
         defStrat = rand.nextInt((max - min) + 1) + min;
@@ -173,7 +173,7 @@ public class HeadCoach extends Player {
         ratDef = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random() );
         ratTalent = (int) (45 + 45 * Math.random());
         ratDiscipline = (int) (45 + 45 * Math.random());
-        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
+        ratOvr = getHCOverall();
         offStrat = rand.nextInt((max - min) + 1) + min;
         if (offStrat > 4) offStrat = 4;
         defStrat = rand.nextInt((max - min) + 1) + min;
@@ -226,7 +226,7 @@ public class HeadCoach extends Player {
         if (ratTalent < 20) ratTalent = 20;
 
 
-        ratOvr = (ratOff + ratDef + ratTalent + ratDiscipline) / 4;
+        ratOvr = getHCOverall();
         ratImprovement = ratOvr - oldOvr;
 
         wins += team.wins;

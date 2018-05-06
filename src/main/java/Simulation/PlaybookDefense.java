@@ -54,26 +54,26 @@ public class PlaybookDefense {
 
     public void playBook2() {
         stratName = "4-6 Bear";
-        stratDescription = "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from runing.";
+        stratDescription = "Focus on stopping the run. Will give up more big passing plays but will allow less runing yards and far less big plays from running.";
         runPref = 2;
-        runStop = 0;
+        runStop = 1;
         runCoverage = 2;
         runSpy = 1;
         passPref = 1;
         passRush = -1;
         passCoverage = -1;
-        passSpy = 1;
+        passSpy = 0;
     }
 
     public void playBook3() {
         stratName = "Cover 0";
         stratDescription = "Play a pure man-to-man defense with no deep defenders";
         runPref = 1;
-        runStop = 1;
+        runStop = 0;
         runCoverage = 1;
         runSpy = 1;
         passPref = 1;
-        passRush = 2;
+        passRush = 1;
         passCoverage = -2;
         passSpy = 1;
     }
@@ -82,24 +82,24 @@ public class PlaybookDefense {
         stratName = "Cover 2";
         stratDescription = "Play a zone defense with safety help in the back against the pass, while LBs cover the run game.";
         runPref = 2;
-        runStop = 0;
-        runCoverage = -1;
+        runStop = -1;
+        runCoverage = 0;
         runSpy = 1;
         passPref = 3;
-        passRush = 2;
+        passRush = 1;
         passCoverage = 0;
-        passSpy = 1;
+        passSpy = 0;
     }
 
     public void playBook5() {
         stratName = "Cover 3";
         stratDescription = "Play a zone defense to stop the big plays, but allows soft zone coverage underneath.";
         runPref = 3;
-        runStop = 0;
+        runStop = -1;
         runCoverage = -2;
         runSpy = 1;
         passPref = 7;
-        passRush = 2;
+        passRush = -1;
         passCoverage = 2;
         passSpy = 1;
     }

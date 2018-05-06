@@ -89,6 +89,7 @@ public class Game implements Serializable {
     private final int timePerPlay = 22; //affects snaps per game!
     private final int intValue = 150; //higher less ints
     private final int sackValue = 200; //higher less sacks
+    private final int escapeValue = 150;
     private final int compValue = 150; //higher more completions
     private final int fatigueDropHigh = 9;
     private final int fatigueDropMed = 6;
@@ -100,6 +101,8 @@ public class Game implements Serializable {
     private double hkReturnAvg = 0, akReturnAvg = 0, hpReturnAvg = 0, apReturnAvg = 0;
 
     private int returnYards;
+
+    //GAME SETUP
 
     public Game(Team home, Team away, String name) {
         homeTeam = home;
@@ -158,7 +161,7 @@ public class Game implements Serializable {
         }
     }
 
-    private int coachAdv() {
+    private int getCoachAdv() {
         int adv = 0;
 
         if (gamePoss) {
@@ -169,49 +172,6 @@ public class Game implements Serializable {
         if (adv > 3) adv = 3;
         if (adv < -3) adv = -3;
         return adv;
-    }
-
-    private int getCompositeOLPass() {
-        int compositeOL = 0;
-        for (int i = 0; i < 5; ++i) {
-            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
-        }
-        compositeOL = compositeOL / 5;
-
-        return (compositeOL);
-    }
-
-    private int getCompositeOLRush(PlayerTE selTE) {
-        int compositeOL = 0;
-        for (int i = 0; i < 5; ++i) {
-            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
-        }
-        compositeOL += selTE.ratRunBlock;
-        compositeOL = compositeOL / 6;
-
-        return compositeOL;
-    }
-
-    private int getCompositeDLPass(PlayerLB selLB) {
-        int compositeDL = 0;
-        for (int i = 0; i < 4; ++i) {
-            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
-        }
-        compositeDL += (selLB.ratSpeed + selLB.ratTackle) / 2;
-        compositeDL = compositeDL / 5;
-
-        return compositeDL;
-    }
-
-    private int getCompositeDLRush(PlayerLB selLB, PlayerS selS) {
-        int compositeDL = 0;
-        for (int i = 0; i < 4; ++i) {
-            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
-        }
-        compositeDL += selLB.ratRunStop + selS.ratRunStop;
-        compositeDL = compositeDL / 6;
-
-        return compositeDL;
     }
 
     private void getReturner() {
@@ -294,6 +254,8 @@ public class Game implements Serializable {
 
         return ST;
     }
+
+    //GAME SIMULATION
 
     public void playGame() {
         if (!hasPlayed) {
@@ -581,6 +543,8 @@ public class Game implements Serializable {
         PlayerLB selLB2;
         PlayerCB selCB;
         PlayerS selS;
+        PlayerS selS2;
+
 
         ArrayList<Player> receiver = new ArrayList<>();
         ArrayList<PlayerRB> RunningBack = new ArrayList<>();
@@ -723,6 +687,7 @@ public class Game implements Serializable {
         selLB2 = Linebacker.get(1);
         selCB = defense.getCB(WideReceiver.get(0).posDepth);
         selS = Safety.get(0);
+        selS2 = Safety.get(1);
 
         if (selCB.gameFatigue <= 0) selCB = defense.getCB(defense.startersCB);
 
@@ -735,14 +700,15 @@ public class Game implements Serializable {
         selWR2.gameFatigue -= fatigueDropMed + Math.round((100 - selWR.ratDur) / 10);
         selTE.gameFatigue -= fatigueDropHigh + Math.round((100 - selTE.ratDur) / 10);
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
-        selLB.gameFatigue -= fatigueDropLow + Math.round((100 - selLB.ratDur) / 10);
-        selLB2.gameFatigue -= Math.round((100 - selLB2.ratDur) / 10);
+        selLB.gameFatigue -= fatigueDropHigh + Math.round((100 - selLB.ratDur) / 10);
+        selLB2.gameFatigue -= fatigueDropHigh + Math.round((100 - selLB2.ratDur) / 10);
         selCB.gameFatigue -= fatigueDropMed + Math.round((100 - selCB.ratDur) / 10);
         selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
+        selS2.gameFatigue -= Math.round((100 - selS2.ratDur) / 10);
 
         String pos = receiver.get(0).position;
 
-        passingPlay(offense, defense, selQB, selRB, selWR, selTE, selDL, selLB, selLB2, selCB, selS, pos);
+        passingPlay(offense, defense, selQB, selRB, selWR, selTE, selDL, selLB, selLB2, selCB, selS, selS2, pos);
 
     }
 
@@ -761,6 +727,7 @@ public class Game implements Serializable {
         PlayerLB selLB;
         PlayerCB selCB;
         PlayerS selS;
+        PlayerS selS2;
 
         ArrayList<Player> rusher = new ArrayList<>();
         ArrayList<PlayerRB> RunningBack = new ArrayList<>();
@@ -869,6 +836,8 @@ public class Game implements Serializable {
         Collections.sort(rusher, new CompGamePlayerPicker());
         Collections.sort(Linebacker, new CompGamePlayerPicker());
         Collections.sort(DLineman, new CompGamePlayerPicker());
+        Collections.sort(Safety, new CompGamePlayerPicker());
+
 
         //Choose Action Players
         selQB = offense.getQB(0 + x);
@@ -877,51 +846,55 @@ public class Game implements Serializable {
         selDL = DLineman.get(0);
         selLB = Linebacker.get(0);
         selCB = Cornerback.get(0);
-        selS = defense.getS(0 + x);
+        selS = Safety.get(0);
+        selS2 = Safety.get(1);
 
         if (selTE.gameFatigue <= 0) selTE = defense.getTE(offense.startersTE);
         if (selS.gameFatigue <= 0) selS = defense.getS(defense.startersS);
 
         selQB.gameSnaps++;
         selTE.gameSnaps++;
-        selS.gameSnaps++;
 
         //Fatigue
         selRB.gameFatigue -= fatigueDropMed + Math.round((100 - selRB.ratDur) / 10);
         selTE.gameFatigue -= fatigueDropMed + Math.round((100 - selTE.ratDur) / 10);
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
-        selLB.gameFatigue -= fatigueDropLow + Math.round((100 - selLB.ratDur) / 10);
+        selLB.gameFatigue -= fatigueDropHigh + Math.round((100 - selLB.ratDur) / 10);
         selCB.gameFatigue -= Math.round((100 - selCB.ratDur) / 10);
         selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
+        selS2.gameFatigue -= Math.round((100 - selS2.ratDur) / 10);
 
-        rushPlay(offense, defense, selQB, selRB, selTE, selDL, selLB, selCB, selS);
+        rushPlay(offense, defense, selQB, selRB, selTE, selDL, selLB, selCB, selS, selS2);
 
     }
 
     //PASSING PLAY - POST-SNAP
 
-    private void passingPlay(Team offense, Team defense, PlayerQB selQB, PlayerRB selRB, PlayerWR selWR, PlayerTE selTE, PlayerDL selDL, PlayerLB selLB, PlayerLB selLB2, PlayerCB selCB, PlayerS selS, String pos) {
+    private void passingPlay(Team offense, Team defense, PlayerQB selQB, PlayerRB selRB, PlayerWR selWR, PlayerTE selTE, PlayerDL selDL, PlayerLB selLB, PlayerLB selLB2, PlayerCB selCB, PlayerS selS, PlayerS selS2, String pos) {
         int yardsGain = 0;
         boolean gotTD = false;
         boolean gotFumble = false;
 
-        //get how much pressure there is on qb, check if sack
-        int pressureOnQB = getCompositeDLPass(selLB2) * 2 - getCompositeOLPass() - getHFadv() - (int) (Math.random() * coachAdv()) + (defense.playbookDef.getRunStop() * 2 - offense.playbookDef.getRunStop());
-        // SACK OUTCOME
-        if (Math.random() * sackValue < pressureOnQB / 8) {
+        int offProtection = getOffPassProtection(offense, selTE);
+        int defPressure = getDefPassPressure(defense, selLB2);
 
-            if (Math.random() * 100 < pressureOnQB / 8 && selQB.ratSpeed > selDL.ratPassRush) {
+        //get how much pressure there is on qb, check if sack
+        int pressureOnQB = 2*defPressure - offProtection + getHFadv() + getCoachAdv();
+        // SACK OUTCOME
+        if (Math.random() * sackValue < pressureOnQB/8) {
+
+            if (Math.random() * escapeValue < pressureOnQB/8 && selQB.ratSpeed > selDL.ratPassRush) {
                 //ESCAPE SACK
                 selQB.gameSim = 1;
                 selRB.gameSim = 0;
-                rushPlay(offense, defense, selQB, selRB, selTE, selDL, selLB, selCB, selS);
+                rushPlay(offense, defense, selQB, selRB, selTE, selDL, selLB, selCB, selS2, selS);
             } else {
                 //sacked!
                 selDL.gameSim = selDL.ratTackle * Math.random() * 100;
-                selLB.gameSim = selLB2.ratTackle * Math.random() * 60;
-                selS.gameSim = selS.ratTackle * Math.random() * 25;
+                selLB2.gameSim = selLB2.ratTackle * Math.random() * 60;
+                selS2.gameSim = selS2.ratTackle * Math.random() * 25;
 
-                recordSack(offense, defense, selQB, selDL, selLB2, selCB, selS);
+                recordSack(offense, defense, selQB, selDL, selLB2, selCB, selS2);
 
                 return;
             }
@@ -946,13 +919,13 @@ public class Game implements Serializable {
                     } else if (pos.equals("TE")) {
                         selDL.gameSim = selDL.ratPassRush * Math.random() * 15;
                         selCB.gameSim = selCB.ratCoverage * Math.random() * 50;
-                        selS.gameSim = selS.ratCoverage * Math.random() * 45;
-                        selLB.gameSim = selLB.ratCoverage * Math.random() * 70;
+                        selS2.gameSim = selS2.ratCoverage * Math.random() * 45;
+                        selLB.gameSim = selLB.ratCoverage * Math.random() * 65;
                     } else {
                         selDL.gameSim = selDL.ratPassRush * Math.random() * 15;
                         selCB.gameSim = selCB.ratCoverage * Math.random() * 80;
                         selS.gameSim = selS.ratCoverage * Math.random() * 50;
-                        selLB.gameSim = selLB.ratCoverage * Math.random() * 70;
+                        selLB.gameSim = selLB.ratCoverage * Math.random() * 65;
                     }
 
                     recordInterception(offense, selQB, selDL, selLB, selCB, selS);
@@ -965,14 +938,17 @@ public class Game implements Serializable {
             double completion;
 
             if (pos.equals("WR")) {
-                completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(selQB.ratPassAcc) + normalize(selWR.ratCatch)
-                        - normalize(selCB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush();
+                completion = (getHFadv() + (int) (Math.random() * getCoachAdv()) + normalize(selQB.ratPassAcc) + normalize(selWR.ratCatch)
+                        - normalize(selCB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 +
+                        (offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush()) + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
             } else if (pos.equals("TE")) {
-                completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(selQB.ratPassAcc) + normalize(selTE.ratCatch)
-                        - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush();
+                completion = (getHFadv() + (int) (Math.random() * getCoachAdv()) + normalize(selQB.ratPassAcc) + normalize(selTE.ratCatch)
+                        - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 +
+                        (offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush()) + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
             } else {
-                completion = (getHFadv() + (int) (Math.random() * coachAdv()) + normalize(selQB.ratPassAcc) + normalize(selRB.ratCatch)
-                        - normalize(selLB2.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 + offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush();
+                completion = (getHFadv() + (int) (Math.random() * getCoachAdv()) + normalize(selQB.ratPassAcc) + normalize(selRB.ratCatch)
+                        - normalize(selLB2.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 +
+                        (offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush()) + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
             }
 
 
@@ -1059,7 +1035,7 @@ public class Game implements Serializable {
                     yardsGain = (int) ((normalize(selQB.ratPassPow) + normalize(selRB.ratSpeed) - normalize(selLB.ratSpeed)) * Math.random() / 4.8 //STRATEGIES
                             + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage()) - 2;  //subtract 2 for screen pass behind line of scrimmage
                     //see if receiver can get yards after catch
-                    escapeChance = (normalize(selRB.ratEvasion) * 3 - selLB.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
+                    escapeChance = (normalize(selRB.ratEvasion) * 3 - selLB2.ratTackle - defense.getS(0).ratOvr) * Math.random()  //STRATEGIES
                             + offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage();
                 }
 
@@ -1193,18 +1169,17 @@ public class Game implements Serializable {
 
     //RUSHING PLAYS POST-SNAP **
 
-    private void rushPlay(Team offense, Team defense, PlayerQB selQB, PlayerRB selRB, PlayerTE selTE, PlayerDL selDL, PlayerLB selLB, PlayerCB selCB, PlayerS selS) {
+    private void rushPlay(Team offense, Team defense, PlayerQB selQB, PlayerRB selRB, PlayerTE selTE, PlayerDL selDL, PlayerLB selLB, PlayerCB selCB, PlayerS selS, Player selS2) {
         boolean gotTD;
         gotTD = false;
         int yardsGain;
-        int blockAdv = getCompositeOLRush(selTE) - getCompositeDLRush(selLB, selS) + (offense.playbookOff.getRunProtection() - defense.playbookDef.getRunStop());
-        int blockAdvOutside = selTE.ratRunBlock * 2 - selLB.ratRunStop - selS.ratRunStop + (offense.playbookOff.getRunUsage() - defense.playbookDef.getRunSpy());
+        int blockAdv = getOffRunProtection(offense, selTE) - getDefRunStop(defense, selLB, selS) + (offense.playbookOff.getRunProtection() - defense.playbookDef.getRunStop());
 
         //Start Rush Play
         if (selRB.gameSim >= selQB.gameSim) {
-            yardsGain = (int) ((selRB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.playbookOff.getRunPotential() / 2 - (double) defense.playbookDef.getRunCoverage() / 2);
+            yardsGain = (int) ((selRB.ratSpeed + blockAdv + getHFadv() + (int) (Math.random() * getCoachAdv())) * Math.random() / 10 + (double) offense.playbookOff.getRunPotential() / 2 - (double) defense.playbookDef.getRunCoverage() / 2);
         } else {
-            yardsGain = (int) ((selQB.ratSpeed + blockAdv + blockAdvOutside + getHFadv() + (int) (Math.random() * coachAdv())) * Math.random() / 10 + (double) offense.playbookOff.getRunPotential() / 2 - (double) defense.playbookDef.getRunCoverage() / 2);
+            yardsGain = (int) ((selQB.ratSpeed + blockAdv + getHFadv() + (int) (Math.random() * getCoachAdv())) * Math.random() / 10 + (double) offense.playbookOff.getRunPotential() / 2 - (double) defense.playbookDef.getRunCoverage() / 2);
         }
 
         //Break past neutral zone
@@ -1214,7 +1189,7 @@ public class Game implements Serializable {
             } else {
                 //break free from tackles
                 if (Math.random() < (0.28 + (offense.playbookOff.getRunPotential() - (double) defense.playbookDef.getRunCoverage() / 2) / 50)) {
-                    yardsGain += (selRB.ratEvasion - blockAdvOutside) / 5 * Math.random();
+                    yardsGain += (selRB.ratEvasion - blockAdv) / 5 * Math.random();
                 }
             }
         } else {
@@ -1223,7 +1198,7 @@ public class Game implements Serializable {
             } else {
                 //break free from tackles
                 if (Math.random() < (0.20 + (offense.playbookOff.getRunPotential() - (double) defense.playbookDef.getRunCoverage() / 2) / 50)) {
-                    yardsGain += (selQB.ratEvasion - blockAdvOutside) / 5 * Math.random();
+                    yardsGain += (selQB.ratEvasion - blockAdv) / 5 * Math.random();
                 }
             }
         }
@@ -1275,7 +1250,7 @@ public class Game implements Serializable {
                     selDL.gameSim = selDL.ratTackle * Math.random() * 20;
                     selCB.gameSim = selCB.ratTackle * Math.random() * 25;
                     selS.gameSim = selS.ratTackle * Math.random() * 50;
-                    selLB.gameSim = selLB.ratTackle * Math.random() * 80;
+                    selLB.gameSim = selLB.ratTackle * Math.random() * 75;
                 }
 
                 recordRushFumble(offense, selQB, selRB, selDL, selLB, selCB, selS);
@@ -1289,6 +1264,131 @@ public class Game implements Serializable {
             }
         }
     }
+
+
+    //PLAY CHARACTERISTICS
+
+    //PASS PROTECTION
+    private int getOffPassProtection(Team off, PlayerTE TE){
+        int OP = 0;
+        if(off.playbookOff.getPassUsage() == 0) OP = getCompositeOLPass();
+        else OP = getCompositeOLPassTE(TE);
+
+        return OP;
+    }
+
+    private int getCompositeOLPass() {
+        int compositeOL = 0;
+        for (int i = 0; i < 5; ++i) {
+            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
+        }
+        compositeOL = compositeOL / 5;
+
+        return (compositeOL);
+    }
+
+    private int getCompositeOLPassTE(PlayerTE selTE) {
+        int compositeOL = 0;
+        for (int i = 0; i < 5; ++i) {
+            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratPassBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
+        }
+        compositeOL += selTE.ratRunBlock;
+        compositeOL = (int)(compositeOL / 5.5);
+
+        return (compositeOL);
+    }
+
+    //RUN BLOCKING
+    private int getOffRunProtection(Team off, PlayerTE TE){
+        int OP = 0;
+        if(off.playbookOff.getRunUsage() == 0) OP = getCompositeOLRush();
+        else OP = getCompositeOLRushTE(TE);
+
+        return OP;
+    }
+
+    private int getCompositeOLRush() {
+        int compositeOL = 0;
+        for (int i = 0; i < 5; ++i) {
+            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
+        }
+        compositeOL = compositeOL / 5;
+
+        return compositeOL;
+    }
+
+    private int getCompositeOLRushTE(PlayerTE selTE) {
+        int compositeOL = 0;
+        for (int i = 0; i < 5; ++i) {
+            compositeOL += (teamOLs.get(i).ratStrength * 2 + teamOLs.get(i).ratRunBlock * 2 + teamOLs.get(i).ratAwareness) / 5;
+        }
+        compositeOL += selTE.ratRunBlock;
+        compositeOL = (int)(compositeOL / 5.5); //TE bonus
+
+        return compositeOL;
+    }
+
+    //PASS PRESSURE
+    private int getDefPassPressure(Team def, PlayerLB LB) {
+        int DP = 0;
+        if(def.playbookDef.getPassSpy() == 0) DP = getCompositeDLPass();
+        else DP = getCompositeDLPassLB(LB);
+
+        return DP;
+    }
+
+    private int getCompositeDLPass() {
+        int compositeDL = 0;
+        for (int i = 0; i < 4; ++i) {
+            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
+        }
+        compositeDL = compositeDL / 4;
+
+        return compositeDL;
+    }
+
+    private int getCompositeDLPassLB(PlayerLB selLB) {
+        int compositeDL = 0;
+        for (int i = 0; i < 4; ++i) {
+            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratPassRush) / 2;
+        }
+        compositeDL += (selLB.ratSpeed + selLB.ratTackle) / 2;
+        compositeDL = (int)(compositeDL / 4.58);  // 4.58 is equal to 5.5 for OL + TE
+
+        return compositeDL;
+    }
+
+    //DEFENDING THE RUN
+    private int getDefRunStop(Team def, PlayerLB LB, PlayerS S) {
+        int DP = 0;
+        if(def.playbookDef.getRunSpy() == 0) DP = getCompositeDLRush(LB);
+        else DP = getCompositeDLRush(LB, S);
+
+        return DP;
+    }
+
+    private int getCompositeDLRush(PlayerLB selLB) {
+        int compositeDL = 0;
+        for (int i = 0; i < 4; ++i) {
+            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
+        }
+        compositeDL += selLB.ratRunStop;
+        compositeDL = compositeDL / 5;
+
+        return compositeDL;
+    }
+
+    private int getCompositeDLRush(PlayerLB selLB, PlayerS selS) {
+        int compositeDL = 0;
+        for (int i = 0; i < 4; ++i) {
+            compositeDL += (teamDLs.get(i).ratStrength + teamDLs.get(i).ratRunStop) / 2;
+        }
+        compositeDL += selLB.ratRunStop + selS.ratRunStop;
+        compositeDL = (int)(compositeDL / 5.5);
+
+        return compositeDL;
+    }
+
 
     //KICKING PLAYS
 

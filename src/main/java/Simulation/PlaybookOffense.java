@@ -58,12 +58,12 @@ public class PlaybookOffense {
         stratName = "Smash Mouth";
         stratDescription = "Play a conservative run-heavy offense, setting up the passes as necessary.";
         runPref = 2;
-        runProtection = 2;
-        runPotential = -2;
+        runProtection = 1;
+        runPotential = -1;
         runUsage = 1;
         passPref = 1;
         passProtection = 2;
-        passPotential = 2;
+        passPotential = 1;
         passUsage = 0;
     }
 
