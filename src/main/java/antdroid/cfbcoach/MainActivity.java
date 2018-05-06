@@ -1646,6 +1646,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (simLeague.currentWeek == 19) {
             simLeague.advanceSeason();
             simLeague.currentWeek++;
+            if(simLeague.updateTV) newsTV();
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Transfer List");
 
@@ -1833,6 +1834,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
         checkboxProRelegation.setChecked(simLeague.enableProRel);
 
+        final CheckBox checkboxTV = dialog.findViewById(R.id.checkboxTV);
+        checkboxTV.setChecked(simLeague.enableTV);
+
         checkboxRealignment.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View view) {
@@ -1853,12 +1857,12 @@ public class MainActivity extends AppCompatActivity {
                                                  }
         );
 
-        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelSettings);
-        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkSettings);
+        Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
+        Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
-        cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 dialog.dismiss();
@@ -1874,7 +1878,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        okChangeNameButton.setOnClickListener(new View.OnClickListener() {
+        okButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 showToasts = checkboxShowPopup.isChecked();
@@ -1883,6 +1887,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.hidePotential = checkboxPotential.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
                 simLeague.enableProRel = checkboxProRelegation.isChecked();
+                simLeague.enableTV = checkboxTV.isChecked();
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
 
@@ -3061,17 +3066,8 @@ public class MainActivity extends AppCompatActivity {
                 userHC.baselinePrestige = userTeam.teamPrestige;
                 simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
                         " to lead the team.");
-                simLeague.coachCarousel();
                 updateHeaderBar();
                 examineTeam(currentTeam.name);
-            }
-        });
-        builder.setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Perform action on click
-
-                dialog.dismiss();
             }
         });
         AlertDialog alert = builder.create();
@@ -3191,7 +3187,7 @@ public class MainActivity extends AppCompatActivity {
     //Conference Realignment Update
     private void conferenceRealignment() {
         if (simLeague.confRealignment) {
-            simLeague.conferenceInvites();
+            simLeague.conferenceRealignment();
             if (simLeague.countRealignment > 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(simLeague.newsRealignment)
@@ -3226,6 +3222,27 @@ public class MainActivity extends AppCompatActivity {
             TextView textView = dialog.findViewById(android.R.id.message);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         }
+    }
+
+    //Television Contract News
+    private void newsTV() {
+        StringBuilder update = new StringBuilder();
+        for(int i = 0; i < simLeague.newsTV.size(); ++i) {
+            update.append(simLeague.newsTV.get(i) + "\n\n");
+        }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(update)
+                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Network Contract Updates")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
     //Transfers Dialog
@@ -3716,8 +3733,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }*/
 
-    //DEBUG STUFF
+    //allow the ability to enable editor to edit player names, positions, attributes, etc.
+    private void playerEditorP() {
 
+    }
+
+    //DEBUG STUFF
     private void netTotalPrestige() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(simLeague.netTotalPrestige() + " Total Net Prestige Change")

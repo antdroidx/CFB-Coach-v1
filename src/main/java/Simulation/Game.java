@@ -91,10 +91,11 @@ public class Game implements Serializable {
     private final int sackValue = 200; //higher less sacks
     private final int escapeValue = 150;
     private final int compValue = 150; //higher more completions
+    private final int fatigueDropSuper = 13;
     private final int fatigueDropHigh = 9;
     private final int fatigueDropMed = 6;
     private final int fatigueDropLow = 3;
-    private final int fatigueGain = 4;
+    private final int fatigueGain = 3;
     private int snapCount = 0;
     private final int touchback = 25;
 
@@ -700,8 +701,8 @@ public class Game implements Serializable {
         selWR2.gameFatigue -= fatigueDropMed + Math.round((100 - selWR.ratDur) / 10);
         selTE.gameFatigue -= fatigueDropHigh + Math.round((100 - selTE.ratDur) / 10);
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
-        selLB.gameFatigue -= fatigueDropHigh + Math.round((100 - selLB.ratDur) / 10);
-        selLB2.gameFatigue -= fatigueDropHigh + Math.round((100 - selLB2.ratDur) / 10);
+        selLB.gameFatigue -= fatigueDropSuper + Math.round((100 - selLB.ratDur) / 10);
+        selLB2.gameFatigue -= fatigueDropSuper + Math.round((100 - selLB2.ratDur) / 10);
         selCB.gameFatigue -= fatigueDropMed + Math.round((100 - selCB.ratDur) / 10);
         selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
         selS2.gameFatigue -= Math.round((100 - selS2.ratDur) / 10);
@@ -859,7 +860,7 @@ public class Game implements Serializable {
         selRB.gameFatigue -= fatigueDropMed + Math.round((100 - selRB.ratDur) / 10);
         selTE.gameFatigue -= fatigueDropMed + Math.round((100 - selTE.ratDur) / 10);
         selDL.gameFatigue -= fatigueDropHigh + Math.round((100 - selDL.ratDur) / 10);
-        selLB.gameFatigue -= fatigueDropHigh + Math.round((100 - selLB.ratDur) / 10);
+        selLB.gameFatigue -= fatigueDropSuper + Math.round((100 - selLB.ratDur) / 10);
         selCB.gameFatigue -= Math.round((100 - selCB.ratDur) / 10);
         selS.gameFatigue -= fatigueDropMed + Math.round((100 - selS.ratDur) / 10);
         selS2.gameFatigue -= Math.round((100 - selS2.ratDur) / 10);
@@ -915,7 +916,7 @@ public class Game implements Serializable {
                         selDL.gameSim = selDL.ratPassRush * Math.random() * 15;
                         selCB.gameSim = selCB.ratCoverage * Math.random() * 100;
                         selS.gameSim = selS.ratCoverage * Math.random() * 50;
-                        selLB.gameSim = selLB.ratCoverage * Math.random() * 40;
+                        selLB.gameSim = selLB.ratCoverage * Math.random() * 30;
                     } else if (pos.equals("TE")) {
                         selDL.gameSim = selDL.ratPassRush * Math.random() * 15;
                         selCB.gameSim = selCB.ratCoverage * Math.random() * 50;

@@ -30,6 +30,9 @@ public class Conference {
     public int confPrestige;
     public int confRelegateMin;
     public int confPromoteMin;
+    public boolean confTV;
+    public int confTVContract;
+    public int confTVBonus;
 
     public final ArrayList<Team> confTeams;
     private boolean evenYear;
@@ -50,12 +53,97 @@ public class Conference {
      * @param name
      * @param league
      */
-    public Conference(String name, League league) {
+    public Conference(String name, League league, Boolean deal, int length, int terms) {
         confName = name;
         confTeams = new ArrayList<>();
         this.league = league;
         week = 0;
         allConfPlayers = new ArrayList<>();
+
+        confTV = deal;
+        confTVContract = length;
+        confTVBonus =terms;
+
+    }
+
+    /**
+     * Sets up Conference from save file
+     *
+     */
+    public Conference(String save, League league) {
+        String[] data = save.split(",");
+        confName = data[0];
+        confTeams = new ArrayList<>();
+        this.league = league;
+        week = 0;
+        allConfPlayers = new ArrayList<>();
+
+        //Old Save Compatibility
+        if(data.length > 1) {
+            confTV = Boolean.parseBoolean(data[1]);
+            confTVContract = Integer.parseInt(data[2]);
+            confTVBonus = Integer.parseInt(data[3]);
+        } else {
+            //Old Save Compatibility
+            confTV = false;
+            confTVContract = 0;
+            confTVBonus = 0;
+        }
+
+    }
+
+    //Conference Television
+    public void reviewConfTVDeal() {
+
+        //Provide television incentives to colleges
+        if(confTV) {
+            int yearBonus = (int)(Math.random()*confTVBonus+1);
+            for(int t = 0; t < confTeams.size(); t++) {
+                confTeams.get(t).teamPrestige += yearBonus;
+                confTeams.get(t).HC.get(0).baselinePrestige += yearBonus/2;  //make the coach's job slightly more challenging
+            }
+            league.newsStories.get(league.currentWeek+1).add(confName + " Network Television Annual Distribution>Each member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
+            league.newsTV.add(confName + " Network Annual Distribution:\n\tEach member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
+            league.updateTV = true;
+            confTVContract--;
+            if (confTVContract <= 0) {
+                confTV = false;
+                league.newsStories.get(league.currentWeek+1).add(confName + " Network Television Contract Expires>The parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
+
+                league.newsTV.add(confName + " Network Contract Expires:\n\tThe parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
+                league.updateTV = true;
+            }
+        }
+
+        //Check for Contracts and Negotiate a new deal if no deal is already in place
+        if(!confTV || confTV && confTVContract == 1) {
+            if (Math.random() * 100 < Math.random()*confPrestige && confPrestige > 55) {
+                confTV = true;
+                confTVContract = (int) (Math.random() * 5) + 4;
+                confTVBonus = confPrestige / 17;
+
+                league.newsStories.get(league.currentWeek+1).add("New " + confName + " Network Television Contract>A new television contract has been worked out with the "
+                        + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+
+
+                league.newsTV.add("New " + confName + " Network Television Contract:\n\tA new television contract has been worked out with the "
+                        + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+                league.updateTV = true;
+            } else if (Math.random() * 200 < Math.random()*confPrestige) {
+                confTV = true;
+                confTVContract = (int) (Math.random() * 5) + 4;
+                confTVBonus = confPrestige / 17;
+
+                league.newsStories.get(league.currentWeek+1).add("New " + confName + " Network Television Contract>A new television contract has been worked out with the "
+                        + confName + " conference. The new television contract is. for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+
+                league.newsTV.add("New " + confName + " Network Television Contract:\n\tA new television contract has been worked out with the "
+                        + confName + " conference. The new television contract is. for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+                league.updateTV = true;
+
+            }
+        }
+
     }
 
     /**

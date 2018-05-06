@@ -31,7 +31,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Show weekly pop-ups:"
+                    android:text="Show weekly pop-ups"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
@@ -49,7 +49,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Show injury report:"
+                    android:text="Show injury report"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
@@ -68,7 +68,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Show Full Game Play by Play:"
+                    android:text="Show Full Game Play by Play"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
@@ -87,7 +87,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Hide Potential Rating:"
+                    android:text="Hide Potential Rating"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
@@ -106,7 +106,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Enable Conf Realignment:"
+                    android:text="Enable Conf Realignment"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
@@ -125,11 +125,30 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Enable Promotion/Relegation:"
+                    android:text="Enable Promotion/Relegation"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
                     android:id="@+id/checkboxProRelegation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15sp">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Enable TV Contracts"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <CheckBox
+                    android:id="@+id/checkboxTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

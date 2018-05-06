@@ -206,9 +206,6 @@ public class Team {
     public int playbookOffNum;
     public int playbookDefNum;
 
-    public boolean confTVDeal;
-    public boolean teamTVDeal;
-
     private static final int NFL_OVR = 90;
     private static final int sophNFL = 2;
     private static final double NFL_CHANCE = 0.65;
@@ -303,8 +300,6 @@ public class Team {
         playbookOffNum = 0;
         playbookDefNum = 0;
         disciplinePts = 0;
-        teamTVDeal = false;
-        confTVDeal = false;
         wonRivalryGame = false;
 
         // Actually load the team from the string
@@ -341,10 +336,6 @@ public class Team {
                                 Integer.parseInt(teamInfo[20]),
                                 Integer.parseInt(teamInfo[17]),
                                 teamInfo[18]);
-                        if (teamInfo.length >= 23) {
-                            teamTVDeal = Boolean.parseBoolean(teamInfo[21]);
-                            confTVDeal = Boolean.parseBoolean(teamInfo[22]);
-                        }
                     }
                 }
             } else {
@@ -798,11 +789,11 @@ public class Team {
         teamPollScore =
                 (int)(preseasonBias * (teamOffTalent + teamDefTalent + 1.25*teamPrestige + 1.25*confPrestige))+
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
-                        1000)/2;
+                        750)/2;
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
-            teamPollScore += 25;
+            teamPollScore += 15;
         }
         if ("NCW".equals(natChampWL)) {
             //bonus for winning champ game
@@ -1092,7 +1083,7 @@ public class Team {
 
         int goal = projectedPoll;
         if (goal > 95) goal = 95;
-        if (goal <= 15) goal = 15;
+        if (goal <= 10) goal = 10;
         else if (goal <= 25) goal = 25;
         int diffExpected = goal - rankTeamPollScore;
 

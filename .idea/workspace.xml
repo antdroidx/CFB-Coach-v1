@@ -10,13 +10,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change beforePath="$PROJECT_DIR$/release/output.json" afterPath="$PROJECT_DIR$/release/output.json" />
-      <change beforePath="$PROJECT_DIR$/release/vc51-CFB-Coach-release.apk" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" afterPath="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/PlaybookDefense.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/PlaybookDefense.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/PlaybookOffense.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/PlaybookOffense.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/League.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" afterPath="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,7 +56,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,14 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getCoachScore()</find>
-      <find>recruitNeeds</find>
-      <find>avgCP</find>
-      <find>confPr</find>
-      <find>confLimit</find>
-      <find>4</find>
-      <find>seasonGoals</find>
-      <find>confSt</find>
       <find>positions</find>
       <find>ScoutGrade</find>
       <find>seasonGoal</find>
@@ -99,6 +91,14 @@
       <find />
       <find>names</find>
       <find>,</find>
+      <find>advanceS</find>
+      <find>confRealignment</find>
+      <find>conferenceIn</find>
+      <find>advanceSeason</find>
+      <find>advanceSedason</find>
+      <find>newsTV</find>
+      <find>advanceSeas</find>
+      <find>calc</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -1383,7 +1383,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerDL.java" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerCB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerLB.java" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/PlayerS.java" />
@@ -1413,7 +1412,6 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GameScheduleListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsListArrayAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/game_editor.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/game_editor_full.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/bowls.java" />
@@ -1423,17 +1421,19 @@
         <option value="$PROJECT_DIR$/src/main/res/values/Credits.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/graphview.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/conferences.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/teams.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/credits.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlaybookOffense.java" />
         <option value="$PROJECT_DIR$/src/main/java/Simulation/PlaybookDefense.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/settings_menu.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/League.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Simulation/Conference.java" />
       </list>
     </option>
   </component>
@@ -1458,7 +1458,61 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cfbcoach" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cfbcoach" type="462c0819:PsiDirectoryNode" />
+              <item name="RecruitingActivity.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Simulation" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -1497,53 +1551,16 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="cfbcoach" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="settings.editor.selected.configurable" value="Shelf.Project.Settings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Archive/CFB-Coach_04-20-2018_21_39_53/main/java/antdroid/cfbcoach/RecruitingActivity.java" />
     <property name="android.project.structure.last.selected" value="CFB-Coach" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="device.picker.selection" value="Pixel_XL_API_25" />
+    <property name="device.picker.selection" value="00b5160227d7c603" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="ExportApk.ApkPath" value="C:\Users\ahngu\AndroidStudioProjects\CFB-Coach" />
     <property name="ExportApk.Flavors" value="" />
@@ -1746,9 +1763,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1762,13 +1779,13 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21002132" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20998926" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6692564" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40954494" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4091442" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1782,7 +1799,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2675906" sideWeight="0.5053192" order="2" side_tool="true" content_ui="tabs" />
@@ -1797,8 +1814,8 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40954494" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40954494" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1809,9 +1826,9 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21002132" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20998926" sideWeight="0.49468085" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
@@ -1821,7 +1838,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="382" />
+      <option name="time" value="388" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1875,23 +1892,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/team_rankings_list_item.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="12" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamHistoryListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerOffense.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1900,13 +1900,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_recruiting.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Positions/PlayerRB.java">
@@ -1920,13 +1920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1547">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/android/widget/ExpandableListView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="217" column="0" lean-forward="false" selection-start-line="217" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1975,34 +1968,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/settings_menu.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_editor_full.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="171" column="50" lean-forward="true" selection-start-line="171" selection-start-column="50" selection-end-line="171" selection-end-column="50" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_editor.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/game_editor.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="36" column="32" lean-forward="false" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/android/os/BaseBundle.class">
@@ -2016,64 +1999,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/bowls.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GameScheduleListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/league_record_list_item.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/team_history_list_item.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/simple_list_dialog.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="34" column="28" lean-forward="false" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/team_rankings_dialog.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jjoe64/graphview/4.2.2/b518d09891b93df1172b3e2ee5726942341d1fe1/graphview-4.2.2-sources.jar!/com/jjoe64/graphview/series/BaseSeries.java">
@@ -2084,64 +2058,54 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="223" column="24" lean-forward="true" selection-start-line="223" selection-start-column="24" selection-end-line="223" selection-end-column="43" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/graphview.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
         </state>
       </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-        </state>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/conferences.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="121" lean-forward="false" selection-start-line="2" selection-start-column="121" selection-end-line="2" selection-end-column="121" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/bowls.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="25" lean-forward="false" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2149,7 +2113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1105">
           <caret line="24" column="3" lean-forward="false" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2157,15 +2120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="37" column="42" lean-forward="true" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="2206" column="0" lean-forward="false" selection-start-line="2206" selection-start-column="0" selection-end-line="2206" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2173,7 +2127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="65" lean-forward="false" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2181,216 +2134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2553">
           <caret line="135" column="65" lean-forward="false" selection-start-line="135" selection-start-column="65" selection-end-line="135" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2039">
-          <caret line="2052" column="13" lean-forward="false" selection-start-line="2052" selection-start-column="13" selection-end-line="2052" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="2434" column="16" lean-forward="false" selection-start-line="2434" selection-start-column="16" selection-end-line="2434" selection-end-column="16" />
-          <folding>
-            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#3741#3757#0" expanded="false" />
-            <element signature="class#9729:10291" expanded="false" />
-            <element signature="method#onItemSelected#0;class#9729:10291" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#9729:10291" expanded="false" />
-            <element signature="class#10863:11321" expanded="false" />
-            <element signature="method#onItemSelected#0;class#10863:11321" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#10863:11321" expanded="false" />
-            <element signature="method#updateHeaderBar#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#newGameHardDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#newGameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#userNameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#19422:20666" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#19422:20666" expanded="false" />
-            <element signature="method#onTextChanged#0;class#19422:20666" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#19422:20666" expanded="false" />
-            <element signature="method#resetTeamUI#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#examineTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrTeam#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateCurrConference#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#scrollToLatestGame#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showNewsStoriesDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#29483:30790" expanded="false" />
-            <element signature="method#onItemSelected#0;class#29483:30790" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#29483:30790" expanded="false" />
-            <element signature="method#updateTeamStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updatePlayerStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#examinePlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#checkAwardPlayer#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateSchedule#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showGameDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#41127:48474" expanded="false" />
-            <element signature="method#onItemSelected#0;class#41127:48474" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#41127:48474" expanded="false" />
-            <element signature="class#51917:52462" expanded="false" />
-            <element signature="method#onItemSelected#0;class#51917:52462" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#51917:52462" expanded="false" />
-            <element signature="class#53137:53682" expanded="false" />
-            <element signature="method#onItemSelected#0;class#53137:53682" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#53137:53682" expanded="false" />
-            <element signature="method#showWeeklyScores#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#56446:57446" expanded="false" />
-            <element signature="method#onItemSelected#0;class#56446:57446" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#56446:57446" expanded="false" />
-            <element signature="method#updateStandings#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#updateRankings#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamLineupDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#60230:60722" expanded="false" />
-            <element signature="method#onItemSelected#0;class#60230:60722" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#60230:60722" expanded="false" />
-            <element signature="method#updateLineupList#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showTeamStrategyDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#67685:68250" expanded="false" />
-            <element signature="method#onItemSelected#0;class#67685:68250" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#67685:68250" expanded="false" />
-            <element signature="class#68848:69413" expanded="false" />
-            <element signature="method#onItemSelected#0;class#68848:69413" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#68848:69413" expanded="false" />
-            <element signature="method#simulateWeek#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#76056#76114#0" expanded="false" />
-            <element signature="class#78337:79355" expanded="false" />
-            <element signature="method#onItemSelected#0;class#78337:79355" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#78337:79355" expanded="false" />
-            <element signature="method#changeSettingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#gameEditor#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#88484:89753" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#88484:89753" expanded="false" />
-            <element signature="method#onTextChanged#0;class#88484:89753" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#88484:89753" expanded="false" />
-            <element signature="class#89811:91138" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#89811:91138" expanded="false" />
-            <element signature="method#onTextChanged#0;class#89811:91138" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#89811:91138" expanded="false" />
-            <element signature="class#91196:92466" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#91196:92466" expanded="false" />
-            <element signature="method#onTextChanged#0;class#91196:92466" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#91196:92466" expanded="false" />
-            <element signature="class#92522:93766" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#92522:93766" expanded="false" />
-            <element signature="method#onTextChanged#0;class#92522:93766" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#92522:93766" expanded="false" />
-            <element signature="method#showLeagueHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#97567:99042" expanded="false" />
-            <element signature="method#onItemSelected#0;class#97567:99042" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#97567:99042" expanded="false" />
-            <element signature="method#showLeagueHistoryStats#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#100714:101649" expanded="false" />
-            <element signature="method#onItemSelected#0;class#100714:101649" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#100714:101649" expanded="false" />
-            <element signature="method#showTop25History#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#103526:103992" expanded="false" />
-            <element signature="method#onItemSelected#0;class#103526:103992" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#103526:103992" expanded="false" />
-            <element signature="method#showCurrTeamHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#105488:106956" expanded="false" />
-            <element signature="method#onItemSelected#0;class#105488:106956" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#105488:106956" expanded="false" />
-            <element signature="method#graphView#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showCoachHistoryDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#109942:110788" expanded="false" />
-            <element signature="method#onItemSelected#0;class#109942:110788" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#109942:110788" expanded="false" />
-            <element signature="method#showTeamRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#114627:115474" expanded="false" />
-            <element signature="method#onItemSelected#0;class#114627:115474" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#114627:115474" expanded="false" />
-            <element signature="method#showPlayerRankingsDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#117484:118391" expanded="false" />
-            <element signature="method#onItemSelected#0;class#117484:118391" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#117484:118391" expanded="false" />
-            <element signature="method#showBowlCCGDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#119591:120203" expanded="false" />
-            <element signature="method#onItemSelected#0;class#119591:120203" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#119591:120203" expanded="false" />
-            <element signature="method#heismanCeremony#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#122500:124000" expanded="false" />
-            <element signature="method#onItemSelected#0;class#122500:124000" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#122500:124000" expanded="false" />
-            <element signature="method#importData#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#saveLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getSaveFileInfos#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#exitMainActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#careerModeOptions#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#showInjuryReportDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#133707#133708#0" expanded="false" />
-            <element signature="e#133746#133747#0" expanded="false" />
-            <element signature="method#seasonGoals#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#136709:136891" expanded="false" />
-            <element signature="method#onClick#0;class#136709:136891" expanded="false" />
-            <element signature="method#midseasonSummary#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#137832:138014" expanded="false" />
-            <element signature="method#onClick#0;class#137832:138014" expanded="false" />
-            <element signature="method#seasonSummary#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#138645:138827" expanded="false" />
-            <element signature="method#onClick#0;class#138645:138827" expanded="false" />
-            <element signature="method#showPrestigeChange#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#139731:139913" expanded="false" />
-            <element signature="method#onClick#0;class#139731:139913" expanded="false" />
-            <element signature="method#contractDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#140730:140912" expanded="false" />
-            <element signature="method#onClick#0;class#140730:140912" expanded="false" />
-            <element signature="method#promotions#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#144656:144870" expanded="false" />
-            <element signature="method#onClick#0;class#144656:144870" expanded="false" />
-            <element signature="class#145179:145394" expanded="false" />
-            <element signature="method#onClick#0;class#145179:145394" expanded="false" />
-            <element signature="class#147362:147560" expanded="false" />
-            <element signature="method#onClick#0;class#147362:147560" expanded="false" />
-            <element signature="method#switchTeams#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#conferenceRealignment#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#149568:149782" expanded="false" />
-            <element signature="method#onClick#0;class#149568:149782" expanded="false" />
-            <element signature="method#promotionRelegation#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#150514:150712" expanded="false" />
-            <element signature="method#onClick#0;class#150514:150712" expanded="false" />
-            <element signature="method#transfers#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#151270:151452" expanded="false" />
-            <element signature="method#onClick#0;class#151270:151452" expanded="false" />
-            <element signature="class#152030:152276" expanded="false" />
-            <element signature="method#onClick#0;class#152030:152276" expanded="false" />
-            <element signature="method#beginRecruiting#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#154410:154594" expanded="false" />
-            <element signature="method#onClick#0;class#154410:154594" expanded="false" />
-            <element signature="class#155792:156474" expanded="false" />
-            <element signature="method#onItemSelected#0;class#155792:156474" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#155792:156474" expanded="false" />
-            <element signature="method#showRecruitingClassDialog#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#customLeague#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isExternalStorageWritable#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isExternalStorageReadable#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getExtSaveDir#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#161098#161163#0" expanded="false" />
-            <element signature="e#161424#161493#0" expanded="false" />
-            <element signature="method#readCoachFile#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#readRosterFile#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#isNameValid#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#168317#168318#0" expanded="false" />
-            <element signature="e#168351#168352#0" expanded="false" />
-            <element signature="method#netTotalPrestige#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#175020:175202" expanded="false" />
-            <element signature="method#onClick#0;class#175020:175202" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2398,7 +2141,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="63" column="26" lean-forward="true" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2406,81 +2148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-34">
           <caret line="61" column="24" lean-forward="false" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="927" column="78" lean-forward="false" selection-start-line="927" selection-start-column="78" selection-end-line="927" selection-end-column="78" />
-          <folding>
-            <element signature="method#Game#0;class#Game#0" expanded="false" />
-            <element signature="method#Game#1;class#Game#0" expanded="false" />
-            <element signature="method#getHFadv#0;class#Game#0" expanded="false" />
-            <element signature="method#getCoachAdv#0;class#Game#0" expanded="false" />
-            <element signature="method#getReturner#0;class#Game#0" expanded="false" />
-            <element signature="method#getSpecialTeamsD#0;class#Game#0" expanded="false" />
-            <element signature="method#playGame#0;class#Game#0" expanded="false" />
-            <element signature="method#runPlay#0;class#Game#0" expanded="false" />
-            <element signature="e#18474#18604#0" expanded="false" />
-            <element signature="method#getOffPassProtection#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLPass#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLPassTE#0;class#Game#0" expanded="false" />
-            <element signature="method#getOffRunProtection#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLRush#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeOLRushTE#0;class#Game#0" expanded="false" />
-            <element signature="method#getDefPassPressure#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLPass#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLPassLB#0;class#Game#0" expanded="false" />
-            <element signature="method#getDefRunStop#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLRush#0;class#Game#0" expanded="false" />
-            <element signature="method#getCompositeDLRush#1;class#Game#0" expanded="false" />
-            <element signature="method#fieldGoalAtt#0;class#Game#0" expanded="false" />
-            <element signature="method#kickXP#0;class#Game#0" expanded="false" />
-            <element signature="method#kickOff#0;class#Game#0" expanded="false" />
-            <element signature="method#freeKick#0;class#Game#0" expanded="false" />
-            <element signature="e#73721#73745#0" expanded="false" />
-            <element signature="method#puntPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#selectReturner#0;class#Game#0" expanded="false" />
-            <element signature="method#returnPlay#0;class#Game#0" expanded="false" />
-            <element signature="method#recordRushAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#recordRushFumble#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassingTD#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassCompletion#0;class#Game#0" expanded="false" />
-            <element signature="method#recordPassAttempt#0;class#Game#0" expanded="false" />
-            <element signature="method#recordDrop#0;class#Game#0" expanded="false" />
-            <element signature="method#recordDefended#0;class#Game#0" expanded="false" />
-            <element signature="method#recordInterception#0;class#Game#0" expanded="false" />
-            <element signature="e#88363#88448#0" expanded="false" />
-            <element signature="method#recordSack#0;class#Game#0" expanded="false" />
-            <element signature="e#90448#90458#0" expanded="false" />
-            <element signature="method#recordRecFumble#0;class#Game#0" expanded="false" />
-            <element signature="method#recordSafety#0;class#Game#0" expanded="false" />
-            <element signature="method#recordReturnStats#0;class#Game#0" expanded="false" />
-            <element signature="method#addPointsQuarter#0;class#Game#0" expanded="false" />
-            <element signature="method#resetForOT#0;class#Game#0" expanded="false" />
-            <element signature="method#convGameTime#0;class#Game#0" expanded="false" />
-            <element signature="method#quarterCheck#0;class#Game#0" expanded="false" />
-            <element signature="method#recoup#0;class#Game#0" expanded="false" />
-            <element signature="method#gameStatistics#0;class#Game#0" expanded="false" />
-            <element signature="method#getGameSummaryStr#0;class#Game#0" expanded="false" />
-            <element signature="e#122280#122281#0" expanded="true" />
-            <element signature="e#122343#122344#0" expanded="true" />
-            <element signature="method#getGameScoutStr#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLogScoring#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLog#0;class#Game#0" expanded="false" />
-            <element signature="method#getEventLogScore#0;class#Game#0" expanded="false" />
-            <element signature="method#getPassYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getRushYards#0;class#Game#0" expanded="false" />
-            <element signature="method#getPasserRating#0;class#Game#0" expanded="false" />
-            <element signature="method#getRecYardsperCatch#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewsStory#0;class#Game#0" expanded="false" />
-            <element signature="method#addUpcomingGames#0;class#Game#0" expanded="false" />
-            <element signature="method#addNewSeasonGames#0;class#Game#0" expanded="false" />
-            <element signature="e#138423#138424#0" expanded="true" />
-            <element signature="e#138464#138465#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2488,18 +2155,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="703" column="0" lean-forward="true" selection-start-line="703" selection-start-column="0" selection-end-line="703" selection-end-column="0" />
-          <folding>
-            <element signature="method#removeRecruits#0;class#RecruitingActivity#0" expanded="false" />
-            <element signature="method#removeRecruits#1;class#RecruitingActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2507,15 +2162,101 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="93" column="43" lean-forward="false" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/android/widget/ExpandableListView.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="217" column="0" lean-forward="false" selection-start-line="217" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/GameScheduleListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="873">
+          <caret line="128" column="19" lean-forward="false" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Positions/HeadCoach.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-269">
-          <caret line="51" column="42" lean-forward="true" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
-          <folding />
+        <state relative-caret-position="-1460">
+          <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/settings_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="146" column="53" lean-forward="false" selection-start-line="146" selection-start-column="53" selection-end-line="146" selection-end-column="53" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Positions/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="126" column="26" lean-forward="false" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
+          <caret line="125" column="30" lean-forward="false" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="112" column="76" lean-forward="false" selection-start-line="112" selection-start-column="76" selection-end-line="112" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="3353" column="28" lean-forward="false" selection-start-line="3353" selection-start-column="28" selection-end-line="3353" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RecruitingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="1354" column="19" lean-forward="false" selection-start-line="1354" selection-start-column="19" selection-end-line="1354" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="1903" column="28" lean-forward="false" selection-start-line="1903" selection-start-column="28" selection-end-line="1903" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100">
+          <caret line="69" column="13" lean-forward="false" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
         </state>
       </provider>
     </entry>

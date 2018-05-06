@@ -100,6 +100,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private int redshirtCount = 0;
     private final int maxRedshirt = 6;
     private final int maxPlayers = 70;
+    private final double recruitOffBoard = 0.930;
 
     private final int five = 84;
     private final int four = 78;
@@ -338,7 +339,7 @@ public class RecruitingActivity extends AppCompatActivity {
             }
         });
 
-        Switch filterSwitch = findViewById(R.id.filterSwitch);
+        final Switch filterSwitch = findViewById(R.id.filterSwitch);
         filterSwitch.setText("Filter Unaffordable");
         filterSwitch.setChecked(autoFilter);
         filterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -404,6 +405,7 @@ public class RecruitingActivity extends AppCompatActivity {
                         } else if (item == 4) {
                             if (autoFilter) autoFilter = false;
                             else autoFilter = true;
+                            filterSwitch.setChecked(autoFilter);
                         }
 
                         dialog.dismiss();
@@ -695,7 +697,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private void removeRecruits(List<String> list) {
         
         for(int i = 0; i < list.size(); ++i) {
-            if (Math.random() > 0.915 ) {
+            if (Math.random() > recruitOffBoard ) {
                 list.remove(i);
             }
         }

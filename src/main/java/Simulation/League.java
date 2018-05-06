@@ -123,8 +123,6 @@ public class League {
     public int currentWeek;
     public int randgm;
     public int randconf;
-    public int countRealignment;
-    public String newsRealignment;
     //Bowl Games
     private boolean hasScheduledBowls;
     private Game semiG14;
@@ -178,6 +176,12 @@ public class League {
     public boolean hidePotential;
     public boolean confRealignment;
     public boolean enableProRel;
+    public boolean enableTV;
+
+    public int countRealignment;
+    public String newsRealignment;
+    public boolean updateTV;
+    public ArrayList<String> newsTV;
 
     private final DecimalFormat df2 = new DecimalFormat(".##");
     private final int seasonStart = 2017;
@@ -209,6 +213,7 @@ public class League {
         careerMode = career;
         hidePotential = true;
         confRealignment = true;
+        enableTV = true;
         setupCommonInitalizers();
 
         //set up names database from xml
@@ -223,7 +228,7 @@ public class League {
         //Set up conferences from XML
         String[] confSplit = confText.split(", ");
         for (String n : confSplit) {
-          conferences.add(new Conference(n, this));
+          conferences.add(new Conference(n, this, false, 0, 0));
         }
 
 
@@ -267,7 +272,7 @@ public class League {
         careerMode = career;
         hidePotential = true;
         confRealignment = true;
-
+        enableTV = true;
         setupCommonInitalizers();
         setupNamesDB(namesCSV, lastNamesCSV);
 
@@ -280,7 +285,7 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONFERENCES]")) {
-                conferences.add(new Conference(line.toString(), this));
+                conferences.add(new Conference(line.toString(), this, false, 0, 0));
             }
         } catch (FileNotFoundException ex) {
             System.out.println(
@@ -578,6 +583,7 @@ public class League {
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
             enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
+            enableTV = Boolean.parseBoolean(bufferedReader.readLine());
 
             if (enableProRel) confRealignment = false;
             if (confRealignment) enableProRel = false;
@@ -652,7 +658,6 @@ public class League {
         longestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
         yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
         longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
-
     }
 
     private void setupSeason() {
@@ -3194,7 +3199,7 @@ public class League {
           3. Random Chance, low: 15% ?
           4. Rivalries remain same or trade rivalries? */
 
-    public void conferenceInvites() {
+    public void conferenceRealignment() {
         int year = getYear();
         newsRealignment = "";
         countRealignment = 0;
@@ -3474,9 +3479,11 @@ public class League {
 
         advanceSeasonWinStreaks();
 
+        if(enableTV) newsTV = new ArrayList<>();
         for (int c = 0; c < conferences.size(); ++c) {
             conferences.get(c).robinWeek = 0;
             conferences.get(c).week = 0;
+            if(enableTV) conferences.get(c).reviewConfTVDeal();
         }
 
         hasScheduledBowls = false;
@@ -4601,13 +4608,13 @@ public class League {
 
         //Save Conference Names
         for (int i = 0; i < conferences.size(); ++i) {
-            sb.append(conferences.get(i).confName + "\n");
+            sb.append(conferences.get(i).confName + "," + conferences.get(i).confTV + "," + conferences.get(i).confTVContract + "," + conferences.get(i).confTVBonus + "\n");
         }
         sb.append("END_CONFERENCES\n");
 
         // Save information about each team like W-L records, as well as all the players
         for (Team t : teamList) {
-            sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," + t.totalWins + "," + t.totalLosses + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," + t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," + t.playbookOffNum + "," + t.playbookDefNum + "," + (t.showPopups ? 1 : 0) + "," + t.yearStartWinStreak.getStreakCSV() + "," + t.teamTVDeal + "," + t.confTVDeal + "%" + t.evenYearHomeOpp + "%\n");
+            sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," + t.totalWins + "," + t.totalLosses + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," + t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," + t.playbookOffNum + "," + t.playbookDefNum + "," + (t.showPopups ? 1 : 0) + "," + t.yearStartWinStreak.getStreakCSV() + "%" + t.evenYearHomeOpp + "%\n");
             sb.append(t.getPlayerInfoSaveFile());
             sb.append("END_PLAYERS\n");
         }
@@ -4743,6 +4750,7 @@ public class League {
         sb.append(hidePotential + "\n");
         sb.append(confRealignment + "\n");
         sb.append(enableProRel + "\n");
+        sb.append(enableTV + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
