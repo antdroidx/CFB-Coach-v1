@@ -115,11 +115,11 @@ public class Conference {
                 confTVContract = (int) (Math.random() * 5) + 4;
                 confTVBonus = confPrestige / 15;
 
-                league.newsStories.get(league.currentWeek+1).add(confName + " Network Television Contract>A new television contract has been worked out with the "
+                league.newsStories.get(league.currentWeek+1).add(confName + " Network TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
 
 
-                league.newsTV.add(confName + " Network Television Contract:\n\tA new television contract has been worked out with the "
+                league.newsTV.add(confName + " Network Television Contract:\n\tA new TV contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
                 league.updateTV = true;
             } else if (Math.random() * 250 < Math.random()*confPrestige) {
@@ -127,10 +127,10 @@ public class Conference {
                 confTVContract = (int) (Math.random() * 5) + 4;
                 confTVBonus = confPrestige / 20;
 
-                league.newsStories.get(league.currentWeek+1).add(confName + " Network Television Contract>A new television contract has been worked out with the "
+                league.newsStories.get(league.currentWeek+1).add(confName + " Network TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
 
-                league.newsTV.add(confName + " Network Television Contract:\n\tA new television contract has been worked out with the "
+                league.newsTV.add(confName + " Network Contract:\n\tA new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
                 league.updateTV = true;
 
@@ -146,7 +146,7 @@ public class Conference {
                 confTeams.get(t).teamPrestige += yearBonus;
                 confTeams.get(t).HC.get(0).baselinePrestige += yearBonus/2;  //make the coach's job slightly more challenging
             }
-            league.newsStories.get(league.currentWeek+1).add(confName + " Network Television Annual Distribution>Each member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
+            league.newsStories.get(league.currentWeek+1).add(confName + " Network Annual Distribution>Each member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
             league.newsTV.add(confName + " Network Annual Distribution:\n\tEach member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
             league.updateTV = true;
             confTVContract--;
@@ -157,7 +157,7 @@ public class Conference {
     private void confTVExpiring() {
         if (confTVContract <= 0) {
             confTV = false;
-            league.newsStories.get(league.currentWeek+1).add(confName + " Network Television Contract Expires>The parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
+            league.newsStories.get(league.currentWeek+1).add(confName + " Network TV Contract Expires>The parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
 
             league.newsTV.add(confName + " Network Contract Expires:\n\tThe parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
             league.updateTV = true;

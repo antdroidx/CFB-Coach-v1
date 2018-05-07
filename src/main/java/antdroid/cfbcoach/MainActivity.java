@@ -100,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean wantUpdateConf;
     private boolean showToasts;
     private boolean showInjuryReport;
-    boolean fullGameLog;
+    private boolean redshirtComplete;
+    private boolean budgetsComplete;
 
     //Universe Settings
     private final int teamsStart = 12;
@@ -2708,11 +2709,11 @@ public class MainActivity extends AppCompatActivity {
 
     //Save File Dialog
     private void saveLeague() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose Save File to Overwrite:");
+        AlertDialog.Builder save = new AlertDialog.Builder(this);
+        save.setTitle("Choose Save File to Overwrite:");
         final String[] fileInfos = getSaveFileInfos();
         SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
-        builder.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
+        save.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 final int itemy = item;
                 // Do something with the selection
@@ -2752,14 +2753,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        save.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing
             }
         });
-        AlertDialog alert = builder.create();
-        alert.show();
+        AlertDialog popup = save.create();
+        popup.show();
     }
 
     //Get Save Files from Storage
@@ -2947,7 +2948,30 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = dialog.findViewById(android.R.id.message);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
+    }
 
+    //Pre-Season Options
+    //Redshirts, Set Budgets, etc.
+    private void preseasonOptions() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("This will let you redshirt and set budgets in the future")
+                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Pre-Season")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setNegativeButton("SAVE PROGRESS", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        saveLeague();
+                    }
+                });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
     //mid-season summary

@@ -143,13 +143,10 @@ public class PlayerTE extends Player {
         recruitRating = getScoutingGrade();
 
         recruitTolerance = (int)((60 - team.teamPrestige)/teImportance);
-        cost = (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
-
+        cost = getInitialCost();
         cost = (int)(cost/teImportance);
-
-        double locFactor = Math.abs(team.location - region) - 2.5;
-        cost = cost + (int)(Math.random()*(locFactor * locationDiscount));
-        if (cost < 0) cost = (int)Math.random()*7+1;
+        cost = getLocationCost();
+        if (cost < 0) cost = (int)Math.random()*5+1;
 
         resetSeasonStats();
         resetCareerStats();

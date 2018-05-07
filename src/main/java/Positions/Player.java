@@ -422,7 +422,16 @@ Player {
     }
 
     int getConfPrestigeBonus() {
-        return team.teamPrestige * 3 + team.confPrestige * 5 + ((120 - team.rankTeamPollScore) * 3);
+        return team.teamPrestige * 3 + team.confPrestige * 7 + ((120 - team.rankTeamPollScore) * 3);
+    }
+
+    int getInitialCost() {
+        return  (int)((Math.pow((float) ratOvr - costBaseRating, 2)/5) + (int)Math.random()*recruitTolerance);
+    }
+
+    int getLocationCost() {
+        double locFactor = Math.abs(team.location - region) - 2.5;
+        return cost + (int)(Math.random()*(locFactor * locationDiscount));
     }
 
     public String getInfoForLineup() {

@@ -105,7 +105,7 @@ public class RecruitingActivity extends AppCompatActivity {
     public int redshirtCount = 0;
     public final int maxRedshirt = 6;
     public final int maxPlayers = 70;
-    private final double recruitOffBoard = 0.930;
+    private final double recruitOffBoard = 0.935;
 
     private final int five = 84;
     private final int four = 78;

@@ -119,6 +119,11 @@ public class League {
     public Team penalizedTeam4;
     public Team penalizedTeam5;
 
+    //League Stats
+    public int leagueOffTal;
+    public int leagueDefTal;
+    public int confAvg;
+
     //Current week, 1-14
     public int currentWeek;
     public int randgm;
@@ -685,6 +690,10 @@ public class League {
         for (int c = 0; c < conferences.size(); ++c) {
             conferences.get(c).updateConfPrestige();
         }
+
+        confAvg = averageConfPrestige();
+        leagueOffTal = getAverageOffTalent();
+        leagueDefTal = getAverageDefTalent();
 
         // Initialize new stories lists
         newsStories = new ArrayList<>();

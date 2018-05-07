@@ -179,6 +179,7 @@ public class Team {
     public final int subS = 1;
 
     public int maxPlayers = 70;
+    private final int recruitExtras = 15;
     private final int minPlayers = 65;
     private final int minRecruitStar = 4;
     private final int maxStarRating = 10;
@@ -215,10 +216,10 @@ public class Team {
     private int maxPrestige = 95;
     private final int minPrestige = 20;
 
-    private int leagueOffTal;
-    private int leagueDefTal;
-    public int confAvg;
-    public int confLimit;
+    //private int leagueOffTal;
+    //private int leagueDefTal;
+    //public int confAvg;
+    //public int confLimit;
 
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
@@ -416,10 +417,10 @@ public class Team {
         sortPlayers();
         teamPrestigeStart = teamPrestige;
         confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
-        leagueOffTal = league.getAverageOffTalent();
-        leagueDefTal = league.getAverageDefTalent();
-        confAvg = league.averageConfPrestige();
-        confLimit = (int)1.15*(confPrestige - confAvg);
+        //leagueOffTal = league.getAverageOffTalent();
+        //leagueDefTal = league.getAverageDefTalent();
+        //confAvg = league.averageConfPrestige();
+        //confLimit = (int)1.15*(confPrestige - confAvg);
         projectedPollScore = (teamOffTalent + teamDefTalent) + 2*teamPrestige + (confPrestige/2);
     }
 
@@ -1112,7 +1113,7 @@ public class Team {
         }
 
         //bonus for winning conference
-        if ("CC".equals(confChampion) && confPrestige > confAvg) {
+        if ("CC".equals(confChampion) && confPrestige > league.confAvg) {
             ccPts += 1;
         }
 
@@ -1200,15 +1201,6 @@ public class Team {
 
         summary += "\n\nNEW PRESTIGE:  " + teamPrestige + " pts\n";
 
-        if(teamPrestigeStart + prestigePts[1] + prestigePts[2] + prestigePts[3]+ prestigePts[4] + prestigePts[5]  != prestigePts[0] && prestigePts[3] == 0) {
-            summary += "\n\nDue to your conference's playing level, your prestige change has been limited. The conference prestige cut-off for this season was set at:\nmin: " + (confMin+confLimit) + " and max: " + (confMax+confLimit)
-                    + "\n\nNote: " + maxPrestige + " is the maximum Prestige level possible unless the team wins a national title.\n";
-            if(teamPrestige >= confMax + confLimit) {
-                summary += "\n\nBecause your team's prestige level was above the conference prestige range, you will retain your old prestige.\n";
-            }
-
-        }
-
         if (newContract && league.isCareerMode()) {
             summary += "\n\nCongratulations! You've been awarded with a contract extension of " + HC.get(0).contractLength + " years.";
         } else if (fired) {
@@ -1240,7 +1232,7 @@ public class Team {
         if(HC.get(0) != null) {
 
             int totalPDiff = teamPrestige - HC.get(0).baselinePrestige;
-            HC.get(0).advanceSeason(totalPDiff, avgOff, leagueOffTal, leagueDefTal);
+            HC.get(0).advanceSeason(totalPDiff, avgOff, league.leagueOffTal, league.leagueDefTal);
 
             teamRecords.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), HC.get(0).name + "%" + abbr, league.getYear());
 
@@ -1288,7 +1280,7 @@ public class Team {
         }
 
         if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 8) && teamPrestige < 74 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige + 7) && confPrestige < confAvg && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 8) && teamPrestige < 74 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige + 7) && confPrestige < league.confAvg && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
                 league.newsStories.get(league.currentWeek + 1).add("Coaching Rumor Mill>After another successful season at " + name + ", " + age + " year old head coach " + HC.get(0).name + " has moved to the top of" +
                         " many of the schools looking for a replacement at that position. He has a career record of " + wins + "-" + losses + ". ");
                 if (Math.random() > 0.50) {
@@ -1326,7 +1318,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && (teamPrestige-teamPrestigeStart) > 2 || teamPrestige < 32 && (teamPrestige-teamPrestigeStart) > 2) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && (teamPrestige-teamPrestigeStart) > 2 || teamPrestige < 32 && (teamPrestige-teamPrestigeStart) > 2) {
                     if (Math.random() > 0.40) {
                         HC.get(0).contractLength = 2;
                         HC.get(0).contractYear = 0;
@@ -1347,7 +1339,7 @@ public class Team {
                     }
                     HC.remove(0);
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < 32) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < 32) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
@@ -1355,7 +1347,7 @@ public class Team {
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && newPrestige < (85+confLimit*.85) && league.isCareerMode() || teamPrestige < 32) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && league.isCareerMode() || teamPrestige < 32) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -2019,16 +2011,16 @@ public class Team {
     
     private int getRecruitLevel() {
         //int level = Math.round(teamPrestige / 10) + 1;
-        int level = (121-rankTeamPrestige) / 12;
+        int level = (120-rankTeamPrestige) / 12;
         if(level < 4) level = 4;
         return level;
     }
 
     public int getUserRecruitLevel() {
-        float level = (121-rankTeamPrestige) / 12;
+        float level = (120-rankTeamPrestige) / 12;
         if(level < 4) level = 4;
 
-        return (int)(level*9.5);
+        return (int)(level*9);
     }
 
     /**
@@ -2342,130 +2334,249 @@ public class Team {
 
     private PlayerQB[] getQBRecruits(int rating) {
         int adjNumRecruits = numRecruits;
-        PlayerQB[] recruits = new PlayerQB[adjNumRecruits];
+        PlayerQB[] recruits = new PlayerQB[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerQB(league.getRandName(), 1, stars, this);
         }
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerQB(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerQB(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerRB[] getRBRecruits(int rating) {
         int adjNumRecruits = numRecruits;
-        PlayerRB[] recruits = new PlayerRB[adjNumRecruits];
+        PlayerRB[] recruits = new PlayerRB[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerRB(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerRB(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerRB(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerWR[] getWRRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
-        PlayerWR[] recruits = new PlayerWR[adjNumRecruits];
+        PlayerWR[] recruits = new PlayerWR[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerWR(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerWR(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerWR(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerTE[] getTERecruits(int rating) {
         int adjNumRecruits = numRecruits;
-        PlayerTE[] recruits = new PlayerTE[adjNumRecruits];
+        PlayerTE[] recruits = new PlayerTE[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerTE(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerTE(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerTE(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerOL[] getOLRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
-        PlayerOL[] recruits = new PlayerOL[adjNumRecruits];
+        PlayerOL[] recruits = new PlayerOL[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerOL(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerOL(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerOL(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerK[] getKRecruits(int rating) {
         int adjNumRecruits = numRecruits;
-        PlayerK[] recruits = new PlayerK[adjNumRecruits];
+        PlayerK[] recruits = new PlayerK[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerK(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerK(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerK(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerDL[] getDLRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
-        PlayerDL[] recruits = new PlayerDL[adjNumRecruits];
+        PlayerDL[] recruits = new PlayerDL[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerDL(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerDL(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerDL(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerLB[] getLBRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
-        PlayerLB[] recruits = new PlayerLB[adjNumRecruits];
+        PlayerLB[] recruits = new PlayerLB[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerLB(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerLB(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerLB(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerCB[] getCBRecruits(int rating) {
         int adjNumRecruits = 2 * numRecruits;
-        PlayerCB[] recruits = new PlayerCB[adjNumRecruits];
+        PlayerCB[] recruits = new PlayerCB[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerCB(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerCB(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerCB(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
 
     private PlayerS[] getSRecruits(int rating) {
         int adjNumRecruits = numRecruits;
-        PlayerS[] recruits = new PlayerS[adjNumRecruits];
+        PlayerS[] recruits = new PlayerS[adjNumRecruits + 2*recruitExtras];
         int stars;
 
         for (int i = 0; i < adjNumRecruits; ++i) {
             stars = (int) (rating * (float) (adjNumRecruits - i / 2) / adjNumRecruits);
             recruits[i] = new PlayerS(league.getRandName(), 1, stars, this);
         }
+
+
+        int r = adjNumRecruits;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerS(league.getRandName(), 1, 2, this);
+        }
+
+        r = adjNumRecruits + recruitExtras;
+        for (int i = 0; i < recruitExtras; ++i) {
+            recruits[r+i] = new PlayerS(league.getRandName(), 1, 1, this);
+        }
+
         Arrays.sort(recruits, new CompRecruit());
         return recruits;
     }
