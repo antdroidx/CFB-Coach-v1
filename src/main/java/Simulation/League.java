@@ -942,6 +942,9 @@ public class League {
     public int averageConfPrestige() {
         int avgPrestige = 0;
         for (int i = 0; i < conferences.size(); ++i) {
+            conferences.get(i).updateConfPrestige();
+        }
+        for (int i = 0; i < conferences.size(); ++i) {
             avgPrestige += conferences.get(i).confPrestige;
         }
         return avgPrestige / conferences.size();
@@ -2573,7 +2576,7 @@ public class League {
 
         ArrayList<String> teams = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
+            if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
         }
@@ -2589,7 +2592,7 @@ public class League {
     public ArrayList<Team> getCoachListFired(int rating, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
+            if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
                 teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
             }
         }
@@ -2604,7 +2607,7 @@ public class League {
         ArrayList<String> teams = new ArrayList<>();
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
+            if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
                 teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
                 teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
             }
@@ -2616,7 +2619,7 @@ public class League {
     public ArrayList<Team> getCoachPromotionList(int rating, double offers, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).teamPrestige < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
+            if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
                 teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
             }
         }
@@ -2646,7 +2649,7 @@ public class League {
             int tmPres = Integer.parseInt(coachSplit[1]);
             int cPres = Integer.parseInt(coachSplit[2]);
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachStarList.get(i).ratOvr + 5) >= teamList.get(t).teamPrestige && teamList.get(t).name != tmName && Math.random() > 0.66) {
+                if (teamList.get(t).HC.isEmpty() && coachStarList.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && teamList.get(t).name != tmName && Math.random() > 0.66) {
                     if (teamList.get(t).teamPrestige > tmPres && teamList.get(t).confPrestige > cPres || teamList.get(t).teamPrestige > tmPres + 5 || teamList.get(t).confPrestige + 10 > cPres) {
                         teamList.get(t).HC.add(coachStarList.get(i));
                         teamList.get(t).HC.get(0).contractLength = 6;
@@ -2676,7 +2679,7 @@ public class League {
         Collections.sort(coachList, new CompCoachOvr());
         for (int i = 0; i < coachList.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachList.get(i).ratOvr + 6) >= teamList.get(t).teamPrestige && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.60) {
+                if (teamList.get(t).HC.isEmpty() && coachList.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && teamList.get(t).name != coachPrevTeam.get(i) && Math.random() > 0.60) {
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -2694,7 +2697,7 @@ public class League {
         Collections.sort(coachFreeAgents, new CompCoachOvr());
         for (int i = 0; i < coachFreeAgents.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= teamList.get(t).teamPrestige && Math.random() < 0.60) {
+                if (teamList.get(t).HC.isEmpty() && coachFreeAgents.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && Math.random() < 0.60) {
                     teamList.get(t).HC.add(coachFreeAgents.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -2726,7 +2729,7 @@ public class League {
             String tmName = coachSplit[0].toString();
             int tmPres = Integer.parseInt(coachSplit[1]);
             int cPres = Integer.parseInt(coachSplit[2]);
-            if ((coachStarList.get(i).ratOvr + 5) >= school.teamPrestige && school.name != tmName && Math.random() > 0.60) {
+            if (coachStarList.get(i).ratOvr >= school.getMinCoachHireReq() && school.name != tmName && Math.random() > 0.60) {
                 if (school.teamPrestige > tmPres && school.confPrestige > cPres || school.teamPrestige > tmPres + 5 || school.confPrestige + 10 > cPres) {
                     school.HC.add(coachStarList.get(i));
                     school.HC.get(0).contractLength = 6;
@@ -2757,7 +2760,7 @@ public class League {
             //Coaches who were fired
             Collections.sort(coachList, new CompCoachOvr());
             for (int i = 0; i < coachList.size(); ++i) {
-                if (school.HC.isEmpty() && (coachList.get(i).ratOvr + 5) >= school.teamPrestige && school.name != coachPrevTeam.get(i) && Math.random() > 0.45) {
+                if (school.HC.isEmpty() && coachList.get(i).ratOvr + 5 >= school.getMinCoachHireReq() && school.name != coachPrevTeam.get(i) && Math.random() > 0.45) {
                     school.HC.add(coachList.get(i));
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
@@ -2775,7 +2778,7 @@ public class League {
             //Coaches who were fired previous years
             Collections.sort(coachFreeAgents, new CompCoachOvr());
             for (int i = 0; i < coachFreeAgents.size(); ++i) {
-                if (school.HC.isEmpty() && (coachFreeAgents.get(i).ratOvr + 10) >= school.teamPrestige && Math.random() < 0.65) {
+                if (school.HC.isEmpty() && coachFreeAgents.get(i).ratOvr >= school.getMinCoachHireReq() && Math.random() < 0.65) {
                     school.HC.add(coachFreeAgents.get(i));
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;

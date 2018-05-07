@@ -1128,8 +1128,8 @@ public class Team {
 
         newPrestige += prestigeChange + ccPts + ncwPts + nflPts + disPts;
 
-        //Sets the bounds for Prestige
-        int cLimiter = 0;
+        //Sets the bounds for Prestige -- REMOVING FOR PRESTIGE TEST!
+/*        int cLimiter = 0;
         if (newPrestige >  confMax + confLimit && !natChampWL.equals("NCW") && teamPrestigeStart < confMax + confLimit) {
             cLimiter = confMax + confLimit;
             newPrestige = cLimiter;
@@ -1140,7 +1140,7 @@ public class Team {
         if (newPrestige < minPrestige) newPrestige = minPrestige;
         if (newPrestige > maxPrestige && !natChampWL.equals("NCW")) newPrestige = maxPrestige;
 
-        if (newPrestige > 100) newPrestige = 100;
+        if (newPrestige > 100) newPrestige = 100;*/
 
         int PrestigeScore[] = {newPrestige, prestigeChange, ccPts, ncwPts, nflPts, disPts};
         return PrestigeScore;
@@ -1403,6 +1403,14 @@ public class Team {
 
         //done making players, sort them
         sortPlayers();
+    }
+
+    //Provide the minimum overall rating for a new coach hire
+    public int getMinCoachHireReq() {
+        int req = 0;
+        req = (120 - rankTeamPrestige)/2 + 25;
+
+        return req;
     }
 
     public void midSeasonProgression() {
@@ -2008,6 +2016,20 @@ public class Team {
         int size = teamQBs.size() + teamRBs.size() + teamWRs.size() + teamTEs.size() + teamOLs.size() + teamKs.size() + teamDLs.size() + teamLBs.size() + teamCBs.size() + teamSs.size();
         return size;
     }
+    
+    private int getRecruitLevel() {
+        //int level = Math.round(teamPrestige / 10) + 1;
+        int level = (121-rankTeamPrestige) / 12;
+        if(level < 4) level = 4;
+        return level;
+    }
+
+    public int getUserRecruitLevel() {
+        float level = (121-rankTeamPrestige) / 12;
+        if(level < 4) level = 4;
+
+        return (int)(level*9.5);
+    }
 
     /**
      * Recruit freshmen at each position.
@@ -2035,7 +2057,7 @@ public class Team {
         }
 
         for (int i = 0; i < qbNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2048,7 +2070,7 @@ public class Team {
         }
 
         for (int i = 0; i < kNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2062,7 +2084,7 @@ public class Team {
         }
 
         for (int i = 0; i < rbNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2076,7 +2098,7 @@ public class Team {
         }
 
         for (int i = 0; i < wrNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2090,7 +2112,7 @@ public class Team {
         }
 
         for (int i = 0; i < teNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2104,7 +2126,7 @@ public class Team {
         }
 
         for (int i = 0; i < olNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2118,7 +2140,7 @@ public class Team {
         }
 
         for (int i = 0; i < dlNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2132,7 +2154,7 @@ public class Team {
         }
 
         for (int i = 0; i < lbNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2145,7 +2167,7 @@ public class Team {
         }
 
         for (int i = 0; i < cbNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);
@@ -2159,7 +2181,7 @@ public class Team {
         }
 
         for (int i = 0; i < sNeeds; ++i) {
-            stars = Math.round(teamPrestige / 10) + 1;
+            stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
             if (recruitChance*Math.random() > Math.random()*50) {
                 stars += Math.random()*(maxStarRating-stars);

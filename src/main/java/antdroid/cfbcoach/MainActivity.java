@@ -60,6 +60,7 @@ import Positions.PlayerRB;
 import Positions.PlayerS;
 import Positions.PlayerTE;
 import Positions.PlayerWR;
+import Recruiting.RecruitingActivity;
 import Simulation.Conference;
 import Simulation.Game;
 import Simulation.League;
@@ -2993,6 +2994,7 @@ public class MainActivity extends AppCompatActivity {
         simLeague.newsStories.get(simLeague.currentWeek + 1).add("Season Summary>" + simLeague.seasonSummaryStr());
     }
 
+    //Show Prestige Change
     private void showPrestigeChange() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
@@ -3238,6 +3240,12 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
+                    })
+                    .setNegativeButton("Prestige Rankings", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            showPrestigeChange();
+                        }
                     });
             AlertDialog dialog = builder.create();
             dialog.show();
@@ -3295,7 +3303,7 @@ public class MainActivity extends AppCompatActivity {
                         //Get String of user team's players and such
                         StringBuilder sb = new StringBuilder();
                         userTeam.sortPlayers();
-                        sb.append(userTeam.conference + "," + userTeam.name + "," + userTeam.abbr + "," + userTeam.teamPrestige + "," + userTeam.HC.get(0).ratTalent + "%\n");
+                        sb.append(userTeam.conference + "," + userTeam.name + "," + userTeam.abbr + "," + userTeam.getUserRecruitLevel() + "," + userTeam.HC.get(0).ratTalent + "%\n");
                         sb.append(userTeam.getPlayerInfoSaveFile());
                         sb.append("END_TEAM_INFO%\n");
                         sb.append(userTeam.getRecruitsInfoSaveFile());

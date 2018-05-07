@@ -1,4 +1,4 @@
-package antdroid.cfbcoach;
+package Recruiting;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,16 +32,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import antdroid.cfbcoach.MainActivity;
+import antdroid.cfbcoach.R;
+
 public class RecruitingActivity extends AppCompatActivity {
 
     // Variables use during recruiting
     private String teamName;
-    private int recruitingBudget;
+    public int recruitingBudget;
     private final Random rand = new Random();
     private int HCtalent;
 
-    private ArrayList<String> playersRecruited;
-    private ArrayList<String> playersRedshirted;
+    public ArrayList<String> playersRecruited;
+    public ArrayList<String> playersRedshirted;
     private ArrayList<String> playersGraduating;
     private ArrayList<String> teamQBs;
     private ArrayList<String> teamRBs;
@@ -54,7 +57,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> teamCBs;
     private ArrayList<String> teamSs;
 
-    private ArrayList<String> teamPlayers; //all players
+    public ArrayList<String> teamPlayers; //all players
 
     private ArrayList<String> availQBs;
     private ArrayList<String> availRBs;
@@ -68,6 +71,8 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> availSs;
     private ArrayList<String> availAll;
     private ArrayList<String> avail50;
+
+    private ArrayList<String> removeList;
 
     private ArrayList<String> west;
     private ArrayList<String> midwest;
@@ -97,9 +102,9 @@ public class RecruitingActivity extends AppCompatActivity {
     private final int minCBs = 7;
     private final int minSs = 5;
 
-    private int redshirtCount = 0;
-    private final int maxRedshirt = 6;
-    private final int maxPlayers = 70;
+    public int redshirtCount = 0;
+    public final int maxRedshirt = 6;
+    public final int maxPlayers = 70;
     private final double recruitOffBoard = 0.930;
 
     private final int five = 84;
@@ -124,8 +129,8 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> positions;
     private ArrayAdapter dataAdapterPosition;
     private ExpandableListAdapterRecruiting expListAdapter;
-    private Map<String, List<String>> playersInfo;
-    private List<String> players;
+    public Map<String, List<String>> playersInfo;
+    public List<String> players;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -674,31 +679,68 @@ public class RecruitingActivity extends AppCompatActivity {
     //REMOVE RECRUITS OFF THE BOARD
     private void removeRecruits() {
         removeRecruits(players);
-        removeRecruits(avail50);
-        removeRecruits(availAll);
-        removeRecruits(availQBs);
-        removeRecruits(availRBs);
-        removeRecruits(availWRs);
-        removeRecruits(availTEs);
-        removeRecruits(availOLs);
-        removeRecruits(availKs);
-        removeRecruits(availDLs);
-        removeRecruits(availLBs);
-        removeRecruits(availCBs);
-        removeRecruits(availSs);
-        removeRecruits(west);
-        removeRecruits(midwest);
-        removeRecruits(central);
-        removeRecruits(east);
+
+        removeRecruitBoard(removeList);
 
         dataAdapterPosition.notifyDataSetChanged();
     }
 
     private void removeRecruits(List<String> list) {
-        
+        removeList = new ArrayList<>();
         for(int i = 0; i < list.size(); ++i) {
             if (Math.random() > recruitOffBoard ) {
+                removeList.add(list.get(i));
                 list.remove(i);
+            }
+        }
+    }
+
+    private void removeRecruitBoard(List<String> list) {
+
+        for (int i=0; i < list.size(); i++) {
+
+            String player = list.get(i);
+            // Remove the player from the top 100 list
+            if (avail50.contains(player)) {
+                avail50.remove(player);
+            }
+            if (availAll.contains(player)) {
+                availAll.remove(player);
+            }
+            if (west.contains(player)) {
+                west.remove(player);
+            }
+            if (midwest.contains(player)) {
+                midwest.remove(player);
+            }
+            if (central.contains(player)) {
+                central.remove(player);
+            }
+            if (east.contains(player)) {
+                east.remove(player);
+            }
+            // Also need to add recruited player to correct team list and remove from avail list
+            String[] ps = player.split(",");
+            if (ps[0].equals("QB")) {
+                availQBs.remove(player);
+            } else if (ps[0].equals("RB")) {
+                availRBs.remove(player);
+            } else if (ps[0].equals("WR")) {
+                availWRs.remove(player);
+            } else if (ps[0].equals("TE")) {
+                availTEs.remove(player);
+            } else if (ps[0].equals("OL")) {
+                availOLs.remove(player);
+            } else if (ps[0].equals("K")) {
+                availKs.remove(player);
+            } else if (ps[0].equals("DL")) {
+                availDLs.remove(player);
+            } else if (ps[0].equals("LB")) {
+                availLBs.remove(player);
+            } else if (ps[0].equals("CB")) {
+                availCBs.remove(player);
+            } else if (ps[0].equals("S")) {
+                availSs.remove(player);
             }
         }
     }
@@ -788,7 +830,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
 
     //RECRUIT PLAYER
-    private void recruitPlayerDialog(String p, int pos, List<Integer> groupsExp) {
+    public void recruitPlayerDialog(String p, int pos, List<Integer> groupsExp) {
         final String player = p;
         final int groupPosition = pos;
         final List<Integer> groupsExpanded = groupsExp;
@@ -984,7 +1026,7 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
     //REDSHIRT PLAYER
-    private void redshirtPlayerDialog(String p, int pos, List<Integer> groupsExp) {
+    public void redshirtPlayerDialog(String p, int pos, List<Integer> groupsExp) {
         final String player = p;
         final int groupPosition = pos;
         final List<Integer> groupsExpanded = groupsExp;
@@ -1245,7 +1287,7 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Converts player string into '$500 QB A. Name, Overall: 89' or similar
      */
-    private String getPlayerNameCost(String player) {
+    public String getPlayerNameCost(String player) {
         String[] ps = player.split(",");
         return "$" + ps[12] + " " + ps[0] + " " + ps[1] + ">Grade: " + getStarGrade(ps[6]);
     }
@@ -1253,7 +1295,7 @@ public class RecruitingActivity extends AppCompatActivity {
     /**
      * Used for parsing through string to get cost
      */
-    private int getRecruitCost(String p) {
+    public int getRecruitCost(String p) {
         String[] pSplit = p.split(",");
         return Integer.parseInt(pSplit[12]);
     }
@@ -1274,7 +1316,7 @@ public class RecruitingActivity extends AppCompatActivity {
         return "[XX]";
     }
 
-    private String getGrade(String num) {
+    public String getGrade(String num) {
         int pRat = (Integer.parseInt(num));
         if (pRat > five) return " * * * * *";
         else if (pRat > four) return " * * * *";
@@ -1283,7 +1325,7 @@ public class RecruitingActivity extends AppCompatActivity {
         else return " *";
     }
 
-    private String getStarGrade(String num) {
+    public String getStarGrade(String num) {
         int pRat = (Integer.parseInt(num));
         if (pRat == 5) return " * * * * *";
         if (pRat == 4) return " * * * *  ";
@@ -1294,7 +1336,7 @@ public class RecruitingActivity extends AppCompatActivity {
         else return "??";
     }
 
-    private String getRegion(int region) {
+    public String getRegion(int region) {
         String location;
         if (region == 0) location = "West";
         else if (region == 1) location = "Mid-West";
@@ -1304,7 +1346,7 @@ public class RecruitingActivity extends AppCompatActivity {
         return location;
     }
 
-    private String getHeight(int height) {
+    public String getHeight(int height) {
 
         int feet = height / 12;
         int leftover = height % 12;
@@ -1312,7 +1354,7 @@ public class RecruitingActivity extends AppCompatActivity {
         return feet + "'' " + leftover + "\"";
     }
 
-    private String getWeight(int weight) {
+    public String getWeight(int weight) {
         return weight + " lbs";
     }
 
@@ -1378,6 +1420,10 @@ public class RecruitingActivity extends AppCompatActivity {
         showPopUp = tf;
     }
 
+
+
+
+
     //MAIN UI FOR PLAYER DATA IN RECRUITING SCREEN
     class ExpandableListAdapterRecruiting extends BaseExpandableListAdapter {
 
@@ -1423,7 +1469,7 @@ public class RecruitingActivity extends AppCompatActivity {
             } else recruitPlayerButton.setVisibility(View.INVISIBLE);
 
             Button redshirtPlayerButton = convertView.findViewById(R.id.buttonRedshirtPlayer);
-            if (redshirtCount < maxRedshirt) {
+            if (redshirtCount < maxRedshirt || teamPlayers.size() + playersRecruited.size() + playersRedshirted.size() < maxPlayers) {
                 redshirtPlayerButton.setText("Redshirt: $" + getRecruitCost(playerCSV));
             } else redshirtPlayerButton.setVisibility(View.INVISIBLE);
 
@@ -1498,37 +1544,4 @@ public class RecruitingActivity extends AppCompatActivity {
 
     }
 
-}
-
-class CompRecruitScoutGrade implements Comparator<String> {
-    @Override
-    public int compare(String a, String b) {
-        String[] psA = a.split(",");
-        String[] psB = b.split(",");
-        float ovrA = (4 * Integer.parseInt(psA[11]) + Integer.parseInt(psA[9])) / 5;
-        float ovrB = (4 * Integer.parseInt(psB[11]) + Integer.parseInt(psB[9])) / 5;
-        return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
-    }
-}
-
-class CompRecruitTeamRosterOvr implements Comparator<String> {
-    @Override
-    public int compare(String a, String b) {
-        String[] psA = a.split(" ");
-        String[] psB = b.split(" ");
-        int ovrA = Integer.parseInt(psA[5]);
-        int ovrB = Integer.parseInt(psB[5]);
-        return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
-    }
-}
-
-class CompRecruitCost implements Comparator<String> {
-    @Override
-    public int compare(String a, String b) {
-        String[] psA = a.split(",");
-        String[] psB = b.split(",");
-        int ovrA = Integer.parseInt(psA[12]);
-        int ovrB = Integer.parseInt(psB[12]);
-        return ovrA > ovrB ? -1 : ovrA == ovrB ? 0 : 1;
-    }
 }
