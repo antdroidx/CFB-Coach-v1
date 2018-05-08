@@ -33,7 +33,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionName 'v1.2.1'
-        versionCode 54
+        versionCode 55
     }
     buildTypes {
         release {
@@ -60,6 +60,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
-    implementation 'com.google.android.gms:play-services-games:15.0.0'
+    debugImplementation 'com.google.android.gms:play-services-games:15.0.0'
     implementation 'com.jjoe64:graphview:4.2.2'
 }

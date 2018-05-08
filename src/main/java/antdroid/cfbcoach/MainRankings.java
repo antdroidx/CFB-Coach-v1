@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import Simulation.Team;
-
 class MainRankings extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;

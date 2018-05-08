@@ -35,7 +35,7 @@
                 android:value="antdroid.cfbcoach.Home" />
         </activity>
         <activity
-            android:name="Recruiting.RecruitingActivity"
+            android:name="recruiting.RecruitingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_recruiting"
             android:parentActivityName=".MainActivity"

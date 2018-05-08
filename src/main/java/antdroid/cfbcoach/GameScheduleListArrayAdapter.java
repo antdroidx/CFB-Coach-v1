@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import Simulation.Game;
-import Simulation.Team;
+import simulation.Game;
+import simulation.Team;
 
 class GameScheduleListArrayAdapter extends ArrayAdapter<Game> {
     private final Context context;
