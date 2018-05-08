@@ -3719,11 +3719,12 @@ public class MainActivity extends AppCompatActivity {
             Team teamRoster = simLeague.teamList.get(i);
             teamRoster.recruitWalkOns();
         }
-        simLeague.updateTeamTalentRatings();
         simLeague.newsStories.get(0).remove(3);
         simLeague.newsStories.get(0).remove(3);
         simLeague.topRecruits();
         currTab = 3;
+
+        simLeague.updateTeamTalentRatings();
         updatePlayerStats();
     }
 

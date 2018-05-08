@@ -2063,20 +2063,6 @@ public class Team {
             teamQBs.add(new PlayerQB(league.getRandName(), 1, stars, this));
         }
 
-        for (int i = 0; i < kNeeds; ++i) {
-            stars = getRecruitLevel();
-            if (stars < minRecruitStar) stars = minRecruitStar;
-            if (recruitChance*Math.random() > Math.random()*50) {
-                stars += Math.random()*(maxStarRating-stars);
-            } else {
-                stars -= Math.random()*(stars);
-            }
-            if (stars > 10) stars = 10;
-
-            //make Ks
-            teamKs.add(new PlayerK(league.getRandName(), 1, stars, this));
-        }
-
         for (int i = 0; i < rbNeeds; ++i) {
             stars = getRecruitLevel();
             if (stars < minRecruitStar) stars = minRecruitStar;
@@ -2131,6 +2117,20 @@ public class Team {
 
             //make OLs
             teamOLs.add(new PlayerOL(league.getRandName(), 1, stars, this));
+        }
+
+        for (int i = 0; i < kNeeds; ++i) {
+            stars = getRecruitLevel();
+            if (stars < minRecruitStar) stars = minRecruitStar;
+            if (recruitChance*Math.random() > Math.random()*50) {
+                stars += Math.random()*(maxStarRating-stars);
+            } else {
+                stars -= Math.random()*(stars);
+            }
+            if (stars > 10) stars = 10;
+
+            //make Ks
+            teamKs.add(new PlayerK(league.getRandName(), 1, stars, this));
         }
 
         for (int i = 0; i < dlNeeds; ++i) {
@@ -2200,8 +2200,8 @@ public class Team {
     public void recruitWalkOns(){
         int star;
         walkon = true;
-        //recruit walk ons (used for player teams who dont recruit all needs)
-        
+
+
         //QUARTERBACKS
         int needs = minQBs - teamQBs.size();
         for (int i = 0; i < teamQBs.size(); ++i) {
@@ -2597,14 +2597,13 @@ public class Team {
             currLine = players[++i];
         }
 
-        // Recruit Walk-ons before redshirts so that they don't affect position needs
-        recruitWalkOns();
-
         currLine = players[++i]; // skip over END_RECRUITS line
         while (!currLine.equals("END_REDSHIRTS")) {
             recruitPlayerCSV(currLine, true);
             currLine = players[++i];
         }
+
+        recruitWalkOns();
 
     }
 

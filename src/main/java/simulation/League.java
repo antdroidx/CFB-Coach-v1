@@ -691,13 +691,7 @@ public class League {
             conferences.get(i).insertOOCSchedule();
         }
 
-        for (int c = 0; c < conferences.size(); ++c) {
-            conferences.get(c).updateConfPrestige();
-        }
-
         confAvg = getAverageConfPrestige();
-        leagueOffTal = getAverageOffTalent();
-        leagueDefTal = getAverageDefTalent();
 
         // Initialize new stories lists
         newsStories = new ArrayList<>();
@@ -748,7 +742,6 @@ public class League {
         disciplineWeekA = (int) (Math.random() * 13);
         disciplineWeekB = (int) (Math.random() * 13);
         disciplineWeekC = (int) (Math.random() * 13);
-
     }
 
     /**
@@ -806,6 +799,9 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).projectedPoll = i+1;
         }
+
+        leagueOffTal = getAverageOffTalent();
+        leagueDefTal = getAverageDefTalent();
     }
 
     /**
