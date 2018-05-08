@@ -109,6 +109,14 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button recentButton = findViewById(R.id.buttonUpdates);
+        recentButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                welcomeMessage();
+            }
+        });
+
         Button tutorialButton = findViewById(R.id.buttonTutorial);
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -183,8 +191,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        welcomeMessage();
-
     }
 
 
@@ -207,9 +213,7 @@ public class Home extends AppCompatActivity {
 
     private void welcomeMessage() {
         AlertDialog.Builder welcome = new AlertDialog.Builder(this);
-        welcome.setMessage("Thank you for participating in the beta program for College Football Coach: Career Edition!\n\nPlease share any feedback to the developer on how to improve this game!" +
-        "\n\nThis beta includes some new features such as Network Television contracts and an entirely new prestige system. There is no longer any cap on restrictions on prestige! In addition, " +
-                        "the game sim engine has been revamped with more play options based on strategies chosen. For example, certain strategies will use the TE for blocking or the S for blitzing.")
+        welcome.setMessage(getString(R.string.changelog))
                 .setTitle("Welcome!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

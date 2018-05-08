@@ -2300,7 +2300,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] selection = {"Team History", "Team Records", "Hall of Fame", "Graph View"};
+        String[] selection = {"Team History", "Team Records", "Hall of Fame", "Graph View: Prestige", "Graph View: Rankings"};
         Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, selection);
@@ -2330,7 +2330,10 @@ public class MainActivity extends AppCompatActivity {
                             teamHistoryList.setAdapter(hofAdapter);
                         } else if (position == 3) {
                             dialog.dismiss();
-                            graphView();
+                            teamGraphView();
+                        } else if (position == 4) {
+                            dialog.dismiss();
+                            teamGraphViewRank();
                         }
                     }
 
@@ -2342,10 +2345,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Graph View
 
-    private void graphView() {
+    private void teamGraphView() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(currentTeam.name)
+        builder.setTitle(currentTeam.name + ": Prestige History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -2374,8 +2377,53 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMaxY(105);
-        graph.getViewport().setMinY(15);
+        graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige+10);
+        graph.getViewport().setMinY(0);
+    }
+
+    //Graph View
+
+    private void teamGraphViewRank() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(currentTeam.name + ": Rankings History")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.graphview, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        DataPoint[] data = new DataPoint[simLeague.leagueHistory.size()];
+        GraphView graph = dialog.findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
+        String[] yearLabels = new String[simLeague.leagueHistory.size()];
+        for(int i = 0; i < simLeague.leagueHistory.size(); i++) {
+            series.appendData(new DataPoint((seasonStart+i), 120 - Integer.parseInt( currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i+1, false);
+            yearLabels[i] = Integer.toString(i+seasonStart);
+        }
+        graph.addSeries(series);
+
+        String[] rankLabels = new String[121];
+        for(int i = 120; i >= 0; i--) {
+            rankLabels[120-i] = Integer.toString(i);
+        }
+
+        if(yearLabels.length > 1) {
+            StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
+            years.setHorizontalLabels(yearLabels);
+            years.setVerticalLabels(rankLabels);
+            graph.getGridLabelRenderer().setLabelFormatter(years);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+            graph.getGridLabelRenderer().setNumVerticalLabels(6);
+        }
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMaxY(120);
+        graph.getViewport().setMinY(0);
     }
 
     //Coach History
@@ -2392,7 +2440,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] selection = {"Team History", "Graph View"};
+        String[] selection = {"Team History", "Graph View: Prestige", "Graph View: Rankings"};
         Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, selection);
@@ -2412,6 +2460,9 @@ public class MainActivity extends AppCompatActivity {
                         } else if (position == 1) {
                             dialog.dismiss();
                             coachGraphView();
+                        } else if (position == 2) {
+                            dialog.dismiss();
+                            coachGraphViewRank();
                         }
                     }
 
@@ -2424,7 +2475,7 @@ public class MainActivity extends AppCompatActivity {
     private void coachGraphView() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(currentTeam.HC.get(0).name)
+        builder.setTitle(currentTeam.HC.get(0).name + ": Prestige History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -2455,8 +2506,53 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMaxY(105);
-        graph.getViewport().setMinY(15);
+        graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige+10);
+        graph.getViewport().setMinY(0);
+    }
+
+    private void coachGraphViewRank() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(currentTeam.HC.get(0).name + ": Rankings History")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.graphview, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        DataPoint[] data = new DataPoint[currentTeam.HC.get(0).history.size()];
+        GraphView graph = dialog.findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
+        String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
+        for(int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
+            if(!currentTeam.HC.get(0).history.get(i).equals("")) {
+                series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), 120 - Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
+                yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
+            }
+        }
+        graph.addSeries(series);
+
+        String[] rankLabels = new String[121];
+        for(int i = 120; i >= 0; i--) {
+            rankLabels[120-i] = Integer.toString(i);
+        }
+
+        if(yearLabels.length > 1) {
+            StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
+            years.setHorizontalLabels(yearLabels);
+            years.setVerticalLabels(rankLabels);
+            graph.getGridLabelRenderer().setLabelFormatter(years);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+            graph.getGridLabelRenderer().setNumVerticalLabels(6);
+        }
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMaxY(120);
+        graph.getViewport().setMinY(0);
     }
 
     //Team Stats Rankings
@@ -2911,7 +3007,7 @@ public class MainActivity extends AppCompatActivity {
             goals += "Despite being projected at #" + userTeam.projectedPoll + ", your goal is to finish in the Top 100.\n\n";
         }
 
-        goals += "In conference play, your team is expected to finish #" + confPos + " in the " + userTeam.conference + " conference.\n\n";
+        goals += "In conference play, your team is expected to finish " + userTeam.getRankStr(confPos) + " in the " + userTeam.conference + " conference.\n\n";
 
         goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
 

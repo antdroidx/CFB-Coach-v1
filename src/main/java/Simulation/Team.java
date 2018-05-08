@@ -102,6 +102,7 @@ public class Team {
     public int rankTeamOffTalent;
     public int rankTeamDefTalent;
     public int rankTeamPrestige;
+    public int rankTeamPrestigeStart;
     public int rankTeamRecruitClass;
     public int rankTeamPollScore;
     public int rankTeamStrengthOfWins;
@@ -211,10 +212,11 @@ public class Team {
     private static final int sophNFL = 2;
     private static final double NFL_CHANCE = 0.65;
     private static final double NFL_CHANCE_SOPH = 0.350;
-    public final int confMin = 30;
-    public final int confMax = 80;
-    private int maxPrestige = 95;
-    private final int minPrestige = 20;
+
+    //public final int confMin = 30;
+    //public final int confMax = 80;
+    //private int maxPrestige = 95;
+    //private final int minPrestige = 20;
 
     //private int leagueOffTal;
     //private int leagueDefTal;
@@ -416,10 +418,11 @@ public class Team {
     public void setupTeamBenchmark() {
         sortPlayers();
         teamPrestigeStart = teamPrestige;
+        rankTeamPrestigeStart = rankTeamPrestige;
         confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
         //leagueOffTal = league.getAverageOffTalent();
         //leagueDefTal = league.getAverageDefTalent();
-        //confAvg = league.averageConfPrestige();
+        //confAvg = league.getAverageConfPrestige();
         //confLimit = (int)1.15*(confPrestige - confAvg);
         projectedPollScore = (teamOffTalent + teamDefTalent) + 2*teamPrestige + (confPrestige/2);
     }
@@ -788,9 +791,9 @@ public class Team {
         if (preseasonBias < 0) preseasonBias = 0;
         preseasonBias = preseasonBias/15;
         teamPollScore =
-                (int)(preseasonBias * (teamOffTalent + teamDefTalent + 1.25*teamPrestige + 1.25*confPrestige))+
+                (int)(preseasonBias * (teamOffTalent + teamDefTalent + 1.1*teamPrestige + 1.2*confPrestige))+
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
-                        750)/2;
+                        500);
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
@@ -1083,9 +1086,9 @@ public class Team {
     public int[] calcSeasonPrestige() {
 
         int goal = projectedPoll;
-        if (goal > 95) goal = 95;
+        if (goal > 100) goal = 100;
         if (goal <= 10) goal = 10;
-        else if (goal <= 25) goal = 25;
+        else if (goal <= 20) goal = 20;
         int diffExpected = goal - rankTeamPollScore;
 
         int newPrestige = teamPrestige;
@@ -1192,14 +1195,14 @@ public class Team {
         //newPrestige, prestigeChange, ccPts, ncwPts, nflPts, disPts, rgameplayed, cLimiter
 
         summary += "\n\nPRESTIGE SUMMARY:\n\n";
-        summary += "Current Prestige:  " + teamPrestigeStart + " pts\n";
+        summary += "Current Prestige:  " + teamPrestigeStart + " pts [" + getRankStr(rankTeamPrestigeStart) + "]\n";
         summary += "Performance Points:  " + prestigePts[1] + " pts\n";
         if (prestigePts[2] > 0) summary += "Conf Champ Bonus:  " + prestigePts[2] + " pts\n";
         if (natChampWL.equals("NCW")) summary += "Nat Title Bonus:  " + prestigePts[3] + " pts\n";
         if (prestigePts[4] > 0) summary += "Pro Draft Bonus:  " + prestigePts[4] + " pts\n";
         summary += "Disciplinary Points:  " + prestigePts[5] + " pts\n";
 
-        summary += "\n\nNEW PRESTIGE:  " + teamPrestige + " pts\n";
+        summary += "\n\nNEW PRESTIGE:  " + teamPrestige + " pts [" + getRankStr(rankTeamPrestige) + "]\n";
 
         if (newContract && league.isCareerMode()) {
             summary += "\n\nCongratulations! You've been awarded with a contract extension of " + HC.get(0).contractLength + " years.";
@@ -1280,7 +1283,7 @@ public class Team {
         }
 
         if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 8) && teamPrestige < 74 && !userControlled && HC.get(0).age < 55 || teamPrestige > (HC.get(0).baselinePrestige + 7) && confPrestige < league.confAvg && teamPrestige < 80 && !userControlled && HC.get(0).age < 55) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 9) && teamPrestige < league.teamList.get((int)(league.countTeam*0.35)).teamPrestige && !userControlled && HC.get(0).age < 53 || teamPrestige > (HC.get(0).baselinePrestige + 12) && confPrestige < league.confAvg && teamPrestige < league.teamList.get((int)(league.countTeam*0.20)).teamPrestige && !userControlled && HC.get(0).age < 48) {
                 league.newsStories.get(league.currentWeek + 1).add("Coaching Rumor Mill>After another successful season at " + name + ", " + age + " year old head coach " + HC.get(0).name + " has moved to the top of" +
                         " many of the schools looking for a replacement at that position. He has a career record of " + wins + "-" + losses + ". ");
                 if (Math.random() > 0.50) {
@@ -1318,7 +1321,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && (teamPrestige-teamPrestigeStart) > 2 || teamPrestige < 32 && (teamPrestige-teamPrestigeStart) > 2) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && (teamPrestige-teamPrestigeStart) > 2 || teamPrestige < league.teamList.get((int)(league.countTeam*0.90)).teamPrestige && (teamPrestige-teamPrestigeStart) > 2) {
                     if (Math.random() > 0.40) {
                         HC.get(0).contractLength = 2;
                         HC.get(0).contractYear = 0;
@@ -1339,7 +1342,7 @@ public class Team {
                     }
                     HC.remove(0);
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < 32) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < league.teamList.get((int)(league.countTeam*0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
@@ -1347,7 +1350,7 @@ public class Team {
                     league.coachList.add(HC.get(0));
                     league.coachPrevTeam.add(name);
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 10)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && league.isCareerMode() || teamPrestige < 32) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige  && league.isCareerMode() || teamPrestige < league.teamList.get((int)(league.countTeam*0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -1366,7 +1369,7 @@ public class Team {
             }
         }
         if (userControlled) {
-            if (newContract && proveIt) contractString = "Congratulations! You've been given an additional " + HC.get(0).contractLength + " year contract based on the recent success of your team and not the disappointing past history!";
+            if (newContract && proveIt) contractString = "You've been given an additional " + HC.get(0).contractLength + " year contract based on the recent success of your team and not the disappointing past history!";
             else if (newContract) {
                 contractString = "Congratulations! You've been award with a new contract extension for " + HC.get(0).contractLength + " years!";
             } else if (fired) {
@@ -2000,7 +2003,6 @@ public class Team {
             }
 
             recruitPlayersFreshman(qb, rb, wr, te, ol, k, dl, lb, cb, s);
-            //resetStats();
         }
     }
 
@@ -2008,11 +2010,11 @@ public class Team {
         int size = teamQBs.size() + teamRBs.size() + teamWRs.size() + teamTEs.size() + teamOLs.size() + teamKs.size() + teamDLs.size() + teamLBs.size() + teamCBs.size() + teamSs.size();
         return size;
     }
-    
+
     private int getRecruitLevel() {
         //int level = Math.round(teamPrestige / 10) + 1;
-        int level = (120-rankTeamPrestige) / 12;
-        if(level < 4) level = 4;
+        int level = (120 - rankTeamPrestige) / 12;
+        if (level < 4) level = 4;
         return level;
     }
 
@@ -2186,8 +2188,9 @@ public class Team {
             teamSs.add(new PlayerS(league.getRandName(), 1, stars, this));
         }
 
-        //done making players, sort them
+        //done making players, sort
         sortPlayers();
+        recruitWalkOns();
     }
 
     /**
@@ -2968,35 +2971,6 @@ public class Team {
         }
     }
 
-    //Reset Team Stats - not really needed actually and now deprecated
-    public void resetStats() {
-        //reset stats
-        gameSchedule = new ArrayList<>();
-        gameOOCSchedule0 = null;
-        gameOOCSchedule1 = null;
-        gameOOCSchedule2 = null;
-        gameWinsAgainst = new ArrayList<>();
-        gameLossesAgainst = new ArrayList<>();
-        gameWLSchedule = new ArrayList<>();
-        confChampion = "";
-        semiFinalWL = "";
-        natChampWL = "";
-        wins = 0;
-        losses = 0;
-
-        //set stats
-        teamPoints = 0;
-        teamOppPoints = 0;
-        teamYards = 0;
-        teamOppYards = 0;
-        teamPassYards = 0;
-        teamRushYards = 0;
-        teamOppPassYards = 0;
-        teamOppRushYards = 0;
-        teamTODiff = 0;
-    }
-
-
     /**
      * Updates team history.
      */
@@ -3058,7 +3032,7 @@ public class Team {
         return hist;
     }
 
-
+    //Disipline the most likely player that committed offense based on disicpline rating
     public void disciplinePlayer() {
         playersDis = new ArrayList<>();
         checkSuspensionPosition(teamQBs, startersQB + subQB);
@@ -3078,6 +3052,7 @@ public class Team {
         }
     }
 
+    //Apply Suspensions to Player
     private void suspendPlayer(Player player) {
         String[] issue = {"Academics", "Fighting", "DUI", "Skipping Class", "Skipping Practice", "Failed Drug Test", "Academics", "Excessive Partying", "Practice Brawl"};
         int duration = (int)(Math.random()*(65 - player.personality)/2);
@@ -3112,7 +3087,7 @@ public class Team {
         if (numInjured < numStarters) {
             for (int i = 0; i < numStarters; ++i) {
                 Player p = players.get(i);
-                if (p.personality < 60) {
+                if (p.personality < 65) {
                     playersDis.add(p);
                 }
             }
@@ -3720,7 +3695,7 @@ public class Team {
      * @param num ranking
      * @return string of the ranking with correct ending
      */
-    private String getRankStr(int num) {
+    public String getRankStr(int num) {
         if (num == 11) {
             return "11th";
         } else if (num == 12) {
@@ -3857,23 +3832,6 @@ public class Team {
         return "#" + rankTeamPollScore + " " + name;
     }
 
-    /**
-     * Str rep of team, no bowl results
-     *
-     * @return ranking abbr (w-l)
-     */
-    public String teamStringforStatRankings() {
-        return name + " (" + wins + "-" + losses + ") ";
-    }
-
-    /**
-     * Str rep of team, with bowl results
-     *
-     * @return ranking abbr (w-l) BW
-     */
-    public String strRepWithBowlResults() {
-        return name + " (" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
-    }
 
     public String strConfStandings() {
         if (rankTeamPollScore < 26) return "#" + rankTeamPollScore + " " + name;
