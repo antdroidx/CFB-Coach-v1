@@ -3067,8 +3067,8 @@ public class Team {
         String description = issue[(int) (Math.random() * issue.length)];
         if (player.personality*Math.random() < Math.random()*HC.get(0).ratDiscipline) {
             player.isSuspended = true;
-            player.ratPot -= duration  * 3;
-            player.ratFootIQ -= duration * 2;
+            player.ratPot -= duration  * 5;
+            player.ratFootIQ -= duration * 3;
             player.weeksSuspended = duration;
             player.troubledTimes++;
             if (player.ratOvr > 77) {

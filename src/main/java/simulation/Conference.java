@@ -144,7 +144,7 @@ public class Conference {
                 league.newsTV.add(TV + " TV Contract:\n\tA new TV contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
                 league.updateTV = true;
-            } else if (Math.random() * confPrestige*2.5 < Math.random()*confPrestige) {
+            } else if (Math.random() * confPrestige*4 < Math.random()*confPrestige) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
                 confTVBonus = confPrestige / 20;

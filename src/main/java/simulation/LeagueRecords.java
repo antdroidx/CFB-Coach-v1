@@ -127,6 +127,7 @@ public class LeagueRecords {
     }
 
     public void checkRecord(String record, int number, String holder, int year) {
+        if(holder.split("%").length < 2) holder = holder + "% ";
         if (record.equals("Team Opp PPG") || record.equals("Team Opp YPG")) {
             // Is a record where lower = better
             if ((records.containsKey(record) && number < records.get(record).getNumber())) {
@@ -180,7 +181,7 @@ public class LeagueRecords {
     public String brokenRecordsStr(int year, String abbr) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Record> r : records.entrySet()) {
-            if (r.getValue() != null && r.getValue().getHolder().split("%").length > 0) {
+            if (r.getValue() != null && r.getValue().getHolder().split("%").length > 1) {
                 if (r.getValue().getHolder().split("%")[1].equals(abbr) &&
                         r.getValue().getYear() == year) {
 

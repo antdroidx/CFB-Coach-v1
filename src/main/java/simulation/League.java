@@ -3342,7 +3342,6 @@ public class League {
     }
 
 
-
     //Mock Draft String
     public String[] getMockDraftPlayersList() {
         ArrayList<Player> allPlayersLeaving = new ArrayList<>();
