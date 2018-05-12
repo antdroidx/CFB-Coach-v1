@@ -62,68 +62,68 @@ public class LeagueRecords {
     public LeagueRecords() {
         records = new HashMap<>();
         records.put("TEAM", null);
-        records.put("Team PPG", new Record(0, "XXX", 0));
-        records.put("Team Opp PPG", new Record(1000, "XXX", 0));
-        records.put("Team YPG", new Record(0, "XXX", 0));
-        records.put("Team Opp YPG", new Record(1000, "XXX", 0));
-        records.put("Team TO Diff", new Record(0, "XXX", 0));
+        records.put("Team PPG", new Record(0, "XXX%XXX", 0));
+        records.put("Team Opp PPG", new Record(1000, "XXX%XXX", 0));
+        records.put("Team YPG", new Record(0, "XXX%XXX", 0));
+        records.put("Team Opp YPG", new Record(1000, "XXX%XXX", 0));
+        records.put("Team TO Diff", new Record(0, "XXX%XXX", 0));
         records.put("SEASON: OFFENSE", null);
-        records.put("Pass Yards", new Record(0, "XXX", 0));
-        records.put("Pass TDs", new Record(0, "XXX", 0));
-        records.put("Ints Thrown", new Record(0, "XXX", 0));
-        records.put("Comp Percent", new Record(0, "XXX", 0));
-        records.put("QB Rating", new Record(0, "XXX", 0));
-        records.put("Rush Yards", new Record(0, "XXX", 0));
-        records.put("Rush TDs", new Record(0, "XXX", 0));
-        records.put("Fumbles Lost", new Record(0, "XXX", 0));
-        records.put("Receptions", new Record(0, "XXX", 0));
-        records.put("Rec Yards", new Record(0, "XXX", 0));
-        records.put("Rec TDs", new Record(0, "XXX", 0));
-        records.put("Catch Percent", new Record(0, "XXX", 0));
+        records.put("Pass Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Pass TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Ints Thrown", new Record(0, "XXX%XXX", 0));
+        records.put("Comp Percent", new Record(0, "XXX%XXX", 0));
+        records.put("QB Rating", new Record(0, "XXX%XXX", 0));
+        records.put("Rush Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Rush TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Fumbles Lost", new Record(0, "XXX%XXX", 0));
+        records.put("Receptions", new Record(0, "XXX%XXX", 0));
+        records.put("Rec Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Rec TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Catch Percent", new Record(0, "XXX%XXX", 0));
         records.put("SEASON: DEFENSE", null);
-        records.put("Tackles", new Record(0, "XXX", 0));
-        records.put("Sacks", new Record(0, "XXX", 0));
-        records.put("Fumbles Recovered", new Record(0, "XXX", 0));
-        records.put("Interceptions", new Record(0, "XXX", 0));
-        records.put("Passes Defended", new Record(0, "XXX", 0));
+        records.put("Tackles", new Record(0, "XXX%XXX", 0));
+        records.put("Sacks", new Record(0, "XXX%XXX", 0));
+        records.put("Fumbles Recovered", new Record(0, "XXX%XXX", 0));
+        records.put("Interceptions", new Record(0, "XXX%XXX", 0));
+        records.put("Passes Defended", new Record(0, "XXX%XXX", 0));
         records.put("SEASON: ST", null);
-        records.put("Field Goals", new Record(0, "XXX", 0));
-        records.put("Kick Ret Yards", new Record(0, "XXX", 0));
-        records.put("Kick Ret TDs", new Record(0, "XXX", 0));
-        records.put("Punt Ret Yards", new Record(0, "XXX", 0));
-        records.put("Punt Ret TDs", new Record(0, "XXX", 0));
+        records.put("Field Goals", new Record(0, "XXX%XXX", 0));
+        records.put("Kick Ret Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Kick Ret TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Punt Ret Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Punt Ret TDs", new Record(0, "XXX%XXX", 0));
         records.put("CAREER: OFFENSE", null);
-        records.put("Career Pass Yards", new Record(0, "XXX", 0));
-        records.put("Career Pass TDs", new Record(0, "XXX", 0));
-        records.put("Career Ints Thrown", new Record(0, "XXX", 0));
-        records.put("Career Comp PCT", new Record(0, "XXX", 0));
-        records.put("Career QB Rating", new Record(0, "XXX", 0));
-        records.put("Career Rush Yards", new Record(0, "XXX", 0));
-        records.put("Career Rush TDs", new Record(0, "XXX", 0));
-        records.put("Career Fumbles Lost", new Record(0, "XXX", 0));
-        records.put("Career Receptions", new Record(0, "XXX", 0));
-        records.put("Career Rec Yards", new Record(0, "XXX", 0));
-        records.put("Career Rec TDs", new Record(0, "XXX", 0));
+        records.put("Career Pass Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Career Pass TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Career Ints Thrown", new Record(0, "XXX%XXX", 0));
+        records.put("Career Comp PCT", new Record(0, "XXX%XXX", 0));
+        records.put("Career QB Rating", new Record(0, "XXX%XXX", 0));
+        records.put("Career Rush Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Career Rush TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Career Fumbles Lost", new Record(0, "XXX%XXX", 0));
+        records.put("Career Receptions", new Record(0, "XXX%XXX", 0));
+        records.put("Career Rec Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Career Rec TDs", new Record(0, "XXX%XXX", 0));
         records.put("CAREER: DEFENSE", null);
-        records.put("Career Tackles", new Record(0, "XXX", 0));
-        records.put("Career Sacks", new Record(0, "XXX", 0));
-        records.put("Career Fumbles Rec", new Record(0, "XXX", 0));
-        records.put("Career Interceptions", new Record(0, "XXX", 0));
-        records.put("Career Defended", new Record(0, "XXX", 0));
+        records.put("Career Tackles", new Record(0, "XXX%XXX", 0));
+        records.put("Career Sacks", new Record(0, "XXX%XXX", 0));
+        records.put("Career Fumbles Rec", new Record(0, "XXX%XXX", 0));
+        records.put("Career Interceptions", new Record(0, "XXX%XXX", 0));
+        records.put("Career Defended", new Record(0, "XXX%XXX", 0));
         records.put("CAREER: SPEC TEAMS", null);
-        records.put("Career Field Goals", new Record(0, "XXX", 0));
-        records.put("Career KR Yards", new Record(0, "XXX", 0));
-        records.put("Career KR TDs", new Record(0, "XXX", 0));
-        records.put("Career PR Yards", new Record(0, "XXX", 0));
-        records.put("Career PR TDs", new Record(0, "XXX", 0));
+        records.put("Career Field Goals", new Record(0, "XXX%XXX", 0));
+        records.put("Career KR Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Career KR TDs", new Record(0, "XXX%XXX", 0));
+        records.put("Career PR Yards", new Record(0, "XXX%XXX", 0));
+        records.put("Career PR TDs", new Record(0, "XXX%XXX", 0));
         records.put("COACHING RECORDS",null);
-        records.put("Wins", new Record(0, "XXX", 0));
-        records.put("National Championships", new Record(0, "XXX", 0));
-        records.put("Conf Championships", new Record(0, "XXX", 0));
-        records.put("Bowl Wins", new Record(0, "XXX", 0));
-        records.put("Coach Awards", new Record(0, "XXX", 0));
-        records.put("Coach Year Score", new Record(0, "XXX", 0));
-        records.put("Coach Career Score", new Record(0, "XXX", 0));
+        records.put("Wins", new Record(0, "XXX%XXX", 0));
+        records.put("National Championships", new Record(0, "XXX%XXX", 0));
+        records.put("Conf Championships", new Record(0, "XXX%XXX", 0));
+        records.put("Bowl Wins", new Record(0, "XXX%XXX", 0));
+        records.put("Coach Awards", new Record(0, "XXX%XXX", 0));
+        records.put("Coach Year Score", new Record(0, "XXX%XXX", 0));
+        records.put("Coach Career Score", new Record(0, "XXX%XXX", 0));
     }
 
     public void checkRecord(String record, int number, String holder, int year) {
@@ -180,12 +180,14 @@ public class LeagueRecords {
     public String brokenRecordsStr(int year, String abbr) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Record> r : records.entrySet()) {
-            if (r.getValue() != null &&
-                    r.getValue().getHolder().split(" ")[0].equals(abbr) &&
-                    r.getValue().getYear() == year &&
-                    !r.getKey().split(" ")[0].equals("Career")) {
-                sb.append(r.getValue().getHolder() + " broke the record for " +
-                        r.getKey() + " with " + r.getValue().getNumber() + "!\n");
+            if (r.getValue() != null && r.getValue().getHolder().split("%").length > 0) {
+                if (r.getValue().getHolder().split("%")[1].equals(abbr) &&
+                        r.getValue().getYear() == year) {
+
+                    sb.append(r.getValue().getHolder().split("%")[0] + " broke the record for " +
+                            r.getKey() + " with " + r.getValue().getNumber() + "!\n");
+
+                }
             }
         }
 

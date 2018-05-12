@@ -1669,6 +1669,8 @@ public class MainActivity extends AppCompatActivity {
             beginRecruiting();
 
         }
+
+        if(userTeam.suspension) showSuspensions();
         resetTeamUI();
 
     }
@@ -3070,6 +3072,24 @@ public class MainActivity extends AppCompatActivity {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
+    public void showSuspensions() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage(userTeam.suspensionNews)
+                .setTitle("DISCIPLINARY ACTION")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        userTeam.suspension = false;
+    }
+
     //mid-season summary
     private void midseasonSummary() {
         String string = "";
@@ -3881,5 +3901,10 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         TextView textView = dialog.findViewById(android.R.id.message);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    }
+
+    public void userHallofFame() {
+        //Retirement Hall of Fame
+
     }
 }

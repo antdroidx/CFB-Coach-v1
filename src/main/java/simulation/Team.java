@@ -1,5 +1,10 @@
 package simulation;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.util.TypedValue;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
@@ -213,6 +219,8 @@ public class Team {
     private static final double NFL_CHANCE = 0.65;
     private static final double NFL_CHANCE_SOPH = 0.350;
 
+    public String suspensionNews;
+    public boolean suspension;
     //public final int confMin = 30;
     //public final int confMax = 80;
     //private int maxPrestige = 95;
@@ -3068,9 +3076,12 @@ public class Team {
                         + ". The player will be suspended for " + duration + " weeks.");
             }
 
+            suspensionNews = "Player Suspended!\n\n" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
+                    + ". The player will be suspended for " + duration + " weeks.";
+            suspension = true;
             sortPlayers();
-
         }
+
     }
 
     private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters) {
@@ -4046,7 +4057,7 @@ public class Team {
         }
 
         // Set ranks so that Off/Def Talent rankings are updated
-        league.setTeamRanks();
+        if (league.currentWeek < 15) league.setTeamRanks();
     }
 
     //Adds a Game Start to each Starter
@@ -4081,9 +4092,9 @@ public class Team {
         if(HC.size() < 1 || teamQBs.size() < 1) return 0;
         if(HC.get(0).offStrat < 0 || HC.get(0).offStrat > 4) HC.get(0).offStrat = 0;
 
-        if (teamQBs.get(0).ratSpeed >= 75 && HC.get(0).offStrat == 4) {
+        if (teamQBs.get(0).ratSpeed >= 70 && HC.get(0).offStrat == 4) {
             return 4;
-        } else if (teamQBs.get(0).ratSpeed < 75 && HC.get(0).offStrat == 4) {
+        } else if (teamQBs.get(0).ratSpeed < 70 && HC.get(0).offStrat == 4) {
             return 0;
         } else {
             return HC.get(0).offStrat;
@@ -4151,12 +4162,12 @@ public class Team {
 
     //Checks if any of the league records were broken by this team.
     public void checkLeagueRecords(LeagueRecords records) {
-        records.checkRecord("Team PPG", teamPoints / numGames(), name, league.getYear());
-        records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), name, league.getYear());
-        records.checkRecord("Team YPG", teamYards / numGames(), name, league.getYear());
-        records.checkRecord("Team Opp YPG", teamOppYards / numGames(), name, league.getYear());
-        records.checkRecord("Team PPG", teamPoints / numGames(), name, league.getYear());
-        records.checkRecord("Team TO Diff", teamTODiff, name, league.getYear());
+        records.checkRecord("Team PPG", teamPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team YPG", teamYards / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team Opp YPG", teamOppYards / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team PPG", teamPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team TO Diff", teamTODiff, name + "%" + abbr, league.getYear());
 
         for (int i = 0; i < teamQBs.size(); ++i) {
             if (getQB(i).gamesStarted > 6) {

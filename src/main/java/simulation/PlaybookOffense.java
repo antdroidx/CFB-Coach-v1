@@ -20,14 +20,14 @@ public class PlaybookOffense {
         public PlaybookOffense(String name, String descrip, int rPref, int rProtection, int rPotential, int rUsage, int pPref, int pProtection, int pPotential, int pUsage) {
             stratName = name;
             stratDescription = descrip;
-            runPref = rPref;
-            runProtection = rProtection;
-            runPotential = rPotential;
-            runUsage = rUsage;
-            passPref = pPref;
-            passProtection = pProtection;
-            passPotential = pPotential;
-            passUsage = pUsage;
+            runPref = rPref;  //Run Frequency  Based on runPref / (runPref+passPref)
+            runProtection = rProtection; //Block Bonus
+            runPotential = rPotential; //RB Hole opening bonus
+            runUsage = rUsage; //Use TE to Block
+            passPref = pPref;  //Pass Frequency
+            passProtection = pProtection; //Block Bonus + accuracy
+            passPotential = pPotential; //Big Play Potential
+            passUsage = pUsage; //use TE more often in passing
         }
 
     public PlaybookOffense(int playbook) {

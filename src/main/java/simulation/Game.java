@@ -576,12 +576,15 @@ public class Game implements Serializable {
             }
         }
 
+        double TEBonus;
+        if (offense.playbookOff.getPassUsage() == 1) TEBonus = 0.20;
+        else TEBonus = 0;
         for (int i = 0 + x; i < offense.startersTE + x; ++i) {
             if (offense.getTE(i).gameFatigue > 0) {
                 if (gameYardLine > 90) {
                     offense.getTE(i).gameSim = Math.pow(((offense.getTE(i).ratCatch + offense.getTE(0).ratSpeed) / 2), 1) * Math.random() * 1.25;
                 } else {
-                    offense.getTE(i).gameSim = Math.pow(((offense.getTE(i).ratCatch + offense.getTE(i).ratSpeed) / 2), 1) * Math.random() * .67;
+                    offense.getTE(i).gameSim = Math.pow(((offense.getTE(i).ratCatch + offense.getTE(i).ratSpeed) / 2), 1) * Math.random() * (.75 + TEBonus);
                 }
                 offense.getTE(i).gameSnaps++;
                 receiver.add(offense.getTE(i));
@@ -590,7 +593,7 @@ public class Game implements Serializable {
                 if (gameYardLine > 90) {
                     offense.getTE(offense.startersTE).gameSim = Math.pow(((offense.getTE(offense.startersTE).ratCatch + offense.getTE(offense.startersTE).ratSpeed) / 2), 1) * Math.random() * 1.25;
                 } else {
-                    offense.getTE(offense.startersTE).gameSim = Math.pow(((offense.getTE(offense.startersTE).ratCatch + offense.getTE(offense.startersTE).ratSpeed) / 2), 1) * Math.random() * .67;
+                    offense.getTE(offense.startersTE).gameSim = Math.pow(((offense.getTE(offense.startersTE).ratCatch + offense.getTE(offense.startersTE).ratSpeed) / 2), 1) * Math.random() * (.75 + TEBonus);
                 }
                 offense.getTE(offense.startersTE).gameSnaps++;
                 receiver.add(offense.getTE(offense.startersTE));
@@ -599,12 +602,12 @@ public class Game implements Serializable {
         }
         for (int i = 0 + x; i < offense.startersRB + x; ++i) {
             if (offense.getRB(i).gameFatigue > 0) {
-                offense.getRB(i).gameSim = Math.pow(((offense.getRB(0).ratCatch + offense.getRB(i).ratSpeed) / 2), 1) * Math.random() * .60;
+                offense.getRB(i).gameSim = Math.pow(((offense.getRB(0).ratCatch + offense.getRB(i).ratSpeed) / 2), 1) * Math.random() * .75;
                 offense.getRB(i).gameSnaps++;
                 receiver.add(offense.getRB(i));
                 RunningBack.add(offense.getRB(i));
             } else {
-                offense.getRB(offense.startersRB).gameSim = Math.pow(((offense.getRB(offense.startersRB).ratCatch + offense.getRB(offense.startersRB).ratSpeed) / 2), 1) * Math.random() * .60;
+                offense.getRB(offense.startersRB).gameSim = Math.pow(((offense.getRB(offense.startersRB).ratCatch + offense.getRB(offense.startersRB).ratSpeed) / 2), 1) * Math.random() * .75;
                 offense.getRB(offense.startersRB).gameSnaps++;
                 receiver.add(offense.getRB(offense.startersRB));
                 RunningBack.add(offense.getRB(offense.startersRB));

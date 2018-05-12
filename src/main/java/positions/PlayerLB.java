@@ -130,7 +130,7 @@ public class PlayerLB extends Player {
         ratCoverage = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratRunStop = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
         ratTackle = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratSpeed = (int) ((ratBase-15) + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratSpeed = (int) ((ratBase-10) + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
          ratOvr = getOverall();
          region = (int)(Math.random()*5);
         personality = (int) (attrBase + 50 * Math.random());
@@ -159,7 +159,7 @@ public class PlayerLB extends Player {
         ratCoverage = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratRunStop = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratTackle = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
-        ratSpeed = (int) ((ratBase-15) + stars * customFactor - ratTolerance * Math.random());
+        ratSpeed = (int) ((ratBase-10) + stars * customFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
         position = "LB";
         region = (int)(Math.random()*5);

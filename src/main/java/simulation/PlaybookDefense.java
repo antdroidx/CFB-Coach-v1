@@ -19,13 +19,13 @@ public class PlaybookDefense {
         stratName = name;
         stratDescription = descrip;
         runPref = rPref;
-        runStop = rProtection;
-        runCoverage = rPotential;
-        runSpy = rUsage;
+        runStop = rProtection; //Run Stop at Line Bonus
+        runCoverage = rPotential; //Big Run Stop Bonus
+        runSpy = rUsage; //Use LB/S to man cover RB
         passPref = pPref;
-        passRush = pProtection;
-        passCoverage = pPotential;
-        passSpy = pUsage;
+        passRush = pProtection; //Pass Rush Bonus
+        passCoverage = pPotential; //Cover Deep
+        passSpy = pUsage; //Use LB/S to Blitz
     }
 
     public PlaybookDefense(int playbook) {

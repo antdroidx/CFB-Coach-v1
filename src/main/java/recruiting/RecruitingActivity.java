@@ -678,10 +678,7 @@ public class RecruitingActivity extends AppCompatActivity {
     //REMOVE RECRUITS OFF THE BOARD
     private void removeRecruits() {
         removeRecruits(players);
-
         removeRecruitBoard(removeList);
-
-        dataAdapterPosition.notifyDataSetChanged();
     }
 
     private void removeRecruits(List<String> list) {
@@ -718,7 +715,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (east.contains(player)) {
                 east.remove(player);
             }
-            // Also need to add recruited player to correct team list and remove from avail list
+
             String[] ps = player.split(",");
             if (ps[0].equals("QB")) {
                 availQBs.remove(player);
@@ -742,6 +739,8 @@ public class RecruitingActivity extends AppCompatActivity {
                 availSs.remove(player);
             }
         }
+
+        dataAdapterPosition.notifyDataSetChanged();
     }
 
 
@@ -895,9 +894,9 @@ public class RecruitingActivity extends AppCompatActivity {
 
                                 recruitList.expandGroup(groupPosition);
                                 expListAdapter.notifyDataSetChanged();
-                                for (int group : groupsExpanded) {
+/*                                for (int group : groupsExpanded) {
                                     recruitList.expandGroup(group);
-                                }
+                                }*/
                                 dialog.cancel();
                             }
                         });
@@ -921,9 +920,9 @@ public class RecruitingActivity extends AppCompatActivity {
                 recruitPlayer(player);
 
                 expListAdapter.notifyDataSetChanged();
-                for (int group : groupsExpanded) {
+/*                for (int group : groupsExpanded) {
                     recruitList.expandGroup(group - 1);
-                }
+                }*/
             }
 
         } else {
@@ -938,9 +937,9 @@ public class RecruitingActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             recruitList.expandGroup(groupPosition);
             expListAdapter.notifyDataSetChanged();
-            for (int group : groupsExpanded) {
+/*            for (int group : groupsExpanded) {
                 recruitList.expandGroup(group);
-            }
+            }*/
         }
     }
 
@@ -1093,9 +1092,9 @@ public class RecruitingActivity extends AppCompatActivity {
 
                                 recruitList.expandGroup(groupPosition);
                                 expListAdapter.notifyDataSetChanged();
-                                for (int group : groupsExpanded) {
+/*                                for (int group : groupsExpanded) {
                                     recruitList.expandGroup(group);
-                                }
+                                }*/
                                 dialog.cancel();
                             }
                         });
@@ -1119,9 +1118,9 @@ public class RecruitingActivity extends AppCompatActivity {
                 redshirtPlayer(player);
 
                 expListAdapter.notifyDataSetChanged();
-                for (int group : groupsExpanded) {
+/*                for (int group : groupsExpanded) {
                     recruitList.expandGroup(group - 1);
-                }
+                }*/
             }
 
         } else {
@@ -1136,9 +1135,9 @@ public class RecruitingActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             recruitList.expandGroup(groupPosition);
             expListAdapter.notifyDataSetChanged();
-            for (int group : groupsExpanded) {
+/*            for (int group : groupsExpanded) {
                 recruitList.expandGroup(group);
-            }
+            }*/
         }
     }
 

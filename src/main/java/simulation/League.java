@@ -3933,7 +3933,7 @@ public class League {
     public ArrayList<String> getLeagueHistoryStats(int selection) {
         /*
          */
-        ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
+        ArrayList<Team> teams = teamList;
         ArrayList<String> rankings = new ArrayList<>();
         Team t;
 
@@ -4218,7 +4218,7 @@ public class League {
         }
         ArrayList<HeadCoach> HC = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            HC.add(teamList.get(i).HC.get(0));
+            if(HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
         }
 
         ArrayList<PlayerOffense> off = new ArrayList<>();
@@ -4824,6 +4824,202 @@ public class League {
             netTotal += teamList.get(i).teamPrestige - teamList.get(i).teamPrestigeStart;
         }
         return netTotal;
+    }
+
+    /**
+     * Save League in a file.
+     *
+     * @param saveFile file to be overwritten
+     * @return true if successful
+     */
+    public boolean saveLeagueMidSeason(File saveFile) {
+
+        //Need method for saving mid-season
+
+        StringBuilder sb = new StringBuilder();
+
+        // Save information about the save file, user team info
+        if (isCareerMode()) {
+            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+                    userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[C]%\n");
+        } else {
+            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
+                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[D]%\n");
+        }
+
+
+        // Save league history of who was #1 each year
+        for (int i = 0; i < leagueHistory.size(); ++i) {
+            for (int j = 0; j < leagueHistory.get(i).length; ++j) {
+                sb.append(leagueHistory.get(i)[j] + "%");
+            }
+            sb.append("\n");
+        }
+        sb.append("END_LEAGUE_HIST\n");
+
+        // Save POTY history of who won each year
+        // Go through leagueHist size in case they save after the Heisman Ceremony
+        for (int i = 0; i < leagueHistory.size(); ++i) {
+            sb.append(heismanHistory.get(i) + "\n");
+        }
+        sb.append("END_HEISMAN_HIST\n");
+
+
+        //Save Conference Names
+        for (int i = 0; i < conferences.size(); ++i) {
+            sb.append(conferences.get(i).confName + "," + conferences.get(i).confTV + "," + conferences.get(i).confTVContract + "," + conferences.get(i).confTVBonus + "," + conferences.get(i).TV + "\n");
+        }
+        sb.append("END_CONFERENCES\n");
+
+        // Save information about each team like W-L records, as well as all the players
+        for (Team t : teamList) {
+            sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," + t.totalWins + "," + t.totalLosses + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," + t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," + t.playbookOffNum + "," + t.playbookDefNum + "," + (t.showPopups ? 1 : 0) + "," + t.yearStartWinStreak.getStreakCSV() + "%" + t.evenYearHomeOpp + "%\n");
+            sb.append(t.getPlayerInfoSaveFile());
+            sb.append("END_PLAYERS\n");
+        }
+
+        // Save history of the user's team of the W-L and bowl results each year
+        sb.append(userTeam.name + "\n");
+        sb.append("END_USER_TEAM\n");
+        //Every Team Year-by-Year History
+        for (Team t : teamList) {
+            for (String s : t.teamHistory) {
+                sb.append(s + "\n");
+            }
+            sb.append("END_TEAM\n");
+        }
+        sb.append("END_TEAM_HISTORY\n");
+
+
+        for (Team t : teamList) {
+            for (String s : t.HC.get(0).history) {
+                sb.append(s + "\n");
+            }
+            sb.append("END_COACH\n");
+        }
+        sb.append("END_COACH_HISTORY\n");
+
+
+        if (bonusTeam1 != null) {
+            sb.append(bonusTeam1.abbr + "\n");
+            sb.append("END_LUCKY_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_LUCKY_TEAM\n");
+        }
+        if (bonusTeam2 != null) {
+            sb.append(bonusTeam2.abbr + "\n");
+            sb.append("END_LUCKY2_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_LUCKY2_TEAM\n");
+        }
+        if (bonusTeam3 != null) {
+            sb.append(bonusTeam3.abbr + "\n");
+            sb.append("END_LUCKY3_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_LUCKY3_TEAM\n");
+        }
+        if (penalizedTeam1 != null) {
+            sb.append(penalizedTeam1.abbr + "\n");
+            sb.append("END_PENALIZED_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_PENALIZED_TEAM\n");
+        }
+        if (penalizedTeam2 != null) {
+            sb.append(penalizedTeam2.abbr + "\n");
+            sb.append("END_PENALIZED2_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_PENALIZED2_TEAM\n");
+        }
+        if (penalizedTeam3 != null) {
+            sb.append(penalizedTeam3.abbr + "\n");
+            sb.append("END_PENALIZED3_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_PENALIZED3_TEAM\n");
+        }
+        if (penalizedTeam4 != null) {
+            sb.append(penalizedTeam4.abbr + "\n");
+            sb.append("END_PENALIZED4_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_PENALIZED4_TEAM\n");
+        }
+        if (penalizedTeam5 != null) {
+            sb.append(penalizedTeam5.abbr + "\n");
+            sb.append("END_PENALIZED5_TEAM\n");
+        } else {
+            sb.append("NULL\n");
+            sb.append("END_PENALIZED5_TEAM\n");
+        }
+
+        for (String bowlName : bowlNames) {
+            sb.append(bowlName + ",");
+        }
+        sb.append("\nEND_BOWL_NAMES\n");
+
+        // Save league records
+        sb.append(leagueRecords.getRecordsStr());
+        sb.append("END_LEAGUE_RECORDS\n");
+
+        sb.append(yearStartLongestWinStreak.getStreakCSV());
+        sb.append("\nEND_LEAGUE_WIN_STREAK\n");
+
+        // Save user team records
+        for (Team t : teamList) {
+            sb.append(t.teamRecords.getRecordsStr());
+            sb.append("END_TEAM\n");
+        }
+        sb.append("END_TEAM_RECORDS\n");
+
+        for (String s : leagueHoF) {
+            sb.append(s + "\n");
+        }
+        sb.append("END_LEAGUE_HALL_OF_FAME\n");
+
+        for(HeadCoach h: coachFreeAgents) {
+            h.age++;
+        }
+        //Adding to the Available Coach List Pool
+        for (HeadCoach h: coachList) {
+            h.ratPot = h.ratPot+(int)Math.random()*15;
+            coachFreeAgents.add(h);
+        }
+        Collections.sort(coachFreeAgents, new CompCoachOvr());
+
+        for (HeadCoach h : coachFreeAgents) {
+            if(h.age < 56){
+                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff+(int)Math.random()*3) + "," + (h.ratDef+(int)Math.random()*3) + "," + (h.ratTalent+(int)Math.random()*3) + "," + (h.ratDiscipline+(int)Math.random()*3)
+                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
+                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "% " + "\n");
+                for (String s : h.history) {
+                    sb.append(s + "\n");
+                }
+                sb.append("END_FREE_AGENT\n");
+            }
+        }
+
+        sb.append("END_COACHES\n");
+
+        sb.append(fullGameLog + "\n");
+        sb.append(hidePotential + "\n");
+        sb.append(confRealignment + "\n");
+        sb.append(enableProRel + "\n");
+        sb.append(enableTV + "\n");
+        sb.append("\nEND_SAVE_FILE");
+
+        // Actually write to the file
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(saveFile), "utf-8"))) {
+            writer.write(sb.toString());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

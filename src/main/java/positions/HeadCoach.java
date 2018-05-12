@@ -248,7 +248,7 @@ public class HeadCoach extends Player {
             prestigeDiff = team.teamPrestige - team.teamPrestigeStart;
         }
 
-        return prestigeDiff * 10 + team.wins * 2 + (team.teamStrengthOfWins / 25);
+        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3*team.wins - 1*team.losses;
     }
 
     //For future implementation: tally up the total prestige change over the years for scoring

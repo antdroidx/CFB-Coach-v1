@@ -331,7 +331,8 @@ Player {
     }
 
     public String getYrOvrPot_Str() {
-        return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
+        if (team.HC.size() > 0) return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
+        else return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, 50);
     }
 
     public String getMockDraftStr(int round, int selection, String nflTeam) {
