@@ -10,16 +10,16 @@ import comparator.CompTeamConfWins;
 import comparator.CompTeamPoll;
 import positions.HeadCoach;
 import positions.Player;
+import positions.PlayerCB;
+import positions.PlayerDL;
+import positions.PlayerK;
+import positions.PlayerLB;
+import positions.PlayerOL;
 import positions.PlayerQB;
 import positions.PlayerRB;
-import positions.PlayerWR;
-import positions.PlayerTE;
-import positions.PlayerOL;
-import positions.PlayerDL;
-import positions.PlayerLB;
-import positions.PlayerCB;
 import positions.PlayerS;
-import positions.PlayerK;
+import positions.PlayerTE;
+import positions.PlayerWR;
 
 public class Conference {
 
@@ -95,7 +95,7 @@ public class Conference {
 
     }
 
-    private String getTVName() {
+    public String getTVName() {
         String name;
 
         int t = (int)(Math.random() * 4);
@@ -132,24 +132,24 @@ public class Conference {
 
     //Check for Contracts and Negotiate a new deal if no deal is already in place
     private void negotiateConfTV() {
-        if(!confTV || confTV && confTVContract <= 1) {
-            if (Math.random() * confPrestige*1.5 < Math.random()*confPrestige && confPrestige > league.getAverageConfPrestige()) {
+        if (!confTV || confTV && confTVContract <= 1) {
+            if (Math.random() * confPrestige * 1.5 < Math.random() * confPrestige && confPrestige > league.getAverageConfPrestige()) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
-                confTVBonus = confPrestige / 20;
+                confTVBonus = confPrestige / 16;
 
-                league.newsStories.get(league.currentWeek+1).add(TV + " TV Contract>A new television contract has been worked out with the "
+                league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
 
                 league.newsTV.add(TV + " TV Contract:\n\tA new TV contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
                 league.updateTV = true;
-            } else if (Math.random() * confPrestige*4 < Math.random()*confPrestige) {
+            } else if (Math.random() * confPrestige * 4 < Math.random() * confPrestige) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
                 confTVBonus = confPrestige / 20;
 
-                league.newsStories.get(league.currentWeek+1).add(TV + " TV Contract>A new television contract has been worked out with the "
+                league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
 
                 league.newsTV.add(TV + " Contract:\n\tA new television contract has been worked out with the "

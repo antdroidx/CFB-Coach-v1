@@ -190,6 +190,14 @@
                 android:textSize="14sp" />
 
             <Button
+                android:id="@+id/buttonUnivProRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Convert to Universal Pro/Rel"
+                android:textSize="14sp" />
+
+            <Button
                 android:id="@+id/buttonGameEditor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

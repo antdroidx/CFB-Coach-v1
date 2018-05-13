@@ -1620,6 +1620,8 @@ public class MainActivity extends AppCompatActivity {
             conferenceRealignment();
             //Promotion/Relegation!
             promotionRelegation();
+            //Promotion/Relegation!
+            universalProRel();
             simGameButton.setTextSize(12);
             if (simLeague.isCareerMode())
                 simGameButton.setText("Off-Season: Job Offers");
@@ -1847,6 +1849,10 @@ public class MainActivity extends AppCompatActivity {
                                                        if (checkboxRealignment.isChecked()) {
                                                            checkboxProRelegation.setChecked(false);
                                                        }
+                                                       if (simLeague.enableUnivProRel) {
+                                                           checkboxProRelegation.setChecked(false);
+                                                       }
+
                                                    }
                                                }
         );
@@ -1857,6 +1863,9 @@ public class MainActivity extends AppCompatActivity {
                                                          if (checkboxProRelegation.isChecked()) {
                                                              checkboxRealignment.setChecked(false);
                                                          }
+                                                         if (simLeague.enableUnivProRel) {
+                                                             checkboxProRelegation.setChecked(false);
+                                                         }
                                                      }
                                                  }
         );
@@ -1865,6 +1874,11 @@ public class MainActivity extends AppCompatActivity {
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
+        Button univProRelButton = dialog.findViewById(R.id.buttonUnivProRel);
+
+        if(simLeague.currentWeek > 0) {
+            univProRelButton.setVisibility(View.INVISIBLE);
+        }
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1892,11 +1906,16 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.confRealignment = checkboxRealignment.isChecked();
                 simLeague.enableProRel = checkboxProRelegation.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
+                if (simLeague.enableUnivProRel) {
+                    simLeague.enableProRel = false;
+                    simLeague.confRealignment = false;
+                }
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
 
             }
         });
+
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
@@ -1913,6 +1932,43 @@ public class MainActivity extends AppCompatActivity {
                         //switchTeams();
                         if (simLeague.isCareerMode()) jobOffers(userHC);
                         else switchTeams(userHC);
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+
+        univProRelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dialog.dismiss();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Are you sure you want convert this game into an Universal Promotion/Relegation Game?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Perform action on click
+                        simLeague.enableUnivProRel = true;
+                        simLeague.enableProRel = false;
+                        simLeague.confRealignment = false;
+                        simLeague.convertUnivProRel();
+                        updateCurrConference();
+                        updateCurrTeam();
+                        examineTeam(userTeam.name);
                         dialog.dismiss();
                     }
                 });
@@ -3351,6 +3407,25 @@ public class MainActivity extends AppCompatActivity {
     private void promotionRelegation() {
         if (simLeague.enableProRel) {
             simLeague.promotionRelegation();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(simLeague.newsRealignment)
+                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Promotion/Relegation Update")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
+    }
+
+    //Promotions & Relegations Update
+    private void universalProRel() {
+        if (simLeague.enableUnivProRel) {
+            simLeague.universalProRel();
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(simLeague.newsRealignment)
                     .setTitle((seasonStart + userTeam.teamHistory.size()) + " Promotion/Relegation Update")

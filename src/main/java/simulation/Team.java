@@ -428,11 +428,8 @@ public class Team {
         teamPrestigeStart = teamPrestige;
         rankTeamPrestigeStart = rankTeamPrestige;
         confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
-        //leagueOffTal = league.getAverageOffTalent();
-        //leagueDefTal = league.getAverageDefTalent();
-        //confAvg = league.getAverageConfPrestige();
-        //confLimit = (int)1.15*(confPrestige - confAvg);
-        projectedPollScore = (teamOffTalent + teamDefTalent) + 2*teamPrestige + (confPrestige/2);
+
+        projectedPollScore = getPreseasonBiasScore();
     }
 
     public void projectTeamWins(){
@@ -795,13 +792,17 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
+
+        int univProRelBonus = 0;
+        if (league.enableUnivProRel) univProRelBonus = 20*(10 - league.getConfNumber(conference));
+
         double preseasonBias = 15 - (wins + losses);
         if (preseasonBias < 0) preseasonBias = 0;
         preseasonBias = preseasonBias/15;
         teamPollScore =
-                (int)(preseasonBias * (teamOffTalent + teamDefTalent + 1.1*teamPrestige + 1.2*confPrestige))+
+                (int)(preseasonBias * getPreseasonBiasScore()) +
                         (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
-                        500);
+                        500 + univProRelBonus);
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
@@ -823,6 +824,17 @@ public class Team {
             //bonus for winning champ game
             teamPollScore += 50;
         }
+    }
+
+    private int getPreseasonBiasScore() {
+        int score = 0;
+
+        score += teamCount - rankTeamOffTalent;
+        score += teamCount - rankTeamDefTalent;
+        score += 1.5*(teamCount - rankTeamPrestige);
+        score += confPrestige/2;
+
+        return score;
     }
 
     public void updateSOS() {
