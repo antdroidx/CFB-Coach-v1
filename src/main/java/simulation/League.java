@@ -3341,7 +3341,7 @@ public class League {
             //break the news
             string.append("Promoted to " + p5ConfName + " Conference\n");
             string.append(" + " + teamA.name + "\n" + " + " + teamC.name + "\n");
-            string.append("Demoted to " + g5ConfName + " Conference\n");
+            string.append("Relegated to " + g5ConfName + " Conference\n");
             string.append(" - " + teamB.name + "\n" + " - " + teamD.name + "\n");
             string.append("\n");
         }
@@ -3391,8 +3391,10 @@ public class League {
         ArrayList<Team> promotedTeams = new ArrayList<>();
         ArrayList<Team> relegatedTeams = new ArrayList<>();
         for (int i = 1; i < conferences.size(); ++i) {
-            promotedTeams.add(conferences.get(i).confTeams.get(0));
-            promotedTeams.add(conferences.get(i).confTeams.get(1));
+            for(int t=0; t < conferences.get(i).confTeams.size(); t++) {
+                if (conferences.get(i).confTeams.get(t).gameSchedule.size() > 12 && conferences.get(i).confTeams.get(t).gameSchedule.get(12).gameName.contains("CCG"))
+                    promotedTeams.add(conferences.get(i).confTeams.get(t));
+            }
         }
 
         for (int i = 0; i < conferences.size() - 1; ++i) {
@@ -3437,7 +3439,7 @@ public class League {
             //break the news
             string.append("Promoted to " + PConf.confName + " Conference (" + PConf.confPrestige + ")\n");
             string.append(" + " + promotedTeams.get(2 * i).name + " (" + promotedTeams.get(2 * i).teamPrestige + ")\n" + " + " + promotedTeams.get(2 * i + 1).name + " (" + promotedTeams.get(2*i+1).teamPrestige + ")\n");
-            string.append("Demoted to " + RConf.confName + " Conference\n");
+            string.append("Relegated to " + RConf.confName + " Conference\n");
             string.append(" - " + relegatedTeams.get(2 * i).name + " (" + relegatedTeams.get(2 * i).teamPrestige + ")\n" + " - " + relegatedTeams.get(2 * i + 1).name + " (" + relegatedTeams.get(2 * i + 1).teamPrestige + ")\n");
             string.append("\n");
 

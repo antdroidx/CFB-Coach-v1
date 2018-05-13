@@ -504,6 +504,7 @@ public class Conference {
             );
         }
         Collections.sort(confTeams, new CompTeamPoll());
+        Collections.sort(confTeams, new CompTeamConfWins());
     }
 
     /**
