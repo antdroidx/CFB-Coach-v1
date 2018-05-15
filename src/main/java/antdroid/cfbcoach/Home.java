@@ -22,21 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 
 
 public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
     private boolean customCareer;
+    private boolean randomize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +46,33 @@ public class Home extends AppCompatActivity {
         Button newGameButton = findViewById(R.id.buttonNewGame);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                finish();
-                Intent myIntent = new Intent(Home.this, MainActivity.class);
-                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
-                Home.this.startActivity(myIntent);
+
+                AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
+                welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
+                        .setTitle("Game Option")
+                        .setPositiveButton("Default", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                Intent myIntent = new Intent(Home.this, MainActivity.class);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
+                                Home.this.startActivity(myIntent);
+                            }
+                        })
+                        .setNegativeButton("Randomize", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                                Intent myIntent = new Intent(Home.this, MainActivity.class);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY_RANDOM");
+                                Home.this.startActivity(myIntent);
+                            }
+                        });
+                welcome.setCancelable(false);
+                AlertDialog dialog = welcome.create();
+                dialog.show();
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
+                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
         });
 
@@ -74,10 +92,32 @@ public class Home extends AppCompatActivity {
         Button newCareerButton = findViewById(R.id.buttonCareer);
         newCareerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                finish();
-                Intent myIntent = new Intent(Home.this, MainActivity.class);
-                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER");
-                Home.this.startActivity(myIntent);
+                AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
+                welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
+                        .setTitle("Game Option")
+                        .setPositiveButton("Default", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                Intent myIntent = new Intent(Home.this, MainActivity.class);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER");
+                                Home.this.startActivity(myIntent);
+                            }
+                        })
+                        .setNegativeButton("Randomize", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                                Intent myIntent = new Intent(Home.this, MainActivity.class);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER_RANDOM");
+                                Home.this.startActivity(myIntent);
+                            }
+                        });
+                welcome.setCancelable(false);
+                AlertDialog dialog = welcome.create();
+                dialog.show();
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
+                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
         });
 
@@ -352,8 +392,8 @@ public class Home extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
-        Intent myIntent = new Intent(Home.this, MainActivity.class);
-        String uriStr;
+        final Intent myIntent = new Intent(Home.this, MainActivity.class);
+        //String uriStr;
 
         // The ACTION_OPEN_DOCUMENT intent was sent with the request code
         // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
@@ -366,14 +406,49 @@ public class Home extends AppCompatActivity {
             // Pull that URI using resultData.getData().
             Uri uri = null;
             uri = resultData.getData();
-            uriStr = uri.toString();
-            if (customCareer) {
+           final String uriStr = uri.toString();
+            AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
+            welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
+                    .setTitle("Game Option")
+                    .setPositiveButton("Default", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (customCareer) {
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM," + uriStr);
+                            } else {
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
+                            }
+                            finish();
+                            Home.this.startActivity(myIntent);
+                        }
+                    })
+                    .setNegativeButton("Randomize", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if (customCareer) {
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM_RANDOM," + uriStr);
+                            } else {
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM_RANDOM," + uriStr);
+                            }
+                            finish();
+                            Home.this.startActivity(myIntent);
+                        }
+                    });
+            welcome.setCancelable(false);
+            AlertDialog dialog = welcome.create();
+            dialog.show();
+            TextView msgTxt = dialog.findViewById(android.R.id.message);
+            msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+
+
+
+/*            if (customCareer) {
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM," + uriStr);
             } else {
                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
             }
             finish();
-            Home.this.startActivity(myIntent);
+            Home.this.startActivity(myIntent);*/
 
         }
     }

@@ -215,11 +215,12 @@ public class League {
      * Creates League, sets up Conferences, reads team names and conferences from file.
      * Also schedules games for every team.
      */
-    public League(String namesCSV, String lastNamesCSV, String confText, String teamText, String bowlText, boolean career) {
+    public League(String namesCSV, String lastNamesCSV, String confText, String teamText, String bowlText, boolean career, boolean randomize) {
         careerMode = career;
         hidePotential = true;
         confRealignment = true;
         enableTV = true;
+        enableUnivProRel = false;
         setupCommonInitalizers();
 
         //set up names database from xml
@@ -242,16 +243,35 @@ public class League {
         String[] teamSplit = teamText.split("%");
         int x = 0;
         int c = 0;
-        for (int t = 0; t < teamText.split("%").length; t++) {
-            if (teamText.split("%")[t].contains("[END CONF]")) {
-                //skip
-            } else {
-                String[] teamID = teamText.split("%")[t].split(", ");
-                conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], Integer.parseInt(teamID[3]), teamID[4], Integer.parseInt(teamID[5]), this));
-                x++;
-                if (x > 11) {
-                    c++;
-                    x = 0;
+        if (!randomize) {
+            for (int t = 0; t < teamText.split("%").length; t++) {
+                if (teamText.split("%")[t].contains("[END CONF]")) {
+                    //skip
+                } else {
+                    String[] teamID = teamText.split("%")[t].split(", ");
+                    conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], Integer.parseInt(teamID[3]), teamID[4], Integer.parseInt(teamID[5]), this));
+                    x++;
+                    if (x > 11) {
+                        c++;
+                        x = 0;
+                    }
+                }
+            }
+        } else {
+            for (int t = 0; t < teamText.split("%").length; t++) {
+                int tmPres = 0;
+                if (c < 5) tmPres = (int)(Math.random()*35) + 60;
+                else tmPres = (int)(Math.random()*35) + 25;
+                if (teamText.split("%")[t].contains("[END CONF]")) {
+                    //skip
+                } else {
+                    String[] teamID = teamText.split("%")[t].split(", ");
+                    conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], tmPres, teamID[4], Integer.parseInt(teamID[5]), this));
+                    x++;
+                    if (x > 11) {
+                        c++;
+                        x = 0;
+                    }
                 }
             }
         }
@@ -275,11 +295,13 @@ public class League {
     /**
      * Creates a CUSTOM League Universe
      */
-    public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl) {
+    public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl, boolean randomize) {
         careerMode = career;
         hidePotential = true;
         confRealignment = true;
         enableTV = true;
+        enableUnivProRel = false;
+
         setupCommonInitalizers();
         setupNamesDB(namesCSV, lastNamesCSV);
 
@@ -319,6 +341,10 @@ public class League {
                         String tmAbbr = filesSplit[1];
                         String tmConf = filesSplit[2];
                         int tmPres = Integer.parseInt(filesSplit[3]);
+                        if (randomize) {
+                            if (c < 5) tmPres = (int)(Math.random()*35) + 60;
+                            else tmPres = (int)(Math.random()*35) + 25;
+                        }
                         String tmRival = filesSplit[4];
                         int tmLoc = Integer.parseInt(filesSplit[5]);
                         conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, tmLoc, this));
@@ -796,6 +822,8 @@ public class League {
 
     //Set Up Team Benchmarks for Goals
     public void setTeamBenchMarks() {
+        setTeamRanks();
+
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).setupTeamBenchmark();
         }
@@ -3303,53 +3331,68 @@ public class League {
 
     //Promotion/Relegation System - just like in Soccer. Can be enabled. Disabled by default.
     public void promotionRelegation() {
+
+        //Get list of Promoted & Relegated Teams
+        ArrayList<Team> promotedTeams = new ArrayList<>();
+        ArrayList<Team> relegatedTeams = new ArrayList<>();
+        for (int i = conferences.size()/2; i < conferences.size(); ++i) {
+            for(int t=0; t < conferences.get(i).confTeams.size(); t++) {
+                if (conferences.get(i).confTeams.get(t).gameSchedule.size() > 12 && conferences.get(i).confTeams.get(t).gameSchedule.get(12).gameName.contains("CCG"))
+                    promotedTeams.add(conferences.get(i).confTeams.get(t));
+            }
+        }
+
+        for (int i = 0; i < conferences.size()/2; ++i) {
+            relegatedTeams.add(conferences.get(i).confTeams.get(11));
+            relegatedTeams.add(conferences.get(i).confTeams.get(10));
+        }
+
+        //Remove more prestige from teams
+        for(int i = 0; i < relegatedTeams.size(); i++) {
+            relegatedTeams.get(i).teamPrestige -= 3;
+        }
+
         StringBuilder string = new StringBuilder();
+        for (int i = 0; i < conferences.size()/2; ++i) {
 
-        for (int i = 5; i < conferences.size(); ++i) {
-            Conference g5Conf = conferences.get(i);
-            Conference p5Conf = conferences.get(i - 5);
-            string.append("[ " + p5Conf.confName + " || " + g5Conf.confName + " ]\n");
+            Conference PConf = conferences.get(i);
+            Conference RConf = conferences.get(i + conferences.size()/2);
+            string.append("[ " + PConf.confName + " || " + RConf.confName + " ]\n");
 
-            //set teams to memory
-            final String g5ConfName = g5Conf.confTeams.get(0).conference;
-            final String p5ConfName = p5Conf.confTeams.get(p5Conf.confTeams.size() - 1).conference;
+            //change team conferences
+            promotedTeams.get(2 * i).conference = PConf.confName;
+            promotedTeams.get(2 * i + 1).conference = PConf.confName;
+            relegatedTeams.get(2 * i).conference = RConf.confName;
+            relegatedTeams.get(2 * i + 1).conference = RConf.confName;
 
-            //transfer rivals and conf data
-            g5Conf.confTeams.get(0).conference = p5ConfName;
-            p5Conf.confTeams.get(p5Conf.confTeams.size() - 1).conference = g5ConfName;
-            Team teamA = g5Conf.confTeams.get(0);
-            Team teamB = p5Conf.confTeams.get(p5Conf.confTeams.size() - 1);
-            g5Conf.confTeams.get(1).conference = p5ConfName;
-            p5Conf.confTeams.get(p5Conf.confTeams.size() - 2).conference = g5ConfName;
-            Team teamC = g5Conf.confTeams.get(1);
-            Team teamD = p5Conf.confTeams.get(p5Conf.confTeams.size() - 2);
+            //Remove teams from Conferences
+            PConf.confTeams.remove(relegatedTeams.get(2 * i));
+            PConf.confTeams.remove(relegatedTeams.get(2 * i + 1));
+            RConf.confTeams.remove(promotedTeams.get(2 * i));
+            RConf.confTeams.remove(promotedTeams.get(2 * i + 1));
 
-            //Remove some prestige from demoted teams
-            teamB.teamPrestige -= (int) Math.random() * 5;
-            teamD.teamPrestige -= (int) Math.random() * 5;
+            //Add teams to Conferences
+            PConf.confTeams.add(promotedTeams.get(2 * i));
+            PConf.confTeams.add(promotedTeams.get(2 * i + 1));
+            RConf.confTeams.add(relegatedTeams.get(2 * i));
+            RConf.confTeams.add(relegatedTeams.get(2 * i + 1));
 
-            //remove + transfer teams
-            g5Conf.confTeams.remove(1);
-            p5Conf.confTeams.remove(p5Conf.confTeams.size() - 1);
-            g5Conf.confTeams.add(teamB);
-            p5Conf.confTeams.add(teamA);
-            g5Conf.confTeams.remove(0);
-            p5Conf.confTeams.remove(p5Conf.confTeams.size() - 2);
-            g5Conf.confTeams.add(teamC);
-            p5Conf.confTeams.add(teamD);
+            //calculate Conf Prestige
+            PConf.updateConfPrestige();
+            RConf.updateConfPrestige();
 
             //break the news
-            string.append("Promoted to " + p5ConfName + " Conference\n");
-            string.append(" + " + teamA.name + "\n" + " + " + teamC.name + "\n");
-            string.append("Relegated to " + g5ConfName + " Conference\n");
-            string.append(" - " + teamB.name + "\n" + " - " + teamD.name + "\n");
+            string.append("Promoted to " + PConf.confName + " Conference (" + PConf.confPrestige + ")\n");
+            string.append(" + " + promotedTeams.get(2 * i).name + " (" + promotedTeams.get(2 * i).teamPrestige + ")\n" + " + " + promotedTeams.get(2 * i + 1).name + " (" + promotedTeams.get(2*i+1).teamPrestige + ")\n");
+            string.append("Relegated to " + RConf.confName + " Conference (" + PConf.confPrestige + ")\n");
+            string.append(" - " + relegatedTeams.get(2 * i).name + " (" + relegatedTeams.get(2 * i).teamPrestige + ")\n" + " - " + relegatedTeams.get(2 * i + 1).name + " (" + relegatedTeams.get(2 * i + 1).teamPrestige + ")\n");
             string.append("\n");
+
         }
 
         //post news in News
         newsRealignment = string.toString();
         newsStories.get(currentWeek + 2).add("Promotion/Relegation Update>" + newsRealignment);
-
     }
 
     //Universal Pro/Rel system - uses EVERY conferences. This is a giant Premier League + Championship + League 1 + League 2 + National League + Feeder Leagues FA-like system.

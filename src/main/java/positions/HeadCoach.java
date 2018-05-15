@@ -225,6 +225,19 @@ public class HeadCoach extends Player {
         if (ratTalent > 95) ratTalent = 95;
         if (ratTalent < 20) ratTalent = 20;
 
+        if(age > 62 || !team.userControlled) {
+            ratOff -= (int)Math.random()*4;
+            ratDef -= (int)Math.random()*4;
+            ratTalent -= (int)Math.random()*4;
+            ratDiscipline -= (int)Math.random()*4;
+        }
+
+        if(age > 65 || team.userControlled) {
+            ratOff -= (int)Math.random()*2;
+            ratDef -= (int)Math.random()*2;
+            ratTalent -= (int)Math.random()*2;
+            ratDiscipline -= (int)Math.random()*2;
+        }
 
         ratOvr = getHCOverall();
         ratImprovement = ratOvr - oldOvr;

@@ -49,7 +49,7 @@ public class TutorialActivity extends AppCompatActivity {
         titles.add("Team Strategies");
         contents.add(getString(R.string.tutTeamStrategy));
 
-        titles.add("Settings Menu");
+        titles.add("Settings Menu & Built-In Game Mods");
         contents.add(getString(R.string.tutSettings));
 
         titles.add("User Customization");

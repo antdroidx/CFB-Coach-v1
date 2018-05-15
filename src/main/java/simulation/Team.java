@@ -1,10 +1,5 @@
 package simulation;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.util.TypedValue;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
@@ -221,6 +215,13 @@ public class Team {
 
     public String suspensionNews;
     public boolean suspension;
+
+    //Future Implementation?
+    public int teamBudget;
+    public int teamRecruitBudget;
+    public int teamDiscplineBudget;
+    public int teamTrainingBudget;
+
     //public final int confMin = 30;
     //public final int confMax = 80;
     //private int maxPrestige = 95;
@@ -431,6 +432,11 @@ public class Team {
 
         projectedPollScore = getPreseasonBiasScore();
     }
+
+    //Future Implementation?
+/*    public void setTeamBudgets() {
+
+    }*/
 
     public void projectTeamWins(){
         //Projected Win-Loss Record
@@ -792,17 +798,22 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
 
-
         int univProRelBonus = 0;
-        if (league.enableUnivProRel) univProRelBonus = 20*(10 - league.getConfNumber(conference));
+        if (league.enableUnivProRel) {
+            univProRelBonus = 20*(10 - league.getConfNumber(conference));
+        }
 
         double preseasonBias = 15 - (wins + losses);
         if (preseasonBias < 0) preseasonBias = 0;
         preseasonBias = preseasonBias/15;
         teamPollScore =
                 (int)(preseasonBias * getPreseasonBiasScore()) +
-                        (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses +
-                        500 + univProRelBonus);
+                        (offRating + defRating + teamStrengthOfWins - teamStrengthOfLosses + 500 + univProRelBonus);
+
+        if(league.currentWeek==0) {
+            teamPollScore = getPreseasonBiasScore();
+        }
+
 
         if ("CC".equals(confChampion)) {
             //bonus for winning conference
@@ -829,10 +840,17 @@ public class Team {
     private int getPreseasonBiasScore() {
         int score = 0;
 
-        score += teamCount - rankTeamOffTalent;
-        score += teamCount - rankTeamDefTalent;
-        score += 1.5*(teamCount - rankTeamPrestige);
-        score += confPrestige/2;
+        if(league.currentWeek > 0) {
+            score += totalTeamCount - rankTeamOffTalent;
+            score += totalTeamCount - rankTeamDefTalent;
+            score += 1.5 * (totalTeamCount - rankTeamPrestige);
+            score += confPrestige / 2;
+        } else {
+            score += getOffTalent();
+            score += getDefTalent();
+            score += 1.5 * teamPrestige;
+            score += confPrestige / 2;
+        }
 
         return score;
     }
@@ -3186,23 +3204,31 @@ public class Team {
      * @return list of players in string
      */
     public String[] getInjuryReport() {
+        ArrayList<Player> playersSuspended = new ArrayList<>();
+        ArrayList<Player> allPlayers = getAllPlayers();
+        for (int i = 0; i < allPlayers.size(); ++i ) {
+            if (allPlayers.get(i).isSuspended) {
+                playersSuspended.add(allPlayers.get(i));
+            }
+        }
 
-        if (playersInjuredAll.size() > 0 || playersRecovered.size() > 0) {
+        if (playersInjuredAll.size() > 0 || playersRecovered.size() > 0 || playersSuspended.size() > 0) {
             String[] injuries;
 
-            if (playersRecovered.size() > 0)
-                injuries = new String[playersInjuredAll.size() + playersRecovered.size() + 1];
-            else injuries = new String[playersInjuredAll.size()];
+           injuries = new String[playersInjuredAll.size() + playersRecovered.size() + playersSuspended.size() + 2];
 
             for (int i = 0; i < playersInjuredAll.size(); ++i) {
                 injuries[i] = playersInjuredAll.get(i).getPosNameYrOvrPot_Str();
             }
 
-            if (playersRecovered.size() > 0) {
-                injuries[playersInjuredAll.size()] = "Players Recovered from Injuries:> ";
-                for (int i = 0; i < playersRecovered.size(); ++i) {
-                    injuries[playersInjuredAll.size() + i + 1] = playersRecovered.get(i).getPosNameYrOvrPot_Str();
-                }
+            injuries[playersInjuredAll.size()] = "Players Suspended:> ";
+            for (int i = 0; i < playersSuspended.size(); ++i) {
+                injuries[playersInjuredAll.size() + i + 1] = playersSuspended.get(i).getPosNameYrOvrPot_Str();
+            }
+
+            injuries[playersInjuredAll.size()+playersSuspended.size()+1] = "Players Recovered from Injuries:> ";
+            for (int i = 0; i < playersRecovered.size(); ++i) {
+                injuries[playersInjuredAll.size() + playersSuspended.size() + i + 2] = playersRecovered.get(i).getPosNameYrOvrPot_Str();
             }
 
             return injuries;

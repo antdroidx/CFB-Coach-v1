@@ -10,6 +10,9 @@
         and you will be offered contract extensions. If you perform poorly, you will lose coaching attributes, and potentially risk losing your job and be on the streets applying for a new position.\n
         This Mode has two starting points: NORMAL mode, which lets you start at any university, and CHALLENGE mode, which humbly starts you at a smaller school and makes your work to get to the top.
         \n\n
+        \n\n
+        NOTE: Save files will ALWAYS start at the beginning of a season. This is intentional, for now. All mid-season progress will be lost. You can only save during pre-season and regular season.
+        There will be a reminder at the beginning of each season.\n\n
 
         Developer Notes:\n\n
         The original version of this game was created by Achi Jones in 2016. He graciously made this game open-source on Github and allowed it to be tinkered with. In Fall of 2017, I took
@@ -98,7 +101,7 @@
         - Tackling: how good the CB is at tackling, higher means he is more likely to tackle WRs before they get away.\n
         - Jumping: how high and quick the CB can jump and attack the ball against the WR. \n
         \n
-        S (2 starter):\n
+        S (2 starters):\n
         - Safety, a leader on defense, and responsible for covering the pass and causing inteceptions from opposing QBs.\n
         - Coverage: how good the safety is at convering the pass and how good he is at catching interceptions.\n
         - Speed: how quick the safety is, affects how he can keep up with WRs.\n
@@ -160,7 +163,12 @@
         + SHOW INJURY REPORT: This is a pop-up that displays after every simulated week that tells users the injury/suspension status of their roster.\n\n
         + SHOW FULL GAME PLAY BY PLAY: By default, the Game Summary will show only scoring plays in the PLAY BY PLAY Log. Enabling this option will show the entire games activity. This will slow down simulation.\n\n
         + HIDE POTENTIAL RATING: Set ON by default, this hides player potential from showing up in the game to create a challenging game. If enabled, the game will predict a players peak overall rating score based on the players full potential.\n\n
-        + ENABLE CONF REALIGNMENT: Set OFF by default, this option enables or disables Conference invites system. If a team is playing well above their conference competition, a higher prestige conference may invite them to join their conference in place of one of their lower prestige teams.\n\n
+        + ENABLE CONF REALIGNMENT: Set OFF by default, this option enables or disables Conference invites system. Every 5 seasons: if a team is playing well above their conference competition, a higher prestige conference may invite them to join their conference in place of one of their lower prestige teams.\n\n
+        + ENABLE PROMOTION/RELEGATION: Set OFF by default. This feature is a yearly event. Each season, the Top 2 teams from a Group of 5 Conference will trade spots with the Bottom 2 teams from a Power 5 Conference.\n\n
+        + ENABLE TV CONTRACTS: Set ON by default. This feature enables network TV contracts for each Conference. Deals may last up to 9 seasons with prestige handed out each year to teams within the conference.\n\n
+        \n+RESIGN JOB: This button can be used to quit your job and find a new job!\n\n
+        \n+UNIVERSAL PROMOTION/RELEGATION: This is only available in Pre-Season of any existing or new game. This feature will turn the entire Universe upside down. Every team will be ranked by Prestige and then placed in 10 Tiers. Then a Promotion/Relegation system is enabled for the rest of time. Top 2 teams of a lower tier will move up while the bottom 2 will move down. The goal is to be the best at Tier 1!\n\n
+        +GAME EDITOR: The Game Editor will allow you to customize Team Names, Abbreviations, Conference Names and Head Coach names from within the game!\n\n
 
     </string>
 

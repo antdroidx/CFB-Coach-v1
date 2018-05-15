@@ -143,11 +143,15 @@ public class MainActivity extends AppCompatActivity {
                     customBowls = new File(getFilesDir(), "bowls.txt");
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls);
+                    if (saveFileStr.contains("RANDOM")) simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, true);
+                    else simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, false);
                     season = seasonStart;
                     //NEW DYNASTY DEFAULT DATABASE
-                } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false);
+                } else if (saveFileStr.contains("NEW_LEAGUE_DYNASTY_RANDOM")) {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, true);
+                    season = seasonStart;
+                }  else {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
                     season = seasonStart;
                 }
                 //NEW CAREER GAME
@@ -161,11 +165,14 @@ public class MainActivity extends AppCompatActivity {
                     customBowls = new File(getFilesDir(), "bowls.txt");
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls);
-                    season = seasonStart;
+                    if (saveFileStr.contains("RANDOM")) simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, true);
+                    else simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, false);                    season = seasonStart;
                     //NEW CAREER GAME WITH DEFAULT DATABASE
-                } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true);
+                } else if (saveFileStr.contains("NEW_LEAGUE_CAREER_RANDOM")) {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, true);
+                    season = seasonStart;
+                }  else {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
                     season = seasonStart;
                 }
                 //LOADING A CURRENT GAME AFTER RECRUITING PERIOD
@@ -197,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             //STARTS A NEW GAME WITH NO EXTRAS - NOT USED CURRENTLY
-            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false);
+            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
             season = seasonStart;
         }
 
@@ -3958,7 +3965,7 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
     //allow the ability to enable editor to edit player names, positions, attributes, etc.
-    private void playerEditorP() {
+    private void playerEditor() {
 
     }
 

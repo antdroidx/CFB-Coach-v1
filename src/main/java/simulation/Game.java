@@ -103,8 +103,6 @@ public class Game implements Serializable {
 
     private int returnYards;
 
-    //private int homeTeamOffNum, homeTeamDefNum, awayTeamOffNum, awayTeamDefNum;
-
     //GAME SETUP
 
     public Game(Team home, Team away, String name) {
@@ -179,32 +177,6 @@ public class Game implements Serializable {
         if (adv < -3) adv = -3;
         return adv;
     }
-
-/*
-    private void setTeamStrategies() {
-
-        //set original playbooks to memory
-        homeTeamOffNum = homeTeam.playbookOffNum;
-        homeTeamDefNum = homeTeam.playbookDefNum;
-        awayTeamOffNum = awayTeam.playbookOffNum;
-        awayTeamDefNum = awayTeam.playbookDefNum;
-
-        if(!awayTeam.userControlled) {
-            if(awayTeam.HC.get(0).ratOff > 80) {
-                if(homeTeam.playbookDefNum > 2) {
-                    if(awayTeam.playbookOffNum == 2 && awayTeam.HC.get(0).ratDef * Math.random() > 100 * Math.random()) {
-                        awayTeam.playbookOffNum = 1;
-                    }
-                }
-            }
-
-        }
-
-        if(!homeTeam.userControlled) {
-
-        }
-    }
-*/
 
     private void getReturner() {
         homeReturner = new ArrayList<>();

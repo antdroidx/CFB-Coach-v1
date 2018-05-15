@@ -35,7 +35,7 @@ class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
             TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
             TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
 
-            if (values[position].substring(0, 3).equals("[I]")) {
+            if (values[position].substring(0, 3).equals("[I]") || values[position].substring(0, 3).equals("[S]")) {
                 // Injury, make red
                 itemL.setText(detailSplit[0].substring(3));
                 itemR.setText(detailSplit[1]);
