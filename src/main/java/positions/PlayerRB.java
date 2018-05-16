@@ -234,7 +234,7 @@ public class PlayerRB extends Player {
             ratRushPower += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratSpeed += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratEvasion += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
-            ratCatch += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratCatch += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor)/1.5;
             if (Math.random() * 100 < progression) {
                 //breakthrough
                 ratRushPower += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;

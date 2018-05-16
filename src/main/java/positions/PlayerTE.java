@@ -212,13 +212,13 @@ public class PlayerTE extends Player {
             ratCatch += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratRunBlock += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratEvasion += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
-            ratSpeed += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
+            ratSpeed += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor)/1.5;
             if (Math.random() * 100 < progression) {
                 //breakthrough
                 ratCatch += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratRunBlock += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratEvasion += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
-                ratSpeed += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
+                ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor)/1.5;
             }
         }
 

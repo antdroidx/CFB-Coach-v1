@@ -34,7 +34,7 @@ public class PlayerK extends Player {
     private final int hAvg = 69;
     private final int hMax = 4;
     private final int hMin = -5;
-    private final int wAvg = 165;
+    private final int wAvg = 150;
     private final int wMax = 35;
     private final int wMin = 15;
 

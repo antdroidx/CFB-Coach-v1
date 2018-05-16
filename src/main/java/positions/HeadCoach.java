@@ -225,18 +225,18 @@ public class HeadCoach extends Player {
         if (ratTalent > 95) ratTalent = 95;
         if (ratTalent < 20) ratTalent = 20;
 
-        if(age > 62 || !team.userControlled) {
+        if(age > 62 && !team.userControlled) {
             ratOff -= (int)Math.random()*4;
             ratDef -= (int)Math.random()*4;
             ratTalent -= (int)Math.random()*4;
             ratDiscipline -= (int)Math.random()*4;
         }
 
-        if(age > 65 || team.userControlled) {
-            ratOff -= (int)Math.random()*2;
-            ratDef -= (int)Math.random()*2;
-            ratTalent -= (int)Math.random()*2;
-            ratDiscipline -= (int)Math.random()*2;
+        if(age > 65 && team.userControlled && team.league.isCareerMode()) {
+            ratOff -= (int)Math.random()*(age/20);
+            ratDef -= (int)Math.random()*(age/20);
+            ratTalent -= (int)Math.random()*(age/20);
+            ratDiscipline -= (int)Math.random()*(age/20);
         }
 
         ratOvr = getHCOverall();
@@ -261,7 +261,7 @@ public class HeadCoach extends Player {
             prestigeDiff = team.teamPrestige - team.teamPrestigeStart;
         }
 
-        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3*team.wins - 1*team.losses;
+        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3*team.wins - 1*team.losses + team.confPrestige;
     }
 
     //For future implementation: tally up the total prestige change over the years for scoring

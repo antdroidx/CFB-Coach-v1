@@ -87,7 +87,7 @@ public class PlaybookDefense {
         runSpy = 1;
         passPref = 3;
         passRush = 1;
-        passCoverage = 0;
+        passCoverage = 1;
         passSpy = 0;
     }
 

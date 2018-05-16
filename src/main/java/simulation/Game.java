@@ -103,6 +103,9 @@ public class Game implements Serializable {
 
     private int returnYards;
 
+    private int homeOffense, homeDefense, awayOffense, awayDefense;
+    private int tacticalCoach = 80;
+
     //GAME SETUP
 
     public Game(Team home, Team away, String name) {
@@ -167,6 +170,7 @@ public class Game implements Serializable {
 
     private int getCoachAdv() {
         int adv = 0;
+        coachingStrategyAdjustments();
 
         if (gamePoss) {
             adv = Math.round((homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 4);
@@ -176,6 +180,59 @@ public class Game implements Serializable {
         if (adv > 3) adv = 3;
         if (adv < -3) adv = -3;
         return adv;
+    }
+
+    private void coachingStrategyAdjustments() {
+        //Set Default Team Playbooks to memory
+        homeOffense = homeTeam.playbookOffNum;
+        homeDefense = homeTeam.playbookDefNum;
+        awayOffense = awayTeam.playbookOffNum;
+        awayDefense = awayTeam.playbookDefNum;
+        
+        //Counter Strategies - performed in snake order.
+        if(!homeTeam.userControlled && homeTeam.getHC(0).ratDef > tacticalCoach && Math.random() > 0.50) {
+            if(awayTeam.playbookOffNum == 0) homeTeam.playbookDefNum = 0;
+            if(awayTeam.playbookOffNum == 1) homeTeam.playbookDefNum = 1;
+            if(awayTeam.playbookOffNum == 2) {
+                if(Math.random() > 0.50) homeTeam.playbookDefNum = 2;
+                else homeTeam.playbookDefNum = 3;
+            }
+            if(awayTeam.playbookOffNum == 3) homeTeam.playbookDefNum = 4;
+            if(awayTeam.playbookOffNum == 4) homeTeam.playbookDefNum = 1;
+        }
+
+        if(!awayTeam.userControlled && awayTeam.getHC(0).ratDef > tacticalCoach && Math.random() > 0.50) {
+            if(homeTeam.playbookOffNum == 0) awayTeam.playbookDefNum = 0;
+            if(homeTeam.playbookOffNum == 1) awayTeam.playbookDefNum = 1;
+            if(homeTeam.playbookOffNum == 2) {
+                if(Math.random() > 0.50) awayTeam.playbookDefNum = 2;
+                else awayTeam.playbookDefNum = 3;
+            }
+            if(homeTeam.playbookOffNum == 3) awayTeam.playbookDefNum = 4;
+            if(homeTeam.playbookOffNum == 4) awayTeam.playbookDefNum = 1;
+        }
+
+        if(!awayTeam.userControlled && awayTeam.getHC(0).ratOff > tacticalCoach && Math.random() > 0.50) {
+            if(awayTeam.playbookOffNum == 1 && homeTeam.playbookDefNum == 1 || awayTeam.playbookOffNum == 4 && homeTeam.playbookDefNum == 1) {
+                awayTeam.playbookOffNum = (int)(Math.random()*3) + 1;
+                if (awayTeam.playbookOffNum == 1 ) awayTeam.playbookOffNum = 0;
+            }
+
+            if(awayTeam.playbookOffNum == 3 && homeTeam.playbookDefNum == 4) {
+                awayTeam.playbookOffNum = (int)(Math.random()*3);
+            }
+        }
+
+        if(!homeTeam.userControlled && homeTeam.getHC(0).ratOff > tacticalCoach && Math.random() > 0.50) {
+            if(homeTeam.playbookOffNum == 1 && awayTeam.playbookDefNum == 1 || homeTeam.playbookOffNum == 4 && awayTeam.playbookDefNum == 1) {
+                homeTeam.playbookOffNum = (int)(Math.random()*3) + 1;
+                if (homeTeam.playbookOffNum == 1 ) homeTeam.playbookOffNum = 0;
+            }
+
+            if(homeTeam.playbookOffNum == 3 && awayTeam.playbookDefNum == 4) {
+                homeTeam.playbookOffNum = (int)(Math.random()*3);
+            }
+        }
     }
 
     private void getReturner() {
@@ -425,6 +482,13 @@ public class Game implements Serializable {
             awayTeam.teamTODiff += homeTOs - awayTOs;
 
             gameStatistics();
+
+            //Reset Strategies
+
+            homeOffense = homeTeam.playbookOffNum;
+            homeDefense = homeTeam.playbookDefNum;
+            awayOffense = awayTeam.playbookOffNum;
+            awayDefense = awayTeam.playbookDefNum;
 
             hasPlayed = true;
 

@@ -215,6 +215,7 @@ public class Team {
 
     public String suspensionNews;
     public boolean suspension;
+    public boolean retirement;
 
     //Future Implementation?
     public int teamBudget;
@@ -469,16 +470,27 @@ public class Team {
     public void setupUserCoach(String name) {
         HC.get(0).name = name;
         HC.get(0).year = 0;
-        HC.get(0).age = 35;
+        HC.get(0).age = 34;
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
-        HC.get(0).ratPot = 70;
-        HC.get(0).ratOff = 70;
-        HC.get(0).ratDef = 70;
-        HC.get(0).ratTalent = 70;
-        HC.get(0).ratDiscipline = 70;
+        HC.get(0).ratPot = (int)(Math.random()*10) + 60;
+        HC.get(0).ratOff = (int)(Math.random()*10) + 60;
+        HC.get(0).ratDef = (int)(Math.random()*10) + 60;
+        HC.get(0).ratTalent = (int)(Math.random()*10) + 60;
+        HC.get(0).ratDiscipline = (int)(Math.random()*10) + 60;
         HC.get(0).offStrat = 0;
         HC.get(0).defStrat = 0;
+        HC.get(0).wins = 0;
+        HC.get(0).losses = 0;
+        HC.get(0).confchamp = 0;
+        HC.get(0).natchamp = 0;
+        HC.get(0).bowlwins = 0;
+        HC.get(0).bowllosses = 0;
+        HC.get(0).allamericans = 0;
+        HC.get(0).allconference = 0;
+        HC.get(0).confAward = 0;
+        HC.get(0).awards = 0;
+        HC.get(0).history.clear();
     }
 
     /**
@@ -1288,15 +1300,19 @@ public class Team {
 
             coachContracts(totalPDiff, teamPrestige);
 
-            if (userControlled && totalPDiff > promotionNum && teamPrestige >= HC.get(0).baselinePrestige) {
+            if (userControlled && league.isCareerMode() && totalPDiff > promotionNum && teamPrestige >= HC.get(0).baselinePrestige) {
                 HC.get(0).promotionCandidate = true;
             }
         } else {}
 
-/*        if(userControlled) {
-            if(HC.get(0).age == 50 || HC.get(0).age == 65 || HC.get(0).age == 80 || HC.get(0).age == 100 || HC.get(0).age == 150 )
-            getLeaderboard();
-        }*/
+
+        if(userControlled && league.isCareerMode()) {
+            if(HC.get(0).age == 65 || HC.get(0).age == 80 || HC.get(0).age == 100 || HC.get(0).age == 150 ) {
+                //getLeaderboard();
+                retirement = true;
+            }
+
+        }
 
     }
 
@@ -2050,7 +2066,6 @@ public class Team {
     }
 
     private int getRecruitLevel() {
-        //int level = Math.round(teamPrestige / 10) + 1;
         int level = (120 - rankTeamPrestige) / 12;
         if (level < 4) level = 4;
         return level;
@@ -2060,7 +2075,7 @@ public class Team {
         float level = (120-rankTeamPrestige) / 12;
         if(level < 4) level = 4;
 
-        return (int)(level*9);
+        return (int)(level*8.5);
     }
 
     /**
@@ -4130,9 +4145,9 @@ public class Team {
         if(HC.size() < 1 || teamQBs.size() < 1) return 0;
         if(HC.get(0).offStrat < 0 || HC.get(0).offStrat > 4) HC.get(0).offStrat = 0;
 
-        if (teamQBs.get(0).ratSpeed >= 70 && HC.get(0).offStrat == 4) {
+        if (teamQBs.get(0).ratSpeed >= 75 && HC.get(0).offStrat == 4) {
             return 4;
-        } else if (teamQBs.get(0).ratSpeed < 70 && HC.get(0).offStrat == 4) {
+        } else if (teamQBs.get(0).ratSpeed < 75 && HC.get(0).offStrat == 4) {
             return 0;
         } else {
             return HC.get(0).offStrat;

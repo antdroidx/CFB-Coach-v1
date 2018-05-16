@@ -3219,24 +3219,28 @@ public class MainActivity extends AppCompatActivity {
 
     //Contract Status Dialog
     private void contractDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage(userTeam.contractString)
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Contract Status")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .setNegativeButton("View Coaching News", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        showNewsStoriesDialog();
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        TextView textView = dialog.findViewById(android.R.id.message);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        if(userTeam.retirement) {
+            retirementQuestion();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(userTeam.contractString)
+                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Contract Status")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setNegativeButton("View Coaching News", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            showNewsStoriesDialog();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        }
     }
 
     //Job Offers Dialog when fired or resignation from previous team
@@ -3602,6 +3606,128 @@ public class MainActivity extends AppCompatActivity {
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 
+    //Retirement vs Eternal
+    private void retirementQuestion() {
+        String string = "";
+        string = "You have reached that time in your life when you need to decide to hang it up and retire or continue on. " +
+                "At this point, if you choose to continue, your ability to increase skill ratings will be much more challenging. " +
+                "You may also retire and end your career. " +
+                "Finally, you can choose to reincarnate yourself as a fresh new head coach in his 30s in this same universe!";
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage(string)
+                .setTitle("Retirement Age")
+                .setPositiveButton("Continue Career", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setNeutralButton("Reincarnate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                reincarnation();
+
+            }
+        })
+                .setNegativeButton("Retire", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                retire();
+            }
+        });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+    }
+
+    private void retire() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("A brief look back...")
+                .setPositiveButton("EXIT GAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        exitMainActivity();
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        builder.setCancelable(false);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        String[] selection = {"Team History"};
+        Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+        final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, selection);
+        teamHistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamHistSpinner.setAdapter(teamHistAdapter);
+
+        final ListView teamHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
+
+        teamHistSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        if (position == 0) {
+                            TeamHistoryListArrayAdapter teamHistoryAdapter =
+                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
+                            teamHistoryList.setAdapter(teamHistoryAdapter);
+                        }
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+    }
+
+    private void reincarnation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
+                .setPositiveButton("Reincarnate - Same Team", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        userTeam.setupUserCoach(userHC.name);
+                    }
+                })
+                .setNegativeButton("Reincarnate - New Team", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        userTeam.setupUserCoach(userHC.name);
+                        jobOffers(userHC);
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        builder.setCancelable(false);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        String[] selection = {"Team History"};
+        Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+        final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, selection);
+        teamHistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamHistSpinner.setAdapter(teamHistAdapter);
+
+        final ListView teamHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
+
+        teamHistSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        if (position == 0) {
+                            TeamHistoryListArrayAdapter teamHistoryAdapter =
+                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
+                            teamHistoryList.setAdapter(teamHistoryAdapter);
+                        }
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+
+    }
 
     //CUSTOM DATA
 
