@@ -173,7 +173,7 @@ Alabama,Jonah Williams,OL,2,10
 Alabama,Ross Pierschbach,OL,3,10
 Alabama,Bradley Bozeman,OL,4,10
 Alabama,Lester Cotton,OL,3,10
-Alabama,JC Hassenauer,OL,4,8
+Alabama,JC Hassenauer,OL,10,8
 Alabama,Matt Womack,OL,2,8
 Alabama,Scott Lashley,OL,1,7
 Alabama,Alex Leatherwood,OL,1,7
@@ -1103,8 +1103,8 @@ California,Brandon Singleton,WR,2,5
 California,Kanawai Noa,WR,2,4
 California,Jordan Duncan,WR,2,4
 California,Jeremiah Hawkins,WR,1,4
-Central Florida,Aaron Robinson,CB,2,6
-Central Florida,Chris Johnson,CB,4,5
+Central Florida,Aaron Robinson,CB,10,6
+Central Florida,Chris Johnson,CB,10,5
 Central Florida,Mike Hughes,CB,3,5
 Central Florida,Rashard Causey,CB,3,5
 Central Florida,Brandon Moore,CB,1,5
@@ -1120,7 +1120,7 @@ Central Florida,Seyvon Lowry,DL,4,5
 Central Florida,AJ Wooten,DL,3,5
 Central Florida,Aaron Cochran,DL,3,4
 Central Florida,Brendon Hayes,DL,2,4
-Central Florida,Jeremiah Zio,DL,1,4
+Central Florida,Jeremiah Zio,DL,10,4
 Central Florida,Matthew Wright,K,3,8
 Central Florida,Mac Loudermilk,K,3,5
 Central Florida,Shaquem Griffin,LB,4,9
@@ -1145,13 +1145,13 @@ Central Florida,Tate Hernly,OL,4,5
 Central Florida,Luke Palmer,OL,3,4
 Central Florida,Charles Sprenkel,OL,4,4
 Central Florida,Jake Brown,OL,2,4
-Central Florida,Samuel Jackson,OL,1,4
-Central Florida,Mckenzie Milton,QB,2,6
+Central Florida,Samuel Jackson,OL,10,10
+Central Florida,Mckenzie Milton,QB,10,10
 Central Florida,Darriel Mack,QB,1,4
 Central Florida,Noah Vedral,QB,1,4
-Central Florida,Jawon Hamilton,RB,2,7
-Central Florida,Taj Mcgowan,RB,3,6
-Central Florida,Adrian Killins,RB,2,6
+Central Florida,Jawon Hamilton,RB,10,7
+Central Florida,Taj Mcgowan,RB,10,9
+Central Florida,Adrian Killins,RB,10,6
 Central Florida,Cordarrian Richardson,RB,1,6
 Central Florida,Bentavious Thompson,RB,1,5
 Central Florida,Kyle Gibson,S,3,6
