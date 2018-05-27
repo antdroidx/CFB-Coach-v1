@@ -44,14 +44,10 @@ public class HeadCoach extends Player {
     private final double potFactor = 1.33;
 
     public boolean promotionCandidate;
+    public boolean retirement;
 
     //Leaderboard Stats
     public float careerScore;
-    final public int leaderboardAge = 50;
-    final public int leaderboardAge2 = 65;
-    final public int leaderboardAge3 = 80;
-    final public int leaderboardAge4 = 100;
-    final public int leaderboardAge5 = 150;
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
                      int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
@@ -61,7 +57,7 @@ public class HeadCoach extends Player {
         year = yr;
         contractYear = cyr;
         contractLength = clength;
-        ratOvr = (off + def + tal + dis)/4;
+        ratOvr = (off + def + tal + dis) / 4;
         ratPot = pot;
         ratOff = off;
         ratDef = def;
@@ -95,7 +91,7 @@ public class HeadCoach extends Player {
         year = yr;
         contractYear = 0;
         contractLength = 0;
-        ratOvr = (2*off + 2*def + tal + dis)/6;
+        ratOvr = (2 * off + 2 * def + tal + dis) / 6;
         ratPot = pot;
         ratOff = off;
         ratDef = def;
@@ -131,9 +127,9 @@ public class HeadCoach extends Player {
         contractYear = (int) (6 * Math.random());
         contractLength = 6;
         ratPot = (int) (50 + 50 * Math.random());
-        ratOff = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random() );
-        ratDef = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random() );
-        ratTalent = (int) (45 + 50*Math.random());
+        ratOff = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random());
+        ratDef = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random());
+        ratTalent = (int) (45 + 50 * Math.random());
         ratDiscipline = (int) (45 + 50 * Math.random());
         ratOvr = getHCOverall();
         offStrat = rand.nextInt((max - min) + 1) + min;
@@ -169,8 +165,8 @@ public class HeadCoach extends Player {
         contractYear = 0;
         contractLength = 6;
         ratPot = (int) (50 + 50 * Math.random());
-        ratOff = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random() );
-        ratDef = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random() );
+        ratOff = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random());
+        ratDef = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random());
         ratTalent = (int) (45 + 45 * Math.random());
         ratDiscipline = (int) (45 + 45 * Math.random());
         ratOvr = getHCOverall();
@@ -203,7 +199,7 @@ public class HeadCoach extends Player {
         contractYear++;
 
         // WIP
-        ratTalent += Math.random()*prestigeDiff;
+        ratTalent += Math.random() * prestigeDiff;
         float off = team.teamYards - avgYards;
         float def = avgYards - team.teamOppYards;
         float offTal = offTalent - team.teamOffTalent;
@@ -211,11 +207,11 @@ public class HeadCoach extends Player {
         float offpts = ((off / avgYards) + (offTal / offTalent)) * 4;
         float defpts = ((def / avgYards) + (defTal / defTalent)) * 4;
 
-        ratOff += ((prestigeDiff + offpts) * ((double)ratTalent/100));
+        ratOff += ((prestigeDiff + offpts) * ((double) ratTalent / 100));
         if (ratOff > 95) ratOff = 95;
         if (ratOff < 20) ratOff = 20;
 
-        ratDef += ((prestigeDiff + defpts) * ((double)ratTalent/100));
+        ratDef += ((prestigeDiff + defpts) * ((double) ratTalent / 100));
         if (ratDef > 95) ratDef = 95;
         if (ratDef < 20) ratDef = 20;
 
@@ -225,18 +221,18 @@ public class HeadCoach extends Player {
         if (ratTalent > 95) ratTalent = 95;
         if (ratTalent < 20) ratTalent = 20;
 
-        if(age > 62 && !team.userControlled) {
-            ratOff -= (int)Math.random()*4;
-            ratDef -= (int)Math.random()*4;
-            ratTalent -= (int)Math.random()*4;
-            ratDiscipline -= (int)Math.random()*4;
+        if (age > 62 && !team.userControlled) {
+            ratOff -= (int) Math.random() * 4;
+            ratDef -= (int) Math.random() * 4;
+            ratTalent -= (int) Math.random() * 4;
+            ratDiscipline -= (int) Math.random() * 4;
         }
 
-        if(age > 65 && team.userControlled && team.league.isCareerMode()) {
-            ratOff -= (int)Math.random()*(age/20);
-            ratDef -= (int)Math.random()*(age/20);
-            ratTalent -= (int)Math.random()*(age/20);
-            ratDiscipline -= (int)Math.random()*(age/20);
+        if (age > 65 && team.userControlled && team.league.isCareerMode()) {
+            ratOff -= (int) Math.random() * (age / 20);
+            ratDef -= (int) Math.random() * (age / 20);
+            ratTalent -= (int) Math.random() * (age / 20);
+            ratDiscipline -= (int) Math.random() * (age / 20);
         }
 
         ratOvr = getHCOverall();
@@ -254,20 +250,21 @@ public class HeadCoach extends Player {
 
     public int getCoachScore() {
         int prestigeDiff;
-        if (team.league.currentWeek < 14) {
+        if (team.league.currentWeek < 15) {
             int[] newPrestige = team.calcSeasonPrestige();
             prestigeDiff = newPrestige[0] - team.teamPrestige;
         } else {
             prestigeDiff = team.teamPrestige - team.teamPrestigeStart;
         }
 
-        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3*team.wins - 1*team.losses + team.confPrestige;
+        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3 * team.wins - 1 * team.losses + team.confPrestige;
     }
 
     //For future implementation: tally up the total prestige change over the years for scoring
     public int getCoachCareerScore() {
         if (year < 1) return 0;
-        else return (5*(wins) - 2*(losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans)/year;
+        else
+            return (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans) / year;
     }
 
     @Override
@@ -347,7 +344,7 @@ public class HeadCoach extends Player {
     public float getLeaderboardScore() {
         float score = 0;
 
-        score = careerScore + (5*(wins) - 2*(losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2* allamericans);
+        score = careerScore + (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans);
 
         return score;
     }

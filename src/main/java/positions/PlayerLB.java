@@ -116,34 +116,34 @@ public class PlayerLB extends Player {
 
     }
 
-     public PlayerLB(String nm, int yr, int stars, Team t) {
-         position = "LB";
-         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
-         weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
-         name = nm;
-         year = yr;
-         team = t;
+    public PlayerLB(String nm, int yr, int stars, Team t) {
+        position = "LB";
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
+        name = nm;
+        year = yr;
+        team = t;
 
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
-        ratCoverage = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratRunStop = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratTackle = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratSpeed = (int) ((ratBase-10) + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-         ratOvr = getOverall();
-         region = (int)(Math.random()*5);
+        ratCoverage = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratRunStop = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratTackle = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratSpeed = (int) ((ratBase - 10) + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratOvr = getOverall();
+        region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
-         recruitRating = getScoutingGrade();
+        recruitRating = getScoutingGrade();
 
-         recruitTolerance = (int)((60 - team.teamPrestige)/lbImportance);
-         cost = getInitialCost();
-         cost = (int)(cost/lbImportance);
-         cost = getLocationCost();
-         if (cost < 0) cost = (int)Math.random()*5+1;
-         resetSeasonStats();
-         resetCareerStats();
+        recruitTolerance = (int) ((60 - team.teamPrestige) / lbImportance);
+        cost = getInitialCost();
+        cost = (int) (cost / lbImportance);
+        cost = getLocationCost();
+        if (cost < 0) cost = (int) Math.random() * 5 + 1;
+        resetSeasonStats();
+        resetCareerStats();
 
 
     }
@@ -159,20 +159,20 @@ public class PlayerLB extends Player {
         ratCoverage = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratRunStop = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratTackle = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
-        ratSpeed = (int) ((ratBase-10) + stars * customFactor - ratTolerance * Math.random());
+        ratSpeed = (int) ((ratBase - 10) + stars * customFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
         position = "LB";
-        region = (int)(Math.random()*5);
+        region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
-        if(custom) isWalkOn = true;
+        if (custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
         resetSeasonStats();
         resetCareerStats();
 
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
     }
 
     public void midSeasonProgression() {
@@ -197,11 +197,11 @@ public class PlayerLB extends Player {
 
         if (!isMedicalRS) {
             year++;
-            if (wonAllConference) ratPot += (int)Math.random()*allConfPotBonus;
-            if (wonAllAmerican) ratPot += (int)Math.random()*allAmericanBonus;
-            if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
-            if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
-            if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+            if (wonAllConference) ratPot += (int) Math.random() * allConfPotBonus;
+            if (wonAllAmerican) ratPot += (int) Math.random() * allAmericanBonus;
+            if (wonAllFreshman) ratPot += (int) Math.random() * allFreshmanBonus;
+            if (wonTopFreshman) ratPot += (int) Math.random() * topBonus;
+            if (wonHeisman) ratPot += (int) Math.random() * topBonus;
             progression = getProgressionDef();
 
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
@@ -210,13 +210,13 @@ public class PlayerLB extends Player {
             ratCoverage += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratRunStop += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratTackle += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
-            ratSpeed += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor)/1.5;
+            ratSpeed += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor) / 1.5;
             if (Math.random() * 100 < progression) {
                 //breakthrough
                 ratCoverage += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratRunStop += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratTackle += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
-                ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor)/1.5;
+                ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor) / 1.5;
             }
         }
 
@@ -281,13 +281,14 @@ public class PlayerLB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + getConfPrestigeBonus();
+        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + ratOvr * 10 + getConfPrestigeBonus();
     }
 
     @Override
     public int getCareerScore() {
-        return statsTackles*25 + statsSacks*425 + statsFumbles*425 + statsInts*425 + ratOvr*10 + team.teamPrestige*4 +
-                careerTackles*25 + careerSacks*425 + careerFumbles*425 + careerInts*425 + ratOvr*year*10;    }
+        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + ratOvr * 10 + team.teamPrestige * 4 +
+                careerTackles * 25 + careerSacks * 425 + careerFumbles * 425 + careerInts * 425 + ratOvr * year * 10;
+    }
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {

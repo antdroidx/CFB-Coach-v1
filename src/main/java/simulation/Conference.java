@@ -62,13 +62,12 @@ public class Conference {
 
         confTV = deal;
         confTVContract = length;
-        confTVBonus =terms;
+        confTVBonus = terms;
         TV = getTVName();
     }
 
     /**
      * Sets up Conference from save file
-     *
      */
     public Conference(String save, League league) {
         String[] data = save.split(",");
@@ -79,7 +78,7 @@ public class Conference {
         allConfPlayers = new ArrayList<>();
 
         //Old Save Compatibility
-        if(data.length > 1) {
+        if (data.length > 1) {
             confTV = Boolean.parseBoolean(data[1]);
             confTVContract = Integer.parseInt(data[2]);
             confTVBonus = Integer.parseInt(data[3]);
@@ -98,11 +97,11 @@ public class Conference {
     public String getTVName() {
         String name;
 
-        int t = (int)(Math.random() * 4);
+        int t = (int) (Math.random() * 4);
 
-        if (t== 0) {
+        if (t == 0) {
             name = confName + " Multimedia";
-        } else if(t == 1) {
+        } else if (t == 1) {
             name = confName + " Sports";
         } else if (t == 2) {
             name = confName + " Network";
@@ -118,7 +117,7 @@ public class Conference {
     //Conference Television
     public void reviewConfTVDeal() {
         updateConfPrestige();
-        if(confTV && confTVContract <= 2) {
+        if (confTV && confTVContract <= 2) {
             confTVprofitSharing();
             negotiateConfTV();
             confTVExpiring();
@@ -162,18 +161,20 @@ public class Conference {
 
     //Provide television incentives to colleges
     private void confTVprofitSharing() {
-        if(confTV) {
+        if (confTV && confTVContract > 0) {
             confTVContract--;
-            int yearBonus = (int)(Math.random()*confTVBonus+1);
-            for(int t = 0; t < confTeams.size(); t++) {
+            int yearBonus = (int) (Math.random() * confTVBonus + 1);
+            for (int t = 0; t < confTeams.size(); t++) {
                 confTeams.get(t).teamPrestige += yearBonus;
-                if (yearBonus > 1) confTeams.get(t).HC.get(0).baselinePrestige += yearBonus/2;  //make the coach's job slightly more challenging
-                else confTeams.get(t).HC.get(0).baselinePrestige += Math.random()*2;
+                if (yearBonus > 1)
+                    confTeams.get(t).HC.get(0).baselinePrestige += yearBonus / 2;  //make the coach's job slightly more challenging
+                else confTeams.get(t).HC.get(0).baselinePrestige += Math.random() * 2;
             }
-            league.newsStories.get(league.currentWeek+1).add(TV + " Annual Distribution>Each member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
+            league.newsStories.get(league.currentWeek + 1).add(TV + " Annual Distribution>Each member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
 
             league.newsTV.add(TV + " Annual Profit Sharing:\n\t+" + yearBonus + " prestige bonus.\nCurrent contract will expire in " + confTVContract + " years.");
             league.updateTV = true;
+            if(confTVContract <= 0) confTV = false;
 
         }
     }
@@ -184,7 +185,7 @@ public class Conference {
             confTV = false;
             confTVContract = 0;
             confTVBonus = 0;
-            league.newsStories.get(league.currentWeek+1).add(TV + " TV Contract Expires>The parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
+            league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract Expires>The parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
 
             league.newsTV.add(TV + " Contract Expires:\n\tThe parent company of the " + confName + " Network and the " + confName + " conference were unable to come to an agreement on a new contract. The contract is now expired and will have to wait until the end of next season for renegotiations to begin again.");
             league.updateTV = true;
@@ -413,8 +414,8 @@ public class Conference {
         }
         confPrestige = CP / (confTeams.size());
 
-        confPromoteMin = (int)(CP/confTeams.size() * promotionFactor);
-        confRelegateMin = (int)(CP/confTeams.size() * relegationFactor);
+        confPromoteMin = (int) (CP / confTeams.size() * promotionFactor);
+        confRelegateMin = (int) (CP / confTeams.size() * relegationFactor);
 
     }
 

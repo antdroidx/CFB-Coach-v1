@@ -15,9 +15,9 @@ import positions.Player;
 public class CompRecruit implements Comparator<Player> {
     @Override
     public int compare(Player a, Player b) {
-        float aRating = (float)((4*a.ratOvr + a.ratPot) / 5);
-        float bRating = (float)((4*b.ratOvr + b.ratPot) / 5);
+        float aRating = (float) ((4 * a.ratOvr + a.ratPot) / 5);
+        float bRating = (float) ((4 * b.ratOvr + b.ratPot) / 5);
 
-        return aRating > bRating ? -1 :aRating == bRating ? 0 : 1;
+        return aRating > bRating ? -1 : aRating == bRating ? 0 : 1;
     }
 }

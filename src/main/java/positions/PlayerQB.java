@@ -128,8 +128,8 @@ public class PlayerQB extends Player {
 
     public PlayerQB(String nm, int yr, int stars, Team t) {
         position = "QB";
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
@@ -137,22 +137,22 @@ public class PlayerQB extends Player {
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
-        ratPassPow = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratPassAcc = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratEvasion = (int) (ratBase + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
-        ratSpeed = (int) ((ratBase-5) + year*yearFactor + stars*starFactor - ratTolerance*Math.random());
+        ratPassPow = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratPassAcc = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratEvasion = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
+        ratSpeed = (int) ((ratBase - 5) + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int)(Math.random()*5);
+        region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
         recruitRating = getScoutingGrade();
 
-        recruitTolerance = (int)((60 - team.teamPrestige)/qbImportance);
+        recruitTolerance = (int) ((60 - team.teamPrestige) / qbImportance);
         cost = getInitialCost();
-        cost = (int)(cost/qbImportance);
+        cost = (int) (cost / qbImportance);
 
         cost = getLocationCost();
-        if (cost < 0) cost = (int)Math.random()*5+1;
+        if (cost < 0) cost = (int) Math.random() * 5 + 1;
 
         resetSeasonStats();
         resetCareerStats();
@@ -161,8 +161,8 @@ public class PlayerQB extends Player {
 
     public PlayerQB(String nm, int yr, int stars, Team t, Boolean custom) {
         position = "QB";
-        height = hAvg + 	(int)(Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + 	(int)(Math.random() * ((wMax - wMin) + 1)) + wMin;
+        height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
         name = nm;
         year = yr;
         team = t;
@@ -173,12 +173,12 @@ public class PlayerQB extends Player {
         ratPassPow = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratPassAcc = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratEvasion = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
-        ratSpeed = (int) ((ratBase-5)  + stars * customFactor - ratTolerance * Math.random());
+        ratSpeed = (int) ((ratBase - 5) + stars * customFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int)(Math.random()*5);
+        region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
-        if(custom) isWalkOn = true;
+        if (custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
         resetSeasonStats();
@@ -189,7 +189,7 @@ public class PlayerQB extends Player {
         final int ratOvrStart = ratOvr;
         progression = getProgressionOff();
         double games = getMidSeasonBonus();
-        
+
         ratFootIQ += (int) (Math.random() * games);
         ratPassPow += (int) (Math.random() * games);
         ratPassAcc += (int) (Math.random() * games);
@@ -206,11 +206,11 @@ public class PlayerQB extends Player {
 
         if (!isMedicalRS) {
             year++;
-            if (wonAllConference) ratPot += (int)Math.random()*allConfPotBonus;
-            if (wonAllAmerican) ratPot += (int)Math.random()*allAmericanBonus;
-            if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
-            if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
-            if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+            if (wonAllConference) ratPot += (int) Math.random() * allConfPotBonus;
+            if (wonAllAmerican) ratPot += (int) Math.random() * allAmericanBonus;
+            if (wonAllFreshman) ratPot += (int) Math.random() * allFreshmanBonus;
+            if (wonTopFreshman) ratPot += (int) Math.random() * topBonus;
+            if (wonHeisman) ratPot += (int) Math.random() * topBonus;
 
             progression = getProgressionOff();
 
@@ -220,14 +220,14 @@ public class PlayerQB extends Player {
             ratPassPow += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratPassAcc += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratEvasion += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
-            ratSpeed += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor)/1.5;
+            ratSpeed += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor) / 1.5;
 
             if (Math.random() * 100 < progression) {
                 //breakthrough
                 ratPassPow += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratPassAcc += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratEvasion += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
-                ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor)/1.5;
+                ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor) / 1.5;
             }
         }
 
@@ -285,6 +285,7 @@ public class PlayerQB extends Player {
         isInjured = false;
 
     }
+
     private void resetCareerStats() {
         careerPassAtt = 0;
         careerPassComp = 0;
@@ -306,18 +307,17 @@ public class PlayerQB extends Player {
     }
 
 
-
     @Override
     public int getHeismanScore() {
-        return statsPassTD*150 - statsInt*215 + statsPassYards + statsRushTD*150 + 3*statsRushYards + ratOvr*10 + getConfPrestigeBonus();
+        return statsPassTD * 150 - statsInt * 215 + statsPassYards + statsRushTD * 150 + 3 * statsRushYards + ratOvr * 10 + getConfPrestigeBonus();
     }
 
 
     //Career score for HoF :: target - 35000?
     @Override
     public int getCareerScore() {
-        return careerTDs*150 - careerInt*215 + careerPassYards + careerRushTD*150 + 3*careerRushYards + ratOvr*10*year +
-                statsPassTD*150 - statsInt*215 + statsPassYards + statsRushTD*150 + 3*statsRushYards + ratOvr*10;
+        return careerTDs * 150 - careerInt * 215 + careerPassYards + careerRushTD * 150 + 3 * careerRushYards + ratOvr * 10 * year +
+                statsPassTD * 150 - statsInt * 215 + statsPassYards + statsRushTD * 150 + 3 * statsRushYards + ratOvr * 10;
     }
 
     public double getPasserRating() {

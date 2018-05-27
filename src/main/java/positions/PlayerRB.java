@@ -88,7 +88,7 @@ public class PlayerRB extends Player {
         ratOvr = getOverall();
 
         resetSeasonStats();
-       resetCareerStats();
+        resetCareerStats();
     }
 
     public PlayerRB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
@@ -148,7 +148,8 @@ public class PlayerRB extends Player {
     public PlayerRB(String nm, int yr, int stars, Team t) {
         position = "RB";
         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;
-        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin; name = nm;
+        weight = wAvg + (int) (Math.random() * ((wMax - wMin) + 1)) + wMin;
+        name = nm;
         year = yr;
         team = t;
 
@@ -168,7 +169,7 @@ public class PlayerRB extends Player {
         cost = getInitialCost();
         cost = (int) (cost / rbImportance);
         cost = getLocationCost();
-        if (cost < 0) cost = (int)Math.random()*5+1;
+        if (cost < 0) cost = (int) Math.random() * 5 + 1;
 
         resetSeasonStats();
         resetCareerStats();
@@ -193,7 +194,7 @@ public class PlayerRB extends Player {
         region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
-        if(custom) isWalkOn = true;
+        if (custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
         resetSeasonStats();
@@ -214,7 +215,7 @@ public class PlayerRB extends Player {
         ratOvr = getOverall();
         ratImprovement = ratOvr - ratOvrStart;
     }
-    
+
     @Override
     public void advanceSeason() {
         double games = getGamesBonus();
@@ -223,9 +224,9 @@ public class PlayerRB extends Player {
             year++;
             if (wonAllConference) ratPot += (int) Math.random() * allConfPotBonus;
             if (wonAllAmerican) ratPot += (int) Math.random() * allAmericanBonus;
-            if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
-            if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
-            if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+            if (wonAllFreshman) ratPot += (int) Math.random() * allFreshmanBonus;
+            if (wonTopFreshman) ratPot += (int) Math.random() * topBonus;
+            if (wonHeisman) ratPot += (int) Math.random() * topBonus;
             progression = getProgressionOff();
 
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);
@@ -234,7 +235,7 @@ public class PlayerRB extends Player {
             ratRushPower += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratSpeed += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
             ratEvasion += (int) (Math.random() * (progression + games - endseason)) / endseasonFactor;
-            ratCatch += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor)/1.5;
+            ratCatch += ((int) (Math.random() * (progression + games - endseason)) / endseasonFactor) / 1.5;
             if (Math.random() * 100 < progression) {
                 //breakthrough
                 ratRushPower += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;

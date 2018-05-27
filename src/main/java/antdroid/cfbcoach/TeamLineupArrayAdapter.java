@@ -50,7 +50,7 @@ class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
 
         if (players.get(position).injury == null && !players.get(position).isTransfer && !players.get(position).isSuspended) {
             playerInfo.setText(players.get(position).getInfoForLineup());
-        } else if (players.get(position).isInjured){
+        } else if (players.get(position).isInjured) {
             playerInfo.setText(players.get(position).getInfoLineupInjury());
         } else if (players.get(position).isTransfer) {
             playerInfo.setText(players.get(position).getInfoLineupTransfer());

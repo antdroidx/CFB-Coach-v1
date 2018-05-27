@@ -185,13 +185,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button googleButton = findViewById(R.id.buttonForum);
+        Button googleButton = findViewById(R.id.buttonDonate);
         googleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://groups.google.com/forum/#!forum/college-football-coach-career-edition"));
+                intent.setData(Uri.parse("https://www.paypal.me/anthonyhnguyen"));
                 startActivity(intent);
             }
         });
@@ -298,6 +298,43 @@ public class Home extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+/*    *//**
+     * Save League, show dialog to choose which save file to save onto.
+     *//*
+    private void exportLeague() {
+        isExternalStorageWritable();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose File to Export:");
+        final String[] fileInfos = getSaveFileInfos();
+        SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
+        builder.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                if (!fileInfos[item].equals("EMPTY")) {
+                    String intFile = getFilesDir() + "/" + item + ".cfb";
+                    String extFile = getExtSaveDir(Home.this, "cfbCoach") + "/" + item + ".cfb";
+
+                    File file = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_DOCUMENTS), "collegeCoach");
+
+
+
+                } else {
+                    Toast.makeText(Home.this, "Cannot load empty file!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }*/
 
     /**
      * Delete Save
@@ -406,7 +443,7 @@ public class Home extends AppCompatActivity {
             // Pull that URI using resultData.getData().
             Uri uri = null;
             uri = resultData.getData();
-           final String uriStr = uri.toString();
+            final String uriStr = uri.toString();
             AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
             welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
                     .setTitle("Game Option")
@@ -439,16 +476,6 @@ public class Home extends AppCompatActivity {
             dialog.show();
             TextView msgTxt = dialog.findViewById(android.R.id.message);
             msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
-
-
-/*            if (customCareer) {
-                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM," + uriStr);
-            } else {
-                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
-            }
-            finish();
-            Home.this.startActivity(myIntent);*/
 
         }
     }

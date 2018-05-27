@@ -1,6 +1,7 @@
 package comparator;
 
 import java.util.Comparator;
+
 import simulation.Team;
 
 /**

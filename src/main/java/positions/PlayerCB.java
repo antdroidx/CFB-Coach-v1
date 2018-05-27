@@ -165,7 +165,7 @@ public class PlayerCB extends Player {
         cost = getInitialCost();
         cost = (int) (cost / cbImportance);
         cost = getLocationCost();
-        if (cost < 0) cost = (int)Math.random()*5+1;
+        if (cost < 0) cost = (int) Math.random() * 5 + 1;
 
         resetSeasonStats();
         resetCareerStats();
@@ -191,7 +191,7 @@ public class PlayerCB extends Player {
         region = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
-        if(custom) isWalkOn = true;
+        if (custom) isWalkOn = true;
         recruitRating = getScoutingGrade();
 
         resetSeasonStats();
@@ -203,7 +203,7 @@ public class PlayerCB extends Player {
         final int ratOvrStart = ratOvr;
         progression = getProgressionDef();
         double games = getMidSeasonBonus();
-        
+
         ratFootIQ += (int) (Math.random() * games);
         ratCoverage += (int) (Math.random() * games);
         ratSpeed += (int) (Math.random() * games);
@@ -224,9 +224,9 @@ public class PlayerCB extends Player {
             year++;
             if (wonAllConference) ratPot += (int) Math.random() * allConfPotBonus;
             if (wonAllAmerican) ratPot += (int) Math.random() * allAmericanBonus;
-            if (wonAllFreshman) ratPot += (int)Math.random()*allFreshmanBonus;
-            if (wonTopFreshman) ratPot += (int)Math.random()*topBonus;
-            if (wonHeisman) ratPot += (int)Math.random()*topBonus;
+            if (wonAllFreshman) ratPot += (int) Math.random() * allFreshmanBonus;
+            if (wonTopFreshman) ratPot += (int) Math.random() * topBonus;
+            if (wonHeisman) ratPot += (int) Math.random() * topBonus;
             progression = getProgressionDef();
 
             if (year > 2 && games < minGamesPot) ratPot -= (int) (Math.random() * 15);

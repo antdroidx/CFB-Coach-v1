@@ -32,10 +32,10 @@ public class PlaybookDefense {
         if (playbook < 1 || playbook > 5) playbook = (int) Math.random() * 5 + 1;
 
         if (playbook == 1) playBook1();
-        else if (playbook == 2)  playBook2();
-        else if (playbook == 3)  playBook3();
-        else if (playbook == 4)  playBook4();
-        else if (playbook == 5)  playBook5();
+        else if (playbook == 2) playBook2();
+        else if (playbook == 3) playBook3();
+        else if (playbook == 4) playBook4();
+        else if (playbook == 5) playBook5();
         else playBook1();
     }
 

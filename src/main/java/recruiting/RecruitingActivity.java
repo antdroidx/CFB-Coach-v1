@@ -683,8 +683,8 @@ public class RecruitingActivity extends AppCompatActivity {
 
     private void removeRecruits(List<String> list) {
         removeList = new ArrayList<>();
-        for(int i = 0; i < list.size(); ++i) {
-            if (Math.random() > recruitOffBoard ) {
+        for (int i = 0; i < list.size(); ++i) {
+            if (Math.random() > recruitOffBoard) {
                 removeList.add(list.get(i));
                 list.remove(i);
             }
@@ -693,7 +693,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
     private void removeRecruitBoard(List<String> list) {
 
-        for (int i=0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
 
             String player = list.get(i);
             // Remove the player from the top 100 list
@@ -1417,9 +1417,6 @@ public class RecruitingActivity extends AppCompatActivity {
     private void setShowPopUp(boolean tf) {
         showPopUp = tf;
     }
-
-
-
 
 
     //MAIN UI FOR PLAYER DATA IN RECRUITING SCREEN

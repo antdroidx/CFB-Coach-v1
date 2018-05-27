@@ -1,7 +1,5 @@
 package antdroid.cfbcoach;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +73,7 @@ public class TutorialActivity extends AppCompatActivity {
                 });
 
     }
+
     @Override
     public void onBackPressed() {
         finish();

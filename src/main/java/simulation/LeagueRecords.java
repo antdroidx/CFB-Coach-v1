@@ -43,11 +43,11 @@ public class LeagueRecords {
     private final String[] recordsList = {"TEAM", "Team PPG", "Team Opp PPG", "Team YPG", "Team Opp YPG", "Team TO Diff",
             "SEASON: OFFENSE", "Pass Yards", "Pass TDs", "Ints Thrown", "Comp Percent", "QB Rating",
             "Rush Yards", "Rush TDs", "Fumbles Lost", "Receptions",
-            "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended", "SEASON: ST", "Field Goals","Kick Ret Yards", "Kick Ret TDs", "Punt Ret Yards", "Punt Ret TDs",
+            "Rec Yards", "Rec TDs", "Catch Percent", "SEASON: DEFENSE", "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Passes Defended", "SEASON: ST", "Field Goals", "Kick Ret Yards", "Kick Ret TDs", "Punt Ret Yards", "Punt Ret TDs",
             "CAREER: OFFENSE", "Career Pass Yards", "Career Pass TDs", "Career Ints Thrown", "Career Comp PCT", "Career QB Rating",
             "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost", "Career Receptions",
             "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended",
-            "CAREER: SPEC TEAMS", "Career Field Goals","Career KR Yards", "Career KR TDs", "Career PR Yards", "Career PR TDs",
+            "CAREER: SPEC TEAMS", "Career Field Goals", "Career KR Yards", "Career KR TDs", "Career PR Yards", "Career PR TDs",
             "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Coach Awards", "Coach Year Score", "Coach Career Score"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
@@ -116,7 +116,7 @@ public class LeagueRecords {
         records.put("Career KR TDs", new Record(0, "XXX%XXX", 0));
         records.put("Career PR Yards", new Record(0, "XXX%XXX", 0));
         records.put("Career PR TDs", new Record(0, "XXX%XXX", 0));
-        records.put("COACHING RECORDS",null);
+        records.put("COACHING RECORDS", null);
         records.put("Wins", new Record(0, "XXX%XXX", 0));
         records.put("National Championships", new Record(0, "XXX%XXX", 0));
         records.put("Conf Championships", new Record(0, "XXX%XXX", 0));
@@ -127,7 +127,7 @@ public class LeagueRecords {
     }
 
     public void checkRecord(String record, int number, String holder, int year) {
-        if(holder.split("%").length < 2) holder = holder + "% ";
+        if (holder.split("%").length < 2) holder = holder + "% ";
         if (record.equals("Team Opp PPG") || record.equals("Team Opp YPG")) {
             // Is a record where lower = better
             if ((records.containsKey(record) && number < records.get(record).getNumber())) {

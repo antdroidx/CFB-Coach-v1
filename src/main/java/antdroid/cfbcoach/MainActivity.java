@@ -143,14 +143,16 @@ public class MainActivity extends AppCompatActivity {
                     customBowls = new File(getFilesDir(), "bowls.txt");
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
-                    if (saveFileStr.contains("RANDOM")) simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, true);
-                    else simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, false);
+                    if (saveFileStr.contains("RANDOM"))
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, true);
+                    else
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, false);
                     season = seasonStart;
                     //NEW DYNASTY DEFAULT DATABASE
                 } else if (saveFileStr.contains("NEW_LEAGUE_DYNASTY_RANDOM")) {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, true);
                     season = seasonStart;
-                }  else {
+                } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
                     season = seasonStart;
                 }
@@ -165,13 +167,16 @@ public class MainActivity extends AppCompatActivity {
                     customBowls = new File(getFilesDir(), "bowls.txt");
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
-                    if (saveFileStr.contains("RANDOM")) simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, true);
-                    else simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, false);                    season = seasonStart;
+                    if (saveFileStr.contains("RANDOM"))
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, true);
+                    else
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, false);
+                    season = seasonStart;
                     //NEW CAREER GAME WITH DEFAULT DATABASE
                 } else if (saveFileStr.contains("NEW_LEAGUE_CAREER_RANDOM")) {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, true);
                     season = seasonStart;
-                }  else {
+                } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
                     season = seasonStart;
                 }
@@ -1621,6 +1626,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (simLeague.currentWeek == 16) {
             userHC = userTeam.HC.get(0);
+
             simLeague.advanceHC();
             if (simLeague.isCareerMode()) contractDialog();
             //conf realignment
@@ -1657,7 +1663,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (simLeague.currentWeek == 19) {
             simLeague.advanceSeason();
             simLeague.currentWeek++;
-            if(simLeague.updateTV) newsTV();
+            if (simLeague.updateTV) newsTV();
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Transfer List");
 
@@ -1679,7 +1685,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if(userTeam.suspension) showSuspensions();
+        if (userTeam.suspension) showSuspensions();
         resetTeamUI();
 
     }
@@ -1880,10 +1886,11 @@ public class MainActivity extends AppCompatActivity {
         Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
+        if(userTeam.getHC(0).age >= 65) changeTeamsButton.setText("RETIRE");
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
         Button univProRelButton = dialog.findViewById(R.id.buttonUnivProRel);
 
-        if(simLeague.currentWeek > 0) {
+        if (simLeague.currentWeek > 0) {
             univProRelButton.setVisibility(View.INVISIBLE);
         }
 
@@ -1926,34 +1933,36 @@ public class MainActivity extends AppCompatActivity {
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
+                if (userTeam.getHC(0).age >= 65) {
+                    retirementQuestion();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Confirmation");
+                    builder.setMessage("Are you sure you want to resign from this position?");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Perform action on click
+                            userHC = userTeam.HC.get(0);
+                            //switchTeams();
+                            if (simLeague.isCareerMode()) jobOffers(userHC);
+                            else switchTeams(userHC);
+                            dialog.dismiss();
+                        }
+                    });
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Confirmation");
-                builder.setMessage("Are you sure you want to resign from this position?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Perform action on click
-                        userHC = userTeam.HC.get(0);
-                        //switchTeams();
-                        if (simLeague.isCareerMode()) jobOffers(userHC);
-                        else switchTeams(userHC);
-                        dialog.dismiss();
-                    }
-                });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
 
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        }
+                    });
 
-                    }
-                });
-
-                builder.show();
-
+                    builder.show();
+                }
             }
         });
 
@@ -2427,13 +2436,13 @@ public class MainActivity extends AppCompatActivity {
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         String[] yearLabels = new String[simLeague.leagueHistory.size()];
-        for(int i = 0; i < simLeague.leagueHistory.size(); i++) {
-            series.appendData(new DataPoint((seasonStart+i), Integer.parseInt( currentTeam.teamHistory.get(i).split(":")[2].split(" ")[1])), true, i+1, false);
-            yearLabels[i] = Integer.toString(i+seasonStart);
+        for (int i = 0; i < simLeague.leagueHistory.size(); i++) {
+            series.appendData(new DataPoint((seasonStart + i), Integer.parseInt(currentTeam.teamHistory.get(i).split(":")[2].split(" ")[1])), true, i + 1, false);
+            yearLabels[i] = Integer.toString(i + seasonStart);
         }
         graph.addSeries(series);
 
-        if(yearLabels.length > 1) {
+        if (yearLabels.length > 1) {
             StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
             years.setHorizontalLabels(yearLabels);
             graph.getGridLabelRenderer().setLabelFormatter(years);
@@ -2442,7 +2451,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige+10);
+        graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige + 10);
         graph.getViewport().setMinY(0);
     }
 
@@ -2465,18 +2474,18 @@ public class MainActivity extends AppCompatActivity {
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         String[] yearLabels = new String[simLeague.leagueHistory.size()];
-        for(int i = 0; i < simLeague.leagueHistory.size(); i++) {
-            series.appendData(new DataPoint((seasonStart+i), 120 - Integer.parseInt( currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i+1, false);
-            yearLabels[i] = Integer.toString(i+seasonStart);
+        for (int i = 0; i < simLeague.leagueHistory.size(); i++) {
+            series.appendData(new DataPoint((seasonStart + i), 120 - Integer.parseInt(currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
+            yearLabels[i] = Integer.toString(i + seasonStart);
         }
         graph.addSeries(series);
 
         String[] rankLabels = new String[121];
-        for(int i = 120; i >= 0; i--) {
-            rankLabels[120-i] = Integer.toString(i);
+        for (int i = 120; i >= 0; i--) {
+            rankLabels[120 - i] = Integer.toString(i);
         }
 
-        if(yearLabels.length > 1) {
+        if (yearLabels.length > 1) {
             StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
             years.setHorizontalLabels(yearLabels);
             years.setVerticalLabels(rankLabels);
@@ -2554,15 +2563,15 @@ public class MainActivity extends AppCompatActivity {
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
-        for(int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
-            if(!currentTeam.HC.get(0).history.get(i).equals("")) {
+        for (int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
+            if (!currentTeam.HC.get(0).history.get(i).equals("")) {
                 series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("Prs: ")[1].split(" ")[0])), true, i + 1, false);
                 yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
             }
         }
         graph.addSeries(series);
 
-        if(yearLabels.length > 1) {
+        if (yearLabels.length > 1) {
             StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
             years.setHorizontalLabels(yearLabels);
             graph.getGridLabelRenderer().setLabelFormatter(years);
@@ -2571,7 +2580,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige+10);
+        graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige + 10);
         graph.getViewport().setMinY(0);
     }
 
@@ -2592,8 +2601,8 @@ public class MainActivity extends AppCompatActivity {
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
-        for(int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
-            if(!currentTeam.HC.get(0).history.get(i).equals("")) {
+        for (int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
+            if (!currentTeam.HC.get(0).history.get(i).equals("")) {
                 series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), 120 - Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
                 yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
             }
@@ -2601,11 +2610,11 @@ public class MainActivity extends AppCompatActivity {
         graph.addSeries(series);
 
         String[] rankLabels = new String[121];
-        for(int i = 120; i >= 0; i--) {
-            rankLabels[120-i] = Integer.toString(i);
+        for (int i = 120; i >= 0; i--) {
+            rankLabels[120 - i] = Integer.toString(i);
         }
 
-        if(yearLabels.length > 1) {
+        if (yearLabels.length > 1) {
             StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
             years.setHorizontalLabels(yearLabels);
             years.setVerticalLabels(rankLabels);
@@ -3076,15 +3085,17 @@ public class MainActivity extends AppCompatActivity {
 
         goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
 
-        if (simLeague.bonusTeam1 != null && simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2 != null && simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3 != null && simLeague.bonusTeam3.name.equals(userTeam.name)) {
-            goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
-        }
+        if (simLeague.getYear() > seasonStart) {
+            if (simLeague.bonusTeam1 != null && simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2 != null && simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3 != null && simLeague.bonusTeam3.name.equals(userTeam.name)) {
+                goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
+            }
 
-        if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
-            goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
-        }
-        if (simLeague.penalizedTeam3 != null && simLeague.penalizedTeam3.name.equals(userTeam.name) || simLeague.penalizedTeam4 != null && simLeague.penalizedTeam4.name.equals(userTeam.name) || simLeague.penalizedTeam5 != null && simLeague.penalizedTeam5.name.equals(userTeam.name)) {
-            goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
+            if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
+                goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
+            }
+            if (simLeague.penalizedTeam3 != null && simLeague.penalizedTeam3.name.equals(userTeam.name) || simLeague.penalizedTeam4 != null && simLeague.penalizedTeam4.name.equals(userTeam.name) || simLeague.penalizedTeam5 != null && simLeague.penalizedTeam5.name.equals(userTeam.name)) {
+                goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
+            }
         }
 
         simLeague.newsStories.get(simLeague.currentWeek).add("Season Goals>" + goals);
@@ -3219,8 +3230,16 @@ public class MainActivity extends AppCompatActivity {
 
     //Contract Status Dialog
     private void contractDialog() {
-        if(userTeam.retirement) {
+
+        if (simLeague.isCareerMode()) {
+            if (userHC.age == 65 || userHC.age == 80 || userHC.age == 100 || userHC.age == 150) {
+                userHC.retirement = true;
+            }
+        }
+
+        if (userHC.retirement) {
             retirementQuestion();
+
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(userTeam.contractString)
@@ -3251,8 +3270,8 @@ public class MainActivity extends AppCompatActivity {
         String oldTeam = userHC.team.name;
         updateHeaderBar();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStrFired((ratOvr - 10), oldTeam);
-        final ArrayList<Team> coachList = simLeague.getCoachListFired((ratOvr - 10), oldTeam);
+        final ArrayList<String> teamsArray = simLeague.getCoachListStrFired(ratOvr, oldTeam);
+        final ArrayList<Team> coachList = simLeague.getCoachListFired(ratOvr, oldTeam);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
         builder.setCancelable(false);
@@ -3294,8 +3313,8 @@ public class MainActivity extends AppCompatActivity {
             String oldTeam = userHC.team.name;
             updateHeaderBar();
             //get user team from list dialog
-            final ArrayList<String> teamsArray = simLeague.getCoachPromotionListStr((ratOvr - 10), offers, oldTeam);
-            final ArrayList<Team> coachList = simLeague.getCoachPromotionList((ratOvr - 10), offers, oldTeam);
+            final ArrayList<String> teamsArray = simLeague.getCoachPromotionListStr(ratOvr, offers, oldTeam);
+            final ArrayList<Team> coachList = simLeague.getCoachPromotionList(ratOvr, offers, oldTeam);
             if (coachList.isEmpty()) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Job Offers")
@@ -3455,28 +3474,28 @@ public class MainActivity extends AppCompatActivity {
     //Television Contract News
     private void newsTV() {
         StringBuilder update = new StringBuilder();
-        for(int i = 0; i < simLeague.newsTV.size(); ++i) {
+        for (int i = 0; i < simLeague.newsTV.size(); ++i) {
             update.append(simLeague.newsTV.get(i) + "\n\n");
         }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage(update)
-                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Network Contract Updates")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .setNegativeButton("Prestige Rankings", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            showPrestigeChange();
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            TextView textView = dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage(update)
+                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Network Contract Updates")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setNegativeButton("Prestige Rankings", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        showPrestigeChange();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
     }
 
     //Transfers Dialog
@@ -3622,18 +3641,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setNeutralButton("Reincarnate", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                reincarnation();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reincarnation();
 
-            }
-        })
+                    }
+                })
                 .setNegativeButton("Retire", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                retire();
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        retire();
+                    }
+                });
         builder.setCancelable(false);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -3971,12 +3990,13 @@ public class MainActivity extends AppCompatActivity {
         exitMainActivity();
     }
 
-    //GAME EDITOR V2
 /*
+    //GAME EDITOR V2
+
     public void gameEditorV2() {
         final List<String> teamEditor = new ArrayList<>();
         final List<String> confEditor = new ArrayList<>();
-        final Conference editConference = new Conference("Name", simLeague);
+        Conference editConference = new Conference("Name", simLeague);
         final Team editTeam = new Team("Name", "abbr", "Conf", 50, 2, simLeague);
 
         AlertDialog.Builder GameEditor = new AlertDialog.Builder(this);
@@ -4088,7 +4108,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+    }
+*/
 
     //allow the ability to enable editor to edit player names, positions, attributes, etc.
     private void playerEditor() {
