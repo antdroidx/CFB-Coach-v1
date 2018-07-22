@@ -152,7 +152,7 @@ Alabama,Joshua Frazier,DL,4,7
 Alabama,Raekwon Davis,DL,2,7
 Alabama,Jamar King,DL,4,7
 Alabama,Labryan Ray,DL,1,7
-Alabama,Phidarian Mathis,DL,1,7
+Alabama, Mathis,DL,1,7
 Alabama,Quinnen Williams,DL,1,7
 Alabama,JK Scott,K,4,10
 Alabama,Joseph Bulovas,K,1,6
@@ -5893,7 +5893,7 @@ Stanford,Walker Little,OL,1,7
 Stanford,Jack Dreyer,OL,2,7
 Stanford,Nick Wilson,OL,2,7
 Stanford,Keller Chryst,QB,3,7
-Stanford,Ryan Burns,QB,4,7
+Stanford,Terry Roberts,QB,10,10
 Stanford,KJ Costello,QB,1,7
 Stanford,Davis Mills,QB,1,7
 Stanford,Bryce Love,RB,3,10
