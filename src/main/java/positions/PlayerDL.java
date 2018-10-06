@@ -241,6 +241,9 @@ public class PlayerDL extends Player {
                 ratPassRush += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratTackle += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
             }
+
+            durabilityProgression();
+
         }
 
         ratOvr = getOverall();

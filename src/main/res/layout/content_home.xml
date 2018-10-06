@@ -40,19 +40,10 @@
             android:id="@+id/buttonNewGame"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:text="New Dynasty"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/buttonCareer"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
             android:layout_margin="0dp"
             android:layout_weight="1"
             android:padding="0dp"
-            android:text="New Career"
+            android:text="New Game"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -66,22 +57,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonCustomNewGame"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:text="Custom Dynasty"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/buttonCustomCareer"
+            android:id="@+id/buttonCustom"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_margin="0dp"
             android:layout_weight="1"
             android:padding="0dp"
-            android:text="Custom Career"
+            android:text="Custom Game"
             android:textSize="12sp" />
 
     </LinearLayout>

@@ -31,7 +31,6 @@ import java.io.IOException;
 public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
     private boolean customCareer;
-    private boolean randomize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +49,12 @@ public class Home extends AppCompatActivity {
                 AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
                 welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
                         .setTitle("Game Option")
-                        .setPositiveButton("Default", new DialogInterface.OnClickListener() {
+                        .setNeutralButton("Default", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
                                 Intent myIntent = new Intent(Home.this, MainActivity.class);
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY");
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE");
                                 Home.this.startActivity(myIntent);
                             }
                         })
@@ -64,10 +63,21 @@ public class Home extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 finish();
                                 Intent myIntent = new Intent(Home.this, MainActivity.class);
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY_RANDOM");
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_RANDOM");
                                 Home.this.startActivity(myIntent);
+
                             }
-                        });
+                        })
+                        .setPositiveButton("Equalize", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                        Intent myIntent = new Intent(Home.this, MainActivity.class);
+                        myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_EQUALIZE");
+                        Home.this.startActivity(myIntent);
+
+                    }
+                });
                 welcome.setCancelable(false);
                 AlertDialog dialog = welcome.create();
                 dialog.show();
@@ -76,56 +86,11 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button newCustomGameButton = findViewById(R.id.buttonCustomNewGame);
+        Button newCustomGameButton = findViewById(R.id.buttonCustom);
         newCustomGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 isExternalStorageReadable();
                 customCareer = false;
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.setType("text/plain");
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(intent, READ_REQUEST_CODE);
-            }
-        });
-
-
-        Button newCareerButton = findViewById(R.id.buttonCareer);
-        newCareerButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
-                welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
-                        .setTitle("Game Option")
-                        .setPositiveButton("Default", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                Intent myIntent = new Intent(Home.this, MainActivity.class);
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER");
-                                Home.this.startActivity(myIntent);
-                            }
-                        })
-                        .setNegativeButton("Randomize", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                                Intent myIntent = new Intent(Home.this, MainActivity.class);
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER_RANDOM");
-                                Home.this.startActivity(myIntent);
-                            }
-                        });
-                welcome.setCancelable(false);
-                AlertDialog dialog = welcome.create();
-                dialog.show();
-                TextView msgTxt = dialog.findViewById(android.R.id.message);
-                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            }
-        });
-
-        Button newCustomCareerButton = findViewById(R.id.buttonCustomCareer);
-        newCustomCareerButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                isExternalStorageReadable();
-                customCareer = true;
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.setType("text/plain");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -447,13 +412,13 @@ public class Home extends AppCompatActivity {
             AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
             welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
                     .setTitle("Game Option")
-                    .setPositiveButton("Default", new DialogInterface.OnClickListener() {
+                    .setNeutralButton("Default", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (customCareer) {
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM," + uriStr);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM," + uriStr);
                             } else {
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM," + uriStr);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM," + uriStr);
                             }
                             finish();
                             Home.this.startActivity(myIntent);
@@ -463,14 +428,26 @@ public class Home extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if (customCareer) {
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CAREER-CUSTOM_RANDOM," + uriStr);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_RANDOM," + uriStr);
                             } else {
-                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_DYNASTY-CUSTOM_RANDOM," + uriStr);
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_RANDOM," + uriStr);
                             }
                             finish();
                             Home.this.startActivity(myIntent);
                         }
-                    });
+                    })
+                    .setPositiveButton("Equalize", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (customCareer) {
+                        myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
+                    } else {
+                        myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
+                    }
+                    finish();
+                    Home.this.startActivity(myIntent);
+                }
+            });
             welcome.setCancelable(false);
             AlertDialog dialog = welcome.create();
             dialog.show();

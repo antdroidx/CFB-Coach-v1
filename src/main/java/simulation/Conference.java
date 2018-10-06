@@ -47,6 +47,8 @@ public class Conference {
 
     public final ArrayList<Player> allConfPlayers;
 
+    public ArrayList<String> confSave;
+
     /**
      * Sets up Conference with empty list of teams.
      *

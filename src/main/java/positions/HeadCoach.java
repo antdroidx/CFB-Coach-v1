@@ -198,7 +198,6 @@ public class HeadCoach extends Player {
         year++;
         contractYear++;
 
-        // WIP
         ratTalent += Math.random() * prestigeDiff;
         float off = team.teamYards - avgYards;
         float def = avgYards - team.teamOppYards;

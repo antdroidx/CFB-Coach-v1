@@ -218,6 +218,9 @@ public class PlayerLB extends Player {
                 ratTackle += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor) / 1.5;
             }
+
+            durabilityProgression();
+
         }
 
         ratOvr = getOverall();

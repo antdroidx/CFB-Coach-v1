@@ -222,16 +222,6 @@ public class Team {
     public int teamDiscplineBudget;
     public int teamTrainingBudget;
 
-    //public final int confMin = 30;
-    //public final int confMax = 80;
-    //private int maxPrestige = 95;
-    //private final int minPrestige = 20;
-
-    //private int leagueOffTal;
-    //private int leagueDefTal;
-    //public int confAvg;
-    //public int confLimit;
-
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
      *
@@ -1136,8 +1126,7 @@ public class Team {
 
         int goal = projectedPoll;
         if (goal > 100) goal = 100;
-        if (goal <= 10) goal = 10;
-        else if (goal <= 20) goal = 20;
+        if (goal <= 20) goal = 20;
         int diffExpected = goal - rankTeamPollScore;
 
         int newPrestige = teamPrestige;
@@ -1147,9 +1136,7 @@ public class Team {
         int ncwPts = 0;
         int nflPts = 0;
 
-        if (disciplinePts > 1) disciplinePts = 1;
         int disPts = disciplinePts;
-
 
         // Don't add/subtract prestige if they are a penalized team from last season
         if (this != league.penalizedTeam1 && this != league.penalizedTeam2 && this != league.penalizedTeam3) {
@@ -1170,7 +1157,7 @@ public class Team {
             ccPts += 1;
         }
 
-        if (teamPrestige < 50) {
+        if (rankTeamPrestige < 75) {
             ArrayList<Player> teamAll = getAllPlayers();
             for (int i = 0; i < teamAll.size(); i++) {
                 if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr > 91) {
@@ -1181,20 +1168,6 @@ public class Team {
         }
 
         newPrestige += prestigeChange + ccPts + ncwPts + nflPts + disPts;
-
-        //Sets the bounds for Prestige -- REMOVING FOR PRESTIGE TEST!
-/*        int cLimiter = 0;
-        if (newPrestige >  confMax + confLimit && !natChampWL.equals("NCW") && teamPrestigeStart < confMax + confLimit) {
-            cLimiter = confMax + confLimit;
-            newPrestige = cLimiter;
-        } else if (newPrestige >  confMax + confLimit && !natChampWL.equals("NCW") && teamPrestigeStart >= confMax + confLimit) {
-            newPrestige = teamPrestigeStart;
-        }
-
-        if (newPrestige < minPrestige) newPrestige = minPrestige;
-        if (newPrestige > maxPrestige && !natChampWL.equals("NCW")) newPrestige = maxPrestige;
-
-        if (newPrestige > 100) newPrestige = 100;*/
 
         int PrestigeScore[] = {newPrestige, prestigeChange, ccPts, ncwPts, nflPts, disPts};
         return PrestigeScore;
@@ -1231,7 +1204,7 @@ public class Team {
         }
 
         if (prestigePts[2] > 0) {
-            summary += "\n\nSince you won your conference championship, your team gained " + prestigePts[3] + " prestige points!";
+            summary += "\n\nSince you won your conference championship, your team gained " + prestigePts[2] + " prestige points!";
         }
         if (prestigePts[4] > 0) {
             summary += "\n\nYou have Pro caliber talent going to the draft. Since your school isn't expected to have such talents, you will see a gain of " + prestigePts[4] + " prestige points in the off-season!";
@@ -1283,29 +1256,29 @@ public class Team {
         retired = false;
         int avgOff = league.getAverageYards();
 
-        if (HC.get(0) != null) {
 
-            int totalPDiff = teamPrestige - HC.get(0).baselinePrestige;
-            HC.get(0).advanceSeason(totalPDiff, avgOff, league.leagueOffTal, league.leagueDefTal);
+        int totalPDiff = teamPrestige - HC.get(0).baselinePrestige;
+        HC.get(0).advanceSeason(totalPDiff, avgOff, league.leagueOffTal, league.leagueDefTal);
 
-            teamRecords.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), HC.get(0).name + "%" + abbr, league.getYear());
+        teamRecords.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), HC.get(0).name + "%" + abbr, league.getYear());
 
-            records.checkRecord("Wins", HC.get(0).wins, HC.get(0).name + "%" + abbr, league.getYear());
-            records.checkRecord("National Championships", HC.get(0).natchamp, HC.get(0).name + "%" + abbr, league.getYear());
-            records.checkRecord("Conf Championships", HC.get(0).natchamp, HC.get(0).name + "%" + abbr, league.getYear());
-            records.checkRecord("Bowl Wins", HC.get(0).bowlwins, HC.get(0).name + "%" + abbr, league.getYear());
-            records.checkRecord("Coach Awards", HC.get(0).awards, HC.get(0).name + "%" + abbr, league.getYear());
-            records.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), HC.get(0).name + "%" + abbr, league.getYear());
-            if (HC.get(0).year > 4)
-                records.checkRecord("Coach Career Score", HC.get(0).getCoachCareerScore(), HC.get(0).name + "%" + abbr, league.getYear());
+        records.checkRecord("Wins", HC.get(0).wins, HC.get(0).name + "%" + abbr, league.getYear());
+        records.checkRecord("National Championships", HC.get(0).natchamp, HC.get(0).name + "%" + abbr, league.getYear());
+        records.checkRecord("Conf Championships", HC.get(0).natchamp, HC.get(0).name + "%" + abbr, league.getYear());
+        records.checkRecord("Bowl Wins", HC.get(0).bowlwins, HC.get(0).name + "%" + abbr, league.getYear());
+        records.checkRecord("Coach Awards", HC.get(0).awards, HC.get(0).name + "%" + abbr, league.getYear());
+        records.checkRecord("Coach Year Score", HC.get(0).getCoachScore(), HC.get(0).name + "%" + abbr, league.getYear());
+        if (HC.get(0).year > 4)
+            records.checkRecord("Coach Career Score", HC.get(0).getCoachCareerScore(), HC.get(0).name + "%" + abbr, league.getYear());
 
-            coachContracts(totalPDiff, teamPrestige);
+        coachContracts(totalPDiff, teamPrestige);
 
+        if (!HC.isEmpty()) {
             if (userControlled && league.isCareerMode() && totalPDiff > promotionNum && teamPrestige >= HC.get(0).baselinePrestige) {
                 HC.get(0).promotionCandidate = true;
             }
-
         }
+
 
     }
 

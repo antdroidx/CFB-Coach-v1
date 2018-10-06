@@ -198,6 +198,9 @@ public class PlayerOL extends Player {
                 ratPassBlock += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratAwareness += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
             }
+
+            durabilityProgression();
+
         }
 
         ratOvr = getOverall();

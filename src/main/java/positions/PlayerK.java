@@ -209,6 +209,8 @@ public class PlayerK extends Player {
                 ratKickFum += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratPressure += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
             }
+
+            durabilityProgression();
         }
 
         ratOvr = getOverall();

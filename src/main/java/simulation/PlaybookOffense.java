@@ -78,7 +78,7 @@ public class PlaybookOffense {
         passPref = 3;
         passProtection = 1;
         passPotential = -2;
-        passUsage = 1;
+        passUsage = 2;
     }
 
     public void playBook4() {
@@ -89,8 +89,8 @@ public class PlaybookOffense {
         runPotential = 1;
         runUsage = 0;
         passPref = 2;
-        passProtection = -1;
-        passPotential = 0;
+        passProtection = -2;
+        passPotential = 1;
         passUsage = 1;
     }
 

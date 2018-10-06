@@ -575,4 +575,8 @@ Player {
         double games = (double) (gamesStarted / 2) + (double) ((gamesPlayed - gamesStarted) / 3);
         return games;
     }
+
+    public void durabilityProgression() {
+        ratDur += Math.random() * 2*year;
+    }
 }

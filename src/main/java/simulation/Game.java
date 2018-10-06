@@ -87,10 +87,10 @@ public class Game implements Serializable {
     private boolean bottomOT;
 
     private final int timePerPlay = 22; //affects snaps per game!
-    private final int intValue = 150; //higher less ints
+    private final int intValue = 135; //higher less ints
     private final int sackValue = 200; //higher less sacks
     private final int escapeValue = 150;
-    private final int compValue = 150; //higher more completions
+    private final int compValue = 250; //higher more completions
     private final int fatigueDropSuper = 13;
     private final int fatigueDropHigh = 9;
     private final int fatigueDropMed = 6;
@@ -173,9 +173,9 @@ public class Game implements Serializable {
         coachingStrategyAdjustments();
 
         if (gamePoss) {
-            adv = Math.round((homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 4);
+            adv = Math.round((homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 5);
         } else {
-            adv = Math.round((awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 4);
+            adv = Math.round((awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 5);
         }
         if (adv > 3) adv = 3;
         if (adv < -3) adv = -3;
@@ -192,7 +192,7 @@ public class Game implements Serializable {
         if(awayTeam.userControlled || homeTeam.userControlled) {
 
             //Counter Strategies - performed in snake order.
-            if (!homeTeam.userControlled && homeTeam.getHC(0).ratDef > tacticalCoach && Math.random() > 0.66) {
+            if (!homeTeam.userControlled && homeTeam.getHC(0).ratDef > tacticalCoach && Math.random() < 0.35) {
                 if (awayTeam.playbookOffNum == 0) homeTeam.playbookDefNum = 0;
                 if (awayTeam.playbookOffNum == 1) homeTeam.playbookDefNum = 1;
                 if (awayTeam.playbookOffNum == 2) {
@@ -204,7 +204,7 @@ public class Game implements Serializable {
                 if (awayTeam.playbookOffNum == 5) homeTeam.playbookDefNum = 3;
             }
 
-            if (!awayTeam.userControlled && awayTeam.getHC(0).ratDef > tacticalCoach && Math.random() > 0.66) {
+            if (!awayTeam.userControlled && awayTeam.getHC(0).ratDef > tacticalCoach && Math.random() < 0.35) {
                 if (homeTeam.playbookOffNum == 0) awayTeam.playbookDefNum = 0;
                 if (homeTeam.playbookOffNum == 1) awayTeam.playbookDefNum = 1;
                 if (homeTeam.playbookOffNum == 2) {
@@ -216,7 +216,7 @@ public class Game implements Serializable {
                 if (homeTeam.playbookOffNum == 5) awayTeam.playbookDefNum = 3;
             }
 
-            if (!awayTeam.userControlled && awayTeam.getHC(0).ratOff > tacticalCoach && Math.random() > 0.66) {
+            if (!awayTeam.userControlled && awayTeam.getHC(0).ratOff > tacticalCoach && Math.random() < 0.35) {
                 if (awayTeam.playbookOffNum == 1 && homeTeam.playbookDefNum == 1 || awayTeam.playbookOffNum == 4 && homeTeam.playbookDefNum == 1) {
                     awayTeam.playbookOffNum = (int) (Math.random() * 3) + 1;
                     if (awayTeam.playbookOffNum == 1) awayTeam.playbookOffNum = 0;
@@ -227,7 +227,7 @@ public class Game implements Serializable {
                 }
             }
 
-            if (!homeTeam.userControlled && homeTeam.getHC(0).ratOff > tacticalCoach && Math.random() > 0.66) {
+            if (!homeTeam.userControlled && homeTeam.getHC(0).ratOff > tacticalCoach && Math.random() < 0.35) {
                 if (homeTeam.playbookOffNum == 1 && awayTeam.playbookDefNum == 1 || homeTeam.playbookOffNum == 4 && awayTeam.playbookDefNum == 1) {
                     homeTeam.playbookOffNum = (int) (Math.random() * 3) + 1;
                     if (homeTeam.playbookOffNum == 1) homeTeam.playbookOffNum = 0;
@@ -241,7 +241,7 @@ public class Game implements Serializable {
         } else {
 
             //Counter Strategies - performed in snake order.
-            if (homeTeam.getHC(0).ratDef > tacticalCoach && Math.random() > 0.50) {
+            if (homeTeam.getHC(0).ratDef > tacticalCoach && Math.random() < 0.45) {
                 if (awayTeam.playbookOffNum == 0) homeTeam.playbookDefNum = 0;
                 if (awayTeam.playbookOffNum == 1) homeTeam.playbookDefNum = 1;
                 if (awayTeam.playbookOffNum == 2) {
@@ -253,7 +253,7 @@ public class Game implements Serializable {
                 if (awayTeam.playbookOffNum == 5) homeTeam.playbookDefNum = 3;
             }
 
-            if (awayTeam.getHC(0).ratDef > tacticalCoach && Math.random() > 0.50) {
+            if (awayTeam.getHC(0).ratDef > tacticalCoach && Math.random() < 0.45) {
                 if (homeTeam.playbookOffNum == 0) awayTeam.playbookDefNum = 0;
                 if (homeTeam.playbookOffNum == 1) awayTeam.playbookDefNum = 1;
                 if (homeTeam.playbookOffNum == 2) {
@@ -265,7 +265,7 @@ public class Game implements Serializable {
                 if (homeTeam.playbookOffNum == 5) awayTeam.playbookDefNum = 3;
             }
 
-            if (awayTeam.getHC(0).ratOff > tacticalCoach && Math.random() > 0.50) {
+            if (awayTeam.getHC(0).ratOff > tacticalCoach && Math.random() < 0.45) {
                 if (awayTeam.playbookOffNum == 1 && homeTeam.playbookDefNum == 1 || awayTeam.playbookOffNum == 4 && homeTeam.playbookDefNum == 1) {
                     awayTeam.playbookOffNum = (int) (Math.random() * 3) + 1;
                     if (awayTeam.playbookOffNum == 1) awayTeam.playbookOffNum = 0;
@@ -276,7 +276,7 @@ public class Game implements Serializable {
                 }
             }
 
-            if (homeTeam.getHC(0).ratOff > tacticalCoach && Math.random() > 0.50) {
+            if (homeTeam.getHC(0).ratOff > tacticalCoach && Math.random() < 0.45) {
                 if (homeTeam.playbookOffNum == 1 && awayTeam.playbookDefNum == 1 || homeTeam.playbookOffNum == 4 && awayTeam.playbookDefNum == 1) {
                     homeTeam.playbookOffNum = (int) (Math.random() * 3) + 1;
                     if (homeTeam.playbookOffNum == 1) homeTeam.playbookOffNum = 0;
@@ -292,23 +292,43 @@ public class Game implements Serializable {
     private void getReturner() {
         homeReturner = new ArrayList<>();
         awayReturner = new ArrayList<>();
+        double starterPenalty = 0.85;
         //Choose Kickoff Returners
-        for (int i = 0; i < homeTeam.startersWR + homeTeam.subWR; i++) {
+        for (int i = 0; i < homeTeam.startersWR; i++) {
+            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamWRs.get(i).name, "WR", homeTeam.teamWRs.get(i).ratSpeed, (float) (starterPenalty * homeTeam.teamWRs.get(i).ratSpeed * Math.random())));
+        }
+        for (int i = 0; i < homeTeam.startersRB; i++) {
+            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamRBs.get(i).name, "RB", homeTeam.teamRBs.get(i).ratSpeed, (float) (starterPenalty * homeTeam.teamRBs.get(i).ratSpeed * Math.random())));
+        }
+        for (int i = 0; i < homeTeam.startersCB; i++) {
+            homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamCBs.get(i).name, "CB", homeTeam.teamCBs.get(i).ratSpeed, (float) (starterPenalty * homeTeam.teamCBs.get(i).ratSpeed * Math.random())));
+        }
+        for (int i = 0; i < awayTeam.startersWR; i++) {
+            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamWRs.get(i).name, "WR", awayTeam.teamWRs.get(i).ratSpeed, (float) (starterPenalty * awayTeam.teamWRs.get(i).ratSpeed * Math.random())));
+        }
+        for (int i = 0; i < awayTeam.startersRB; i++) {
+            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamRBs.get(i).name, "RB", awayTeam.teamRBs.get(i).ratSpeed, (float) (starterPenalty * awayTeam.teamWRs.get(i).ratSpeed * Math.random())));
+        }
+        for (int i = 0; i < awayTeam.startersCB; i++) {
+            awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamCBs.get(i).name, "CB", awayTeam.teamCBs.get(i).ratSpeed, (float) (starterPenalty * awayTeam.teamWRs.get(i).ratSpeed * Math.random())));
+        }
+
+        for (int i = homeTeam.startersWR; i < homeTeam.startersWR + homeTeam.subWR; i++) {
             homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamWRs.get(i).name, "WR", homeTeam.teamWRs.get(i).ratSpeed, (float) (homeTeam.teamWRs.get(i).ratSpeed * Math.random())));
         }
-        for (int i = 0; i < homeTeam.startersRB + homeTeam.subRB; i++) {
+        for (int i = homeTeam.startersRB; i < homeTeam.startersRB + homeTeam.subRB; i++) {
             homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamRBs.get(i).name, "RB", homeTeam.teamRBs.get(i).ratSpeed, (float) (homeTeam.teamRBs.get(i).ratSpeed * Math.random())));
         }
-        for (int i = 0; i < homeTeam.startersCB + homeTeam.subCB; i++) {
+        for (int i = homeTeam.startersCB; i < homeTeam.startersCB + homeTeam.subCB; i++) {
             homeReturner.add(new PlayerReturner(homeTeam.abbr, homeTeam.teamCBs.get(i).name, "CB", homeTeam.teamCBs.get(i).ratSpeed, (float) (homeTeam.teamCBs.get(i).ratSpeed * Math.random())));
         }
-        for (int i = 0; i < awayTeam.startersWR + awayTeam.subWR; i++) {
+        for (int i = awayTeam.startersWR; i < awayTeam.startersWR + awayTeam.subWR; i++) {
             awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamWRs.get(i).name, "WR", awayTeam.teamWRs.get(i).ratSpeed, (float) (awayTeam.teamWRs.get(i).ratSpeed * Math.random())));
         }
-        for (int i = 0; i < awayTeam.startersRB + awayTeam.subRB; i++) {
+        for (int i = awayTeam.startersRB; i < awayTeam.startersRB + awayTeam.subRB; i++) {
             awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamRBs.get(i).name, "RB", awayTeam.teamRBs.get(i).ratSpeed, (float) (awayTeam.teamWRs.get(i).ratSpeed * Math.random())));
         }
-        for (int i = 0; i < awayTeam.startersCB + awayTeam.subCB; i++) {
+        for (int i = awayTeam.startersCB; i < awayTeam.startersCB + awayTeam.subCB; i++) {
             awayReturner.add(new PlayerReturner(awayTeam.abbr, awayTeam.teamCBs.get(i).name, "CB", awayTeam.teamCBs.get(i).ratSpeed, (float) (awayTeam.teamWRs.get(i).ratSpeed * Math.random())));
         }
 
@@ -695,7 +715,7 @@ public class Game implements Serializable {
         }
 
         double TEBonus;
-        if (offense.playbookOff.getPassUsage() == 1) TEBonus = 0.20;
+        if (offense.playbookOff.getPassUsage() > 0) TEBonus = 0.20;
         else TEBonus = 0;
         for (int i = 0 + x; i < offense.startersTE + x; ++i) {
             if (offense.getTE(i).gameFatigue > 0) {
@@ -1031,7 +1051,7 @@ public class Game implements Serializable {
 
             //check for int
             if (!pos.equals("RB")) {
-                double intChance = (pressureOnQB + defense.getS(0).ratOvr - (selQB.ratPassAcc + selQB.ratFootIQ + 100) / 3) / 18    //STRATEGIES
+                double intChance = (pressureOnQB + defense.getS(0).ratOvr - (2*selQB.ratPassAcc + selQB.ratFootIQ + 100) / 4) / 18
                         - offense.playbookOff.getPassProtection() + defense.playbookDef.getPassRush();
                 if (intChance < 0.015) intChance = 0.015;
                 if (intValue * Math.random() < intChance) {
@@ -1060,24 +1080,28 @@ public class Game implements Serializable {
             }
 
             //Check for completion
-            double completion;
+            double completion, coverage;
 
             if (pos.equals("WR")) {
-                completion = (getHFadv() + (int) (Math.random() * getCoachAdv()) + normalize(selQB.ratPassAcc) + normalize(selWR.ratCatch)
-                        - normalize(selCB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 +
-                        (offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush()) + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
+                completion =  getHFadv() + getCoachAdv() + 2*offense.playbookOff.getPassProtection() + 4*offense.playbookOff.getPassPref() +
+                        1.5*normalize(selQB.ratPassAcc) + normalize(selWR.ratCatch);
+
+                coverage = 2*defense.playbookDef.getPassRush() + 4*defense.playbookDef.getPassCoverage() + normalize(selCB.ratCoverage) + pressureOnQB;
+
             } else if (pos.equals("TE")) {
-                completion = (getHFadv() + (int) (Math.random() * getCoachAdv()) + normalize(selQB.ratPassAcc) + normalize(selTE.ratCatch)
-                        - normalize(selLB.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 +
-                        (offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush()) + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
+                completion =  getHFadv() + getCoachAdv() + 2*offense.playbookOff.getPassProtection() + 4*offense.playbookOff.getPassPref()  +
+                        1.5*normalize(selQB.ratPassAcc) + normalize(selTE.ratCatch);
+
+                coverage = 2*defense.playbookDef.getPassRush() + 4*defense.playbookDef.getPassCoverage() + normalize(selLB.ratCoverage) + pressureOnQB;
+
             } else {
-                completion = (getHFadv() + (int) (Math.random() * getCoachAdv()) + normalize(selQB.ratPassAcc) + normalize(selRB.ratCatch)
-                        - normalize(selLB2.ratCoverage)) / 2 + 18.25 - pressureOnQB / 16.8 +
-                        (offense.playbookOff.getPassProtection() - defense.playbookDef.getPassRush()) + (offense.playbookOff.getPassPotential() - defense.playbookDef.getPassCoverage());
+                completion =  getHFadv() + getCoachAdv() + 2*offense.playbookOff.getPassProtection() + 4*offense.playbookOff.getPassPref() +
+                        1.5*normalize(selQB.ratPassAcc) + normalize(selRB.ratCatch);
+
+                coverage = 2*defense.playbookDef.getPassRush() + 4*defense.playbookDef.getPassCoverage() + normalize(selLB2.ratCoverage) + pressureOnQB;
             }
 
-
-            if (compValue * Math.random() < completion) {
+            if (coverage * Math.random() > completion * Math.random()) {
                 if (pos.equals("WR")) {
                     if (100 * Math.random() < (100 - selWR.ratCatch) / 3) {
                         //drop
@@ -1093,7 +1117,7 @@ public class Game implements Serializable {
                     }
                 }
                 if (pos.equals("TE")) {
-                    if (compValue * Math.random() < (100 - selTE.ratCatch) / 3) {
+                    if (100 * Math.random() < (100 - selTE.ratCatch) / 3) {
                         //drop
                         if (homeTeam.league.fullGameLog)
                             gameEventLog += getEventLog() + offense.abbr + "TE " + selTE.name + " dropped the catch.";
@@ -1107,7 +1131,7 @@ public class Game implements Serializable {
                     }
                 }
                 if (pos.equals("RB")) {
-                    if (compValue * Math.random() < (100 - selTE.ratCatch) / 3) {
+                    if (100 * Math.random() < (100 - selTE.ratCatch) / 3) {
                         //drop
                         if (homeTeam.league.fullGameLog)
                             gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " dropped the catch.";
@@ -1396,8 +1420,8 @@ public class Game implements Serializable {
     //PASS PROTECTION
     private int getOffPassProtection(Team off, PlayerTE TE) {
         int OP = 0;
-        if (off.playbookOff.getPassUsage() == 0) OP = getCompositeOLPass();
-        else OP = getCompositeOLPassTE(TE);
+        if (off.playbookOff.getPassUsage() > 0) OP = getCompositeOLPassTE(TE);
+        else OP = getCompositeOLPass();
 
         return OP;
     }
@@ -3173,7 +3197,8 @@ public class Game implements Serializable {
     }
 
     private int normalize(int rating) {
-        return (100 + rating) / 2;
+        //return (100 + rating) / 2;
+        return rating;
     }
 
 }

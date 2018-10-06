@@ -109,9 +109,6 @@ public class League {
     private TeamStreak longestActiveWinStreak;
 
     // News Story Variables
-    public Team bonusTeam1;
-    public Team bonusTeam2;
-    public Team bonusTeam3;
     public Team penalizedTeam1;
     public Team penalizedTeam2;
     public Team penalizedTeam3;
@@ -189,7 +186,7 @@ public class League {
     public ArrayList<String> newsTV;
 
     private final DecimalFormat df2 = new DecimalFormat(".##");
-    private final int seasonStart = 2017;
+    private final int seasonStart = 2018;
     final int countTeam = 120;
     private final int seasonWeeks = 26;
     private final double realignmentChance = 0.38;
@@ -197,16 +194,19 @@ public class League {
     private final String crYear2 = "7";
     private boolean heismanDecided;
     private Player heisman;
+    private Player defPOTY;
     private Player coachWinner;
     private Player freshman;
     private ArrayList<Player> heismanCandidates;
+    private ArrayList<Player> defPOTYCandidates;
     private ArrayList<Player> freshmanCandidates;
     private ArrayList<Player> allAmericans;
     private ArrayList<Player> allFreshman;
     private String heismanWinnerStrFull;
+    private String defPOTYWinnerStrFull;
     private String freshmanWinnerStrFull;
     private String coachWinnerStrFull;
-    private boolean careerMode;
+    public boolean careerMode;
 
     private final String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
             "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
@@ -215,8 +215,8 @@ public class League {
      * Creates League, sets up Conferences, reads team names and conferences from file.
      * Also schedules games for every team.
      */
-    public League(String namesCSV, String lastNamesCSV, String confText, String teamText, String bowlText, boolean career, boolean randomize) {
-        careerMode = career;
+    public League(String namesCSV, String lastNamesCSV, String confText, String teamText, String bowlText, boolean randomize, boolean equalize) {
+        careerMode = true;
         hidePotential = true;
         confRealignment = true;
         enableTV = true;
@@ -243,7 +243,7 @@ public class League {
         String[] teamSplit = teamText.split("%");
         int x = 0;
         int c = 0;
-        if (!randomize) {
+        if (!randomize && !equalize) {
             for (int t = 0; t < teamText.split("%").length; t++) {
                 if (teamText.split("%")[t].contains("[END CONF]")) {
                     //skip
@@ -257,11 +257,26 @@ public class League {
                     }
                 }
             }
-        } else {
+        } else if(randomize) {
             for (int t = 0; t < teamText.split("%").length; t++) {
                 int tmPres = 0;
                 if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
                 else tmPres = (int) (Math.random() * 35) + 25;
+                if (teamText.split("%")[t].contains("[END CONF]")) {
+                    //skip
+                } else {
+                    String[] teamID = teamText.split("%")[t].split(", ");
+                    conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], tmPres, teamID[4], Integer.parseInt(teamID[5]), this));
+                    x++;
+                    if (x > 11) {
+                        c++;
+                        x = 0;
+                    }
+                }
+            }
+        } else {
+            for (int t = 0; t < teamText.split("%").length; t++) {
+                int tmPres = 60;
                 if (teamText.split("%")[t].contains("[END CONF]")) {
                     //skip
                 } else {
@@ -295,8 +310,8 @@ public class League {
     /**
      * Creates a CUSTOM League Universe
      */
-    public League(String namesCSV, String lastNamesCSV, boolean career, File customConf, File customTeams, File customBowl, boolean randomize) {
-        careerMode = career;
+    public League(String namesCSV, String lastNamesCSV, File customConf, File customTeams, File customBowl, boolean randomize, boolean equalize) {
+        careerMode = true;
         hidePotential = true;
         confRealignment = true;
         enableTV = true;
@@ -344,6 +359,9 @@ public class League {
                         if (randomize) {
                             if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
                             else tmPres = (int) (Math.random() * 35) + 25;
+                        }
+                        if (equalize) {
+                            tmPres = 60;
                         }
                         String tmRival = filesSplit[4];
                         int tmLoc = Integer.parseInt(filesSplit[5]);
@@ -474,36 +492,6 @@ public class League {
             }
 
             // Set up lucky and penalized teams for Week 0 news stories
-            StringBuilder sbLucky = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LUCKY_TEAM")) {
-                sbLucky.append(line);
-            }
-            if (!sbLucky.toString().equals("NULL")) {
-                bonusTeam1 = findTeamAbbr(sbLucky.toString());
-            } else {
-                bonusTeam1 = null;
-            }
-
-            StringBuilder sbLucky2 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LUCKY2_TEAM")) {
-                sbLucky2.append(line);
-            }
-            if (!sbLucky2.toString().equals("NULL")) {
-                bonusTeam2 = findTeamAbbr(sbLucky2.toString());
-            } else {
-                bonusTeam2 = null;
-            }
-
-            StringBuilder sbLucky3 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LUCKY3_TEAM")) {
-                sbLucky3.append(line);
-            }
-            if (!sbLucky3.toString().equals("NULL")) {
-                bonusTeam3 = findTeamAbbr(sbLucky3.toString());
-            } else {
-                bonusTeam3 = null;
-            }
-
 
             StringBuilder sbPenalized = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED_TEAM")) {
@@ -753,10 +741,6 @@ public class League {
                 conferences.get(8).confName + ":  " + conferences.get(8).confPrestige + "\n" +
                 conferences.get(9).confName + ":  " + conferences.get(9).confPrestige + "\n");
 
-        if (bonusTeam1 != null || bonusTeam2 != null || bonusTeam3 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Facility Upgrades:>The following teams have had significant facility upgrades performed to their campus this off-season: \n\n" +
-                    bonusTeam1.name + "\n" + bonusTeam2.name + "\n" + bonusTeam3.name + "\n");
-        }
         if (penalizedTeam1 != null && getYear() > seasonStart) {
             newsStories.get(0).add("Major Infraction: " + penalizedTeam1.name + ">An administrative probe has determined that booster " + penalizedTeam1.HC.get(0).name +
                     " has tampered with several recruits. In addition, academic records at  " + penalizedTeam1.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
@@ -1144,12 +1128,12 @@ public class League {
             int teamDis = teamList.get(t).getTeamDiscipline();
             if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
                 teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 4);
-                teamList.get(t).disciplinePts -= (int) (Math.random() * 2);
+                teamList.get(t).disciplinePts -= (int) (Math.random() * 3);
                 teamDiscipline.add(teamList.get(t).name);
                 teamList.get(t).disciplinePlayer();
             } else {
                 teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
-                teamList.get(t).disciplinePts += (int) (Math.random() * 2);
+                //teamList.get(t).disciplinePts += (int) (Math.random() * 2);
             }
         }
         for (int i = 0; i < teamDiscipline.size(); ++i) {
@@ -1275,7 +1259,120 @@ public class League {
                     heismanScore = tempScore;
                 }
             }
+        }
+        Collections.sort(heismanCandidates, new CompPlayerHeisman());
 
+        return heismanCandidates;
+    }
+
+    /**
+     * Perform the heisman ceremony. Congratulate winner and give top 5 vote getters.
+     *
+     * @return string of the heisman ceremony.
+     */
+    public String getHeismanCeremonyStr() {
+        boolean putNewsStory = false;
+        if (!heismanDecided) {
+            heismanDecided = true;
+            heismanCandidates = getHeisman();
+            heisman = heismanCandidates.get(0);
+            heisman.wonHeisman = true;
+            putNewsStory = true;
+            //full results string
+            String heismanTop5 = "\n";
+            for (int i = 0; i < 5; ++i) {
+                Player p = heismanCandidates.get(i);
+                if (p instanceof PlayerQB) {
+                    PlayerQB pqb = (PlayerQB) p;
+                    heismanTop5 += (i + 1) + ". QB " + pqb.name + ": " + p.getHeismanScore() + " votes\n\t\t"
+                            + pqb.team.strRankTeamRecord() + "\n\t\t"
+                            + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
+                            + df2.format(pqb.getPasserRating()) + " QBR\n\n";
+                } else if (p instanceof PlayerRB) {
+                    PlayerRB prb = (PlayerRB) p;
+                    heismanTop5 += (i + 1) + ". RB " + prb.name + ": " + p.getHeismanScore() + " votes\n\t\t"
+                            + prb.team.strRankTeamRecord() + "\n\t\t"
+                            + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n\n";
+                } else if (p instanceof PlayerWR) {
+                    PlayerWR pwr = (PlayerWR) p;
+                    heismanTop5 += (i + 1) + ". WR " + pwr.name + ": " + p.getHeismanScore() + " votes\n\t\t"
+                            + pwr.team.strRankTeamRecord() + "\n\t\t"
+                            + pwr.statsRecTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds\n\n";
+                } else if (p instanceof PlayerTE) {
+                    PlayerTE pte = (PlayerTE) p;
+                    heismanTop5 += (i + 1) + ". TE " + pte.name + ": " + p.getHeismanScore() + " votes\n\t\t"
+                            + pte.team.strRankTeamRecord() + "\n\t\t"
+                            + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n\n";
+                }
+            }
+
+            String heismanStats = "";
+            String heismanWinnerStr = "";
+            if (heisman instanceof PlayerQB) {
+                //qb heisman
+                PlayerQB heisQB = (PlayerQB) heisman;
+                heismanWinnerStr = "Congratulations to the Offensive Player of the Year, " + heisQB.team.name +
+                        " QB " + heisQB.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisQB.statsPassTD + " TDs, just " + heisQB.statsInt + " interceptions, and " +
+                        heisQB.statsPassYards + " passing yards. In addition, he ran for " + heisQB.statsRushYards + " rushing yards and scored " + heisQB.statsRushTD + " touchdowns. He led " + heisQB.team.name +
+                        " to a " + heisQB.team.wins + "-" + heisQB.team.losses + " record and a #" + heisQB.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerRB) {
+                //rb heisman
+                PlayerRB heisRB = (PlayerRB) heisman;
+                heismanWinnerStr = "Congratulations to the Offensive Player of the Year, " + heisRB.team.name +
+                        " RB " + heisRB.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisRB.statsRushTD + " TDs, just " + heisRB.statsFumbles + " fumbles, and " +
+                        heisRB.statsRushYards + " rushing yards. He led " + heisRB.team.name +
+                        " to a " + heisRB.team.wins + "-" + heisRB.team.losses + " record and a #" + heisRB.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerWR) {
+                //wr heisman
+                PlayerWR heisWR = (PlayerWR) heisman;
+                heismanWinnerStr = "Congratulations to the Offensive Player of the Year, " + heisWR.team.name +
+                        " WR " + heisWR.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisWR.statsRecTD + " TDs, just " + heisWR.statsFumbles + " fumbles, and " +
+                        heisWR.statsRecYards + " receiving yards. He led " + heisWR.team.name +
+                        " to a " + heisWR.team.wins + "-" + heisWR.team.losses + " record and a #" + heisWR.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            } else if (heisman instanceof PlayerTE) {
+                //te heisman
+                PlayerTE heisTE = (PlayerTE) heisman;
+                heismanWinnerStr = "Congratulations to the Offensive Player of the Year, " + heisTE.team.name +
+                        " TE " + heisTE.name + " [" + heisman.getYrStr() + "], who had " +
+                        heisTE.statsRecTD + " TDs, just " + heisTE.statsFumbles + " fumbles, and " +
+                        heisTE.statsRecYards + " receiving yards. He led " + heisTE.team.name +
+                        " to a " + heisTE.team.wins + "-" + heisTE.team.losses + " record and a #" + heisTE.team.rankTeamPollScore +
+                        " poll ranking.";
+                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
+            }
+
+            // Add news story
+            if (putNewsStory) {
+                newsStories.get(currentWeek + 1).add(heisman.name + " is the Offensive Player of the Year!>" + heismanWinnerStr);
+                heismanWinnerStrFull = heismanStats;
+            }
+
+            return heismanStats;
+        } else {
+            return heismanWinnerStrFull;
+        }
+    }
+
+    /**
+     * Calculates who wins the Heisman.
+     *
+     * @return Heisman Winner
+     */
+    private ArrayList<Player> getDefPOTY() {
+        heisman = null;
+        int heismanScore = 0;
+        int tempScore = 0;
+        ArrayList<Player> heismanCandidates = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); ++i) {
             //dl
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
                 heismanCandidates.add(teamList.get(i).teamDLs.get(dl));
@@ -1326,40 +1423,18 @@ public class League {
      *
      * @return string of the heisman ceremony.
      */
-    public String getHeismanCeremonyStr() {
+    public String getDefensePOTYStr() {
         boolean putNewsStory = false;
         if (!heismanDecided) {
-            heismanDecided = true;
-            heismanCandidates = getHeisman();
-            heisman = heismanCandidates.get(0);
-            heisman.wonHeisman = true;
+            defPOTYCandidates = getDefPOTY();
+            defPOTY = defPOTYCandidates.get(0);
+            defPOTY.wonHeisman = true;
             putNewsStory = true;
             //full results string
             String heismanTop5 = "\n";
             for (int i = 0; i < 5; ++i) {
-                Player p = heismanCandidates.get(i);
-                if (p instanceof PlayerQB) {
-                    PlayerQB pqb = (PlayerQB) p;
-                    heismanTop5 += (i + 1) + ". QB " + pqb.name + ": " + p.getHeismanScore() + " votes\n\t\t"
-                            + pqb.team.strRankTeamRecord() + "\n\t\t"
-                            + pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds, "
-                            + df2.format(pqb.getPasserRating()) + " QBR\n\n";
-                } else if (p instanceof PlayerRB) {
-                    PlayerRB prb = (PlayerRB) p;
-                    heismanTop5 += (i + 1) + ". RB " + prb.name + ": " + p.getHeismanScore() + " votes\n\t\t"
-                            + prb.team.strRankTeamRecord() + "\n\t\t"
-                            + prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n\n";
-                } else if (p instanceof PlayerWR) {
-                    PlayerWR pwr = (PlayerWR) p;
-                    heismanTop5 += (i + 1) + ". WR " + pwr.name + ": " + p.getHeismanScore() + " votes\n\t\t"
-                            + pwr.team.strRankTeamRecord() + "\n\t\t"
-                            + pwr.statsRecTD + " TDs, " + pwr.statsFumbles + " Fum, " + pwr.statsRecYards + " Yds\n\n";
-                } else if (p instanceof PlayerTE) {
-                    PlayerTE pte = (PlayerTE) p;
-                    heismanTop5 += (i + 1) + ". TE " + pte.name + ": " + p.getHeismanScore() + " votes\n\t\t"
-                            + pte.team.strRankTeamRecord() + "\n\t\t"
-                            + pte.statsRecTD + " TDs, " + pte.statsFumbles + " Fum, " + pte.statsRecYards + " Yds\n\n";
-                } else if (p instanceof PlayerDL) {
+                Player p = defPOTYCandidates.get(i);
+                if (p instanceof PlayerDL) {
                     PlayerDL pdl = (PlayerDL) p;
                     heismanTop5 += (i + 1) + ". DL " + pdl.name + ": " + p.getHeismanScore() + " votes\n\t\t"
                             + pdl.team.strRankTeamRecord() + "\n\t\t"
@@ -1384,80 +1459,40 @@ public class League {
 
             String heismanStats = "";
             String heismanWinnerStr = "";
-            if (heisman instanceof PlayerQB) {
-                //qb heisman
-                PlayerQB heisQB = (PlayerQB) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisQB.team.name +
-                        " QB " + heisQB.name + " [" + heisman.getYrStr() + "], who had " +
-                        heisQB.statsPassTD + " TDs, just " + heisQB.statsInt + " interceptions, and " +
-                        heisQB.statsPassYards + " passing yards. In addition, he ran for " + heisQB.statsRushYards + " rushing yards and scored " + heisQB.statsRushTD + " touchdowns. He led " + heisQB.team.name +
-                        " to a " + heisQB.team.wins + "-" + heisQB.team.losses + " record and a #" + heisQB.team.rankTeamPollScore +
-                        " poll ranking.";
-                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerRB) {
-                //rb heisman
-                PlayerRB heisRB = (PlayerRB) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisRB.team.name +
-                        " RB " + heisRB.name + " [" + heisman.getYrStr() + "], who had " +
-                        heisRB.statsRushTD + " TDs, just " + heisRB.statsFumbles + " fumbles, and " +
-                        heisRB.statsRushYards + " rushing yards. He led " + heisRB.team.name +
-                        " to a " + heisRB.team.wins + "-" + heisRB.team.losses + " record and a #" + heisRB.team.rankTeamPollScore +
-                        " poll ranking.";
-                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerWR) {
-                //wr heisman
-                PlayerWR heisWR = (PlayerWR) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisWR.team.name +
-                        " WR " + heisWR.name + " [" + heisman.getYrStr() + "], who had " +
-                        heisWR.statsRecTD + " TDs, just " + heisWR.statsFumbles + " fumbles, and " +
-                        heisWR.statsRecYards + " receiving yards. He led " + heisWR.team.name +
-                        " to a " + heisWR.team.wins + "-" + heisWR.team.losses + " record and a #" + heisWR.team.rankTeamPollScore +
-                        " poll ranking.";
-                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerTE) {
-                //te heisman
-                PlayerTE heisTE = (PlayerTE) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisTE.team.name +
-                        " TE " + heisTE.name + " [" + heisman.getYrStr() + "], who had " +
-                        heisTE.statsRecTD + " TDs, just " + heisTE.statsFumbles + " fumbles, and " +
-                        heisTE.statsRecYards + " receiving yards. He led " + heisTE.team.name +
-                        " to a " + heisTE.team.wins + "-" + heisTE.team.losses + " record and a #" + heisTE.team.rankTeamPollScore +
-                        " poll ranking.";
-                heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerDL) {
+           if (defPOTY instanceof PlayerDL) {
                 //dl heisman
-                PlayerDL heisDL = (PlayerDL) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisDL.team.name +
-                        " DL " + heisDL.name + " [" + heisman.getYrStr() + "], who had " +
+                PlayerDL heisDL = (PlayerDL) defPOTY;
+                heismanWinnerStr = "Congratulations to the Defensive Player of the Year, " + heisDL.team.name +
+                        " DL " + heisDL.name + " [" + defPOTY.getYrStr() + "], who had " +
                         heisDL.statsTackles + " tackles, " + heisDL.statsSacks + " sacks, and forced " + heisDL.statsFumbles + " fumbles. He led " + heisDL.team.name +
                         " to a " + heisDL.team.wins + "-" + heisDL.team.losses + " record and a #" + heisDL.team.rankTeamPollScore +
                         " poll ranking.";
                 heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerLB) {
+            } else if (defPOTY instanceof PlayerLB) {
                 //wr heisman
-                PlayerLB heisLB = (PlayerLB) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisLB.team.name +
-                        " LB " + heisLB.name + " [" + heisman.getYrStr() + "], who had " +
+                PlayerLB heisLB = (PlayerLB) defPOTY;
+                heismanWinnerStr = "Congratulations to the Defensive Player of the Year, " + heisLB.team.name +
+                        " LB " + heisLB.name + " [" + defPOTY.getYrStr() + "], who had " +
                         heisLB.statsTackles + " tackles, " + heisLB.statsSacks + " sacks, and recovered " + heisLB.statsFumbles + " fumbles, and " +
                         heisLB.statsInts + " inteceptions. He led " + heisLB.team.name +
                         " to a " + heisLB.team.wins + "-" + heisLB.team.losses + " record and a #" + heisLB.team.rankTeamPollScore +
                         " poll ranking.";
                 heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerCB) {
+            } else if (defPOTY instanceof PlayerCB) {
                 //wr heisman
-                PlayerCB heisCB = (PlayerCB) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisCB.team.name +
-                        " CB " + heisCB.name + " [" + heisman.getYrStr() + "], who had " +
+                PlayerCB heisCB = (PlayerCB) defPOTY;
+                heismanWinnerStr = "Congratulations to the Defensive Player of the Year, " + heisCB.team.name +
+                        " CB " + heisCB.name + " [" + defPOTY.getYrStr() + "], who had " +
                         heisCB.statsTackles + " tackles, defended " + heisCB.statsDefended + " passes, and " +
                         heisCB.statsInts + " inteceptions. He led " + heisCB.team.name +
                         " to a " + heisCB.team.wins + "-" + heisCB.team.losses + " record and a #" + heisCB.team.rankTeamPollScore +
                         " poll ranking.";
                 heismanStats = heismanWinnerStr + "\n\nFull Results:" + heismanTop5;
-            } else if (heisman instanceof PlayerS) {
+            } else if (defPOTY instanceof PlayerS) {
                 //wr heisman
-                PlayerS heisS = (PlayerS) heisman;
-                heismanWinnerStr = "Congratulations to the Player of the Year, " + heisS.team.name +
-                        " S " + heisS.name + " [" + heisman.getYrStr() + "], who had " +
+                PlayerS heisS = (PlayerS) defPOTY;
+                heismanWinnerStr = "Congratulations to the Defensive Player of the Year, " + heisS.team.name +
+                        " S " + heisS.name + " [" + defPOTY.getYrStr() + "], who had " +
                         heisS.statsTackles + " tackles, " + heisS.statsSacks + " sacks, and recovered " + heisS.statsFumbles + " fumbles, and " +
                         heisS.statsInts + " inteceptions. He led " + heisS.team.name +
                         " to a " + heisS.team.wins + "-" + heisS.team.losses + " record and a #" + heisS.team.rankTeamPollScore +
@@ -1467,13 +1502,13 @@ public class League {
 
             // Add news story
             if (putNewsStory) {
-                newsStories.get(currentWeek + 1).add(heisman.name + " is the Player of the Year!>" + heismanWinnerStr);
-                heismanWinnerStrFull = heismanStats;
+                newsStories.get(currentWeek + 1).add(defPOTY.name + " is the Defensive Player of the Year!>" + heismanWinnerStr);
+                defPOTYWinnerStrFull = heismanStats;
             }
 
             return heismanStats;
         } else {
-            return heismanWinnerStrFull;
+            return defPOTYWinnerStrFull;
         }
     }
 
@@ -2133,7 +2168,7 @@ public class League {
 
             for (int i = 0; i < teamList.size(); ++i) {
                 teamList.get(i).updatePollScore();
-                if (teamList.get(i) == penalizedTeam1) teamList.get(i).teamPollScore = 0;
+                if (teamList.get(i) == penalizedTeam1 || teamList.get(i) == penalizedTeam2) teamList.get(i).teamPollScore = 0;
             }
             Collections.sort(teamList, new CompTeamPoll());
 
@@ -3432,6 +3467,7 @@ public class League {
         updateTeamTalentRatings();
         setTeamBenchMarks();
         setTeamRanks();
+        Collections.sort(teamList, new CompTeamPrestige());
     }
 
     //Universal Promotion/Relegation System - just like in Soccer. Can be enabled. Disabled by default.
@@ -3558,37 +3594,8 @@ public class League {
     public void advanceSeason() {
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceTeamPlayers();
+
         }
-
-
-        //Field Upgrade Chance 1
-        int luckyNumber = (int) (Math.random() * 40);
-        Team luckyTeam = teamList.get(luckyNumber);
-        luckyTeam.teamPrestige += (int) (Math.random() * 4);
-        bonusTeam1 = luckyTeam;
-        if (luckyTeam.teamPrestige > 99) {
-            luckyTeam.teamPrestige = 95;
-        }
-
-        //Field Upgrade Chance 2
-        luckyNumber = (int) (Math.random() * 40);
-        Team luckyTeam2 = teamList.get(40 + luckyNumber);
-        luckyTeam2.teamPrestige += (int) (Math.random() * 6);
-        bonusTeam2 = luckyTeam2;
-        if (luckyTeam2.teamPrestige > 99) {
-            luckyTeam2.teamPrestige = 95;
-        }
-
-        //Field Upgrade Chance 3
-        luckyNumber = (int) (Math.random() * 40);
-        if (luckyNumber > 39) luckyNumber = 39;
-        Team luckyTeam3 = teamList.get(80 + luckyNumber);
-        luckyTeam3.teamPrestige += (int) (Math.random() * 8);
-        bonusTeam3 = luckyTeam3;
-        if (luckyTeam3.teamPrestige > 99) {
-            luckyTeam3.teamPrestige = 95;
-        }
-
 
         /// INFRACTIONS TIME
 
@@ -3679,7 +3686,6 @@ public class League {
             if (enableTV) conferences.get(c).reviewConfTVDeal();
         }
 
-        hasScheduledBowls = false;
     }
 
 
@@ -4099,7 +4105,7 @@ public class League {
 
         ArrayList<HeadCoach> HC = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
+            if (teamList.get(i).HC.get(0) != null) HC.add(teamList.get(i).HC.get(0));
         }
 
         switch (selection) {
@@ -4825,28 +4831,6 @@ public class League {
         }
         sb.append("END_COACH_HISTORY\n");
 
-
-        if (bonusTeam1 != null) {
-            sb.append(bonusTeam1.abbr + "\n");
-            sb.append("END_LUCKY_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_LUCKY_TEAM\n");
-        }
-        if (bonusTeam2 != null) {
-            sb.append(bonusTeam2.abbr + "\n");
-            sb.append("END_LUCKY2_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_LUCKY2_TEAM\n");
-        }
-        if (bonusTeam3 != null) {
-            sb.append(bonusTeam3.abbr + "\n");
-            sb.append("END_LUCKY3_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_LUCKY3_TEAM\n");
-        }
         if (penalizedTeam1 != null) {
             sb.append(penalizedTeam1.abbr + "\n");
             sb.append("END_PENALIZED_TEAM\n");
@@ -5005,6 +4989,18 @@ public class League {
         return netTotal;
     }
 
+
+
+    /////////////////////////
+    //TEST TEST TEST ///////
+    ////////////////////////
+
+
+
+
+
+
+
     /**
      * Save League in a file.
      *
@@ -5019,10 +5015,10 @@ public class League {
 
         // Save information about the save file, user team info
         if (isCareerMode()) {
-            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+            sb.append((seasonStart + leagueHistory.size()) + " wk " + currentWeek+1 + " : " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins) + "-" + (userTeam.HC.get(0).losses) + ") " +
                     userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[C]%\n");
         } else {
-            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
+            sb.append((seasonStart + leagueHistory.size()) + " wk " + currentWeek+1 + " : " + userTeam.abbr + " (" + (userTeam.totalWins) + "-" + (userTeam.totalLosses) + ") " +
                     userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[D]%\n");
         }
 
@@ -5047,6 +5043,7 @@ public class League {
         //Save Conference Names
         for (int i = 0; i < conferences.size(); ++i) {
             sb.append(conferences.get(i).confName + "," + conferences.get(i).confTV + "," + conferences.get(i).confTVContract + "," + conferences.get(i).confTVBonus + "," + conferences.get(i).TV + "\n");
+
         }
         sb.append("END_CONFERENCES\n");
 
@@ -5078,28 +5075,6 @@ public class League {
         }
         sb.append("END_COACH_HISTORY\n");
 
-
-        if (bonusTeam1 != null) {
-            sb.append(bonusTeam1.abbr + "\n");
-            sb.append("END_LUCKY_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_LUCKY_TEAM\n");
-        }
-        if (bonusTeam2 != null) {
-            sb.append(bonusTeam2.abbr + "\n");
-            sb.append("END_LUCKY2_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_LUCKY2_TEAM\n");
-        }
-        if (bonusTeam3 != null) {
-            sb.append(bonusTeam3.abbr + "\n");
-            sb.append("END_LUCKY3_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_LUCKY3_TEAM\n");
-        }
         if (penalizedTeam1 != null) {
             sb.append(penalizedTeam1.abbr + "\n");
             sb.append("END_PENALIZED_TEAM\n");

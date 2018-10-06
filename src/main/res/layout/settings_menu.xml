@@ -103,6 +103,25 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:text="Career Mode (Fireable)"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <CheckBox
+                    android:id="@+id/checkboxCareerMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:text="Enable Conf Realignment"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -184,14 +203,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="Resign Job"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/buttonUnivProRel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Convert to Universal Pro/Rel"
                 android:textSize="14sp" />
 
             <Button

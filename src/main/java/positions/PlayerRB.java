@@ -243,6 +243,9 @@ public class PlayerRB extends Player {
                 ratEvasion += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratCatch += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
             }
+
+            durabilityProgression();
+
         }
         ratOvr = getOverall();
         ratImprovement = ratOvr - ratOvrStart;
@@ -335,7 +338,7 @@ public class PlayerRB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsRushTD * 150 - statsFumbles * 75 + (int) (statsRushYards * 3.25) + 2 * statsReceptions + (int) (statsRecYards * 2.65) + statsRecTD * 150 + statsKickRetYards + statsKickRetTDs * 150 + statsPuntRetYards + statsPuntRetTDs * 150 + ratOvr * 10 + getConfPrestigeBonus();
+        return statsRushTD * 150 - statsFumbles * 75 + (int) (statsRushYards * 3.15) + 2 * statsReceptions + (int) (statsRecYards * 2.65) + statsRecTD * 150 + statsKickRetYards + statsKickRetTDs * 120 + statsPuntRetYards + statsPuntRetTDs * 120 + ratOvr * 10 + getConfPrestigeBonus();
     }
 
     @Override

@@ -229,6 +229,9 @@ public class PlayerQB extends Player {
                 ratEvasion += (int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor;
                 ratSpeed += ((int) (Math.random() * (progression + games - endseasonBonus)) / endseasonFactor) / 1.5;
             }
+
+            durabilityProgression();
+
         }
 
         ratOvr = getOverall();
@@ -309,7 +312,7 @@ public class PlayerQB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsPassTD * 150 - statsInt * 215 + statsPassYards + statsRushTD * 150 + 3 * statsRushYards + ratOvr * 10 + getConfPrestigeBonus();
+        return statsPassTD * 150 - statsInt * 215 + statsPassYards + statsRushTD * 140 + 3 * statsRushYards + ratOvr * 10 + getConfPrestigeBonus();
     }
 
 

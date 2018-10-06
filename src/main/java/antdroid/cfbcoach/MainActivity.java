@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     //Universe Settings
     private final int teamsStart = 12;
     private final int confStart = 10;
-    private final int seasonStart = 2017;
+    private final int seasonStart = 2018;
 
     String saveLeagueFileStr;
     private File customConfs;
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             String saveFileStr = extras.getString("SAVE_FILE");
 
             //NEW DYNASTY GAME
-            if (saveFileStr.contains("NEW_LEAGUE_DYNASTY")) {
+            if (saveFileStr.contains("NEW_LEAGUE")) {
                 //NEW DYNASTY GAME WITH CUSTOM DATABASE
                 if (saveFileStr.contains("CUSTOM")) {
                     String[] filesSplit = saveFileStr.split(",");
@@ -144,40 +144,24 @@ public class MainActivity extends AppCompatActivity {
                     Uri uri = Uri.parse(customUri);
                     customLeague(uri);
                     if (saveFileStr.contains("RANDOM"))
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, true);
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, true, false);
+                    else if (saveFileStr.contains("EQUALIZE"))
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, true);
                     else
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), false, customConfs, customTeams, customBowls, false);
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, false);
                     season = seasonStart;
+
+                    importDataPrompt();
+
                     //NEW DYNASTY DEFAULT DATABASE
-                } else if (saveFileStr.contains("NEW_LEAGUE_DYNASTY_RANDOM")) {
+                } else if (saveFileStr.contains("RANDOM")) {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
+                    season = seasonStart;
+                } else if (saveFileStr.contains("EQUALIZE")) {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, true);
                     season = seasonStart;
                 } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
-                    season = seasonStart;
-                }
-                //NEW CAREER GAME
-            } else if (saveFileStr.contains("NEW_LEAGUE_CAREER")) {
-                //NEW CAREER GAME WITH CUSTOM DATABASE
-                if (saveFileStr.contains("CUSTOM")) {
-                    String[] filesSplit = saveFileStr.split(",");
-                    this.customUri = filesSplit[1];
-                    customConfs = new File(getFilesDir(), "conferences.txt");
-                    customTeams = new File(getFilesDir(), "teams.txt");
-                    customBowls = new File(getFilesDir(), "bowls.txt");
-                    Uri uri = Uri.parse(customUri);
-                    customLeague(uri);
-                    if (saveFileStr.contains("RANDOM"))
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, true);
-                    else
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), true, customConfs, customTeams, customBowls, false);
-                    season = seasonStart;
-                    //NEW CAREER GAME WITH DEFAULT DATABASE
-                } else if (saveFileStr.contains("NEW_LEAGUE_CAREER_RANDOM")) {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, true);
-                    season = seasonStart;
-                } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
                     season = seasonStart;
                 }
                 //LOADING A CURRENT GAME AFTER RECRUITING PERIOD
@@ -405,47 +389,10 @@ public class MainActivity extends AppCompatActivity {
     //Update Header Bar
     private void updateHeaderBar() {
         if (simLeague.isCareerMode()) {
-            getSupportActionBar().setTitle(season + " | " + userTeam.name + " | Career Mode");
+            getSupportActionBar().setTitle(season + " | " + userTeam.name);
         } else {
-            getSupportActionBar().setTitle(season + " | " + userTeam.name + " | Dynasty Mode");
+            getSupportActionBar().setTitle(season + " | " + userTeam.name);
         }
-    }
-
-    private void newGameHardDialog() {
-        //rank teams within conferences
-        simLeague.updateTeamTalentRatings();
-        //choose last 3 teams in each conference
-        final ArrayList<Team> coachList = simLeague.getCoachList();
-        final ArrayList<String> teamsArray = simLeague.getCoachListStr();
-        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Job Offers Available:");
-        builder.setItems(teams, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                // Do something with the selection
-                userTeam.userControlled = false;
-                simLeague.newJobtransfer(coachList.get(item).name);
-                userTeam = simLeague.userTeam;
-                userTeam.userControlled = true;
-                userTeamStr = userTeam.name;
-                currentTeam = userTeam;
-                userNameDialog();
-                userTeam.setupUserCoach(username);
-                // set rankings so that not everyone is rank #0
-                simLeague.setTeamRanks();
-                simLeague.setTeamBenchMarks();
-                simLeague.updateTeamTalentRatings();
-                simLeague.preseasonNews();
-                userHC = userTeam.HC.get(0);
-                // Set toolbar text to '2017 Season' etc
-                updateHeaderBar();
-                examineTeam(currentTeam.name);
-            }
-        });
-        builder.setCancelable(false);
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     private void newGameDialog() {
@@ -959,11 +906,11 @@ public class MainActivity extends AppCompatActivity {
 
             String[] selection;
             selection = new String[5];
-            selection[0] = "Game Summary";
-            selection[1] = "Offense Stats";
-            selection[2] = "Defense Stats";
-            selection[3] = "Special Teams Stats";
-            selection[4] = "Game Play Log";
+            selection[0] = "menu >> Game Summary";
+            selection[1] = "menu >> Offense Stats";
+            selection[2] = "menu >> Defense Stats";
+            selection[3] = "menu >> Special Teams Stats";
+            selection[4] = "menu >> Game Play Log";
 
             Spinner potySpinner = dialog.findViewById(R.id.boxscoreMenu);
             final ArrayAdapter<String> boxMenu = new ArrayAdapter<>(this,
@@ -1804,10 +1751,13 @@ public class MainActivity extends AppCompatActivity {
             /*
               Clicked Save League in drop down menu
              */
-            if (simLeague.currentWeek < 13) {
+            if (simLeague.getYear() == seasonStart || simLeague.currentWeek < 13) {
                 saveLeague();
-            } else {
+            } else if (simLeague.currentWeek < 13) {
                 Toast.makeText(MainActivity.this, "Save Function Disabled. Save only available in Pre-Season and Reg Season.",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Save Function disabled during initial season.",
                         Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.action_return_main_menu) {
@@ -1847,6 +1797,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
         checkboxPotential.setChecked(simLeague.hidePotential);
 
+        final CheckBox checkboxCareerMode = dialog.findViewById(R.id.checkboxCareerMode);
+        checkboxCareerMode.setChecked(simLeague.isCareerMode());
+
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
@@ -1865,7 +1818,6 @@ public class MainActivity extends AppCompatActivity {
                                                        if (simLeague.enableUnivProRel) {
                                                            checkboxProRelegation.setChecked(false);
                                                        }
-
                                                    }
                                                }
         );
@@ -1888,11 +1840,6 @@ public class MainActivity extends AppCompatActivity {
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         if(userTeam.getHC(0).age >= 65) changeTeamsButton.setText("RETIRE");
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
-        Button univProRelButton = dialog.findViewById(R.id.buttonUnivProRel);
-
-        if (simLeague.currentWeek > 0) {
-            univProRelButton.setVisibility(View.INVISIBLE);
-        }
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1917,6 +1864,7 @@ public class MainActivity extends AppCompatActivity {
                 showInjuryReport = checkboxShowInjury.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.hidePotential = checkboxPotential.isChecked();
+                simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
                 simLeague.enableProRel = checkboxProRelegation.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
@@ -1966,42 +1914,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        univProRelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                dialog.dismiss();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Confirmation");
-                builder.setMessage("Are you sure you want convert this game into an Universal Promotion/Relegation Game?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Perform action on click
-                        simLeague.enableUnivProRel = true;
-                        simLeague.enableProRel = false;
-                        simLeague.confRealignment = false;
-                        simLeague.convertUnivProRel();
-                        updateCurrConference();
-                        updateCurrTeam();
-                        examineTeam(userTeam.name);
-                        dialog.dismiss();
-                    }
-                });
-
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-
-                    }
-                });
-
-                builder.show();
-
-            }
-        });
     }
 
     //Game Editor - Customize Names
@@ -2789,16 +2701,17 @@ public class MainActivity extends AppCompatActivity {
         String[] selection;
         if (simLeague.currentWeek < 13) {
             selection = new String[1];
-            selection[0] = "Player of the Year";
+            selection[0] = "Offensive Player of the Year";
         } else {
-            selection = new String[15];
-            selection[0] = "Player of the Year";
-            selection[1] = "Coach of the Year";
-            selection[2] = "Freshman of the Year";
-            selection[3] = "All-American Team";
-            selection[4] = "All-Freshman Team";
+            selection = new String[16];
+            selection[0] = "Offensive Player of the Year";
+            selection[1] = "Defensive Player of the Year";
+            selection[2] = "Coach of the Year";
+            selection[3] = "Freshman of the Year";
+            selection[4] = "All-American Team";
+            selection[5] = "All-Freshman Team";
             for (int i = 0; i < confStart; ++i) {
-                selection[i + 5] = simLeague.conferences.get(i).confName + " All-Conf Team";
+                selection[i + 6] = simLeague.conferences.get(i).confName + " All-Conf Team";
             }
         }
 
@@ -2812,6 +2725,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get all american and all conf
         final String[] coachAwardList = simLeague.getCoachAwardStr().split(">");
+        final String[] defAwardList = simLeague.getDefensePOTYStr().split(">");
         final String[] freshmanAwardList = simLeague.getFreshmanCeremonyStr().split(">");
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
         final String[] allFreshman = simLeague.getAllFreshmanStr().split(">");
@@ -2828,15 +2742,17 @@ public class MainActivity extends AppCompatActivity {
                         if (position == 0) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, simLeague.getHeismanCeremonyStr().split(">"), userTeam.abbr));
                         } else if (position == 1) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, coachAwardList, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, defAwardList, userTeam.abbr));
                         } else if (position == 2) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, freshmanAwardList, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, coachAwardList, userTeam.abbr));
                         } else if (position == 3) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allAmericans, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, freshmanAwardList, userTeam.abbr));
                         } else if (position == 4) {
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allAmericans, userTeam.abbr));
+                        } else if (position == 5) {
                             potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allFreshman, userTeam.abbr));
                         } else {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 5], userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 6], userTeam.abbr));
                         }
                     }
 
@@ -2844,6 +2760,25 @@ public class MainActivity extends AppCompatActivity {
                         // do nothing
                     }
                 });
+    }
+
+    private void importDataPrompt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Do you want to import Coach/Player data?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    importData();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void importData() {
@@ -2861,6 +2796,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.setType("text/plain");
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         startActivityForResult(intent, READ_REQUEST_CODE);
+                        importMoreDataPrompt();
                     }
                 })
                 .setNegativeButton("Roster File", new DialogInterface.OnClickListener() {
@@ -2871,6 +2807,27 @@ public class MainActivity extends AppCompatActivity {
                         intent.setType("text/plain");
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         startActivityForResult(intent, READ_REQUEST_CODE);
+                        importMoreDataPrompt();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void importMoreDataPrompt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Do you want to import more data?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        importData();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
                     }
                 });
         AlertDialog dialog = builder.create();
@@ -2985,30 +2942,102 @@ public class MainActivity extends AppCompatActivity {
 
     //IN-GAME DISPLAYS
 
-    //Career Mode Options
+    //New Game Options
     private void careerModeOptions() {
-        AlertDialog.Builder mode = new AlertDialog.Builder(this);
-        mode.setMessage("What difficulty would you like?\n\n" +
-                "Normal: Choose any team to start your new career.\n\n" +
-                "Challenge: Start at the bottom and work your way up.\n\n")
-                .setTitle("Choose Difficulty:")
-                .setPositiveButton("Challenge", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        newGameHardDialog();
-                    }
-                })
-                .setNegativeButton("Normal", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        newGameDialog();
-                    }
-                });
-        mode.setCancelable(false);
-        AlertDialog dialog = mode.create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("New Game Options")
+                .setView(getLayoutInflater().inflate(R.layout.settings_menu, null));
+        final AlertDialog dialog = builder.create();
         dialog.show();
-        TextView msgTxt = dialog.findViewById(android.R.id.message);
-        msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+        final CheckBox checkboxShowPopup = dialog.findViewById(R.id.checkboxShowPopups);
+        checkboxShowPopup.setChecked(showToasts);
+
+        final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
+        checkboxShowInjury.setChecked(showInjuryReport);
+
+        final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
+        checkboxGameLog.setChecked(simLeague.fullGameLog);
+
+        final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
+        checkboxPotential.setChecked(simLeague.hidePotential);
+
+        final CheckBox checkboxCareerMode = dialog.findViewById(R.id.checkboxCareerMode);
+        checkboxCareerMode.setChecked(simLeague.isCareerMode());
+
+        final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
+        checkboxRealignment.setChecked(simLeague.confRealignment);
+
+        final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
+        checkboxProRelegation.setChecked(simLeague.enableUnivProRel);
+
+        final CheckBox checkboxTV = dialog.findViewById(R.id.checkboxTV);
+        checkboxTV.setChecked(simLeague.enableTV);
+
+        checkboxRealignment.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View view) {
+                                                       if (checkboxRealignment.isChecked()) {
+                                                           checkboxProRelegation.setChecked(false);
+                                                       }
+                                                   }
+                                               }
+        );
+
+        checkboxProRelegation.setOnClickListener(new View.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(View view) {
+                                                         if (checkboxProRelegation.isChecked()) {
+                                                             checkboxRealignment.setChecked(false);
+                                                         }
+                                                     }
+                                                 }
+        );
+
+        Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
+        cancelButton.setVisibility(View.INVISIBLE);
+        Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
+        changeTeamsButton.setVisibility(View.INVISIBLE);
+        Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
+        gameEditorButton.setVisibility(View.INVISIBLE);
+
+        Button okButton = dialog.findViewById(R.id.buttonOkSettings);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                showToasts = checkboxShowPopup.isChecked();
+                showInjuryReport = checkboxShowInjury.isChecked();
+                simLeague.fullGameLog = checkboxGameLog.isChecked();
+                simLeague.hidePotential = checkboxPotential.isChecked();
+                simLeague.careerMode = checkboxCareerMode.isChecked();
+                simLeague.enableUnivProRel = checkboxProRelegation.isChecked();
+                simLeague.confRealignment = checkboxRealignment.isChecked();
+                simLeague.enableTV = checkboxTV.isChecked();
+                if (simLeague.enableUnivProRel) {
+                    simLeague.enableProRel = false;
+                    simLeague.confRealignment = false;
+                    universalProRelAction();
+                }
+                userTeam.showPopups = showToasts;
+                newGameDialog();
+                dialog.dismiss();
+
+            }
+        });
+
+    }
+
+    private void universalProRelAction() {
+
+        // Perform action on click
+        simLeague.enableUnivProRel = true;
+        simLeague.enableProRel = false;
+        simLeague.confRealignment = false;
+        simLeague.convertUnivProRel();
+        updateCurrConference();
+        updateCurrTeam();
+        examineTeam(userTeam.name);
+
     }
 
     //Injury Report
@@ -3086,10 +3115,6 @@ public class MainActivity extends AppCompatActivity {
         goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
 
         if (simLeague.getYear() > seasonStart) {
-            if (simLeague.bonusTeam1 != null && simLeague.bonusTeam1.name.equals(userTeam.name) || simLeague.bonusTeam2 != null && simLeague.bonusTeam2.name.equals(userTeam.name) || simLeague.bonusTeam3 != null && simLeague.bonusTeam3.name.equals(userTeam.name)) {
-                goals += "Your team's training facilities were upgraded over the off-season! Prestige has increased!\n\n";
-            }
-
             if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
                 goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
             }
@@ -3701,6 +3726,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reincarnation() {
+        userHC = userTeam.getHC(0);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
                 .setPositiveButton("Reincarnate - Same Team", new DialogInterface.OnClickListener() {

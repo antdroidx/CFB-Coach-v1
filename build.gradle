@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -27,13 +27,13 @@ android {
         }
     }
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "antdroid.cfbcoach"
         minSdkVersion 21
-        targetSdkVersion 27
-        versionName 'v1.2.15'
-        versionCode 71
+        targetSdkVersion 26
+        versionName 'v1.2.21'
+        versionCode 79
     }
     buildTypes {
         release {
@@ -60,6 +60,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
-    debugImplementation 'com.google.android.gms:play-services-games:15.0.0'
     implementation 'com.jjoe64:graphview:4.2.2'
 }
