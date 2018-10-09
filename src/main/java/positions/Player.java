@@ -161,6 +161,14 @@ Player {
         return "ERROR";
     }
 
+    public boolean getWasRedshirtStatus() {
+        wasRedshirt = false;
+        int rs = (int) (Math.random() * 5);
+        if (year > 1 && rs > 1) wasRedshirt = true;
+
+        return wasRedshirt;
+    }
+
     public void advanceSeason() {
         //add stuff
         if (!isMedicalRS) year++;
@@ -579,4 +587,5 @@ Player {
     public void durabilityProgression() {
         ratDur += Math.random() * 2*year;
     }
+
 }

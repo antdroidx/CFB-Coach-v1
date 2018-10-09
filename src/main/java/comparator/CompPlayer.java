@@ -19,7 +19,7 @@ public class CompPlayer implements Comparator<Player> {
     public int compare(Player a, Player b) {
         if (!a.isInjured && !b.isInjured) {
             // If both players aren't injured
-            if (a.year > 0 && b.year > 0) {
+            if (!a.isRedshirt && !b.isRedshirt) {
                 if (!a.isTransfer && !b.isTransfer) {
                     // If both players aren't redshirted
                     if (!a.isSuspended && !b.isSuspended) {
@@ -37,9 +37,9 @@ public class CompPlayer implements Comparator<Player> {
                 } else if (!b.isTransfer) {
                     return 1;
                 }
-            } else if (a.year > 0) {
+            } else if (!a.isRedshirt) {
                 return -1;
-            } else if (b.year > 0) {
+            } else if (!b.isRedshirt) {
                 return 1;
             } else {
                 return a.ratOvr > b.ratOvr ? -1 : a.ratOvr == b.ratOvr ? 0 : 1;

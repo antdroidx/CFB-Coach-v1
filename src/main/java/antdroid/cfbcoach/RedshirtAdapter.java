@@ -14,21 +14,25 @@ import java.util.ArrayList;
 
 import positions.Player;
 
+import static android.view.View.INVISIBLE;
+
 /**
  * Created by Achi Jones on 3/18/2016.
  */
-class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
+class RedshirtAdapter extends ArrayAdapter<Player> {
     private final Context context;
     public final ArrayList<Player> players;
     public final ArrayList<Player> playersSelected;
+    public final ArrayList<Player> playersRemoved;
     public int playersRequired;
 
-    public TeamLineupArrayAdapter(Context context, ArrayList<Player> values, int playersRequired) {
+    public RedshirtAdapter(Context context, ArrayList<Player> values, int playersRequired) {
         super(context, R.layout.team_lineup_list_item, values);
         this.context = context;
         this.players = values;
         this.playersRequired = playersRequired;
         playersSelected = new ArrayList<>();
+        playersRemoved = new ArrayList<>();
         if (players.size() >= playersRequired) {
             for (int i = 0; i < playersRequired; ++i) {
                 playersSelected.add(players.get(i));
@@ -61,27 +65,25 @@ class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
 
 
         CheckBox isPlayerStarting = rowView.findViewById(R.id.checkboxPlayerStartingLineup);
-        if (playersSelected.contains(players.get(position))) {
-            isPlayerStarting.setChecked(true);
-        } else if (players.get(position).isInjured) {
+        if (players.get(position).isInjured) {
             // Is injured
             isPlayerStarting.setEnabled(false);
             playerInfo.setTextColor(Color.BLUE);
         } else if (players.get(position).isTransfer) {
             // Is Transfer
             isPlayerStarting.setEnabled(false);
-            isPlayerStarting.setText("T");
             playerInfo.setTextColor(Color.GRAY);
         } else if (players.get(position).isSuspended) {
             // Is suspended
             isPlayerStarting.setEnabled(false);
             playerInfo.setTextColor(Color.GREEN);
-        } else if (players.get(position).isRedshirt) {
+        } else if (players.get(position).wasRedshirt) {
             isPlayerStarting.setEnabled(false);
-            isPlayerStarting.setText("RS");
+            playerInfo.setTextColor(Color.GRAY);
+        } else if (players.get(position).isRedshirt) {
+            isPlayerStarting.setChecked(true);
+            isPlayerStarting.setEnabled(true);
             playerInfo.setTextColor(Color.RED);
-        } else {
-            isPlayerStarting.setChecked(false);
         }
 
         isPlayerStarting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -92,6 +94,9 @@ class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
                     playersSelected.add(players.get(position));
                 } else {
                     playersSelected.remove(players.get(position));
+                }
+                if (!isChecked && players.get(position).isRedshirt) {
+                    playersRemoved.add(players.get(position));
                 }
             }
         });

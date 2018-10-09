@@ -109,7 +109,7 @@ public class Team {
     public int rankTeamSOS;
     private final int teamCount = 12;
     private final int totalTeamCount = teamCount * 10;
-    private final int ratTransfer = 71;
+    private final int ratTransfer = 70;
     private final int promotionNum = 0;
 
     //prestige/talent improvements
@@ -145,6 +145,19 @@ public class Team {
     private ArrayList<Player> teamSOs;
     private ArrayList<Player> teamJRs;
     private ArrayList<Player> teamSRs;
+
+    //offense
+    public ArrayList<PlayerQB> nonRSQBs;
+    public ArrayList<PlayerRB> nonRSRBs;
+    public ArrayList<PlayerWR> nonRSWRs;
+    public ArrayList<PlayerTE> nonRSTEs;
+    public ArrayList<PlayerK> nonRSKs;
+    public ArrayList<PlayerOL> nonRSOLs;
+    //defense
+    public ArrayList<PlayerDL> nonRSDLs;
+    public ArrayList<PlayerLB> nonRSLBs;
+    public ArrayList<PlayerCB> nonRSCBs;
+    public ArrayList<PlayerS> nonRSSs;
 
     public final int minQBs = 3;
     public final int minRBs = 5;
@@ -393,6 +406,17 @@ public class Team {
         teamJRs = new ArrayList<>();
         teamSRs = new ArrayList<>();
 
+        nonRSQBs = new ArrayList<>();
+        nonRSRBs = new ArrayList<>();
+        nonRSWRs = new ArrayList<>();
+        nonRSTEs = new ArrayList<>();
+        nonRSKs = new ArrayList<>();
+        nonRSOLs = new ArrayList<>();
+        nonRSDLs = new ArrayList<>();
+        nonRSLBs = new ArrayList<>();
+        nonRSCBs = new ArrayList<>();
+        nonRSSs = new ArrayList<>();
+
         playbookOff = new PlaybookOffense(0);
         playbookDef = new PlaybookDefense(0);
 
@@ -637,7 +661,7 @@ public class Team {
         sortPlayers();
     }
 
-    public void redshirtPlayers() {
+    public void redshirtCPUPlayers() {
         int redshirts = 0;
         int redshirtMax = HC.get(0).ratTalent / 10;
         sortPlayers();
@@ -650,7 +674,6 @@ public class Team {
                 for (int i = 0; i < teamQBs.size(); ++i) {
                     if (teamQBs.get(i) == p) {
                         if (i > 2 * startersQB && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -661,7 +684,6 @@ public class Team {
                 for (int i = 0; i < teamRBs.size(); ++i) {
                     if (teamRBs.get(i) == p) {
                         if (i > 2 * startersRB && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -672,7 +694,6 @@ public class Team {
                 for (int i = 0; i < teamWRs.size(); ++i) {
                     if (teamWRs.get(i) == p) {
                         if (i > 2 * startersWR && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -683,7 +704,6 @@ public class Team {
                 for (int i = 0; i < teamTEs.size(); ++i) {
                     if (teamTEs.get(i) == p) {
                         if (i > 2 * startersTE && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -694,7 +714,6 @@ public class Team {
                 for (int i = 0; i < teamOLs.size(); ++i) {
                     if (teamOLs.get(i) == p) {
                         if (i > 2 * startersOL && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -705,7 +724,6 @@ public class Team {
                 for (int i = 0; i < teamKs.size(); ++i) {
                     if (teamKs.get(i) == p) {
                         if (i > 2 * startersK && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -716,7 +734,6 @@ public class Team {
                 for (int i = 0; i < teamDLs.size(); ++i) {
                     if (teamDLs.get(i) == p) {
                         if (i > 2 * startersDL && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -727,7 +744,6 @@ public class Team {
                 for (int i = 0; i < teamLBs.size(); ++i) {
                     if (teamLBs.get(i) == p) {
                         if (i > 2 * startersLB && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -738,7 +754,6 @@ public class Team {
                 for (int i = 0; i < teamCBs.size(); ++i) {
                     if (teamCBs.get(i) == p) {
                         if (i > 2 * startersCB && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -749,7 +764,6 @@ public class Team {
                 for (int i = 0; i < teamSs.size(); ++i) {
                     if (teamSs.get(i) == p) {
                         if (i > 2 * startersS && redshirts < redshirtMax && !p.wasRedshirt) {
-                            p.year = 0;
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -1157,7 +1171,7 @@ public class Team {
             ccPts += 1;
         }
 
-        if (rankTeamPrestige < 75) {
+        if (rankTeamPrestige > 75) {
             ArrayList<Player> teamAll = getAllPlayers();
             for (int i = 0; i < teamAll.size(); i++) {
                 if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr > 91) {
@@ -2617,12 +2631,6 @@ public class Team {
             currLine = players[++i];
         }
 
-        currLine = players[++i]; // skip over END_RECRUITS line
-        while (!currLine.equals("END_REDSHIRTS")) {
-            recruitPlayerCSV(currLine, true);
-            currLine = players[++i];
-        }
-
         recruitWalkOns();
 
     }
@@ -2635,14 +2643,12 @@ public class Team {
      */
     private void recruitPlayerCSV(String line, boolean isRedshirt) {
         String[] playerInfo = line.split(",");
-        boolean isT = false, wasRS = false;
-        if (playerInfo[7].equals("true")) isT = true;
-        if (playerInfo[8].equals("true")) wasRS = false;
+        if (Boolean.parseBoolean(playerInfo[7])) isRedshirt = true;
 
         if (playerInfo[0].equals("QB")) {
             if (playerInfo.length > 20)
                 teamQBs.add(new PlayerQB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2659,14 +2665,14 @@ public class Team {
                 ));
             else
                 teamQBs.add(new PlayerQB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("RB")) {
             if (playerInfo.length > 20)
                 teamRBs.add(new PlayerRB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2683,14 +2689,14 @@ public class Team {
                         Integer.parseInt(playerInfo[38]), Integer.parseInt(playerInfo[39])));
             else
                 teamRBs.add(new PlayerRB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("WR")) {
             if (playerInfo.length > 20)
                 teamWRs.add(new PlayerWR(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2707,14 +2713,14 @@ public class Team {
                         Integer.parseInt(playerInfo[38])));
             else
                 teamWRs.add(new PlayerWR(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("TE")) {
             if (playerInfo.length > 20)
                 teamTEs.add(new PlayerTE(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2728,14 +2734,14 @@ public class Team {
                         Integer.parseInt(playerInfo[32])));
             else
                 teamTEs.add(new PlayerTE(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("OL")) {
             if (playerInfo.length > 20)
                 teamOLs.add(new PlayerOL(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2746,14 +2752,14 @@ public class Team {
                         Integer.parseInt(playerInfo[26])));
             else
                 teamOLs.add(new PlayerOL(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("K")) {
             if (playerInfo.length > 20)
                 teamKs.add(new PlayerK(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2766,14 +2772,14 @@ public class Team {
                         Integer.parseInt(playerInfo[30])));
             else
                 teamKs.add(new PlayerK(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("DL")) {
             if (playerInfo.length > 20)
                 teamDLs.add(new PlayerDL(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2786,14 +2792,14 @@ public class Team {
                         Integer.parseInt(playerInfo[30])));
             else
                 teamDLs.add(new PlayerDL(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("LB")) {
             if (playerInfo.length > 20)
                 teamLBs.add(new PlayerLB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2806,14 +2812,14 @@ public class Team {
                         Integer.parseInt(playerInfo[30])));
             else
                 teamLBs.add(new PlayerLB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("CB")) {
             if (playerInfo.length > 20)
                 teamCBs.add(new PlayerCB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2830,14 +2836,14 @@ public class Team {
                         Integer.parseInt(playerInfo[38]), Integer.parseInt(playerInfo[39])));
             else
                 teamCBs.add(new PlayerCB(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
         } else if (playerInfo[0].equals("S")) {
             if (playerInfo.length > 20)
                 teamSs.add(new PlayerS(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS, Boolean.parseBoolean(playerInfo[9]),
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]), Boolean.parseBoolean(playerInfo[9]),
                         Integer.parseInt(playerInfo[10]), Integer.parseInt(playerInfo[11]), isRedshirt,
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]),
                         Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
@@ -2850,7 +2856,7 @@ public class Team {
                         Integer.parseInt(playerInfo[30])));
             else
                 teamSs.add(new PlayerS(this, playerInfo[1], Integer.parseInt(playerInfo[2]), Integer.parseInt(playerInfo[3]),
-                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), isT, wasRS,
+                        Integer.parseInt(playerInfo[4]), Integer.parseInt(playerInfo[5]), Integer.parseInt(playerInfo[6]), Boolean.parseBoolean(playerInfo[7]), Boolean.parseBoolean(playerInfo[8]),
                         Integer.parseInt(playerInfo[9]), Integer.parseInt(playerInfo[10]), isRedshirt, Integer.parseInt(playerInfo[13]),
                         Integer.parseInt(playerInfo[14]), Integer.parseInt(playerInfo[15]), Integer.parseInt(playerInfo[16]), Integer.parseInt(playerInfo[17]),
                         Integer.parseInt(playerInfo[18])));
@@ -2905,10 +2911,184 @@ public class Team {
             if (teamPlayers.get(p).year == 1 && !teamPlayers.get(p).isRedshirt) {
                 league.freshmen.add(teamPlayers.get(p));
             }
-            if (teamPlayers.get(p).year == 0) {
+            if (teamPlayers.get(p).year == 1 && teamPlayers.get(p).isRedshirt) {
                 league.redshirts.add(teamPlayers.get(p));
             }
         }
+    }
+
+
+    //Set Redshirts
+    public void setRedshirts(ArrayList<Player> redshirts, ArrayList<Player> unredshirt, int position) {
+        switch (position) {
+            case 0:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamQBs, new CompPlayer());
+                break;
+            case 1:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamRBs, new CompPlayer());
+                break;
+            case 2:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamWRs, new CompPlayer());
+                break;
+            case 3:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamTEs, new CompPlayer());
+                break;
+            case 4:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamOLs, new CompPlayer());
+                break;
+            case 5:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamKs, new CompPlayer());
+                break;
+            case 6:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamDLs, new CompPlayer());
+                break;
+            case 7:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamLBs, new CompPlayer());
+                break;
+            case 8:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamCBs, new CompPlayer());
+                break;
+            case 9:
+                for (Player p : redshirts) {
+                    p.isRedshirt = true;
+                }
+                for (Player p : unredshirt) {
+                    p.isRedshirt = false;
+                }
+                Collections.sort(teamSs, new CompPlayer());
+                break;
+        }
+
+        // Set ranks so that Off/Def Talent rankings are updated
+        if (league.currentWeek < 15) league.setTeamRanks();
+    }
+
+    public int countRedshirts() {
+        int count = 0;
+        for (int i = 0; i < getAllPlayers().size(); ++i) {
+            if (getAllPlayers().get(i).isRedshirt) count++;
+        }
+        return count;
+    }
+
+    //Set Redshirts
+    public int getActivePlayers(int position) {
+        int numPlayers = 0;
+        switch (position) {
+            case 0:
+                for (Player p : teamQBs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamQBs.size() - numPlayers;
+            case 1:
+                for (Player p : teamRBs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamRBs.size() - numPlayers;
+            case 2:
+                for (Player p : teamWRs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamWRs.size() - numPlayers;
+
+            case 3:
+                for (Player p : teamTEs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamTEs.size() - numPlayers;
+
+            case 4:
+                for (Player p : teamOLs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamOLs.size() - numPlayers;
+
+            case 5:
+                for (Player p : teamKs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamKs.size() - numPlayers;
+
+            case 6:
+                for (Player p : teamDLs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamDLs.size() - numPlayers;
+
+            case 7:
+                for (Player p : teamLBs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamLBs.size() - numPlayers;
+
+            case 8:
+                for (Player p : teamCBs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamCBs.size() - numPlayers;
+
+            case 9:
+                for (Player p : teamSs) {
+                    if (p.isRedshirt) numPlayers++;
+                }
+                return teamSs.size() - numPlayers;
+
+        }
+        return numPlayers;
     }
 
 

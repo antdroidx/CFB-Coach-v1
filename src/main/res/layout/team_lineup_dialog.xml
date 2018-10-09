@@ -15,12 +15,19 @@
         android:layout_gravity="center_horizontal" />
 
     <TextView
+        android:id="@+id/textMinPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Minimum Players"
+        android:textAlignment="center" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textViewLineupPositionDescription"
-        android:text="Name [Yr] Ovr/Pot (Str, Acc, Eva)" />
+        android:text="[Yr] Ovr/Pot (Str, Acc, Eva)" />
 
     <ListView
         android:layout_width="match_parent"

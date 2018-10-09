@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -344,17 +345,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Team Depth Chart Button
-        final Button depthchartButton = findViewById(R.id.buttonDepthChart);
+        Button depthchartButton = findViewById(R.id.buttonDepthChart);
+        if (!redshirtComplete) {
+            depthchartButton.setText("REDSHIRT");
+            depthchartButton.setBackgroundColor(Color.RED);
+        }
+
         depthchartButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 currentTeam = userTeam;
-                showTeamLineupDialog();
+                if (!redshirtComplete) redshirtDialog();
+                else depthChartDialog();
             }
         });
 
         //Strategy/Playbook
         final Button strategyButton = findViewById(R.id.buttonStrategy);
+        strategyButton.setBackgroundColor(0XFF607D8B);
         strategyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -365,6 +373,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Simulate Week Button
         final Button simGameButton = findViewById(R.id.simGameButton);
+        simGameButton.setText("START SEASON");
         simGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 simulateWeek();
@@ -375,7 +384,6 @@ public class MainActivity extends AppCompatActivity {
         if (loadedLeague) {
             // Set rankings so that not everyone is rank #0
             simLeague.setTeamRanks();
-            simLeague.preseasonNews();
             examineTeam(userTeam.name);
             showToasts = userTeam.showPopups;
         }
@@ -1273,21 +1281,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Depth Chart
-    private void showTeamLineupDialog() {
+    private void depthChartDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Set Team Lineup")
                 .setView(getLayoutInflater().inflate(R.layout.team_lineup_dialog, null));
         final AlertDialog dialog = builder.create();
         dialog.show();
 
-        final String[] positionSelection = {"QB (1 starter)", "RB (2 starters)", "WR (3 starters)", "TE (1 starter)", "OL (5 starters)",
-                "K (1 starter)", "DL (4 starters)", "LB (3 starters)", "CB (3 starters)", "S (2 starters)"};
+        final String[] positionSelection = {"Quarterbacks", "Running Backs", "Wide Receivers", "Tight Ends", "Off Linemen",
+                "Kickers", "Def Linemen", "Linebackers", "Cornerbacks", "Safeties"};
         final int[] positionNumberRequired = {userTeam.startersQB, userTeam.startersRB, userTeam.startersWR, userTeam.startersTE, userTeam.startersOL, userTeam.startersK, userTeam.startersDL, userTeam.startersLB, userTeam.startersCB, userTeam.startersS};
         final Spinner teamLineupPositionSpinner = dialog.findViewById(R.id.spinnerTeamLineupPosition);
         ArrayAdapter<String> teamLineupPositionSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, positionSelection);
         teamLineupPositionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         teamLineupPositionSpinner.setAdapter(teamLineupPositionSpinnerAdapter);
+
+        final TextView minPlayersText = dialog.findViewById(R.id.textMinPlayers);
 
         // Text to show what each attr is
         final TextView textLineupPositionDescription = dialog.findViewById(R.id.textViewLineupPositionDescription);
@@ -1304,6 +1314,9 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
+
+                        minPlayersText.setText("Starters: " + positionNumberRequired[position]);
+
                         updateLineupList(position, teamLineupAdapter, positionNumberRequired, positionPlayers, textLineupPositionDescription);
                     }
 
@@ -1404,6 +1417,147 @@ public class MainActivity extends AppCompatActivity {
         teamLineupAdapter.notifyDataSetChanged();
     }
 
+    //Depth Chart
+    private void redshirtDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Redshirt Players")
+                .setView(getLayoutInflater().inflate(R.layout.team_lineup_dialog, null));
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        final String[] positionSelection = {"Quarterbacks", "Running Backs", "Wide Receivers", "Tight Ends", "Off Linemen",
+                "Kickers", "Def Linemen", "Linebackers", "Cornerbacks", "Safeties"};
+        final int[] positionNumberRequired = {userTeam.minQBs, userTeam.minRBs, userTeam.minWRs, userTeam.minTEs, userTeam.minOLs, userTeam.minKs, userTeam.minDLs, userTeam.minLBs, userTeam.minCBs, userTeam.minSs};
+        final Spinner teamLineupPositionSpinner = dialog.findViewById(R.id.spinnerTeamLineupPosition);
+        ArrayAdapter<String> teamLineupPositionSpinnerAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, positionSelection);
+        teamLineupPositionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamLineupPositionSpinner.setAdapter(teamLineupPositionSpinnerAdapter);
+
+        final TextView minPlayersText = dialog.findViewById(R.id.textMinPlayers);
+
+        // Text to show what each attr is
+        final TextView textLineupPositionDescription = dialog.findViewById(R.id.textViewLineupPositionDescription);
+
+        // List of team's players for selected position
+        final ArrayList<Player> positionPlayers = new ArrayList<>();
+        positionPlayers.addAll(userTeam.teamQBs);
+
+        final ListView teamPositionList = dialog.findViewById(R.id.listViewTeamLineup);
+        final RedshirtAdapter redshirtSelector = new RedshirtAdapter(this, positionPlayers, 1);
+        teamPositionList.setAdapter(redshirtSelector);
+
+        teamLineupPositionSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+
+                        minPlayersText.setText("Min Active: " + positionNumberRequired[position] + " Current Active: " + userTeam.getActivePlayers(position));
+                        redshirtLineup(position, redshirtSelector, positionNumberRequired, positionPlayers, textLineupPositionDescription);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+
+        Button saveLineupsButton = dialog.findViewById(R.id.buttonSaveLineups);
+        saveLineupsButton.setText("REDSHIRT PLAYERS");
+        Button doneWithLineupsButton = dialog.findViewById(R.id.buttonDoneWithLineups);
+
+        doneWithLineupsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Button depthchartButton = findViewById(R.id.buttonDepthChart);
+                if (!redshirtComplete) depthchartButton.setText("SET REDSHIRTS");
+                dialog.dismiss();
+                updateCurrTeam();
+            }
+        });
+
+        saveLineupsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Save the lineup that player set for the position
+                int positionSpinner = teamLineupPositionSpinner.getSelectedItemPosition();
+                // Set starters to new selection
+
+                if (redshirtSelector.playersSelected.size() + userTeam.countRedshirts() - redshirtSelector.playersRemoved.size() < 8) {
+
+                    userTeam.setRedshirts(redshirtSelector.playersSelected, redshirtSelector.playersRemoved, positionSpinner);
+                    redshirtSelector.playersSelected.clear();
+                    redshirtSelector.playersRemoved.clear();
+
+                    // Update list to show the change
+                    redshirtLineup(positionSpinner, redshirtSelector, positionNumberRequired, positionPlayers, textLineupPositionDescription);
+                    minPlayersText.setText("Min Active: " + positionNumberRequired[positionSpinner] + " Current Active: " + userTeam.getActivePlayers(positionSpinner));
+
+                    Toast.makeText(MainActivity.this, "Set redshirts for " + positionSelection[positionSpinner] + "! You currently have " + userTeam.countRedshirts() + " (Max: 7) redshirted players.",
+                            Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Toast.makeText(MainActivity.this, "A maximum of 7 players can be redshirted each season. You have exceeded this! You currently have " + userTeam.countRedshirts() + " redshirted players.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+    }
+
+    //Depth Chart Lineup Setup
+    private void redshirtLineup(int position, RedshirtAdapter redshirtSelector, int[] positionNumberRequired,
+                                ArrayList<Player> positionPlayers, TextView textLineupPositionDescription) {
+        redshirtSelector.playersRequired = positionNumberRequired[position];
+        redshirtSelector.playersSelected.clear();
+        redshirtSelector.players.clear();
+        positionPlayers.clear();
+        // Change position players to correct position
+        switch (position) {
+            case 0:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Pass Strength, Pass Accuracy, Evasion, Speed)");
+                positionPlayers.addAll(userTeam.teamQBs);
+                break;
+            case 1:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Power, Speed, Evasion, Catch)");
+                positionPlayers.addAll(userTeam.teamRBs);
+                break;
+            case 2:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Catch, Speed, Evaasion, Jump)");
+                positionPlayers.addAll(userTeam.teamWRs);
+                break;
+            case 3:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Catch, Run Block, Evasion, Speed)");
+                positionPlayers.addAll(userTeam.teamTEs);
+                break;
+            case 4:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Strength, Run Block, Pass Block, Awareness)");
+                positionPlayers.addAll(userTeam.teamOLs);
+                break;
+            case 5:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Kick Strength, Kick Accuracy, Clumsiness, Pressure)");
+                positionPlayers.addAll(userTeam.teamKs);
+                break;
+            case 6:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Strength, Run Def, Pass Def, Tackle)");
+                positionPlayers.addAll(userTeam.teamDLs);
+                break;
+            case 7:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Cover, Run Def, Tackle, Run Stop)");
+                positionPlayers.addAll(userTeam.teamLBs);
+                break;
+            case 8:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Cover, Speed, Tackle, Jump)");
+                positionPlayers.addAll(userTeam.teamCBs);
+                break;
+            case 9:
+                textLineupPositionDescription.setText("Name [Yr] Overall/Potential\n(Cover, Speed, Tackle, Run Stop)");
+                positionPlayers.addAll(userTeam.teamSs);
+                break;
+        }
+        redshirtSelector.notifyDataSetChanged();
+    }
+
+
     //Team Stategy/Playbook
     private void showTeamStrategyDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -1489,8 +1643,16 @@ public class MainActivity extends AppCompatActivity {
     private void simulateWeek() {
         Button simGameButton = findViewById(R.id.simGameButton);
         // In-Season
-
-        if (simLeague.currentWeek <= 14) {
+        if(simLeague.currentWeek == 0 && !redshirtComplete) {
+            simGameButton.setTextSize(12);
+            simGameButton.setText("Play Week " + (simLeague.currentWeek + 1));
+            redshirtComplete = true;
+            userTeam.recruitWalkOns();
+            simLeague.preseasonNews();
+            Button depthchartButton = findViewById(R.id.buttonDepthChart);
+            depthchartButton.setBackgroundColor(0XFF607D8B);
+            depthchartButton.setText("DEPTH CHART");
+        } else if (simLeague.currentWeek <= 14) {
             int numGamesPlayed = userTeam.gameWLSchedule.size();
             simLeague.playWeek();
 
@@ -1838,7 +2000,7 @@ public class MainActivity extends AppCompatActivity {
         Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
-        if(userTeam.getHC(0).age >= 65) changeTeamsButton.setText("RETIRE");
+        if (userTeam.getHC(0).age >= 65) changeTeamsButton.setText("RETIRE");
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -2768,7 +2930,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    importData();
+                        importData();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -3056,7 +3218,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Manage Lineup
-                            showTeamLineupDialog();
+                            depthChartDialog();
                         }
                     })
                     .setView(getLayoutInflater().inflate(R.layout.injury_report, null));
@@ -3992,9 +4154,6 @@ public class MainActivity extends AppCompatActivity {
             Team teamRoster = simLeague.teamList.get(i);
             teamRoster.recruitWalkOns();
         }
-        simLeague.newsStories.get(0).remove(3);
-        simLeague.newsStories.get(0).remove(3);
-        simLeague.topRecruits();
         currTab = 3;
 
         simLeague.updateTeamTalentRatings();

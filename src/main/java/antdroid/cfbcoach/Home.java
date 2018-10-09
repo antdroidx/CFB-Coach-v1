@@ -89,12 +89,42 @@ public class Home extends AppCompatActivity {
         Button newCustomGameButton = findViewById(R.id.buttonCustom);
         newCustomGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                isExternalStorageReadable();
-                customCareer = false;
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.setType("text/plain");
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(intent, READ_REQUEST_CODE);
+
+                AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
+                welcome.setMessage("Do you want to start the game with a custom Universe file? \nUniverse file must be correctly formatted to avoid errors!")
+                        .setTitle("Custom Dynasty")
+                        .setNeutralButton("Help", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                                intent.setData(Uri.parse("https://www.youtube.com/watch?v=_zEuX0JAYBg"));
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                isExternalStorageReadable();
+                                customCareer = false;
+                                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                                intent.setType("text/plain");
+                                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                startActivityForResult(intent, READ_REQUEST_CODE);
+                            }
+                        });
+                welcome.setCancelable(false);
+                AlertDialog dialog = welcome.create();
+                dialog.show();
+                TextView msgTxt = dialog.findViewById(android.R.id.message);
+                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
         });
 

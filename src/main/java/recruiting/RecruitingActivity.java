@@ -43,7 +43,6 @@ public class RecruitingActivity extends AppCompatActivity {
     private int HCtalent;
 
     public ArrayList<String> playersRecruited;
-    public ArrayList<String> playersRedshirted;
     private ArrayList<String> playersGraduating;
     private ArrayList<String> teamQBs;
     private ArrayList<String> teamRBs;
@@ -101,8 +100,6 @@ public class RecruitingActivity extends AppCompatActivity {
     private final int minCBs = 7;
     private final int minSs = 5;
 
-    public int redshirtCount = 0;
-    public final int maxRedshirt = 6;
     public final int maxPlayers = 70;
     private final double recruitOffBoard = 0.935;
 
@@ -140,7 +137,6 @@ public class RecruitingActivity extends AppCompatActivity {
 
         // Init all the ArrayLists
         playersRecruited = new ArrayList<>();
-        playersRedshirted = new ArrayList<>();
         playersGraduating = new ArrayList<>();
         teamQBs = new ArrayList<>();
         teamRBs = new ArrayList<>();
@@ -427,7 +423,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String rosterStr = getRosterStr();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(rosterStr)
-                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()))
+                .setTitle(teamName + " Roster | Team Size: " + (teamPlayers.size() + playersRecruited.size()))
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -475,11 +471,6 @@ public class RecruitingActivity extends AppCompatActivity {
 
         sb.append("\nSs (Need: " + needSs + ")\n");
         appendPlayers(sb, teamSs, 2);
-
-        sb.append("\nRedshirted Players:\n");
-        for (String rp : playersRedshirted) {
-            sb.append("\t" + getReadablePlayerInfoPos(rp) + "\n");
-        }
 
         return sb.toString();
     }
@@ -838,7 +829,7 @@ public class RecruitingActivity extends AppCompatActivity {
             if (showPopUp) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Confirm Recruiting");
-                builder.setMessage("Your team roster is at " + (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
+                builder.setMessage("Your team roster is at " + (teamPlayers.size() + playersRecruited.size()) + " (Max: 70).\n\nAre you sure you want to recruit " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?");
                 builder.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -1023,184 +1014,6 @@ public class RecruitingActivity extends AppCompatActivity {
         updatePositionNeeds();
     }
 
-    //REDSHIRT PLAYER
-    public void redshirtPlayerDialog(String p, int pos, List<Integer> groupsExp) {
-        final String player = p;
-        final int groupPosition = pos;
-        final List<Integer> groupsExpanded = groupsExp;
-        int moneyNeeded = getRecruitCost(player);
-        if (recruitingBudget >= moneyNeeded) {
-
-            if (showPopUp) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Confirm Redshirting");
-                builder.setMessage("Your team roster is at " + (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()) + " (Max: 70).\n" +
-                        "You currently have redshirted " + redshirtCount + " players (Max: " + maxRedshirt + ").\n\n" +
-                        "Are you sure you want to redshirt " + player.split(",")[0] + " " + getReadablePlayerInfoDisplay(player) + " for $" + moneyNeeded + "?\n" +
-                        "He will be unavailable to play for the first year.");
-                builder.setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                recruitList.collapseGroup(groupPosition);
-                                for (int i = groupPosition + 1; i < players.size(); ++i) {
-                                    if (recruitList.isGroupExpanded(i)) {
-                                        groupsExpanded.add(i);
-                                    }
-                                    recruitList.collapseGroup(i);
-                                }
-
-                                redshirtPlayer(player);
-
-                                expListAdapter.notifyDataSetChanged();
-                                redshirtCount++;
-                                dialog.dismiss();
-                            }
-                        });
-
-                builder.setNeutralButton("Yes, Don't Show",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                recruitList.collapseGroup(groupPosition);
-                                for (int i = groupPosition + 1; i < players.size(); ++i) {
-                                    if (recruitList.isGroupExpanded(i)) {
-                                        groupsExpanded.add(i);
-                                    }
-                                    recruitList.collapseGroup(i);
-                                }
-
-                                redshirtPlayer(player);
-                                setShowPopUp(false);
-
-                                expListAdapter.notifyDataSetChanged();
-                                dialog.dismiss();
-                            }
-                        });
-
-                builder.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // not successful
-                                recruitList.collapseGroup(groupPosition);
-                                for (int i = groupPosition + 1; i < players.size(); ++i) {
-                                    if (recruitList.isGroupExpanded(i)) {
-                                        groupsExpanded.add(i);
-                                    }
-                                    recruitList.collapseGroup(i);
-                                }
-
-                                recruitList.expandGroup(groupPosition);
-                                expListAdapter.notifyDataSetChanged();
-/*                                for (int group : groupsExpanded) {
-                                    recruitList.expandGroup(group);
-                                }*/
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-                TextView msgTxt = dialog.findViewById(android.R.id.message);
-                msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-
-            } else {
-                // Don't show pop up dialog
-                recruitList.collapseGroup(groupPosition);
-                for (int i = groupPosition + 1; i < players.size(); ++i) {
-                    if (recruitList.isGroupExpanded(i)) {
-                        groupsExpanded.add(i);
-                    }
-                    recruitList.collapseGroup(i);
-                }
-
-                redshirtPlayer(player);
-
-                expListAdapter.notifyDataSetChanged();
-/*                for (int group : groupsExpanded) {
-                    recruitList.expandGroup(group - 1);
-                }*/
-            }
-
-        } else {
-            recruitList.collapseGroup(groupPosition);
-            for (int i = groupPosition + 1; i < players.size(); ++i) {
-                if (recruitList.isGroupExpanded(i)) {
-                    groupsExpanded.add(i);
-                }
-                recruitList.collapseGroup(i);
-            }
-            Toast.makeText(this, "Not enough money!",
-                    Toast.LENGTH_SHORT).show();
-            recruitList.expandGroup(groupPosition);
-            expListAdapter.notifyDataSetChanged();
-/*            for (int group : groupsExpanded) {
-                recruitList.expandGroup(group);
-            }*/
-        }
-    }
-
-    private void redshirtPlayer(String player) {
-        int moneyNeeded = getRecruitCost(player);
-        recruitingBudget -= moneyNeeded;
-        budgetText.setText("Budget: $" + recruitingBudget);
-
-        // Remove the player from the top 100 list
-        if (avail50.contains(player)) {
-            avail50.remove(player);
-        }
-        if (availAll.contains(player)) {
-            availAll.remove(player);
-        }
-        if (west.contains(player)) {
-            west.remove(player);
-        }
-        if (midwest.contains(player)) {
-            midwest.remove(player);
-        }
-        if (central.contains(player)) {
-            central.remove(player);
-        }
-        if (east.contains(player)) {
-            east.remove(player);
-        }
-        playersRedshirted.add(player);
-
-        // Also need to add recruited player to correct team list and remove from avail list
-        String[] ps = player.split(",");
-        if (ps[0].equals("QB")) {
-            availQBs.remove(player);
-        } else if (ps[0].equals("RB")) {
-            availRBs.remove(player);
-        } else if (ps[0].equals("WR")) {
-            availWRs.remove(player);
-        } else if (ps[0].equals("TE")) {
-            availTEs.remove(player);
-        } else if (ps[0].equals("OL")) {
-            availOLs.remove(player);
-        } else if (ps[0].equals("K")) {
-            availKs.remove(player);
-        } else if (ps[0].equals("DL")) {
-            availDLs.remove(player);
-        } else if (ps[0].equals("LB")) {
-            availLBs.remove(player);
-        } else if (ps[0].equals("CB")) {
-            availCBs.remove(player);
-        } else if (ps[0].equals("S")) {
-            availSs.remove(player);
-        }
-
-        players.remove(player);
-
-        Toast.makeText(this, "Redshirted " + ps[0] + " " + ps[1],
-                Toast.LENGTH_SHORT).show();
-
-        if (autoFilter) removeUnaffordableRecruits();
-        removeRecruits();
-        updatePositionNeeds();
-
-    }
 
     //PLAYER INFO FOR RECRUIT/REDSHIRTING DIALOG
     private String getReadablePlayerInfoDisplay(String p) {
@@ -1273,7 +1086,7 @@ public class RecruitingActivity extends AppCompatActivity {
         String improveStr = "";
         String transfer = "";
         if (pi[7].equals("true")) transfer = " (Transfer)";
-        if (!playersRecruited.contains(p) && !playersRedshirted.contains(p)) {
+        if (!playersRecruited.contains(p)) {
             improveStr = "(+" + pi[13] + ")";
             return pi[1] + " " + getYrStr(pi[2]) + "  Ovr: " + pi[12] + " " + improveStr + transfer;
         } else {
@@ -1400,11 +1213,6 @@ public class RecruitingActivity extends AppCompatActivity {
         }
         sb.append("END_RECRUITS%\n");
 
-        for (String rp : playersRedshirted) {
-            sb.append(rp + "%\n");
-        }
-        sb.append("END_REDSHIRTS%\n");
-
         return sb.toString();
     }
 
@@ -1459,33 +1267,17 @@ public class RecruitingActivity extends AppCompatActivity {
             // Set up Recruit and Redshirt buttons to display the right price
             Button recruitPlayerButton = convertView.findViewById(R.id.buttonRecruitPlayer);
 
-            if (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size() < maxPlayers) {
+            if (teamPlayers.size() + playersRecruited.size() < maxPlayers) {
                 recruitPlayerButton.setText("Recruit: $" + getRecruitCost(playerCSV));
             } else recruitPlayerButton.setVisibility(View.INVISIBLE);
-
-            Button redshirtPlayerButton = convertView.findViewById(R.id.buttonRedshirtPlayer);
-            if (redshirtCount < maxRedshirt || teamPlayers.size() + playersRecruited.size() + playersRedshirted.size() < maxPlayers) {
-                redshirtPlayerButton.setText("Redshirt: $" + getRecruitCost(playerCSV));
-            } else redshirtPlayerButton.setVisibility(View.INVISIBLE);
 
             // Set up button for recruiting player
             recruitPlayerButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // Save who is currently expanded
-                    if (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size() < maxPlayers) {
+                    if (teamPlayers.size() + playersRecruited.size() < maxPlayers) {
                         List<Integer> groupsExpanded = new ArrayList<>();
                         recruitPlayerDialog(playerCSV, groupPosition, groupsExpanded);
-                    }
-                }
-            });
-
-            // Set up button for redshirting player
-            redshirtPlayerButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // Save who is currently expanded
-                    if (redshirtCount < maxRedshirt && (teamPlayers.size() + playersRecruited.size() + playersRedshirted.size()) < maxPlayers) {
-                        List<Integer> groupsExpanded = new ArrayList<>();
-                        redshirtPlayerDialog(playerCSV, groupPosition, groupsExpanded);
                     }
                 }
             });

@@ -134,6 +134,8 @@ public class PlayerQB extends Player {
         year = yr;
         team = t;
 
+        wasRedshirt = getWasRedshirtStatus();
+
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
@@ -166,6 +168,8 @@ public class PlayerQB extends Player {
         name = nm;
         year = yr;
         team = t;
+
+        wasRedshirt = getWasRedshirtStatus();
 
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
@@ -205,7 +209,6 @@ public class PlayerQB extends Player {
         double games = getGamesBonus();
 
         if (!isMedicalRS) {
-            year++;
             if (wonAllConference) ratPot += (int) Math.random() * allConfPotBonus;
             if (wonAllAmerican) ratPot += (int) Math.random() * allAmericanBonus;
             if (wonAllFreshman) ratPot += (int) Math.random() * allFreshmanBonus;
@@ -256,12 +259,12 @@ public class PlayerQB extends Player {
         if (wonAllFreshman) careerAllFreshman++;
         if (wonTopFreshman) careerTopFreshman++;
 
-        if (isTransfer) {
+        if (isTransfer || isRedshirt || isMedicalRS) {
             isTransfer = false;
-            year -= 1;
+            wasRedshirt = true;
+        } else {
+            year++;
         }
-
-        if (isRedshirt) wasRedshirt = true;
     }
 
     private void resetSeasonStats() {

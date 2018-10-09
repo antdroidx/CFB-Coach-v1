@@ -609,6 +609,7 @@ public class League {
             enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
             enableTV = Boolean.parseBoolean(bufferedReader.readLine());
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
+            userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
 
             if (enableProRel) confRealignment = false;
             if (confRealignment) enableProRel = false;
@@ -1005,7 +1006,7 @@ public class League {
     public void topRecruits() {
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i) != userTeam) {
-                teamList.get(i).redshirtPlayers();
+                teamList.get(i).redshirtCPUPlayers();
             }
             teamList.get(i).getLeagueFreshman();
         }
@@ -4775,8 +4776,8 @@ public class League {
             sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
                     userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[C]%\n");
         } else {
-            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.abbr + " (" + (userTeam.totalWins - userTeam.wins) + "-" + (userTeam.totalLosses - userTeam.losses) + ") " +
-                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[D]%\n");
+            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+                    userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[D]%\n");
         }
 
 
@@ -4921,6 +4922,7 @@ public class League {
         sb.append(enableProRel + "\n");
         sb.append(enableTV + "\n");
         sb.append(enableUnivProRel + "\n");
+        sb.append(userTeam.showPopups + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
