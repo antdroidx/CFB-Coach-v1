@@ -1,5 +1,7 @@
 package simulation;
 
+import android.content.res.Resources;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+import antdroid.cfbcoach.MainActivity;
+import antdroid.cfbcoach.R;
 import comparator.CompCoachCareer;
 import comparator.CompCoachOvr;
 import comparator.CompCoachScore;
@@ -633,6 +637,16 @@ public class League {
         //Get longest active win streak
         updateLongestActiveWinStreak();
 
+        //fix bowl names
+        if(bowlNames[0] == null) {
+           String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
+
+            bowlNames = new String[bowlText.split(", ").length];
+            for (int b = 0; b < bowlText.split(", ").length; ++b) {
+                bowlNames[b] = bowlText.split(", ")[b];
+            }
+        }
+
         setupSeason();
     }
 
@@ -1022,7 +1036,7 @@ public class League {
             newsRedshirts.append((i + 1) + ". " + redshirts.get(i).position + " " + redshirts.get(i).name + ", " + redshirts.get(i).team.name + "\n\n");
         }
 
-        newsStories.get(0).add("Impact Freshman>This year's top freshmen who are expected to play right away:\n\n" + newsFreshman);
+        newsStories.get(0).add("Impact Freshmen>This year's top freshmen who are expected to play right away:\n\n" + newsFreshman);
         newsStories.get(0).add("Top Incoming Redshirted Recruits>The following list is this year's top redshirts. Their respective teams decided to sit them out this season, in hopes of progressing their talent further for next year.\n\n" + newsRedshirts);
     }
 

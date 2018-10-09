@@ -97,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
     private ListView mainList;
     private ExpandableListView expListPlayerStats;
 
-    //recruiting
     private boolean wantUpdateConf;
     private boolean showToasts;
     private boolean showInjuryReport;
     private boolean redshirtComplete;
     private boolean budgetsComplete;
+    private boolean newGame;
+    private boolean skipRetirementQ;
 
     //Universe Settings
     private final int teamsStart = 12;
@@ -151,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
                     else
                         simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, false);
                     season = seasonStart;
-
-                    importDataPrompt();
 
                     //NEW DYNASTY DEFAULT DATABASE
                 } else if (saveFileStr.contains("RANDOM")) {
@@ -211,9 +210,11 @@ public class MainActivity extends AppCompatActivity {
             currentTeam = userTeam;
             currentTeam = simLeague.teamList.get(0);
             currentConference = simLeague.conferences.get(0);
+            newGame = true;
 
-            if (simLeague.isCareerMode()) careerModeOptions();
-            else newGameDialog();
+            String saveFileStr = extras.getString("SAVE_FILE");
+            if (saveFileStr.contains("CUSTOM")) importDataPrompt();
+                else careerModeOptions();
         }
 
         // Set toolbar text
@@ -403,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void newGameDialog() {
+    private void selectTeam() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose your team:");
         final String[] teams = simLeague.getTeamListStr();
@@ -422,7 +423,6 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.setTeamRanks();
                 simLeague.setTeamBenchMarks();
                 simLeague.updateTeamTalentRatings();
-                simLeague.preseasonNews();
                 userHC = userTeam.HC.get(0);
                 // Set toolbar text to '2017 Season' etc
                 updateHeaderBar();
@@ -494,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
                 if (isNameValid((newHC))) {
                     userTeam.HC.get(0).name = newHC;
                     examineTeam(currentTeam.name);
-                    seasonGoals();
+                    if (!newGame) seasonGoals();
                     dialog.dismiss();
                 } else {
                     if (showToasts)
@@ -2000,7 +2000,7 @@ public class MainActivity extends AppCompatActivity {
         Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
-        if (userTeam.getHC(0).age >= 65) changeTeamsButton.setText("RETIRE");
+        if (userTeam.getHC(0).age >= 70) changeTeamsButton.setText("RETIRE");
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -2043,7 +2043,7 @@ public class MainActivity extends AppCompatActivity {
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
-                if (userTeam.getHC(0).age >= 65) {
+                if (userTeam.getHC(0).age >= 70) {
                     retirementQuestion();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -2936,7 +2936,10 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        if (newGame) {
+                            newGame = false;
+                            careerModeOptions();
+                        }
                     }
                 });
         AlertDialog dialog = builder.create();
@@ -2989,7 +2992,10 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        if (newGame) {
+                            newGame = false;
+                            careerModeOptions();
+                        }
                     }
                 });
         AlertDialog dialog = builder.create();
@@ -3181,7 +3187,7 @@ public class MainActivity extends AppCompatActivity {
                     universalProRelAction();
                 }
                 userTeam.showPopups = showToasts;
-                newGameDialog();
+                selectTeam();
                 dialog.dismiss();
 
             }
@@ -3419,13 +3425,14 @@ public class MainActivity extends AppCompatActivity {
     private void contractDialog() {
 
         if (simLeague.isCareerMode()) {
-            if (userHC.age == 65 || userHC.age == 80 || userHC.age == 100 || userHC.age == 150) {
+            if (userHC.age > 69) {
                 userHC.retirement = true;
             }
         }
 
-        if (userHC.retirement) {
+        if (userHC.retirement && !skipRetirementQ) {
             retirementQuestion();
+            skipRetirementQ = true;
 
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -3825,6 +3832,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Continue Career", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (skipRetirementQ) contractDialog();
                     }
                 })
                 .setNeutralButton("Reincarnate", new DialogInterface.OnClickListener() {
@@ -3895,6 +3903,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         userTeam.setupUserCoach(userHC.name);
+                        newGame = true;
+                        userNameDialog();
                     }
                 })
                 .setNegativeButton("Reincarnate - New Team", new DialogInterface.OnClickListener() {
@@ -3902,6 +3912,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         userTeam.setupUserCoach(userHC.name);
                         jobOffers(userHC);
+                        newGame = true;
+                        userNameDialog();
                     }
                 })
                 .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
@@ -4075,7 +4087,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         reader.close();
-        userTeam.setupUserCoach(userHC.name);
         currTab = 3;
         updatePlayerStats();
     }
@@ -4146,14 +4157,14 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < simLeague.teamList.size(); ++i) {
             Team teamRoster = simLeague.teamList.get(i);
             if (teamRoster.getAllPlayers().isEmpty()) {
-                teamRoster.newRoster(teamRoster.minQBs, teamRoster.minRBs, teamRoster.minWRs, teamRoster.minTEs, teamRoster.minOLs, teamRoster.minKs, teamRoster.minDLs, teamRoster.minLBs, teamRoster.minCBs, teamRoster.minSs);
+                teamRoster.newRoster(teamRoster.minQBs, teamRoster.minRBs, teamRoster.minWRs, teamRoster.minTEs, teamRoster.minOLs, teamRoster.minKs, teamRoster.minDLs, teamRoster.minLBs, teamRoster.minCBs, teamRoster.minSs, true);
+            } else {
+                teamRoster.newRoster(teamRoster.minQBs - teamRoster.teamQBs.size(), teamRoster.minRBs - teamRoster.teamRBs.size(), teamRoster.minWRs - teamRoster.teamWRs.size(),
+                        teamRoster.minTEs - teamRoster.teamTEs.size(), teamRoster.minOLs - teamRoster.teamOLs.size(), teamRoster.minKs - teamRoster.teamKs.size(),
+                        teamRoster.minDLs - teamRoster.teamDLs.size(), teamRoster.minLBs - teamRoster.teamLBs.size(), teamRoster.minCBs - teamRoster.teamCBs.size(), teamRoster.minSs - teamRoster.teamSs.size(), false);
             }
         }
 
-        for (int i = 0; i < simLeague.teamList.size(); ++i) {
-            Team teamRoster = simLeague.teamList.get(i);
-            teamRoster.recruitWalkOns();
-        }
         currTab = 3;
 
         simLeague.updateTeamTalentRatings();

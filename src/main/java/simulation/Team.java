@@ -254,7 +254,7 @@ public class Team {
         rivalTeam = rivalTeamAbbr;
         commonInitializer();
 
-        newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs);
+        newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs, true);
 
         //set stats
         totalWins = 0;
@@ -483,7 +483,7 @@ public class Team {
     public void setupUserCoach(String name) {
         HC.get(0).name = name;
         HC.get(0).year = 0;
-        HC.get(0).age = 34;
+        HC.get(0).age = 30 + (int)(Math.random()*8);
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
         HC.get(0).ratPot = (int) (Math.random() * 10) + 60;
@@ -522,7 +522,7 @@ public class Team {
      * @param teNeeds
      * @param lbNeeds
      */
-    public void newRoster(int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds) {
+    public void newRoster(int qbNeeds, int rbNeeds, int wrNeeds, int teNeeds, int olNeeds, int kNeeds, int dlNeeds, int lbNeeds, int cbNeeds, int sNeeds, boolean coach) {
         //make team
         int stars = Math.round(teamPrestige / 10);
         int chance = 15;
@@ -648,18 +648,22 @@ public class Team {
         }
 
         //MAKE HEAD COACH
-        int coachNum = 100 * (int) Math.random();
-        if (coachNum < 20) {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars - 2, this));
-        } else if (coachNum > 80) {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars + 2, this));
-        } else {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this));
+        if (coach) {
+            int coachNum = 100 * (int) Math.random();
+            if (coachNum < 20) {
+                HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars - 2, this));
+            } else if (coachNum > 80) {
+                HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars + 2, this));
+            } else {
+                HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this));
+            }
         }
 
         //done making players, sort them
         sortPlayers();
+        recruitWalkOns();
     }
+
 
     public void redshirtCPUPlayers() {
         int redshirts = 0;
