@@ -439,6 +439,7 @@ public class Home extends AppCompatActivity {
             Uri uri = null;
             uri = resultData.getData();
             final String uriStr = uri.toString();
+
             AlertDialog.Builder welcome = new AlertDialog.Builder(Home.this);
             welcome.setMessage("Use Default Team Prestige or Randomize Teams Prestige?")
                     .setTitle("Game Option")
@@ -467,25 +468,25 @@ public class Home extends AppCompatActivity {
                         }
                     })
                     .setPositiveButton("Equalize", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if (customCareer) {
-                        myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
-                    } else {
-                        myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
-                    }
-                    finish();
-                    Home.this.startActivity(myIntent);
-                }
-            });
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if (customCareer) {
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
+                            } else {
+                                myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
+                            }
+                            finish();
+                            Home.this.startActivity(myIntent);
+                        }
+                    });
             welcome.setCancelable(false);
             AlertDialog dialog = welcome.create();
             dialog.show();
             TextView msgTxt = dialog.findViewById(android.R.id.message);
             msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
         }
     }
+
 
 }
 

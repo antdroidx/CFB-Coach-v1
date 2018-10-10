@@ -354,22 +354,42 @@ public class League {
             while ((line = bufferedReader.readLine()) != null && !line.equals("[END_TEAMS]")) {
                 for (int c = 0; c < conferences.size(); ++c) {
                     while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
-                        line.replace("\"", "\\\"");
                         String[] filesSplit = line.split(", ");
-                        String tmName = filesSplit[0];
-                        String tmAbbr = filesSplit[1];
-                        String tmConf = filesSplit[2];
-                        int tmPres = Integer.parseInt(filesSplit[3]);
-                        if (randomize) {
-                            if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
-                            else tmPres = (int) (Math.random() * 35) + 25;
+                        if(filesSplit.length > 1) {
+
+                            line.replace("\"", "\\\"");
+                            //String[] filesSplit = line.split(", ");
+                            String tmName = filesSplit[0];
+                            String tmAbbr = filesSplit[1];
+                            String tmConf = filesSplit[2];
+                            int tmPres = Integer.parseInt(filesSplit[3]);
+                            if (randomize) {
+                                if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
+                                else tmPres = (int) (Math.random() * 35) + 25;
+                            }
+                            if (equalize) {
+                                tmPres = 60;
+                            }
+                            String tmRival = filesSplit[4];
+                            int tmLoc = Integer.parseInt(filesSplit[5]);
+                            conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, tmLoc, this));
+                        } else {
+                            filesSplit = line.split(",");
+                            String tmName = filesSplit[0];
+                            String tmAbbr = filesSplit[1];
+                            String tmConf = filesSplit[2];
+                            int tmPres = Integer.parseInt(filesSplit[3]);
+                            if (randomize) {
+                                if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
+                                else tmPres = (int) (Math.random() * 35) + 25;
+                            }
+                            if (equalize) {
+                                tmPres = 60;
+                            }
+                            String tmRival = filesSplit[4];
+                            int tmLoc = Integer.parseInt(filesSplit[5]);
+                            conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, tmLoc, this));
                         }
-                        if (equalize) {
-                            tmPres = 60;
-                        }
-                        String tmRival = filesSplit[4];
-                        int tmLoc = Integer.parseInt(filesSplit[5]);
-                        conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, tmLoc, this));
                     }
                 }
             }
@@ -399,10 +419,17 @@ public class League {
 
             //First ignore the save file info
             line = bufferedReader.readLine();
-            line.replaceAll("\"", "\\\"");
-            for (int b = 0; b < bowlNames.length; ++b) {
-                String[] filesSplit = line.split(", ");
-                bowlNames[b] = filesSplit[b].toString();
+            String[] filesSplit = line.split(", ");
+            if(filesSplit.length > 1) {
+                line.replaceAll("\"", "\\\"");
+                for (int b = 0; b < bowlNames.length; ++b) {
+                    bowlNames[b] = filesSplit[b];
+                }
+            } else {
+                filesSplit = line.split(",");
+                for (int b = 0; b < bowlNames.length; ++b) {
+                    bowlNames[b] = filesSplit[b];
+                }
             }
 
         } catch (FileNotFoundException ex) {

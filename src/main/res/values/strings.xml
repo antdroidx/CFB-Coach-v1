@@ -17,6 +17,7 @@
     <string name="action_ccg_watch">Conf Championships</string>
     <string name="action_ccg_bowl_watch">Post-Season Watch</string>
     <string name="action_save_league">Save League</string>
+    <string name="action_export_league">Export League</string>
     <string name="action_return_main_menu">Return to Main Menu</string>
     <string name="action_change_team_name">Settings/Editor</string>
     <string name="title_activity_recruiting">RecruitingActivity</string>

@@ -1922,6 +1922,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Save Function disabled during initial season.",
                         Toast.LENGTH_SHORT).show();
             }
+        } else if (id == R.id.action_export_league) {
+            /*
+              Clicked Save League in drop down menu
+             */
+            exportData();
+
         } else if (id == R.id.action_return_main_menu) {
             /*
               Let user confirm that they actually do want to go to main menu
@@ -2943,6 +2949,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         AlertDialog dialog = builder.create();
+        builder.setCancelable(false);
         dialog.show();
     }
 
@@ -2974,8 +2981,15 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(intent, READ_REQUEST_CODE);
                         importMoreDataPrompt();
                     }
+                })
+                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        importMoreDataPrompt();
+                    }
                 });
         AlertDialog dialog = builder.create();
+        builder.setCancelable(false);
         dialog.show();
 
     }
@@ -2999,6 +3013,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         AlertDialog dialog = builder.create();
+        builder.setCancelable(false);
         dialog.show();
     }
 
@@ -3083,6 +3098,14 @@ public class MainActivity extends AppCompatActivity {
         }
         return infos;
     }
+
+    //Export Save File
+
+    private void exportData() {
+        //WORK IN PROGRESS
+        exportSave();
+    }
+
 
     //Exit Current Game
     private void exitMainActivity() {
@@ -4027,15 +4050,15 @@ public class MainActivity extends AppCompatActivity {
 
     //* Creates external Save directory *//*
 
-    public File getExtSaveDir(Context context, String cfbCoach) {
-        // Get the directory for the app's private pictures directory.
+    public File getExtSaveDir(Context context, String fileName) {
         File file = new File(context.getExternalFilesDir(
-                Environment.DIRECTORY_DOCUMENTS), cfbCoach);
+                Environment.DIRECTORY_DOCUMENTS), fileName);
         if (!file.mkdirs()) {
-            Log.e(cfbCoach, "Directory not created");
+            Log.e(fileName, "Directory not created");
         }
         return file;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,
@@ -4075,13 +4098,20 @@ public class MainActivity extends AppCompatActivity {
         //First ignore the save file info
         while ((line = reader.readLine()) != null && !line.equals("END_COACHES")) {
             String[] fileSplit = line.split(",");
-            for (int i = 0; i < simLeague.teamList.size(); ++i) {
-                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
-                    if (fileSplit.length > 2) {
-                        simLeague.teamList.get(i).HC.clear();
-                        simLeague.teamList.get(i).newCustomHeadCoach(fileSplit[1], Integer.parseInt(fileSplit[2]));
-                    } else {
-                        simLeague.teamList.get(i).HC.get(0).name = fileSplit[1];
+
+            //Name checker
+            if (fileSplit.length > 1) {
+                if (fileSplit[1].split(" ").length > 1) {
+
+                    for (int i = 0; i < simLeague.teamList.size(); ++i) {
+                        if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
+                            if (fileSplit.length > 2) {
+                                simLeague.teamList.get(i).HC.clear();
+                                simLeague.teamList.get(i).newCustomHeadCoach(fileSplit[1], Integer.parseInt(fileSplit[2]));
+                            } else {
+                                simLeague.teamList.get(i).HC.get(0).name = fileSplit[1];
+                            }
+                        }
                     }
                 }
             }
@@ -4114,39 +4144,41 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
         line = reader.readLine();
-        //First ignore the save file info
-        int qb, rb, wr, te, ol, k, dl, lb, cb, s;
-        String teamX = "No Team";
+        //First ignore the save file info;
         while ((line = reader.readLine()) != null && !line.equals("END_ROSTER")) {
             String[] fileSplit = line.split(",");
 
+            //Name checker
+            if (fileSplit.length > 1) {
+                if (fileSplit[1].split(" ").length > 1) {
 
-            //METHOD FOR CREATING NEW ROSTER WITH CUSTOM FILE
-            for (int i = 0; i < simLeague.teamList.size(); ++i) {
-                if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
-                    teamX = simLeague.teamList.get(i).name;
-                    Team teamRoster = simLeague.teamList.get(i);
+                    //METHOD FOR CREATING NEW ROSTER WITH CUSTOM FILE
+                    for (int i = 0; i < simLeague.teamList.size(); ++i) {
+                        if (fileSplit[0].equals(simLeague.teamList.get(i).name)) {
+                            Team teamRoster = simLeague.teamList.get(i);
+                            if (fileSplit[2].equals("QB")) {
+                                teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("RB")) {
+                                teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("WR")) {
+                                teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("TE")) {
+                                teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("OL")) {
+                                teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("DL")) {
+                                teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("LB")) {
+                                teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("CB")) {
+                                teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("S")) {
+                                teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            } else if (fileSplit[2].equals("K")) {
+                                teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                            }
 
-                    if (fileSplit[2].equals("QB")) {
-                        teamRoster.teamQBs.add(new PlayerQB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("RB")) {
-                        teamRoster.teamRBs.add(new PlayerRB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("WR")) {
-                        teamRoster.teamWRs.add(new PlayerWR(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("TE")) {
-                        teamRoster.teamTEs.add(new PlayerTE(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("OL")) {
-                        teamRoster.teamOLs.add(new PlayerOL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("DL")) {
-                        teamRoster.teamDLs.add(new PlayerDL(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("LB")) {
-                        teamRoster.teamLBs.add(new PlayerLB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("CB")) {
-                        teamRoster.teamCBs.add(new PlayerCB(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("S")) {
-                        teamRoster.teamSs.add(new PlayerS(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
-                    } else if (fileSplit[2].equals("K")) {
-                        teamRoster.teamKs.add(new PlayerK(fileSplit[1], Integer.parseInt(fileSplit[3]), Integer.parseInt(fileSplit[4]), teamRoster, custom));
+                        }
                     }
                 }
             }
@@ -4170,6 +4202,58 @@ public class MainActivity extends AppCompatActivity {
         simLeague.updateTeamTalentRatings();
         updatePlayerStats();
     }
+
+    //EXPORT DATA
+
+    private void exportSave() {
+        // Empty file, don't show dialog confirmation
+        isExternalStorageReadable();
+        isExternalStorageWritable();
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_SAVE.txt");
+        simLeague.saveLeague(saveLeagueFile);
+        Toast.makeText(MainActivity.this, "Saved league!", Toast.LENGTH_SHORT).show();
+    }
+
+    //Export Save File
+    private void exportTeams() {
+        // Empty file, don't show dialog confirmation
+        isExternalStorageReadable();
+        isExternalStorageWritable();
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_TEAMS.txt");
+        simLeague.saveLeague(saveLeagueFile);
+        Toast.makeText(MainActivity.this, "Saved league!", Toast.LENGTH_SHORT).show();
+    }
+
+    //Export Save File
+    private void exportBowlNames() {
+        // Empty file, don't show dialog confirmation
+        isExternalStorageReadable();
+        isExternalStorageWritable();
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_BOWLS.txt");
+        simLeague.saveLeague(saveLeagueFile);
+        Toast.makeText(MainActivity.this, "Saved league!", Toast.LENGTH_SHORT).show();
+    }
+
+    //Export Save File
+    private void exportPlayers() {
+        // Empty file, don't show dialog confirmation
+        isExternalStorageReadable();
+        isExternalStorageWritable();
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_PLAYERS.txt");
+        simLeague.saveLeague(saveLeagueFile);
+        Toast.makeText(MainActivity.this, "Saved league!", Toast.LENGTH_SHORT).show();
+    }
+
+    //Export Save File
+    private void exportConferences() {
+        // Empty file, don't show dialog confirmation
+        isExternalStorageReadable();
+        isExternalStorageWritable();
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_CONF.txt");
+        simLeague.saveLeague(saveLeagueFile);
+        Toast.makeText(MainActivity.this, "Saved league!", Toast.LENGTH_SHORT).show();
+    }
+
 
 
     //MISC STUFF
@@ -4306,6 +4390,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 */
+
 
     //allow the ability to enable editor to edit player names, positions, attributes, etc.
     private void playerEditor() {

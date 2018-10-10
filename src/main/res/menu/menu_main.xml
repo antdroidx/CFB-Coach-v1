@@ -57,6 +57,11 @@
         android:title="@string/action_save_league"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_export_league"
+        android:orderInCategory="100"
+        android:title="@string/action_export_league"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_return_main_menu"
         android:orderInCategory="100"
         android:title="@string/action_return_main_menu"
