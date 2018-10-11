@@ -71,7 +71,6 @@ import simulation.Team;
 
 public class MainActivity extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 43;
-    private String oldConf;
     private HeadCoach userHC;
     private int season;
     private League simLeague;
@@ -1906,8 +1905,8 @@ public class MainActivity extends AppCompatActivity {
               Clicked CCG / Bowl Watch in drop down menu
              */
             showBowlCCGDialog();
-        } else if (id == R.id.action_import) {
-            importData();
+/*        } else if (id == R.id.action_import) {
+            importData();*/
 
         } else if (id == R.id.action_save_league) {
             /*
@@ -2020,7 +2019,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 dialog.dismiss();
-                gameEditor();
+                gameEditorV2();
 
             }
         });
@@ -2268,7 +2267,7 @@ public class MainActivity extends AppCompatActivity {
                     simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
                     currentTeam.name = newName; //set new team name
                     currentTeam.abbr = newAbbr; //set new conference name
-                    oldConf = currentConference.confName;
+                    String oldConf = currentConference.confName;
                     currentConference.confName = newConf;
                     currentTeam.HC.get(0).name = newHC;
                     simLeague.updateTeamConf(newConf, oldConf, currentConferenceID);  //update all other conf teams
@@ -4209,9 +4208,9 @@ public class MainActivity extends AppCompatActivity {
         // Empty file, don't show dialog confirmation
         isExternalStorageReadable();
         isExternalStorageWritable();
-        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_SAVE.txt");
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_SAVE.cfb");
         simLeague.saveLeague(saveLeagueFile);
-        Toast.makeText(MainActivity.this, "Saved league!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Exported League", Toast.LENGTH_SHORT).show();
     }
 
     //Export Save File
@@ -4270,14 +4269,14 @@ public class MainActivity extends AppCompatActivity {
         exitMainActivity();
     }
 
-/*
+
     //GAME EDITOR V2
 
     public void gameEditorV2() {
-        final List<String> teamEditor = new ArrayList<>();
-        final List<String> confEditor = new ArrayList<>();
-        Conference editConference = new Conference("Name", simLeague);
-        final Team editTeam = new Team("Name", "abbr", "Conf", 50, 2, simLeague);
+        currentTeam = userTeam;
+        currentConference = simLeague.conferences.get(simLeague.getConfNumber(userTeam.conference));
+
+
 
         AlertDialog.Builder GameEditor = new AlertDialog.Builder(this);
         GameEditor.setTitle("Game Universe Editor")
@@ -4285,68 +4284,96 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = GameEditor.create();
         dialog.show();
 
+        //setup window
+        final List<String> teamEditor = new ArrayList<>();
+        final List<String> confEditor = new ArrayList<>();
         final Spinner confList = dialog.findViewById(R.id.confList);
         final Spinner teamList = dialog.findViewById(R.id.teamList);
         final EditText changeNameEditText = dialog.findViewById(R.id.editTextChangeName);
         final EditText changeAbbrEditText = dialog.findViewById(R.id.editTextChangeAbbr);
+        final EditText changeRivalEditText = dialog.findViewById(R.id.editRival);
         final EditText changeConfEditText = dialog.findViewById(R.id.editTextChangeConf);
         final EditText changeHCEditText = dialog.findViewById(R.id.editTextChangeHC);
+        final EditText changePrestigeEditText = dialog.findViewById(R.id.editPrestige);
 
-        for (int i = 0; i < confStart; i++) {
-            confEditor.add(simLeague.conferences.get(i).confName);
-        }
-        for (int i = 0; i < simLeague.conferences.get(0).confTeams.size(); i++) {
-            teamEditor.add(simLeague.conferences.get(0).confTeams.get(i).name);
-        }
-
-        changeNameEditText.setText(currentTeam.name);  //updated from userTeam to currentTeam
-        changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
-        changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
-        changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
-
-        ArrayAdapter<String> editorAdaptorConf = new ArrayAdapter<>(this,
+        final ArrayAdapter<String> editorAdaptorConf = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, confEditor);
         editorAdaptorConf.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         confList.setAdapter(editorAdaptorConf);
+        final ArrayAdapter<String> editorAdaptorTeam = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, teamEditor);
+        editorAdaptorTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamList.setAdapter(editorAdaptorTeam);
+
+        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
+        cancelChangeNameButton.setText("BACK");
+        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
+        Button updateTeamButton = dialog.findViewById(R.id.buttonSave);
+
+        //fill in default data
+        for (int i = 0; i < confStart; i++) {
+            confEditor.add(simLeague.conferences.get(i).confName);
+        }
+        for (int i = 0; i < simLeague.conferences.get(simLeague.getConfNumber(currentTeam.conference)).confTeams.size(); i++) {
+            teamEditor.add(simLeague.conferences.get(simLeague.getConfNumber(currentTeam.conference)).confTeams.get(i).name);
+        }
+        editorAdaptorConf.notifyDataSetChanged();
+        editorAdaptorTeam.notifyDataSetChanged();
+
+        changeNameEditText.setText(currentTeam.name);
+        changeAbbrEditText.setText(currentTeam.abbr);
+        changeRivalEditText.setText(currentTeam.rivalTeam);
+        changeConfEditText.setText(currentConference.confName);
+        changeHCEditText.setText(currentTeam.HC.get(0).name);
+        changePrestigeEditText.setText(Integer.toString(currentTeam.teamPrestige));
+
+        //setup spinner data
         confList.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                        editConference = simLeague.conferences.get(position);
-                        for (int i = 0; i < simLeague.conferences.get(position).confTeams.size(); i++) {
-                            teamEditor.add(simLeague.conferences.get(position).confTeams.get(i).name);
+
+                        currentConference = simLeague.conferences.get(position);
+                        teamEditor.clear();
+                        for (int i = 0; i < currentConference.confTeams.size(); i++) {
+                            teamEditor.add(currentConference.confTeams.get(i).name);
                         }
-                        teamList.notify();
+
+                        editorAdaptorConf.notifyDataSetChanged();
+                        editorAdaptorTeam.notifyDataSetChanged();
+
+                        changeNameEditText.setText(currentTeam.name);
+                        changeAbbrEditText.setText(currentTeam.abbr);
+                        changeRivalEditText.setText(currentTeam.rivalTeam);
+                        changeConfEditText.setText(currentConference.confName);
+                        changeHCEditText.setText(currentTeam.HC.get(0).name);
+                        changePrestigeEditText.setText(Integer.toString(currentTeam.teamPrestige));
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
                     }
                 });
 
-        ArrayAdapter<String> editorAdaptorTeam = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, teamEditor);
-        editorAdaptorTeam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        teamList.setAdapter(editorAdaptorTeam);
         teamList.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
-                        Team tm = simLeague.conferences.get(position).confTeams.get(position);
-                        changeNameEditText.setText(.name);  //updated from userTeam to currentTeam
-                        changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
-                        changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
-                        changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
+                        Team tm = currentConference.confTeams.get(position);
+                        currentTeam = tm;
+                        currentConference = simLeague.conferences.get(simLeague.getConfNumber(currentTeam.conference));
+
+                            changeNameEditText.setText(currentTeam.name);
+                            changeAbbrEditText.setText(currentTeam.abbr);
+                            changeRivalEditText.setText(currentTeam.rivalTeam);
+                            changeConfEditText.setText(currentConference.confName);
+                            changeHCEditText.setText(currentTeam.HC.get(0).name);
+                            changePrestigeEditText.setText(Integer.toString(currentTeam.teamPrestige));
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
                     }
                 });
 
-
-
-
-        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
-        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
 
         cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -4358,28 +4385,63 @@ public class MainActivity extends AppCompatActivity {
         okChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                getSupportActionBar().setTitle(season + " | " + userTeam.name);
+                updateCurrConference();  //updates the UI
+                examineTeam(currentTeam.name);
+                dialog.dismiss();
+            }
+        });
+
+        updateTeamButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
                 String newName = changeNameEditText.getText().toString().trim();
                 String newAbbr = changeAbbrEditText.getText().toString().trim().toUpperCase();
+                String newRival = changeRivalEditText.getText().toString().trim().toUpperCase();
                 String newConf = changeConfEditText.getText().toString().trim();
                 String newHC = changeHCEditText.getText().toString().trim();
+                int newPrestige = Integer.parseInt( changePrestigeEditText.getText().toString().trim() );
 
                 if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr) && simLeague.isNameValid(newConf) && isNameValid((newHC))) {
                     simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
-                    currentTeam.name = newName; //set new team name
-                    currentTeam.abbr = newAbbr; //set new conference name
-                    oldConf = currentConference.confName;
-                    currentConference.confName = newConf;
-                    currentTeam.HC.get(0).name = newHC;
-                    simLeague.updateTeamConf(newConf, oldConf, currentConferenceID);  //update all other conf teams
-                    getSupportActionBar().setTitle(season + " | " + userTeam.name);
-                    Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);  // Have to update rival's rival too!
-                    rival.rivalTeam = currentTeam.abbr;
+
+                    if (newName != currentTeam.name) {
+                        currentTeam.name = newName; //set new team name
+                        teamEditor.clear();
+                        for (int i = 0; i < currentConference.confTeams.size(); i++) {
+                            teamEditor.add(currentConference.confTeams.get(i).name);
+                        }
+                        editorAdaptorTeam.notifyDataSetChanged();
+                        Toast.makeText(MainActivity.this, "Updated Team Name", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (newAbbr != currentTeam.abbr) currentTeam.abbr = newAbbr; //set new team Abbr
+
+                    if (newHC != currentTeam.HC.get(0).name) currentTeam.HC.get(0).name = newHC; //set new HC name
+
+                    if (newPrestige != currentTeam.teamPrestige) currentTeam.teamPrestige = newPrestige;
+
+                    if (newConf != currentConference.confName) {
+                        String oldConf = currentConference.confName;
+                        currentConference.confName = newConf;
+                        simLeague.updateTeamConf(newConf, oldConf, simLeague.getConfNumber(currentConference.confName));  //update all other conf teams
+
+                        confEditor.clear();
+                        for (int i = 0; i < confStart; i++) {
+                            confEditor.add(simLeague.conferences.get(i).confName);
+                        }
+                        editorAdaptorConf.notifyDataSetChanged();
+                        editorAdaptorTeam.notifyDataSetChanged();
+                        Toast.makeText(MainActivity.this, "Updated Conference Name", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    if (newRival != currentTeam.rivalTeam) {
+                        currentTeam.rivalTeam = newRival;
+                    }
+
+
                     wantUpdateConf = true;
-                    updateCurrConference();  //updates the UI
-                    examineTeam(currentTeam.name);
-
-                    dialog.dismiss();
-
                 } else {
                     if (showToasts)
                         Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
@@ -4389,7 +4451,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-*/
 
 
     //allow the ability to enable editor to edit player names, positions, attributes, etc.
