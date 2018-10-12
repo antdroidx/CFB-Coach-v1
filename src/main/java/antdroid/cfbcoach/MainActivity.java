@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             if (saveFileStr.contains("NEW_LEAGUE")) {
                 //NEW DYNASTY GAME WITH CUSTOM DATABASE
                 if (saveFileStr.contains("CUSTOM")) {
+                    newGame = true;
                     String[] filesSplit = saveFileStr.split(",");
                     this.customUri = filesSplit[1];
                     customConfs = new File(getFilesDir(), "conferences.txt");
@@ -156,9 +157,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if (saveFileStr.contains("RANDOM")) {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
                     season = seasonStart;
+
                 } else if (saveFileStr.contains("EQUALIZE")) {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, true);
                     season = seasonStart;
+
                 } else {
                     simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
                     season = seasonStart;
@@ -209,7 +212,6 @@ public class MainActivity extends AppCompatActivity {
             currentTeam = userTeam;
             currentTeam = simLeague.teamList.get(0);
             currentConference = simLeague.conferences.get(0);
-            newGame = true;
 
             String saveFileStr = extras.getString("SAVE_FILE");
             if (saveFileStr.contains("CUSTOM")) importDataPrompt();
@@ -389,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (simLeague.getYear() != seasonStart) {
-            // Only show recruiting classes if it aint 2017
+            // Only show recruiting classes if not season 1
             showRecruitingClassDialog();
         }
     }
@@ -1967,6 +1969,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxCareerMode = dialog.findViewById(R.id.checkboxCareerMode);
         checkboxCareerMode.setChecked(simLeague.isCareerMode());
 
+        final CheckBox checkboxNeverRetire = dialog.findViewById(R.id.checkboxNeverRetire);
+        checkboxNeverRetire.setChecked(simLeague.neverRetire);
+
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
@@ -2005,7 +2010,7 @@ public class MainActivity extends AppCompatActivity {
         Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
-        if (userTeam.getHC(0).age >= 70) changeTeamsButton.setText("RETIRE");
+        if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -2032,6 +2037,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.hidePotential = checkboxPotential.isChecked();
                 simLeague.careerMode = checkboxCareerMode.isChecked();
+                simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
                 simLeague.enableProRel = checkboxProRelegation.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
@@ -2048,7 +2054,7 @@ public class MainActivity extends AppCompatActivity {
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
-                if (userTeam.getHC(0).age >= 70) {
+                if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) {
                     retirementQuestion();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -3155,6 +3161,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxCareerMode = dialog.findViewById(R.id.checkboxCareerMode);
         checkboxCareerMode.setChecked(simLeague.isCareerMode());
 
+        final CheckBox checkboxNeverRetire = dialog.findViewById(R.id.checkboxNeverRetire);
+        checkboxNeverRetire.setChecked(simLeague.neverRetire);
+
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
@@ -3200,6 +3209,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.hidePotential = checkboxPotential.isChecked();
                 simLeague.careerMode = checkboxCareerMode.isChecked();
+                simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.enableUnivProRel = checkboxProRelegation.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
@@ -3452,7 +3462,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (userHC.retirement && !skipRetirementQ) {
+        if (userHC.retirement && !skipRetirementQ && !simLeague.neverRetire) {
             retirementQuestion();
             skipRetirementQ = true;
 
@@ -4308,7 +4318,7 @@ public class MainActivity extends AppCompatActivity {
         Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
         cancelChangeNameButton.setText("BACK");
         Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
-        Button updateTeamButton = dialog.findViewById(R.id.buttonSave);
+        okChangeNameButton.setText("UPDATE");
 
         //fill in default data
         for (int i = 0; i < confStart; i++) {
@@ -4320,18 +4330,18 @@ public class MainActivity extends AppCompatActivity {
         editorAdaptorConf.notifyDataSetChanged();
         editorAdaptorTeam.notifyDataSetChanged();
 
-        changeNameEditText.setText(currentTeam.name);
-        changeAbbrEditText.setText(currentTeam.abbr);
-        changeRivalEditText.setText(currentTeam.rivalTeam);
-        changeConfEditText.setText(currentConference.confName);
-        changeHCEditText.setText(currentTeam.HC.get(0).name);
-        changePrestigeEditText.setText(Integer.toString(currentTeam.teamPrestige));
-
         //setup spinner data
         confList.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
+
+                        changeNameEditText.clearComposingText();
+                        changeAbbrEditText.clearComposingText();
+                        changeRivalEditText.clearComposingText();
+                        changeConfEditText.clearComposingText();
+                        changeHCEditText.clearComposingText();
+                        changePrestigeEditText.clearComposingText();
 
                         currentConference = simLeague.conferences.get(position);
                         teamEditor.clear();
@@ -4341,13 +4351,7 @@ public class MainActivity extends AppCompatActivity {
 
                         editorAdaptorConf.notifyDataSetChanged();
                         editorAdaptorTeam.notifyDataSetChanged();
-
-                        changeNameEditText.setText(currentTeam.name);
-                        changeAbbrEditText.setText(currentTeam.abbr);
-                        changeRivalEditText.setText(currentTeam.rivalTeam);
-                        changeConfEditText.setText(currentConference.confName);
-                        changeHCEditText.setText(currentTeam.HC.get(0).name);
-                        changePrestigeEditText.setText(Integer.toString(currentTeam.teamPrestige));
+                        teamList.performClick();
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -4378,21 +4382,14 @@ public class MainActivity extends AppCompatActivity {
         cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                getSupportActionBar().setTitle(season + " | " + userTeam.name);
+                updateCurrConference();  //updates the UI
+                examineTeam(userTeam.name);
                 dialog.dismiss();
-            }
+                }
         });
 
         okChangeNameButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                getSupportActionBar().setTitle(season + " | " + userTeam.name);
-                updateCurrConference();  //updates the UI
-                examineTeam(currentTeam.name);
-                dialog.dismiss();
-            }
-        });
-
-        updateTeamButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 String newName = changeNameEditText.getText().toString().trim();
@@ -4450,6 +4447,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
 

@@ -57,7 +57,6 @@ public class PlayerLB extends Player {
         ratTackle = tkl;
         ratSpeed = spd;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         region = reg;
@@ -86,7 +85,6 @@ public class PlayerLB extends Player {
         ratTackle = tkl;
         ratSpeed = spd;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;

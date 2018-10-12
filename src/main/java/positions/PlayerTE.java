@@ -62,7 +62,6 @@ public class PlayerTE extends Player {
         ratEvasion = eva;
         ratSpeed = spd;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         region = reg;
@@ -92,7 +91,6 @@ public class PlayerTE extends Player {
         ratEvasion = eva;
         ratSpeed = spd;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;

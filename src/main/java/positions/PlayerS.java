@@ -54,7 +54,6 @@ public class PlayerS extends Player {
         ratTackle = tkl;
         ratRunStop = rstop;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         region = reg;
@@ -83,7 +82,6 @@ public class PlayerS extends Player {
         ratTackle = tkl;
         ratRunStop = rstop;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;

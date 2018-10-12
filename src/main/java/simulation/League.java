@@ -177,12 +177,15 @@ public class League {
     public ArrayList<Player> freshmen;
     public ArrayList<Player> redshirts;
     private String[] bowlNames;
+
+    //Game Options
     public boolean fullGameLog;
     public boolean hidePotential;
     public boolean confRealignment;
     public boolean enableProRel;
     public boolean enableUnivProRel;
     public boolean enableTV;
+    public boolean neverRetire;
 
     public int countRealignment;
     public String newsRealignment;
@@ -225,6 +228,7 @@ public class League {
         confRealignment = true;
         enableTV = true;
         enableUnivProRel = false;
+        neverRetire = false;
         setupCommonInitalizers();
 
         //set up names database from xml
@@ -320,6 +324,7 @@ public class League {
         confRealignment = true;
         enableTV = true;
         enableUnivProRel = false;
+        neverRetire = false;
 
         setupCommonInitalizers();
         setupNamesDB(namesCSV, lastNamesCSV);
@@ -641,6 +646,7 @@ public class League {
             enableTV = Boolean.parseBoolean(bufferedReader.readLine());
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
+            neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
 
             if (enableProRel) confRealignment = false;
             if (confRealignment) enableProRel = false;
@@ -4964,6 +4970,7 @@ public class League {
         sb.append(enableTV + "\n");
         sb.append(enableUnivProRel + "\n");
         sb.append(userTeam.showPopups + "\n");
+        sb.append(neverRetire + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
@@ -5207,6 +5214,9 @@ public class League {
         sb.append(confRealignment + "\n");
         sb.append(enableProRel + "\n");
         sb.append(enableTV + "\n");
+        sb.append(enableUnivProRel + "\n");
+        sb.append(userTeam.showPopups + "\n");
+        sb.append(neverRetire + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file

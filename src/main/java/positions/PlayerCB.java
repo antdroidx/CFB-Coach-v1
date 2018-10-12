@@ -71,7 +71,6 @@ public class PlayerCB extends Player {
         ratTackle = tkl;
         ratJump = jmp;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         region = reg;
@@ -100,7 +99,6 @@ public class PlayerCB extends Player {
         ratTackle = tkl;
         ratJump = jmp;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;

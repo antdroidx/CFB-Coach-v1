@@ -74,7 +74,6 @@ public class PlayerWR extends Player {
         ratEvasion = eva;
         ratJump = jmp;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
         region = reg;
         personality = trait;
@@ -102,7 +101,6 @@ public class PlayerWR extends Player {
         ratEvasion = eva;
         ratJump = jmp;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
         isTransfer = transfer;
         isWalkOn = wo;

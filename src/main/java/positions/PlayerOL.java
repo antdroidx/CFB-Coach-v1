@@ -44,7 +44,6 @@ public class PlayerOL extends Player {
         ratPassBlock = bkp;
         ratAwareness = awr;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
         height = h;
         weight = w;
@@ -73,7 +72,6 @@ public class PlayerOL extends Player {
         ratPassBlock = bkp;
         ratAwareness = awr;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;

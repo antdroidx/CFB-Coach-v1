@@ -54,7 +54,6 @@ public class PlayerDL extends Player {
         ratPassRush = pas;
         ratTackle = tkl;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         position = "DL";
@@ -111,7 +110,6 @@ public class PlayerDL extends Player {
         ratPassRush = pas;
         ratTackle = tkl;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;

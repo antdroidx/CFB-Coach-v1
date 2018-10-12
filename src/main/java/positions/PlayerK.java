@@ -52,7 +52,6 @@ public class PlayerK extends Player {
         ratKickFum = fum;
         ratPressure = prs;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         region = reg;
@@ -81,7 +80,6 @@ public class PlayerK extends Player {
         ratKickFum = fum;
         ratPressure = prs;
         isRedshirt = rs;
-        if (isRedshirt) year = 0;
         wasRedshirt = wasRS;
 
         isTransfer = transfer;
