@@ -549,7 +549,7 @@ public class MainActivity extends AppCompatActivity {
                         " " + currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ") " +
                         currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
                 break;
-            } else if (spinnerSplit.length == 3 && (spinnerSplit[1] + " " + spinnerSplit[2]).toString().equals(tempT.name)) {
+            } else if (spinnerSplit.length == 3 && (spinnerSplit[1] + " " + spinnerSplit[2]).equals(tempT.name)) {
                 examineTeamSpinner.setSelection(i);
                 currentTeam = tempT;
                 TextView currentTeamText = findViewById(R.id.currentTeamText);
@@ -557,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
                         " " + currentTeam.name + " (" + currentTeam.wins + "-" + currentTeam.losses + ") " +
                         currentTeam.confChampion + " " + currentTeam.semiFinalWL + currentTeam.natChampWL);
                 break;
-            } else if (spinnerSplit.length == 4 && (spinnerSplit[1] + " " + spinnerSplit[2] + " " + spinnerSplit[3]).toString().equals(tempT.name)) {
+            } else if (spinnerSplit.length == 4 && (spinnerSplit[1] + " " + spinnerSplit[2] + " " + spinnerSplit[3]).equals(tempT.name)) {
                 examineTeamSpinner.setSelection(i);
                 currentTeam = tempT;
                 TextView currentTeamText = findViewById(R.id.currentTeamText);
@@ -4279,7 +4279,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder GameEditor = new AlertDialog.Builder(this);
-        GameEditor.setTitle("Game Universe Editor")
+        GameEditor.setTitle("Game Universe Editor v2 (BETA)")
                 .setView(getLayoutInflater().inflate(R.layout.game_editor_full, null));
         final AlertDialog dialog = GameEditor.create();
         dialog.show();
