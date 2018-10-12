@@ -1683,7 +1683,6 @@ Eastern Michigan,Kobie Beltram,LB,3,4
 Eastern Michigan,Desean Boyd,LB,1,3
 Eastern Michigan,Tyler Lyle,RB,2,6
 Eastern Michigan,Jaylen Pickett,LB,4,3
-Eastern Michigan, IVan,K,3,4
 Eastern Michigan,Ka'john Armstrong,OL,4,4
 Eastern Michigan,Tre'shown Fields,TE,3,5
 Eastern Michigan,Mathew Sexton,WR,3,3
@@ -1753,7 +1752,6 @@ Florida,Moral Stephens,TE,4,8
 Florida,Andrew Chatfieldj,LB,1,9
 Florida,Chauncey GardneRJohn,CB,3,6
 Florida,Brett Heggie,OL,2,7
-Florida, IVerson,RB,1,7
 Florida,Marlon Dunlap,DL,2,5
 Florida,Kyle Trask,QB,2,6
 Florida,David Reese,LB,3,8
@@ -1998,7 +1996,6 @@ Georgia,Deangelo Gibbs,S,2,6
 Georgia,Jarvis Wilson,S,4,6
 Georgia,Isaac Nauta,TE,3,5
 Georgia,David Marshall,DL,3,5
-Georgia, JR,S,3,8
 Georgia Tech,Jaquan Henderson,LB,2,6
 Georgia Tech,Kyle Cerge-hende,DL,3,5
 Georgia Tech,Dameon Williams,CB,1,6
@@ -2116,7 +2113,6 @@ Hawaii,Khoury Bethley,S,1,3
 Hawaii,Samiuela Akoteu,DL,3,5
 Hawaii,Anthony Mermea,DL,3,5
 Hawaii,Melvin Davis,RB,4,4
-Hawaii, JR,OL,3,4
 Hawaii,Ryan Meskell,K,3,4
 Hawaii,Joey Nu'uanukuh,OL,2,5
 Hawaii,Alesana Sunia,OL,2,5
@@ -2402,7 +2398,6 @@ Iowa,Nate Wieting,TE,3,8
 Iowa,Spencer Petras,QB,1,5
 Iowa,Kyle Groeneweg,WR,4,5
 Iowa,Nick Easley,WR,4,5
-Iowa, IVory,RB,2,5
 Iowa,Brandon Smith,WR,2,5
 Iowa,Miguel Recinos,K,4,5
 Iowa,Mekhi Sargent,RB,2,6
@@ -4411,7 +4406,6 @@ Northwestern,Joe Bergin,S,3,8
 Northwestern,Jake Saunders,DL,2,6
 Northwestern,Sam Gerak,OL,1,7
 Northwestern,JJ Jefferson,WR,1,7
-Northwestern, JR,S,2,6
 Northwestern,TJ Green,QB,3,6
 Northwestern,Jesse Brown,RB,2,6
 Notre Dame,Braden Lenzy,WR,1,7
@@ -5329,7 +5323,6 @@ San Diego State,Derrick Achayo,OL,4,8
 San Diego State,William Dunkle,OL,1,5
 San Diego State,Juwan Washington,RB,3,8
 San Diego State,Isiah Macklin,WR,2,5
-San Diego State, JR,WR,1,5
 San Diego State,Kahale Warring,TE,3,7
 San Diego State,Tayari Venable,CB,1,6
 San Diego State,Trenton Thompson,S,2,5
