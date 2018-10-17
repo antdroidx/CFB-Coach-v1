@@ -25,6 +25,7 @@ public class HeadCoach extends Player {
     public int offStrat;
     public int defStrat;
     public int baselinePrestige;
+    public int cumulativePrestige;
     private final int teamWins;
     private final int teamLosses;
     public int wins;
@@ -41,7 +42,6 @@ public class HeadCoach extends Player {
     private final int max = 4;
     private final int min = 0;
     public final ArrayList<String> history;
-    private final double potFactor = 1.33;
 
     public boolean promotionCandidate;
     public boolean retirement;
@@ -50,7 +50,7 @@ public class HeadCoach extends Player {
     public float careerScore;
 
     public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw, int cpres) {
         team = t;
         name = nm;
         age = a;
@@ -63,6 +63,7 @@ public class HeadCoach extends Player {
         ratDef = def;
         ratTalent = tal;
         ratDiscipline = dis;
+        ratOvr = getHCOverall();
         offStrat = ostrat;
         defStrat = dstrat;
         baselinePrestige = sPrs;
@@ -78,6 +79,7 @@ public class HeadCoach extends Player {
         allconference = allconf;
         confAward = caw;
         awards = aw;
+        cumulativePrestige = cpres;
         history = new ArrayList<>();
 
         position = "HC";
@@ -85,18 +87,18 @@ public class HeadCoach extends Player {
 
     //This one is for HC Free Agency Pool
     public HeadCoach(String nm, int a, int yr, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw) {
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw, int cpres) {
         name = nm;
         age = a;
         year = yr;
         contractYear = 0;
         contractLength = 0;
-        ratOvr = (2 * off + 2 * def + tal + dis) / 6;
         ratPot = pot;
         ratOff = off;
         ratDef = def;
         ratTalent = tal;
         ratDiscipline = dis;
+        ratOvr = getHCOverall();
         offStrat = ostrat;
         defStrat = dstrat;
         baselinePrestige = sPrs;
@@ -112,6 +114,7 @@ public class HeadCoach extends Player {
         allconference = allconf;
         confAward = caw;
         awards = aw;
+        cumulativePrestige = cpres;
         history = new ArrayList<>();
 
         position = "HC";
@@ -149,6 +152,7 @@ public class HeadCoach extends Player {
         allconference = 0;
         confAward = 0;
         awards = 0;
+        cumulativePrestige = 0;
         history = new ArrayList<>();
 
         position = "HC";
@@ -187,47 +191,53 @@ public class HeadCoach extends Player {
         allconference = 0;
         confAward = 0;
         awards = 0;
+        cumulativePrestige = 0;
         history = new ArrayList<>();
 
         position = "HC";
     }
 
-    public void advanceSeason(int prestigeDiff, int avgYards, int offTalent, int defTalent) {
-        int oldOvr = ratOvr;
+    public void advanceSeason(int avgYards, int offTalent, int defTalent) {
+        int prestigeDiff = team.teamPrestige - team.teamPrestigeStart - team.disciplinePts;
+
+        int oldOvr = getHCOverall();
         age++;
         year++;
         contractYear++;
 
-        ratTalent += Math.random() * prestigeDiff;
-        float off = team.teamYards - avgYards;
-        float def = avgYards - team.teamOppYards;
-        float offTal = offTalent - team.teamOffTalent;
-        float defTal = defTalent - team.teamDefTalent;
-        float offpts = ((off / avgYards) + (offTal / offTalent)) * 4;
-        float defpts = ((def / avgYards) + (defTal / defTalent)) * 4;
+        double off = team.teamYards - avgYards;
+        double def = avgYards - team.teamOppYards;
+        double offTal = offTalent - team.teamStartOffTal;
+        double defTal = defTalent - team.teamStartDefTal;
+        double offpts = ((off / avgYards) + (offTal / offTalent)) * 5;
+        double defpts = ((def / avgYards) + (defTal / defTalent)) * 5;
+        double coachScore = (getCoachScore() - team.confPrestige)/10;
+        if (coachScore < -3) coachScore = -3;
 
-        ratOff += ((prestigeDiff + offpts) * ((double) ratTalent / 100));
+        ratOff += (2*prestigeDiff + offpts + coachScore)/4;
         if (ratOff > 95) ratOff = 95;
         if (ratOff < 20) ratOff = 20;
 
-        ratDef += ((prestigeDiff + defpts) * ((double) ratTalent / 100));
+        ratDef += (2*prestigeDiff + defpts + coachScore)/4;
         if (ratDef > 95) ratDef = 95;
         if (ratDef < 20) ratDef = 20;
+
+        ratTalent += prestigeDiff  + coachScore;
+        if (ratTalent > 95) ratTalent = 95;
+        if (ratTalent < 20) ratTalent = 20;
 
         if (ratDiscipline > 90) ratDiscipline = 90;
         if (ratDiscipline < 15) ratDiscipline = 15;
 
-        if (ratTalent > 95) ratTalent = 95;
-        if (ratTalent < 20) ratTalent = 20;
 
-        if (age > 62 && !team.userControlled) {
+        if (age > 65 && !team.userControlled) {
             ratOff -= (int) Math.random() * 4;
             ratDef -= (int) Math.random() * 4;
             ratTalent -= (int) Math.random() * 4;
             ratDiscipline -= (int) Math.random() * 4;
         }
 
-        if (age > 65 && team.userControlled && team.league.isCareerMode()) {
+        if (age > 70 && team.userControlled && team.league.isCareerMode() && !team.league.neverRetire ) {
             ratOff -= (int) Math.random() * (age / 20);
             ratDef -= (int) Math.random() * (age / 20);
             ratTalent -= (int) Math.random() * (age / 20);
@@ -245,6 +255,7 @@ public class HeadCoach extends Player {
         allconference += 0;
         confAward += 0;
         awards += 0;
+        cumulativePrestige += prestigeDiff;
     }
 
     public int getCoachScore() {
@@ -263,7 +274,7 @@ public class HeadCoach extends Player {
     public int getCoachCareerScore() {
         if (year < 1) return 0;
         else
-            return (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans) / year;
+            return (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans + cumulativePrestige) / year;
     }
 
     @Override
@@ -273,8 +284,8 @@ public class HeadCoach extends Player {
         if (team.league.isCareerMode()) {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
-        pStats.add("Offense Playcalling: " + getLetterGrade(ratOff) + ">Defense Playcalling: " + getLetterGrade(ratDef));
-        pStats.add("Offense Style: " + team.playbookOff.getStratName() + ">Defense Style: " + team.playbookDef.getStratName());
+        pStats.add("Offense: " + team.playbookOff.getStratName() + ">Defense: " + team.playbookDef.getStratName());
+        pStats.add("Offense: " + getLetterGrade(ratOff) + ">Defense: " + getLetterGrade(ratDef));
         pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add(" > ");
@@ -288,8 +299,8 @@ public class HeadCoach extends Player {
         if (team.league.isCareerMode()) {
             pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
-        pStats.add("Offense Philosophy: " + ratOff + ">Defense Philosophy: " + ratDef);
-        pStats.add("Offense Style: " + team.playbookOff.getStratName() + ">Defense Style: " + team.playbookDef.getStratName());
+        pStats.add("Offense: " + team.playbookOff.getStratName() + ">Defense: " + team.playbookDef.getStratName());
+        pStats.add("Offense: " + ratOff + ">Defense: " + ratDef);
         pStats.add("Talent Progression: " + ratTalent + ">Discipline: " + ratDiscipline);
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add("[B]CAREER STATS:");
@@ -305,6 +316,7 @@ public class HeadCoach extends Player {
         pStats.add("Conf Champs: " + confchamp + ">National Champs: " + natchamp);
         pStats.add("All Conferences: " + allconference + ">All Americans: " + allamericans);
         pStats.add("Conference Coach: " + confAward + ">Coach of Year: " + awards);
+        pStats.add("Prestige Change: " + cumulativePrestige + ">Coach Score: " + getCoachCareerScore());
         return pStats;
     }
 
@@ -326,6 +338,12 @@ public class HeadCoach extends Player {
             hist[i] = history.get(i);
         }
         return hist;
+    }
+
+    public String getHCString() {
+        if (team.league.currentWeek > 15 && year > 0 && ratImprovement > 0) return "Head Coach " + name + ">" + "Ovr: " + getHCOverall() + " (+" + ratImprovement + ")";
+        else if (team.league.currentWeek > 15 && year > 0 && ratImprovement < 0) return "Head Coach " + name + ">" + "Ovr: " + getHCOverall() + " (" + ratImprovement + ")";
+        else return "Head Coach " + name + ">" + "Ovr: " + ratOvr;
     }
 
     public int getHCOverall() {

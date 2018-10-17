@@ -1,7 +1,5 @@
 package simulation;
 
-import android.content.res.Resources;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
@@ -19,9 +19,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import antdroid.cfbcoach.MainActivity;
-import antdroid.cfbcoach.R;
 import comparator.CompCoachCareer;
+import comparator.CompCoachCareerPrestige;
 import comparator.CompCoachOvr;
 import comparator.CompCoachScore;
 import comparator.CompKickRetTD;
@@ -622,16 +621,19 @@ public class League {
             int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
                 String h[] = line.split("%");
+                int  cPres = 0;
                 if (h.length == 1) {
                     String c[] = line.split(",");
+                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
                     coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
                             , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20])));
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
                 } else if (h.length == 2) {
                     String c[] = h[0].split(",");
+                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
                     coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
                             , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20])));
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
                         coachFreeAgents.get(coachFA).history.add(line);
                     }
@@ -647,6 +649,7 @@ public class League {
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
             neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
+            if (!careerMode) careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
 
             if (enableProRel) confRealignment = false;
             if (confRealignment) enableProRel = false;
@@ -684,6 +687,245 @@ public class League {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * IMPORT A SAVE FILE
+     * Create League from saved file.
+     **/
+    public League(InputStream inputStream, String namesCSV, String lastNamesCSV) {
+        setupCommonInitalizers();
+        setupNamesDB(namesCSV, lastNamesCSV);
+
+        String line = null;
+
+        try {
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            //First ignore the save file info
+            line = bufferedReader.readLine();
+            // Game Mode
+            careerMode = line.substring(line.length() - 4, line.length()).equals("[C]%");
+            //9
+            //Next get league history
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HIST")) {
+                leagueHistory.add(line.split("%"));
+            }
+
+            //Next get heismans
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_HEISMAN_HIST")) {
+                heismanHistory.add(line);
+            }
+
+            //Next make all the conferences & teams
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONFERENCES")) {
+                conferences.add(new Conference(line, this));
+            }
+
+            for (int i = 0; i < countTeam; ++i) { //Do for every team
+                StringBuilder sbTeam = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null && !line.equals("END_PLAYERS")) {
+                    sbTeam.append(line);
+                }
+                Team t = new Team(sbTeam.toString(), this);
+                conferences.get(getConfNumber(t.conference)).confTeams.add(t);
+                teamList.add(t);
+                teamList.get(i).playbookOffNum = teamList.get(i).getCPUOffense();
+                teamList.get(i).playbookDefNum = teamList.get(i).getCPUDefense();
+                teamList.get(i).playbookOff = teamList.get(i).getPlaybookOff()[teamList.get(i).playbookOffNum];
+                teamList.get(i).playbookDef = teamList.get(i).getPlaybookDef()[teamList.get(i).playbookDefNum];
+            }
+
+            //Set up user team
+            if ((line = bufferedReader.readLine()) != null) {
+                for (Team t : teamList) {
+                    if (t.name.equals(line)) {
+                        userTeam = t;
+                        userTeam.userControlled = true;
+                    }
+                }
+            }
+            //Team History
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM_HISTORY")) {
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
+                        teamList.get(i).teamHistory.add(line);
+                    }
+                }
+            }
+            //Coach History
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACH_HISTORY")) {
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACH")) {
+                        teamList.get(i).HC.get(0).history.add(line);
+                    }
+                }
+            }
+
+            // Set up lucky and penalized teams for Week 0 news stories
+
+            StringBuilder sbPenalized = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED_TEAM")) {
+                sbPenalized.append(line);
+            }
+            if (!sbPenalized.toString().equals("NULL")) {
+                penalizedTeam1 = findTeamAbbr(sbPenalized.toString());
+            } else {
+                penalizedTeam1 = null;
+            }
+
+            StringBuilder sbPenalized2 = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED2_TEAM")) {
+                sbPenalized2.append(line);
+            }
+            if (!sbPenalized2.toString().equals("NULL")) {
+                penalizedTeam2 = findTeamAbbr(sbPenalized2.toString());
+            } else {
+                penalizedTeam2 = null;
+            }
+
+            StringBuilder sbPenalized3 = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED3_TEAM")) {
+                sbPenalized3.append(line);
+            }
+            if (!sbPenalized3.toString().equals("NULL")) {
+                penalizedTeam3 = findTeamAbbr(sbPenalized3.toString());
+            } else {
+                penalizedTeam3 = null;
+            }
+
+            StringBuilder sbPenalized4 = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED4_TEAM")) {
+                sbPenalized4.append(line);
+            }
+            if (!sbPenalized4.toString().equals("NULL")) {
+                penalizedTeam4 = findTeamAbbr(sbPenalized4.toString());
+            } else {
+                penalizedTeam4 = null;
+            }
+
+            StringBuilder sbPenalized5 = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED5_TEAM")) {
+                sbPenalized5.append(line);
+            }
+            if (!sbPenalized5.toString().equals("NULL")) {
+                penalizedTeam5 = findTeamAbbr(sbPenalized5.toString());
+            } else {
+                penalizedTeam5 = null;
+            }
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
+                for (int b = 0; b < bowlNames.length; ++b) {
+                    String[] filesSplit = line.split(",");
+                    bowlNames[b] = filesSplit[b];
+                }
+            }
+
+            String[] record;
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
+                record = line.split(",");
+                if (!record[1].equals("-1"))
+                    leagueRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_WIN_STREAK")) {
+                record = line.split(",");
+                longestWinStreak = new TeamStreak(
+                        Integer.parseInt(record[2]), Integer.parseInt(record[3]), Integer.parseInt(record[0]), record[1]);
+                yearStartLongestWinStreak = new TeamStreak(
+                        Integer.parseInt(record[2]), Integer.parseInt(record[3]), Integer.parseInt(record[0]), record[1]);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM_RECORDS")) {
+                for (int i = 0; i < countTeam; ++i) { //Do for every team
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
+                        record = line.split(",");
+                        if (!record[1].equals("-1"))
+                            teamList.get(i).teamRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+                    }
+                }
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HALL_OF_FAME")) {
+                leagueHoF.add(line);
+                String[] fileSplit = line.split(":");
+                for (int i = 0; i < countTeam; ++i) {
+                    if (teamList.get(i).name.equals(fileSplit[0])) {
+                        teamList.get(i).hallOfFame.add(line);
+                    }
+                }
+            }
+            int coachFA = 0;
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
+                String h[] = line.split("%");
+                int  cPres = 0;
+                if (h.length == 1) {
+                    String c[] = line.split(",");
+                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
+                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
+                } else if (h.length == 2) {
+                    String c[] = h[0].split(",");
+                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
+                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
+                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
+                        coachFreeAgents.get(coachFA).history.add(line);
+                    }
+                    coachFA++;
+                }
+            }
+
+            fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
+            hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
+            confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
+            enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
+            enableTV = Boolean.parseBoolean(bufferedReader.readLine());
+            enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
+            userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
+            neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
+            if (!careerMode) careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
+
+            if (enableProRel) confRealignment = false;
+            if (confRealignment) enableProRel = false;
+            if (enableUnivProRel) {
+                confRealignment = false;
+                enableProRel = false;
+            }
+
+            // Always close files.
+            bufferedReader.close();
+
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file");
+        } catch (IOException ex) {
+            System.out.println(
+                    "Error reading file");
+        }
+
+        //Get longest active win streak
+        updateLongestActiveWinStreak();
+
+        //fix bowl names
+        if(bowlNames[0] == null) {
+            String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
+
+            bowlNames = new String[bowlText.split(", ").length];
+            for (int b = 0; b < bowlText.split(", ").length; ++b) {
+                bowlNames[b] = bowlText.split(", ")[b];
+            }
+        }
+
+        setupSeason();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     //Initialize all common variables for each game type
     private void setupCommonInitalizers() {
@@ -794,7 +1036,7 @@ public class League {
                     " has tampered with several recruits. In addition, academic records at  " + penalizedTeam1.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
         }
         if (penalizedTeam2 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Minor Infraction: " + penalizedTeam2.name + ">Investigations have led to the discovery that " + penalizedTeam2.name + "'s head coach " + penalizedTeam2.HC.get(0).name +
+            newsStories.get(0).add("Major Infraction: " + penalizedTeam2.name + ">Investigations have led to the discovery that " + penalizedTeam2.name + "'s head coach " + penalizedTeam2.HC.get(0).name +
                     " was found violating recruiting policies over the past off-season. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped.");
         }
         if (penalizedTeam3 != null && getYear() > seasonStart) {
@@ -1181,11 +1423,10 @@ public class League {
                 teamList.get(t).disciplinePlayer();
             } else {
                 teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
-                //teamList.get(t).disciplinePts += (int) (Math.random() * 2);
             }
         }
         for (int i = 0; i < teamDiscipline.size(); ++i) {
-            news += "\n" + teamDiscipline.get(i).toString();
+            news += "\n" + teamDiscipline.get(i);
         }
         newsStories.get(currentWeek + 1).add("In-Season Disciplinary Action>The following teams have had issues with discipline in the past week:\n" + news);
     }
@@ -3648,77 +3889,77 @@ public class League {
         /// INFRACTIONS TIME
 
         //Major Infraction to a good team
-        int x = (int) (Math.random() * 11);
-        if (x > 8) {
-            int penalizedNumber = (int) (Math.random() * 50);
-            Team penalizedTeam = teamList.get(penalizedNumber);
-            if (penalizedTeam.teamPrestige > 60 && penalizedTeam.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                penalizedTeam.teamPrestige -= (25 + x);
-                penalizedTeam1 = penalizedTeam;
-                penalizedTeam.HC.get(0).ratDiscipline -= 20;
+        if ((int) (Math.random() * 11) > 8) {
+            int teamNumber = (int) (Math.random() * 50);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .25);
+                penalizedTeam1 = teamTrouble;
+                teamTrouble.HC.get(0).ratDiscipline -= 20;
             } else {
                 penalizedTeam1 = null;
-                penalizedTeam.HC.get(0).ratDiscipline += 15;
+                teamTrouble.HC.get(0).ratDiscipline += 3;
             }
         } else penalizedTeam1 = null;
 
         //Minor infraction to an avg team
-        x = (int) (Math.random() * 11);
-        if (x > 7) {
-            int penalizedNumber = (int) (Math.random() * 60);
-            Team penalizedTeam2 = teamList.get(penalizedNumber);
-            if (penalizedTeam2.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                penalizedTeam2.teamPrestige -= (10 + x);
-                this.penalizedTeam2 = penalizedTeam2;
-                penalizedTeam2.HC.get(0).ratDiscipline -= 10;
+        if ((int) (Math.random() * 11) > 7) {
+            int teamNumber = (int) (Math.random() * 60);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .17);
+                penalizedTeam2 = teamTrouble;
+                teamTrouble.HC.get(0).ratDiscipline -= 10;
             } else {
-                this.penalizedTeam2 = null;
-                penalizedTeam2.HC.get(0).ratDiscipline += 7;
+                penalizedTeam2 = null;
+                teamTrouble.HC.get(0).ratDiscipline += 3;
             }
         } else penalizedTeam2 = null;
 
         //Discipline a team
-        x = (int) (Math.random() * 11);
-        if (x > 6) {
-            int penalizedNumber = (int) (Math.random() * 70);
-            Team penalizedTeam3 = teamList.get(penalizedNumber);
-            if (penalizedTeam3.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                penalizedTeam3.teamPrestige -= (6 + x);
-                penalizedTeam3.HC.get(0).ratDiscipline -= 8;
-                this.penalizedTeam3 = penalizedTeam3;
+        if ((int) (Math.random() * 11) > 6) {
+            int teamNumber = (int) (Math.random() * 70);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .13);
+                teamTrouble.HC.get(0).ratDiscipline -= 8;
+                penalizedTeam3 = teamTrouble;
             } else {
-                this.penalizedTeam3 = null;
-                penalizedTeam3.HC.get(0).ratDiscipline += 5;
+                penalizedTeam3 = null;
+                teamTrouble.HC.get(0).ratDiscipline += 3;
             }
         } else penalizedTeam3 = null;
 
         //Discipline a team
-        x = (int) (Math.random() * 11);
-        if (x > 5) {
-            int penalizedNumber = (int) (Math.random() * 80);
-            Team penalizedTeam4 = teamList.get(penalizedNumber);
-            if (penalizedTeam4.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                penalizedTeam4.teamPrestige -= (5 + x);
-                penalizedTeam4.HC.get(0).ratDiscipline -= 5;
-                this.penalizedTeam4 = penalizedTeam4;
+        if ((int) (Math.random() * 11) > 5) {
+            int teamNumber = (int) (Math.random() * 80);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .10);
+                teamTrouble.HC.get(0).ratDiscipline -= 5;
+                penalizedTeam4 = teamTrouble;
             } else {
-                this.penalizedTeam4 = null;
-                penalizedTeam4.HC.get(0).ratDiscipline += 5;
+                penalizedTeam4 = null;
+                teamTrouble.HC.get(0).ratDiscipline += 3;
             }
         } else penalizedTeam4 = null;
 
         //Discipline a team
-        x = (int) (Math.random() * 11);
-        if (x > 5) {
-            int penalizedNumber = (int) (Math.random() * 100);
-            Team penalizedTeam5 = teamList.get(penalizedNumber);
-            if (penalizedTeam5.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                penalizedTeam5.teamPrestige -= (3 + x);
-                penalizedTeam5.HC.get(0).ratDiscipline -= 5;
-                this.penalizedTeam5 = penalizedTeam5;
+        if ((int) (Math.random() * 11) > 5) {
+            int teamNumber = (int) (Math.random() * 100);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .07);
+                teamTrouble.HC.get(0).ratDiscipline -= 5;
+                penalizedTeam5 = teamTrouble;
             } else {
-                penalizedTeam1 = null;
-                penalizedTeam5.HC.get(0).ratDiscipline += 5;
+                penalizedTeam5 = null;
+                teamTrouble.HC.get(0).ratDiscipline += 3;
             }
         } else penalizedTeam5 = null;
 
@@ -4008,7 +4249,13 @@ public class League {
     public ArrayList<String> getTeamRankingsStr(int selection) {
         /*
          */
-        ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
+        ArrayList<Team> teams = teamList;
+
+        ArrayList<HeadCoach> HC = new ArrayList<>();
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
+        }
+
         ArrayList<String> rankings = new ArrayList<>();
         Team t;
         switch (selection) {
@@ -4132,6 +4379,18 @@ public class League {
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + t.getRecruitingClassRat());
                 }
                 break;
+            case 16:
+                Collections.sort(HC, new CompCoachOvr());
+                for (int i = 0; i < HC.size(); ++i) {
+                    rankings.add((i + 1) + ". ," + HC.get(i).team.name + "," + HC.get(i).getHCOverall());
+                }
+                break;
+            case 17:
+                Collections.sort(HC, new CompCoachScore());
+                for (int i = 0; i < HC.size(); ++i) {
+                    rankings.add((i + 1) + ". ," + HC.get(i).team.name + "," + HC.get(i).getCoachScore());
+                }
+                break;
             default:
                 Collections.sort(teams, new CompTeamPoll());
                 for (int i = 0; i < teams.size(); ++i) {
@@ -4153,7 +4412,7 @@ public class League {
 
         ArrayList<HeadCoach> HC = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).HC.get(0) != null) HC.add(teamList.get(i).HC.get(0));
+            if (teamList.get(i).HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
         }
 
         switch (selection) {
@@ -4189,6 +4448,12 @@ public class League {
                 Collections.sort(HC, new CompCoachCareer());
                 for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachCareerScore());
+                }
+                break;
+            case 5:
+                Collections.sort(HC, new CompCoachCareerPrestige());
+                for (int i = 0; i < HC.size(); ++i) {
+                    rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).cumulativePrestige);
                 }
                 break;
         }
@@ -4432,7 +4697,7 @@ public class League {
         }
         ArrayList<HeadCoach> HC = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
-            if (HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
+            if (teamList.get(i).HC.size() > 0) HC.add(teamList.get(i).HC.get(0));
         }
 
         ArrayList<PlayerOffense> off = new ArrayList<>();
@@ -4704,15 +4969,15 @@ public class League {
                 }
                 break;
             case 20:
-                Collections.sort(HC, new CompCoachScore());
+                Collections.sort(HC, new CompCoachOvr());
                 for (int i = 0; i < HC.size(); ++i) {
-                    rankings.add((i + 1) + ". ," + HC.get(i).name + "," + HC.get(i).team.abbr + "," + HC.get(i).getCoachScore());
+                    rankings.add((i + 1) + ". ," + HC.get(i).name + "," + HC.get(i).team.abbr + "," + HC.get(i).getHCOverall());
                 }
                 break;
             case 21:
-                Collections.sort(HC, new CompCoachCareer());
+                Collections.sort(HC, new CompCoachScore());
                 for (int i = 0; i < HC.size(); ++i) {
-                    rankings.add((i + 1) + ". ," + HC.get(i).name + "," + HC.get(i).team.abbr + "," + HC.get(i).getCoachCareerScore());
+                    rankings.add((i + 1) + ". ," + HC.get(i).name + "," + HC.get(i).team.abbr + "," + HC.get(i).getCoachScore());
                 }
                 break;
         }
@@ -4819,14 +5084,8 @@ public class League {
         StringBuilder sb = new StringBuilder();
 
         // Save information about the save file, user team info
-        if (isCareerMode()) {
-            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
-                    userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[C]%\n");
-        } else {
-            sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
-                    userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[D]%\n");
-        }
-
+        sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+                userTeam.HC.get(0).confchamp + " CC, " + userTeam.HC.get(0).natchamp + " NC [" + userTeam.HC.get(0).getCoachCareerScore() + "]>\n");
 
         // Save league history of who was #1 each year
         for (int i = 0; i < leagueHistory.size(); ++i) {
@@ -4971,6 +5230,7 @@ public class League {
         sb.append(enableUnivProRel + "\n");
         sb.append(userTeam.showPopups + "\n");
         sb.append(neverRetire + "\n");
+        sb.append(careerMode + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
@@ -5030,23 +5290,42 @@ public class League {
         }
     }
 
-    //FOR DEBUG - calculate total net prestige change across league
-    public int netTotalPrestige() {
-        int netTotal = 0;
-        for (int i = 0; i < teamList.size(); i++) {
-            netTotal += teamList.get(i).teamPrestige - teamList.get(i).teamPrestigeStart;
+    public int getAvgCoachTal() {
+        int avg = 0;
+        for(int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratTalent;
         }
-        return netTotal;
+        return avg/(teamList.size()-1);
     }
 
+    public int getAvgCoachDis() {
+        int avg = 0;
+        for(int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratDiscipline;
+        }
+        return avg/(teamList.size()-1);
+    }
+
+    public int getAvgCoachOff() {
+        int avg = 0;
+        for(int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratOff;
+        }
+        return avg/(teamList.size()-1);
+    }
+
+    public int getAvgCoachDef() {
+        int avg = 0;
+        for(int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratDef;
+        }
+        return avg/(teamList.size()-1);
+    }
 
 
     /////////////////////////
     //TEST TEST TEST ///////
     ////////////////////////
-
-
-
 
 
 
@@ -5064,13 +5343,9 @@ public class League {
         StringBuilder sb = new StringBuilder();
 
         // Save information about the save file, user team info
-        if (isCareerMode()) {
-            sb.append((seasonStart + leagueHistory.size()) + " wk " + currentWeek+1 + " : " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins) + "-" + (userTeam.HC.get(0).losses) + ") " +
-                    userTeam.HC.get(0).confchamp + " CCs, " + userTeam.HC.get(0).natchamp + " NCs>[C]%\n");
-        } else {
-            sb.append((seasonStart + leagueHistory.size()) + " wk " + currentWeek+1 + " : " + userTeam.abbr + " (" + (userTeam.totalWins) + "-" + (userTeam.totalLosses) + ") " +
-                    userTeam.totalCCs + " CCs, " + userTeam.totalNCs + " NCs>[D]%\n");
-        }
+        sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+                userTeam.HC.get(0).confchamp + " CC, " + userTeam.HC.get(0).natchamp + " NC [" + userTeam.HC.get(0).getCoachCareerScore() + "] \n");
+
 
 
         // Save league history of who was #1 each year
@@ -5217,6 +5492,7 @@ public class League {
         sb.append(enableUnivProRel + "\n");
         sb.append(userTeam.showPopups + "\n");
         sb.append(neverRetire + "\n");
+        sb.append(careerMode + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file
@@ -5229,4 +5505,16 @@ public class League {
         }
     }
 
+    public String getCoachChanges() {
+        StringBuilder string = new StringBuilder();
+
+        for(int i =0; i < teamList.size(); i++) {
+            if(teamList.get(i).HC.size() > 0) {
+                string.append(teamList.get(i).name + " (" + teamList.get(i).getHC(0).ratImprovement + ")\n");
+            }
+        }
+
+
+        return string.toString();
+    }
 }

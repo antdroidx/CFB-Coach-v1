@@ -30,6 +30,7 @@ import java.io.IOException;
 
 public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
+    private static final int IMPORT_CODE = 12;
     private boolean customCareer;
 
     @Override
@@ -136,6 +137,14 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button importButton = findViewById(R.id.buttonImportSave);
+        importButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                importGame();
+            }
+        });
+
         Button deleteGameButton = findViewById(R.id.buttonDeleteSave);
         deleteGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -148,7 +157,7 @@ public class Home extends AppCompatActivity {
         recentButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                welcomeMessage();
+                changelog();
             }
         });
 
@@ -246,10 +255,10 @@ public class Home extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void welcomeMessage() {
+    private void changelog() {
         AlertDialog.Builder welcome = new AlertDialog.Builder(this);
         welcome.setMessage(getString(R.string.changelog))
-                .setTitle("Welcome!")
+                .setTitle("Changelog!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -294,31 +303,22 @@ public class Home extends AppCompatActivity {
         alert.show();
     }
 
-/*    *//**
-     * Save League, show dialog to choose which save file to save onto.
-     *//*
-    private void exportLeague() {
-        isExternalStorageWritable();
+    private void importGame() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose File to Export:");
+        builder.setTitle("Choose File to Delete:");
         final String[] fileInfos = getSaveFileInfos();
         SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
-        builder.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                // Do something with the selection
-                if (!fileInfos[item].equals("EMPTY")) {
-                    String intFile = getFilesDir() + "/" + item + ".cfb";
-                    String extFile = getExtSaveDir(Home.this, "cfbCoach") + "/" + item + ".cfb";
-
-                    File file = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_DOCUMENTS), "collegeCoach");
-
-
-
-                } else {
-                    Toast.makeText(Home.this, "Cannot load empty file!",
-                            Toast.LENGTH_SHORT).show();
-                }
+        builder.setMessage("This feature lets you import external Exported Saves from your device. Please locate and select the desired file after pressing OK.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+                isExternalStorageReadable();
+                customCareer = false;
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setType("text/plain");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent, IMPORT_CODE);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -329,7 +329,7 @@ public class Home extends AppCompatActivity {
         });
         AlertDialog alert = builder.create();
         alert.show();
-    }*/
+    }
 
     /**
      * Delete Save
@@ -436,6 +436,8 @@ public class Home extends AppCompatActivity {
             // Instead, a URI to that document will be contained in the return intent
             // provided to this method as a parameter.
             // Pull that URI using resultData.getData().
+
+            //STARTING CUSTOM UNIVERSE
             Uri uri = null;
             uri = resultData.getData();
             final String uriStr = uri.toString();
@@ -484,6 +486,23 @@ public class Home extends AppCompatActivity {
             dialog.show();
             TextView msgTxt = dialog.findViewById(android.R.id.message);
             msgTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        }
+
+
+        //IMPORT EXTERNAL SAVE FILE
+        if (requestCode == IMPORT_CODE && resultCode == Home.RESULT_OK) {
+            // The document selected by the user won't be returned in the intent.
+            // Instead, a URI to that document will be contained in the return intent
+            // provided to this method as a parameter.
+            // Pull that URI using resultData.getData().
+            Uri uri = null;
+            uri = resultData.getData();
+            final String uriStr = uri.toString();
+
+            myIntent.putExtra("SAVE_FILE", "IMPORT_GAME," + uriStr);
+            finish();
+            Home.this.startActivity(myIntent);
+
         }
     }
 

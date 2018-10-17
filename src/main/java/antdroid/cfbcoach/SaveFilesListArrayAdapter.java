@@ -30,7 +30,7 @@ class SaveFilesListArrayAdapter extends ArrayAdapter<String> {
 
         String[] detailSplit = values[position].split(">");
         TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
-        itemL.setPadding(5, 0, 5, 0);
+        itemL.setPadding(5, 0, 2, 0);
         itemL.setText(detailSplit[0]);
 
         return rowView;

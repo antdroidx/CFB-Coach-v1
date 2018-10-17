@@ -179,6 +179,24 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     loadedLeague = true;
                 }
+                //Import Save
+            } else if (saveFileStr.contains("IMPORT"))  {
+                String[] filesSplit = saveFileStr.split(",");
+                Uri uri = Uri.parse(filesSplit[1]);
+                InputStream inputStream = null;
+                try {
+                    inputStream = getContentResolver().openInputStream(uri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                simLeague = new League(inputStream, getString(R.string.league_player_names), getString(R.string.league_last_names));
+                    userTeam = simLeague.userTeam;
+                    userTeamStr = userTeam.name;
+                    simLeague.updateTeamTalentRatings();
+                    season = simLeague.getYear();
+                    currentTeam = userTeam;
+                    loadedLeague = true;
+
                 //LOADS A SAVE GAME
             } else {
                 File saveFile = new File(getFilesDir(), saveFileStr);
@@ -495,8 +513,9 @@ public class MainActivity extends AppCompatActivity {
                 if (isNameValid((newHC))) {
                     userTeam.HC.get(0).name = newHC;
                     examineTeam(currentTeam.name);
-                    if (!newGame) seasonGoals();
+                    //if (!newGame) seasonGoals();
                     dialog.dismiss();
+                    setupCoachStyle();
                 } else {
                     if (showToasts)
                         Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
@@ -504,6 +523,63 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setupCoachStyle() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Please select your starting coaching style.")
+                .setTitle("Coaching Strengths:")
+                .setNeutralButton("Balanced", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        setupCoachBal();
+                        dialog.dismiss();
+                        if (!newGame) seasonGoals();
+                    }
+                })
+                .setPositiveButton("Defensive-Minded", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setupCoachDef();
+                        dialog.dismiss();
+                        if (!newGame) seasonGoals();
+                    }
+                })
+                .setNegativeButton("Offensive-Minded", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        setupCoachOff();
+                        dialog.dismiss();
+                        if (!newGame) seasonGoals();
+                    }
+                });
+        final AlertDialog dialog = builder.create();
+        builder.setCancelable(false);
+        dialog.show();
+        TextView textView = dialog.findViewById(android.R.id.message);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+
+    }
+    private void setupCoachOff() {
+        userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff()+5;
+        userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef()-5;
+        userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
+        updatePlayerStats();
+    }
+
+    private void setupCoachDef() {
+        userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff()-5;
+        userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef()+5;
+        userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
+        updatePlayerStats();
+    }
+
+    private void setupCoachBal() {
+        userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff();
+        userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef();
+        userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
+        updatePlayerStats();
     }
 
     public void resetTeamUI() {
@@ -1751,6 +1827,9 @@ public class MainActivity extends AppCompatActivity {
             else simGameButton.setText("Off-Season: Continue");
             simLeague.currentWeek++;
 
+            //DEBUG STUFF
+            //coachProgressData();
+
         } else if (simLeague.currentWeek == 17 && userTeam.fired) {
             if (simLeague.isCareerMode()) jobOffers(userHC);
             simLeague.currentWeek++;
@@ -2011,6 +2090,8 @@ public class MainActivity extends AppCompatActivity {
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
+        if (simLeague.currentWeek < 16) changeTeamsButton.setVisibility(View.INVISIBLE);
+
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -2365,7 +2446,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();// = simLeague.getTeamRankingsStr(0);
         String[] rankingsSelection =
-                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Active Coach Career Score"};
+                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Active Coach Career Score", "Active Coach Prestige"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -2382,7 +2463,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getLeagueHistoryStats(position);
-                        if (position == 4) {
+                        if (position == 4 || position == 5) {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.HC.get(0).name + " (" + userTeam.abbr + ")");
                         } else {
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
@@ -2728,11 +2809,11 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        ArrayList<String> rankings = new ArrayList<>();// = simLeague.getTeamRankingsStr(0);
+        ArrayList<String> rankings = new ArrayList<>();
         String[] rankingsSelection =
                 {"Poll Votes", "Prestige", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
-                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class"};
+                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class", "Coach - Overall", "Coach Score"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -2783,7 +2864,7 @@ public class MainActivity extends AppCompatActivity {
         String[] rankingsSelection =
                 {"Passer Rating", "Passing Yards", "Passing TDs", "Interceptions Thrown", "Pass Comp PCT", "Rushing Yards", "Rushing TDs", "Receptions", "Receiving Yards", "Receiving TDs",
                         "Tackles", "Sacks", "Fumbles Recovered", "Interceptions", "Field Goals Made", "Field Goal Pct", "Kickoff Return Yards", "Kickoff Return TDs", "Punt Return Yards", "Punt Return TDs",
-                        "Coach - Overall", "Coach - Career Score"
+                        "Coach - Overall", "Coach - Season Score"
                 };
         Spinner playerRankingssSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> playerRankingssSpinnerAdapter = new ArrayAdapter<>(this,
@@ -3326,7 +3407,7 @@ public class MainActivity extends AppCompatActivity {
         simLeague.newsStories.get(simLeague.currentWeek).add("Season Goals>" + goals);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage(goals + "\n\nNote: You can always review your season goals in the Pre-Season News.")
+        builder.setMessage(goals + "\nNote: You can always review your season goals in the Pre-Season News.")
                 .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Goals")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -3853,6 +3934,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Retirement vs Eternal
     private void retirementQuestion() {
+        simLeague.leagueRecords.checkRecord("Coach Career Score", userTeam.HC.get(0).getCoachCareerScore(), userTeam.HC.get(0).name + "%" + userTeam.abbr, simLeague.getYear());
+        simLeague.leagueRecords.checkRecord("Coach Career Prestige", userTeam.HC.get(0).getCoachCareerScore(), userTeam.HC.get(0).name + "%" + userTeam.abbr, simLeague.getYear());
+
         String string = "";
         string = "You have reached that time in your life when you need to decide to hang it up and retire or continue on. " +
                 "At this point, if you choose to continue, your ability to increase skill ratings will be much more challenging. " +
@@ -4218,9 +4302,9 @@ public class MainActivity extends AppCompatActivity {
         // Empty file, don't show dialog confirmation
         isExternalStorageReadable();
         isExternalStorageWritable();
-        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_SAVE.cfb");
+        saveLeagueFile = new File(getExtSaveDir(this,"CFBCOACH"), "CFB_SAVE.txt");
         simLeague.saveLeague(saveLeagueFile);
-        Toast.makeText(MainActivity.this, "Exported League", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Exported Save to Storage", Toast.LENGTH_SHORT).show();
     }
 
     //Export Save File
@@ -4456,24 +4540,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //DEBUG STUFF
-    private void netTotalPrestige() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage(simLeague.netTotalPrestige() + " Total Net Prestige Change")
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Prestige Change")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        TextView textView = dialog.findViewById(android.R.id.message);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-    }
-
     public void userHallofFame() {
         //Retirement Hall of Fame
 
+    }
+
+    private void coachProgressData() {
+        String string = simLeague.getCoachChanges();
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Coach Progression Data");
+        builder.setMessage(string);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform action on click
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }

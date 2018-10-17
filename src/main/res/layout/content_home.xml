@@ -87,6 +87,16 @@
             android:textSize="12sp" />
 
         <Button
+            android:id="@+id/buttonImportSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:text="Import"
+            android:textSize="12sp" />
+
+        <Button
             android:id="@+id/buttonDeleteSave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

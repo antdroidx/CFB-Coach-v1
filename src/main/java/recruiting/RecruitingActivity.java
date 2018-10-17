@@ -224,6 +224,9 @@ public class RecruitingActivity extends AppCompatActivity {
             ++i; // go to next line
         }
 
+        sortTeam();
+
+
         // Add extra money if your team was fleeced
         int recBonus = (minPlayers - teamPlayers.size()) * 17;
         int coachBonus = HCtalent * 3;
@@ -965,44 +968,35 @@ public class RecruitingActivity extends AppCompatActivity {
         if (ps[0].equals("QB")) {
             availQBs.remove(player);
             teamQBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamQBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("RB")) {
             availRBs.remove(player);
             teamRBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamRBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("WR")) {
             availWRs.remove(player);
             teamWRs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamWRs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("TE")) {
             availTEs.remove(player);
             teamTEs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamTEs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("OL")) {
             availOLs.remove(player);
             teamOLs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamOLs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("K")) {
             availKs.remove(player);
             teamKs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamKs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("DL")) {
             availDLs.remove(player);
             teamDLs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamDLs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("LB")) {
             availLBs.remove(player);
             teamLBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamLBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("CB")) {
             availCBs.remove(player);
             teamCBs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamCBs, new CompRecruitTeamRosterOvr());
         } else if (ps[0].equals("S")) {
             availSs.remove(player);
             teamSs.add(getReadablePlayerInfo(player));
-            Collections.sort(teamSs, new CompRecruitTeamRosterOvr());
         }
+        sortTeam();
 
         players.remove(player);
 
@@ -1079,6 +1073,18 @@ public class RecruitingActivity extends AppCompatActivity {
         }
     }
 
+    private void sortTeam() {
+        Collections.sort(teamQBs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamRBs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamWRs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamTEs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamOLs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamKs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamDLs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamLBs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamCBs, new CompRecruitTeamRosterOvr());
+        Collections.sort(teamSs, new CompRecruitTeamRosterOvr());
+    }
 
     //PLAYER DISPLAY INFO
     private String getReadablePlayerInfo(String p) {

@@ -236,9 +236,6 @@ Player {
         return grade;
     }
 
-    public String getHCString() {
-        return "Head Coach " + name + "> ";
-    }
 
     public String getPosNameYrOvrPot_Str() {
         if (ratImprovement > 0 && team.league.currentWeek > 5 && team.league.currentWeek < 8 || team.league.currentWeek > 19) {
