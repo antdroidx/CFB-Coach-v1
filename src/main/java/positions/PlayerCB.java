@@ -349,8 +349,10 @@ public class PlayerCB extends Player {
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Jumping: " + getLetterGrade(ratJump));
+        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
+
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Defended: " + statsDefended + ">Shutdown Pct: " + (100 * (statsIncomplete) / (statsTargets + 1)) + "%");
@@ -363,19 +365,17 @@ public class PlayerCB extends Player {
             pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
             pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
         }
-        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Jumping: " + getLetterGrade(ratJump));
-        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         return pStats;
     }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Jumping: " + getLetterGrade(ratJump));
+        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
+
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Defended: " + statsDefended + ">Shutdown Pct: " + (100 * (statsIncomplete) / (statsTargets + 1)) + "%");
@@ -387,12 +387,7 @@ public class PlayerCB extends Player {
             pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
             pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
         }
-        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Jumping: " + getLetterGrade(ratJump));
-        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
-        pStats.add(" > ");
+
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;

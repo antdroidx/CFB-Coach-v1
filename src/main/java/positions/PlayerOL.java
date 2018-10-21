@@ -259,28 +259,23 @@ public class PlayerOL extends Player {
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
+        ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Block: " + getLetterGrade(ratRunBlock));
         pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Pass Block: " + getLetterGrade(ratPassBlock));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
+
         pStats.add(" > ");
         return pStats;
     }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
+        ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Block: " + getLetterGrade(ratRunBlock));
         pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Pass Block: " + getLetterGrade(ratPassBlock));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());

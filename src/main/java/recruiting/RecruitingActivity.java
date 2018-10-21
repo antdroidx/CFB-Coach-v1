@@ -129,6 +129,9 @@ public class RecruitingActivity extends AppCompatActivity {
     public Map<String, List<String>> playersInfo;
     public List<String> players;
 
+    public final String[] states = {"AS","AZ","CA","HI","ID","MT","NV","OR","UT","WA","CO","KS","MO","NE","NM","ND","OK","SD","TX","WY","IL","IN","IA","KY","MD","MI","MN","OH","TN","WI","CT","DE","ME","MA","NH","NJ","NY","PA","RI","VT","AL","AK","FL","GA","LA","MS","NC","SC","VA","WV"};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -239,19 +242,20 @@ public class RecruitingActivity extends AppCompatActivity {
         while (i < lines.length) {
             playerInfo = lines[i].split(",");
             availAll.add(lines[i]);
-            if (playerInfo[3].equals("0")) {
+            int region = Integer.parseInt(playerInfo[3])/10;
+            if (region == 0) {
                 west.add(lines[i]);
             }
-            if (playerInfo[3].equals("1")) {
+            if (region == 1) {
                 midwest.add(lines[i]);
             }
-            if (playerInfo[3].equals("2")) {
+            if (region == 2) {
                 central.add(lines[i]);
             }
-            if (playerInfo[3].equals("3")) {
+            if (region == 3) {
                 east.add(lines[i]);
             }
-            if (playerInfo[3].equals("4")) {
+            if (region == 4) {
                 south.add(lines[i]);
             }
 
@@ -578,62 +582,62 @@ public class RecruitingActivity extends AppCompatActivity {
     private String getPlayerDetails(String player, String pos) {
         String[] ps = player.split(",");
         if (pos.equals("QB")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nPass Strength: " + getGrade(ps[13]) +
                     "\nPass Accuracy: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nSpeed: " + getGrade(ps[16]);
         } else if (pos.equals("RB")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nPower: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nCatching: " + getGrade(ps[16]);
         } else if (pos.equals("WR")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nCatching: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nJumping: " + getGrade(ps[16]);
         } else if (pos.equals("TE")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nCatching: " + getGrade(ps[13]) +
                     "\nRush Blk: " + getGrade(ps[14]) +
                     "\nEvasion: " + getGrade(ps[15]) +
                     "\nSpeed: " + getGrade(ps[16]);
         } else if (pos.equals("OL")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nStrength: " + getGrade(ps[13]) +
                     "\nRush Blk: " + getGrade(ps[14]) +
                     "\nPass Blk: " + getGrade(ps[15]) +
                     "\nAwareness: " + getGrade(ps[16]);
         } else if (pos.equals("K")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nKick Power: " + getGrade(ps[13]) +
                     "\nAccuracy: " + getGrade(ps[14]) +
                     "\nClumsiness: " + getGrade(ps[15]) +
                     "\nPressure: " + getGrade(ps[16]);
         } else if (pos.equals("DL")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nStrength: " + getGrade(ps[13]) +
                     "\nRun Stop: " + getGrade(ps[14]) +
                     "\nPass Press: " + getGrade(ps[15]) +
                     "\nTackling: " + getGrade(ps[16]);
         } else if (pos.equals("LB")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
                     "\nCoverage: " + getGrade(ps[13]) +
                     "\nRun Stop: " + getGrade(ps[14]) +
                     "\nTackling: " + getGrade(ps[15]) +
                     "\nSpeed: " + getGrade(ps[16]);
         } else if (pos.equals("CB")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
 
                     "\nCoverage: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
                     "\nTackling: " + getGrade(ps[15]) +
                     "\nJumping: " + getGrade(ps[16]);
         } else if (pos.equals("S")) {
-            return "Region: " + getRegion(Integer.parseInt(ps[3])) +
+            return "Home State: " + getRegion(Integer.parseInt(ps[3])) +
 
                     "\nCoverage: " + getGrade(ps[13]) +
                     "\nSpeed: " + getGrade(ps[14]) +
@@ -1175,13 +1179,7 @@ public class RecruitingActivity extends AppCompatActivity {
     }
 
     public String getRegion(int region) {
-        String location;
-        if (region == 0) location = "West";
-        else if (region == 1) location = "Mid-West";
-        else if (region == 2) location = "Central";
-        else if (region == 3) location = "East";
-        else location = "South";
-        return location;
+        return states[region];
     }
 
     public String getHeight(int height) {

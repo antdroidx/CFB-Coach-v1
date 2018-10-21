@@ -358,38 +358,34 @@ public class PlayerQB extends Player {
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
+        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
+
+
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + df2.format(((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10)) + " yds");
         pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
         pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
-        pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         return pStats;
     }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
+        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
+
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
         pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + df2.format(((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10)) + " yds");
         pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
         pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
-        pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());

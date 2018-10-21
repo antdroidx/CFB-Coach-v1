@@ -222,6 +222,8 @@ public class League {
     private final String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
             "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
 
+    public final String[] states = {"AS","AZ","CA","HI","ID","MT","NV","OR","UT","WA","CO","KS","MO","NE","NM","ND","OK","SD","TX","WY","IL","IN","IA","KY","MD","MI","MN","OH","TN","WI","CT","DE","ME","MA","NH","NJ","NY","PA","RI","VT","AL","AK","FL","GA","LA","MS","NC","SC","VA","WV"};
+
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
      * Also schedules games for every team.
@@ -5544,7 +5546,7 @@ public class League {
     public int getAvgCoachTal() {
         int avg = 0;
         for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratTalent;
+            if (teamList.get(i) != userTeam && teamList.get(i).HC.size() > 0) avg += teamList.get(i).HC.get(0).ratTalent;
         }
         return avg / (teamList.size() - 1);
     }
@@ -5552,7 +5554,7 @@ public class League {
     public int getAvgCoachDis() {
         int avg = 0;
         for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratDiscipline;
+            if (teamList.get(i) != userTeam && teamList.get(i).HC.size() > 0) avg += teamList.get(i).HC.get(0).ratDiscipline;
         }
         return avg / (teamList.size() - 1);
     }
@@ -5560,7 +5562,7 @@ public class League {
     public int getAvgCoachOff() {
         int avg = 0;
         for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratOff;
+            if (teamList.get(i) != userTeam && teamList.get(i).HC.size() > 0) avg += teamList.get(i).HC.get(0).ratOff;
         }
         return avg / (teamList.size() - 1);
     }
@@ -5568,7 +5570,7 @@ public class League {
     public int getAvgCoachDef() {
         int avg = 0;
         for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratDef;
+            if (teamList.get(i) != userTeam && teamList.get(i).HC.size() > 0) avg += teamList.get(i).HC.get(0).ratDef;
         }
         return avg / (teamList.size() - 1);
     }

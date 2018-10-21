@@ -135,7 +135,7 @@ Player {
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
         personality = (int) (attrBase + 50 * Math.random());
-        region = (int) (Math.random() * 5);
+        region = (int) (Math.random() * 50);
     }
 
     public String getYrStr() {
@@ -445,7 +445,7 @@ Player {
     }
 
     int getLocationCost() {
-        double locFactor = Math.abs(team.location - region) - 2.5;
+        double locFactor = Math.abs(team.location - (region/10)) - 2.5;
         return cost + (int) (Math.random() * (locFactor * locationDiscount));
     }
 
@@ -504,7 +504,7 @@ Player {
     }
 
 
-    String getRegion(int region) {
+/*    String getRegion(int region) {
         String location;
         if (region == 0) location = "West";
         else if (region == 1) location = "Midwest";
@@ -512,6 +512,10 @@ Player {
         else if (region == 3) location = "East";
         else location = "South";
         return location;
+    }*/
+
+    String getRegion(int region) {
+        return team.league.states[region];
     }
 
 
@@ -590,6 +594,15 @@ Player {
 
     public void durabilityProgression() {
         ratDur += Math.random() * 2*year;
+    }
+
+    public ArrayList<String> stringPlayerAttributes() {
+        ArrayList<String> pAttr = new ArrayList<>();
+        pAttr.add("Height " + getHeight() + ">Weight: " + getWeight());
+        pAttr.add("Home State: " + getRegion(region) + ">Scout Grade: " + getScoutingGradeString());
+        pAttr.add("Personality: " + getLetterGrade(personality) + " > " + getStatus());
+        pAttr.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
+        return pAttr;
     }
 
 }

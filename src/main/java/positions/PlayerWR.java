@@ -337,8 +337,10 @@ public class PlayerWR extends Player {
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
+        pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Jumping: " + getLetterGrade(ratJump));
+
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
@@ -352,19 +354,17 @@ public class PlayerWR extends Player {
             pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
             pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
         }
-        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
-        pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Jumping: " + getLetterGrade(ratJump));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         return pStats;
     }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
+        pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Jumping: " + getLetterGrade(ratJump));
+
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
         pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
@@ -378,11 +378,6 @@ public class PlayerWR extends Player {
             pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
             pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
         }
-        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
-        pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Jumping: " + getLetterGrade(ratJump));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());

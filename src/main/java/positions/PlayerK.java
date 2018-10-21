@@ -297,8 +297,10 @@ public class PlayerK extends Player {
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Kick Strength: " + getLetterGrade(ratKickPow) + ">Kick Accuracy: " + getLetterGrade(ratKickAcc));
+        pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
+
         if (statsXPAtt > 0) {
             pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + (100 * statsXPMade / (statsXPAtt)) + "%");
         } else {
@@ -311,19 +313,17 @@ public class PlayerK extends Player {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-        pStats.add("Kick Strength: " + getLetterGrade(ratKickPow) + ">Kick Accuracy: " + getLetterGrade(ratKickAcc));
-        pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         return pStats;
     }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Kick Strength: " + getLetterGrade(ratKickPow) + ">Kick Accuracy: " + getLetterGrade(ratKickAcc));
+        pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
+
         if (statsXPAtt > 0) {
             pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + (100 * statsXPMade / (statsXPAtt)) + "%");
         } else {
@@ -336,11 +336,7 @@ public class PlayerK extends Player {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-        pStats.add("Kick Strength: " + getLetterGrade(ratKickPow) + ">Kick Accuracy: " + getLetterGrade(ratKickAcc));
-        pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());

@@ -315,32 +315,28 @@ public class PlayerDL extends Player {
 
     @Override
     public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Stop: " + getLetterGrade(ratRunStop));
+        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Pass Rush: " + getLetterGrade(ratPassRush));
+
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-        pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Stop: " + getLetterGrade(ratRunStop));
-        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Pass Rush: " + getLetterGrade(ratPassRush));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         return pStats;
     }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Height " + getHeight() + ">Weight: " + getWeight());
+        ArrayList<String> pStats = stringPlayerAttributes();
+        pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Stop: " + getLetterGrade(ratRunStop));
+        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Pass Rush: " + getLetterGrade(ratPassRush));
+
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-        pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Stop: " + getLetterGrade(ratRunStop));
-        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Pass Rush: " + getLetterGrade(ratPassRush));
-        pStats.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
-        pStats.add("Home Region: " + getRegion(region) + ">Personality: " + getLetterGrade(personality));
-        pStats.add("Scout Grade: " + getScoutingGradeString() + " > " + getStatus());
+
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());

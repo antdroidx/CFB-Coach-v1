@@ -476,7 +476,7 @@ public class Team {
     public void setupUserCoach(String name) {
         HC.get(0).name = name;
         HC.get(0).year = 0;
-        HC.get(0).age = 30 + (int)(Math.random()*8);
+        HC.get(0).age = 70 + (int)(Math.random()*8);
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
         HC.get(0).ratPot = 70;
