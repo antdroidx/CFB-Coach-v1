@@ -519,10 +519,10 @@ Player {
         String trait = "";
         if (personality > 91) trait = "Leader";
         else if (personality > 84) trait = "Motivated";
-        else if (personality > 75) trait = "Team Player";
+        else if (personality > 75) trait = "";
         else if (personality > 67) trait = "Average";
         else if (personality > 59) trait = "Team Player";
-        else if (personality > 54) trait = "Team Player";
+        else if (personality > 54) trait = "Trouble";
         else trait = "Undisciplined";
 
         return trait;

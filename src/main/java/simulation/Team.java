@@ -65,6 +65,8 @@ public class Team {
     public ArrayList<Team> gameWinsAgainst;
     public ArrayList<Team> gameLossesAgainst;
     public String confChampion;
+    public String sweet16;
+    public String qtFinalWL;
     public String semiFinalWL;
     public String natChampWL;
 
@@ -415,6 +417,8 @@ public class Team {
         gameLossesAgainst = new ArrayList<>();
         gameWLSchedule = new ArrayList<>();
         confChampion = "";
+        sweet16 = "";
+        qtFinalWL = "";
         semiFinalWL = "";
         natChampWL = "";
 
@@ -829,19 +833,35 @@ public class Team {
         }
         if ("NCW".equals(natChampWL)) {
             //bonus for winning champ game
-            teamPollScore += 500;
+            teamPollScore += 1000;
         }
         if ("NCL".equals(natChampWL)) {
             //bonus for winning champ game
-            teamPollScore += 250;
+            teamPollScore += 500;
         }
         if ("SFW".equals(semiFinalWL)) {
             //bonus for winning champ game
-            teamPollScore += 50;
+            teamPollScore += 200;
         }
         if ("SFL".equals(semiFinalWL)) {
             //bonus for winning champ game
+            teamPollScore += 150;
+        }
+        if ("QTW".equals(qtFinalWL)) {
+            //bonus for winning champ game
+            teamPollScore += 150;
+        }
+        if ("QTL".equals(qtFinalWL)) {
+            //bonus for winning champ game
             teamPollScore += 50;
+        }
+        if ("S16W".equals(sweet16)) {
+            //bonus for winning champ game
+            teamPollScore += 50;
+        }
+        if ("S16L".equals(sweet16)) {
+            //bonus for winning champ game
+            teamPollScore += 25;
         }
     }
 
@@ -4088,7 +4108,7 @@ public class Team {
     }
 
     public String strTeamRecord() {
-        return "(" + wins + "-" + losses + ") " + confChampion + " " + semiFinalWL + natChampWL;
+        return "(" + wins + "-" + losses + ") " + confChampion + " " + sweet16 + qtFinalWL + semiFinalWL + natChampWL;
     }
 
     /**

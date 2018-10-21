@@ -171,6 +171,26 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp">
+
+                <TextView
+                    android:id="@+id/textPlayoffs"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Expanded Playoffs"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <CheckBox
+                    android:id="@+id/checkboxPlayoffs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15sp">

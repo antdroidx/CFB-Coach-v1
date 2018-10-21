@@ -133,7 +133,9 @@ public class League {
     private Game semiG23;
     private Game ncg;
     private Game[] bowlGames;
+    private Game[] cfpGames;
     private final int countBG = 18;
+    public int playoffWeek;
 
     //User Team
     public Team userTeam;
@@ -185,11 +187,14 @@ public class League {
     public boolean enableUnivProRel;
     public boolean enableTV;
     public boolean neverRetire;
+    public boolean expPlayoffs;
 
     public int countRealignment;
     public String newsRealignment;
     public boolean updateTV;
     public ArrayList<String> newsTV;
+    public ArrayList<Team> playoffTeams;
+    public String postseason;
 
     private final DecimalFormat df2 = new DecimalFormat(".##");
     private final int seasonStart = 2018;
@@ -650,6 +655,7 @@ public class League {
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
             neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
             if (!careerMode) careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
+            expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
 
             if (enableProRel) confRealignment = false;
             if (confRealignment) enableProRel = false;
@@ -887,6 +893,7 @@ public class League {
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
             neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
             if (!careerMode) careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
+            expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
 
             if (enableProRel) confRealignment = false;
             if (confRealignment) enableProRel = false;
@@ -935,6 +942,8 @@ public class League {
         hasScheduledBowls = false;
         bowlGames = new Game[countBG];
         bowlNames = new String[countBG];
+        cfpGames = new Game[15];
+        playoffTeams = new ArrayList<>();
         leagueHistory = new ArrayList<>();
         heismanHistory = new ArrayList<>();
         leagueHoF = new ArrayList<>();
@@ -1347,13 +1356,26 @@ public class League {
             }
             Collections.sort(teamList, new CompTeamPoll());
 
-            schedBowlGames();
+            if (expPlayoffs) expandedPlayoff();
+            else schedBowlGames();
+
         } else if (currentWeek == 13) {
             ArrayList<Player> heismans = getHeisman();
             heismanHistory.add(heismans.get(0).position + " " + heismans.get(0).getInitialName() + " [" + heismans.get(0).getYrStr() + "], "
                     + heismans.get(0).team.abbr + " (" + heismans.get(0).team.wins + "-" + heismans.get(0).team.losses + ")");
-            playBowlGames();
+
+            if (expPlayoffs) playExpPlayoffSweet16();
+            else playBowlWeek1();
+
         } else if (currentWeek == 14) {
+            if (expPlayoffs) playExpPlayoffQTF();
+            else playBowlWeek2();
+
+        } else if (currentWeek == 15) {
+            if (expPlayoffs) playExpPlayoffSemi();
+            else playBowlWeek3();
+
+        } else if (currentWeek == 16) {
             ncg.playGame();
             if (ncg.homeScore > ncg.awayScore) {
                 ncg.homeTeam.semiFinalWL = "";
@@ -1365,7 +1387,7 @@ public class League {
                 ncg.homeTeam.HC.get(0).bowlwins++;
                 ncg.homeTeam.HC.get(0).natchamp++;
                 ncg.awayTeam.HC.get(0).bowllosses++;
-                newsStories.get(15).add(
+                newsStories.get(currentWeek + 1).add(
                         ncg.homeTeam.name + " wins the National Championship!>" +
                                 ncg.homeTeam.name + " defeats " + ncg.awayTeam.name +
                                 " in the national championship game " + ncg.homeScore + " to " + ncg.awayScore + "." +
@@ -1382,7 +1404,7 @@ public class League {
                 ncg.awayTeam.HC.get(0).bowlwins++;
                 ncg.awayTeam.HC.get(0).natchamp++;
                 ncg.homeTeam.HC.get(0).bowllosses++;
-                newsStories.get(15).add(
+                newsStories.get(currentWeek + 1).add(
                         ncg.awayTeam.name + " wins the National Championship!>" +
                                 ncg.awayTeam.name + " defeats " + ncg.homeTeam.name +
                                 " in the national championship game " + ncg.awayScore + " to " + ncg.homeScore + "." +
@@ -2573,6 +2595,222 @@ public class League {
         }
     }
 
+    //
+    // EXPANDED PLAYOFFS MODE
+    //
+
+    public void expandedPlayoff() {
+        playoffWeek = 1;
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).updatePollScore();
+            //bowl ban!
+            if (penalizedTeam1 != null) {
+                if (Objects.equals(teamList.get(i).abbr, penalizedTeam1.abbr))
+                    teamList.get(i).teamPollScore = 0;
+            }
+            if (penalizedTeam2 != null) {
+                if (Objects.equals(teamList.get(i).abbr, penalizedTeam2.abbr))
+                    teamList.get(i).teamPollScore = 0;
+            }
+            //minimum wins for bowl eligibility
+            if (teamList.get(i).wins < 7) teamList.get(i).teamPollScore = 0;
+
+        }
+        Collections.sort(teamList, new CompTeamPoll());
+
+        for (int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i).confChampion.equals("CC")) {
+                playoffTeams.add(teamList.get(i));
+            }
+        }
+        int x = 0;
+            for (int i = 0; i < teamList.size(); i++) {
+                if (!teamList.get(i).confChampion.equals("CC")) {
+                    playoffTeams.add(teamList.get(i));
+                    x++;
+                    if (x >= 6) break;
+                }
+        }
+
+        Collections.sort(playoffTeams, new CompTeamPoll());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("The following teams have made it to the Football Playoffs!\n\n");
+        for (Team t : playoffTeams) {
+            sb.append(t.name + "\n\n");
+        }
+        postseason = sb.toString();
+
+        for(int i=0; i < 8; i++) {
+            cfpGames[i] = new Game(playoffTeams.get(i), playoffTeams.get(15-i), "Sweet 16");
+            playoffTeams.get(i).gameSchedule.add(cfpGames[i]);
+            playoffTeams.get(i+8).gameSchedule.add(cfpGames[i]);
+            newsStories.get(currentWeek + 1).add("Upcoming Sweet 16 Playoffs!>" + playoffTeams.get(i).getStrAbbrWL() + " will compete with " + playoffTeams.get(15-i).getStrAbbrWL() +
+                    " for the " + getYear() + " Sweet 16!");
+        }
+
+    }
+
+
+    public void expPlayoffSchdQT() {
+        Collections.sort(playoffTeams, new CompTeamPoll());
+
+        for(int i=8; i < 12; i++) {
+            cfpGames[i] = new Game(playoffTeams.get(i-8), playoffTeams.get(15-i), "Elite 8");
+            playoffTeams.get(i-8).gameSchedule.add(cfpGames[i]);
+            playoffTeams.get(15-i).gameSchedule.add(cfpGames[i]);
+            newsStories.get(currentWeek + 1).add("Upcoming Elite 8!>" + playoffTeams.get(i-8).getStrAbbrWL() + " will compete with " + playoffTeams.get(15-i).getStrAbbrWL() +
+                    " for the " + getYear() + " Elite 8!");
+        }
+    }
+
+    public void expPlayoffSchdSemi() {
+        Collections.sort(playoffTeams, new CompTeamPoll());
+
+        for(int i=12; i < 14; i++) {
+            cfpGames[i] = new Game(playoffTeams.get(i-12), playoffTeams.get(15-i), "Final Four");
+            playoffTeams.get(i-12).gameSchedule.add(cfpGames[i]);
+            playoffTeams.get(15-i).gameSchedule.add(cfpGames[i]);
+            newsStories.get(currentWeek + 1).add("Upcoming Final Four!>" + playoffTeams.get(i-12).getStrAbbrWL() + " will compete with " + playoffTeams.get(15-i).getStrAbbrWL() +
+                    " for the " + getYear() + " Final Four!");
+        }
+    }
+
+    public void expPlayoffSchFinals() {
+        Collections.sort(playoffTeams, new CompTeamPoll());
+
+        ncg = new Game(playoffTeams.get(0), playoffTeams.get(1), "Championship");
+            playoffTeams.get(0).gameSchedule.add(ncg);
+            playoffTeams.get(1).gameSchedule.add(ncg);
+        newsStories.get(currentWeek + 1).add("Upcoming National Title Game!>" + playoffTeams.get(0).getStrAbbrWL() + " will compete with " + playoffTeams.get(1).getStrAbbrWL() +
+                " for the " + getYear() + " College Football National Title!");
+    }
+
+    public void playExpPlayoffSweet16() {
+        playoffWeek = 1;
+        for (int i = 0; i < 8; i++) {
+            playPlayoff(cfpGames[i]);
+        }
+        expPlayoffSchdQT();
+    }
+
+    public void playExpPlayoffQTF() {
+        playoffWeek = 2;
+        for (int i = 8; i < 12; i++) {
+            playPlayoff(cfpGames[i]);
+        }
+        expPlayoffSchdSemi();
+    }
+
+    public void playExpPlayoffSemi() {
+        playoffWeek = 3;
+        for (int i = 12; i < 14; i++) {
+            playPlayoff(cfpGames[i]);
+        }
+        expPlayoffSchFinals();
+    }
+
+    private void playPlayoff(Game g) {
+        g.playGame();
+
+        if(playoffWeek == 1) {
+            if (g.homeScore > g.awayScore) {
+                g.homeTeam.sweet16 = "S16W";
+                g.awayTeam.sweet16 = "S16L";
+                g.homeTeam.totalBowls++;
+                g.awayTeam.totalBowlLosses++;
+                g.homeTeam.HC.get(0).bowlwins++;
+                g.awayTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek+1).add(
+                        g.homeTeam.name + " wins the " + g.gameName + "!>" +
+                                g.homeTeam.strRep() + " defeats " + g.awayTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.homeScore + " to " + g.awayScore + "."
+                );
+                playoffTeams.remove(g.awayTeam);
+            } else {
+                g.homeTeam.sweet16 = "S16L";
+                g.awayTeam.sweet16 = "S16W";
+                g.homeTeam.totalBowlLosses++;
+                g.awayTeam.totalBowls++;
+                g.awayTeam.HC.get(0).bowlwins++;
+                g.homeTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek+1).add(
+                        g.awayTeam.name + " wins the " + g.gameName + "!>" +
+                                g.awayTeam.strRep() + " defeats " + g.homeTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.awayScore + " to " + g.homeScore + "."
+                );
+                playoffTeams.remove(g.homeTeam);
+            }
+        }
+
+        if(playoffWeek == 2) {
+            g.homeTeam.sweet16 = "";
+            g.awayTeam.sweet16 = "";
+            if (g.homeScore > g.awayScore) {
+                g.homeTeam.qtFinalWL = "QTW";
+                g.awayTeam.qtFinalWL = "QTL";
+                g.homeTeam.totalBowls++;
+                g.awayTeam.totalBowlLosses++;
+                g.homeTeam.HC.get(0).bowlwins++;
+                g.awayTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek+1).add(
+                        g.homeTeam.name + " wins the " + g.gameName + "!>" +
+                                g.homeTeam.strRep() + " defeats " + g.awayTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.homeScore + " to " + g.awayScore + "."
+                );
+                playoffTeams.remove(g.awayTeam);
+            } else {
+                g.homeTeam.qtFinalWL = "QTL";
+                g.awayTeam.qtFinalWL = "QTW";
+                g.homeTeam.totalBowlLosses++;
+                g.awayTeam.totalBowls++;
+                g.awayTeam.HC.get(0).bowlwins++;
+                g.homeTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek+1).add(
+                        g.awayTeam.name + " wins the " + g.gameName + "!>" +
+                                g.awayTeam.strRep() + " defeats " + g.homeTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.awayScore + " to " + g.homeScore + "."
+                );
+                playoffTeams.remove(g.homeTeam);
+            }
+        }
+
+        if(playoffWeek == 3) {
+            g.homeTeam.qtFinalWL = "";
+            g.awayTeam.qtFinalWL = "";
+            if (g.homeScore > g.awayScore) {
+                g.homeTeam.semiFinalWL = "SFW";
+                g.awayTeam.semiFinalWL = "SFL";
+                g.homeTeam.totalBowls++;
+                g.awayTeam.totalBowlLosses++;
+                g.homeTeam.HC.get(0).bowlwins++;
+                g.awayTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek+1).add(
+                        g.homeTeam.name + " wins the " + g.gameName + "!>" +
+                                g.homeTeam.strRep() + " defeats " + g.awayTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.homeScore + " to " + g.awayScore + "."
+                );
+                playoffTeams.remove(g.awayTeam);
+            } else {
+                g.homeTeam.semiFinalWL = "SFL";
+                g.awayTeam.semiFinalWL = "SFW";
+                g.homeTeam.totalBowlLosses++;
+                g.awayTeam.totalBowls++;
+                g.awayTeam.HC.get(0).bowlwins++;
+                g.homeTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek+1).add(
+                        g.awayTeam.name + " wins the " + g.gameName + "!>" +
+                                g.awayTeam.strRep() + " defeats " + g.homeTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.awayScore + " to " + g.homeScore + "."
+                );
+                playoffTeams.remove(g.homeTeam);
+            }
+        }
+
+    }
+
+    ////////////////
+
 
     /**
      * Schedules bowl games based on team rankings.
@@ -2745,9 +2983,23 @@ public class League {
      * Actually plays each bowl game.
      */
 
-    private void playBowlGames() {
-        for (Game g : bowlGames) {
-            playBowl(g);
+
+
+    private void playBowlWeek1() {
+        for (int g=12; g < 18; g++) {
+            playBowl(bowlGames[g]);
+        }
+    }
+
+    private void playBowlWeek2() {
+        for (int g=6; g < 12; g++) {
+            playBowl(bowlGames[g]);
+        }
+    }
+
+    private void playBowlWeek3() {
+        for (int g=0; g < 6; g++) {
+            playBowl(bowlGames[g]);
         }
 
         semiG14.playGame();
@@ -2762,7 +3014,7 @@ public class League {
             semiG14.homeTeam.HC.get(0).bowlwins++;
             semiG14.awayTeam.HC.get(0).bowllosses++;
             semi14winner = semiG14.homeTeam;
-            newsStories.get(14).add(
+            newsStories.get(currentWeek + 1).add(
                     semiG14.homeTeam.name + " wins the " + semiG14.gameName + "!>" +
                             semiG14.homeTeam.strRep() + " defeats " + semiG14.awayTeam.strRep() +
                             " in the semifinals, winning " + semiG14.homeScore + " to " + semiG14.awayScore + ". " +
@@ -2777,7 +3029,7 @@ public class League {
             semiG14.awayTeam.HC.get(0).bowlwins++;
             semiG14.homeTeam.HC.get(0).bowllosses++;
             semi14winner = semiG14.awayTeam;
-            newsStories.get(14).add(
+            newsStories.get(currentWeek + 1).add(
                     semiG14.awayTeam.name + " wins the " + semiG14.gameName + "!>" +
                             semiG14.awayTeam.strRep() + " defeats " + semiG14.homeTeam.strRep() +
                             " in the semifinals, winning " + semiG14.awayScore + " to " + semiG14.homeScore + ". " +
@@ -2793,7 +3045,7 @@ public class League {
             semiG23.homeTeam.HC.get(0).bowlwins++;
             semiG23.awayTeam.HC.get(0).bowllosses++;
             semi23winner = semiG23.homeTeam;
-            newsStories.get(14).add(
+            newsStories.get(currentWeek + 1).add(
                     semiG23.homeTeam.name + " wins the " + semiG23.gameName + "!>" +
                             semiG23.homeTeam.strRep() + " defeats " + semiG23.awayTeam.strRep() +
                             " in the semifinals, winning " + semiG23.homeScore + " to " + semiG23.awayScore + ". " +
@@ -2808,7 +3060,7 @@ public class League {
             semiG23.awayTeam.HC.get(0).bowlwins++;
             semiG23.homeTeam.HC.get(0).bowllosses++;
             semi23winner = semiG23.awayTeam;
-            newsStories.get(14).add(
+            newsStories.get(currentWeek + 1).add(
                     semiG23.awayTeam.name + " wins the " + semiG23.gameName + "!>" +
                             semiG23.awayTeam.strRep() + " defeats " + semiG23.homeTeam.strRep() +
                             " in the semifinals, winning " + semiG23.awayScore + " to " + semiG23.homeScore + ". " +
@@ -2839,7 +3091,7 @@ public class League {
             g.awayTeam.totalBowlLosses++;
             g.homeTeam.HC.get(0).bowlwins++;
             g.awayTeam.HC.get(0).bowllosses++;
-            newsStories.get(14).add(
+            newsStories.get(currentWeek + 1).add(
                     g.homeTeam.name + " wins the " + g.gameName + "!>" +
                             g.homeTeam.strRep() + " defeats " + g.awayTeam.strRep() +
                             " in the " + g.gameName + ", winning " + g.homeScore + " to " + g.awayScore + "."
@@ -2851,7 +3103,7 @@ public class League {
             g.awayTeam.totalBowls++;
             g.awayTeam.HC.get(0).bowlwins++;
             g.homeTeam.HC.get(0).bowllosses++;
-            newsStories.get(14).add(
+            newsStories.get(currentWeek + 1).add(
                     g.awayTeam.name + " wins the " + g.gameName + "!>" +
                             g.awayTeam.strRep() + " defeats " + g.homeTeam.strRep() +
                             " in the " + g.gameName + ", winning " + g.awayScore + " to " + g.homeScore + "."
@@ -5229,6 +5481,7 @@ public class League {
         sb.append(userTeam.showPopups + "\n");
         sb.append(neverRetire + "\n");
         sb.append(careerMode + "\n");
+        sb.append(expPlayoffs + "\n");
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file

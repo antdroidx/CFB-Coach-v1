@@ -561,6 +561,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
     }
+
     private void setupCoachOff() {
         userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff()+5;
         userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef()-5;
@@ -736,15 +737,17 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 0) weekSelection[i] = "Pre-Season News";
             else if (i == 13) weekSelection[i] = "Conf Champ Week";
-            else if (i == 14) weekSelection[i] = "Bowl Game Week";
-            else if (i == 15) weekSelection[i] = "National Champ";
-            else if (i == 16) weekSelection[i] = "Off-Season News";
-            else if (i == 17) weekSelection[i] = "Coaching Contracts";
+            else if (i == 14) weekSelection[i] = "Bowl Game Week 1";
+            else if (i == 15) weekSelection[i] = "Bowl Game Week 2";
+            else if (i == 16) weekSelection[i] = "Bowl Game Week 3";
+            else if (i == 17) weekSelection[i] = "National Champ";
             else if (i == 18) weekSelection[i] = "Off-Season News";
-            else if (i == 19) weekSelection[i] = "Coach Hirings";
-            else if (i == 20) weekSelection[i] = "Roster News";
-            else if (i == 21) weekSelection[i] = "Transfer News";
-            else if (i == 22) weekSelection[i] = "Recruiting News";
+            else if (i == 19) weekSelection[i] = "Coaching Contracts";
+            else if (i == 20) weekSelection[i] = "Off-Season News";
+            else if (i == 21) weekSelection[i] = "Coach Hirings";
+            else if (i == 22) weekSelection[i] = "Roster News";
+            else if (i == 23) weekSelection[i] = "Transfer News";
+            else if (i == 24) weekSelection[i] = "Recruiting News";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
@@ -752,7 +755,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, weekSelection);
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
-        if (simLeague.currentWeek > 16 && simLeague.currentWeek < 19) {
+        if (simLeague.currentWeek > 18 && simLeague.currentWeek < 21) {
             weekSelectionSpinner.setSelection(simLeague.currentWeek);
         } else {
             weekSelectionSpinner.setSelection(simLeague.currentWeek);
@@ -768,7 +771,7 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.newsStories.get(position);
                         boolean isempty = false;
-                        if (simLeague.currentWeek == 22 && rankings.size() == 0) {
+                        if (simLeague.currentWeek == 24 && rankings.size() == 0) {
                             rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshmen to their schools.");
                         }
                         if (rankings.size() == 0) {
@@ -1287,14 +1290,16 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();
         int dbSize;
-        if (simLeague.currentWeek + 1 <= 16) dbSize = simLeague.currentWeek + 1;
+        if (simLeague.currentWeek + 1 <= 18) dbSize = simLeague.currentWeek + 1;
         else dbSize = 16;
 
         String[] weekSelection = new String[dbSize];
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 13) weekSelection[i] = "Conf Champ Week";
-            else if (i == 14) weekSelection[i] = "Bowl Game Week";
-            else if (i == 15) weekSelection[i] = "National Champ";
+            else if (i == 14) weekSelection[i] = "Bowl Game Week 1";
+            else if (i == 15) weekSelection[i] = "Bowl Game Week 2";
+            else if (i == 16) weekSelection[i] = "Bowl Game Week 3";
+            else if (i == 17) weekSelection[i] = "National Champ";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
@@ -1729,8 +1734,9 @@ public class MainActivity extends AppCompatActivity {
             Button depthchartButton = findViewById(R.id.buttonDepthChart);
             depthchartButton.setBackgroundColor(0XFF607D8B);
             depthchartButton.setText("DEPTH CHART");
-        } else if (simLeague.currentWeek <= 14) {
+        } else if (simLeague.currentWeek <= 16) {
             int numGamesPlayed = userTeam.gameWLSchedule.size();
+
             simLeague.playWeek();
 
             if (simLeague.currentWeek == 6) {
@@ -1781,12 +1787,23 @@ public class MainActivity extends AppCompatActivity {
             } else if (simLeague.currentWeek == 13) {
                 heismanCeremony();
                 simGameButton.setTextSize(12);
-                simGameButton.setText("Play Bowl Games");
+                if (simLeague.expPlayoffs) simGameButton.setText("Play Sweet 16");
+                else simGameButton.setText("Play Bowl Week 1");
                 examineTeam(currentTeam.name);
             } else if (simLeague.currentWeek == 14) {
+                simGameButton.setTextSize(12);
+                if (simLeague.expPlayoffs) simGameButton.setText("Play Elite 8");
+                else simGameButton.setText("Play Bowl Week 2");
+                examineTeam(currentTeam.name);
+            } else if (simLeague.currentWeek == 15) {
+                simGameButton.setTextSize(12);
+                if (simLeague.expPlayoffs) simGameButton.setText("Play Final Four");
+                else simGameButton.setText("Play Bowl Week 3");
+                examineTeam(currentTeam.name);
+            } else if (simLeague.currentWeek == 16) {
                 simGameButton.setTextSize(10);
                 simGameButton.setText("Play National Championship");
-            } else if (simLeague.currentWeek == 15) {
+            } else if (simLeague.currentWeek == 17) {
                 simGameButton.setTextSize(10);
                 simGameButton.setText("Season Summary");
                 showNewsStoriesDialog();
@@ -1797,7 +1814,7 @@ public class MainActivity extends AppCompatActivity {
             scrollToLatestGame();
 
             //Off-Season
-        } else if (simLeague.currentWeek == 15) {
+        } else if (simLeague.currentWeek == 17) {
             // Show NCG summary and check league records
             simLeague.enterOffseason();
             simLeague.checkLeagueRecords();
@@ -1810,7 +1827,7 @@ public class MainActivity extends AppCompatActivity {
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Contracts");
 
-        } else if (simLeague.currentWeek == 16) {
+        } else if (simLeague.currentWeek == 18) {
             userHC = userTeam.HC.get(0);
 
             simLeague.advanceHC();
@@ -1830,46 +1847,46 @@ public class MainActivity extends AppCompatActivity {
             //DEBUG STUFF
             //coachProgressData();
 
-        } else if (simLeague.currentWeek == 17 && userTeam.fired) {
+        } else if (simLeague.currentWeek == 19 && userTeam.fired) {
             if (simLeague.isCareerMode()) jobOffers(userHC);
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Coaching Changes");
 
-        } else if (simLeague.currentWeek == 17 && !userTeam.fired) {
+        } else if (simLeague.currentWeek == 19 && !userTeam.fired) {
             if (simLeague.isCareerMode()) promotions(userHC);
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Coaching Changes");
 
-        } else if (simLeague.currentWeek == 18) {
+        } else if (simLeague.currentWeek == 20) {
             simLeague.coachCarousel();
             simGameButton.setTextSize(12);
             simLeague.currentWeek++;
             simGameButton.setText("Off-Season: Graduation");
             showNewsStoriesDialog();
 
-        } else if (simLeague.currentWeek == 19) {
+        } else if (simLeague.currentWeek == 21) {
             simLeague.advanceSeason();
             simLeague.currentWeek++;
             if (simLeague.updateTV) newsTV();
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Transfer List");
 
-        } else if (simLeague.currentWeek == 20) {
+        } else if (simLeague.currentWeek == 22) {
             simLeague.transferPlayers();
             showNewsStoriesDialog(); //shows significant transfer options
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Complete Transfers");
 
-        } else if (simLeague.currentWeek == 21) {
+        } else if (simLeague.currentWeek == 23) {
             transfers(); //displays list of transfers
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Begin Recruiting");
 
-        } else if (simLeague.currentWeek >= 22) {
+        } else if (simLeague.currentWeek >= 24) {
             beginRecruiting();
 
         }
@@ -1958,7 +1975,7 @@ public class MainActivity extends AppCompatActivity {
               Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
-        } else if (id == R.id.action_player_rankings && simLeague.currentWeek < 18) {
+        } else if (id == R.id.action_player_rankings && simLeague.currentWeek < 20) {
 
             showPlayerRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
@@ -2054,6 +2071,16 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
+        final CheckBox checkboxPlayoffs = dialog.findViewById(R.id.checkboxPlayoffs);
+        final TextView textPlayoffs = dialog.findViewById(R.id.textPlayoffs);
+        if(simLeague.currentWeek < 13) {
+            checkboxPlayoffs.setChecked(simLeague.expPlayoffs);
+        } else {
+            textPlayoffs.setVisibility(View.INVISIBLE);
+            checkboxPlayoffs.setVisibility(View.INVISIBLE);
+        }
+
+
         final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
         checkboxProRelegation.setChecked(simLeague.enableProRel);
 
@@ -2090,7 +2117,7 @@ public class MainActivity extends AppCompatActivity {
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
-        if (simLeague.currentWeek < 16) changeTeamsButton.setVisibility(View.INVISIBLE);
+        if (simLeague.currentWeek < 18) changeTeamsButton.setVisibility(View.INVISIBLE);
 
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
@@ -2121,6 +2148,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
                 simLeague.enableProRel = checkboxProRelegation.isChecked();
+                simLeague.expPlayoffs = checkboxPlayoffs.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
                 if (simLeague.enableUnivProRel) {
                     simLeague.enableProRel = false;
@@ -2168,213 +2196,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    //Game Editor - Customize Names
-    private void gameEditor() {
-
-        AlertDialog.Builder GameEditor = new AlertDialog.Builder(this);
-        GameEditor.setTitle("Game Editor")
-                .setView(getLayoutInflater().inflate(R.layout.game_editor, null));
-        final AlertDialog dialog = GameEditor.create();
-        dialog.show();
-
-        final EditText changeNameEditText = dialog.findViewById(R.id.editTextChangeName);
-        changeNameEditText.setText(currentTeam.name);  //updated from userTeam to currentTeam
-        final EditText changeAbbrEditText = dialog.findViewById(R.id.editTextChangeAbbr);
-        changeAbbrEditText.setText(currentTeam.abbr);   //updated from userTeam to currentTeam
-        final EditText changeConfEditText = dialog.findViewById(R.id.editTextChangeConf);
-        changeConfEditText.setText(currentConference.confName);   //updated from userTeam to currentTeam
-        final EditText changeHCEditText = dialog.findViewById(R.id.editTextChangeHC);
-        changeHCEditText.setText(currentTeam.HC.get(0).name);   //change Head Coach Name
-
-
-        final TextView invalidNameText = dialog.findViewById(R.id.textViewChangeName);
-        final TextView invalidAbbrText = dialog.findViewById(R.id.textViewChangeAbbr);
-        final TextView invalidConfText = dialog.findViewById(R.id.textViewChangeConf);
-        final TextView invalidHCText = dialog.findViewById(R.id.textViewChangeHC);
-
-        changeNameEditText.addTextChangedListener(new TextWatcher() {
-            String newName;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                newName = s.toString().trim();
-                if (!simLeague.isNameValid(newName)) {
-                    invalidNameText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidNameText.setText("");
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                newName = s.toString().trim();
-                if (!simLeague.isNameValid(newName)) {
-                    invalidNameText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidNameText.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                newName = s.toString().trim();
-                if (!simLeague.isNameValid(newName)) {
-                    invalidNameText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidNameText.setText("");
-                }
-            }
-        });
-
-        changeAbbrEditText.addTextChangedListener(new TextWatcher() {
-            String newAbbr;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                newAbbr = s.toString().trim().toUpperCase();
-                if (!simLeague.isAbbrValid(newAbbr)) {
-                    invalidAbbrText.setText("Abbreviation already in use or has illegal characters!");
-                } else {
-                    invalidAbbrText.setText("");
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                newAbbr = s.toString().trim().toUpperCase();
-                if (!simLeague.isAbbrValid(newAbbr)) {
-                    invalidAbbrText.setText("Abbreviation already in use or has illegal characters!");
-                } else {
-                    invalidAbbrText.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                newAbbr = s.toString().trim().toUpperCase();
-                if (!simLeague.isAbbrValid(newAbbr)) {
-                    invalidAbbrText.setText("Abbr already in use or has illegal characters!");
-                } else {
-                    invalidAbbrText.setText("");
-                }
-            }
-        });
-
-        changeConfEditText.addTextChangedListener(new TextWatcher() {
-            String newConf;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                newConf = s.toString().trim();
-                if (!simLeague.isNameValid(newConf)) {
-                    invalidConfText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidConfText.setText("");
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                newConf = s.toString().trim();
-                if (!simLeague.isNameValid(newConf)) {
-                    invalidConfText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidConfText.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                newConf = s.toString().trim();
-                if (!simLeague.isNameValid(newConf)) {
-                    invalidConfText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidConfText.setText("");
-                }
-            }
-
-        });
-
-        changeHCEditText.addTextChangedListener(new TextWatcher() {
-            String newHC;
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                newHC = s.toString().trim();
-                if (!simLeague.isNameValid(newHC)) {
-                    invalidHCText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidHCText.setText("");
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                newHC = s.toString().trim();
-                if (!simLeague.isNameValid(newHC)) {
-                    invalidHCText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidHCText.setText("");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                newHC = s.toString().trim();
-                if (!simLeague.isNameValid(newHC)) {
-                    invalidHCText.setText("Name already in use or has illegal characters!");
-                } else {
-                    invalidHCText.setText("");
-                }
-            }
-
-        });
-
-        Button cancelChangeNameButton = dialog.findViewById(R.id.buttonCancelChangeName);
-        Button okChangeNameButton = dialog.findViewById(R.id.buttonOkChangeName);
-
-        cancelChangeNameButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                dialog.dismiss();
-            }
-        });
-
-        okChangeNameButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                String newName = changeNameEditText.getText().toString().trim();
-                String newAbbr = changeAbbrEditText.getText().toString().trim().toUpperCase();
-                String newConf = changeConfEditText.getText().toString().trim();
-                String newHC = changeHCEditText.getText().toString().trim();
-
-                if (simLeague.isNameValid(newName) && simLeague.isAbbrValid(newAbbr) && simLeague.isNameValid(newConf) && isNameValid((newHC))) {
-                    simLeague.changeAbbrHistoryRecords(currentTeam.abbr, newAbbr);
-                    currentTeam.name = newName; //set new team name
-                    currentTeam.abbr = newAbbr; //set new conference name
-                    String oldConf = currentConference.confName;
-                    currentConference.confName = newConf;
-                    currentTeam.HC.get(0).name = newHC;
-                    simLeague.updateTeamConf(newConf, oldConf, currentConferenceID);  //update all other conf teams
-                    getSupportActionBar().setTitle(season + " | " + userTeam.name);
-                    Team rival = simLeague.findTeamAbbr(currentTeam.rivalTeam);  // Have to update rival's rival too!
-                    rival.rivalTeam = currentTeam.abbr;
-                    wantUpdateConf = true;
-                    updateCurrConference();  //updates the UI
-                    examineTeam(currentTeam.name);
-
-                    dialog.dismiss();
-
-                } else {
-                    if (showToasts)
-                        Toast.makeText(MainActivity.this, "Invalid name/abbr! Name not changed.",
-                                Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
     }
 
     //League History
@@ -2446,7 +2267,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();// = simLeague.getTeamRankingsStr(0);
         String[] rankingsSelection =
-                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Active Coach Career Score", "Active Coach Prestige"};
+                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Active Coach Career Score", "Active Coach Accumulated Prestige"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -3225,6 +3046,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("New Game Options")
                 .setView(getLayoutInflater().inflate(R.layout.settings_menu, null));
         final AlertDialog dialog = builder.create();
+        builder.setCancelable(false);
         dialog.show();
 
         final CheckBox checkboxShowPopup = dialog.findViewById(R.id.checkboxShowPopups);
@@ -3247,6 +3069,9 @@ public class MainActivity extends AppCompatActivity {
 
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
+
+        final CheckBox checkboxPlayoffs = dialog.findViewById(R.id.checkboxPlayoffs);
+        checkboxPlayoffs.setChecked(simLeague.expPlayoffs);
 
         final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
         checkboxProRelegation.setChecked(simLeague.enableUnivProRel);
@@ -3293,6 +3118,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.enableUnivProRel = checkboxProRelegation.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
+                simLeague.expPlayoffs = checkboxPlayoffs.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
                 if (simLeague.enableUnivProRel) {
                     simLeague.enableProRel = false;

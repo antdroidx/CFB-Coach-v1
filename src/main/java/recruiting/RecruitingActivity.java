@@ -76,6 +76,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private ArrayList<String> midwest;
     private ArrayList<String> central;
     private ArrayList<String> east;
+    private ArrayList<String> south;
 
     private int needQBs;
     private int needRBs;
@@ -166,6 +167,7 @@ public class RecruitingActivity extends AppCompatActivity {
         midwest = new ArrayList<>();
         central = new ArrayList<>();
         east = new ArrayList<>();
+        south = new ArrayList<>();
 
         // Get User Team's player info and team info for recruiting
         Bundle extras = getIntent().getExtras();
@@ -249,6 +251,9 @@ public class RecruitingActivity extends AppCompatActivity {
             if (playerInfo[3].equals("3")) {
                 east.add(lines[i]);
             }
+            if (playerInfo[3].equals("4")) {
+                south.add(lines[i]);
+            }
 
             if (playerInfo[0].equals("QB")) {
                 availQBs.add(lines[i]);
@@ -281,6 +286,7 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(midwest, new CompRecruitScoutGrade());
         Collections.sort(central, new CompRecruitScoutGrade());
         Collections.sort(east, new CompRecruitScoutGrade());
+        Collections.sort(south, new CompRecruitScoutGrade());
 
         avail50 = new ArrayList<>(availAll.subList(0, 49));
 
@@ -315,6 +321,7 @@ public class RecruitingActivity extends AppCompatActivity {
         positions.add("Midwest (" + midwest.size() + ")");
         positions.add("Central (" + central.size() + ")");
         positions.add("East (" + east.size() + ")");
+        positions.add("South (" + east.size() + ")");
 
         dataAdapterPosition = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, positions);
@@ -516,6 +523,8 @@ public class RecruitingActivity extends AppCompatActivity {
                 players = central;
             } else if (position == 15) {
                 players = east;
+            } else if (position == 16) {
+                players = south;
             } else {
                 players = availAll;
             }
@@ -653,6 +662,7 @@ public class RecruitingActivity extends AppCompatActivity {
         removeUnaffordable(midwest);
         removeUnaffordable(central);
         removeUnaffordable(east);
+        removeUnaffordable(south);
 
         dataAdapterPosition.notifyDataSetChanged();
     }
@@ -708,6 +718,9 @@ public class RecruitingActivity extends AppCompatActivity {
             }
             if (east.contains(player)) {
                 east.remove(player);
+            }
+            if (south.contains(player)) {
+                south.remove(player);
             }
 
             String[] ps = player.split(",");
@@ -770,6 +783,7 @@ public class RecruitingActivity extends AppCompatActivity {
             positions.add("Midwest (" + midwest.size() + ")");
             positions.add("Central (" + central.size() + ")");
             positions.add("East (" + east.size() + ")");
+            positions.add("South (" + south.size() + ")");
 
             dataAdapterPosition.clear();
             for (String p : positions) {
@@ -798,6 +812,8 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(midwest, new CompRecruitScoutGrade());
         Collections.sort(central, new CompRecruitScoutGrade());
         Collections.sort(east, new CompRecruitScoutGrade());
+        Collections.sort(south, new CompRecruitScoutGrade());
+
     }
 
     //SORT - COST
@@ -818,6 +834,8 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(midwest, new CompRecruitCost());
         Collections.sort(central, new CompRecruitCost());
         Collections.sort(east, new CompRecruitCost());
+        Collections.sort(south, new CompRecruitCost());
+
     }
 
 
@@ -960,6 +978,9 @@ public class RecruitingActivity extends AppCompatActivity {
         }
         if (east.contains(player)) {
             east.remove(player);
+        }
+        if (south.contains(player)) {
+            south.remove(player);
         }
         playersRecruited.add(player);
 
