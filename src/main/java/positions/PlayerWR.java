@@ -145,17 +145,13 @@ public class PlayerWR extends Player {
 
         wasRedshirt = getWasRedshirtStatus();
 
+        createGenericAttributes();
 
-        ratPot = (int) (attrBase + 50 * Math.random());
-        ratFootIQ = (int) (attrBase + 50 * Math.random());
-        ratDur = (int) (attrBase + 50 * Math.random());
         ratCatch = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratSpeed = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratEvasion = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratJump = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int) (Math.random() * 5);
-        personality = (int) (attrBase + 50 * Math.random());
 
         recruitRating = getScoutingGrade();
 
@@ -180,16 +176,13 @@ public class PlayerWR extends Player {
 
         wasRedshirt = getWasRedshirtStatus();
 
-        ratPot = (int) (attrBase + 50 * Math.random());
-        ratFootIQ = (int) (attrBase + 50 * Math.random());
-        ratDur = (int) (attrBase + 50 * Math.random());
+        createGenericAttributes();
+
         ratCatch = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratSpeed = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratEvasion = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratJump = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int) (Math.random() * 5);
-        personality = (int) (attrBase + 50 * Math.random());
 
         if (custom) isWalkOn = true;
         recruitRating = getScoutingGrade();

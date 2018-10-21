@@ -116,16 +116,13 @@ public class PlayerK extends Player {
 
         wasRedshirt = getWasRedshirtStatus();
 
-        ratPot = (int) (attrBase + 50 * Math.random());
-        ratFootIQ = (int) (attrBase + 50 * Math.random());
-        ratDur = (int) (attrBase + 50 * Math.random());
+        createGenericAttributes();
+
         ratKickPow = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratKickAcc = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratKickFum = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratPressure = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int) (Math.random() * 5);
-        personality = (int) (attrBase + 50 * Math.random());
 
         recruitRating = getScoutingGrade();
 
@@ -149,16 +146,13 @@ public class PlayerK extends Player {
 
         wasRedshirt = getWasRedshirtStatus();
 
-        ratPot = (int) (attrBase + 50 * Math.random());
-        ratFootIQ = (int) (attrBase + 50 * Math.random());
-        ratDur = (int) (attrBase + 50 * Math.random());
+        createGenericAttributes();
+
         ratKickPow = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratKickAcc = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratKickFum = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratPressure = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int) (Math.random() * 5);
-        personality = (int) (attrBase + 50 * Math.random());
 
         if (custom) isWalkOn = true;
         recruitRating = getScoutingGrade();

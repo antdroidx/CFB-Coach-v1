@@ -130,6 +130,13 @@ Player {
     private final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
     protected final String[] potGrades = {"F", "F", "D", "D", "C", "C", "B", "B", "A", "A"};
 
+    public void createGenericAttributes() {
+        ratPot = (int) (attrBase + 50 * Math.random());
+        ratFootIQ = (int) (attrBase + 50 * Math.random());
+        ratDur = (int) (attrBase + 50 * Math.random());
+        personality = (int) (attrBase + 50 * Math.random());
+        region = (int) (Math.random() * 5);
+    }
 
     public String getYrStr() {
         if (year == 0) {

@@ -264,7 +264,7 @@ public class League {
                     }
                 }
             }
-        } else if(randomize) {
+        } else if (randomize) {
             for (int t = 0; t < teamText.split("%").length; t++) {
                 int tmPres = 0;
                 if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
@@ -359,7 +359,7 @@ public class League {
                 for (int c = 0; c < conferences.size(); ++c) {
                     while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
                         String[] filesSplit = line.split(", ");
-                        if(filesSplit.length > 1) {
+                        if (filesSplit.length > 1) {
 
                             line.replace("\"", "\\\"");
                             //String[] filesSplit = line.split(", ");
@@ -424,7 +424,7 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             String[] filesSplit = line.split(", ");
-            if(filesSplit.length > 1) {
+            if (filesSplit.length > 1) {
                 line.replaceAll("\"", "\\\"");
                 for (int b = 0; b < bowlNames.length; ++b) {
                     bowlNames[b] = filesSplit[b];
@@ -621,7 +621,7 @@ public class League {
             int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
                 String h[] = line.split("%");
-                int  cPres = 0;
+                int cPres = 0;
                 if (h.length == 1) {
                     String c[] = line.split(",");
                     if (c.length > 21) cPres = Integer.parseInt(c[21]);
@@ -674,8 +674,8 @@ public class League {
         updateLongestActiveWinStreak();
 
         //fix bowl names
-        if(bowlNames[0] == null) {
-           String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
+        if (bowlNames[0] == null) {
+            String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
 
             bowlNames = new String[bowlText.split(", ").length];
             for (int b = 0; b < bowlText.split(", ").length; ++b) {
@@ -858,7 +858,7 @@ public class League {
             int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
                 String h[] = line.split("%");
-                int  cPres = 0;
+                int cPres = 0;
                 if (h.length == 1) {
                     String c[] = line.split(",");
                     if (c.length > 21) cPres = Integer.parseInt(c[21]);
@@ -911,7 +911,7 @@ public class League {
         updateLongestActiveWinStreak();
 
         //fix bowl names
-        if(bowlNames[0] == null) {
+        if (bowlNames[0] == null) {
             String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
 
             bowlNames = new String[bowlText.split(", ").length];
@@ -924,7 +924,6 @@ public class League {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
     //Initialize all common variables for each game type
@@ -1748,7 +1747,7 @@ public class League {
 
             String heismanStats = "";
             String heismanWinnerStr = "";
-           if (defPOTY instanceof PlayerDL) {
+            if (defPOTY instanceof PlayerDL) {
                 //dl heisman
                 PlayerDL heisDL = (PlayerDL) defPOTY;
                 heismanWinnerStr = "Congratulations to the Defensive Player of the Year, " + heisDL.team.name +
@@ -1982,51 +1981,51 @@ public class League {
             }
         }
 
-            StringBuilder allFreshmanTeam = new StringBuilder();
-            for (int i = 0; i < allFreshman.size(); ++i) {
-                Player p = allFreshman.get(i);
-                allFreshmanTeam.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
-                if (p instanceof PlayerQB) {
-                    PlayerQB pqb = (PlayerQB) p;
-                    allFreshmanTeam.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
-                            pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
-                } else if (p instanceof PlayerRB) {
-                    PlayerRB prb = (PlayerRB) p;
-                    allFreshmanTeam.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
-                            prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
-                } else if (p instanceof PlayerWR) {
-                    PlayerWR pwr = (PlayerWR) p;
-                    allFreshmanTeam.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
-                            pwr.statsRecTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds\n");
-                } else if (p instanceof PlayerTE) {
-                    PlayerTE pte = (PlayerTE) p;
-                    allFreshmanTeam.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
-                            pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
-                } else if (p instanceof PlayerK) {
-                    PlayerK pk = (PlayerK) p;
-                    allFreshmanTeam.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
-                            "FGs: " + pk.statsFGMade + "/" + pk.statsFGAtt + ", XPs: " + pk.statsXPMade + "/" + pk.statsXPAtt + "\n");
-                } else if (p instanceof PlayerDL) {
-                    PlayerDL pdl = (PlayerDL) p;
-                    allFreshmanTeam.append(" DL " + pdl.name + " [" + pdl.getYrStr() + "]\n \t\t" +
-                            pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum\n");
-                } else if (p instanceof PlayerLB) {
-                    PlayerLB plb = (PlayerLB) p;
-                    allFreshmanTeam.append(" LB " + plb.name + " [" + plb.getYrStr() + "]\n \t\t" +
-                            plb.statsTackles + " Tkl, " + plb.statsSacks + " Sacks, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int\n");
-                } else if (p instanceof PlayerCB) {
-                    PlayerCB pcb = (PlayerCB) p;
-                    allFreshmanTeam.append(" CB " + pcb.name + " [" + pcb.getYrStr() + "]\n \t\t" +
-                            pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int\n");
-                } else if (p instanceof PlayerS) {
-                    PlayerS ps = (PlayerS) p;
-                    allFreshmanTeam.append(" S " + ps.name + " [" + ps.getYrStr() + "]\n \t\t" +
-                            ps.statsTackles + " Tkl, " + ps.statsSacks + " Sacks, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int\n");
-                } else {
-                    allFreshmanTeam.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
-                }
-                allFreshmanTeam.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
+        StringBuilder allFreshmanTeam = new StringBuilder();
+        for (int i = 0; i < allFreshman.size(); ++i) {
+            Player p = allFreshman.get(i);
+            allFreshmanTeam.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
+            if (p instanceof PlayerQB) {
+                PlayerQB pqb = (PlayerQB) p;
+                allFreshmanTeam.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
+            } else if (p instanceof PlayerRB) {
+                PlayerRB prb = (PlayerRB) p;
+                allFreshmanTeam.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
+                        prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
+            } else if (p instanceof PlayerWR) {
+                PlayerWR pwr = (PlayerWR) p;
+                allFreshmanTeam.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
+                        pwr.statsRecTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerTE) {
+                PlayerTE pte = (PlayerTE) p;
+                allFreshmanTeam.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
+                        pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerK) {
+                PlayerK pk = (PlayerK) p;
+                allFreshmanTeam.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
+                        "FGs: " + pk.statsFGMade + "/" + pk.statsFGAtt + ", XPs: " + pk.statsXPMade + "/" + pk.statsXPAtt + "\n");
+            } else if (p instanceof PlayerDL) {
+                PlayerDL pdl = (PlayerDL) p;
+                allFreshmanTeam.append(" DL " + pdl.name + " [" + pdl.getYrStr() + "]\n \t\t" +
+                        pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum\n");
+            } else if (p instanceof PlayerLB) {
+                PlayerLB plb = (PlayerLB) p;
+                allFreshmanTeam.append(" LB " + plb.name + " [" + plb.getYrStr() + "]\n \t\t" +
+                        plb.statsTackles + " Tkl, " + plb.statsSacks + " Sacks, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int\n");
+            } else if (p instanceof PlayerCB) {
+                PlayerCB pcb = (PlayerCB) p;
+                allFreshmanTeam.append(" CB " + pcb.name + " [" + pcb.getYrStr() + "]\n \t\t" +
+                        pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int\n");
+            } else if (p instanceof PlayerS) {
+                PlayerS ps = (PlayerS) p;
+                allFreshmanTeam.append(" S " + ps.name + " [" + ps.getYrStr() + "]\n \t\t" +
+                        ps.statsTackles + " Tkl, " + ps.statsSacks + " Sacks, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int\n");
+            } else {
+                allFreshmanTeam.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
             }
+            allFreshmanTeam.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
+        }
 
         return allFreshmanTeam.toString();
     }
@@ -2187,7 +2186,7 @@ public class League {
     }
 
     public String getCoachAwardStr() {
-        if(!heismanDecided) {
+        if (!heismanDecided) {
             ArrayList<HeadCoach> coachCandidates = rankHC();
             coachWinner = coachCandidates.get(0);
             String coachAwardTopList = "";
@@ -2457,7 +2456,8 @@ public class League {
 
             for (int i = 0; i < teamList.size(); ++i) {
                 teamList.get(i).updatePollScore();
-                if (teamList.get(i) == penalizedTeam1 || teamList.get(i) == penalizedTeam2) teamList.get(i).teamPollScore = 0;
+                if (teamList.get(i) == penalizedTeam1 || teamList.get(i) == penalizedTeam2)
+                    teamList.get(i).teamPollScore = 0;
             }
             Collections.sort(teamList, new CompTeamPoll());
 
@@ -3970,8 +3970,6 @@ public class League {
 
         if (enableTV) newsTV = new ArrayList<>();
         for (int c = 0; c < conferences.size(); ++c) {
-            conferences.get(c).robinWeek = 0;
-            conferences.get(c).week = 0;
             if (enableTV) conferences.get(c).reviewConfTVDeal();
         }
 
@@ -5292,43 +5290,40 @@ public class League {
 
     public int getAvgCoachTal() {
         int avg = 0;
-        for(int i = 0; i < teamList.size(); i++) {
+        for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratTalent;
         }
-        return avg/(teamList.size()-1);
+        return avg / (teamList.size() - 1);
     }
 
     public int getAvgCoachDis() {
         int avg = 0;
-        for(int i = 0; i < teamList.size(); i++) {
+        for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratDiscipline;
         }
-        return avg/(teamList.size()-1);
+        return avg / (teamList.size() - 1);
     }
 
     public int getAvgCoachOff() {
         int avg = 0;
-        for(int i = 0; i < teamList.size(); i++) {
+        for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratOff;
         }
-        return avg/(teamList.size()-1);
+        return avg / (teamList.size() - 1);
     }
 
     public int getAvgCoachDef() {
         int avg = 0;
-        for(int i = 0; i < teamList.size(); i++) {
+        for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i) != userTeam) avg += teamList.get(i).HC.get(0).ratDef;
         }
-        return avg/(teamList.size()-1);
+        return avg / (teamList.size() - 1);
     }
 
 
     /////////////////////////
     //TEST TEST TEST ///////
     ////////////////////////
-
-
-
 
     /**
      * Save League in a file.
@@ -5513,7 +5508,6 @@ public class League {
                 string.append(teamList.get(i).name + " (" + teamList.get(i).getHC(0).ratImprovement + ")\n");
             }
         }
-
 
         return string.toString();
     }

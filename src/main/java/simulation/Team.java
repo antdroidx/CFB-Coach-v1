@@ -36,7 +36,6 @@ public class Team {
     public String rivalTeam;
     public boolean wonRivalryGame;
     public ArrayList<String> teamHistory;
-    private ArrayList<String> userHistory;
     public ArrayList<String> hallOfFame;
     public LeagueRecords teamRecords;
     public boolean userControlled;
@@ -140,7 +139,6 @@ public class Team {
     public ArrayList<PlayerLB> teamLBs;
     public ArrayList<PlayerCB> teamCBs;
     public ArrayList<PlayerS> teamSs;
-    private ArrayList<PlayerDefense> teamDefense;
     //By year
     private ArrayList<Player> teamRSs;
     private ArrayList<Player> teamFRs;
@@ -335,32 +333,21 @@ public class Team {
             totalNCs = Integer.parseInt(teamInfo[7]);
             rivalTeam = teamInfo[8];
             location = Integer.parseInt(teamInfo[9]);
-            if (teamInfo.length >= 14) {
-                totalNCLosses = Integer.parseInt(teamInfo[10]);
-                totalCCLosses = Integer.parseInt(teamInfo[11]);
-                totalBowls = Integer.parseInt(teamInfo[12]);
-                totalBowlLosses = Integer.parseInt(teamInfo[13]);
-                if (teamInfo.length >= 17) {
-                    playbookOffNum = Integer.parseInt(teamInfo[13]);
-                    playbookDefNum = Integer.parseInt(teamInfo[15]);
-                    showPopups = (Integer.parseInt(teamInfo[16]) == 1);
-                    if (teamInfo.length >= 21) {
-                        winStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
-                                Integer.parseInt(teamInfo[20]),
-                                Integer.parseInt(teamInfo[17]),
-                                teamInfo[18]);
-                        yearStartWinStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
-                                Integer.parseInt(teamInfo[20]),
-                                Integer.parseInt(teamInfo[17]),
-                                teamInfo[18]);
-                    }
-                }
-            } else {
-                totalCCLosses = 0;
-                totalNCLosses = 0;
-                totalBowls = 0;
-                totalBowlLosses = 0;
-            }
+            totalNCLosses = Integer.parseInt(teamInfo[10]);
+            totalCCLosses = Integer.parseInt(teamInfo[11]);
+            totalBowls = Integer.parseInt(teamInfo[12]);
+            totalBowlLosses = Integer.parseInt(teamInfo[13]);
+            playbookOffNum = Integer.parseInt(teamInfo[13]);
+            playbookDefNum = Integer.parseInt(teamInfo[15]);
+            showPopups = (Integer.parseInt(teamInfo[16]) == 1);
+            winStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
+                        Integer.parseInt(teamInfo[20]),
+                        Integer.parseInt(teamInfo[17]),
+                        teamInfo[18]);
+            yearStartWinStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
+                        Integer.parseInt(teamInfo[20]),
+                        Integer.parseInt(teamInfo[17]),
+                        teamInfo[18]);
         }
 
         // Lines 1 is Team Home/Away Rotation
@@ -384,7 +371,6 @@ public class Team {
         userControlled = false;
         showPopups = true;
         teamHistory = new ArrayList<>();
-        userHistory = new ArrayList<>();
         hallOfFame = new ArrayList<>();
         teamRecords = new LeagueRecords();
         playersInjuredAll = new ArrayList<>();
@@ -400,7 +386,6 @@ public class Team {
         teamLBs = new ArrayList<>();
         teamCBs = new ArrayList<>();
         teamSs = new ArrayList<>();
-        teamDefense = new ArrayList<>();
 
         teamRSs = new ArrayList<>();
         teamFRs = new ArrayList<>();

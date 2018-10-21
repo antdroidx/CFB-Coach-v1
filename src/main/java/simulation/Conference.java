@@ -39,9 +39,7 @@ public class Conference {
 
     private Game ccg;
 
-    public int week;
-    public int robinWeek;
-    private final int teamCount = 12;
+    private int robinWeek;
     private final double promotionFactor = 1.15;
     private final double relegationFactor = 0.85;
 
@@ -59,7 +57,6 @@ public class Conference {
         confName = name;
         confTeams = new ArrayList<>();
         this.league = league;
-        week = 0;
         allConfPlayers = new ArrayList<>();
 
         confTV = deal;
@@ -76,7 +73,6 @@ public class Conference {
         confName = data[0];
         confTeams = new ArrayList<>();
         this.league = league;
-        week = 0;
         allConfPlayers = new ArrayList<>();
 
         //Old Save Compatibility
@@ -229,13 +225,13 @@ public class Conference {
             }
         }
         for (int r = 0; r < 9; ++r) {
-            for (int g = 0; g < ((teamCount + 1) / 2); ++g) {
-                Team a = confTeams.get((robinWeek + g) % (teamCount - 1));
+            for (int g = 0; g < ((confTeams.size() + 1) / 2); ++g) {
+                Team a = confTeams.get((robinWeek + g) % (confTeams.size() - 1));
                 Team b;
                 if (g == 0) {
-                    b = confTeams.get((teamCount - 1));
+                    b = confTeams.get((confTeams.size() - 1));
                 } else {
-                    b = confTeams.get(((teamCount - 1) - g + robinWeek) % (teamCount - 1));
+                    b = confTeams.get(((confTeams.size() - 1) - g + robinWeek) % (confTeams.size() - 1));
                 }
 
                 Game gm;
@@ -331,10 +327,10 @@ public class Conference {
     }
 
     private void scheduleOOC(int offsetOOC, int selConf, ArrayList<Team> availTeams) {
-        for (int i = 0; i < teamCount; ++i) {
+        for (int i = 0; i < confTeams.size(); ++i) {
             availTeams.add(league.conferences.get(selConf).confTeams.get(i));
         }
-        for (int i = 0; i < teamCount; ++i) {
+        for (int i = 0; i < confTeams.size(); ++i) {
             int selTeam = (int) (availTeams.size() * Math.random());
             Team a = confTeams.get(i);
             Team b = availTeams.get(selTeam);
@@ -377,34 +373,34 @@ public class Conference {
      * Plays week for each team. If CCG week, play the CCG.
      */
     public void playWeek() {
-        if (week == 12) {
+        if (league.currentWeek == 12) {
             playConfChamp();
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
-                confTeams.get(i).gameSchedule.get(week).playGame();
+                confTeams.get(i).gameSchedule.get(league.currentWeek).playGame();
             }
-            if (week == 11) schedConfChamp();
-            week++;
+            if (league.currentWeek == 11) schedConfChamp();
+            //week++;
         }
 
     }
 
     public void newsMatchups() {
-        if (week >= 12) {
+        if (league.currentWeek >= 12) {
             return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
-                confTeams.get(i).gameSchedule.get(week).addUpcomingGames(confTeams.get(i));
+                confTeams.get(i).gameSchedule.get(league.currentWeek).addUpcomingGames(confTeams.get(i));
             }
         }
     }
 
     public void newsNSMatchups() {
-        if (week >= 12) {
+        if (league.currentWeek >= 12) {
             return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
-                confTeams.get(i).gameSchedule.get(week).addNewSeasonGames(confTeams.get(i));
+                confTeams.get(i).gameSchedule.get(league.currentWeek).addNewSeasonGames(confTeams.get(i));
             }
         }
     }
@@ -474,7 +470,7 @@ public class Conference {
         ccg = new Game(confTeams.get(0), confTeams.get(1), confName + " CCG");
         confTeams.get(0).gameSchedule.add(ccg);
         confTeams.get(1).gameSchedule.add(ccg);
-        league.newsStories.get(week + 1).add("Upcoming: " + confName + " Championship Game>" + confTeams.get(0).strRankTeamRecord() + " will host " + confTeams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
+        league.newsStories.get(league.currentWeek + 1).add("Upcoming: " + confName + " Championship Game>" + confTeams.get(0).strRankTeamRecord() + " will host " + confTeams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
     }
 
     /**

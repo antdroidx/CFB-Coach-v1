@@ -105,17 +105,13 @@ public class PlayerOL extends Player {
 
         wasRedshirt = getWasRedshirtStatus();
 
+        createGenericAttributes();
 
-        ratPot = (int) (attrBase + 50 * Math.random());
-        ratFootIQ = (int) (attrBase + 50 * Math.random());
-        ratDur = (int) (attrBase + 50 * Math.random());
         ratStrength = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratRunBlock = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratPassBlock = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratAwareness = (int) (ratBase + year * yearFactor + stars * starFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int) (Math.random() * 5);
-        personality = (int) (attrBase + 50 * Math.random());
 
         recruitRating = getScoutingGrade();
 
