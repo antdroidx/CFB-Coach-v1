@@ -10,7 +10,7 @@ public class Injury {
     private static final String[] injuries = {"Knee", "Thigh", "Shoulder", "Wrist", "Ankle", "Foot", "Arm", "Back", "Head"};
     private static final Random rando = new Random();
     public League league;
-    private int duration; // Duration of the injury (in games)
+    public int duration; // Duration of the injury (in games)
     private final String description; // What the injury is
     private final Player player; // Player that has this injury
 

@@ -476,7 +476,7 @@ public class Team {
     public void setupUserCoach(String name) {
         HC.get(0).name = name;
         HC.get(0).year = 0;
-        HC.get(0).age = 70 + (int)(Math.random()*8);
+        HC.get(0).age = 30 + (int)(Math.random()*8);
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
         HC.get(0).ratPot = 70;
@@ -3376,7 +3376,6 @@ public class Team {
         checkInjuryPosition(teamLBs, startersLB + subLB);
         checkInjuryPosition(teamCBs, startersCB + subCB);
         checkInjuryPosition(teamSs, startersS + subS);
-
     }
 
     private void checkInjuryPosition(ArrayList<? extends Player> players, int numStarters) {
@@ -3403,6 +3402,46 @@ public class Team {
                     playersInjured.add(p);
                     playersInjuredAll.add(p);
                     numInjured++;
+                }
+            }
+        }
+
+        if (numInjured > 0) Collections.sort(players, new CompPlayer());
+    }
+    
+    public void postSeasonHealing(int weeks) {
+        playersInjured = new ArrayList<>();
+        playersRecovered = new ArrayList<>();
+        healing(teamQBs, weeks);
+        healing(teamRBs, weeks);
+        healing(teamWRs, weeks);
+        healing(teamTEs, weeks);
+        healing(teamOLs, weeks);
+        healing(teamKs, weeks);
+        healing(teamDLs, weeks);
+        healing(teamLBs, weeks);
+        healing(teamCBs, weeks);
+        healing(teamSs, weeks);
+    }
+
+
+    private void healing(ArrayList<? extends Player> players, int weeks) {
+        int numInjured = 0;
+
+        for (Player p : players) {
+            if (p.injury != null && !p.isSuspended && !p.isTransfer) {
+                numInjured++;
+                for (int w=0; w < weeks; w++) {
+                    p.injury.duration --;
+                }
+                if (p.injury.duration <= 0) {
+                    // Done with injury
+                    p.isInjured = false;
+                    p.injury = null;
+                }
+                if (p.injury == null) {
+                    playersRecovered.add(p);
+                    playersInjuredAll.remove(p);
                 }
             }
         }

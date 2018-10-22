@@ -222,7 +222,7 @@ public class League {
     private final String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
             "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
 
-    public final String[] states = {"AS","AZ","CA","HI","ID","MT","NV","OR","UT","WA","CO","KS","MO","NE","NM","ND","OK","SD","TX","WY","IL","IN","IA","KY","MD","MI","MN","OH","TN","WI","CT","DE","ME","MA","NH","NJ","NY","PA","RI","VT","AL","AK","FL","GA","LA","MS","NC","SC","VA","WV"};
+    public final String[] states = {"AS", "AZ", "CA", "HI", "ID", "MT", "NV", "OR", "UT", "WA", "CO", "KS", "MO", "NE", "NM", "ND", "OK", "SD", "TX", "WY", "IL", "IN", "IA", "KY", "MD", "MI", "MN", "OH", "TN", "WI", "CT", "DE", "ME", "MA", "NH", "NJ", "NY", "PA", "RI", "VT", "AL", "AK", "FL", "GA", "LA", "MS", "NC", "SC", "VA", "WV"};
 
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
@@ -2478,122 +2478,136 @@ public class League {
         //if bowls arent scheduled yet, give predictions
         if (!hasScheduledBowls) {
 
-            for (int i = 0; i < teamList.size(); ++i) {
-                teamList.get(i).updatePollScore();
-                if (teamList.get(i) == penalizedTeam1 || teamList.get(i) == penalizedTeam2)
-                    teamList.get(i).teamPollScore = 0;
-            }
-            Collections.sort(teamList, new CompTeamPoll());
+            if (expPlayoffs) {
+                getPlayoffTeams();
+                return postseason;
+            } else {
 
-            StringBuilder sb = new StringBuilder();
-            Team t1;
-            Team t2;
+                for (int i = 0; i < teamList.size(); ++i) {
+                    teamList.get(i).updatePollScore();
+                    if (teamList.get(i) == penalizedTeam1 || teamList.get(i) == penalizedTeam2)
+                        teamList.get(i).teamPollScore = 0;
+                }
+                Collections.sort(teamList, new CompTeamPoll());
 
-            sb.append("Semifinal 1v4:\n\t\t");
-            t1 = teamList.get(0);
-            t2 = teamList.get(3);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+                StringBuilder sb = new StringBuilder();
+                Team t1;
+                Team t2;
 
-            sb.append("Semifinal 2v3:\n\t\t");
-            t1 = teamList.get(1);
-            t2 = teamList.get(2);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[0] + ":\n\t\t");
-            t1 = teamList.get(4);
-            t2 = teamList.get(6);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[1] + ":\n\t\t");
-            t1 = teamList.get(5);
-            t2 = teamList.get(7);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[2] + ":\n\t\t");
-            t1 = teamList.get(8);
-            t2 = teamList.get(14);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[3] + ":\n\t\t");
-            t1 = teamList.get(9);
-            t2 = teamList.get(15);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[4] + ":\n\t\t");
-            t1 = teamList.get(10);
-            t2 = teamList.get(11);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[5] + ":\n\t\t");
-            t1 = teamList.get(12);
-            t2 = teamList.get(13);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            for (int i = 6; i < 10; ++i) {
-                sb.append(bowlNames[i] + ":\n\t\t");
-                t1 = teamList.get(10 + i);
-                t2 = teamList.get(14 + i);
+                sb.append("Semifinal 1v4:\n\t\t");
+                t1 = teamList.get(0);
+                t2 = teamList.get(3);
                 sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append("Semifinal 2v3:\n\t\t");
+                t1 = teamList.get(1);
+                t2 = teamList.get(2);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[0] + ":\n\t\t");
+                t1 = teamList.get(4);
+                t2 = teamList.get(6);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[1] + ":\n\t\t");
+                t1 = teamList.get(5);
+                t2 = teamList.get(7);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[2] + ":\n\t\t");
+                t1 = teamList.get(8);
+                t2 = teamList.get(14);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[3] + ":\n\t\t");
+                t1 = teamList.get(9);
+                t2 = teamList.get(15);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[4] + ":\n\t\t");
+                t1 = teamList.get(10);
+                t2 = teamList.get(11);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[5] + ":\n\t\t");
+                t1 = teamList.get(12);
+                t2 = teamList.get(13);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                for (int i = 6; i < 10; ++i) {
+                    sb.append(bowlNames[i] + ":\n\t\t");
+                    t1 = teamList.get(10 + i);
+                    t2 = teamList.get(14 + i);
+                    sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+                }
+
+                sb.append(bowlNames[10] + ":\n\t\t");
+                t1 = teamList.get(24);
+                t2 = teamList.get(28);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[11] + ":\n\t\t");
+                t1 = teamList.get(25);
+                t2 = teamList.get(30);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[12] + ":\n\t\t");
+                t1 = teamList.get(26);
+                t2 = teamList.get(29);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[13] + ":\n\t\t");
+                t1 = teamList.get(27);
+                t2 = teamList.get(31);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[14] + ":\n\t\t");
+                t1 = teamList.get(32);
+                t2 = teamList.get(36);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[15] + ":\n\t\t");
+                t1 = teamList.get(33);
+                t2 = teamList.get(38);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[16] + ":\n\t\t");
+                t1 = teamList.get(34);
+                t2 = teamList.get(37);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[17] + ":\n\t\t");
+                t1 = teamList.get(35);
+                t2 = teamList.get(39);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                return sb.toString();
+
             }
-
-            sb.append(bowlNames[10] + ":\n\t\t");
-            t1 = teamList.get(24);
-            t2 = teamList.get(28);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[11] + ":\n\t\t");
-            t1 = teamList.get(25);
-            t2 = teamList.get(30);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[12] + ":\n\t\t");
-            t1 = teamList.get(26);
-            t2 = teamList.get(29);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[13] + ":\n\t\t");
-            t1 = teamList.get(27);
-            t2 = teamList.get(31);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[14] + ":\n\t\t");
-            t1 = teamList.get(32);
-            t2 = teamList.get(36);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[15] + ":\n\t\t");
-            t1 = teamList.get(33);
-            t2 = teamList.get(38);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[16] + ":\n\t\t");
-            t1 = teamList.get(34);
-            t2 = teamList.get(37);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            sb.append(bowlNames[17] + ":\n\t\t");
-            t1 = teamList.get(35);
-            t2 = teamList.get(39);
-            sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-
-            return sb.toString();
-
         } else {
-            // Games have already been scheduled, give actual teams
-            StringBuilder sb = new StringBuilder();
 
-            sb.append("Semifinal 1v4:\n");
-            sb.append(getGameSummaryBowl(semiG14));
+            if(expPlayoffs) {
 
-            sb.append("\n\nSemifinal 2v3:\n");
-            sb.append(getGameSummaryBowl(semiG23));
+                return postseason;
 
-            for (int i = 0; i < bowlGames.length; ++i) {
-                sb.append("\n\n" + bowlNames[i] + ":\n");
-                sb.append(getGameSummaryBowl(bowlGames[i]));
+             } else {
+                // Games have already been scheduled, give actual teams
+                StringBuilder sb = new StringBuilder();
+
+                sb.append("Semifinal 1v4:\n");
+                sb.append(getGameSummaryBowl(semiG14));
+
+                sb.append("\n\nSemifinal 2v3:\n");
+                sb.append(getGameSummaryBowl(semiG23));
+
+                for (int i = 0; i < bowlGames.length; ++i) {
+                    sb.append("\n\n" + bowlNames[i] + ":\n");
+                    sb.append(getGameSummaryBowl(bowlGames[i]));
+                }
+
+                return sb.toString();
             }
 
-            return sb.toString();
         }
     }
 
@@ -2601,8 +2615,8 @@ public class League {
     // EXPANDED PLAYOFFS MODE
     //
 
-    public void expandedPlayoff() {
-        playoffWeek = 1;
+    public void getPlayoffTeams() {
+        playoffTeams.clear();
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
             //bowl ban!
@@ -2620,28 +2634,52 @@ public class League {
         }
         Collections.sort(teamList, new CompTeamPoll());
 
-        for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i).confChampion.equals("CC")) {
-                playoffTeams.add(teamList.get(i));
+        if (currentWeek > 13 ) {
+            for (int i = 0; i < teamList.size(); i++) {
+                if (teamList.get(i).confChampion.equals("CC")) {
+                    playoffTeams.add(teamList.get(i));
+                }
             }
-        }
-        int x = 0;
+            int x = 0;
             for (int i = 0; i < teamList.size(); i++) {
                 if (!teamList.get(i).confChampion.equals("CC")) {
                     playoffTeams.add(teamList.get(i));
                     x++;
                     if (x >= 6) break;
                 }
+            }
+        } else {
+            for (int i = 0; i < conferences.size(); i++) {
+                Collections.sort(conferences.get(i).confTeams, new CompTeamConfWins());
+                playoffTeams.add(conferences.get(i).confTeams.get(0));
+            }
+
+            int x = 0;
+            for (int i = 0; i < teamList.size(); i++) {
+                if (!playoffTeams.contains(teamList.get(i))) {
+                    playoffTeams.add(teamList.get(i));
+                    x++;
+                    if (x >= 6) break;
+                }
+            }
         }
 
         Collections.sort(playoffTeams, new CompTeamPoll());
 
         StringBuilder sb = new StringBuilder();
-        sb.append("The following teams have made it to the Football Playoffs!\n\n");
+        sb.append("The following teams are expected to make it to the Football Playoffs!\n\n");
+        int i = 1;
         for (Team t : playoffTeams) {
-            sb.append(t.name + "\n\n");
+            sb.append(i + ". " + t.strRankTeamRecord() + " [" + t.conference + "]\n");
+            i++;
         }
         postseason = sb.toString();
+    }
+
+    public void expandedPlayoff() {
+        hasScheduledBowls = true;
+        playoffWeek = 1;
+        getPlayoffTeams();
 
         for(int i=0; i < 8; i++) {
             cfpGames[i] = new Game(playoffTeams.get(i), playoffTeams.get(15-i), "Sweet 16");
@@ -2651,6 +2689,10 @@ public class League {
                     " for the " + getYear() + " Sweet 16!");
         }
 
+        //Heal teams
+        for(int i = 0; i < teamList.size(); i++) {
+            teamList.get(i).postSeasonHealing(1);
+        }
     }
 
 
@@ -2979,6 +3021,18 @@ public class League {
                 " in next week's bowl game. ");
 
         hasScheduledBowls = true;
+
+        //Heal Bowl Team Players
+
+        for(int i = 0; i < 12; i++) {
+            teamList.get(i).postSeasonHealing(3);
+        }
+        for(int i = 12; i < 24; i++) {
+            teamList.get(i).postSeasonHealing(2);
+        }
+        for(int i = 24; i < 36; i++) {
+            teamList.get(i).postSeasonHealing(1);
+        }
     }
 
     /**

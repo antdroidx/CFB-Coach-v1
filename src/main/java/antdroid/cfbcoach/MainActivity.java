@@ -737,9 +737,9 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 0) weekSelection[i] = "Pre-Season News";
             else if (i == 13) weekSelection[i] = "Conf Champ Week";
-            else if (i == 14) weekSelection[i] = "Bowl Game Week 1";
-            else if (i == 15) weekSelection[i] = "Bowl Game Week 2";
-            else if (i == 16) weekSelection[i] = "Bowl Game Week 3";
+            else if (i == 14) weekSelection[i] = "Bowl Week 1";
+            else if (i == 15) weekSelection[i] = "Bowl Week 2";
+            else if (i == 16) weekSelection[i] = "Bowl Week 3";
             else if (i == 17) weekSelection[i] = "National Champ";
             else if (i == 18) weekSelection[i] = "Off-Season News";
             else if (i == 19) weekSelection[i] = "Coaching Contracts";
@@ -1296,9 +1296,9 @@ public class MainActivity extends AppCompatActivity {
         String[] weekSelection = new String[dbSize];
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 13) weekSelection[i] = "Conf Champ Week";
-            else if (i == 14) weekSelection[i] = "Bowl Game Week 1";
-            else if (i == 15) weekSelection[i] = "Bowl Game Week 2";
-            else if (i == 16) weekSelection[i] = "Bowl Game Week 3";
+            else if (i == 14) weekSelection[i] = "Bowl Week 1";
+            else if (i == 15) weekSelection[i] = "Bowl Week 2";
+            else if (i == 16) weekSelection[i] = "Bowl Week 3";
             else if (i == 17) weekSelection[i] = "National Champ";
             else weekSelection[i] = "Week " + i;
         }
@@ -2733,7 +2733,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] selection = {"Conf Championships", "Bowl Games"};
+        String[] selection = {"Conf Championships", "Post-Season"};
         Spinner bowlCCGSpinner = dialog.findViewById(R.id.spinnerBowlCCG);
         ArrayAdapter<String> bowlCCGadapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, selection);
