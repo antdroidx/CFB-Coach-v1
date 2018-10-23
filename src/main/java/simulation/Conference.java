@@ -380,17 +380,16 @@ public class Conference {
                 confTeams.get(i).gameSchedule.get(league.currentWeek).playGame();
             }
             if (league.currentWeek == 11) schedConfChamp();
-            //week++;
         }
 
     }
 
     public void newsMatchups() {
-        if (league.currentWeek >= 12) {
+        if (league.currentWeek >= 11) {
             return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
-                confTeams.get(i).gameSchedule.get(league.currentWeek).addUpcomingGames(confTeams.get(i));
+                confTeams.get(i).gameSchedule.get(league.currentWeek+1).addUpcomingGames(confTeams.get(i));
             }
         }
     }

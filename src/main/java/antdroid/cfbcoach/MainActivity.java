@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView mainList;
     private ExpandableListView expListPlayerStats;
 
+    private ArrayList<Team> jobList;
+    private int jobType;
+    private boolean jobListSet;
+
     private boolean wantUpdateConf;
     private boolean showToasts;
     private boolean showInjuryReport;
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up list
         mainList = findViewById(R.id.mainList);
         expListPlayerStats = findViewById(R.id.playerStatsExpandList);
+        jobList = new ArrayList<>();
 
         //LOAD GAME DATA
         //SAVE OR NO SAVE
@@ -208,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                     season = simLeague.getYear();
                     currentTeam = userTeam;
                     loadedLeague = true;
-                    //STARTS A NEW GAME -- NOT SURE WHY THIS EXISTS
+                    if(season == seasonStart) seasonGoals();
                 }
             }
         } else {
@@ -1818,11 +1823,10 @@ public class MainActivity extends AppCompatActivity {
             // Show NCG summary and check league records
             simLeague.enterOffseason();
             simLeague.checkLeagueRecords();
+            seasonSummary();
             simLeague.updateHCHistory();
             simLeague.updateTeamHistories();
             simLeague.updateLeagueHistory();
-            seasonSummary();
-            //netTotalPrestige();
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Contracts");
@@ -2117,7 +2121,7 @@ public class MainActivity extends AppCompatActivity {
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
-        if (simLeague.currentWeek < 18) changeTeamsButton.setVisibility(View.INVISIBLE);
+        if (simLeague.currentWeek < 19) changeTeamsButton.setVisibility(View.INVISIBLE);
 
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
@@ -2175,9 +2179,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             // Perform action on click
                             userHC = userTeam.HC.get(0);
-                            //switchTeams();
+                            //selectNewTeam();
                             if (simLeague.isCareerMode()) jobOffers(userHC);
-                            else switchTeams(userHC);
+                            else selectNewTeam(userHC);
                             dialog.dismiss();
                         }
                     });
@@ -3210,7 +3214,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        goals = "Welcome to the " + (seasonStart + userTeam.teamHistory.size()) + " College Football season!\n\n";
+        goals = "Welcome to the " + simLeague.getYear() + " College Football season!\n\n";
         goals += "This season your team is projected to finish ranked #" + userTeam.projectedPoll + "!\n\n";
 
         if (userTeam.projectedPoll > 100) {
@@ -3234,7 +3238,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(goals + "\nNote: You can always review your season goals in the Pre-Season News.")
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Goals")
+                .setTitle(simLeague.getYear() + " Season Goals")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -3259,7 +3263,7 @@ public class MainActivity extends AppCompatActivity {
     private void preseasonOptions() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage("This will let you redshirt and set budgets in the future")
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Pre-Season")
+                .setTitle(simLeague.getYear() + " Pre-Season")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -3319,7 +3323,7 @@ public class MainActivity extends AppCompatActivity {
     private void seasonSummary() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(simLeague.seasonSummaryStr() + "\n\nNote: You can always review your season summary in the Off-Season News.")
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Season Summary")
+                .setTitle(simLeague.getYear() + " Season Summary")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -3376,7 +3380,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(userTeam.contractString)
-                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Contract Status")
+                    .setTitle(simLeague.getYear() + " Contract Status")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -3397,38 +3401,29 @@ public class MainActivity extends AppCompatActivity {
 
     //Job Offers Dialog when fired or resignation from previous team
     private void jobOffers(HeadCoach headCoach) {
+        jobType  = 1;
+        jobListSet = true;
+        jobList.clear();
+
         userHC = headCoach;
         int ratOvr = userHC.ratOvr;
         if (ratOvr < 40) ratOvr = 40;
         String oldTeam = userHC.team.name;
         updateHeaderBar();
         //get user team from list dialog
-        final ArrayList<String> teamsArray = simLeague.getCoachListStrFired(ratOvr, oldTeam);
-        final ArrayList<Team> coachList = simLeague.getCoachListFired(ratOvr, oldTeam);
+        jobList = simLeague.getCoachListFired(ratOvr, oldTeam);
+        String[] teams = setJobTeamList(jobList);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Job Offers Available:");
         builder.setCancelable(false);
-        final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
-                userTeam.userControlled = false;
-                userTeam.HC.clear();
-                simLeague.coachHiringSingleTeam(userTeam);
-                simLeague.newJobtransfer(coachList.get(item).name);
-                userTeam = simLeague.userTeam;
-                userTeamStr = userTeam.name;
-                currentTeam = userTeam;
-                userTeam.HC.clear();
-                userTeam.HC.add(userHC);
-                userTeam.fired = false;
-                userHC.contractYear = 0;
-                userHC.contractLength = 6;
-                userHC.baselinePrestige = userTeam.teamPrestige;
-                simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
-                        " to lead the team.");
-                updateHeaderBar();
-                examineTeam(currentTeam.name);
+                //changeTeams(coachList, item);
+                //updateHeaderBar();
+                //examineTeam(currentTeam.name);
+                viewTeam(jobList, item);
             }
         });
         AlertDialog alert = builder.create();
@@ -3437,6 +3432,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Job offers from other teams
     private void promotions(HeadCoach headCoach) {
+        jobType  = 2;
+        jobListSet = true;
+        jobList.clear();
+
         userHC = headCoach;
         if (userHC.promotionCandidate) {
 
@@ -3446,9 +3445,11 @@ public class MainActivity extends AppCompatActivity {
             String oldTeam = userHC.team.name;
             updateHeaderBar();
             //get user team from list dialog
-            final ArrayList<String> teamsArray = simLeague.getCoachPromotionListStr(ratOvr, offers, oldTeam);
-            final ArrayList<Team> coachList = simLeague.getCoachPromotionList(ratOvr, offers, oldTeam);
-            if (coachList.isEmpty()) {
+            jobList = simLeague.getCoachPromotionList(ratOvr, offers, oldTeam);
+
+            String[] teams = setJobTeamList(jobList);
+
+            if (jobList.isEmpty()) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Job Offers")
                         .setMessage("No job offers available.")
@@ -3469,32 +3470,17 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         });
-                final String[] teams = teamsArray.toArray(new String[teamsArray.size()]);
                 builder.setCancelable(false);
                 builder.setItems(teams, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
-                        userTeam.userControlled = false;
-                        userTeam.HC.clear();
-                        simLeague.coachHiringSingleTeam(userTeam);
-                        simLeague.newJobtransfer(coachList.get(item).name);
-                        userTeam = simLeague.userTeam;
-                        userTeamStr = userTeam.name;
-                        currentTeam = userTeam;
-                        userTeam.HC.clear();
-                        userTeam.HC.add(userHC);
-                        userTeam.fired = false;
-                        userHC.contractYear = 0;
-                        userHC.contractLength = 6;
-                        userHC.baselinePrestige = userTeam.teamPrestige;
-                        simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
-                                " to lead the team.");
-                        simLeague.coachCarousel();
-                        updateHeaderBar();
-                        examineTeam(currentTeam.name);
+                        //changeTeams(jobList, item);
+                        //simLeague.coachCarousel();
+                        //updateHeaderBar();
+                        //examineTeam(currentTeam.name);
+                        viewTeam(jobList, item);
                     }
                 });
-
                 AlertDialog alert = builder.create();
                 alert.show();
             }
@@ -3512,38 +3498,107 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Choose ANY team
-    private void switchTeams(HeadCoach headCoach) {
+    //Choose ANY team (manually change from Options Menu)
+    private void selectNewTeam(HeadCoach headCoach) {
+        jobType  = 0;
+        jobListSet = true;
+        jobList.clear();
+
         userHC = headCoach;
         updateHeaderBar();
         //get user team from list dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose your new team:");
+        jobList = simLeague.teamList;
+
         final String[] teams = simLeague.getTeamListStr();
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
-                userTeam.userControlled = false;
-                userTeam.HC.clear();
-                simLeague.coachHiringSingleTeam(userTeam);
-                simLeague.newJobtransfer(simLeague.teamList.get(item).name);
-                userTeam = simLeague.userTeam;
-                userTeamStr = userTeam.name;
-                currentTeam = userTeam;
-                userTeam.HC.clear();
-                userTeam.HC.add(userHC);
-                userTeam.fired = false;
-                userHC.contractYear = 0;
-                userHC.contractLength = 6;
-                userHC.baselinePrestige = userTeam.teamPrestige;
-                updateHeaderBar();
-                examineTeam(currentTeam.name);
+                //changeTeams(coachList, item);
+                //updateHeaderBar();
+                //examineTeam(currentTeam.name);
+                viewTeam(jobList, item);
             }
         });
         builder.setCancelable(false);
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    //Make a list of Team Names for the Team Selection Window
+    private String[] setJobTeamList(ArrayList<Team> jobListTemp) {
+        String[] temp = new String[jobListTemp.size()];
+
+        for(int i=0; i < jobListTemp.size(); i++) {
+            temp[i] = jobListTemp.get(i).name;
+        }
+
+        return temp;
+    }
+
+    //View Team prior to choosing
+    private void viewTeam(final ArrayList<Team> teamList, final int item) {
+        String[] teamRoster = teamList.get(item).getTeamRosterString();
+
+        AlertDialog.Builder roster = new AlertDialog.Builder(this);
+        roster.setTitle(teamList.get(item).name + " Team Roster\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + teamList.get(item).teamOffTalent + " | Def: " + teamList.get(item).teamDefTalent);
+        roster.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(jobType == 2)  promotions(userHC);
+                else if (jobType == 1) jobOffers(userHC);
+                else selectNewTeam(userHC);
+
+            }
+        });
+        roster.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changeTeams(jobList, item);
+                if(jobType == 2) simLeague.coachCarousel();
+            }
+        });
+
+        StringBuilder sb = new StringBuilder();
+        for(String s : teamRoster) {
+            sb.append(s +"\n");
+        }
+        roster.setMessage(sb);
+
+/*        roster.setItems(teamRoster, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+            }
+        });*/
+        roster.setCancelable(false);
+        AlertDialog teamWindow = roster.create();
+        teamWindow.show();
+    }
+
+    //Method to actually switch teams
+    private void changeTeams(ArrayList<Team> teamList, int item) {
+        userTeam.userControlled = false;
+        userTeam.HC.clear();
+        simLeague.coachHiringSingleTeam(userTeam);
+        simLeague.newJobtransfer(teamList.get(item).name);
+        userTeam = simLeague.userTeam;
+        userTeamStr = userTeam.name;
+        currentTeam = userTeam;
+        userTeam.HC.clear();
+        userTeam.HC.add(userHC);
+        userTeam.fired = false;
+        userHC.contractYear = 0;
+        userHC.contractLength = 6;
+        userHC.baselinePrestige = userTeam.teamPrestige;
+        simLeague.newsStories.get(simLeague.currentWeek + 1).add("Coaching Hire: " + currentTeam.name + ">After an extensive search for a new head coach, " + currentTeam.name + " has hired " + userHC.name +
+                " to lead the team.");
+        updateHeaderBar();
+        examineTeam(currentTeam.name);
+    }
+
+
 
     //Conference Realignment Update
     private void conferenceRealignment() {
@@ -3552,7 +3607,7 @@ public class MainActivity extends AppCompatActivity {
             if (simLeague.countRealignment > 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(simLeague.newsRealignment)
-                        .setTitle((seasonStart + userTeam.teamHistory.size()) + " Conference Realignment News")
+                        .setTitle(simLeague.getYear() + " Conference Realignment News")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -3572,7 +3627,7 @@ public class MainActivity extends AppCompatActivity {
             simLeague.promotionRelegation();
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(simLeague.newsRealignment)
-                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Promotion/Relegation Update")
+                    .setTitle(simLeague.getYear() + " Promotion/Relegation Update")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -3591,7 +3646,7 @@ public class MainActivity extends AppCompatActivity {
             simLeague.universalProRel();
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(simLeague.newsRealignment)
-                    .setTitle((seasonStart + userTeam.teamHistory.size()) + " Promotion/Relegation Update")
+                    .setTitle(simLeague.getYear() + " Promotion/Relegation Update")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -3613,7 +3668,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(update)
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Network Contract Updates")
+                .setTitle(simLeague.getYear() + " Network Contract Updates")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -3635,7 +3690,7 @@ public class MainActivity extends AppCompatActivity {
     private void transfers() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(simLeague.userTransfers)
-                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Transfers")
+                .setTitle(simLeague.getYear() + " Transfers")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -3647,7 +3702,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
                         builder1.setMessage(simLeague.sumTransfers)
-                                .setTitle((seasonStart + userTeam.teamHistory.size()) + " Transfers")
+                                .setTitle(simLeague.getYear() + " Transfers")
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

@@ -3254,45 +3254,15 @@ public class League {
 
     }
 
-    //New Hard Game dialog
+    //New Hard Game
     public ArrayList<Team> getCoachList() {
         ArrayList<Team> teamVacancies = new ArrayList<>();
 
         for (int c = 0; c < conferences.size(); c++) {
-            teamVacancies.add(new Team(conferences.get(c).confTeams.get(9).name, conferences.get(c).confTeams.get(9).abbr, conferences.get(c).confName, conferences.get(c).confTeams.get(9).teamPrestige, conferences.get(c).confTeams.get(9).rivalTeam, conferences.get(c).confTeams.get(9).location, this));
-            teamVacancies.add(new Team(conferences.get(c).confTeams.get(10).name, conferences.get(c).confTeams.get(10).abbr, conferences.get(c).confName, conferences.get(c).confTeams.get(10).teamPrestige, conferences.get(c).confTeams.get(10).rivalTeam, conferences.get(c).confTeams.get(10).location, this));
-            teamVacancies.add(new Team(conferences.get(c).confTeams.get(11).name, conferences.get(c).confTeams.get(11).abbr, conferences.get(c).confName, conferences.get(c).confTeams.get(11).teamPrestige, conferences.get(c).confTeams.get(11).rivalTeam, conferences.get(c).confTeams.get(11).location, this));
+            teamVacancies.add(conferences.get(c).confTeams.get(10));
+            teamVacancies.add(conferences.get(c).confTeams.get(11));
         }
         return teamVacancies;
-    }
-
-    //New Hard Game Dialog
-    public ArrayList<String> getCoachListStr() {
-        ArrayList<String> teams = new ArrayList<>();
-        for (int c = 0; c < conferences.size(); c++) {
-            teams.add(new String(conferences.get(c).confName + ":  " + conferences.get(c).confTeams.get(9).name + "  [" + conferences.get(c).confTeams.get(9).teamPrestige + "]"));
-            teams.add(new String(conferences.get(c).confName + ":  " + conferences.get(c).confTeams.get(10).name + "  [" + conferences.get(c).confTeams.get(10).teamPrestige + "]"));
-            teams.add(new String(conferences.get(c).confName + ":  " + conferences.get(c).confTeams.get(11).name + "  [" + conferences.get(c).confTeams.get(11).teamPrestige + "]"));
-        }
-        return teams;
-    }
-
-
-    //Get Coaching Job Offers if fired or quit
-    public ArrayList<String> getCoachListStrFired(int rating, String oldTeam) {
-
-        ArrayList<String> teams = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
-                teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
-            }
-        }
-
-        if (teams.isEmpty()) {
-            teams = getCoachListStr();
-        }
-
-        return teams;
     }
 
     //Get Coach Job Offers List if fired or quit
@@ -3300,7 +3270,7 @@ public class League {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
+                teamVacancies.add(teamList.get(i));
             }
         }
 
@@ -3310,24 +3280,12 @@ public class League {
         return teamVacancies;
     }
 
-    public ArrayList<String> getCoachPromotionListStr(int rating, double offers, String oldTeam) {
-        ArrayList<String> teams = new ArrayList<>();
-        ArrayList<Team> teamVacancies = new ArrayList<>();
-        for (int i = 0; i < teamList.size(); ++i) {
-            if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
-                teams.add(new String(teamList.get(i).conference + ":  " + teamList.get(i).name + "  [" + teamList.get(i).teamPrestige + "]"));
-            }
-        }
-        return teams;
-    }
-
     //Get Coach Job Offers List for Team Transfer
     public ArrayList<Team> getCoachPromotionList(int rating, double offers, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
         for (int i = 0; i < teamList.size(); ++i) {
             if (teamList.get(i).getMinCoachHireReq() < rating && teamList.get(i).HC.isEmpty() && teamList.get(i).name != oldTeam && offers > 0.50) {
-                teamVacancies.add(new Team(teamList.get(i).name, teamList.get(i).abbr, teamList.get(i).conference, teamList.get(i).teamPrestige, teamList.get(i).rivalTeam, teamList.get(i).location, this));
+                teamVacancies.add(teamList.get(i));
             }
         }
 

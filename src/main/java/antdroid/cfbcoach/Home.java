@@ -165,8 +165,13 @@ public class Home extends AppCompatActivity {
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent myIntent = new Intent(Home.this, TutorialActivity.class);
-                Home.this.startActivity(myIntent);
+                //Intent myIntent = new Intent(Home.this, TutorialActivity.class);
+                //Home.this.startActivity(myIntent);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://www.antdroid.net/p/college-football-coach-career-edition.html"));
+                startActivity(intent);
             }
         });
 

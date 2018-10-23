@@ -143,7 +143,7 @@
             android:layout_margin="0dp"
             android:layout_weight="1"
             android:padding="0dp"
-            android:text="Tutorials"
+            android:text="Game Manual"
             android:textSize="12sp" />
 
         <Button

@@ -3988,6 +3988,20 @@ public class Team {
         return null;
     }
 
+    //Roster String
+
+    public String[] getTeamRosterString() {
+        ArrayList<Player> rosters = getAllPlayers();
+        String[] roster = new String[rosters.size()];
+        for(int i = 0; i < rosters.size(); i++) {
+            roster[i] = rosters.get(i).getPosNameYrOvrPot_OneLine();
+        }
+
+        return roster;
+    }
+
+
+
     /**
      * Gets rank str, i.e. 12 -> 12th, 3 -> 3rd
      *
