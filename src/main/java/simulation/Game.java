@@ -26,6 +26,8 @@ import positions.PlayerWR;
 
 public class Game implements Serializable {
 
+    private final DecimalFormat df2 = new DecimalFormat(".#");
+
     public final Team homeTeam;
     public final Team awayTeam;
 
@@ -156,7 +158,7 @@ public class Game implements Serializable {
 
     private int getHFadv() {
         //home field advantage
-        int footIQadv = (homeTeam.getCompositeFootIQ() - awayTeam.getCompositeFootIQ()) / 5;
+        int footIQadv = (int) (homeTeam.getCompositeFootIQ() - awayTeam.getCompositeFootIQ()) / 5;
         if (footIQadv > 3) footIQadv = 3;
         if (footIQadv < -3) footIQadv = -3;
         if (gameName.contains("Bowl") || gameName.contains("NC") || gameName.contains("SF"))
@@ -1641,7 +1643,7 @@ public class Game implements Serializable {
                 boolean successConversion = false;
                 if (Math.random() <= 0.50) {
                     //rushing
-                    int blockAdv = offense.getCompositeOLRush() - defense.getCompositeDLRush();
+                    int blockAdv = (int) offense.getCompositeOLRush() - (int) defense.getCompositeDLRush();
                     int yardsGain = (int) ((offense.getRB(0).ratSpeed + blockAdv) * Math.random() / 6);
                     if (yardsGain > 5) {
                         successConversion = true;
@@ -1656,7 +1658,7 @@ public class Game implements Serializable {
                         gameEventLog += getEventLogScoring() + "TOUCHDOWN!\n" + tdInfo + " " + offense.getRB(0).name + " stopped at the line of scrimmage, failed the 2pt conversion.";
                     }
                 } else {
-                    int pressureOnQB = defense.getCompositeDLPass() * 2 - offense.getCompositeOLPass();
+                    int pressureOnQB = (int) defense.getCompositeDLPass() * 2 - (int) offense.getCompositeOLPass();
                     double completion = (normalize(offense.getQB(0).ratPassAcc) + offense.getWR(0).ratCatch - defense.getCB(0).ratCoverage) / 2 + 25 - pressureOnQB / 20;
                     if (100 * Math.random() < completion) {
                         successConversion = true;
@@ -2202,7 +2204,7 @@ public class Game implements Serializable {
 
     private void recordSack(Team offense, Team defense, PlayerQB selQB, PlayerDL selDL, PlayerLB selLB, PlayerCB selCB, PlayerS selS) {
         String defender = "";
-        int sackloss = (3 + (int) (Math.random() * (normalize(defense.getCompositeDLPass()) - normalize(offense.getCompositeOLPass())) / 2));
+        int sackloss = (3 + (int) (Math.random() * (normalize((int)defense.getCompositeDLPass()) - normalize((int)offense.getCompositeOLPass())) / 2));
         if (sackloss < 2) sackloss = 2;
 
         ArrayList<Player> def = new ArrayList<>();
@@ -2927,11 +2929,11 @@ public class Game implements Serializable {
         StringBuilder gameC = new StringBuilder();
         StringBuilder gameR = new StringBuilder();
         
-        int homeRating = homeTeam.HC.get(0).ratDef + homeTeam.HC.get(0).ratOff + homeTeam.teamOffTalent + homeTeam.teamDefTalent + 3;
-        int awayRating = awayTeam.HC.get(0).ratDef + awayTeam.HC.get(0).ratOff + awayTeam.teamOffTalent + awayTeam.teamDefTalent;
+        int homeRating = (int) (homeTeam.HC.get(0).ratDef + homeTeam.HC.get(0).ratOff + homeTeam.teamOffTalent + homeTeam.teamDefTalent + 3);
+        int awayRating = (int) (awayTeam.HC.get(0).ratDef + awayTeam.HC.get(0).ratOff + awayTeam.teamOffTalent + awayTeam.teamDefTalent);
 
         gameL.append("Ranking\nRecord\nPPG\nOpp PPG\nYPG\nOpp YPG\n" +
-                "\nPass YPG\nRush YPG\nOpp PYPG\nOpp RYPG\n\nOff Talent\nDef Talent\nPrestige\n\nHC Ovr\nHC Off\nOffense\nHC Def\nDefense\n\nFavorite");
+                "\nPass YPG\nRush YPG\nOpp PYPG\nOpp RYPG\n\nOff Talent\nDef Talent\nPrestige\n\nHC\nHC Ovr\nHC Off\nOffense\nHC Def\nDefense\n\nFavorite");
         int g = awayTeam.numGames();
         Team t = awayTeam;
         gameC.append("#" + t.rankTeamPollScore + " " + t.abbr + "\n" + t.wins + "-" + t.losses + "\n" +
@@ -2939,9 +2941,11 @@ public class Game implements Serializable {
                 t.teamYards / g + " (" + t.rankTeamYards + ")\n" + t.teamOppYards / g + " (" + t.rankTeamOppYards + ")\n\n" +
                 t.teamPassYards / g + " (" + t.rankTeamPassYards + ")\n" + t.teamRushYards / g + " (" + t.rankTeamRushYards + ")\n" +
                 t.teamOppPassYards / g + " (" + t.rankTeamOppPassYards + ")\n" + t.teamOppRushYards / g + " (" + t.rankTeamOppRushYards + ")\n\n" +
-                t.teamOffTalent + " (" + t.rankTeamOffTalent + ")\n" + t.teamDefTalent + " (" + t.rankTeamDefTalent + ")\n" +
-                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n\n" +
-                t.HC.get(0).ratOvr + "\n" + t.HC.get(0).ratOff + "\n" + t.playbookOff.getStratName() + "\n" + t.HC.get(0).ratDef + "\n" + t.playbookDef.getStratName() + "\n\n" + getFavorite(homeRating, awayRating, false));
+                df2.format(t.teamOffTalent) + " (" + t.rankTeamOffTalent + ")\n" + df2.format(t.teamDefTalent) + " (" + t.rankTeamDefTalent + ")\n" +
+                t.teamPrestige + " (" + t.rankTeamPrestige + ")\n\n"
+                + t.HC.get(0).getInitialName() + "\n" +
+                t.HC.get(0).ratOvr + "\n" + t.HC.get(0).ratOff + "\n" + t.playbookOff.getStratName() + "\n" + t.HC.get(0).ratDef + "\n" + t.playbookDef.getStratName() +
+                "\n\n" + getFavorite(homeRating, awayRating, false));
         g = homeTeam.numGames();
         t = homeTeam;
         gameR.append("#" + t.rankTeamPollScore + " " + t.abbr + "\n" + t.wins + "-" + t.losses + "\n" +
@@ -2949,9 +2953,11 @@ public class Game implements Serializable {
                 t.teamYards / g + " (" + t.rankTeamYards + ")\n" + t.teamOppYards / g + " (" + t.rankTeamOppYards + ")\n\n" +
                 t.teamPassYards / g + " (" + t.rankTeamPassYards + ")\n" + t.teamRushYards / g + " (" + t.rankTeamRushYards + ")\n" +
                 t.teamOppPassYards / g + " (" + t.rankTeamOppPassYards + ")\n" + t.teamOppRushYards / g + " (" + t.rankTeamOppRushYards + ")\n\n" +
-                t.teamOffTalent + " (" + t.rankTeamOffTalent + ")\n" + t.teamDefTalent + " (" + t.rankTeamDefTalent + ")\n" +
+                df2.format(t.teamOffTalent) + " (" + t.rankTeamOffTalent + ")\n" + df2.format(t.teamDefTalent) + " (" + t.rankTeamDefTalent + ")\n" +
                 t.teamPrestige + " (" + t.rankTeamPrestige + ")\n\n" +
-                t.HC.get(0).ratOvr + "\n" + t.HC.get(0).ratOff + "\n" + t.playbookOff.getStratName() + "\n" + t.HC.get(0).ratDef + "\n" + t.playbookDef.getStratName() + "\n\n" + getFavorite(homeRating, awayRating, true));
+                t.HC.get(0).getInitialName() + "\n" +
+                t.HC.get(0).ratOvr + "\n" + t.HC.get(0).ratOff + "\n" + t.playbookOff.getStratName() + "\n" + t.HC.get(0).ratDef + "\n" + t.playbookDef.getStratName() +
+                "\n\n" + getFavorite(homeRating, awayRating, true));
 
         gameSum[0] = gameL.toString();
         gameSum[1] = gameC.toString();

@@ -64,7 +64,7 @@ public class PlayerQB extends Player {
         ratSpeed = spd;
         isRedshirt = rs;
         wasRedshirt = wasRS;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -94,7 +94,7 @@ public class PlayerQB extends Player {
         wasRedshirt = wasRS;
         isTransfer = transfer;
         isWalkOn = wo;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -332,16 +332,16 @@ public class PlayerQB extends Player {
         if (statsPassAtt < 1) {
             return 0;
         } else {
-            double rating = 100 * statsPassComp / (statsPassAtt);
+            float rating = (float) 100 * statsPassComp / (statsPassAtt);
             return rating;
         }
     }
 
-    public double getCareerPassPCT() {
+    public float getCareerPassPCT() {
         if (careerPassAtt + statsPassAtt < 1) {
             return 0;
         } else {
-            double rating = (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt));
+            float rating =(float) (100 * (statsPassComp + careerPassComp) / (statsPassAtt + careerPassAtt));
             return rating;
         }
     }

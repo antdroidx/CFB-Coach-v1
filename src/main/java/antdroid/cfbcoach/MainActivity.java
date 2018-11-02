@@ -45,6 +45,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -109,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean skipRetirementQ;
 
     //Universe Settings
-    private final int teamsStart = 12;
-    private final int confStart = 10;
     private final int seasonStart = 2018;
 
     String saveLeagueFileStr;
@@ -118,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
     private File customTeams;
     private File customBowls;
     private String customUri;
+
+    private final DecimalFormat df2 = new DecimalFormat(".#");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up spinner for examining team.
         examineConfSpinner = findViewById(R.id.examineConfSpinner);
         confList = new ArrayList<>();
-        for (int i = 0; i < confStart; i++) {
+        for (int i = 0; i < simLeague.conferences.size(); i++) {
             confList.add(simLeague.conferences.get(i).confName);
         }
         dataAdapterConf = new ArrayAdapter<>(this,
@@ -274,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
         examineTeamSpinner = findViewById(R.id.examineTeamSpinner);
         teamList = new ArrayList<>();
-        for (int i = 0; i < teamsStart; i++) {
+        for (int i = 0; i < simLeague.teamList.size(); i++) {
             teamList.add(simLeague.teamList.get(i).strRep());
         }
 
@@ -668,7 +670,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateCurrTeam() {
         teamList = new ArrayList<>();
         dataAdapterTeam.clear();
-        for (int i = 0; i < teamsStart; i++) {
+        for (int i = 0; i < currentConference.confTeams.size() ; i++) {
             teamList.add(currentConference.confTeams.get(i).strRep());
             dataAdapterTeam.add(teamList.get(i));
         }
@@ -693,7 +695,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateCurrConference() {
         confList.clear();
-        for (int i = 0; i < confStart; i++) {
+        for (int i = 0; i < simLeague.conferences.size(); i++) {
             confList.add(simLeague.conferences.get(i).confName);
         }
         dataAdapterConf.notifyDataSetChanged();
@@ -701,7 +703,7 @@ public class MainActivity extends AppCompatActivity {
         if (wantUpdateConf) {
             teamList = new ArrayList<>();
             dataAdapterTeam.clear();
-            for (int i = 0; i < teamsStart; i++) {
+            for (int i = 0; i < currentConference.confTeams.size() ; i++) {
                 teamList.add(currentConference.confTeams.get(i).strRep());
                 dataAdapterTeam.add(teamList.get(i));
             }
@@ -1296,7 +1298,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> rankings = new ArrayList<>();
         int dbSize;
         if (simLeague.currentWeek + 1 <= 18) dbSize = simLeague.currentWeek + 1;
-        else dbSize = 16;
+        else dbSize = 18;
 
         String[] weekSelection = new String[dbSize];
         for (int i = 0; i < weekSelection.length; ++i) {
@@ -1766,17 +1768,26 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the National Championship Game!",
                                     Toast.LENGTH_SHORT).show();
                     } else {
-                        if (showToasts)
+                        if (showToasts && simLeague.expPlayoffs)
                             Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the " +
                                             weekGameName + "!",
                                     Toast.LENGTH_SHORT).show();
+                        else {
+                            if (showToasts && simLeague.currentWeek == 13)
+                                Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the " +
+                                                weekGameName + "!",
+                                        Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else if (simLeague.currentWeek == 12) {
                     if (showToasts)
                         Toast.makeText(MainActivity.this, userTeam.name + " was not invited to the Conference Championship.",
                                 Toast.LENGTH_SHORT).show();
                 } else if (simLeague.currentWeek == 13) {
-                    if (showToasts)
+                    if (showToasts && simLeague.expPlayoffs)
+                        Toast.makeText(MainActivity.this, userTeam.name + " did not make the College Football Playoffs.",
+                                Toast.LENGTH_SHORT).show();
+                    if (showToasts && !simLeague.expPlayoffs)
                         Toast.makeText(MainActivity.this, userTeam.name + " was not invited to a bowl game.",
                                 Toast.LENGTH_SHORT).show();
                 }
@@ -2636,7 +2647,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();
         String[] rankingsSelection =
-                {"Poll Votes", "Prestige", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
+                {"Power Index", "Prestige", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
                         "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class", "Coach - Overall", "Coach Score"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
@@ -2789,7 +2800,7 @@ public class MainActivity extends AppCompatActivity {
             selection[3] = "Freshman of the Year";
             selection[4] = "All-American Team";
             selection[5] = "All-Freshman Team";
-            for (int i = 0; i < confStart; ++i) {
+            for (int i = 0; i < simLeague.conferences.size(); ++i) {
                 selection[i + 6] = simLeague.conferences.get(i).confName + " All-Conf Team";
             }
         }
@@ -2808,8 +2819,8 @@ public class MainActivity extends AppCompatActivity {
         final String[] freshmanAwardList = simLeague.getFreshmanCeremonyStr().split(">");
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
         final String[] allFreshman = simLeague.getAllFreshmanStr().split(">");
-        final String[][] allConference = new String[confStart][];
-        for (int i = 0; i < confStart; ++i) {
+        final String[][] allConference = new String[simLeague.conferences.size()][];
+        for (int i = 0; i < simLeague.conferences.size(); ++i) {
             allConference[i] = simLeague.getAllConfStr(i).split(">");
         }
 
@@ -3215,10 +3226,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         goals = "Welcome to the " + simLeague.getYear() + " College Football season!\n\n";
-        goals += "This season your team is projected to finish ranked #" + userTeam.projectedPoll + "!\n\n";
+        goals += "This season your team is projected to finish ranked #" + userTeam.projectedPollRank + "!\n\n";
 
-        if (userTeam.projectedPoll > 100) {
-            goals += "Despite being projected at #" + userTeam.projectedPoll + ", your goal is to finish in the Top 100.\n\n";
+        if (userTeam.projectedPollRank > 100) {
+            goals += "Despite being projected at #" + userTeam.projectedPollRank + ", your goal is to finish in the Top 100.\n\n";
         }
 
         goals += "In conference play, your team is expected to finish " + userTeam.getRankStr(confPos) + " in the " + userTeam.conference + " conference.\n\n";
@@ -3420,9 +3431,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
-                //changeTeams(coachList, item);
-                //updateHeaderBar();
-                //examineTeam(currentTeam.name);
                 viewTeam(jobList, item);
             }
         });
@@ -3531,7 +3539,7 @@ public class MainActivity extends AppCompatActivity {
         String[] temp = new String[jobListTemp.size()];
 
         for(int i=0; i < jobListTemp.size(); i++) {
-            temp[i] = jobListTemp.get(i).name;
+            temp[i] = jobListTemp.get(i).name + "\n Prestige: #" + jobListTemp.get(i).rankTeamPrestige + "  Off: " + df2.format(jobListTemp.get(i).teamOffTalent) + "  Def: " + df2.format(jobListTemp.get(i).teamDefTalent);
         }
 
         return temp;
@@ -3542,8 +3550,8 @@ public class MainActivity extends AppCompatActivity {
         String[] teamRoster = teamList.get(item).getTeamRosterString();
 
         AlertDialog.Builder roster = new AlertDialog.Builder(this);
-        roster.setTitle(teamList.get(item).name + " Team Roster\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + teamList.get(item).teamOffTalent + " | Def: " + teamList.get(item).teamDefTalent);
-        roster.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+        roster.setTitle(teamList.get(item).name + " Team Roster\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + df2.format(teamList.get(item).teamOffTalent) + " | Def: " + df2.format(teamList.get(item).teamDefTalent));
+        roster.setNeutralButton("Decline", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -3567,11 +3575,6 @@ public class MainActivity extends AppCompatActivity {
         }
         roster.setMessage(sb);
 
-/*        roster.setItems(teamRoster, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                // Do something with the selection
-            }
-        });*/
         roster.setCancelable(false);
         AlertDialog teamWindow = roster.create();
         teamWindow.show();
@@ -3736,7 +3739,7 @@ public class MainActivity extends AppCompatActivity {
                         //Get String of user team's players and such
                         StringBuilder sb = new StringBuilder();
                         userTeam.sortPlayers();
-                        sb.append(userTeam.conference + "," + userTeam.name + "," + userTeam.abbr + "," + userTeam.getUserRecruitLevel() + "," + userTeam.HC.get(0).ratTalent + "%\n");
+                        sb.append(userTeam.conference + "," + userTeam.name + "," + userTeam.abbr + "," + userTeam.getUserRecruitBudget() + "," + userTeam.HC.get(0).ratTalent + "%\n");
                         sb.append(userTeam.getPlayerInfoSaveFile());
                         sb.append("END_TEAM_INFO%\n");
                         sb.append(userTeam.getRecruitsInfoSaveFile());
@@ -4286,7 +4289,7 @@ public class MainActivity extends AppCompatActivity {
         okChangeNameButton.setText("UPDATE");
 
         //fill in default data
-        for (int i = 0; i < confStart; i++) {
+        for (int i = 0; i < simLeague.conferences.size(); i++) {
             confEditor.add(simLeague.conferences.get(i).confName);
         }
         for (int i = 0; i < simLeague.conferences.get(simLeague.getConfNumber(currentTeam.conference)).confTeams.size(); i++) {
@@ -4389,7 +4392,7 @@ public class MainActivity extends AppCompatActivity {
                         simLeague.updateTeamConf(newConf, oldConf, simLeague.getConfNumber(currentConference.confName));  //update all other conf teams
 
                         confEditor.clear();
-                        for (int i = 0; i < confStart; i++) {
+                        for (int i = 0; i < simLeague.conferences.size(); i++) {
                             confEditor.add(simLeague.conferences.get(i).confName);
                         }
                         editorAdaptorConf.notifyDataSetChanged();
@@ -4441,4 +4444,58 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
+    public void disciplineAction(Player player, String issue, int gamesA, int gamesB) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Disicpline Action Required");
+        builder.setMessage(player.name + " violated a team policy related to " + issue + ".\n\nHow do you want to proceed?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Suspend " + gamesA + " Games", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform action on click
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Suspend " + gamesB + " Games", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform action on click
+                dialog.dismiss();
+            }
+        });
+        builder.setNeutralButton("Ignore", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform action on click
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    private void transferPlayer(Player player) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Transfer Request");
+        builder.setMessage(player.position + " " + player.name + " would like to transfer to your program. He is rated overall at " + player.ratOvr + ".\n\nHow do you want to proceed?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Accept Request", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // SOMETHING SOMETHING
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Reject Request", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // SOMETHING SOMETHING
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
 }

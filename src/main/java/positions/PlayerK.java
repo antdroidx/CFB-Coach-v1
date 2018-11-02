@@ -54,7 +54,7 @@ public class PlayerK extends Player {
         isRedshirt = rs;
         wasRedshirt = wasRS;
 
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -84,7 +84,7 @@ public class PlayerK extends Player {
 
         isTransfer = transfer;
         isWalkOn = wo;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -275,22 +275,22 @@ public class PlayerK extends Player {
         return (statsFGMade * 20 + statsXPMade * 5) * (int) getFGpct() / 100 + ratOvr * 10 + (careerFGMade * 25 + careerXPMade * 5) * (int) (getCareerFGpct() / 100) + ratOvr * 10 * year;
     }
 
-    public double getFGpct() {
+    public float getFGpct() {
         if (statsFGAtt < 1) {
             return 0;
         } else {
 
-            int rating = 100 * statsFGMade / (statsFGAtt);
+            float rating = 100 * (float) statsFGMade / (statsFGAtt);
             return rating;
         }
     }
 
-    private double getCareerFGpct() {
+    private float getCareerFGpct() {
         if (statsFGAtt + careerFGAtt < 1) {
             return 0;
         } else {
 
-            int rating = 100 * (statsFGMade + careerFGMade) / (statsFGAtt + careerFGAtt);
+            float rating = (float) 100 * (statsFGMade + careerFGMade) / (statsFGAtt + careerFGAtt);
             return rating;
         }
     }
@@ -302,13 +302,13 @@ public class PlayerK extends Player {
         pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
 
         if (statsXPAtt > 0) {
-            pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + (100 * statsXPMade / (statsXPAtt)) + "%");
+            pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + df2.format(100 * (float) statsXPMade / (statsXPAtt)) + "%");
         } else {
             pStats.add("XP Made/Att: 0/0>XP Percent: 0%");
         }
 
         if (statsFGAtt > 0) {
-            pStats.add("FG Made/Att: " + statsFGMade + "/" + statsFGAtt + ">FG Percent: " + (100 * statsFGMade / statsFGAtt + "%"));
+            pStats.add("FG Made/Att: " + statsFGMade + "/" + statsFGAtt + ">FG Percent: " + df2.format(getFGpct()) + "%");
         } else {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
@@ -325,13 +325,13 @@ public class PlayerK extends Player {
         pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
 
         if (statsXPAtt > 0) {
-            pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + (100 * statsXPMade / (statsXPAtt)) + "%");
+            pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + df2.format(100 * (float) statsXPMade / (statsXPAtt)) + "%");
         } else {
             pStats.add("XP Made/Att: 0/0>XP Percent: 0%");
         }
 
         if (statsFGAtt > 0) {
-            pStats.add("FG Made/Att: " + statsFGMade + "/" + statsFGAtt + ">FG Percent: " + (100 * statsFGMade / statsFGAtt + "%"));
+            pStats.add("FG Made/Att: " + statsFGMade + "/" + statsFGAtt + ">FG Percent: " + df2.format(getFGpct()) + "%");
         } else {
             pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
         }
@@ -348,14 +348,14 @@ public class PlayerK extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         if ((statsXPAtt + careerXPAtt) > 0) {
             pStats.add("XP Made/Att: " + (statsXPMade + careerXPMade) + "/" + (statsXPAtt + careerXPAtt) +
-                    ">XP Percentage: " + (100 * (statsXPMade + careerXPMade) / (statsXPAtt + careerXPAtt)) + "%");
+                    ">XP Percentage: " +df2.format (100 * (float) (statsXPMade + careerXPMade) / (statsXPAtt + careerXPAtt)) + "%");
         } else {
             pStats.add("XP Made/Att: 0/0>XP Percentage: 0%");
         }
 
         if ((statsFGAtt + careerFGAtt) > 0) {
             pStats.add("FG Made/Att: " + (statsFGMade + careerFGMade) + "/" + (statsFGAtt + careerFGAtt) +
-                    ">FG Percentage: " + (100 * (statsFGMade + careerFGMade) / (statsFGAtt + careerFGAtt) + "%"));
+                    ">FG Percentage: " + df2.format(getCareerFGpct()) + "%");
         } else {
             pStats.add("FG Made/Att: 0/0>FG Percentage: 0%");
         }

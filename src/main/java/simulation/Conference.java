@@ -190,6 +190,7 @@ public class Conference {
         }
     }
 
+
     /**
      * Sets up schedule for in-conference games using round robin scheduling.
      */
@@ -198,34 +199,8 @@ public class Conference {
         robinWeek = 0;
         evenYear = (league.leagueHistory.size() % 2 == 0);
 
-        // Set up int arrays for each team's home/away rotation.
-        // Theoretically every year you should change off between having 5 home games and 4 away games in conference
-        if (league.leagueHistory.size() == 0 || confTeams.get(0).evenYearHomeOpp == null) {
-            int[][] evenHomeGames = new int[12][];
-            evenHomeGames[0] = new int[]{11, 7, 3, 10, 6};
-            evenHomeGames[1] = new int[]{8, 4, 0, 9};
-            evenHomeGames[2] = new int[]{9, 5, 1, 8, 10};
-            evenHomeGames[3] = new int[]{6, 2, 10, 7};
-            evenHomeGames[4] = new int[]{7, 3, 11, 6};
-            evenHomeGames[5] = new int[]{4, 0, 8, 11};
-            evenHomeGames[6] = new int[]{5, 1, 9, 2};
-            evenHomeGames[7] = new int[]{2, 10, 6, 5, 1};
-            evenHomeGames[8] = new int[]{3, 11, 7, 0};
-            evenHomeGames[9] = new int[]{0, 8, 4, 3, 5};
-            evenHomeGames[10] = new int[]{1, 9, 5, 4};
-            evenHomeGames[11] = new int[]{10, 6, 2, 1, 3};
-
-
-            for (int x = 0; x < evenHomeGames.length; x++) {
-                StringBuilder sb = new StringBuilder();
-                for (int y = 0; y < evenHomeGames[x].length; y++) {
-                    sb.append(confTeams.get(evenHomeGames[x][y]).abbr + ",");
-                }
-                confTeams.get(x).evenYearHomeOpp = sb.toString();
-            }
-        }
         for (int r = 0; r < 9; ++r) {
-            for (int g = 0; g < ((confTeams.size() + 1) / 2); ++g) {
+            for (int g = 0; g < (confTeams.size()/ 2); ++g) {
                 Team a = confTeams.get((robinWeek + g) % (confTeams.size() - 1));
                 Team b;
                 if (g == 0) {
@@ -236,41 +211,31 @@ public class Conference {
 
                 Game gm;
 
-                // Check whether it's an even year and if team B appears in team A's even year home game list, or if it's not an even year and team A appears in team B's list
+                    if (r%2== 0) {
+                        if (a.rivalTeam.equals(b.abbr)) {
+                            gm = new Game(a, b, "Rivalry");
+                        } else {
+                            gm = new Game(a, b, "Conference");
+                        }
+                    } else {
+                        if (a.rivalTeam.equals(b.abbr)) {
+                            gm = new Game(b, a, "Rivalry");
+                        } else {
+                            gm = new Game(b, a, "Conference");
+                        }
+                    }
 
-                if ((evenYear && a.evenYearHomeOpp.contains(b.abbr)) || (evenYear && !b.evenYearHomeOpp.contains(a.abbr)) || (!evenYear && !a.evenYearHomeOpp.contains((b.abbr))) || (!evenYear && b.evenYearHomeOpp.contains((a.abbr)))) {
-                    if (a.rivalTeam.equals(b.abbr)) {
-                        gm = new Game(a, b, "Rivalry Game");
-                    } else {
-                        gm = new Game(a, b, "Conference");
-                    }
-                }
-
-                // Basically check all the reverse scenarios above, anything that would cause B to be the home team.
-                else if ((evenYear && b.evenYearHomeOpp.contains(a.abbr) || (evenYear && !a.evenYearHomeOpp.contains(b.abbr)) || (!evenYear && a.evenYearHomeOpp.contains((b.abbr))) || (!evenYear && !b.evenYearHomeOpp.contains(a.abbr)))) {
-                    if (a.rivalTeam.equals(b.abbr)) {
-                        gm = new Game(b, a, "Rivalry Game");
-                    } else {
-                        gm = new Game(b, a, "Conference");
-                    }
-                } else { // I'm 99.9% sure all scenarios and possibilities are covered above, but lets not break the game if I'm wrong
-                    if (a.rivalTeam.equals(b.abbr)) {
-                        gm = new Game(b, a, "Rivalry Game");
-                    } else {
-                        gm = new Game(b, a, "Conference");
-                    }
-                }
                 a.gameSchedule.add(gm);
                 b.gameSchedule.add(gm);
 
-                if (a.userControlled == true)
-                    System.out.println("User Controlled Home Schedule: " + a.evenYearHomeOpp);
             }
-            robinWeek++;
+            robinWeek = robinWeek + 3;
         }
-
-
     }
+
+
+
+
 
     /**
      * Sets up schedule for OOC games, which are played in 3 weeks.
@@ -428,48 +393,55 @@ public class Conference {
         for (int i = 0; i < confTeams.size(); ++i) {
             confTeams.get(i).updatePollScore();
         }
-        Collections.sort(confTeams, new CompTeamConfWins());
 
-        int winsFirst = confTeams.get(0).getConfWins();
-        Team t = confTeams.get(0);
+        ArrayList<Team> teams = new ArrayList<>();
+        for(int i = 0; i < confTeams.size(); ++i) {
+            if (league.penalizedTeam1 != confTeams.get(i) && league.penalizedTeam2 != confTeams.get(i)) teams.add(confTeams.get(i));
+        }
+
+
+        Collections.sort(teams, new CompTeamConfWins());
+
+        int winsFirst = teams.get(0).getConfWins();
+        Team t = teams.get(0);
         int i = 0;
         ArrayList<Team> teamTB = new ArrayList<>();
         while (t.getConfWins() == winsFirst) {
             teamTB.add(t);
             ++i;
-            t = confTeams.get(i);
+            t = teams.get(i);
         }
         if (teamTB.size() > 2) {
             // ugh 3 way tiebreaker
             Collections.sort(teamTB, new CompTeamPoll());
             for (int j = 0; j < teamTB.size(); ++j) {
-                confTeams.set(j, teamTB.get(j));
+                teams.set(j, teamTB.get(j));
             }
 
         }
 
-        int winsSecond = confTeams.get(1).getConfWins();
-        t = confTeams.get(1);
+        int winsSecond = teams.get(1).getConfWins();
+        t = teams.get(1);
         i = 1;
         teamTB.clear();
         while (t.getConfWins() == winsSecond) {
             teamTB.add(t);
             ++i;
-            t = confTeams.get(i);
+            t = teams.get(i);
         }
         if (teamTB.size() > 2) {
             // ugh 3 way tiebreaker
             Collections.sort(teamTB, new CompTeamPoll());
             for (int j = 0; j < teamTB.size(); ++j) {
-                confTeams.set(1 + j, teamTB.get(j));
+                teams.set(1 + j, teamTB.get(j));
             }
 
         }
 
-        ccg = new Game(confTeams.get(0), confTeams.get(1), confName + " CCG");
-        confTeams.get(0).gameSchedule.add(ccg);
-        confTeams.get(1).gameSchedule.add(ccg);
-        league.newsStories.get(league.currentWeek + 1).add("Upcoming: " + confName + " Championship Game>" + confTeams.get(0).strRankTeamRecord() + " will host " + confTeams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
+        ccg = new Game(teams.get(0), teams.get(1), confName + " CCG");
+        teams.get(0).gameSchedule.add(ccg);
+        teams.get(1).gameSchedule.add(ccg);
+        league.newsStories.get(league.currentWeek + 1).add("Upcoming: " + confName + " Championship Game>" + teams.get(0).strRankTeamRecord() + " will host " + teams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
     }
 
     /**
@@ -479,22 +451,20 @@ public class Conference {
         // Play CCG between top 2 teams
         ccg.playGame();
         if (ccg.homeScore > ccg.awayScore) {
-            confTeams.get(0).confChampion = "CC";
-            confTeams.get(0).totalCCs++;
-            confTeams.get(1).totalCCLosses++;
-            confTeams.get(0).HC.get(0).confchamp++;
-            confTeams.get(1).HC.get(0).bowllosses++;
+            ccg.homeTeam.confChampion = "CC";
+            ccg.homeTeam.totalCCs++;
+            ccg.awayTeam.totalCCLosses++;
+            ccg.homeTeam.HC.get(0).confchamp++;
             league.newsStories.get(13).add(
                     ccg.homeTeam.name + " wins the " + confName + "!>" +
                             ccg.homeTeam.strRep() + " took care of business in the conference championship against " + ccg.awayTeam.strRep() +
                             ", winning at home with a score of " + ccg.homeScore + " to " + ccg.awayScore + "."
             );
         } else {
-            confTeams.get(1).confChampion = "CC";
-            confTeams.get(1).totalCCs++;
-            confTeams.get(0).totalCCLosses++;
-            confTeams.get(1).HC.get(0).confchamp++;
-            confTeams.get(0).HC.get(0).bowllosses++;
+            ccg.awayTeam.confChampion = "CC";
+            ccg.awayTeam.totalCCs++;
+            ccg.homeTeam.totalCCLosses++;
+            ccg.awayTeam.HC.get(0).confchamp++;
             league.newsStories.get(13).add(
                     ccg.awayTeam.name + " wins the " + confName + "!>" +
                             ccg.awayTeam.strRep() + " surprised many in the conference championship against " + ccg.homeTeam.strRep() +

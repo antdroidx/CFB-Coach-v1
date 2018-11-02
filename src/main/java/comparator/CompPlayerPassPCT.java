@@ -11,6 +11,6 @@ import positions.PlayerQB;
 public class CompPlayerPassPCT implements Comparator<PlayerQB> {
     @Override
     public int compare(PlayerQB a, PlayerQB b) {
-        return a.getPassPCT() > b.getPassPCT() ? -1 : a.getPassPCT() == b.getPassPCT() ? 0 : 1;
+        return (float) a.getPassPCT() > (float) b.getPassPCT() ? -1 :(float) a.getPassPCT() == (float) b.getPassPCT() ? 0 : 1;
     }
 }

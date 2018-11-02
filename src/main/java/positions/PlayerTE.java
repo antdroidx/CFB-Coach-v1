@@ -64,7 +64,7 @@ public class PlayerTE extends Player {
         isRedshirt = rs;
         wasRedshirt = wasRS;
 
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -95,7 +95,7 @@ public class PlayerTE extends Player {
 
         isTransfer = transfer;
         isWalkOn = wo;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;

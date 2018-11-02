@@ -57,7 +57,7 @@ public class PlayerDL extends Player {
         wasRedshirt = wasRS;
 
         position = "DL";
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -114,7 +114,7 @@ public class PlayerDL extends Player {
 
         isTransfer = transfer;
         isWalkOn = wo;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;

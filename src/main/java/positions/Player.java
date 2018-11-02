@@ -26,7 +26,7 @@ Player {
     public int ratImprovement;
     public int cost;
     int progression;
-    public int region;
+    public int homeState;
     public int personality;
     public int height;
     public int weight;
@@ -63,9 +63,6 @@ Player {
 
     public boolean isInjured;
     public Injury injury;
-
-    public int heightBase = 60;
-    public int weightBase = 160;
 
     final int attrBase = 50;
     final int ratBase = 60;
@@ -125,17 +122,22 @@ Player {
     public int gameFGMade;
     public int gameXPAttempts;
     public int gameXPMade;
-    final DecimalFormat df2 = new DecimalFormat(".##");
+    final DecimalFormat df2 = new DecimalFormat(".#");
 
     private final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
-    protected final String[] potGrades = {"F", "F", "D", "D", "C", "C", "B", "B", "A", "A"};
 
     public void createGenericAttributes() {
         ratPot = (int) (attrBase + 50 * Math.random());
         ratFootIQ = (int) (attrBase + 50 * Math.random());
         ratDur = (int) (attrBase + 50 * Math.random());
         personality = (int) (attrBase + 50 * Math.random());
-        region = (int) (Math.random() * 50);
+        homeState = (int) (Math.random() * 50);
+    }
+
+    public int yearCompensation(int stars) {
+        int tmp = stars;
+        if(year < 4) tmp = stars * (int)(Math.random()*(4-year));
+        return tmp;
     }
 
     public String getYrStr() {
@@ -333,9 +335,9 @@ Player {
 
     public String getPosNameYrOvrPot_OneLine() {
         if (injury != null) {
-            return position + " " + getInitialName() + " [" + getYrStr() + "] Ovr: " + ratOvr + " " + injury.toString();
+            return position + " " + getInitialName() + " [" + getYrStr() + "]  Ovr: " + ratOvr + " " + injury.toString();
         }
-        return position + " " + getInitialName() + " [" + getYrStr() + "] " + "Ovr: " + ratOvr;
+        return position + " " + getInitialName() + " [" + getYrStr() + "] " + " Ovr: " + ratOvr;
     }
 
     public String getPosNameYrOvr_Str() {
@@ -445,7 +447,7 @@ Player {
     }
 
     int getLocationCost() {
-        double locFactor = Math.abs(team.location - (region/10)) - 2.5;
+        double locFactor = Math.abs(team.location - (homeState /10)) - 2.5;
         return cost + (int) (Math.random() * (locFactor * locationDiscount));
     }
 
@@ -504,19 +506,17 @@ Player {
     }
 
 
-/*    String getRegion(int region) {
-        String location;
-        if (region == 0) location = "West";
-        else if (region == 1) location = "Midwest";
-        else if (region == 2) location = "Central";
-        else if (region == 3) location = "East";
-        else location = "South";
+    public int getRegion() {
+        int location;
+        location = homeState/10;
         return location;
-    }*/
+    }
 
-    String getRegion(int region) {
+    public String getHomeState(int region) {
         return team.league.states[region];
     }
+
+
 
 
     public String getPersonality(int personality) {
@@ -599,7 +599,7 @@ Player {
     public ArrayList<String> stringPlayerAttributes() {
         ArrayList<String> pAttr = new ArrayList<>();
         pAttr.add("Height " + getHeight() + ">Weight: " + getWeight());
-        pAttr.add("Home State: " + getRegion(region) + ">Scout Grade: " + getScoutingGradeString());
+        pAttr.add("Home State: " + getHomeState(homeState) + ">Scout Grade: " + getScoutingGradeString());
         pAttr.add("Personality: " + getLetterGrade(personality) + " > " + getStatus());
         pAttr.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
         return pAttr;

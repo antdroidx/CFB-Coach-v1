@@ -49,7 +49,7 @@ public class PlayerOL extends Player {
         weight = w;
         ratOvr = getOverall();
 
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
 
@@ -76,7 +76,7 @@ public class PlayerOL extends Player {
 
         isTransfer = transfer;
         isWalkOn = wo;
-        region = reg;
+        homeState = reg;
         personality = trait;
         troubledTimes = 0;
         recruitRating = scout;
@@ -144,7 +144,7 @@ public class PlayerOL extends Player {
         ratPassBlock = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratAwareness = (int) (ratBase + stars * customFactor - ratTolerance * Math.random());
         ratOvr = getOverall();
-        region = (int) (Math.random() * 5);
+        homeState = (int) (Math.random() * 5);
         personality = (int) (attrBase + 50 * Math.random());
 
         if (custom) isWalkOn = true;

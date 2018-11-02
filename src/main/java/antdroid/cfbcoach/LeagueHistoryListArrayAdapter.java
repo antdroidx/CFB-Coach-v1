@@ -45,6 +45,22 @@ class LeagueHistoryListArrayAdapter extends ArrayAdapter<String> {
                 // User team won POTY, make it special color
                 textBottom.setTextColor(Color.parseColor("#5994de"));
             }
+        } else if (record.length == 4) {
+            textTop.setText(record[0]);
+            textMiddle.setText(record[1]);
+            textBottom.setText(record[2] + "\n" + record[3] );
+            if (record[1].split(" ")[1].equals(userTeamAbbr)) {
+                // User team won NCG, make it special color
+                textMiddle.setTextColor(Color.parseColor("#5994de"));
+            }
+            if (record[2].split(" ")[5].equals(userTeamAbbr)) {
+                // User team won POTY, make it special color
+                textBottom.setTextColor(Color.parseColor("#5994de"));
+            }
+            if (record[3].split(" ")[5].equals(userTeamAbbr)) {
+                // User team won POTY, make it special color
+                textBottom.setTextColor(Color.parseColor("#5994de"));
+            }
         }
 
         return rowView;

@@ -79,7 +79,7 @@ public class PlayerRB extends Player {
         ratCatch = cat;
         isRedshirt = rs;
         wasRedshirt = wasRS;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
@@ -111,7 +111,7 @@ public class PlayerRB extends Player {
         wasRedshirt = wasRS;
         isTransfer = transfer;
         isWalkOn = wo;
-        region = reg;
+        homeState = reg;
         personality = trait;
         recruitRating = scout;
         height = h;
