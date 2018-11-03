@@ -2025,10 +2025,10 @@ public class MainActivity extends AppCompatActivity {
             /*
               Clicked Save League in drop down menu
              */
-            if (simLeague.getYear() == seasonStart || simLeague.currentWeek < 13) {
+            if (simLeague.getYear() != seasonStart && simLeague.currentWeek < 7) {
                 saveLeague();
-            } else if (simLeague.currentWeek < 13) {
-                Toast.makeText(MainActivity.this, "Save Function Disabled. Save only available in Pre-Season and Reg Season.",
+            } else if (simLeague.currentWeek > 6) {
+                Toast.makeText(MainActivity.this, "Save Function Disabled. Save only available in prior to Week 6.",
                         Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(MainActivity.this, "Save Function disabled during initial season.",
@@ -3254,8 +3254,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
-                })
-                .setNegativeButton("SAVE PROGRESS", new DialogInterface.OnClickListener() {
+                });
+        if(simLeague.getYear() != seasonStart)
+                builder.setNegativeButton("SAVE PROGRESS", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         saveLeague();

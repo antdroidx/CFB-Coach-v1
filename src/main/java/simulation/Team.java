@@ -52,7 +52,7 @@ public class Team {
     public int totalNCLosses;
     public int totalBowls;
     public int totalBowlLosses;
-    public String evenYearHomeOpp;
+    //public String evenYearHomeOpp;
 
     public TeamStreak winStreak;
     public TeamStreak yearStartWinStreak;
@@ -354,11 +354,9 @@ public class Team {
         }
 
         // Lines 1 is Team Home/Away Rotation
-        int startOfPlayers = 2;
-        if (!lines[1].split(",")[0].equals("HC")) evenYearHomeOpp = lines[1];
-        else {
-            startOfPlayers = 1;
-        }
+        int startOfPlayers =2;
+        if (!lines[1].split(",")[0].equals("HC")) startOfPlayers = 2;
+        else startOfPlayers = 1;
 
         // Rest of lines are player info
         for (int i = startOfPlayers; i < lines.length; ++i) {
