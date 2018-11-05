@@ -39,7 +39,6 @@ public class Conference {
     private Game ccg;
     public final ArrayList<Division> divisions;
 
-    private int robinWeek;
     private final double promotionFactor = 1.15;
     private final double relegationFactor = 0.85;
     public final int minConfTeams = 8;
@@ -213,10 +212,10 @@ public class Conference {
      */
     public void setUpDivisionSchedule() {
         //schedule in conf matchups
-        robinWeek = 0;
+        int robinWeek = 0;
         for (int i = 0; i < 2; i++) {
             int div = divisions.get(i).divTeams.size();
-            for (int r = 0; r < 6; ++r) {
+            for (int r = 0; r < 5; ++r) {
                 for (int g = 0; g < (div / 2); ++g) {
                     Team a = divisions.get(i).divTeams.get((robinWeek + g) % (div - 1));
                     Team b;
@@ -245,7 +244,7 @@ public class Conference {
                     b.gameSchedule.add(gm);
 
                 }
-                robinWeek = robinWeek + 3;
+                robinWeek++;
             }
         }
     }
@@ -279,38 +278,37 @@ public class Conference {
      */
     public void setUpSchedule() {
         //schedule in conf matchups
-        robinWeek = 0;
+        int robinWeek = 0;
+        int robinCounter = 1;
+        int confSize = confTeams.size() - 1;
+
+        if(confTeams.size() > 11) {
+            robinCounter = 3;
+        }
 
         for (int r = 0; r < 9; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
-                Team a = confTeams.get((robinWeek + g) % (confTeams.size() - 1));
+                Team a = confTeams.get((robinWeek + g) % confSize);
                 Team b;
                 if (g == 0) {
-                    b = confTeams.get((confTeams.size() - 1));
+                    b = confTeams.get(confSize);
                 } else {
-                    b = confTeams.get(((confTeams.size() - 1) - g + robinWeek) % (confTeams.size() - 1));
+                    b = confTeams.get((confSize - g + robinWeek) % confSize);
                 }
 
                 Game gm;
 
-                    if (r%2== 0) {
-                        if (a.rivalTeam.equals(b.abbr)) {
-                            gm = new Game(a, b, "Rivalry");
-                        } else {
+                    if (r%2 == 0 && confSize > 10) {
                             gm = new Game(a, b, "Conference");
-                        }
                     } else {
-                        if (a.rivalTeam.equals(b.abbr)) {
-                            gm = new Game(b, a, "Rivalry");
-                        } else {
                             gm = new Game(b, a, "Conference");
-                        }
                     }
+
                 a.gameSchedule.add(gm);
                 b.gameSchedule.add(gm);
 
             }
-            robinWeek = robinWeek + 3;
+            robinWeek += robinCounter;
         }
     }
 

@@ -131,10 +131,6 @@ public class Game implements Serializable {
             gameName = "Game";
         }
 
-        if (gameName.equals("Conference") && (homeTeam.rivalTeam.equals(awayTeam.abbr) || awayTeam.rivalTeam.equals(homeTeam.abbr))) {
-            // Rivalry game!
-            gameName = "Rivalry Game";
-        }
     }
 
     public Game(Team home, Team away) {
@@ -569,14 +565,6 @@ public class Game implements Serializable {
             hasPlayed = true;
 
             addNewsStory();
-
-            if (homeTeam.rivalTeam.equals(awayTeam.abbr) || awayTeam.rivalTeam.equals(homeTeam.abbr)) {
-                if (homeScore > awayScore) {
-                    homeTeam.wonRivalryGame = true;
-                } else {
-                    awayTeam.wonRivalryGame = true;
-                }
-            }
 
             homeTeam.checkForInjury();
             awayTeam.checkForInjury();

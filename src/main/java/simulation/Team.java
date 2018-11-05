@@ -35,7 +35,6 @@ public class Team {
     public String division;
     public int location;
     public String rivalTeam;
-    public boolean wonRivalryGame;
     public ArrayList<String> teamHistory;
     public ArrayList<String> hallOfFame;
     public LeagueRecords teamRecords;
@@ -270,7 +269,6 @@ public class Team {
         totalBowls = 0;
         totalBowlLosses = 0;
 
-        wonRivalryGame = false;
         teamPoints = 0;
         teamOppPoints = 0;
         teamYards = 0;
@@ -319,7 +317,6 @@ public class Team {
         playbookOffNum = 0;
         playbookDefNum = 0;
         disciplinePts = 0;
-        wonRivalryGame = false;
 
         // Actually load the team from the string
         String[] lines = loadStr.split("%");
@@ -4170,7 +4167,7 @@ public class Team {
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
             g = gameSchedule.get(i);
-            if (g.gameName.equals("Conference") || g.gameName.equals("Rivalry")) {
+            if (g.gameName.equals("Conference") || g.gameName.equals("Division")) {
                 // in conference game, see if was won
                 if (g.homeTeam == this && g.homeScore > g.awayScore) {
                     confWins++;
@@ -4192,7 +4189,7 @@ public class Team {
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
             g = gameSchedule.get(i);
-            if (g.gameName.equals("Conference") || g.gameName.equals("Rivalry")) {
+            if (g.gameName.equals("Conference") || g.gameName.equals("Division")) {
                 // in conference game, see if was won
                 if (g.homeTeam == this && g.homeScore < g.awayScore) {
                     confLosses++;
@@ -4246,12 +4243,8 @@ public class Team {
         int i = wins + losses - 1;
         Game g = gameSchedule.get(i);
         String gameSummary = gameWLSchedule.get(i) + " " + gameSummaryStr(g);
-        String rivalryGameStr = "";
-        if (g.gameName.equals("Rivalry")) {
-            if (gameWLSchedule.get(i).equals("W")) rivalryGameStr = "Won against Rival!\n";
-            else rivalryGameStr = "Lost against Rival!\n";
-        }
-        return rivalryGameStr + name + " " + gameSummary + "\nNew poll rank: #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ")";
+
+        return name + " " + gameSummary + "\nNew poll rank: #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ")";
     }
 
     /**
