@@ -288,10 +288,19 @@ public class Home extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
                 if (!fileInfos[item].equals("EMPTY")) {
-                    finish();
-                    Intent myIntent = new Intent(Home.this, MainActivity.class);
-                    myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb");
-                    Home.this.startActivity(myIntent);
+                    if(!fileInfos[item].contains("INCOMPATIBLE")) {
+                        finish();
+                        Intent myIntent = new Intent(Home.this, MainActivity.class);
+                        myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb");
+                        Home.this.startActivity(myIntent);
+                    } else {
+                        finish();
+                        Intent myIntent = new Intent(Home.this, MainActivity.class);
+                        myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb,FIX");
+                        Home.this.startActivity(myIntent);
+                    }
+
+
                 } else {
                     Toast.makeText(Home.this, "Cannot load empty file!",
                             Toast.LENGTH_SHORT).show();
@@ -380,6 +389,7 @@ public class Home extends AppCompatActivity {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(saveFile));
                     fileInfo = bufferedReader.readLine();
                     infos[i] = fileInfo.substring(0, fileInfo.length() - 1); //gets rid of % at end
+                    //if(!infos[i].contains("v1.5")) infos[i] = fileInfo.split(",")[0] + " " + fileInfo.split(" ")[3]  + " " + fileInfo.split(" ")[4] + " [INCOMPATIBLE SAVE]";
                 } catch (FileNotFoundException ex) {
                     System.out.println(
                             "Unable to open file");

@@ -32,6 +32,7 @@ public class Team {
     public String name;
     public String abbr;
     public String conference;
+    public String division;
     public int location;
     public String rivalTeam;
     public boolean wonRivalryGame;
@@ -199,7 +200,7 @@ public class Team {
     private final int minPlayers = 65;
     private final int minRecruitStar = 4;
     private final int maxStarRating = 10;
-    private final int numRecruits = 32;
+    private final int numRecruits = 40;
 
     public final int five = 84;
     public final int four = 78;
@@ -1153,7 +1154,7 @@ public class Team {
     public int[] calcSeasonPrestige() {
 
         int goal = projectedPollRank;
-        if (goal > 100) goal = 100;
+        if (goal > league.teamList.size()*.85) goal = (int)(league.teamList.size()*.85);
         if (goal <= 20) goal = 20;
         int diffExpected = goal - rankTeamPollScore;
 
@@ -1465,7 +1466,7 @@ public class Team {
 
     //Provide the minimum overall rating for a new coach hire
     public int getMinCoachHireReq() {
-        int req = (120 - rankTeamPrestige) / 2 + 33;
+        int req = (league.teamList.size() - rankTeamPrestige) / 2 + (int)Math.round(league.teamList.size()/3.6);
         if (req > 90) req = 90;
         return req;
     }
@@ -1697,7 +1698,6 @@ public class Team {
                 }
                 playersTransferring.add(teamQBs.get(i));
                 league.transferQBs.add(teamQBs.get(i));
-                league.tQBs.add(abbr);
                 teamQBs.remove(i);
             }
             ++i;
@@ -1727,7 +1727,6 @@ public class Team {
                     }
                     playersTransferring.add(teamRBs.get(i));
                     league.transferRBs.add(teamRBs.get(i));
-                    league.tRBs.add(abbr);
                     teamRBs.remove(i);
                 }
             }
@@ -1758,7 +1757,6 @@ public class Team {
                     }
                     playersTransferring.add(teamWRs.get(i));
                     league.transferWRs.add(teamWRs.get(i));
-                    league.tWRs.add(abbr);
                     teamWRs.remove(i);
                 }
             }
@@ -1788,7 +1786,6 @@ public class Team {
                 }
                 playersTransferring.add(teamTEs.get(i));
                 league.transferTEs.add(teamTEs.get(i));
-                league.tTEs.add(abbr);
                 teamTEs.remove(i);
             }
             ++i;
@@ -1818,7 +1815,6 @@ public class Team {
                     }
                     playersTransferring.add(teamOLs.get(i));
                     league.transferOLs.add(teamOLs.get(i));
-                    league.tOLs.add(abbr);
                     teamOLs.remove(i);
                 }
             }
@@ -1848,7 +1844,6 @@ public class Team {
                 }
                 playersTransferring.add(teamKs.get(i));
                 league.transferKs.add(teamKs.get(i));
-                league.tKs.add(abbr);
                 teamKs.remove(i);
             }
             ++i;
@@ -1878,7 +1873,6 @@ public class Team {
                     }
                     playersTransferring.add(teamDLs.get(i));
                     league.transferDLs.add(teamDLs.get(i));
-                    league.tDLs.add(abbr);
                     teamDLs.remove(i);
                 }
             }
@@ -1909,7 +1903,6 @@ public class Team {
                     }
                     playersTransferring.add(teamLBs.get(i));
                     league.transferLBs.add(teamLBs.get(i));
-                    league.tLBs.add(abbr);
                     teamLBs.remove(i);
                 }
             }
@@ -1940,7 +1933,6 @@ public class Team {
                     }
                     playersTransferring.add(teamCBs.get(i));
                     league.transferCBs.add(teamCBs.get(i));
-                    league.tCBs.add(abbr);
                     teamCBs.remove(i);
                 }
             }
@@ -1971,7 +1963,6 @@ public class Team {
                     }
                     playersTransferring.add(teamSs.get(i));
                     league.transferSs.add(teamSs.get(i));
-                    league.tSs.add(abbr);
                     teamSs.remove(i);
                 }
             }
@@ -2089,22 +2080,22 @@ public class Team {
     }
 
     private int getRecruitLevel() {
-        int level = (120 - rankTeamPrestige) / 12;
+        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/11);
         if (level < 4) level = 4;
-        return level;
+        return Math.round(level);
     }
 
     public int getUserRecruitBudget() {
-        float level = (120 - rankTeamPrestige) / 12;
+        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/10);
         if (level < 4) level = 4;
 
-        return (int) (level * 8.5);
+        return (int) Math.round(level * 8.5);
     }
 
     public int getUserRecruitStars() {
-        float level = (120 - rankTeamPrestige) / 12;
+        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/11);
         if (level < 4) level = 4;
-        return (int) level;
+        return Math.round(level);
     }
 
     /**
@@ -4179,7 +4170,7 @@ public class Team {
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
             g = gameSchedule.get(i);
-            if (g.gameName.equals("Conference") || g.gameName.equals("Rivalry Game")) {
+            if (g.gameName.equals("Conference") || g.gameName.equals("Rivalry")) {
                 // in conference game, see if was won
                 if (g.homeTeam == this && g.homeScore > g.awayScore) {
                     confWins++;
@@ -4201,7 +4192,7 @@ public class Team {
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
             g = gameSchedule.get(i);
-            if (g.gameName.equals("Conference") || g.gameName.equals("Rivalry Game")) {
+            if (g.gameName.equals("Conference") || g.gameName.equals("Rivalry")) {
                 // in conference game, see if was won
                 if (g.homeTeam == this && g.homeScore < g.awayScore) {
                     confLosses++;
@@ -4256,7 +4247,7 @@ public class Team {
         Game g = gameSchedule.get(i);
         String gameSummary = gameWLSchedule.get(i) + " " + gameSummaryStr(g);
         String rivalryGameStr = "";
-        if (g.gameName.equals("Rivalry Game")) {
+        if (g.gameName.equals("Rivalry")) {
             if (gameWLSchedule.get(i).equals("W")) rivalryGameStr = "Won against Rival!\n";
             else rivalryGameStr = "Lost against Rival!\n";
         }

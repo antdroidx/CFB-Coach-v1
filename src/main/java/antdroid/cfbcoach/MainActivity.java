@@ -205,6 +205,18 @@ public class MainActivity extends AppCompatActivity {
                     loadedLeague = true;
 
                 //LOADS A SAVE GAME
+            } else if (saveFileStr.contains("FIX")) {
+                File saveFile = new File(getFilesDir(), saveFileStr);
+                if (saveFile.exists()) {
+                    simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names), true);
+                    userTeam = simLeague.userTeam;
+                    userTeamStr = userTeam.name;
+                    simLeague.updateTeamTalentRatings();
+                    season = simLeague.getYear();
+                    currentTeam = userTeam;
+                    loadedLeague = true;
+                    if(season == seasonStart) seasonGoals();
+                }
             } else {
                 File saveFile = new File(getFilesDir(), saveFileStr);
                 if (saveFile.exists()) {
@@ -2477,14 +2489,14 @@ public class MainActivity extends AppCompatActivity {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         String[] yearLabels = new String[simLeague.leagueHistory.size()];
         for (int i = 0; i < simLeague.leagueHistory.size(); i++) {
-            series.appendData(new DataPoint((seasonStart + i), 120 - Integer.parseInt(currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
+            series.appendData(new DataPoint((seasonStart + i), simLeague.teamList.size() - Integer.parseInt(currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
             yearLabels[i] = Integer.toString(i + seasonStart);
         }
         graph.addSeries(series);
 
-        String[] rankLabels = new String[121];
-        for (int i = 120; i >= 0; i--) {
-            rankLabels[120 - i] = Integer.toString(i);
+        String[] rankLabels = new String[simLeague.teamList.size()+1];
+        for (int i = simLeague.teamList.size(); i >= 0; i--) {
+            rankLabels[simLeague.teamList.size() - i] = Integer.toString(i);
         }
 
         if (yearLabels.length > 1) {
@@ -2498,7 +2510,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMaxY(120);
+        graph.getViewport().setMaxY(simLeague.teamList.size());
         graph.getViewport().setMinY(0);
     }
 
@@ -2605,15 +2617,15 @@ public class MainActivity extends AppCompatActivity {
         String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
         for (int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
             if (!currentTeam.HC.get(0).history.get(i).equals("")) {
-                series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), 120 - Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
+                series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), simLeague.teamList.size() - Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
                 yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
             }
         }
         graph.addSeries(series);
 
-        String[] rankLabels = new String[121];
-        for (int i = 120; i >= 0; i--) {
-            rankLabels[120 - i] = Integer.toString(i);
+        String[] rankLabels = new String[simLeague.teamList.size()+1];
+        for (int i = simLeague.teamList.size(); i >= 0; i--) {
+            rankLabels[simLeague.teamList.size() - i] = Integer.toString(i);
         }
 
         if (yearLabels.length > 1) {
@@ -2627,7 +2639,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMaxY(120);
+        graph.getViewport().setMaxY(simLeague.teamList.size());
         graph.getViewport().setMinY(0);
     }
 
@@ -2793,7 +2805,7 @@ public class MainActivity extends AppCompatActivity {
             selection = new String[1];
             selection[0] = "Offensive Player of the Year";
         } else {
-            selection = new String[16];
+            selection = new String[6 + simLeague.conferences.size()];
             selection[0] = "Offensive Player of the Year";
             selection[1] = "Defensive Player of the Year";
             selection[2] = "Coach of the Year";
