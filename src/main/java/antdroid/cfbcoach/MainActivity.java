@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     private League simLeague;
     private Conference currentConference;
     private Team currentTeam;
-    private int currentConferenceID;
     private Team userTeam;
     private File saveLeagueFile;
     private String username;
@@ -277,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         currentConference = simLeague.findConference(parent.getItemAtPosition(position).toString());
-                        currentConferenceID = position;
                         updateCurrConference();
                     }
 
@@ -3619,7 +3617,7 @@ public class MainActivity extends AppCompatActivity {
     //Conference Realignment Update
     private void conferenceRealignment() {
         if (simLeague.confRealignment) {
-            simLeague.conferenceRealignment();
+            simLeague.conferenceRealignmentV2();
             if (simLeague.countRealignment > 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(simLeague.newsRealignment)

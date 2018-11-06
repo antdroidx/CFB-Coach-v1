@@ -11,6 +11,6 @@ import positions.PlayerK;
 public class CompPlayerFGpct implements Comparator<PlayerK> {
     @Override
     public int compare(PlayerK a, PlayerK b) {
-        return (float)a.getFGpct() > (float)b.getFGpct() ? -1 :(float) a.getFGpct() == (float) b.getFGpct() ? 0 : 1;
+        return a.getFGpct() > b.getFGpct() ? -1 : a.getFGpct() == b.getFGpct() ? 0 : 1;
     }
 }

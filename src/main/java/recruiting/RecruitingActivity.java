@@ -358,11 +358,7 @@ public class RecruitingActivity extends AppCompatActivity {
         filterSwitch.setChecked(autoFilter);
         filterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    autoFilter = true;
-                } else {
-                    autoFilter = false;
-                }
+                autoFilter = isChecked;
             }
         });
 
@@ -417,8 +413,7 @@ public class RecruitingActivity extends AppCompatActivity {
                             sortByCost();
                             expListAdapter.notifyDataSetChanged();
                         } else if (item == 4) {
-                            if (autoFilter) autoFilter = false;
-                            else autoFilter = true;
+                            autoFilter = !autoFilter;
                             filterSwitch.setChecked(autoFilter);
                         }
 
@@ -705,27 +700,13 @@ public class RecruitingActivity extends AppCompatActivity {
 
             String player = list.get(i);
             // Remove the player from the top 100 list
-            if (avail50.contains(player)) {
-                avail50.remove(player);
-            }
-            if (availAll.contains(player)) {
-                availAll.remove(player);
-            }
-            if (west.contains(player)) {
-                west.remove(player);
-            }
-            if (midwest.contains(player)) {
-                midwest.remove(player);
-            }
-            if (central.contains(player)) {
-                central.remove(player);
-            }
-            if (east.contains(player)) {
-                east.remove(player);
-            }
-            if (south.contains(player)) {
-                south.remove(player);
-            }
+            avail50.remove(player);
+            availAll.remove(player);
+            west.remove(player);
+            midwest.remove(player);
+            central.remove(player);
+            east.remove(player);
+            south.remove(player);
 
             String[] ps = player.split(",");
             if (ps[0].equals("QB")) {
@@ -965,27 +946,13 @@ public class RecruitingActivity extends AppCompatActivity {
         budgetText.setText("Budget: $" + recruitingBudget);
 
         // Remove the player from the top 100 list
-        if (avail50.contains(player)) {
-            avail50.remove(player);
-        }
-        if (availAll.contains(player)) {
-            availAll.remove(player);
-        }
-        if (west.contains(player)) {
-            west.remove(player);
-        }
-        if (midwest.contains(player)) {
-            midwest.remove(player);
-        }
-        if (central.contains(player)) {
-            central.remove(player);
-        }
-        if (east.contains(player)) {
-            east.remove(player);
-        }
-        if (south.contains(player)) {
-            south.remove(player);
-        }
+        avail50.remove(player);
+        availAll.remove(player);
+        west.remove(player);
+        midwest.remove(player);
+        central.remove(player);
+        east.remove(player);
+        south.remove(player);
         playersRecruited.add(player);
 
         // Also need to add recruited player to correct team list and remove from avail list

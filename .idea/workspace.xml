@@ -2,7 +2,6 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="SPLITTER_PROPORTION" value="0.9357849" />
-    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="AndroidLayouts">
     <shared>
@@ -33,10 +32,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/comparator/CompConfPrestige.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Universe/BETA/Universe2018v3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comparator/CompPlayerFGpct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comparator/CompPlayerFGpct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruiting/RecruitingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/recruiting/RecruitingActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Conference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Conference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/League.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/PlaybookDefense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/PlaybookDefense.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -83,8 +91,8 @@
       <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2734">
-              <caret line="256" column="13" selection-start-line="256" selection-start-column="8" selection-end-line="256" selection-end-column="13" />
+            <state relative-caret-position="16">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -92,20 +100,32 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="1769" column="73" selection-start-line="1769" selection-start-column="73" selection-end-line="1769" selection-end-column="73" />
+            <state relative-caret-position="273">
+              <caret line="4302" selection-start-line="4302" selection-end-line="4302" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Conference.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="564">
+              <caret line="192" column="37" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
+              <folding>
+                <element signature="e#7592#11503#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Conference.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-342">
-              <caret line="203" column="17" lean-forward="true" selection-start-line="203" selection-start-column="17" selection-end-line="203" selection-end-column="17" />
+            <state relative-caret-position="314">
+              <caret line="338" column="93" selection-start-line="338" selection-start-column="93" selection-end-line="338" selection-end-column="93" />
               <folding>
-                <element signature="e#13590#13591#0" expanded="true" />
-                <element signature="e#13660#13661#0" expanded="true" />
+                <element signature="e#13167#13168#0" expanded="true" />
+                <element signature="e#13237#13238#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,11 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Bern</find>
-      <find>Div</find>
-      <find>div</find>
-      <find>teamList</find>
-      <find>Division</find>
       <find>confStart</find>
       <find>simLeague.teamList.size()</find>
       <find>simLeague.conferences.size()</find>
@@ -154,10 +169,13 @@
       <find>realignment</find>
       <find>Rivalry</find>
       <find>rival</find>
+      <find>teamPowerRating()</find>
+      <find>Realignment</find>
+      <find>conferences</find>
+      <find>penaliz</find>
+      <find>editor</find>
     </findStrings>
     <replaceStrings>
-      <replace>t.strRep()</replace>
-      <replace>t.name</replace>
       <replace>Defense</replace>
       <replace>getPlaybook</replace>
       <replace>editorAdaptor</replace>
@@ -186,6 +204,8 @@
       <replace>transferSs.get(i).team.name</replace>
       <replace>.team.name</replace>
       <replace>get(i).team.abbr</replace>
+      <replace>confList</replace>
+      <replace>confPrestige</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1686,8 +1706,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/comparator/CompPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/child_recruit.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamLineupArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/team_lineup_dialog.xml" />
@@ -1730,13 +1748,15 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/RedshirtAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Division.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/teams.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
-        <option value="$PROJECT_DIR$/src/main/res/values/changelog.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/PlaybookDefense.java" />
+        <option value="$PROJECT_DIR$/src/main/java/comparator/CompConfPrestige.java" />
+        <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/Conference.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
+        <option value="$PROJECT_DIR$/src/main/res/values/changelog.xml" />
       </list>
     </option>
   </component>
@@ -1967,6 +1987,7 @@
       <window_info id="Designer" order="4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4883041" weight="0.18176973" />
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49733475" weight="0.26859045" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32741398" />
       <window_info anchor="right" id="Gradle" order="8" weight="0.32942432" />
       <window_info id="Structure" order="1" sideWeight="0.5114754" side_tool="true" weight="0.18176973" />
       <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" weight="0.32889125" />
@@ -1984,7 +2005,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Assistant" order="5" weight="0.32995737" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32741398" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1992,18 +2012,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java</url>
-          <line>4304</line>
-          <properties />
-          <option name="timeStamp" value="908" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="989" />
+      <option name="time" value="1016" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -2058,76 +2070,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/rankings_main.xml">
-      <provider editor-type-id="text-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_home.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="1504">
-          <caret line="94" column="33" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerRB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-268">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Injury.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="62" selection-start-line="62" selection-end-line="66" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/TeamStreak.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/league_history_list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/LeagueHistoryListArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="50" column="59" selection-start-line="50" selection-start-column="59" selection-end-line="50" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompPlayerPassYards.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompTeamORYPG.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="161" selection-start-line="13" selection-start-column="161" selection-end-line="13" selection-end-column="161" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompTeamOPPG.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -2329,10 +2271,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-          <folding>
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#482#483#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2362,99 +2300,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Division.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/values/changelog.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-400">
           <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="e#1454#3679#0" expanded="true" />
-            <element signature="e#1803#2301#0" expanded="true" />
-            <element signature="e#2300#2301#0" expanded="true" />
-            <element signature="e#2359#2870#0" expanded="true" />
-            <element signature="e#2869#2870#0" expanded="true" />
-            <element signature="e#2927#3376#0" expanded="true" />
-            <element signature="e#3375#3376#0" expanded="true" />
-            <element signature="e#3678#3679#0" expanded="true" />
-            <element signature="e#3800#6087#0" expanded="true" />
-            <element signature="e#4214#4804#0" expanded="true" />
-            <element signature="e#4803#4804#0" expanded="true" />
-            <element signature="e#5134#5784#0" expanded="true" />
-            <element signature="e#5783#5784#0" expanded="true" />
-            <element signature="e#6086#6087#0" expanded="true" />
-            <element signature="e#6200#6367#0" expanded="true" />
-            <element signature="e#6366#6367#0" expanded="true" />
-            <element signature="e#6478#6645#0" expanded="true" />
-            <element signature="e#6644#6645#0" expanded="true" />
-            <element signature="e#6764#6931#0" expanded="true" />
-            <element signature="e#6930#6931#0" expanded="true" />
-            <element signature="e#7039#7205#0" expanded="true" />
-            <element signature="e#7204#7205#0" expanded="true" />
-            <element signature="e#7318#7909#0" expanded="true" />
-            <element signature="e#7908#7909#0" expanded="true" />
-            <element signature="e#8019#8865#0" expanded="true" />
-            <element signature="e#8207#8234#0" expanded="true" />
-            <element signature="e#8864#8865#0" expanded="true" />
-            <element signature="e#8972#9351#0" expanded="true" />
-            <element signature="e#9350#9351#0" expanded="true" />
-            <element signature="e#9468#9846#0" expanded="true" />
-            <element signature="e#9845#9846#0" expanded="true" />
-            <element signature="e#9960#10326#0" expanded="true" />
-            <element signature="e#10325#10326#0" expanded="true" />
-            <element signature="e#10433#10814#0" expanded="true" />
-            <element signature="e#10813#10814#0" expanded="true" />
-            <element signature="e#11557#11586#0" expanded="true" />
-            <element signature="e#12542#13601#0" expanded="true" />
-            <element signature="e#13600#13601#0" expanded="true" />
-            <element signature="e#13648#13832#0" expanded="true" />
-            <element signature="e#13831#13832#0" expanded="true" />
-            <element signature="e#14422#14931#0" expanded="true" />
-            <element signature="e#14930#14931#0" expanded="true" />
-            <element signature="e#14978#15162#0" expanded="true" />
-            <element signature="e#15161#15162#0" expanded="true" />
-            <element signature="e#15629#16100#0" expanded="true" />
-            <element signature="e#16099#16100#0" expanded="true" />
-            <element signature="e#16147#16331#0" expanded="true" />
-            <element signature="e#16330#16331#0" expanded="true" />
-            <element signature="e#20142#20750#0" expanded="true" />
-            <element signature="e#20749#20750#0" expanded="true" />
-            <element signature="e#20804#21431#0" expanded="true" />
-            <element signature="e#21430#21431#0" expanded="true" />
-            <element signature="e#21484#22115#0" expanded="true" />
-            <element signature="e#22114#22115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2734">
-          <caret line="256" column="13" selection-start-line="256" selection-start-column="8" selection-end-line="256" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="5671" column="104" lean-forward="true" selection-start-line="5671" selection-start-column="104" selection-end-line="5671" selection-end-column="104" />
-          <folding>
-            <element signature="e#7592#11503#0" />
-            <element signature="e#11643#17462#0" />
-            <element signature="e#17602#29580#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2465,20 +2314,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_recruiting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_recruiting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="165" column="49" lean-forward="true" selection-start-line="165" selection-start-column="49" selection-end-line="165" selection-end-column="49" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_tutorial.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
-          <caret line="1769" column="73" selection-start-line="1769" selection-start-column="73" selection-end-line="1769" selection-end-column="73" />
+          <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/PlaybookDefense.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1712">
+          <caret line="107" column="32" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/PlaybookOffense.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-164">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompConfPrestige.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompConfTeamRanking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="11" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Division.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="4302" selection-start-line="4302" selection-end-line="4302" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="203" column="17" lean-forward="true" selection-start-line="203" selection-start-column="17" selection-end-line="203" selection-end-column="17" />
+        <state relative-caret-position="314">
+          <caret line="338" column="93" selection-start-line="338" selection-start-column="93" selection-end-line="338" selection-end-column="93" />
           <folding>
-            <element signature="e#13590#13591#0" expanded="true" />
-            <element signature="e#13660#13661#0" expanded="true" />
+            <element signature="e#13167#13168#0" expanded="true" />
+            <element signature="e#13237#13238#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/changelog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="192" column="37" selection-start-line="192" selection-start-column="37" selection-end-line="192" selection-end-column="37" />
+          <folding>
+            <element signature="e#7592#11503#0" />
           </folding>
         </state>
       </provider>

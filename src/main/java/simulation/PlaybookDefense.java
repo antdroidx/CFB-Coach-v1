@@ -105,7 +105,7 @@ public class PlaybookDefense {
     }
 
     public void playBook6() {
-        stratName = "TBD";
+        stratName = "3-4 Defense";
         stratDescription = "TBD";
         runPref = 1;
         runStop = 0;

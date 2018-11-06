@@ -40,7 +40,7 @@ public class Conference {
     public final ArrayList<Division> divisions;
 
     private final double promotionFactor = 1.15;
-    private final double relegationFactor = 0.85;
+    private final double relegationFactor = 0.75;
     public final int minConfTeams = 8;
 
     public final ArrayList<Player> allConfPlayers;
@@ -228,17 +228,9 @@ public class Conference {
                     Game gm;
 
                     if (r % 2 == 0) {
-                        if (a.rivalTeam.equals(b.abbr)) {
-                            gm = new Game(a, b, "Rivalry");
-                        } else {
                             gm = new Game(a, b, "Conference");
-                        }
                     } else {
-                        if (a.rivalTeam.equals(b.abbr)) {
-                            gm = new Game(b, a, "Rivalry");
-                        } else {
                             gm = new Game(b, a, "Conference");
-                        }
                     }
                     a.gameSchedule.add(gm);
                     b.gameSchedule.add(gm);
