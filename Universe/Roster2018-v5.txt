@@ -4384,7 +4384,7 @@ Notre Dame,Shaun Crawford,CB,3,8
 Notre Dame,Julian Okwara,DL,3,8
 Notre Dame,Jordan Genmark,LB,2,8
 Notre Dame,Alize' Mack,TE,3,9
-Notre Dame,Lawrence Keys,WR,1,8
+Notre Dame,Lawrence Keys,WR,1,7
 Notre Dame,Tyler Newsome,K,4,9
 Notre Dame,Sam Mustipher,OL,4,9
 Notre Dame,Avery Davis,RB,1,8
