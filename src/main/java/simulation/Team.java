@@ -62,6 +62,7 @@ public class Team {
     public Game gameOOCSchedule0;
     public Game gameOOCSchedule1;
     public Game gameOOCSchedule2;
+    public ArrayList<Team> oocTeams;
     public ArrayList<String> gameWLSchedule;
     public ArrayList<Team> gameWinsAgainst;
     public ArrayList<Team> gameLossesAgainst;
@@ -410,6 +411,7 @@ public class Team {
         gameOOCSchedule0 = null;
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
+        oocTeams = new ArrayList<>();
         gameWinsAgainst = new ArrayList<>();
         gameLossesAgainst = new ArrayList<>();
         gameWLSchedule = new ArrayList<>();

@@ -1270,7 +1270,7 @@ public class League {
 
                 ArrayList<Team> availTeamsB = new ArrayList<>();
                 for (int k = 0; k < availTeams.size(); k++) {
-                    if (!availTeams.get(k).conference.equals(a.conference)) {
+                    if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k))) {
                         availTeamsB.add(availTeams.get(k));
                     }
                 }
@@ -1292,16 +1292,22 @@ public class League {
                 if (w == 0) {
                     a.gameOOCSchedule0 = gm;
                     b.gameOOCSchedule0 = gm;
+                    a.oocTeams.add(b);
+                    b.oocTeams.add(a);
                     availTeams.remove(a);
                     availTeams.remove(b);
                 } else if (w == 1) {
                     a.gameOOCSchedule1 = gm;
                     b.gameOOCSchedule1 = gm;
+                    a.oocTeams.add(b);
+                    b.oocTeams.add(a);
                     availTeams.remove(a);
                     availTeams.remove(b);
                 } else if (w == 2) {
                     a.gameOOCSchedule2 = gm;
                     b.gameOOCSchedule2 = gm;
+                    a.oocTeams.add(b);
+                    b.oocTeams.add(a);
                     availTeams.remove(a);
                     availTeams.remove(b);
                 }
