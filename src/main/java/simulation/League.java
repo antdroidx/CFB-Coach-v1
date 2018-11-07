@@ -189,7 +189,7 @@ public class League {
     private final int seasonStart = 2018;
     int countTeam = 120;
     private final int seasonWeeks = 26;
-    private final double realignmentChance = 0.38;
+    private final double realignmentChance = 0.35;
     private final String crYear1 = "2";
     private final String crYear2 = "7";
     private boolean heismanDecided;
@@ -468,7 +468,7 @@ public class League {
 
             //Team Count
             if (line.split(">").length > 1) {
-                countTeam = Integer.parseInt(line.split(">")[1]);
+                if(!line.split(">")[1].contains("[")) countTeam = Integer.parseInt(line.split(">")[1]);
             }
 
 
@@ -714,9 +714,8 @@ public class League {
 
             //Team Count
             if (line.split(">").length > 1) {
-                countTeam = Integer.parseInt(line.split(">")[1]);
+                if(!line.split(">")[1].contains("[")) countTeam = Integer.parseInt(line.split(">")[1]);
             }
-
 
             //Next get league history
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HIST")) {
@@ -1248,76 +1247,68 @@ public class League {
             conferences.get(i).setUpSchedule();
         }
 
-        Random rand = new Random();
-        int max = 8;
-        int min = 5;
-        randgm = rand.nextInt((max - min) + 1) + min;
-        int maxc = 1;
-        int minc = 0;
-        randconf = rand.nextInt((maxc - minc) + 1) + minc;
+        if(!enableUnivProRel) {
+            for (int w = 0; w < 3; w++) {
 
-/*       for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).setUpOOCSchedule();
-        }*/
+                ArrayList<Team> availTeams = (ArrayList<Team>) teamList.clone();
 
-        for (int w = 0; w < 3; w++) {
+                while (availTeams.size() > 0) {
+                    int selTeamA = (int) (availTeams.size() * Math.random());
+                    Team a = availTeams.get(selTeamA);
 
-            ArrayList<Team> availTeams = (ArrayList<Team>) teamList.clone();
+                    ArrayList<Team> availTeamsB = new ArrayList<>();
+                    for (int k = 0; k < availTeams.size(); k++) {
+                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k))) {
+                            availTeamsB.add(availTeams.get(k));
+                        }
+                    }
+                    Team b;
+                    if (availTeamsB.isEmpty()) {
+                        b = new Team("FCS " + proTeams[(int) (proTeams.length * Math.random())], "FCS", "FCS Division", 25, "FCS1", 0, this);
+                    } else {
+                        int selTeamB = (int) (availTeamsB.size() * Math.random());
+                        b = availTeamsB.get(selTeamB);
+                    }
 
-            while (availTeams.size() > 0) {
-                int selTeamA = (int) (availTeams.size() * Math.random());
-                Team a = availTeams.get(selTeamA);
+                    Game gm;
+                    if (Math.random() > 0.5) {
+                        gm = new Game(a, b, a.conference + " vs " + b.conference);
+                    } else {
+                        gm = new Game(b, a, b.conference + " vs " + a.conference);
+                    }
 
-                ArrayList<Team> availTeamsB = new ArrayList<>();
-                for (int k = 0; k < availTeams.size(); k++) {
-                    if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k))) {
-                        availTeamsB.add(availTeams.get(k));
+                    if (w == 0) {
+                        a.gameOOCSchedule0 = gm;
+                        b.gameOOCSchedule0 = gm;
+                        a.oocTeams.add(b);
+                        b.oocTeams.add(a);
+                        availTeams.remove(a);
+                        availTeams.remove(b);
+                    } else if (w == 1) {
+                        a.gameOOCSchedule1 = gm;
+                        b.gameOOCSchedule1 = gm;
+                        a.oocTeams.add(b);
+                        b.oocTeams.add(a);
+                        availTeams.remove(a);
+                        availTeams.remove(b);
+                    } else if (w == 2) {
+                        a.gameOOCSchedule2 = gm;
+                        b.gameOOCSchedule2 = gm;
+                        a.oocTeams.add(b);
+                        b.oocTeams.add(a);
+                        availTeams.remove(a);
+                        availTeams.remove(b);
                     }
                 }
-                Team b;
-                if (availTeamsB.isEmpty()) {
-                    b = new Team("FCS Team", "FCS", "FCS Division", 20, "FCS1", 0, this);
-                } else {
-                    int selTeamB = (int) (availTeamsB.size() * Math.random());
-                    b = availTeamsB.get(selTeamB);
-                }
+            }
 
-                Game gm;
-                if (Math.random() > 0.5) {
-                    gm = new Game(a, b, a.conference + " vs " + b.conference);
-                } else {
-                    gm = new Game(b, a, b.conference + " vs " + a.conference);
-                }
-
-                if (w == 0) {
-                    a.gameOOCSchedule0 = gm;
-                    b.gameOOCSchedule0 = gm;
-                    a.oocTeams.add(b);
-                    b.oocTeams.add(a);
-                    availTeams.remove(a);
-                    availTeams.remove(b);
-                } else if (w == 1) {
-                    a.gameOOCSchedule1 = gm;
-                    b.gameOOCSchedule1 = gm;
-                    a.oocTeams.add(b);
-                    b.oocTeams.add(a);
-                    availTeams.remove(a);
-                    availTeams.remove(b);
-                } else if (w == 2) {
-                    a.gameOOCSchedule2 = gm;
-                    b.gameOOCSchedule2 = gm;
-                    a.oocTeams.add(b);
-                    b.oocTeams.add(a);
-                    availTeams.remove(a);
-                    availTeams.remove(b);
-                }
+            for (int i = 0; i < conferences.size(); ++i) {
+                conferences.get(i).insertOOCSchedule();
             }
         }
 
 
-        for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).insertOOCSchedule();
-        }
+
 
         confAvg = getAverageConfPrestige();
 
@@ -4247,7 +4238,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                     Conference conf = conferences.get(c);
                     ArrayList<Team> qualified = new ArrayList<>();
                     for(int i = 0; i < demoteTeamList.size(); i++) {
-                        if(demoteTeamList.get(i).teamPrestige > conf.confRelegateMin && Math.random() < realignmentChance*2 && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                        if(demoteTeamList.get(i).teamPrestige > conf.confRelegateMin && Math.random() < realignmentChance*2.5 && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
                             qualified.add(demoteTeamList.get(i));
                         }
                         if(qualified.size() >= 2) {
@@ -4496,6 +4487,8 @@ Then conferences can see if they want to add them to their list if the teams mee
         }
 
         int teamsPerConf = Math.round(teamList.size() / conferences.size());
+        if (teamsPerConf % 2 == 0) teamsPerConf++;  //check if even # of teams
+        //int teamsPerConf = 13; //conf play weeks + 1
 
         int c = 0, next = 0;
         for (int t = 0; t < teamList.size(); t++) {

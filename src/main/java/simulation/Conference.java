@@ -272,13 +272,15 @@ public class Conference {
         //schedule in conf matchups
         int robinWeek = 0;
         int robinCounter = 1;
+        int confWeeks = 9;
         int confSize = confTeams.size() - 1;
 
         if(confTeams.size() > 11) {
             robinCounter = 3;
         }
+        if(league.enableUnivProRel) confWeeks = 12;
 
-        for (int r = 0; r < 9; ++r) {
+        for (int r = 0; r < confWeeks; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
                 Team a = confTeams.get((robinWeek + g) % confSize);
                 Team b;
@@ -337,6 +339,7 @@ public class Conference {
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
                 confTeams.get(i).gameSchedule.get(league.currentWeek+1).addUpcomingGames(confTeams.get(i));
+
             }
         }
     }
