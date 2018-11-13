@@ -34,7 +34,6 @@ public class Team {
     public String conference;
     public String division;
     public int location;
-    public String rivalTeam;
     public ArrayList<String> teamHistory;
     public ArrayList<String> hallOfFame;
     public LeagueRecords teamRecords;
@@ -42,20 +41,18 @@ public class Team {
     public boolean showPopups;
     private final DecimalFormat df2 = new DecimalFormat(".#");
 
-    public int wins;
-    public int losses;
-    public int totalWins;
-    public int totalLosses;
-    public int totalCCs;
-    public int totalNCs;
-    public int totalCCLosses;
-    public int totalNCLosses;
-    public int totalBowls;
-    public int totalBowlLosses;
-    //public String evenYearHomeOpp;
+    public PlaybookOffense playbookOff;
+    public PlaybookDefense playbookDef;
+    public int playbookOffNum;
+    public int playbookDefNum;
 
-    public TeamStreak winStreak;
-    public TeamStreak yearStartWinStreak;
+    //Future Implementation?
+    public int teamBudget;
+    public int teamRecruitBudget;
+    public int teamDiscplineBudget;
+    public int teamDisciplineScore;
+    public int teamFacilities;
+    public int teamStadium;
 
     //Game Log variables
     public ArrayList<Game> gameSchedule;
@@ -63,6 +60,7 @@ public class Team {
     public Game gameOOCSchedule1;
     public Game gameOOCSchedule2;
     public ArrayList<Team> oocTeams;
+    public ArrayList<Integer> oocWeeks;
     public ArrayList<String> gameWLSchedule;
     public ArrayList<Team> gameWinsAgainst;
     public ArrayList<Team> gameLossesAgainst;
@@ -73,6 +71,20 @@ public class Team {
     public String natChampWL;
 
     //Team stats
+    public int wins;
+    public int losses;
+    public int totalWins;
+    public int totalLosses;
+    public int totalCCs;
+    public int totalNCs;
+    public int totalCCLosses;
+    public int totalNCLosses;
+    public int totalBowls;
+    public int totalBowlLosses;
+
+    public TeamStreak winStreak;
+
+    //Season Stats
     public int teamPoints;
     public int teamOppPoints;
     public int teamYards;
@@ -82,17 +94,20 @@ public class Team {
     public int teamOppPassYards;
     public int teamOppRushYards;
     public int teamTODiff;
-    public float teamOffTalent;
-    public float teamDefTalent;
     public int teamPrestige;
     public int teamPrestigeStart;
+    public int teamDiscipline;
+
+    //Calculated Stats
+    public float teamOffTalent;
+    public float teamDefTalent;
     public int prestigePts[];
     public float teamPollScore;
     public int teamStrengthOfWins;
     private int teamStrengthOfLosses;
     public int teamSOS;
-    public int teamDiscipline;
 
+    //Calculated Ranks
     public int rankTeamPoints;
     public int rankTeamOppPoints;
     public int rankTeamYards;
@@ -111,8 +126,7 @@ public class Team {
     public int rankTeamStrengthOfWins;
     public int rankTeamSOS;
 
-    private final int ratTransfer = 70;
-    private final int promotionNum = 0;
+
 
     //prestige/talent improvements
     public int confPrestige;
@@ -123,12 +137,13 @@ public class Team {
     public float teamStartOffTal;
     public float teamStartDefTal;
 
+    //Head Coach
     public ArrayList<HeadCoach> HC;
     public boolean fired;
     private boolean newContract;
     private boolean retired;
     public String contractString;
-    private boolean walkon;
+
     //players on team
     //offense
     public ArrayList<PlayerQB> teamQBs;
@@ -161,6 +176,19 @@ public class Team {
     public ArrayList<PlayerLB> nonRSLBs;
     public ArrayList<PlayerCB> nonRSCBs;
     public ArrayList<PlayerS> nonRSSs;
+
+    public ArrayList<Player> playersLeaving;
+    private ArrayList<Player> playersTransferring;
+
+    private ArrayList<Player> playersInjured;
+    private ArrayList<Player> playersRecovered;
+    public ArrayList<Player> playersInjuredAll;
+    private ArrayList<Player> playersDis;
+
+    public String suspensionNews;
+    public boolean suspension;
+
+    //Defined Variables
 
     public final int startersQB = 1;
     public final int startersRB = 2;
@@ -201,42 +229,28 @@ public class Team {
     private final int minRecruitStar = 4;
     private final int maxStarRating = 10;
     private final int numRecruits = 40;
+    private boolean walkon;
+
+
+    private final int ratTransfer = 70;
+    private final int promotionNum = 0;
 
     public final int five = 84;
     public final int four = 78;
     public final int three = 68;
     public final int two = 58;
 
-    public ArrayList<Player> playersLeaving;
-    private ArrayList<Player> playersTransferring;
+
     private int dismissalChance = 3;
     private final int gradTransferMinGames = 6;
     private final int dismissalRat = 63;
     private final int gradTransferRat = 77;
 
-    private ArrayList<Player> playersInjured;
-    private ArrayList<Player> playersRecovered;
-    public ArrayList<Player> playersInjuredAll;
-    private ArrayList<Player> playersDis;
-
-    public PlaybookOffense playbookOff;
-    public PlaybookDefense playbookDef;
-    public int playbookOffNum;
-    public int playbookDefNum;
 
     private static final int NFL_OVR = 93;
     private static final int sophNFL = 2;
     private static final double NFL_CHANCE = 0.66;
     private static final double NFL_CHANCE_SOPH = 0.330;
-
-    public String suspensionNews;
-    public boolean suspension;
-
-    //Future Implementation?
-    public int teamBudget;
-    public int teamRecruitBudget;
-    public int teamDiscplineBudget;
-    public int teamTrainingBudget;
 
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
@@ -247,15 +261,14 @@ public class Team {
      * @param league     reference to the league object all must obey
      * @param prestige   prestige of that team, between 0-100
      */
-    public Team(String name, String abbr, String conference, int prestige, String rivalTeamAbbr, int loc, League league) {
+    public Team(String name, String abbr, String conference, int prestige, String div, int loc, League league) {
         this.name = name;
         this.abbr = abbr;
-        this.conference = conference;
         this.conference = conference;
         this.league = league;
         location = loc;
         teamPrestige = prestige;
-        rivalTeam = rivalTeamAbbr;
+        division = div;
         commonInitializer();
 
         newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs, true);
@@ -291,6 +304,13 @@ public class Team {
         playbookDef = getPlaybookDef()[playbookDefNum];
 
         hallOfFame.add("");
+
+        teamBudget = 0;
+        teamRecruitBudget = 0;
+        teamFacilities = 0;
+        teamStadium = 0;
+        teamDiscplineBudget = 0;
+        teamDisciplineScore = 70;
     }
 
     /**
@@ -333,7 +353,7 @@ public class Team {
             totalLosses = Integer.parseInt(teamInfo[5]);
             totalCCs = Integer.parseInt(teamInfo[6]);
             totalNCs = Integer.parseInt(teamInfo[7]);
-            rivalTeam = teamInfo[8];
+            division = teamInfo[8];
             location = Integer.parseInt(teamInfo[9]);
             totalNCLosses = Integer.parseInt(teamInfo[10]);
             totalCCLosses = Integer.parseInt(teamInfo[11]);
@@ -346,10 +366,17 @@ public class Team {
                         Integer.parseInt(teamInfo[20]),
                         Integer.parseInt(teamInfo[17]),
                         teamInfo[18]);
-            yearStartWinStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
-                        Integer.parseInt(teamInfo[20]),
-                        Integer.parseInt(teamInfo[17]),
-                        teamInfo[18]);
+            if(teamInfo.length > 21) {
+                teamBudget = Integer.parseInt(teamInfo[21]);
+                teamDisciplineScore = Integer.parseInt((teamInfo[22]));
+                teamFacilities = Integer.parseInt((teamInfo[22]));
+                teamStadium = Integer.parseInt((teamInfo[22]));
+            } else {
+                teamBudget = 0;
+                teamDisciplineScore = 70;
+                teamFacilities = 0;
+                teamStadium = 0;
+            }
         }
 
         // Lines 1 is Team Home/Away Rotation
@@ -412,6 +439,7 @@ public class Team {
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
         oocTeams = new ArrayList<>();
+        oocWeeks = new ArrayList<>();
         gameWinsAgainst = new ArrayList<>();
         gameLossesAgainst = new ArrayList<>();
         gameWLSchedule = new ArrayList<>();
@@ -422,7 +450,6 @@ public class Team {
         natChampWL = "";
 
         winStreak = new TeamStreak(league.getYear(), league.getYear(), 0, name);
-        yearStartWinStreak = new TeamStreak(league.getYear(), league.getYear(), 0, name);
 
         playersLeaving = new ArrayList<>();
         playersTransferring = new ArrayList<>();
@@ -871,12 +898,20 @@ public class Team {
             score += league.teamList.size() - rankTeamOffTalent;
             score += league.teamList.size() - rankTeamDefTalent;
             score += 1.5 * (league.teamList.size() - rankTeamPrestige);
-            score += confPrestige / 2;
+            if (league.conferences.get(league.getConfNumber(conference)).confTeams.size() < league.conferences.get(league.getConfNumber(conference)).minConfTeams) {
+                score += teamPrestige/2.25;
+            } else {
+                score += confPrestige / 2;
+            }
         } else {
             score += getOffTalent();
             score += getDefTalent();
             score += 1.5 * teamPrestige;
-            score += confPrestige / 2;
+            if (league.conferences.get(league.getConfNumber(conference)).confTeams.size() < league.conferences.get(league.getConfNumber(conference)).minConfTeams) {
+                score += teamPrestige/2;
+            } else {
+                score += confPrestige / 2.25;
+            }
         }
 
         return score;
@@ -1167,7 +1202,7 @@ public class Team {
         int disPts = disciplinePts;
 
         // Don't add/subtract prestige if they are a penalized team from last season
-        if (this != league.penalizedTeam1 && this != league.penalizedTeam2 && this != league.penalizedTeam3) {
+        if (this != league.penalizedTeams.get(0) && this != league.penalizedTeams.get(2) && this != league.penalizedTeams.get(3)) {
             prestigeChange = Math.round((float) (diffExpected / 7.5));
 
             if (prestigeChange < wins - projectedWins) prestigeChange++;
@@ -1221,7 +1256,7 @@ public class Team {
         if (projectedPollRank > 100) {
             summary += "\nDespite being projected at #" + projectedPollRank + ", your goal was to finish in the Top 100.\n\n";
         }
-        if (this == league.penalizedTeam1 || this == league.penalizedTeam2 || this == league.penalizedTeam3) {
+        if (this == league.penalizedTeams.get(0) || this == league.penalizedTeams.get(2) || this == league.penalizedTeams.get(3)) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[1]) > 0) {
             summary += "\n\nYou exceeded expectations and gained " + prestigePts[1] + " prestige points!";
@@ -4692,6 +4727,16 @@ public class Team {
 
     }
 
+    public String getTeamSaveString() {
+        String teamSave;
+        
+        teamSave = (conference + "," + name + "," + abbr + "," + teamPrestige + "," + totalWins + "," + totalLosses
+                + "," + totalCCs + "," + totalNCs + "," + division + "," + location + "," + totalNCLosses
+                + "," + totalCCLosses + "," + totalBowls + "," + totalBowlLosses + "," + playbookOffNum + "," + playbookDefNum
+                + "," + (showPopups ? 1 : 0) + "," + winStreak.getStreakCSV() + teamBudget + "," + teamDisciplineScore + "," + teamFacilities + "," + teamStadium + "," + "%\n");
+
+        return teamSave;
+    }
 
     //Saves generated recruits to a file for Recruiting Activity
     public String getRecruitsInfoSaveFile() {

@@ -391,6 +391,10 @@ public class Game implements Serializable {
     //GAME SIMULATION
 
     public void playGame() {
+        if(awayTeam.name.equals("BYE") || homeTeam.name.equals("BYE")) {
+            hasPlayed = true;
+        }
+
         if (!hasPlayed) {
             gameEventLog = "LOG: #" + awayTeam.rankTeamPollScore + " " + awayTeam.abbr + " (" + awayTeam.wins + "-" + awayTeam.losses + ") @ #" +
                     homeTeam.rankTeamPollScore + " " + homeTeam.abbr + " (" + homeTeam.wins + "-" + homeTeam.losses + ")" + "\n" +

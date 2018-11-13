@@ -86,6 +86,8 @@ import positions.PlayerTE;
 import positions.PlayerWR;
 
 public class League {
+    public String saveVer = "v1.3";
+
     public ArrayList<String[]> leagueHistory;
     private ArrayList<String> heismanHistory;
     public ArrayList<String> leagueHoF;
@@ -99,10 +101,7 @@ public class League {
     public ArrayList<ArrayList<String>> newsStories;
     public ArrayList<ArrayList<String>> weeklyScores;
     private ArrayList<String> teamDiscipline;
-    private int disciplineWeekA;
-    private int disciplineWeekB;
-    private int disciplineWeekC;
-    private int disciplineTimes;
+    private double disciplineChance = 0.85;
 
     public LeagueRecords leagueRecords;
     public LeagueRecords userTeamRecords;
@@ -111,11 +110,7 @@ public class League {
     private TeamStreak longestActiveWinStreak;
 
     // News Story Variables
-    public Team penalizedTeam1;
-    public Team penalizedTeam2;
-    public Team penalizedTeam3;
-    public Team penalizedTeam4;
-    public Team penalizedTeam5;
+    public ArrayList<Team> penalizedTeams;
 
     //League Stats
     public int leagueOffTal;
@@ -124,8 +119,7 @@ public class League {
 
     //Current week, 1-14
     public int currentWeek;
-    public int randgm;
-    public int randconf;
+
     //Bowl Games
     private boolean hasScheduledBowls;
     private Game semiG14;
@@ -172,7 +166,6 @@ public class League {
     public boolean fullGameLog;
     public boolean hidePotential;
     public boolean confRealignment;
-    public boolean enableProRel;
     public boolean enableUnivProRel;
     public boolean enableTV;
     public boolean neverRetire;
@@ -189,7 +182,8 @@ public class League {
     private final int seasonStart = 2018;
     int countTeam = 120;
     private final int seasonWeeks = 26;
-    private final double realignmentChance = 0.35;
+    private final double confRealignmentChance = 0.23; //chance of event
+    private final double realignmentChance = 0.35; //chance of invite
     private final String crYear1 = "2";
     private final String crYear2 = "7";
     private boolean heismanDecided;
@@ -236,28 +230,28 @@ public class League {
         }
 
         //Set up conferences from XML
-        String[] confSplit = confText.split(", ");
+        String[] confSplit = confText.split("%");
+        int confDiv = 0;
         for (String n : confSplit) {
-            conferences.add(new Conference(n, this, false, 0, 0));
+            conferences.add(new Conference(n.split(",")[0], this, false, 0, 0));
+            conferences.get(confDiv).divisions.add(new Division(n.split(",")[1], this));
+            conferences.get(confDiv).divisions.add(new Division(n.split(",")[2], this));
+            confDiv++;
         }
 
 
         //Set up teams from XML
-        String[] teamSplit = teamText.split("%");
         int x = 0;
         int c = 0;
         if (!randomize && !equalize) {
             for (int t = 0; t < teamText.split("%").length; t++) {
-                if (teamText.split("%")[t].contains("[END CONF]")) {
-                    //skip
+                if (teamText.split("%")[t].contains("[END_CONF]")) {
+                    x = 0;
+                    c++;
                 } else {
-                    String[] teamID = teamText.split("%")[t].split(", ");
+                    String[] teamID = teamText.split("%")[t].split(",");
                     conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], Integer.parseInt(teamID[3]), teamID[4], Integer.parseInt(teamID[5]), this));
                     x++;
-                    if (x > 11) {
-                        c++;
-                        x = 0;
-                    }
                 }
             }
         } else if (randomize) {
@@ -265,31 +259,25 @@ public class League {
                 int tmPres = 0;
                 if (c < 5) tmPres = (int) (Math.random() * 35) + 60;
                 else tmPres = (int) (Math.random() * 35) + 25;
-                if (teamText.split("%")[t].contains("[END CONF]")) {
-                    //skip
+                if (teamText.split("%")[t].contains("[END_CONF]")) {
+                    x = 0;
+                    c++;
                 } else {
-                    String[] teamID = teamText.split("%")[t].split(", ");
+                    String[] teamID = teamText.split("%")[t].split(",");
                     conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], tmPres, teamID[4], Integer.parseInt(teamID[5]), this));
                     x++;
-                    if (x > 11) {
-                        c++;
-                        x = 0;
-                    }
                 }
             }
         } else {
             for (int t = 0; t < teamText.split("%").length; t++) {
                 int tmPres = 60;
-                if (teamText.split("%")[t].contains("[END CONF]")) {
-                    //skip
+                if (teamText.split("%")[t].contains("[END_CONF]")) {
+                    x = 0;
+                    c++;
                 } else {
-                    String[] teamID = teamText.split("%")[t].split(", ");
+                    String[] teamID = teamText.split("%")[t].split(",");
                     conferences.get(c).confTeams.add(new Team(teamID[0].substring(1), teamID[1], teamID[2], tmPres, teamID[4], Integer.parseInt(teamID[5]), this));
                     x++;
-                    if (x > 11) {
-                        c++;
-                        x = 0;
-                    }
                 }
             }
         }
@@ -356,9 +344,8 @@ public class League {
                     while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
                         String[] filesSplit = line.split(", ");
                         if (filesSplit.length > 1) {
-
                             line.replace("\"", "\\\"");
-                            //String[] filesSplit = line.split(", ");
+
                             String tmName = filesSplit[0];
                             String tmAbbr = filesSplit[1];
                             String tmConf = filesSplit[2];
@@ -438,6 +425,16 @@ public class League {
         } catch (IOException ex) {
             System.out.println(
                     "Error reading file");
+        }
+
+        //Rename conference to Independent if too small
+        for(int c = 0; c < conferences.size(); c++) {
+            if(conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
+                conferences.get(c).confName = "Independent";
+                for(int i = 0; i < conferences.get(c).confTeams.size(); i++) {
+                    conferences.get(c).confTeams.get(i).conference = "Independent";
+                }
+            }
         }
 
         setupSeason();
@@ -527,57 +524,7 @@ public class League {
                 }
             }
 
-            // Set up lucky and penalized teams for Week 0 news stories
 
-            StringBuilder sbPenalized = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED_TEAM")) {
-                sbPenalized.append(line);
-            }
-            if (!sbPenalized.toString().equals("NULL")) {
-                penalizedTeam1 = findTeamAbbr(sbPenalized.toString());
-            } else {
-                penalizedTeam1 = null;
-            }
-
-            StringBuilder sbPenalized2 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED2_TEAM")) {
-                sbPenalized2.append(line);
-            }
-            if (!sbPenalized2.toString().equals("NULL")) {
-                penalizedTeam2 = findTeamAbbr(sbPenalized2.toString());
-            } else {
-                penalizedTeam2 = null;
-            }
-
-            StringBuilder sbPenalized3 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED3_TEAM")) {
-                sbPenalized3.append(line);
-            }
-            if (!sbPenalized3.toString().equals("NULL")) {
-                penalizedTeam3 = findTeamAbbr(sbPenalized3.toString());
-            } else {
-                penalizedTeam3 = null;
-            }
-
-            StringBuilder sbPenalized4 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED4_TEAM")) {
-                sbPenalized4.append(line);
-            }
-            if (!sbPenalized4.toString().equals("NULL")) {
-                penalizedTeam4 = findTeamAbbr(sbPenalized4.toString());
-            } else {
-                penalizedTeam4 = null;
-            }
-
-            StringBuilder sbPenalized5 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED5_TEAM")) {
-                sbPenalized5.append(line);
-            }
-            if (!sbPenalized5.toString().equals("NULL")) {
-                penalizedTeam5 = findTeamAbbr(sbPenalized5.toString());
-            } else {
-                penalizedTeam5 = null;
-            }
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
                 for (int b = 0; b < bowlNames.length; ++b) {
                     String[] filesSplit = line.split(",");
@@ -645,7 +592,6 @@ public class League {
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
-            enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
             enableTV = Boolean.parseBoolean(bufferedReader.readLine());
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
@@ -653,11 +599,8 @@ public class League {
             careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
             expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
 
-            if (enableProRel) confRealignment = false;
-            if (confRealignment) enableProRel = false;
             if (enableUnivProRel) {
                 confRealignment = false;
-                enableProRel = false;
             }
 
             // Always close files.
@@ -776,53 +719,24 @@ public class League {
 
             StringBuilder sbPenalized = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED_TEAM")) {
-                sbPenalized.append(line);
-            }
-            if (!sbPenalized.toString().equals("NULL")) {
-                penalizedTeam1 = findTeamAbbr(sbPenalized.toString());
-            } else {
-                penalizedTeam1 = null;
             }
 
             StringBuilder sbPenalized2 = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED2_TEAM")) {
-                sbPenalized2.append(line);
-            }
-            if (!sbPenalized2.toString().equals("NULL")) {
-                penalizedTeam2 = findTeamAbbr(sbPenalized2.toString());
-            } else {
-                penalizedTeam2 = null;
             }
 
             StringBuilder sbPenalized3 = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED3_TEAM")) {
-                sbPenalized3.append(line);
-            }
-            if (!sbPenalized3.toString().equals("NULL")) {
-                penalizedTeam3 = findTeamAbbr(sbPenalized3.toString());
-            } else {
-                penalizedTeam3 = null;
             }
 
             StringBuilder sbPenalized4 = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED4_TEAM")) {
-                sbPenalized4.append(line);
-            }
-            if (!sbPenalized4.toString().equals("NULL")) {
-                penalizedTeam4 = findTeamAbbr(sbPenalized4.toString());
-            } else {
-                penalizedTeam4 = null;
             }
 
             StringBuilder sbPenalized5 = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED5_TEAM")) {
-                sbPenalized5.append(line);
             }
-            if (!sbPenalized5.toString().equals("NULL")) {
-                penalizedTeam5 = findTeamAbbr(sbPenalized5.toString());
-            } else {
-                penalizedTeam5 = null;
-            }
+
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
                 for (int b = 0; b < bowlNames.length; ++b) {
                     String[] filesSplit = line.split(",");
@@ -890,7 +804,7 @@ public class League {
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
-            enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
+            bufferedReader.readLine();
             enableTV = Boolean.parseBoolean(bufferedReader.readLine());
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
@@ -898,11 +812,8 @@ public class League {
             careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
             expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
 
-            if (enableProRel) confRealignment = false;
-            if (confRealignment) enableProRel = false;
             if (enableUnivProRel) {
                 confRealignment = false;
-                enableProRel = false;
             }
 
             // Always close files.
@@ -930,14 +841,16 @@ public class League {
             }
         }
 
-        //fix team divions
+       //fix team divions
         for (int c = 0; c < conferences.size(); c++) {
-            for (int i = 0; i <= conferences.get(c).confTeams.size(); c++) {
-                if (i < conferences.get(c).confTeams.size() / 2) {
-                    conferences.get(c).confTeams.get(i).rivalTeam = conferences.get(c).divisions.get(1).divName;
+            for (int i = 0; i < conferences.get(c).confTeams.size(); i++) {
+                conferences.get(c).divisions.add(new Division("A",this));
+                conferences.get(c).divisions.add(new Division("B", this));
+                if (i % 2 == 0) {
+                    conferences.get(c).confTeams.get(i).division = conferences.get(c).divisions.get(1).divName;
                     conferences.get(c).divisions.get(0).divTeams.add(conferences.get(c).confTeams.get(i));
                 } else {
-                    conferences.get(c).confTeams.get(i).rivalTeam = conferences.get(c).divisions.get(2).divName;
+                    conferences.get(c).confTeams.get(i).division = conferences.get(c).divisions.get(2).divName;
                     conferences.get(c).divisions.get(1).divTeams.add(conferences.get(c).confTeams.get(i));
                 }
             }
@@ -1029,57 +942,6 @@ public class League {
                 }
             }
 
-            // Set up lucky and penalized teams for Week 0 news stories
-
-            StringBuilder sbPenalized = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED_TEAM")) {
-                sbPenalized.append(line);
-            }
-            if (!sbPenalized.toString().equals("NULL")) {
-                penalizedTeam1 = findTeamAbbr(sbPenalized.toString());
-            } else {
-                penalizedTeam1 = null;
-            }
-
-            StringBuilder sbPenalized2 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED2_TEAM")) {
-                sbPenalized2.append(line);
-            }
-            if (!sbPenalized2.toString().equals("NULL")) {
-                penalizedTeam2 = findTeamAbbr(sbPenalized2.toString());
-            } else {
-                penalizedTeam2 = null;
-            }
-
-            StringBuilder sbPenalized3 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED3_TEAM")) {
-                sbPenalized3.append(line);
-            }
-            if (!sbPenalized3.toString().equals("NULL")) {
-                penalizedTeam3 = findTeamAbbr(sbPenalized3.toString());
-            } else {
-                penalizedTeam3 = null;
-            }
-
-            StringBuilder sbPenalized4 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED4_TEAM")) {
-                sbPenalized4.append(line);
-            }
-            if (!sbPenalized4.toString().equals("NULL")) {
-                penalizedTeam4 = findTeamAbbr(sbPenalized4.toString());
-            } else {
-                penalizedTeam4 = null;
-            }
-
-            StringBuilder sbPenalized5 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED5_TEAM")) {
-                sbPenalized5.append(line);
-            }
-            if (!sbPenalized5.toString().equals("NULL")) {
-                penalizedTeam5 = findTeamAbbr(sbPenalized5.toString());
-            } else {
-                penalizedTeam5 = null;
-            }
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
                 for (int b = 0; b < bowlNames.length; ++b) {
                     String[] filesSplit = line.split(",");
@@ -1147,7 +1009,6 @@ public class League {
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
             hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
-            enableProRel = Boolean.parseBoolean(bufferedReader.readLine());
             enableTV = Boolean.parseBoolean(bufferedReader.readLine());
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
             userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
@@ -1155,11 +1016,8 @@ public class League {
             careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
             expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
 
-            if (enableProRel) confRealignment = false;
-            if (confRealignment) enableProRel = false;
             if (enableUnivProRel) {
                 confRealignment = false;
-                enableProRel = false;
             }
 
             // Always close files.
@@ -1213,6 +1071,7 @@ public class League {
 
         conferences = new ArrayList<>();
         teamList = new ArrayList<>();
+        penalizedTeams = new ArrayList<>();
 
         allAmericans = new ArrayList<>();
         allFreshman = new ArrayList<>();
@@ -1241,16 +1100,58 @@ public class League {
     //Set Up Season variables
     private void setupSeason() {
 
-
         //set up schedule
         for (int i = 0; i < conferences.size(); ++i) {
-            conferences.get(i).setUpSchedule();
+                conferences.get(i).setUpSchedule();
         }
 
-        if(!enableUnivProRel) {
-            for (int w = 0; w < 3; w++) {
+        //Future Implementations of Divisions
+/*        for (int i = 0; i < conferences.size(); ++i) {
+            if(conferences.get(i).confTeams.size() < 12) {
+                conferences.get(i).setUpSchedule();
+            } else {
+                conferences.get(i).setDivisionTeams();
+                conferences.get(i).setUpDivisionSchedule();
+                conferences.get(i).setUpCrossDivisionSchedule();
+            }
+        } */
 
-                ArrayList<Team> availTeams = (ArrayList<Team>) teamList.clone();
+
+        //decide OOC schedule
+        int j = 0;
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < conferences.size(); c++) {
+                if (conferences.get(c).confTeams.size() > conferences.get(c).minConfTeams) {
+                    conferences.get(c).oocWeeks[r] = (j + r);
+                    for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                        conferences.get(c).confTeams.get(t).oocWeeks.add(j+r);
+                    }
+                    j++;
+                    if (j + r > 9) j = 0;
+                } else {
+                    conferences.get(c).oocWeeks[0] = 100;
+                    conferences.get(c).oocWeeks[1] = 100;
+                    conferences.get(c).oocWeeks[2] = 100;
+                    for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                        conferences.get(c).confTeams.get(t).oocWeeks.add(100);
+                        conferences.get(c).confTeams.get(t).oocWeeks.add(100);
+                        conferences.get(c).confTeams.get(t).oocWeeks.add(100);
+                    }
+                }
+            }
+        }
+
+        //Setup OOC v3 Scheduling
+        if (!enableUnivProRel) {
+            for (int week = 0; week < 12; week++) {
+
+                ArrayList<Team> availTeams = new ArrayList<>();
+
+                for (int t = 0; t < teamList.size(); t ++) {
+                    if (teamList.get(t).oocWeeks.contains(week) || teamList.get(t).conference.equals("Independent")) {
+                        availTeams.add(teamList.get(t));
+                    }
+                }
 
                 while (availTeams.size() > 0) {
                     int selTeamA = (int) (availTeams.size() * Math.random());
@@ -1258,13 +1159,16 @@ public class League {
 
                     ArrayList<Team> availTeamsB = new ArrayList<>();
                     for (int k = 0; k < availTeams.size(); k++) {
-                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k))) {
+                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k)) || availTeams.get(k).conference.contains("Independent") && availTeams.get(k) != a && !a.oocTeams.contains(availTeams.get(k))  ) {
                             availTeamsB.add(availTeams.get(k));
                         }
                     }
                     Team b;
                     if (availTeamsB.isEmpty()) {
-                        b = new Team("FCS " + proTeams[(int) (proTeams.length * Math.random())], "FCS", "FCS Division", 25, "FCS1", 0, this);
+                        b = new Team("FCS " + proTeams[(int) (proTeams.length * Math.random())], "FCS", "FCS Division", (int)(Math.random()*45), "FCS1", 0, this);
+                        b.oocWeeks.add(100);
+                        b.oocWeeks.add(100);
+                        b.oocWeeks.add(100);
                     } else {
                         int selTeamB = (int) (availTeamsB.size() * Math.random());
                         b = availTeamsB.get(selTeamB);
@@ -1272,40 +1176,56 @@ public class League {
 
                     Game gm;
                     if (Math.random() > 0.5) {
-                        gm = new Game(a, b, a.conference + " vs " + b.conference);
+                        gm = new Game(a, b, "OOC");
                     } else {
-                        gm = new Game(b, a, b.conference + " vs " + a.conference);
+                        gm = new Game(b, a, "OOC");
                     }
 
-                    if (w == 0) {
+                    if (a.oocWeeks.get(0) == week) {
                         a.gameOOCSchedule0 = gm;
-                        b.gameOOCSchedule0 = gm;
                         a.oocTeams.add(b);
-                        b.oocTeams.add(a);
-                        availTeams.remove(a);
-                        availTeams.remove(b);
-                    } else if (w == 1) {
+                    } else if (a.oocWeeks.get(1) == week) {
                         a.gameOOCSchedule1 = gm;
-                        b.gameOOCSchedule1 = gm;
                         a.oocTeams.add(b);
-                        b.oocTeams.add(a);
-                        availTeams.remove(a);
-                        availTeams.remove(b);
-                    } else if (w == 2) {
+                    } else if (a.oocWeeks.get(2) == week) {
                         a.gameOOCSchedule2 = gm;
-                        b.gameOOCSchedule2 = gm;
                         a.oocTeams.add(b);
+                    }
+
+                    if (b.oocWeeks.get(0) == week) {
+                        b.gameOOCSchedule0 = gm;
                         b.oocTeams.add(a);
-                        availTeams.remove(a);
-                        availTeams.remove(b);
+                    } else if (b.oocWeeks.get(1) == week) {
+                        b.gameOOCSchedule1 = gm;
+                        b.oocTeams.add(a);
+                    } else if (b.oocWeeks.get(2) == week) {
+                        b.gameOOCSchedule2 = gm;
+                        b.oocTeams.add(a);
+                    }
+
+                    availTeams.remove(a);
+                    availTeams.remove(b);
+                    if(a.conference.contains("Independent"))
+                    {
+                        a.gameSchedule.add(gm);
+                        a.oocTeams.add(b);
+                    }
+                    if(b.conference.contains("Independent")) {
+                        b.gameSchedule.add(gm);
+                        b.oocTeams.add(a);
                     }
                 }
             }
 
-            for (int i = 0; i < conferences.size(); ++i) {
-                conferences.get(i).insertOOCSchedule();
+
+            for (int c = 0;c < conferences.size(); c++){
+                if (conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
+                    conferences.get(c).insertOOCSchedule();
+                }
             }
+
         }
+
 
 
 
@@ -1332,28 +1252,25 @@ public class League {
 
         newsStories.get(0).add("Conference Prestige>The latest surveys are in. The " + getYear() + " prestige ratings for each conference are:\n\n" + sb);
 
-        if (penalizedTeam1 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Major Infraction: " + penalizedTeam1.name + ">An administrative probe has determined that booster " + penalizedTeam1.HC.get(0).name +
-                    " has tampered with several recruits. In addition, academic records at  " + penalizedTeam1.name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
+        penalizeTeams();
+
+        if (penalizedTeams.get(0) != null && getYear() > seasonStart) {
+            newsStories.get(0).add("Major Infraction: " + penalizedTeams.get(0).name + ">An administrative probe has determined that booster " + penalizedTeams.get(0).HC.get(0).name +
+                    " has tampered with several recruits. In addition, academic records at  " + penalizedTeams.get(0).name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
         }
-        if (penalizedTeam2 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Major Infraction: " + penalizedTeam2.name + ">Investigations have led to the discovery that " + penalizedTeam2.name + "'s head coach " + penalizedTeam2.HC.get(0).name +
+        if (penalizedTeams.get(1) != null && getYear() > seasonStart) {
+            newsStories.get(0).add("Major Infraction: " + penalizedTeams.get(1).name + ">Investigations have led to the discovery that " + penalizedTeams.get(1).name + "'s head coach " + penalizedTeams.get(1).HC.get(0).name +
                     " was found violating recruiting policies over the past off-season. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped.");
         }
-        if (penalizedTeam3 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Incidental Infraction: " + penalizedTeam3.name + ">Several players from " + penalizedTeam3.name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
+        if (penalizedTeams.get(2) != null && getYear() > seasonStart) {
+            newsStories.get(0).add("Incidental Infraction: " + penalizedTeams.get(2).name + ">Several players from " + penalizedTeams.get(2).name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
         }
-        if (penalizedTeam4 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Incidental Infraction: " + penalizedTeam4.name + ">An independent investigation determined " + penalizedTeam4.name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
+        if (penalizedTeams.get(3) != null && getYear() > seasonStart) {
+            newsStories.get(0).add("Incidental Infraction: " + penalizedTeams.get(3).name + ">An independent investigation determined " + penalizedTeams.get(3).name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
         }
-        if (penalizedTeam5 != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Incidental Infraction: " + penalizedTeam5.name + ">Newspapers are reporting " + penalizedTeam5.name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
+        if (penalizedTeams.get(4) != null && getYear() > seasonStart) {
+            newsStories.get(0).add("Incidental Infraction: " + penalizedTeams.get(4).name + ">Newspapers are reporting " + penalizedTeams.get(4).name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
         }
-
-        disciplineTimes = (int) (Math.random() * 3) + 1;
-        disciplineWeekA = (int) (Math.random() * 13);
-        disciplineWeekB = (int) (Math.random() * 13);
-        disciplineWeekC = (int) (Math.random() * 13);
     }
 
     /**
@@ -1613,25 +1530,94 @@ public class League {
         newsStories.get(0).add("Top Incoming Redshirted Recruits>The following list is this year's top redshirts. Their respective teams decided to sit them out this season, in hopes of progressing their talent further for next year.\n\n" + newsRedshirts);
     }
 
+    public void penalizeTeams() {
+        //Major Infraction to a good team
+        if ((int) (Math.random() * 11) > 8) {
+            int teamNumber = (int) (Math.random() * 50);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .25);
+                penalizedTeams.add(0, teamTrouble);
+                teamTrouble.HC.get(0).ratDiscipline -= 20;
+            } else {
+                penalizedTeams.add(0, null);
+                teamTrouble.HC.get(0).ratDiscipline += 3;
+            }
+        } else penalizedTeams.add(0, null);;
+
+        //Minor infraction to an avg team
+        if ((int) (Math.random() * 11) > 7) {
+            int teamNumber = (int) (Math.random() * 60);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .17);
+                penalizedTeams.add(1, teamTrouble);
+                teamTrouble.HC.get(0).ratDiscipline -= 10;
+            } else {
+                penalizedTeams.add(1, null);
+                teamTrouble.HC.get(0).ratDiscipline += 3;
+            }
+        } else penalizedTeams.add(1, null);
+
+        //Discipline a team
+        if ((int) (Math.random() * 11) > 6) {
+            int teamNumber = (int) (Math.random() * 70);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .13);
+                teamTrouble.HC.get(0).ratDiscipline -= 8;
+                penalizedTeams.add(2, teamTrouble);
+            } else {
+                penalizedTeams.add(2, null);
+                teamTrouble.HC.get(0).ratDiscipline += 3;
+            }
+        } else  penalizedTeams.add(2, null);
+
+
+        //Discipline a team
+        if ((int) (Math.random() * 11) > 5) {
+            int teamNumber = (int) (Math.random() * 80);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .10);
+                teamTrouble.HC.get(0).ratDiscipline -= 5;
+                penalizedTeams.add(3, teamTrouble);
+            } else {
+                penalizedTeams.add(3, null);
+                teamTrouble.HC.get(0).ratDiscipline += 3;
+            }
+        } else  penalizedTeams.add(3, null);
+
+        //Discipline a team
+        if ((int) (Math.random() * 11) > 5) {
+            int teamNumber = (int) (Math.random() * 100);
+            Team teamTrouble = teamList.get(teamNumber);
+
+            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
+                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .07);
+                teamTrouble.HC.get(0).ratDiscipline -= 5;
+                penalizedTeams.add(4, teamTrouble);
+            } else {
+                penalizedTeams.add(4, null);
+                teamTrouble.HC.get(0).ratDiscipline += 3;
+            }
+        } else penalizedTeams.add(4, null);
+
+        //FINISH INFRACTIONS
+    }
+
     //Simulates Each Game Week
     public void playWeek() {
         //focus on the best player at a position this year each week
         playerSpotlight();
 
         updateSuspensions();
-        if (disciplineTimes == 3) {
-            if (currentWeek == disciplineWeekA || currentWeek == disciplineWeekB || currentWeek == disciplineWeekC) {
-                disciplineAction();
-            }
-        } else if (disciplineTimes == 2) {
-            if (currentWeek == disciplineWeekA || currentWeek == disciplineWeekB) {
-                disciplineAction();
-            }
-        } else {
-            if (currentWeek == disciplineWeekA) {
-                disciplineAction();
-            }
-        }
+
+        disciplineAction();
 
         if (currentWeek <= 12) {
             for (int i = 0; i < conferences.size(); ++i) {
@@ -1728,14 +1714,16 @@ public class League {
         teamDiscipline = new ArrayList<>();
         String news = "";
         for (int t = 0; t < teamList.size(); ++t) {
-            int teamDis = teamList.get(t).getTeamDiscipline();
-            if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
-                teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 4);
-                teamList.get(t).disciplinePts -= (int) (Math.random() * 3);
-                teamDiscipline.add(teamList.get(t).name);
-                teamList.get(t).disciplinePlayer();
-            } else {
-                teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
+            if(Math.random() > disciplineChance) {
+                int teamDis = teamList.get(t).getTeamDiscipline();
+                if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
+                    teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 4);
+                    teamList.get(t).disciplinePts -= (int) (Math.random() * 3);
+                    teamDiscipline.add(teamList.get(t).name);
+                    teamList.get(t).disciplinePlayer();
+                } else {
+                    teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
+                }
             }
         }
         for (int i = 0; i < teamDiscipline.size(); ++i) {
@@ -2775,7 +2763,7 @@ public class League {
 
                 for (int i = 0; i < teamList.size(); ++i) {
                     teamList.get(i).updatePollScore();
-                    if (teamList.get(i) == penalizedTeam1 || teamList.get(i) == penalizedTeam2)
+                    if (teamList.get(i) == penalizedTeams.get(0) || teamList.get(i) == penalizedTeams.get(1))
                         teamList.get(i).teamPollScore = 0;
                 }
                 Collections.sort(teamList, new CompTeamPoll());
@@ -2910,12 +2898,12 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
             //bowl ban!
-            if (penalizedTeam1 != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeam1.abbr))
+            if (penalizedTeams.get(0) != null) {
+                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(0).abbr))
                     teamList.get(i).teamPollScore = 0;
             }
-            if (penalizedTeam2 != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeam2.abbr))
+            if (penalizedTeams.get(1) != null) {
+                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(1).abbr))
                     teamList.get(i).teamPollScore = 0;
             }
             //minimum wins for bowl eligibility
@@ -3154,12 +3142,12 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
             //bowl ban!
-            if (penalizedTeam1 != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeam1.abbr))
+            if (penalizedTeams.get(0) != null) {
+                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(0).abbr))
                     teamList.get(i).teamPollScore = 0;
             }
-            if (penalizedTeam2 != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeam2.abbr))
+            if (penalizedTeams.get(1) != null) {
+                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(1).abbr))
                     teamList.get(i).teamPollScore = 0;
             }
             //minimum wins for bowl eligibility
@@ -4132,76 +4120,6 @@ public class League {
     }
 
     /*
-    Conference Invites - Switch teams around with partner conference if criteria met:
-         1. Team A is over 75 Prestige / Team B is below 30
-         2. Conferences are partners:
-            a. Atlantic :: American
-            b. Big Ten :: MAC
-            c. Big 12 :: Sun Belt
-            d. SEC :: Conf USA
-            e. Pac 12 :: Mt West
-          3. Random Chance, low: 15% ?
-    */
-    public void conferenceRealignment() {
-        int year = getYear();
-        Conference p5Conf, g5Conf;
-        newsRealignment = "";
-        countRealignment = 0;
-        String yearEnd = Integer.toString(year).substring(3, 4);
-        if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
-            for (int i = 5; i < conferences.size(); ++i) {
-                if (conferences.get(i - 5).confPrestige >= conferences.get(i).confPrestige) {
-                    g5Conf = conferences.get(i);
-                    p5Conf = conferences.get(i - 5);
-                } else {
-                    g5Conf = conferences.get(i - 5);
-                    p5Conf = conferences.get(i);
-                }
-                for (int t = 0; t < g5Conf.confTeams.size(); ++t) {
-                    if (g5Conf.confTeams.get(t).teamPrestige > p5Conf.confPromoteMin) {
-                        for (int x = p5Conf.confTeams.size() - 1; x >= 0; --x) {
-                            if (p5Conf.confTeams.get(x).teamPrestige < p5Conf.confRelegateMin) {
-                                //set teams to memory
-                                if (Math.random() < realignmentChance) {
-                                    final String teamArival = g5Conf.confTeams.get(t).rivalTeam;
-                                    final String teamBrival = p5Conf.confTeams.get(x).rivalTeam;
-                                    final String teamAconf = g5Conf.confTeams.get(t).conference;
-                                    final String teamBconf = p5Conf.confTeams.get(x).conference;
-
-                                    //transfer rivals and conf data
-                                    g5Conf.confTeams.get(t).rivalTeam = teamBrival;
-                                    p5Conf.confTeams.get(x).rivalTeam = teamArival;
-                                    g5Conf.confTeams.get(t).conference = teamBconf;
-                                    p5Conf.confTeams.get(x).conference = teamAconf;
-                                    Team teamA = g5Conf.confTeams.get(t);
-                                    Team teamB = p5Conf.confTeams.get(x);
-
-                                    //Remove some prestige from demoted teams
-                                    teamB.teamPrestige -= (int) Math.random() * 4;
-
-                                    //remove + transfer teams
-                                    g5Conf.confTeams.remove(t);
-                                    p5Conf.confTeams.remove(x);
-                                    g5Conf.confTeams.add(teamB);
-                                    p5Conf.confTeams.add(teamA);
-
-                                    //break the news
-                                    newsStories.get(currentWeek + 2).add("Conference Realignment News>The " + p5Conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf.confName + " conference has agreed to add " + teamB.name + " as part of the realignment.");
-
-                                    newsRealignment += ("The " + p5Conf.confName + " announced today they will be adding " + teamA.name + " to their conference next season! The " + g5Conf.confName + " conference has agreed to add " + teamB.name + " as part of the realignment.\n\n");
-                                    countRealignment++;
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    /*
 Conference Realigment v2:
 
 Every conference creates a bucket of teams that are not meeting minimum prestige threshold and a bucket of exceeding threshold (if lower tierd conference).
@@ -4216,9 +4134,10 @@ Then conferences can see if they want to add them to their list if the teams mee
         ArrayList<Team> promoteTeamList = new ArrayList<>();
         newsRealignment = "";
         countRealignment = 0;
-        if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
+       // if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
 
-            ArrayList<Conference> confList =  conferences;
+        if (Math.random() < confRealignmentChance) {
+            ArrayList<Conference> confList = conferences;
             Collections.sort(confList, new CompConfPrestige());
 
             //find conferences for independents
@@ -4405,74 +4324,6 @@ Then conferences can see if they want to add them to their list if the teams mee
         Collections.sort(conferences, new CompConfPrestige());
     }
 
-
-    //Promotion/Relegation System - just like in Soccer. Can be enabled. Disabled by default.
-    public void promotionRelegation() {
-
-        //Get list of Promoted & Relegated Teams
-        ArrayList<Team> promotedTeams = new ArrayList<>();
-        ArrayList<Team> relegatedTeams = new ArrayList<>();
-        for (int i = conferences.size() / 2; i < conferences.size(); ++i) {
-            for (int t = 0; t < conferences.get(i).confTeams.size(); t++) {
-                if (conferences.get(i).confTeams.get(t).gameSchedule.size() > 12 && conferences.get(i).confTeams.get(t).gameSchedule.get(12).gameName.contains("CCG"))
-                    promotedTeams.add(conferences.get(i).confTeams.get(t));
-            }
-        }
-
-        for (int i = 0; i < conferences.size() / 2; ++i) {
-            int size = conferences.get(i).confTeams.size();
-            relegatedTeams.add(conferences.get(i).confTeams.get(size - 1));
-            relegatedTeams.add(conferences.get(i).confTeams.get(size - 2));
-        }
-
-        //Remove more prestige from teams
-        for (int i = 0; i < relegatedTeams.size(); i++) {
-            relegatedTeams.get(i).teamPrestige -= 3;
-        }
-
-        StringBuilder string = new StringBuilder();
-        for (int i = 0; i < conferences.size() / 2; ++i) {
-
-            Conference PConf = conferences.get(i);
-            Conference RConf = conferences.get(i + conferences.size() / 2);
-            string.append("[ " + PConf.confName + " || " + RConf.confName + " ]\n");
-
-            //change team conferences
-            promotedTeams.get(2 * i).conference = PConf.confName;
-            promotedTeams.get(2 * i + 1).conference = PConf.confName;
-            relegatedTeams.get(2 * i).conference = RConf.confName;
-            relegatedTeams.get(2 * i + 1).conference = RConf.confName;
-
-            //Remove teams from Conferences
-            PConf.confTeams.remove(relegatedTeams.get(2 * i));
-            PConf.confTeams.remove(relegatedTeams.get(2 * i + 1));
-            RConf.confTeams.remove(promotedTeams.get(2 * i));
-            RConf.confTeams.remove(promotedTeams.get(2 * i + 1));
-
-            //Add teams to Conferences
-            PConf.confTeams.add(promotedTeams.get(2 * i));
-            PConf.confTeams.add(promotedTeams.get(2 * i + 1));
-            RConf.confTeams.add(relegatedTeams.get(2 * i));
-            RConf.confTeams.add(relegatedTeams.get(2 * i + 1));
-
-            //calculate Conf Prestige
-            PConf.updateConfPrestige();
-            RConf.updateConfPrestige();
-
-            //break the news
-            string.append("Promoted to " + PConf.confName + " Conference (" + PConf.confPrestige + ")\n");
-            string.append(" + " + promotedTeams.get(2 * i).name + " (" + promotedTeams.get(2 * i).teamPrestige + ")\n" + " + " + promotedTeams.get(2 * i + 1).name + " (" + promotedTeams.get(2 * i + 1).teamPrestige + ")\n");
-            string.append("Relegated to " + RConf.confName + " Conference (" + PConf.confPrestige + ")\n");
-            string.append(" - " + relegatedTeams.get(2 * i).name + " (" + relegatedTeams.get(2 * i).teamPrestige + ")\n" + " - " + relegatedTeams.get(2 * i + 1).name + " (" + relegatedTeams.get(2 * i + 1).teamPrestige + ")\n");
-            string.append("\n");
-
-        }
-
-        //post news in News
-        newsRealignment = string.toString();
-        newsStories.get(currentWeek + 2).add("Promotion/Relegation Update>" + newsRealignment);
-    }
-
     //Universal Pro/Rel system - uses EVERY conferences. This is a giant Premier League + Championship + League 1 + League 2 + National League + Feeder Leagues FA-like system.
     public void convertUnivProRel() {
 
@@ -4486,15 +4337,14 @@ Then conferences can see if they want to add them to their list if the teams mee
             conferences.get(i).TV = conferences.get(i).getTVName();
         }
 
-        int teamsPerConf = Math.round(teamList.size() / conferences.size());
-        if (teamsPerConf % 2 == 0) teamsPerConf++;  //check if even # of teams
-        //int teamsPerConf = 13; //conf play weeks + 1
+        int teamsPerConf = teamList.size() / conferences.size();
+        if (teamsPerConf % 2 != 0) teamsPerConf++;  //check if even # of teams
 
         int c = 0, next = 0;
         for (int t = 0; t < teamList.size(); t++) {
             if (c == conferences.size() - 1) {
 
-            } else if (next > teamsPerConf) {
+            } else if (next == teamsPerConf) {
                 next = 0;
                 c++;
             }
@@ -4646,86 +4496,6 @@ Then conferences can see if they want to add them to their list if the teams mee
 
         }
 
-        /// INFRACTIONS TIME
-
-        //Major Infraction to a good team
-        if ((int) (Math.random() * 11) > 8) {
-            int teamNumber = (int) (Math.random() * 50);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .25);
-                penalizedTeam1 = teamTrouble;
-                teamTrouble.HC.get(0).ratDiscipline -= 20;
-            } else {
-                penalizedTeam1 = null;
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else penalizedTeam1 = null;
-
-        //Minor infraction to an avg team
-        if ((int) (Math.random() * 11) > 7) {
-            int teamNumber = (int) (Math.random() * 60);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .17);
-                penalizedTeam2 = teamTrouble;
-                teamTrouble.HC.get(0).ratDiscipline -= 10;
-            } else {
-                penalizedTeam2 = null;
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else penalizedTeam2 = null;
-
-        //Discipline a team
-        if ((int) (Math.random() * 11) > 6) {
-            int teamNumber = (int) (Math.random() * 70);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .13);
-                teamTrouble.HC.get(0).ratDiscipline -= 8;
-                penalizedTeam3 = teamTrouble;
-            } else {
-                penalizedTeam3 = null;
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else penalizedTeam3 = null;
-
-        //Discipline a team
-        if ((int) (Math.random() * 11) > 5) {
-            int teamNumber = (int) (Math.random() * 80);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .10);
-                teamTrouble.HC.get(0).ratDiscipline -= 5;
-                penalizedTeam4 = teamTrouble;
-            } else {
-                penalizedTeam4 = null;
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else penalizedTeam4 = null;
-
-        //Discipline a team
-        if ((int) (Math.random() * 11) > 5) {
-            int teamNumber = (int) (Math.random() * 100);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .07);
-                teamTrouble.HC.get(0).ratDiscipline -= 5;
-                penalizedTeam5 = teamTrouble;
-            } else {
-                penalizedTeam5 = null;
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else penalizedTeam5 = null;
-
-        //FINISH INFRACTIONS
-
-
         advanceSeasonWinStreaks();
 
         if (enableTV) newsTV = new ArrayList<>();
@@ -4763,9 +4533,6 @@ Then conferences can see if they want to add them to their list if the teams mee
      */
     private void advanceSeasonWinStreaks() {
         yearStartLongestWinStreak = longestWinStreak;
-        for (Team t : teamList) {
-            t.yearStartWinStreak = t.winStreak;
-        }
     }
 
     /**
@@ -4795,7 +4562,6 @@ Then conferences can see if they want to add them to their list if the teams mee
         userTeamRecords.changeAbbrRecords(userTeam.abbr, newAbbr);
         changeAbbrWinStreaks(userTeam.abbr, newAbbr);
         userTeam.winStreak.changeAbbr(newAbbr);
-        userTeam.yearStartWinStreak.changeAbbr(newAbbr);
 
         // check league and POTY history
         for (String[] yr : leagueHistory) {
@@ -5830,180 +5596,6 @@ Then conferences can see if they want to add them to their list if the teams mee
         return rankings;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Save League in a file.
-     *
-     * @param saveFile file to be overwritten
-     * @return true if successful
-     */
-    public boolean saveLeague(File saveFile) {
-
-        //Need method for saving mid-season
-
-        StringBuilder sb = new StringBuilder();
-
-        // Save information about the save file, user team info
-        sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
-                userTeam.HC.get(0).confchamp + " CC, " + userTeam.HC.get(0).natchamp + " NC [" + userTeam.HC.get(0).getCoachCareerScore() + "]>" + teamList.size() + ">v1.5\n");
-
-        // Save league history of who was #1 each year
-        for (int i = 0; i < leagueHistory.size(); ++i) {
-            for (int j = 0; j < leagueHistory.get(i).length; ++j) {
-                sb.append(leagueHistory.get(i)[j] + "%");
-            }
-            sb.append("\n");
-        }
-        sb.append("END_LEAGUE_HIST\n");
-
-        // Save POTY history of who won each year
-        // Go through leagueHist size in case they save after the Heisman Ceremony
-        for (int i = 0; i < leagueHistory.size(); ++i) {
-            sb.append(heismanHistory.get(i) + "\n");
-        }
-        sb.append("END_HEISMAN_HIST\n");
-
-
-        //Save Conference Names
-        for (int i = 0; i < conferences.size(); ++i) {
-            sb.append(conferences.get(i).confName + "," + conferences.get(i).confTV + "," + conferences.get(i).confTVContract + "," + conferences.get(i).confTVBonus + "," + conferences.get(i).TV + "\n");
-        }
-        sb.append("END_CONFERENCES\n");
-
-        // Save information about each team like W-L records, as well as all the players
-        for (Team t : teamList) {
-            sb.append(t.conference + "," + t.name + "," + t.abbr + "," + t.teamPrestige + "," + t.totalWins + "," + t.totalLosses + "," + t.totalCCs + "," + t.totalNCs + "," + t.rivalTeam + "," + t.location + "," + t.totalNCLosses + "," + t.totalCCLosses + "," + t.totalBowls + "," + t.totalBowlLosses + "," + t.playbookOffNum + "," + t.playbookDefNum + "," + (t.showPopups ? 1 : 0) + "," + t.yearStartWinStreak.getStreakCSV() + "%\n");
-            sb.append(t.getPlayerInfoSaveFile());
-            sb.append("END_PLAYERS\n");
-        }
-
-        // Save history of the user's team of the W-L and bowl results each year
-        sb.append(userTeam.name + "\n");
-        sb.append("END_USER_TEAM\n");
-        //Every Team Year-by-Year History
-        for (Team t : teamList) {
-            for (String s : t.teamHistory) {
-                sb.append(s + "\n");
-            }
-            sb.append("END_TEAM\n");
-        }
-        sb.append("END_TEAM_HISTORY\n");
-
-
-        for (Team t : teamList) {
-            for (String s : t.HC.get(0).history) {
-                sb.append(s + "\n");
-            }
-            sb.append("END_COACH\n");
-        }
-        sb.append("END_COACH_HISTORY\n");
-
-        if (penalizedTeam1 != null) {
-            sb.append(penalizedTeam1.abbr + "\n");
-            sb.append("END_PENALIZED_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_PENALIZED_TEAM\n");
-        }
-        if (penalizedTeam2 != null) {
-            sb.append(penalizedTeam2.abbr + "\n");
-            sb.append("END_PENALIZED2_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_PENALIZED2_TEAM\n");
-        }
-        if (penalizedTeam3 != null) {
-            sb.append(penalizedTeam3.abbr + "\n");
-            sb.append("END_PENALIZED3_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_PENALIZED3_TEAM\n");
-        }
-        if (penalizedTeam4 != null) {
-            sb.append(penalizedTeam4.abbr + "\n");
-            sb.append("END_PENALIZED4_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_PENALIZED4_TEAM\n");
-        }
-        if (penalizedTeam5 != null) {
-            sb.append(penalizedTeam5.abbr + "\n");
-            sb.append("END_PENALIZED5_TEAM\n");
-        } else {
-            sb.append("NULL\n");
-            sb.append("END_PENALIZED5_TEAM\n");
-        }
-
-        for (String bowlName : bowlNames) {
-            sb.append(bowlName + ",");
-        }
-        sb.append("\nEND_BOWL_NAMES\n");
-
-        // Save league records
-        sb.append(leagueRecords.getRecordsStr());
-        sb.append("END_LEAGUE_RECORDS\n");
-
-        sb.append(yearStartLongestWinStreak.getStreakCSV());
-        sb.append("\nEND_LEAGUE_WIN_STREAK\n");
-
-        // Save user team records
-        for (Team t : teamList) {
-            sb.append(t.teamRecords.getRecordsStr());
-            sb.append("END_TEAM\n");
-        }
-        sb.append("END_TEAM_RECORDS\n");
-
-        for (String s : leagueHoF) {
-            sb.append(s + "\n");
-        }
-        sb.append("END_LEAGUE_HALL_OF_FAME\n");
-
-        for (HeadCoach h : coachFreeAgents) {
-            h.age++;
-        }
-        //Adding to the Available Coach List Pool
-        for (HeadCoach h : coachList) {
-            h.ratPot = h.ratPot + (int) Math.random() * 15;
-            coachFreeAgents.add(h);
-        }
-        Collections.sort(coachFreeAgents, new CompCoachOvr());
-
-        for (HeadCoach h : coachFreeAgents) {
-            if (h.age < 56) {
-                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff + (int) Math.random() * 3) + "," + (h.ratDef + (int) Math.random() * 3) + "," + (h.ratTalent + (int) Math.random() * 3) + "," + (h.ratDiscipline + (int) Math.random() * 3)
-                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
-                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "% " + "\n");
-                for (String s : h.history) {
-                    sb.append(s + "\n");
-                }
-                sb.append("END_FREE_AGENT\n");
-            }
-        }
-
-        sb.append("END_COACHES\n");
-
-        sb.append(fullGameLog + "\n");
-        sb.append(hidePotential + "\n");
-        sb.append(confRealignment + "\n");
-        sb.append(enableProRel + "\n");
-        sb.append(enableTV + "\n");
-        sb.append(enableUnivProRel + "\n");
-        sb.append(userTeam.showPopups + "\n");
-        sb.append(neverRetire + "\n");
-        sb.append(careerMode + "\n");
-        sb.append(expPlayoffs + "\n");
-        sb.append("\nEND_SAVE_FILE");
-
-        // Actually write to the file
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(saveFile), "utf-8"))) {
-            writer.write(sb.toString());
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     /**
      * See if team name is in use, or has illegal characters.
@@ -6089,19 +5681,149 @@ Then conferences can see if they want to add them to their list if the teams mee
     }
 
 
-    /////////////////////////
-    //TEST TEST TEST ///////
-    ////////////////////////
+    public String getFreeAgentCoachSave() {
+        for (HeadCoach h : coachFreeAgents) {
+            h.age++;
+        }
+        //Adding to the Available Coach List Pool
+        for (HeadCoach h : coachList) {
+            h.ratPot = h.ratPot + (int) Math.random() * 15;
+            coachFreeAgents.add(h);
+        }
+        Collections.sort(coachFreeAgents, new CompCoachOvr());
+        StringBuilder sb = new StringBuilder();
 
-    public String getCoachChanges() {
-        StringBuilder string = new StringBuilder();
-
-        for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i).HC.size() > 0) {
-                string.append(teamList.get(i).name + " (" + teamList.get(i).getHC(0).ratImprovement + ")\n");
+        for (HeadCoach h : coachFreeAgents) {
+            if (h.age < 56) {
+                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff + (int) Math.random() * 3) + "," + (h.ratDef + (int) Math.random() * 3) + "," + (h.ratTalent + (int) Math.random() * 3) + "," + (h.ratDiscipline + (int) Math.random() * 3)
+                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
+                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "% " + "\n");
+                for (String s : h.history) {
+                    sb.append(s + "\n");
+                }
+                sb.append("END_FREE_AGENT\n");
             }
         }
 
-        return string.toString();
+        return sb.toString();
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Save League in a file.
+     *
+     * @param saveFile file to be overwritten
+     * @return true if successful
+     */
+    public boolean saveLeague(File saveFile) {
+
+        //Need method for saving mid-season
+
+        StringBuilder sb = new StringBuilder();
+
+        // Save information about the save file, user team info
+        sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
+                userTeam.HC.get(0).confchamp + " CC, " + userTeam.HC.get(0).natchamp + " NC [" + userTeam.HC.get(0).getCoachCareerScore() + "]>" + teamList.size() + ">" + saveVer + "\n");
+
+        // Save league history of who was #1 each year
+        for (int i = 0; i < leagueHistory.size(); ++i) {
+            for (int j = 0; j < leagueHistory.get(i).length; ++j) {
+                sb.append(leagueHistory.get(i)[j] + "%");
+            }
+            sb.append("\n");
+        }
+        sb.append("END_LEAGUE_HIST\n");
+
+        // Save POTY history of who won each year
+        // Go through leagueHist size in case they save after the Heisman Ceremony
+        for (int i = 0; i < leagueHistory.size(); ++i) {
+            sb.append(heismanHistory.get(i) + "\n");
+        }
+        sb.append("END_HEISMAN_HIST\n");
+
+
+        //Save Conference Names
+        for (int i = 0; i < conferences.size(); ++i) {
+            sb.append(conferences.get(i).getConfSaveString());
+        }
+        sb.append("END_CONFERENCES\n");
+
+        // Save information about each team like W-L records, as well as all the players
+        for (Team t : teamList) {
+            sb.append(t.getTeamSaveString());
+            sb.append(t.getPlayerInfoSaveFile());
+            sb.append("END_PLAYERS\n");
+        }
+
+        // Save history of the user's team of the W-L and bowl results each year
+        sb.append(userTeam.name + "\n");
+        sb.append("END_USER_TEAM\n");
+        //Every Team Year-by-Year History
+        for (Team t : teamList) {
+            for (String s : t.teamHistory) {
+                sb.append(s + "\n");
+            }
+            sb.append("END_TEAM\n");
+        }
+        sb.append("END_TEAM_HISTORY\n");
+
+
+        for (Team t : teamList) {
+            for (String s : t.HC.get(0).history) {
+                sb.append(s + "\n");
+            }
+            sb.append("END_COACH\n");
+        }
+        sb.append("END_COACH_HISTORY\n");
+
+        for (String bowlName : bowlNames) {
+            sb.append(bowlName + ",");
+        }
+        sb.append("\nEND_BOWL_NAMES\n");
+
+        // Save league records
+        sb.append(leagueRecords.getRecordsStr());
+        sb.append("END_LEAGUE_RECORDS\n");
+
+        sb.append(yearStartLongestWinStreak.getStreakCSV());
+        sb.append("\nEND_LEAGUE_WIN_STREAK\n");
+
+        // Save user team records
+        for (Team t : teamList) {
+            sb.append(t.teamRecords.getRecordsStr());
+            sb.append("END_TEAM\n");
+        }
+        sb.append("END_TEAM_RECORDS\n");
+
+        for (String s : leagueHoF) {
+            sb.append(s + "\n");
+        }
+        sb.append("END_LEAGUE_HALL_OF_FAME\n");
+
+        sb.append(getFreeAgentCoachSave());
+        sb.append("END_COACHES\n");
+
+        sb.append(fullGameLog + "\n");
+        sb.append(hidePotential + "\n");
+        sb.append(confRealignment + "\n");
+        sb.append(enableTV + "\n");
+        sb.append(enableUnivProRel + "\n");
+        sb.append(userTeam.showPopups + "\n");
+        sb.append(neverRetire + "\n");
+        sb.append(careerMode + "\n");
+        sb.append(expPlayoffs + "\n");
+        sb.append("\nEND_SAVE_FILE");
+
+        // Actually write to the file
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(saveFile), "utf-8"))) {
+            writer.write(sb.toString());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }

@@ -205,8 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //LOADS A SAVE GAME
             } else if (saveFileStr.contains("FIX")) {
-                File saveFile = new File(getFilesDir(), saveFileStr);
-                if (saveFile.exists()) {
+                File saveFile = new File(getFilesDir(), saveFileStr.split(",")[0]);
                     simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names), true);
                     userTeam = simLeague.userTeam;
                     userTeamStr = userTeam.name;
@@ -215,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
                     currentTeam = userTeam;
                     loadedLeague = true;
                     if(season == seasonStart) seasonGoals();
-                }
             } else {
                 File saveFile = new File(getFilesDir(), saveFileStr);
                 if (saveFile.exists()) {
@@ -1860,8 +1858,6 @@ public class MainActivity extends AppCompatActivity {
             //conf realignment
             conferenceRealignment();
             //Promotion/Relegation!
-            promotionRelegation();
-            //Promotion/Relegation!
             universalProRel();
             simGameButton.setTextSize(12);
             if (simLeague.isCareerMode())
@@ -2093,8 +2089,8 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxNeverRetire = dialog.findViewById(R.id.checkboxNeverRetire);
         checkboxNeverRetire.setChecked(simLeague.neverRetire);
 
-        final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
-        checkboxRealignment.setChecked(simLeague.confRealignment);
+        final CheckBox checkboxTV = dialog.findViewById(R.id.checkboxTV);
+        checkboxTV.setChecked(simLeague.enableTV);
 
         final CheckBox checkboxPlayoffs = dialog.findViewById(R.id.checkboxPlayoffs);
         final TextView textPlayoffs = dialog.findViewById(R.id.textPlayoffs);
@@ -2105,20 +2101,26 @@ public class MainActivity extends AppCompatActivity {
             checkboxPlayoffs.setVisibility(View.INVISIBLE);
         }
 
+        final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
+        if(simLeague.enableUnivProRel) {
+            final TextView textRealignment = dialog.findViewById(R.id.textConfRealignment);
+            textRealignment.setVisibility(View.INVISIBLE);
+            checkboxRealignment.setVisibility(View.INVISIBLE);
+        }
+        checkboxRealignment.setChecked(simLeague.confRealignment);
 
         final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
-        checkboxProRelegation.setChecked(simLeague.enableProRel);
+        //checkboxProRelegation.setChecked(simLeague.enableUnivProRel);
+        checkboxProRelegation.setVisibility(View.INVISIBLE);
+        final TextView textProRel = dialog.findViewById(R.id.textEnableProRel);
+        textProRel.setVisibility(View.INVISIBLE);
 
-        final CheckBox checkboxTV = dialog.findViewById(R.id.checkboxTV);
-        checkboxTV.setChecked(simLeague.enableTV);
+
 
         checkboxRealignment.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View view) {
                                                        if (checkboxRealignment.isChecked()) {
-                                                           checkboxProRelegation.setChecked(false);
-                                                       }
-                                                       if (simLeague.enableUnivProRel) {
                                                            checkboxProRelegation.setChecked(false);
                                                        }
                                                    }
@@ -2130,9 +2132,6 @@ public class MainActivity extends AppCompatActivity {
                                                      public void onClick(View view) {
                                                          if (checkboxProRelegation.isChecked()) {
                                                              checkboxRealignment.setChecked(false);
-                                                         }
-                                                         if (simLeague.enableUnivProRel) {
-                                                             checkboxProRelegation.setChecked(false);
                                                          }
                                                      }
                                                  }
@@ -2172,11 +2171,9 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
-                simLeague.enableProRel = checkboxProRelegation.isChecked();
                 simLeague.expPlayoffs = checkboxPlayoffs.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
                 if (simLeague.enableUnivProRel) {
-                    simLeague.enableProRel = false;
                     simLeague.confRealignment = false;
                 }
                 userTeam.showPopups = showToasts;
@@ -3146,7 +3143,6 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.expPlayoffs = checkboxPlayoffs.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
                 if (simLeague.enableUnivProRel) {
-                    simLeague.enableProRel = false;
                     simLeague.confRealignment = false;
                     universalProRelAction();
                 }
@@ -3163,7 +3159,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Perform action on click
         simLeague.enableUnivProRel = true;
-        simLeague.enableProRel = false;
         simLeague.confRealignment = false;
         simLeague.convertUnivProRel();
         updateCurrConference();
@@ -3247,11 +3242,11 @@ public class MainActivity extends AppCompatActivity {
         goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
 
         if (simLeague.getYear() > seasonStart) {
-            if (simLeague.penalizedTeam1 != null && simLeague.penalizedTeam1.name.equals(userTeam.name) || simLeague.penalizedTeam2 != null && simLeague.penalizedTeam2.name.equals(userTeam.name)) {
-                goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
-            }
-            if (simLeague.penalizedTeam3 != null && simLeague.penalizedTeam3.name.equals(userTeam.name) || simLeague.penalizedTeam4 != null && simLeague.penalizedTeam4.name.equals(userTeam.name) || simLeague.penalizedTeam5 != null && simLeague.penalizedTeam5.name.equals(userTeam.name)) {
+            if (simLeague.penalizedTeams.get(0) != null && simLeague.penalizedTeams.get(0).name.equals(userTeam.name) || simLeague.penalizedTeams.get(1) != null && simLeague.penalizedTeams.get(1).name.equals(userTeam.name)) {
                 goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
+            }
+            if (simLeague.penalizedTeams.get(2) != null && simLeague.penalizedTeams.get(2).name.equals(userTeam.name) || simLeague.penalizedTeams.get(3) != null && simLeague.penalizedTeams.get(3).name.equals(userTeam.name) || simLeague.penalizedTeams.get(4) != null && simLeague.penalizedTeams.get(4).name.equals(userTeam.name)) {
+                goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
             }
         }
 
@@ -3632,25 +3627,6 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = dialog.findViewById(android.R.id.message);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             }
-        }
-    }
-
-    //Promotions & Relegations Update
-    private void promotionRelegation() {
-        if (simLeague.enableProRel) {
-            simLeague.promotionRelegation();
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage(simLeague.newsRealignment)
-                    .setTitle(simLeague.getYear() + " Promotion/Relegation Update")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            TextView textView = dialog.findViewById(android.R.id.message);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         }
     }
 
@@ -4347,7 +4323,7 @@ public class MainActivity extends AppCompatActivity {
 
                             changeNameEditText.setText(currentTeam.name);
                             changeAbbrEditText.setText(currentTeam.abbr);
-                            changeRivalEditText.setText(currentTeam.rivalTeam);
+                            changeRivalEditText.setText(currentTeam.division);
                             changeConfEditText.setText(currentConference.confName);
                             changeHCEditText.setText(currentTeam.HC.get(0).name);
                             changePrestigeEditText.setText(Integer.toString(currentTeam.teamPrestige));
@@ -4412,9 +4388,9 @@ public class MainActivity extends AppCompatActivity {
 
                     }
 
-                    if (newRival != currentTeam.rivalTeam) {
-                        currentTeam.rivalTeam = newRival;
-                    }
+/*                    if (newRival != currentTeam.division) {
+                        currentTeam.division = newRival;
+                    }*/
 
 
                     wantUpdateConf = true;
@@ -4438,22 +4414,6 @@ public class MainActivity extends AppCompatActivity {
     public void userHallofFame() {
         //Retirement Hall of Fame
 
-    }
-
-    private void coachProgressData() {
-        String string = simLeague.getCoachChanges();
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Coach Progression Data");
-        builder.setMessage(string);
-        builder.setCancelable(false);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Perform action on click
-                dialog.dismiss();
-            }
-        });
-        builder.show();
     }
 
     public void disciplineAction(Player player, String issue, int gamesA, int gamesB) {

@@ -138,44 +138,6 @@
                 android:layout_marginTop="15sp">
 
                 <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Enable Conf Realignment"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <CheckBox
-                    android:id="@+id/checkboxConfRealignment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15sp">
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Enable Promotion/Relegation"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <CheckBox
-                    android:id="@+id/checkboxProRelegation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15sp">
-
-                <TextView
                     android:id="@+id/textPlayoffs"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -208,6 +170,48 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp">
+
+                <TextView
+                    android:id="@+id/textConfRealignment"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Enable Conf Realignment"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <CheckBox
+                    android:id="@+id/checkboxConfRealignment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp">
+
+                <TextView
+                    android:id="@+id/textEnableProRel"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Enable Promotion/Relegation"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <CheckBox
+                    android:id="@+id/checkboxProRelegation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="fill_parent"

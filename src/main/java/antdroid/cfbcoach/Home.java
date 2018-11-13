@@ -29,6 +29,7 @@ import java.io.IOException;
 
 
 public class Home extends AppCompatActivity {
+    public String saveVer = "v1.3";
     private static final int READ_REQUEST_CODE = 42;
     private static final int IMPORT_CODE = 12;
     private boolean customCareer;
@@ -389,7 +390,7 @@ public class Home extends AppCompatActivity {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(saveFile));
                     fileInfo = bufferedReader.readLine();
                     infos[i] = fileInfo.substring(0, fileInfo.length() - 1); //gets rid of % at end
-                    //if(!infos[i].contains("v1.5")) infos[i] = fileInfo.split(",")[0] + " " + fileInfo.split(" ")[3]  + " " + fileInfo.split(" ")[4] + " [INCOMPATIBLE SAVE]";
+                    if(!infos[i].contains(saveVer)) infos[i] = fileInfo.substring(0, fileInfo.length() - 1) + "\n[INCOMPATIBLE: TRY TO FIX]";
                 } catch (FileNotFoundException ex) {
                     System.out.println(
                             "Unable to open file");
