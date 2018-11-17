@@ -137,24 +137,24 @@ public class Conference {
             if (Math.random() * confPrestige * 1.5 < Math.random() * confPrestige && confPrestige > league.getAverageConfPrestige()) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
-                confTVBonus = confPrestige / 16;
+                confTVBonus = confPrestige * 15;
 
                 league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
-                        + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+                        + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
 
                 league.newsTV.add(TV + " TV Contract:\n\tA new TV contract has been worked out with the "
-                        + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+                        + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
                 league.updateTV = true;
             } else if (Math.random() * confPrestige * 4 < Math.random() * confPrestige) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
-                confTVBonus = confPrestige / 20;
+                confTVBonus = confPrestige * 10;
 
                 league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
-                        + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+                        + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
 
                 league.newsTV.add(TV + " Contract:\n\tA new television contract has been worked out with the "
-                        + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to " + confTVBonus + " prestige points every season to each team.");
+                        + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
                 league.updateTV = true;
 
             }
@@ -165,16 +165,16 @@ public class Conference {
     private void confTVprofitSharing() {
         if (confTV && confTVContract > 0) {
             confTVContract--;
-            int yearBonus = (int) (Math.random() * confTVBonus + 1);
+            int yearBonus = (int) (Math.random() * 4);
             for (int t = 0; t < confTeams.size(); t++) {
                 confTeams.get(t).teamPrestige += yearBonus;
                 if (yearBonus > 1)
-                    confTeams.get(t).HC.get(0).baselinePrestige += yearBonus / 2;  //make the coach's job slightly more challenging
+                    confTeams.get(t).HC.get(0).baselinePrestige += Math.round(yearBonus / 2);  //make the coach's job slightly more challenging
                 else confTeams.get(t).HC.get(0).baselinePrestige += Math.random() * 2;
             }
-            league.newsStories.get(league.currentWeek + 1).add(TV + " Annual Distribution>Each member of the " + confName + " Conference will be receiving an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
+            league.newsStories.get(league.currentWeek + 1).add(TV + " Annual Distribution>Each member of the " + confName + " Conference will be receiving $" + confTVBonus + " plus an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
 
-            league.newsTV.add(TV + " Annual Profit Sharing:\n\t+" + yearBonus + " prestige bonus.\nCurrent contract will expire in " + confTVContract + " years.");
+            league.newsTV.add(TV + " Annual Profit Sharing:\n\t+$" + confTVBonus + " budget bonus.\n\t+" + yearBonus + " prestige bonus.\nCurrent contract will expire in " + confTVContract + " years.");
             league.updateTV = true;
             if(confTVContract <= 0) confTV = false;
 
@@ -194,9 +194,12 @@ public class Conference {
         }
     }
 
-    /**
+/*
+    */
+/**
      * Sorts teams into their division
-     */
+     *//*
+
     public void setDivisionTeams(){
         if(confTeams.size() >= 12) {
             String divAName = divisions.get(0).divName;
@@ -210,12 +213,16 @@ public class Conference {
         }
     }
 
-    /**
+    */
+/**
      * sets up division schedule round robin style
-     */
-    /**
+     *//*
+
+    */
+/**
      * Sets up schedule for in-conference games using round robin scheduling.
-     */
+     *//*
+
     public void setUpDivisionSchedule() {
         //schedule in conf matchups
         int robinWeek = 0;
@@ -262,9 +269,11 @@ public class Conference {
         }
     }
 
-    /**
+    */
+/**
      * Sets up cross divisional games
-     */
+     *//*
+
     public void setUpCrossDivisionSchedule(){
         int year = league.leagueHistory.size();
         int n = year%6;
@@ -285,6 +294,7 @@ public class Conference {
             }
         }
     }
+*/
 
     /**
      * Sets up schedule for in-conference games using round robin scheduling.
@@ -330,9 +340,9 @@ public class Conference {
     }
 
     /**
-     * Inserts the OOC games in the 1st, 5th, and 10th weeks. changed to 1, 2, 3 weeks
+     * Inserts the OOC games
      */
-    public void insertOOCSchedule() {
+    public void  insertOOCSchedule() {
         for (int i = 0; i < confTeams.size(); ++i) {
             confTeams.get(i).gameSchedule.add(oocWeeks[0], confTeams.get(i).gameOOCSchedule0);
             confTeams.get(i).gameSchedule.add(oocWeeks[1], confTeams.get(i).gameOOCSchedule1);
@@ -405,7 +415,7 @@ public class Conference {
 
             ArrayList<Team> teams = new ArrayList<>();
             for (int i = 0; i < confTeams.size(); ++i) {
-                if (league.penalizedTeams.get(0) != confTeams.get(i) && league.penalizedTeams.get(1) != confTeams.get(i))
+                if (!confTeams.get(i).bowlBan)
                     teams.add(confTeams.get(i));
             }
 

@@ -566,17 +566,17 @@ Player {
     }
 
     public int getProgression() {
-        int num = (ratPot * 2 + team.HC.get(0).ratTalent * 1) / 3;
+        int num = (ratPot * 2 + team.HC.get(0).ratTalent * 1 + 3*team.teamFacilities) / 3;
         return num;
     }
 
     public int getProgressionOff() {
-        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff) / 7;
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff + 7*team.teamFacilities) / 7;
         return num;
     }
 
     public int getProgressionDef() {
-        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef) / 7;
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef + 7*team.teamFacilities) / 7;
         return num;
     }
 

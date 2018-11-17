@@ -2656,7 +2656,7 @@ public class MainActivity extends AppCompatActivity {
         String[] rankingsSelection =
                 {"Power Index", "Prestige", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
-                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class", "Coach - Overall", "Coach Score"};
+                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class", "Discipline Score", "Team Budget", "Team Facilities", "Coach - Overall", "Coach Score"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -3242,11 +3242,17 @@ public class MainActivity extends AppCompatActivity {
         goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
 
         if (simLeague.getYear() > seasonStart) {
-            if (simLeague.penalizedTeams.get(0) != null && simLeague.penalizedTeams.get(0).name.equals(userTeam.name) || simLeague.penalizedTeams.get(1) != null && simLeague.penalizedTeams.get(1).name.equals(userTeam.name)) {
+            if (userTeam.bowlBan) {
                 goals += "Your team was penalized heavily for off-season issues by the College Athletic Administration and will lose Prestige and suffer a post-season bowl ban this year.\n\n";
             }
-            if (simLeague.penalizedTeams.get(2) != null && simLeague.penalizedTeams.get(2).name.equals(userTeam.name) || simLeague.penalizedTeams.get(3) != null && simLeague.penalizedTeams.get(3).name.equals(userTeam.name) || simLeague.penalizedTeams.get(4) != null && simLeague.penalizedTeams.get(4).name.equals(userTeam.name)) {
+            if (userTeam.penalized) {
                 goals += "Your team had a minor infraction over the off-season and lost some Prestige.\n\n";
+            }
+        }
+
+        if (simLeague.getYear() > seasonStart) {
+            if (userTeam.facilityUpgrade) {
+                goals += "Your team upgraded the training facilities this off-season to Level " + userTeam.teamFacilities + "!\n\n";
             }
         }
 
@@ -3488,10 +3494,6 @@ public class MainActivity extends AppCompatActivity {
                 builder.setItems(teams, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         // Do something with the selection
-                        //changeTeams(jobList, item);
-                        //simLeague.coachCarousel();
-                        //updateHeaderBar();
-                        //examineTeam(currentTeam.name);
                         viewTeam(jobList, item);
                     }
                 });
@@ -3556,7 +3558,9 @@ public class MainActivity extends AppCompatActivity {
         String[] teamRoster = teamList.get(item).getTeamRosterString();
 
         AlertDialog.Builder roster = new AlertDialog.Builder(this);
-        roster.setTitle(teamList.get(item).name + " Team Roster\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + df2.format(teamList.get(item).teamOffTalent) + " | Def: " + df2.format(teamList.get(item).teamDefTalent));
+        roster.setTitle(teamList.get(item).name + " Team Roster" +
+                        "\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + df2.format(teamList.get(item).teamOffTalent) + " | Def: " + df2.format(teamList.get(item).teamDefTalent) +
+                "\nDiscipline: " + teamList.get(item).teamDisciplineScore + "% | Facilities: " + teamList.get(item).teamFacilities);
         roster.setNeutralButton("Decline", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

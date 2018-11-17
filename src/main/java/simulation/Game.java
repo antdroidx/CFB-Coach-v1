@@ -37,6 +37,7 @@ public class Game implements Serializable {
     private boolean QT3;
 
     public String gameName;
+    public int week;
 
     public int homeScore;
     public final int[] homeQScore;
@@ -107,6 +108,11 @@ public class Game implements Serializable {
 
     private int homeOffense, homeDefense, awayOffense, awayDefense;
     private int tacticalCoach = 82;
+
+    //budget sales
+    private int tickets = 10;
+    private int merch = 2;
+    private int winSales = 150;
 
     //GAME SETUP
 
@@ -572,6 +578,20 @@ public class Game implements Serializable {
 
             homeTeam.checkForInjury();
             awayTeam.checkForInjury();
+
+            if(!gameName.equals("Conference") || !gameName.equals("OOC")) {
+                int attendance = ((homeTeam.teamPrestige * 2 + awayTeam.teamPrestige) / 3);
+                homeTeam.teamBudget += (int) (tickets * .75 * attendance) + (int) (merch * Math.random() * homeTeam.teamPrestige);
+                awayTeam.teamBudget += (int) (tickets * .25 * attendance);
+            } else {
+                int attendance = ((homeTeam.teamPrestige * 2 + awayTeam.teamPrestige) / 3);
+                homeTeam.teamBudget += (int) (1.25*tickets * .50 * attendance) + (int) (2*merch * Math.random() * homeTeam.teamPrestige);
+                awayTeam.teamBudget += (int) (1.25*tickets * .50 * attendance) + (int) (2*merch * Math.random() * awayTeam.teamPrestige);
+            }
+
+            if(homeScore > awayScore) homeTeam.teamBudget += winSales;
+            if(awayScore > homeScore) awayTeam.teamBudget += winSales;
+
 
         }
     }
@@ -3126,20 +3146,34 @@ public class Game implements Serializable {
                             ">" + awayTeam.getStrAbbrWL() + " hands " + homeTeam.getStrAbbrWL() +
                             " their first loss of the season, winning " + awayScore + " to " + homeScore + ".");
         } else if (awayScore > homeScore && homeTeam.rankTeamPollScore < 20 &&
-                (awayTeam.rankTeamPollScore - homeTeam.rankTeamPollScore) > 20) {
+                (awayTeam.rankTeamPollScore - homeTeam.rankTeamPollScore) > 20 && !awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
             // Upset!
             awayTeam.league.newsStories.get(awayTeam.league.currentWeek + 1).add(
                     "Upset! " + awayTeam.getStrAbbrWL() + " beats " + homeTeam.getStrAbbrWL() +
                             ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " was able to pull off the upset on the road against #" +
                             homeTeam.rankTeamPollScore + " " + homeTeam.name + ", winning " + awayScore + " to " + homeScore + ".");
         } else if (homeScore > awayScore && awayTeam.rankTeamPollScore < 20 &&
-                (homeTeam.rankTeamPollScore - awayTeam.rankTeamPollScore) > 20) {
+                (homeTeam.rankTeamPollScore - awayTeam.rankTeamPollScore) > 20 && !awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
+            // Upset!
+            homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(
+                    "Upset! " + homeTeam.getStrAbbrWL() + " beats " + awayTeam.getStrAbbrWL() +
+                            ">#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " was able to pull off the upset at home against #" +
+                            awayTeam.rankTeamPollScore + " " + awayTeam.name + ", winning " + homeScore + " to " + awayScore + ".");
+        } else if (awayScore > homeScore && homeTeam.rankTeamPollScore < 40 && awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
+            // Upset!
+            awayTeam.league.newsStories.get(awayTeam.league.currentWeek + 1).add(
+                    "Upset! " + awayTeam.getStrAbbrWL() + " beats " + homeTeam.getStrAbbrWL() +
+                            ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " was able to pull off the upset on the road against #" +
+                            homeTeam.rankTeamPollScore + " " + homeTeam.name + ", winning " + awayScore + " to " + homeScore + ".");
+        } else if (homeScore > awayScore && awayTeam.rankTeamPollScore < 20 && awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
             // Upset!
             homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(
                     "Upset! " + homeTeam.getStrAbbrWL() + " beats " + awayTeam.getStrAbbrWL() +
                             ">#" + homeTeam.rankTeamPollScore + " " + homeTeam.name + " was able to pull off the upset at home against #" +
                             awayTeam.rankTeamPollScore + " " + awayTeam.name + ", winning " + homeScore + " to " + awayScore + ".");
         }
+
+
         if (homeTeam.league.currentWeek < 12) {
             if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11) {
                 if (awayScore > homeScore) {
@@ -3163,12 +3197,12 @@ public class Game implements Serializable {
 
     public void addUpcomingGames(Team name) {
         if (name == awayTeam) {
-            if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11) {
+            if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11 && !awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
                 homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add("Upcoming Game: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">The premier game of the week has " + awayTeam.getStrAbbrWL() + " visiting " + homeTeam.getStrAbbrWL() + ", as these two Top Ten teams fight for a crucial playoff spot. " +
                         awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards / awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
                         homeTeam.playbookOff.getStratName() + " offense, averaging " + (homeTeam.teamYards / homeTeam.numGames()) + " yards per game.");
-            } else if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26) {
+            } else if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26 && !awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
                 homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add("Upcoming Game: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">Next week, " + awayTeam.getStrAbbrWL() + " visits " + homeTeam.getStrAbbrWL() + " in a battle of two ranked schools. " +
                         awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, which is averaging " + (awayTeam.teamYards / awayTeam.numGames()) + " yards per game. " + homeTeam.name + " plays a " +
@@ -3179,13 +3213,13 @@ public class Game implements Serializable {
 
     public void addNewSeasonGames(Team name) {
         if (name == awayTeam) {
-            if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11) {
+            if (awayTeam.rankTeamPollScore < 11 && homeTeam.rankTeamPollScore < 11 && !awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
                 homeTeam.league.newsStories.get(0).add("Kick-Off: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">The season kicks off with an exciting game between vistors " + awayTeam.name + " and home team, " + homeTeam.name + ". " +
                         "These two teams are in the pre-season Top Ten, and both are expected to have big seasons this year. " + awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, while " + homeTeam.name + " plays a " +
                         homeTeam.playbookOff.getStratName() + " offense.");
 
-            } else if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26) {
+            } else if (awayTeam.rankTeamPollScore < 26 && homeTeam.rankTeamPollScore < 26 && !awayTeam.name.contains("FCS") && !homeTeam.name.contains("FCS")) {
                 homeTeam.league.newsStories.get(0).add("Kick-Off: #" + awayTeam.rankTeamPollScore + " " + awayTeam.name + " vs #" +
                         homeTeam.rankTeamPollScore + " " + homeTeam.name + ">The " + homeTeam.league.getYear() + " season starts off with " + awayTeam.name + " visiting " + homeTeam.name
                         + " in one of the interesting early season games pitting two ranked teams. " + awayTeam.name + " plays a " + awayTeam.playbookOff.getStratName() + " offense, while " + homeTeam.name + " plays a " +

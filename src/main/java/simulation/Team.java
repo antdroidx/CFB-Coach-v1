@@ -1,5 +1,8 @@
 package simulation;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
@@ -39,6 +43,11 @@ public class Team {
     public LeagueRecords teamRecords;
     public boolean userControlled;
     public boolean showPopups;
+    public boolean penalized;
+    public boolean bowlBan;
+    public boolean recentPenalty;
+    public boolean facilityUpgrade;
+    public boolean disciplineAction;
     private final DecimalFormat df2 = new DecimalFormat(".#");
 
     public PlaybookOffense playbookOff;
@@ -51,6 +60,7 @@ public class Team {
     public int teamRecruitBudget;
     public int teamDiscplineBudget;
     public int teamDisciplineScore;
+    public final int disciplineStart = 60;
     public int teamFacilities;
     public int teamStadium;
 
@@ -125,8 +135,9 @@ public class Team {
     public int rankTeamPollScore;
     public int rankTeamStrengthOfWins;
     public int rankTeamSOS;
-
-
+    public int rankTeamDisciplineScore;
+    public int rankTeamBudget;
+    public int rankTeamFacilities;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -310,7 +321,7 @@ public class Team {
         teamFacilities = 0;
         teamStadium = 0;
         teamDiscplineBudget = 0;
-        teamDisciplineScore = 70;
+        teamDisciplineScore = disciplineStart;
     }
 
     /**
@@ -366,14 +377,15 @@ public class Team {
                         Integer.parseInt(teamInfo[20]),
                         Integer.parseInt(teamInfo[17]),
                         teamInfo[18]);
-            if(teamInfo.length > 21) {
+            if(teamInfo.length > 21 && teamInfo.length > 24) {
                 teamBudget = Integer.parseInt(teamInfo[21]);
                 teamDisciplineScore = Integer.parseInt((teamInfo[22]));
-                teamFacilities = Integer.parseInt((teamInfo[22]));
-                teamStadium = Integer.parseInt((teamInfo[22]));
+                recentPenalty = Boolean.parseBoolean(teamInfo[23]);
+                teamFacilities = Integer.parseInt((teamInfo[24]));
+                teamStadium = Integer.parseInt((teamInfo[25]));
             } else {
                 teamBudget = 0;
-                teamDisciplineScore = 70;
+                teamDisciplineScore = disciplineStart;
                 teamFacilities = 0;
                 teamStadium = 0;
             }
@@ -434,7 +446,7 @@ public class Team {
         playbookOff = new PlaybookOffense(0);
         playbookDef = new PlaybookDefense(0);
 
-        gameSchedule = new ArrayList<>();
+        gameSchedule = new ArrayList<>(12);
         gameOOCSchedule0 = null;
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;
@@ -1202,7 +1214,7 @@ public class Team {
         int disPts = disciplinePts;
 
         // Don't add/subtract prestige if they are a penalized team from last season
-        if (this != league.penalizedTeams.get(0) && this != league.penalizedTeams.get(2) && this != league.penalizedTeams.get(3)) {
+        if (!bowlBan && !penalized) {
             prestigeChange = Math.round((float) (diffExpected / 7.5));
 
             if (prestigeChange < wins - projectedWins) prestigeChange++;
@@ -1256,7 +1268,7 @@ public class Team {
         if (projectedPollRank > 100) {
             summary += "\nDespite being projected at #" + projectedPollRank + ", your goal was to finish in the Top 100.\n\n";
         }
-        if (this == league.penalizedTeams.get(0) || this == league.penalizedTeams.get(2) || this == league.penalizedTeams.get(3)) {
+        if (bowlBan || penalized) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[1]) > 0) {
             summary += "\n\nYou exceeded expectations and gained " + prestigePts[1] + " prestige points!";
@@ -1286,6 +1298,8 @@ public class Team {
         } else if (disciplinePts > 0) {
             summary += "\n\nYour team stayed out of trouble this season and bonded together. Your team gained " + disciplinePts + " prestige points.";
         }
+
+        summary += "\n\nYour team's current discipline score is " + teamDisciplineScore + "% Rating.";
 
         summary += "\n\nYour coach score for this year was " + HC.get(0).getCoachScore() + "\n";
 
@@ -3325,11 +3339,17 @@ public class Team {
     }
 
     //Apply Suspensions to Player
+    public void userSuspendPlayerSetup() {
+
+    }
+
+    //Apply Suspensions to Player
     private void suspendPlayer(Player player) {
         String[] issue = {"Academics", "Fighting", "DUI", "Skipping Class", "Skipping Practice", "Failed Drug Test", "Academics", "Excessive Partying", "Practice Brawl"};
         int duration = (int) (Math.random() * (65 - player.personality) / 2);
         if (duration == 0) duration = 1;
         String description = issue[(int) (Math.random() * issue.length)];
+
         if (player.personality * Math.random() < Math.random() * HC.get(0).ratDiscipline) {
             player.isSuspended = true;
             player.ratPot -= duration * 5;
@@ -3346,8 +3366,6 @@ public class Team {
             suspension = true;
             sortPlayers();
         }
-
-
     }
 
     private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters) {
@@ -3721,9 +3739,21 @@ public class Team {
         ts0.append("Prestige" + ",");
         ts0.append(getRankStr(rankTeamPrestige) + "%\n");
 
+        ts0.append(teamDisciplineScore + "%,");
+        ts0.append("Discipline" + ",");
+        ts0.append(getRankStr(rankTeamDisciplineScore) + "%\n");
+
         ts0.append(df2.format(getRecruitingClassRat()) + ",");
         ts0.append("Recruit Class" + ",");
         ts0.append(getRankStr(rankTeamRecruitClass) + "%\n");
+
+        ts0.append("$" + teamBudget + ",");
+        ts0.append("Team Budget" + ",");
+        ts0.append(getRankStr(rankTeamBudget) + "%\n");
+
+        ts0.append("L" + teamFacilities + ",");
+        ts0.append("Facilities" + ",");
+        ts0.append(getRankStr(rankTeamFacilities) + "%\n");
 
         return ts0.toString();
     }
@@ -4733,7 +4763,7 @@ public class Team {
         teamSave = (conference + "," + name + "," + abbr + "," + teamPrestige + "," + totalWins + "," + totalLosses
                 + "," + totalCCs + "," + totalNCs + "," + division + "," + location + "," + totalNCLosses
                 + "," + totalCCLosses + "," + totalBowls + "," + totalBowlLosses + "," + playbookOffNum + "," + playbookDefNum
-                + "," + (showPopups ? 1 : 0) + "," + winStreak.getStreakCSV() + teamBudget + "," + teamDisciplineScore + "," + teamFacilities + "," + teamStadium + "," + "%\n");
+                + "," + (showPopups ? 1 : 0) + "," + winStreak.getStreakCSV() + "," + teamBudget + "," + teamDisciplineScore + "," + recentPenalty + "," + teamFacilities + "," + teamStadium + "%\n");
 
         return teamSave;
     }

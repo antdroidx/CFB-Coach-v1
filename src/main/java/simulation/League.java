@@ -48,9 +48,12 @@ import comparator.CompPlayerTackles;
 import comparator.CompPuntRetTDs;
 import comparator.CompPuntRetYards;
 import comparator.CompTeamBowls;
+import comparator.CompTeamBudget;
 import comparator.CompTeamCC;
 import comparator.CompTeamConfWins;
 import comparator.CompTeamDefTalent;
+import comparator.CompTeamDisciplineScore;
+import comparator.CompTeamFacilities;
 import comparator.CompTeamNC;
 import comparator.CompTeamOPPG;
 import comparator.CompTeamOPYPG;
@@ -110,7 +113,6 @@ public class League {
     private TeamStreak longestActiveWinStreak;
 
     // News Story Variables
-    public ArrayList<Team> penalizedTeams;
 
     //League Stats
     public int leagueOffTal;
@@ -339,6 +341,7 @@ public class League {
 
             //First ignore the save file info
             line = bufferedReader.readLine();
+            countTeam = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("[END_TEAMS]")) {
                 for (int c = 0; c < conferences.size(); ++c) {
                     while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
@@ -377,6 +380,7 @@ public class League {
                             int tmLoc = Integer.parseInt(filesSplit[5]);
                             conferences.get(c).confTeams.add(new Team(tmName, tmAbbr, tmConf, tmPres, tmRival, tmLoc, this));
                         }
+                        countTeam++;
                     }
                 }
             }
@@ -1071,7 +1075,6 @@ public class League {
 
         conferences = new ArrayList<>();
         teamList = new ArrayList<>();
-        penalizedTeams = new ArrayList<>();
 
         allAmericans = new ArrayList<>();
         allFreshman = new ArrayList<>();
@@ -1102,24 +1105,12 @@ public class League {
 
         //set up schedule
         for (int i = 0; i < conferences.size(); ++i) {
-                conferences.get(i).setUpSchedule();
+            conferences.get(i).setUpSchedule();
         }
 
-        //Future Implementations of Divisions
-/*        for (int i = 0; i < conferences.size(); ++i) {
-            if(conferences.get(i).confTeams.size() < 12) {
-                conferences.get(i).setUpSchedule();
-            } else {
-                conferences.get(i).setDivisionTeams();
-                conferences.get(i).setUpDivisionSchedule();
-                conferences.get(i).setUpCrossDivisionSchedule();
-            }
-        } */
-
-
         //decide OOC schedule
-        int j = 0;
         for (int r = 0; r < 3; r++) {
+            int j = 0;
             for (int c = 0; c < conferences.size(); c++) {
                 if (conferences.get(c).confTeams.size() > conferences.get(c).minConfTeams) {
                     conferences.get(c).oocWeeks[r] = (j + r);
@@ -1127,7 +1118,7 @@ public class League {
                         conferences.get(c).confTeams.get(t).oocWeeks.add(j+r);
                     }
                     j++;
-                    if (j + r > 9) j = 0;
+                    if (j + r == 9) j = 0;
                 } else {
                     conferences.get(c).oocWeeks[0] = 100;
                     conferences.get(c).oocWeeks[1] = 100;
@@ -1139,6 +1130,10 @@ public class League {
                     }
                 }
             }
+        }
+
+        for(int t = 0; t < teamList.size(); t++) {
+            Collections.sort(teamList.get(t).oocWeeks);
         }
 
         //Setup OOC v3 Scheduling
@@ -1165,7 +1160,7 @@ public class League {
                     }
                     Team b;
                     if (availTeamsB.isEmpty()) {
-                        b = new Team("FCS " + proTeams[(int) (proTeams.length * Math.random())], "FCS", "FCS Division", (int)(Math.random()*45), "FCS1", 0, this);
+                        b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int)(Math.random()*45), "FCS1", 0, this);
                         b.oocWeeks.add(100);
                         b.oocWeeks.add(100);
                         b.oocWeeks.add(100);
@@ -1183,28 +1178,24 @@ public class League {
 
                     if (a.oocWeeks.get(0) == week) {
                         a.gameOOCSchedule0 = gm;
-                        a.oocTeams.add(b);
                     } else if (a.oocWeeks.get(1) == week) {
                         a.gameOOCSchedule1 = gm;
-                        a.oocTeams.add(b);
                     } else if (a.oocWeeks.get(2) == week) {
                         a.gameOOCSchedule2 = gm;
-                        a.oocTeams.add(b);
                     }
 
                     if (b.oocWeeks.get(0) == week) {
                         b.gameOOCSchedule0 = gm;
-                        b.oocTeams.add(a);
                     } else if (b.oocWeeks.get(1) == week) {
                         b.gameOOCSchedule1 = gm;
-                        b.oocTeams.add(a);
                     } else if (b.oocWeeks.get(2) == week) {
                         b.gameOOCSchedule2 = gm;
-                        b.oocTeams.add(a);
                     }
-
+                    a.oocTeams.add(b);
+                    b.oocTeams.add(a);
                     availTeams.remove(a);
                     availTeams.remove(b);
+
                     if(a.conference.contains("Independent"))
                     {
                         a.gameSchedule.add(gm);
@@ -1217,7 +1208,6 @@ public class League {
                 }
             }
 
-
             for (int c = 0;c < conferences.size(); c++){
                 if (conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
                     conferences.get(c).insertOOCSchedule();
@@ -1225,10 +1215,6 @@ public class League {
             }
 
         }
-
-
-
-
 
         confAvg = getAverageConfPrestige();
 
@@ -1254,23 +1240,38 @@ public class League {
 
         penalizeTeams();
 
-        if (penalizedTeams.get(0) != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Major Infraction: " + penalizedTeams.get(0).name + ">An administrative probe has determined that booster " + penalizedTeams.get(0).HC.get(0).name +
-                    " has tampered with several recruits. In addition, academic records at  " + penalizedTeams.get(0).name + " have been suspect over the past couple years. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped and recruiting will be more challenging.");
+        sb = new StringBuilder();
+        for (int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i).bowlBan) {
+                sb.append(teamList.get(i).name + "\n");
+            }
         }
-        if (penalizedTeams.get(1) != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Major Infraction: " + penalizedTeams.get(1).name + ">Investigations have led to the discovery that " + penalizedTeams.get(1).name + "'s head coach " + penalizedTeams.get(1).HC.get(0).name +
-                    " was found violating recruiting policies over the past off-season. The team will ineligible for bowl games or the playoffs this season. The team prestige has dropped.");
+
+        if(sb.length() > 0)
+        newsStories.get(0).add("Post-Season Ban!>These teams have seen numerous violations pile up and have lost the patiences of the College Football Administration. These teams will see reduced scholarships (loss of prestige), and post-season bans!\n\n" + sb);
+
+        sb = new StringBuilder();
+        for (int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i).penalized) {
+                sb.append(teamList.get(i).name + "\n");
+            }
         }
-        if (penalizedTeams.get(2) != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Incidental Infraction: " + penalizedTeams.get(2).name + ">Several players from " + penalizedTeams.get(2).name + " were arrested in non-football related activities this past off-season. The team prestige has dropped.");
+
+        if(sb.length() > 0)
+        newsStories.get(0).add("Minor Infractions!>The following teams have been fined by the College Football Administration for a minor infractions related to discplinary concerns surrounding the school:\n\n" + sb);
+
+        upgradeFacilities();
+
+        sb = new StringBuilder();
+        for (int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i).facilityUpgrade) {
+                sb.append(teamList.get(i).name + " >> Level " + teamList.get(i).teamFacilities + "\n");
+            }
         }
-        if (penalizedTeams.get(3) != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Incidental Infraction: " + penalizedTeams.get(3).name + ">An independent investigation determined " + penalizedTeams.get(3).name + " assistant " + getRandName() + " violated recruiting regulations during the off-season. The team prestige has dropped.");
-        }
-        if (penalizedTeams.get(4) != null && getYear() > seasonStart) {
-            newsStories.get(0).add("Incidental Infraction: " + penalizedTeams.get(4).name + ">Newspapers are reporting " + penalizedTeams.get(4).name + "'s head recruiter " + getRandName() + " contacted several recruits during a recruiting dead period. The team prestige has dropped.");
-        }
+
+        if(sb.length() > 0)
+            newsStories.get(0).add("Upgraded Facilities!>The following teams upgraded their team training facilities this off-season:\n\n" + sb);
+
     }
 
     /**
@@ -1531,83 +1532,38 @@ public class League {
     }
 
     public void penalizeTeams() {
-        //Major Infraction to a good team
-        if ((int) (Math.random() * 11) > 8) {
-            int teamNumber = (int) (Math.random() * 50);
-            Team teamTrouble = teamList.get(teamNumber);
 
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .25);
-                penalizedTeams.add(0, teamTrouble);
-                teamTrouble.HC.get(0).ratDiscipline -= 20;
-            } else {
-                penalizedTeams.add(0, null);
-                teamTrouble.HC.get(0).ratDiscipline += 3;
+
+        //Infractions v2
+        //Based closer to NCAA Football series
+        //If Discipline score drops below threshold, penalties ensue
+
+        for (int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i).teamDisciplineScore < 30 && !teamList.get(i).recentPenalty) {
+                teamList.get(i).penalized = true;
+                teamList.get(i).recentPenalty = true;
+                teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.10;
+            } else if (teamList.get(i).teamDisciplineScore <= 0) {
+                teamList.get(i).bowlBan = true;
+                teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.30;
+                teamList.get(i).teamDisciplineScore = teamList.get(i).disciplineStart;
             }
-        } else penalizedTeams.add(0, null);;
+        }
+    }
 
-        //Minor infraction to an avg team
-        if ((int) (Math.random() * 11) > 7) {
-            int teamNumber = (int) (Math.random() * 60);
-            Team teamTrouble = teamList.get(teamNumber);
+    public void upgradeFacilities() {
 
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .17);
-                penalizedTeams.add(1, teamTrouble);
-                teamTrouble.HC.get(0).ratDiscipline -= 10;
-            } else {
-                penalizedTeams.add(1, null);
-                teamTrouble.HC.get(0).ratDiscipline += 3;
+
+        //Team Facilities Upgrade -- if teams have enough cash, they will spend on this. helps progression of players
+        int baselineCost = 17500;
+        for (int i = 0; i < teamList.size(); i++) {
+            if (teamList.get(i).teamBudget > baselineCost * (teamList.get(i).teamFacilities+1)) {
+                //spend cash, upgrade facilities
+                teamList.get(i).teamBudget -= baselineCost * (teamList.get(i).teamFacilities+1);
+                teamList.get(i).facilityUpgrade = true;
+                teamList.get(i).teamFacilities++;
             }
-        } else penalizedTeams.add(1, null);
-
-        //Discipline a team
-        if ((int) (Math.random() * 11) > 6) {
-            int teamNumber = (int) (Math.random() * 70);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .13);
-                teamTrouble.HC.get(0).ratDiscipline -= 8;
-                penalizedTeams.add(2, teamTrouble);
-            } else {
-                penalizedTeams.add(2, null);
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else  penalizedTeams.add(2, null);
-
-
-        //Discipline a team
-        if ((int) (Math.random() * 11) > 5) {
-            int teamNumber = (int) (Math.random() * 80);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .10);
-                teamTrouble.HC.get(0).ratDiscipline -= 5;
-                penalizedTeams.add(3, teamTrouble);
-            } else {
-                penalizedTeams.add(3, null);
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else  penalizedTeams.add(3, null);
-
-        //Discipline a team
-        if ((int) (Math.random() * 11) > 5) {
-            int teamNumber = (int) (Math.random() * 100);
-            Team teamTrouble = teamList.get(teamNumber);
-
-            if (teamTrouble.HC.get(0).ratDiscipline < (Math.random() * 100)) {
-                teamTrouble.teamPrestige -= (teamTrouble.teamPrestige * .07);
-                teamTrouble.HC.get(0).ratDiscipline -= 5;
-                penalizedTeams.add(4, teamTrouble);
-            } else {
-                penalizedTeams.add(4, null);
-                teamTrouble.HC.get(0).ratDiscipline += 3;
-            }
-        } else penalizedTeams.add(4, null);
-
-        //FINISH INFRACTIONS
+        }
     }
 
     //Simulates Each Game Week
@@ -1718,11 +1674,14 @@ public class League {
                 int teamDis = teamList.get(t).getTeamDiscipline();
                 if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
                     teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 4);
-                    teamList.get(t).disciplinePts -= (int) (Math.random() * 3);
+                    teamList.get(t).disciplinePts -= (int) (Math.random() * 4);
                     teamDiscipline.add(teamList.get(t).name);
                     teamList.get(t).disciplinePlayer();
+                    teamList.get(t).teamDisciplineScore -= ((int)(Math.random()*8)+1);
                 } else {
                     teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
+                    teamList.get(t).teamDisciplineScore += (int)(Math.random()*5);
+                    if(teamList.get(t).teamDisciplineScore > 100) teamList.get(t).teamDisciplineScore = 100;
                 }
             }
         }
@@ -2763,7 +2722,7 @@ public class League {
 
                 for (int i = 0; i < teamList.size(); ++i) {
                     teamList.get(i).updatePollScore();
-                    if (teamList.get(i) == penalizedTeams.get(0) || teamList.get(i) == penalizedTeams.get(1))
+                    if (teamList.get(i).bowlBan)
                         teamList.get(i).teamPollScore = 0;
                 }
                 Collections.sort(teamList, new CompTeamPoll());
@@ -2898,14 +2857,8 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
             //bowl ban!
-            if (penalizedTeams.get(0) != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(0).abbr))
-                    teamList.get(i).teamPollScore = 0;
-            }
-            if (penalizedTeams.get(1) != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(1).abbr))
-                    teamList.get(i).teamPollScore = 0;
-            }
+            if (teamList.get(i).bowlBan) teamList.get(i).teamPollScore = 0;
+
             //minimum wins for bowl eligibility
             if (teamList.get(i).wins < 7) teamList.get(i).teamPollScore = 0;
 
@@ -3142,14 +3095,7 @@ public class League {
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
             //bowl ban!
-            if (penalizedTeams.get(0) != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(0).abbr))
-                    teamList.get(i).teamPollScore = 0;
-            }
-            if (penalizedTeams.get(1) != null) {
-                if (Objects.equals(teamList.get(i).abbr, penalizedTeams.get(1).abbr))
-                    teamList.get(i).teamPollScore = 0;
-            }
+            if (teamList.get(i).bowlBan)  teamList.get(i).teamPollScore = 0;
             //minimum wins for bowl eligibility
             if (teamList.get(i).wins < 7) teamList.get(i).teamPollScore = 0;
 
@@ -4759,6 +4705,21 @@ Then conferences can see if they want to add them to their list if the teams mee
             teamList.get(t).rankTeamPrestige = t + 1;
         }
 
+        Collections.sort(teamList, new CompTeamDisciplineScore());
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).rankTeamDisciplineScore = t + 1;
+        }
+
+        Collections.sort(teamList, new CompTeamBudget());
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).rankTeamBudget = t + 1;
+        }
+
+        Collections.sort(teamList, new CompTeamFacilities());
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).rankTeamFacilities = t + 1;
+        }
+
         if (currentWeek == 0) {
             Collections.sort(teamList, new CompTeamRecruitClass());
             for (int t = 0; t < teamList.size(); ++t) {
@@ -4907,12 +4868,33 @@ Then conferences can see if they want to add them to their list if the teams mee
                 }
                 break;
             case 16:
+                Collections.sort(teams, new CompTeamDisciplineScore());
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + (t.teamDisciplineScore) + "%");
+                }
+                break;
+            case 17:
+                Collections.sort(teams, new CompTeamBudget());
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",$" +  t.teamBudget);
+                }
+                break;
+            case 18:
+                Collections.sort(teams, new CompTeamFacilities());
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",L" +  t.teamFacilities);
+                }
+                break;
+            case 19:
                 Collections.sort(HC, new CompCoachOvr());
                 for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).team.name + "," + HC.get(i).getHCOverall());
                 }
                 break;
-            case 17:
+            case 20:
                 Collections.sort(HC, new CompCoachScore());
                 for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).team.name + "," + HC.get(i).getCoachScore());
