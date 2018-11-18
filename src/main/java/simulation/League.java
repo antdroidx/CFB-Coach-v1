@@ -1170,47 +1170,19 @@ public class League {
                     }
 
                     Game gm;
-                    if (Math.random() > 0.5) {
-                        gm = new Game(a, b, "OOC");
-                    } else {
-                        gm = new Game(b, a, "OOC");
-                    }
+                    gm = new Game(a, b, "OOC");
 
-                    if (a.oocWeeks.get(0) == week) {
-                        a.gameOOCSchedule0 = gm;
-                    } else if (a.oocWeeks.get(1) == week) {
-                        a.gameOOCSchedule1 = gm;
-                    } else if (a.oocWeeks.get(2) == week) {
-                        a.gameOOCSchedule2 = gm;
-                    }
+                    if (!a.conference.contains("Independent") && !a.conference.contains("FCS")) a.gameSchedule.add(week, gm);
+                    if (!b.conference.contains("Independent") && !b.conference.contains("FCS")) b.gameSchedule.add(week, gm);
 
-                    if (b.oocWeeks.get(0) == week) {
-                        b.gameOOCSchedule0 = gm;
-                    } else if (b.oocWeeks.get(1) == week) {
-                        b.gameOOCSchedule1 = gm;
-                    } else if (b.oocWeeks.get(2) == week) {
-                        b.gameOOCSchedule2 = gm;
-                    }
+                    if(a.conference.contains("Independent")) a.gameSchedule.add(gm);
+                    if(b.conference.contains("Independent")) b.gameSchedule.add(gm);
+
                     a.oocTeams.add(b);
                     b.oocTeams.add(a);
+
                     availTeams.remove(a);
                     availTeams.remove(b);
-
-                    if(a.conference.contains("Independent"))
-                    {
-                        a.gameSchedule.add(gm);
-                        a.oocTeams.add(b);
-                    }
-                    if(b.conference.contains("Independent")) {
-                        b.gameSchedule.add(gm);
-                        b.oocTeams.add(a);
-                    }
-                }
-            }
-
-            for (int c = 0;c < conferences.size(); c++){
-                if (conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
-                    conferences.get(c).insertOOCSchedule();
                 }
             }
 

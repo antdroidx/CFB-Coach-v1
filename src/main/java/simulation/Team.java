@@ -446,7 +446,7 @@ public class Team {
         playbookOff = new PlaybookOffense(0);
         playbookDef = new PlaybookDefense(0);
 
-        gameSchedule = new ArrayList<>(12);
+        gameSchedule = new ArrayList<>();
         gameOOCSchedule0 = null;
         gameOOCSchedule1 = null;
         gameOOCSchedule2 = null;

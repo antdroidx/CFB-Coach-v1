@@ -33,8 +33,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionName 'v1.3.0'
-        versionCode 114
-        versionNameSuffix '-BETA-5'
+        versionCode 116
     }
     buildTypes {
         release {
