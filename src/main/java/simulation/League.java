@@ -1160,7 +1160,7 @@ public class League {
                     }
                     Team b;
                     if (availTeamsB.isEmpty()) {
-                        b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int)(Math.random()*45), "FCS1", 0, this);
+                        b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int)(Math.random()*45), "FCS1", 0, this, true);
                         b.oocWeeks.add(100);
                         b.oocWeeks.add(100);
                         b.oocWeeks.add(100);
@@ -3066,12 +3066,15 @@ public class League {
         //bowl week
         for (int i = 0; i < teamList.size(); ++i) {
             teamList.get(i).updatePollScore();
+        }
+
+        for (int i = 0; i < teamList.size(); ++i) {
             //bowl ban!
             if (teamList.get(i).bowlBan)  teamList.get(i).teamPollScore = 0;
             //minimum wins for bowl eligibility
             if (teamList.get(i).wins < 7) teamList.get(i).teamPollScore = 0;
-
         }
+
         Collections.sort(teamList, new CompTeamPoll());
 
 
@@ -3973,52 +3976,52 @@ public class League {
 
         for (int i = 0; i < transferQBs.size(); ++i) {
             if (transferQBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferRBs.size(); ++i) {
             if (transferRBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferWRs.size(); ++i) {
             if (transferWRs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferTEs.size(); ++i) {
             if (transferTEs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferOLs.size(); ++i) {
             if (transferOLs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferKs.size(); ++i) {
             if (transferKs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferDLs.size(); ++i) {
             if (transferDLs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferLBs.size(); ++i) {
             if (transferLBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferCBs.size(); ++i) {
             if (transferCBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
         for (int i = 0; i < transferSs.size(); ++i) {
             if (transferSs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (Div II)\n\n");
+                tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (FCS)\n\n");
             }
         }
 

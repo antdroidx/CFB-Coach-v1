@@ -324,6 +324,61 @@ public class Team {
         teamDisciplineScore = disciplineStart;
     }
 
+    //Creates an FCS team
+    public Team(String name, String abbr, String conference, int prestige, String div, int loc, League league, boolean FCS) {
+        this.name = name;
+        this.abbr = abbr;
+        this.conference = conference;
+        this.league = league;
+        location = loc;
+        teamPrestige = prestige;
+        division = div;
+        commonInitializer();
+
+        newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs, true);
+
+        //set stats
+        totalWins = 0;
+        totalLosses = 0;
+        totalCCs = 0;
+        totalNCs = 0;
+        totalCCLosses = 0;
+        totalNCLosses = 0;
+        totalBowls = 0;
+        totalBowlLosses = 0;
+
+        teamPoints = 0;
+        teamOppPoints = 0;
+        teamYards = 0;
+        teamOppYards = 0;
+        teamPassYards = 0;
+        teamRushYards = 0;
+        teamOppPassYards = 0;
+        teamOppRushYards = 0;
+        teamTODiff = 0;
+        teamOffTalent = getOffTalent();
+        teamDefTalent = getDefTalent();
+        disciplinePts = 0;
+
+        teamPollScore = teamPrestige + getOffTalent() + getDefTalent();
+
+        playbookOffNum = getCPUOffense();
+        playbookDefNum = getCPUDefense();
+        playbookOff = getPlaybookOff()[playbookOffNum];
+        playbookDef = getPlaybookDef()[playbookDefNum];
+
+        hallOfFame.add("");
+
+        teamBudget = 0;
+        teamRecruitBudget = 0;
+        teamFacilities = 0;
+        teamStadium = 0;
+        teamDiscplineBudget = 0;
+        teamDisciplineScore = disciplineStart;
+
+        rankTeamPollScore = league.countTeam;
+    }
+
     /**
      * Constructor for team that is being loaded from file.
      *
