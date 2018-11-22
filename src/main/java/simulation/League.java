@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import comparator.CompCoachCareer;
@@ -89,7 +88,7 @@ import positions.PlayerTE;
 import positions.PlayerWR;
 
 public class League {
-    public String saveVer = "v1.3";
+    public String saveVer = "v1.3.2";
 
     public ArrayList<String[]> leagueHistory;
     private ArrayList<String> heismanHistory;
@@ -593,15 +592,42 @@ public class League {
                 }
             }
 
-            fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
-            hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
-            confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
-            enableTV = Boolean.parseBoolean(bufferedReader.readLine());
-            enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
-            userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
-            neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
-            careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
-            expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_GAME_LOG")) {
+                fullGameLog = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_HIDE_POTENTIAL")) {
+                hidePotential = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONF_REALIGNMENT")) {
+                confRealignment = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_ENABLE_TV")) {
+                enableTV = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PRO_REL")) {
+                enableUnivProRel = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_POPUPS")) {
+                userTeam.showPopups = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_NEVER_RETIRE")) {
+                neverRetire = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CAREER_MODE")) {
+                careerMode = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_EXP_PLAYOFFS")) {
+                expPlayoffs = Boolean.parseBoolean((line));
+            }
 
             if (enableUnivProRel) {
                 confRealignment = false;
@@ -1237,7 +1263,7 @@ public class League {
         sb = new StringBuilder();
         for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i).facilityUpgrade) {
-                sb.append(teamList.get(i).name + " >> Level " + teamList.get(i).teamFacilities + "\n");
+                sb.append(teamList.get(i).name + " : Level " + teamList.get(i).teamFacilities + "\n");
             }
         }
 
@@ -1515,9 +1541,11 @@ public class League {
                 teamList.get(i).penalized = true;
                 teamList.get(i).recentPenalty = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.10;
+                teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.10;
             } else if (teamList.get(i).teamDisciplineScore <= 0) {
                 teamList.get(i).bowlBan = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.30;
+                teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.30;
                 teamList.get(i).teamDisciplineScore = teamList.get(i).disciplineStart;
             }
         }
@@ -1650,6 +1678,7 @@ public class League {
                     teamDiscipline.add(teamList.get(t).name);
                     teamList.get(t).disciplinePlayer();
                     teamList.get(t).teamDisciplineScore -= ((int)(Math.random()*8)+1);
+                    teamList.get(t).teamBudget -= ((int)(Math.random()*6*100));
                 } else {
                     teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
                     teamList.get(t).teamDisciplineScore += (int)(Math.random()*5);
@@ -5681,7 +5710,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
         // Save information about the save file, user team info
         sb.append((seasonStart + leagueHistory.size()) + ": " + userTeam.HC.get(0).getInitialName() + ", " + userTeam.abbr + " (" + (userTeam.HC.get(0).wins - userTeam.wins) + "-" + (userTeam.HC.get(0).losses - userTeam.losses) + ") " +
-                userTeam.HC.get(0).confchamp + " CC, " + userTeam.HC.get(0).natchamp + " NC [" + userTeam.HC.get(0).getCoachCareerScore() + "]>" + teamList.size() + ">" + saveVer + "\n");
+                userTeam.HC.get(0).confchamp + " CC, " + userTeam.HC.get(0).natchamp + " NC [" + userTeam.HC.get(0).getCoachCareerScore() + "]>" + teamList.size() + ">" + saveVer + "%\n");
 
         // Save league history of who was #1 each year
         for (int i = 0; i < leagueHistory.size(); ++i) {
@@ -5761,15 +5790,27 @@ Then conferences can see if they want to add them to their list if the teams mee
         sb.append(getFreeAgentCoachSave());
         sb.append("END_COACHES\n");
 
+
         sb.append(fullGameLog + "\n");
+        sb.append("END_GAME_LOG\n");
         sb.append(hidePotential + "\n");
+        sb.append("END_HIDE_POTENTIAL\n");
         sb.append(confRealignment + "\n");
+        sb.append("END_CONF_REALIGNMENT\n");
         sb.append(enableTV + "\n");
+        sb.append("END_ENABLE_TV\n");
         sb.append(enableUnivProRel + "\n");
+        sb.append("END_PRO_REL\n");
         sb.append(userTeam.showPopups + "\n");
+        sb.append("END_POPUPS\n");
         sb.append(neverRetire + "\n");
+        sb.append("END_NEVER_RETIRE\n");
         sb.append(careerMode + "\n");
+        sb.append("END_CAREER_MODE\n");
         sb.append(expPlayoffs + "\n");
+        sb.append("END_EXP_PLAYOFFS\n");
+
+
         sb.append("\nEND_SAVE_FILE");
 
         // Actually write to the file

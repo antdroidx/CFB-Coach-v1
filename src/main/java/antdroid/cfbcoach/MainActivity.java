@@ -1577,7 +1577,7 @@ public class MainActivity extends AppCompatActivity {
                 int positionSpinner = teamLineupPositionSpinner.getSelectedItemPosition();
                 // Set starters to new selection
 
-                if (redshirtSelector.playersSelected.size() + userTeam.countRedshirts() - redshirtSelector.playersRemoved.size() < 8) {
+                if (redshirtSelector.playersSelected.size() + userTeam.countRedshirts() - redshirtSelector.playersRemoved.size() < 9) {
 
                     userTeam.setRedshirts(redshirtSelector.playersSelected, redshirtSelector.playersRemoved, positionSpinner);
                     redshirtSelector.playersSelected.clear();
@@ -1587,7 +1587,7 @@ public class MainActivity extends AppCompatActivity {
                     redshirtLineup(positionSpinner, redshirtSelector, positionNumberRequired, positionPlayers, textLineupPositionDescription);
                     minPlayersText.setText("Min Active: " + positionNumberRequired[positionSpinner] + " Current Active: " + userTeam.getActivePlayers(positionSpinner));
 
-                    Toast.makeText(MainActivity.this, "Set redshirts for " + positionSelection[positionSpinner] + "! You currently have " + userTeam.countRedshirts() + " (Max: 7) redshirted players.",
+                    Toast.makeText(MainActivity.this, "Set redshirts for " + positionSelection[positionSpinner] + "! You currently have " + userTeam.countRedshirts() + " (Max: 8) redshirted players.",
                             Toast.LENGTH_SHORT).show();
 
                 } else {

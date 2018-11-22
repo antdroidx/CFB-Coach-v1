@@ -29,7 +29,7 @@ import java.io.IOException;
 
 
 public class Home extends AppCompatActivity {
-    public String saveVer = "v1.3";
+    public String saveVer = "v1.3.2";
     private static final int READ_REQUEST_CODE = 42;
     private static final int IMPORT_CODE = 12;
     private boolean customCareer;

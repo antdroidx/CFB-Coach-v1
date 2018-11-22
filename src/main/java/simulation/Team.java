@@ -763,7 +763,7 @@ public class Team {
             if (p instanceof PlayerQB) {
                 for (int i = 0; i < teamQBs.size(); ++i) {
                     if (teamQBs.get(i) == p) {
-                        if (i > 2 * startersQB && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > startersQB && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -773,7 +773,7 @@ public class Team {
             if (p instanceof PlayerRB) {
                 for (int i = 0; i < teamRBs.size(); ++i) {
                     if (teamRBs.get(i) == p) {
-                        if (i > 2 * startersRB && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersRB && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -783,7 +783,7 @@ public class Team {
             if (p instanceof PlayerWR) {
                 for (int i = 0; i < teamWRs.size(); ++i) {
                     if (teamWRs.get(i) == p) {
-                        if (i > 2 * startersWR && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersWR && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -793,7 +793,7 @@ public class Team {
             if (p instanceof PlayerTE) {
                 for (int i = 0; i < teamTEs.size(); ++i) {
                     if (teamTEs.get(i) == p) {
-                        if (i > 2 * startersTE && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersTE && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -803,7 +803,7 @@ public class Team {
             if (p instanceof PlayerOL) {
                 for (int i = 0; i < teamOLs.size(); ++i) {
                     if (teamOLs.get(i) == p) {
-                        if (i > 2 * startersOL && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersOL && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -813,7 +813,7 @@ public class Team {
             if (p instanceof PlayerK) {
                 for (int i = 0; i < teamKs.size(); ++i) {
                     if (teamKs.get(i) == p) {
-                        if (i > 2 * startersK && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersK && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -823,7 +823,7 @@ public class Team {
             if (p instanceof PlayerDL) {
                 for (int i = 0; i < teamDLs.size(); ++i) {
                     if (teamDLs.get(i) == p) {
-                        if (i > 2 * startersDL && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersDL && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -833,7 +833,7 @@ public class Team {
             if (p instanceof PlayerLB) {
                 for (int i = 0; i < teamLBs.size(); ++i) {
                     if (teamLBs.get(i) == p) {
-                        if (i > 2 * startersLB && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersLB && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -843,7 +843,7 @@ public class Team {
             if (p instanceof PlayerCB) {
                 for (int i = 0; i < teamCBs.size(); ++i) {
                     if (teamCBs.get(i) == p) {
-                        if (i > 2 * startersCB && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersCB && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -853,7 +853,7 @@ public class Team {
             if (p instanceof PlayerS) {
                 for (int i = 0; i < teamSs.size(); ++i) {
                     if (teamSs.get(i) == p) {
-                        if (i > 2 * startersS && redshirts < redshirtMax && !p.wasRedshirt) {
+                        if (i > 1.5 * startersS && redshirts < redshirtMax && !p.wasRedshirt) {
                             p.isRedshirt = true;
                             redshirts++;
                         }
@@ -1788,7 +1788,7 @@ public class Team {
             if (teamQBs.get(i).year < 2) --chance;
             chance += teamQBs.get(i).troubledTimes;
 
-            if (teamQBs.get(i).year > (transferYear - 1) && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int) (Math.random() * (transferChance - 2)) < chance && !teamQBs.get(i).isTransfer || teamQBs.get(i).troubledTimes > Math.random() * dismissalChance) {
+            if (teamQBs.get(i).year > (transferYear) && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int) (Math.random() * (transferChance - 2)) < chance && !teamQBs.get(i).isTransfer || teamQBs.get(i).troubledTimes > Math.random() * dismissalChance) {
                 teamQBs.get(i).isTransfer = true;
                 if (teamQBs.get(i).troubledTimes > 0) {
                     league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed QB " + teamQBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
@@ -3162,7 +3162,7 @@ public class Team {
     public int countRedshirts() {
         int count = 0;
         for (int i = 0; i < getAllPlayers().size(); ++i) {
-            if (getAllPlayers().get(i).isRedshirt) count++;
+            if (getAllPlayers().get(i).isRedshirt && !getAllPlayers().get(i).isTransfer) count++;
         }
         return count;
     }
