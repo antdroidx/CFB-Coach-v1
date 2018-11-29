@@ -342,7 +342,7 @@ Arizona State,Brandon Aiyuk,WR,3,7
 Arizona State,Joey Bryant,S,4,7
 Arizona State,Ryan Newsome,WR,3,7
 Arizona State,John Humphrey,WR,3,7
-Arizona State,Jay Jay Wilson,LB,4,7
+Arizona State,JayJay Wilson,LB,4,7
 Arizona State,Curtis Hodges,WR,2,7
 Arkansas,Hjalte Froholdt,OL,4,8
 Arkansas,Cole Kelley,QB,2,7
@@ -497,7 +497,7 @@ Auburn,Dontavius Russell,DL,4,9
 Auburn,K.J. Britt,LB,2,8
 Auburn,Marlon Davidson,DL,3,9
 Auburn,Coynis Miller,DL,1,8
-Auburn,Big Kat Bryant,DL,2,8
+Auburn,BigKat Bryant,DL,2,8
 Auburn,Jamien Sherwood,S,1,8
 Auburn,Aidan Marshall,K,2,8
 Auburn,Kam Martin,RB,3,8
@@ -549,8 +549,8 @@ Auburn,Kaleb Kim,OL,3,8
 Auburn,Sal Cannella,WR,3,8
 Auburn,Matthew Hill,WR,1,8
 Auburn,Jarrett Stidham,QB,3,9
-Auburn,Cord  Sandberg,QB,1,8
-Auburn,Prince Tega Wanogho,OL,3,9
+Auburn,Cord Sandberg,QB,1,8
+Auburn,Prince-Tega Wanogho,OL,3,9
 Ball State,Alex Joss,OL,4,6
 Ball State,Curtis Blackwell,OL,2,6
 Ball State,Tyler Potts,CB,1,5
@@ -1128,7 +1128,7 @@ Central Florida,Cole Schneider,OL,1,7
 Central Florida,Titus Davis,DL,4,8
 Central Florida,Monterious Loggins,LB,2,7
 Central Florida,A.J. Wooten,DL,4,8
-Central Florida,Shawn  Burges-Becker,LB,3,8
+Central Florida,Shawn Burges-Becker,LB,3,8
 Central Florida,Nevelle Clarke,CB,3,8
 Central Florida,Jake Brown,OL,3,8
 Central Florida,Otis Anderson,RB,2,8
@@ -1862,7 +1862,7 @@ Florida State,Landon Dickerson,OL,2,8
 Florida State,Walvenski Aime,DL,4,8
 Florida State,Cory Durden,DL,1,8
 Florida State,Camren McDonald,TE,1,8
-Fresno State,Marc David Bien,OL,1,5
+Fresno State,Marc-David Bien,OL,1,5
 Fresno State,Nick Aibuedefe,OL,3,6
 Fresno State,Matt Boateng,CB,4,6
 Fresno State,Anthoula Kelly,CB,4,7
@@ -2071,11 +2071,11 @@ Georgia Tech,Christian Malloy,RB,1,6
 Georgia Tech,Zamari Walton,CB,1,6
 Hawaii,Eric Rooks,WR,1,6
 Hawaii,Kendall Hune,DL,3,6
-Hawaii,Jonah K.,DL,1,6
+Hawaii,Jonah Kahahawai,DL,1,6
 Hawaii,Kohl Levao,OL,3,6
-Hawaii,Eperone  Moananu,DL,3,6
+Hawaii,Eperone Moananu,DL,3,6
 Hawaii,Mykal Tolliver,CB,2,6
-Hawaii,Manu H.,S,4,6
+Hawaii,Manu Hudson,S,4,6
 Hawaii,Eugene Ford,CB,2,6
 Hawaii,Freddie Holly,RB,2,7
 Hawaii,Ilm Manning,OL,1,6
@@ -2104,7 +2104,7 @@ Hawaii,Dakota Torres,TE,4,7
 Hawaii,Manly Williams,DL,3,6
 Hawaii,Rojesterman Farris,CB,3,7
 Hawaii,Stan Gaudion,K,2,7
-Hawaii,Joey N.,OL,2,6
+Hawaii,Joey Nu'uanu,OL,2,6
 Hawaii,Ernest Moore,OL,3,6
 Hawaii,Derek Thomas,DL,2,7
 Hawaii,Elijah Dale,RB,4,6
@@ -2129,8 +2129,8 @@ Hawaii,Kana'i Picanco,LB,3,6
 Hawaii,Dayton Furuta,RB,3,6
 Hawaii,Devan Stubblefield,WR,4,6
 Hawaii,Micah Vanterpool,OL,1,6
-Hawaii,Jason M. Sharsh,WR,3,6
-Hawaii,Marcus A.,WR,4,6
+Hawaii,Jason Sharsh,WR,3,6
+Hawaii,Marcus Armstrong,WR,4,6
 Hawaii,Cole McDonald,QB,2,7
 Hawaii,Akil Francisco,CB,1,6
 Hawaii,Zeno Choi,DL,4,7
@@ -2647,7 +2647,7 @@ Kent State,Elvis Hines,S,2,6
 Kent State,Alex Hoag,DL,3,6
 Kent State,Jamal Parker,S,3,6
 Kent State,Will Matthews,RB,3,6
-Kent State,John Henry Bronczek,S,3,6
+Kent State,John-Henry Bronczek,S,3,6
 Kent State,Trey Harrell,WR,3,6
 Kent State,Matt Bahr,LB,4,6
 Kent State,Matt Harmon,LB,1,6
@@ -2770,11 +2770,11 @@ Louisiana Tech,Brandon Floyd,S,3,6
 Louisiana Tech,O'Shea Dugas,OL,4,7
 Louisiana Tech,Zach Cousar,TE,2,6
 Louisiana Tech,Kollin Hurt,S,1,6
-Louisiana Tech,Cee Jay Powell,WR,2,6
+Louisiana Tech,CeeJay Powell,WR,2,6
 Louisiana Tech,Eric Kendzior,DL,3,6
 Louisiana Tech,Trey Spencer,CB,4,7
 Louisiana Tech,Milton Williams,DL,1,6
-Louisiana Tech,Bee Jay Williamson,S,1,6
+Louisiana Tech,BeeJay Williamson,S,1,6
 Louisiana Tech,Dae'Von Washington,LB,4,7
 Louisiana Tech,Peyton Braswell,TE,3,6
 Louisiana Tech,Kam McKnight,RB,4,7
@@ -2798,7 +2798,7 @@ Louisiana Tech,La'Dante Davenport,DL,3,6
 Louisiana Tech,Collin Scott,LB,3,7
 Louisiana Tech,Israel Tucker,RB,2,7
 Louisiana Tech,L'Jarius Sneed,CB,3,7
-Louisiana Tech,Jon Randall Belton,WR,2,6
+Louisiana Tech,Jon-Randall Belton,WR,2,6
 Louisiana Tech,Zach Hannibal,CB,2,7
 Louisiana Tech,Ka'Derrion Mason,DL,3,6
 Louisiana Tech,Drew Kirkpatrick,OL,3,5
@@ -3228,7 +3228,7 @@ Miami,Dee Wiggins,WR,1,8
 Miami,Mark Pope,WR,1,8
 Miami,Derrick Smith,LB,2,8
 Miami,Scott Patchan,DL,3,8
-Miami,Kai Leon Herbert,OL,2,8
+Miami,Kai-Leon Herbert,OL,2,8
 Miami,Marquez Ezzard,WR,1,8
 Miami,Michael Jackson,CB,4,9
 Miami,Zalontae Hillery,OL,1,7
@@ -3716,7 +3716,7 @@ Navy,Steve Satchell,OL,4,6
 Navy,Griffin Baumoel,LB,2,6
 Navy,Noruwa Obanor,CB,3,6
 Navy,Bryce Shaw,LB,1,6
-Navy,Keoni K Makekau,RB,2,6
+Navy,Keoni Makekau,RB,2,6
 Navy,Bryan Hammond,RB,4,6
 Navy,Ben Glass,QB,1,6
 Navy,Ryan Mitchell,WR,2,6
@@ -4501,7 +4501,7 @@ Ohio State,Isaiah Pryor,S,2,8
 Ohio State,Sean Nuernberger,K,4,9
 Ohio State,J.K. Dobbins,RB,2,9
 Ohio State,Demetrius Knox,OL,4,9
-Ohio State,C J Saunders,WR,3,8
+Ohio State,CJ Saunders,WR,3,8
 Ohio State,Malcolm Pridgeon,OL,4,8
 Ohio State,Nicholas Petit-Frere,OL,1,8
 Ohio State,Tyler Friday,DL,1,8
@@ -4685,7 +4685,7 @@ Oklahoma State,Enoch Smith,DL,4,8
 Oklahoma State,Rondarius Williams,CB,2,8
 Oklahoma State,Amen Ogbongbemiga,LB,2,7
 Oklahoma State,Lamarcus Morton,CB,2,7
-Oklahoma State,Sean Michae Flanagan,S,1,7
+Oklahoma State,Sean-Michael Flanagan,S,1,7
 Oklahoma State,CJ Moore,WR,1,8
 Oklahoma State,Za'Carrius Green,S,3,7
 Oklahoma State,Larry Williams,OL,4,8
@@ -5450,7 +5450,7 @@ Southern Methodist,James Proche,WR,3,8
 Southern Methodist,Alan Ali,OL,1,6
 Southern Methodist,Matt McNew,LB,3,6
 Southern Methodist,Richard Moore,LB,3,7
-South Carolina,A.J.  Turner,RB,3,8
+South Carolina,A.J. Turner,RB,3,8
 South Carolina,M.J. Webb,DL,1,7
 South Carolina,Parker White,K,2,7
 South Carolina,Jamyest Williams,CB,2,7
@@ -6282,7 +6282,7 @@ Tulsa,Waahid Muhammad,OL,2,6
 Tulsa,Willie Wright,OL,4,7
 Tulsa,Reggie Robinson,CB,3,7
 Tulsa,Yohance Burnett,LB,3,6
-Tulsa,Chad  President,QB,3,7
+Tulsa,Chad President,QB,3,7
 Tulsa,Montray Norris,CB,2,5
 Tulsa,Malik Welch,CB,2,6
 Tulsa,Keidrien Wadley,S,3,6
@@ -6504,7 +6504,7 @@ UConn,Noel Brouse,OL,2,6
 UConn,David Pindell,QB,4,7
 UConn,Ryan Carroll,CB,1,6
 UConn,Marshe Terry,LB,3,6
-UConn,Robert P. King,CB,1,6
+UConn,Robert King,CB,1,6
 UConn,Brian Cespedes,OL,3,6
 UConn,Keyshawn Paul,CB,1,6
 UConn,Zavier Scott,RB,1,6
@@ -6632,7 +6632,7 @@ Utah,Donavan Thompson,LB,3,8
 Utah,Solomon Enis,WR,1,8
 Utah,Chris Hart,LB,3,7
 Utah,Jaylen Dixon,WR,1,7
-Utah,Javelin K. Guidry,S,2,8
+Utah,Javelin Guidry,S,2,8
 Utah,Connor Haller,TE,2,7
 Utah,Pita Tonga,DL,2,8
 Utah,Jake Jackson,TE,3,7
@@ -7316,7 +7316,7 @@ West Virginia,Alec Sinkfield,RB,1,8
 Western Michigan,John Keenoy,OL,4,7
 Western Michigan,Ken Aguirre,DL,2,6
 Western Michigan,Eric Assoua,DL,4,7
-Western Michigan,Keni H Lovely,CB,1,6
+Western Michigan,Keni Lovely,CB,1,6
 Western Michigan,Keishawn Watson,WR,3,6
 Western Michigan,Dylan Deatherage,OL,1,7
 Western Michigan,Anton Curtis,WR,3,6
@@ -7820,7 +7820,7 @@ Florida Intl,Donovan Georges,LB,1,6
 Florida Intl,Jordan Budwig,OL,4,7
 Florida Intl,Mershawn Miller,OL,1,5
 Florida Intl,Noah Curtis,DL,2,6
-Florida Intl,Tyree  Johnson,S,3,7
+Florida Intl,Tyree Johnson,S,3,7
 Florida Intl,Joshua Little,DL,3,6
 Florida Intl,Anthony Johnson,DL,4,7
 Florida Intl,Josh Powell,LB,2,6
