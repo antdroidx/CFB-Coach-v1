@@ -53,7 +53,8 @@ public class Conference {
      * @param league
      */
     public Conference(String name, League league, Boolean deal, int length, int terms) {
-        confName = name;
+        String[] save = name.split(",");
+        confName = save[0];
         confTeams = new ArrayList<>();
         this.league = league;
         allConfPlayers = new ArrayList<>();

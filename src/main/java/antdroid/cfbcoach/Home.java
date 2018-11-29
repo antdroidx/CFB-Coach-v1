@@ -117,7 +117,7 @@ public class Home extends AppCompatActivity {
                                 isExternalStorageReadable();
                                 customCareer = false;
                                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                                intent.setType("text/plain");
+                                intent.setType("text/*");
                                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                                 startActivityForResult(intent, READ_REQUEST_CODE);
                             }

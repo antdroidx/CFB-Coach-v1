@@ -254,6 +254,8 @@ public class PlayerQB extends Player {
 
         if (isTransfer || isRedshirt || isMedicalRS) {
             isTransfer = false;
+            isRedshirt = false;
+            isMedicalRS = false;
             wasRedshirt = true;
         } else {
             year++;

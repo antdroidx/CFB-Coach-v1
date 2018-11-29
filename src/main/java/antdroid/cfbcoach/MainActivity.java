@@ -2894,7 +2894,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         loadData = "coach";
                         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                        intent.setType("text/plain");
+                        intent.setType("text/*");
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         startActivityForResult(intent, READ_REQUEST_CODE);
                         importMoreDataPrompt();
@@ -2905,7 +2905,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         loadData = "roster";
                         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                        intent.setType("text/plain");
+                        intent.setType("text/*");
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
                         startActivityForResult(intent, READ_REQUEST_CODE);
                         importMoreDataPrompt();
@@ -3956,7 +3956,7 @@ public class MainActivity extends AppCompatActivity {
             line = reader.readLine();
             //Next get league history
             sb.append("[START_CONFERENCES]\n");
-            while ((line = reader.readLine()) != null && !line.equals("[END_CONFERENCES]")) {
+            while ((line = reader.readLine()) != null && !line.contains("[END_CONFERENCES]")) {
                 sb.append(line + "\n");
             }
             sb.append("[END_CONFERENCES]\n");
@@ -3971,7 +3971,7 @@ public class MainActivity extends AppCompatActivity {
 
             //teams
             sb1.append("[START_TEAMS]\n");
-            while ((line = reader.readLine()) != null && !line.equals("[END_TEAMS]")) {
+            while ((line = reader.readLine()) != null && !line.contains("[END_TEAMS]")) {
                 sb1.append(line + "\n");
             }
             sb1.append("[END_TEAMS]\n");

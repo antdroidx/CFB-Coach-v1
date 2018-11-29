@@ -341,9 +341,9 @@ public class League {
             //First ignore the save file info
             line = bufferedReader.readLine();
             countTeam = 0;
-            while ((line = bufferedReader.readLine()) != null && !line.equals("[END_TEAMS]")) {
+            while ((line = bufferedReader.readLine()) != null && !line.contains("[END_TEAMS]")) {
                 for (int c = 0; c < conferences.size(); ++c) {
-                    while ((line = bufferedReader.readLine()) != null && !line.equals("[END_CONF]")) {
+                    while ((line = bufferedReader.readLine()) != null && !line.contains("[END_CONF]")) {
                         String[] filesSplit = line.split(", ");
                         if (filesSplit.length > 1) {
                             line.replace("\"", "\\\"");
@@ -4121,9 +4121,9 @@ Then conferences can see if they want to add them to their list if the teams mee
                             conf.confTeams.add(teamB);
 
                             //break the news
-                            newsStories.get(currentWeek + 2).add("Conference Addition!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA + " was an Independent previously.");
+                            newsStories.get(currentWeek + 2).add("Conference Addition!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " was an Independent previously.");
 
-                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA + " was an Independent previously.\n\n");
+                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " was an Independent previously.\n\n");
                             countRealignment++;
                             demoteTeamList.remove(teamA);
                             demoteTeamList.remove(teamB);
@@ -4443,7 +4443,6 @@ Then conferences can see if they want to add them to their list if the teams mee
     public void advanceSeason() {
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceTeamPlayers();
-
         }
 
         advanceSeasonWinStreaks();
