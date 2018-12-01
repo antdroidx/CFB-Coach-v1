@@ -195,11 +195,6 @@ public class Conference {
         }
     }
 
-/*
-    */
-/**
-     * Sorts teams into their division
-     *//*
 
     public void setDivisionTeams(){
         if(confTeams.size() >= 12) {
@@ -213,16 +208,6 @@ public class Conference {
             }
         }
     }
-
-    */
-/**
-     * sets up division schedule round robin style
-     *//*
-
-    */
-/**
-     * Sets up schedule for in-conference games using round robin scheduling.
-     *//*
 
     public void setUpDivisionSchedule() {
         //schedule in conf matchups
@@ -270,11 +255,6 @@ public class Conference {
         }
     }
 
-    */
-/**
-     * Sets up cross divisional games
-     *//*
-
     public void setUpCrossDivisionSchedule(){
         int year = league.leagueHistory.size();
         int n = year%6;
@@ -295,7 +275,9 @@ public class Conference {
             }
         }
     }
-*/
+
+
+
 
     /**
      * Sets up schedule for in-conference games using round robin scheduling.
@@ -340,16 +322,6 @@ public class Conference {
         }
     }
 
-    /**
-     * Inserts the OOC games
-     */
-    public void  insertOOCSchedule() {
-        for (int i = 0; i < confTeams.size(); ++i) {
-            confTeams.get(i).gameSchedule.add(oocWeeks[0], confTeams.get(i).gameOOCSchedule0);
-            confTeams.get(i).gameSchedule.add(oocWeeks[1], confTeams.get(i).gameOOCSchedule1);
-            confTeams.get(i).gameSchedule.add(oocWeeks[2], confTeams.get(i).gameOOCSchedule2);
-        }
-    }
 
     /**
      * Plays week for each team. If CCG week, play the CCG.

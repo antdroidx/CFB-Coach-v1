@@ -1121,6 +1121,8 @@ public class RecruitingActivity extends AppCompatActivity {
             return "[Jr]";
         } else if (yr.equals("4")) {
             return "[Sr]";
+        } else if (yr.equals("5")) {
+            return "[Sr]";
         }
         return "[XX]";
     }

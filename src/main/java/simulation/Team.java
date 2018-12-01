@@ -1642,7 +1642,7 @@ public class Team {
         ArrayList<Player> players = getAllPlayers();
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isRedshirt && players.get(i).year == 4) {
+            if (players.get(i).isRedshirt && players.get(i).year >= 4) {
                 players.get(i).year = 5;
             }
         }
@@ -1758,7 +1758,7 @@ public class Team {
         }
 
         for (i = 0; i < players.size(); i++) {
-            if (players.get(i).isRedshirt && players.get(i).year == 5) {
+            if (players.get(i).isRedshirt && players.get(i).year >= 4) {
                 players.get(i).year = 4;
             }
         }
@@ -1773,7 +1773,7 @@ public class Team {
         // Juniors/Seniors - rated 75+ who have not played more than 4 games total and are not starters on teams > 60
         int i;
         dismissalChance = Math.round((100 - HC.get(0).ratDiscipline) / 10);
-        int transferChance = 11;
+        int transferChance = 12;
         int transferYear = 2;  //2: Junior 1: Sophomore 0: Freshman
 
         sortPlayers();
@@ -2070,6 +2070,14 @@ public class Team {
                 }
             }
             ++i;
+        }
+
+        ArrayList<Player> players = getAllPlayers();
+
+        for (int p = 0; p < players.size(); p++) {
+            if (players.get(p).year >= 4) {
+                players.get(p).year = 4;
+            }
         }
     }
 

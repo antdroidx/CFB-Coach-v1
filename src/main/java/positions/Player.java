@@ -124,7 +124,7 @@ Player {
     public int gameXPMade;
     final DecimalFormat df2 = new DecimalFormat(".#");
 
-    private final String[] letterGrades = {"F", "F+", "D", "D+", "C", "C+", "B", "B+", "A", "A+"};
+    private final String[] letterGrades = {"F-", "F", "F+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"};
 
     public void createGenericAttributes() {
         ratPot = (int) (attrBase + 50 * Math.random());
@@ -149,7 +149,7 @@ Player {
             return "So";
         } else if (year == 3) {
             return "Jr";
-        } else if (year == 4) {
+        } else if (year >= 4) {
             return "Sr";
         }
         return "ERROR";
@@ -164,7 +164,7 @@ Player {
             return "Sophomore";
         } else if (year == 3) {
             return "Junior";
-        } else if (year == 4) {
+        } else if (year >= 4) {
             return "Senior";
         }
         return "ERROR";
@@ -360,8 +360,8 @@ Player {
      * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
      */
     protected String getLetterGrade(String num) {
-        int ind = (Integer.parseInt(num) - 50) / 5;
-        if (ind > 9) ind = 9;
+        int ind = (int)((Integer.parseInt(num) - 50) / 3.33);
+        if (ind > 14) ind = 14;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
     }
@@ -380,8 +380,8 @@ Player {
      * Convert a rating into a letter grade. 90 -> A, 80 -> B, etc
      */
     String getLetterGrade(int num) {
-        int ind = (num - 50) / 5;
-        if (ind > 9) ind = 9;
+        int ind = (int)((num - 50) / 3.33);
+        if (ind > 14) ind = 14;
         if (ind < 0) ind = 0;
         return letterGrades[ind];
     }

@@ -8,8 +8,8 @@ public class CompNFLTalent implements Comparator<Player> {
     @Override
     public int compare(Player a, Player b) {
 
-        a.talentNFL = ((5 * a.ratOvr + 2 * a.ratPot + a.personality + a.ratDur + a.ratFootIQ) / 10);
-        b.talentNFL = ((5 * b.ratOvr + 2 * b.ratPot + b.personality + b.ratDur + b.ratFootIQ) / 10);
+        a.talentNFL = ((5 * a.ratOvr + 2 * a.ratPot + a.personality + a.ratDur + a.ratFootIQ) / 10) + 3*a.gamesStarted/2;
+        b.talentNFL = ((5 * b.ratOvr + 2 * b.ratPot + b.personality + b.ratDur + b.ratFootIQ) / 10) + 3*b.gamesStarted/2;
 
         if (a.position.equals("QB")) a.talentNFL = (a.talentNFL * 1.06);
         if (b.position.equals("QB")) b.talentNFL = (b.talentNFL * 1.06);

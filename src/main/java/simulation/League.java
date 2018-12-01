@@ -2,6 +2,7 @@ package simulation;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -128,7 +129,6 @@ public class League {
     private Game ncg;
     private Game[] bowlGames;
     private Game[] cfpGames;
-    private final int countBG = 18;
     public int playoffWeek;
 
     //User Team
@@ -207,6 +207,8 @@ public class League {
             "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
 
     public final String[] states = {"AS", "AZ", "CA", "HI", "ID", "MT", "NV", "OR", "UT", "WA", "CO", "KS", "MO", "NE", "NM", "ND", "OK", "SD", "TX", "WY", "IL", "IN", "IA", "KY", "MD", "MI", "MN", "OH", "TN", "WI", "CT", "DE", "ME", "MA", "NH", "NJ", "NY", "PA", "RI", "VT", "AL", "AK", "FL", "GA", "LA", "MS", "NC", "SC", "VA", "WV"};
+
+    private final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl";
 
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
@@ -411,13 +413,15 @@ public class League {
             line = bufferedReader.readLine();
             String[] filesSplit = line.split(", ");
             if (filesSplit.length > 1) {
+                String[] bowlNames = new String[filesSplit.length];
                 line.replaceAll("\"", "\\\"");
-                for (int b = 0; b < bowlNames.length; ++b) {
+                for (int b = 0; b < filesSplit.length; ++b) {
                     bowlNames[b] = filesSplit[b];
                 }
             } else {
                 filesSplit = line.split(",");
-                for (int b = 0; b < bowlNames.length; ++b) {
+                String[] bowlNames = new String[filesSplit.length];
+                for (int b = 0; b < filesSplit.length; ++b) {
                     bowlNames[b] = filesSplit[b];
                 }
             }
@@ -430,6 +434,21 @@ public class League {
                     "Error reading file");
         }
 
+        if (bowlNames.length != bowlNamesText.length()){
+
+            String[] bowlTemp = bowlNames.clone();
+
+            String[] bowlNames = new String[bowlNamesText.length()];
+
+            for(int b = 0; b < bowlTemp.length; b++) {
+                bowlNames[b] = bowlTemp[b];
+            }
+
+            for(int b = bowlNames.length; b < bowlNamesText.length(); b++) {
+                bowlNames[b] = bowlNamesText.split(", ")[b];
+            }
+        }
+
         //Rename conference to Independent if too small
         for(int c = 0; c < conferences.size(); c++) {
             if(conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
@@ -439,6 +458,16 @@ public class League {
                 }
             }
         }
+
+        //fix bowl names
+        if (bowlNames[0] == null) {
+
+            bowlNames = new String[bowlNamesText.split(", ").length];
+            for (int b = 0; b < bowlNamesText.split(", ").length; ++b) {
+                bowlNames[b] = bowlNamesText.split(", ")[b];
+            }
+        }
+
 
         setupSeason();
     }
@@ -529,9 +558,33 @@ public class League {
 
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
-                for (int b = 0; b < bowlNames.length; ++b) {
-                    String[] filesSplit = line.split(",");
+                String[] filesSplit = line.split(",");
+                String[] bowlNames = new String[filesSplit.length];
+                for (int b = 0; b < filesSplit.length; ++b) {
                     bowlNames[b] = filesSplit[b];
+                }
+            }
+
+            //fix bowl names
+            if (bowlNames[0] == null) {
+
+                bowlNames = new String[bowlNamesText.split(", ").length];
+                for (int b = 0; b < bowlNamesText.split(", ").length; ++b) {
+                    bowlNames[b] = bowlNamesText.split(", ")[b];
+                }
+            }
+            if (bowlNames.length != bowlNamesText.length()){
+
+                String[] bowlTemp = bowlNames.clone();
+
+                String[] bowlNames = new String[bowlNamesText.length()];
+
+                for(int b = 0; b < bowlTemp.length; b++) {
+                    bowlNames[b] = bowlTemp[b];
+                }
+
+                for(int b = bowlNames.length; b < bowlNamesText.length(); b++) {
+                    bowlNames[b] = bowlNamesText.split(", ")[b];
                 }
             }
 
@@ -648,15 +701,6 @@ public class League {
         //Get longest active win streak
         updateLongestActiveWinStreak();
 
-        //fix bowl names
-        if (bowlNames[0] == null) {
-            String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
-
-            bowlNames = new String[bowlText.split(", ").length];
-            for (int b = 0; b < bowlText.split(", ").length; ++b) {
-                bowlNames[b] = bowlText.split(", ")[b];
-            }
-        }
 
         setupSeason();
     }
@@ -768,11 +812,37 @@ public class League {
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
-                for (int b = 0; b < bowlNames.length; ++b) {
-                    String[] filesSplit = line.split(",");
+                String[] filesSplit = line.split(",");
+                String[] bowlNames = new String[filesSplit.length];
+
+                for (int b = 0; b < filesSplit.length; ++b) {
                     bowlNames[b] = filesSplit[b];
                 }
             }
+
+            //fix bowl names
+            if (bowlNames[0] == null) {
+
+                bowlNames = new String[bowlNamesText.split(", ").length];
+                for (int b = 0; b < bowlNamesText.split(", ").length; ++b) {
+                    bowlNames[b] = bowlNamesText.split(", ")[b];
+                }
+            }
+            if (bowlNames.length != bowlNamesText.length()){
+
+                String[] bowlTemp = bowlNames.clone();
+
+                String[] bowlNames = new String[bowlNamesText.length()];
+
+                for(int b = 0; b < bowlTemp.length; b++) {
+                    bowlNames[b] = bowlTemp[b];
+                }
+
+                for(int b = bowlNames.length; b < bowlNamesText.length(); b++) {
+                    bowlNames[b] = bowlNamesText.split(", ")[b];
+                }
+            }
+
 
             String[] record;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
@@ -863,11 +933,24 @@ public class League {
 
         //fix bowl names
         if (bowlNames[0] == null) {
-            String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
 
-            bowlNames = new String[bowlText.split(", ").length];
-            for (int b = 0; b < bowlText.split(", ").length; ++b) {
-                bowlNames[b] = bowlText.split(", ")[b];
+            bowlNames = new String[bowlNamesText.split(", ").length];
+            for (int b = 0; b < bowlNamesText.split(", ").length; ++b) {
+                bowlNames[b] = bowlNamesText.split(", ")[b];
+            }
+        }
+        if (bowlNames.length != bowlNamesText.length()){
+
+            String[] bowlTemp = bowlNames.clone();
+
+            String[] bowlNames = new String[bowlNamesText.length()];
+
+            for(int b = 0; b < bowlTemp.length; b++) {
+                bowlNames[b] = bowlTemp[b];
+            }
+
+            for(int b = bowlNames.length; b < bowlNamesText.length(); b++) {
+                bowlNames[b] = bowlNamesText.split(", ")[b];
             }
         }
 
@@ -973,11 +1056,37 @@ public class League {
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
-                for (int b = 0; b < bowlNames.length; ++b) {
-                    String[] filesSplit = line.split(",");
+                String[] filesSplit = line.split(",");
+                String[] bowlNames = new String[filesSplit.length];
+
+                for (int b = 0; b < filesSplit.length; ++b) {
                     bowlNames[b] = filesSplit[b];
                 }
             }
+
+            //fix bowl names
+            if (bowlNames[0] == null) {
+
+                bowlNames = new String[bowlNamesText.split(", ").length];
+                for (int b = 0; b < bowlNamesText.split(", ").length; ++b) {
+                    bowlNames[b] = bowlNamesText.split(", ")[b];
+                }
+            }
+            if (bowlNames.length != bowlNamesText.length()){
+
+                String[] bowlTemp = bowlNames.clone();
+
+                String[] bowlNames = new String[bowlNamesText.length()];
+
+                for(int b = 0; b < bowlTemp.length; b++) {
+                    bowlNames[b] = bowlTemp[b];
+                }
+
+                for(int b = bowlNames.length; b < bowlNamesText.length(); b++) {
+                    bowlNames[b] = bowlNamesText.split(", ")[b];
+                }
+            }
+
 
             String[] record;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
@@ -1062,18 +1171,23 @@ public class League {
                     "Error reading file");
         }
 
-        //Get longest active win streak
-        updateLongestActiveWinStreak();
-
-        //fix bowl names
-        if (bowlNames[0] == null) {
-            String bowlText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl";
-
-            bowlNames = new String[bowlText.split(", ").length];
-            for (int b = 0; b < bowlText.split(", ").length; ++b) {
-                bowlNames[b] = bowlText.split(", ")[b];
+        //fix team divions
+        for (int c = 0; c < conferences.size(); c++) {
+            for (int i = 0; i < conferences.get(c).confTeams.size(); i++) {
+                conferences.get(c).divisions.add(new Division("A",this));
+                conferences.get(c).divisions.add(new Division("B", this));
+                if (i % 2 == 0) {
+                    conferences.get(c).confTeams.get(i).division = conferences.get(c).divisions.get(1).divName;
+                    conferences.get(c).divisions.get(0).divTeams.add(conferences.get(c).confTeams.get(i));
+                } else {
+                    conferences.get(c).confTeams.get(i).division = conferences.get(c).divisions.get(2).divName;
+                    conferences.get(c).divisions.get(1).divTeams.add(conferences.get(c).confTeams.get(i));
+                }
             }
         }
+
+        //Get longest active win streak
+        updateLongestActiveWinStreak();
 
         setupSeason();
     }
@@ -1088,8 +1202,8 @@ public class League {
         lastNameList = new ArrayList<>();
         heismanDecided = false;
         hasScheduledBowls = false;
-        bowlGames = new Game[countBG];
-        bowlNames = new String[countBG];
+        bowlGames = new Game[bowlNamesText.length()];
+        bowlNames = new String[bowlNamesText.length()];
         cfpGames = new Game[15];
         playoffTeams = new ArrayList<>();
         leagueHistory = new ArrayList<>();
@@ -1138,7 +1252,7 @@ public class League {
         for (int r = 0; r < 3; r++) {
             int j = 0;
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() > conferences.get(c).minConfTeams) {
+                if (conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
                     conferences.get(c).oocWeeks[r] = (j + r);
                     for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
                         conferences.get(c).confTeams.get(t).oocWeeks.add(j+r);
@@ -2819,6 +2933,51 @@ public class League {
                 t2 = teamList.get(39);
                 sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
 
+                sb.append(bowlNames[18] + ":\n\t\t");
+                t1 = teamList.get(40);
+                t2 = teamList.get(49);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[19] + ":\n\t\t");
+                t1 = teamList.get(41);
+                t2 = teamList.get(48);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[20] + ":\n\t\t");
+                t1 = teamList.get(42);
+                t2 = teamList.get(47);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[21] + ":\n\t\t");
+                t1 = teamList.get(43);
+                t2 = teamList.get(46);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[22] + ":\n\t\t");
+                t1 = teamList.get(44);
+                t2 = teamList.get(45);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[23] + ":\n\t\t");
+                t1 = teamList.get(50);
+                t2 = teamList.get(57);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[24] + ":\n\t\t");
+                t1 = teamList.get(51);
+                t2 = teamList.get(56);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[25] + ":\n\t\t");
+                t1 = teamList.get(52);
+                t2 = teamList.get(55);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
+                sb.append(bowlNames[26] + ":\n\t\t");
+                t1 = teamList.get(53);
+                t2 = teamList.get(54);
+                sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+
                 return sb.toString();
 
             }
@@ -3085,8 +3244,75 @@ public class League {
 
     }
 
-    ////////////////
+    /////////////////////////
 
+    /* New Bowl Scheduling Logic
+    Only teams qualify make it to bowl games. bowl games max out at total bowl length. if not enough teams qualify, bowl size shrinks.
+     */
+
+
+
+    private ArrayList<Team> getQualifiedTeams() {
+        ArrayList<Team> bowlTeams = new ArrayList<>();
+
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).bowlBan && teamList.get(i).wins < 7) bowlTeams.add(teamList.get(i));
+        }
+
+        return bowlTeams;
+    }
+
+    private void bowlScheduleLogic() {
+    ArrayList<Team> bowlTeams = getQualifiedTeams();
+        Collections.sort(bowlTeams, new CompTeamPoll());
+
+        int bowlCount = bowlTeams.size() - 4;
+        if(bowlCount > bowlNames.length) bowlCount = bowlNames.length;
+
+        //semifinals
+        semiG14 = new Game(teamList.get(0), teamList.get(3), "Semis, 1v4");
+        teamList.get(0).gameSchedule.add(semiG14);
+        teamList.get(3).gameSchedule.add(semiG14);
+
+        semiG23 = new Game(teamList.get(1), teamList.get(2), "Semis, 2v3");
+        teamList.get(1).gameSchedule.add(semiG23);
+        teamList.get(2).gameSchedule.add(semiG23);
+
+        newsStories.get(currentWeek + 1).add("Playoff Teams Announced!>" + teamList.get(0).getStrAbbrWL() + " will play " + teamList.get(3).getStrAbbrWL() +
+                " , while " + teamList.get(1).getStrAbbrWL() + " will play " + teamList.get(2).getStrAbbrWL() + " in next week's College Football Playoff semi-final round. The winners will compete for this year's National Title!");
+
+
+        //schedule bowl games teams ranked #5-12
+        if(bowlCount / 8 > 1) {
+            for (int i = 0; i < 8; i++) {
+                cfpGames[i] = new Game(playoffTeams.get(i), playoffTeams.get(15 - i), "Sweet 16");
+                playoffTeams.get(i).gameSchedule.add(cfpGames[i]);
+                playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
+                newsStories.get(currentWeek + 1).add("Upcoming Sweet 16 Playoff Games!>" + playoffTeams.get(i).getStrAbbrWL() + " will battle with " + playoffTeams.get(15 - i).getStrAbbrWL() +
+                        " in the " + getYear() + " Sweet 16 round of the Playoffs!");
+            }
+
+            //Heal teams
+            for (int i = 0; i < teamList.size(); i++) {
+                teamList.get(i).postSeasonHealing(1);
+            }
+        }
+
+        //schedule bowl games teams ranked #13-21
+        if(bowlCount / 8 > 2) {
+
+
+        }
+
+        //schedule bowl games teams ranked #22-30
+        if(bowlCount / 8 > 3) {
+
+        }
+
+
+    }
+
+    ///////////////////////////
 
     /**
      * Schedules bowl games based on team rankings.
@@ -3104,8 +3330,24 @@ public class League {
             if (teamList.get(i).wins < 7) teamList.get(i).teamPollScore = 0;
         }
 
-        Collections.sort(teamList, new CompTeamPoll());
+        if(teamList.size() < 60) {
+            for (int i = 0; i < teamList.size(); ++i) {
+                //bowl ban!
+                if (teamList.get(i).bowlBan)  teamList.get(i).teamPollScore = 0;
+                //minimum wins for bowl eligibility
+                if (teamList.get(i).wins < 6) teamList.get(i).teamPollScore = 0;
+            }
+            if(teamList.size() < 60) {
+                for (int i = 0; i < teamList.size(); ++i) {
+                    //bowl ban!
+                    if (teamList.get(i).bowlBan)  teamList.get(i).teamPollScore = 0;
+                    //minimum wins for bowl eligibility
+                    if (teamList.get(i).wins < 5) teamList.get(i).teamPollScore = 0;
+                }
+            }
+        }
 
+        Collections.sort(teamList, new CompTeamPoll());
 
         //semifinals
         semiG14 = new Game(teamList.get(0), teamList.get(3), "Semis, 1v4");
@@ -3248,17 +3490,86 @@ public class League {
         newsStories.get(currentWeek + 1).add(bowlGames[17].gameName + " Selection Announced:>" + teamList.get(35).strRankTeamRecord() + " will play " + teamList.get(39).strRankTeamRecord() +
                 " in next week's bowl game. ");
 
+        //new bowls added 11/30/2018
+
+        bowlGames[18] = new Game(teamList.get(40), teamList.get(49), bowlNames[18]);
+        teamList.get(40).gameSchedule.add(bowlGames[18]);
+        teamList.get(49).gameSchedule.add(bowlGames[18]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[18].gameName + " Selection Announced:>" + teamList.get(40).strRankTeamRecord() + " will play " + teamList.get(49).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[19] = new Game(teamList.get(41), teamList.get(48), bowlNames[19]);
+        teamList.get(41).gameSchedule.add(bowlGames[19]);
+        teamList.get(48).gameSchedule.add(bowlGames[19]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[19].gameName + " Selection Announced:>" + teamList.get(41).strRankTeamRecord() + " will play " + teamList.get(48).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[20] = new Game(teamList.get(42), teamList.get(47), bowlNames[20]);
+        teamList.get(42).gameSchedule.add(bowlGames[20]);
+        teamList.get(47).gameSchedule.add(bowlGames[20]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[20].gameName + " Selection Announced:>" + teamList.get(42).strRankTeamRecord() + " will play " + teamList.get(47).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[21] = new Game(teamList.get(43), teamList.get(46), bowlNames[21]);
+        teamList.get(43).gameSchedule.add(bowlGames[21]);
+        teamList.get(46).gameSchedule.add(bowlGames[21]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[21].gameName + " Selection Announced:>" + teamList.get(43).strRankTeamRecord() + " will play " + teamList.get(46).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[22] = new Game(teamList.get(44), teamList.get(45), bowlNames[22]);
+        teamList.get(44).gameSchedule.add(bowlGames[22]);
+        teamList.get(45).gameSchedule.add(bowlGames[22]);
+        hasScheduledBowls = true;
+
+        newsStories.get(currentWeek + 1).add(bowlGames[22].gameName + " Selection Announced:>" + teamList.get(44).strRankTeamRecord() + " will play " + teamList.get(45).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[23] = new Game(teamList.get(50), teamList.get(57), bowlNames[23]);
+        teamList.get(50).gameSchedule.add(bowlGames[23]);
+        teamList.get(57).gameSchedule.add(bowlGames[23]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[23].gameName + " Selection Announced:>" + teamList.get(50).strRankTeamRecord() + " will play " + teamList.get(57).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[24] = new Game(teamList.get(51), teamList.get(56), bowlNames[24]);
+        teamList.get(51).gameSchedule.add(bowlGames[24]);
+        teamList.get(56).gameSchedule.add(bowlGames[24]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[24].gameName + " Selection Announced:>" + teamList.get(51).strRankTeamRecord() + " will play " + teamList.get(56).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[25] = new Game(teamList.get(52), teamList.get(55), bowlNames[25]);
+        teamList.get(52).gameSchedule.add(bowlGames[25]);
+        teamList.get(55).gameSchedule.add(bowlGames[25]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[25].gameName + " Selection Announced:>" + teamList.get(52).strRankTeamRecord() + " will play " + teamList.get(55).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        bowlGames[26] = new Game(teamList.get(53), teamList.get(54), bowlNames[26]);
+        teamList.get(53).gameSchedule.add(bowlGames[26]);
+        teamList.get(54).gameSchedule.add(bowlGames[26]);
+
+        newsStories.get(currentWeek + 1).add(bowlGames[26].gameName + " Selection Announced:>" + teamList.get(53).strRankTeamRecord() + " will play " + teamList.get(54).strRankTeamRecord() +
+                " in next week's bowl game. ");
+
+        //finished bowls
+
+
         hasScheduledBowls = true;
 
         //Heal Bowl Team Players
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 116; i++) {
             teamList.get(i).postSeasonHealing(3);
         }
-        for (int i = 12; i < 24; i++) {
+        for (int i = 16; i < 40; i++) {
             teamList.get(i).postSeasonHealing(2);
         }
-        for (int i = 24; i < 36; i++) {
+        for (int i = 40; i < 58; i++) {
             teamList.get(i).postSeasonHealing(1);
         }
     }
@@ -3269,13 +3580,13 @@ public class League {
 
 
     private void playBowlWeek1() {
-        for (int g = 12; g < 18; g++) {
+        for (int g = 18; g < 27; g++) {
             playBowl(bowlGames[g]);
         }
     }
 
     private void playBowlWeek2() {
-        for (int g = 6; g < 12; g++) {
+        for (int g = 6; g < 18; g++) {
             playBowl(bowlGames[g]);
         }
     }

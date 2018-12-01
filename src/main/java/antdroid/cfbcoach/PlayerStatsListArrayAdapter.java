@@ -82,15 +82,15 @@ class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
         // The last index is always the rating: A+, C, etc
         if (ratSplit.length > 0 && rating.split(",").length == 1) {
             String letter = ratSplit[ratSplit.length - 1];
-            if (letter.equals("A") || letter.equals("A+")) {
+            if (letter.contains("A")) {
                 textV.setTextColor(Color.parseColor("#5994de"));
-            } else if (letter.equals("B") || letter.equals("B+")) {
+            } else if (letter.contains("B")) {
                 textV.setTextColor(Color.parseColor("#00b300"));
-            } else if (letter.equals("C") || letter.equals("C+")) {
+            } else if (letter.contains("C")) {
                 textV.setTextColor(Color.YELLOW);
-            } else if (letter.equals("D") || letter.equals("D+")) {
+            } else if (letter.contains("D")) {
                 textV.setTextColor(Color.parseColor("#e68a00"));
-            } else if (letter.equals("F") || letter.equals("F+")) {
+            } else if (letter.contains("F")) {
                 textV.setTextColor(Color.RED);
             }
         }
