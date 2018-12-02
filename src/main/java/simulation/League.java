@@ -2,7 +2,6 @@ package simulation;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -434,26 +433,26 @@ public class League {
                     "Error reading file");
         }
 
-        if (bowlNames.length != bowlNamesText.split(",").length){
+        if (bowlNames.length != bowlNamesText.split(",").length) {
 
             String[] bowlTemp = bowlNames.clone();
 
             bowlNames = new String[bowlNamesText.split(",").length];
 
-            for(int b = 0; b < bowlTemp.length; b++) {
+            for (int b = 0; b < bowlTemp.length; b++) {
                 bowlNames[b] = bowlTemp[b];
             }
 
-            for(int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
+            for (int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
                 bowlNames[b] = bowlNamesText.split(",")[b];
             }
         }
 
         //Rename conference to Independent if too small
-        for(int c = 0; c < conferences.size(); c++) {
-            if(conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
+        for (int c = 0; c < conferences.size(); c++) {
+            if (conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
                 conferences.get(c).confName = "Independent";
-                for(int i = 0; i < conferences.get(c).confTeams.size(); i++) {
+                for (int i = 0; i < conferences.get(c).confTeams.size(); i++) {
                     conferences.get(c).confTeams.get(i).conference = "Independent";
                 }
             }
@@ -487,7 +486,8 @@ public class League {
 
             //Team Count
             if (line.split(">").length > 1) {
-                if(!line.split(">")[1].contains("[")) countTeam = Integer.parseInt(line.split(">")[1]);
+                if (!line.split(">")[1].contains("["))
+                    countTeam = Integer.parseInt(line.split(">")[1]);
             }
 
 
@@ -556,17 +556,17 @@ public class League {
             }
 
             //fix bowl names
-            if (bowlNames.length != bowlNamesText.split(",").length){
+            if (bowlNames.length != bowlNamesText.split(",").length) {
 
                 String[] bowlTemp = bowlNames.clone();
 
                 bowlNames = new String[bowlNamesText.split(",").length];
 
-                for(int b = 0; b < bowlTemp.length; b++) {
+                for (int b = 0; b < bowlTemp.length; b++) {
                     bowlNames[b] = bowlTemp[b];
                 }
 
-                for(int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
+                for (int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
                     bowlNames[b] = bowlNamesText.split(",")[b];
                 }
             }
@@ -714,7 +714,8 @@ public class League {
 
             //Team Count
             if (line.split(">").length > 1) {
-                if(!line.split(">")[1].contains("[")) countTeam = Integer.parseInt(line.split(">")[1]);
+                if (!line.split(">")[1].contains("["))
+                    countTeam = Integer.parseInt(line.split(">")[1]);
             }
 
             //Next get league history
@@ -804,17 +805,17 @@ public class League {
             }
 
             //fix bowl names
-            if (bowlNames.length != bowlNamesText.split(",").length){
+            if (bowlNames.length != bowlNamesText.split(",").length) {
 
                 String[] bowlTemp = bowlNames.clone();
 
                 bowlNames = new String[bowlNamesText.split(",").length];
 
-                for(int b = 0; b < bowlTemp.length; b++) {
+                for (int b = 0; b < bowlTemp.length; b++) {
                     bowlNames[b] = bowlTemp[b];
                 }
 
-                for(int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
+                for (int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
                     bowlNames[b] = bowlNamesText.split(",")[b];
                 }
             }
@@ -915,25 +916,25 @@ public class League {
                 bowlNames[b] = bowlNamesText.split(", ")[b];
             }
         }
-        if (bowlNames.length != bowlNamesText.length()){
+        if (bowlNames.length != bowlNamesText.length()) {
 
             String[] bowlTemp = bowlNames.clone();
 
             String[] bowlNames = new String[bowlNamesText.length()];
 
-            for(int b = 0; b < bowlTemp.length; b++) {
+            for (int b = 0; b < bowlTemp.length; b++) {
                 bowlNames[b] = bowlTemp[b];
             }
 
-            for(int b = bowlNames.length; b < bowlNamesText.length(); b++) {
+            for (int b = bowlNames.length; b < bowlNamesText.length(); b++) {
                 bowlNames[b] = bowlNamesText.split(", ")[b];
             }
         }
 
-       //fix team divions
+        //fix team divions
         for (int c = 0; c < conferences.size(); c++) {
             for (int i = 0; i < conferences.get(c).confTeams.size(); i++) {
-                conferences.get(c).divisions.add(new Division("A",this));
+                conferences.get(c).divisions.add(new Division("A", this));
                 conferences.get(c).divisions.add(new Division("B", this));
                 if (i % 2 == 0) {
                     conferences.get(c).confTeams.get(i).division = conferences.get(c).divisions.get(1).divName;
@@ -1041,17 +1042,17 @@ public class League {
             }
 
             //fix bowl names
-            if (bowlNames.length != bowlNamesText.split(",").length){
+            if (bowlNames.length != bowlNamesText.split(",").length) {
 
                 String[] bowlTemp = bowlNames.clone();
 
                 bowlNames = new String[bowlNamesText.split(",").length];
 
-                for(int b = 0; b < bowlTemp.length; b++) {
+                for (int b = 0; b < bowlTemp.length; b++) {
                     bowlNames[b] = bowlTemp[b];
                 }
 
-                for(int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
+                for (int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
                     bowlNames[b] = bowlNamesText.split(",")[b];
                 }
             }
@@ -1143,7 +1144,7 @@ public class League {
         //fix team divions
         for (int c = 0; c < conferences.size(); c++) {
             for (int i = 0; i < conferences.get(c).confTeams.size(); i++) {
-                conferences.get(c).divisions.add(new Division("A",this));
+                conferences.get(c).divisions.add(new Division("A", this));
                 conferences.get(c).divisions.add(new Division("B", this));
                 if (i % 2 == 0) {
                     conferences.get(c).confTeams.get(i).division = conferences.get(c).divisions.get(1).divName;
@@ -1223,8 +1224,8 @@ public class League {
             for (int c = 0; c < conferences.size(); c++) {
                 if (conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
                     conferences.get(c).oocWeeks[r] = (j + r);
-                    for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
-                        conferences.get(c).confTeams.get(t).oocWeeks.add(j+r);
+                    for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                        conferences.get(c).confTeams.get(t).oocWeeks.add(j + r);
                     }
                     j++;
                     if (j + r == 9) j = 0;
@@ -1232,7 +1233,7 @@ public class League {
                     conferences.get(c).oocWeeks[0] = 100;
                     conferences.get(c).oocWeeks[1] = 100;
                     conferences.get(c).oocWeeks[2] = 100;
-                    for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                    for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
                         conferences.get(c).confTeams.get(t).oocWeeks.add(100);
                         conferences.get(c).confTeams.get(t).oocWeeks.add(100);
                         conferences.get(c).confTeams.get(t).oocWeeks.add(100);
@@ -1241,7 +1242,24 @@ public class League {
             }
         }
 
-        for(int t = 0; t < teamList.size(); t++) {
+        for (int c = 0; c < conferences.size(); c++) {
+            Conference conf = conferences.get(c);
+            if(conf.confTeams.size() < 10 && conf.confTeams.size() >= 8) {
+                Boolean ooc = true;
+               do {
+                    int oocWeek = (int)(Math.random()*8);
+                    if(conf.oocWeeks[0] != oocWeek && conf.oocWeeks[1] != oocWeek && conf.oocWeeks[2] != oocWeek) {
+                        conf.oocWeeks[3] = oocWeek;
+                        for (int t = 0; t < conf.confTeams.size(); t++) {
+                            conf.confTeams.get(t).oocWeeks.add(oocWeek);
+                        }
+                        ooc = false;
+                    }
+                } while (ooc);
+            }
+        }
+
+        for (int t = 0; t < teamList.size(); t++) {
             Collections.sort(teamList.get(t).oocWeeks);
         }
 
@@ -1251,7 +1269,7 @@ public class League {
 
                 ArrayList<Team> availTeams = new ArrayList<>();
 
-                for (int t = 0; t < teamList.size(); t ++) {
+                for (int t = 0; t < teamList.size(); t++) {
                     if (teamList.get(t).oocWeeks.contains(week) || teamList.get(t).conference.equals("Independent")) {
                         availTeams.add(teamList.get(t));
                     }
@@ -1263,13 +1281,13 @@ public class League {
 
                     ArrayList<Team> availTeamsB = new ArrayList<>();
                     for (int k = 0; k < availTeams.size(); k++) {
-                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k)) || availTeams.get(k).conference.contains("Independent") && availTeams.get(k) != a && !a.oocTeams.contains(availTeams.get(k))  ) {
+                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k)) || availTeams.get(k).conference.contains("Independent") && availTeams.get(k) != a && !a.oocTeams.contains(availTeams.get(k))) {
                             availTeamsB.add(availTeams.get(k));
                         }
                     }
                     Team b;
                     if (availTeamsB.isEmpty()) {
-                        b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int)(Math.random()*45), "FCS1", 0, this, true);
+                        b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 45), "FCS1", 0, this, true);
                         b.oocWeeks.add(100);
                         b.oocWeeks.add(100);
                         b.oocWeeks.add(100);
@@ -1281,11 +1299,13 @@ public class League {
                     Game gm;
                     gm = new Game(a, b, "OOC");
 
-                    if (!a.conference.contains("Independent") && !a.conference.contains("FCS")) a.gameSchedule.add(week, gm);
-                    if (!b.conference.contains("Independent") && !b.conference.contains("FCS")) b.gameSchedule.add(week, gm);
+                    if (!a.conference.contains("Independent") && !a.conference.contains("FCS"))
+                        a.gameSchedule.add(week, gm);
+                    if (!b.conference.contains("Independent") && !b.conference.contains("FCS"))
+                        b.gameSchedule.add(week, gm);
 
-                    if(a.conference.contains("Independent")) a.gameSchedule.add(gm);
-                    if(b.conference.contains("Independent")) b.gameSchedule.add(gm);
+                    if (a.conference.contains("Independent")) a.gameSchedule.add(gm);
+                    if (b.conference.contains("Independent")) b.gameSchedule.add(gm);
 
                     a.oocTeams.add(b);
                     b.oocTeams.add(a);
@@ -1328,8 +1348,8 @@ public class League {
             }
         }
 
-        if(sb.length() > 0)
-        newsStories.get(0).add("Post-Season Ban!>These teams have seen numerous violations pile up and have lost the patiences of the College Football Administration. These teams will see reduced scholarships (loss of prestige), and post-season bans!\n\n" + sb);
+        if (sb.length() > 0)
+            newsStories.get(0).add("Post-Season Ban!>These teams have seen numerous violations pile up and have lost the patiences of the College Football Administration. These teams will see reduced scholarships (loss of prestige), and post-season bans!\n\n" + sb);
 
         sb = new StringBuilder();
         for (int i = 0; i < teamList.size(); i++) {
@@ -1338,8 +1358,8 @@ public class League {
             }
         }
 
-        if(sb.length() > 0)
-        newsStories.get(0).add("Minor Infractions!>The following teams have been fined by the College Football Administration for a minor infractions related to discplinary concerns surrounding the school:\n\n" + sb);
+        if (sb.length() > 0)
+            newsStories.get(0).add("Minor Infractions!>The following teams have been fined by the College Football Administration for a minor infractions related to discplinary concerns surrounding the school:\n\n" + sb);
 
         upgradeFacilities();
 
@@ -1350,7 +1370,7 @@ public class League {
             }
         }
 
-        if(sb.length() > 0)
+        if (sb.length() > 0)
             newsStories.get(0).add("Upgraded Facilities!>The following teams upgraded their team training facilities this off-season:\n\n" + sb);
 
     }
@@ -1640,9 +1660,9 @@ public class League {
         //Team Facilities Upgrade -- if teams have enough cash, they will spend on this. helps progression of players
         int baselineCost = 17500;
         for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i).teamBudget > baselineCost * (teamList.get(i).teamFacilities+1)) {
+            if (teamList.get(i).teamBudget > baselineCost * (teamList.get(i).teamFacilities + 1)) {
                 //spend cash, upgrade facilities
-                teamList.get(i).teamBudget -= baselineCost * (teamList.get(i).teamFacilities+1);
+                teamList.get(i).teamBudget -= baselineCost * (teamList.get(i).teamFacilities + 1);
                 teamList.get(i).facilityUpgrade = true;
                 teamList.get(i).teamFacilities++;
             }
@@ -1672,7 +1692,7 @@ public class League {
             Collections.sort(teamList, new CompTeamPoll());
 
             if (expPlayoffs) expandedPlayoff();
-            //else schedBowlGames();
+                //else schedBowlGames();
             else bowlScheduleLogic();
 
         } else if (currentWeek == 13) {
@@ -1754,19 +1774,20 @@ public class League {
         teamDiscipline = new ArrayList<>();
         String news = "";
         for (int t = 0; t < teamList.size(); ++t) {
-            if(Math.random() > disciplineChance) {
+            if (Math.random() > disciplineChance) {
                 int teamDis = teamList.get(t).getTeamDiscipline();
                 if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
                     teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 4);
                     teamList.get(t).disciplinePts -= (int) (Math.random() * 4);
                     teamDiscipline.add(teamList.get(t).name);
                     teamList.get(t).disciplinePlayer();
-                    teamList.get(t).teamDisciplineScore -= ((int)(Math.random()*8)+1);
-                    teamList.get(t).teamBudget -= ((int)(Math.random()*6*100));
+                    teamList.get(t).teamDisciplineScore -= ((int) (Math.random() * 8) + 1);
+                    teamList.get(t).teamBudget -= ((int) (Math.random() * 6 * 100));
                 } else {
                     teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
-                    teamList.get(t).teamDisciplineScore += (int)(Math.random()*5);
-                    if(teamList.get(t).teamDisciplineScore > 100) teamList.get(t).teamDisciplineScore = 100;
+                    teamList.get(t).teamDisciplineScore += (int) (Math.random() * 5);
+                    if (teamList.get(t).teamDisciplineScore > 100)
+                        teamList.get(t).teamDisciplineScore = 100;
                 }
             }
         }
@@ -2827,13 +2848,13 @@ public class League {
                 sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
 
                 int t = 4;
-                for(int g = 0; g < bowlNames.length; g++){
-                        sb.append(bowlNames[g] + ":\n\t\t");
-                        t1 = teamList.get(t);
-                        t2 = teamList.get(t+4);
-                        sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
-                        t++;
-                        if (t % 8 == 0) t = t+8;
+                for (int g = 0; g < bowlNames.length; g++) {
+                    sb.append(bowlNames[g] + ":\n\t\t");
+                    t1 = teamList.get(t);
+                    t2 = teamList.get(t + 4);
+                    sb.append(t1.strRep() + " vs " + t2.strRep() + "\n\n");
+                    t++;
+                    if (t % 8 == 0) t = t + 8;
                 }
 
                 return sb.toString();
@@ -3109,12 +3130,12 @@ public class League {
      */
 
 
-
     private ArrayList<Team> getQualifiedTeams() {
         ArrayList<Team> bowlTeams = new ArrayList<>();
 
         for (int i = 0; i < teamList.size(); ++i) {
-            if (!teamList.get(i).bowlBan && teamList.get(i).wins > 6) bowlTeams.add(teamList.get(i));
+            if (!teamList.get(i).bowlBan && teamList.get(i).wins > 6)
+                bowlTeams.add(teamList.get(i));
         }
 
         return bowlTeams;
@@ -3122,18 +3143,18 @@ public class League {
 
     private void bowlScheduleLogic() {
         setTeamRanks();
-    ArrayList<Team> bowlTeams = getQualifiedTeams();
+        ArrayList<Team> bowlTeams = getQualifiedTeams();
         Collections.sort(bowlTeams, new CompTeamPoll());
 
-        int bowlCount = (bowlTeams.size() - 4)/2;
-        if(bowlCount > bowlNames.length) bowlCount = bowlNames.length;
+        int bowlCount = (bowlTeams.size() - 4) / 2;
+        if (bowlCount > bowlNames.length) bowlCount = bowlNames.length;
 
         //semifinals
         semiG14 = new Game(bowlTeams.get(0), bowlTeams.get(3), "Semis, 1v4");
         bowlTeams.get(0).gameSchedule.add(semiG14);
         bowlTeams.get(3).gameSchedule.add(semiG14);
 
-        semiG23 = new Game(teamList.get(1), bowlTeams.get(2), "Semis, 2v3");
+        semiG23 = new Game(bowlTeams.get(1), bowlTeams.get(2), "Semis, 2v3");
         bowlTeams.get(1).gameSchedule.add(semiG23);
         bowlTeams.get(2).gameSchedule.add(semiG23);
 
@@ -3146,23 +3167,23 @@ public class League {
         int r = 1; //rounds #
         int t = 0; //team #
 
-        while(bowlCount / 4 >= r) {
-            for (int i = t+4; i < t+8; i++) {
-                bowlGames[g] = new Game(bowlTeams.get(i), bowlTeams.get(i+4), bowlNames[g]);
+        while (bowlCount / 4 >= r) {
+            for (int i = t + 4; i < t + 8; i++) {
+                bowlGames[g] = new Game(bowlTeams.get(i), bowlTeams.get(i + 4), bowlNames[g]);
                 bowlTeams.get(i).gameSchedule.add(bowlGames[g]);
-                bowlTeams.get(i+4).gameSchedule.add(bowlGames[g]);
-                newsStories.get(currentWeek + 1).add(bowlGames[g].gameName + " Announced!>" + "#" + bowlTeams.get(i).rankTeamPollScore + " " + bowlTeams.get(i).getStrAbbrWL() + " will compete with " + "#" + bowlTeams.get(i+4).rankTeamPollScore + " " + bowlTeams.get(i+4).getStrAbbrWL() +
+                bowlTeams.get(i + 4).gameSchedule.add(bowlGames[g]);
+                newsStories.get(currentWeek + 1).add(bowlGames[g].gameName + " Announced!>" + "#" + bowlTeams.get(i).rankTeamPollScore + " " + bowlTeams.get(i).getStrAbbrWL() + " will compete with " + "#" + bowlTeams.get(i + 4).rankTeamPollScore + " " + bowlTeams.get(i + 4).getStrAbbrWL() +
                         " in the " + getYear() + " " + bowlGames[g].gameName + "!");
                 g++;
             }
-            t = t+8;
+            t = t + 8;
             r++;
         }
 
         hasScheduledBowls = true;
 
         //Heal Bowl Team Players
-        int weekGame = (bowlCount)/2;
+        int weekGame = (bowlCount) / 2;
 
         for (int i = 0; i < 16; i++) {
             teamList.get(i).postSeasonHealing(3);
@@ -3182,26 +3203,20 @@ public class League {
 
 
     private void playBowlWeek1() {
-        int bowlCount = 0;
-        for (int b = 0; b < bowlGames.length; b++) {
-            if(bowlGames[b] != null) {
-                bowlCount++;
-            }
-        }
-        for (int g = 16; g < bowlCount; g++) {
-            playBowl(bowlGames[g]);
+        for (int g = 16; g < bowlGames.length; g++) {
+            if(bowlGames[g] != null) playBowl(bowlGames[g]);
         }
     }
 
     private void playBowlWeek2() {
-        for (int g = 6; g < 16; g++) {
-            playBowl(bowlGames[g]);
+        for (int g = 6; g < bowlGames.length; g++) {
+            if(bowlGames[g] != null) playBowl(bowlGames[g]);
         }
     }
 
     private void playBowlWeek3() {
-        for (int g = 0; g < 6; g++) {
-            playBowl(bowlGames[g]);
+        for (int g = 0; g < bowlGames.length; g++) {
+            if(bowlGames[g] != null) playBowl(bowlGames[g]);
         }
 
         semiG14.playGame();
@@ -4003,7 +4018,7 @@ Then conferences can see if they want to add them to their list if the teams mee
         ArrayList<Team> promoteTeamList = new ArrayList<>();
         newsRealignment = "";
         countRealignment = 0;
-       // if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
+        // if (yearEnd.equals(crYear1) || yearEnd.equals(crYear2)) {
 
         if (Math.random() < confRealignmentChance) {
             ArrayList<Conference> confList = conferences;
@@ -4021,15 +4036,15 @@ Then conferences can see if they want to add them to their list if the teams mee
             }
 
             //Smaller Conferences Will Try to Expand Their Empire...
-            for(int c = 0; c < conferences.size(); c++) {
-                if(conferences.get(c).confTeams.size() < 14) {
+            for (int c = 0; c < conferences.size(); c++) {
+                if (conferences.get(c).confTeams.size() < 14) {
                     Conference conf = conferences.get(c);
                     ArrayList<Team> qualified = new ArrayList<>();
-                    for(int i = 0; i < demoteTeamList.size(); i++) {
-                        if(demoteTeamList.get(i).teamPrestige > conf.confRelegateMin && Math.random() < realignmentChance*2.5 && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                    for (int i = 0; i < demoteTeamList.size(); i++) {
+                        if (demoteTeamList.get(i).teamPrestige > conf.confRelegateMin && Math.random() < realignmentChance * 2.5 && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
                             qualified.add(demoteTeamList.get(i));
                         }
-                        if(qualified.size() >= 2) {
+                        if (qualified.size() >= 2) {
                             final Team teamA = qualified.get(0);
                             final Team teamB = qualified.get(1);
                             conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
@@ -4095,7 +4110,6 @@ Then conferences can see if they want to add them to their list if the teams mee
 
                                 //Remove some prestige from demoted teams
                                 teamA.teamPrestige -= (int) Math.random() * 4;
-
 
 
                                 //break the news
@@ -4185,8 +4199,8 @@ Then conferences can see if they want to add them to their list if the teams mee
 
         }
 
-        for(Conference c : conferences) {
-            if(c.confTeams.size() < c.minConfTeams) {
+        for (Conference c : conferences) {
+            if (c.confTeams.size() < c.minConfTeams) {
                 c.confPrestige = 0;
             }
         }
@@ -4800,14 +4814,14 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(teams, new CompTeamBudget());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",$" +  t.teamBudget);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",$" + t.teamBudget);
                 }
                 break;
             case 18:
                 Collections.sort(teams, new CompTeamFacilities());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",L" +  t.teamFacilities);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",L" + t.teamFacilities);
                 }
                 break;
             case 19:

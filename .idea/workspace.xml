@@ -23,7 +23,7 @@
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/simulation/League.java" line="2896" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/simulation/League.java" line="2917" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -33,11 +33,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Universe/2018UniverseV6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Universe/2018UniverseV6.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Conference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Conference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/simulation/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/League.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Team.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -84,8 +85,26 @@
       <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="3116" column="68" selection-start-line="3116" selection-start-column="68" selection-end-line="3116" selection-end-column="68" />
+            <state relative-caret-position="316">
+              <caret line="3156" column="36" selection-start-line="3156" selection-start-column="36" selection-end-line="3156" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="4299" column="112" selection-start-line="4299" selection-start-column="112" selection-end-line="4299" selection-end-column="112" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Conference.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="293" column="56" selection-start-line="293" selection-start-column="56" selection-end-line="293" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -1712,9 +1731,9 @@
         <option value="$PROJECT_DIR$/src/main/java/positions/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/ExpandableListAdapterPlayerStats.java" />
+        <option value="$PROJECT_DIR$/src/main/res/values/bowls.xml" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
-        <option value="$PROJECT_DIR$/src/main/res/values/bowls.xml" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
       </list>
     </option>
@@ -2007,14 +2026,14 @@
       <window_info id="Captures" order="5" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4883041" visible="true" weight="0.18017058" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4883041" visible="true" weight="0.18017058" />
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49733475" weight="0.26859045" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32741398" />
       <window_info anchor="right" id="Gradle" order="8" weight="0.32942432" />
       <window_info id="Structure" order="1" sideWeight="0.5114754" side_tool="true" weight="0.10127932" />
       <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" weight="0.32889125" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="bottom" x="15" y="699" width="1876" height="291" id="Debug" order="3" sideWeight="0.4978678" weight="0.42175362" />
+      <window_info active="true" anchor="bottom" x="15" y="699" width="1876" height="291" id="Debug" order="3" sideWeight="0.4978678" visible="true" weight="0.42175362" />
       <window_info id="Favorites" order="6" sideWeight="0.5116959" side_tool="true" weight="0.18176973" />
       <window_info anchor="right" id="Preview" order="7" />
       <window_info anchor="bottom" id="Dependency Viewer" order="13" weight="0.3295964" />
@@ -2037,7 +2056,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="1299" />
+      <option name="time" value="1306" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -2363,13 +2382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerStatsListArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -2388,13 +2400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="383" column="44" selection-start-line="383" selection-start-column="32" selection-end-line="383" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -2434,24 +2439,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-27/android.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="149" selection-start-line="149" selection-end-line="149" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64832">
-          <caret line="4298" selection-start-line="4298" selection-end-line="4298" />
+        <state relative-caret-position="156">
+          <caret line="4299" column="112" selection-start-line="4299" selection-start-column="112" selection-end-line="4299" selection-end-column="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="293" column="56" selection-start-line="293" selection-start-column="56" selection-end-line="293" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="526" column="25" selection-start-line="526" selection-start-column="25" selection-end-line="526" selection-end-column="25" />
+        <state relative-caret-position="-2144">
+          <caret line="398" column="16" selection-start-line="398" selection-start-column="16" selection-end-line="398" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="3116" column="68" selection-start-line="3116" selection-start-column="68" selection-end-line="3116" selection-end-column="68" />
+        <state relative-caret-position="316">
+          <caret line="3156" column="36" selection-start-line="3156" selection-start-column="36" selection-end-line="3156" selection-end-column="36" />
         </state>
       </provider>
     </entry>

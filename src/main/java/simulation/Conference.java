@@ -38,7 +38,7 @@ public class Conference {
 
     private Game ccg;
     public final ArrayList<Division> divisions;
-    public int[] oocWeeks = {0,1,2};
+    public int[] oocWeeks = {0,1,2,100};
 
     private final double promotionFactor = 1.15;
     private final double relegationFactor = 0.75;
@@ -289,11 +289,9 @@ public class Conference {
         int confWeeks = 9;
         int confSize = confTeams.size() - 1;
 
-        if(confTeams.size() > 11) {
-            robinCounter = 3;
-        }
         if(confName.contains("Independent")) confWeeks = 0;
         if(league.enableUnivProRel) confWeeks = 12;
+        if(confTeams.size() < 10 && confTeams.size() >=8) confWeeks = 8;
 
 
         for (int r = 0; r < confWeeks; ++r) {

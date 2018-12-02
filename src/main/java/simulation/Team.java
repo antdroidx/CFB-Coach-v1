@@ -2,6 +2,7 @@ package simulation;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -4296,6 +4297,7 @@ public class Team {
         int confWins = 0;
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
+            Log.d("crash", "getConfWins: " + " " + name + " " + rankTeamPollScore + " " + gameSchedule.size() + " " +  gameWLSchedule.size());
             g = gameSchedule.get(i);
             if (g.gameName.equals("Conference") || g.gameName.equals("Division")) {
                 // in conference game, see if was won
