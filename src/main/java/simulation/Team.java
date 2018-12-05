@@ -3041,18 +3041,18 @@ public class Team {
         for (Player p : allPlayers) {
             if (p.year == 1 && !p.wasRedshirt || p.year == 0) {
                 int pRat;
-                if (p.ratOvr > five) pRat = 5;
-                else if (p.ratOvr > four) pRat = 4;
-                else if (p.ratOvr > three) pRat = 3;
-                else if (p.ratOvr > two) pRat = 2;
-                else pRat = 1;
+                if (p.ratOvr > five) pRat = 150;
+                else if (p.ratOvr > four) pRat = 120;
+                else if (p.ratOvr > three) pRat = 75;
+                else if (p.ratOvr > two) pRat = 30;
+                else pRat = 5;
 
-                classStrength += pRat * pRat;
+                classStrength += pRat;
                 numFreshman++;
             }
         }
         if (numFreshman > 0)
-            return (float) (classStrength * (classStrength / numFreshman));
+            return (float) (classStrength);
         else return 0;
     }
 
@@ -3165,7 +3165,7 @@ public class Team {
         }
 
         // Set ranks so that Off/Def Talent rankings are updated
-        if (league.currentWeek < 15) league.setTeamRanks();
+        if (league.currentWeek < league.regSeasonWeeks+2) league.setTeamRanks();
     }
 
     public int countRedshirts() {
@@ -4297,7 +4297,6 @@ public class Team {
         int confWins = 0;
         Game g;
         for (int i = 0; i < gameWLSchedule.size(); ++i) {
-            Log.d("crash", "getConfWins: " + " " + name + " " + rankTeamPollScore + " " + gameSchedule.size() + " " +  gameWLSchedule.size());
             g = gameSchedule.get(i);
             if (g.gameName.equals("Conference") || g.gameName.equals("Division")) {
                 // in conference game, see if was won
@@ -4309,6 +4308,28 @@ public class Team {
             }
         }
         return confWins;
+    }
+
+    /**
+     * Gets the number of in-conference wins, used for CCG rankings
+     *
+     * @return number of in-conf wins
+     */
+    public int getDivWins() {
+        int divWins = 0;
+        Game g;
+        for (int i = 0; i < gameWLSchedule.size(); ++i) {
+            g = gameSchedule.get(i);
+            if (g.gameName.equals("Division")) {
+                // in conference game, see if was won
+                if (g.homeTeam == this && g.homeScore > g.awayScore) {
+                    divWins++;
+                } else if (g.awayTeam == this && g.homeScore < g.awayScore) {
+                    divWins++;
+                }
+            }
+        }
+        return divWins;
     }
 
     /**
@@ -4558,7 +4579,7 @@ public class Team {
         }
 
         // Set ranks so that Off/Def Talent rankings are updated
-        if (league.currentWeek < 15) league.setTeamRanks();
+        if (league.currentWeek < league.regSeasonWeeks+2) league.setTeamRanks();
     }
 
     //Adds a Game Start to each Starter

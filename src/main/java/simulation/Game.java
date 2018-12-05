@@ -399,6 +399,8 @@ public class Game implements Serializable {
     public void playGame() {
         if(awayTeam.name.equals("BYE") || homeTeam.name.equals("BYE")) {
             hasPlayed = true;
+            homeTeam.gameWLSchedule.add("B");
+            awayTeam.gameWLSchedule.add("B");
         }
 
         if (!hasPlayed) {

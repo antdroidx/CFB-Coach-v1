@@ -1,5 +1,7 @@
 package simulation;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -38,11 +40,14 @@ public class Conference {
 
     private Game ccg;
     public final ArrayList<Division> divisions;
-    public int[] oocWeeks = {0,1,2,100};
+    public int oocGames;
+    public int divGames;
+    public ArrayList<Integer> oocWeeks;
 
     private final double promotionFactor = 1.15;
     private final double relegationFactor = 0.75;
     public final int minConfTeams = 8;
+    public final int maxConfTeams = 18;
 
     public final ArrayList<Player> allConfPlayers;
 
@@ -59,13 +64,16 @@ public class Conference {
         this.league = league;
         allConfPlayers = new ArrayList<>();
         divisions = new ArrayList<Division>();
-
+        if(name.split(",").length > 1) {
+            divisions.add(new Division(save[1], league));
+            divisions.add(new Division(save[2], league));
+        }
 
         confTV = deal;
         confTVContract = length;
         confTVBonus = terms;
         TV = getTVName();
-
+        oocWeeks = new ArrayList<>();
     }
 
     /**
@@ -78,7 +86,10 @@ public class Conference {
         this.league = league;
         allConfPlayers = new ArrayList<>();
         divisions = new ArrayList<Division>();
-
+        if(data.length > 5) {
+            divisions.add(new Division(data[5], league));
+            divisions.add(new Division(data[6], league));
+        }
 
         //Old Save Compatibility
         if (data.length > 1) {
@@ -94,6 +105,7 @@ public class Conference {
             TV = getTVName();
         }
 
+        oocWeeks = new ArrayList<>();
 
     }
 
@@ -196,6 +208,121 @@ public class Conference {
     }
 
 
+    public int getOOCGames() {
+        int OOC = 0;
+        if(confTeams.size() >= 10) OOC = 3;
+        else if(confTeams.size() == 9) OOC = 4;
+        else if (confTeams.size() == 8) OOC = 5;
+        else OOC = 12;
+        return OOC;
+    }
+
+    public int getDivGames() {
+        int div = 0;
+        if(confTeams.size() < 12) div = 0;
+        else if (confTeams.size() >= 20) div = 9;
+        else if (confTeams.size() >= 18) div = 8;
+        else if (confTeams.size() >= 16) div = 7;
+        else if (confTeams.size() >= 14) div = 6;
+        else div = 5;
+        return div;
+    }
+
+    /**
+     * Sets up schedule for in-conference games using round robin scheduling.
+     */
+    public void setUpSchedule() {
+        oocGames = getOOCGames();
+        setDivisionTeams();
+        setUpOriginalSchedule();
+        //setUpEvenOddSchedule();
+
+/*        if (confTeams.size() >= 12) {
+            setUpCrossDivisionSchedule();
+            setUpDivisionSchedule();
+        } else {
+            setUpNoDivisionSchedule();
+        }*/
+
+    }
+
+    //NO DIVISIONS SCHEDULE EVEN TEAMS ONLY
+    private void setUpOriginalSchedule() {
+        //schedule in conf matchups
+        int robinWeek = 0;
+        int robinCounter = 1;
+        int confSize = confTeams.size() - 1;
+        oocGames = getOOCGames();
+
+        int confWeeks = 12 - oocGames;
+        if(league.enableUnivProRel) confWeeks = 12;
+
+        for (int r = 0; r < confWeeks; ++r) {
+            for (int g = 0; g < (confTeams.size()/ 2); ++g) {
+                Team a = confTeams.get((robinWeek + g) % confSize);
+                Team b;
+                if (g == 0) {
+                    b = confTeams.get(confSize);
+                } else {
+                    b = confTeams.get((confSize - g + robinWeek) % confSize);
+                }
+
+                Game gm;
+
+                if (r%2 == 0) {
+                    gm = new Game(a, b, "Conference");
+                } else {
+                    gm = new Game(b, a, "Conference");
+                }
+
+                a.gameSchedule.add(gm);
+                b.gameSchedule.add(gm);
+
+            }
+            robinWeek += robinCounter;
+        }
+    }
+
+    //NO DIVISION SCHEDULING WITH ODD/EVEN TEAMS (WIP)
+    private void setUpEvenOddSchedule() {
+        //schedule in conf matchups
+        int robinWeek = 0;
+        int robinCounter = 1;
+        //int confWeeks = 9;
+        int confSize = confTeams.size() - 1;
+        oocGames = getOOCGames();
+
+        int confWeeks = 12 - oocGames;
+        if(league.enableUnivProRel) confWeeks = 12;
+
+        for (int r = 0; r < confWeeks; ++r) {
+            for (int g = 0; g < (confTeams.size()/ 2); ++g) {
+                Team a = confTeams.get((robinWeek + g) % confSize);
+                Team b;
+                if (g == 0) {
+                    b = confTeams.get(confSize);
+                } else {
+                    b = confTeams.get((confSize - g + robinWeek) % confSize);
+                }
+
+                Game gm;
+
+                if (r%2 == 0 && confSize > 10) {
+                    gm = new Game(a, b, "Conference");
+                } else {
+                    gm = new Game(b, a, "Conference");
+                }
+
+                a.gameSchedule.add(gm);
+                b.gameSchedule.add(gm);
+
+            }
+            robinWeek += robinCounter;
+        }
+    }
+
+    //DIVISION SCHEDULING
+
     public void setDivisionTeams(){
         if(confTeams.size() >= 12) {
             String divAName = divisions.get(0).divName;
@@ -206,6 +333,38 @@ public class Conference {
                     divisions.get(1).divTeams.add(confTeams.get(i));
                 }
             }
+
+            if(Math.abs(divisions.get(1).divTeams.size() - divisions.get(0).divTeams.size()) > 1) {
+                //fix division split
+            }
+        }
+    }
+
+
+    public void setUpCrossDivisionSchedule(){
+        int games = (12-getOOCGames()) - getDivGames();
+
+        for(int g = 0; g < games; g++) {
+            Game gm;
+            int j = 0;
+            for(int t = 0; t < divisions.get(0).divTeams.size(); t++) {
+                Log.d("Div", confName);
+                Log.d("teams", divisions.get(0).divTeams.get(t).name);
+                Log.d("teams", divisions.get(1).divTeams.get((t+j) % (divisions.get(1).divTeams.size()-1)).name);
+
+                Team a = divisions.get(0).divTeams.get(t);
+                Team b = divisions.get(1).divTeams.get((t+j) % (divisions.get(1).divTeams.size()-1));
+
+                if(g % 2 == 0) {
+                    gm = new Game(a, b,"Conference");
+                }
+                else{
+                    gm = new Game(b, a,"Conference");
+                }
+                a.gameSchedule.add(gm);
+                b.gameSchedule.add(gm);
+                j++;
+            }
         }
     }
 
@@ -213,14 +372,16 @@ public class Conference {
         //schedule in conf matchups
         int robinWeek = 0;
         int robinCounter = 1;
-        int confWeeks = 5;
+        int divWeeks = getDivGames();
 
         for (int d = 0; d < 2; d++) {
+
             int divSize = divisions.get(d).divTeams.size();
+
             if(divSize % 2 != 0) {
                 divisions.get(d).divTeams.add(new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league));
                 divSize++;
-                confWeeks++;
+                divWeeks++;
             } else {
                 Team b = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
                 for (int g = 0; g < divSize; ++g) {
@@ -228,14 +389,15 @@ public class Conference {
                     a.gameSchedule.add(new Game(a, b, "BYE WEEK"));
                 }
             }
-            for (int r = 0; r < confWeeks; ++r) {
+
+            for (int r = 0; r < divWeeks; ++r) {
                 for (int g = 0; g < divSize/2; ++g) {
-                    Team a = divisions.get(d).divTeams.get((robinWeek + g) % (divSize-1));
+                    Team a = divisions.get(d).divTeams.get((robinWeek + g) % (divSize-2));
                     Team b;
                     if (g == 0) {
                         b = divisions.get(d).divTeams.get(divSize-1);
                     } else {
-                        b = divisions.get(d).divTeams.get((divSize-1 - g + robinWeek) % (divSize-1));
+                        b = divisions.get(d).divTeams.get((divSize-1 - g + robinWeek) % (divSize-2));
                     }
 
                     Game gm;
@@ -255,44 +417,22 @@ public class Conference {
         }
     }
 
-    public void setUpCrossDivisionSchedule(){
-        int year = league.leagueHistory.size();
-        int n = year%6;
-        int teams = confTeams.size()/2;
-        for(int i = 0; i < teams; i++){
-            Game gm;
-            for(int k = 0; k < 4; k++) {
-                Team teamA = divisions.get(0).divTeams.get(i);
-                Team teamB = divisions.get(1).divTeams.get((n + i + k) % teams);
-                if(k > 1) {
-                    gm = new Game(teamA,teamB,"Conference");
-                }
-                else{
-                    gm = new Game(teamB,teamA,"Conference");
-                }
-                teamA.gameSchedule.add(gm);
-                teamB.gameSchedule.add(gm);
-            }
-        }
-    }
-
-
-
-
-    /**
-     * Sets up schedule for in-conference games using round robin scheduling.
-     */
-    public void setUpSchedule() {
+    private void setUpNoDivisionSchedule() {
         //schedule in conf matchups
         int robinWeek = 0;
         int robinCounter = 1;
-        int confWeeks = 9;
+        //int confWeeks = 9;
         int confSize = confTeams.size() - 1;
+        oocGames = getOOCGames();
 
-        if(confName.contains("Independent")) confWeeks = 0;
+        int confWeeks = 12 - oocGames;
         if(league.enableUnivProRel) confWeeks = 12;
-        if(confTeams.size() < 10 && confTeams.size() >=8) confWeeks = 8;
 
+        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
+        for (int t = 0; t < confTeams.size(); ++t) {
+            Team a = confTeams.get(t);
+            a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+        }
 
         for (int r = 0; r < confWeeks; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
@@ -306,11 +446,11 @@ public class Conference {
 
                 Game gm;
 
-                    if (r%2 == 0 && confSize > 10) {
-                            gm = new Game(a, b, "Conference");
-                    } else {
-                            gm = new Game(b, a, "Conference");
-                    }
+                if (r%2 == 0 && confSize > 10) {
+                    gm = new Game(a, b, "Conference");
+                } else {
+                    gm = new Game(b, a, "Conference");
+                }
 
                 a.gameSchedule.add(gm);
                 b.gameSchedule.add(gm);
@@ -320,36 +460,35 @@ public class Conference {
         }
     }
 
-
     /**
      * Plays week for each team. If CCG week, play the CCG.
      */
     public void playWeek() {
-        if (league.currentWeek == 12) {
+        if (league.currentWeek == league.regSeasonWeeks-1) {
             if(confTeams.size() >= minConfTeams)
             playConfChamp();
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
                 confTeams.get(i).gameSchedule.get(league.currentWeek).playGame();
             }
-            if (league.currentWeek == 11) schedConfChamp();
+            if (league.currentWeek == league.regSeasonWeeks-2) schedConfChamp();
         }
 
     }
 
     public void newsMatchups() {
-        if (league.currentWeek >= 11) {
+        if (league.currentWeek >= league.regSeasonWeeks-2) {
             return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
+                Log.d("ConfTeams", confTeams.get(i).name);
                 confTeams.get(i).gameSchedule.get(league.currentWeek+1).addUpcomingGames(confTeams.get(i));
-
             }
         }
     }
 
     public void newsNSMatchups() {
-        if (league.currentWeek >= 12) {
+        if (league.currentWeek >= league.regSeasonWeeks-1) {
             return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
@@ -621,7 +760,7 @@ public class Conference {
     }
 
     public String getConfSaveString() {
-        return (confName + "," + confTV + "," + confTVContract + "," + confTVBonus + "," + TV + "\n");
+        return (confName + "," + confTV + "," + confTVContract + "," + confTVBonus + "," + TV + "," + divisions.get(0).divName + "," + divisions.get(1).divName + "\n");
     }
 
 }

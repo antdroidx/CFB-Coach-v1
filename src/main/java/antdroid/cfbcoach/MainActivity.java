@@ -751,18 +751,18 @@ public class MainActivity extends AppCompatActivity {
         String[] weekSelection = new String[simLeague.currentWeek + 1];
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == 0) weekSelection[i] = "Pre-Season News";
-            else if (i == 13) weekSelection[i] = "Conf Champ Week";
-            else if (i == 14) weekSelection[i] = "Bowl Week 1";
-            else if (i == 15) weekSelection[i] = "Bowl Week 2";
-            else if (i == 16) weekSelection[i] = "Bowl Week 3";
-            else if (i == 17) weekSelection[i] = "National Champ";
-            else if (i == 18) weekSelection[i] = "Off-Season News";
-            else if (i == 19) weekSelection[i] = "Coaching Contracts";
-            else if (i == 20) weekSelection[i] = "Off-Season News";
-            else if (i == 21) weekSelection[i] = "Coach Hirings";
-            else if (i == 22) weekSelection[i] = "Roster News";
-            else if (i == 23) weekSelection[i] = "Transfer News";
-            else if (i == 24) weekSelection[i] = "Recruiting News";
+            else if (i == simLeague.regSeasonWeeks) weekSelection[i] = "Conf Champ Week"; //was 13
+            else if (i == simLeague.regSeasonWeeks+1) weekSelection[i] = "Bowl Week 1";
+            else if (i == simLeague.regSeasonWeeks+2) weekSelection[i] = "Bowl Week 2";
+            else if (i == simLeague.regSeasonWeeks+3) weekSelection[i] = "Bowl Week 3";
+            else if (i == simLeague.regSeasonWeeks+4) weekSelection[i] = "National Champ";
+            else if (i == simLeague.regSeasonWeeks+5) weekSelection[i] = "Off-Season News";
+            else if (i == simLeague.regSeasonWeeks+6) weekSelection[i] = "Coaching Contracts";
+            else if (i == simLeague.regSeasonWeeks+7) weekSelection[i] = "Off-Season News";
+            else if (i == simLeague.regSeasonWeeks+8) weekSelection[i] = "Coach Hirings";
+            else if (i == simLeague.regSeasonWeeks+9) weekSelection[i] = "Roster News";
+            else if (i == simLeague.regSeasonWeeks+10) weekSelection[i] = "Transfer News";
+            else if (i == simLeague.regSeasonWeeks+11) weekSelection[i] = "Recruiting News";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
@@ -770,7 +770,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, weekSelection);
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
-        if (simLeague.currentWeek > 18 && simLeague.currentWeek < 21) {
+        if (simLeague.currentWeek > simLeague.regSeasonWeeks+5 && simLeague.currentWeek < simLeague.regSeasonWeeks+7) {
             weekSelectionSpinner.setSelection(simLeague.currentWeek);
         } else {
             weekSelectionSpinner.setSelection(simLeague.currentWeek);
@@ -786,7 +786,7 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.newsStories.get(position);
                         boolean isempty = false;
-                        if (simLeague.currentWeek == 24 && rankings.size() == 0) {
+                        if (simLeague.currentWeek == simLeague.regSeasonWeeks+11 && rankings.size() == 0) {
                             rankings.add("National Letter of Intention Day!>Today marks the first day of open recruitment. Teams are now allowed to sign incoming freshmen to their schools.");
                         }
                         if (rankings.size() == 0) {
@@ -1305,16 +1305,16 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();
         int dbSize;
-        if (simLeague.currentWeek + 1 <= 18) dbSize = simLeague.currentWeek + 1;
-        else dbSize = 18;
+        if (simLeague.currentWeek + 1 <= simLeague.regSeasonWeeks+5) dbSize = simLeague.currentWeek + 1;
+        else dbSize = simLeague.regSeasonWeeks+5;
 
         String[] weekSelection = new String[dbSize];
         for (int i = 0; i < weekSelection.length; ++i) {
-            if (i == 13) weekSelection[i] = "Conf Champ Week";
-            else if (i == 14) weekSelection[i] = "Bowl Week 1";
-            else if (i == 15) weekSelection[i] = "Bowl Week 2";
-            else if (i == 16) weekSelection[i] = "Bowl Week 3";
-            else if (i == 17) weekSelection[i] = "National Champ";
+            if (i == simLeague.regSeasonWeeks) weekSelection[i] = "Conf Champ Week";
+            else if (i == simLeague.regSeasonWeeks+1) weekSelection[i] = "Bowl Week 1";
+            else if (i == simLeague.regSeasonWeeks+2) weekSelection[i] = "Bowl Week 2";
+            else if (i == simLeague.regSeasonWeeks+3) weekSelection[i] = "Bowl Week 3";
+            else if (i == simLeague.regSeasonWeeks+4) weekSelection[i] = "National Champ";
             else weekSelection[i] = "Week " + i;
         }
         Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
@@ -1749,12 +1749,12 @@ public class MainActivity extends AppCompatActivity {
             Button depthchartButton = findViewById(R.id.buttonDepthChart);
             depthchartButton.setBackgroundColor(0XFF607D8B);
             depthchartButton.setText("DEPTH CHART");
-        } else if (simLeague.currentWeek <= 16) {
+        } else if (simLeague.currentWeek <= simLeague.regSeasonWeeks+3) {
             int numGamesPlayed = userTeam.gameWLSchedule.size();
 
             simLeague.playWeek();
 
-            if (simLeague.currentWeek == 6) {
+            if (simLeague.currentWeek == simLeague.regSeasonWeeks/2) {
                 midseasonSummary();
             }
 
@@ -1768,7 +1768,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // Show notification for being invited/not invited to bowl or CCG
-            if (simLeague.currentWeek >= 12) {
+            if (simLeague.currentWeek >= simLeague.regSeasonWeeks-1) {
                 if (!userTeam.gameSchedule.get(userTeam.gameSchedule.size() - 1).hasPlayed) {
                     String weekGameName = userTeam.gameSchedule.get(userTeam.gameSchedule.size() - 1).gameName;
                     if (weekGameName.equals("NCG")) {
@@ -1781,17 +1781,17 @@ public class MainActivity extends AppCompatActivity {
                                             weekGameName + "!",
                                     Toast.LENGTH_SHORT).show();
                         else {
-                            if (showToasts && simLeague.currentWeek == 13)
+                            if (showToasts && simLeague.currentWeek == simLeague.regSeasonWeeks)
                                 Toast.makeText(MainActivity.this, "Congratulations! " + userTeam.name + " was invited to the " +
                                                 weekGameName + "!",
                                         Toast.LENGTH_SHORT).show();
                         }
                     }
-                } else if (simLeague.currentWeek == 12) {
+                } else if (simLeague.currentWeek == simLeague.regSeasonWeeks-1) {
                     if (showToasts)
                         Toast.makeText(MainActivity.this, userTeam.name + " was not invited to the Conference Championship.",
                                 Toast.LENGTH_SHORT).show();
-                } else if (simLeague.currentWeek == 13) {
+                } else if (simLeague.currentWeek == simLeague.regSeasonWeeks) {
                     if (showToasts && simLeague.expPlayoffs)
                         Toast.makeText(MainActivity.this, userTeam.name + " did not make the College Football Playoffs.",
                                 Toast.LENGTH_SHORT).show();
@@ -1801,33 +1801,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if (simLeague.currentWeek < 12) {
+            if (simLeague.currentWeek < simLeague.regSeasonWeeks-1) {
                 simGameButton.setTextSize(14);
                 simGameButton.setText("Play Week " + (simLeague.currentWeek + 1));
-            } else if (simLeague.currentWeek == 12) {
+            } else if (simLeague.currentWeek == simLeague.regSeasonWeeks-1) {
                 simGameButton.setTextSize(11);
                 simGameButton.setText("Play Conf Championships");
                 examineTeam(currentTeam.name);
-            } else if (simLeague.currentWeek == 13) {
+            } else if (simLeague.currentWeek == simLeague.regSeasonWeeks) {
                 heismanCeremony();
                 simGameButton.setTextSize(12);
                 if (simLeague.expPlayoffs) simGameButton.setText("Play Sweet 16");
                 else simGameButton.setText("Play Bowl Week 1");
                 examineTeam(currentTeam.name);
-            } else if (simLeague.currentWeek == 14) {
+            } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+1) {
                 simGameButton.setTextSize(12);
                 if (simLeague.expPlayoffs) simGameButton.setText("Play Elite 8");
                 else simGameButton.setText("Play Bowl Week 2");
                 examineTeam(currentTeam.name);
-            } else if (simLeague.currentWeek == 15) {
+            } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+2) {
                 simGameButton.setTextSize(12);
                 if (simLeague.expPlayoffs) simGameButton.setText("Play Final Four");
                 else simGameButton.setText("Play Bowl Week 3");
                 examineTeam(currentTeam.name);
-            } else if (simLeague.currentWeek == 16) {
+            } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+3) {
                 simGameButton.setTextSize(10);
                 simGameButton.setText("Play National Championship");
-            } else if (simLeague.currentWeek == 17) {
+            } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+4) {
                 simGameButton.setTextSize(10);
                 simGameButton.setText("Season Summary");
                 showNewsStoriesDialog();
@@ -1838,7 +1838,7 @@ public class MainActivity extends AppCompatActivity {
             scrollToLatestGame();
 
             //Off-Season
-        } else if (simLeague.currentWeek == 17) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+4) {
             // Show NCG summary and check league records
             simLeague.enterOffseason();
             simLeague.checkLeagueRecords();
@@ -1850,7 +1850,7 @@ public class MainActivity extends AppCompatActivity {
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Contracts");
 
-        } else if (simLeague.currentWeek == 18) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+5) {
             userHC = userTeam.HC.get(0);
 
             simLeague.advanceHC();
@@ -1868,46 +1868,46 @@ public class MainActivity extends AppCompatActivity {
             //DEBUG STUFF
             //coachProgressData();
 
-        } else if (simLeague.currentWeek == 19 && userTeam.fired) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+6 && userTeam.fired) {
             if (simLeague.isCareerMode()) jobOffers(userHC);
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Coaching Changes");
 
-        } else if (simLeague.currentWeek == 19 && !userTeam.fired) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+6 && !userTeam.fired) {
             if (simLeague.isCareerMode()) promotions(userHC);
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Coaching Changes");
 
-        } else if (simLeague.currentWeek == 20) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+7) {
             simLeague.coachCarousel();
             simGameButton.setTextSize(12);
             simLeague.currentWeek++;
             simGameButton.setText("Off-Season: Graduation");
             showNewsStoriesDialog();
 
-        } else if (simLeague.currentWeek == 21) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+8) {
             simLeague.advanceSeason();
             simLeague.currentWeek++;
             if (simLeague.updateTV) newsTV();
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Transfer List");
 
-        } else if (simLeague.currentWeek == 22) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+9) {
             simLeague.transferPlayers();
             showNewsStoriesDialog(); //shows significant transfer options
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Off-Season: Complete Transfers");
 
-        } else if (simLeague.currentWeek == 23) {
+        } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+10) {
             transfers(); //displays list of transfers
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
             simGameButton.setText("Begin Recruiting");
 
-        } else if (simLeague.currentWeek >= 24) {
+        } else if (simLeague.currentWeek >= simLeague.regSeasonWeeks+11) {
             beginRecruiting();
 
         }
@@ -1939,7 +1939,7 @@ public class MainActivity extends AppCompatActivity {
             /*
               Clicked Heisman watch in drop down menu
              */
-            if (simLeague.currentWeek < 13) {
+            if (simLeague.currentWeek < simLeague.regSeasonWeeks) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Player of the Year Watch")
@@ -1996,7 +1996,7 @@ public class MainActivity extends AppCompatActivity {
               Clicked Team Rankings in drop down menu
              */
             showTeamRankingsDialog();
-        } else if (id == R.id.action_player_rankings && simLeague.currentWeek < 20) {
+        } else if (id == R.id.action_player_rankings && simLeague.currentWeek < simLeague.regSeasonWeeks+7) {
 
             showPlayerRankingsDialog();
         } else if (id == R.id.action_current_team_history) {
@@ -2031,9 +2031,9 @@ public class MainActivity extends AppCompatActivity {
             /*
               Clicked Save League in drop down menu
              */
-            if (simLeague.getYear() != seasonStart && simLeague.currentWeek < 7) {
+            if (simLeague.getYear() != seasonStart && simLeague.currentWeek < simLeague.regSeasonWeeks-6) {
                 saveLeague();
-            } else if (simLeague.currentWeek > 6) {
+            } else if (simLeague.currentWeek > simLeague.regSeasonWeeks-7) {
                 Toast.makeText(MainActivity.this, "Save Function Disabled. Save only available in prior to Week 6.",
                         Toast.LENGTH_SHORT).show();
             } else {
@@ -2094,7 +2094,7 @@ public class MainActivity extends AppCompatActivity {
 
         final CheckBox checkboxPlayoffs = dialog.findViewById(R.id.checkboxPlayoffs);
         final TextView textPlayoffs = dialog.findViewById(R.id.textPlayoffs);
-        if(simLeague.currentWeek < 13) {
+        if(simLeague.currentWeek < simLeague.regSeasonWeeks) {
             checkboxPlayoffs.setChecked(simLeague.expPlayoffs);
         } else {
             textPlayoffs.setVisibility(View.INVISIBLE);
@@ -2141,7 +2141,7 @@ public class MainActivity extends AppCompatActivity {
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
         if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
-        if (simLeague.currentWeek < 19) changeTeamsButton.setVisibility(View.INVISIBLE);
+        if (simLeague.currentWeek < simLeague.regSeasonWeeks+6) changeTeamsButton.setVisibility(View.INVISIBLE);
 
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
 
@@ -2796,7 +2796,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         String[] selection;
-        if (simLeague.currentWeek < 13) {
+        if (simLeague.currentWeek < simLeague.regSeasonWeeks) {
             selection = new String[1];
             selection[0] = "Offensive Player of the Year";
         } else {

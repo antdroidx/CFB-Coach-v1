@@ -1,5 +1,7 @@
 package simulation;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -88,7 +90,7 @@ import positions.PlayerTE;
 import positions.PlayerWR;
 
 public class League {
-    public String saveVer = "v1.3.2";
+    public String saveVer = "v1.3.16";
 
     public ArrayList<String[]> leagueHistory;
     private ArrayList<String> heismanHistory;
@@ -181,7 +183,8 @@ public class League {
     private final DecimalFormat df2 = new DecimalFormat(".#");
     private final int seasonStart = 2018;
     int countTeam = 120;
-    private final int seasonWeeks = 26;
+    private final int seasonWeeks = 27;
+    public final int regSeasonWeeks = 13;
     private final double confRealignmentChance = 0.23; //chance of event
     private final double realignmentChance = 0.35; //chance of invite
     private final String crYear1 = "2";
@@ -718,6 +721,7 @@ public class League {
                     countTeam = Integer.parseInt(line.split(">")[1]);
             }
 
+
             //Next get league history
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HIST")) {
                 leagueHistory.add(line.split("%"));
@@ -773,32 +777,10 @@ public class League {
                 }
             }
 
-            // Set up lucky and penalized teams for Week 0 news stories
-
-            StringBuilder sbPenalized = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED_TEAM")) {
-            }
-
-            StringBuilder sbPenalized2 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED2_TEAM")) {
-            }
-
-            StringBuilder sbPenalized3 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED3_TEAM")) {
-            }
-
-            StringBuilder sbPenalized4 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED4_TEAM")) {
-            }
-
-            StringBuilder sbPenalized5 = new StringBuilder();
-            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PENALIZED5_TEAM")) {
-            }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_BOWL_NAMES")) {
                 String[] filesSplit = line.split(",");
                 bowlNames = new String[filesSplit.length];
-
                 for (int b = 0; b < filesSplit.length; ++b) {
                     bowlNames[b] = filesSplit[b];
                 }
@@ -819,7 +801,6 @@ public class League {
                     bowlNames[b] = bowlNamesText.split(",")[b];
                 }
             }
-
 
             String[] record;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
@@ -878,16 +859,42 @@ public class League {
                 }
             }
 
-            fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
-            hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
-            confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
-            bufferedReader.readLine();
-            enableTV = Boolean.parseBoolean(bufferedReader.readLine());
-            enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
-            userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
-            neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
-            careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
-            expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_GAME_LOG")) {
+                fullGameLog = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_HIDE_POTENTIAL")) {
+                hidePotential = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONF_REALIGNMENT")) {
+                confRealignment = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_ENABLE_TV")) {
+                enableTV = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PRO_REL")) {
+                enableUnivProRel = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_POPUPS")) {
+                userTeam.showPopups = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_NEVER_RETIRE")) {
+                neverRetire = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CAREER_MODE")) {
+                careerMode = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_EXP_PLAYOFFS")) {
+                expPlayoffs = Boolean.parseBoolean((line));
+            }
 
             if (enableUnivProRel) {
                 confRealignment = false;
@@ -908,30 +915,7 @@ public class League {
         //Get longest active win streak
         updateLongestActiveWinStreak();
 
-        //fix bowl names
-        if (bowlNames[0] == null) {
-
-            bowlNames = new String[bowlNamesText.split(", ").length];
-            for (int b = 0; b < bowlNamesText.split(", ").length; ++b) {
-                bowlNames[b] = bowlNamesText.split(", ")[b];
-            }
-        }
-        if (bowlNames.length != bowlNamesText.length()) {
-
-            String[] bowlTemp = bowlNames.clone();
-
-            String[] bowlNames = new String[bowlNamesText.length()];
-
-            for (int b = 0; b < bowlTemp.length; b++) {
-                bowlNames[b] = bowlTemp[b];
-            }
-
-            for (int b = bowlNames.length; b < bowlNamesText.length(); b++) {
-                bowlNames[b] = bowlNamesText.split(", ")[b];
-            }
-        }
-
-        //fix team divions
+        //fix team divisions
         for (int c = 0; c < conferences.size(); c++) {
             for (int i = 0; i < conferences.get(c).confTeams.size(); i++) {
                 conferences.get(c).divisions.add(new Division("A", this));
@@ -1219,58 +1203,45 @@ public class League {
         }
 
         //decide OOC schedule
-        for (int r = 0; r < 3; r++) {
+        for (int r = 0; r < regSeasonWeeks; r++) {
             int j = 0;
+            int k = 0;
+
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
-                    conferences.get(c).oocWeeks[r] = (j + r);
-                    for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
-                        conferences.get(c).confTeams.get(t).oocWeeks.add(j + r);
+                if (r < conferences.get(c).oocGames && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
+                    boolean scheduled = false;
+                    k = k + (int)(Math.random()*4);
+                    while (!scheduled) {
+                        int week = (j + r + k) % (regSeasonWeeks-1);
+                        if (!conferences.get(c).oocWeeks.contains(week)) {
+                            conferences.get(c).oocWeeks.add(week);
+                            for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                                conferences.get(c).confTeams.get(t).oocWeeks.add(week);
+                            }
+                            scheduled = true;
+                        } else {
+                            k = k + 2;
+                        }
                     }
                     j++;
-                    if (j + r == 9) j = 0;
-                } else {
-                    conferences.get(c).oocWeeks[0] = 100;
-                    conferences.get(c).oocWeeks[1] = 100;
-                    conferences.get(c).oocWeeks[2] = 100;
-                    for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
-                        conferences.get(c).confTeams.get(t).oocWeeks.add(100);
-                        conferences.get(c).confTeams.get(t).oocWeeks.add(100);
-                        conferences.get(c).confTeams.get(t).oocWeeks.add(100);
+                } else if (conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
+                    for (int i = 0; i < (regSeasonWeeks-1); i++) {
+                        for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                            conferences.get(c).confTeams.get(t).oocWeeks.add(i);
+                        }
                     }
                 }
             }
         }
 
-        for (int c = 0; c < conferences.size(); c++) {
-            Conference conf = conferences.get(c);
-            if(conf.confTeams.size() < 10 && conf.confTeams.size() >= 8) {
-                Boolean ooc = true;
-               do {
-                    int oocWeek = (int)(Math.random()*8);
-                    if(conf.oocWeeks[0] != oocWeek && conf.oocWeeks[1] != oocWeek && conf.oocWeeks[2] != oocWeek) {
-                        conf.oocWeeks[3] = oocWeek;
-                        for (int t = 0; t < conf.confTeams.size(); t++) {
-                            conf.confTeams.get(t).oocWeeks.add(oocWeek);
-                        }
-                        ooc = false;
-                    }
-                } while (ooc);
-            }
-        }
-
-        for (int t = 0; t < teamList.size(); t++) {
-            Collections.sort(teamList.get(t).oocWeeks);
-        }
 
         //Setup OOC v3 Scheduling
         if (!enableUnivProRel) {
-            for (int week = 0; week < 12; week++) {
+            for (int week = 0; week < (regSeasonWeeks-1); week++) {
 
                 ArrayList<Team> availTeams = new ArrayList<>();
-
                 for (int t = 0; t < teamList.size(); t++) {
-                    if (teamList.get(t).oocWeeks.contains(week) || teamList.get(t).conference.equals("Independent")) {
+                    if (teamList.get(t).oocWeeks.contains(week)) {
                         availTeams.add(teamList.get(t));
                     }
                 }
@@ -1281,16 +1252,14 @@ public class League {
 
                     ArrayList<Team> availTeamsB = new ArrayList<>();
                     for (int k = 0; k < availTeams.size(); k++) {
-                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k)) || availTeams.get(k).conference.contains("Independent") && availTeams.get(k) != a && !a.oocTeams.contains(availTeams.get(k))) {
+                        if (!availTeams.get(k).conference.equals(a.conference) && !a.oocTeams.contains(availTeams.get(k))) {
                             availTeamsB.add(availTeams.get(k));
                         }
                     }
                     Team b;
+
                     if (availTeamsB.isEmpty()) {
                         b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 45), "FCS1", 0, this, true);
-                        b.oocWeeks.add(100);
-                        b.oocWeeks.add(100);
-                        b.oocWeeks.add(100);
                     } else {
                         int selTeamB = (int) (availTeamsB.size() * Math.random());
                         b = availTeamsB.get(selTeamB);
@@ -1299,13 +1268,22 @@ public class League {
                     Game gm;
                     gm = new Game(a, b, "OOC");
 
-                    if (!a.conference.contains("Independent") && !a.conference.contains("FCS"))
-                        a.gameSchedule.add(week, gm);
-                    if (!b.conference.contains("Independent") && !b.conference.contains("FCS"))
-                        b.gameSchedule.add(week, gm);
+                    Log.d("teams", a.name);
+                    Log.d("teams", b.name);
 
-                    if (a.conference.contains("Independent")) a.gameSchedule.add(gm);
-                    if (b.conference.contains("Independent")) b.gameSchedule.add(gm);
+                    if (!a.conference.contains("Independent") && !a.conference.contains("FCS")) {
+                        a.gameSchedule.add(week, gm);
+                    }
+                    if (!b.conference.contains("Independent") && !b.conference.contains("FCS"))  {
+                        b.gameSchedule.add(week, gm);
+                    }
+
+                    if (a.conference.contains("Independent")) {
+                        a.gameSchedule.add(gm);
+                    }
+                    if (b.conference.contains("Independent")) {
+                        b.gameSchedule.add(gm);
+                    }
 
                     a.oocTeams.add(b);
                     b.oocTeams.add(a);
@@ -1313,6 +1291,7 @@ public class League {
                     availTeams.remove(a);
                     availTeams.remove(b);
                 }
+
             }
 
         }
@@ -1678,13 +1657,13 @@ public class League {
 
         disciplineAction();
 
-        if (currentWeek <= 12) {
+        if (currentWeek <= regSeasonWeeks-1) {
             for (int i = 0; i < conferences.size(); ++i) {
                 conferences.get(i).playWeek();
             }
         }
 
-        if (currentWeek == 12) {
+        if (currentWeek == regSeasonWeeks-1) {
             //bowl week
             for (int i = 0; i < teamList.size(); ++i) {
                 teamList.get(i).updatePollScore();
@@ -1695,7 +1674,7 @@ public class League {
                 //else schedBowlGames();
             else bowlScheduleLogic();
 
-        } else if (currentWeek == 13) {
+        } else if (currentWeek == regSeasonWeeks) {
             ArrayList<Player> heismans = getHeisman();
             heismanHistory.add(heismans.get(0).position + " " + heismans.get(0).getInitialName() + " [" + heismans.get(0).getYrStr() + "], "
                     + heismans.get(0).team.abbr + " (" + heismans.get(0).team.wins + "-" + heismans.get(0).team.losses + ")>" +
@@ -1705,15 +1684,15 @@ public class League {
             if (expPlayoffs) playExpPlayoffSweet16();
             else playBowlWeek1();
 
-        } else if (currentWeek == 14) {
+        } else if (currentWeek == regSeasonWeeks+1) {
             if (expPlayoffs) playExpPlayoffQTF();
             else playBowlWeek2();
 
-        } else if (currentWeek == 15) {
+        } else if (currentWeek == regSeasonWeeks+2) {
             if (expPlayoffs) playExpPlayoffSemi();
             else playBowlWeek3();
 
-        } else if (currentWeek == 16) {
+        } else if (currentWeek == regSeasonWeeks+3) {
             ncg.playGame();
             if (ncg.homeScore > ncg.awayScore) {
                 ncg.homeTeam.semiFinalWL = "";
@@ -1856,7 +1835,7 @@ public class League {
                     teams.get(2).getStrAbbrWL() + "\n" + "4. " + teams.get(3).getStrAbbrWL() + "\n" + "5. " + teams.get(4).getStrAbbrWL() + "\n" + "6. " + teams.get(5).getStrAbbrWL() + "\n" + "7. " +
                     teams.get(6).getStrAbbrWL() + "\n" + "8. " + teams.get(7).getStrAbbrWL() + "\n");
         }
-        if (currentWeek > 8 && currentWeek < 12) {
+        if (currentWeek > 8 && currentWeek < regSeasonWeeks-1) {
             newsStories.get(currentWeek + 1).add("Committee Updates Rankings>The College Football Playoff Committee has updated their Playoff Rankings. The order looks like this: \n\n" + "1. " + teams.get(0).getStrAbbrWL() +
                     "\n" + "2. " + teams.get(1).getStrAbbrWL() + "\n" + "3. " + teams.get(2).getStrAbbrWL() + "\n" + "4. " + teams.get(3).getStrAbbrWL() + "\n" + "5. " + teams.get(4).getStrAbbrWL() + "\n" + "6. " +
                     teams.get(5).getStrAbbrWL() + "\n" + "7. " + teams.get(6).getStrAbbrWL() + "\n" + "8. " + teams.get(7).getStrAbbrWL() + "\n");
