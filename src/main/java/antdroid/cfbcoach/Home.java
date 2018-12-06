@@ -284,7 +284,7 @@ public class Home extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose File to Load:");
         final String[] fileInfos = getSaveFileInfos();
-        SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
+        SaveFilesList saveFilesAdapter = new SaveFilesList(this, fileInfos);
         builder.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
@@ -322,7 +322,7 @@ public class Home extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose File to Delete:");
         final String[] fileInfos = getSaveFileInfos();
-        SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
+        SaveFilesList saveFilesAdapter = new SaveFilesList(this, fileInfos);
         builder.setMessage("This feature lets you import external Exported Saves from your device. Please locate and select the desired file after pressing OK.");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -353,7 +353,7 @@ public class Home extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose File to Delete:");
         final String[] fileInfos = getSaveFileInfos();
-        SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
+        SaveFilesList saveFilesAdapter = new SaveFilesList(this, fileInfos);
         builder.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection

@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-class SeasonAwardsListArrayAdapter extends ArrayAdapter<String> {
+class SeasonAwardsList extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeamAbbr;
 
-    public SeasonAwardsListArrayAdapter(Context context, String[] values, String userTeamAbbr) {
+    public SeasonAwardsList(Context context, String[] values, String userTeamAbbr) {
         super(context, R.layout.league_history_list_item, values);
         this.context = context;
         this.values = values;

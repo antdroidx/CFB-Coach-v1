@@ -14,11 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
+class PlayerProfile extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 
-    public PlayerStatsListArrayAdapter(Context context, String[] values) {
+    public PlayerProfile(Context context, String[] values) {
         super(context, R.layout.child_player_stats, values);
         this.context = context;
         this.values = values;
@@ -82,15 +82,23 @@ class PlayerStatsListArrayAdapter extends ArrayAdapter<String> {
         // The last index is always the rating: A+, C, etc
         if (ratSplit.length > 0 && rating.split(",").length == 1) {
             String letter = ratSplit[ratSplit.length - 1];
-            if (letter.contains("A")) {
+            if (letter.equals("A") || letter.equals("A+") || letter.equals("A-")) {
                 textV.setTextColor(Color.parseColor("#5994de"));
-            } else if (letter.contains("B")) {
+            } else if (letter.equals("B") || letter.equals("B+") || letter.equals("B-")) {
                 textV.setTextColor(Color.parseColor("#00b300"));
-            } else if (letter.contains("C")) {
+            } else if (letter.equals("C") || letter.equals("C+") || letter.equals("C-")) {
                 textV.setTextColor(Color.YELLOW);
-            } else if (letter.contains("D")) {
+            } else if (letter.equals("D") || letter.equals("D+") || letter.equals("D-")) {
                 textV.setTextColor(Color.parseColor("#e68a00"));
-            } else if (letter.contains("F")) {
+            } else if (letter.equals("F") || letter.equals("F+") || letter.equals("F-")) {
+                textV.setTextColor(Color.RED);
+            } else if (letter.equals("Active")) {
+            textV.setTextColor(Color.WHITE);
+            } else if (letter.equals("Redshirt") || letter.equals("Medical") || letter.equals("Transfer")) {
+                textV.setTextColor(Color.DKGRAY);
+            } else if (letter.equals("Injured")) {
+            textV.setTextColor(Color.YELLOW);
+            } else if (letter.equals("Suspended")) {
                 textV.setTextColor(Color.RED);
             }
         }

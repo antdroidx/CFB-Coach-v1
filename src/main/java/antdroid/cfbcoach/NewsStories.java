@@ -12,11 +12,11 @@ import java.util.ArrayList;
 /**
  * Created by Achi on 3/1/2016.
  */
-class NewsStoriesListArrayAdapter extends ArrayAdapter<String> {
+class NewsStories extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
 
-    public NewsStoriesListArrayAdapter(Context context, ArrayList<String> values) {
+    public NewsStories(Context context, ArrayList<String> values) {
         super(context, R.layout.news_story_list_item, values);
         this.context = context;
         this.values = values;

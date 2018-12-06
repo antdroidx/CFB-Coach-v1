@@ -11,13 +11,13 @@ import android.widget.TextView;
 import simulation.Game;
 import simulation.Team;
 
-class GameScheduleListArrayAdapter extends ArrayAdapter<Game> {
+class GameScheduleList extends ArrayAdapter<Game> {
     private final Context context;
     private final Game[] games;
     private final Team team;
     private final MainActivity mainAct;
 
-    public GameScheduleListArrayAdapter(Context context, MainActivity mainAct, Team team, Game[] games) {
+    public GameScheduleList(Context context, MainActivity mainAct, Team team, Game[] games) {
         super(context, R.layout.game_schedule_list_item, games);
         this.context = context;
         this.mainAct = mainAct;

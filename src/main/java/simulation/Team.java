@@ -3843,270 +3843,199 @@ public class Team {
         return gs;
     }
 
-    public List<String> getPlayerStatsExpandListStr() {
-        ArrayList<String> pList = new ArrayList<>();
+    //Roster 2.0
 
-        for (int i = 0; i < startersQB; ++i) {
-            if (HC.size() > (i)) {
-                pList.add(getHC(0).getHCString());
-            } else {
-                pList.add("HC [HIRING IN PROGRESS]>N/A");
-            }
-        }
+    public ArrayList<String> getRoster() {
+        ArrayList<String> roster = new ArrayList<>();
 
-        for (int i = 0; i < startersQB; ++i) {
-            if (teamQBs.size() > (i)) {
-                pList.add(getQB(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("QB [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
+        roster.add(" ,Coaching Staff, , ");
+        roster.add("HC," + getHC(0).name + ", ," + getHC(0).getHCOverall());
 
-        for (int i = 0; i < startersRB; ++i) {
-            if (teamRBs.size() > (i)) {
-                pList.add(getRB(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("RB [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersWR; ++i) {
-            if (teamWRs.size() > (i)) {
-                pList.add(getWR(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("WR [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersTE; ++i) {
-            if (teamTEs.size() > (i)) {
-                pList.add(getTE(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("TE [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersOL; ++i) {
-            if (teamOLs.size() > (i)) {
-                pList.add(getOL(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("OL [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersK; ++i) {
-            if (teamKs.size() > (i)) {
-                pList.add(getK(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("K [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersDL; ++i) {
-            if (teamDLs.size() > (i)) {
-                pList.add(getDL(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("DL [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersLB; ++i) {
-            if (teamLBs.size() > (i)) {
-                pList.add(getLB(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("LB [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersCB; ++i) {
-            if (teamCBs.size() > (i)) {
-                pList.add(getCB(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("CB [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-
-        for (int i = 0; i < startersS; ++i) {
-            if (teamSs.size() > (i)) {
-                pList.add(getS(i).getPosNameYrOvrPot_Str());
-            } else {
-                pList.add("S [EMPTY ROSTER SPOT]>N/A");
-            }
-        }
-        pList.add("BENCH > BENCH");
-
-        return pList;
-    }
-
-    public Map<String, List<String>> getPlayerStatsExpandListMap(List<String> playerStatsGroupHeaders) {
-        Map<String, List<String>> playerStatsMap = new LinkedHashMap<>();
-
-        String ph; //player header
-        ArrayList<String> blank = new ArrayList<>();
-
-        //Head Coach
-        ph = playerStatsGroupHeaders.get(0);
-        if (HC.size() > (0)) {
-            playerStatsMap.put(ph, getHC(0).getDetailStatsList(numGames()));
-        } else {
-            playerStatsMap.put(ph, blank);
-        }
-
-        //QB
-        ph = playerStatsGroupHeaders.get(1);
-        if (teamQBs.size() > (0)) {
-            playerStatsMap.put(ph, getQB(0).getDetailStatsList(numGames()));
-        } else {
-            playerStatsMap.put(ph, blank);
-        }
-
-        for (int i = 2; i < 4; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamRBs.size() > (i - 2)) {
-                playerStatsMap.put(ph, getRB(i - 2).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-
-        for (int i = 4; i < 7; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamWRs.size() > (i - 4)) {
-                playerStatsMap.put(ph, getWR(i - 4).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-
-        ph = playerStatsGroupHeaders.get(7);
-        if (teamTEs.size() > (0)) {
-            playerStatsMap.put(ph, getTE(0).getDetailStatsList(numGames()));
-        } else {
-            playerStatsMap.put(ph, blank);
-        }
-
-        for (int i = 8; i < 13; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamOLs.size() > (i - 8)) {
-                playerStatsMap.put(ph, getOL(i - 8).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-
-        ph = playerStatsGroupHeaders.get(13);
-        if (teamKs.size() > (0)) {
-            playerStatsMap.put(ph, getK(0).getDetailStatsList(numGames()));
-        } else {
-            playerStatsMap.put(ph, blank);
-        }
-
-        for (int i = 14; i < 18; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamDLs.size() > (i - 14)) {
-                playerStatsMap.put(ph, getDL(i - 14).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-        for (int i = 18; i < 21; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamLBs.size() > (i - 18)) {
-                playerStatsMap.put(ph, getLB(i - 18).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-        for (int i = 21; i < 24; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamCBs.size() > (i - 21)) {
-                playerStatsMap.put(ph, getCB(i - 21).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-        for (int i = 24; i < 26; ++i) {
-            ph = playerStatsGroupHeaders.get(i);
-            if (teamSs.size() > (i - 24)) {
-                playerStatsMap.put(ph, getS(i - 24).getDetailStatsList(numGames()));
-            } else {
-                playerStatsMap.put(ph, blank);
-            }
-        }
-
-        //Bench
-        ph = playerStatsGroupHeaders.get(26);
-        ArrayList<String> benchStr = new ArrayList<>();
-        for (int i = startersQB; i < teamQBs.size(); ++i) {
-            benchStr.add(getQB(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersRB; i < teamRBs.size(); ++i) {
-            benchStr.add(getRB(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersWR; i < teamWRs.size(); ++i) {
-            benchStr.add(getWR(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersTE; i < teamTEs.size(); ++i) {
-            benchStr.add(getTE(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersOL; i < teamOLs.size(); ++i) {
-            benchStr.add(getOL(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersK; i < teamKs.size(); ++i) {
-            benchStr.add(getK(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersDL; i < teamDLs.size(); ++i) {
-            benchStr.add(getDL(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersLB; i < teamLBs.size(); ++i) {
-            benchStr.add(getLB(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersCB; i < teamCBs.size(); ++i) {
-            benchStr.add(getCB(i).getPosNameYrOvrPot_Str());
-        }
-        for (int i = startersS; i < teamSs.size(); ++i) {
-            benchStr.add(getS(i).getPosNameYrOvrPot_Str());
-        }
-        playerStatsMap.put(ph, benchStr);
-
-        return playerStatsMap;
-    }
-
-    public Player findBenchPlayer(String line) {
+        roster.add(" , , , ");
+        roster.add(" ,Quarterbacks, , ");
+        int i = 0;
         for (Player p : teamQBs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            String starter = getRosterStatus(p, i, "QB");
+            roster.add("QB," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Running Backs, , ");
+        i=0;
+        for (Player p : teamRBs) {
+            String starter = getRosterStatus(p, i, "RB");
+            roster.add("RB," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Wide Receivers, , ");
+        i=0;
+        for (Player p : teamWRs) {
+            String starter = getRosterStatus(p, i, "WR");
+            roster.add("WR," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Tight Ends, , ");
+        i=0;
+        for (Player p : teamTEs) {
+            String starter = getRosterStatus(p, i, "TE");
+            roster.add("TE," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Offensive Linemen, , ");
+        i=0;
+        for (Player p : teamOLs) {
+            String starter = getRosterStatus(p, i, "OL");
+            roster.add("OL," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Kickers, , ");
+        i=0;
+        for (Player p : teamKs) {
+            String starter = getRosterStatus(p, i, "K");
+            roster.add("K," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Defensive Linemen, , ");
+        i=0;
+        for (Player p : teamDLs) {
+            String starter = getRosterStatus(p, i, "DL");
+            roster.add("DL," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Linebackers, , ");
+        i=0;
+        for (Player p : teamLBs) {
+            String starter = getRosterStatus(p, i, "LB");
+            roster.add("LB," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Cornerbacks, , ");
+        i=0;
+        for (Player p : teamCBs) {
+            String starter = getRosterStatus(p, i, "CB");
+            roster.add("CB," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        roster.add(" , , , ");
+        roster.add(" ,Safeties, , ");
+        i=0;
+        for (Player p : teamSs) {
+            String starter = getRosterStatus(p, i, "S");
+            roster.add("S," + p.name + "," + starter + "," + p.ratOvr);
+            i++;
+        }
+
+        return roster;
+    }
+
+    private String getRosterStatus(Player p, int i, String pos) {
+        String status = " ";
+
+        if (pos.equals("QB")) {
+            if(i < startersQB) {
+                status = "*";
+            }
+        } else if (pos.equals("RB")) {
+            if(i < startersRB) {
+                status = "*";
+            }
+        } else if (pos.equals("WR")) {
+            if(i < startersWR) {
+                status = "*";
+            }
+        } else if (pos.equals("TE")) {
+            if(i < startersTE) {
+                status = "*";
+            }
+        } else if (pos.equals("OL")) {
+            if(i < startersOL) {
+                status = "*";
+            }
+        } else if (pos.equals("K")) {
+            if(i < startersK) {
+                status = "*";
+            }
+        } else if (pos.equals("DL")) {
+            if(i < startersDL) {
+                status = "*";
+            }
+        } else if (pos.equals("LB")) {
+            if(i < startersLB) {
+                status = "*";
+            }
+        } else if (pos.equals("CB")) {
+            if(i < startersCB) {
+                status = "*";
+            }
+        } else if (pos.equals("S")) {
+            if(i < startersS) {
+                status = "*";
+            }
+        }
+        if(p.isInjured) status = " [INJ - " + p.injury.duration + " wks]";
+        if(p.isRedshirt) status = " [RS]";
+        if(p.isTransfer) status = " [T]";
+        if(p.isMedicalRS) status = " [Med RS]";
+        if(p.isSuspended) status = " [Suspended - " + p.weeksSuspended + " wks]";
+
+        return status;
+    }
+
+    public Player findTeamPlayer(String line) {
+        for (Player p : HC) {
+            if(p.name.equals(line)) return p;
+        }
+        for (Player p : teamQBs) {
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamRBs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamWRs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamTEs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamOLs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamKs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamDLs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamLBs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamCBs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         for (Player p : teamSs) {
-            if (p.getPosNameYrOvrPot_Str().equals(line)) return p;
+            if (p.name.equals(line)) return p;
         }
         return null;
     }
 
-    //Roster String
+
+    //Roster String for Team Scouting For Coach Vacancies
 
     public String[] getTeamRosterString() {
         ArrayList<Player> rosters = getAllPlayers();
@@ -4674,7 +4603,6 @@ public class Team {
                 ArrayList<String> careerStats = p.getCareerStatsList();
                 StringBuilder sb = new StringBuilder();
                 sb.append(p.getPosNameYrOvr_Str() + "&");
-                sb.append("HoF Score: " + totalScore + " (" + score + ")> ");
                 for (String s : careerStats) {
                     sb.append(s + "&");
                 }

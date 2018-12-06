@@ -17,13 +17,13 @@ import positions.Player;
 /**
  * Created by Achi Jones on 3/18/2016.
  */
-class TeamLineupArrayAdapter extends ArrayAdapter<Player> {
+class DepthChart extends ArrayAdapter<Player> {
     private final Context context;
     public final ArrayList<Player> players;
     public final ArrayList<Player> playersSelected;
     public int playersRequired;
 
-    public TeamLineupArrayAdapter(Context context, ArrayList<Player> values, int playersRequired) {
+    public DepthChart(Context context, ArrayList<Player> values, int playersRequired) {
         super(context, R.layout.team_lineup_list_item, values);
         this.context = context;
         this.players = values;

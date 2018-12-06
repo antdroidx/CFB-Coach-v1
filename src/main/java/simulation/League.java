@@ -182,9 +182,9 @@ public class League {
 
     private final DecimalFormat df2 = new DecimalFormat(".#");
     private final int seasonStart = 2018;
-    int countTeam = 120;
+    int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 27;
-    public final int regSeasonWeeks = 13;
+    public final int regSeasonWeeks = 13; //original = 13  bye week =14
     private final double confRealignmentChance = 0.23; //chance of event
     private final double realignmentChance = 0.35; //chance of invite
     private final String crYear1 = "2";
@@ -1267,9 +1267,6 @@ public class League {
 
                     Game gm;
                     gm = new Game(a, b, "OOC");
-
-                    Log.d("teams", a.name);
-                    Log.d("teams", b.name);
 
                     if (!a.conference.contains("Independent") && !a.conference.contains("FCS")) {
                         a.gameSchedule.add(week, gm);

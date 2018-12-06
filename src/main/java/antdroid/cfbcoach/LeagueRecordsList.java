@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-class LeagueRecordsListArrayAdapter extends ArrayAdapter<String> {
+class LeagueRecordsList extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeamAbbr;
     private final String userTeamName;
 
-    public LeagueRecordsListArrayAdapter(Context context, String[] values, String userTeamAbbr, String userTeamName) {
+    public LeagueRecordsList(Context context, String[] values, String userTeamAbbr, String userTeamName) {
         super(context, R.layout.league_record_list_item, values);
         this.context = context;
         this.values = values;

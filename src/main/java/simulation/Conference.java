@@ -248,9 +248,7 @@ public class Conference {
 
     //NO DIVISIONS SCHEDULE EVEN TEAMS ONLY
     private void setUpOriginalSchedule() {
-        //schedule in conf matchups
-        int robinWeek = 0;
-        int robinCounter = 1;
+        //schedule in conf matchups;
         int confSize = confTeams.size() - 1;
         oocGames = getOOCGames();
 
@@ -259,12 +257,12 @@ public class Conference {
 
         for (int r = 0; r < confWeeks; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
-                Team a = confTeams.get((robinWeek + g) % confSize);
+                Team a = confTeams.get((r + g) % confSize);
                 Team b;
                 if (g == 0) {
                     b = confTeams.get(confSize);
                 } else {
-                    b = confTeams.get((confSize - g + robinWeek) % confSize);
+                    b = confTeams.get((confSize - g + r) % confSize);
                 }
 
                 Game gm;
@@ -279,7 +277,6 @@ public class Conference {
                 b.gameSchedule.add(gm);
 
             }
-            robinWeek += robinCounter;
         }
     }
 
@@ -343,17 +340,14 @@ public class Conference {
 
     public void setUpCrossDivisionSchedule(){
         int games = (12-getOOCGames()) - getDivGames();
+        int divTeams = divisions.get(0).divTeams.size()-1;
 
         for(int g = 0; g < games; g++) {
             Game gm;
-            int j = 0;
             for(int t = 0; t < divisions.get(0).divTeams.size(); t++) {
-                Log.d("Div", confName);
-                Log.d("teams", divisions.get(0).divTeams.get(t).name);
-                Log.d("teams", divisions.get(1).divTeams.get((t+j) % (divisions.get(1).divTeams.size()-1)).name);
 
                 Team a = divisions.get(0).divTeams.get(t);
-                Team b = divisions.get(1).divTeams.get((t+j) % (divisions.get(1).divTeams.size()-1));
+                Team b = divisions.get(1).divTeams.get((t+g) % divTeams);
 
                 if(g % 2 == 0) {
                     gm = new Game(a, b,"Conference");
@@ -361,17 +355,15 @@ public class Conference {
                 else{
                     gm = new Game(b, a,"Conference");
                 }
+
                 a.gameSchedule.add(gm);
                 b.gameSchedule.add(gm);
-                j++;
             }
         }
     }
 
     public void setUpDivisionSchedule() {
         //schedule in conf matchups
-        int robinWeek = 0;
-        int robinCounter = 1;
         int divWeeks = getDivGames();
 
         for (int d = 0; d < 2; d++) {
@@ -390,19 +382,21 @@ public class Conference {
                 }
             }
 
+            int divTeams = divSize -1;
+
             for (int r = 0; r < divWeeks; ++r) {
-                for (int g = 0; g < divSize/2; ++g) {
-                    Team a = divisions.get(d).divTeams.get((robinWeek + g) % (divSize-2));
+                for (int g = 0; g < (divisions.get(d).divTeams.size()/ 2); ++g) {
+                    Team a = divisions.get(d).divTeams.get((r + g) % divTeams);
                     Team b;
                     if (g == 0) {
-                        b = divisions.get(d).divTeams.get(divSize-1);
+                        b = divisions.get(d).divTeams.get(divTeams);
                     } else {
-                        b = divisions.get(d).divTeams.get((divSize-1 - g + robinWeek) % (divSize-2));
+                        b = divisions.get(d).divTeams.get((divTeams - g + r) % divTeams);
                     }
 
                     Game gm;
 
-                    if (r % 2 == 0) {
+                    if (r%2 == 0) {
                         gm = new Game(a, b, "Division");
                     } else {
                         gm = new Game(b, a, "Division");
@@ -412,7 +406,6 @@ public class Conference {
                     b.gameSchedule.add(gm);
 
                 }
-                robinWeek += robinCounter;
             }
         }
     }
@@ -481,7 +474,6 @@ public class Conference {
             return;
         } else {
             for (int i = 0; i < confTeams.size(); ++i) {
-                Log.d("ConfTeams", confTeams.get(i).name);
                 confTeams.get(i).gameSchedule.get(league.currentWeek+1).addUpcomingGames(confTeams.get(i));
             }
         }

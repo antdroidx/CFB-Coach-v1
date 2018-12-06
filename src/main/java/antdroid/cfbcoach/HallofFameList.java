@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-class HallOfFameListArrayAdapter extends ArrayAdapter<String> {
+class HallofFameList extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeam;
 
-    public HallOfFameListArrayAdapter(Context context, String[] values, String userTeam) {
+    public HallofFameList(Context context, String[] values, String userTeam) {
         super(context, R.layout.hall_fame_list_item, values);
         this.context = context;
         this.values = values;

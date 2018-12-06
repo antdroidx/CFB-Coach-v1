@@ -15,12 +15,14 @@ class PlayerRankingsList extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;
+    private final MainActivity mainAct;
 
-    public PlayerRankingsList(Context context, ArrayList<String> values, String userTeamStrRep) {
+    public PlayerRankingsList(Context context, ArrayList<String> values, String userTeamStrRep, MainActivity mainAct) {
         super(context, R.layout.team_rankings_list_item, values);
         this.context = context;
         this.values = values;
         this.userTeamStrRep = userTeamStrRep;
+        this.mainAct = mainAct;
     }
 
     @Override
@@ -33,7 +35,7 @@ class PlayerRankingsList extends ArrayAdapter<String> {
         TextView textRight = rowView.findViewById(R.id.textTeamRankingsRight);
 
 
-        String[] teamStat = values.get(position).split(",");
+        final String[] teamStat = values.get(position).split(",");
         textLeft.setText(teamStat[0]);
         textCenter.setText(teamStat[1] + " (" + teamStat[2] + ")");
         textRight.setText(teamStat[3]);
@@ -48,8 +50,17 @@ class PlayerRankingsList extends ArrayAdapter<String> {
             textRight.setTextColor(Color.parseColor("#5994de"));
         }
 
+        textCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainAct.openPlayerProfile(teamStat[1], teamStat[2]);
+            }
+        });
+
         return rowView;
     }
+
+
 
     public void setUserTeamStrRep(String userTeamStrRep) {
         this.userTeamStrRep = userTeamStrRep;

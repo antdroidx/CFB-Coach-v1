@@ -48,7 +48,6 @@ import java.io.Writer;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import positions.HeadCoach;
 import positions.Player;
@@ -339,7 +338,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 currTab = 3;
-                updatePlayerStats();
+                //updatePlayerStats();
+                viewRoster();
             }
         });
 
@@ -581,21 +581,21 @@ public class MainActivity extends AppCompatActivity {
         userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff()+5;
         userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef()-5;
         userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
-        updatePlayerStats();
+        viewRoster();
     }
 
     private void setupCoachDef() {
         userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff()-5;
         userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef()+5;
         userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
-        updatePlayerStats();
+        viewRoster();
     }
 
     private void setupCoachBal() {
         userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff();
         userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef();
         userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
-        updatePlayerStats();
+        viewRoster();
     }
 
     public void resetTeamUI() {
@@ -670,7 +670,7 @@ public class MainActivity extends AppCompatActivity {
             updateTeamStats();
         } else {
             currTab = 3;
-            updatePlayerStats();
+            viewRoster();
         }
 
     }
@@ -696,7 +696,7 @@ public class MainActivity extends AppCompatActivity {
             updateTeamStats();
         } else {
             currTab = 3;
-            updatePlayerStats();
+            viewRoster();
         }
 
     }
@@ -777,7 +777,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
-        final NewsStoriesListArrayAdapter newsStoriesAdapter = new NewsStoriesListArrayAdapter(this, rankings);
+        final NewsStories newsStoriesAdapter = new NewsStories(this, rankings);
         newsStoriesList.setAdapter(newsStoriesAdapter);
 
         weekSelectionSpinner.setOnItemSelectedListener(
@@ -813,60 +813,75 @@ public class MainActivity extends AppCompatActivity {
         expListPlayerStats.setVisibility(View.GONE);
 
         String[] teamStatsStr = currentTeam.getTeamStatsStrCSV().split("%\n");
-        mainList.setAdapter(new TeamStatsListArrayAdapter(this, teamStatsStr));
+        mainList.setAdapter(new TeamStatsList(this, teamStatsStr));
     }
 
     //Player Stats
-    private void updatePlayerStats() {
-        mainList.setVisibility(View.GONE);
-        expListPlayerStats.setVisibility(View.VISIBLE);
+    //Roster 2.0
+    private void viewRoster() {
+        mainList.setVisibility(View.VISIBLE);
+        expListPlayerStats.setVisibility(View.GONE);
 
-        List<String> playerHeaders = currentTeam.getPlayerStatsExpandListStr();
-        Map<String, List<String>> playerInfos = currentTeam.getPlayerStatsExpandListMap(playerHeaders);
-        final ExpandableListAdapterPlayerStats expListAdapterPlayerStats =
-                new ExpandableListAdapterPlayerStats(this, this, playerHeaders, playerInfos);
-        expListPlayerStats.setAdapter(expListAdapterPlayerStats);
+        ArrayList<String> roster;
+        roster = currentTeam.getRoster();
 
-        expListPlayerStats.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(
-                    ExpandableListView parent, View v,
-                    int groupPosition, int childPosition,
-                    long id) {
-                if (expListAdapterPlayerStats.getGroup(groupPosition).equals("BENCH > BENCH")) {
-                    // Bench player, examine
-                    examinePlayer(expListAdapterPlayerStats.getChild(groupPosition, childPosition));
-                }
-                return false;
-            }
-        });
+        final TeamRoster teamRoster = new TeamRoster(this, roster, this);
+        mainList.setAdapter(teamRoster);
     }
 
     //Open Player Profile
     public void examinePlayer(String player) {
-        Player p = currentTeam.findBenchPlayer(player);
-        if (p == null) p = currentTeam.getHC(0);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        ArrayList<String> pStatsList = p.getDetailAllStatsList(currentTeam.numGames());
-        if (p.injury != null) pStatsList.add(0, "[I]Injured: " + p.injury.toString());
-        pStatsList.add(0, "[B]" + p.getYrOvrPot_Str());
-        String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
-        PlayerStatsListArrayAdapter pStatsAdapter = new PlayerStatsListArrayAdapter(this, pStatsArray);
-        builder.setAdapter(pStatsAdapter, null)
-                .setTitle(p.position + " " + p.name)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //do nothing
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        Player p = currentTeam.findTeamPlayer(player);
+        if (p == null) {
+
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            ArrayList<String> pStatsList = p.getDetailAllStatsList(currentTeam.numGames());
+            if (p.injury != null) pStatsList.add(0, "[I]Injured: " + p.injury.toString());
+            pStatsList.add(0, "[B]" + p.getYrOvrPot_Str());
+            String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
+            PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
+            builder.setAdapter(pStatsAdapter, null)
+                    .setTitle(p.position + " " + p.name)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    public void openPlayerProfile(String player, String teamAbbr) {
+        Team tempTeam = simLeague.findTeamAbbr(teamAbbr);
+        Player p = tempTeam.findTeamPlayer(player);
+        if (p == null) {
+
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            ArrayList<String> pStatsList = p.getDetailAllStatsList(tempTeam.numGames());
+            if (p.injury != null) pStatsList.add(0, "[I]Injured: " + p.injury.toString());
+            pStatsList.add(0, "[B]" + p.getYrOvrPot_Str());
+            String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
+            PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
+            builder.setAdapter(pStatsAdapter, null)
+                    .setTitle(p.position + " " + p.name)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     //Player Awards for Bio
     public int checkAwardPlayer(String player) {
-        Player p = currentTeam.findBenchPlayer(player);
+        Player p = currentTeam.findTeamPlayer(player);
         if (p == null) return 0;
         if (p.wonHeisman) return 3;
         if (p.wonAllAmerican) return 2;
@@ -883,7 +898,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < games.length; ++i) {
             games[i] = currentTeam.gameSchedule.get(i);
         }
-        mainList.setAdapter(new GameScheduleListArrayAdapter(this, this, currentTeam, games));
+        mainList.setAdapter(new GameScheduleList(this, this, currentTeam, games));
         mainList.setSelection(currentTeam.numGames() - 3);
     }
 
@@ -1325,7 +1340,7 @@ public class MainActivity extends AppCompatActivity {
         weekSelectionSpinner.setSelection(dbSize - 1);
 
         final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
-        final NewsStoriesListArrayAdapter weeklyScoresAdapter = new NewsStoriesListArrayAdapter(this, rankings);
+        final NewsStories weeklyScoresAdapter = new NewsStories(this, rankings);
         newsStoriesList.setAdapter(weeklyScoresAdapter);
 
         weekSelectionSpinner.setOnItemSelectedListener(
@@ -1404,7 +1419,7 @@ public class MainActivity extends AppCompatActivity {
         positionPlayers.addAll(userTeam.teamQBs);
 
         final ListView teamPositionList = dialog.findViewById(R.id.listViewTeamLineup);
-        final TeamLineupArrayAdapter teamLineupAdapter = new TeamLineupArrayAdapter(this, positionPlayers, 1);
+        final DepthChart teamLineupAdapter = new DepthChart(this, positionPlayers, 1);
         teamPositionList.setAdapter(teamLineupAdapter);
 
         teamLineupPositionSpinner.setOnItemSelectedListener(
@@ -1456,7 +1471,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Depth Chart Lineup Setup
-    private void updateLineupList(int position, TeamLineupArrayAdapter teamLineupAdapter, int[] positionNumberRequired,
+    private void updateLineupList(int position, DepthChart teamLineupAdapter, int[] positionNumberRequired,
                                   ArrayList<Player> positionPlayers, TextView textLineupPositionDescription) {
         teamLineupAdapter.playersRequired = positionNumberRequired[position];
         teamLineupAdapter.playersSelected.clear();
@@ -1963,8 +1978,8 @@ public class MainActivity extends AppCompatActivity {
                 teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
 
                 final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
-                final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                        new TeamRankingsListArrayAdapter(this, rankings, userTeam.abbr);
+                final TeamRankingsList teamRankingsAdapter =
+                        new TeamRankingsList(this, rankings, userTeam.abbr);
                 teamRankingsList.setAdapter(teamRankingsAdapter);
 
                 teamRankingsSpinner.setOnItemSelectedListener(
@@ -2252,17 +2267,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 1) {
-                            final LeagueRecordsListArrayAdapter leagueRecordsAdapter =
-                                    new LeagueRecordsListArrayAdapter(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr, userTeam.name);
+                            final LeagueRecordsList leagueRecordsAdapter =
+                                    new LeagueRecordsList(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr, userTeam.name);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
                         } else if (position == 3) {
-                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers, userTeam.name);
+                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
                             leagueHistoryList.setAdapter(hofAdapter);
                         } else if (position == 2) {
                             showLeagueHistoryStats();
                         } else {
-                            final LeagueHistoryListArrayAdapter leagueHistoryAdapter =
-                                    new LeagueHistoryListArrayAdapter(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
+                            final LeagueHistoryList leagueHistoryAdapter =
+                                    new LeagueHistoryList(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
                             leagueHistoryList.setAdapter(leagueHistoryAdapter);
                         }
                     }
@@ -2297,8 +2312,8 @@ public class MainActivity extends AppCompatActivity {
         teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
-        final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, rankings, userTeam.name);
+        final TeamRankingsList teamRankingsAdapter =
+                new TeamRankingsList(this, rankings, userTeam.name);
         teamRankingsList.setAdapter(teamRankingsAdapter);
 
         teamRankingsSpinner.setOnItemSelectedListener(
@@ -2401,15 +2416,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
-                            TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.getTeamHistoryList());
+                            TeamHistoryList teamHistoryAdapter =
+                                    new TeamHistoryList(MainActivity.this, currentTeam.getTeamHistoryList());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         } else if (position == 1) {
-                            LeagueRecordsListArrayAdapter leagueRecordsAdapter =
-                                    new LeagueRecordsListArrayAdapter(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---", "---");
+                            LeagueRecordsList leagueRecordsAdapter =
+                                    new LeagueRecordsList(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---", "---");
                             teamHistoryList.setAdapter(leagueRecordsAdapter);
                         } else if (position == 2) {
-                            HallOfFameListArrayAdapter hofAdapter = new HallOfFameListArrayAdapter(MainActivity.this, hofPlayers, userTeam.name);
+                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
                             teamHistoryList.setAdapter(hofAdapter);
                         } else if (position == 3) {
                             dialog.dismiss();
@@ -2537,8 +2552,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
-                            TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
+                            TeamHistoryList teamHistoryAdapter =
+                                    new TeamHistoryList(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         } else if (position == 1) {
                             dialog.dismiss();
@@ -2664,8 +2679,8 @@ public class MainActivity extends AppCompatActivity {
         teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
-        final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, rankings, userTeam.name);
+        final TeamRankingsList teamRankingsAdapter =
+                new TeamRankingsList(this, rankings, userTeam.name);
         teamRankingsList.setAdapter(teamRankingsAdapter);
 
         teamRankingsSpinner.setOnItemSelectedListener(
@@ -2717,7 +2732,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView playerRankingssList = dialog.findViewById(R.id.listViewTeamRankings);
         final PlayerRankingsList playerRankingssAdapter =
-                new PlayerRankingsList(this, rankings, userTeam.abbr);
+                new PlayerRankingsList(this, rankings, userTeam.abbr, this);
         playerRankingssList.setAdapter(playerRankingssAdapter);
 
         playerRankingssSpinner.setOnItemSelectedListener(
@@ -2837,19 +2852,19 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, simLeague.getHeismanCeremonyStr().split(">"), userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, simLeague.getHeismanCeremonyStr().split(">"), userTeam.abbr));
                         } else if (position == 1) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, defAwardList, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, defAwardList, userTeam.abbr));
                         } else if (position == 2) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, coachAwardList, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, coachAwardList, userTeam.abbr));
                         } else if (position == 3) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, freshmanAwardList, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, freshmanAwardList, userTeam.abbr));
                         } else if (position == 4) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allAmericans, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, allAmericans, userTeam.abbr));
                         } else if (position == 5) {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allFreshman, userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, allFreshman, userTeam.abbr));
                         } else {
-                            potyList.setAdapter(new SeasonAwardsListArrayAdapter(MainActivity.this, allConference[position - 6], userTeam.abbr));
+                            potyList.setAdapter(new SeasonAwardsList(MainActivity.this, allConference[position - 6], userTeam.abbr));
                         }
                     }
 
@@ -2951,7 +2966,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder save = new AlertDialog.Builder(this);
         save.setTitle("Choose Save File to Overwrite:");
         final String[] fileInfos = getSaveFileInfos();
-        SaveFilesListArrayAdapter saveFilesAdapter = new SaveFilesListArrayAdapter(this, fileInfos);
+        SaveFilesList saveFilesAdapter = new SaveFilesList(this, fileInfos);
         save.setAdapter(saveFilesAdapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 final int itemy = item;
@@ -3191,7 +3206,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
 
             ListView injuryList = dialog.findViewById(R.id.listViewInjuryReport);
-            injuryList.setAdapter(new PlayerStatsListArrayAdapter(this, injuries));
+            injuryList.setAdapter(new PlayerProfile(this, injuries));
 
             CheckBox showInjuryReportCheckBox = dialog.findViewById(R.id.checkBoxInjuryReport);
             showInjuryReportCheckBox.setChecked(true);
@@ -3382,8 +3397,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewDialog);
-        final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, simLeague.getTeamRankingsStr(1), userTeam.name);
+        final TeamRankingsList teamRankingsAdapter =
+                new TeamRankingsList(this, simLeague.getTeamRankingsStr(1), userTeam.name);
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 
@@ -3760,10 +3775,10 @@ public class MainActivity extends AppCompatActivity {
         beginRecruitingSpinner.setAdapter(beginRecruitingSpinnerAdapter);
 
         final ListView playerList = dialog.findViewById(R.id.listViewTeamRankings);
-        final PlayerStatsListArrayAdapter playerStatsAdapter =
-                new PlayerStatsListArrayAdapter(this, userTeam.getGradPlayersList());
-        final MockDraftListArrayAdapter mockDraftAdapter =
-                new MockDraftListArrayAdapter(this, simLeague.getMockDraftPlayersList(), userTeam.name);
+        final PlayerProfile playerStatsAdapter =
+                new PlayerProfile(this, userTeam.getGradPlayersList());
+        final MockDraft mockDraftAdapter =
+                new MockDraft(this, simLeague.getMockDraftPlayersList(), userTeam.name);
         playerList.setAdapter(playerStatsAdapter);
 
         beginRecruitingSpinner.setOnItemSelectedListener(
@@ -3802,8 +3817,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewDialog);
-        final TeamRankingsListArrayAdapter teamRankingsAdapter =
-                new TeamRankingsListArrayAdapter(this, simLeague.getTeamRankingsStr(15), userTeam.strRepWithPrestige());
+        final TeamRankingsList teamRankingsAdapter =
+                new TeamRankingsList(this, simLeague.getTeamRankingsStr(15), userTeam.strRepWithPrestige());
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 
@@ -3874,8 +3889,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
-                            TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
+                            TeamHistoryList teamHistoryAdapter =
+                                    new TeamHistoryList(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         }
                     }
@@ -3926,8 +3941,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
-                            TeamHistoryListArrayAdapter teamHistoryAdapter =
-                                    new TeamHistoryListArrayAdapter(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
+                            TeamHistoryList teamHistoryAdapter =
+                                    new TeamHistoryList(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         }
                     }
@@ -4086,7 +4101,7 @@ public class MainActivity extends AppCompatActivity {
         }
         reader.close();
         currTab = 3;
-        updatePlayerStats();
+        viewRoster();
     }
 
     private void readRosterFile(Uri uri) throws IOException {
@@ -4168,7 +4183,7 @@ public class MainActivity extends AppCompatActivity {
         currTab = 3;
 
         simLeague.updateTeamTalentRatings();
-        updatePlayerStats();
+        viewRoster();
     }
 
     //EXPORT DATA

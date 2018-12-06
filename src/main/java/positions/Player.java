@@ -406,8 +406,7 @@ Player {
 
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Games: " + (gamesStarted + careerGames) + " (" + (statsWins + careerWins) + "-" + (gamesStarted + careerGames - (statsWins + careerWins)) + ")"
-                + ">Yrs: " + getYearsPlayed());
+        pStats.add("Games: " + (gamesStarted + careerGames) + ">Yrs: " + getYearsPlayed());
         pStats.add("Awards: " + getAwards() + "> ");
         return pStats;
     }

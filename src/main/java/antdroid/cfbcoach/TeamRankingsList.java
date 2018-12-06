@@ -15,12 +15,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-class TeamRankingsListArrayAdapter extends ArrayAdapter<String> {
+class TeamRankingsList extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;
 
-    public TeamRankingsListArrayAdapter(Context context, ArrayList<String> values, String userTeamStrRep) {
+    public TeamRankingsList(Context context, ArrayList<String> values, String userTeamStrRep) {
         super(context, R.layout.team_rankings_list_item, values);
         this.context = context;
         this.values = values;

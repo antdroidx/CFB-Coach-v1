@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-class TeamHistoryListArrayAdapter extends ArrayAdapter<String> {
+class TeamHistoryList extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 
-    public TeamHistoryListArrayAdapter(Context context, String[] values) {
+    public TeamHistoryList(Context context, String[] values) {
         super(context, R.layout.team_history_list_item, values);
         this.context = context;
         this.values = values;

@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-class TeamStatsListArrayAdapter extends ArrayAdapter<String> {
+class TeamStatsList extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 
-    public TeamStatsListArrayAdapter(Context context, String[] values) {
+    public TeamStatsList(Context context, String[] values) {
         super(context, R.layout.team_stats_list_item, values);
         this.context = context;
         this.values = values;

@@ -15,18 +15,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-class MainRankings extends ArrayAdapter<String> {
+class TeamRoster extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
     private String userTeamStrRep;
     private final MainActivity mainAct;
 
 
-    public MainRankings(Context context, ArrayList<String> values, String userTeamStrRep, MainActivity mainAct) {
+    public TeamRoster(Context context, ArrayList<String> values, MainActivity mainAct) {
         super(context, R.layout.team_stats_list_item, values);
         this.context = context;
         this.values = values;
-        this.userTeamStrRep = userTeamStrRep;
         this.mainAct = mainAct;
     }
 
@@ -44,33 +43,49 @@ class MainRankings extends ArrayAdapter<String> {
         textCenter.setText(teamStat[1] + " " + teamStat[2]);
         textRight.setText(teamStat[3]);
 
-        if (teamStat[1].equals(userTeamStrRep)) {
-            // Bold user team
-            textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
-            textLeft.setTextColor(Color.WHITE);
-            textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
-            textCenter.setTextColor(Color.WHITE);
-            textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
-            textRight.setTextColor(Color.WHITE);
-        }
         if (teamStat[0].equals(" ")) {
             // Bold user team
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
             textCenter.setTextColor(Color.parseColor("#5994de"));
         }
+        if (teamStat[2].equals("*")) {
+            textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
+            textCenter.setTextColor(Color.WHITE);
+        }
+        if (teamStat[2].contains("RS") || teamStat[2].contains("[T]")) {
+            textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
+            textCenter.setTextColor(Color.RED);
+        }
+        if (teamStat[2].contains("Suspended")) {
+            textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
+            textCenter.setTextColor(Color.DKGRAY);
+        }
+        if (teamStat[2].contains("INJ")) {
+            textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
+            textCenter.setTextColor(Color.YELLOW);
+        }
+
+
+        if(!teamStat[3].contains(" ")) {
+            if (Integer.parseInt(teamStat[3]) > 90) {
+                textRight.setTextColor(Color.parseColor("#5994de"));
+            } else if (Integer.parseInt(teamStat[3]) > 80) {
+                textRight.setTextColor(Color.GREEN);
+            }
+        }
+
+
+
 
         textCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainAct.examineTeam(teamStat[1]);
+                mainAct.examinePlayer(teamStat[1]);
             }
         });
 
         return rowView;
     }
 
-    public void setUserTeamStrRep(String userTeamStrRep) {
-        this.userTeamStrRep = userTeamStrRep;
-    }
 }
 
