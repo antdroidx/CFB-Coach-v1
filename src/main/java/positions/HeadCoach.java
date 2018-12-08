@@ -45,6 +45,8 @@ public class HeadCoach extends Player {
 
     public boolean promotionCandidate;
     public boolean retirement;
+    public boolean wonConfHC;
+    public boolean wonTopHC;
 
     //Leaderboard Stats
     public float careerScore;
@@ -278,31 +280,24 @@ public class HeadCoach extends Player {
     }
 
     @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Age: " + age + ">Years Coaching: " + year);
-        if (team.league.isCareerMode()) {
-            pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
-        }
-        pStats.add("Offense: " + team.playbookOff.getStratName() + ">Defense: " + team.playbookDef.getStratName());
-        pStats.add("Offense: " + getLetterGrade(ratOff) + ">Defense: " + getLetterGrade(ratDef));
-        pStats.add("Talent Progression: " + getLetterGrade(ratTalent) + ">Discipline: " + getLetterGrade(ratDiscipline));
-        pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
-        pStats.add(" > ");
-        return pStats;
-    }
-
-    @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Age: " + age + ">Years Coaching: " + year);
         if (team.league.isCareerMode()) {
-            pStats.add("Contract Years Remaining: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
+            pStats.add("Contract Years Left: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
+        pStats.add(" > ");
+        pStats.add("[B]COACHING STYLE:");
+
         pStats.add("Offense: " + team.playbookOff.getStratName() + ">Defense: " + team.playbookDef.getStratName());
         pStats.add("Offense: " + ratOff + ">Defense: " + ratDef);
         pStats.add("Talent Progression: " + ratTalent + ">Discipline: " + ratDiscipline);
+        pStats.add(" > ");
+        pStats.add("[B]TEAM STATUS:");
+
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
+        pStats.add("Job Status: " + coachStatus() + "> ");
+
         pStats.add("[B]CAREER STATS:");
         pStats.addAll(getCareerStatsList());
         return pStats;
@@ -318,12 +313,6 @@ public class HeadCoach extends Player {
         pStats.add("Conference Coach: " + confAward + ">Coach of Year: " + awards);
         pStats.add("Prestige Change: " + cumulativePrestige + ">Coach Score: " + getCoachCareerScore());
         return pStats;
-    }
-
-
-    @Override
-    public String getYrOvrPot_Str() {
-        return "COACH ATTRIBUTES:";
     }
 
     @Override
@@ -364,5 +353,24 @@ public class HeadCoach extends Player {
         score = careerScore + (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans);
 
         return score;
+    }
+
+    public String coachStatus() {
+        String status = "Normal";
+        if(baselinePrestige > (team.teamPrestige + 5)) status = "Hot Seat";
+        else if(baselinePrestige + 7 < (team.teamPrestige)) status = "Secure";
+        else if(baselinePrestige + 3 < (team.teamPrestige)) status = "Safe";
+        else if (baselinePrestige > (team.teamPrestige + 3)) status = "Unsafe";
+        else status = "OK";
+
+        return status;
+    }
+
+    public int getSeasonAwards() {
+        int award = 0;
+        if(wonConfHC) award = 2;
+        if(wonTopHC) award = 4;
+
+        return award;
     }
 }

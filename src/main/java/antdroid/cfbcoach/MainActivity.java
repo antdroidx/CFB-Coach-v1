@@ -825,7 +825,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> roster;
         roster = currentTeam.getRoster();
 
-        final TeamRoster teamRoster = new TeamRoster(this, roster, this);
+        final TeamRoster teamRoster = new TeamRoster(this, roster, this, simLeague.currentWeek);
         mainList.setAdapter(teamRoster);
     }
 
@@ -837,12 +837,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             ArrayList<String> pStatsList = p.getDetailAllStatsList(currentTeam.numGames());
-            if (p.injury != null) pStatsList.add(0, "[I]Injured: " + p.injury.toString());
-            pStatsList.add(0, "[B]" + p.getYrOvrPot_Str());
+
             String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
             PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
             builder.setAdapter(pStatsAdapter, null)
-                    .setTitle(p.position + " " + p.name)
+                    .setTitle(p.position + " " + p.name + ", " + p.getYrStr())
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -862,8 +861,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             ArrayList<String> pStatsList = p.getDetailAllStatsList(tempTeam.numGames());
-            if (p.injury != null) pStatsList.add(0, "[I]Injured: " + p.injury.toString());
-            pStatsList.add(0, "[B]" + p.getYrOvrPot_Str());
+
             String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
             PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
             builder.setAdapter(pStatsAdapter, null)
@@ -1592,7 +1590,7 @@ public class MainActivity extends AppCompatActivity {
                 int positionSpinner = teamLineupPositionSpinner.getSelectedItemPosition();
                 // Set starters to new selection
 
-                if (redshirtSelector.playersSelected.size() + userTeam.countRedshirts() - redshirtSelector.playersRemoved.size() < 9) {
+                if (redshirtSelector.playersSelected.size() + userTeam.countRedshirts() - redshirtSelector.playersRemoved.size() < 10) {
 
                     userTeam.setRedshirts(redshirtSelector.playersSelected, redshirtSelector.playersRemoved, positionSpinner);
                     redshirtSelector.playersSelected.clear();
@@ -1602,12 +1600,12 @@ public class MainActivity extends AppCompatActivity {
                     redshirtLineup(positionSpinner, redshirtSelector, positionNumberRequired, positionPlayers, textLineupPositionDescription);
                     minPlayersText.setText("Min Active: " + positionNumberRequired[positionSpinner] + " Current Active: " + userTeam.getActivePlayers(positionSpinner));
 
-                    Toast.makeText(MainActivity.this, "Set redshirts for " + positionSelection[positionSpinner] + "! You currently have " + userTeam.countRedshirts() + " (Max: 8) redshirted players.",
+                    Toast.makeText(MainActivity.this, "Set redshirts for " + positionSelection[positionSpinner] + "! You currently have " + userTeam.countRedshirts() + " (Max: 9) redshirted players.",
                             Toast.LENGTH_SHORT).show();
 
                 } else {
 
-                    Toast.makeText(MainActivity.this, "A maximum of 7 players can be redshirted each season. You have exceeded this! You currently have " + userTeam.countRedshirts() + " redshirted players.",
+                    Toast.makeText(MainActivity.this, "A maximum of 9 players can be redshirted each season. You have exceeded this! You currently have " + userTeam.countRedshirts() + " redshirted players.",
                             Toast.LENGTH_SHORT).show();
                 }
 

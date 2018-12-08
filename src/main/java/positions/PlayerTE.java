@@ -300,26 +300,13 @@ public class PlayerTE extends Player {
     }
 
     @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
-        pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Run Block: " + getLetterGrade(ratRunBlock));
-
-        pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
-        pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
-        pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>Drops: " + statsDrops);
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-
-        pStats.add(" > ");
-        return pStats;
-    }
-
-    @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
         pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Run Block: " + getLetterGrade(ratRunBlock));
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
+
 
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);

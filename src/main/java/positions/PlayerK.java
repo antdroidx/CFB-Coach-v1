@@ -297,34 +297,15 @@ public class PlayerK extends Player {
         }
     }
 
-    @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-        pStats.add("Kick Strength: " + getLetterGrade(ratKickPow) + ">Kick Accuracy: " + getLetterGrade(ratKickAcc));
-        pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
-
-        if (statsXPAtt > 0) {
-            pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + df2.format(100 * (float) statsXPMade / (statsXPAtt)) + "%");
-        } else {
-            pStats.add("XP Made/Att: 0/0>XP Percent: 0%");
-        }
-
-        if (statsFGAtt > 0) {
-            pStats.add("FG Made/Att: " + statsFGMade + "/" + statsFGAtt + ">FG Percent: " + df2.format(getFGpct()) + "%");
-        } else {
-            pStats.add("FG Made/Att: 0/0>FG Percent: 0%");
-        }
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-
-        pStats.add(" > ");
-        return pStats;
-    }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Kick Strength: " + getLetterGrade(ratKickPow) + ">Kick Accuracy: " + getLetterGrade(ratKickAcc));
         pStats.add("Clumsiness: " + getLetterGrade(ratKickFum) + ">Pressure: " + getLetterGrade(ratPressure));
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
+
 
         if (statsXPAtt > 0) {
             pStats.add("XP Made/Att: " + statsXPMade + "/" + statsXPAtt + ">XP Percent: " + df2.format(100 * (float) statsXPMade / (statsXPAtt)) + "%");

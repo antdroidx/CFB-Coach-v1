@@ -183,6 +183,15 @@ Player {
         if (!isMedicalRS) year++;
     }
 
+    public int getSeasonAwards() {
+        int award = 0;
+        if(wonAllFreshman) award = 1;
+        if(wonAllConference) award = 2;
+        if(wonAllAmerican) award = 3;
+        if(wonHeisman) award = 4;
+        return award;
+    }
+
     public int getHeismanScore() {
         int adjGames = gamesStarted;
         if (adjGames > 11) adjGames = 11;
@@ -247,82 +256,13 @@ Player {
 
 
     public String getPosNameYrOvrPot_Str() {
-        if (ratImprovement > 0 && team.league.currentWeek > 5 && team.league.currentWeek < 8 || team.league.currentWeek > 19) {
-            if (team.league.hidePotential) {
                 if (injury != null) {
-                    return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                if (isTransfer) {
-                    return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Transfer  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                if (isRedshirt) {
-                    return position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Redshirt  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                    return position + "  " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr;
                 }
                 if (isSuspended) {
-                    return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
+                    return position + "  " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr;
                 }
-                if (isWalkOn) {
-                    return position + " " + name + " [" + getYrStr() + "]>" + " [WO]  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-            } else {
-
-                if (injury != null) {
-                    return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                if (isTransfer) {
-                    return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Transfer  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                if (isRedshirt) {
-                    return position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Redshirt  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                if (isSuspended) {
-                    return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr + " (+" + ratImprovement + ")";
-                }
-                if (isWalkOn) {
-                    return position + " " + name + " [" + getYrStr() + "]>" + "[WO]  Ovr: " + ratOvr + " (+" + ratImprovement + ")" + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
-                }
-                return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + " (+" + ratImprovement + ")" + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
-            }
-        }
-
-
-        if (team.league.hidePotential) {
-            if (injury != null) {
-                return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr;
-            }
-            if (isTransfer) {
-                return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Transfer  Ovr: " + ratOvr;
-            }
-            if (isRedshirt) {
-                return position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Redshirt  Ovr: " + ratOvr;
-            }
-            if (isSuspended) {
-                return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr;
-            }
-            if (isWalkOn) {
-                return position + " " + name + " [" + getYrStr() + "]>" + " [WO]  Ovr: " + ratOvr;
-            }
-            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr;
-        } else {
-
-            if (injury != null) {
-                return "[I]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">" + injury.toString() + "  Ovr: " + ratOvr;
-            }
-            if (isTransfer) {
-                return "[T]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Transfer  Ovr: " + ratOvr;
-            }
-            if (isRedshirt) {
-                return position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Redshirt  Ovr: " + ratOvr;
-            }
-            if (isSuspended) {
-                return "[S]" + position + " " + getInitialName() + " [" + getYrStr() + "]" + ">Suspended (" + weeksSuspended + "wk)  Ovr: " + ratOvr;
-            }
-            if (isWalkOn) {
-                return position + " " + name + " [" + getYrStr() + "]>" + "[WO]  Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
-            }
-            return position + " " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
-        }
+                return position + "  " + name + " [" + getYrStr() + "]>" + "Ovr: " + ratOvr;
     }
 
     public String getPosNameYrOvrPotTra_Str() {
@@ -344,12 +284,6 @@ Player {
         return team.name + ": " + position + " " + name + " [" + getYrStr() + "] Ovr: " + ratOvr;
     }
 
-    public String getYrOvrPot_Str() {
-        if (team.HC.size() > 0)
-            return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent);
-        else
-            return "[" + getYrStr() + "] Ovr: " + ratOvr + ", Pot: " + getPotRating(ratPot, ratOvr, year, 50);
-    }
 
     public String getMockDraftStr(int round, int selection, String nflTeam) {
         return "Round " + round + ", Pick " + selection + " : " + nflTeam + "\n" + position + " " + name + "\n" + getFullYrStr()
@@ -394,10 +328,6 @@ Player {
         int potential;
         potential = ovr + ((3 * pot + 2 * hc) / 50) * (4 - year);
         return potential;
-    }
-
-    public ArrayList<String> getDetailStatsList(int games) {
-        return null;
     }
 
     public ArrayList<String> getDetailAllStatsList(int games) {
@@ -597,6 +527,7 @@ Player {
 
     public ArrayList<String> stringPlayerAttributes() {
         ArrayList<String> pAttr = new ArrayList<>();
+        pAttr.add("Team: " + team.name + ">Overall: " + ratOvr);
         pAttr.add("Height " + getHeight() + ">Weight: " + getWeight());
         pAttr.add("Home State: " + getHomeState(homeState) + ">Scout Grade: " + getScoutingGradeString());
         pAttr.add("Personality: " + getLetterGrade(personality) + " > " + getStatus());

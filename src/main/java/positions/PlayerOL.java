@@ -260,22 +260,13 @@ public class PlayerOL extends Player {
     }
 
     @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-        pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Block: " + getLetterGrade(ratRunBlock));
-        pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Pass Block: " + getLetterGrade(ratPassBlock));
-
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-
-        pStats.add(" > ");
-        return pStats;
-    }
-
-    @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Block: " + getLetterGrade(ratRunBlock));
         pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Pass Block: " + getLetterGrade(ratPassBlock));
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
+
 
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
         pStats.add(" > ");

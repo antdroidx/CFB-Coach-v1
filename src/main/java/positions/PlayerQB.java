@@ -359,28 +359,13 @@ public class PlayerQB extends Player {
 
 
     @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-        pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
-        pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
-
-
-        pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
-        pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
-        pStats.add("Pass Yards: " + statsPassYards + " yds>Yards/Att: " + df2.format(((double) (10 * statsPassYards / (statsPassAtt + 1)) / 10)) + " yds");
-        pStats.add("Yds/Game: " + (statsPassYards / getGames()) + " yds/g>Sacks: " + statsSacked);
-        pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
-        pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
-
-        pStats.add(" > ");
-        return pStats;
-    }
-
-    @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
+
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
 
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);

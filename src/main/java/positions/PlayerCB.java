@@ -348,35 +348,14 @@ public class PlayerCB extends Player {
 
     }
 
-
-    @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-        pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Jumping: " + getLetterGrade(ratJump));
-        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
-
-        pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
-        pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
-        pStats.add("Defended: " + statsDefended + ">Shutdown Pct: " + (100 * (statsIncomplete) / (statsTargets + 1)) + "%");
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-        if (statsKickRets > 0) {
-            pStats.add("Kick Rets: " + statsKickRets + ">Kick Ret Yards: " + statsKickRetYards + " yrds");
-            pStats.add("Kick Ret TDs: " + statsKickRetTDs + ">Ret Avg: " + (double) (statsKickRetYards / statsKickRets));
-        }
-        if (statsPuntRets > 0) {
-            pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
-            pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
-        }
-
-        pStats.add(" > ");
-        return pStats;
-    }
-
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Jumping: " + getLetterGrade(ratJump));
         pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
+
 
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));

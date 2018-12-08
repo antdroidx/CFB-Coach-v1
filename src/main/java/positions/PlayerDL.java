@@ -314,26 +314,14 @@ public class PlayerDL extends Player {
                 careerTackles * 25 + careerSacks * 425 + careerFumbles * 425 + careerInts * 425 + ratOvr * year * 10;
     }
 
-
-    @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-        pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Stop: " + getLetterGrade(ratRunStop));
-        pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Pass Rush: " + getLetterGrade(ratPassRush));
-
-        pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
-        pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
-        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
-
-        pStats.add(" > ");
-        return pStats;
-    }
-
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
         ArrayList<String> pStats = stringPlayerAttributes();
         pStats.add("Strength: " + getLetterGrade(ratStrength) + ">Run Stop: " + getLetterGrade(ratRunStop));
         pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Pass Rush: " + getLetterGrade(ratPassRush));
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
+
 
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));

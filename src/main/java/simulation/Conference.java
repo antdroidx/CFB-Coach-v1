@@ -697,6 +697,7 @@ public class Conference {
 
             allConfPlayers.add(hc.get(0));
             hc.get(0).wonAllConference = true;
+            hc.get(0).wonConfHC = true;
             hc.get(0).confAward++;
             allConfPlayers.add(qbs.get(0));
             qbs.get(0).wonAllConference = true;

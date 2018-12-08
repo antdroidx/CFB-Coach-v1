@@ -35,12 +35,10 @@ class PlayerProfile extends ArrayAdapter<String> {
             TextView itemL = rowView.findViewById(R.id.textPlayerStatsLeftChild);
             TextView itemR = rowView.findViewById(R.id.textPlayerStatsRightChild);
 
-            if (values[position].substring(0, 3).equals("[I]") || values[position].substring(0, 3).equals("[S]")) {
-                // Injury, make red
-                itemL.setText(detailSplit[0].substring(3));
-                itemR.setText(detailSplit[1]);
-                itemL.setTextColor(Color.RED);
-                itemR.setTextColor(Color.RED);
+            if (values[position].substring(0, 3).equals("[B]")) {
+                // Bold it
+                itemL.setText(values[position].substring(3));
+                itemR.setTypeface(null, Typeface.BOLD);
             } else {
                 itemL.setText(detailSplit[0]);
                 itemR.setText(detailSplit[1]);
@@ -57,10 +55,6 @@ class PlayerProfile extends ArrayAdapter<String> {
                 // Bold it
                 itemC.setText(values[position].substring(3));
                 itemC.setTypeface(null, Typeface.BOLD);
-            } else if (values[position].substring(0, 3).equals("[I]")) {
-                // Red it for injury
-                itemC.setText(values[position].substring(3));
-                itemC.setTextColor(Color.RED);
             } else {
                 itemC.setText(values[position]);
             }

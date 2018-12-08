@@ -2551,6 +2551,8 @@ public class League {
 
             coachCandidates.get(0).awards++;
             coachWinnerStrFull = coachStats;
+            coachCandidates.get(0).wonTopHC = true;
+
 
             return coachStats;
         } else {

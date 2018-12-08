@@ -754,7 +754,7 @@ public class Team {
 
     public void redshirtCPUPlayers() {
         int redshirts = 0;
-        int redshirtMax = HC.get(0).ratTalent / 10;
+        int redshirtMax = HC.get(0).ratTalent / 9;
         sortPlayers();
         groupPlayerStandingCSV();
         Collections.sort(teamFRs, new CompPlayer());
@@ -3572,20 +3572,21 @@ public class Team {
         if (playersInjuredAll.size() > 0 || playersRecovered.size() > 0 || playersSuspended.size() > 0) {
             String[] injuries;
 
-            injuries = new String[playersInjuredAll.size() + playersRecovered.size() + playersSuspended.size() + 2];
+            injuries = new String[playersInjuredAll.size() + playersRecovered.size() + playersSuspended.size() + 3];
 
+            injuries[0] = "[B]Players Injured";
             for (int i = 0; i < playersInjuredAll.size(); ++i) {
-                injuries[i] = playersInjuredAll.get(i).getPosNameYrOvrPot_Str();
+                injuries[i + 1]  = playersInjuredAll.get(i).getPosNameYrOvrPot_Str();
             }
 
-            injuries[playersInjuredAll.size()] = "Players Suspended:> ";
+            injuries[playersInjuredAll.size()+1] = "[B]Players Suspended";
             for (int i = 0; i < playersSuspended.size(); ++i) {
-                injuries[playersInjuredAll.size() + i + 1] = playersSuspended.get(i).getPosNameYrOvrPot_Str();
+                injuries[playersInjuredAll.size() + i + 2] = playersSuspended.get(i).getPosNameYrOvrPot_Str();
             }
 
-            injuries[playersInjuredAll.size() + playersSuspended.size() + 1] = "Players Recovered from Injuries:> ";
+            injuries[playersInjuredAll.size() + playersSuspended.size() + 2] = "[B]Players Recovered";
             for (int i = 0; i < playersRecovered.size(); ++i) {
-                injuries[playersInjuredAll.size() + playersSuspended.size() + i + 2] = playersRecovered.get(i).getPosNameYrOvrPot_Str();
+                injuries[playersInjuredAll.size() + playersSuspended.size() + i + 3] = playersRecovered.get(i).getPosNameYrOvrPot_Str();
             }
 
             return injuries;
@@ -3848,100 +3849,121 @@ public class Team {
     public ArrayList<String> getRoster() {
         ArrayList<String> roster = new ArrayList<>();
 
-        roster.add(" ,Coaching Staff, , ");
-        roster.add("HC," + getHC(0).name + ", ," + getHC(0).getHCOverall());
+        roster.add(" , ,Coaching Staff, , , ");
+            if (HC.size() > 0) {
+                String hs = " ";
+                if(HC.get(0).coachStatus().equals("Hot Seat")) hs = " [Hot Seat]";
+                roster.add("HC," + getHC(0).age + "," + getHC(0).name + "," + hs + "," + getHC(0).getHCOverall() + "," + getHC(0).getSeasonAwards());
+            }
 
-        roster.add(" , , , ");
-        roster.add(" ,Quarterbacks, , ");
+        roster.add(" , , , ,  ");
+        roster.add(" , ,Quarterbacks, , , ");
         int i = 0;
         for (Player p : teamQBs) {
             String starter = getRosterStatus(p, i, "QB");
-            roster.add("QB," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("QB,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Running Backs, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Running Backs, , , ");
         i=0;
         for (Player p : teamRBs) {
             String starter = getRosterStatus(p, i, "RB");
-            roster.add("RB," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("RB,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Wide Receivers, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Wide Receivers, , , ");
         i=0;
         for (Player p : teamWRs) {
             String starter = getRosterStatus(p, i, "WR");
-            roster.add("WR," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = " ";
+            if(p.ratImprovement > 0) imp = " (+" + p.ratImprovement + ")";
+            roster.add("WR,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Tight Ends, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Tight Ends, , , ");
         i=0;
         for (Player p : teamTEs) {
             String starter = getRosterStatus(p, i, "TE");
-            roster.add("TE," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("TE,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Offensive Linemen, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Offensive Linemen, , , ");
         i=0;
         for (Player p : teamOLs) {
             String starter = getRosterStatus(p, i, "OL");
-            roster.add("OL," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("OL,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Kickers, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Kickers, , , ");
         i=0;
         for (Player p : teamKs) {
             String starter = getRosterStatus(p, i, "K");
-            roster.add("K," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("K,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Defensive Linemen, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Defensive Linemen, , , ");
         i=0;
         for (Player p : teamDLs) {
             String starter = getRosterStatus(p, i, "DL");
-            roster.add("DL," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("DL,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Linebackers, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Linebackers, , , ");
         i=0;
         for (Player p : teamLBs) {
             String starter = getRosterStatus(p, i, "LB");
-            roster.add("LB," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("LB,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Cornerbacks, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Cornerbacks, , , ");
         i=0;
         for (Player p : teamCBs) {
             String starter = getRosterStatus(p, i, "CB");
-            roster.add("CB," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("CB,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
-        roster.add(" , , , ");
-        roster.add(" ,Safeties, , ");
+        roster.add(" , , , , ");
+        roster.add(" , ,Safeties, , , ");
         i=0;
         for (Player p : teamSs) {
             String starter = getRosterStatus(p, i, "S");
-            roster.add("S," + p.name + "," + starter + "," + p.ratOvr);
+            String imp = getRatImprovement(p);
+            roster.add("S,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
 
         return roster;
+    }
+
+    private String getRatImprovement(Player p) {
+        String imp = " ";
+        if(p.ratImprovement > 0) imp = " (+" + p.ratImprovement + ")";
+        return imp;
     }
 
     private String getRosterStatus(Player p, int i, String pos) {

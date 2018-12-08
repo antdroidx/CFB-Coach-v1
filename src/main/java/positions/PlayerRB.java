@@ -363,30 +363,6 @@ public class PlayerRB extends Player {
         }
     }
 
-    @Override
-    public ArrayList<String> getDetailStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-
-        pStats.add("Rush Speed: " + getLetterGrade(ratSpeed) + ">Rush Power: " + getLetterGrade(ratRushPower));
-        pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Evasion: " + getLetterGrade(ratEvasion));
-
-        pStats.add("Rush TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
-        pStats.add("Yds/Game: " + df2.format((double) (statsRushYards / getGames())) + " yds/g>Rush Att: " + statsRushAtt);
-        pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions + " ");
-        pStats.add("Rec TDs: " + statsRecTD + ">Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
-        if (statsKickRets > 0) {
-            pStats.add("Kick Rets: " + statsKickRets + ">Kick Ret Yards: " + statsKickRetYards + " yrds");
-            pStats.add("Kick Ret TDs: " + statsKickRetTDs + ">Ret Avg: " + (double) (statsKickRetYards / statsKickRets));
-        }
-        if (statsPuntRets > 0) {
-            pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
-            pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
-        }
-
-        pStats.add(" > ");
-        return pStats;
-    }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
@@ -394,6 +370,9 @@ public class PlayerRB extends Player {
 
         pStats.add("Rush Speed: " + getLetterGrade(ratSpeed) + ">Rush Power: " + getLetterGrade(ratRushPower));
         pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Evasion: " + getLetterGrade(ratEvasion));
+
+        pStats.add(" > ");
+        pStats.add("[B]SEASON STATS:");
 
         pStats.add("TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
