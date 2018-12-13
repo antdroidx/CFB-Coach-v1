@@ -284,17 +284,23 @@ public class PlayerS extends Player {
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
+        ArrayList<String> pStats = stringPlayerInfo();
+        pStats.add(" > ");
+        pStats.add("[B]PLAYER RATINGS");
+        ArrayList<String> attributes = stringPlayerAttributes();
+        for(String a : attributes) {
+            pStats.add(a);
+        }
         pStats.add("Coverage: " + getLetterGrade(ratCoverage) + ">Run Stop: " + getLetterGrade(ratRunStop));
         pStats.add("Tackling: " + getLetterGrade(ratTackle) + ">Speed: " + getLetterGrade(ratSpeed));
         pStats.add(" > ");
-        pStats.add("[B]SEASON STATS:");
+        pStats.add("[B]SEASON STATS");
 
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
 
         pStats.add(" > ");
-        pStats.add("[B]CAREER STATS:");
+        pStats.add("[B]CAREER STATS");
         pStats.addAll(getCareerStatsList());
         return pStats;
     }

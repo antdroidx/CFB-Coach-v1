@@ -2669,7 +2669,7 @@ public class MainActivity extends AppCompatActivity {
         String[] rankingsSelection =
                 {"Power Index", "Prestige", "Strength of Schedule", "Strength of Wins", "Points Per Game", "Opp Points Per Game",
                         "Yards Per Game", "Opp Yards Per Game", "Pass Yards Per Game", "Rush Yards Per Game",
-                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Recruiting Class", "Discipline Score", "Team Budget", "Team Facilities", "Coach - Overall", "Coach Score"};
+                        "Opp Pass YPG", "Opp Rush YPG", "TO Differential", "Off Talent", "Def Talent", "Team Chemistry", "Recruiting Class", "Discipline Score", "Team Budget", "Team Facilities", "Coach - Overall", "Coach Score"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -2688,7 +2688,7 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<String> rankings = simLeague.getTeamRankingsStr(position);
 
                         teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
-                        if (position == 15)
+                        if (position == 16)
                             teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
 
                         teamRankingsAdapter.clear();
@@ -3594,9 +3594,10 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         for(String s : teamRoster) {
-            sb.append(s +"\n");
+            if(s != null) sb.append(s +"\n");
         }
         roster.setMessage(sb);
+
 
         roster.setCancelable(false);
         AlertDialog teamWindow = roster.create();
@@ -3816,7 +3817,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewDialog);
         final TeamRankingsList teamRankingsAdapter =
-                new TeamRankingsList(this, simLeague.getTeamRankingsStr(15), userTeam.strRepWithPrestige());
+                new TeamRankingsList(this, simLeague.getTeamRankingsStr(16), userTeam.strRepWithPrestige());
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 

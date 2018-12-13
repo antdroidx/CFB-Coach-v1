@@ -178,16 +178,9 @@ public class Conference {
     private void confTVprofitSharing() {
         if (confTV && confTVContract > 0) {
             confTVContract--;
-            int yearBonus = (int) (Math.random() * 4);
-            for (int t = 0; t < confTeams.size(); t++) {
-                confTeams.get(t).teamPrestige += yearBonus;
-                if (yearBonus > 1)
-                    confTeams.get(t).HC.get(0).baselinePrestige += Math.round(yearBonus / 2);  //make the coach's job slightly more challenging
-                else confTeams.get(t).HC.get(0).baselinePrestige += Math.random() * 2;
-            }
-            league.newsStories.get(league.currentWeek + 1).add(TV + " Annual Distribution>Each member of the " + confName + " Conference will be receiving $" + confTVBonus + " plus an additional " + yearBonus + " prestige bonus this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
+            league.newsStories.get(league.currentWeek + 1).add(TV + " Annual Distribution>Each member of the " + confName + " Conference will be receiving $" + confTVBonus + " this off-season as part of their network contract. The current contract will expire in " + confTVContract + " years.");
 
-            league.newsTV.add(TV + " Annual Profit Sharing:\n\t+$" + confTVBonus + " budget bonus.\n\t+" + yearBonus + " prestige bonus.\nCurrent contract will expire in " + confTVContract + " years.");
+            league.newsTV.add(TV + " Annual Profit Sharing:\n\t+$" + confTVBonus + " budget bonus.\nCurrent contract will expire in " + confTVContract + " years.");
             league.updateTV = true;
             if(confTVContract <= 0) confTV = false;
 
@@ -285,12 +278,23 @@ public class Conference {
         //schedule in conf matchups
         int robinWeek = 0;
         int robinCounter = 1;
-        //int confWeeks = 9;
         int confSize = confTeams.size() - 1;
         oocGames = getOOCGames();
 
         int confWeeks = 12 - oocGames;
         if(league.enableUnivProRel) confWeeks = 12;
+
+        if(confTeams.size() % 2 != 0) {
+            confTeams.add(new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league));
+            confSize++;
+            confWeeks++;
+        } else {
+            Team b = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
+            for (int g = 0; g < confTeams.size(); ++g) {
+                Team a = confTeams.get(g);
+                a.gameSchedule.add(new Game(a, b, "BYE WEEK"));
+            }
+        }
 
         for (int r = 0; r < confWeeks; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
@@ -387,12 +391,7 @@ public class Conference {
             for (int r = 0; r < divWeeks; ++r) {
                 for (int g = 0; g < (divisions.get(d).divTeams.size()/ 2); ++g) {
                     Team a = divisions.get(d).divTeams.get((r + g) % divTeams);
-                    Team b;
-                    if (g == 0) {
-                        b = divisions.get(d).divTeams.get(divTeams);
-                    } else {
-                        b = divisions.get(d).divTeams.get((divTeams - g + r) % divTeams);
-                    }
+                    Team b = divisions.get(d).divTeams.get((divTeams + r + g - 1) % divTeams);
 
                     Game gm;
 

@@ -51,6 +51,7 @@ import comparator.CompPuntRetYards;
 import comparator.CompTeamBowls;
 import comparator.CompTeamBudget;
 import comparator.CompTeamCC;
+import comparator.CompTeamChemistry;
 import comparator.CompTeamConfWins;
 import comparator.CompTeamDefTalent;
 import comparator.CompTeamDisciplineScore;
@@ -119,6 +120,7 @@ public class League {
     public int leagueOffTal;
     public int leagueDefTal;
     public int confAvg;
+    public double leagueChemistry;
 
     //Current week, 1-14
     public int currentWeek;
@@ -570,6 +572,16 @@ public class League {
                 }
 
                 for (int b = bowlTemp.length; b < bowlNamesText.split(",").length; b++) {
+                    bowlNames[b] = bowlNamesText.split(",")[b];
+                }
+            }
+
+            //fix bowl null
+            if (bowlNames.length > 0 && bowlNames[0] == null) {
+
+                bowlNames = new String[bowlNamesText.split(",").length];
+
+                for (int b = 0; b < bowlNamesText.split(",").length; b++) {
                     bowlNames[b] = bowlNamesText.split(",")[b];
                 }
             }
@@ -1411,6 +1423,7 @@ public class League {
 
         leagueOffTal = getAverageOffTalent();
         leagueDefTal = getAverageDefTalent();
+        leagueChemistry = getAverageTeamChemistry();
     }
 
     /**
@@ -1571,6 +1584,15 @@ public class League {
         return avgPrestige / conferences.size();
     }
 
+    //get League Avg Chemistry
+    public double getAverageTeamChemistry() {
+        double avg = 0;
+        for (int i = 0; i < teamList.size(); ++i) {
+            avg += teamList.get(i).teamChemistry;
+        }
+        return avg / teamList.size();
+    }
+
 
     //News on opening weekend
     public void preseasonNews() {
@@ -1597,11 +1619,11 @@ public class League {
 
         StringBuilder newsFreshman = new StringBuilder();
         for (int i = 0; i < 25; ++i) {
-            newsFreshman.append((i + 1) + ". " + freshmen.get(i).position + " " + freshmen.get(i).name + ", " + freshmen.get(i).team.name + "\n\n");
+            newsFreshman.append((i + 1) + ". " + freshmen.get(i).position + " " + freshmen.get(i).name + ", " + freshmen.get(i).team.name + " : Ovr: " + freshmen.get(i).ratOvr + "\n\n");
         }
         StringBuilder newsRedshirts = new StringBuilder();
         for (int i = 0; i < 25; ++i) {
-            newsRedshirts.append((i + 1) + ". " + redshirts.get(i).position + " " + redshirts.get(i).name + ", " + redshirts.get(i).team.name + "\n\n");
+            newsRedshirts.append((i + 1) + ". " + redshirts.get(i).position + " " + redshirts.get(i).name + ", " + redshirts.get(i).team.name + " : Ovr: " + freshmen.get(i).ratOvr + "\n\n");
         }
 
         newsStories.get(0).add("Impact Freshmen>This year's top freshmen who are expected to play right away:\n\n" + newsFreshman);
@@ -1625,7 +1647,7 @@ public class League {
                 teamList.get(i).bowlBan = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.30;
                 teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.30;
-                teamList.get(i).teamDisciplineScore = teamList.get(i).disciplineStart;
+                teamList.get(i).teamDisciplineScore = 50;
             }
         }
     }
@@ -1634,7 +1656,7 @@ public class League {
 
 
         //Team Facilities Upgrade -- if teams have enough cash, they will spend on this. helps progression of players
-        int baselineCost = 17500;
+        int baselineCost = 15000;
         for (int i = 0; i < teamList.size(); i++) {
             if (teamList.get(i).teamBudget > baselineCost * (teamList.get(i).teamFacilities + 1)) {
                 //spend cash, upgrade facilities
@@ -1753,17 +1775,17 @@ public class League {
             if (Math.random() > disciplineChance) {
                 int teamDis = teamList.get(t).getTeamDiscipline();
                 if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
-                    teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 4);
+                    teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 5);
                     teamList.get(t).disciplinePts -= (int) (Math.random() * 4);
                     teamDiscipline.add(teamList.get(t).name);
                     teamList.get(t).disciplinePlayer();
-                    teamList.get(t).teamDisciplineScore -= ((int) (Math.random() * 8) + 1);
-                    teamList.get(t).teamBudget -= ((int) (Math.random() * 6 * 100));
+                    teamList.get(t).teamDisciplineScore -= ((int) (Math.random() * 7) + 3);
+                    teamList.get(t).teamBudget -= ((int) (Math.random() * 10 * 100));
                 } else {
                     teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
-                    teamList.get(t).teamDisciplineScore += (int) (Math.random() * 5);
-                    if (teamList.get(t).teamDisciplineScore > 100)
-                        teamList.get(t).teamDisciplineScore = 100;
+                    teamList.get(t).teamDisciplineScore += (int) (Math.random() * 4);
+                    if (teamList.get(t).teamDisciplineScore > 99)
+                        teamList.get(t).teamDisciplineScore = 99;
                 }
             }
         }
@@ -3278,31 +3300,33 @@ public class League {
      * @param g bowl game to be played
      */
     private void playBowl(Game g) {
-        g.playGame();
-        if (g.homeScore > g.awayScore) {
-            g.homeTeam.semiFinalWL = "BW";
-            g.awayTeam.semiFinalWL = "BL";
-            g.homeTeam.totalBowls++;
-            g.awayTeam.totalBowlLosses++;
-            g.homeTeam.HC.get(0).bowlwins++;
-            g.awayTeam.HC.get(0).bowllosses++;
-            newsStories.get(currentWeek + 1).add(
-                    g.homeTeam.name + " wins the " + g.gameName + "!>" +
-                            g.homeTeam.strRep() + " defeats " + g.awayTeam.strRep() +
-                            " in the " + g.gameName + ", winning " + g.homeScore + " to " + g.awayScore + "."
-            );
-        } else {
-            g.homeTeam.semiFinalWL = "BL";
-            g.awayTeam.semiFinalWL = "BW";
-            g.homeTeam.totalBowlLosses++;
-            g.awayTeam.totalBowls++;
-            g.awayTeam.HC.get(0).bowlwins++;
-            g.homeTeam.HC.get(0).bowllosses++;
-            newsStories.get(currentWeek + 1).add(
-                    g.awayTeam.name + " wins the " + g.gameName + "!>" +
-                            g.awayTeam.strRep() + " defeats " + g.homeTeam.strRep() +
-                            " in the " + g.gameName + ", winning " + g.awayScore + " to " + g.homeScore + "."
-            );
+        if(!g.hasPlayed) {
+            g.playGame();
+            if (g.homeScore > g.awayScore) {
+                g.homeTeam.semiFinalWL = "BW";
+                g.awayTeam.semiFinalWL = "BL";
+                g.homeTeam.totalBowls++;
+                g.awayTeam.totalBowlLosses++;
+                g.homeTeam.HC.get(0).bowlwins++;
+                g.awayTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek + 1).add(
+                        g.homeTeam.name + " wins the " + g.gameName + "!>" +
+                                g.homeTeam.strRep() + " defeats " + g.awayTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.homeScore + " to " + g.awayScore + "."
+                );
+            } else {
+                g.homeTeam.semiFinalWL = "BL";
+                g.awayTeam.semiFinalWL = "BW";
+                g.homeTeam.totalBowlLosses++;
+                g.awayTeam.totalBowls++;
+                g.awayTeam.HC.get(0).bowlwins++;
+                g.homeTeam.HC.get(0).bowllosses++;
+                newsStories.get(currentWeek + 1).add(
+                        g.awayTeam.name + " wins the " + g.gameName + "!>" +
+                                g.awayTeam.strRep() + " defeats " + g.homeTeam.strRep() +
+                                " in the " + g.gameName + ", winning " + g.awayScore + " to " + g.homeScore + "."
+                );
+            }
         }
     }
 
@@ -4634,6 +4658,11 @@ Then conferences can see if they want to add them to their list if the teams mee
             teamList.get(t).rankTeamFacilities = t + 1;
         }
 
+        Collections.sort(teamList, new CompTeamChemistry());
+        for (int t = 0; t < teamList.size(); ++t) {
+            teamList.get(t).rankTeamChemistry = t + 1;
+        }
+
         if (currentWeek == 0) {
             Collections.sort(teamList, new CompTeamRecruitClass());
             for (int t = 0; t < teamList.size(); ++t) {
@@ -4775,40 +4804,47 @@ Then conferences can see if they want to add them to their list if the teams mee
                 }
                 break;
             case 15:
+                Collections.sort(teams, new CompTeamChemistry());
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + df2.format(t.getTeamChemistry()));
+                }
+                break;
+            case 16:
                 Collections.sort(teams, new CompTeamRecruitClass());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + df2.format(t.getRecruitingClassRat()));
                 }
                 break;
-            case 16:
+            case 17:
                 Collections.sort(teams, new CompTeamDisciplineScore());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + (t.teamDisciplineScore) + "%");
                 }
                 break;
-            case 17:
+            case 18:
                 Collections.sort(teams, new CompTeamBudget());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",$" + t.teamBudget);
                 }
                 break;
-            case 18:
+            case 19:
                 Collections.sort(teams, new CompTeamFacilities());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",L" + t.teamFacilities);
                 }
                 break;
-            case 19:
+            case 20:
                 Collections.sort(HC, new CompCoachOvr());
                 for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).team.name + "," + HC.get(i).getHCOverall());
                 }
                 break;
-            case 20:
+            case 21:
                 Collections.sort(HC, new CompCoachScore());
                 for (int i = 0; i < HC.size(); ++i) {
                     rankings.add((i + 1) + ". ," + HC.get(i).team.name + "," + HC.get(i).getCoachScore());

@@ -495,17 +495,17 @@ Player {
     }
 
     public int getProgression() {
-        int num = (ratPot * 2 + team.HC.get(0).ratTalent * 1 + 3*team.teamFacilities) / 3;
+        int num = (ratPot * 2 + team.HC.get(0).ratTalent * 1 + 3*team.teamFacilities + (int)(Math.random() * getChemistryProgression())) / 3;
         return num;
     }
 
     public int getProgressionOff() {
-        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff + 7*team.teamFacilities) / 7;
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratOff + 7*team.teamFacilities + (int)(Math.random() * getChemistryProgression())) / 7;
         return num;
     }
 
     public int getProgressionDef() {
-        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef + 7*team.teamFacilities) / 7;
+        int num = (ratPot * 4 + team.HC.get(0).ratTalent * 2 + team.HC.get(0).ratDef + 7*team.teamFacilities + (int)(Math.random() * getChemistryProgression())) / 7;
         return num;
     }
 
@@ -521,18 +521,26 @@ Player {
         return games;
     }
 
+    public double getChemistryProgression() {
+        return team.teamChemistry - team.league.getAverageTeamChemistry();
+    }
+
     public void durabilityProgression() {
         ratDur += Math.random() * 2*year;
     }
 
-    public ArrayList<String> stringPlayerAttributes() {
+    public ArrayList<String> stringPlayerInfo() {
         ArrayList<String> pAttr = new ArrayList<>();
         pAttr.add("Team: " + team.name + ">Overall: " + ratOvr);
         pAttr.add("Height " + getHeight() + ">Weight: " + getWeight());
         pAttr.add("Home State: " + getHomeState(homeState) + ">Scout Grade: " + getScoutingGradeString());
+        return pAttr;
+    }
+    
+    public ArrayList<String> stringPlayerAttributes() {
+        ArrayList<String> pAttr = new ArrayList<>();
         pAttr.add("Personality: " + getLetterGrade(personality) + " > " + getStatus());
         pAttr.add("Durability: " + getLetterGrade(ratDur) + ">Football IQ: " + getLetterGrade(ratFootIQ));
         return pAttr;
     }
-
 }

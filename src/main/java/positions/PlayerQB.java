@@ -360,12 +360,18 @@ public class PlayerQB extends Player {
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
+        ArrayList<String> pStats = stringPlayerInfo();
+        pStats.add(" > ");
+        pStats.add("[B]PLAYER RATINGS");
+        ArrayList<String> attributes = stringPlayerAttributes();
+        for(String a : attributes) {
+            pStats.add(a);
+        }
         pStats.add("Pass Strength: " + getLetterGrade(ratPassPow) + ">Accuracy: " + getLetterGrade(ratPassAcc));
         pStats.add("Speed: " + getLetterGrade(ratSpeed) + ">Evasion: " + getLetterGrade(ratEvasion));
 
         pStats.add(" > ");
-        pStats.add("[B]SEASON STATS:");
+        pStats.add("[B]SEASON STATS");
 
         pStats.add("Passer Rating " + df2.format(getPasserRating()) + ">Comp Percent: " + df2.format(getPassPCT()) + "%");
         pStats.add("Touchdowns: " + statsPassTD + ">Interceptions: " + statsInt);
@@ -374,7 +380,7 @@ public class PlayerQB extends Player {
         pStats.add("Rush Yards: " + (statsRushYards) + ">Rush TDs: " + statsRushTD);
         pStats.add("Fumbles: " + statsFumbles + "> Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
         pStats.add(" > ");
-        pStats.add("[B]CAREER STATS:");
+        pStats.add("[B]CAREER STATS");
         pStats.addAll(getCareerStatsList());
         return pStats;
     }

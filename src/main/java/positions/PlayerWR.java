@@ -340,7 +340,13 @@ public class PlayerWR extends Player {
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
+        ArrayList<String> pStats = stringPlayerInfo();
+        pStats.add(" > ");
+        pStats.add("[B]PLAYER RATINGS");
+        ArrayList<String> attributes = stringPlayerAttributes();
+        for(String a : attributes) {
+            pStats.add(a);
+        }
         pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Rec Speed: " + getLetterGrade(ratSpeed));
         pStats.add("Evasion: " + getLetterGrade(ratEvasion) + ">Jumping: " + getLetterGrade(ratJump));
         pStats.add(" > ");

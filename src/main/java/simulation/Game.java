@@ -107,7 +107,7 @@ public class Game implements Serializable {
     private int returnYards;
 
     private int homeOffense, homeDefense, awayOffense, awayDefense;
-    private int tacticalCoach = 82;
+    private int tacticalCoach = 83;
 
     //budget sales
     private int tickets = 10;
@@ -180,6 +180,20 @@ public class Game implements Serializable {
             adv = Math.round((homeTeam.HC.get(0).ratOff - awayTeam.HC.get(0).ratDef) / 5);
         } else {
             adv = Math.round((awayTeam.HC.get(0).ratOff - homeTeam.HC.get(0).ratDef) / 5);
+        }
+        adv += getTeamChemistryAdv();
+        if (adv > 4) adv = 4;
+        if (adv < -4) adv = -4;
+        return adv;
+    }
+
+    private int getTeamChemistryAdv() {
+        int adv = 0;
+
+        if (gamePoss) {
+            adv = (int)(Math.round((homeTeam.getTeamChemistry() - awayTeam.getTeamChemistry()) / 5));
+        } else {
+            adv = (int)(Math.round((awayTeam.getTeamChemistry() - homeTeam.getTeamChemistry()) / 5));
         }
         if (adv > 3) adv = 3;
         if (adv < -3) adv = -3;
@@ -3231,7 +3245,6 @@ public class Game implements Serializable {
     }
 
     private int normalize(int rating) {
-        //return (100 + rating) / 2;
         return rating;
     }
 

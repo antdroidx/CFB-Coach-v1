@@ -108,6 +108,7 @@ public class Team {
     public int teamPrestige;
     public int teamPrestigeStart;
     public int teamDiscipline;
+    public double teamChemistry;
 
     //Calculated Stats
     public float teamOffTalent;
@@ -139,6 +140,7 @@ public class Team {
     public int rankTeamDisciplineScore;
     public int rankTeamBudget;
     public int rankTeamFacilities;
+    public int rankTeamChemistry;
 
     //prestige/talent improvements
     public int confPrestige;
@@ -1034,6 +1036,7 @@ public class Team {
         teamOffTalent = getOffTalent();
         teamDefTalent = getDefTalent();
         teamPollScore = teamPrestige + teamOffTalent + teamDefTalent;
+        teamChemistry = getTeamChemistry();
     }
 
     /**
@@ -1108,6 +1111,19 @@ public class Team {
             rating += roster.get(i).personality;
         }
         return rating / roster.size();
+    }
+
+    /**
+     * team disicipline rating
+     */
+    public double getTeamChemistry() {
+        double rating = 0;
+        ArrayList<Player> roster = getAllPlayers();
+        for (int i = 0; i < roster.size(); ++i) {
+            rating += roster.get(i).personality;
+            rating += roster.get(i).ratFootIQ;
+        }
+        return rating / (2*roster.size());
     }
 
 
@@ -1491,7 +1507,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige && (teamPrestige - teamPrestigeStart) > 2 || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige && (teamPrestige - teamPrestigeStart) > 2) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && (teamPrestige - teamPrestigeStart) > 2 || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige && (teamPrestige - teamPrestigeStart) > 2) {
                     if (Math.random() > 0.40) {
                         HC.get(0).contractLength = 2;
                         HC.get(0).contractYear = 0;
@@ -1511,14 +1527,14 @@ public class Team {
                         }
                         HC.remove(0);
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && rankTeamPrestige > league.conferences.get(league.getConfNumber(conference)).confTeams.get(2).rankTeamPrestige && league.isCareerMode() || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && league.isCareerMode() || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -3800,6 +3816,10 @@ public class Team {
         ts0.append("Def Talent" + ",");
         ts0.append(getRankStr(rankTeamDefTalent) + "%\n");
 
+        ts0.append(df2.format(teamChemistry) + ",");
+        ts0.append("Team Chemistry" + ",");
+        ts0.append(getRankStr(rankTeamChemistry) + "%\n");
+
         ts0.append(teamPrestige + ",");
         ts0.append("Prestige" + ",");
         ts0.append(getRankStr(rankTeamPrestige) + "%\n");
@@ -3853,7 +3873,8 @@ public class Team {
             if (HC.size() > 0) {
                 String hs = " ";
                 if(HC.get(0).coachStatus().equals("Hot Seat")) hs = " [Hot Seat]";
-                roster.add("HC," + getHC(0).age + "," + getHC(0).name + "," + hs + "," + getHC(0).getHCOverall() + "," + getHC(0).getSeasonAwards());
+                String imp = getRatImprovement(HC.get(0));
+                roster.add("HC," + getHC(0).age + "," + getHC(0).name + "," + hs + "," + getHC(0).getHCOverall() + "," + getHC(0).getSeasonAwards() + "," + imp);
             }
 
         roster.add(" , , , ,  ");
@@ -3963,6 +3984,7 @@ public class Team {
     private String getRatImprovement(Player p) {
         String imp = " ";
         if(p.ratImprovement > 0) imp = " (+" + p.ratImprovement + ")";
+        if(p.ratImprovement < 0) imp = " (" + p.ratImprovement + ")";
         return imp;
     }
 

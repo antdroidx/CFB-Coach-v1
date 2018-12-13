@@ -211,10 +211,10 @@ public class HeadCoach extends Player {
         double def = avgYards - team.teamOppYards;
         double offTal = offTalent - team.teamStartOffTal;
         double defTal = defTalent - team.teamStartDefTal;
-        double offpts = ((off / avgYards) + (offTal / offTalent)) * 5;
-        double defpts = ((def / avgYards) + (defTal / defTalent)) * 5;
+        double offpts = ((off / avgYards) + (offTal / offTalent)) * 4;
+        double defpts = ((def / avgYards) + (defTal / defTalent)) * 4;
         double coachScore = (getCoachScore() - team.confPrestige)/10;
-        if (coachScore < -3) coachScore = -3;
+        if (coachScore < -4) coachScore = -4;
 
         ratOff += (2*prestigeDiff + offpts + coachScore)/4;
         if (ratOff > 95) ratOff = 95;
@@ -287,18 +287,18 @@ public class HeadCoach extends Player {
             pStats.add("Contract Years Left: " + (contractLength - contractYear - 1) + ">Contract Length: " + contractLength);
         }
         pStats.add(" > ");
-        pStats.add("[B]COACHING STYLE:");
+        pStats.add("[B]COACHING STYLE");
 
         pStats.add("Offense: " + team.playbookOff.getStratName() + ">Defense: " + team.playbookDef.getStratName());
         pStats.add("Offense: " + ratOff + ">Defense: " + ratDef);
         pStats.add("Talent Progression: " + ratTalent + ">Discipline: " + ratDiscipline);
         pStats.add(" > ");
-        pStats.add("[B]TEAM STATUS:");
+        pStats.add("[B]TEAM STATUS");
 
         pStats.add("Baseline Prestige: " + baselinePrestige + ">Team Prestige: " + team.teamPrestige);
         pStats.add("Job Status: " + coachStatus() + "> ");
 
-        pStats.add("[B]CAREER STATS:");
+        pStats.add("[B]CAREER STATS");
         pStats.addAll(getCareerStatsList());
         return pStats;
     }

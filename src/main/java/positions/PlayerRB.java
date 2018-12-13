@@ -366,13 +366,18 @@ public class PlayerRB extends Player {
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
-        ArrayList<String> pStats = stringPlayerAttributes();
-
+        ArrayList<String> pStats = stringPlayerInfo();
+        pStats.add(" > ");
+        pStats.add("[B]PLAYER RATINGS");
+        ArrayList<String> attributes = stringPlayerAttributes();
+        for(String a : attributes) {
+            pStats.add(a);
+        }
         pStats.add("Rush Speed: " + getLetterGrade(ratSpeed) + ">Rush Power: " + getLetterGrade(ratRushPower));
         pStats.add("Catching: " + getLetterGrade(ratCatch) + ">Evasion: " + getLetterGrade(ratEvasion));
 
         pStats.add(" > ");
-        pStats.add("[B]SEASON STATS:");
+        pStats.add("[B]SEASON STATS");
 
         pStats.add("TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
@@ -388,7 +393,7 @@ public class PlayerRB extends Player {
             pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
         }
         pStats.add(" > ");
-        pStats.add("[B]CAREER STATS:");
+        pStats.add("[B]CAREER STATS");
         pStats.addAll(getCareerStatsList());
         return pStats;
     }
