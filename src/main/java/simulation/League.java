@@ -164,7 +164,7 @@ public class League {
     private ArrayList<String> transfersList;
     public ArrayList<Player> freshmen;
     public ArrayList<Player> redshirts;
-    private String[] bowlNames;
+    public String[] bowlNames;
 
     //Game Options
     public boolean fullGameLog;
@@ -187,7 +187,7 @@ public class League {
     int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 27;
     public final int regSeasonWeeks = 13; //original = 13  bye week =14
-    private final double confRealignmentChance = 0.23; //chance of event
+    private final double confRealignmentChance = 0.25; //chance of event
     private final double realignmentChance = 0.35; //chance of invite
     private final String crYear1 = "2";
     private final String crYear2 = "7";
@@ -212,7 +212,10 @@ public class League {
 
     public final String[] states = {"AS", "AZ", "CA", "HI", "ID", "MT", "NV", "OR", "UT", "WA", "CO", "KS", "MO", "NE", "NM", "ND", "OK", "SD", "TX", "WY", "IL", "IN", "IA", "KY", "MD", "MI", "MN", "OH", "TN", "WI", "CT", "DE", "ME", "MA", "NH", "NJ", "NY", "PA", "RI", "VT", "AL", "AK", "FL", "GA", "LA", "MS", "NC", "SC", "VA", "WV"};
 
-    private final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl, Chick Bowl, Empire Bowl, Rainbow Bowl, Mushroom Bowl, Coffee Bowl";
+    public final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl, Chick Bowl, Empire Bowl, Rainbow Bowl, Mushroom Bowl, Coffee Bowl";
+
+    public String[] teamsFCS = {"Alabama State", "Albany", "Cal-Poly", "Central Arkansas", "Chattanooga", "Columbia", "Dayton", "Deleware", "Eastern Wash", "Eastern Tenn", "Eastern Ken", "Harvard", "Yale", "Princeton", "Grambling", "Georgetown", "Idaho", "Idaho State", "James Madison", "Maine", "Miss Valley", "Montana", "New Hampshire", "North Dakota", "North Dakota St", "South Dakota", "South Dakota St", "Northern Arizona", "Northern Colorado", "Portland", "Rhode Island", "Sacramento", "Southern", "Southern TX", "Western llinois", "Vanilla", "Youngstown"};
+
 
     /**
      * Creates League, sets up Conferences, reads team names and conferences from file.
@@ -1246,6 +1249,17 @@ public class League {
             }
         }
 
+        //setup FCS Team Database
+
+        //get list of team names
+        ArrayList<String> leagueTeams = new ArrayList<>();
+        for(int i = 0; i < teamList.size(); i++) {
+            leagueTeams.add(teamList.get(i).name);
+        }
+
+        for(int i = 0; i < teamsFCS.length; i++) {
+            if(leagueTeams.contains(teamsFCS[i])) teamsFCS[i] = "FCS Team";
+        }
 
         //Setup OOC v3 Scheduling
         if (!enableUnivProRel) {
@@ -1271,7 +1285,7 @@ public class League {
                     Team b;
 
                     if (availTeamsB.isEmpty()) {
-                        b = new Team("FCS " + states[(int) (states.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 45), "FCS1", 0, this, true);
+                        b = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 45), "FCS1", 0, this, true);
                     } else {
                         int selTeamB = (int) (availTeamsB.size() * Math.random());
                         b = availTeamsB.get(selTeamB);
@@ -1279,7 +1293,7 @@ public class League {
 
                     Game gm;
                     gm = new Game(a, b, "OOC");
-
+                    Log.d("league", "setupSeason: " + a.name + " vs " + b.name);
                     if (!a.conference.contains("Independent") && !a.conference.contains("FCS")) {
                         a.gameSchedule.add(week, gm);
                     }
@@ -1675,6 +1689,9 @@ public class League {
         updateSuspensions();
 
         disciplineAction();
+
+        //Clear "next week" scoreboard blank data
+        weeklyScores.get(currentWeek+1).clear();
 
         if (currentWeek <= regSeasonWeeks-1) {
             for (int i = 0; i < conferences.size(); ++i) {
@@ -2957,6 +2974,8 @@ public class League {
             playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
             newsStories.get(currentWeek + 1).add("Upcoming Sweet 16 Playoff Games!>" + playoffTeams.get(i).getStrAbbrWL() + " will battle with " + playoffTeams.get(15 - i).getStrAbbrWL() +
                     " in the " + getYear() + " Sweet 16 round of the Playoffs!");
+            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">#" + cfpGames[i].awayTeam.rankTeamPollScore + " " + cfpGames[i].awayTeam.name + "\n" + "#" + cfpGames[i].homeTeam.rankTeamPollScore + " " + cfpGames[i].homeTeam.name);
+
         }
 
         //Heal teams
@@ -2975,6 +2994,7 @@ public class League {
             playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
             newsStories.get(currentWeek + 1).add("Elite 8 Match-up Announced!>" + playoffTeams.get(i - 8).getStrAbbrWL() + " will take on " + playoffTeams.get(15 - i).getStrAbbrWL() +
                     " in the " + getYear() + " Elite 8!");
+            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">#" + cfpGames[i].awayTeam.rankTeamPollScore + " " + cfpGames[i].awayTeam.name + "\n" + "#" + cfpGames[i].homeTeam.rankTeamPollScore + " " + cfpGames[i].homeTeam.name);
         }
     }
 
@@ -2987,6 +3007,7 @@ public class League {
             playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
             newsStories.get(currentWeek + 1).add("Final Four Announced!>" + playoffTeams.get(i - 12).getStrAbbrWL() + " and " + playoffTeams.get(15 - i).getStrAbbrWL() +
                     " will play each other in the " + getYear() + " Final Four!");
+            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">#" + cfpGames[i].awayTeam.rankTeamPollScore + " " + cfpGames[i].awayTeam.name + "\n" + "#" + cfpGames[i].homeTeam.rankTeamPollScore + " " + cfpGames[i].homeTeam.name);
         }
     }
 
@@ -2998,6 +3019,7 @@ public class League {
         playoffTeams.get(1).gameSchedule.add(ncg);
         newsStories.get(currentWeek + 1).add("The Upcoming National Title Game!>" + playoffTeams.get(0).getStrAbbrWL() + " and " + playoffTeams.get(1).getStrAbbrWL() +
                 " are the last two teams left in the " + getYear() + " College Football Playoffs. These teams will compete next weekend for the National Title!");
+        weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">#" + ncg.awayTeam.rankTeamPollScore + " " + ncg.awayTeam.name + "\n" + "#" + ncg.homeTeam.rankTeamPollScore + " " + ncg.homeTeam.name);
     }
 
     public void playExpPlayoffSweet16() {
@@ -3161,6 +3183,9 @@ public class League {
         newsStories.get(currentWeek + 1).add("Playoff Teams Announced!>" + bowlTeams.get(0).getStrAbbrWL() + " will play " + bowlTeams.get(3).getStrAbbrWL() +
                 " , while " + bowlTeams.get(1).getStrAbbrWL() + " will play " + bowlTeams.get(2).getStrAbbrWL() + " in next week's College Football Playoff semi-final round. The winners will compete for this year's National Title!");
 
+        weeklyScores.get(currentWeek + 4).add(semiG14.gameName + ">#" + semiG14.awayTeam.rankTeamPollScore + " " + semiG14.awayTeam.name + "\n" + "#" + semiG14.homeTeam.rankTeamPollScore + " " + semiG14.homeTeam.name);
+        weeklyScores.get(currentWeek + 4).add(semiG23.gameName + ">#" + semiG23.awayTeam.rankTeamPollScore + " " + semiG23.awayTeam.name + "\n" + "#" + semiG23.homeTeam.rankTeamPollScore + " " + semiG23.homeTeam.name);
+
 
         //schedule bowl games teams ranked #5-12
         int g = 0; //game #
@@ -3174,6 +3199,10 @@ public class League {
                 bowlTeams.get(i + 4).gameSchedule.add(bowlGames[g]);
                 newsStories.get(currentWeek + 1).add(bowlGames[g].gameName + " Announced!>" + "#" + bowlTeams.get(i).rankTeamPollScore + " " + bowlTeams.get(i).getStrAbbrWL() + " will compete with " + "#" + bowlTeams.get(i + 4).rankTeamPollScore + " " + bowlTeams.get(i + 4).getStrAbbrWL() +
                         " in the " + getYear() + " " + bowlGames[g].gameName + "!");
+                if(g < 6) weeklyScores.get(currentWeek + 4).add(bowlGames[g].gameName + ">#" + bowlGames[g].awayTeam.rankTeamPollScore + " " + bowlGames[g].awayTeam.name + "\n" + "#" + bowlGames[g].homeTeam.rankTeamPollScore + " " + bowlGames[g].homeTeam.name);
+                else if(g < 16) weeklyScores.get(currentWeek + 3).add(bowlGames[g].gameName + ">#" + bowlGames[g].awayTeam.rankTeamPollScore + " " + bowlGames[g].awayTeam.name + "\n" + "#" + bowlGames[g].homeTeam.rankTeamPollScore + " " + bowlGames[g].homeTeam.name );
+                else weeklyScores.get(currentWeek + 2).add(bowlGames[g].gameName + ">#" + bowlGames[g].awayTeam.rankTeamPollScore + " " + bowlGames[g].awayTeam.name + "\n" + "#" + bowlGames[g].homeTeam.rankTeamPollScore + " " + bowlGames[g].homeTeam.name);
+
                 g++;
             }
             t = t + 8;
@@ -3292,6 +3321,8 @@ public class League {
         semi23winner.gameSchedule.add(ncg);
         newsStories.get(currentWeek + 1).add("Upcoming National Title Game!>" + semi14winner.getStrAbbrWL() + " will compete with " + semi23winner.getStrAbbrWL() +
                 " for the " + getYear() + " College Football National Title!");
+        weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">#" + ncg.awayTeam.rankTeamPollScore + " " + ncg.awayTeam.name + "\n" + "#" + ncg.homeTeam.rankTeamPollScore + " " + ncg.homeTeam.name);
+
     }
 
     /**
@@ -3403,6 +3434,7 @@ public class League {
     public void advanceHC() {
         coachList.clear();
         coachStarList.clear();
+        Collections.sort(teamList, new CompTeamPrestige());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceHC(leagueRecords, teamList.get(t).teamRecords);
         }
@@ -3935,61 +3967,102 @@ public class League {
 
         //The remaining user players transfer to FCS/Div II Football
 
-        for (int i = 0; i < teamList.size(); ++i) {
-            teamList.get(i).sortPlayers();
-        }
-
         for (int i = 0; i < transferQBs.size(); ++i) {
-            if (transferQBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (FCS)\n\n");
+            if(Math.random() > .50) {
+                if (transferQBs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferQBs.get(i).team.teamQBs.add(transferQBs.get(i));
             }
         }
         for (int i = 0; i < transferRBs.size(); ++i) {
-            if (transferRBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferRBs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferRBs.get(i).team.teamRBs.add(transferRBs.get(i));
             }
         }
         for (int i = 0; i < transferWRs.size(); ++i) {
-            if (transferWRs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferWRs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferWRs.get(i).team.teamWRs.add(transferWRs.get(i));
             }
         }
         for (int i = 0; i < transferTEs.size(); ++i) {
-            if (transferTEs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferTEs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferTEs.get(i).team.teamTEs.add(transferTEs.get(i));
             }
         }
         for (int i = 0; i < transferOLs.size(); ++i) {
-            if (transferOLs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferOLs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferOLs.get(i).team.teamOLs.add(transferOLs.get(i));
             }
         }
         for (int i = 0; i < transferKs.size(); ++i) {
-            if (transferKs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferKs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferKs.get(i).team.teamKs.add(transferKs.get(i));
             }
         }
         for (int i = 0; i < transferDLs.size(); ++i) {
-            if (transferDLs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferDLs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferDLs.get(i).team.teamDLs.add(transferDLs.get(i));
             }
         }
         for (int i = 0; i < transferLBs.size(); ++i) {
-            if (transferLBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferLBs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferLBs.get(i).team.teamLBs.add(transferLBs.get(i));
             }
         }
         for (int i = 0; i < transferCBs.size(); ++i) {
-            if (transferCBs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferCBs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferCBs.get(i).team.teamCBs.add(transferCBs.get(i));
             }
         }
         for (int i = 0; i < transferSs.size(); ++i) {
-            if (transferSs.get(i).team.abbr.equals(userTeam.abbr)) {
-                tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (FCS)\n\n");
+            if (Math.random() > .50) {
+                if (transferSs.get(i).team.abbr.equals(userTeam.abbr)) {
+                    tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (FCS)\n\n");
+                }
+            } else {
+                transferSs.get(i).team.teamSs.add(transferSs.get(i));
             }
         }
 
+        //Sort Teams
+        for (int i = 0; i < teamList.size(); ++i) {
+            teamList.get(i).sortPlayers();
+        }
+        
         userTransfers = tIn + "\n" + tOut;
         newsStories.get(currentWeek + 1).add("User Team Transfers>" + userTransfers);
 
@@ -4198,6 +4271,12 @@ Then conferences can see if they want to add them to their list if the teams mee
                     }
                 }
             }*/
+
+
+            //Promote FCS School
+
+
+            //Create New Conference
 
         }
 
@@ -4807,7 +4886,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(teams, new CompTeamChemistry());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + df2.format(t.getTeamChemistry()));
+                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format(t.getTeamChemistry()));
                 }
                 break;
             case 16:

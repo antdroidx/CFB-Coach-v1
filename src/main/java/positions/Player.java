@@ -485,9 +485,9 @@ Player {
     String getHeight() {
 
         int feet = height / 12;
-        int leftover = height % 12;
+        int inch = height % 12;
 
-        return feet + "'' " + leftover + "\"";
+        return feet + "' " + inch + "\"";
     }
 
     String getWeight() {

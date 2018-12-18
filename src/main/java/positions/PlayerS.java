@@ -278,8 +278,8 @@ public class PlayerS extends Player {
 
     @Override
     public int getCareerScore() {
-        return statsTackles * 20 + statsSacks * 400 + statsFumbles * 400 + statsInts * 400 + ratOvr * 10 + team.teamPrestige * 4 +
-                careerTackles * 20 + careerSacks * 400 + careerFumbles * 400 + careerInts * 400 + ratOvr * year * 10;
+        return statsTackles * 25 + statsSacks * 425 + statsFumbles * 425 + statsInts * 425 + ratOvr * 10 + team.teamPrestige * 4 +
+                careerTackles * 25 + careerSacks * 425 + careerFumbles * 425 + careerInts * 425 + ratOvr * year * 10;
     }
 
     @Override

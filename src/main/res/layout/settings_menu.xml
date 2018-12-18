@@ -84,25 +84,6 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Hide Potential Rating"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <CheckBox
-                    android:id="@+id/checkboxHidePotential"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15sp">
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
                     android:text="Career Mode (Fireable)"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -247,7 +228,13 @@
                 android:layout_marginTop="10dp"
                 android:text="Game Editor (Beta)"
                 android:textSize="14sp" />
-
+            <Button
+                android:id="@+id/buttonFixBowls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Fix Bowl Names"
+                android:textSize="14sp" />
             <Button
                 android:id="@+id/buttonChangeTeams"
                 android:layout_width="match_parent"

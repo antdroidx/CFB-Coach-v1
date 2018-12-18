@@ -16,4 +16,47 @@ public class Division {
         this.league = league;
     }
 
+    public void setUpDivisionSchedule(int divWeeks) {
+        int divSize = divTeams.size()-1;
+        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
+
+        if(divSize % 2 != 0) {
+            divTeams.add(bye);
+            divSize++;
+            divWeeks++;
+        } else {
+            for (int g = 0; g < divSize; ++g) {
+                Team a = divTeams.get(g);
+                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+            }
+        }
+
+
+        for (int r = 0; r < divWeeks; ++r) {
+            for (int g = 0; g < (divTeams.size()/ 2); ++g) {
+                Team a = divTeams.get((r + g) % divSize);
+                Team b;
+                if (g == 0) {
+                    b = divTeams.get(divSize);
+                } else {
+                    b = divTeams.get((divSize - g + r) % divSize);
+                }
+
+                Game gm;
+
+                if (r%2 == 0) {
+                    gm = new Game(a, b, "Division");
+                } else {
+                    gm = new Game(b, a, "Division");
+                }
+
+                a.gameSchedule.add(gm);
+                b.gameSchedule.add(gm);
+
+            }
+        }
+
+        divTeams.remove(bye);
+    }
+
 }

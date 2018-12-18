@@ -45,7 +45,7 @@ public class Conference {
     public ArrayList<Integer> oocWeeks;
 
     private final double promotionFactor = 1.15;
-    private final double relegationFactor = 0.75;
+    private final double relegationFactor = 0.80;
     public final int minConfTeams = 8;
     public final int maxConfTeams = 18;
 
@@ -112,7 +112,7 @@ public class Conference {
     public String getTVName() {
         String name;
 
-        int t = (int) (Math.random() * 4);
+        int t = (int) (Math.random() * 6);
 
         if (t == 0) {
             name = confName + " Multimedia";
@@ -122,6 +122,10 @@ public class Conference {
             name = confName + " Network";
         } else if (t == 3) {
             name = confName + " Channel";
+        } else if (t == 4) {
+            name = confName + " Entertainment";
+        } else if (t == 5) {
+            name = confName + " Television";
         } else {
             name = confName + " Network";
         }
@@ -150,7 +154,7 @@ public class Conference {
             if (Math.random() * confPrestige * 1.5 < Math.random() * confPrestige && confPrestige > league.getAverageConfPrestige()) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
-                confTVBonus = confPrestige * 15;
+                confTVBonus = (int)(confPrestige * 17.5);
 
                 league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
@@ -158,6 +162,14 @@ public class Conference {
                 league.newsTV.add(TV + " TV Contract:\n\tA new TV contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years starting next season, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
                 league.updateTV = true;
+                if(Math.random() < 0.15) {
+                    TV = getTVName();
+                    league.newsStories.get(league.currentWeek + 1).add(confName + " TV Re-Branding>The " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
+                    + TV + ".");
+
+                    league.newsTV.add(confName + " TV Re-Branding:\n\tThe " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
+                            + TV + ".");
+                }
             } else if (Math.random() * confPrestige * 4 < Math.random() * confPrestige) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
@@ -169,7 +181,14 @@ public class Conference {
                 league.newsTV.add(TV + " Contract:\n\tA new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
                 league.updateTV = true;
+                if(Math.random() < 0.05) {
+                    TV = getTVName();
+                    league.newsStories.get(league.currentWeek + 1).add(confName + " TV Re-Branding>The " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
+                            + TV + ".");
 
+                    league.newsTV.add(confName + " TV Re-Branding:\n\tThe " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
+                            + TV + ".");
+                }
             }
         }
     }
@@ -276,34 +295,32 @@ public class Conference {
     //NO DIVISION SCHEDULING WITH ODD/EVEN TEAMS (WIP)
     private void setUpEvenOddSchedule() {
         //schedule in conf matchups
-        int robinWeek = 0;
-        int robinCounter = 1;
         int confSize = confTeams.size() - 1;
         oocGames = getOOCGames();
 
         int confWeeks = 12 - oocGames;
         if(league.enableUnivProRel) confWeeks = 12;
+        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
 
         if(confTeams.size() % 2 != 0) {
-            confTeams.add(new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league));
+            confTeams.add(bye);
             confSize++;
             confWeeks++;
         } else {
-            Team b = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
             for (int g = 0; g < confTeams.size(); ++g) {
                 Team a = confTeams.get(g);
-                a.gameSchedule.add(new Game(a, b, "BYE WEEK"));
+                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
             }
         }
 
         for (int r = 0; r < confWeeks; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
-                Team a = confTeams.get((robinWeek + g) % confSize);
+                Team a = confTeams.get((r + g) % confSize);
                 Team b;
                 if (g == 0) {
                     b = confTeams.get(confSize);
                 } else {
-                    b = confTeams.get((confSize - g + robinWeek) % confSize);
+                    b = confTeams.get((confSize - g + r) % confSize);
                 }
 
                 Game gm;
@@ -318,8 +335,9 @@ public class Conference {
                 b.gameSchedule.add(gm);
 
             }
-            robinWeek += robinCounter;
         }
+
+        confTeams.remove(bye);
     }
 
     //DIVISION SCHEDULING
@@ -350,8 +368,8 @@ public class Conference {
             Game gm;
             for(int t = 0; t < divisions.get(0).divTeams.size(); t++) {
 
-                Team a = divisions.get(0).divTeams.get(t);
-                Team b = divisions.get(1).divTeams.get((t+g) % divTeams);
+                Team a = divisions.get(0).divTeams.get(t % divisions.get(0).divTeams.size());
+                Team b = divisions.get(1).divTeams.get((t) % divisions.get(0).divTeams.size());
 
                 if(g % 2 == 0) {
                     gm = new Game(a, b,"Conference");
@@ -370,50 +388,13 @@ public class Conference {
         //schedule in conf matchups
         int divWeeks = getDivGames();
 
-        for (int d = 0; d < 2; d++) {
-
-            int divSize = divisions.get(d).divTeams.size();
-
-            if(divSize % 2 != 0) {
-                divisions.get(d).divTeams.add(new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league));
-                divSize++;
-                divWeeks++;
-            } else {
-                Team b = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
-                for (int g = 0; g < divSize; ++g) {
-                    Team a = divisions.get(d).divTeams.get(g);
-                    a.gameSchedule.add(new Game(a, b, "BYE WEEK"));
-                }
-            }
-
-            int divTeams = divSize -1;
-
-            for (int r = 0; r < divWeeks; ++r) {
-                for (int g = 0; g < (divisions.get(d).divTeams.size()/ 2); ++g) {
-                    Team a = divisions.get(d).divTeams.get((r + g) % divTeams);
-                    Team b = divisions.get(d).divTeams.get((divTeams + r + g - 1) % divTeams);
-
-                    Game gm;
-
-                    if (r%2 == 0) {
-                        gm = new Game(a, b, "Division");
-                    } else {
-                        gm = new Game(b, a, "Division");
-                    }
-
-                    a.gameSchedule.add(gm);
-                    b.gameSchedule.add(gm);
-
-                }
-            }
+        for (int d = 0; d < divisions.size(); d++) {
+            divisions.get(d).setUpDivisionSchedule(divWeeks);
         }
     }
 
     private void setUpNoDivisionSchedule() {
         //schedule in conf matchups
-        int robinWeek = 0;
-        int robinCounter = 1;
-        //int confWeeks = 9;
         int confSize = confTeams.size() - 1;
         oocGames = getOOCGames();
 
@@ -426,19 +407,20 @@ public class Conference {
             a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
         }
 
+
         for (int r = 0; r < confWeeks; ++r) {
             for (int g = 0; g < (confTeams.size()/ 2); ++g) {
-                Team a = confTeams.get((robinWeek + g) % confSize);
+                Team a = confTeams.get((r + g) % confSize);
                 Team b;
                 if (g == 0) {
                     b = confTeams.get(confSize);
                 } else {
-                    b = confTeams.get((confSize - g + robinWeek) % confSize);
+                    b = confTeams.get((confSize - g + r) % confSize);
                 }
 
                 Game gm;
 
-                if (r%2 == 0 && confSize > 10) {
+                if (r%2 == 0) {
                     gm = new Game(a, b, "Conference");
                 } else {
                     gm = new Game(b, a, "Conference");
@@ -448,8 +430,8 @@ public class Conference {
                 b.gameSchedule.add(gm);
 
             }
-            robinWeek += robinCounter;
         }
+        confTeams.remove(bye);
     }
 
     /**
@@ -469,6 +451,7 @@ public class Conference {
     }
 
     public void newsMatchups() {
+        Log.d("conf", "newsMatchups: " + confName);
         if (league.currentWeek >= league.regSeasonWeeks-2) {
             return;
         } else {
@@ -563,6 +546,8 @@ public class Conference {
             teams.get(0).gameSchedule.add(ccg);
             teams.get(1).gameSchedule.add(ccg);
             league.newsStories.get(league.currentWeek + 1).add("Upcoming: " + confName + " Championship Game>" + teams.get(0).strRankTeamRecord() + " will host " + teams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
+            league.weeklyScores.get(league.currentWeek + 2).add(ccg.gameName + ">#" + ccg.awayTeam.rankTeamPollScore + " " + ccg.awayTeam.name + "\n" + "#" + ccg.homeTeam.rankTeamPollScore + " " + ccg.homeTeam.name);
+
         }
     }
 

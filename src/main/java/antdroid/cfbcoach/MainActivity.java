@@ -1318,24 +1318,32 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();
         int dbSize;
-        if (simLeague.currentWeek + 1 <= simLeague.regSeasonWeeks+5) dbSize = simLeague.currentWeek + 1;
+        if (simLeague.currentWeek + 2 <= simLeague.regSeasonWeeks+5 && simLeague.currentWeek+1 <= simLeague.regSeasonWeeks) dbSize = simLeague.currentWeek + 2;
         else dbSize = simLeague.regSeasonWeeks+5;
 
         String[] weekSelection = new String[dbSize];
         for (int i = 0; i < weekSelection.length; ++i) {
             if (i == simLeague.regSeasonWeeks) weekSelection[i] = "Conf Champ Week";
-            else if (i == simLeague.regSeasonWeeks+1) weekSelection[i] = "Bowl Week 1";
-            else if (i == simLeague.regSeasonWeeks+2) weekSelection[i] = "Bowl Week 2";
-            else if (i == simLeague.regSeasonWeeks+3) weekSelection[i] = "Bowl Week 3";
+            else if (i == simLeague.regSeasonWeeks+1 && !simLeague.expPlayoffs) weekSelection[i] = "Bowl Week 1";
+            else if (i == simLeague.regSeasonWeeks+2 && !simLeague.expPlayoffs) weekSelection[i] = "Bowl Week 2";
+            else if (i == simLeague.regSeasonWeeks+3 && !simLeague.expPlayoffs) weekSelection[i] = "Bowl Week 3";
+            else if (i == simLeague.regSeasonWeeks+1) weekSelection[i] = "Sweet 16";
+            else if (i == simLeague.regSeasonWeeks+2) weekSelection[i] = "Elite 8";
+            else if (i == simLeague.regSeasonWeeks+3) weekSelection[i] = "Final Four";
             else if (i == simLeague.regSeasonWeeks+4) weekSelection[i] = "National Champ";
             else weekSelection[i] = "Week " + i;
         }
+
         Spinner weekSelectionSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> weekSelectionSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, weekSelection);
         weekSelectionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSelectionSpinner.setAdapter(weekSelectionSpinnerAdapter);
-        weekSelectionSpinner.setSelection(dbSize - 1);
+
+        int psweek = simLeague.currentWeek;
+        if(psweek > simLeague.regSeasonWeeks+4) psweek = simLeague.regSeasonWeeks+4;
+        if(simLeague.currentWeek+2 <= simLeague.regSeasonWeeks) weekSelectionSpinner.setSelection(dbSize - 2);
+        else weekSelectionSpinner.setSelection(psweek);
 
         final ListView newsStoriesList = dialog.findViewById(R.id.listViewTeamRankings);
         final NewsStories weeklyScoresAdapter = new NewsStories(this, rankings);
@@ -1349,7 +1357,7 @@ public class MainActivity extends AppCompatActivity {
                         boolean isempty = false;
                         if (scores.size() == 0) {
                             isempty = true;
-                            scores.add("No news stories.>I guess this week was a bit boring, huh?");
+                            scores.add(" > ");
                         }
                         weeklyScoresAdapter.clear();
                         weeklyScoresAdapter.addAll(scores);
@@ -2093,9 +2101,6 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
         checkboxGameLog.setChecked(simLeague.fullGameLog);
 
-        final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
-        checkboxPotential.setChecked(simLeague.hidePotential);
-
         final CheckBox checkboxCareerMode = dialog.findViewById(R.id.checkboxCareerMode);
         checkboxCareerMode.setChecked(simLeague.isCareerMode());
 
@@ -2157,6 +2162,7 @@ public class MainActivity extends AppCompatActivity {
         if (simLeague.currentWeek < simLeague.regSeasonWeeks+6) changeTeamsButton.setVisibility(View.INVISIBLE);
 
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
+        Button fixBowlButton = dialog.findViewById(R.id.buttonFixBowls);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -2174,13 +2180,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fixBowlButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Confirmation");
+                builder.setMessage("Are you sure you want to restore bowl names to game default names?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Perform action on click
+                        fixBowlNames();
+                        Toast.makeText(getApplicationContext(), "Bowl Names Replaced!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Canceled!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
         okButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
-                simLeague.hidePotential = checkboxPotential.isChecked();
                 simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
@@ -3093,9 +3127,6 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
         checkboxGameLog.setChecked(simLeague.fullGameLog);
 
-        final CheckBox checkboxPotential = dialog.findViewById(R.id.checkboxHidePotential);
-        checkboxPotential.setChecked(simLeague.hidePotential);
-
         final CheckBox checkboxCareerMode = dialog.findViewById(R.id.checkboxCareerMode);
         checkboxCareerMode.setChecked(simLeague.isCareerMode());
 
@@ -3140,7 +3171,8 @@ public class MainActivity extends AppCompatActivity {
         changeTeamsButton.setVisibility(View.INVISIBLE);
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
         gameEditorButton.setVisibility(View.INVISIBLE);
-
+        Button fixBowlButton = dialog.findViewById(R.id.buttonFixBowls);
+        fixBowlButton.setVisibility(View.INVISIBLE);
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         okButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -3148,7 +3180,6 @@ public class MainActivity extends AppCompatActivity {
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
-                simLeague.hidePotential = checkboxPotential.isChecked();
                 simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.enableUnivProRel = checkboxProRelegation.isChecked();
@@ -4423,6 +4454,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void fixBowlNames() {
+        String[] bowls = simLeague.bowlNamesText.split(",");
+        for(int i = 0; i < bowls.length; i++) {
+            simLeague.bowlNames[i] = bowls[i];
+        }
+    }
 
     //allow the ability to enable editor to edit player names, positions, attributes, etc.
     private void playerEditor() {

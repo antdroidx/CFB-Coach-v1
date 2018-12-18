@@ -17,6 +17,7 @@ import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
+import comparator.CompTeamPrestige;
 import positions.HeadCoach;
 import positions.Player;
 import positions.PlayerCB;
@@ -1478,7 +1479,7 @@ public class Team {
                 }
             }
             //New Contracts or Firing
-            if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.35) || (HC.get(0).contractYear + 2 == HC.get(0).contractLength && Math.random() < 0.20)) {
+            if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.38) || (HC.get(0).contractYear + 2 == HC.get(0).contractLength && Math.random() < 0.23)) {
                 if (totalPDiff > 15 || (natChampWL.equals("NCW"))) {
                     HC.get(0).contractLength = 7;
                     HC.get(0).contractYear = 0;
@@ -1507,7 +1508,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && (teamPrestige - teamPrestigeStart) > 2 || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige && (teamPrestige - teamPrestigeStart) > 2) {
+                } else if (totalPDiff < 0 && (teamPrestige - teamPrestigeStart) > 2 || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige && (teamPrestige - teamPrestigeStart) > 2) {
                     if (Math.random() > 0.40) {
                         HC.get(0).contractLength = 2;
                         HC.get(0).contractYear = 0;
@@ -1527,14 +1528,14 @@ public class Team {
                         }
                         HC.remove(0);
                     }
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
-                } else if (totalPDiff < (0 - (HC.get(0).baselinePrestige / 25)) && league.isCareerMode() || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < -2 && league.isCareerMode() || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -2214,7 +2215,7 @@ public class Team {
     }
 
     public int getUserRecruitBudget() {
-        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/10);
+        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/11);
         if (level < 4) level = 4;
 
         return (int) Math.round(level * 8.5);
@@ -3053,9 +3054,11 @@ public class Team {
     public float getRecruitingClassRat() {
         double classStrength = 0;
         int numFreshman = 0;
+        int numFreshmanScoring = 0;
         ArrayList<Player> allPlayers = getAllPlayers();
         for (Player p : allPlayers) {
-            if (p.year == 1 && !p.wasRedshirt || p.year == 0) {
+            if(p.year == 1 && !p.wasRedshirt) numFreshman++;
+            if (p.year == 1 && !p.wasRedshirt && p.ratOvr > two) {
                 int pRat;
                 if (p.ratOvr > five) pRat = 150;
                 else if (p.ratOvr > four) pRat = 120;
@@ -3064,11 +3067,11 @@ public class Team {
                 else pRat = 5;
 
                 classStrength += pRat;
-                numFreshman++;
+                numFreshmanScoring++;
             }
         }
         if (numFreshman > 0)
-            return (float) (classStrength);
+            return (float) (classStrength/(numFreshmanScoring + (.33*(numFreshman-numFreshmanScoring))));
         else return 0;
     }
 

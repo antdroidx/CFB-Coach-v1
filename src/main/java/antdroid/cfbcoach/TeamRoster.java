@@ -56,7 +56,7 @@ class TeamRoster extends ArrayAdapter<String> {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
             textCenter.setTextColor(Color.WHITE);
         }
-        if (teamStat[3].contains("RS") || teamStat[2].contains("[T]")) {
+        if (teamStat[3].contains("RS") || teamStat[3].contains("[T]")) {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
             textCenter.setTextColor(Color.DKGRAY);
         }
