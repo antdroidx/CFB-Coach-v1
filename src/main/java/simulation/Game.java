@@ -2732,6 +2732,7 @@ public class Game implements Serializable {
 
     }
 
+
     public String[] getGameSummaryStrV2() {
         DecimalFormat df2 = new DecimalFormat(".##");
 
@@ -3466,6 +3467,59 @@ public class Game implements Serializable {
 
     private int normalize(int rating) {
         return rating;
+    }
+
+    public ArrayList<String> saveGame() {
+        ArrayList<String> gameData = new ArrayList<>();
+/*
+        gameData.add(gameName);
+        gameData.add(week);
+        gameData.add(homeScore);
+        gameData.add(awayScore);
+        gameData.add(homeQScore)
+        gameData.add(gameEventLog);
+
+        public String gameName;
+        public int week;
+
+        public int homeScore;
+        public final int[] homeQScore;
+        public int awayScore;
+        public final int[] awayQScore;
+        private int homeYards;
+        private int awayYards;
+
+        public int numOT;
+        private int homeTOs;
+        private int awayTOs;
+
+        private ArrayList<PlayerReturner> homeReturner;
+        private ArrayList<PlayerReturner> awayReturner;
+        private PlayerReturner homeKickReturner;
+        private PlayerReturner awayKickReturner;
+        private ArrayList<PlayerST> teamST;
+        private PlayerST playerST;
+
+        private ArrayList<String> homePassingStats;
+        private ArrayList<String> homeRushingStats;
+        private ArrayList<String> homeReceivingStats;
+        private ArrayList<String> homeDefenseStats;
+        private ArrayList<String> homeKickingStats;
+        private ArrayList<String> awayPassingStats;
+        private ArrayList<String> awayRushingStats;
+        private ArrayList<String> awayReceivingStats;
+        private ArrayList<String> awayDefenseStats;
+        private ArrayList<String> awayKickingStats;
+
+        private ArrayList<PlayerOL> teamOLs;
+        private ArrayList<PlayerDL> teamDLs;
+
+        private int homePassYards;
+        private int awayPassYards;
+        private int homeRushYards;
+        private int awayRushYards;*/
+
+       return gameData;
     }
 
 }

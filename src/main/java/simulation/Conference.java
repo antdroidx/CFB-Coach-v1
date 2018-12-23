@@ -266,14 +266,6 @@ public class Conference {
         } else {
             setUpEvenOddSchedule();
         }
-
-/*        if (confTeams.size() >= 12) {
-            setUpCrossDivisionSchedule();
-            setUpDivisionSchedule();
-        } else {
-            setUpNoDivisionSchedule();
-        }*/
-
     }
 
     //NO DIVISIONS SCHEDULE EVEN TEAMS ONLY
@@ -418,8 +410,8 @@ public class Conference {
             for(int t = 0; t < divisions.get(0).divTeams.size(); t++) {
 
                 Log.d("t", t + " " + (t % divisions.get(0).divTeams.size()));
-                Team a = divisions.get(0).divTeams.get(t % divisions.get(0).divTeams.size());
-                Team b = divisions.get(1).divTeams.get((t) % divisions.get(1).divTeams.size());
+                Team a = divisions.get(0).divTeams.get(t % divTeams);
+                Team b = divisions.get(1).divTeams.get((t+g) % divTeams);
 
                 if(g % 2 == 0) {
                     gm = new Game(a, b,"Conference");

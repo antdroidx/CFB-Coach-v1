@@ -24,22 +24,17 @@ public class Division {
             divTeams.add(bye);
             divSize = divTeams.size()-1;
             divWeeks++;
-        } else {
-            for (int g = 0; g < divSize; ++g) {
-                Team a = divTeams.get(g);
-                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
-            }
         }
 
         int games = divTeams.size()/2;
         for (int r = 0; r < divWeeks; ++r) {
             for (int g = 0; g < games; ++g) {
-                Team a = divTeams.get((r + g) % divTeams.size());
+                Team a = divTeams.get((r + g) % divSize);
                 Team b;
                 if (g == 0) {
                     b = divTeams.get(divSize);
                 } else {
-                    b = divTeams.get((divSize - g + r) % divTeams.size());
+                    b = divTeams.get((divSize - g + r) % divSize);
                 }
 
                 Game gm;
@@ -57,6 +52,13 @@ public class Division {
         }
 
         divTeams.remove(bye);
+
+        if(divSize % 2 == 0) {
+            for (int g = 0; g < divSize; ++g) {
+                Team a = divTeams.get(g);
+                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+            }
+        }
     }
 
 }
