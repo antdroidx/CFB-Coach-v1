@@ -4281,16 +4281,18 @@ Then conferences can see if they want to add them to their list if the teams mee
                         if (demoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
                             final Team teamA = demoteTeamList.get(i);
                             final String oldConf = teamA.conference;
-                            conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
-                            teamA.conference = conf.confName;
-                            conf.confTeams.add(teamA);
+                            if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams) {
+                                conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
+                                teamA.conference = conf.confName;
+                                conf.confTeams.add(teamA);
 
-                            //break the news
-                            newsStories.get(currentWeek + 2).add("Conference Growth!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.");
+                                //break the news
+                                newsStories.get(currentWeek + 2).add("Conference Growth!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.");
 
-                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.\n\n");
-                            countRealignment++;
-                            demoteTeamList.remove(teamA);
+                                newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.\n\n");
+                                countRealignment++;
+                                demoteTeamList.remove(teamA);
+                            }
                         }
                     }
                 }
@@ -4311,16 +4313,19 @@ Then conferences can see if they want to add them to their list if the teams mee
                     if (Math.random() < realignmentChance && indy.confTeams.size() < (indy.minConfTeams-1) && !demoteTeamList.get(i).conference.equals("Independent")) {
                         final Team teamA = demoteTeamList.get(i);
                         final String oldConf = teamA.conference;
-                        conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
-                        teamA.conference = indy.confName;
-                        indy.confTeams.add(teamA);
 
-                        //break the news
-                        newsStories.get(currentWeek + 2).add("Conference and Team Part Ways!>The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference.");
+                        if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams) {
+                            conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
+                            teamA.conference = indy.confName;
+                            indy.confTeams.add(teamA);
 
-                        newsRealignment += ("The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference\n\n");
-                        countRealignment++;
-                        demoteTeamList.remove(teamA);
+                            //break the news
+                            newsStories.get(currentWeek + 2).add("Conference and Team Part Ways!>The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference.");
+
+                            newsRealignment += ("The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference\n\n");
+                            countRealignment++;
+                            demoteTeamList.remove(teamA);
+                        }
                     }
                 }
             }

@@ -216,6 +216,7 @@ public class HeadCoach extends Player {
         double coachScore = (getCoachScore() - team.confPrestige)/10;
         if (coachScore < -4) coachScore = -4;
 
+
         ratOff += (2*prestigeDiff + offpts + coachScore)/4;
         if (ratOff > 95) ratOff = 95;
         if (ratOff < 20) ratOff = 20;
@@ -224,7 +225,7 @@ public class HeadCoach extends Player {
         if (ratDef > 95) ratDef = 95;
         if (ratDef < 20) ratDef = 20;
 
-        ratTalent += prestigeDiff  + coachScore;
+        ratTalent += (2*prestigeDiff  + coachScore)/3;
         if (ratTalent > 95) ratTalent = 95;
         if (ratTalent < 20) ratTalent = 20;
 

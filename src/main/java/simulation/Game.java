@@ -3469,55 +3469,55 @@ public class Game implements Serializable {
         return rating;
     }
 
-    public ArrayList<String> saveGame() {
+    public ArrayList<String> saveGameData() {
         ArrayList<String> gameData = new ArrayList<>();
-/*
+
         gameData.add(gameName);
-        gameData.add(week);
-        gameData.add(homeScore);
-        gameData.add(awayScore);
-        gameData.add(homeQScore)
         gameData.add(gameEventLog);
+        gameData.add(homeScore + "," + awayScore + "," + homeYards + "," + awayYards + "," + homePassYards + "," + awayPassYards+ "," + homeRushYards + "," + awayRushYards+ "," + homeTOs + "," + awayTOs + "," + numOT);
+        gameData.add(homeQScore[0] + "," + homeQScore[1] + "," + homeQScore[2] + "," + homeQScore[3]);
+        gameData.add(awayQScore[0] + "," + awayQScore[1] + "," + awayQScore[2] + "," + awayQScore[3]);
 
-        public String gameName;
-        public int week;
-
-        public int homeScore;
-        public final int[] homeQScore;
-        public int awayScore;
-        public final int[] awayQScore;
-        private int homeYards;
-        private int awayYards;
-
-        public int numOT;
-        private int homeTOs;
-        private int awayTOs;
-
-        private ArrayList<PlayerReturner> homeReturner;
-        private ArrayList<PlayerReturner> awayReturner;
-        private PlayerReturner homeKickReturner;
-        private PlayerReturner awayKickReturner;
-        private ArrayList<PlayerST> teamST;
-        private PlayerST playerST;
-
-        private ArrayList<String> homePassingStats;
-        private ArrayList<String> homeRushingStats;
-        private ArrayList<String> homeReceivingStats;
-        private ArrayList<String> homeDefenseStats;
-        private ArrayList<String> homeKickingStats;
-        private ArrayList<String> awayPassingStats;
-        private ArrayList<String> awayRushingStats;
-        private ArrayList<String> awayReceivingStats;
-        private ArrayList<String> awayDefenseStats;
-        private ArrayList<String> awayKickingStats;
-
-        private ArrayList<PlayerOL> teamOLs;
-        private ArrayList<PlayerDL> teamDLs;
-
-        private int homePassYards;
-        private int awayPassYards;
-        private int homeRushYards;
-        private int awayRushYards;*/
+        gameData.add("[Home Passing Stats]");
+        for(String x : homePassingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Away Passing Stats]");
+        for(String x : awayPassingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Home Rushing Stats]");
+        for(String x : homeRushingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Away Rushing Stats]");
+        for(String x : awayRushingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Home Receiving Stats]");
+        for(String x : homeReceivingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Away Receiving Stats]");
+        for(String x : awayReceivingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Home Kicking Stats]");
+        for(String x : homeKickingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Away Kicking Stats]");
+        for(String x : awayKickingStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Home Defense Stats]");
+        for(String x : homeDefenseStats) {
+            gameData.add(x);
+        }
+        gameData.add("[Away Defense Stats]");
+        for(String x : awayDefenseStats) {
+            gameData.add(x);
+        }
 
        return gameData;
     }
