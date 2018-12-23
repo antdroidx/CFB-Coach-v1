@@ -542,38 +542,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupCoachStyle() {
 
+        String[] coachChoice = {"Balanced", "Defensive-Minded", "Offensive-Minded", "Graduate Assistant (HARD)"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Please select your starting coaching style.")
-                .setTitle("Coaching Strengths:")
-                .setNeutralButton("Balanced", new DialogInterface.OnClickListener() {
+        builder
+                .setTitle("Choose your Coaching Style")
+                .setSingleChoiceItems(coachChoice, -1, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        setupCoachBal();
-                        dialog.dismiss();
-                        if (!newGame) seasonGoals();
-                    }
-                })
-                .setPositiveButton("Defensive-Minded", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setupCoachDef();
-                        dialog.dismiss();
-                        if (!newGame) seasonGoals();
-                    }
-                })
-                .setNegativeButton("Offensive-Minded", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        setupCoachOff();
-                        dialog.dismiss();
-                        if (!newGame) seasonGoals();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(i == 0) {
+                            setupCoachBal();
+                            if (!newGame) seasonGoals();
+                        }
+                        if(i == 1) {
+                            setupCoachDef();
+                            if (!newGame) seasonGoals();
+                        }
+                        if(i == 2) {
+                            setupCoachOff();
+                            if (!newGame) seasonGoals();
+                        }
+                        if(i == 3) {
+                            setupCoachHard();
+                            if (!newGame) seasonGoals();
+                        }
+                        dialogInterface.dismiss();
                     }
                 });
+
         final AlertDialog dialog = builder.create();
         builder.setCancelable(false);
         dialog.show();
-        TextView textView = dialog.findViewById(android.R.id.message);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
     }
 
@@ -594,6 +592,15 @@ public class MainActivity extends AppCompatActivity {
     private void setupCoachBal() {
         userTeam.getHC(0).ratOff = simLeague.getAvgCoachOff();
         userTeam.getHC(0).ratDef = simLeague.getAvgCoachDef();
+        userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
+        viewRoster();
+    }
+
+    private void setupCoachHard() {
+        userTeam.getHC(0).ratOff = 50;
+        userTeam.getHC(0).ratDef = 50;
+        userTeam.getHC(0).ratDiscipline = 60;
+        userTeam.getHC(0).ratTalent = 50;
         userTeam.getHC(0).ratOvr = userTeam.getHC(0).getHCOverall();
         viewRoster();
     }
@@ -830,7 +837,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Open Player Profile
-    public void examinePlayer(String player) {
+    public void examinePlayer(String player, Boolean coach) {
         Player p = currentTeam.findTeamPlayer(player);
         if (p == null) {
 
@@ -848,6 +855,15 @@ public class MainActivity extends AppCompatActivity {
                             //do nothing
                         }
                     });
+
+            if(coach) {
+                builder.setNeutralButton("Coach History", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        showCoachHistoryDialog();
+                    }
+                });
+            }
             AlertDialog dialog = builder.create();
             dialog.show();
         }
@@ -2127,13 +2143,32 @@ public class MainActivity extends AppCompatActivity {
         }
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
+        final CheckBox checkboxAdvRealignment = dialog.findViewById(R.id.checkboxAdvConfRealignment);
+        if(simLeague.enableUnivProRel) {
+            final TextView textAdvRealignment = dialog.findViewById(R.id.textAdvConfRealignment);
+            textAdvRealignment.setVisibility(View.INVISIBLE);
+            checkboxAdvRealignment.setVisibility(View.INVISIBLE);
+        }
+        checkboxAdvRealignment.setChecked(simLeague.advancedRealignment);
+
         final CheckBox checkboxProRelegation = dialog.findViewById(R.id.checkboxProRelegation);
         //checkboxProRelegation.setChecked(simLeague.enableUnivProRel);
         checkboxProRelegation.setVisibility(View.INVISIBLE);
         final TextView textProRel = dialog.findViewById(R.id.textEnableProRel);
         textProRel.setVisibility(View.INVISIBLE);
 
+        checkboxAdvRealignment.setOnClickListener(new View.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(View view) {
+                                                          if (checkboxAdvRealignment.isChecked()) {
+                                                              checkboxProRelegation.setChecked(false);
+                                                              checkboxRealignment.setChecked(true);
+                                                          }
 
+                                                          if(simLeague.regSeasonWeeks > 13) checkboxAdvRealignment.setChecked(true);
+                                                      }
+                                                  }
+        );
 
         checkboxRealignment.setOnClickListener(new View.OnClickListener() {
                                                    @Override
@@ -2150,6 +2185,7 @@ public class MainActivity extends AppCompatActivity {
                                                      public void onClick(View view) {
                                                          if (checkboxProRelegation.isChecked()) {
                                                              checkboxRealignment.setChecked(false);
+                                                             checkboxAdvRealignment.setChecked(false);
                                                          }
                                                      }
                                                  }
@@ -2158,7 +2194,7 @@ public class MainActivity extends AppCompatActivity {
         Button cancelButton = dialog.findViewById(R.id.buttonCancelSettings);
         Button okButton = dialog.findViewById(R.id.buttonOkSettings);
         Button changeTeamsButton = dialog.findViewById(R.id.buttonChangeTeams);
-        if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
+        if (userTeam.getHC(0).age >= 68 && !simLeague.neverRetire) changeTeamsButton.setText("RETIRE");
         if (simLeague.currentWeek < simLeague.regSeasonWeeks+6) changeTeamsButton.setVisibility(View.INVISIBLE);
 
         Button gameEditorButton = dialog.findViewById(R.id.buttonGameEditor);
@@ -2218,10 +2254,12 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
+                simLeague.advancedRealignment = checkboxAdvRealignment.isChecked();
                 simLeague.expPlayoffs = checkboxPlayoffs.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
                 if (simLeague.enableUnivProRel) {
                     simLeague.confRealignment = false;
+                    simLeague.advancedRealignment = false;
                 }
                 userTeam.showPopups = showToasts;
                 dialog.dismiss();
@@ -2232,7 +2270,7 @@ public class MainActivity extends AppCompatActivity {
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
-                if (userTeam.getHC(0).age >= 70 && !simLeague.neverRetire) {
+                if (userTeam.getHC(0).age >= 68 && !simLeague.neverRetire) {
                     retirementQuestion();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -3136,6 +3174,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxRealignment = dialog.findViewById(R.id.checkboxConfRealignment);
         checkboxRealignment.setChecked(simLeague.confRealignment);
 
+        final CheckBox checkboxAdvRealignment = dialog.findViewById(R.id.checkboxAdvConfRealignment);
+        checkboxAdvRealignment.setChecked(simLeague.advancedRealignment);
+
         final CheckBox checkboxPlayoffs = dialog.findViewById(R.id.checkboxPlayoffs);
         checkboxPlayoffs.setChecked(simLeague.expPlayoffs);
 
@@ -3145,14 +3186,27 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxTV = dialog.findViewById(R.id.checkboxTV);
         checkboxTV.setChecked(simLeague.enableTV);
 
-        checkboxRealignment.setOnClickListener(new View.OnClickListener() {
+        checkboxAdvRealignment.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View view) {
-                                                       if (checkboxRealignment.isChecked()) {
+                                                       if (checkboxAdvRealignment.isChecked()) {
                                                            checkboxProRelegation.setChecked(false);
+                                                           checkboxRealignment.setChecked(true);
                                                        }
+
+                                                       if(simLeague.regSeasonWeeks > 13) checkboxAdvRealignment.setChecked(true);
                                                    }
                                                }
+        );
+
+        checkboxRealignment.setOnClickListener(new View.OnClickListener() {
+                                                                     @Override
+                                                                     public void onClick(View view) {
+                                                                         if (checkboxRealignment.isChecked()) {
+                                                                             checkboxProRelegation.setChecked(false);
+                                                                         }
+                                                                     }
+                                                                 }
         );
 
         checkboxProRelegation.setOnClickListener(new View.OnClickListener() {
@@ -3160,6 +3214,7 @@ public class MainActivity extends AppCompatActivity {
                                                      public void onClick(View view) {
                                                          if (checkboxProRelegation.isChecked()) {
                                                              checkboxRealignment.setChecked(false);
+                                                             checkboxAdvRealignment.setChecked(false);
                                                          }
                                                      }
                                                  }
@@ -3184,6 +3239,7 @@ public class MainActivity extends AppCompatActivity {
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
                 simLeague.enableUnivProRel = checkboxProRelegation.isChecked();
                 simLeague.confRealignment = checkboxRealignment.isChecked();
+                simLeague.advancedRealignment = checkboxAdvRealignment.isChecked();
                 simLeague.expPlayoffs = checkboxPlayoffs.isChecked();
                 simLeague.enableTV = checkboxTV.isChecked();
                 if (simLeague.enableUnivProRel) {
@@ -3296,7 +3352,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (simLeague.getYear() > seasonStart) {
             if (userTeam.facilityUpgrade) {
-                goals += "Your team upgraded the training facilities this off-season to Level " + userTeam.teamFacilities + "!\n\n";
+                goals += "Your team upgraded the training facilities this off-season to Level " + userTeam.teamFacilities + " which added an additional " + userTeam.teamFacilities + " prestige points!\n\n";
             }
         }
 
@@ -3435,7 +3491,7 @@ public class MainActivity extends AppCompatActivity {
     private void contractDialog() {
 
         if (simLeague.isCareerMode()) {
-            if (userHC.age > 69) {
+            if (userHC.age > 67) {
                 userHC.retirement = true;
             }
         }

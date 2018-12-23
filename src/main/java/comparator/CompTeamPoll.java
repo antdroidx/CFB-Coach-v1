@@ -11,6 +11,17 @@ import simulation.Team;
 public class CompTeamPoll implements Comparator<Team> {
     @Override
     public int compare(Team a, Team b) {
-        return a.teamPollScore > b.teamPollScore ? -1 : a.teamPollScore == b.teamPollScore ? 0 : 1;
+        if (a.teamPollScore > b.teamPollScore) {
+            return -1;
+
+        } else if (b.teamPollScore == a.teamPollScore) {
+            //check for  tiebreaker
+            if (a.teamStrengthOfWins > b.teamStrengthOfWins) {
+                return -1;
+            } else if (a.teamStrengthOfWins < b.teamStrengthOfWins) {
+                return 1;
+            } else return 0;
+
+        } else return 1;
     }
 }

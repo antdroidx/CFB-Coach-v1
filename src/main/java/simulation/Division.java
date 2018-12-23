@@ -22,7 +22,7 @@ public class Division {
 
         if(divSize % 2 != 0) {
             divTeams.add(bye);
-            divSize++;
+            divSize = divTeams.size()-1;
             divWeeks++;
         } else {
             for (int g = 0; g < divSize; ++g) {
@@ -31,15 +31,15 @@ public class Division {
             }
         }
 
-
+        int games = divTeams.size()/2;
         for (int r = 0; r < divWeeks; ++r) {
-            for (int g = 0; g < (divTeams.size()/ 2); ++g) {
-                Team a = divTeams.get((r + g) % divSize);
+            for (int g = 0; g < games; ++g) {
+                Team a = divTeams.get((r + g) % divTeams.size());
                 Team b;
                 if (g == 0) {
                     b = divTeams.get(divSize);
                 } else {
-                    b = divTeams.get((divSize - g + r) % divSize);
+                    b = divTeams.get((divSize - g + r) % divTeams.size());
                 }
 
                 Game gm;

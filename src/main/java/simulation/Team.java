@@ -380,7 +380,7 @@ public class Team {
         teamDiscplineBudget = 0;
         teamDisciplineScore = disciplineStart;
 
-        rankTeamPollScore = league.countTeam;
+        rankTeamPollScore = league.teamList.size();
     }
 
     /**
@@ -970,18 +970,18 @@ public class Team {
             score += league.teamList.size() - rankTeamDefTalent;
             score += 1.5 * (league.teamList.size() - rankTeamPrestige);
             if (league.conferences.get(league.getConfNumber(conference)).confTeams.size() < league.conferences.get(league.getConfNumber(conference)).minConfTeams) {
-                score += teamPrestige/2.25;
+                score += teamPrestige / 2.25;
             } else {
                 score += confPrestige / 2;
             }
         } else {
-            score += getOffTalent();
-            score += getDefTalent();
-            score += 1.5 * teamPrestige;
+            score += 1 * getOffTalent();
+            score += 1 * getDefTalent();
+            score += 3 * teamPrestige;
             if (league.conferences.get(league.getConfNumber(conference)).confTeams.size() < league.conferences.get(league.getConfNumber(conference)).minConfTeams) {
-                score += teamPrestige/2;
+                score += teamPrestige / 2.25;
             } else {
-                score += confPrestige / 2.25;
+                score += confPrestige / 2;
             }
         }
 
@@ -1290,9 +1290,8 @@ public class Team {
         if (!bowlBan && !penalized) {
             prestigeChange = Math.round((float) (diffExpected / 7.5));
 
-            if (prestigeChange < wins - projectedWins) prestigeChange++;
-            if (prestigeChange > (12-projectedWins) - losses) prestigeChange--;
-
+            if(wins+losses > 12 && prestigeChange <=0 ) prestigeChange++;
+            if (prestigeChange < (wins - projectedWins)) prestigeChange++;
         }
 
         //National Title Winner
@@ -1309,7 +1308,7 @@ public class Team {
             ccPts += 1;
         }
 
-        if (rankTeamPrestige > 75) {
+        if (rankTeamPrestige > (league.teamList.size()*.60)) {
             ArrayList<Player> teamAll = getAllPlayers();
             for (int i = 0; i < teamAll.size(); i++) {
                 if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr > 91) {
@@ -1320,6 +1319,8 @@ public class Team {
         }
 
         newPrestige += prestigeChange + ccPts + ncwPts + nflPts + disPts;
+
+        if(newPrestige < 0) newPrestige = 0;
 
         int PrestigeScore[] = {newPrestige, prestigeChange, ccPts, ncwPts, nflPts, disPts};
         return PrestigeScore;
@@ -1528,14 +1529,14 @@ public class Team {
                         }
                         HC.remove(0);
                     }
-                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige  || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
-                } else if (totalPDiff < -2 && league.isCareerMode() || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < -2 && league.isCareerMode() && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -3858,8 +3859,12 @@ public class Team {
         Game g = gameSchedule.get(gameNumber);
         gs[0] = g.gameName;
         if (gameNumber < gameWLSchedule.size()) {
-            gs[1] = gameWLSchedule.get(gameNumber) + " " + gameSummaryStrScore(g);
-            if (g.numOT > 0) gs[1] += " (" + g.numOT + "OT)";
+            if(g.gameName.equals("BYE WEEK")) {
+                gs[1] = "BYE";
+            } else {
+                gs[1] = gameWLSchedule.get(gameNumber) + " " + gameSummaryStrScore(g);
+                if (g.numOT > 0) gs[1] += " (" + g.numOT + "OT)";
+            }
         } else {
             gs[1] = "---";
         }
@@ -4399,6 +4404,8 @@ public class Team {
     private String gameSummaryStrScore(Game g) {
         if (g.homeTeam == this) {
             return g.homeScore + " - " + g.awayScore;
+        } else if(g.gameName.equals("BYE WEEK")) {
+            return "";
         } else {
             return g.awayScore + " - " + g.homeScore;
         }
@@ -4411,10 +4418,14 @@ public class Team {
      * @return vs OPP #45
      */
     private String gameSummaryStrOpponent(Game g) {
-        if (g.homeTeam == this) {
-            return "vs " + g.awayTeam.name + " #" + g.awayTeam.rankTeamPollScore;
+        if (g.gameName.equals("BYE WEEK")) {
+            return "BYE WEEK";
         } else {
-            return "at " + g.homeTeam.name + " #" + g.homeTeam.rankTeamPollScore;
+            if (g.homeTeam == this) {
+                return "vs " + g.awayTeam.name + " #" + g.awayTeam.rankTeamPollScore;
+            } else {
+                return "at " + g.homeTeam.name + " #" + g.homeTeam.rankTeamPollScore;
+            }
         }
     }
 

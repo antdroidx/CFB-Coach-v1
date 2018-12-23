@@ -181,7 +181,7 @@ public class Conference {
                 league.newsTV.add(TV + " Contract:\n\tA new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");
                 league.updateTV = true;
-                if(Math.random() < 0.05) {
+                if(Math.random() < 0.15) {
                     TV = getTVName();
                     league.newsStories.get(league.currentWeek + 1).add(confName + " TV Re-Branding>The " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
                             + TV + ".");
@@ -229,6 +229,21 @@ public class Conference {
         return OOC;
     }
 
+    public int getOOCGamesEvenOdd() {
+        int OOC = 0;
+        if (confTeams.size() > 14 && confTeams.size() % 2 == 0) OOC = 3;
+        else if (confTeams.size() >= 14 && confTeams.size() % 2 != 0) OOC = 0;
+        else if(confTeams.size() == 14) OOC = 3;
+        else if(confTeams.size() == 13) OOC = 0;
+        else if(confTeams.size() == 12) OOC = 3;
+        else if(confTeams.size() == 11) OOC = 2;
+        else if(confTeams.size() == 10) OOC = 3;
+        else if(confTeams.size() == 9) OOC = 4;
+        else if (confTeams.size() == 8) OOC = 5;
+        else OOC = 12;
+        return OOC;
+    }
+
     public int getDivGames() {
         int div = 0;
         if(confTeams.size() < 12) div = 0;
@@ -246,8 +261,11 @@ public class Conference {
     public void setUpSchedule() {
         oocGames = getOOCGames();
         setDivisionTeams();
-        setUpOriginalSchedule();
-        //setUpEvenOddSchedule();
+        if(league.regSeasonWeeks == 13) {
+            setUpOriginalSchedule();
+        } else {
+            setUpEvenOddSchedule();
+        }
 
 /*        if (confTeams.size() >= 12) {
             setUpCrossDivisionSchedule();
@@ -296,25 +314,29 @@ public class Conference {
     private void setUpEvenOddSchedule() {
         //schedule in conf matchups
         int confSize = confTeams.size() - 1;
-        oocGames = getOOCGames();
+        oocGames = getOOCGamesEvenOdd();
 
         int confWeeks = 12 - oocGames;
-        if(league.enableUnivProRel) confWeeks = 12;
-        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
+        if (league.enableUnivProRel) confWeeks = 12;
+        Team ooc1 = new Team("OOC1", "OOC", "OOC", 0, "OOC", 0, league);
+        Team ooc2 = new Team("OOC2", "OOC", "OOC", 0, "OOC", 0, league);
 
-        if(confTeams.size() % 2 != 0) {
+        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
+        bye.rankTeamPollScore = league.teamList.size();
+
+        if (confTeams.size() % 2 != 0) {
+/*            if(confTeams.size() >= 13) {
+                confTeams.add(ooc1);
+                confTeams.add(ooc2);
+            }*/
             confTeams.add(bye);
-            confSize++;
+
+            confSize = confTeams.size() - 1;
             confWeeks++;
-        } else {
-            for (int g = 0; g < confTeams.size(); ++g) {
-                Team a = confTeams.get(g);
-                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
-            }
         }
 
         for (int r = 0; r < confWeeks; ++r) {
-            for (int g = 0; g < (confTeams.size()/ 2); ++g) {
+            for (int g = 0; g < (confTeams.size() / 2); ++g) {
                 Team a = confTeams.get((r + g) % confSize);
                 Team b;
                 if (g == 0) {
@@ -325,19 +347,46 @@ public class Conference {
 
                 Game gm;
 
-                if (r%2 == 0 && confSize > 10) {
-                    gm = new Game(a, b, "Conference");
+                if(a.abbr.equals("OOC") || b.abbr.equals("OOC")) {
+                    a.oocWeeks.add(r);
+                    b.oocWeeks.add(r);
                 } else {
-                    gm = new Game(b, a, "Conference");
-                }
 
-                a.gameSchedule.add(gm);
-                b.gameSchedule.add(gm);
+                    if (a.name.equals("BYE") || b.name.equals("BYE")) {
+                        gm = new Game(a, b, "BYE WEEK");
+                    } else {
+                        if (r % 2 == 0 && confSize >= minConfTeams) {
+                            gm = new Game(a, b, "Conference");
+                        } else {
+                            gm = new Game(b, a, "Conference");
+                        }
+                    }
+
+                    a.gameSchedule.add(gm);
+                    b.gameSchedule.add(gm);
+                }
 
             }
         }
 
         confTeams.remove(bye);
+        confTeams.remove(ooc1);
+        confTeams.remove(ooc2);
+
+        if (confTeams.size() % 2 == 0 && confTeams.size() >= minConfTeams) {
+            for (int g = 0; g < confTeams.size(); ++g) {
+                Team a = confTeams.get(g);
+                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+            }
+        }
+
+        if (league.regSeasonWeeks >= 15 && confTeams.size() >= minConfTeams) {
+            for (int g = 0; g < confTeams.size(); ++g) {
+                Team a = confTeams.get(g);
+                a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+            }
+        }
+
     }
 
     //DIVISION SCHEDULING
@@ -368,8 +417,9 @@ public class Conference {
             Game gm;
             for(int t = 0; t < divisions.get(0).divTeams.size(); t++) {
 
+                Log.d("t", t + " " + (t % divisions.get(0).divTeams.size()));
                 Team a = divisions.get(0).divTeams.get(t % divisions.get(0).divTeams.size());
-                Team b = divisions.get(1).divTeams.get((t) % divisions.get(0).divTeams.size());
+                Team b = divisions.get(1).divTeams.get((t) % divisions.get(1).divTeams.size());
 
                 if(g % 2 == 0) {
                     gm = new Game(a, b,"Conference");
@@ -451,7 +501,6 @@ public class Conference {
     }
 
     public void newsMatchups() {
-        Log.d("conf", "newsMatchups: " + confName);
         if (league.currentWeek >= league.regSeasonWeeks-2) {
             return;
         } else {

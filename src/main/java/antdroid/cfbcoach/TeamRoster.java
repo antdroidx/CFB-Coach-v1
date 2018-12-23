@@ -21,6 +21,7 @@ class TeamRoster extends ArrayAdapter<String> {
     private String userTeamStrRep;
     private final MainActivity mainAct;
     private final int week;
+    private Boolean test = false;
 
 
     public TeamRoster(Context context, ArrayList<String> values, MainActivity mainAct, int week) {
@@ -117,10 +118,13 @@ class TeamRoster extends ArrayAdapter<String> {
             textProg.setText(teamStat[6]);
         }
 
+
         textCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainAct.examinePlayer(teamStat[2]);
+                if(teamStat[0].equals("HC")) test = true;
+                else test = false;
+                mainAct.examinePlayer(teamStat[2], test);
             }
         });
 

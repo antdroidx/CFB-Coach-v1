@@ -411,10 +411,12 @@ public class Game implements Serializable {
     //GAME SIMULATION
 
     public void playGame() {
-        if(awayTeam.name.equals("BYE") || homeTeam.name.equals("BYE")) {
+        if(gameName.equals("BYE WEEK") && !hasPlayed) {
             hasPlayed = true;
-            homeTeam.gameWLSchedule.add("B");
-            awayTeam.gameWLSchedule.add("B");
+            homeTeam.gameWLSchedule.add("BYE");
+            awayTeam.gameWLSchedule.add("BYE");
+            homeTeam.postSeasonHealing(1);
+            awayTeam.postSeasonHealing(1);
         }
 
         if (!hasPlayed) {

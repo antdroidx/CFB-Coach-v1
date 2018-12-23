@@ -1,7 +1,5 @@
 package simulation;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -174,7 +172,7 @@ public class League {
     public boolean enableTV;
     public boolean neverRetire;
     public boolean expPlayoffs;
-
+    public boolean advancedRealignment;
     public int countRealignment;
     public String newsRealignment;
     public boolean updateTV;
@@ -186,11 +184,9 @@ public class League {
     private final int seasonStart = 2018;
     int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 27;
-    public final int regSeasonWeeks = 13; //original = 13  bye week =14
+    public int regSeasonWeeks = 13; //original = 13 will change dynamically based on team/conference structure
     private final double confRealignmentChance = 0.25; //chance of event
-    private final double realignmentChance = 0.35; //chance of invite
-    private final String crYear1 = "2";
-    private final String crYear2 = "7";
+    private final double realignmentChance = 0.33; //chance of invite
     private boolean heismanDecided;
     private Player heisman;
     private Player defPOTY;
@@ -683,8 +679,13 @@ public class League {
                 expPlayoffs = Boolean.parseBoolean((line));
             }
 
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_ADV_CONF_REALIGNMENT")) {
+                advancedRealignment = Boolean.parseBoolean(line);
+            }
+
             if (enableUnivProRel) {
                 confRealignment = false;
+                advancedRealignment = false;
             }
 
             // Always close files.
@@ -1123,9 +1124,11 @@ public class League {
             neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
             careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
             expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
+            advancedRealignment = Boolean.parseBoolean((bufferedReader.readLine()));
 
             if (enableUnivProRel) {
                 confRealignment = false;
+                advancedRealignment = false;
             }
 
             // Always close files.
@@ -1212,6 +1215,20 @@ public class League {
     //Set Up Season variables
     private void setupSeason() {
 
+        int numOddConf = 0;
+        int largeOddConf = 0;
+        for (int i = 0; i < conferences.size(); i++) {
+            if(conferences.get(i).confTeams.size() % 2 != 0) {
+                numOddConf++;
+                advancedRealignment = true;
+/*                if(conferences.get(i).confTeams.size() >= 13) {
+                    largeOddConf++;
+                }*/
+            }
+        }
+        if (numOddConf > 0) regSeasonWeeks++;
+        if (largeOddConf > 0) regSeasonWeeks++;
+
         //set up schedule
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).setUpSchedule();
@@ -1225,9 +1242,9 @@ public class League {
             for (int c = 0; c < conferences.size(); c++) {
                 if (r < conferences.get(c).oocGames && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
                     boolean scheduled = false;
-                    k = k + (int)(Math.random()*4);
+                    k = k + (int) (Math.random() * 4);
                     while (!scheduled) {
-                        int week = (j + r + k) % (regSeasonWeeks-1);
+                        int week = (j + r + k) % (regSeasonWeeks - 1);
                         if (!conferences.get(c).oocWeeks.contains(week)) {
                             conferences.get(c).oocWeeks.add(week);
                             for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
@@ -1239,11 +1256,9 @@ public class League {
                         }
                     }
                     j++;
-                } else if (conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
-                    for (int i = 0; i < (regSeasonWeeks-1); i++) {
-                        for(int t = 0; t < conferences.get(c).confTeams.size(); t++) {
-                            conferences.get(c).confTeams.get(t).oocWeeks.add(i);
-                        }
+                } else if (conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams && r < conferences.get(c).oocGames) {
+                    for (int t = 0; t < conferences.get(c).confTeams.size(); t++) {
+                        conferences.get(c).confTeams.get(t).oocWeeks.add(r);
                     }
                 }
             }
@@ -1285,7 +1300,7 @@ public class League {
                     Team b;
 
                     if (availTeamsB.isEmpty()) {
-                        b = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 45), "FCS1", 0, this, true);
+                        b = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, true);
                     } else {
                         int selTeamB = (int) (availTeamsB.size() * Math.random());
                         b = availTeamsB.get(selTeamB);
@@ -1293,7 +1308,9 @@ public class League {
 
                     Game gm;
                     gm = new Game(a, b, "OOC");
-                    Log.d("league", "setupSeason: " + a.name + " vs " + b.name);
+
+                    //Log.d("league", "setupSeason: " + a.name + " vs " + b.name);
+
                     if (!a.conference.contains("Independent") && !a.conference.contains("FCS")) {
                         a.gameSchedule.add(week, gm);
                     }
@@ -1315,6 +1332,33 @@ public class League {
                     availTeams.remove(b);
                 }
 
+            }
+
+
+            if(numOddConf > 0) {
+                for (int c = 0; c < conferences.size(); c++) {
+                    if (conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
+                        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, this);
+                        bye.rankTeamPollScore = teamList.size();
+                        for (int g = 0; g < conferences.get(c).confTeams.size(); ++g) {
+                            Team a = conferences.get(c).confTeams.get(g);
+                            a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+                        }
+                    }
+                }
+            }
+
+            if(largeOddConf > 0) {
+                for (int c = 0; c < conferences.size(); c++) {
+                    if (conferences.get(c).confTeams.size() < conferences.get(c).minConfTeams) {
+                        Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, this);
+                        bye.rankTeamPollScore = teamList.size();
+                        for (int g = 0; g < conferences.get(c).confTeams.size(); ++g) {
+                            Team a = conferences.get(c).confTeams.get(g);
+                            a.gameSchedule.add(new Game(a, bye, "BYE WEEK"));
+                        }
+                    }
+                }
             }
 
         }
@@ -1655,13 +1699,15 @@ public class League {
             if (teamList.get(i).teamDisciplineScore < 30 && !teamList.get(i).recentPenalty) {
                 teamList.get(i).penalized = true;
                 teamList.get(i).recentPenalty = true;
-                teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.10;
-                teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.10;
+                teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.15;
+                teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.15;
             } else if (teamList.get(i).teamDisciplineScore <= 0) {
                 teamList.get(i).bowlBan = true;
-                teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.30;
-                teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.30;
+                teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.35;
+                teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.35;
                 teamList.get(i).teamDisciplineScore = 50;
+                teamList.get(i).penalized = false;
+                teamList.get(i).recentPenalty = false;
             }
         }
     }
@@ -1677,6 +1723,8 @@ public class League {
                 teamList.get(i).teamBudget -= baselineCost * (teamList.get(i).teamFacilities + 1);
                 teamList.get(i).facilityUpgrade = true;
                 teamList.get(i).teamFacilities++;
+                teamList.get(i).teamPrestige += teamList.get(i).teamFacilities;
+                teamList.get(i).getHC(0).baselinePrestige += teamList.get(i).teamFacilities*.75;
             }
         }
     }
@@ -1793,7 +1841,7 @@ public class League {
                 int teamDis = teamList.get(t).getTeamDiscipline();
                 if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
                     teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 5);
-                    teamList.get(t).disciplinePts -= (int) (Math.random() * 4);
+                    teamList.get(t).disciplinePts -= (int) (Math.random() * 3);
                     teamDiscipline.add(teamList.get(t).name);
                     teamList.get(t).disciplinePlayer();
                     teamList.get(t).teamDisciplineScore -= ((int) (Math.random() * 7) + 3);
@@ -2894,8 +2942,10 @@ public class League {
                 sb.append(getGameSummaryBowl(semiG23));
 
                 for (int i = 0; i < bowlGames.length; ++i) {
-                    sb.append("\n\n" + bowlNames[i] + ":\n");
-                    sb.append(getGameSummaryBowl(bowlGames[i]));
+                    if (bowlGames[i] != null) {
+                        sb.append("\n\n" + bowlNames[i] + ":\n");
+                        sb.append(getGameSummaryBowl(bowlGames[i]));
+                    }
                 }
 
                 return sb.toString();
@@ -4112,7 +4162,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
             //Smaller Conferences Will Try to Expand Their Empire...
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() < 14) {
+                if (conferences.get(c).confTeams.size() < 16) {
                     Conference conf = conferences.get(c);
                     ArrayList<Team> qualified = new ArrayList<>();
                     for (int i = 0; i < demoteTeamList.size(); i++) {
@@ -4205,78 +4255,81 @@ Then conferences can see if they want to add them to their list if the teams mee
 
             }
 
-/*            //find the teams do not meet conference threshold
-            for (int c = 0; c < confList.size(); c++) {
-                if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams) {
-                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
-                        if (confList.get(c).confTeams.get(i).teamPrestige < confList.get(c).confRelegateMin) {
+            if(advancedRealignment) {
+
+                //find the teams do not meet conference threshold
+                for (int c = 0; c < confList.size(); c++) {
+                    if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams) {
+                        for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                            if (confList.get(c).confTeams.get(i).teamPrestige < confList.get(c).confRelegateMin) {
+                                demoteTeamList.add(confList.get(c).confTeams.get(i));
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
                             demoteTeamList.add(confList.get(c).confTeams.get(i));
                         }
                     }
-                } else {
-                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
-                            demoteTeamList.add(confList.get(c).confTeams.get(i));
+                }
+
+                //Smaller Conferences Will Try to Expand Their Empire...
+                for (int c = 0; c < conferences.size(); c++) {
+                    if (conferences.get(c).confTeams.size() < 14) {
+                        Conference conf = conferences.get(c);
+                        for (int i = 0; i < demoteTeamList.size(); i++) {
+                            if (demoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() > realignmentChance && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                                final Team teamA = demoteTeamList.get(i);
+                                final String oldConf = teamA.conference;
+                                conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
+                                teamA.conference = conf.confName;
+                                conf.confTeams.add(teamA);
+
+                                //break the news
+                                newsStories.get(currentWeek + 2).add("Conference Growth!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.");
+
+                                newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.\n\n");
+                                countRealignment++;
+                                demoteTeamList.remove(teamA);
+                            }
+                        }
                     }
                 }
-            }
 
-            //Smaller Conferences Will Try to Expand Their Empire...
-            for(int c = 0; c < conferences.size(); c++) {
-                if(conferences.get(c).confTeams.size() < 14) {
-                    Conference conf = conferences.get(c);
-                    for(int i = 0; i < demoteTeamList.size(); i++) {
-                        if(demoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() > realignmentChance && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                //Let's kick people out
+                int indConf = 0;
+                boolean indSpace = false;
+                for (Conference c : conferences) {
+                    if (c.confName.equals("Independent") && c.confTeams.size() < c.minConfTeams) {
+                        indConf = getConfNumber(c.confName);
+                        indSpace = true;
+                    }
+                }
+                if (indSpace) {
+                    Conference indy = conferences.get(indConf);
+                    for (int i = 0; i < demoteTeamList.size(); i++) {
+                        if (Math.random() < 0.95 && indy.confTeams.size() < indy.minConfTeams && !demoteTeamList.get(i).conference.equals("Independent")) {
                             final Team teamA = demoteTeamList.get(i);
                             final String oldConf = teamA.conference;
                             conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
-                            teamA.conference = conf.confName;
-                            conf.confTeams.add(teamA);
+                            teamA.conference = indy.confName;
+                            indy.confTeams.add(teamA);
 
                             //break the news
-                            newsStories.get(currentWeek + 2).add("Conference Growth!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.");
+                            newsStories.get(currentWeek + 2).add("Conference and Team Part Ways!>The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference.");
 
-                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.\n\n");
+                            newsRealignment += ("The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference\n\n");
                             countRealignment++;
                             demoteTeamList.remove(teamA);
                         }
                     }
                 }
+
+
+                //Promote FCS School
+
+
+                //Create New Conference
             }
-
-            //Let's kick people out
-            int indConf = 0;
-            boolean indSpace = false;
-            for(Conference c : conferences) {
-                if(c.confName.equals("Independent") && c.confTeams.size() < c.minConfTeams) {
-                    indConf = getConfNumber(c.confName);
-                    indSpace = true;
-                }
-            }
-            if (indSpace) {
-                Conference indy = conferences.get(indConf);
-                for (int i = 0; i < demoteTeamList.size(); i++) {
-                    if (Math.random() < 0.95 && indy.confTeams.size() < indy.minConfTeams && !demoteTeamList.get(i).conference.equals("Independent")) {
-                        final Team teamA = demoteTeamList.get(i);
-                        final String oldConf = teamA.conference;
-                        conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
-                        teamA.conference = indy.confName;
-                        indy.confTeams.add(teamA);
-
-                        //break the news
-                        newsStories.get(currentWeek + 2).add("Conference Removes Team!>The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference.");
-
-                        newsRealignment += ("The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference\n\n");
-                        countRealignment++;
-                        demoteTeamList.remove(teamA);
-                    }
-                }
-            }*/
-
-
-            //Promote FCS School
-
-
-            //Create New Conference
 
         }
 
@@ -4294,6 +4347,11 @@ Then conferences can see if they want to add them to their list if the teams mee
         //Reorder Every Team by Rank
         Collections.sort(teamList, new CompTeamPrestige());
 
+        //check if there is an even number of teams
+        if(teamList.size() % 2 != 0) {
+            teamList.add(new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, true));
+        }
+
         //Clear all Conferences
         for (int i = 0; i < conferences.size(); i++) {
             conferences.get(i).confTeams.clear();
@@ -4302,7 +4360,7 @@ Then conferences can see if they want to add them to their list if the teams mee
         }
 
         int teamsPerConf = teamList.size() / conferences.size();
-        if (teamsPerConf % 2 != 0) teamsPerConf++;  //check if even # of teams
+        if (teamsPerConf % 2 != 0) teamsPerConf++;  //check if even # of teams per conf
 
         int c = 0, next = 0;
         for (int t = 0; t < teamList.size(); t++) {
@@ -4313,6 +4371,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 c++;
             }
             teamList.get(t).conference = conferences.get(c).confName;
+            teamList.get(t).division = "A";
             teamList.get(t).gameSchedule.clear();
             conferences.get(c).confTeams.add(teamList.get(t));
             next++;
@@ -5834,7 +5893,8 @@ Then conferences can see if they want to add them to their list if the teams mee
         sb.append("END_CAREER_MODE\n");
         sb.append(expPlayoffs + "\n");
         sb.append("END_EXP_PLAYOFFS\n");
-
+        sb.append(advancedRealignment + "\n");
+        sb.append("END_ADV_CONF_REALIGNMENT\n");
 
         sb.append("\nEND_SAVE_FILE");
 

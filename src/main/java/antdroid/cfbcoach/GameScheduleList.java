@@ -42,15 +42,19 @@ class GameScheduleList extends ArrayAdapter<Game> {
         if (team.gameWLSchedule.size() > position) {
             if (team.gameWLSchedule.get(position).equals("W")) {
                 gameButton.setBackground(context.getResources().getDrawable(R.drawable.button_shape_fc_win));
-            } else {
+            } else if (team.gameWLSchedule.get(position).equals("L")) {
                 gameButton.setBackground(context.getResources().getDrawable(R.drawable.button_shape_fc_loss));
+            } else if (team.gameWLSchedule.get(position).equals("BYE")) {
+                gameButton.setBackground(context.getResources().getDrawable(R.drawable.button_shape_fc_neutral));
             }
         }
 
         gameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                mainAct.showGameDialog(games[position]);
+                if (!games[position].gameName.equals("BYE WEEK")) {
+                    mainAct.showGameDialog(games[position]);
+                }
             }
         });
 
@@ -58,9 +62,11 @@ class GameScheduleList extends ArrayAdapter<Game> {
             @Override
             public void onClick(View v) {
                 // Do something on click
-                if (games[position].awayTeam == team)
-                    mainAct.examineTeam(games[position].homeTeam.name);
-                else mainAct.examineTeam(games[position].awayTeam.name);
+                if (!games[position].gameName.equals("BYE WEEK")) {
+                    if (games[position].awayTeam == team)
+                        mainAct.examineTeam(games[position].homeTeam.name);
+                    else mainAct.examineTeam(games[position].awayTeam.name);
+                }
             }
         });
 

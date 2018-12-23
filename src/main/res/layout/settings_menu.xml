@@ -178,6 +178,26 @@
                 android:layout_marginTop="15sp">
 
                 <TextView
+                    android:id="@+id/textAdvConfRealignment"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Enable Advanced Conf Realignment"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <CheckBox
+                    android:id="@+id/checkboxAdvConfRealignment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp">
+
+                <TextView
                     android:id="@+id/textEnableProRel"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"

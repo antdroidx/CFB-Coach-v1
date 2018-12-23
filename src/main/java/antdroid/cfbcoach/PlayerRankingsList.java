@@ -16,6 +16,7 @@ class PlayerRankingsList extends ArrayAdapter<String> {
     private final ArrayList<String> values;
     private String userTeamStrRep;
     private final MainActivity mainAct;
+    private Boolean coach;
 
     public PlayerRankingsList(Context context, ArrayList<String> values, String userTeamStrRep, MainActivity mainAct) {
         super(context, R.layout.team_rankings_list_item, values);
