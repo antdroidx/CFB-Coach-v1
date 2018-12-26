@@ -233,8 +233,8 @@ public class RecruitingActivity extends AppCompatActivity {
 
 
         // Add extra money if your team was fleeced
-        int recBonus = (minPlayers - teamPlayers.size()) * 25;
-        int coachBonus = HCtalent * 3;
+        int recBonus = (int)((minPlayers - teamPlayers.size()) * 27.5);
+        int coachBonus = (int)(HCtalent * 3.25);
         recruitingBudget += recBonus + coachBonus;
 
         // Next get recruits info

@@ -170,10 +170,10 @@ public class Conference {
                     league.newsTV.add(confName + " TV Re-Branding:\n\tThe " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
                             + TV + ".");
                 }
-            } else if (Math.random() * confPrestige * 4 < Math.random() * confPrestige) {
+            } else if (Math.random() * confPrestige * 3 < Math.random() * confPrestige) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
-                confTVBonus = confPrestige * 10;
+                confTVBonus = (int)(confPrestige * 11);
 
                 league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");

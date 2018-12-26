@@ -186,7 +186,7 @@ public class League {
     private final int seasonWeeks = 30;
     public int regSeasonWeeks = 13; //original = 13 will change dynamically based on team/conference structure
     private final double confRealignmentChance = .25; //chance of event .25
-    private final double realignmentChance = .30; //chance of invite .33
+    private final double realignmentChance = .225; //chance of invite .33
     private boolean heismanDecided;
     private Player heisman;
     private Player defPOTY;
@@ -4179,9 +4179,9 @@ Then conferences can see if they want to add them to their list if the teams mee
                             conf.confTeams.add(teamB);
 
                             //break the news
-                            newsStories.get(currentWeek + 2).add("Conference Addition!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " to their conference next season! Both teams were Independent previously.");
+                            newsStories.get(currentWeek + 2).add("Conference Addition!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " from the " + conf.confName + " to their conference next season!");
 
-                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " to their conference next season! Both teams were Independent previously.\n\n");
+                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " from the " + conf.confName + " to their conference next season!\n\n");
                             countRealignment++;
                             demoteTeamList.remove(teamA);
                             demoteTeamList.remove(teamB);
@@ -4211,7 +4211,7 @@ Then conferences can see if they want to add them to their list if the teams mee
             //Bigger Conferences will extend Invites
             for (int i = 0; i < promoteTeamList.size(); i++) {
                 int randomConf = (int) (Math.random() * (confList.size() / 2));
-                if (promoteTeamList.get(i).teamPrestige > confList.get(randomConf).confPromoteMin) {
+                if (promoteTeamList.get(i).teamPrestige > confList.get(randomConf).confPromoteMin && confList.get(randomConf).confTeams.size() >= confList.get(randomConf).minConfTeams) {
                     for (int k = confList.get(randomConf).confTeams.size() - 1; k >= 0; k--) {
                         if (confList.get(randomConf).confTeams.get(k).teamPrestige < confList.get(randomConf).confRelegateMin) {
                             if (Math.random() < realignmentChance && Math.abs(confList.get(randomConf).confTeams.get(k).location - promoteTeamList.get(i).location) < 2) {
@@ -4275,7 +4275,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
             //Smaller Conferences Will Try to Expand Their Empire...
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() < 14) {
+                if (conferences.get(c).confTeams.size() < 14 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
                     Conference conf = conferences.get(c);
                     for (int i = 0; i < demoteTeamList.size(); i++) {
                         if (demoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {

@@ -1800,7 +1800,7 @@ public class MainActivity extends AppCompatActivity {
                 if (showInjuryReport)
                     showInjuryReportDialog();
                 if (showToasts)
-                    Toast.makeText(MainActivity.this, userTeam.weekSummaryStr(),
+                    Toast.makeText(MainActivity.this, userTeam.weekSummaryStr(simLeague.currentWeek),
                             Toast.LENGTH_SHORT).show();
             }
 

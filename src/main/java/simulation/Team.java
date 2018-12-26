@@ -1273,7 +1273,7 @@ public class Team {
     public int[] calcSeasonPrestige() {
 
         int goal = projectedPollRank;
-        if (goal > league.teamList.size()*.85) goal = (int)(league.teamList.size()*.85);
+        if (goal > league.teamList.size()*.875) goal = (int)(league.teamList.size()*.875);
         if (goal <= 20) goal = 20;
         int diffExpected = goal - rankTeamPollScore;
 
@@ -1290,8 +1290,9 @@ public class Team {
         if (!bowlBan && !penalized) {
             prestigeChange = Math.round((float) (diffExpected / 7.5));
 
-            if(wins+losses > 12 && prestigeChange <=0 ) prestigeChange++;
+            if((wins+losses) > 12 && prestigeChange <= 0) prestigeChange++;
             if (prestigeChange < (wins - projectedWins)) prestigeChange++;
+            if(prestigeChange <= 0 && rankTeamPollScore < rankTeamPrestige) prestigeChange++;
         }
 
         //National Title Winner
@@ -1472,7 +1473,7 @@ public class Team {
         }
 
         if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 9) && teamPrestige < league.teamList.get((int) (league.countTeam * 0.35)).teamPrestige && !userControlled && HC.get(0).age < 53 || teamPrestige > (HC.get(0).baselinePrestige + 12) && confPrestige < league.confAvg && teamPrestige < league.teamList.get((int) (league.countTeam * 0.20)).teamPrestige && !userControlled && HC.get(0).age < 48) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 9) && rankTeamPrestige > (int) (league.countTeam * 0.35) && !userControlled && HC.get(0).age < 50 || teamPrestige > (HC.get(0).baselinePrestige + 12) && confPrestige < league.confAvg && rankTeamPrestige < (int) (league.countTeam * 0.20) && !userControlled && HC.get(0).age < 45) {
                 league.newsStories.get(league.currentWeek + 1).add("Head Coach Rumor Mill>After another successful season at " + name + ", " + age + " year old head coach " + HC.get(0).name + " has moved to the top of" +
                         " many of the schools looking for a replacement at that position. He has a career record of " + wins + "-" + losses + ". ");
                 if (Math.random() > 0.50) {
@@ -1509,7 +1510,7 @@ public class Team {
                         HC.get(0).baselinePrestige = (HC.get(0).baselinePrestige + 2 * teamPrestige) / 3;
                         newContract = true;
                     }
-                } else if (totalPDiff < 0 && (teamPrestige - teamPrestigeStart) > 2 || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige && (teamPrestige - teamPrestigeStart) > 2) {
+                } else if (totalPDiff < 0 && (teamPrestige - teamPrestigeStart) > 2 || rankTeamPrestige > 15 && (teamPrestige - teamPrestigeStart) > 2) {
                     if (Math.random() > 0.40) {
                         HC.get(0).contractLength = 2;
                         HC.get(0).contractYear = 0;
@@ -1529,14 +1530,14 @@ public class Team {
                         }
                         HC.remove(0);
                     }
-                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige  || !userControlled && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && rankTeamPrestige > 10 || !userControlled && rankTeamPrestige > 15 && totalPDiff < 0) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
-                } else if (totalPDiff < -2 && league.isCareerMode() && teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige || teamPrestige < league.teamList.get((int) (league.countTeam * 0.90)).teamPrestige) {
+                } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < 0) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -3353,7 +3354,7 @@ public class Team {
             histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
                     + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige + " (" + (teamPrestige - teamPrestigeStart) + ")";
 
-        for (int i = 12; i < gameSchedule.size(); ++i) {
+        for (int i = league.regSeasonWeeks-1; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);
             histYear += ">" + g.gameName + ": ";
             String[] gameSum = getGameSummaryStr(i);
@@ -3372,7 +3373,7 @@ public class Team {
             histYear = league.getYear() + ": #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ") "
                     + confChampion + " " + semiFinalWL + natChampWL + " Prs: " + teamPrestige + " (" + (teamPrestige - teamPrestigeStart) + ")";
 
-        for (int i = 12; i < gameSchedule.size(); ++i) {
+        for (int i = league.regSeasonWeeks-1; i < gameSchedule.size(); ++i) {
             Game g = gameSchedule.get(i);
             histYear += ">" + g.gameName + ": ";
             String[] gameSum = getGameSummaryStr(i);
@@ -4373,10 +4374,16 @@ public class Team {
      *
      * @return name W/L gameSum, new poll rank #1
      */
-    public String weekSummaryStr() {
-        int i = wins + losses - 1;
+    public String weekSummaryStr(int week) {
+        int i = week - 1;
+        if(week > league.regSeasonWeeks)  i = wins + losses + (league.regSeasonWeeks-13)-1;
         Game g = gameSchedule.get(i);
-        String gameSummary = gameWLSchedule.get(i) + " " + gameSummaryStr(g);
+        String gameSummary;
+        if(g.gameName.equals("BYE WEEK")) {
+            gameSummary = "BYE WEEK";
+        } else {
+           gameSummary = gameWLSchedule.get(i) + " " + gameSummaryStr(g);
+        }
 
         return name + " " + gameSummary + "\nNew poll rank: #" + rankTeamPollScore + " " + name + " (" + wins + "-" + losses + ")";
     }
@@ -4997,14 +5004,22 @@ public class Team {
     }
 
     public String midseasonTeamSave() {
-        String teamSave;
+        StringBuilder teamSave = new StringBuilder();
 
-        teamSave = (conference + "," + name + "," + abbr + "," + teamPrestige + "," + totalWins + "," + totalLosses
+        //Save Team Data
+        teamSave.append(conference + "," + name + "," + abbr + "," + teamPrestige + "," + totalWins + "," + totalLosses
                 + "," + totalCCs + "," + totalNCs + "," + division + "," + location + "," + totalNCLosses
                 + "," + totalCCLosses + "," + totalBowls + "," + totalBowlLosses + "," + playbookOffNum + "," + playbookDefNum
                 + "," + (showPopups ? 1 : 0) + "," + winStreak.getStreakCSV() + "," + teamBudget + "," + teamDisciplineScore + "," + recentPenalty + "," + teamFacilities + "," + teamStadium + "%\n");
 
-        return teamSave;
+        //Save Team Season Data
+        teamSave.append("");
+
+        //Save Team Schedule
+
+        //Save Team Injuries & Suspensions
+
+        return teamSave.toString();
     }
 
     //Creates a Save File for Team Roster
