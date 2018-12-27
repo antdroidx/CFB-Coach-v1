@@ -153,10 +153,32 @@ public class Game implements Serializable {
         awayScore = 0;
         awayQScore = new int[10];
 
-        //playGame();
         hasPlayed = false;
 
     }
+
+/*    public Game(String saveData) {
+        homeTeam = home;
+        awayTeam = away;
+
+        gameName = name;
+
+        homeScore = 0;
+        homeQScore = new int[10];
+        awayScore = 0;
+        awayQScore = new int[10];
+        numOT = 0;
+
+        homeTOs = 0;
+        awayTOs = 0;
+
+        hasPlayed = false;
+
+        if (gameName == null) {
+            gameName = "Game";
+        }
+    }*/
+
 
     private int getHFadv() {
         //home field advantage
@@ -1950,6 +1972,11 @@ public class Game implements Serializable {
             selQB.gameRushYards += yardsGain;
         }
 
+        for(int i = 0; i < 5; i++) {
+            teamOLs.get(i).statsRushYards += yardsGain;
+            teamOLs.get(i).statsRushSnaps++;
+        }
+
         if (yardsGain < 2 && !gotTD) {
             selDL.gameTackles++;
             selDL.statsTackles++;
@@ -2099,6 +2126,10 @@ public class Game implements Serializable {
         selQB.gamePassComplete++;
         selQB.gamePassYards += yardsGain;
 
+        for(int i = 0; i < 5; i++) {
+            teamOLs.get(i).statsPassYards += yardsGain;
+        }
+
         if (pos.equals("WR")) {
             selWR.statsReceptions++;
             selWR.statsRecYards += yardsGain;
@@ -2140,6 +2171,10 @@ public class Game implements Serializable {
     private void recordPassAttempt(PlayerQB selQB, PlayerRB selRB, PlayerWR selWR, PlayerTE selTE, PlayerLB selLB, PlayerCB selCB, String pos) {
         selQB.statsPassAtt++;
         selQB.gamePassAtempts++;
+
+        for(int i = 0; i < 5; i++) {
+            teamOLs.get(i).statsPassSnaps++;
+        }
 
         if (pos.equals("WR")) {
             selWR.statsTargets++;
@@ -2258,6 +2293,10 @@ public class Game implements Serializable {
             selDL.statsTackles++;
             selDL.statsSacks++;
             defender = ("DL " + selDL.name);
+            for(int i = 0; i < 5; i++) {
+                teamOLs.get(i).statsSacksAllowed++;
+                teamOLs.get(i).statsPassSnaps++;
+            }
         } else if (pos.equals("LB")) {
             selLB.gameTackles++;
             selLB.gameSacks++;

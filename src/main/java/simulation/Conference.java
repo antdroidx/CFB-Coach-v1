@@ -151,7 +151,7 @@ public class Conference {
     //Check for Contracts and Negotiate a new deal if no deal is already in place
     private void negotiateConfTV() {
         if (!confTV || confTV && confTVContract <= 1) {
-            if (Math.random() * confPrestige * 1.5 < Math.random() * confPrestige && confPrestige > league.getAverageConfPrestige()) {
+            if (Math.random() < 0.70 && confPrestige > league.getAverageConfPrestige()) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
                 confTVBonus = (int)(confPrestige * 17.5);
@@ -170,7 +170,7 @@ public class Conference {
                     league.newsTV.add(confName + " TV Re-Branding:\n\tThe " + confName + " conference has announced today that they will be re-branding their network branding to go along with the new network contract. The conference television channel will now be known as The "
                             + TV + ".");
                 }
-            } else if (Math.random() * confPrestige * 3 < Math.random() * confPrestige) {
+            } else if (Math.random() < 0.40) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
                 confTVBonus = (int)(confPrestige * 11);

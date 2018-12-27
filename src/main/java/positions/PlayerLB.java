@@ -229,20 +229,8 @@ public class PlayerLB extends Player {
         careerFumbles += statsFumbles;
         careerInts += statsInts;
 
-        if (wonHeisman) careerHeismans++;
-        if (wonAllAmerican) careerAllAmerican++;
-        if (wonAllConference) careerAllConference++;
-        if (wonAllFreshman) careerAllFreshman++;
-        if (wonTopFreshman) careerTopFreshman++;
-
-        if (isTransfer || isRedshirt || isMedicalRS) {
-            isTransfer = false;
-            isRedshirt = false;
-            isMedicalRS = false;
-            wasRedshirt = true;
-        } else {
-            year++;
-        }
+        addSeasonAwards();
+        checkRedshirt();
 
     }
 
@@ -328,8 +316,8 @@ public class PlayerLB extends Player {
     @Override
     public String getInfoForLineup() {
         if (injury != null)
-            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
-        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " " + injury.toString();
+        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratCoverage) + ", " + getLetterGrade(ratRunStop) + ", " + getLetterGrade(ratTackle) + ", " + getLetterGrade(ratSpeed) + ")";
     }
 

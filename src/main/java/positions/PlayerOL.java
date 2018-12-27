@@ -22,6 +22,8 @@ public class PlayerOL extends Player {
     public int statsSacksAllowed;
     public int statsRushYards;
     public int statsPassYards;
+    public int statsRushSnaps;
+    public int statsPassSnaps;
 
     //Size Config
     private final int hAvg = 76;
@@ -207,21 +209,8 @@ public class PlayerOL extends Player {
         careerGames += gamesPlayed;
         careerWins += statsWins;
 
-        if (wonHeisman) careerHeismans++;
-        if (wonAllAmerican) careerAllAmerican++;
-        if (wonAllConference) careerAllConference++;
-        if (wonAllFreshman) careerAllFreshman++;
-        if (wonTopFreshman) careerTopFreshman++;
-
-        if (isTransfer || isRedshirt || isMedicalRS) {
-            isTransfer = false;
-            isRedshirt = false;
-            isMedicalRS = false;
-            wasRedshirt = true;
-        } else {
-            year++;
-        }
-
+        addSeasonAwards();
+        checkRedshirt();
     }
 
     private void resetSeasonStats() {
@@ -251,7 +240,10 @@ public class PlayerOL extends Player {
 
     @Override
     public int getHeismanScore() {
-        return ratOvr * 50 + getConfPrestigeBonus();
+        int teamFactor = 0;
+        if(gamesPlayed < 0) return 0;
+        teamFactor = (int)( (gamesPlayed*50 + gamesStarted*250) + (+100*getYardsPerPass() +200*getYardsPerRush() -75*statsSacksAllowed) );
+        return ratOvr * 100 + teamFactor + getConfPrestigeBonus();
     }
 
     @Override
@@ -272,9 +264,11 @@ public class PlayerOL extends Player {
         pStats.add("Awareness: " + getLetterGrade(ratAwareness) + ">Pass Block: " + getLetterGrade(ratPassBlock));
         pStats.add(" > ");
         pStats.add("[B]SEASON STATS");
-
-
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
+        pStats.add("Run Snaps: " + statsRushSnaps + ">Run Yards: " + statsRushYards);
+        pStats.add("Pass Snaps: " + statsPassSnaps + ">Pass Yards: " + statsPassYards);
+        pStats.add("Run YPD: " + df2.format(getYardsPerRush()) + " YPD>Pass YPD: " + df2.format(getYardsPerPass()) + " YPD");
+        pStats.add("Sacks Allowed: " + statsSacksAllowed + "> ");
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS");
         pStats.addAll(getCareerStatsList());
@@ -284,8 +278,8 @@ public class PlayerOL extends Player {
     @Override
     public String getInfoForLineup() {
         if (injury != null)
-            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
-        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " " + injury.toString();
+        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratStrength) + ", " + getLetterGrade(ratRunBlock) + ", " + getLetterGrade(ratPassBlock) + ", " + getLetterGrade(ratAwareness) + ")";
     }
 
@@ -293,6 +287,24 @@ public class PlayerOL extends Player {
         int ovr;
         ovr = (ratStrength * 3 + ratRunBlock * 2 + ratPassBlock * 2 + ratAwareness) / 8;
         return ovr;
+    }
+
+    public float getYardsPerRush() {
+        if (statsRushSnaps < 1) {
+            return 0;
+        } else {
+            float ypa = (float)(statsRushYards) / (statsRushSnaps);
+            return ypa;
+        }
+    }
+
+    public float getYardsPerPass() {
+        if (statsPassSnaps < 1) {
+            return 0;
+        } else {
+            float ypa = (float)(statsPassYards) / (statsPassSnaps);
+            return ypa;
+        }
     }
 
 }

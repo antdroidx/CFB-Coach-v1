@@ -256,20 +256,8 @@ public class PlayerWR extends Player {
         careerPuntRetTDs += statsPuntRetTDs;
         careerRetGames += statsRetGames;
 
-        if (wonHeisman) careerHeismans++;
-        if (wonAllAmerican) careerAllAmerican++;
-        if (wonAllConference) careerAllConference++;
-        if (wonAllFreshman) careerAllFreshman++;
-        if (wonTopFreshman) careerTopFreshman++;
-
-        if (isTransfer || isRedshirt || isMedicalRS) {
-            isTransfer = false;
-            isRedshirt = false;
-            isMedicalRS = false;
-            wasRedshirt = true;
-        } else {
-            year++;
-        }
+        addSeasonAwards();
+        checkRedshirt();
 
     }
 
@@ -337,6 +325,41 @@ public class PlayerWR extends Player {
 
     }
 
+    private float getCareerYardsperTGT() {
+        if (careerReceptions < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsRecYards + careerRecYards) / (statsTargets + careerTargets);
+            return rating;
+        }
+    }
+
+    private float getYardsperTGT() {
+        if (statsReceptions < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsRecYards) / (statsTargets);
+            return rating;
+        }
+    }
+
+    private float getCareerCatchPCT() {
+        if (careerTargets < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsReceptions + careerReceptions) / (statsTargets + careerTargets)*100;
+            return rating;
+        }
+    }
+
+    private float getCatchPCT() {
+        if (statsTargets < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsReceptions) / (statsTargets)*100;
+            return rating;
+        }
+    }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
@@ -355,7 +378,7 @@ public class PlayerWR extends Player {
 
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
-        pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
+        pStats.add("Catch Percent: " + df2.format(getCatchPCT()) + "%>Yards/Tgt: " + df2.format(getYardsperTGT()) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>Drops: " + statsDrops);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
         if (statsKickRets > 0) {
@@ -377,15 +400,15 @@ public class PlayerWR extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("TDs: " + (statsRecTD + careerTD) + ">Fumbles: " + (statsFumbles + careerFumbles));
         pStats.add("Rec Yards: " + (statsRecYards + careerRecYards) + " yds>Receptions: " + (statsReceptions + careerReceptions));
-        pStats.add("Catch Percent: " + (100 * (statsReceptions + careerReceptions) / (statsTargets + careerTargets + 1)) + ">Yards/Tgt: " + ((double) ((10 * statsRecYards + careerRecYards) / (statsTargets + careerTargets + 1)) / 10) + " yds");
+        pStats.add("Catch Percent: " + df2.format(getCareerCatchPCT()) + "%>Yards/Tgt: " + df2.format(getCareerYardsperTGT()) + " yds");
         pStats.add("Yds/Game: " + ((statsRecYards + careerRecYards) / (getGames() + careerGames)) + " yds/g>Drops: " + (statsDrops + careerDrops));
-        if (statsKickRets + careerKickRets > 0) {
-            pStats.add("Kick Rets: " + (statsKickRets + careerKickRets) + ">Kick Ret Yards: " + (statsKickRetYards + careerKickRetYards) + " yrds");
-            pStats.add("Kick Ret TDs: " + (statsKickRetTDs + careerKickRetTDs) + ">Ret Avg: " + (double) ((statsKickRetYards + careerKickRetYards) / (statsKickRets + careerKickRets)));
+        if (statsKickRets > 0) {
+            pStats.add("Kick Rets: " + statsKickRets + ">Kick Ret Yards: " + statsKickRetYards + " yrds");
+            pStats.add("Kick Ret TDs: " + statsKickRetTDs + ">Ret Avg: " + df2.format((float) (statsKickRetYards / statsKickRets)));
         }
-        if (statsPuntRets + careerPuntRets > 0) {
-            pStats.add("Punt Rets: " + (statsPuntRets + careerPuntRets) + ">Punt Ret Yards: " + (statsPuntRetYards + careerPuntRetYards) + " yrds");
-            pStats.add("Punt Ret TDs: " + (statsPuntRetTDs + careerPuntRetTDs) + ">Ret Avg: " + (double) ((statsPuntRetYards + careerPuntRetYards) / (statsPuntRets + careerPuntRets)));
+        if (statsPuntRets > 0) {
+            pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
+            pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + df2.format((float) (statsPuntRetYards / statsPuntRets)));
         }
         pStats.addAll(super.getCareerStatsList());
         return pStats;
@@ -394,8 +417,8 @@ public class PlayerWR extends Player {
     @Override
     public String getInfoForLineup() {
         if (injury != null)
-            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
-        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " " + injury.toString();
+        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratCatch) + ", " + getLetterGrade(ratSpeed) + ", " + getLetterGrade(ratEvasion) + ", " + getLetterGrade(ratJump) + ")";
     }
 

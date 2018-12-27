@@ -48,7 +48,7 @@ public class LeagueRecords {
             "Career Rush Yards", "Career Rush TDs", "Career Fumbles Lost", "Career Receptions",
             "Career Rec Yards", "Career Rec TDs", "CAREER: DEFENSE", "Career Tackles", "Career Sacks", "Career Fumbles Rec", "Career Interceptions", "Career Defended",
             "CAREER: SPEC TEAMS", "Career Field Goals", "Career KR Yards", "Career KR TDs", "Career PR Yards", "Career PR TDs",
-            "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Bowl Appearances", "Coach Awards", "All-Americans", "All-Conferences", "Coach Year Score", "Coach Career Score", "Coach Career Prestige"};
+            "COACHING RECORDS", "Wins", "National Championships", "Conf Championships", "Bowl Wins", "Bowl Appearances", "Coach Awards", "All-Americans", "All-Conferences", "Coach Year Score"};
 
     public LeagueRecords(ArrayList<String> recordStrings) {
         records = new HashMap<>();
@@ -125,8 +125,6 @@ public class LeagueRecords {
         records.put("All-Americans", new Record(0, "XXX%XXX", 0));
         records.put("All-Conferences", new Record(0, "XXX%XXX", 0));
         records.put("Coach Year Score", new Record(0, "XXX%XXX", 0));
-        records.put("Coach Career Score", new Record(0, "XXX%XXX", 0));
-        records.put("Coach Career Prestige", new Record(0, "XXX%XXX", 0));
     }
 
     public void checkRecord(String record, int number, String holder, int year) {

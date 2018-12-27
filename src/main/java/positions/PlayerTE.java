@@ -232,20 +232,8 @@ public class PlayerTE extends Player {
         careerGames += gamesPlayed;
         careerWins += statsWins;
 
-        if (wonHeisman) careerHeismans++;
-        if (wonAllAmerican) careerAllAmerican++;
-        if (wonAllConference) careerAllConference++;
-        if (wonAllFreshman) careerAllFreshman++;
-        if (wonTopFreshman) careerTopFreshman++;
-
-        if (isTransfer || isRedshirt || isMedicalRS) {
-            isTransfer = false;
-            isRedshirt = false;
-            isMedicalRS = false;
-            wasRedshirt = true;
-        } else {
-            year++;
-        }
+        addSeasonAwards();
+        checkRedshirt();
 
     }
 
@@ -299,6 +287,41 @@ public class PlayerTE extends Player {
                 careerTD * 220 - careerFumbles * 75 + careerReceptions * 3 - careerDrops * 25 + careerRecYards * 3 + ratOvr * 10 * year;
     }
 
+    private float getCareerYardsperTGT() {
+        if (careerReceptions < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsRecYards + careerRecYards) / (statsTargets + careerTargets);
+            return rating;
+        }
+    }
+
+    private float getYardsperTGT() {
+        if (statsReceptions < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsRecYards) / (statsTargets);
+            return rating;
+        }
+    }
+
+    private float getCareerCatchPCT() {
+        if (careerTargets < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsReceptions + careerReceptions) / (statsTargets + careerTargets)*100;
+            return rating;
+        }
+    }
+
+    private float getCatchPCT() {
+        if (statsTargets < 1) {
+            return 0;
+        } else {
+            float rating = (float)(statsReceptions) / (statsTargets)*100;
+            return rating;
+        }
+    }
 
     @Override
     public ArrayList<String> getDetailAllStatsList(int games) {
@@ -317,7 +340,7 @@ public class PlayerTE extends Player {
 
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
-        pStats.add("Catch Percent: " + (100 * statsReceptions / (statsTargets + 1)) + ">Yards/Tgt: " + ((double) (10 * statsRecYards / (statsTargets + 1)) / 10) + " yds");
+        pStats.add("Catch Percent: " + df2.format(getCatchPCT()) + "%>Yards/Tgt: " + df2.format(getYardsperTGT()) + " yds");
         pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>Drops: " + statsDrops);
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
 
@@ -332,7 +355,7 @@ public class PlayerTE extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("TDs: " + (statsRecTD + careerTD) + ">Fumbles: " + (statsFumbles + careerFumbles));
         pStats.add("Rec Yards: " + (statsRecYards + careerRecYards) + " yds>Receptions: " + (statsReceptions + careerReceptions));
-        pStats.add("Catch Percent: " + (100 * (statsReceptions + careerReceptions) / (statsTargets + careerTargets + 1)) + ">Yards/Tgt: " + ((double) ((10 * statsRecYards + careerRecYards) / (statsTargets + careerTargets + 1)) / 10) + " yds");
+        pStats.add("Catch Percent: " + df2.format(getCareerCatchPCT()) + "%>Yards/Tgt: " + df2.format(getCareerYardsperTGT()) + " yds");
         pStats.add("Yds/Game: " + ((statsRecYards + careerRecYards) / (getGames() + careerGames)) + " yds/g>Drops: " + (statsDrops + careerDrops));
         pStats.addAll(super.getCareerStatsList());
         return pStats;
@@ -341,8 +364,8 @@ public class PlayerTE extends Player {
     @Override
     public String getInfoForLineup() {
         if (injury != null)
-            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
-        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " " + injury.toString();
+        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratCatch) + ", " + getLetterGrade(ratRunBlock) + ", " + getLetterGrade(ratEvasion) + ", " + getLetterGrade(ratSpeed) + ")";
     }
 

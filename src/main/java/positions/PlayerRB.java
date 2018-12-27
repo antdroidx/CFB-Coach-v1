@@ -263,20 +263,8 @@ public class PlayerRB extends Player {
         careerPuntRetTDs += statsPuntRetTDs;
         careerRetGames += statsRetGames;
 
-        if (wonHeisman) careerHeismans++;
-        if (wonAllAmerican) careerAllAmerican++;
-        if (wonAllConference) careerAllConference++;
-        if (wonAllFreshman) careerAllFreshman++;
-        if (wonTopFreshman) careerTopFreshman++;
-
-        if (isTransfer || isRedshirt || isMedicalRS) {
-            isTransfer = false;
-            isRedshirt = false;
-            isMedicalRS = false;
-            wasRedshirt = true;
-        } else {
-            year++;
-        }
+        addSeasonAwards();
+        checkRedshirt();
 
     }
 
@@ -345,20 +333,20 @@ public class PlayerRB extends Player {
                 + statsPuntRetYards + statsPuntRetTDs * 150 + careerKickRetYards + careerKickRetTDs * 150 + careerPuntRetYards + careerPuntRetTDs * 150 + ratOvr * 10 * year;
     }
 
-    private double getCareerYardsperCarry() {
+    private float getCareerYardsperCarry() {
         if (careerRushAtt < 1) {
             return 0;
         } else {
-            double rating = (statsRushYards + careerRushYards) / (statsRushAtt + careerRushAtt);
+            float rating = (float)(statsRushYards + careerRushYards) / (statsRushAtt + careerRushAtt);
             return rating;
         }
     }
 
-    private double getYardsperCarry() {
+    private float getYardsperCarry() {
         if (statsRushAtt < 1) {
             return 0;
         } else {
-            double rating = (double) (statsRushYards) / (statsRushAtt);
+            float rating = (float)(statsRushYards) / (statsRushAtt);
             return rating;
         }
     }
@@ -386,11 +374,11 @@ public class PlayerRB extends Player {
         pStats.add("Rec TDs: " + statsRecTD + ">Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
         if (statsKickRets > 0) {
             pStats.add("Kick Rets: " + statsKickRets + ">Kick Ret Yards: " + statsKickRetYards + " yrds");
-            pStats.add("Kick Ret TDs: " + statsKickRetTDs + ">Ret Avg: " + (double) (statsKickRetYards / statsKickRets));
+            pStats.add("Kick Ret TDs: " + statsKickRetTDs + ">Ret Avg: " + df2.format((float) (statsKickRetYards / statsKickRets)));
         }
         if (statsPuntRets > 0) {
             pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
-            pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
+            pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + df2.format((float) (statsPuntRetYards / statsPuntRets)));
         }
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS");
@@ -421,8 +409,8 @@ public class PlayerRB extends Player {
     @Override
     public String getInfoForLineup() {
         if (injury != null)
-            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " " + injury.toString();
-        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(ratPot, ratOvr, year, team.HC.get(0).ratTalent) + " (" +
+            return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " " + injury.toString();
+        return getInitialName() + " [" + getYrStr() + "] " + ratOvr + "/" + getPotRating(team.HC.get(0).ratTalent) + " (" +
                 getLetterGrade(ratRushPower) + ", " + getLetterGrade(ratSpeed) + ", " + getLetterGrade(ratEvasion) + ", " + getLetterGrade(ratCatch) + ")";
     }
 

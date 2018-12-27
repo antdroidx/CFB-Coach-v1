@@ -122,7 +122,7 @@ Player {
     public int gameFGMade;
     public int gameXPAttempts;
     public int gameXPMade;
-    final DecimalFormat df2 = new DecimalFormat(".#");
+    final DecimalFormat df2 = new DecimalFormat(".##");
 
     private final String[] letterGrades = {"F-", "F", "F+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"};
 
@@ -181,6 +181,29 @@ Player {
     public void advanceSeason() {
         //add stuff
         if (!isMedicalRS) year++;
+    }
+
+    public void checkRedshirt() {
+
+        if (isTransfer || isRedshirt || isMedicalRS) {
+            isTransfer = false;
+            isRedshirt = false;
+            isMedicalRS = false;
+            wasRedshirt = true;
+        } else if(gamesPlayed <= 4) {
+            wasRedshirt = true;
+        } else {
+            year++;
+        }
+    }
+
+    public void addSeasonAwards() {
+        if (wonHeisman) careerHeismans++;
+        if (wonAllAmerican) careerAllAmerican++;
+        if (wonAllConference) careerAllConference++;
+        if (wonAllFreshman) careerAllFreshman++;
+        if (wonTopFreshman) careerTopFreshman++;
+
     }
 
     public int getSeasonAwards() {
@@ -321,12 +344,12 @@ Player {
     }
 
     /**
-     * Convert a rating into a letter grade for potential, so 50 is a C instead of F
+     * Potential Overall Score
      */
-    int getPotRating(int pot, int ovr, int year, int hc) {
-        if (team.league.hidePotential) return 0;
+    public int getPotRating(int hc) {
+        if (!team.league.showPotential) return 0;
         int potential;
-        potential = ovr + ((3 * pot + 2 * hc) / 50) * (4 - year);
+        potential = ratOvr + ((3 * ratPot + 2 * hc) / 50) * (4 - year);
         return potential;
     }
 

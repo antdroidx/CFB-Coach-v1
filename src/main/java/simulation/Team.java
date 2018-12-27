@@ -1,23 +1,14 @@
 package simulation;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.util.Log;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
-import comparator.CompTeamPrestige;
 import positions.HeadCoach;
 import positions.Player;
 import positions.PlayerCB;
@@ -1446,8 +1437,13 @@ public class Team {
                 HC.get(0).promotionCandidate = true;
             }
         }
+    }
 
-
+    public void checkFacilitiesUpgradeBonus() {
+        if(facilityUpgrade) {
+            teamPrestige += teamFacilities;
+            if(HC.size() > 0) getHC(0).baselinePrestige += teamFacilities*.75;
+        }
     }
 
     private void coachContracts(int totalPDiff, int newPrestige) {
@@ -1463,8 +1459,6 @@ public class Team {
         //RETIREMENT
         if (HC.get(0).age > retire && !userControlled) {
             retired = true;
-            league.leagueRecords.checkRecord("Coach Career Score", HC.get(0).getCoachCareerScore(), HC.get(0).name + "%" + abbr, league.getYear());
-            league.leagueRecords.checkRecord("Coach Career Prestige", HC.get(0).cumulativePrestige, HC.get(0).name + "%" + abbr, league.getYear());
             String oldCoach = HC.get(0).name;
             fired = true;
             HC.remove(0);
@@ -1530,14 +1524,14 @@ public class Team {
                         }
                         HC.remove(0);
                     }
-                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && rankTeamPrestige > 10 || !userControlled && rankTeamPrestige > 15 && totalPDiff < 0) {
+                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && rankTeamPrestige > 10 || !userControlled && rankTeamPrestige > 15 && totalPDiff < -1) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
-                } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < 0) {
+                } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < -1) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -3912,7 +3906,6 @@ public class Team {
         for (Player p : teamWRs) {
             String starter = getRosterStatus(p, i, "WR");
             String imp = " ";
-            if(p.ratImprovement > 0) imp = " (+" + p.ratImprovement + ")";
             roster.add("WR,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
@@ -3992,8 +3985,15 @@ public class Team {
 
     private String getRatImprovement(Player p) {
         String imp = " ";
-        if(p.ratImprovement > 0) imp = " (+" + p.ratImprovement + ")";
-        if(p.ratImprovement < 0) imp = " (" + p.ratImprovement + ")";
+
+        if(league.currentWeek == league.regSeasonWeeks/2 || league.currentWeek > 21) {
+            if (p.ratImprovement > 0) imp = " (+" + p.ratImprovement + ")";
+            if (p.ratImprovement < 0) imp = " (" + p.ratImprovement + ")";
+        } else if(league.showPotential && HC.size() > 0 && !p.position.equals("HC")) {
+            imp = Integer.toString( p.getPotRating(getHC(0).ratTalent) );
+        }
+
+
         return imp;
     }
 
@@ -4362,7 +4362,7 @@ public class Team {
      * @return ranking abbr (Pres: XX)
      */
     public String strRepWithPrestige() {
-        return /*"#" + rankTeamPollScore + " " + */name + " [" + teamPrestige + "]";
+        return /*"#" + rankTeamPollScore + " " + */name + " [#" + rankTeamPrestige + "]";
     }
 
     public String strTeamRecord() {

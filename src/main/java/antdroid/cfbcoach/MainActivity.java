@@ -2114,6 +2114,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
         checkboxShowInjury.setChecked(showInjuryReport);
 
+        final CheckBox checkboxShowPotential = dialog.findViewById(R.id.checkboxShowPotential);
+        checkboxShowPotential.setChecked(simLeague.showPotential);
+
         final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
         checkboxGameLog.setChecked(simLeague.fullGameLog);
 
@@ -2250,6 +2253,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
+                simLeague.showPotential = checkboxShowPotential.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
@@ -3162,6 +3166,9 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkboxShowInjury = dialog.findViewById(R.id.checkboxShowInjuryReport);
         checkboxShowInjury.setChecked(showInjuryReport);
 
+        final CheckBox checkboxShowPotential = dialog.findViewById(R.id.checkboxShowPotential);
+        checkboxShowPotential.setChecked(simLeague.showPotential);
+
         final CheckBox checkboxGameLog = dialog.findViewById(R.id.checkboxShowFullGameLog);
         checkboxGameLog.setChecked(simLeague.fullGameLog);
 
@@ -3234,6 +3241,7 @@ public class MainActivity extends AppCompatActivity {
                 // Perform action on click
                 showToasts = checkboxShowPopup.isChecked();
                 showInjuryReport = checkboxShowInjury.isChecked();
+                simLeague.showPotential = checkboxShowPotential.isChecked();
                 simLeague.fullGameLog = checkboxGameLog.isChecked();
                 simLeague.careerMode = checkboxCareerMode.isChecked();
                 simLeague.neverRetire = checkboxNeverRetire.isChecked();
@@ -3910,9 +3918,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Retirement vs Eternal
     private void retirementQuestion() {
-        simLeague.leagueRecords.checkRecord("Coach Career Score", userTeam.HC.get(0).getCoachCareerScore(), userTeam.HC.get(0).name + "%" + userTeam.abbr, simLeague.getYear());
-        simLeague.leagueRecords.checkRecord("Coach Career Prestige", userTeam.HC.get(0).getCoachCareerScore(), userTeam.HC.get(0).name + "%" + userTeam.abbr, simLeague.getYear());
-
         String string = "";
         string = "You have reached that time in your life when you need to decide to hang it up and retire or continue on. " +
                 "At this point, if you choose to continue, your ability to increase skill ratings will be much more challenging. " +
@@ -3925,12 +3930,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (skipRetirementQ) contractDialog();
+                        dialog.dismiss();
+
                     }
                 })
                 .setNeutralButton("Reincarnate", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         reincarnation();
+                        dialog.dismiss();
 
                     }
                 })
@@ -3938,6 +3946,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         retire();
+                        dialog.dismiss();
+
                     }
                 });
         builder.setCancelable(false);
@@ -3997,6 +4007,8 @@ public class MainActivity extends AppCompatActivity {
                         userTeam.setupUserCoach(userHC.name);
                         newGame = true;
                         userNameDialog();
+                        dialog.dismiss();
+
                     }
                 })
                 .setNegativeButton("Reincarnate - New Team", new DialogInterface.OnClickListener() {
@@ -4006,6 +4018,8 @@ public class MainActivity extends AppCompatActivity {
                         jobOffers(userHC);
                         newGame = true;
                         userNameDialog();
+                        dialog.dismiss();
+
                     }
                 })
                 .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));

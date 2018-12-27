@@ -114,7 +114,8 @@ class TeamRoster extends ArrayAdapter<String> {
             textClass.setTextColor(Color.DKGRAY);
         }
 
-        if(week > 5 && week < 8 && teamStat.length > 6 || week > 21 && teamStat.length > 6  ) {
+        //if(week > 5 && week < 8 && teamStat.length > 6 || week > 21 && teamStat.length > 6) {
+        if(teamStat.length > 6) {
             textProg.setText(teamStat[6]);
         }
 

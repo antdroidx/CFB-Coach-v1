@@ -166,7 +166,7 @@ public class League {
 
     //Game Options
     public boolean fullGameLog;
-    public boolean hidePotential;
+    public boolean showPotential;
     public boolean confRealignment;
     public boolean enableUnivProRel;
     public boolean enableTV;
@@ -180,7 +180,7 @@ public class League {
     public ArrayList<Team> playoffTeams;
     public String postseason;
 
-    private final DecimalFormat df2 = new DecimalFormat(".#");
+    private final DecimalFormat df2 = new DecimalFormat(".##");
     private final int seasonStart = 2018;
     int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 30;
@@ -221,7 +221,7 @@ public class League {
      */
     public League(String namesCSV, String lastNamesCSV, String confText, String teamText, String bowlText, boolean randomize, boolean equalize) {
         careerMode = true;
-        hidePotential = true;
+        showPotential = false;
         confRealignment = true;
         enableTV = true;
         enableUnivProRel = false;
@@ -311,7 +311,7 @@ public class League {
      */
     public League(String namesCSV, String lastNamesCSV, File customConf, File customTeams, File customBowl, boolean randomize, boolean equalize) {
         careerMode = true;
-        hidePotential = true;
+        showPotential = false;
         confRealignment = true;
         enableTV = true;
         enableUnivProRel = false;
@@ -650,7 +650,7 @@ public class League {
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_HIDE_POTENTIAL")) {
-                hidePotential = Boolean.parseBoolean(line);
+                showPotential = Boolean.parseBoolean(line);
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONF_REALIGNMENT")) {
@@ -883,7 +883,7 @@ public class League {
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_HIDE_POTENTIAL")) {
-                hidePotential = Boolean.parseBoolean(line);
+                showPotential = Boolean.parseBoolean(line);
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONF_REALIGNMENT")) {
@@ -1118,7 +1118,7 @@ public class League {
             }
 
             fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
-            hidePotential = Boolean.parseBoolean(bufferedReader.readLine());
+            showPotential = Boolean.parseBoolean(bufferedReader.readLine());
             confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
             enableTV = Boolean.parseBoolean(bufferedReader.readLine());
             enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
@@ -1725,8 +1725,6 @@ public class League {
                 teamList.get(i).teamBudget -= baselineCost * (teamList.get(i).teamFacilities + 1);
                 teamList.get(i).facilityUpgrade = true;
                 teamList.get(i).teamFacilities++;
-                teamList.get(i).teamPrestige += teamList.get(i).teamFacilities;
-                teamList.get(i).getHC(0).baselinePrestige += teamList.get(i).teamFacilities*.75;
             }
         }
     }
@@ -2279,6 +2277,23 @@ public class League {
                 }
             }
 
+            //ol
+            for (int ol = 0; ol < teamList.get(i).teamOLs.size(); ++ol) {
+                if (teamList.get(i).teamOLs.get(ol).year == 1) {
+                    //freshmanCandidates.add(teamList.get(i).teamOLs.get(ol));
+                    fOLs.add(teamList.get(i).teamOLs.get(ol));
+                }
+            }
+
+            //k
+            for (int k = 0; k < teamList.get(i).teamKs.size(); ++k) {
+                if (teamList.get(i).teamKs.get(k).year == 1) {
+                    freshmanCandidates.add(teamList.get(i).teamKs.get(k));
+                    fKs.add(teamList.get(i).teamKs.get(k));
+                }
+            }
+
+            
             //dl
             for (int dl = 0; dl < teamList.get(i).teamDLs.size(); ++dl) {
                 if (teamList.get(i).teamDLs.get(dl).year == 1) {
@@ -2433,6 +2448,10 @@ public class League {
                 PlayerTE pte = (PlayerTE) p;
                 allFreshmanTeam.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
                         pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerOL) {
+                PlayerOL pol = (PlayerOL) p;
+                allFreshmanTeam.append(" OL " + pol.name + " [" + pol.getYrStr() + "]\n \t\t" +
+                        df2.format(pol.getYardsPerRush()) + " YPR, " + df2.format(pol.getYardsPerPass()) + " YPP, " + pol.statsSacksAllowed + " Sacks\n");
             } else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 allFreshmanTeam.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
@@ -2771,6 +2790,10 @@ public class League {
                 PlayerTE pte = (PlayerTE) p;
                 allAmerican.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
                         pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerOL) {
+                PlayerOL pol = (PlayerOL) p;
+                allAmerican.append(" OL " + pol.name + " [" + pol.getYrStr() + "]\n \t\t" +
+                        df2.format(pol.getYardsPerRush()) + " YPR, " + df2.format(pol.getYardsPerPass()) + " YPP, " + pol.statsSacksAllowed + " Sacks\n");
             } else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 allAmerican.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
@@ -2833,6 +2856,10 @@ public class League {
                 PlayerTE pte = (PlayerTE) p;
                 sb.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
                         pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerOL) {
+                PlayerOL pol = (PlayerOL) p;
+                sb.append(" OL " + pol.name + " [" + pol.getYrStr() + "]\n \t\t" +
+                        df2.format(pol.getYardsPerRush()) + " YPR, " + df2.format(pol.getYardsPerPass()) + " YPP, " + pol.statsSacksAllowed + " Sacks\n");
             } else if (p instanceof PlayerK) {
                 PlayerK pk = (PlayerK) p;
                 sb.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
@@ -3489,6 +3516,7 @@ public class League {
         Collections.sort(teamList, new CompTeamPrestige());
         for (int t = 0; t < teamList.size(); ++t) {
             teamList.get(t).advanceHC(leagueRecords, teamList.get(t).teamRecords);
+            teamList.get(t).checkFacilitiesUpgradeBonus();
         }
     }
 
@@ -4553,6 +4581,7 @@ Then conferences can see if they want to add them to their list if the teams mee
     //advances team players
     public void advanceSeason() {
         for (int t = 0; t < teamList.size(); ++t) {
+
             teamList.get(t).advanceTeamPlayers();
         }
 
@@ -5915,7 +5944,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
         sb.append(fullGameLog + "\n");
         sb.append("END_GAME_LOG\n");
-        sb.append(hidePotential + "\n");
+        sb.append(showPotential + "\n");
         sb.append("END_HIDE_POTENTIAL\n");
         sb.append(confRealignment + "\n");
         sb.append("END_CONF_REALIGNMENT\n");
