@@ -173,7 +173,7 @@ public class Conference {
             } else if (Math.random() < 0.40) {
                 confTV = true;
                 confTVContract = (int) (Math.random() * 5) + 5;
-                confTVBonus = (int)(confPrestige * 11);
+                confTVBonus = confPrestige * 11;
 
                 league.newsStories.get(league.currentWeek + 1).add(TV + " TV Contract>A new television contract has been worked out with the "
                         + confName + " conference. The new television contract is for " + confTVContract + " years, and will provide bonuses of up to $" + confTVBonus + " every season to each team.");

@@ -362,6 +362,7 @@ public class PlayerCB extends Player {
             pStats.add("Punt Rets: " + statsPuntRets + ">Punt Ret Yards: " + statsPuntRetYards + " yrds");
             pStats.add("Punt Ret TDs: " + statsPuntRetTDs + ">Ret Avg: " + (double) (statsPuntRetYards / statsPuntRets));
         }
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
 
         pStats.add("[B]CAREER STATS");
         pStats.addAll(getCareerStatsList());

@@ -286,6 +286,7 @@ public class PlayerS extends Player {
 
         pStats.add("Tackles: " + (statsTackles) + " >Sacks: " + (statsSacks));
         pStats.add("Fumbles: " + (statsFumbles) + " >Interceptions: " + (statsInts));
+        pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
 
         pStats.add(" > ");
         pStats.add("[B]CAREER STATS");

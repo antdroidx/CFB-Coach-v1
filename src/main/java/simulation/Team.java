@@ -5013,7 +5013,6 @@ public class Team {
                 + "," + (showPopups ? 1 : 0) + "," + winStreak.getStreakCSV() + "," + teamBudget + "," + teamDisciplineScore + "," + recentPenalty + "," + teamFacilities + "," + teamStadium + "%\n");
 
         //Save Team Season Data
-        teamSave.append("");
 
         //Save Team Schedule
 
