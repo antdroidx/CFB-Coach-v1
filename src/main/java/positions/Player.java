@@ -190,7 +190,7 @@ Player {
             isRedshirt = false;
             isMedicalRS = false;
             wasRedshirt = true;
-        } else if(gamesPlayed <= 4) {
+        } else if(gamesPlayed <= 4 && !wasRedshirt) {
             wasRedshirt = true;
         } else {
             year++;
