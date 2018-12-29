@@ -118,8 +118,9 @@ public class HeadCoach extends Player {
         confAward = caw;
         awards = aw;
         cumulativePrestige = cpres;
-        history = new ArrayList<>();
         retired = ret;
+        history = new ArrayList<>();
+
 
         position = "HC";
     }

@@ -32,8 +32,8 @@ android {
         applicationId "antdroid.cfbcoach"
         minSdkVersion 21
         targetSdkVersion 26
-        versionName 'v1.3.53'
-        versionCode 176
+        versionName 'v1.3.54'
+        versionCode 177
     }
     buildTypes {
         release {

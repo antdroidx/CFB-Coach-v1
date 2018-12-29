@@ -420,7 +420,7 @@ public class Team {
             totalCCLosses = Integer.parseInt(teamInfo[11]);
             totalBowls = Integer.parseInt(teamInfo[12]);
             totalBowlLosses = Integer.parseInt(teamInfo[13]);
-            playbookOffNum = Integer.parseInt(teamInfo[13]);
+            playbookOffNum = Integer.parseInt(teamInfo[14]);
             playbookDefNum = Integer.parseInt(teamInfo[15]);
             showPopups = (Integer.parseInt(teamInfo[16]) == 1);
             winStreak = new TeamStreak(Integer.parseInt(teamInfo[19]),
@@ -453,7 +453,6 @@ public class Team {
 
         // Group players by class standing (FRs, SOs, etc)
         groupPlayerStandingCSV();
-
     }
 
     private void commonInitializer() {

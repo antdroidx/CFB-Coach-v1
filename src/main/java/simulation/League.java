@@ -5979,13 +5979,14 @@ Then conferences can see if they want to add them to their list if the teams mee
             } else {
                 h.retired = true;
             }
+
             sb.append(h.name + "," + h.age + "," + h.year + "," + h.ratPot + "," + h.ratOff + "," + h.ratDef + "," + h.ratTalent + "," + h.ratDiscipline
                     + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses
                     + "," + h.confchamp + "," + h.natchamp + "," + h.allconference + "," + h.allamericans + "," + h.confAward + "," + h.awards + "," + h.cumulativePrestige + "," + h.retired + "% " + "\n");
             for (String s : h.history) {
                 sb.append(s + "\n");
-                sb.append("END_FREE_AGENT\n");
             }
+            sb.append("END_FREE_AGENT\n");
         }
 
         return sb.toString();

@@ -43,6 +43,18 @@ public class CoachDatabase  extends ArrayAdapter<String> {
         textCenter.setText(teamStat[1]);
         textRight.setText(teamStat[2]);
 
+
+        if (!teamStat[1].contains("[U]") && !teamStat[1].contains("[R]")) {
+            // Bold user team
+            textCenter.setTextColor(Color.WHITE);
+            textRight.setTextColor(Color.WHITE);
+        }
+        if (teamStat[1].contains("[R]")) {
+            // Bold user team
+            textCenter.setTextColor(Color.GRAY);
+            textRight.setTextColor(Color.GRAY);
+        }
+
         if (teamStat[1].equals(userHC)) {
             // Bold user team
             textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
@@ -52,6 +64,7 @@ public class CoachDatabase  extends ArrayAdapter<String> {
             textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
             textRight.setTextColor(Color.parseColor("#5994de"));
         }
+
         if (teamStat[2].split(" ").length > 1 && teamStat[2].split(" ")[2].contains("+")) {
             // Highlight Prestige Changes in off-season
             textRight.setTextColor(Color.GREEN);
