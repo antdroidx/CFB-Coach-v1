@@ -903,7 +903,7 @@ public class MainActivity extends AppCompatActivity {
             String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
             PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
             builder.setAdapter(pStatsAdapter, null)
-                    .setTitle(p.position + " " + p.name + ", " + p.getYrStr())
+                    .setTitle(p.position + " " + p.name)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -3387,6 +3387,7 @@ public class League {
 
             );
         }
+
         if (semiG23.homeScore > semiG23.awayScore) {
             semiG23.homeTeam.semiFinalWL = "SFW";
             semiG23.awayTeam.semiFinalWL = "SFL";
@@ -5192,7 +5193,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(coachDatabase, new CompCoachWins());
                 for (int i = 0; i < coachDatabase.size(); ++i) {
                     c = coachDatabase.get(i);
-                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + (c.wins + c.careerWins));
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + (c.wins + c.teamWins));
                 }
                 break;
             case 4:

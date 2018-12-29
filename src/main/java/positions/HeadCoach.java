@@ -26,8 +26,8 @@ public class HeadCoach extends Player {
     public int defStrat;
     public int baselinePrestige;
     public int cumulativePrestige;
-    private final int teamWins;
-    private final int teamLosses;
+    public int teamWins;
+    public int teamLosses;
     public int wins;
     public int losses;
     public int bowlwins;
@@ -252,8 +252,11 @@ public class HeadCoach extends Player {
         ratOvr = getHCOverall();
         ratImprovement = ratOvr - oldOvr;
 
-        wins += team.wins;
-        losses += team.losses;
+        wins += teamWins;
+        losses += teamLosses;
+        teamWins = 0;
+        teamLosses = 0;
+
         confchamp += 0;
         natchamp += 0;
         allamericans += 0;
@@ -272,14 +275,14 @@ public class HeadCoach extends Player {
             prestigeDiff = team.teamPrestige - team.teamPrestigeStart;
         }
 
-        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3 * team.wins - 1 * team.losses + team.confPrestige;
+        return prestigeDiff * 10 + (team.teamStrengthOfWins / 20) + 3 * teamWins - 1 * teamLosses + team.confPrestige;
     }
 
     //For future implementation: tally up the total prestige change over the years for scoring
     public int getCoachCareerScore() {
         if (year < 1) return 0;
         else
-            return (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans + 5*cumulativePrestige) / year;
+            return (5 * (wins + teamWins) - 2 * (losses + teamLosses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans + 5*cumulativePrestige) / year;
     }
 
     @Override
@@ -309,7 +312,8 @@ public class HeadCoach extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Career Wins: " + wins + ">Career Losses: " + losses);
+        pStats.add("Current Status: " + (wins+teamWins) + ">Career Losses: " + (losses+teamLosses));
+        pStats.add("Career Wins: " + (wins+teamWins) + ">Career Losses: " + (losses+teamLosses));
         pStats.add("Bowl Wins: " + bowlwins + ">Bowl Losses: " + bowllosses);
         pStats.add("Conf Champs: " + confchamp + ">National Champs: " + natchamp);
         pStats.add("All Conferences: " + allconference + ">All Americans: " + allamericans);
@@ -320,7 +324,7 @@ public class HeadCoach extends Player {
 
     @Override
     public String getYrStr() {
-        return "Season " + year;
+        return " Seasons: " + year;
     }
 
     public String[] getCoachHistory() {
@@ -353,7 +357,7 @@ public class HeadCoach extends Player {
     public float getLeaderboardScore() {
         float score = 0;
 
-        score = careerScore + (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans);
+        score = careerScore + (5 * (wins+teamWins) - 2 * (losses+teamLosses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans);
 
         return score;
     }
@@ -379,8 +383,8 @@ public class HeadCoach extends Player {
 
     public double getWinPCT() {
        double pct = 0;
-       if(wins + losses > 0) {
-           pct = 100*(double)(wins)/(wins+losses);
+       if(wins+teamWins + losses+teamLosses > 0) {
+           pct = 100*(double)(wins+teamWins)/(wins+losses+teamWins+teamLosses);
        }
        return pct;
     }
