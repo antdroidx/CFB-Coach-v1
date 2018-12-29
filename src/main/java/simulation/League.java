@@ -4215,7 +4215,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
             //Smaller Conferences Will Try to Expand Their Empire...
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() < 16) {
+                if (conferences.get(c).confTeams.size() < 15) {
                     Conference conf = conferences.get(c);
                     ArrayList<Team> qualified = new ArrayList<>();
                     for (int i = 0; i < demoteTeamList.size(); i++) {
@@ -4329,7 +4329,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
             //Smaller Conferences Will Try to Expand Their Empire...
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() < 14 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
+                if (conferences.get(c).confTeams.size() < 15 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
                     Conference conf = conferences.get(c);
                     for (int i = 0; i < demoteTeamList.size(); i++) {
                         if (demoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
@@ -5148,12 +5148,8 @@ Then conferences can see if they want to add them to their list if the teams mee
         return rankings;
     }
 
-    public ArrayList<String> getCoachDatabase(int selection) {
-        /*
-         */
+    public void createCoachDatabase() {
         coachDatabase.clear();
-        ArrayList<String> rankings = new ArrayList<>();
-        HeadCoach c;
 
         for(HeadCoach x : coachDatabase) {
             coachDatabase.add(x);
@@ -5166,6 +5162,16 @@ Then conferences can see if they want to add them to their list if the teams mee
         for(HeadCoach x : coachFreeAgents) {
             coachDatabase.add(x);
         }
+    }
+
+    public ArrayList<String> getCoachDatabase(int selection) {
+        /*
+         */
+        coachDatabase.clear();
+        ArrayList<String> rankings = new ArrayList<>();
+        HeadCoach c;
+
+        createCoachDatabase();
 
         switch (selection) {
             case 0:

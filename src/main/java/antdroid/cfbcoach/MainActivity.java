@@ -2457,7 +2457,7 @@ public class MainActivity extends AppCompatActivity {
     //League History Stats
     private void showCoachDatabase() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("League Stats")
+        builder.setTitle("Coach Database")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

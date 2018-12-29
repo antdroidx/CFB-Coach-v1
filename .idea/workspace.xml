@@ -32,15 +32,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/comparator/CompCoachHiring.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comparator/CompCoachWins.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comparator/CompCoachWins.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/simulation/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/League.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Team.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -84,11 +84,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-111">
+              <caret line="3570" column="44" selection-start-line="3570" selection-start-column="44" selection-end-line="3570" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="1590" column="31" selection-start-line="1590" selection-start-column="31" selection-end-line="1590" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompCoachOvr.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachOvr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="64">
+              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="11" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeadCoach.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/positions/HeadCoach.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5504">
+              <caret line="349" column="19" selection-start-line="349" selection-start-column="19" selection-end-line="349" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="905" column="55" selection-start-line="905" selection-start-column="55" selection-end-line="905" selection-end-column="55" />
+            <state relative-caret-position="305">
+              <caret line="3633" column="41" selection-start-line="3633" selection-start-column="41" selection-end-line="3633" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -106,11 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>teamOL</find>
-      <find>allFreshman</find>
-      <find>TE</find>
-      <find>AllAmeri</find>
-      <find>facility</find>
       <find>advance</find>
       <find>fac</find>
       <find>retire</find>
@@ -136,9 +167,13 @@
       <find>coachFreeAgents</find>
       <find>coachDa</find>
       <find>NCG</find>
+      <find>realign</find>
+      <find>Coach Da</find>
+      <find>getHCOverall</find>
+      <find>jobO</find>
+      <find>coach</find>
     </findStrings>
     <replaceStrings>
-      <replace>.team.name</replace>
       <replace>get(i).team.abbr</replace>
       <replace>confList</replace>
       <replace>confPrestige</replace>
@@ -168,6 +203,7 @@
       <replace>c.team.name</replace>
       <replace>+ checkCoachStatus(c) +</replace>
       <replace>coachDatabase</replace>
+      <replace>getHCHiring</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1668,7 +1704,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/res/layout/box_score.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/box_scores.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
@@ -1712,17 +1747,18 @@
         <option value="$PROJECT_DIR$/src/main/java/positions/PlayerCB.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/PlayerS.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRoster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/changelog.xml" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/comparator/CompCoachWins.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" />
+        <option value="$PROJECT_DIR$/src/main/java/comparator/CompCoachHiring.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="699" />
     <option name="y" value="16" />
     <option name="width" value="973" />
@@ -2012,6 +2048,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32963374" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32963374" />
@@ -2027,8 +2064,9 @@
       <window_info id="Captures" order="5" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48698884" visible="true" weight="0.20682302" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48698884" visible="true" weight="0.19829424" />
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49626866" weight="0.25831485" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32815966" />
       <window_info anchor="right" id="Gradle" order="9" weight="0.32942432" />
       <window_info id="Structure" order="1" sideWeight="0.51301116" side_tool="true" weight="0.4420131" />
       <window_info anchor="right" id="Device File Explorer" order="8" side_tool="true" weight="0.32889125" />
@@ -2046,7 +2084,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Assistant" order="5" weight="0.32995737" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32815966" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2118,13 +2155,6 @@ return avg / teamList.size();</expression-string>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompTeamRecruitClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/TeamStreak.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -2174,13 +2204,6 @@ return avg / teamList.size();</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3936">
           <caret line="267" column="9" selection-start-line="267" selection-start-column="9" selection-end-line="267" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachOvr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -2447,13 +2470,6 @@ return avg / teamList.size();</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="570" column="37" selection-start-line="570" selection-start-column="37" selection-end-line="570" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/changelog.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -2488,13 +2504,6 @@ return avg / teamList.size();</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/HeadCoach.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="314" column="60" lean-forward="true" selection-start-line="314" selection-start-column="60" selection-end-line="314" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="823">
@@ -2502,17 +2511,48 @@ return avg / teamList.size();</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachOvr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-92">
-          <caret line="5195" column="116" selection-start-line="5195" selection-start-column="116" selection-end-line="5195" selection-end-column="116" />
+        <state relative-caret-position="64">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="905" column="55" selection-start-line="905" selection-start-column="55" selection-end-line="905" selection-end-column="55" />
+        <state relative-caret-position="305">
+          <caret line="3633" column="41" selection-start-line="3633" selection-start-column="41" selection-end-line="3633" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachHiring.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-111">
+          <caret line="3570" column="44" selection-start-line="3570" selection-start-column="44" selection-end-line="3570" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/HeadCoach.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5504">
+          <caret line="349" column="19" selection-start-line="349" selection-start-column="19" selection-end-line="349" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="1590" column="31" selection-start-line="1590" selection-start-column="31" selection-end-line="1590" selection-end-column="31" />
         </state>
       </provider>
     </entry>

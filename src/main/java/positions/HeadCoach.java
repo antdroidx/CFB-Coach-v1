@@ -347,6 +347,15 @@ public class HeadCoach extends Player {
         return ratOvr;
     }
 
+    public float getHCHiring() {
+        float value = 0;
+
+        if(!retired) {
+            value = ((float)(getHCOverall() + getCoachCareerScore() - (age/4)) / 2);
+        }
+
+        return value;
+    }
 
     /* Leaderboard Google Play API Future Implementation
        This will be used to score players at various ages (50, 65, 80, 100, 150, etc)

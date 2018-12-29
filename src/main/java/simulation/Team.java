@@ -1588,7 +1588,7 @@ public class Team {
     //Provide the minimum overall rating for a new coach hire
     public int getMinCoachHireReq() {
         int req = (league.teamList.size() - rankTeamPrestige) / 2 + (int)Math.round(league.teamList.size()/3.6);
-        if (req > 90) req = 90;
+        if (req >= 88) req = 88;
         return req;
     }
 
