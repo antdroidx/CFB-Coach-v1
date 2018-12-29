@@ -286,7 +286,7 @@ public class PlayerK extends Player {
 
 
     @Override
-    public ArrayList<String> getDetailAllStatsList(int games) {
+    public ArrayList<String> getDetailAllStatsList() {
         ArrayList<String> pStats = stringPlayerInfo();
         pStats.add(" > ");
         pStats.add("[B]PLAYER RATINGS");

@@ -353,7 +353,7 @@ Player {
         return potential;
     }
 
-    public ArrayList<String> getDetailAllStatsList(int games) {
+    public ArrayList<String> getDetailAllStatsList() {
         return null;
     }
 

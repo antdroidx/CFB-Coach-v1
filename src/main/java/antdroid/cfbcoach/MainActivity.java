@@ -445,6 +445,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(teams, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
+                simLeague.teamList.get(item).HC.get(0).team = null;
+                simLeague.coachFreeAgents.add(simLeague.teamList.get(item).HC.get(0));
                 userTeam.userControlled = false;
                 userTeam = simLeague.teamList.get(item);
                 simLeague.userTeam = userTeam;
@@ -837,13 +839,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Open Player Profile
-    public void examinePlayer(String player, Boolean coach) {
+    public void examinePlayer(String player) {
         Player p = currentTeam.findTeamPlayer(player);
         if (p == null) {
 
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            ArrayList<String> pStatsList = p.getDetailAllStatsList(currentTeam.numGames());
+            ArrayList<String> pStatsList = p.getDetailAllStatsList();
 
             String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
             PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
@@ -855,15 +857,6 @@ public class MainActivity extends AppCompatActivity {
                             //do nothing
                         }
                     });
-
-            if(coach) {
-                builder.setNeutralButton("Coach History", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        showCoachHistoryDialog();
-                    }
-                });
-            }
             AlertDialog dialog = builder.create();
             dialog.show();
         }
@@ -876,7 +869,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            ArrayList<String> pStatsList = p.getDetailAllStatsList(tempTeam.numGames());
+            ArrayList<String> pStatsList = p.getDetailAllStatsList();
 
             String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
             PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
@@ -891,6 +884,58 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+    }
+
+    //Open Coach Profile from Database
+    public void examineCoachDB(String player) {
+        final HeadCoach p = findCoachProfile(player);
+        if (p == null) {
+
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            ArrayList<String> pStatsList;
+            if(p.team == null) {
+                pStatsList = p.getCareerStatsList();
+            } else {
+                pStatsList = p.getDetailAllStatsList();
+            }
+
+            String[] pStatsArray = pStatsList.toArray(new String[pStatsList.size()]);
+            PlayerProfile pStatsAdapter = new PlayerProfile(this, pStatsArray);
+            builder.setAdapter(pStatsAdapter, null)
+                    .setTitle(p.position + " " + p.name + ", " + p.getYrStr())
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    })
+                    .setNeutralButton("Coach History", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            showCoachHistoryDialog(p);
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    public HeadCoach findCoachProfile(String name) {
+        HeadCoach p = null;
+        String[] nameSplit = name.split(" ");
+        String nameHC = nameSplit[0] + " " + nameSplit[1];
+
+        for(int i = 0; i < simLeague.teamList.size(); i++) {
+            if(simLeague.teamList.get(i).HC.size() > 0 && simLeague.teamList.get(i).HC.get(0).name.equals(nameHC)) return simLeague.teamList.get(i).HC.get(0);
+        }
+
+        for(int i = 0; i < simLeague.coachDatabase.size(); i++) {
+            if(simLeague.coachDatabase.get(i).name.equals(nameHC)) return simLeague.coachDatabase.get(i);
+        }
+
+        return p;
     }
 
     //Player Awards for Bio
@@ -2051,11 +2096,11 @@ public class MainActivity extends AppCompatActivity {
                Clicked Top 25 History
               */
             showTop25History();
-        } else if (id == R.id.action_team_history) {
+        } else if (id == R.id.action_coach_DB) {
             /*
               Clicked User Team History in drop down menu
              */
-            showCoachHistoryDialog();
+            showCoachDatabase();
         } else if (id == R.id.action_ccg_bowl_watch) {
             /*
               Clicked CCG / Bowl Watch in drop down menu
@@ -2323,7 +2368,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        String[] historySelection = {"League History", "League Records", "League Stats", "Hall of Fame",};
+        String[] historySelection = {"League History", "League Records", "League Stats", "Hall of Fame", "Coach Database"};
         Spinner leagueHistorySpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> leagueHistorySpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, historySelection);
@@ -2344,11 +2389,13 @@ public class MainActivity extends AppCompatActivity {
                             final LeagueRecordsList leagueRecordsAdapter =
                                     new LeagueRecordsList(MainActivity.this, simLeague.getLeagueRecordsStr().split("\n"), userTeam.abbr, userTeam.name);
                             leagueHistoryList.setAdapter(leagueRecordsAdapter);
+                        } else if (position == 2) {
+                            showLeagueHistoryStats();
                         } else if (position == 3) {
                             HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
                             leagueHistoryList.setAdapter(hofAdapter);
-                        } else if (position == 2) {
-                            showLeagueHistoryStats();
+                        } else if (position == 4) {
+                            showCoachDatabase();
                         } else {
                             final LeagueHistoryList leagueHistoryAdapter =
                                     new LeagueHistoryList(MainActivity.this, simLeague.getLeagueHistoryStr().split("%"), userTeam.abbr);
@@ -2376,9 +2423,9 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        ArrayList<String> rankings = new ArrayList<>();// = simLeague.getTeamRankingsStr(0);
+        ArrayList<String> rankings = new ArrayList<>();
         String[] rankingsSelection =
-                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Active Coach Career Score", "Active Coach Accumulated Prestige"};
+                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -2395,11 +2442,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         ArrayList<String> rankings = simLeague.getLeagueHistoryStats(position);
-                        if (position == 4 || position == 5) {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.HC.get(0).name + " (" + userTeam.abbr + ")");
-                        } else {
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
-                        }
+                        teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
                         teamRankingsAdapter.clear();
                         teamRankingsAdapter.addAll(rankings);
                         teamRankingsAdapter.notifyDataSetChanged();
@@ -2410,6 +2453,53 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    //League History Stats
+    private void showCoachDatabase() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("League Stats")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        ArrayList<String> rankings = new ArrayList<>();// = simLeague.getTeamRankingsStr(0);
+        String[] rankingsSelection =
+                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Winning PCT", "Coach of the Year", "Conf Coach of Year", "All-Americans", "All-Conference", "Coach Career Score", "Coach Accumulated Prestige"};
+        Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+        ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, rankingsSelection);
+        teamRankingsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamRankingsSpinner.setAdapter(teamRankingsSpinnerAdapter);
+
+        final ListView teamRankingsList = dialog.findViewById(R.id.listViewTeamRankings);
+        final CoachDatabase coachDatabase =
+                new CoachDatabase(this, rankings, userTeam.name, this);
+        teamRankingsList.setAdapter(coachDatabase);
+
+        teamRankingsSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        ArrayList<String> rankings = simLeague.getCoachDatabase(position);
+                        coachDatabase.setupUserHC(userTeam.HC.get(0).name + " (" + userTeam.abbr + ")");
+                        coachDatabase.clear();
+                        coachDatabase.addAll(rankings);
+                        coachDatabase.notifyDataSetChanged();
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
+    }
+
+
 
     //AP Poll History
     private void showTop25History() {
@@ -2502,10 +2592,10 @@ public class MainActivity extends AppCompatActivity {
                             teamHistoryList.setAdapter(hofAdapter);
                         } else if (position == 3) {
                             dialog.dismiss();
-                            teamGraphView();
+                            teamPrestigeGraphView();
                         } else if (position == 4) {
                             dialog.dismiss();
-                            teamGraphViewRank();
+                            teamRankingGraphView();
                         }
                     }
 
@@ -2517,7 +2607,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Graph View
 
-    private void teamGraphView() {
+    private void teamPrestigeGraphView() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(currentTeam.name + ": Prestige History")
@@ -2555,7 +2645,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Graph View
 
-    private void teamGraphViewRank() {
+    private void teamRankingGraphView() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(currentTeam.name + ": Rankings History")
@@ -2599,9 +2689,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Coach History
-    private void showCoachHistoryDialog() {
+    private void showCoachHistoryDialog(HeadCoach p) {
+        final HeadCoach hc = p;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
+        builder.setTitle("Coach History: " + hc.name)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -2627,14 +2718,12 @@ public class MainActivity extends AppCompatActivity {
                             AdapterView<?> parent, View view, int position, long id) {
                         if (position == 0) {
                             TeamHistoryList teamHistoryAdapter =
-                                    new TeamHistoryList(MainActivity.this, currentTeam.HC.get(0).getCoachHistory());
+                                    new TeamHistoryList(MainActivity.this, hc.getCoachHistory());
                             teamHistoryList.setAdapter(teamHistoryAdapter);
                         } else if (position == 1) {
-                            dialog.dismiss();
-                            coachGraphView();
+                            coachGraphView(hc);
                         } else if (position == 2) {
-                            dialog.dismiss();
-                            coachGraphViewRank();
+                            coachGraphViewRank(hc);
                         }
                     }
 
@@ -2644,10 +2733,10 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void coachGraphView() {
+    private void coachGraphView(HeadCoach hc) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(currentTeam.HC.get(0).name + ": Prestige History")
+        builder.setTitle(hc.name + ": Prestige History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -2657,14 +2746,14 @@ public class MainActivity extends AppCompatActivity {
                 .setView(getLayoutInflater().inflate(R.layout.graphview, null));
         AlertDialog dialog = builder.create();
         dialog.show();
-        DataPoint[] data = new DataPoint[currentTeam.HC.get(0).history.size()];
+        DataPoint[] data = new DataPoint[hc.history.size()];
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
-        for (int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
-            if (!currentTeam.HC.get(0).history.get(i).equals("")) {
-                series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("Prs: ")[1].split(" ")[0])), true, i + 1, false);
-                yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
+        String[] yearLabels = new String[hc.history.size()];
+        for (int i = 0; i < hc.history.size(); i++) {
+            if (!hc.history.get(i).equals("")) {
+                series.appendData(new DataPoint(Integer.parseInt(hc.history.get(i).split(": ")[0]), Integer.parseInt(hc.history.get(i).split("Prs: ")[1].split(" ")[0])), true, i + 1, false);
+                yearLabels[i] = hc.history.get(i).split(":")[0];
             }
         }
         graph.addSeries(series);
@@ -2682,10 +2771,10 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setMinY(0);
     }
 
-    private void coachGraphViewRank() {
+    private void coachGraphViewRank(HeadCoach hc) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(currentTeam.HC.get(0).name + ": Rankings History")
+        builder.setTitle(hc.name + ": Rankings History")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -2695,14 +2784,14 @@ public class MainActivity extends AppCompatActivity {
                 .setView(getLayoutInflater().inflate(R.layout.graphview, null));
         AlertDialog dialog = builder.create();
         dialog.show();
-        DataPoint[] data = new DataPoint[currentTeam.HC.get(0).history.size()];
+        DataPoint[] data = new DataPoint[hc.history.size()];
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        String[] yearLabels = new String[currentTeam.HC.get(0).history.size()];
-        for (int i = 0; i < currentTeam.HC.get(0).history.size(); i++) {
-            if (!currentTeam.HC.get(0).history.get(i).equals("")) {
-                series.appendData(new DataPoint(Integer.parseInt(currentTeam.HC.get(0).history.get(i).split(": ")[0]), simLeague.teamList.size() - Integer.parseInt(currentTeam.HC.get(0).history.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
-                yearLabels[i] = currentTeam.HC.get(0).history.get(i).split(":")[0];
+        String[] yearLabels = new String[hc.history.size()];
+        for (int i = 0; i < hc.history.size(); i++) {
+            if (!hc.history.get(i).equals("")) {
+                series.appendData(new DataPoint(Integer.parseInt(hc.history.get(i).split(": ")[0]), simLeague.teamList.size() - Integer.parseInt(hc.history.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
+                yearLabels[i] = hc.history.get(i).split(":")[0];
             }
         }
         graph.addSeries(series);
@@ -4004,6 +4093,9 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Reincarnate - Same Team", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        userHC.retired = true;
+                        userHC.team = null;
+                        simLeague.coachFreeAgents.add(userHC);
                         userTeam.setupUserCoach(userHC.name);
                         newGame = true;
                         userNameDialog();
@@ -4014,6 +4106,9 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Reincarnate - New Team", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        userHC.retired = true;
+                        userHC.team = null;
+                        simLeague.coachFreeAgents.add(userHC);
                         userTeam.setupUserCoach(userHC.name);
                         jobOffers(userHC);
                         newGame = true;

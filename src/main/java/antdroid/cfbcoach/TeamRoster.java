@@ -123,8 +123,8 @@ class TeamRoster extends ArrayAdapter<String> {
         textCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test = teamStat[0].equals("HC");
-                mainAct.examinePlayer(teamStat[2], test);
+                if(teamStat[0].equals("HC")) mainAct.examineCoachDB(teamStat[2]);
+                else mainAct.examinePlayer(teamStat[2]);
             }
         });
 

@@ -22,7 +22,7 @@
         android:title="@string/action_current_team_history"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_team_history"
+        android:id="@+id/action_coach_DB"
         android:orderInCategory="100"
         android:title="@string/action_team_history"
         app:showAsAction="never" />

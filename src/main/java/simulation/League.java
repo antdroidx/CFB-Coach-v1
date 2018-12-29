@@ -18,10 +18,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import comparator.CompCoachAllAmericans;
+import comparator.CompCoachAllConference;
+import comparator.CompCoachBowlWins;
+import comparator.CompCoachCC;
+import comparator.CompCoachCOTY;
 import comparator.CompCoachCareer;
 import comparator.CompCoachCareerPrestige;
+import comparator.CompCoachConfCOTY;
+import comparator.CompCoachNC;
 import comparator.CompCoachOvr;
 import comparator.CompCoachScore;
+import comparator.CompCoachWinPCT;
+import comparator.CompCoachWins;
 import comparator.CompConfPrestige;
 import comparator.CompKickRetTD;
 import comparator.CompKickRetYards;
@@ -98,7 +107,8 @@ public class League {
     public ArrayList<Team> teamList;
     public ArrayList<HeadCoach> coachList;
     public ArrayList<HeadCoach> coachStarList;
-    private ArrayList<HeadCoach> coachFreeAgents;
+    public ArrayList<HeadCoach> coachFreeAgents;
+    public ArrayList<HeadCoach> coachDatabase;
     private ArrayList<String> nameList;
     private ArrayList<String> lastNameList;
     public ArrayList<ArrayList<String>> newsStories;
@@ -107,7 +117,6 @@ public class League {
     private double disciplineChance = 0.15;
 
     public LeagueRecords leagueRecords;
-    public LeagueRecords userTeamRecords;
     private TeamStreak longestWinStreak;
     private TeamStreak yearStartLongestWinStreak;
     private TeamStreak longestActiveWinStreak;
@@ -212,7 +221,7 @@ public class League {
 
     public String[] teamsFCS = {"Alabama State", "Albany", "Cal-Poly", "Central Arkansas", "Chattanooga", "Columbia", "Dayton", "Deleware", "Eastern Wash", "Eastern Tenn", "Eastern Ken", "Harvard", "Yale", "Princeton", "Grambling", "Georgetown", "Idaho", "Idaho State", "James Madison", "Maine", "Miss Valley", "Montana", "New Hampshire", "North Dakota", "North Dakota St", "South Dakota", "South Dakota St", "Northern Arizona", "Northern Colorado", "Portland", "Rhode Island", "Sacramento", "Southern", "Southern TX", "Western llinois", "Vanilla", "Youngstown"};
 
-    public String[] confNamesNew = {"Big 8", "National", "Constitution", "Colonial", "Contintental"};
+    public String[] confNamesNew = {"Big 8", "National", "Constitution", "Colonial", "Continental"};
 
 
     /**
@@ -621,22 +630,21 @@ public class League {
                     }
                 }
             }
+
             int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
                 String h[] = line.split("%");
                 int cPres = 0;
-                if (h.length == 1) {
-                    String c[] = line.split(",");
+                boolean cRetire = false;
+                String c[] = h[0].split(",");
+                if (h.length > 1) {
                     if (c.length > 21) cPres = Integer.parseInt(c[21]);
+                    if (c.length > 22) cRetire = Boolean.parseBoolean(c[22]);
+
                     coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
                             , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
-                } else if (h.length == 2) {
-                    String c[] = h[0].split(",");
-                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
-                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
-                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
+                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres, cRetire));
+
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
                         coachFreeAgents.get(coachFA).history.add(line);
                     }
@@ -854,29 +862,25 @@ public class League {
                     }
                 }
             }
+
             int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
                 String h[] = line.split("%");
                 int cPres = 0;
-                if (h.length == 1) {
-                    String c[] = line.split(",");
-                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
-                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
-                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
-                } else if (h.length == 2) {
-                    String c[] = h[0].split(",");
-                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
-                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
-                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
-                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
-                        coachFreeAgents.get(coachFA).history.add(line);
-                    }
-                    coachFA++;
-                }
-            }
+                boolean cRetire = false;
+                String c[] = h[0].split(",");
+                if (c.length > 21) cPres = Integer.parseInt(c[21]);
+                if (c.length > 22) cRetire = Boolean.parseBoolean(c[22]);
 
+                coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                        , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                        , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres, cRetire));
+
+                while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
+                    coachFreeAgents.get(coachFA).history.add(line);
+                }
+                coachFA++;
+            }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_GAME_LOG")) {
                 fullGameLog = Boolean.parseBoolean(line);
@@ -1094,43 +1098,64 @@ public class League {
                     }
                 }
             }
+
             int coachFA = 0;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_COACHES")) {
                 String h[] = line.split("%");
                 int cPres = 0;
-                if (h.length == 1) {
-                    String c[] = line.split(",");
-                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
-                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
-                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
-                } else if (h.length == 2) {
-                    String c[] = h[0].split(",");
-                    if (c.length > 21) cPres = Integer.parseInt(c[21]);
-                    coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
-                            , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
-                            , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres));
-                    while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
-                        coachFreeAgents.get(coachFA).history.add(line);
-                    }
-                    coachFA++;
+                boolean cRetire = false;
+                String c[] = h[0].split(",");
+                if (c.length > 21) cPres = Integer.parseInt(c[21]);
+                if (c.length > 22) cRetire = Boolean.parseBoolean(c[22]);
+
+                coachFreeAgents.add(new HeadCoach(c[0], Integer.parseInt(c[1]), Integer.parseInt(c[2]), Integer.parseInt(c[3]), Integer.parseInt(c[4]), Integer.parseInt(c[5]), Integer.parseInt(c[6]), Integer.parseInt(c[7])
+                        , Integer.parseInt(c[8]), Integer.parseInt(c[9]), Integer.parseInt(c[10]), Integer.parseInt(c[11]), Integer.parseInt(c[12]), Integer.parseInt(c[13]), Integer.parseInt(c[14]), Integer.parseInt(c[15])
+                        , Integer.parseInt(c[16]), Integer.parseInt(c[17]), Integer.parseInt(c[18]), Integer.parseInt(c[19]), Integer.parseInt(c[20]), cPres, cRetire));
+
+                while ((line = bufferedReader.readLine()) != null && !line.equals("END_FREE_AGENT")) {
+                    coachFreeAgents.get(coachFA).history.add(line);
                 }
+                coachFA++;
             }
 
-            fullGameLog = Boolean.parseBoolean(bufferedReader.readLine());
-            showPotential = Boolean.parseBoolean(bufferedReader.readLine());
-            confRealignment = Boolean.parseBoolean(bufferedReader.readLine());
-            enableTV = Boolean.parseBoolean(bufferedReader.readLine());
-            enableUnivProRel = Boolean.parseBoolean((bufferedReader.readLine()));
-            userTeam.showPopups = Boolean.parseBoolean((bufferedReader.readLine()));
-            neverRetire = Boolean.parseBoolean((bufferedReader.readLine()));
-            careerMode = Boolean.parseBoolean((bufferedReader.readLine()));
-            expPlayoffs = Boolean.parseBoolean((bufferedReader.readLine()));
-            advancedRealignment = Boolean.parseBoolean((bufferedReader.readLine()));
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_GAME_LOG")) {
+                fullGameLog = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_HIDE_POTENTIAL")) {
+                showPotential = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CONF_REALIGNMENT")) {
+                confRealignment = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_ENABLE_TV")) {
+                enableTV = Boolean.parseBoolean(line);
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_PRO_REL")) {
+                enableUnivProRel = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_POPUPS")) {
+                userTeam.showPopups = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_NEVER_RETIRE")) {
+                neverRetire = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_CAREER_MODE")) {
+                careerMode = Boolean.parseBoolean((line));
+            }
+
+            while ((line = bufferedReader.readLine()) != null && !line.equals("END_EXP_PLAYOFFS")) {
+                expPlayoffs = Boolean.parseBoolean((line));
+            }
 
             if (enableUnivProRel) {
                 confRealignment = false;
-                advancedRealignment = false;
             }
 
             // Always close files.
@@ -1186,6 +1211,7 @@ public class League {
         coachList = new ArrayList<>();
         coachStarList = new ArrayList<>();
         coachFreeAgents = new ArrayList<>();
+        coachDatabase = new ArrayList<>();
 
         conferences = new ArrayList<>();
         teamList = new ArrayList<>();
@@ -1208,7 +1234,6 @@ public class League {
         redshirts = new ArrayList<>();
 
         leagueRecords = new LeagueRecords();
-        userTeamRecords = new LeagueRecords();
         longestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
         yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
         longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
@@ -1462,7 +1487,7 @@ public class League {
         name = nameList.get(fn) + " " + lastNameList.get(ln);
         return name;
     }
-
+    
     //Set Up Team Benchmarks for Goals
     public void setTeamBenchMarks() {
         setTeamRanks();
@@ -3633,7 +3658,7 @@ public class League {
         Collections.sort(coachFreeAgents, new CompCoachOvr());
         for (int i = 0; i < coachFreeAgents.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && coachFreeAgents.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && Math.random() < 0.60) {
+                if (teamList.get(t).HC.isEmpty() && coachFreeAgents.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && Math.random() < 0.60 && !coachFreeAgents.get(i).retired) {
                     teamList.get(t).HC.add(coachFreeAgents.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
@@ -3713,7 +3738,7 @@ public class League {
             //Coaches who were fired previous years
             Collections.sort(coachFreeAgents, new CompCoachOvr());
             for (int i = 0; i < coachFreeAgents.size(); ++i) {
-                if (school.HC.isEmpty() && coachFreeAgents.get(i).ratOvr >= school.getMinCoachHireReq() && Math.random() < 0.65) {
+                if (school.HC.isEmpty() && coachFreeAgents.get(i).ratOvr >= school.getMinCoachHireReq() && Math.random() < 0.65 && !coachFreeAgents.get(i).retired) {
                     school.HC.add(coachFreeAgents.get(i));
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
@@ -4648,7 +4673,6 @@ Then conferences can see if they want to add them to their list if the teams mee
     public void changeAbbrHistoryRecords(String oldAbbr, String newAbbr) {
         // check records and win streaks
         leagueRecords.changeAbbrRecords(userTeam.abbr, newAbbr);
-        userTeamRecords.changeAbbrRecords(userTeam.abbr, newAbbr);
         changeAbbrWinStreaks(userTeam.abbr, newAbbr);
         userTeam.winStreak.changeAbbr(newAbbr);
 
@@ -4682,9 +4706,8 @@ Then conferences can see if they want to add them to their list if the teams mee
     public void checkLeagueRecords() {
         for (Team t : teamList) {
             t.checkLeagueRecords(leagueRecords);
-            t.checkLeagueRecords(t.teamRecords);
+            t.checkTeamRecords(t.teamRecords);
         }
-        userTeam.checkLeagueRecords(userTeamRecords);
     }
 
     /**
@@ -4899,7 +4922,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(teams, new CompTeamPoll());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format(t.teamPollScore));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format(t.teamPollScore));
                 }
                 break;
             case 1:
@@ -4907,81 +4930,81 @@ Then conferences can see if they want to add them to their list if the teams mee
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     if (currentWeek > 15 && (t.teamPrestige - t.teamPrestigeStart) > 0)
-                        rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamPrestige + "  (+" + (t.teamPrestige - t.teamPrestigeStart) + ")");
+                        rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamPrestige + "  (+" + (t.teamPrestige - t.teamPrestigeStart) + ")");
                     else if (currentWeek > 15 && (t.teamPrestige - t.teamPrestigeStart) < 0)
-                        rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamPrestige + "  (" + (t.teamPrestige - t.teamPrestigeStart) + ")");
+                        rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamPrestige + "  (" + (t.teamPrestige - t.teamPrestigeStart) + ")");
                     else
-                        rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamPrestige);
+                        rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamPrestige);
                 }
                 break;
             case 2:
                 Collections.sort(teams, new CompTeamSoS());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamSOS);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamSOS);
                 }
                 break;
             case 3:
                 Collections.sort(teams, new CompTeamSoW());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamStrengthOfWins);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamStrengthOfWins);
                 }
                 break;
             case 4:
                 Collections.sort(teams, new CompTeamPPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamPoints / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamPoints / t.numGames()));
                 }
                 break;
             case 5:
                 Collections.sort(teams, new CompTeamOPPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppPoints / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppPoints / t.numGames()));
                 }
                 break;
             case 6:
                 Collections.sort(teams, new CompTeamYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamYards / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamYards / t.numGames()));
                 }
                 break;
             case 7:
                 Collections.sort(teams, new CompTeamOYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppYards / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppYards / t.numGames()));
                 }
                 break;
             case 8:
                 Collections.sort(teams, new CompTeamPYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamPassYards / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamPassYards / t.numGames()));
                 }
                 break;
             case 9:
                 Collections.sort(teams, new CompTeamRYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamRushYards / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamRushYards / t.numGames()));
                 }
                 break;
             case 10:
                 Collections.sort(teams, new CompTeamOPYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppPassYards / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppPassYards / t.numGames()));
                 }
                 break;
             case 11:
                 Collections.sort(teams, new CompTeamORYPG());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppRushYards / t.numGames()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format((float) t.teamOppRushYards / t.numGames()));
                 }
                 break;
             case 12:
@@ -4989,58 +5012,58 @@ Then conferences can see if they want to add them to their list if the teams mee
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
                     if (t.teamTODiff > 0)
-                        rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",+" + t.teamTODiff);
+                        rankings.add(t.getRankStr(i + 1) + "," + t.name + ",+" + t.teamTODiff);
                     else
-                        rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamTODiff);
+                        rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamTODiff);
                 }
                 break;
             case 13:
                 Collections.sort(teams, new CompTeamOffTalent());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format(t.teamOffTalent));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format(t.teamOffTalent));
                 }
                 break;
             case 14:
                 Collections.sort(teams, new CompTeamDefTalent());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format(t.teamDefTalent));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format(t.teamDefTalent));
                 }
                 break;
             case 15:
                 Collections.sort(teams, new CompTeamChemistry());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + df2.format(t.getTeamChemistry()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + df2.format(t.getTeamChemistry()));
                 }
                 break;
             case 16:
                 Collections.sort(teams, new CompTeamRecruitClass());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.strRepWithPrestige() + "," + df2.format(t.getRecruitingClassRat()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.strRepWithPrestige() + "," + df2.format(t.getRecruitingClassRat()));
                 }
                 break;
             case 17:
                 Collections.sort(teams, new CompTeamDisciplineScore());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + (t.teamDisciplineScore) + "%");
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + (t.teamDisciplineScore) + "%");
                 }
                 break;
             case 18:
                 Collections.sort(teams, new CompTeamBudget());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",$" + t.teamBudget);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + ",$" + t.teamBudget);
                 }
                 break;
             case 19:
                 Collections.sort(teams, new CompTeamFacilities());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + ",L" + t.teamFacilities);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + ",L" + t.teamFacilities);
                 }
                 break;
             case 20:
@@ -5059,7 +5082,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(teams, new CompTeamPoll());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.teamPollScore);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.teamPollScore);
                 }
                 break;
         }
@@ -5084,28 +5107,28 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(teams, new CompTeamNC());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.totalNCs);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.totalNCs);
                 }
                 break;
             case 1:
                 Collections.sort(teams, new CompTeamCC());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.totalCCs);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.totalCCs);
                 }
                 break;
             case 2:
                 Collections.sort(teams, new CompTeamBowls());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.totalBowls);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.totalBowls);
                 }
                 break;
             case 3:
                 Collections.sort(teams, new CompTeamWins());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + (t.totalWins + t.wins));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + (t.totalWins + t.wins));
                 }
                 break;
             case 4:
@@ -5124,6 +5147,116 @@ Then conferences can see if they want to add them to their list if the teams mee
         return rankings;
     }
 
+    public ArrayList<String> getCoachDatabase(int selection) {
+        /*
+         */
+        coachDatabase.clear();
+        ArrayList<String> rankings = new ArrayList<>();
+        HeadCoach c;
+
+        for(HeadCoach x : coachDatabase) {
+            coachDatabase.add(x);
+        }
+
+        for (int i = 0; i < teamList.size(); ++i) {
+            if (teamList.get(i).HC.size() > 0) coachDatabase.add(teamList.get(i).HC.get(0));
+        }
+
+        for(HeadCoach x : coachFreeAgents) {
+            coachDatabase.add(x);
+        }
+
+        switch (selection) {
+            case 0:
+                Collections.sort(coachDatabase, new CompCoachNC());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.natchamp);
+                }
+                break;
+            case 1:
+                Collections.sort(coachDatabase, new CompCoachCC());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.confchamp);
+                }
+                break;
+            case 2:
+                Collections.sort(coachDatabase, new CompCoachBowlWins());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.bowlwins);
+                }
+                break;
+            case 3:
+                Collections.sort(coachDatabase, new CompCoachWins());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + (c.wins + c.careerWins));
+                }
+                break;
+            case 4:
+                Collections.sort(coachDatabase, new CompCoachWinPCT());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + df2.format(c.getWinPCT()) + "%");
+                }
+                break;
+            case 5:
+                Collections.sort(coachDatabase, new CompCoachCOTY());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.awards);
+                }
+                break;
+            case 6:
+                Collections.sort(coachDatabase, new CompCoachConfCOTY());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.confAward);
+                }
+                break;
+            case 7:
+                Collections.sort(coachDatabase, new CompCoachAllAmericans());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.allamericans);
+                }
+                break;
+            case 8:
+                Collections.sort(coachDatabase, new CompCoachAllConference());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.allconference);
+                }
+                break;
+            case 9:
+                Collections.sort(coachDatabase, new CompCoachCareer());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.getCoachCareerScore());
+                }
+                break;
+            case 10:
+                Collections.sort(coachDatabase, new CompCoachCareerPrestige());
+                for (int i = 0; i < coachDatabase.size(); ++i) {
+                    c = coachDatabase.get(i);
+                    rankings.add(getRankStr(i + 1) + "," + c.name + checkCoachStatus(c) + "," + c.cumulativePrestige);
+                }
+                break;
+        }
+        return rankings;
+    }
+
+    private String checkCoachStatus(HeadCoach c) {
+        String s = "";
+        if(c.retired) s = " [R]";
+        else if (c.team == null) s = " [U]";
+        else s = " (" + c.team.abbr +")";
+
+        return s;
+    }
+
 
     /**
      * Get conference standings in an list of Strings.
@@ -5139,7 +5272,7 @@ Then conferences can see if they want to add them to their list if the teams mee
             Team t;
             for (int i = 0; i < confTeams.size(); ++i) {
                 t = confTeams.get(i);
-                confStandings.add(t.getRankStrStarUser(i + 1) + "," + t.strConfStandings() + "," + t.strTeamRecord() + "," + t.getConfWins() + "-" + t.getConfLosses());
+                confStandings.add(t.getRankStr(i + 1) + "," + t.strConfStandings() + "," + t.strTeamRecord() + "," + t.getConfWins() + "-" + t.getConfLosses());
             }
             confTeams.clear();
             confStandings.add(" , , , ");
@@ -5154,7 +5287,7 @@ Then conferences can see if they want to add them to their list if the teams mee
         Collections.sort(teams, new CompTeamPoll());
         for (int i = 0; i < teams.size(); ++i) {
             t = teams.get(i);
-            rankings.add(t.getRankStrStarUser(i + 1) + "," + t.name + "," + t.strTeamRecord() + "," + df2.format(t.teamPollScore));
+            rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.strTeamRecord() + "," + df2.format(t.teamPollScore));
         }
         return rankings;
     }
@@ -5831,13 +5964,19 @@ Then conferences can see if they want to add them to their list if the teams mee
         StringBuilder sb = new StringBuilder();
 
         for (HeadCoach h : coachFreeAgents) {
-            if (h.age < 56) {
-                sb.append(h.name + "," + (h.age) + "," + h.year + "," + h.ratPot + "," + (h.ratOff + (int) Math.random() * 3) + "," + (h.ratDef + (int) Math.random() * 3) + "," + (h.ratTalent + (int) Math.random() * 3) + "," + (h.ratDiscipline + (int) Math.random() * 3)
-                        + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses + "," + h.confchamp + "," + h.natchamp + "," + h.allconference
-                        + "," + h.allamericans + "," + h.confAward + "," + h.awards + "% " + "\n");
-                for (String s : h.history) {
-                    sb.append(s + "\n");
-                }
+            if (h.age < 63) {
+                h.ratOff += (int) (Math.random()*3);
+                h.ratDef += (int) (Math.random()*3);
+                h.ratTalent += (int) (Math.random()*3);
+                h.ratDiscipline += (int) (Math.random()*3);
+            } else {
+                h.retired = true;
+            }
+            sb.append(h.name + "," + h.age + "," + h.year + "," + h.ratPot + "," + h.ratOff + "," + h.ratDef + "," + h.ratTalent + "," + h.ratDiscipline
+                    + "," + h.offStrat + "," + h.defStrat + "," + h.baselinePrestige + "," + h.wins + "," + h.losses + "," + h.bowlwins + "," + h.bowllosses
+                    + "," + h.confchamp + "," + h.natchamp + "," + h.allconference + "," + h.allamericans + "," + h.confAward + "," + h.awards + "," + h.cumulativePrestige + "," + h.retired + "% " + "\n");
+            for (String s : h.history) {
+                sb.append(s + "\n");
                 sb.append("END_FREE_AGENT\n");
             }
         }

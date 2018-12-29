@@ -47,6 +47,7 @@ public class HeadCoach extends Player {
     public boolean retirement;
     public boolean wonConfHC;
     public boolean wonTopHC;
+    public boolean retired;
 
     //Leaderboard Stats
     public float careerScore;
@@ -87,9 +88,9 @@ public class HeadCoach extends Player {
         position = "HC";
     }
 
-    //This one is for HC Free Agency Pool
+    //This one is for Retirement Coach Database
     public HeadCoach(String nm, int a, int yr, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
-                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw, int cpres) {
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw, int cpres, boolean ret) {
         name = nm;
         age = a;
         year = yr;
@@ -118,6 +119,7 @@ public class HeadCoach extends Player {
         awards = aw;
         cumulativePrestige = cpres;
         history = new ArrayList<>();
+        retired = ret;
 
         position = "HC";
     }
@@ -277,11 +279,11 @@ public class HeadCoach extends Player {
     public int getCoachCareerScore() {
         if (year < 1) return 0;
         else
-            return (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans + cumulativePrestige) / year;
+            return (5 * (wins) - 2 * (losses) + 10 * natchamp + 3 * confchamp + 10 * awards + 3 * confAward + allconference + 2 * allamericans + 5*cumulativePrestige) / year;
     }
 
     @Override
-    public ArrayList<String> getDetailAllStatsList(int games) {
+    public ArrayList<String> getDetailAllStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("Age: " + age + ">Years Coaching: " + year);
         if (team.league.isCareerMode()) {
@@ -373,5 +375,13 @@ public class HeadCoach extends Player {
         if(wonTopHC) award = 4;
 
         return award;
+    }
+
+    public double getWinPCT() {
+       double pct = 0;
+       if(wins + losses > 0) {
+           pct = 100*(double)(wins)/(wins+losses);
+       }
+       return pct;
     }
 }

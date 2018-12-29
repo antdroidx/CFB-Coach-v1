@@ -66,16 +66,16 @@ class DepthChart extends ArrayAdapter<Player> {
         } else if (players.get(position).isInjured) {
             // Is injured
             isPlayerStarting.setEnabled(false);
-            playerInfo.setTextColor(Color.DKGRAY);
+            playerInfo.setTextColor(Color.YELLOW);
         } else if (players.get(position).isTransfer) {
             // Is Transfer
             isPlayerStarting.setEnabled(false);
             isPlayerStarting.setText("T");
-            playerInfo.setTextColor(Color.DKGRAY);
+            playerInfo.setTextColor(Color.RED);
         } else if (players.get(position).isSuspended) {
             // Is suspended
             isPlayerStarting.setEnabled(false);
-            playerInfo.setTextColor(Color.DKGRAY);
+            playerInfo.setTextColor(Color.YELLOW);
         } else if (players.get(position).isRedshirt) {
             isPlayerStarting.setEnabled(false);
             isPlayerStarting.setText("RS");
