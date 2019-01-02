@@ -530,7 +530,6 @@ public class MainActivity extends AppCompatActivity {
                 if (isNameValid((newHC))) {
                     userTeam.HC.get(0).name = newHC;
                     examineTeam(currentTeam.name);
-                    //if (!newGame) seasonGoals();
                     dialog.dismiss();
                     setupCoachStyle();
                 } else {
@@ -1957,6 +1956,7 @@ public class MainActivity extends AppCompatActivity {
             simGameButton.setText("Off-Season: Coaching Changes");
 
         } else if (simLeague.currentWeek == simLeague.regSeasonWeeks+6 && !userTeam.fired) {
+            userHC = userTeam.HC.get(0);
             if (simLeague.isCareerMode()) promotions(userHC);
             simLeague.currentWeek++;
             simGameButton.setTextSize(12);
@@ -1994,7 +1994,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if (userTeam.suspension) showSuspensions();
+        if(userTeam.disciplineAction) disciplineSetup();
         resetTeamUI();
 
     }
@@ -3182,10 +3182,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Get Save Files from Storage
     private String[] getSaveFileInfos() {
-        String[] infos = new String[10];
+        String[] infos = new String[20];
         String fileInfo;
         File saveFile;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 20; ++i) {
             saveFile = new File(getFilesDir(), "saveFile" + i + ".cfb");
             if (saveFile.exists()) {
                 try {
@@ -3436,7 +3436,14 @@ public class MainActivity extends AppCompatActivity {
 
         goals += "In conference play, your team is expected to finish " + userTeam.getRankStr(confPos) + " in the " + userTeam.conference + " conference.\n\n";
 
-        goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (12 - userTeam.projectedWins) + ".\n\n";
+        int games = 0;
+        for(Game g : userTeam.gameSchedule) {
+            if (g.gameName.equals("OOC") || g.gameName.equals("Conference") || g.gameName.equals("Division")) {
+                games++;
+            }
+        }
+
+        goals += "Based on your schedule, your team is projected to finish with a record of " + userTeam.projectedWins + " - " + (games - userTeam.projectedWins) + ".\n\n";
 
         if (simLeague.getYear() > seasonStart) {
             if (userTeam.bowlBan) {
@@ -3626,7 +3633,7 @@ public class MainActivity extends AppCompatActivity {
         jobList.clear();
 
         userHC = headCoach;
-        int ratOvr = userHC.ratOvr;
+        int ratOvr = userHC.getHCOverall();
         if (ratOvr < 40) ratOvr = 40;
         String oldTeam = userHC.team.name;
         updateHeaderBar();
@@ -3656,7 +3663,7 @@ public class MainActivity extends AppCompatActivity {
         userHC = headCoach;
         if (userHC.promotionCandidate) {
 
-            int ratOvr = userHC.ratOvr;
+            int ratOvr = userHC.getHCOverall();
             if (ratOvr < 40) ratOvr = 40;
             double offers = 2;
             String oldTeam = userHC.team.name;
@@ -4090,7 +4097,7 @@ public class MainActivity extends AppCompatActivity {
         userHC = userTeam.getHC(0);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
-                .setPositiveButton("Reincarnate - Same Team", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Use Same Team", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         userHC.retired = true;
@@ -4103,7 +4110,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 })
-                .setNegativeButton("Reincarnate - New Team", new DialogInterface.OnClickListener() {
+                .setNeutralButton("Pick New Team", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         userHC.retired = true;
@@ -4636,57 +4643,57 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void disciplineAction(Player player, String issue, int gamesA, int gamesB) {
+    private void disciplineSetup() {
+        userTeam.suspendPlayerSetup(this);
+    }
+
+    public void disciplineAction(final Player player, final String issue, final int gamesA, final int gamesB) {
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Disicpline Action Required");
-        builder.setMessage(player.name + " violated a team policy related to " + issue + ".\n\nHow do you want to proceed?");
+        builder.setMessage(player.position + " " + player.name + " (" + player.ratOvr + ") violated a team policy related to " + issue + ".\n\nHow do you want to proceed?");
         builder.setCancelable(false);
         builder.setPositiveButton("Suspend " + gamesA + " Games", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Perform action on click
+                userTeam.disciplineAction(player, issue, gamesA, 2);
                 dialog.dismiss();
+                if (userTeam.suspension) showSuspensions();
+
             }
         });
         builder.setNegativeButton("Suspend " + gamesB + " Games", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Perform action on click
+                userTeam.disciplineAction(player, issue, gamesB, 1);
                 dialog.dismiss();
+                if (userTeam.suspension) showSuspensions();
+
             }
         });
         builder.setNeutralButton("Ignore", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Perform action on click
+                userTeam.disciplineAction(player, issue, gamesA, 3);
                 dialog.dismiss();
+                if (userTeam.suspension) showSuspensions();
+
             }
         });
         builder.show();
+        userTeam.disciplineAction = false;
     }
 
-    private void transferPlayer(Player player) {
+    private void transferPlayer(ArrayList<String> players) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Transfer Request");
-        builder.setMessage(player.position + " " + player.name + " would like to transfer to your program. He is rated overall at " + player.ratOvr + ".\n\nHow do you want to proceed?");
+        builder.setTitle("Select to Accept Transfer Request");
         builder.setCancelable(false);
-        builder.setPositiveButton("Accept Request", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // SOMETHING SOMETHING
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("Reject Request", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // SOMETHING SOMETHING
-                dialog.dismiss();
-            }
-        });
-        builder.show();
     }
+
 
 }

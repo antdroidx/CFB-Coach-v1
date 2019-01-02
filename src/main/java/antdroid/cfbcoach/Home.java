@@ -379,11 +379,11 @@ public class Home extends AppCompatActivity {
      * Get info of the 10 save files for printing in the save file list
      */
     private String[] getSaveFileInfos() {
-        String[] infos = new String[10];
+        String[] infos = new String[20];
         String fileInfo;
         File saveFile;
         File extFile;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 20; ++i) {
             saveFile = new File(getFilesDir(), "saveFile" + i + ".cfb");
             if (saveFile.exists()) {
                 try {

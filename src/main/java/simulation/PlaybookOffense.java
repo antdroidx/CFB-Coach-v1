@@ -108,7 +108,7 @@ public class PlaybookOffense {
     }
 
     public void playBook6() {
-        stratName = "Read-Option Pass";
+        stratName = "Run-Pass Option";
         stratDescription = "Passing-Oriented version of the Read-Option";
         runPref = 2;
         runProtection = -1;

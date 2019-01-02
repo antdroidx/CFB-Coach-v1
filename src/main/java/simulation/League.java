@@ -1779,9 +1779,11 @@ public class League {
             }
             Collections.sort(teamList, new CompTeamPoll());
 
-            if (expPlayoffs) expandedPlayoff();
-                //else schedBowlGames();
-            else bowlScheduleLogic();
+            if (expPlayoffs) {
+                scheduleExpPlayoff();
+            } else {
+                scheduleNormalCFP();
+            }
 
         } else if (currentWeek == regSeasonWeeks) {
             ArrayList<Player> heismans = getHeisman();
@@ -1865,17 +1867,10 @@ public class League {
             if (Math.random() < disciplineChance) {
                 int teamDis = teamList.get(t).getTeamDiscipline();
                 if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
-                    teamList.get(t).HC.get(0).ratDiscipline -= (int) (Math.random() * 5);
-                    teamList.get(t).disciplinePts -= (int) (Math.random() * 3);
                     teamDiscipline.add(teamList.get(t).name);
-                    teamList.get(t).disciplinePlayer();
-                    teamList.get(t).teamDisciplineScore -= ((int) (Math.random() * 7) + 3);
-                    teamList.get(t).teamBudget -= ((int) (Math.random() * 10 * 100));
+                    teamList.get(t).disciplineFailure();
                 } else {
-                    teamList.get(t).HC.get(0).ratDiscipline += (int) (Math.random() * 3);
-                    teamList.get(t).teamDisciplineScore += (int) (Math.random() * 4);
-                    if (teamList.get(t).teamDisciplineScore > 99)
-                        teamList.get(t).teamDisciplineScore = 99;
+                    teamList.get(t).disciplineSuccess();
                 }
             }
         }
@@ -2941,7 +2936,7 @@ public class League {
         if (!hasScheduledBowls) {
 
             if (expPlayoffs) {
-                getPlayoffTeams();
+                getExpPlayoffTeams();
                 return postseason;
             } else {
                 setTeamRanks();
@@ -3008,49 +3003,43 @@ public class League {
         }
     }
 
-    //
-    // EXPANDED PLAYOFFS MODE
-    //
+    /*
+    EXPANDED PLAYOFFS MODE
+    */
 
-    public void getPlayoffTeams() {
+    public void getExpPlayoffTeams() {
         playoffTeams.clear();
-        for (int i = 0; i < teamList.size(); ++i) {
-            teamList.get(i).updatePollScore();
-            //bowl ban!
-            if (teamList.get(i).bowlBan) teamList.get(i).teamPollScore = 0;
+        
+        ArrayList<Team> qualifiedTeams = getQualifiedTeams();
 
-            //minimum wins for bowl eligibility
-            if (teamList.get(i).wins < 7) teamList.get(i).teamPollScore = 0;
-
-        }
-        Collections.sort(teamList, new CompTeamPoll());
-
-        if (currentWeek > 13) {
-            for (int i = 0; i < teamList.size(); i++) {
-                if (teamList.get(i).confChampion.equals("CC")) {
-                    playoffTeams.add(teamList.get(i));
+        if (currentWeek > regSeasonWeeks) {
+            for (int i = 0; i < qualifiedTeams.size(); i++) {
+                if (qualifiedTeams.get(i).confChampion.equals("CC")) {
+                    playoffTeams.add(qualifiedTeams.get(i));
                 }
             }
-            int x = 0;
-            for (int i = 0; i < teamList.size(); i++) {
-                if (!teamList.get(i).confChampion.equals("CC")) {
-                    playoffTeams.add(teamList.get(i));
+            int x = playoffTeams.size();
+            for (int i = 0; i < qualifiedTeams.size(); i++) {
+                if (!qualifiedTeams.get(i).confChampion.equals("CC")) {
+                    playoffTeams.add(qualifiedTeams.get(i));
                     x++;
-                    if (x >= 16 - playoffTeams.size()) break;
+                    if (x >= 16) break;
                 }
             }
         } else {
             for (int i = 0; i < conferences.size(); i++) {
-                Collections.sort(conferences.get(i).confTeams, new CompTeamConfWins());
-                playoffTeams.add(conferences.get(i).confTeams.get(0));
+                if(!conferences.get(i).confName.equals("Independent")) {
+                    Collections.sort(conferences.get(i).confTeams, new CompTeamConfWins());
+                    playoffTeams.add(conferences.get(i).confTeams.get(0));
+                }
             }
 
-            int x = 0;
-            for (int i = 0; i < teamList.size(); i++) {
-                if (!playoffTeams.contains(teamList.get(i))) {
-                    playoffTeams.add(teamList.get(i));
+            int x = playoffTeams.size();
+            for (int i = 0; i < qualifiedTeams.size(); i++) {
+                if (!playoffTeams.contains(qualifiedTeams.get(i))) {
+                    playoffTeams.add(qualifiedTeams.get(i));
                     x++;
-                    if (x >= 6) break;
+                    if (x >= 16 ) break;
                 }
             }
         }
@@ -3061,22 +3050,29 @@ public class League {
         sb.append("The following teams are expected to make it to the Football Playoffs!\n\n");
         int i = 1;
         for (Team t : playoffTeams) {
-            sb.append(i + ". " + t.strRankTeamRecord() + " [" + t.conference + "]\n");
+            sb.append(i + ". " + t.strRankTeamRecord() + "   [" + t.conference + "]\n");
             i++;
         }
         postseason = sb.toString();
+
+        for(int x = 0; x < playoffTeams.size(); x++) {
+            qualifiedTeams.remove(playoffTeams.get(x));
+        }
+
+        if(hasScheduledBowls) bowlScheduleLogic(qualifiedTeams);
+
     }
 
-    public void expandedPlayoff() {
+    public void scheduleExpPlayoff() {
         hasScheduledBowls = true;
         playoffWeek = 1;
-        getPlayoffTeams();
+        getExpPlayoffTeams();
 
         for (int i = 0; i < 8; i++) {
             cfpGames[i] = new Game(playoffTeams.get(i), playoffTeams.get(15 - i), "Sweet 16");
             playoffTeams.get(i).gameSchedule.add(cfpGames[i]);
             playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
-            newsStories.get(currentWeek + 1).add("Upcoming Sweet 16 Playoff Games!>" + playoffTeams.get(i).getStrAbbrWL() + " will battle with " + playoffTeams.get(15 - i).getStrAbbrWL() +
+            newsStories.get(currentWeek + 1).add("Upcoming Sweet 16 Playoff Games!>"  + "#" + playoffTeams.get(i).rankTeamPollScore + " " + playoffTeams.get(i).getStrAbbrWL() + " will battle with #" + playoffTeams.get(15-i).rankTeamPollScore + " " + playoffTeams.get(15 - i).getStrAbbrWL() +
                     " in the " + getYear() + " Sweet 16 round of the Playoffs!");
             weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">#" + cfpGames[i].awayTeam.rankTeamPollScore + " " + cfpGames[i].awayTeam.name + "\n" + "#" + cfpGames[i].homeTeam.rankTeamPollScore + " " + cfpGames[i].homeTeam.name);
 
@@ -3087,8 +3083,7 @@ public class League {
             teamList.get(i).postSeasonHealing(1);
         }
     }
-
-
+    
     public void expPlayoffSchdQT() {
         Collections.sort(playoffTeams, new CompTeamPoll());
 
@@ -3127,6 +3122,8 @@ public class League {
     }
 
     public void playExpPlayoffSweet16() {
+        playBowlWeek1();
+
         playoffWeek = 1;
         for (int i = 0; i < 8; i++) {
             playPlayoff(cfpGames[i]);
@@ -3135,6 +3132,8 @@ public class League {
     }
 
     public void playExpPlayoffQTF() {
+        playBowlWeek2();
+
         playoffWeek = 2;
         for (int i = 8; i < 12; i++) {
             playPlayoff(cfpGames[i]);
@@ -3143,6 +3142,8 @@ public class League {
     }
 
     public void playExpPlayoffSemi() {
+        playBowlWeek3();
+
         playoffWeek = 3;
         for (int i = 12; i < 14; i++) {
             playPlayoff(cfpGames[i]);
@@ -3258,6 +3259,8 @@ public class League {
 
     private ArrayList<Team> getQualifiedTeams() {
         ArrayList<Team> bowlTeams = new ArrayList<>();
+        setTeamRanks();
+        Collections.sort(teamList, new CompTeamPoll());
 
         for (int i = 0; i < teamList.size(); ++i) {
             if (!teamList.get(i).bowlBan && teamList.get(i).wins > 6)
@@ -3267,13 +3270,8 @@ public class League {
         return bowlTeams;
     }
 
-    private void bowlScheduleLogic() {
-        setTeamRanks();
+    private void scheduleNormalCFP() {
         ArrayList<Team> bowlTeams = getQualifiedTeams();
-        Collections.sort(bowlTeams, new CompTeamPoll());
-
-        int bowlCount = (bowlTeams.size() - 4) / 2;
-        if (bowlCount > bowlNames.length) bowlCount = bowlNames.length;
 
         //semifinals
         semiG14 = new Game(bowlTeams.get(0), bowlTeams.get(3), "Semis, 1v4");
@@ -3284,12 +3282,25 @@ public class League {
         bowlTeams.get(1).gameSchedule.add(semiG23);
         bowlTeams.get(2).gameSchedule.add(semiG23);
 
-        newsStories.get(currentWeek + 1).add("Playoff Teams Announced!>" + bowlTeams.get(0).getStrAbbrWL() + " will play " + bowlTeams.get(3).getStrAbbrWL() +
-                " , while " + bowlTeams.get(1).getStrAbbrWL() + " will play " + bowlTeams.get(2).getStrAbbrWL() + " in next week's College Football Playoff semi-final round. The winners will compete for this year's National Title!");
+        newsStories.get(currentWeek + 1).add("Playoff Teams Announced!>"  + "#" + bowlTeams.get(0).rankTeamPollScore + bowlTeams.get(0).getStrAbbrWL() + " will play #" + bowlTeams.get(3).rankTeamPollScore + bowlTeams.get(3).getStrAbbrWL() +
+                " , while " + "#" + bowlTeams.get(1).rankTeamPollScore + bowlTeams.get(1).getStrAbbrWL() + " will play #" + bowlTeams.get(2).rankTeamPollScore + bowlTeams.get(2).getStrAbbrWL() + " in next week's College Football Playoff semi-final round. The winners will compete for this year's National Title!");
 
         weeklyScores.get(currentWeek + 4).add(semiG14.gameName + ">#" + semiG14.awayTeam.rankTeamPollScore + " " + semiG14.awayTeam.name + "\n" + "#" + semiG14.homeTeam.rankTeamPollScore + " " + semiG14.homeTeam.name);
         weeklyScores.get(currentWeek + 4).add(semiG23.gameName + ">#" + semiG23.awayTeam.rankTeamPollScore + " " + semiG23.awayTeam.name + "\n" + "#" + semiG23.homeTeam.rankTeamPollScore + " " + semiG23.homeTeam.name);
 
+        for (int i = 0; i < 4; i++) {
+            bowlTeams.get(i).postSeasonHealing(3);
+        }
+        bowlTeams.remove(semiG23.awayTeam);
+        bowlTeams.remove(semiG23.homeTeam);
+        bowlTeams.remove(semiG14.awayTeam);
+        bowlTeams.remove(semiG14.homeTeam);
+        bowlScheduleLogic(bowlTeams);
+    }
+
+    private void bowlScheduleLogic(ArrayList<Team> bowlTeams) {
+        int bowlCount = (bowlTeams.size()) / 2;
+        if (bowlCount > bowlNames.length) bowlCount = bowlNames.length;
 
         //schedule bowl games teams ranked #5-12
         int g = 0; //game #
@@ -3297,7 +3308,7 @@ public class League {
         int t = 0; //team #
 
         while (bowlCount / 4 >= r) {
-            for (int i = t + 4; i < t + 8; i++) {
+            for (int i = t; i < t + 4; i++) {
                 bowlGames[g] = new Game(bowlTeams.get(i), bowlTeams.get(i + 4), bowlNames[g]);
                 bowlTeams.get(i).gameSchedule.add(bowlGames[g]);
                 bowlTeams.get(i + 4).gameSchedule.add(bowlGames[g]);
@@ -3316,17 +3327,15 @@ public class League {
         hasScheduledBowls = true;
 
         //Heal Bowl Team Players
-        int weekGame = (bowlCount) / 2;
-
-        for (int i = 0; i < 16; i++) {
-            teamList.get(i).postSeasonHealing(3);
-        }
-        for (int i = 16; i < 36; i++) {
-            teamList.get(i).postSeasonHealing(2);
-        }
-        for (int i = 36; i < teamList.size(); i++) {
-            teamList.get(i).postSeasonHealing(1);
-        }
+            for (int i = 0; i < 12; i++) {
+                bowlTeams.get(i).postSeasonHealing(3);
+            }
+            for (int i = 12; i < 32; i++) {
+                bowlTeams.get(i).postSeasonHealing(2);
+            }
+            for (int i = 32; i < bowlTeams.size(); i++) {
+                bowlTeams.get(i).postSeasonHealing(1);
+            }
 
     }
 
@@ -3352,82 +3361,83 @@ public class League {
             if(bowlGames[g] != null) playBowl(bowlGames[g]);
         }
 
-        semiG14.playGame();
-        semiG23.playGame();
-        Team semi14winner;
-        Team semi23winner;
-        if (semiG14.homeScore > semiG14.awayScore) {
-            semiG14.homeTeam.semiFinalWL = "SFW";
-            semiG14.awayTeam.semiFinalWL = "SFL";
-            semiG14.awayTeam.totalBowlLosses++;
-            semiG14.homeTeam.totalBowls++;
-            semiG14.homeTeam.HC.get(0).bowlwins++;
-            semiG14.awayTeam.HC.get(0).bowllosses++;
-            semi14winner = semiG14.homeTeam;
-            newsStories.get(currentWeek + 1).add(
-                    semiG14.homeTeam.name + " wins the " + semiG14.gameName + "!>" +
-                            semiG14.homeTeam.strRep() + " defeats " + semiG14.awayTeam.strRep() +
-                            " in the semifinals, winning " + semiG14.homeScore + " to " + semiG14.awayScore + ". " +
-                            semiG14.homeTeam.name + " advances to the National Championship!"
+        if(!expPlayoffs) {
+            semiG14.playGame();
+            semiG23.playGame();
+            Team semi14winner;
+            Team semi23winner;
+            if (semiG14.homeScore > semiG14.awayScore) {
+                semiG14.homeTeam.semiFinalWL = "SFW";
+                semiG14.awayTeam.semiFinalWL = "SFL";
+                semiG14.awayTeam.totalBowlLosses++;
+                semiG14.homeTeam.totalBowls++;
+                semiG14.homeTeam.HC.get(0).bowlwins++;
+                semiG14.awayTeam.HC.get(0).bowllosses++;
+                semi14winner = semiG14.homeTeam;
+                newsStories.get(currentWeek + 1).add(
+                        semiG14.homeTeam.name + " wins the " + semiG14.gameName + "!>" +
+                                semiG14.homeTeam.strRep() + " defeats " + semiG14.awayTeam.strRep() +
+                                " in the semifinals, winning " + semiG14.homeScore + " to " + semiG14.awayScore + ". " +
+                                semiG14.homeTeam.name + " advances to the National Championship!"
 
-            );
-        } else {
-            semiG14.homeTeam.semiFinalWL = "SFL";
-            semiG14.awayTeam.semiFinalWL = "SFW";
-            semiG14.homeTeam.totalBowlLosses++;
-            semiG14.awayTeam.totalBowls++;
-            semiG14.awayTeam.HC.get(0).bowlwins++;
-            semiG14.homeTeam.HC.get(0).bowllosses++;
-            semi14winner = semiG14.awayTeam;
-            newsStories.get(currentWeek + 1).add(
-                    semiG14.awayTeam.name + " wins the " + semiG14.gameName + "!>" +
-                            semiG14.awayTeam.strRep() + " defeats " + semiG14.homeTeam.strRep() +
-                            " in the semifinals, winning " + semiG14.awayScore + " to " + semiG14.homeScore + ". " +
-                            semiG14.awayTeam.name + " advances to the National Championship!"
+                );
+            } else {
+                semiG14.homeTeam.semiFinalWL = "SFL";
+                semiG14.awayTeam.semiFinalWL = "SFW";
+                semiG14.homeTeam.totalBowlLosses++;
+                semiG14.awayTeam.totalBowls++;
+                semiG14.awayTeam.HC.get(0).bowlwins++;
+                semiG14.homeTeam.HC.get(0).bowllosses++;
+                semi14winner = semiG14.awayTeam;
+                newsStories.get(currentWeek + 1).add(
+                        semiG14.awayTeam.name + " wins the " + semiG14.gameName + "!>" +
+                                semiG14.awayTeam.strRep() + " defeats " + semiG14.homeTeam.strRep() +
+                                " in the semifinals, winning " + semiG14.awayScore + " to " + semiG14.homeScore + ". " +
+                                semiG14.awayTeam.name + " advances to the National Championship!"
 
-            );
+                );
+            }
+
+            if (semiG23.homeScore > semiG23.awayScore) {
+                semiG23.homeTeam.semiFinalWL = "SFW";
+                semiG23.awayTeam.semiFinalWL = "SFL";
+                semiG23.homeTeam.totalBowls++;
+                semiG23.awayTeam.totalBowlLosses++;
+                semiG23.homeTeam.HC.get(0).bowlwins++;
+                semiG23.awayTeam.HC.get(0).bowllosses++;
+                semi23winner = semiG23.homeTeam;
+                newsStories.get(currentWeek + 1).add(
+                        semiG23.homeTeam.name + " wins the " + semiG23.gameName + "!>" +
+                                semiG23.homeTeam.strRep() + " defeats " + semiG23.awayTeam.strRep() +
+                                " in the semifinals, winning " + semiG23.homeScore + " to " + semiG23.awayScore + ". " +
+                                semiG23.homeTeam.name + " advances to the National Championship!"
+
+                );
+            } else {
+                semiG23.homeTeam.semiFinalWL = "SFL";
+                semiG23.awayTeam.semiFinalWL = "SFW";
+                semiG23.awayTeam.totalBowls++;
+                semiG23.homeTeam.totalBowlLosses++;
+                semiG23.awayTeam.HC.get(0).bowlwins++;
+                semiG23.homeTeam.HC.get(0).bowllosses++;
+                semi23winner = semiG23.awayTeam;
+                newsStories.get(currentWeek + 1).add(
+                        semiG23.awayTeam.name + " wins the " + semiG23.gameName + "!>" +
+                                semiG23.awayTeam.strRep() + " defeats " + semiG23.homeTeam.strRep() +
+                                " in the semifinals, winning " + semiG23.awayScore + " to " + semiG23.homeScore + ". " +
+                                semiG23.awayTeam.name + " advances to the National Championship!"
+
+                );
+            }
+
+            //schedule NCG
+            ncg = new Game(semi14winner, semi23winner, "NCG");
+            semi14winner.gameSchedule.add(ncg);
+            semi23winner.gameSchedule.add(ncg);
+            newsStories.get(currentWeek + 1).add("Upcoming National Title Game!>" + semi14winner.getStrAbbrWL() + " will compete with " + semi23winner.getStrAbbrWL() +
+                    " for the " + getYear() + " College Football National Title!");
+            weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">#" + ncg.awayTeam.rankTeamPollScore + " " + ncg.awayTeam.name + "\n" + "#" + ncg.homeTeam.rankTeamPollScore + " " + ncg.homeTeam.name);
         }
-
-        if (semiG23.homeScore > semiG23.awayScore) {
-            semiG23.homeTeam.semiFinalWL = "SFW";
-            semiG23.awayTeam.semiFinalWL = "SFL";
-            semiG23.homeTeam.totalBowls++;
-            semiG23.awayTeam.totalBowlLosses++;
-            semiG23.homeTeam.HC.get(0).bowlwins++;
-            semiG23.awayTeam.HC.get(0).bowllosses++;
-            semi23winner = semiG23.homeTeam;
-            newsStories.get(currentWeek + 1).add(
-                    semiG23.homeTeam.name + " wins the " + semiG23.gameName + "!>" +
-                            semiG23.homeTeam.strRep() + " defeats " + semiG23.awayTeam.strRep() +
-                            " in the semifinals, winning " + semiG23.homeScore + " to " + semiG23.awayScore + ". " +
-                            semiG23.homeTeam.name + " advances to the National Championship!"
-
-            );
-        } else {
-            semiG23.homeTeam.semiFinalWL = "SFL";
-            semiG23.awayTeam.semiFinalWL = "SFW";
-            semiG23.awayTeam.totalBowls++;
-            semiG23.homeTeam.totalBowlLosses++;
-            semiG23.awayTeam.HC.get(0).bowlwins++;
-            semiG23.homeTeam.HC.get(0).bowllosses++;
-            semi23winner = semiG23.awayTeam;
-            newsStories.get(currentWeek + 1).add(
-                    semiG23.awayTeam.name + " wins the " + semiG23.gameName + "!>" +
-                            semiG23.awayTeam.strRep() + " defeats " + semiG23.homeTeam.strRep() +
-                            " in the semifinals, winning " + semiG23.awayScore + " to " + semiG23.homeScore + ". " +
-                            semiG23.awayTeam.name + " advances to the National Championship!"
-
-            );
-        }
-
-        //schedule NCG
-        ncg = new Game(semi14winner, semi23winner, "NCG");
-        semi14winner.gameSchedule.add(ncg);
-        semi23winner.gameSchedule.add(ncg);
-        newsStories.get(currentWeek + 1).add("Upcoming National Title Game!>" + semi14winner.getStrAbbrWL() + " will compete with " + semi23winner.getStrAbbrWL() +
-                " for the " + getYear() + " College Football National Title!");
-        weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">#" + ncg.awayTeam.rankTeamPollScore + " " + ncg.awayTeam.name + "\n" + "#" + ncg.homeTeam.rankTeamPollScore + " " + ncg.homeTeam.name);
-
     }
 
     /**

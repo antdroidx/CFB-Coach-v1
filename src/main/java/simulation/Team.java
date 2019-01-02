@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
@@ -257,6 +258,8 @@ public class Team {
     private static final int sophNFL = 2;
     private static final double NFL_CHANCE = 0.66;
     private static final double NFL_CHANCE_SOPH = 0.330;
+
+    String[] issue = {"Skipping Practice", "Skipping Class", "Excessive Partying", "Academics", "Fighting", "Drugs", "DUI", "PED"};
 
     /**
      * Creates new team, recruiting needed players and setting team stats to 0.
@@ -955,7 +958,7 @@ public class Team {
         }
     }
 
-    private float getPreseasonBiasScore() {
+    private float  getPreseasonBiasScore() {
         float score = 0;
 
         if (league.currentWeek > 0) {
@@ -1282,8 +1285,14 @@ public class Team {
         // Don't add/subtract prestige if they are a penalized team from last season
         if (!bowlBan && !penalized) {
             prestigeChange = Math.round((float) (diffExpected / 7.5));
+            int postSeasonGames = 0;
+            for(Game g: gameSchedule) {
+                if(!g.gameName.equals("Conference") && !g.gameName.equals("Division") && !g.gameName.equals("OOC") && !g.gameName.equals("BYE")) {
+                    postSeasonGames++;
+                }
+            }
 
-            if((wins+losses) > 12 && prestigeChange <= 0) prestigeChange++;
+            if((postSeasonGames) > 0 && prestigeChange <= 0) prestigeChange++;
             if (prestigeChange < (wins - projectedWins)) prestigeChange++;
             if(prestigeChange <= 0 && rankTeamPollScore < rankTeamPrestige) prestigeChange++;
         }
@@ -1305,7 +1314,7 @@ public class Team {
         if (rankTeamPrestige > (league.teamList.size()*.60)) {
             ArrayList<Player> teamAll = getAllPlayers();
             for (int i = 0; i < teamAll.size(); i++) {
-                if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr > 91) {
+                if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr > 90) {
                     nflPts++;
                 }
             }
@@ -1522,6 +1531,7 @@ public class Team {
                                 " despite finally getting the team on the right track. The team struggled during his first few seasons at the school, but had shown some promise this season." +
                                 " He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                         teamPrestige -= (int) Math.random() * 8;
+                        if(teamDisciplineScore < 45) teamDisciplineScore += 20;
                         if (!userControlled) {
                             league.coachList.add(HC.get(0));
                         }
@@ -1532,6 +1542,7 @@ public class Team {
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
+                    if(teamDisciplineScore < 45) teamDisciplineScore += 20;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
                 } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < -1) {
@@ -1539,6 +1550,7 @@ public class Team {
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
+                    if(teamDisciplineScore < 45) teamDisciplineScore += 20;
                     if (!userControlled) {
                         league.coachList.add(HC.get(0));
                     }
@@ -3400,8 +3412,101 @@ public class Team {
         return hist;
     }
 
+    //DISCIPLINE SYSTEM
+
+    public void disciplineSuccess() {
+        HC.get(0).ratDiscipline += (int) (Math.random() * 3);
+        teamDisciplineScore += (int) (Math.random() * 4);
+        if (teamDisciplineScore > 99) teamDisciplineScore = 99;
+    }
+
     //Disipline the most likely player that committed offense based on disicpline rating
-    public void disciplinePlayer() {
+    public void disciplineFailure() {
+        getLowDisciplinePlayers();
+
+        if(!userControlled) {
+            Player player = playersDis.get((int) (Math.random() * playersDis.size()));
+
+            int duration = (int) (Math.random() * (65 - player.personality) / 2);
+            if (duration <= 0) duration = 1;
+            int issueNo = duration-1;
+            if(issueNo > issue.length) issueNo = issue.length;
+            String description = issue[issueNo];
+
+            int choice = HC.get(0).ratDiscipline - (int)(100*Math.random());
+            if(choice > 10) {
+                choice = 1;
+                duration = duration*2;
+            }
+            else if (choice > -20) {
+                choice = 2;
+            }
+            else choice = 3;
+
+            disciplineAction(player, description, duration, choice);
+
+        } else {
+            disciplineAction = true;
+        }
+    }
+
+    //Apply Suspensions to Player
+    public void suspendPlayerSetup(MainActivity main) {
+        Player player = playersDis.get((int) (Math.random() * playersDis.size()));
+
+        int duration = (int) (Math.random() * (65 - player.personality) / 2);
+        if (duration <= 0) duration = 1;
+        int duration2 = duration * 2;
+        int issueNo = duration-1;
+        if(issueNo > issue.length) issueNo = issue.length;
+        String description = issue[issueNo];
+
+        main.disciplineAction(player, description, duration, duration2);
+    }
+
+    public void disciplineAction(Player player, String description, int duration, int choice) {
+        //choice = 1 - good discipline 2- medium 3- ignore
+        int penalty = (65-player.personality)/2;
+
+        if(choice == 1) {
+            HC.get(0).ratDiscipline -= penalty/3;
+            disciplinePts --;
+            teamDisciplineScore -= penalty/2;
+            teamBudget -= ((int) (Math.random() * penalty * 100));
+        } else if(choice == 2) {
+            HC.get(0).ratDiscipline -= penalty/2;
+            disciplinePts --;
+            teamDisciplineScore -= penalty;
+            teamBudget -= ((int) (Math.random() * penalty * 200));
+        } else {
+            player.troubledTimes++;
+            HC.get(0).ratDiscipline -= penalty;
+            disciplinePts --;
+            teamDisciplineScore -= penalty*2;
+            teamBudget -= ((int) (Math.random() * penalty * 300));
+        }
+
+        if(choice == 1 || choice == 2) {
+            player.isSuspended = true;
+            player.ratPot -= duration * 5;
+            player.ratFootIQ -= duration * 3;
+            player.weeksSuspended = duration;
+            player.troubledTimes++;
+            if (player.ratOvr > 77) {
+                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Star Player Suspended>" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
+                        + ". The player will be suspended for " + duration + " weeks.");
+            }
+
+            if(userControlled) {
+                suspensionNews = "Player Suspended!\n\n" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
+                        + ". The player will be suspended for " + duration + " weeks.";
+                suspension = true;
+            }
+            sortPlayers();
+        }
+    }
+
+    private void getLowDisciplinePlayers() {
         playersDis = new ArrayList<>();
         checkSuspensionPosition(teamQBs, startersQB + subQB);
         checkSuspensionPosition(teamRBs, startersRB + subRB);
@@ -3413,41 +3518,6 @@ public class Team {
         checkSuspensionPosition(teamLBs, startersLB + subLB);
         checkSuspensionPosition(teamCBs, startersCB + subCB);
         checkSuspensionPosition(teamSs, startersS + subS);
-
-        if (playersDis.size() > 0) {
-            int randomPlayer = (int) (Math.random() * playersDis.size());
-            suspendPlayer(playersDis.get(randomPlayer));
-        }
-    }
-
-    //Apply Suspensions to Player
-    public void userSuspendPlayerSetup() {
-
-    }
-
-    //Apply Suspensions to Player
-    private void suspendPlayer(Player player) {
-        String[] issue = {"Academics", "Fighting", "DUI", "Skipping Class", "Skipping Practice", "Failed Drug Test", "Academics", "Excessive Partying", "Practice Brawl"};
-        int duration = (int) (Math.random() * (65 - player.personality) / 2);
-        if (duration == 0) duration = 1;
-        String description = issue[(int) (Math.random() * issue.length)];
-
-        if (player.personality * Math.random() < Math.random() * HC.get(0).ratDiscipline) {
-            player.isSuspended = true;
-            player.ratPot -= duration * 5;
-            player.ratFootIQ -= duration * 3;
-            player.weeksSuspended = duration;
-            player.troubledTimes++;
-            if (player.ratOvr > 77) {
-                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Star Player Suspended>" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
-                        + ". The player will be suspended for " + duration + " weeks.");
-            }
-
-            suspensionNews = "Player Suspended!\n\n" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
-                    + ". The player will be suspended for " + duration + " weeks.";
-            suspension = true;
-            sortPlayers();
-        }
     }
 
     private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters) {
@@ -3459,7 +3529,7 @@ public class Team {
             }
         }
 
-        // Only injure if there are people left to injure
+        // Only suspend if there are people left
         if (numInjured < numStarters) {
             for (int i = 0; i < numStarters; ++i) {
                 Player p = players.get(i);
@@ -3908,7 +3978,7 @@ public class Team {
         i=0;
         for (Player p : teamWRs) {
             String starter = getRosterStatus(p, i, "WR");
-            String imp = " ";
+            String imp = getRatImprovement(p);
             roster.add("WR,"  + p.getYrStr() + "," + p.name + "," + starter + "," + p.ratOvr + "," + p.getSeasonAwards() + "," + imp);
             i++;
         }
