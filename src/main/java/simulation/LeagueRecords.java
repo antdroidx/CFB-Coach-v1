@@ -1,23 +1,24 @@
 package simulation;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LeagueRecords {
-
+    private final DecimalFormat df2 = new DecimalFormat("#.##");
     class Record {
-        private final int number;
+        private final float number;
         private String holder;
         private final int year;
 
-        Record(int n, String h, int y) {
+        Record(float n, String h, int y) {
             number = n;
             holder = h;
             year = y;
         }
 
-        int getNumber() {
+        float getNumber() {
             return number;
         }
 
@@ -55,7 +56,7 @@ public class LeagueRecords {
         String[] csv;
         for (String str : recordStrings) {
             csv = str.split(",");
-            records.put(csv[0], new Record(Integer.parseInt(csv[1]), csv[2], Integer.parseInt(csv[3])));
+            records.put(csv[0], new Record(Float.parseFloat(csv[1]), csv[2], Integer.parseInt(csv[3])));
         }
     }
 
@@ -127,7 +128,7 @@ public class LeagueRecords {
         records.put("Coach Year Score", new Record(0, "XXX%XXX", 0));
     }
 
-    public void checkRecord(String record, int number, String holder, int year) {
+    public void checkRecord(String record, float number, String holder, int year) {
         if (holder.split("%").length < 2) holder = holder + "% ";
         if (record.equals("Team Opp PPG") || record.equals("Team Opp YPG")) {
             // Is a record where lower = better
@@ -170,7 +171,7 @@ public class LeagueRecords {
         if (records.containsKey(key)) {
             Record r = records.get(key);
             if (r == null) return key + ",-1,-1,-1";
-            return key + "," + r.getNumber() + "," + r.getHolder() + "," + r.getYear();
+            return key + "," + df2.format(r.getNumber())+ "," + r.getHolder() + "," + r.getYear();
         } else return "ERROR,ERROR,ERROR,ERROR";
     }
 
@@ -186,7 +187,7 @@ public class LeagueRecords {
                 if (r.getValue().getHolder().split("%")[1].equals(abbr) &&
                         r.getValue().getYear() == year) {
                     sb.append(r.getValue().getHolder().split("%")[0] + " broke the record for " +
-                            r.getKey() + " with " + r.getValue().getNumber() + "!\n");
+                            r.getKey() + " with " + df2.format(r.getValue().getNumber()) + "!\n");
                 }
             }
         }

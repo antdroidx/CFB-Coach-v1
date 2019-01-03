@@ -309,16 +309,16 @@ public class PlayerQB extends Player {
                 statsPassTD * 150 - statsInt * 215 + statsPassYards + statsRushTD * 150 + 3 * statsRushYards + ratOvr * 10;
     }
 
-    public double getPasserRating() {
+    public float getPasserRating() {
         if (statsPassAtt < 1) {
             return 0;
         } else {
-            double rating = (((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt);
+            float rating = (float)(((8.4 * statsPassYards) + (300 * statsPassTD) + (100 * statsPassComp) - (200 * statsInt)) / statsPassAtt);
             return rating;
         }
     }
 
-    public double getPassPCT() {
+    public float getPassPCT() {
         if (statsPassAtt < 1) {
             return 0;
         } else {

@@ -189,7 +189,7 @@ public class League {
     public ArrayList<Team> playoffTeams;
     public String postseason;
 
-    private final DecimalFormat df2 = new DecimalFormat(".##");
+    private final DecimalFormat df2 = new DecimalFormat("#.##");
     private final int seasonStart = 2018;
     int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 30;
@@ -600,7 +600,7 @@ public class League {
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
                 record = line.split(",");
                 if (!record[1].equals("-1"))
-                    leagueRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+                    leagueRecords.checkRecord(record[0], Float.parseFloat(record[1]), record[2], Integer.parseInt(record[3]));
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_WIN_STREAK")) {
@@ -616,7 +616,7 @@ public class League {
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
                         record = line.split(",");
                         if (!record[1].equals("-1"))
-                            teamList.get(i).teamRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+                            teamList.get(i).teamRecords.checkRecord(record[0], Float.parseFloat(record[1]), record[2], Integer.parseInt(record[3]));
                     }
                 }
             }
@@ -3541,7 +3541,10 @@ public class League {
         StringBuilder sb = new StringBuilder();
         sb.append(ncgSummaryStr());
         sb.append("\n\n" + userTeam.seasonSummaryStr());
-        sb.append("\n\n" + leagueRecords.brokenRecordsStr(getYear(), userTeam.abbr));
+        if (getYear() > seasonStart) {
+            sb.append("\n\n" + leagueRecords.brokenRecordsStr(getYear(), userTeam.abbr));
+            sb.append("\n\n" + userTeam.teamRecords.brokenRecordsStr(getYear(), userTeam.abbr));
+        }
         return sb.toString();
     }
 

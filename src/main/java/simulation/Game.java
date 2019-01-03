@@ -26,7 +26,7 @@ import positions.PlayerWR;
 
 public class Game implements Serializable {
 
-    private final DecimalFormat df2 = new DecimalFormat(".#");
+    private final DecimalFormat df2 = new DecimalFormat("#.##");
 
     public final Team homeTeam;
     public final Team awayTeam;

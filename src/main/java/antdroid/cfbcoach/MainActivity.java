@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private File customBowls;
     private String customUri;
 
-    private final DecimalFormat df2 = new DecimalFormat(".#");
+    private final DecimalFormat df2 = new DecimalFormat("#.##");
 
 
     @Override

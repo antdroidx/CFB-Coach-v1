@@ -42,7 +42,7 @@ public class Team {
     public boolean recentPenalty;
     public boolean facilityUpgrade;
     public boolean disciplineAction;
-    private final DecimalFormat df2 = new DecimalFormat(".#");
+    private final DecimalFormat df2 = new DecimalFormat("#.##");
 
     public PlaybookOffense playbookOff;
     public PlaybookDefense playbookDef;
@@ -3498,7 +3498,7 @@ public class Team {
             player.weeksSuspended = duration;
             player.troubledTimes++;
             if (player.ratOvr > 77) {
-                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Star Player Suspended>" + player.team.name + "'s star " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
+                player.team.league.newsStories.get(player.team.league.currentWeek + 1).add("Player Suspended!>" + player.team.name + "'s " + player.position + ", " + player.name + " was suspended from the team today. The team cited the reason as: " + description
                         + ". The player will be suspended for " + duration + " weeks.");
             }
 
@@ -4718,11 +4718,11 @@ public class Team {
 
     //Checks if any of the league records were broken by this team.
     public void checkLeagueRecords(LeagueRecords records) {
-        records.checkRecord("Team PPG", teamPoints / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team YPG", teamYards / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team Opp YPG", teamOppYards / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team PPG", teamPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team PPG", (float)teamPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team Opp PPG", (float)teamOppPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team YPG", (float)teamYards / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team Opp YPG", (float)teamOppYards / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team PPG", (float)teamPoints / numGames(), name + "%" + abbr, league.getYear());
         records.checkRecord("Team TO Diff", teamTODiff, name + "%" + abbr, league.getYear());
 
         for (int i = 0; i < teamQBs.size(); ++i) {
@@ -4730,8 +4730,8 @@ public class Team {
                 records.checkRecord("Pass Yards", getQB(i).statsPassYards, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Pass TDs", getQB(i).statsPassTD, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Ints Thrown", getQB(i).statsInt, getQB(i).name + "%" + abbr, league.getYear());
-                records.checkRecord("Comp Percent", ((int)getQB(i).getPassPCT()), getQB(i).name + "%" + abbr, league.getYear());
-                records.checkRecord("QB Rating", (int) getQB(i).getPasserRating(), getQB(i).name + "%" + abbr, league.getYear());
+                records.checkRecord("Comp Percent", getQB(i).getPassPCT(), getQB(i).name + "%" + abbr, league.getYear());
+                records.checkRecord("QB Rating", getQB(i).getPasserRating(), getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Rush Yards", getQB(i).statsRushYards, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Rush TDs", getQB(i).statsRushTD, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Fumbles Lost", getQB(i).statsFumbles, getQB(i).name + "%" + abbr, league.getYear());
@@ -4803,8 +4803,8 @@ public class Team {
                     records.checkRecord("Career Pass Yards", qb.statsPassYards + qb.careerPassYards, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Pass TDs", qb.statsPassTD + qb.careerTDs, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Ints Thrown", qb.statsInt + qb.careerInt, qb.name + "%" + abbr, league.getYear() - 1);
-                    records.checkRecord("Career Comp PCT", (int) qb.getCareerPassPCT(), qb.name + "%" + abbr, league.getYear() - 1);
-                    records.checkRecord("Career QB Rating", (int) qb.getCareerPasserRating(), qb.name + "%" + abbr, league.getYear() - 1);
+                    records.checkRecord("Career Comp PCT", qb.getCareerPassPCT(), qb.name + "%" + abbr, league.getYear() - 1);
+                    records.checkRecord("Career QB Rating", qb.getCareerPasserRating(), qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Rush Yards", qb.statsRushYards + qb.careerRushYards, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Rush TDs", qb.statsRushTD + qb.careerRushTD, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Fumbles Lost", qb.statsFumbles + qb.careerFumbles, qb.name + "%" + abbr, league.getYear() - 1);
@@ -4871,11 +4871,11 @@ public class Team {
 
     //Checks if any of the league records were broken by this team.
     public void checkTeamRecords(TeamRecords records) {
-        records.checkRecord("Team PPG", teamPoints / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team Opp PPG", teamOppPoints / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team YPG", teamYards / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team Opp YPG", teamOppYards / numGames(), name + "%" + abbr, league.getYear());
-        records.checkRecord("Team PPG", teamPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team PPG", (float)teamPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team Opp PPG", (float)teamOppPoints / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team YPG", (float)teamYards / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team Opp YPG", (float)teamOppYards / numGames(), name + "%" + abbr, league.getYear());
+        records.checkRecord("Team PPG", (float)teamPoints / numGames(), name + "%" + abbr, league.getYear());
         records.checkRecord("Team TO Diff", teamTODiff, name + "%" + abbr, league.getYear());
 
         for (int i = 0; i < teamQBs.size(); ++i) {
@@ -4883,8 +4883,8 @@ public class Team {
                 records.checkRecord("Pass Yards", getQB(i).statsPassYards, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Pass TDs", getQB(i).statsPassTD, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Ints Thrown", getQB(i).statsInt, getQB(i).name + "%" + abbr, league.getYear());
-                records.checkRecord("Comp Percent", ((int)getQB(i).getPassPCT()), getQB(i).name + "%" + abbr, league.getYear());
-                records.checkRecord("QB Rating", (int) getQB(i).getPasserRating(), getQB(i).name + "%" + abbr, league.getYear());
+                records.checkRecord("Comp Percent", getQB(i).getPassPCT(), getQB(i).name + "%" + abbr, league.getYear());
+                records.checkRecord("QB Rating", getQB(i).getPasserRating(), getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Rush Yards", getQB(i).statsRushYards, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Rush TDs", getQB(i).statsRushTD, getQB(i).name + "%" + abbr, league.getYear());
                 records.checkRecord("Fumbles Lost", getQB(i).statsFumbles, getQB(i).name + "%" + abbr, league.getYear());
@@ -4956,8 +4956,8 @@ public class Team {
                     records.checkRecord("Career Pass Yards", qb.statsPassYards + qb.careerPassYards, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Pass TDs", qb.statsPassTD + qb.careerTDs, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Ints Thrown", qb.statsInt + qb.careerInt, qb.name + "%" + abbr, league.getYear() - 1);
-                    records.checkRecord("Career Comp PCT", (int) qb.getCareerPassPCT(), qb.name + "%" + abbr, league.getYear() - 1);
-                    records.checkRecord("Career QB Rating", (int) qb.getCareerPasserRating(), qb.name + "%" + abbr, league.getYear() - 1);
+                    records.checkRecord("Career Comp PCT",  qb.getCareerPassPCT(), qb.name + "%" + abbr, league.getYear() - 1);
+                    records.checkRecord("Career QB Rating",  qb.getCareerPasserRating(), qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Rush Yards", qb.statsRushYards + qb.careerRushYards, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Rush TDs", qb.statsRushTD + qb.careerRushTD, qb.name + "%" + abbr, league.getYear() - 1);
                     records.checkRecord("Career Fumbles Lost", qb.statsFumbles + qb.careerFumbles, qb.name + "%" + abbr, league.getYear() - 1);

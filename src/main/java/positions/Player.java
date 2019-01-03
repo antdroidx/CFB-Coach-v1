@@ -122,7 +122,7 @@ Player {
     public int gameFGMade;
     public int gameXPAttempts;
     public int gameXPMade;
-    final DecimalFormat df2 = new DecimalFormat(".##");
+    public final DecimalFormat df2 = new DecimalFormat("#.##");
 
     private final String[] letterGrades = {"F-", "F", "F+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"};
 

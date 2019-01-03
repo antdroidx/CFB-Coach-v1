@@ -313,7 +313,11 @@ public class HeadCoach extends Player {
     @Override
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
-        pStats.add("Current Status: " + (wins+teamWins) + ">Career Losses: " + (losses+teamLosses));
+        if(team == null) {
+            pStats.add("Current Status: " + getCoachStatus() + ">Age: " + age);
+            pStats.add("Years Coached: " + year + ">Rating: " + getHCOverall());
+            pStats.add("[B]CAREER STATS");
+        }
         pStats.add("Career Wins: " + (wins+teamWins) + ">Career Losses: " + (losses+teamLosses));
         pStats.add("Bowl Wins: " + bowlwins + ">Bowl Losses: " + bowllosses);
         pStats.add("Conf Champs: " + confchamp + ">National Champs: " + natchamp);
@@ -379,6 +383,15 @@ public class HeadCoach extends Player {
         else if(baselinePrestige + 3 < (team.teamPrestige)) status = "Safe";
         else if (baselinePrestige > (team.teamPrestige + 3)) status = "Unsafe";
         else status = "OK";
+
+        return status;
+    }
+
+    public String getCoachStatus() {
+        String status = "Normal";
+        if(retired) status = "Retired";
+        else if(team == null) status = "Unemployed";
+        else status = "Active";
 
         return status;
     }
