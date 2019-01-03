@@ -3635,7 +3635,8 @@ public class MainActivity extends AppCompatActivity {
         userHC = headCoach;
         int ratOvr = userHC.getHCOverall();
         if (ratOvr < 40) ratOvr = 40;
-        String oldTeam = userHC.team.name;
+        String oldTeam = "NO TEAM";
+        if(userHC.team != null) oldTeam = userHC.team.name;
         updateHeaderBar();
         //get user team from list dialog
         jobList = simLeague.getCoachListFired(ratOvr, oldTeam);
@@ -3666,7 +3667,8 @@ public class MainActivity extends AppCompatActivity {
             int ratOvr = userHC.getHCOverall();
             if (ratOvr < 40) ratOvr = 40;
             double offers = 2;
-            String oldTeam = userHC.team.name;
+            String oldTeam = "NO TEAM";
+            if(userHC.team != null) oldTeam = userHC.team.name;
             updateHeaderBar();
             //get user team from list dialog
             jobList = simLeague.getCoachPromotionList(ratOvr, offers, oldTeam);
@@ -4115,8 +4117,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         userHC.retired = true;
                         userHC.team = null;
+                        userTeam.promoteCoach();
                         simLeague.coachFreeAgents.add(userHC);
+
                         userTeam.setupUserCoach(userHC.name);
+
                         jobOffers(userHC);
                         newGame = true;
                         userNameDialog();

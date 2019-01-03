@@ -3563,17 +3563,6 @@ public class League {
 
     }
 
-    //New Hard Game
-    public ArrayList<Team> getCoachList() {
-        ArrayList<Team> teamVacancies = new ArrayList<>();
-
-        for (int c = 0; c < conferences.size(); c++) {
-            teamVacancies.add(conferences.get(c).confTeams.get(10));
-            teamVacancies.add(conferences.get(c).confTeams.get(11));
-        }
-        return teamVacancies;
-    }
-
     //Get Coach Job Offers List if fired or quit
     public ArrayList<Team> getCoachListFired(int rating, String oldTeam) {
         ArrayList<Team> teamVacancies = new ArrayList<>();
@@ -3598,6 +3587,19 @@ public class League {
             }
         }
 
+        return teamVacancies;
+    }
+
+    //If there are no vacancies for user head coach...
+    public ArrayList<Team> getCoachList() {
+        ArrayList<Team> teamVacancies = new ArrayList<>();
+
+        for (int c = 0; c < conferences.size(); c++) {
+            if(conferences.get(c).confTeams.size() > 3) {
+                teamVacancies.add(conferences.get(c).confTeams.get(conferences.get(c).confTeams.size() - 1));
+                teamVacancies.add(conferences.get(c).confTeams.get(conferences.get(c).confTeams.size() - 2));
+            }
+        }
         return teamVacancies;
     }
 
@@ -3628,6 +3630,7 @@ public class League {
                         teamList.get(t).HC.get(0).contractLength = 6;
                         teamList.get(t).HC.get(0).contractYear = 0;
                         teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
+                        teamList.get(t).HC.get(0).team = teamList.get(t);
                         newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
                                 tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
@@ -3657,6 +3660,7 @@ public class League {
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
                     teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
+                    teamList.get(t).HC.get(0).team = teamList.get(t);
                     newsStories.get(currentWeek + 1).add("Coaching Switch: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
                     coachList.remove(i);
@@ -3674,6 +3678,7 @@ public class League {
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
                     teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
+                    teamList.get(t).HC.get(0).team = teamList.get(t);
                     newsStories.get(currentWeek + 1).add("Return to the Sidelines: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " has been out of football, but is returning this season!");
                     coachFreeAgents.remove(i);
@@ -3707,6 +3712,7 @@ public class League {
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
                     school.HC.get(0).baselinePrestige = school.teamPrestige;
+                    school.HC.get(0).team = school;
                     newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + school.name + ">Rising star head coach " + school.HC.get(0).name + " has announced his departure from " +
                             tmName + " after being selected by " + school.name + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
@@ -3737,6 +3743,7 @@ public class League {
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
                     school.HC.get(0).baselinePrestige = school.teamPrestige;
+                    school.HC.get(0).team = school;
                     newsStories.get(currentWeek + 1).add("Coaching Change: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
                             " to lead the team. Coach " + school.HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
                     coachList.remove(i);
@@ -3754,6 +3761,7 @@ public class League {
                     school.HC.get(0).contractLength = 6;
                     school.HC.get(0).contractYear = 0;
                     school.HC.get(0).baselinePrestige = school.teamPrestige;
+                    school.HC.get(0).team = school;
                     newsStories.get(currentWeek + 1).add("Back to Coaching: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
                             " to lead the team. Coach " + school.HC.get(0).name + " has been out of football, but is returning this upcoming season!");
                     coachFreeAgents.remove(i);
@@ -4089,6 +4097,7 @@ public class League {
                     tOut.append(transferQBs.get(i).position + " " + transferQBs.get(i).name + ", " + transferQBs.get(i).getYrStr() + "  Ovr: " + transferQBs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferQBs.get(i).isTransfer = false;
                 transferQBs.get(i).team.teamQBs.add(transferQBs.get(i));
             }
         }
@@ -4098,6 +4107,7 @@ public class League {
                     tOut.append(transferRBs.get(i).position + " " + transferRBs.get(i).name + ", " + transferRBs.get(i).getYrStr() + "  Ovr: " + transferRBs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferRBs.get(i).isTransfer = false;
                 transferRBs.get(i).team.teamRBs.add(transferRBs.get(i));
             }
         }
@@ -4107,6 +4117,7 @@ public class League {
                     tOut.append(transferWRs.get(i).position + " " + transferWRs.get(i).name + ", " + transferWRs.get(i).getYrStr() + "  Ovr: " + transferWRs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferWRs.get(i).isTransfer = false;
                 transferWRs.get(i).team.teamWRs.add(transferWRs.get(i));
             }
         }
@@ -4116,6 +4127,7 @@ public class League {
                     tOut.append(transferTEs.get(i).position + " " + transferTEs.get(i).name + ", " + transferTEs.get(i).getYrStr() + "  Ovr: " + transferTEs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferTEs.get(i).isTransfer = false;
                 transferTEs.get(i).team.teamTEs.add(transferTEs.get(i));
             }
         }
@@ -4125,6 +4137,7 @@ public class League {
                     tOut.append(transferOLs.get(i).position + " " + transferOLs.get(i).name + ", " + transferOLs.get(i).getYrStr() + "  Ovr: " + transferOLs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferOLs.get(i).isTransfer = false;
                 transferOLs.get(i).team.teamOLs.add(transferOLs.get(i));
             }
         }
@@ -4134,6 +4147,7 @@ public class League {
                     tOut.append(transferKs.get(i).position + " " + transferKs.get(i).name + ", " + transferKs.get(i).getYrStr() + "  Ovr: " + transferKs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferKs.get(i).isTransfer = false;
                 transferKs.get(i).team.teamKs.add(transferKs.get(i));
             }
         }
@@ -4143,6 +4157,7 @@ public class League {
                     tOut.append(transferDLs.get(i).position + " " + transferDLs.get(i).name + ", " + transferDLs.get(i).getYrStr() + "  Ovr: " + transferDLs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferDLs.get(i).isTransfer = false;
                 transferDLs.get(i).team.teamDLs.add(transferDLs.get(i));
             }
         }
@@ -4152,6 +4167,7 @@ public class League {
                     tOut.append(transferLBs.get(i).position + " " + transferLBs.get(i).name + ", " + transferLBs.get(i).getYrStr() + "  Ovr: " + transferLBs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferLBs.get(i).isTransfer = false;
                 transferLBs.get(i).team.teamLBs.add(transferLBs.get(i));
             }
         }
@@ -4161,6 +4177,7 @@ public class League {
                     tOut.append(transferCBs.get(i).position + " " + transferCBs.get(i).name + ", " + transferCBs.get(i).getYrStr() + "  Ovr: " + transferCBs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferCBs.get(i).isTransfer = false;
                 transferCBs.get(i).team.teamCBs.add(transferCBs.get(i));
             }
         }
@@ -4170,6 +4187,7 @@ public class League {
                     tOut.append(transferSs.get(i).position + " " + transferSs.get(i).name + ", " + transferSs.get(i).getYrStr() + "  Ovr: " + transferSs.get(i).ratOvr + " (FCS)\n\n");
                 }
             } else {
+                transferSs.get(i).isTransfer = false;
                 transferSs.get(i).team.teamSs.add(transferSs.get(i));
             }
         }

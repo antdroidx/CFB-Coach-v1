@@ -3422,10 +3422,12 @@ public class Team {
 
     //Disipline the most likely player that committed offense based on disicpline rating
     public void disciplineFailure() {
-        getLowDisciplinePlayers();
+        getLowDisciplinePlayers(65);
 
         if(!userControlled) {
-            Player player = playersDis.get((int) (Math.random() * playersDis.size()));
+            int random = (int) (Math.random() * playersDis.size());
+            if (random > playersDis.size()-1) random = playersDis.size()-1;
+            Player player = playersDis.get(random);
 
             int duration = (int) (Math.random() * (65 - player.personality) / 2);
             if (duration <= 0) duration = 1;
@@ -3452,7 +3454,10 @@ public class Team {
 
     //Apply Suspensions to Player
     public void suspendPlayerSetup(MainActivity main) {
-        Player player = playersDis.get((int) (Math.random() * playersDis.size()));
+        if(playersDis.size() <= 0) getLowDisciplinePlayers(75);
+        int random = (int) (Math.random() * playersDis.size());
+        if (random > playersDis.size() - 1) random = playersDis.size() - 1;
+        Player player = playersDis.get(random);
 
         int duration = (int) (Math.random() * (65 - player.personality) / 2);
         if (duration <= 0) duration = 1;
@@ -3506,21 +3511,21 @@ public class Team {
         }
     }
 
-    private void getLowDisciplinePlayers() {
+    private void getLowDisciplinePlayers(int minRating) {
         playersDis = new ArrayList<>();
-        checkSuspensionPosition(teamQBs, startersQB + subQB);
-        checkSuspensionPosition(teamRBs, startersRB + subRB);
-        checkSuspensionPosition(teamWRs, startersWR + subWR);
-        checkSuspensionPosition(teamTEs, startersTE + subTE);
-        checkSuspensionPosition(teamOLs, startersOL + subOL);
-        checkSuspensionPosition(teamKs, startersK + subK);
-        checkSuspensionPosition(teamDLs, startersDL + subDL);
-        checkSuspensionPosition(teamLBs, startersLB + subLB);
-        checkSuspensionPosition(teamCBs, startersCB + subCB);
-        checkSuspensionPosition(teamSs, startersS + subS);
+        checkSuspensionPosition(teamQBs, startersQB + subQB, minRating);
+        checkSuspensionPosition(teamRBs, startersRB + subRB, minRating);
+        checkSuspensionPosition(teamWRs, startersWR + subWR, minRating);
+        checkSuspensionPosition(teamTEs, startersTE + subTE, minRating);
+        checkSuspensionPosition(teamOLs, startersOL + subOL, minRating);
+        checkSuspensionPosition(teamKs, startersK + subK, minRating);
+        checkSuspensionPosition(teamDLs, startersDL + subDL, minRating);
+        checkSuspensionPosition(teamLBs, startersLB + subLB, minRating);
+        checkSuspensionPosition(teamCBs, startersCB + subCB, minRating);
+        checkSuspensionPosition(teamSs, startersS + subS, minRating);
     }
 
-    private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters) {
+    private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters, int minRating) {
         int numInjured = 0;
 
         for (Player p : players) {
@@ -3533,7 +3538,7 @@ public class Team {
         if (numInjured < numStarters) {
             for (int i = 0; i < numStarters; ++i) {
                 Player p = players.get(i);
-                if (p.personality < 65) {
+                if (p.personality < minRating) {
                     playersDis.add(p);
                 }
             }

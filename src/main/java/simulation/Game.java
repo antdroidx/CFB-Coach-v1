@@ -675,7 +675,7 @@ public class Game implements Serializable {
             if (gameDown == 1 && gameYardLine >= 91) gameYardsNeed = 100 - gameYardLine;
 
             //Under 30 seconds to play, check that the team with the ball is trailing or tied, do something based on the score difference
-            if (gameTime <= 30 && !playingOT && ((gamePoss && (awayScore >= homeScore)) || (!gamePoss && (homeScore >= awayScore)))) {
+            if (gameTime <= 20 && !playingOT && ((gamePoss && (awayScore >= homeScore)) || (!gamePoss && (homeScore >= awayScore)))) {
                 //Down by 3 or less, or tied, and you have the ball
                 if (((gamePoss && (awayScore - homeScore) <= 3) || (!gamePoss && (homeScore - awayScore) <= 3)) && gameYardLine > 60) {
                     //last second FGA
@@ -1282,8 +1282,6 @@ public class Game implements Serializable {
 
                 if (!gotTD && !gotFumble) {
                     //check downs if there wasnt fumble or TD
-                    gameYardsNeed -= yardsGain;
-
                     if (homeTeam.league.fullGameLog) {
                         if (pos.equals("WR")) {
                             gameEventLog += getEventLog() + offense.abbr + " WR " + selWR.name + " caught the pass for a gain of " + yardsGain + " yards.";
@@ -1293,6 +1291,8 @@ public class Game implements Serializable {
                             gameEventLog += getEventLog() + offense.abbr + " TE " + selTE.name + " caught the pass for a gain of " + yardsGain + " yards.";
                         }
                     }
+
+                    gameYardsNeed -= yardsGain;
 
 
                     if (pos.equals("WR")) {
@@ -2026,7 +2026,11 @@ public class Game implements Serializable {
             }
         } else {
             if (homeTeam.league.fullGameLog)
-                gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " rushed for " + yardsGain + " yards, and was tackled by " + defender + ".";
+                if (selRB.gameSim >= selQB.gameSim) {
+                    gameEventLog += getEventLog() + offense.abbr + " RB " + selRB.name + " rushed for " + yardsGain + " yards, and was tackled by " + defender + ".";
+                } else {
+                    gameEventLog += getEventLog() + offense.abbr + " QB " + selQB.name + " scrambled for " + yardsGain + " yards, and was tackled by " + defender + ".";
+                }
 
         }
     }

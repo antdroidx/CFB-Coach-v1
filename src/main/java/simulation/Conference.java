@@ -312,11 +312,10 @@ public class Conference {
         if (league.enableUnivProRel) confWeeks = 12;
         Team ooc1 = new Team("OOC1", "OOC", "OOC", 0, "OOC", 0, league);
         Team ooc2 = new Team("OOC2", "OOC", "OOC", 0, "OOC", 0, league);
-
         Team bye = new Team("BYE", "BYE", "BYE", 0, "BYE", 0, league);
         bye.rankTeamPollScore = league.teamList.size();
 
-        if (confTeams.size() % 2 != 0) {
+        if (confTeams.size() % 2 != 0 && confTeams.size() >= minConfTeams) {
 /*            if(confTeams.size() >= 13) {
                 confTeams.add(ooc1);
                 confTeams.add(ooc2);
