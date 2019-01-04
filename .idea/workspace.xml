@@ -33,11 +33,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/League.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/LeagueRecords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/LeagueRecords.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/TeamRecords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/TeamRecords.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/teams.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/teams.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,15 +79,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="14944">
-              <caret line="1029" column="17" lean-forward="true" selection-start-line="1029" selection-start-column="17" selection-end-line="1029" selection-end-column="17" />
+              <caret line="1029" column="17" selection-start-line="1029" selection-start-column="17" selection-end-line="1029" selection-end-column="17" />
               <folding>
                 <element signature="e#64608#64609#0" expanded="true" />
                 <element signature="e#64665#64666#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="teams.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/res/values/teams.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="659">
+              <caret line="138" column="25" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -1669,7 +1676,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/res/layout/game_dialog.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/hall_fame_list_item.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/child_player_stats.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerProfile.java" />
@@ -1720,10 +1726,11 @@
         <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/TeamRecords.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/LeagueRecords.java" />
+        <option value="$PROJECT_DIR$/src/main/res/values/teams.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="75" />
     <option name="y" value="5" />
     <option name="width" value="480" />
@@ -2041,20 +2048,6 @@ return avg / teamList.size();</expression-string>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachAllAmericans.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachCC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comparator/CompCoachNC.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -2398,14 +2391,26 @@ return avg / teamList.size();</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/bowls.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14944">
-          <caret line="1029" column="17" lean-forward="true" selection-start-line="1029" selection-start-column="17" selection-end-line="1029" selection-end-column="17" />
+          <caret line="1029" column="17" selection-start-line="1029" selection-start-column="17" selection-end-line="1029" selection-end-column="17" />
           <folding>
             <element signature="e#64608#64609#0" expanded="true" />
             <element signature="e#64665#64666#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/teams.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="138" column="25" selection-start-line="138" selection-start-column="25" selection-end-line="138" selection-end-column="25" />
         </state>
       </provider>
     </entry>
