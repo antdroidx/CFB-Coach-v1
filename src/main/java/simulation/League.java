@@ -3542,8 +3542,8 @@ public class League {
         sb.append(ncgSummaryStr());
         sb.append("\n\n" + userTeam.seasonSummaryStr());
         if (getYear() > seasonStart) {
-            sb.append("\n\n" + leagueRecords.brokenRecordsStr(getYear(), userTeam.abbr));
-            sb.append("\n\n" + userTeam.teamRecords.brokenRecordsStr(getYear(), userTeam.abbr));
+            sb.append("\n\nLEAGUE RECORDS BROKEN:\n" + leagueRecords.brokenRecordsStr(getYear(), userTeam.abbr));
+            sb.append("\n\nTEAM RECORDS BROKEN:\n" + userTeam.teamRecords.brokenRecordsStr(getYear(), userTeam.abbr));
         }
         return sb.toString();
     }

@@ -186,11 +186,12 @@ public class LeagueRecords {
             if (r.getValue() != null && r.getValue().getHolder().split("%").length > 1) {
                 if (r.getValue().getHolder().split("%")[1].equals(abbr) &&
                         r.getValue().getYear() == year) {
-                    sb.append(r.getValue().getHolder().split("%")[0] + " broke the record for " +
+                    sb.append("+ " + r.getValue().getHolder().split("%")[0] + " League broke the record for " +
                             r.getKey() + " with " + df2.format(r.getValue().getNumber()) + "!\n");
                 }
             }
         }
+        if (sb.length() == 0) sb.append("None");
 
         return sb.toString();
     }
