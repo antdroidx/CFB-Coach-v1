@@ -12,10 +12,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import comparator.CompCoachAllAmericans;
@@ -189,7 +191,8 @@ public class League {
     public ArrayList<Team> playoffTeams;
     public String postseason;
 
-    private final DecimalFormat df2 = new DecimalFormat("#.##");
+    private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+    private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
     private final int seasonStart = 2018;
     int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 30;
@@ -1067,8 +1070,13 @@ public class League {
             String[] record;
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_RECORDS")) {
                 record = line.split(",");
-                if (!record[1].equals("-1"))
-                    leagueRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+                if (!record[1].equals("-1")) {
+                    if (record.length > 4) {
+                        leagueRecords.checkRecord(record[0], Float.parseFloat(record[1] + "." + record[2]), record[3], Integer.parseInt(record[4]));
+                    } else {
+                        leagueRecords.checkRecord(record[0], Float.parseFloat(record[1]), record[2], Integer.parseInt(record[3]));
+                    }
+                }
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_WIN_STREAK")) {
@@ -1083,8 +1091,13 @@ public class League {
                 for (int i = 0; i < teamList.size(); ++i) { //Do for every team
                     while ((line = bufferedReader.readLine()) != null && !line.equals("END_TEAM")) {
                         record = line.split(",");
-                        if (!record[1].equals("-1"))
-                            teamList.get(i).teamRecords.checkRecord(record[0], Integer.parseInt(record[1]), record[2], Integer.parseInt(record[3]));
+                        if (!record[1].equals("-1")) {
+                            if (record.length > 4) {
+                                leagueRecords.checkRecord(record[0], Float.parseFloat(record[1] + "." + record[2]), record[3], Integer.parseInt(record[4]));
+                            } else {
+                                leagueRecords.checkRecord(record[0], Float.parseFloat(record[1]), record[2], Integer.parseInt(record[3]));
+                            }
+                        }
                     }
                 }
             }

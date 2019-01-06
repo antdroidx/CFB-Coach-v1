@@ -24,10 +24,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -35,6 +38,9 @@ import antdroid.cfbcoach.MainActivity;
 import antdroid.cfbcoach.R;
 
 public class RecruitingActivity extends AppCompatActivity {
+
+    private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+    private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
 
     // Variables use during recruiting
     private String teamName;

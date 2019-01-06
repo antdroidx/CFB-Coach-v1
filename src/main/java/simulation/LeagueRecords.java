@@ -1,12 +1,15 @@
 package simulation;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LeagueRecords {
-    private final DecimalFormat df2 = new DecimalFormat("#.##");
+    private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+    private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
     class Record {
         private final float number;
         private String holder;

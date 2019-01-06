@@ -125,6 +125,43 @@ public class HeadCoach extends Player {
         position = "HC";
     }
 
+    //This one is for midseason saves
+    public HeadCoach(String nm, Team t, int a, int yr, int cyr, int clength, int pot, int off, int def, int tal, int dis, int ostrat, int dstrat, int sPrs, int cWins, int cLosses,
+                     int bwins, int blosses, int cchamps, int nchamps, int allconf, int allams, int caw, int aw, int cpres, int tWins, int tLosses, int ratImp) {
+        team = t;
+        name = nm;
+        age = a;
+        year = yr;
+        contractYear = cyr;
+        contractLength = clength;
+        ratPot = pot;
+        ratOff = off;
+        ratDef = def;
+        ratTalent = tal;
+        ratDiscipline = dis;
+        ratOvr = getHCOverall();
+        offStrat = ostrat;
+        defStrat = dstrat;
+        baselinePrestige = sPrs;
+        teamWins = tWins;
+        teamLosses = tLosses;
+        wins = cWins;
+        losses = cLosses;
+        confchamp = cchamps;
+        natchamp = nchamps;
+        bowlwins = bwins;
+        bowllosses = blosses;
+        allamericans = allams;
+        allconference = allconf;
+        confAward = caw;
+        awards = aw;
+        cumulativePrestige = cpres;
+        history = new ArrayList<>();
+        ratImprovement = ratImp;
+
+        position = "HC";
+    }
+
     public HeadCoach(String nm, int yr, int stars, Team t) {
         name = nm;
         year = yr;

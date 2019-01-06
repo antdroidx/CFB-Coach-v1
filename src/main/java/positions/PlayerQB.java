@@ -124,6 +124,83 @@ public class PlayerQB extends Player {
 
     }
 
+    public PlayerQB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int pow, int acc, int eva, int spd, int h, int w, int cPassAtt, int cPassComp, int cTDs, int cInt, int cPassYards, int cSacked,
+                    int cRushAtt, int cRushYards, int cRushTD, int cFumbles,
+                    int seaPA, int seaPC, int seaPTD, int seaPInt, int seaPYards, int seaSacked, int seaRushAtt, int seaRushYards, int seaRushTD, int seaFum, int seaGames, int seaGPlayed, int seaWins,
+                    boolean inj, boolean medRS, int tt, int ratImp, boolean wonHeis, boolean wonAA, boolean wonAC, boolean wonTF, boolean wonAF) {
+
+        position = "QB";
+        team = t;
+        name = nm;
+        year = yr;
+        ratPot = pot;
+        ratFootIQ = iq;
+        ratDur = dur;
+        ratPassPow = pow;
+        ratPassAcc = acc;
+        ratEvasion = eva;
+        ratSpeed = spd;
+        isRedshirt = rs;
+        wasRedshirt = wasRS;
+        isTransfer = transfer;
+        isWalkOn = wo;
+        homeState = reg;
+        personality = trait;
+        recruitRating = scout;
+        height = h;
+        weight = w;
+        ratOvr = getOverall();
+
+        resetSeasonStats();
+
+        careerPassAtt = cPassAtt;
+        careerPassComp = cPassComp;
+        careerTDs = cTDs;
+        careerInt = cInt;
+        careerPassYards = cPassYards;
+        careerSacked = cSacked;
+        careerRushAtt = cRushAtt;
+        careerRushYards = cRushYards;
+        careerRushTD = cRushTD;
+        careerFumbles = cFumbles;
+
+        careerGames = cGamesPlayed;
+        careerHeismans = cHeismans;
+        careerAllAmerican = cAA;
+        careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
+        careerWins = cWins;
+
+
+        //Stats
+        statsPassAtt = seaPA;
+        statsPassComp = seaPC;
+        statsPassTD = seaPTD;
+        statsInt = seaPInt;
+        statsPassYards = seaPYards;
+        statsSacked = seaSacked;
+        statsRushAtt = seaRushAtt;
+        statsRushYards = seaRushYards;
+        statsRushTD = seaRushTD;
+        statsFumbles = seaFum;
+        gamesStarted = seaGames;
+        gamesPlayed = seaGPlayed;
+        statsWins = seaWins;
+
+        isInjured = inj;
+        isMedicalRS = medRS;
+        troubledTimes = tt;
+        ratImprovement = ratImp;
+
+        wonHeisman = wonHeis;
+        wonAllAmerican = wonAA;
+        wonAllConference = wonAC;
+        wonTopFreshman = wonTF;
+        wonAllFreshman = wonAF;
+    }
+    
     public PlayerQB(String nm, int yr, int stars, Team t) {
         position = "QB";
         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;

@@ -1,7 +1,9 @@
 package positions;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import simulation.Injury;
 import simulation.Team;
@@ -122,7 +124,9 @@ Player {
     public int gameFGMade;
     public int gameXPAttempts;
     public int gameXPMade;
-    public final DecimalFormat df2 = new DecimalFormat("#.##");
+
+    public final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+    public final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
 
     private final String[] letterGrades = {"F-", "F", "F+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"};
 

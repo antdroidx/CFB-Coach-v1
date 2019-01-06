@@ -46,8 +46,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import positions.HeadCoach;
 import positions.Player;
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
     private File customBowls;
     private String customUri;
 
+    private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
     private final DecimalFormat df2 = new DecimalFormat("#.##");
 
 
