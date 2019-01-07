@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/background_light"
+        android:textColor="@android:color/holo_orange_dark"
         android:textStyle="bold" />
 
     <RelativeLayout

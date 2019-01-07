@@ -53,7 +53,7 @@ class TeamRankingsList extends ArrayAdapter<String> {
         }
         if (teamStat[2].split(" ").length > 1 && teamStat[2].split(" ")[2].contains("+")) {
             // Highlight Prestige Changes in off-season
-            textRight.setTextColor(Color.GREEN);
+            textRight.setTextColor(Color.parseColor("#00b300"));
         } else if (teamStat[2].split(" ").length > 1 && teamStat[2].split(" ")[2].contains("-")) {
             textRight.setTextColor(Color.RED);
         }

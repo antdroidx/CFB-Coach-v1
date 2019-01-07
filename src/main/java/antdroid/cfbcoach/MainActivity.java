@@ -4496,6 +4496,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText changeNameEditText = dialog.findViewById(R.id.editTextChangeName);
         final EditText changeAbbrEditText = dialog.findViewById(R.id.editTextChangeAbbr);
         final EditText changeRivalEditText = dialog.findViewById(R.id.editRival);
+        changeRivalEditText.setVisibility(View.INVISIBLE);
+
         final EditText changeConfEditText = dialog.findViewById(R.id.editTextChangeConf);
         final EditText changeHCEditText = dialog.findViewById(R.id.editTextChangeHC);
         final EditText changePrestigeEditText = dialog.findViewById(R.id.editPrestige);

@@ -88,7 +88,7 @@ class PlayerProfile extends ArrayAdapter<String> {
             } else if (letter.equals("F") || letter.equals("F+") || letter.equals("F-")) {
                 textV.setTextColor(Color.RED);
             } else if (letter.equals("Active")) {
-            textV.setTextColor(Color.WHITE);
+
             } else if (letter.equals("Redshirt") || letter.equals("Medical") || letter.equals("Transfer")) {
                 textV.setTextColor(Color.DKGRAY);
             } else if (letter.equals("Injured")) {
