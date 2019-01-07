@@ -198,7 +198,7 @@ public class League {
     private final int seasonWeeks = 30;
     public int regSeasonWeeks = 13; //original = 13 will change dynamically based on team/conference structure
     private final double confRealignmentChance = .25; //chance of event .25
-    private final double realignmentChance = .225; //chance of invite .33
+    private final double realignmentChance = .25; //chance of invite .33
     private boolean heismanDecided;
     private Player heisman;
     private Player defPOTY;
@@ -3340,6 +3340,9 @@ public class League {
         hasScheduledBowls = true;
 
         //Heal Bowl Team Players
+        int tmCount = bowlTeams.size();
+
+        if(tmCount > 32) {
             for (int i = 0; i < 12; i++) {
                 bowlTeams.get(i).postSeasonHealing(3);
             }
@@ -3349,6 +3352,18 @@ public class League {
             for (int i = 32; i < bowlTeams.size(); i++) {
                 bowlTeams.get(i).postSeasonHealing(1);
             }
+        } else if(tmCount > 12) {
+            for (int i = 0; i < 12; i++) {
+                bowlTeams.get(i).postSeasonHealing(3);
+            }
+            for (int i = 12; i < tmCount; i++) {
+                bowlTeams.get(i).postSeasonHealing(2);
+            }
+        } else {
+            for (int i = 0; i < tmCount; i++) {
+                bowlTeams.get(i).postSeasonHealing(3);
+            }
+        }
 
     }
 

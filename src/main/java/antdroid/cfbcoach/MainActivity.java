@@ -1,9 +1,11 @@
 package antdroid.cfbcoach;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -125,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+
+        if(extras.get("Theme").equals(1)) setTheme(R.style.AppThemeLight);
+        else setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -136,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
 
         //LOAD GAME DATA
         //SAVE OR NO SAVE
-        Bundle extras = getIntent().getExtras();
         boolean loadedLeague = false;
         if (extras != null) {
             String saveFileStr = extras.getString("SAVE_FILE");
@@ -2749,6 +2755,7 @@ public class MainActivity extends AppCompatActivity {
                 .setView(getLayoutInflater().inflate(R.layout.graphview, null));
         AlertDialog dialog = builder.create();
         dialog.show();
+
         DataPoint[] data = new DataPoint[hc.history.size()];
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();

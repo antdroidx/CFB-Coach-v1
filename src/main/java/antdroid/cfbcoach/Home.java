@@ -2,10 +2,12 @@ package antdroid.cfbcoach;
 
 //Google Play Services ID: 116207837258
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,6 +35,7 @@ public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
     private static final int IMPORT_CODE = 12;
     private boolean customCareer;
+    private int theme = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class Home extends AppCompatActivity {
                                 finish();
                                 Intent myIntent = new Intent(Home.this, MainActivity.class);
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE");
+                                myIntent.putExtra("Theme", theme);
                                 Home.this.startActivity(myIntent);
                             }
                         })
@@ -66,6 +70,7 @@ public class Home extends AppCompatActivity {
                                 finish();
                                 Intent myIntent = new Intent(Home.this, MainActivity.class);
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_RANDOM");
+                                myIntent.putExtra("Theme", theme);
                                 Home.this.startActivity(myIntent);
 
                             }
@@ -76,6 +81,7 @@ public class Home extends AppCompatActivity {
                         finish();
                         Intent myIntent = new Intent(Home.this, MainActivity.class);
                         myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_EQUALIZE");
+                        myIntent.putExtra("Theme", theme);
                         Home.this.startActivity(myIntent);
 
                     }
@@ -151,6 +157,24 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action on click
                 deleteSave();
+            }
+        });
+
+        Button themeButton = findViewById(R.id.buttonChangeTheme);
+        setThemeButton();
+
+        themeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                if(theme == 0) {
+                    theme = 1;
+                    Toast.makeText(Home.this, "Light Theme Applied!", Toast.LENGTH_SHORT).show();
+                    setThemeButton();
+                } else {
+                    theme = 0;
+                    Toast.makeText(Home.this, "Dark Theme Applied!", Toast.LENGTH_SHORT).show();
+                    setThemeButton();
+                }
             }
         });
 
@@ -293,11 +317,13 @@ public class Home extends AppCompatActivity {
                         finish();
                         Intent myIntent = new Intent(Home.this, MainActivity.class);
                         myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb");
+                        myIntent.putExtra("Theme", theme);
                         Home.this.startActivity(myIntent);
                     } else {
                         finish();
                         Intent myIntent = new Intent(Home.this, MainActivity.class);
                         myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb,FIX");
+                        myIntent.putExtra("Theme", theme);
                         Home.this.startActivity(myIntent);
                     }
 
@@ -466,8 +492,10 @@ public class Home extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             if (customCareer) {
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM," + uriStr);
+                                myIntent.putExtra("Theme", theme);
                             } else {
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM," + uriStr);
+                                myIntent.putExtra("Theme", theme);
                             }
                             finish();
                             Home.this.startActivity(myIntent);
@@ -478,8 +506,10 @@ public class Home extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if (customCareer) {
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_RANDOM," + uriStr);
+                                myIntent.putExtra("Theme", theme);
                             } else {
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_RANDOM," + uriStr);
+                                myIntent.putExtra("Theme", theme);
                             }
                             finish();
                             Home.this.startActivity(myIntent);
@@ -490,8 +520,10 @@ public class Home extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if (customCareer) {
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
+                                myIntent.putExtra("Theme", theme);
                             } else {
                                 myIntent.putExtra("SAVE_FILE", "NEW_LEAGUE_CUSTOM_EQUALIZE," + uriStr);
+                                myIntent.putExtra("Theme", theme);
                             }
                             finish();
                             Home.this.startActivity(myIntent);
@@ -516,12 +548,27 @@ public class Home extends AppCompatActivity {
             final String uriStr = uri.toString();
 
             myIntent.putExtra("SAVE_FILE", "IMPORT_GAME," + uriStr);
+            myIntent.putExtra("Theme", theme);
             finish();
             Home.this.startActivity(myIntent);
 
         }
     }
 
+    private void setThemeButton() {
+        Button themeButton = findViewById(R.id.buttonChangeTheme);
+        View layout = findViewById(R.id.homeMain);
+
+        if(theme == 0) {
+            themeButton.setText("Set Light Theme");
+            layout.setBackgroundColor(Color.DKGRAY);
+            setTheme(R.style.AppTheme);
+        } else {
+            themeButton.setText("Set Dark Theme");
+            layout.setBackgroundColor(Color.LTGRAY);
+            setTheme(R.style.AppThemeLight);
+        }
+    }
 
 }
 

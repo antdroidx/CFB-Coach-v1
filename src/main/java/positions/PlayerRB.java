@@ -143,6 +143,89 @@ public class PlayerRB extends Player {
         careerPuntRetTDs = ptd;
     }
 
+    public PlayerRB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int pow, int spd, int eva, int cat, int h, int w, int cRushAtt, int cRushYards, int cTDs, int cFumbles, int cRec, int cRecYards, int cRecTD, int kret, int kyds, int ktd, int pret, int pyds, int ptd,
+                    int seaRushAtt, int seaRushYards, int seaRushTD, int seaFum, int seaRec, int seaRecYards, int seaRecTD,
+                    int seaKRet, int seaKYds, int seaKTD, int seaPRet, int seaPYrd, int seaPTD,
+                    int seaGames, int seaGPlayed, int seaWins, boolean inj, boolean medRS, int tt, int ratImp, boolean wonHeis, boolean wonAA, boolean wonAC, boolean wonTF, boolean wonAF) {
+
+        position = "RB";
+        team = t;
+        name = nm;
+        year = yr;
+        gamesStarted = 0;
+        gamesPlayed = 0;
+        isInjured = false;
+        ratPot = pot;
+        ratFootIQ = iq;
+        ratDur = dur;
+        ratRushPower = pow;
+        ratSpeed = spd;
+        ratEvasion = eva;
+        ratCatch = cat;
+        isRedshirt = rs;
+        wasRedshirt = wasRS;
+        isTransfer = transfer;
+        isWalkOn = wo;
+        homeState = reg;
+        personality = trait;
+        recruitRating = scout;
+        height = h;
+        weight = w;
+        ratOvr = getOverall();
+
+        careerRushAtt = cRushAtt;
+        careerRushYards = cRushYards;
+        careerTDs = cTDs;
+        careerFumbles = cFumbles;
+        careerReceptions = cRec;
+        careerRecYards = cRecYards;
+        careerRecTD = cRecTD;
+        careerGames = cGamesPlayed;
+        careerHeismans = cHeismans;
+        careerAllAmerican = cAA;
+        careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
+        careerWins = cWins;
+
+        careerKickRets = kret;
+        careerKickRetYards = kyds;
+        careerKickRetTDs = ktd;
+        careerPuntRets = pret;
+        careerPuntRetYards = pyds;
+        careerPuntRetTDs = ptd;
+
+        statsRushAtt = seaRushAtt;
+        statsRushYards = seaRushYards;
+        statsRushTD = seaRushTD;
+        statsFumbles = seaFum;
+        statsReceptions = seaRec;
+        statsRecYards = seaRecYards;
+        statsRecTD = seaRecTD;
+        statsKickRets = seaKRet;
+        statsKickRetYards = seaKYds;
+        statsKickRetTDs = seaKTD;
+        statsPuntRets = seaPRet;
+        statsPuntRetYards = seaPYrd;
+        statsPuntRetTDs = seaPTD;
+
+        gamesStarted = seaGames;
+        gamesPlayed = seaGPlayed;
+        statsWins = seaWins;
+
+        isInjured = inj;
+        isMedicalRS = medRS;
+        troubledTimes = tt;
+        ratImprovement = ratImp;
+
+        wonHeisman = wonHeis;
+        wonAllAmerican = wonAA;
+        wonAllConference = wonAC;
+        wonTopFreshman = wonTF;
+        wonAllFreshman = wonAF;
+    }
+
     public PlayerRB(String nm, int yr, int stars, Team t) {
         position = "RB";
         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;

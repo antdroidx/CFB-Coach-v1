@@ -3,6 +3,7 @@ package antdroid.cfbcoach;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class CoachDatabase  extends ArrayAdapter<String> {
         TextView textCenter = rowView.findViewById(R.id.textTeamRankingsCenter);
         TextView textRight = rowView.findViewById(R.id.textTeamRankingsRight);
 
-
         final String[] teamStat = values.get(position).split(",");
         textLeft.setText(teamStat[0]);
         textCenter.setText(teamStat[1]);
@@ -46,8 +46,8 @@ public class CoachDatabase  extends ArrayAdapter<String> {
 
         if (!teamStat[1].contains("[U]") && !teamStat[1].contains("[R]")) {
             // Bold user team
-            textCenter.setTextColor(Color.WHITE);
-            textRight.setTextColor(Color.WHITE);
+            textCenter.setTextColor(Color.parseColor("#5994de"));
+            textRight.setTextColor(Color.parseColor("#5994de"));
         }
         if (teamStat[1].contains("[R]")) {
             // Bold user team
@@ -58,11 +58,11 @@ public class CoachDatabase  extends ArrayAdapter<String> {
         if (teamStat[1].equals(userHC)) {
             // Bold user team
             textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
-            textLeft.setTextColor(Color.parseColor("#5994de"));
+            textLeft.setTextColor(Color.parseColor("#ff9933"));
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
-            textCenter.setTextColor(Color.parseColor("#5994de"));
+            textCenter.setTextColor(Color.parseColor("#ff9933"));
             textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
-            textRight.setTextColor(Color.parseColor("#5994de"));
+            textRight.setTextColor(Color.parseColor("#ff9933"));
         }
 
         if (teamStat[2].split(" ").length > 1 && teamStat[2].split(" ")[2].contains("+")) {

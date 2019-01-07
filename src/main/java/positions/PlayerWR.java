@@ -135,6 +135,86 @@ public class PlayerWR extends Player {
         careerPuntRetTDs = ptd;
     }
 
+    public PlayerWR(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int cat, int spd, int eva, int jmp, int h, int w, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles, int kret, int kyds, int ktd, int pret, int pyds, int ptd,
+                    int seaTar, int seaRec, int seaRecYards, int seaRecTD, int seaDrops, int seaFum, int seaKRet, int seaKYds, int seaKTD, int seaPRet, int seaPYrd, int seaPTD,
+                    int seaGames, int seaGPlayed, int seaWins, boolean inj, boolean medRS, int tt, int ratImp, boolean wonHeis, boolean wonAA, boolean wonAC, boolean wonTF, boolean wonAF) {
+        position = "WR";
+        team = t;
+        name = nm;
+        year = yr;
+
+        ratPot = pot;
+        ratFootIQ = iq;
+        ratDur = dur;
+        ratCatch = cat;
+        ratSpeed = spd;
+        ratEvasion = eva;
+        ratJump = jmp;
+        isRedshirt = rs;
+        wasRedshirt = wasRS;
+        isTransfer = transfer;
+        isWalkOn = wo;
+        homeState = reg;
+        personality = trait;
+        recruitRating = scout;
+        height = h;
+        weight = w;
+        ratOvr = getOverall();
+
+        resetSeasonStats();
+
+        careerTargets = cTargets;
+        careerReceptions = cReceptions;
+        careerRecYards = cRecYards;
+        careerTD = cTD;
+        careerDrops = cDrops;
+        careerFumbles = cFumbles;
+        careerGames = cGamesPlayed;
+        careerHeismans = cHeismans;
+        careerAllAmerican = cAA;
+        careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
+        careerWins = cWins;
+
+        careerKickRets = kret;
+        careerKickRetYards = kyds;
+        careerKickRetTDs = ktd;
+        careerPuntRets = pret;
+        careerPuntRetYards = pyds;
+        careerPuntRetTDs = ptd;
+
+        statsTargets = seaTar;
+        statsReceptions = seaRec;
+        statsRecYards = seaRecYards;
+        statsRecTD = seaRecTD;
+        statsDrops = seaDrops;
+        statsFumbles = seaFum;
+
+        statsKickRets = seaKRet;
+        statsKickRetYards = seaKYds;
+        statsKickRetTDs = seaKTD;
+        statsPuntRets = seaPRet;
+        statsPuntRetYards = seaPYrd;
+        statsPuntRetTDs = seaPTD;
+
+        gamesStarted = seaGames;
+        gamesPlayed = seaGPlayed;
+        statsWins = seaWins;
+
+        isInjured = inj;
+        isMedicalRS = medRS;
+        troubledTimes = tt;
+        ratImprovement = ratImp;
+
+        wonHeisman = wonHeis;
+        wonAllAmerican = wonAA;
+        wonAllConference = wonAC;
+        wonTopFreshman = wonTF;
+        wonAllFreshman = wonAF;
+    }
+
     public PlayerWR(String nm, int yr, int stars, Team t) {
         position = "WR";
         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;

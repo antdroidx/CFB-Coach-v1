@@ -267,6 +267,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Game Editor (Beta)"
                 android:textSize="14sp" />
+
             <Button
                 android:id="@+id/buttonFixBowls"
                 android:layout_width="match_parent"

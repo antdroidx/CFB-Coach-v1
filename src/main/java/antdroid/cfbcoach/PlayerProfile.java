@@ -55,7 +55,7 @@ class PlayerProfile extends ArrayAdapter<String> {
                 // Bold it
                 itemC.setText(values[position].substring(3));
                 itemC.setTypeface(null, Typeface.BOLD);
-                itemC.setTextColor(Color.WHITE);
+                itemC.setTextColor(Color.parseColor("#5994de"));
             } else {
                 itemC.setText(values[position]);
             }

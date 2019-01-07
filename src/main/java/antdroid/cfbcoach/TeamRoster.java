@@ -55,7 +55,7 @@ class TeamRoster extends ArrayAdapter<String> {
         }
         if (teamStat[3].equals("*")) {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
-            textCenter.setTextColor(Color.WHITE);
+            //textCenter.setTextColor(Color.WHITE);
         }
         if (teamStat[3].contains("RS") || teamStat[3].contains("[T]")) {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
@@ -67,7 +67,7 @@ class TeamRoster extends ArrayAdapter<String> {
         }
         if (teamStat[3].contains("INJ")) {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
-            textCenter.setTextColor(Color.YELLOW);
+            textCenter.setTextColor(Color.parseColor("#ff9933"));
         }
         if (teamStat[3].contains("Hot Seat")) {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);

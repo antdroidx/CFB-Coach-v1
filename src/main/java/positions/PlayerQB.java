@@ -152,8 +152,6 @@ public class PlayerQB extends Player {
         weight = w;
         ratOvr = getOverall();
 
-        resetSeasonStats();
-
         careerPassAtt = cPassAtt;
         careerPassComp = cPassComp;
         careerTDs = cTDs;

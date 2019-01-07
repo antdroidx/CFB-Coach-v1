@@ -47,11 +47,11 @@ class MainRankings extends ArrayAdapter<String> {
         if (teamStat[1].equals(userTeamStrRep)) {
             // Bold user team
             textLeft.setTypeface(textLeft.getTypeface(), Typeface.BOLD);
-            textLeft.setTextColor(Color.WHITE);
+            textLeft.setTextColor(Color.parseColor("#5994de"));
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.BOLD);
-            textCenter.setTextColor(Color.WHITE);
+            textCenter.setTextColor(Color.parseColor("#5994de"));
             textRight.setTypeface(textRight.getTypeface(), Typeface.BOLD);
-            textRight.setTextColor(Color.WHITE);
+            textRight.setTextColor(Color.parseColor("#5994de"));
         }
         if (teamStat[0].equals(" ")) {
             // Bold user team

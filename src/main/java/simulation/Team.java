@@ -4994,7 +4994,8 @@ public class Team {
                     + "," + p.ratRushPower + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratCatch + "," + p.height + "," + p.weight
                     + "," + p.careerRushAtt + "," + p.careerRushYards + "," + p.careerTDs + "," + p.careerFumbles + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerRecTD
                     + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
-
+                    + "," + p.statsRushAtt+ "," + p.statsRushYards+ "," + p.statsRushTD+ "," + p.statsFumbles+ "," + p.statsReceptions+ "," + p.statsRecYards+ "," + p.statsRecTD
+                    + "," + p.statsKickRets+ "," + p.statsKickRetYards + "," + p.statsKickRetTDs+ "," + p.statsPuntRets+ "," + p.statsPuntRetYards+ "," + p.statsPuntRetTDs
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5005,7 +5006,8 @@ public class Team {
                     + "," + p.ratCatch + "," + p.ratSpeed + "," + p.ratEvasion + "," + p.ratJump + "," + p.height + "," + p.weight
                     + "," + p.careerTargets + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerTD + "," + p.careerDrops + "," + p.careerFumbles
                     + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
-
+                    + "," + p.statsTargets + "," + p.statsReceptions + "," + p.statsRecYards + "," + p.statsRecTD + "," + p.statsDrops + "," + p.statsFumbles
+                    + "," + p.statsKickRets+ "," + p.statsKickRetYards + "," + p.statsKickRetTDs+ "," + p.statsPuntRets+ "," + p.statsPuntRetYards+ "," + p.statsPuntRetTDs
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5211,7 +5213,37 @@ public class Team {
     }
 
     private void loadRBSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+       if (data.length > 40)
+           teamRBs.add(new PlayerRB(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                   Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                   Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                   Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                   Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                   Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                   Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                   Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                   Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                   Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                   Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                   Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                   Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                   Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                   Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                   Integer.parseInt(data[38]), Integer.parseInt(data[39]),
+                   Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                   Integer.parseInt(data[42]), Integer.parseInt(data[43]),
+                   Integer.parseInt(data[44]), Integer.parseInt(data[45]),
+                   Integer.parseInt(data[46]), Integer.parseInt(data[47]),
+                   Integer.parseInt(data[48]), Integer.parseInt(data[49]),
+                   Integer.parseInt(data[50]), Integer.parseInt(data[51]),
+                   Integer.parseInt(data[52]), Integer.parseInt(data[53]),
+                   Integer.parseInt(data[54]), Integer.parseInt(data[55]),
+                   Boolean.parseBoolean(data[56]), Boolean.parseBoolean(data[57]),
+                   Integer.parseInt(data[58]), Integer.parseInt(data[59]),
+                   Boolean.parseBoolean(data[60]), Boolean.parseBoolean(data[61]),
+                   Boolean.parseBoolean(data[62]), Boolean.parseBoolean(data[63]), Boolean.parseBoolean(data[64])
+                   ));
+       else if (data.length > 20)
             teamRBs.add(new PlayerRB(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5237,7 +5269,35 @@ public class Team {
     }
 
     private void loadWRSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 40)
+            teamWRs.add(new PlayerWR(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                    Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                    Integer.parseInt(data[38]), Integer.parseInt(data[39]),
+                    Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                    Integer.parseInt(data[42]), Integer.parseInt(data[43]),
+                    Integer.parseInt(data[44]), Integer.parseInt(data[45]),
+                    Integer.parseInt(data[46]), Integer.parseInt(data[47]),
+                    Integer.parseInt(data[48]), Integer.parseInt(data[49]),
+                    Integer.parseInt(data[50]), Integer.parseInt(data[51]),
+                    Integer.parseInt(data[52]), Integer.parseInt(data[53]),
+                    Boolean.parseBoolean(data[54]), Boolean.parseBoolean(data[55]),
+                    Integer.parseInt(data[56]), Integer.parseInt(data[57]),
+                    Boolean.parseBoolean(data[58]), Boolean.parseBoolean(data[59]),
+                    Boolean.parseBoolean(data[60]), Boolean.parseBoolean(data[61]), Boolean.parseBoolean(data[62])));
+        else if (data.length > 20)
             teamWRs.add(new PlayerWR(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
