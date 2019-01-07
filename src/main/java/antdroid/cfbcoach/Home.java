@@ -2,7 +2,6 @@ package antdroid.cfbcoach;
 
 //Google Play Services ID: 116207837258
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,9 +39,16 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(extras != null &&extras.containsKey("Theme")) {
+            theme = Integer.parseInt(extras.get("Theme").toString());
+            setTheme();
+        }
 
         ImageView imageLogo = findViewById(R.id.imageLogo);
         imageLogo.setImageResource(R.drawable.main_menu_logo);
@@ -161,7 +167,7 @@ public class Home extends AppCompatActivity {
         });
 
         Button themeButton = findViewById(R.id.buttonChangeTheme);
-        setThemeButton();
+        setTheme();
 
         themeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -169,11 +175,11 @@ public class Home extends AppCompatActivity {
                 if(theme == 0) {
                     theme = 1;
                     Toast.makeText(Home.this, "Light Theme Applied!", Toast.LENGTH_SHORT).show();
-                    setThemeButton();
+                    setTheme();
                 } else {
                     theme = 0;
                     Toast.makeText(Home.this, "Dark Theme Applied!", Toast.LENGTH_SHORT).show();
-                    setThemeButton();
+                    setTheme();
                 }
             }
         });
@@ -555,7 +561,7 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    private void setThemeButton() {
+    private void setTheme() {
         Button themeButton = findViewById(R.id.buttonChangeTheme);
         View layout = findViewById(R.id.homeMain);
 

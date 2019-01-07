@@ -1536,7 +1536,7 @@ public class Team {
                                 " despite finally getting the team on the right track. The team struggled during his first few seasons at the school, but had shown some promise this season." +
                                 " He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                         teamPrestige -= (int) Math.random() * 8;
-                        if(teamDisciplineScore < 45) teamDisciplineScore += 20;
+                        if(teamDisciplineScore < 30) teamDisciplineScore += 10;
                         if (!userControlled) {
                             league.coachList.add(HC.get(0));
                         }
@@ -1547,7 +1547,7 @@ public class Team {
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
-                    if(teamDisciplineScore < 45) teamDisciplineScore += 20;
+                    if(teamDisciplineScore < 30) teamDisciplineScore += 10;
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
                 } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < -1) {
@@ -1555,7 +1555,7 @@ public class Team {
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                     teamPrestige -= (int) Math.random() * 8;
-                    if(teamDisciplineScore < 45) teamDisciplineScore += 20;
+                    if(teamDisciplineScore < 30) teamDisciplineScore += 10;
                     if (!userControlled) {
                         league.coachList.add(HC.get(0));
                     }
@@ -3184,7 +3184,7 @@ public class Team {
             if (random > playersDis.size()-1) random = playersDis.size()-1;
             Player player = playersDis.get(random);
 
-            int duration = (int) (Math.random() * (65 - player.personality) / 2);
+            int duration = (int) (Math.random() * (66 - player.personality) / 2);
             if (duration <= 0) duration = 1;
             int issueNo = duration-1;
             if(issueNo > issue.length) issueNo = issue.length;
@@ -3229,21 +3229,21 @@ public class Team {
         int penalty = (65-player.personality)/2;
 
         if(choice == 1) {
-            HC.get(0).ratDiscipline -= penalty/3;
-            disciplinePts --;
-            teamDisciplineScore -= penalty/2;
-            teamBudget -= ((int) (Math.random() * penalty * 100));
-        } else if(choice == 2) {
             HC.get(0).ratDiscipline -= penalty/2;
             disciplinePts --;
-            teamDisciplineScore -= penalty;
-            teamBudget -= ((int) (Math.random() * penalty * 200));
-        } else {
-            player.troubledTimes++;
+            teamDisciplineScore -= penalty/2;
+            teamBudget -= (penalty * 100);
+        } else if(choice == 2) {
             HC.get(0).ratDiscipline -= penalty;
             disciplinePts --;
+            teamDisciplineScore -= penalty;
+            teamBudget -= (penalty * 175);
+        } else {
+            player.troubledTimes++;
+            HC.get(0).ratDiscipline -= penalty*1.5;
+            disciplinePts --;
             teamDisciplineScore -= penalty*2;
-            teamBudget -= ((int) (Math.random() * penalty * 300));
+            teamBudget -= (penalty * 250);
         }
 
         if(choice == 1 || choice == 2) {

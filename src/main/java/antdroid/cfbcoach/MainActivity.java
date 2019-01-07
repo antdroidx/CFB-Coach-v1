@@ -123,13 +123,14 @@ public class MainActivity extends AppCompatActivity {
     private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
     private final DecimalFormat df2 = new DecimalFormat("#.##");
 
+    private int theme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-
-        if(extras.get("Theme").equals(1)) setTheme(R.style.AppThemeLight);
+        theme =  Integer.parseInt(extras.get("Theme").toString());
+        if(theme == 1) setTheme(R.style.AppThemeLight);
         else setTheme(R.style.AppTheme);
 
         setContentView(R.layout.activity_main);
@@ -3234,6 +3235,7 @@ public class MainActivity extends AppCompatActivity {
                         // Actually go back to main menu
                         finish();
                         Intent myIntent = new Intent(MainActivity.this, Home.class);
+                        myIntent.putExtra("Theme", theme);
                         MainActivity.this.startActivity(myIntent);
                     }
                 })
@@ -3956,6 +3958,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         Intent myIntent = new Intent(MainActivity.this, RecruitingActivity.class);
                         myIntent.putExtra("USER_TEAM_INFO", sb.toString());
+                        myIntent.putExtra("Theme", theme);
                         MainActivity.this.startActivity(myIntent);
                     }
                 })

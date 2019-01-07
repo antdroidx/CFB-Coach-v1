@@ -82,7 +82,7 @@ class PlayerProfile extends ArrayAdapter<String> {
             } else if (letter.equals("B") || letter.equals("B+") || letter.equals("B-")) {
                 textV.setTextColor(Color.parseColor("#00b300"));
             } else if (letter.equals("C") || letter.equals("C+") || letter.equals("C-")) {
-                textV.setTextColor(Color.YELLOW);
+                textV.setTextColor(Color.parseColor("#ffc34d"));
             } else if (letter.equals("D") || letter.equals("D+") || letter.equals("D-")) {
                 textV.setTextColor(Color.parseColor("#e68a00"));
             } else if (letter.equals("F") || letter.equals("F+") || letter.equals("F-")) {
@@ -92,7 +92,7 @@ class PlayerProfile extends ArrayAdapter<String> {
             } else if (letter.equals("Redshirt") || letter.equals("Medical") || letter.equals("Transfer")) {
                 textV.setTextColor(Color.DKGRAY);
             } else if (letter.equals("Injured")) {
-            textV.setTextColor(Color.YELLOW);
+            textV.setTextColor(Color.parseColor("#ffc34d"));
             } else if (letter.equals("Suspended")) {
                 textV.setTextColor(Color.RED);
             }

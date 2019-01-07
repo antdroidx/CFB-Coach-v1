@@ -6,6 +6,7 @@ package antdroid.cfbcoach;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,8 +111,10 @@ class TeamRoster extends ArrayAdapter<String> {
         if(week > 17 && week < 22 && teamStat[1].contains("Sr")) {
             textCenter.setTypeface(textCenter.getTypeface(), Typeface.ITALIC);
             textCenter.setTextColor(Color.DKGRAY);
+            textCenter.setPaintFlags(textCenter.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             textClass.setTypeface(textCenter.getTypeface(), Typeface.ITALIC);
             textClass.setTextColor(Color.DKGRAY);
+            textClass.setPaintFlags(textClass.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         //if(week > 5 && week < 8 && teamStat.length > 6 || week > 21 && teamStat.length > 6) {

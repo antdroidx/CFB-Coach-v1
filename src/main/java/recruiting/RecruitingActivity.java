@@ -41,7 +41,7 @@ public class RecruitingActivity extends AppCompatActivity {
 
     private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
     private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
-
+    private int theme;
     // Variables use during recruiting
     private String teamName;
     public int recruitingBudget;
@@ -141,6 +141,12 @@ public class RecruitingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+
+        theme =  Integer.parseInt(extras.get("Theme").toString());
+        if(theme == 1) setTheme(R.style.AppThemeLight);
+        else setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_recruiting);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -179,7 +185,6 @@ public class RecruitingActivity extends AppCompatActivity {
         south = new ArrayList<>();
 
         // Get User Team's player info and team info for recruiting
-        Bundle extras = getIntent().getExtras();
         String userTeamStr = "";
         if (extras != null) {
             userTeamStr = extras.getString("USER_TEAM_INFO");
@@ -1188,6 +1193,7 @@ public class RecruitingActivity extends AppCompatActivity {
                         Intent myIntent = new Intent(RecruitingActivity.this, MainActivity.class);
                         myIntent.putExtra("SAVE_FILE", "DONE_RECRUITING");
                         myIntent.putExtra("RECRUITS", getRecruitsStr());
+                        myIntent.putExtra("Theme", theme);
                         RecruitingActivity.this.startActivity(myIntent);
                         finish();
                     }
