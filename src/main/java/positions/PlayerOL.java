@@ -61,7 +61,7 @@ public class PlayerOL extends Player {
 
 
     public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
-                    int pow, int bkr, int bkp, int awr, int h, int w) {
+                         int pow, int bkr, int bkp, int awr, int h, int w) {
         position = "OL";
         team = t;
         name = nm;
@@ -96,6 +96,61 @@ public class PlayerOL extends Player {
         careerAllFreshman = cAF;
         careerWins = cWins;
     }
+
+    public PlayerOL(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int pow, int bkr, int bkp, int awr, int h, int w,
+                    int seaGames, int seaGPlayed, int seaWins, boolean inj, boolean medRS, int tt, int ratImp, boolean wonHeis, boolean wonAA, boolean wonAC, boolean wonTF, boolean wonAF) {
+        position = "OL";
+        team = t;
+        name = nm;
+        year = yr;
+        ratPot = pot;
+        ratFootIQ = iq;
+        ratDur = dur;
+        ratStrength = pow;
+        ratRunBlock = bkr;
+        ratPassBlock = bkp;
+        ratAwareness = awr;
+        isRedshirt = rs;
+        wasRedshirt = wasRS;
+
+        isTransfer = transfer;
+        isWalkOn = wo;
+        homeState = reg;
+        personality = trait;
+        troubledTimes = 0;
+        recruitRating = scout;
+        height = h;
+        weight = w;
+        ratOvr = getOverall();
+
+        resetSeasonStats();
+
+        careerGames = cGamesPlayed;
+        careerHeismans = cHeismans;
+        careerAllAmerican = cAA;
+        careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
+        careerWins = cWins;
+
+        gamesStarted = seaGames;
+        gamesPlayed = seaGPlayed;
+        statsWins = seaWins;
+
+        isInjured = inj;
+        isMedicalRS = medRS;
+        troubledTimes = tt;
+        ratImprovement = ratImp;
+
+        wonHeisman = wonHeis;
+        wonAllAmerican = wonAA;
+        wonAllConference = wonAC;
+        wonTopFreshman = wonTF;
+        wonAllFreshman = wonAF;
+
+    }
+
 
     public PlayerOL(String nm, int yr, int stars, Team t) {
         position = "OL";

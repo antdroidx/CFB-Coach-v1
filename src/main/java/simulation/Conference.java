@@ -45,7 +45,7 @@ public class Conference {
     public ArrayList<Integer> oocWeeks;
 
     private final double promotionFactor = 1.15;
-    private final double relegationFactor = 0.80;
+    private final double relegationFactor = 0.82;
     public final int minConfTeams = 8;
     public final int maxConfTeams = 18;
 

@@ -198,7 +198,7 @@ public class League {
     private final int seasonWeeks = 30;
     public int regSeasonWeeks = 13; //original = 13 will change dynamically based on team/conference structure
     private final double confRealignmentChance = .25; //chance of event .25
-    private final double realignmentChance = .25; //chance of invite .33
+    private final double realignmentChance = .285; //chance of invite .33
     private boolean heismanDecided;
     private Player heisman;
     private Player defPOTY;
@@ -220,9 +220,9 @@ public class League {
 
     public final String[] states = {"AS", "AZ", "CA", "HI", "ID", "MT", "NV", "OR", "UT", "WA", "CO", "KS", "MO", "NE", "NM", "ND", "OK", "SD", "TX", "WY", "IL", "IN", "IA", "KY", "MD", "MI", "MN", "OH", "TN", "WI", "CT", "DE", "ME", "MA", "NH", "NJ", "NY", "PA", "RI", "VT", "AL", "AK", "FL", "GA", "LA", "MS", "NC", "SC", "VA", "WV"};
 
-    public final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Necatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Aligator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl, Chick Bowl, Empire Bowl, Rainbow Bowl, Mushroom Bowl, Coffee Bowl";
+    public final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Nectatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Gator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl, Chick Bowl, Empire Bowl, Rainbow Bowl, Mushroom Bowl, Coffee Bowl, Cascade Bowl, Great Lakes Bowl, Cowboy Bowl, Alliance Bowl, Appalachian Bowl, Bayou Bowl";
 
-    public String[] teamsFCS = {"Alabama State", "Albany", "Cal-Poly", "Central Arkansas", "Chattanooga", "Columbia", "Dayton", "Deleware", "Eastern Wash", "Eastern Tenn", "Eastern Ken", "Harvard", "Yale", "Princeton", "Grambling", "Georgetown", "Idaho", "Idaho State", "James Madison", "Maine", "Miss Valley", "Montana", "New Hampshire", "North Dakota", "North Dakota St", "South Dakota", "South Dakota St", "Northern Arizona", "Northern Colorado", "Portland", "Rhode Island", "Sacramento", "Southern", "Southern TX", "Western llinois", "Vanilla", "Youngstown"};
+    public String[] teamsFCS = {"Alabama State", "Albany", "Cal-Poly", "Central Arkansas", "Chattanooga", "Columbia", "Dayton", "Delaware", "Eastern Wash", "Eastern Tenn", "Eastern Ken", "Harvard", "Yale", "Princeton", "Grambling", "Georgetown", "Idaho", "Idaho State", "James Madison", "Maine", "Miss Valley", "Montana", "New Hampshire", "North Dakota", "North Dakota St", "South Dakota", "South Dakota St", "Northern Arizona", "Northern Colorado", "Portland", "Rhode Island", "Sacramento", "Southern", "Southern TX", "Western llinois", "Vanilla", "Youngstown"};
 
     public String[] confNamesNew = {"Big 8", "National", "Constitution", "Colonial", "Continental"};
 
@@ -5347,7 +5347,7 @@ Then conferences can see if they want to add them to their list if the teams mee
     }
 
     public ArrayList<String> getTeamRankings() {
-        ArrayList<Team> teams = teamList; //(ArrayList<Team>) teamList.clone();
+        ArrayList<Team> teams = teamList;
         ArrayList<String> rankings = new ArrayList<>();
         Team t;
         Collections.sort(teams, new CompTeamPoll());

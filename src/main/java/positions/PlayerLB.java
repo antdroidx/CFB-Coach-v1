@@ -114,6 +114,71 @@ public class PlayerLB extends Player {
 
     }
 
+    public PlayerLB(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int cov, int rsh, int tkl, int spd, int h, int w, int cTackles, int cSacks, int cFumbles, int cInts,
+                    int seaTackles, int seaSacks, int seaFumbles, int seaInts,
+                    int seaGames, int seaGPlayed, int seaWins, boolean inj, boolean medRS, int tt, int ratImp, boolean wonHeis, boolean wonAA, boolean wonAC, boolean wonTF, boolean wonAF) {
+        position = "LB";
+        team = t;
+        name = nm;
+        year = yr;
+
+        ratPot = pot;
+        ratFootIQ = iq;
+        ratDur = dur;
+        ratCoverage = cov;
+        ratRunStop = rsh;
+        ratTackle = tkl;
+        ratSpeed = spd;
+        isRedshirt = rs;
+        wasRedshirt = wasRS;
+
+        isTransfer = transfer;
+        isWalkOn = wo;
+        homeState = reg;
+        personality = trait;
+        troubledTimes = 0;
+        recruitRating = scout;
+        height = h;
+        weight = w;
+        ratOvr = getOverall();
+
+        resetSeasonStats();
+
+        careerGames = cGamesPlayed;
+        careerHeismans = cHeismans;
+        careerAllAmerican = cAA;
+        careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
+        careerWins = cWins;
+
+        careerTackles = cTackles;
+        careerSacks = cSacks;
+        careerFumbles = cFumbles;
+        careerInts = cInts;
+
+        statsTackles = seaTackles;
+        statsSacks = seaSacks;
+        statsFumbles = seaFumbles;
+        statsInts = seaInts;
+
+        gamesStarted = seaGames;
+        gamesPlayed = seaGPlayed;
+        statsWins = seaWins;
+
+        isInjured = inj;
+        isMedicalRS = medRS;
+        troubledTimes = tt;
+        ratImprovement = ratImp;
+
+        wonHeisman = wonHeis;
+        wonAllAmerican = wonAA;
+        wonAllConference = wonAC;
+        wonTopFreshman = wonTF;
+        wonAllFreshman = wonAF;
+    }
+
     public PlayerLB(String nm, int yr, int stars, Team t) {
         position = "LB";
         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;

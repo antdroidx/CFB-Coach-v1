@@ -3233,17 +3233,17 @@ public class Game implements Serializable {
         gameSum[2] = gameR.toString();
 
         StringBuilder gameScout = new StringBuilder();
-        if (awayTeam.playersInjuredAll != null && !awayTeam.playersInjuredAll.isEmpty()) {
-            Collections.sort(awayTeam.playersInjuredAll, new CompPlayerPosition());
+        if (awayTeam.playersInjured != null && !awayTeam.playersInjured.isEmpty()) {
+            Collections.sort(awayTeam.playersInjured, new CompPlayerPosition());
             gameScout.append("\n" + awayTeam.abbr + " Injury Report:\n");
-            for (Player p : awayTeam.playersInjuredAll) {
+            for (Player p : awayTeam.playersInjured) {
                 gameScout.append(p.getPosNameYrOvrPot_OneLine() + "\n");
             }
         }
-        if (homeTeam.playersInjuredAll != null && !homeTeam.playersInjuredAll.isEmpty()) {
-            Collections.sort(homeTeam.playersInjuredAll, new CompPlayerPosition());
+        if (homeTeam.playersInjured != null && !homeTeam.playersInjured.isEmpty()) {
+            Collections.sort(homeTeam.playersInjured, new CompPlayerPosition());
             gameScout.append("\n" + homeTeam.abbr + " Injury Report:\n");
-            for (Player p : homeTeam.playersInjuredAll) {
+            for (Player p : homeTeam.playersInjured) {
                 gameScout.append(p.getPosNameYrOvrPot_OneLine() + "\n");
             }
         }

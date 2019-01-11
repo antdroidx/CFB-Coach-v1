@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean budgetsComplete;
     private boolean newGame;
     private boolean skipRetirementQ;
+    private boolean reincarnate;
 
     //Universe Settings
     private final int seasonStart = 2018;
@@ -3819,7 +3820,17 @@ public class MainActivity extends AppCompatActivity {
         userTeamStr = userTeam.name;
         currentTeam = userTeam;
         userTeam.HC.clear();
-        userTeam.HC.add(userHC);
+
+        if(reincarnate) {
+            userTeam.setupUserCoach(userHC.name);
+            userHC = userTeam.HC.get(0);
+            reincarnate = false;
+            userNameDialog();
+        } else {
+            userTeam.HC.add(userHC);
+        }
+
+        userHC.team = userTeam;
         userTeam.fired = false;
         userHC.contractYear = 0;
         userHC.contractLength = 6;
@@ -4128,16 +4139,15 @@ public class MainActivity extends AppCompatActivity {
                 .setNeutralButton("Pick New Team", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        reincarnate = true;
                         userHC.retired = true;
                         userHC.team = null;
-                        userTeam.promoteCoach();
                         simLeague.coachFreeAgents.add(userHC);
 
-                        userTeam.setupUserCoach(userHC.name);
-
                         jobOffers(userHC);
+
                         newGame = true;
-                        userNameDialog();
+
                         dialog.dismiss();
 
                     }

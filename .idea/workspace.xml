@@ -24,7 +24,8 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/main/java/simulation/League.java" line="3041" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/simulation/Team.java" line="3419" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/simulation/Team.java" line="3418" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" line="4121" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -33,15 +34,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/hall_fame_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/hall_fame_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerCB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerCB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerDL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerLB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerLB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerOL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerOL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/positions/PlayerTE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/PlayerTE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Conference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Conference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/League.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Team.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -84,48 +92,21 @@
     <favorites_list name="CFB-Coach" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="League.java" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Division.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Division.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="League.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-66402">
-              <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="4556" column="43" selection-start-line="4556" selection-start-column="43" selection-end-line="4556" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TeamRankingsList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="55" column="21" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51296">
-              <caret line="3233" column="35" selection-start-line="3233" selection-start-column="35" selection-end-line="3233" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerProfile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerProfile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="82" column="26" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="64" />
+            <state relative-caret-position="352">
+              <caret line="222" column="572" selection-start-line="222" selection-start-column="572" selection-end-line="222" selection-end-column="572" />
             </state>
           </provider>
         </entry>
@@ -143,14 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>discip</find>
-      <find>offStr</find>
-      <find>Coaching S</find>
-      <find>reincarnn</find>
-      <find>seasonGoal</find>
-      <find>teamHistory</find>
-      <find>schedule</find>
-      <find>eventLog</find>
       <find>getYear</find>
       <find>leagueRe</find>
       <find>teamHist</find>
@@ -171,12 +144,18 @@
       <find>exit</find>
       <find>fired</find>
       <find>prestige</find>
-      <find>discipline</find>
       <find>Prestige</find>
+      <find>discipline</find>
+      <find>career</find>
+      <find>nonRSQBs</find>
+      <find>teamRSs</find>
+      <find>gameOOCSchedule0</find>
+      <find>All</find>
+      <find>clone()</find>
+      <find>reincarnate</find>
+      <find>realignme</find>
     </findStrings>
     <replaceStrings>
-      <replace>(a)</replace>
-      <replace>Budget</replace>
       <replace>Facilities</replace>
       <replace>teamDisciplineScore</replace>
       <replace>&gt;= 4</replace>
@@ -205,6 +184,8 @@
       <replace>= new ArrayList();</replace>
       <replace>data</replace>
       <replace>sea</replace>
+      <replace>stats</replace>
+      <replace>public</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1718,27 +1699,16 @@
         <option value="$PROJECT_DIR$/src/main/java/comparator/CompCoachAllConference.java" />
         <option value="$PROJECT_DIR$/src/main/res/menu/menu_main.xml" />
         <option value="$PROJECT_DIR$/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerTE.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerOL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerK.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerDL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerLB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerCB.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerS.java" />
         <option value="$PROJECT_DIR$/src/main/java/comparator/CompCoachWins.java" />
         <option value="$PROJECT_DIR$/src/main/java/comparator/CompCoachHiring.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/PlaybookOffense.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/teams.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/Game.java" />
-        <option value="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/LeagueRecords.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/TeamRecords.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/PlayerQB.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/PlayerRB.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/PlayerWR.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainRankings.java" />
         <option value="$PROJECT_DIR$/src/main/res/values/colors.xml" />
@@ -1751,29 +1721,76 @@
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/Home.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRoster.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/DepthChart.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/hall_fame_list_item.xml" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerProfile.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerTE.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerOL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerK.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerDL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerLB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/PlayerCB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/Conference.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="946" />
     <option name="y" value="2" />
     <option name="width" value="974" />
     <option name="height" value="263" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CFB-Coach" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CFB-Coach" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simulation" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1983,7 +2000,6 @@
       <window_info id="Build Variants" order="2" sideWeight="0.5115894" side_tool="true" weight="0.18176973" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5021322" side_tool="true" weight="0.32297447" />
-      <window_info anchor="right" id="Preview" order="7" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4968017" weight="0.33259425" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32963374" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32963374" />
@@ -1992,13 +2008,14 @@
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48698884" weight="0.4067164" />
-      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49626866" visible="true" weight="0.25609756" />
-      <window_info anchor="right" id="Gradle" order="8" weight="0.32942432" />
+      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49626866" weight="0.25609756" />
+      <window_info anchor="right" id="Gradle" order="9" weight="0.32942432" />
       <window_info id="Structure" order="1" sideWeight="0.51301116" side_tool="true" weight="0.4420131" />
-      <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" weight="0.32889125" />
+      <window_info anchor="right" id="Device File Explorer" order="8" side_tool="true" weight="0.32889125" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="bottom" x="15" y="699" width="1876" height="291" id="Debug" order="3" sideWeight="0.4978678" weight="0.3968958" />
       <window_info anchor="bottom" id="Favorites" order="16" sideWeight="0.50373137" side_tool="true" weight="0.2682927" />
+      <window_info anchor="right" id="Preview" order="7" />
       <window_info anchor="bottom" id="Dependency Viewer" order="13" weight="0.3295964" />
       <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -2009,7 +2026,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Assistant" order="5" weight="0.32995737" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32815966" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32815966" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2021,7 +2038,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="1608" />
+      <option name="time" value="1613" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -2094,76 +2111,6 @@ return avg / teamList.size();</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="3601" column="39" lean-forward="true" selection-start-line="3601" selection-start-column="39" selection-end-line="3601" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Division.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerOL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerDL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerLB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerCB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/HeadCoach.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="129" column="158" selection-start-line="129" selection-start-column="158" selection-end-line="129" selection-end-column="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/positions/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
@@ -2220,20 +2167,6 @@ return avg / teamList.size();</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="118" column="18" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerWR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="214" column="31" selection-start-line="214" selection-start-column="31" selection-end-line="214" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerTE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2342,9 +2275,6 @@ return avg / teamList.size();</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-45">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2414,13 +2344,6 @@ return avg / teamList.size();</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66402">
-          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/simple_list_dialog.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2433,29 +2356,360 @@ return avg / teamList.size();</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/PlayerProfile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
+        <state relative-caret-position="1184">
           <caret line="82" column="26" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51296">
-          <caret line="3233" column="35" selection-start-line="3233" selection-start-column="35" selection-end-line="3233" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/TeamRankingsList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
+        <state relative-caret-position="736">
           <caret line="55" column="21" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerTE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="123" column="95" selection-start-line="123" selection-start-column="95" selection-end-line="123" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerOL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="963">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+          <folding>
+            <element signature="e#9911#9912#0" expanded="true" />
+            <element signature="e#9954#9955#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="110" column="76" selection-start-line="110" selection-start-column="76" selection-end-line="110" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerLB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="707">
+          <caret line="178" column="31" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerCB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="141" column="96" selection-start-line="141" selection-start-column="96" selection-end-line="141" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerWR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2128">
+          <caret line="139" column="100" selection-start-line="139" selection-start-column="100" selection-end-line="139" selection-end-column="176" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerDL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1299">
+          <caret line="191" column="24" selection-start-line="191" selection-start-column="24" selection-end-line="191" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/PlayerS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="173" column="31" selection-start-line="173" selection-start-column="31" selection-end-line="173" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="3251" lean-forward="true" selection-start-line="3251" selection-end-line="3251" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/positions/HeadCoach.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="416" column="33" selection-start-line="416" selection-start-column="33" selection-end-line="416" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="4556" column="43" selection-start-line="4556" selection-start-column="43" selection-end-line="4556" selection-end-column="43" />
+        <state relative-caret-position="218">
+          <caret line="4145" column="24" selection-start-line="4145" selection-start-column="24" selection-end-line="4145" selection-end-column="24" />
+          <folding>
+            <element signature="e#5404#5443#0" expanded="true" />
+            <element signature="e#5445#5482#0" expanded="true" />
+            <element signature="e#5647#5686#0" expanded="true" />
+            <element signature="e#5688#5725#0" expanded="true" />
+            <element signature="e#5852#5891#0" expanded="true" />
+            <element signature="e#5893#5930#0" expanded="true" />
+            <element signature="e#6184#6223#0" expanded="true" />
+            <element signature="e#6225#6262#0" expanded="true" />
+            <element signature="e#6264#6295#0" expanded="true" />
+            <element signature="e#6297#6322#0" expanded="true" />
+            <element signature="e#6324#6349#0" expanded="true" />
+            <element signature="e#6514#6553#0" expanded="true" />
+            <element signature="e#6555#6592#0" expanded="true" />
+            <element signature="e#6594#6625#0" expanded="true" />
+            <element signature="e#6627#6652#0" expanded="true" />
+            <element signature="e#6654#6679#0" expanded="true" />
+            <element signature="e#6806#6845#0" expanded="true" />
+            <element signature="e#6847#6884#0" expanded="true" />
+            <element signature="e#6886#6917#0" expanded="true" />
+            <element signature="e#6919#6944#0" expanded="true" />
+            <element signature="e#6946#6971#0" expanded="true" />
+            <element signature="e#7356#7395#0" expanded="true" />
+            <element signature="e#7397#7434#0" expanded="true" />
+            <element signature="e#8341#8380#0" expanded="true" />
+            <element signature="e#8382#8419#0" expanded="true" />
+            <element signature="e#8942#8981#0" expanded="true" />
+            <element signature="e#8983#9020#0" expanded="true" />
+            <element signature="e#9567#9606#0" expanded="true" />
+            <element signature="e#9608#9645#0" expanded="true" />
+            <element signature="e#10153#10192#0" expanded="true" />
+            <element signature="e#10194#10231#0" expanded="true" />
+            <element signature="e#10233#10264#0" expanded="true" />
+            <element signature="e#10266#10291#0" expanded="true" />
+            <element signature="e#10293#10318#0" expanded="true" />
+            <element signature="e#13690#13871#0" expanded="true" />
+            <element signature="e#13870#13871#0" expanded="true" />
+            <element signature="e#14005#14169#0" expanded="true" />
+            <element signature="e#14168#14169#0" expanded="true" />
+            <element signature="e#14324#14525#0" expanded="true" />
+            <element signature="e#14524#14525#0" expanded="true" />
+            <element signature="e#14682#14917#0" expanded="true" />
+            <element signature="e#14916#14917#0" expanded="true" />
+            <element signature="e#15079#15236#0" expanded="true" />
+            <element signature="e#15235#15236#0" expanded="true" />
+            <element signature="e#15384#15543#0" expanded="true" />
+            <element signature="e#15542#15543#0" expanded="true" />
+            <element signature="e#15697#15855#0" expanded="true" />
+            <element signature="e#15854#15855#0" expanded="true" />
+            <element signature="e#16005#16162#0" expanded="true" />
+            <element signature="e#16161#16162#0" expanded="true" />
+            <element signature="e#16469#16744#0" expanded="true" />
+            <element signature="e#16743#16744#0" expanded="true" />
+            <element signature="e#16946#17165#0" expanded="true" />
+            <element signature="e#17164#17165#0" expanded="true" />
+            <element signature="e#17359#17485#0" expanded="true" />
+            <element signature="e#17484#17485#0" expanded="true" />
+            <element signature="e#18407#19505#0" expanded="true" />
+            <element signature="e#19504#19505#0" expanded="true" />
+            <element signature="e#21747#22423#0" expanded="true" />
+            <element signature="e#22422#22423#0" expanded="true" />
+            <element signature="e#22794#23697#0" expanded="true" />
+            <element signature="e#23696#23697#0" expanded="true" />
+            <element signature="e#30545#30769#0" expanded="true" />
+            <element signature="e#30768#30769#0" expanded="true" />
+            <element signature="e#36077#36320#0" expanded="true" />
+            <element signature="e#36319#36320#0" expanded="true" />
+            <element signature="e#37103#37346#0" expanded="true" />
+            <element signature="e#37345#37346#0" expanded="true" />
+            <element signature="e#38241#38484#0" expanded="true" />
+            <element signature="e#38483#38484#0" expanded="true" />
+            <element signature="e#38541#38803#0" expanded="true" />
+            <element signature="e#38802#38803#0" expanded="true" />
+            <element signature="e#40733#40977#0" expanded="true" />
+            <element signature="e#40976#40977#0" expanded="true" />
+            <element signature="e#54909#55153#0" expanded="true" />
+            <element signature="e#55152#55153#0" expanded="true" />
+            <element signature="e#60815#61039#0" expanded="true" />
+            <element signature="e#61038#61039#0" expanded="true" />
+            <element signature="e#68016#68221#0" expanded="true" />
+            <element signature="e#68220#68221#0" expanded="true" />
+            <element signature="e#68270#69446#0" expanded="true" />
+            <element signature="e#69445#69446#0" expanded="true" />
+            <element signature="e#75411#75734#0" expanded="true" />
+            <element signature="e#75733#75734#0" expanded="true" />
+            <element signature="e#75783#77410#0" expanded="true" />
+            <element signature="e#77409#77410#0" expanded="true" />
+            <element signature="e#80501#80725#0" expanded="true" />
+            <element signature="e#80724#80725#0" expanded="true" />
+            <element signature="e#94117#94381#0" expanded="true" />
+            <element signature="e#94380#94381#0" expanded="true" />
+            <element signature="e#102592#103376#0" expanded="true" />
+            <element signature="e#103375#103376#0" expanded="true" />
+            <element signature="e#103436#103962#0" expanded="true" />
+            <element signature="e#103961#103962#0" expanded="true" />
+            <element signature="e#104024#104667#0" expanded="true" />
+            <element signature="e#104666#104667#0" expanded="true" />
+            <element signature="e#105318#105489#0" expanded="true" />
+            <element signature="e#105488#105489#0" expanded="true" />
+            <element signature="e#105537#105741#0" expanded="true" />
+            <element signature="e#105740#105741#0" expanded="true" />
+            <element signature="e#105786#107120#0" expanded="true" />
+            <element signature="e#106241#106676#0" expanded="true" />
+            <element signature="e#106675#106676#0" expanded="true" />
+            <element signature="e#106728#107061#0" expanded="true" />
+            <element signature="e#107060#107061#0" expanded="true" />
+            <element signature="e#107119#107120#0" expanded="true" />
+            <element signature="e#107160#108273#0" expanded="true" />
+            <element signature="e#108272#108273#0" expanded="true" />
+            <element signature="e#108322#109952#0" expanded="true" />
+            <element signature="e#108917#109457#0" expanded="true" />
+            <element signature="e#109456#109457#0" expanded="true" />
+            <element signature="e#109513#109871#0" expanded="true" />
+            <element signature="e#109870#109871#0" expanded="true" />
+            <element signature="e#109951#109952#0" expanded="true" />
+            <element signature="e#110192#110416#0" expanded="true" />
+            <element signature="e#110415#110416#0" expanded="true" />
+            <element signature="e#113236#113460#0" expanded="true" />
+            <element signature="e#113459#113460#0" expanded="true" />
+            <element signature="e#115521#115745#0" expanded="true" />
+            <element signature="e#115744#115745#0" expanded="true" />
+            <element signature="e#117977#118201#0" expanded="true" />
+            <element signature="e#118200#118201#0" expanded="true" />
+            <element signature="e#120354#120578#0" expanded="true" />
+            <element signature="e#120577#120578#0" expanded="true" />
+            <element signature="e#123432#123656#0" expanded="true" />
+            <element signature="e#123655#123656#0" expanded="true" />
+            <element signature="e#125249#125473#0" expanded="true" />
+            <element signature="e#125472#125473#0" expanded="true" />
+            <element signature="e#127447#127671#0" expanded="true" />
+            <element signature="e#127670#127671#0" expanded="true" />
+            <element signature="e#129562#129786#0" expanded="true" />
+            <element signature="e#129785#129786#0" expanded="true" />
+            <element signature="e#131417#131641#0" expanded="true" />
+            <element signature="e#131640#131641#0" expanded="true" />
+            <element signature="e#133628#133852#0" expanded="true" />
+            <element signature="e#133851#133852#0" expanded="true" />
+            <element signature="e#136441#136665#0" expanded="true" />
+            <element signature="e#136664#136665#0" expanded="true" />
+            <element signature="e#139345#139569#0" expanded="true" />
+            <element signature="e#139568#139569#0" expanded="true" />
+            <element signature="e#141144#141368#0" expanded="true" />
+            <element signature="e#141367#141368#0" expanded="true" />
+            <element signature="e#145334#145558#0" expanded="true" />
+            <element signature="e#145557#145558#0" expanded="true" />
+            <element signature="e#145601#145946#0" expanded="true" />
+            <element signature="e#145945#145946#0" expanded="true" />
+            <element signature="e#146388#146942#0" expanded="true" />
+            <element signature="e#146941#146942#0" expanded="true" />
+            <element signature="e#146994#147549#0" expanded="true" />
+            <element signature="e#147548#147549#0" expanded="true" />
+            <element signature="e#147595#147829#0" expanded="true" />
+            <element signature="e#147828#147829#0" expanded="true" />
+            <element signature="e#148177#148401#0" expanded="true" />
+            <element signature="e#148400#148401#0" expanded="true" />
+            <element signature="e#148444#148789#0" expanded="true" />
+            <element signature="e#148788#148789#0" expanded="true" />
+            <element signature="e#149259#151648#0" expanded="true" />
+            <element signature="e#150256#150953#0" expanded="true" />
+            <element signature="e#150952#150953#0" expanded="true" />
+            <element signature="e#151012#151350#0" expanded="true" />
+            <element signature="e#151349#151350#0" expanded="true" />
+            <element signature="e#151647#151648#0" expanded="true" />
+            <element signature="e#151692#151876#0" expanded="true" />
+            <element signature="e#151875#151876#0" expanded="true" />
+            <element signature="e#153391#153879#0" expanded="true" />
+            <element signature="e#153878#153879#0" expanded="true" />
+            <element signature="e#153926#154150#0" expanded="true" />
+            <element signature="e#154149#154150#0" expanded="true" />
+            <element signature="e#156384#157141#0" expanded="true" />
+            <element signature="e#157140#157141#0" expanded="true" />
+            <element signature="e#157201#157853#0" expanded="true" />
+            <element signature="e#157852#157853#0" expanded="true" />
+            <element signature="e#157915#158558#0" expanded="true" />
+            <element signature="e#158557#158558#0" expanded="true" />
+            <element signature="e#159204#160413#0" expanded="true" />
+            <element signature="e#160412#160413#0" expanded="true" />
+            <element signature="e#161046#161290#0" expanded="true" />
+            <element signature="e#161289#161290#0" expanded="true" />
+            <element signature="e#161345#161640#0" expanded="true" />
+            <element signature="e#161639#161640#0" expanded="true" />
+            <element signature="e#162179#162459#0" expanded="true" />
+            <element signature="e#162458#162459#0" expanded="true" />
+            <element signature="e#165643#165872#0" expanded="true" />
+            <element signature="e#165871#165872#0" expanded="true" />
+            <element signature="e#166735#166964#0" expanded="true" />
+            <element signature="e#166963#166964#0" expanded="true" />
+            <element signature="e#169387#169624#0" expanded="true" />
+            <element signature="e#169623#169624#0" expanded="true" />
+            <element signature="e#171795#172050#0" expanded="true" />
+            <element signature="e#172049#172050#0" expanded="true" />
+            <element signature="e#173062#173285#0" expanded="true" />
+            <element signature="e#173284#173285#0" expanded="true" />
+            <element signature="e#175135#175398#0" expanded="true" />
+            <element signature="e#175397#175398#0" expanded="true" />
+            <element signature="e#176656#177013#0" expanded="true" />
+            <element signature="e#177012#177013#0" expanded="true" />
+            <element signature="e#178318#178630#0" expanded="true" />
+            <element signature="e#178629#178630#0" expanded="true" />
+            <element signature="e#178676#178934#0" expanded="true" />
+            <element signature="e#178933#178934#0" expanded="true" />
+            <element signature="e#182948#183185#0" expanded="true" />
+            <element signature="e#183184#183185#0" expanded="true" />
+            <element signature="e#183934#184990#0" expanded="true" />
+            <element signature="e#184989#184990#0" expanded="true" />
+            <element signature="e#185486#186829#0" expanded="true" />
+            <element signature="e#186828#186829#0" expanded="true" />
+            <element signature="e#189165#189390#0" expanded="true" />
+            <element signature="e#189389#189390#0" expanded="true" />
+            <element signature="e#190624#190916#0" expanded="true" />
+            <element signature="e#190915#190916#0" expanded="true" />
+            <element signature="e#190967#191237#0" expanded="true" />
+            <element signature="e#191236#191237#0" expanded="true" />
+            <element signature="e#191284#191547#0" expanded="true" />
+            <element signature="e#191546#191547#0" expanded="true" />
+            <element signature="e#191992#192222#0" expanded="true" />
+            <element signature="e#192221#192222#0" expanded="true" />
+            <element signature="e#193967#194494#0" expanded="true" />
+            <element signature="e#194493#194494#0" expanded="true" />
+            <element signature="e#194547#195151#0" expanded="true" />
+            <element signature="e#195150#195151#0" expanded="true" />
+            <element signature="e#210137#210138#0" expanded="true" />
+            <element signature="e#210171#210172#0" expanded="true" />
+            <element signature="e#215422#215779#0" expanded="true" />
+            <element signature="e#215778#215779#0" expanded="true" />
+            <element signature="e#215829#218901#0" expanded="true" />
+            <element signature="e#218900#218901#0" expanded="true" />
+            <element signature="e#219343#219344#0" expanded="true" />
+            <element signature="e#219392#219393#0" expanded="true" />
+            <element signature="e#219946#220307#0" expanded="true" />
+            <element signature="e#220306#220307#0" expanded="true" />
+            <element signature="e#220376#220737#0" expanded="true" />
+            <element signature="e#220736#220737#0" expanded="true" />
+            <element signature="e#220783#221144#0" expanded="true" />
+            <element signature="e#221143#221144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="530" column="52" lean-forward="true" selection-start-line="530" selection-start-column="52" selection-end-line="530" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Conference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Division.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="222" column="572" selection-start-line="222" selection-start-column="572" selection-end-line="222" selection-end-column="572" />
         </state>
       </provider>
     </entry>

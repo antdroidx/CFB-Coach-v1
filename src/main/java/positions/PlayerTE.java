@@ -119,6 +119,74 @@ public class PlayerTE extends Player {
         careerWins = cWins;
     }
 
+    public PlayerTE(Team t, String nm, int yr, int reg, int trait, int iq, int scout, boolean transfer, boolean wasRS, boolean wo, int pot, int dur, boolean rs, int cGamesPlayed, int cWins, int cHeismans, int cAA, int cAC, int cTF, int cAF,
+                    int cat, int blk, int eva, int spd, int h, int w, int cTargets, int cReceptions, int cRecYards, int cTD, int cDrops, int cFumbles,
+                    int seaTar, int seaRec, int seaRecYards, int seaRecTD, int seaDrops, int seaFum,
+                    int seaGames, int seaGPlayed, int seaWins, boolean inj, boolean medRS, int tt, int ratImp, boolean wonHeis, boolean wonAA, boolean wonAC, boolean wonTF, boolean wonAF) {
+        position = "TE";
+        team = t;
+        name = nm;
+        year = yr;
+
+        ratPot = pot;
+        ratFootIQ = iq;
+        ratDur = dur;
+        ratCatch = cat;
+        ratRunBlock = blk;
+        ratEvasion = eva;
+        ratSpeed = spd;
+        isRedshirt = rs;
+        wasRedshirt = wasRS;
+
+        isTransfer = transfer;
+        isWalkOn = wo;
+        homeState = reg;
+        personality = trait;
+        recruitRating = scout;
+        height = h;
+        weight = w;
+        ratOvr = getOverall();
+
+        resetSeasonStats();
+
+        careerTargets = cTargets;
+        careerReceptions = cReceptions;
+        careerRecYards = cRecYards;
+        careerTD = cTD;
+        careerDrops = cDrops;
+        careerFumbles = cFumbles;
+        careerGames = cGamesPlayed;
+        careerHeismans = cHeismans;
+        careerAllAmerican = cAA;
+        careerAllConference = cAC;
+        careerTopFreshman = cTF;
+        careerAllFreshman = cAF;
+        careerWins = cWins;
+
+
+        statsTargets = seaTar;
+        statsReceptions = seaRec;
+        statsRecYards = seaRecYards;
+        statsRecTD = seaRecTD;
+        statsDrops = seaDrops;
+        statsFumbles = seaFum;
+
+        gamesStarted = seaGames;
+        gamesPlayed = seaGPlayed;
+        statsWins = seaWins;
+
+        isInjured = inj;
+        isMedicalRS = medRS;
+        troubledTimes = tt;
+        ratImprovement = ratImp;
+
+        wonHeisman = wonHeis;
+        wonAllAmerican = wonAA;
+        wonAllConference = wonAC;
+        wonTopFreshman = wonTF;
+        wonAllFreshman = wonAF;
+    }
+
     public PlayerTE(String nm, int yr, int stars, Team t) {
         position = "TE";
         height = hAvg + (int) (Math.random() * ((hMax - hMin) + 1)) + hMin;

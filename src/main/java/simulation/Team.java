@@ -27,6 +27,8 @@ import positions.PlayerWR;
 
 
 public class Team {
+    private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+    private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
 
     public final League league;
     public String name;
@@ -44,8 +46,7 @@ public class Team {
     public boolean recentPenalty;
     public boolean facilityUpgrade;
     public boolean disciplineAction;
-    private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
-    private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
+
 
     public PlaybookOffense playbookOff;
     public PlaybookDefense playbookDef;
@@ -57,15 +58,11 @@ public class Team {
     public int teamRecruitBudget;
     public int teamDiscplineBudget;
     public int teamDisciplineScore;
-    public final int disciplineStart = 60;
     public int teamFacilities;
     public int teamStadium;
 
     //Game Log variables
     public ArrayList<Game> gameSchedule;
-    public Game gameOOCSchedule0;
-    public Game gameOOCSchedule1;
-    public Game gameOOCSchedule2;
     public ArrayList<Team> oocTeams;
     public ArrayList<Integer> oocWeeks;
     public ArrayList<String> gameWLSchedule;
@@ -109,7 +106,7 @@ public class Team {
     //Calculated Stats
     public float teamOffTalent;
     public float teamDefTalent;
-    public int prestigePts[];
+    private int prestigePts[];
     public float teamPollScore;
     public int teamStrengthOfWins;
     private int teamStrengthOfLosses;
@@ -128,7 +125,7 @@ public class Team {
     public int rankTeamOffTalent;
     public int rankTeamDefTalent;
     public int rankTeamPrestige;
-    public int rankTeamPrestigeStart;
+    private int rankTeamPrestigeStart;
     public int rankTeamRecruitClass;
     public int rankTeamPollScore;
     public int rankTeamStrengthOfWins;
@@ -167,32 +164,12 @@ public class Team {
     public ArrayList<PlayerLB> teamLBs;
     public ArrayList<PlayerCB> teamCBs;
     public ArrayList<PlayerS> teamSs;
-    //By year
-    private ArrayList<Player> teamRSs;
-    private ArrayList<Player> teamFRs;
-    private ArrayList<Player> teamSOs;
-    private ArrayList<Player> teamJRs;
-    private ArrayList<Player> teamSRs;
-
-    //offense
-    public ArrayList<PlayerQB> nonRSQBs;
-    public ArrayList<PlayerRB> nonRSRBs;
-    public ArrayList<PlayerWR> nonRSWRs;
-    public ArrayList<PlayerTE> nonRSTEs;
-    public ArrayList<PlayerK> nonRSKs;
-    public ArrayList<PlayerOL> nonRSOLs;
-    //defense
-    public ArrayList<PlayerDL> nonRSDLs;
-    public ArrayList<PlayerLB> nonRSLBs;
-    public ArrayList<PlayerCB> nonRSCBs;
-    public ArrayList<PlayerS> nonRSSs;
 
     public ArrayList<Player> playersLeaving;
     private ArrayList<Player> playersTransferring;
 
-    private ArrayList<Player> playersInjured;
     private ArrayList<Player> playersRecovered;
-    public ArrayList<Player> playersInjuredAll;
+    public ArrayList<Player> playersInjured;
     private ArrayList<Player> playersDis;
 
     public String suspensionNews;
@@ -211,13 +188,13 @@ public class Team {
     public final int startersCB = 3;
     public final int startersS = 2;
 
-    private final int subQB = 0;
+    public final int subQB = 0;
     public final int subRB = 1;
     public final int subWR = 2;
-    private final int subTE = 1;
-    private final int subOL = 2;
-    private final int subK = 0;
-    private final int subDL = 2;
+    public final int subTE = 1;
+    public final int subOL = 2;
+    public final int subK = 0;
+    public final int subDL = 2;
     public final int subLB = 2;
     public final int subCB = 1;
     public final int subS = 1;
@@ -250,6 +227,7 @@ public class Team {
     public final int three = 68;
     public final int two = 58;
 
+    private final int disciplineStart = 60;
 
     private int dismissalChance = 3;
     private final int gradTransferMinGames = 6;
@@ -456,9 +434,6 @@ public class Team {
         for (int i = startOfPlayers; i < lines.length; ++i) {
             loadPlayerSaveData(lines[i], false);
         }
-
-        // Group players by class standing (FRs, SOs, etc)
-        groupPlayerStandingCSV();
     }
 
     private void commonInitializer() {
@@ -467,7 +442,7 @@ public class Team {
         teamHistory = new ArrayList<>();
         hallOfFame = new ArrayList<>();
         teamRecords = new TeamRecords();
-        playersInjuredAll = new ArrayList<>();
+        playersInjured = new ArrayList<>();
 
         HC = new ArrayList<>();
         teamQBs = new ArrayList<>();
@@ -481,30 +456,10 @@ public class Team {
         teamCBs = new ArrayList<>();
         teamSs = new ArrayList<>();
 
-        teamRSs = new ArrayList<>();
-        teamFRs = new ArrayList<>();
-        teamSOs = new ArrayList<>();
-        teamJRs = new ArrayList<>();
-        teamSRs = new ArrayList<>();
-
-        nonRSQBs = new ArrayList<>();
-        nonRSRBs = new ArrayList<>();
-        nonRSWRs = new ArrayList<>();
-        nonRSTEs = new ArrayList<>();
-        nonRSKs = new ArrayList<>();
-        nonRSOLs = new ArrayList<>();
-        nonRSDLs = new ArrayList<>();
-        nonRSLBs = new ArrayList<>();
-        nonRSCBs = new ArrayList<>();
-        nonRSSs = new ArrayList<>();
-
         playbookOff = new PlaybookOffense(0);
         playbookDef = new PlaybookDefense(0);
 
         gameSchedule = new ArrayList<>();
-        gameOOCSchedule0 = null;
-        gameOOCSchedule1 = null;
-        gameOOCSchedule2 = null;
         oocTeams = new ArrayList<>();
         oocWeeks = new ArrayList<>();
         gameWinsAgainst = new ArrayList<>();
@@ -760,9 +715,14 @@ public class Team {
         int redshirts = 0;
         int redshirtMax = HC.get(0).ratTalent / 9;
         sortPlayers();
-        groupPlayerStandingCSV();
-        Collections.sort(teamFRs, new CompPlayer());
 
+        ArrayList<Player> teamFRs = getAllPlayers();
+        for(int i = 0; i < teamFRs.size() ; i++) {
+            if(teamFRs.get(i).year != 1 || teamFRs.get(i).wasRedshirt) {
+                teamFRs.remove(i);
+            }
+        }
+        Collections.sort(teamFRs, new CompPlayer());
 
         for (Player p : teamFRs) {
             if (p instanceof PlayerQB) {
@@ -889,12 +849,6 @@ public class Team {
         Collections.sort(teamLBs, new CompPlayer());
         Collections.sort(teamCBs, new CompPlayer());
         Collections.sort(teamSs, new CompPlayer());
-
-        Collections.sort(teamRSs, new CompPlayer());
-        Collections.sort(teamFRs, new CompPlayer());
-        Collections.sort(teamSOs, new CompPlayer());
-        Collections.sort(teamJRs, new CompPlayer());
-        Collections.sort(teamSRs, new CompPlayer());
     }
 
     /**
@@ -3028,84 +2982,6 @@ public class Team {
 
 
     /**
-     * For news stories or other info gathering, setup player groups by student standing
-     * Run through each type of player, add them to the appropriate year
-     */
-    private void groupPlayerStandingCSV() {
-        for (PlayerQB p : teamQBs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerRB p : teamRBs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerWR p : teamWRs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerTE p : teamTEs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerK p : teamKs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerOL p : teamOLs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerDL p : teamDLs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerLB p : teamLBs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerCB p : teamCBs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-        for (PlayerS p : teamSs) {
-            if (p.year == 0) teamRSs.add(p);
-            else if (p.year == 1) teamFRs.add(p);
-            else if (p.year == 2) teamSOs.add(p);
-            else if (p.year == 3) teamJRs.add(p);
-            else if (p.year == 4) teamSRs.add(p);
-        }
-    }
-
-    /**
      * Updates team history.
      */
     public void updateTeamHistory() {
@@ -3172,7 +3048,7 @@ public class Team {
     public void disciplineSuccess() {
         HC.get(0).ratDiscipline += (int) (Math.random() * 3);
         teamDisciplineScore += (int) (Math.random() * 4);
-        if (teamDisciplineScore > 99) teamDisciplineScore = 99;
+        if (teamDisciplineScore > 100) teamDisciplineScore = 100;
     }
 
     //Disipline the most likely player that committed offense based on disicpline rating
@@ -3191,7 +3067,7 @@ public class Team {
             String description = issue[issueNo];
 
             int choice = HC.get(0).ratDiscipline - (int)(100*Math.random());
-            if(choice > 10) {
+            if(choice > 15) {
                 choice = 1;
                 duration = duration*2;
             }
@@ -3229,20 +3105,20 @@ public class Team {
         int penalty = (65-player.personality)/2;
 
         if(choice == 1) {
-            HC.get(0).ratDiscipline -= penalty/2;
-            disciplinePts --;
-            teamDisciplineScore -= penalty/2;
-            teamBudget -= (penalty * 100);
-        } else if(choice == 2) {
-            HC.get(0).ratDiscipline -= penalty;
+            HC.get(0).ratDiscipline -= penalty*.75;
             disciplinePts --;
             teamDisciplineScore -= penalty;
+            teamBudget -= (penalty * 100);
+        } else if(choice == 2) {
+            HC.get(0).ratDiscipline -= penalty*1.25;
+            disciplinePts --;
+            teamDisciplineScore -= penalty*1.65;
             teamBudget -= (penalty * 175);
         } else {
             player.troubledTimes++;
-            HC.get(0).ratDiscipline -= penalty*1.5;
+            HC.get(0).ratDiscipline -= penalty*2;
             disciplinePts --;
-            teamDisciplineScore -= penalty*2;
+            teamDisciplineScore -= penalty*2.25;
             teamBudget -= (penalty * 250);
         }
 
@@ -3318,7 +3194,6 @@ public class Team {
      * Guaranteed not to injure more than the amount of starters for each position.
      */
     public void checkForInjury() {
-        playersInjured = new ArrayList<>();
         playersRecovered = new ArrayList<>();
         checkInjuryPosition(teamQBs, startersQB + subQB);
         checkInjuryPosition(teamRBs, startersRB + subRB);
@@ -3341,7 +3216,7 @@ public class Team {
                 numInjured++;
                 if (p.injury == null) {
                     playersRecovered.add(p);
-                    playersInjuredAll.remove(p);
+                    playersInjured.remove(p);
                 }
             }
         }
@@ -3354,7 +3229,6 @@ public class Team {
                     // injury!
                     p.injury = new Injury(p);
                     playersInjured.add(p);
-                    playersInjuredAll.add(p);
                     numInjured++;
                 }
             }
@@ -3364,7 +3238,6 @@ public class Team {
     }
 
     public void postSeasonHealing(int weeks) {
-        playersInjured = new ArrayList<>();
         playersRecovered = new ArrayList<>();
         healing(teamQBs, weeks);
         healing(teamRBs, weeks);
@@ -3395,7 +3268,7 @@ public class Team {
                 }
                 if (p.injury == null) {
                     playersRecovered.add(p);
-                    playersInjuredAll.remove(p);
+                    playersInjured.remove(p);
                 }
             }
         }
@@ -3417,24 +3290,24 @@ public class Team {
             }
         }
 
-        if (playersInjuredAll.size() > 0 || playersRecovered.size() > 0 || playersSuspended.size() > 0) {
+        if (playersInjured.size() > 0 || playersRecovered.size() > 0 || playersSuspended.size() > 0) {
             String[] injuries;
 
-            injuries = new String[playersInjuredAll.size() + playersRecovered.size() + playersSuspended.size() + 3];
+            injuries = new String[playersInjured.size() + playersRecovered.size() + playersSuspended.size() + 3];
 
             injuries[0] = "[B]Players Injured";
-            for (int i = 0; i < playersInjuredAll.size(); ++i) {
-                injuries[i + 1]  = playersInjuredAll.get(i).getPosNameYrOvrPot_Str();
+            for (int i = 0; i < playersInjured.size(); ++i) {
+                injuries[i + 1]  = playersInjured.get(i).getPosNameYrOvrPot_Str();
             }
 
-            injuries[playersInjuredAll.size()+1] = "[B]Players Suspended";
+            injuries[playersInjured.size()+1] = "[B]Players Suspended";
             for (int i = 0; i < playersSuspended.size(); ++i) {
-                injuries[playersInjuredAll.size() + i + 2] = playersSuspended.get(i).getPosNameYrOvrPot_Str();
+                injuries[playersInjured.size() + i + 2] = playersSuspended.get(i).getPosNameYrOvrPot_Str();
             }
 
-            injuries[playersInjuredAll.size() + playersSuspended.size() + 2] = "[B]Players Recovered";
+            injuries[playersInjured.size() + playersSuspended.size() + 2] = "[B]Players Recovered";
             for (int i = 0; i < playersRecovered.size(); ++i) {
-                injuries[playersInjuredAll.size() + playersSuspended.size() + i + 3] = playersRecovered.get(i).getPosNameYrOvrPot_Str();
+                injuries[playersInjured.size() + playersSuspended.size() + i + 3] = playersRecovered.get(i).getPosNameYrOvrPot_Str();
             }
 
             return injuries;
@@ -5018,7 +4891,7 @@ public class Team {
                     + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
                     + "," + p.ratCatch + "," + p.ratRunBlock + "," + p.ratEvasion + "," + p.ratSpeed + "," + p.height + "," + p.weight
                     + "," + p.careerTargets + "," + p.careerReceptions + "," + p.careerRecYards + "," + p.careerTD + "," + p.careerDrops + "," + p.careerFumbles
-
+                    + "," + p.statsTargets + "," + p.statsReceptions + "," + p.statsRecYards + "," + p.statsRecTD + "," + p.statsDrops + "," + p.statsFumbles
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5027,7 +4900,6 @@ public class Team {
             sb.append("OL," + p.name + "," + p.year + "," + p.homeState + "," + p.personality + "," + p.ratFootIQ + "," + p.recruitRating + "," + p.isTransfer + "," + p.wasRedshirt + "," + p.isWalkOn + "," + p.ratPot + "," + p.ratDur
                     + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
                     + "," + p.ratStrength + "," + p.ratRunBlock + "," + p.ratPassBlock + "," + p.ratAwareness + "," + p.height + "," + p.weight
-
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5037,7 +4909,7 @@ public class Team {
                     + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
                     + "," + p.ratKickPow + "," + p.ratKickAcc + "," + p.ratKickFum + "," + p.ratPressure + "," + p.height + "," + p.weight
                     + "," + p.careerXPAtt + "," + p.careerXPMade + "," + p.careerFGAtt + "," + p.careerFGMade
-
+                    + "," + p.statsXPAtt + "," + p.statsXPMade + "," + p.statsFGAtt + "," + p.statsFGMade
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5047,7 +4919,7 @@ public class Team {
                     + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
                     + "," + p.ratStrength + "," + p.ratRunStop + "," + p.ratPassRush + "," + p.ratTackle + "," + p.height + "," + p.weight
                     + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
-
+                    + "," + p.statsTackles + "," + p.statsSacks + "," + p.statsFumbles + "," + p.statsInts
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5057,7 +4929,7 @@ public class Team {
                     + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
                     + "," + p.ratCoverage + "," + p.ratRunStop + "," + p.ratTackle + "," + p.ratSpeed + "," + p.height + "," + p.weight
                     + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
-
+                    + "," + p.statsTackles + "," + p.statsSacks + "," + p.statsFumbles + "," + p.statsInts
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5068,7 +4940,8 @@ public class Team {
                     + "," + p.ratCoverage + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratJump + "," + p.height + "," + p.weight
                     + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts + "," + p.careerTargets + "," + p.careerIncomplete + "," + p.careerDefended
                     + "," + p.careerKickRets + "," + p.careerKickRetYards + "," + p.careerKickRetTDs + "," + p.careerPuntRets + "," + p.careerPuntRetYards + "," + p.careerPuntRetTDs
-
+                    + "," + p.statsTackles + "," + p.statsSacks + "," + p.statsFumbles + "," + p.statsInts
+                    + "," + p.statsKickRets+ "," + p.statsKickRetYards + "," + p.statsKickRetTDs+ "," + p.statsPuntRets+ "," + p.statsPuntRetYards+ "," + p.statsPuntRetTDs
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5078,7 +4951,7 @@ public class Team {
                     + "," + p.ratOvr + "," + p.ratImprovement + "," + p.careerGames + "," + p.careerWins + "," + p.careerHeismans + "," + p.careerAllAmerican + "," + p.careerAllConference + "," + p.careerTopFreshman + "," + p.careerAllFreshman
                     + "," + p.ratCoverage + "," + p.ratSpeed + "," + p.ratTackle + "," + p.ratRunStop + "," + p.height + "," + p.weight
                     + "," + p.careerTackles + "," + p.careerSacks + "," + p.careerFumbles + "," + p.careerInts
-
+                    + "," + p.statsTackles + "," + p.statsSacks + "," + p.statsFumbles + "," + p.statsInts
                     + "," + p.gamesStarted + "," + p.gamesPlayed + "," + p.statsWins + "," + p.isInjured + "," + p.isMedicalRS + "," + p.troubledTimes + "," + p.ratImprovement + "," + p.wonHeisman + "," + p.wonAllAmerican + "," + p.wonAllConference + "," + p.wonTopFreshman + "," + p.wonAllFreshman
                     + "%\n");
         }
@@ -5323,7 +5196,30 @@ public class Team {
     }
 
     private void loadTESaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 34)
+                teamTEs.add(new PlayerTE(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                        Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                        Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                        Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                        Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                        Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                        Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                        Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                        Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                        Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                        Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                        Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                        Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                        Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                        Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                        Integer.parseInt(data[38]), Integer.parseInt(data[39]),
+                        Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                        Boolean.parseBoolean(data[42]), Boolean.parseBoolean(data[43]),
+                        Integer.parseInt(data[44]), Integer.parseInt(data[45]),
+                        Boolean.parseBoolean(data[46]), Boolean.parseBoolean(data[47]),
+                        Boolean.parseBoolean(data[48]), Boolean.parseBoolean(data[49]), Boolean.parseBoolean(data[50])
+                ));
+        else if (data.length > 20)
             teamTEs.add(new PlayerTE(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5346,7 +5242,24 @@ public class Team {
     }
 
     private void loadOLSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 28)
+            teamOLs.add(new PlayerOL(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Boolean.parseBoolean(data[30]), Boolean.parseBoolean(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Boolean.parseBoolean(data[34]), Boolean.parseBoolean(data[35]),
+                    Boolean.parseBoolean(data[36]), Boolean.parseBoolean(data[37]), Boolean.parseBoolean(data[38])
+            ));
+        else if (data.length > 20)
             teamOLs.add(new PlayerOL(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5366,7 +5279,28 @@ public class Team {
     }
 
     private void loadKSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 32)
+            teamKs.add(new PlayerK(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                    Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                    Boolean.parseBoolean(data[38]), Boolean.parseBoolean(data[39]),
+                    Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                    Boolean.parseBoolean(data[42]), Boolean.parseBoolean(data[43]),
+                    Boolean.parseBoolean(data[44]), Boolean.parseBoolean(data[45]), Boolean.parseBoolean(data[46])
+            ));
+        else if (data.length > 20)
             teamKs.add(new PlayerK(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5388,7 +5322,28 @@ public class Team {
     }
 
     private void loadDLSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 32)
+            teamDLs.add(new PlayerDL(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                    Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                    Boolean.parseBoolean(data[38]), Boolean.parseBoolean(data[39]),
+                    Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                    Boolean.parseBoolean(data[42]), Boolean.parseBoolean(data[43]),
+                    Boolean.parseBoolean(data[44]), Boolean.parseBoolean(data[45]), Boolean.parseBoolean(data[46])
+            ));
+        else if (data.length > 20)
             teamDLs.add(new PlayerDL(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5410,7 +5365,28 @@ public class Team {
     }
 
     private void loadLBSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 32)
+            teamLBs.add(new PlayerLB(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                    Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                    Boolean.parseBoolean(data[38]), Boolean.parseBoolean(data[39]),
+                    Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                    Boolean.parseBoolean(data[42]), Boolean.parseBoolean(data[43]),
+                    Boolean.parseBoolean(data[44]), Boolean.parseBoolean(data[45]), Boolean.parseBoolean(data[46])
+            ));
+        else if (data.length > 20)
             teamLBs.add(new PlayerLB(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5432,7 +5408,36 @@ public class Team {
     }
 
     private void loadCBSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 41)
+            teamCBs.add(new PlayerCB(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                    Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                    Integer.parseInt(data[38]), Integer.parseInt(data[39]),
+                    Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                    Integer.parseInt(data[42]), Integer.parseInt(data[43]),
+                    Integer.parseInt(data[44]), Integer.parseInt(data[45]),
+                    Integer.parseInt(data[46]), Integer.parseInt(data[47]),
+                    Integer.parseInt(data[48]), Integer.parseInt(data[49]),
+                    Integer.parseInt(data[50]), Integer.parseInt(data[51]),
+                    Integer.parseInt(data[52]),
+                    Boolean.parseBoolean(data[53]), Boolean.parseBoolean(data[54]),
+                    Integer.parseInt(data[55]), Integer.parseInt(data[56]),
+                    Boolean.parseBoolean(data[57]), Boolean.parseBoolean(data[58]),
+                    Boolean.parseBoolean(data[59]), Boolean.parseBoolean(data[60]), Boolean.parseBoolean(data[61])
+            ));
+        else if (data.length > 20)
             teamCBs.add(new PlayerCB(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
@@ -5458,7 +5463,28 @@ public class Team {
     }
 
     private void loadSSaveData(String[] data, boolean isRedshirt) {
-        if (data.length > 20)
+        if (data.length > 32)
+            teamSs.add(new PlayerS(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
+                    Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
+                    Integer.parseInt(data[14]), Integer.parseInt(data[15]),
+                    Integer.parseInt(data[16]), Integer.parseInt(data[17]),
+                    Integer.parseInt(data[18]), Integer.parseInt(data[19]),
+                    Integer.parseInt(data[20]), Integer.parseInt(data[21]),
+                    Integer.parseInt(data[22]), Integer.parseInt(data[23]),
+                    Integer.parseInt(data[24]), Integer.parseInt(data[25]),
+                    Integer.parseInt(data[26]), Integer.parseInt(data[27]),
+                    Integer.parseInt(data[28]), Integer.parseInt(data[29]),
+                    Integer.parseInt(data[30]), Integer.parseInt(data[31]),
+                    Integer.parseInt(data[32]), Integer.parseInt(data[33]),
+                    Integer.parseInt(data[34]), Integer.parseInt(data[35]),
+                    Integer.parseInt(data[36]), Integer.parseInt(data[37]),
+                    Boolean.parseBoolean(data[38]), Boolean.parseBoolean(data[39]),
+                    Integer.parseInt(data[40]), Integer.parseInt(data[41]),
+                    Boolean.parseBoolean(data[42]), Boolean.parseBoolean(data[43]),
+                    Boolean.parseBoolean(data[44]), Boolean.parseBoolean(data[45]), Boolean.parseBoolean(data[46])
+            ));
+        else if (data.length > 20)
             teamSs.add(new PlayerS(this, data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]),
                     Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8]), Boolean.parseBoolean(data[9]),
                     Integer.parseInt(data[10]), Integer.parseInt(data[11]), isRedshirt,
