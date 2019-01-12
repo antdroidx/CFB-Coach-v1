@@ -1579,6 +1579,7 @@ public class Game implements Serializable {
 
     private void fieldGoalAtt(Team offense, Team defense) {
         PlayerK selK = offense.getK(0);
+        selK.gameSnaps++;
         gameYardLine -= 7;
 
 
@@ -1659,6 +1660,7 @@ public class Game implements Serializable {
 
     private void kickXP(Team offense, Team defense) {
         PlayerK selK = offense.getK(0);
+        selK.gameSnaps++;
 
         // No XP/2pt try if the TD puts the bottom OT offense ahead (aka wins the game)
         if (playingOT && bottomOT && (((numOT % 2 == 0) && awayScore > homeScore) || ((numOT % 2 != 0) && homeScore > awayScore))) {

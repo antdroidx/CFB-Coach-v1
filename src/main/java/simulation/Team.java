@@ -531,7 +531,7 @@ public class Team {
         HC.get(0).age = 30 + (int)(Math.random()*8);
         HC.get(0).contractYear = 0;
         HC.get(0).contractLength = 6;
-        HC.get(0).ratPot = 70;
+        HC.get(0).ratPot = 65;
         HC.get(0).ratOff = league.getAvgCoachOff();
         HC.get(0).ratDef = league.getAvgCoachDef();
         HC.get(0).ratTalent = league.getAvgCoachTal();
@@ -1432,6 +1432,7 @@ public class Team {
             league.coachFreeAgents.add(HC.get(0));
             String oldCoach = HC.get(0).name;
             fired = true;
+            newCoachTeamChanges();
             HC.remove(0);
             league.newsStories.get(league.currentWeek + 1).add(name + " Coaching Retirement>" + oldCoach + " has announced his retirement at the age of " + age +
                     ". His former team, " + name + " have not announced a new successor to replace the retired coach. Coach " + oldCoach + " had a career record of " + wins + "-" + losses + ".");
@@ -1489,8 +1490,7 @@ public class Team {
                         league.newsStories.get(league.currentWeek + 1).add("Polarizing Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                                 " despite finally getting the team on the right track. The team struggled during his first few seasons at the school, but had shown some promise this season." +
                                 " He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
-                        teamPrestige -= (int) Math.random() * 8;
-                        if(teamDisciplineScore < 30) teamDisciplineScore += 10;
+                        newCoachTeamChanges();
                         if (!userControlled) {
                             league.coachList.add(HC.get(0));
                         }
@@ -1500,16 +1500,14 @@ public class Team {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
-                    teamPrestige -= (int) Math.random() * 8;
-                    if(teamDisciplineScore < 30) teamDisciplineScore += 10;
+                    newCoachTeamChanges();
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
                 } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < -1) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
-                    teamPrestige -= (int) Math.random() * 8;
-                    if(teamDisciplineScore < 30) teamDisciplineScore += 10;
+                    newCoachTeamChanges();
                     if (!userControlled) {
                         league.coachList.add(HC.get(0));
                     }
@@ -1538,18 +1536,24 @@ public class Team {
 
     }
 
+    private void newCoachTeamChanges() {
+
+        teamPrestige -= (int) Math.random() * 8;
+
+        if(teamDisciplineScore < 30) {
+            teamDisciplineScore = (50 - teamDisciplineScore)/2;
+        }
+
+    }
+
     public void promoteCoach() {
         //make team
         boolean promote = true;
-        int stars = teamPrestige / 20 + 1;
-        int chance = 20 - (teamPrestige - 20 * (teamPrestige / 20)); //between 0 and 20
+        int stars = teamPrestige / 20;
+        stars = ((int)Math.random()*(stars/2)) + (stars/2);
 
         //MAKE HEAD COACH
-        if (100 * Math.random() < 5 * chance) {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars - 1, this, promote));
-        } else {
-            HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this, promote));
-        }
+        HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this, promote));
 
         //done making players, sort them
         sortPlayers();
@@ -3032,10 +3036,10 @@ public class Team {
         String[] hist = new String[teamHistory.size() + 7];
         hist[0] = "Location: " + league.getRegion(location);
         hist[1] = "Prestige: " + teamPrestige + " ("+ getRankStr(rankTeamPrestige) + ")";
-        hist[2] = "Overall W-L: " + totalWins + "-" + totalLosses;
-        hist[3] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses;
-        hist[4] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses;
-        hist[5] = "National Champ Record: " + totalNCs + "-" + totalNCLosses;
+        hist[2] = "Overall W-L: " + totalWins + "-" + totalLosses + " (" + df2.format(getWinPCT(totalWins, totalLosses)) + "%)";
+        hist[3] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses + " (" + df2.format(getWinPCT(totalCCs, totalCCLosses)) + "%)";
+        hist[4] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses + " (" + df2.format(getWinPCT(totalBowls, totalBowlLosses)) + "%)";
+        hist[5] = "National Champ Record: " + totalNCs + "-" + totalNCLosses + " (" + df2.format(getWinPCT(totalNCs, totalNCLosses)) + "%)";
         hist[6] = " ";
         for (int i = 0; i < teamHistory.size(); ++i) {
             hist[i + 7] = teamHistory.get(i);
@@ -3043,6 +3047,12 @@ public class Team {
         return hist;
     }
 
+    private float getWinPCT(int w, int l) {
+        if(w+l < 1) return 0;
+        else {
+            return (float)w/(w+l)*100;
+        }
+    }
     //DISCIPLINE SYSTEM
 
     public void disciplineSuccess() {
@@ -3798,8 +3808,18 @@ public class Team {
 
     public String[] getTeamRosterString() {
         ArrayList<Player> rosters = getAllPlayers();
-        String[] roster = new String[rosters.size()+19];
-        int i=0;
+        String[] roster = new String[rosters.size()+19+7];
+
+        roster[0] = "Prestige: " + teamPrestige + " ("+ getRankStr(rankTeamPrestige) + ")";
+        roster[1] = "Discipline: " + teamDisciplineScore + "% | Facilities: L" + teamFacilities;
+        roster[2] = "Overall W-L: " + totalWins + "-" + totalLosses + " (" + df2.format(getWinPCT(totalWins, totalLosses)) + "%)";
+        roster[3] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses + " (" + df2.format(getWinPCT(totalCCs, totalCCLosses)) + "%)";
+        roster[4] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses + " (" + df2.format(getWinPCT(totalBowls, totalBowlLosses)) + "%)";
+        roster[5] = "National Champ Record: " + totalNCs + "-" + totalNCLosses + " (" + df2.format(getWinPCT(totalNCs, totalNCLosses)) + "%)";
+        roster[6] = " ";
+        
+        
+        int i=7;
         roster[i] = "Quarterbacks";
         i++;
         for (Player p : teamQBs) {

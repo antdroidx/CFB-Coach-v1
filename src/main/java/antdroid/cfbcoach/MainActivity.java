@@ -3778,8 +3778,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder roster = new AlertDialog.Builder(this);
         roster.setTitle(teamList.get(item).name + " Team Roster" +
-                        "\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + df2.format(teamList.get(item).teamOffTalent) + " | Def: " + df2.format(teamList.get(item).teamDefTalent) +
-                "\nDiscipline: " + teamList.get(item).teamDisciplineScore + "% | Facilities: " + teamList.get(item).teamFacilities);
+                        "\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + df2.format(teamList.get(item).teamOffTalent) + " | Def: " + df2.format(teamList.get(item).teamDefTalent));
         roster.setNeutralButton("Decline", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -3808,6 +3807,62 @@ public class MainActivity extends AppCompatActivity {
         roster.setCancelable(false);
         AlertDialog teamWindow = roster.create();
         teamWindow.show();
+    }
+
+    private void viewTeam2() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Team History: " + currentTeam.name)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing?
+                    }
+                })
+                .setView(getLayoutInflater().inflate(R.layout.team_rankings_dialog, null));
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        String[] selection = {"Team History", "Team Records", "Hall of Fame", "Graph View: Prestige", "Graph View: Rankings"};
+        Spinner teamHistSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
+        final ArrayAdapter<String> teamHistAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, selection);
+        teamHistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teamHistSpinner.setAdapter(teamHistAdapter);
+
+        final ListView teamHistoryList = dialog.findViewById(R.id.listViewTeamRankings);
+        final String[] hofPlayers = new String[currentTeam.hallOfFame.size()];
+        for (int i = 0; i < currentTeam.hallOfFame.size(); ++i) {
+            hofPlayers[i] = currentTeam.hallOfFame.get(i);
+        }
+
+        teamHistSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        if (position == 0) {
+                            TeamHistoryList teamHistoryAdapter =
+                                    new TeamHistoryList(MainActivity.this, currentTeam.getTeamHistoryList());
+                            teamHistoryList.setAdapter(teamHistoryAdapter);
+                        } else if (position == 1) {
+                            LeagueRecordsList leagueRecordsAdapter =
+                                    new LeagueRecordsList(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---", "---");
+                            teamHistoryList.setAdapter(leagueRecordsAdapter);
+                        } else if (position == 2) {
+                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
+                            teamHistoryList.setAdapter(hofAdapter);
+                        } else if (position == 3) {
+                            dialog.dismiss();
+                            teamPrestigeGraphView();
+                        } else if (position == 4) {
+                            dialog.dismiss();
+                            teamRankingGraphView();
+                        }
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // do nothing
+                    }
+                });
     }
 
     //Method to actually switch teams
