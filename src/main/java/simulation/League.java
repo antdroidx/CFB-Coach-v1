@@ -1741,6 +1741,10 @@ public class League {
                 teamList.get(i).recentPenalty = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.15;
                 teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.15;
+
+                teamList.get(i).HC.get(0).contractLength =- 2;
+
+
             } else if (teamList.get(i).teamDisciplineScore <= 0) {
                 teamList.get(i).bowlBan = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.35;
@@ -1748,6 +1752,13 @@ public class League {
                 teamList.get(i).teamDisciplineScore = 50;
                 teamList.get(i).penalized = false;
                 teamList.get(i).recentPenalty = false;
+
+                if(!teamList.get(i).userControlled) {
+                    teamList.get(i).midSeasonFiring();
+                } else {
+                    teamList.get(i).HC.get(0).contractLength = 1;
+                }
+
             }
         }
     }
@@ -3041,7 +3052,7 @@ public class League {
             }
         } else {
             for (int i = 0; i < conferences.size(); i++) {
-                if(!conferences.get(i).confName.equals("Independent")) {
+                if(!conferences.get(i).confName.equals("Independent") && conferences.get(i).confTeams.size() > 0) {
                     Collections.sort(conferences.get(i).confTeams, new CompTeamConfWins());
                     playoffTeams.add(conferences.get(i).confTeams.get(0));
                 }
@@ -3682,24 +3693,6 @@ public class League {
             }
         }
 
-        //Coaches who were fired
-        Collections.sort(coachList, new CompCoachOvr());
-        for (int i = 0; i < coachList.size(); ++i) {
-            for (int t = 0; t < teamList.size(); ++t) {
-                if (teamList.get(t).HC.isEmpty() && coachList.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && teamList.get(t).name != coachList.get(i).team.name && Math.random() > 0.60) {
-                    teamList.get(t).HC.add(coachList.get(i));
-                    teamList.get(t).HC.get(0).contractLength = 6;
-                    teamList.get(t).HC.get(0).contractYear = 0;
-                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
-                    teamList.get(t).HC.get(0).team = teamList.get(t);
-                    newsStories.get(currentWeek + 1).add("Coaching Switch: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
-                            " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
-                    coachList.remove(i);
-                    break;
-                }
-            }
-        }
-
         //Coaches who were fired previous years
         Collections.sort(coachFreeAgents, new CompCoachOvr());
         for (int i = 0; i < coachFreeAgents.size(); ++i) {
@@ -3713,6 +3706,24 @@ public class League {
                     newsStories.get(currentWeek + 1).add("Return to the Sidelines: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " has been out of football, but is returning this season!");
                     coachFreeAgents.remove(i);
+                    break;
+                }
+            }
+        }
+
+        //Coaches who were fired
+        Collections.sort(coachList, new CompCoachOvr());
+        for (int i = 0; i < coachList.size(); ++i) {
+            for (int t = 0; t < teamList.size(); ++t) {
+                if (teamList.get(t).HC.isEmpty() && coachList.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && teamList.get(t).name != coachList.get(i).team.name && Math.random() > 0.60) {
+                    teamList.get(t).HC.add(coachList.get(i));
+                    teamList.get(t).HC.get(0).contractLength = 6;
+                    teamList.get(t).HC.get(0).contractYear = 0;
+                    teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
+                    teamList.get(t).HC.get(0).team = teamList.get(t);
+                    newsStories.get(currentWeek + 1).add("Coaching Switch: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                            " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
+                    coachList.remove(i);
                     break;
                 }
             }
@@ -3766,24 +3777,6 @@ public class League {
         }
 
         if (school.HC.isEmpty()) {
-            //Coaches who were fired
-            Collections.sort(coachList, new CompCoachOvr());
-            for (int i = 0; i < coachList.size(); ++i) {
-                if (school.HC.isEmpty() && coachList.get(i).ratOvr + 5 >= school.getMinCoachHireReq() && school.name != coachList.get(i).team.name && Math.random() > 0.45) {
-                    school.HC.add(coachList.get(i));
-                    school.HC.get(0).contractLength = 6;
-                    school.HC.get(0).contractYear = 0;
-                    school.HC.get(0).baselinePrestige = school.teamPrestige;
-                    school.HC.get(0).team = school;
-                    newsStories.get(currentWeek + 1).add("Coaching Change: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
-                            " to lead the team. Coach " + school.HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
-                    coachList.remove(i);
-                    break;
-                }
-            }
-        }
-
-        if (school.HC.isEmpty()) {
             //Coaches who were fired previous years
             Collections.sort(coachFreeAgents, new CompCoachOvr());
             for (int i = 0; i < coachFreeAgents.size(); ++i) {
@@ -3796,6 +3789,24 @@ public class League {
                     newsStories.get(currentWeek + 1).add("Back to Coaching: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
                             " to lead the team. Coach " + school.HC.get(0).name + " has been out of football, but is returning this upcoming season!");
                     coachFreeAgents.remove(i);
+                    break;
+                }
+            }
+        }
+
+        if (school.HC.isEmpty()) {
+            //Coaches who were fired
+            Collections.sort(coachList, new CompCoachOvr());
+            for (int i = 0; i < coachList.size(); ++i) {
+                if (school.HC.isEmpty() && coachList.get(i).ratOvr + 5 >= school.getMinCoachHireReq() && school.name != coachList.get(i).team.name && Math.random() > 0.45) {
+                    school.HC.add(coachList.get(i));
+                    school.HC.get(0).contractLength = 6;
+                    school.HC.get(0).contractYear = 0;
+                    school.HC.get(0).baselinePrestige = school.teamPrestige;
+                    school.HC.get(0).team = school;
+                    newsStories.get(currentWeek + 1).add("Coaching Change: " + school.name + ">After an extensive search for a new head coach, " + school.name + " has hired " + school.HC.get(0).name +
+                            " to lead the team. Coach " + school.HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
+                    coachList.remove(i);
                     break;
                 }
             }

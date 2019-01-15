@@ -326,11 +326,15 @@ public class Home extends AppCompatActivity {
                         myIntent.putExtra("Theme", theme);
                         Home.this.startActivity(myIntent);
                     } else {
-                        finish();
+
+                        Toast.makeText(Home.this, "Incompatible Save!",
+                                Toast.LENGTH_SHORT).show();
+
+/*                        finish();
                         Intent myIntent = new Intent(Home.this, MainActivity.class);
                         myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb,FIX");
                         myIntent.putExtra("Theme", theme);
-                        Home.this.startActivity(myIntent);
+                        Home.this.startActivity(myIntent);*/
                     }
 
 
@@ -422,7 +426,7 @@ public class Home extends AppCompatActivity {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(saveFile));
                     fileInfo = bufferedReader.readLine();
                     infos[i] = fileInfo.substring(0, fileInfo.length() - 1); //gets rid of % at end
-                    if(!infos[i].contains(saveVer)) infos[i] = fileInfo.substring(0, fileInfo.length() - 1) + "\n[INCOMPATIBLE: TRY TO FIX]";
+                    if(!infos[i].contains(saveVer)) infos[i] = fileInfo.substring(0, fileInfo.length() - 1) + "\n[Old Save No Longer Supported]";
                 } catch (FileNotFoundException ex) {
                     System.out.println(
                             "Unable to open file");

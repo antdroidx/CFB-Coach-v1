@@ -1251,7 +1251,7 @@ public class Team {
                 }
             }
 
-            if((postSeasonGames) > 0 && prestigeChange <= 0) prestigeChange++;
+            if((postSeasonGames) > 0 && prestigeChange < 0) prestigeChange++;
             if (prestigeChange < (wins - projectedWins)) prestigeChange++;
             if(prestigeChange <= 0 && rankTeamPollScore < rankTeamPrestige) prestigeChange++;
         }
@@ -1273,7 +1273,7 @@ public class Team {
         if (rankTeamPrestige > (league.teamList.size()*.60)) {
             ArrayList<Player> teamAll = getAllPlayers();
             for (int i = 0; i < teamAll.size(); i++) {
-                if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr > 90) {
+                if (teamAll.get(i).year == 4 && teamAll.get(i).ratOvr >= 90) {
                     nflPts++;
                 }
             }
@@ -1337,7 +1337,7 @@ public class Team {
 
         summary += "\n\nYour team's current discipline score is " + teamDisciplineScore + "% Rating.";
 
-        summary += "\n\nYour coach score for this year was " + HC.get(0).getCoachScore() + "\n";
+        summary += "\n\nYour coach grade for this year was: " + HC.get(0).getSeasonGrade() + " (" + HC.get(0).getCoachScore() + " pts)\n";
 
         summary += "\n\nPRESTIGE SUMMARY:\n\n";
         summary += "Current Prestige:  " + teamPrestigeStart + " pts [" + getRankStr(rankTeamPrestigeStart) + "]\n";
@@ -1439,7 +1439,7 @@ public class Team {
         }
 
         if (!retired) {
-            if (teamPrestige > (HC.get(0).baselinePrestige + 9) && rankTeamPrestige > (int) (league.countTeam * 0.35) && !userControlled && HC.get(0).age < 50 || teamPrestige > (HC.get(0).baselinePrestige + 12) && confPrestige < league.confAvg && rankTeamPrestige < (int) (league.countTeam * 0.20) && !userControlled && HC.get(0).age < 45) {
+            if (teamPrestige > (HC.get(0).baselinePrestige + 9) && rankTeamPrestige > (int) (league.countTeam * 0.35) && !userControlled && HC.get(0).age < 50 || teamPrestige > (HC.get(0).baselinePrestige + 12) && confPrestige < league.confAvg && rankTeamPrestige < (int) (league.countTeam * 0.20) && !userControlled && HC.get(0).age < 48) {
                 league.newsStories.get(league.currentWeek + 1).add("Head Coach Rumor Mill>After another successful season at " + name + ", " + age + " year old head coach " + HC.get(0).name + " has moved to the top of" +
                         " many of the schools looking for a replacement at that position. He has a career record of " + wins + "-" + losses + ". ");
                 if (Math.random() > 0.50) {
@@ -1447,7 +1447,7 @@ public class Team {
                 }
             }
             //New Contracts or Firing
-            if ((HC.get(0).contractYear) == HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.38) || (HC.get(0).contractYear + 2 == HC.get(0).contractLength && Math.random() < 0.23)) {
+            if ((HC.get(0).contractYear) >= HC.get(0).contractLength || natChampWL.equals("NCW") || natChampWL.equals("NCL") || (HC.get(0).contractYear + 1 == HC.get(0).contractLength && Math.random() < 0.38) || (HC.get(0).contractYear + 2 == HC.get(0).contractLength && Math.random() < 0.23)) {
                 if (totalPDiff > 15 || (natChampWL.equals("NCW"))) {
                     HC.get(0).contractLength = 7;
                     HC.get(0).contractYear = 0;
@@ -1534,6 +1534,20 @@ public class Team {
             }
         }
 
+    }
+
+    public void midSeasonFiring() {
+        final String hcName = HC.get(0).name;
+        HC.get(0).team = null;
+        league.coachFreeAgents.add(HC.get(0));
+        HC.remove(0);
+
+       promoteCoach();
+       HC.get(0).contractLength = 1;
+       HC.get(0).contractYear = 1;
+
+        league.newsStories.get(league.currentWeek).add("FIRED! Acting Head Coach named at " + name + ">" + name + " has fired their head coach, " + hcName +
+                " and has promoted his assistant coach, " + HC.get(0).name + ", as Acting Head Coach for the remainder of the season. After the season ends, the team will determine what to do for the Head Coach vacancy.");
     }
 
     private void newCoachTeamChanges() {
@@ -2183,20 +2197,20 @@ public class Team {
     }
 
     private int getRecruitLevel() {
-        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/11);
+        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
         if (level < 4) level = 4;
         return Math.round(level);
     }
 
     public int getUserRecruitBudget() {
-        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/11);
+        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
         if (level < 4) level = 4;
 
         return (int) Math.round(level * 8.5);
     }
 
     public int getUserRecruitStars() {
-        float level = (league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/11);
+        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
         if (level < 4) level = 4;
         return Math.round(level);
     }
@@ -3076,7 +3090,7 @@ public class Team {
             if(issueNo > issue.length) issueNo = issue.length;
             String description = issue[issueNo];
 
-            int choice = HC.get(0).ratDiscipline - (int)(100*Math.random());
+            int choice = HC.get(0).ratDiscipline - (int)(80*Math.random());
             if(choice > 15) {
                 choice = 1;
                 duration = duration*2;
@@ -3122,13 +3136,13 @@ public class Team {
         } else if(choice == 2) {
             HC.get(0).ratDiscipline -= penalty*1.25;
             disciplinePts --;
-            teamDisciplineScore -= penalty*1.65;
+            teamDisciplineScore -= penalty*1.5;
             teamBudget -= (penalty * 175);
         } else {
             player.troubledTimes++;
-            HC.get(0).ratDiscipline -= penalty*2;
+            HC.get(0).ratDiscipline -= penalty*1.75;
             disciplinePts --;
-            teamDisciplineScore -= penalty*2.25;
+            teamDisciplineScore -= penalty*1.75;
             teamBudget -= (penalty * 250);
         }
 
@@ -3164,6 +3178,7 @@ public class Team {
         checkSuspensionPosition(teamLBs, startersLB + subLB, minRating);
         checkSuspensionPosition(teamCBs, startersCB + subCB, minRating);
         checkSuspensionPosition(teamSs, startersS + subS, minRating);
+        if(playersDis.size() < 1) getLowDisciplinePlayers(75);
     }
 
     private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters, int minRating) {

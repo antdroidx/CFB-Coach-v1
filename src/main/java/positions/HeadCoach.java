@@ -448,4 +448,24 @@ public class HeadCoach extends Player {
        }
        return pct;
     }
+
+    public String getSeasonGrade() {
+        String grade = "";
+        int x = getCoachScore();
+
+        if (x > 140) {
+            grade = "A";
+        } else if (x > 100) {
+            grade = "B";
+        } else if (x > 60) {
+            grade = "C";
+        } else if (x > 40) {
+            grade = "D";
+        } else {
+            grade = "F";
+        }
+
+
+        return grade;
+    }
 }
