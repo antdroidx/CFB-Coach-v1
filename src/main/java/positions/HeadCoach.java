@@ -273,14 +273,14 @@ public class HeadCoach extends Player {
         if (ratDiscipline < 15) ratDiscipline = 15;
 
 
-        if (age > 65 && !team.userControlled) {
+        if (age > 60 && !team.userControlled) {
             ratOff -= (int) Math.random() * 4;
             ratDef -= (int) Math.random() * 4;
             ratTalent -= (int) Math.random() * 4;
             ratDiscipline -= (int) Math.random() * 4;
         }
 
-        if (age > 70 && team.userControlled && team.league.isCareerMode() && !team.league.neverRetire ) {
+        if (age > 60 && team.userControlled && team.league.isCareerMode() && !team.league.neverRetire ) {
             ratOff -= (int) Math.random() * (age / 20);
             ratDef -= (int) Math.random() * (age / 20);
             ratTalent -= (int) Math.random() * (age / 20);

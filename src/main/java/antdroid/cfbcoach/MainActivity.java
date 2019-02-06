@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Universe Settings
     private final int seasonStart = 2018;
+    private final int retireAge = 67;
 
     String saveLeagueFileStr;
     private File customConfs;
@@ -2330,7 +2331,7 @@ public class MainActivity extends AppCompatActivity {
         changeTeamsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.dismiss();
-                if (userTeam.getHC(0).age >= 68 && !simLeague.neverRetire) {
+                if (userTeam.getHC(0).age > retireAge && !simLeague.neverRetire) {
                     retirementQuestion();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -3608,7 +3609,7 @@ public class MainActivity extends AppCompatActivity {
     private void contractDialog() {
 
         if (simLeague.isCareerMode()) {
-            if (userHC.age > 67) {
+            if (userHC.age > retireAge) {
                 userHC.retirement = true;
             }
         }

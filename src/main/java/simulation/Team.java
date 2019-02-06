@@ -1229,7 +1229,7 @@ public class Team {
 
         int goal = projectedPollRank;
         if (goal > league.teamList.size()*.875) goal = (int)(league.teamList.size()*.875);
-        if (goal <= 20) goal = 20;
+        if (goal <= 15) goal = 15;
         int diffExpected = goal - rankTeamPollScore;
 
         int newPrestige = teamPrestige;
@@ -1277,7 +1277,7 @@ public class Team {
                     nflPts++;
                 }
             }
-            if (nflPts > 2) nflPts = 2;
+            if (nflPts > 3) nflPts = 3;
         }
 
         newPrestige += prestigeChange + ccPts + ncwPts + nflPts + disPts;
@@ -1417,7 +1417,7 @@ public class Team {
 
     private void coachContracts(int totalPDiff, int newPrestige) {
         int max = 78;
-        int min = 63;
+        int min = 65;
         Random rand = new Random();
         int retire = rand.nextInt((max - min) + 1) + min;
         int age = HC.get(0).age;
@@ -1546,16 +1546,20 @@ public class Team {
        HC.get(0).contractLength = 1;
        HC.get(0).contractYear = 1;
 
+        if(teamDisciplineScore < 60) {
+            teamDisciplineScore = (60 + teamDisciplineScore)/2;
+        }
+
         league.newsStories.get(league.currentWeek).add("FIRED! Acting Head Coach named at " + name + ">" + name + " has fired their head coach, " + hcName +
                 " and has promoted his assistant coach, " + HC.get(0).name + ", as Acting Head Coach for the remainder of the season. After the season ends, the team will determine what to do for the Head Coach vacancy.");
     }
 
     private void newCoachTeamChanges() {
 
-        teamPrestige -= (int) Math.random() * 8;
+        if(HC.get(0).contractLength != 1) teamPrestige -= (int) Math.random() * 8;
 
-        if(teamDisciplineScore < 30) {
-            teamDisciplineScore = (50 - teamDisciplineScore)/2;
+        if(teamDisciplineScore < 60) {
+            teamDisciplineScore = (60 + teamDisciplineScore)/2;
         }
 
     }
@@ -1564,10 +1568,10 @@ public class Team {
         //make team
         boolean promote = true;
         int stars = teamPrestige / 20;
-        stars = ((int)Math.random()*(stars/2)) + (stars/2);
+        stars = (int)(Math.random()*15) + (stars/4);
 
         //MAKE HEAD COACH
-        HC.add(new HeadCoach(league.getRandName(), (int) (4 * Math.random() + 1), stars, this, promote));
+        HC.add(new HeadCoach(league.getRandName(), 0, stars, this, promote));
 
         //done making players, sort them
         sortPlayers();
@@ -3071,7 +3075,7 @@ public class Team {
 
     public void disciplineSuccess() {
         HC.get(0).ratDiscipline += (int) (Math.random() * 3);
-        teamDisciplineScore += (int) (Math.random() * 4);
+        teamDisciplineScore += (int) (Math.random() * 3);
         if (teamDisciplineScore > 100) teamDisciplineScore = 100;
     }
 
@@ -4867,7 +4871,53 @@ public class Team {
 
         //Save Team Season Data
 
+/*
+        public int wins;
+        public int losses;
+        public int totalWins;
+        public int totalLosses;
+        public int totalCCs;
+        public int totalNCs;
+        public int totalCCLosses;
+        public int totalNCLosses;
+        public int totalBowls;
+        public int totalBowlLosses;
+        public int teamPoints;
+        public int teamOppPoints;
+        public int teamYards;
+        public int teamOppYards;
+        public int teamPassYards;
+        public int teamRushYards;
+        public int teamOppPassYards;
+        public int teamOppRushYards;
+        public int teamTODiff;
+        public int teamPrestige;
+        public int teamPrestigeStart;
+
+        public int confPrestige;
+        public int disciplinePts;
+        public int projectedWins;
+        public int projectedPollRank;
+        public float projectedPollScore;
+        public float teamStartOffTal;
+        public float teamStartDefTal;
+
+        public boolean fired;
+        private boolean newContract;
+        private boolean retired;
+
         //Save Team Schedule
+        public ArrayList<Game> gameSchedule;
+        public ArrayList<String> gameWLSchedule;
+        public ArrayList<Team> gameWinsAgainst;
+        public ArrayList<Team> gameLossesAgainst;
+        public String confChampion;
+        public String sweet16;
+        public String qtFinalWL;
+        public String semiFinalWL;
+        public String natChampWL;
+*/
+
 
         //Save Team Injuries & Suspensions
 

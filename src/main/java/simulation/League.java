@@ -116,7 +116,8 @@ public class League {
     public ArrayList<ArrayList<String>> newsStories;
     public ArrayList<ArrayList<String>> weeklyScores;
     private ArrayList<String> teamDiscipline;
-    private double disciplineChance = 0.15;
+    private double disciplineChance = 0.10;
+    private double disciplineScrutiny = 0.05;
 
     public LeagueRecords leagueRecords;
     private TeamStreak longestWinStreak;
@@ -1743,13 +1744,15 @@ public class League {
                 teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.15;
 
                 teamList.get(i).HC.get(0).contractLength =- 2;
-
+                if(!teamList.get(i).userControlled && Math.random() < .15) {
+                    teamList.get(i).midSeasonFiring();
+                }
 
             } else if (teamList.get(i).teamDisciplineScore <= 0) {
                 teamList.get(i).bowlBan = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.35;
                 teamList.get(i).teamBudget -= teamList.get(i).teamBudget * 0.35;
-                teamList.get(i).teamDisciplineScore = 50;
+                teamList.get(i).teamDisciplineScore = 60;
                 teamList.get(i).penalized = false;
                 teamList.get(i).recentPenalty = false;
 
@@ -1888,7 +1891,11 @@ public class League {
         teamDiscipline = new ArrayList<>();
         String news = "";
         for (int t = 0; t < teamList.size(); ++t) {
-            if (Math.random() < disciplineChance) {
+            double disChance = disciplineChance;
+            if(teamList.get(t).teamDisciplineScore < 50 || teamList.get(t).rankTeamPrestige < teamList.size()*.20) disChance += disciplineScrutiny;
+            else if(Math.random() < 0.33) disChance += disciplineScrutiny;
+
+            if (Math.random() < disChance) {
                 int teamDis = teamList.get(t).getTeamDiscipline();
                 if ((int) (Math.random() * (100 - teamDis)) > (int) (Math.random() * teamList.get(t).HC.get(0).ratDiscipline)) {
                     teamDiscipline.add(teamList.get(t).name);
@@ -6030,7 +6037,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
     public String getFreeAgentCoachSave() {
         for (HeadCoach h : coachFreeAgents) {
-            h.age++;
+            if(!h.retired) h.age++;
         }
         //Adding to the Available Coach List Pool
         for (HeadCoach h : coachList) {

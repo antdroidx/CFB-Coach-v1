@@ -3200,8 +3200,8 @@ public class Game implements Serializable {
         StringBuilder gameC = new StringBuilder();
         StringBuilder gameR = new StringBuilder();
 
-        int homeRating = (int) (homeTeam.HC.get(0).ratDef + homeTeam.HC.get(0).ratOff + homeTeam.teamOffTalent + homeTeam.teamDefTalent + 3);
-        int awayRating = (int) (awayTeam.HC.get(0).ratDef + awayTeam.HC.get(0).ratOff + awayTeam.teamOffTalent + awayTeam.teamDefTalent);
+        int homeRating = (int) (homeTeam.HC.get(0).ratDef + homeTeam.HC.get(0).ratOff + homeTeam.teamOffTalent + homeTeam.teamDefTalent + 3)/4;
+        int awayRating = (int) (awayTeam.HC.get(0).ratDef + awayTeam.HC.get(0).ratOff + awayTeam.teamOffTalent + awayTeam.teamDefTalent)/4;
 
         gameL.append("Ranking\nRecord\nPPG\nOpp PPG\nYPG\nOpp YPG\n" +
                 "\nPass YPG\nRush YPG\nOpp PYPG\nOpp RYPG\n\nOff Talent\nDef Talent\nPrestige\n\nHC\nHC Ovr\nHC Off\nOffense\nHC Def\nDefense\n\nFavorite");
@@ -3259,12 +3259,12 @@ public class Game implements Serializable {
         String fav = "";
 
         if (hometeam) {
-            if (home >= away) {
-                fav = "Fav";
+            if (home > away) {
+                fav = "by " + 2*(home-away);
             }
         } else {
             if (away > home) {
-                fav = "Fav";
+                fav = "by " + 2*(away-home);
             }
         }
 
@@ -3392,13 +3392,13 @@ public class Game implements Serializable {
             homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(
                     numOT + "OT Thriller!>" + winner.getStrAbbrWL() + " and " + loser.getStrAbbrWL() + " played an absolutely thrilling game " +
                             "that went to " + numOT + " overtimes, with " + winner.name + " finally emerging victorious " + winScore + " to " + loseScore + ".");
-        } else if (homeScore > awayScore && awayTeam.losses == 1 && awayTeam.league.currentWeek > 5) {
+        } else if (homeScore > awayScore && awayTeam.losses == 1 && awayTeam.league.currentWeek > 5 && awayTeam.rankTeamPollScore < awayTeam.league.countTeam) {
             // 5-0 or better team given first loss
             awayTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(
                     "Undefeated no more! " + awayTeam.name + " suffers first loss!" +
                             ">" + homeTeam.getStrAbbrWL() + " hands " + awayTeam.getStrAbbrWL() +
                             " their first loss of the season, winning " + homeScore + " to " + awayScore + ".");
-        } else if (awayScore > homeScore && homeTeam.losses == 1 && homeTeam.league.currentWeek > 5) {
+        } else if (awayScore > homeScore && homeTeam.losses == 1 && homeTeam.league.currentWeek > 5 && homeTeam.rankTeamPollScore < homeTeam.league.countTeam) {
             // 5-0 or better team given first loss
             homeTeam.league.newsStories.get(homeTeam.league.currentWeek + 1).add(
                     "Undefeated no more! " + homeTeam.name + " suffers first loss!" +
