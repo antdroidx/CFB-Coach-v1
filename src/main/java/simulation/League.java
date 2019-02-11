@@ -1,5 +1,8 @@
 package simulation;
 
+import android.content.Intent;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import antdroid.cfbcoach.Home;
+import antdroid.cfbcoach.MainActivity;
 import comparator.CompCoachAllAmericans;
 import comparator.CompCoachAllConference;
 import comparator.CompCoachBowlWins;
@@ -322,7 +327,7 @@ public class League {
     /**
      * Creates a CUSTOM League Universe
      */
-    public League(String namesCSV, String lastNamesCSV, File customConf, File customTeams, File customBowl, boolean randomize, boolean equalize) {
+    public League(String namesCSV, String lastNamesCSV, File customConf, File customTeams, File customBowl, boolean randomize, boolean equalize, MainActivity main) {
         careerMode = true;
         showPotential = false;
         confRealignment = true;
@@ -347,9 +352,12 @@ public class League {
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(
                     "Error reading file");
+            ex.printStackTrace();
+            main.crash();
+            return;
         }
 
 
@@ -409,6 +417,8 @@ public class League {
         } catch (IOException ex) {
             System.out.println(
                     "Error reading file");
+            ex.printStackTrace();
+            main.crash();
         }
 
         //set teamList
@@ -450,6 +460,8 @@ public class League {
         } catch (IOException ex) {
             System.out.println(
                     "Error reading file");
+            ex.printStackTrace();
+            main.crash();
         }
 
         if (bowlNames.length != bowlNamesText.split(",").length) {
@@ -709,7 +721,7 @@ public class League {
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(
                     "Error reading file");
         }
@@ -730,7 +742,7 @@ public class League {
      *
      * @param saveFile file that league is saved in
      */
-    public League(File saveFile, String namesCSV, String lastNamesCSV, boolean fixSave) {
+    public League(File saveFile, String namesCSV, String lastNamesCSV, boolean fixSave, MainActivity main) {
         setupCommonInitalizers();
         setupNamesDB(namesCSV, lastNamesCSV);
 
@@ -933,9 +945,11 @@ public class League {
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(
                     "Error reading file");
+            ex.printStackTrace();
+            main.crash();
         }
 
         //Get longest active win streak
@@ -966,7 +980,7 @@ public class League {
      * IMPORT A SAVE FILE
      * Create League from saved file.
      **/
-    public League(InputStream inputStream, String namesCSV, String lastNamesCSV) {
+    public League(InputStream inputStream, String namesCSV, String lastNamesCSV, MainActivity main) {
         setupCommonInitalizers();
         setupNamesDB(namesCSV, lastNamesCSV);
 
@@ -1179,9 +1193,11 @@ public class League {
         } catch (FileNotFoundException ex) {
             System.out.println(
                     "Unable to open file");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(
                     "Error reading file");
+            ex.printStackTrace();
+            main.crash();
         }
 
         //fix team divions
@@ -3694,6 +3710,7 @@ public class League {
                                 }
                             }
                         }
+                        coachStarList.remove(teamList.get(t).HC.get(0));
                         break;
                     }
                 }
@@ -3778,6 +3795,7 @@ public class League {
                             }
                         }
                     }
+                    coachStarList.remove(school.HC.get(0));
                     break;
                 }
             }
@@ -4275,119 +4293,11 @@ Then conferences can see if they want to add them to their list if the teams mee
         newsRealignment = "";
         countRealignment = 0;
 
-        if (Math.random() < confRealignmentChance) {
-            ArrayList<Conference> confList = conferences;
-            Collections.sort(confList, new CompConfPrestige());
-
-            //find conferences for independents
-            for (int c = 0; c < confList.size(); c++) {
-                if (confList.get(c).confTeams.size() < confList.get(c).minConfTeams) {
-                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
-                        if (confList.get(c).confTeams.get(i).teamPrestige < confList.get(c).confRelegateMin) {
-                            demoteTeamList.add(confList.get(c).confTeams.get(i));
-                        }
-                    }
-                }
-            }
-
-            //Smaller Conferences Will Try to Expand Their Empire...
-            for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() < 15) {
-                    Conference conf = conferences.get(c);
-                    ArrayList<Team> qualified = new ArrayList<>();
-                    for (int i = 0; i < demoteTeamList.size(); i++) {
-                        if (demoteTeamList.get(i).teamPrestige > conf.confRelegateMin && Math.random() < realignmentChance * 2 && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
-                            qualified.add(demoteTeamList.get(i));
-                        }
-                        if (qualified.size() >= 2) {
-                            final Team teamA = qualified.get(0);
-                            final Team teamB = qualified.get(1);
-                            conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
-                            conferences.get(getConfNumber(teamB.conference)).confTeams.remove(teamB);
-                            teamA.conference = conf.confName;
-                            teamB.conference = conf.confName;
-                            conf.confTeams.add(teamA);
-                            conf.confTeams.add(teamB);
-
-                            //break the news
-                            newsStories.get(currentWeek + 2).add("Conference Addition!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " from the " + conf.confName + " to their conference next season!");
-
-                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " from the " + conf.confName + " to their conference next season!\n\n");
-                            countRealignment++;
-                            demoteTeamList.remove(teamA);
-                            demoteTeamList.remove(teamB);
-                        }
-                    }
-                }
-            }
-
-            //find the teams that are doing too well for their conference level
-            for (int c = confList.size() / 2; c < confList.size(); c++) {
-                if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams) {
-                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
-                        if (confList.get(c).confTeams.get(i).teamPrestige > confList.get(c).confPromoteMin) {
-                            promoteTeamList.add(confList.get(c).confTeams.get(i));
-                        }
-                    }
-                } else {
-                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
-                        promoteTeamList.add(confList.get(c).confTeams.get(i));
-                    }
-                }
-            }
-
-            //Sort Prestige
-            Collections.sort(promoteTeamList, new CompTeamPrestige());
-
-            //Bigger Conferences will extend Invites
-            for (int i = 0; i < promoteTeamList.size(); i++) {
-                int randomConf = (int) (Math.random() * (confList.size() / 2));
-                if (promoteTeamList.get(i).teamPrestige > confList.get(randomConf).confPromoteMin && confList.get(randomConf).confTeams.size() >= confList.get(randomConf).minConfTeams) {
-                    for (int k = confList.get(randomConf).confTeams.size() - 1; k >= 0; k--) {
-                        if (confList.get(randomConf).confTeams.get(k).teamPrestige < confList.get(randomConf).confRelegateMin) {
-                            if (Math.random() < realignmentChance && Math.abs(confList.get(randomConf).confTeams.get(k).location - promoteTeamList.get(i).location) < 2) {
-
-                                final String teamAconf = confList.get(randomConf).confName;
-                                final String teamBconf = promoteTeamList.get(i).conference;
-                                final Team teamA = confList.get(randomConf).confTeams.get(k);
-                                final Team teamB = promoteTeamList.get(i);
-
-                                //transfer conf data
-                                teamB.conference = teamAconf;
-                                teamA.conference = teamBconf;
-
-                                //remove + transfer teams
-                                confList.get(getConfNumber(teamAconf)).confTeams.remove(teamA);
-                                confList.get(getConfNumber(teamBconf)).confTeams.remove(teamB);
-
-                                confList.get(getConfNumber(teamAconf)).confTeams.add(teamB);
-                                confList.get(getConfNumber(teamBconf)).confTeams.add(teamA);
-
-                                //Remove some prestige from demoted teams
-                                teamA.teamPrestige -= (int) Math.random() * 4;
-
-
-                                //break the news
-                                newsStories.get(currentWeek + 2).add("Conference Realignment News>The " + teamAconf + " conference announced today they will be adding " + teamB.name + " to their conference next season! The " + teamBconf + " conference has agreed to add " + teamA.name + " as part of the realignment.");
-
-                                newsRealignment += ("The " + teamAconf + " announced today they will be adding " + teamB.name + " to their conference next season! The " + teamBconf + " conference has agreed to add " + teamA.name + " as part of the realignment.\n\n");
-                                countRealignment++;
-                                promoteTeamList.remove(teamA);
-                                break;
-                            }
-                        }
-
-                    }
-
-                }
-            }
-        }
-
-
         if (advancedRealignment && Math.random() < confRealignmentChance) {
             ArrayList<Conference> confList = conferences;
             Collections.sort(confList, new CompConfPrestige());
-
+            demoteTeamList = new ArrayList<>();
+            promoteTeamList = new ArrayList<>();
 
             //find the teams do not meet conference threshold
             for (int c = 0; c < confList.size(); c++) {
@@ -4499,6 +4409,119 @@ Then conferences can see if they want to add them to their list if the teams mee
 
 
         }
+
+
+
+        if (Math.random() < confRealignmentChance) {
+            ArrayList<Conference> confList = conferences;
+            Collections.sort(confList, new CompConfPrestige());
+            demoteTeamList = new ArrayList<>();
+            promoteTeamList = new ArrayList<>();
+
+            //find conferences for independents
+            for (int c = 0; c < confList.size(); c++) {
+                if (confList.get(c).confTeams.size() < confList.get(c).minConfTeams) {
+                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                        if (confList.get(c).confTeams.get(i).teamPrestige < confList.get(c).confRelegateMin) {
+                            demoteTeamList.add(confList.get(c).confTeams.get(i));
+                        }
+                    }
+                }
+            }
+
+            //Smaller Conferences Will Try to Expand Their Empire...
+            for (int c = 0; c < conferences.size(); c++) {
+                if (conferences.get(c).confTeams.size() < 15) {
+                    Conference conf = conferences.get(c);
+                    ArrayList<Team> qualified = new ArrayList<>();
+                    for (int i = 0; i < demoteTeamList.size(); i++) {
+                        if (demoteTeamList.get(i).teamPrestige > conf.confRelegateMin && Math.random() < realignmentChance * 2 && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                            qualified.add(demoteTeamList.get(i));
+                        }
+                        if (qualified.size() >= 2) {
+                            final Team teamA = qualified.get(0);
+                            final Team teamB = qualified.get(1);
+                            conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
+                            conferences.get(getConfNumber(teamB.conference)).confTeams.remove(teamB);
+                            teamA.conference = conf.confName;
+                            teamB.conference = conf.confName;
+                            conf.confTeams.add(teamA);
+                            conf.confTeams.add(teamB);
+
+                            //break the news
+                            newsStories.get(currentWeek + 2).add("Conference Addition!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " from the " + conf.confName + " to their conference next season!");
+
+                            newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " and " + teamB.name + " from the " + conf.confName + " to their conference next season!\n\n");
+                            countRealignment++;
+                            demoteTeamList.remove(teamA);
+                            demoteTeamList.remove(teamB);
+                        }
+                    }
+                }
+            }
+
+            //find the teams that are doing too well for their conference level
+            for (int c = confList.size() / 2; c < confList.size(); c++) {
+                if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams) {
+                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                        if (confList.get(c).confTeams.get(i).teamPrestige > confList.get(c).confPromoteMin) {
+                            promoteTeamList.add(confList.get(c).confTeams.get(i));
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                        promoteTeamList.add(confList.get(c).confTeams.get(i));
+                    }
+                }
+            }
+
+            //Sort Prestige
+            Collections.sort(promoteTeamList, new CompTeamPrestige());
+
+            //Bigger Conferences will extend Invites
+            for (int i = 0; i < promoteTeamList.size(); i++) {
+                int randomConf = (int) (Math.random() * (confList.size() / 2));
+                if (promoteTeamList.get(i).teamPrestige > confList.get(randomConf).confPromoteMin && confList.get(randomConf).confTeams.size() >= confList.get(randomConf).minConfTeams) {
+                    for (int k = confList.get(randomConf).confTeams.size() - 1; k >= 0; k--) {
+                        if (confList.get(randomConf).confTeams.get(k).teamPrestige < confList.get(randomConf).confRelegateMin) {
+                            if (Math.random() < realignmentChance && Math.abs(confList.get(randomConf).confTeams.get(k).location - promoteTeamList.get(i).location) < 2) {
+
+                                final String teamAconf = confList.get(randomConf).confName;
+                                final String teamBconf = promoteTeamList.get(i).conference;
+                                final Team teamA = confList.get(randomConf).confTeams.get(k);
+                                final Team teamB = promoteTeamList.get(i);
+
+                                //transfer conf data
+                                teamB.conference = teamAconf;
+                                teamA.conference = teamBconf;
+
+                                //remove + transfer teams
+                                confList.get(getConfNumber(teamAconf)).confTeams.remove(teamA);
+                                confList.get(getConfNumber(teamBconf)).confTeams.remove(teamB);
+
+                                confList.get(getConfNumber(teamAconf)).confTeams.add(teamB);
+                                confList.get(getConfNumber(teamBconf)).confTeams.add(teamA);
+
+                                //Remove some prestige from demoted teams
+                                teamA.teamPrestige -= (int) Math.random() * 4;
+
+
+                                //break the news
+                                newsStories.get(currentWeek + 2).add("Conference Realignment News>The " + teamAconf + " conference announced today they will be adding " + teamB.name + " to their conference next season! The " + teamBconf + " conference has agreed to add " + teamA.name + " as part of the realignment.");
+
+                                newsRealignment += ("The " + teamAconf + " announced today they will be adding " + teamB.name + " to their conference next season! The " + teamBconf + " conference has agreed to add " + teamA.name + " as part of the realignment.\n\n");
+                                countRealignment++;
+                                promoteTeamList.remove(teamA);
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+        }
+
 
 
         for (Conference c : conferences) {

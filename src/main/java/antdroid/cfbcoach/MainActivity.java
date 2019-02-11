@@ -1,11 +1,9 @@
 package antdroid.cfbcoach;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -125,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
     private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
     private final DecimalFormat df2 = new DecimalFormat("#.##");
 
-    private int theme;
+    public int theme;
+
+    private boolean loadedLeague = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,123 +144,36 @@ public class MainActivity extends AppCompatActivity {
         expListPlayerStats = findViewById(R.id.playerStatsExpandList);
         jobList = new ArrayList<>();
 
-        //LOAD GAME DATA
-        //SAVE OR NO SAVE
-        boolean loadedLeague = false;
-        if (extras != null) {
-            String saveFileStr = extras.getString("SAVE_FILE");
+        //Load Data
+        loadGame(extras);
 
-            //NEW DYNASTY GAME
-            if (saveFileStr.contains("NEW_LEAGUE")) {
-                //NEW DYNASTY GAME WITH CUSTOM DATABASE
-                if (saveFileStr.contains("CUSTOM")) {
-                    newGame = true;
-                    String[] filesSplit = saveFileStr.split(",");
-                    this.customUri = filesSplit[1];
-                    customConfs = new File(getFilesDir(), "conferences.txt");
-                    customTeams = new File(getFilesDir(), "teams.txt");
-                    customBowls = new File(getFilesDir(), "bowls.txt");
-                    Uri uri = Uri.parse(customUri);
-                    customLeague(uri);
-                    if (saveFileStr.contains("RANDOM"))
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, true, false);
-                    else if (saveFileStr.contains("EQUALIZE"))
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, true);
-                    else
-                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, false);
-                    season = seasonStart;
-
-                    //NEW DYNASTY DEFAULT DATABASE
-                } else if (saveFileStr.contains("RANDOM")) {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
-                    season = seasonStart;
-
-                } else if (saveFileStr.contains("EQUALIZE")) {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, true);
-                    season = seasonStart;
-
-                } else {
-                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
-                    season = seasonStart;
-                }
-                //LOADING A CURRENT GAME AFTER RECRUITING PERIOD
-            } else if (saveFileStr.equals("DONE_RECRUITING")) {
-                File saveFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
-                if (saveFile.exists()) {
-                    simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names));
-                    userTeam = simLeague.userTeam;
-                    userTeamStr = userTeam.name;
-                    userTeam.recruitPlayersFromStr(extras.getString("RECRUITS"));
-                    simLeague.updateTeamTalentRatings();
-                    season = simLeague.getYear();
-                    currentTeam = userTeam;
-                    loadedLeague = true;
-                }
-                //Import Save
-            } else if (saveFileStr.contains("IMPORT"))  {
-                String[] filesSplit = saveFileStr.split(",");
-                Uri uri = Uri.parse(filesSplit[1]);
-                InputStream inputStream = null;
-                try {
-                    inputStream = getContentResolver().openInputStream(uri);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                simLeague = new League(inputStream, getString(R.string.league_player_names), getString(R.string.league_last_names));
-                    userTeam = simLeague.userTeam;
-                    userTeamStr = userTeam.name;
-                    simLeague.updateTeamTalentRatings();
-                    season = simLeague.getYear();
-                    currentTeam = userTeam;
-                    loadedLeague = true;
-
-                //LOADS A SAVE GAME
-            } else if (saveFileStr.contains("FIX")) {
-                File saveFile = new File(getFilesDir(), saveFileStr.split(",")[0]);
-                    simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names), true);
-                    userTeam = simLeague.userTeam;
-                    userTeamStr = userTeam.name;
-                    simLeague.updateTeamTalentRatings();
-                    season = simLeague.getYear();
-                    currentTeam = userTeam;
-                    loadedLeague = true;
-                    if(season == seasonStart) seasonGoals();
-            } else {
-                File saveFile = new File(getFilesDir(), saveFileStr);
-                if (saveFile.exists()) {
-                    simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names));
-                    userTeam = simLeague.userTeam;
-                    userTeamStr = userTeam.name;
-                    simLeague.updateTeamTalentRatings();
-                    season = simLeague.getYear();
-                    currentTeam = userTeam;
-                    loadedLeague = true;
-                    if(season == seasonStart) seasonGoals();
-                }
-            }
-        } else {
-            //STARTS A NEW GAME WITH NO EXTRAS - NOT USED CURRENTLY
-            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
-            season = seasonStart;
-        }
 
         wantUpdateConf = true; // 0 and 1, don't update, 2 update
         showToasts = true;
         showInjuryReport = true;
 
-        if (!loadedLeague) {
-            // Set it to 1st team until one selected
-            userTeam = simLeague.teamList.get(0);
-            simLeague.userTeam = userTeam;
-            userTeam.userControlled = true;
-            userTeamStr = userTeam.name;
-            currentTeam = userTeam;
-            currentTeam = simLeague.teamList.get(0);
-            currentConference = simLeague.conferences.get(0);
+        try {
+            if (!loadedLeague) {
+                // Set it to 1st team until one selected
+                userTeam = simLeague.teamList.get(0);
+                simLeague.userTeam = userTeam;
+                userTeam.userControlled = true;
+                userTeamStr = userTeam.name;
+                currentTeam = userTeam;
+                currentTeam = simLeague.teamList.get(0);
+                currentConference = simLeague.conferences.get(0);
 
-            String saveFileStr = extras.getString("SAVE_FILE");
-            if (saveFileStr.contains("CUSTOM")) importDataPrompt();
+                String saveFileStr = extras.getString("SAVE_FILE");
+                if (saveFileStr.contains("CUSTOM")) importDataPrompt();
                 else careerModeOptions();
+            }
+
+        } catch (Exception ex) {
+            System.out.println(
+                    "Error reading file");
+            ex.printStackTrace();
+            crash();
+            return;
         }
 
         // Set toolbar text
@@ -438,6 +351,105 @@ public class MainActivity extends AppCompatActivity {
         if (simLeague.getYear() != seasonStart) {
             // Only show recruiting classes if not season 1
             showRecruitingClassDialog();
+        }
+    }
+
+    private void loadGame(Bundle extras) {
+        if (extras != null) {
+            String saveFileStr = extras.getString("SAVE_FILE");
+
+            //NEW DYNASTY GAME
+            if (saveFileStr.contains("NEW_LEAGUE")) {
+                //NEW DYNASTY GAME WITH CUSTOM DATABASE
+                if (saveFileStr.contains("CUSTOM")) {
+                    newGame = true;
+                    String[] filesSplit = saveFileStr.split(",");
+                    this.customUri = filesSplit[1];
+                    customConfs = new File(getFilesDir(), "conferences.txt");
+                    customTeams = new File(getFilesDir(), "teams.txt");
+                    customBowls = new File(getFilesDir(), "bowls.txt");
+                    Uri uri = Uri.parse(customUri);
+                    customLeague(uri);
+                    if (saveFileStr.contains("RANDOM"))
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, true, false, this);
+                    else if (saveFileStr.contains("EQUALIZE"))
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, true, this);
+                    else
+                        simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), customConfs, customTeams, customBowls, false, false, this);
+                    season = seasonStart;
+
+                    //NEW DYNASTY DEFAULT DATABASE
+                } else if (saveFileStr.contains("RANDOM")) {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), true, false);
+                    season = seasonStart;
+
+                } else if (saveFileStr.contains("EQUALIZE")) {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, true);
+                    season = seasonStart;
+
+                } else {
+                    simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
+                    season = seasonStart;
+                }
+                //LOADING A CURRENT GAME AFTER RECRUITING PERIOD
+            } else if (saveFileStr.equals("DONE_RECRUITING")) {
+                File saveFile = new File(getFilesDir(), "saveLeagueRecruiting.cfb");
+                if (saveFile.exists()) {
+                    simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names));
+                    userTeam = simLeague.userTeam;
+                    userTeamStr = userTeam.name;
+                    userTeam.recruitPlayersFromStr(extras.getString("RECRUITS"));
+                    simLeague.updateTeamTalentRatings();
+                    season = simLeague.getYear();
+                    currentTeam = userTeam;
+                    loadedLeague = true;
+                }
+                //Import Save
+            } else if (saveFileStr.contains("IMPORT"))  {
+                String[] filesSplit = saveFileStr.split(",");
+                Uri uri = Uri.parse(filesSplit[1]);
+                InputStream inputStream = null;
+                try {
+                    inputStream = getContentResolver().openInputStream(uri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                simLeague = new League(inputStream, getString(R.string.league_player_names), getString(R.string.league_last_names), this);
+                userTeam = simLeague.userTeam;
+                userTeamStr = userTeam.name;
+                simLeague.updateTeamTalentRatings();
+                season = simLeague.getYear();
+                currentTeam = userTeam;
+                loadedLeague = true;
+
+                //LOADS A SAVE GAME
+            } else if (saveFileStr.contains("FIX")) {
+                File saveFile = new File(getFilesDir(), saveFileStr.split(",")[0]);
+                simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names), true, this);
+                userTeam = simLeague.userTeam;
+                userTeamStr = userTeam.name;
+                simLeague.updateTeamTalentRatings();
+                season = simLeague.getYear();
+                currentTeam = userTeam;
+                loadedLeague = true;
+                if(season == seasonStart) seasonGoals();
+            } else {
+                File saveFile = new File(getFilesDir(), saveFileStr);
+                if (saveFile.exists()) {
+                    simLeague = new League(saveFile, getString(R.string.league_player_names), getString(R.string.league_last_names));
+                    userTeam = simLeague.userTeam;
+                    userTeamStr = userTeam.name;
+                    simLeague.updateTeamTalentRatings();
+                    season = simLeague.getYear();
+                    currentTeam = userTeam;
+                    loadedLeague = true;
+                    if(season == seasonStart) seasonGoals();
+                }
+            }
+        } else {
+            //STARTS A NEW GAME WITH NO EXTRAS - NOT USED CURRENTLY
+            simLeague = new League(getString(R.string.league_player_names), getString(R.string.league_last_names), getString(R.string.conferences), getString(R.string.teams), getString(R.string.bowls), false, false);
+            season = seasonStart;
         }
     }
 
@@ -3228,7 +3240,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Exit Current Game
-    private void exitMainActivity() {
+    public void exitMainActivity() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage("Are you sure you want to return to main menu? Any progress from the beginning of the season will be lost.")
                 .setPositiveButton("Yes, Exit", new DialogInterface.OnClickListener() {
@@ -3246,7 +3258,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing
                     }
-                });
+                })
+                .setCancelable(false);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -4714,6 +4727,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fixBowlNames() {
         String[] bowls = simLeague.bowlNamesText.split(",");
+        simLeague.bowlNames = new String[bowls.length];
         for(int i = 0; i < bowls.length; i++) {
             simLeague.bowlNames[i] = bowls[i];
         }
@@ -4781,5 +4795,22 @@ public class MainActivity extends AppCompatActivity {
         builder.setCancelable(false);
     }
 
+    public void crash() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("The DATABASE is invalid or corrupt. Please check for formatting or spelling errors.")
+                .setPositiveButton("Exit to Main Screen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Actually go back to main menu
+                        finish();
+                        Intent myIntent = new Intent(MainActivity.this, Home.class);
+                        myIntent.putExtra("Theme", theme);
+                        MainActivity.this.startActivity(myIntent);
+                    }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 }

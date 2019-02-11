@@ -3200,8 +3200,8 @@ public class Game implements Serializable {
         StringBuilder gameC = new StringBuilder();
         StringBuilder gameR = new StringBuilder();
 
-        int homeRating = (int) (homeTeam.HC.get(0).ratDef + homeTeam.HC.get(0).ratOff + homeTeam.teamOffTalent + homeTeam.teamDefTalent + 3)/4;
-        int awayRating = (int) (awayTeam.HC.get(0).ratDef + awayTeam.HC.get(0).ratOff + awayTeam.teamOffTalent + awayTeam.teamDefTalent)/4;
+        int homeRating = (int) (homeTeam.HC.get(0).ratDef + homeTeam.HC.get(0).ratOff + 3*homeTeam.teamOffTalent + 3*homeTeam.teamDefTalent + 3)/8;
+        int awayRating = (int) (awayTeam.HC.get(0).ratDef + awayTeam.HC.get(0).ratOff + 3*awayTeam.teamOffTalent + 3*awayTeam.teamDefTalent)/8;
 
         gameL.append("Ranking\nRecord\nPPG\nOpp PPG\nYPG\nOpp YPG\n" +
                 "\nPass YPG\nRush YPG\nOpp PYPG\nOpp RYPG\n\nOff Talent\nDef Talent\nPrestige\n\nHC\nHC Ovr\nHC Off\nOffense\nHC Def\nDefense\n\nFavorite");

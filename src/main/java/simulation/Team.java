@@ -4141,7 +4141,7 @@ public class Team {
     }
 
     public String[] getGradPlayersList() {
-        String[] playersLeavingList = new String[playersLeaving.size()];
+        String[] playersLeavingList = new String[playersLeaving.size() + playersTransferring.size()];
         for (int i = 0; i < playersLeavingList.length; ++i) {
             playersLeavingList[i] = playersLeaving.get(i).getGraduatingPlayerInfo();
         }

@@ -260,7 +260,7 @@ public class Conference {
      */
     public void setUpSchedule() {
         oocGames = getOOCGames();
-        setDivisionTeams();
+        //setDivisionTeams();
         if(league.regSeasonWeeks == 13) {
             setUpOriginalSchedule();
         } else {
@@ -683,7 +683,7 @@ public class Conference {
      * Should be only called after week 13
      */
     public ArrayList<Player> getAllConfPlayers() {
-        if (allConfPlayers.isEmpty()) {
+        if (allConfPlayers.isEmpty() && confTeams.size() > 0) {
             ArrayList<HeadCoach> hc = new ArrayList<>();
             ArrayList<PlayerQB> qbs = new ArrayList<>();
             ArrayList<PlayerRB> rbs = new ArrayList<>();
