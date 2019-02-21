@@ -1,8 +1,5 @@
 package simulation;
 
-import android.content.Intent;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,7 +20,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-import antdroid.cfbcoach.Home;
 import antdroid.cfbcoach.MainActivity;
 import comparator.CompCoachAllAmericans;
 import comparator.CompCoachAllConference;
@@ -1793,6 +1789,8 @@ public class League {
                 teamList.get(i).teamBudget -= baselineCost * (teamList.get(i).teamFacilities + 1);
                 teamList.get(i).facilityUpgrade = true;
                 teamList.get(i).teamFacilities++;
+                teamList.get(i).teamPrestige += teamList.get(i).teamFacilities;
+                teamList.get(i).HC.get(0).baselinePrestige += teamList.get(i).teamFacilities;
             }
         }
     }
@@ -4293,6 +4291,53 @@ Then conferences can see if they want to add them to their list if the teams mee
         newsRealignment = "";
         countRealignment = 0;
 
+        //Independent Home finding...
+        if (advancedRealignment && Math.random() < realignmentChance) {
+            ArrayList<Conference> confList = conferences;
+            promoteTeamList = new ArrayList<>();
+
+
+            //find the Independents
+            for (int c = 0; c < confList.size(); c++) {
+                if (confList.get(c).confTeams.size() < confList.get(c).minConfTeams) {
+                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                        promoteTeamList.add(confList.get(c).confTeams.get(i));
+                    }
+                }
+            }
+
+            //Sort Prestige
+            Collections.sort(promoteTeamList, new CompTeamPrestige());
+
+            //Smaller Conferences Will Try to Expand Their Empire...
+            for (int c = 0; c < conferences.size(); c++) {
+                if (conferences.get(c).confTeams.size() < 16 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
+                    Conference conf = conferences.get(c);
+                    for (int i = 0; i < promoteTeamList.size(); i++) {
+                        if (promoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(promoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                            final Team teamA = promoteTeamList.get(i);
+                            final String oldConf = teamA.conference;
+                            if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams && conferences.get(getConfNumber(teamA.conference)).confTeams.size() > 10) {
+                                conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
+                                teamA.conference = conf.confName;
+                                conf.confTeams.add(teamA);
+
+                                //break the news
+                                newsStories.get(currentWeek + 2).add("Conference Growth!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to be unaffiliated as an Independent.");
+
+                                newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to be unaffiliated as an Independent.\n\n");
+                                countRealignment++;
+                                promoteTeamList.remove(teamA);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        //Advanced Realignment Craziness
+
         if (advancedRealignment && Math.random() < confRealignmentChance) {
             ArrayList<Conference> confList = conferences;
             Collections.sort(confList, new CompConfPrestige());
@@ -4301,7 +4346,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
             //find the teams do not meet conference threshold
             for (int c = 0; c < confList.size(); c++) {
-                if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams) {
+                if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams && confList.get(c).confTeams.size() > 10) {
                     for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
                         if (confList.get(c).confTeams.get(i).teamPrestige < confList.get(c).confRelegateMin) {
                             demoteTeamList.add(confList.get(c).confTeams.get(i));
@@ -4314,15 +4359,18 @@ Then conferences can see if they want to add them to their list if the teams mee
                 }
             }
 
+            //Sort Prestige
+            Collections.sort(demoteTeamList, new CompTeamPrestige());
+
             //Smaller Conferences Will Try to Expand Their Empire...
             for (int c = 0; c < conferences.size(); c++) {
-                if (conferences.get(c).confTeams.size() < 15 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
+                if (conferences.get(c).confTeams.size() < 16 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
                     Conference conf = conferences.get(c);
                     for (int i = 0; i < demoteTeamList.size(); i++) {
                         if (demoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(demoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
                             final Team teamA = demoteTeamList.get(i);
                             final String oldConf = teamA.conference;
-                            if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams) {
+                            if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams && conferences.get(getConfNumber(teamA.conference)).confTeams.size() > 10) {
                                 conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
                                 teamA.conference = conf.confName;
                                 conf.confTeams.add(teamA);
@@ -4339,7 +4387,50 @@ Then conferences can see if they want to add them to their list if the teams mee
                 }
             }
 
-            //Let's kick people out
+            //find the teams that are doing too well for their conference level
+            for (int c = 0; c < confList.size(); c++) {
+                if (confList.get(c).confTeams.size() >= confList.get(c).minConfTeams  && confList.get(c).confTeams.size() > 10) {
+                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                        if (confList.get(c).confTeams.get(i).teamPrestige > confList.get(c).confPromoteMin) {
+                            promoteTeamList.add(confList.get(c).confTeams.get(i));
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < confList.get(c).confTeams.size(); i++) {
+                        promoteTeamList.add(confList.get(c).confTeams.get(i));
+                    }
+                }
+            }
+
+            //Sort Prestige
+            Collections.sort(promoteTeamList, new CompTeamPrestige());
+
+            //Smaller Conferences Will Try to Expand Their Empire...
+            for (int c = 0; c < conferences.size(); c++) {
+                if (conferences.get(c).confTeams.size() < 16 && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams)  {
+                    Conference conf = conferences.get(c);
+                    for (int i = 0; i < promoteTeamList.size(); i++) {
+                        if (promoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(promoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                            final Team teamA = promoteTeamList.get(i);
+                            final String oldConf = teamA.conference;
+                            if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams && conferences.get(getConfNumber(teamA.conference)).confTeams.size() > 10) {
+                                conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
+                                teamA.conference = conf.confName;
+                                conf.confTeams.add(teamA);
+
+                                //break the news
+                                newsStories.get(currentWeek + 2).add("Conference Growth!>The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.");
+
+                                newsRealignment += ("The " + conf.confName + " conference announced today they will be adding " + teamA.name + " to their conference next season! " + teamA.name + " used to part of the " + oldConf + " Conference.\n\n");
+                                countRealignment++;
+                                promoteTeamList.remove(teamA);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Let's kick people out to Independents
             int indConf = 0;
             boolean indSpace = false;
             for (Conference c : conferences) {
@@ -4355,13 +4446,13 @@ Then conferences can see if they want to add them to their list if the teams mee
                         final Team teamA = demoteTeamList.get(i);
                         final String oldConf = teamA.conference;
 
-                        if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams) {
+                        if(conferences.get(getConfNumber(teamA.conference)).confTeams.size() > conferences.get(getConfNumber(teamA.conference)).minConfTeams && conferences.get(getConfNumber(teamA.conference)).confTeams.size() > 10) {
                             conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
                             teamA.conference = indy.confName;
                             indy.confTeams.add(teamA);
 
                             //break the news
-                            newsStories.get(currentWeek + 2).add("Conference and Team Part Ways!>The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference.");
+                            newsStories.get(currentWeek + 2).add("Conference and Team Part Ways!>The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become an Independent school until picked up by a new conference.");
 
                             newsRealignment += ("The " + oldConf + " conference announced today they will be removing " + teamA.name + " from their conference next season! " + teamA.name + " will become and Independent school until picked up by a new conference\n\n");
                             countRealignment++;

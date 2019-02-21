@@ -1229,7 +1229,7 @@ public class Team {
 
         int goal = projectedPollRank;
         if (goal > league.teamList.size()*.875) goal = (int)(league.teamList.size()*.875);
-        if (goal <= 15) goal = 15;
+        if (goal <= league.teamList.size()*.125) goal = (int)(league.teamList.size()*.125);
         int diffExpected = goal - rankTeamPollScore;
 
         int newPrestige = teamPrestige;
@@ -1301,13 +1301,15 @@ public class Team {
         if (confChampion.equals("CC"))
             summary += "\n\nCongratulations on winning the " + conference + " Championship!";
 
+        int num = (int)(league.teamList.size()*.875);
+
         if (projectedPollRank > 100) {
-            summary += "\nDespite being projected at #" + projectedPollRank + ", your goal was to finish in the Top 100.\n\n";
+            summary += "\nDespite being projected at #" + projectedPollRank + ", your goal was to finish in the Top " + num + ".\n\n";
         }
         if (bowlBan || penalized) {
             summary += "\n\nYour team had penalties placed on it by the collegiate administration this season. Recruiting budgets were reduced due to this.";
         } else if ((prestigePts[1]) > 0) {
-            summary += "\n\nYou exceeded expectations and gained " + prestigePts[1] + " prestige points!";
+            summary += "\n\nYou met or exceeded expectations and gained " + prestigePts[1] + " prestige points!";
         } else if ((prestigePts[1]) < 0) {
             summary += "\n\nYou fell short of expectations and lost " + Math.abs(prestigePts[1]) + " prestige points.";
         } else {
@@ -4142,11 +4144,11 @@ public class Team {
 
     public String[] getGradPlayersList() {
         String[] playersLeavingList = new String[playersLeaving.size() + playersTransferring.size()];
-        for (int i = 0; i < playersLeavingList.length; ++i) {
-            playersLeavingList[i] = playersLeaving.get(i).getGraduatingPlayerInfo();
-        }
         for (int i = 0; i < playersTransferring.size(); ++i) {
             playersLeavingList[i] = playersTransferring.get(i).getPosNameYrOvrPotTra_Str();
+        }
+        for (int i = 0; i < playersLeaving.size(); ++i) {
+            playersLeavingList[i + playersTransferring.size()] = playersLeaving.get(i).getGraduatingPlayerInfo();
         }
         return playersLeavingList;
     }
