@@ -12,6 +12,7 @@ import antdroid.cfbcoach.MainActivity;
 import comparator.CompPlayer;
 import comparator.CompRecruit;
 import comparator.CompTeamConfWins;
+import comparator.CompTeamPrestige;
 import positions.HeadCoach;
 import positions.Player;
 import positions.PlayerCB;
@@ -316,6 +317,10 @@ public class Team {
 
         newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs, true);
 
+        if(FCS) {
+            teamPrestige = (int) (Math.random() * league.teamList.get((int) (league.teamList.size() * .75)).teamPrestige);
+        }
+
         //set stats
         totalWins = 0;
         totalLosses = 0;
@@ -355,7 +360,7 @@ public class Team {
         teamDiscplineBudget = 0;
         teamDisciplineScore = disciplineStart;
 
-        rankTeamPollScore = league.teamList.size();
+        if(!FCS) rankTeamPollScore = league.teamList.size();
     }
 
     /**
@@ -1569,8 +1574,9 @@ public class Team {
     public void promoteCoach() {
         //make team
         boolean promote = true;
-        int stars = teamPrestige / 20;
-        stars = (int)(Math.random()*15) + (stars/4);
+        int stars = (int)((league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/10.5));
+        stars = (int)(Math.random()*stars) + (stars/4);
+        if(stars > 10) stars = 10;
 
         //MAKE HEAD COACH
         HC.add(new HeadCoach(league.getRandName(), 0, stars, this, promote));

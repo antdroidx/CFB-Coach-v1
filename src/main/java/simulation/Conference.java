@@ -67,6 +67,9 @@ public class Conference {
         if(name.split(",").length > 1) {
             divisions.add(new Division(save[1], league));
             divisions.add(new Division(save[2], league));
+        } else {
+            divisions.add(new Division("A", league));
+            divisions.add(new Division("B", league));
         }
 
         confTV = deal;
@@ -89,6 +92,9 @@ public class Conference {
         if(data.length > 5) {
             divisions.add(new Division(data[5], league));
             divisions.add(new Division(data[6], league));
+        } else {
+            divisions.add(new Division("A", league));
+            divisions.add(new Division("B", league));
         }
 
         //Old Save Compatibility

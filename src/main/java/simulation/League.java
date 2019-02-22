@@ -1353,7 +1353,7 @@ public class League {
                     Team b;
 
                     if (availTeamsB.isEmpty()) {
-                        b = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, true);
+                        b = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, false);
                     } else {
                         int selTeamB = (int) (availTeamsB.size() * Math.random());
                         b = availTeamsB.get(selTeamB);
@@ -1692,7 +1692,9 @@ public class League {
         for (int i = 0; i < conferences.size(); ++i) {
             avgPrestige += conferences.get(i).confPrestige;
         }
-        return avgPrestige / conferences.size();
+
+        if (conferences.size() > 0) return avgPrestige / conferences.size();
+        else return 0;
     }
 
     //get League Avg Chemistry
@@ -4464,7 +4466,8 @@ Then conferences can see if they want to add them to their list if the teams mee
 
 
             //Promote FCS School
-            if(Math.random() < realignmentChance) {
+            //if(Math.random() < realignmentChance) {
+            if(Math.random() > 0) {
                 Conference indy = conferences.get(indConf);
                 if(conferences.get(indConf).confTeams.size() < indy.minConfTeams-1) {
                     String fcsName;
@@ -4482,7 +4485,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                         }
                     }
 
-                    Team FCS = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "Independent", (int) (Math.random() * 35), "A", (int)(Math.random()*6), this);
+                    Team FCS = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "Independent", (int)(Math.random()*35), "A", (int)(Math.random()*6), this, true);
                     FCS.abbr = FCS.name.substring(0,2);
                     FCS.rankTeamPollScore = teamList.size();
                     teamList.add(FCS);
@@ -4632,7 +4635,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
         //check if there is an even number of teams
         if(teamList.size() % 2 != 0) {
-            teamList.add(new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", (int)(Math.random()*6), this, true));
+            teamList.add(new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", (int)(Math.random()*6), this, false));
         }
 
         //Clear all Conferences

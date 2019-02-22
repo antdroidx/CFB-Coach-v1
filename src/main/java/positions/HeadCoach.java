@@ -175,7 +175,7 @@ public class HeadCoach extends Player {
         ratOff = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random());
         ratDef = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random());
         ratTalent = (int) (45 + 50 * Math.random());
-        ratDiscipline = (int) (45 + 50 * Math.random());
+        ratDiscipline = (int) (45 + 45 * Math.random());
         ratOvr = getHCOverall();
         offStrat = rand.nextInt((max - min) + 1) + min;
         if (offStrat > 4) offStrat = 4;
