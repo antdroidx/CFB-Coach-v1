@@ -3459,7 +3459,7 @@ public class MainActivity extends AppCompatActivity {
 
         int num = (int)(simLeague.teamList.size()*.875);
         if (userTeam.projectedPollRank > 100) {
-            goals += "Despite being projected at #" + userTeam.projectedPollRank + ", your goal is to finish in the Top + " + num + ".\n\n";
+            goals += "Despite being projected at #" + userTeam.projectedPollRank + ", your goal is to finish in the Top " + num + ".\n\n";
         }
 
         goals += "In conference play, your team is expected to finish " + userTeam.getRankStr(confPos) + " in the " + userTeam.conference + " conference.\n\n";

@@ -1577,9 +1577,10 @@ public class Team {
         int stars = (int)((league.teamList.size() - rankTeamPrestige) / (league.teamList.size()/10.5));
         stars = (int)(Math.random()*stars) + (stars/4);
         if(stars > 10) stars = 10;
+        if(stars < 2) stars = 2;
 
         //MAKE HEAD COACH
-        HC.add(new HeadCoach(league.getRandName(), 0, stars, this, promote));
+        HC.add(new HeadCoach(league.getRandName(), 0, stars, this, true));
 
         //done making players, sort them
         sortPlayers();

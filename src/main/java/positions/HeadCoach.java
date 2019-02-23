@@ -171,9 +171,9 @@ public class HeadCoach extends Player {
         year = 0;
         contractYear = (int) (6 * Math.random());
         contractLength = 6;
-        ratPot = (int) (50 + 50 * Math.random());
-        ratOff = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random());
-        ratDef = (int) (50 + stars * 5 - 15 * Math.random() + 15 * Math.random());
+        ratPot = (int) (50 + 45 * Math.random());
+        ratOff = (int) (50 + stars * 5 - 15 * Math.random());
+        ratDef = (int) (50 + stars * 5 - 15 * Math.random());
         ratTalent = (int) (45 + 50 * Math.random());
         ratDiscipline = (int) (45 + 45 * Math.random());
         ratOvr = getHCOverall();
@@ -206,13 +206,13 @@ public class HeadCoach extends Player {
         team = t;
         boolean promote = newhire;
 
-        age = 30 + (int) (Math.random() * 10);
+        age = 30 + (int) (Math.random() * 15);
         year = 0;
         contractYear = 0;
         contractLength = 6;
-        ratPot = (int) (50 + 50 * Math.random());
-        ratOff = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random());
-        ratDef = (int) (45 + stars * 5 - 20 * Math.random() + 20 * Math.random());
+        ratPot = (int) (50 + 45 * Math.random());
+        ratOff = (int) (45 + stars * 5 - 20 * Math.random());
+        ratDef = (int) (45 + stars * 5 - 20 * Math.random());
         ratTalent = (int) (45 + 45 * Math.random());
         ratDiscipline = (int) (45 + 45 * Math.random());
         ratOvr = getHCOverall();
