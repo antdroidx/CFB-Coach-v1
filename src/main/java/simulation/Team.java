@@ -873,7 +873,7 @@ public class Team {
         }
 
         double preseasonBias = 15 - (wins + losses);
-        if (preseasonBias < 0) preseasonBias = 0;
+        if (preseasonBias < 3) preseasonBias = 3;
         preseasonBias = preseasonBias / 15;
         teamPollScore =
                 (float) (preseasonBias * getPreseasonBiasScore()) +
@@ -2211,20 +2211,29 @@ public class Team {
 
     private int getRecruitLevel() {
         float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
-        if (level < 4) level = 4;
+        float confBias = confPrestige - league.getAverageConfPrestige();
+        if (level < 4 && confBias < 0) level = 4;
+        if (level > 7 && confBias < 0) level = 7;
+        if (level < 6 && confBias > 0) level = 6;
         return Math.round(level);
     }
 
     public int getUserRecruitBudget() {
         float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
-        if (level < 4) level = 4;
+        float confBias = confPrestige - league.getAverageConfPrestige();
+        if (level < 4 && confBias < 0) level = 4;
+        if (level > 7 && confBias < 0) level = 7;
+        if (level < 6 && confBias > 0) level = 6;
 
         return (int) Math.round(level * 8.5);
     }
 
     public int getUserRecruitStars() {
         float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
-        if (level < 4) level = 4;
+        float confBias = confPrestige - league.getAverageConfPrestige();
+        if (level < 4 && confBias < 0) level = 4;
+        if (level > 7 && confBias < 0) level = 7;
+        if (level < 6 && confBias > 0) level = 6;
         return Math.round(level);
     }
 

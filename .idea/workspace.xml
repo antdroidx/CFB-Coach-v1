@@ -34,12 +34,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ea3d8f2-19f8-49b2-b311-33984da55e97" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/CFB-Coach-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/CFB-Coach-release.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/simulation/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/League.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/simulation/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simulation/Team.java" afterDir="false" />
     </list>
@@ -83,27 +81,27 @@
     <session id="2038126400">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="3" />
-          <entry key="project.open.time.8" value="5" />
+          <entry key="project.open.time.8" value="6" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="17" />
+          <entry key="project.opened" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4093" />
+          <entry key="java" value="4575" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4093" />
+          <entry key="JAVA" value="4575" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -111,7 +109,7 @@
         <counts>
           <entry key="apk" value="1" />
           <entry key="class" value="3" />
-          <entry key="java" value="86" />
+          <entry key="java" value="87" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
@@ -119,7 +117,7 @@
         <counts>
           <entry key="APK" value="1" />
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="86" />
+          <entry key="JAVA" value="87" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -133,8 +131,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9541">
-              <caret line="4327" column="90" selection-start-line="4327" selection-start-column="90" selection-end-line="4327" selection-end-column="90" />
+            <state relative-caret-position="6592">
+              <caret line="4519" column="44" selection-start-line="4519" selection-start-column="44" selection-end-line="4519" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -152,7 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>load</find>
       <find>disciplineFailure</find>
       <find>fire</find>
       <find>penalize</find>
@@ -182,6 +179,7 @@
       <find>FCS</find>
       <find>leagueHistory.size()</find>
       <find>promote</find>
+      <find>coach</find>
     </findStrings>
     <replaceStrings>
       <replace>teamDisciplineScore</replace>
@@ -1762,8 +1760,8 @@
         <option value="$PROJECT_DIR$/src/main/java/recruiting/RecruitingActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/Conference.java" />
         <option value="$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/positions/HeadCoach.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulation/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/simulation/League.java" />
       </list>
     </option>
@@ -2378,13 +2376,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24864">
-          <caret line="1582" column="71" selection-start-line="1582" selection-start-column="71" selection-end-line="1582" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/antdroid/cfbcoach/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31552">
@@ -2399,10 +2390,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulation/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-64395">
+          <caret line="951" column="20" lean-forward="true" selection-start-line="951" selection-start-column="20" selection-end-line="951" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulation/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9541">
-          <caret line="4327" column="90" selection-start-line="4327" selection-start-column="90" selection-end-line="4327" selection-end-column="90" />
+        <state relative-caret-position="6592">
+          <caret line="4519" column="44" selection-start-line="4519" selection-start-column="44" selection-end-line="4519" selection-end-column="44" />
         </state>
       </provider>
     </entry>
