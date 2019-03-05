@@ -523,12 +523,15 @@ public class Conference {
             CP += confTeams.get(i).teamPrestige;
         }
 
-        if(confTeams.size() > 0) {
+        if(confTeams.size() > 0 && confTeams.size() >= minConfTeams) {
             confPrestige = CP / (confTeams.size());
             confPromoteMin = (int) (CP / confTeams.size() * promotionFactor);
             confRelegateMin = (int) (CP / confTeams.size() * relegationFactor);
         } else {
-            confPrestige = 0;
+            for(int i = 0; i < confTeams.size(); i++) {
+                confTeams.get(i).confPrestige = (int)(confTeams.get(i).teamPrestige * .85);
+            }
+            confPrestige = CP / (confTeams.size());
             confPromoteMin = 0;
             confRelegateMin = 0;
         }

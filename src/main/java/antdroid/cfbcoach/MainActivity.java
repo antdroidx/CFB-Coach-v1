@@ -3458,7 +3458,7 @@ public class MainActivity extends AppCompatActivity {
         goals += "This season your team is projected to finish ranked #" + userTeam.projectedPollRank + "!\n\n";
 
         int num = (int)(simLeague.teamList.size()*.875);
-        if (userTeam.projectedPollRank > 100) {
+        if (userTeam.projectedPollRank > num) {
             goals += "Despite being projected at #" + userTeam.projectedPollRank + ", your goal is to finish in the Top " + num + ".\n\n";
         }
 

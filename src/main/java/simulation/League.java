@@ -1686,14 +1686,18 @@ public class League {
     //Determine League Average Conference Prestige
     public int getAverageConfPrestige() {
         int avgPrestige = 0;
+        int countC = 0;
         for (int i = 0; i < conferences.size(); ++i) {
             conferences.get(i).updateConfPrestige();
         }
         for (int i = 0; i < conferences.size(); ++i) {
-            avgPrestige += conferences.get(i).confPrestige;
+            if(conferences.get(i).confTeams.size() > conferences.get(i).minConfTeams) {
+                avgPrestige += conferences.get(i).confPrestige;
+                countC++;
+            }
         }
 
-        if (conferences.size() > 0) return avgPrestige / conferences.size();
+        if (countC > 0) return avgPrestige / countC;
         else return 0;
     }
 
@@ -4318,7 +4322,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 if (conferences.get(c).confTeams.size() < maxConfTeams && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
                     Conference conf = conferences.get(c);
                     for (int i = 0; i < promoteTeamList.size(); i++) {
-                        if (promoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(promoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                        if (promoteTeamList.get(i).teamPrestige > (conf.confRelegateMin*1.2) && Math.random() < realignmentChance && Math.abs(promoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
                             final Team teamA = promoteTeamList.get(i);
                             conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
                             teamA.conference = conf.confName;
@@ -4362,7 +4366,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 if (conferences.get(c).confTeams.size() < maxConfTeams && conferences.get(c).confTeams.size() >= conferences.get(c).minConfTeams) {
                     Conference conf = conferences.get(c);
                     for (int i = 0; i < promoteTeamList.size(); i++) {
-                        if (promoteTeamList.get(i).teamPrestige > conf.confPromoteMin && Math.random() < realignmentChance && Math.abs(promoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
+                        if (promoteTeamList.get(i).teamPrestige > (conf.confRelegateMin*1.2) && Math.random() < realignmentChance && Math.abs(promoteTeamList.get(i).location - conf.confTeams.get(0).location) < 2) {
                             final Team teamA = promoteTeamList.get(i);
                             conferences.get(getConfNumber(teamA.conference)).confTeams.remove(teamA);
                             teamA.conference = conf.confName;

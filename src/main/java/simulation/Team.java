@@ -1308,7 +1308,7 @@ public class Team {
 
         int num = (int)(league.teamList.size()*.875);
 
-        if (projectedPollRank > 100) {
+        if (projectedPollRank > num) {
             summary += "\nDespite being projected at #" + projectedPollRank + ", your goal was to finish in the Top " + num + ".\n\n";
         }
         if (bowlBan || penalized) {
@@ -2211,18 +2211,24 @@ public class Team {
 
     private int getRecruitLevel() {
         float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
+        for (int i = 0; i < league.conferences.size(); ++i) {
+            league.conferences.get(i).updateConfPrestige();
+        }
         float confBias = confPrestige - league.getAverageConfPrestige();
         if (level < 4 && confBias < 0) level = 4;
-        if (level > 7 && confBias < 0) level = 7;
+        if (level > 7 && confBias < 0) level = 6;
         if (level < 6 && confBias > 0) level = 6;
         return Math.round(level);
     }
 
     public int getUserRecruitBudget() {
         float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
+        for (int i = 0; i < league.conferences.size(); ++i) {
+            league.conferences.get(i).updateConfPrestige();
+        }
         float confBias = confPrestige - league.getAverageConfPrestige();
         if (level < 4 && confBias < 0) level = 4;
-        if (level > 7 && confBias < 0) level = 7;
+        if (level > 7 && confBias < 0) level = 6;
         if (level < 6 && confBias > 0) level = 6;
 
         return (int) Math.round(level * 8.5);
@@ -2230,9 +2236,12 @@ public class Team {
 
     public int getUserRecruitStars() {
         float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
+        for (int i = 0; i < league.conferences.size(); ++i) {
+            league.conferences.get(i).updateConfPrestige();
+        }
         float confBias = confPrestige - league.getAverageConfPrestige();
         if (level < 4 && confBias < 0) level = 4;
-        if (level > 7 && confBias < 0) level = 7;
+        if (level > 7 && confBias < 0) level = 6;
         if (level < 6 && confBias > 0) level = 6;
         return Math.round(level);
     }
