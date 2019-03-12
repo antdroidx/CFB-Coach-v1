@@ -318,9 +318,12 @@ public class Team {
         newRoster(minQBs, minRBs, minWRs, minTEs, minOLs, minKs, minDLs, minLBs, minCBs, minSs, true);
 
         if(FCS) {
-            teamPrestige = (int) (Math.random() * league.teamList.get((int) (league.teamList.size() * .75)).teamPrestige);
+            ArrayList<Team> teams = league.teamList;
+            Collections.sort(teams, new CompTeamPrestige());
+            teamPrestige = teams.get(teams.size()-1).teamPrestige-1;
             HC.get(0).contractYear = 0;
             HC.get(0).contractLength = 6;
+            HC.get(0).baselinePrestige = teamPrestige;
         }
 
         //set stats

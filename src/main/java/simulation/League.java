@@ -4516,11 +4516,10 @@ Then conferences can see if they want to add them to their list if the teams mee
                             named = true;
                         }
                     }
-                    ArrayList<Team> teams = teamList;
-                    Collections.sort(teams, new CompTeamPrestige());
 
-                    Team FCS = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "Independent", (int)(teams.get(teams.size()-1).teamPrestige), "A", (int)(Math.random()*6), this, true);
-                    FCS.abbr = FCS.name.substring(0,2);
+
+                    Team FCS = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "Independent", 35, "A", (int)(Math.random()*6), this, true);
+                    FCS.abbr = FCS.name.substring(0,3);
                     FCS.rankTeamPollScore = teamList.size();
                     teamList.add(FCS);
                     indy.confTeams.add(FCS);
