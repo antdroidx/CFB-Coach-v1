@@ -274,17 +274,17 @@ public class HeadCoach extends Player {
 
 
         if (age > 60 && !team.userControlled) {
-            ratOff -= (int) (Math.random() * (age / 15));
-            ratDef -= (int) (Math.random() * (age / 15));
-            ratTalent -= (int)(Math.random() * (age / 15));
-            ratDiscipline -= (int) (Math.random() * (age / 15));
+            ratOff -= (int) (Math.random() * (age / 10));
+            ratDef -= (int) (Math.random() * (age / 10));
+            ratTalent -= (int)(Math.random() * (age / 10));
+            ratDiscipline -= (int) (Math.random() * (age / 10));
         }
 
         if (age > 60 && team.userControlled && team.league.isCareerMode() && !team.league.neverRetire ) {
-            ratOff -= (int) (Math.random() * (age / 15));
-            ratDef -= (int) (Math.random() * (age / 15));
-            ratTalent -= (int)(Math.random() * (age / 15));
-            ratDiscipline -= (int) (Math.random() * (age / 15));
+            ratOff -= (int) (Math.random() * (age / 10));
+            ratDef -= (int) (Math.random() * (age / 10));
+            ratTalent -= (int)(Math.random() * (age / 10));
+            ratDiscipline -= (int) (Math.random() * (age / 10));
         }
 
         ratOvr = getHCOverall();

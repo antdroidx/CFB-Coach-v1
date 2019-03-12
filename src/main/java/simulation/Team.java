@@ -319,6 +319,8 @@ public class Team {
 
         if(FCS) {
             teamPrestige = (int) (Math.random() * league.teamList.get((int) (league.teamList.size() * .75)).teamPrestige);
+            HC.get(0).contractYear = 0;
+            HC.get(0).contractLength = 6;
         }
 
         //set stats
@@ -3854,18 +3856,19 @@ public class Team {
 
     public String[] getTeamRosterString() {
         ArrayList<Player> rosters = getAllPlayers();
-        String[] roster = new String[rosters.size()+19+7];
+        String[] roster = new String[rosters.size()+19+8];
 
-        roster[0] = "Prestige: " + teamPrestige + " ("+ getRankStr(rankTeamPrestige) + ")";
-        roster[1] = "Discipline: " + teamDisciplineScore + "% | Facilities: L" + teamFacilities;
-        roster[2] = "Overall W-L: " + totalWins + "-" + totalLosses + " (" + df2.format(getWinPCT(totalWins, totalLosses)) + "%)";
-        roster[3] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses + " (" + df2.format(getWinPCT(totalCCs, totalCCLosses)) + "%)";
-        roster[4] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses + " (" + df2.format(getWinPCT(totalBowls, totalBowlLosses)) + "%)";
-        roster[5] = "National Champ Record: " + totalNCs + "-" + totalNCLosses + " (" + df2.format(getWinPCT(totalNCs, totalNCLosses)) + "%)";
-        roster[6] = " ";
+        roster[0] = "Conference: " + conference;
+        roster[1] = "Prestige: " + teamPrestige + " ("+ getRankStr(rankTeamPrestige) + ")";
+        roster[2] = "Discipline: " + teamDisciplineScore + "% | Facilities: L" + teamFacilities;
+        roster[3] = "Overall W-L: " + totalWins + "-" + totalLosses + " (" + df2.format(getWinPCT(totalWins, totalLosses)) + "%)";
+        roster[4] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses + " (" + df2.format(getWinPCT(totalCCs, totalCCLosses)) + "%)";
+        roster[5] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses + " (" + df2.format(getWinPCT(totalBowls, totalBowlLosses)) + "%)";
+        roster[6] = "National Champ Record: " + totalNCs + "-" + totalNCLosses + " (" + df2.format(getWinPCT(totalNCs, totalNCLosses)) + "%)";
+        roster[7] = " ";
         
         
-        int i=7;
+        int i=8;
         roster[i] = "Quarterbacks";
         i++;
         for (Player p : teamQBs) {

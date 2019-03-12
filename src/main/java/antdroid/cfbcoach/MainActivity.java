@@ -3792,7 +3792,7 @@ public class MainActivity extends AppCompatActivity {
         String[] teamRoster = teamList.get(item).getTeamRosterString();
 
         AlertDialog.Builder roster = new AlertDialog.Builder(this);
-        roster.setTitle(teamList.get(item).name + " Team Roster" +
+        roster.setTitle(teamList.get(item).name + " Team Info" +
                         "\nPres: #" + teamList.get(item).rankTeamPrestige + " | Off: " + df2.format(teamList.get(item).teamOffTalent) + " | Def: " + df2.format(teamList.get(item).teamDefTalent));
         roster.setNeutralButton("Decline", new DialogInterface.OnClickListener() {
             @Override
