@@ -2881,7 +2881,7 @@ public class MainActivity extends AppCompatActivity {
 
                         teamRankingsAdapter.setUserTeamStrRep(userTeam.name);
                         if (position == 16)
-                            teamRankingsAdapter.setUserTeamStrRep(userTeam.strRepWithPrestige());
+                            teamRankingsAdapter.setUserTeamStrRep(userTeam.name + "\n" + userTeam.getTopRecruit());
 
                         teamRankingsAdapter.clear();
                         teamRankingsAdapter.addAll(rankings);
@@ -4106,7 +4106,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView teamRankingsList = dialog.findViewById(R.id.listViewDialog);
         final TeamRankingsList teamRankingsAdapter =
-                new TeamRankingsList(this, simLeague.getTeamRankingsStr(16), userTeam.strRepWithPrestige());
+                new TeamRankingsList(this, simLeague.getTeamRankingsStr(16), userTeam.name + "\n" + userTeam.getTopRecruit());
         teamRankingsList.setAdapter(teamRankingsAdapter);
     }
 

@@ -2879,7 +2879,7 @@ public class Team {
         }
         Collections.sort(teamRecruits, new CompPlayer());
 
-        if(teamRecruits.size() > 0) topRecruit = teamRecruits.get(0).position + " " + teamRecruits.get(0).name + " [" + teamRecruits.get(0).ratOvr + "]";
+        if(teamRecruits.size() > 0) topRecruit = teamRecruits.get(0).position + " " + teamRecruits.get(0).name + " (" + teamRecruits.get(0).ratOvr + ")";
         else topRecruit = "No Recruits";
 
         return topRecruit;
