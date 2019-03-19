@@ -2449,7 +2449,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> rankings = new ArrayList<>();
         String[] rankingsSelection =
-                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins"};
+                {"National Championships", "Conference Championships", "Bowl Victories", "Total Wins", "Hall of Famers"};
         Spinner teamRankingsSpinner = dialog.findViewById(R.id.spinnerTeamRankings);
         ArrayAdapter<String> teamRankingsSpinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, rankingsSelection);
@@ -2663,6 +2663,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
+        simLeague.sortTeamList();
         graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige + 10);
         graph.getViewport().setMinY(0);
     }
@@ -2792,6 +2793,7 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
         graph.getViewport().setYAxisBoundsManual(true);
+        simLeague.sortTeamList();
         graph.getViewport().setMaxY(simLeague.teamList.get(0).teamPrestige + 10);
         graph.getViewport().setMinY(0);
     }
@@ -4191,6 +4193,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void reincarnation() {
         userHC = userTeam.getHC(0);
+        userTeam.teamPrestige = (int)(userTeam.teamPrestige*userTeam.knockdownRet);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
                 .setPositiveButton("Use Same Team", new DialogInterface.OnClickListener() {

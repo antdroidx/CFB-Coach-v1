@@ -66,6 +66,7 @@ import comparator.CompTeamConfWins;
 import comparator.CompTeamDefTalent;
 import comparator.CompTeamDisciplineScore;
 import comparator.CompTeamFacilities;
+import comparator.CompTeamHoFCount;
 import comparator.CompTeamNC;
 import comparator.CompTeamOPPG;
 import comparator.CompTeamOPYPG;
@@ -639,6 +640,7 @@ public class League {
                 for (int i = 0; i < teamList.size(); ++i) {
                     if (teamList.get(i).name.equals(fileSplit[0])) {
                         teamList.get(i).hallOfFame.add(line);
+                        teamList.get(i).HoFCount++;
                     }
                 }
             }
@@ -1119,6 +1121,7 @@ public class League {
                 for (int i = 0; i < teamList.size(); ++i) {
                     if (teamList.get(i).name.equals(fileSplit[0])) {
                         teamList.get(i).hallOfFame.add(line);
+                        teamList.get(i).HoFCount++;
                     }
                 }
             }
@@ -1641,6 +1644,10 @@ public class League {
         return i;
     }
 
+    public void sortTeamList() {
+        Collections.sort(teamList, new CompTeamPrestige());
+    }
+
     /**
      * Update all teams off talent, def talent, etc
      */
@@ -1755,7 +1762,7 @@ public class League {
         //If Discipline score drops below threshold, penalties ensue
 
         for (int i = 0; i < teamList.size(); i++) {
-            if (teamList.get(i).teamDisciplineScore < 30 && !teamList.get(i).recentPenalty) {
+            if (teamList.get(i).teamDisciplineScore < 25 && !teamList.get(i).recentPenalty) {
                 teamList.get(i).penalized = true;
                 teamList.get(i).recentPenalty = true;
                 teamList.get(i).teamPrestige -= teamList.get(i).teamPrestige * 0.15;
@@ -3701,7 +3708,7 @@ public class League {
                         teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                         teamList.get(t).HC.get(0).team = teamList.get(t);
                         newsStories.get(currentWeek + 1).add("Rising Star Coach Hired: " + teamList.get(t).name + ">Rising star head coach " + teamList.get(t).HC.get(0).name + " has announced his departure from " +
-                                tmName + " after being selected by " + teamList.get(t).name + " as their new head coach. His previous track record has had him on the top list of many schools.");
+                                tmName + " after being selected by " + teamList.get(t).strRankTeamRecord() + " as their new head coach. His previous track record has had him on the top list of many schools.");
 
                         for (int j = 0; j < teamList.size(); ++j) {
                             if (teamList.get(j).name.equals(tmName)) {
@@ -3709,7 +3716,7 @@ public class League {
                                 if (Math.random() > 0.20) {
                                     teamList.get(j).promoteCoach();
                                     teamList.get(j).HC.get(0).history.add("");
-                                    newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).name +
+                                    newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).strRankTeamRecord() +
                                             " hopes to continue their recent success, despite the recent loss of coach " + teamList.get(t).HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
                                 }
                             }
@@ -3731,7 +3738,7 @@ public class League {
                     teamList.get(t).HC.get(0).contractYear = 0;
                     teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                     teamList.get(t).HC.get(0).team = teamList.get(t);
-                    newsStories.get(currentWeek + 1).add("Return to the Sidelines: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
+                    newsStories.get(currentWeek + 1).add("Return to the Sidelines: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).strRankTeamRecord() + " has hired " + teamList.get(t).HC.get(0).name +
                             " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " has been out of football, but is returning this season!");
                     coachFreeAgents.remove(i);
                     break;
@@ -3744,13 +3751,15 @@ public class League {
         for (int i = 0; i < coachList.size(); ++i) {
             for (int t = 0; t < teamList.size(); ++t) {
                 if (teamList.get(t).HC.isEmpty() && coachList.get(i).ratOvr >= teamList.get(t).getMinCoachHireReq() && teamList.get(t).name != coachList.get(i).team.name && Math.random() > 0.60) {
+
+                    newsStories.get(currentWeek + 1).add("Coaching Switch: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).strRankTeamRecord() + " has hired " + coachList.get(i).name +
+                            " to lead the team. Coach " + coachList.get(i).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
+
                     teamList.get(t).HC.add(coachList.get(i));
                     teamList.get(t).HC.get(0).contractLength = 6;
                     teamList.get(t).HC.get(0).contractYear = 0;
                     teamList.get(t).HC.get(0).baselinePrestige = teamList.get(t).teamPrestige;
                     teamList.get(t).HC.get(0).team = teamList.get(t);
-                    newsStories.get(currentWeek + 1).add("Coaching Switch: " + teamList.get(t).name + ">After an extensive search for a new head coach, " + teamList.get(t).name + " has hired " + teamList.get(t).HC.get(0).name +
-                            " to lead the team. Coach " + teamList.get(t).HC.get(0).name + " previously coached at " + coachList.get(i).team.name + ", before being let go this past season.");
                     coachList.remove(i);
                     break;
                 }
@@ -3763,7 +3772,7 @@ public class League {
             if (teamList.get(t).HC.isEmpty()) {
                 teamList.get(t).promoteCoach();
                 teamList.get(t).HC.get(0).history.add("");
-                newsStories.get(currentWeek + 1).add("Coaching Promotion: " + teamList.get(t).name + ">Following the departure of their previous head coach, " + teamList.get(t).name + " has promoted assistant " + teamList.get(t).HC.get(0).name +
+                newsStories.get(currentWeek + 1).add("Coaching Promotion: " + teamList.get(t).name + ">Following the departure of their previous head coach, " + teamList.get(t).strRankTeamRecord() + " has promoted assistant " + teamList.get(t).HC.get(0).name +
                         " to lead the team.");
             }
         }
@@ -3792,7 +3801,7 @@ public class League {
                             if (Math.random() > 0.25) {
                                 teamList.get(j).promoteCoach();
                                 teamList.get(j).HC.get(0).history.add("");
-                                newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).name +
+                                newsStories.get(currentWeek + 1).add("Replacement Promoted: " + teamList.get(j).name + ">" + teamList.get(j).strRankTeamRecord() +
                                         " hopes to continue their recent success, despite the recent loss of coach " + school.HC.get(0).name + ". The team has promoted his assistant coach " + teamList.get(j).HC.get(0).name + " to the head coaching job at the school.");
                             } else {
                                 coachHiringSingleTeam(teamList.get(j));
@@ -3856,10 +3865,10 @@ public class League {
             for (int i = 0; i < teamList.size(); ++i) {
                 if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength) {
                     newsStories.get(0).add("Coaching Hot Seat: " + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " has struggled over the course of his current contract with " +
-                            teamList.get(i).name + " and has failed to raise the team prestige. Because this is his final contract year, the team will be evaluating whether to continue with the coach at the end of " +
+                            teamList.get(i).strRankTeamRecord() + " and has failed to raise the team prestige. Because this is his final contract year, the team will be evaluating whether to continue with the coach at the end of " +
                             "this season. He'll remain on the hot seat throughout this year.");
                 } else if (teamList.get(i).teamPrestige > (teamList.get(i).HC.get(0).baselinePrestige + 10) && teamList.get(i).teamPrestige < teamList.get((int) (teamList.size() * 0.35)).teamPrestige) {
-                    newsStories.get(0).add("Coaching Rising Star: " + teamList.get(i).HC.get(0).name + ">" + teamList.get(i).name + " head coach " + teamList.get(i).HC.get(0).name +
+                    newsStories.get(0).add("Coaching Rising Star: " + teamList.get(i).HC.get(0).name + ">" + teamList.get(i).strRankTeamRecord() + " head coach " + teamList.get(i).HC.get(0).name +
                             " has been building a strong program and if he continues this path, he'll be on the top of the wishlist at a major program in the future.");
                 }
             }
@@ -3867,7 +3876,7 @@ public class League {
             for (int i = 0; i < teamList.size(); ++i) {
                 if (teamList.get(i).HC.get(0).baselinePrestige < teamList.get(i).teamPrestige && teamList.get(i).HC.get(0).contractYear == teamList.get(i).HC.get(0).contractLength && teamList.get(i).rankTeamPollScore > (100 - teamList.get(i).HC.get(0).baselinePrestige)) {
                     newsStories.get(currentWeek + 1).add("Coaching Hot Seat: " + teamList.get(i).name + ">Head Coach " + teamList.get(i).HC.get(0).name + " future is in jeopardy at  " +
-                            teamList.get(i).name + ". The coach has failed to get out of the hot seat this season with disappointing losses and failing to live up to the school's standards.");
+                            teamList.get(i).strRankTeamRecord() + ". The coach has failed to get out of the hot seat this season with disappointing losses and failing to live up to the school's standards.");
                 }
             }
         }
@@ -5270,7 +5279,8 @@ Then conferences can see if they want to add them to their list if the teams mee
                 Collections.sort(teams, new CompTeamRecruitClass());
                 for (int i = 0; i < teams.size(); ++i) {
                     t = teams.get(i);
-                    rankings.add(t.getRankStr(i + 1) + "," + t.strRepWithPrestige() + "," + df2.format(t.getRecruitingClassRat()));
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "\n" + t.getTopRecruit() + "," + df2.format(t.getRecruitingClassRat()));
+
                 }
                 break;
             case 17:
@@ -5360,15 +5370,10 @@ Then conferences can see if they want to add them to their list if the teams mee
                 }
                 break;
             case 4:
-                Collections.sort(HC, new CompCoachCareer());
-                for (int i = 0; i < HC.size(); ++i) {
-                    rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).getCoachCareerScore());
-                }
-                break;
-            case 5:
-                Collections.sort(HC, new CompCoachCareerPrestige());
-                for (int i = 0; i < HC.size(); ++i) {
-                    rankings.add((i + 1) + ". ," + HC.get(i).name + " (" + HC.get(i).team.abbr + ")," + HC.get(i).cumulativePrestige);
+                Collections.sort(teams, new CompTeamHoFCount());
+                for (int i = 0; i < teams.size(); ++i) {
+                    t = teams.get(i);
+                    rankings.add(t.getRankStr(i + 1) + "," + t.name + "," + t.HoFCount);
                 }
                 break;
         }

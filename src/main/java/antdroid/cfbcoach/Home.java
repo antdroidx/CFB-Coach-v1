@@ -34,7 +34,7 @@ public class Home extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
     private static final int IMPORT_CODE = 12;
     private boolean customCareer;
-    private int theme = 0;
+    private int theme = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

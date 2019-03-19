@@ -303,7 +303,17 @@ public class RecruitingActivity extends AppCompatActivity {
         Collections.sort(east, new CompRecruitScoutGrade());
         Collections.sort(south, new CompRecruitScoutGrade());
 
-        avail50 = new ArrayList<>(availAll.subList(0, 49));
+        //avail50 = new ArrayList<>(availAll.subList(0, 49));
+        avail50 = new ArrayList<>();
+
+        int n = 0;
+        for(int p = 0; p < availAll.size(); p++) {
+                if (!availAll.get(p).split(",")[0].equals("K")) {
+                    avail50.add(availAll.get(p));
+                    n++;
+                }
+                if (n > 50) break;
+            }
 
         // Get needs for each position
         updatePositionNeeds();
@@ -1181,7 +1191,7 @@ public class RecruitingActivity extends AppCompatActivity {
     private void exitRecruiting() {
         StringBuilder sb = new StringBuilder();
         sb.append("Are you sure you are done recruiting? Any unfilled positions will be filled by walk-ons.\n\n");
-        for (int i = 2; i < positions.size() - 4; ++i) {
+        for (int i = 2; i < positions.size() - 5; ++i) {
             sb.append("\t\t" + positions.get(i) + "\n");
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(RecruitingActivity.this);

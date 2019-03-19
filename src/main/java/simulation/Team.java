@@ -176,6 +176,7 @@ public class Team {
     public String suspensionNews;
     public boolean suspension;
 
+    public int HoFCount = 0;
     //Defined Variables
 
     public final int startersQB = 1;
@@ -240,6 +241,9 @@ public class Team {
     private static final int sophNFL = 2;
     private static final double NFL_CHANCE = 0.66;
     private static final double NFL_CHANCE_SOPH = 0.330;
+
+    public static double knockdownRet = 0.925;
+    private static double knockdownFired = 0.975;
 
     String[] issue = {"Skipping Practice", "Skipping Class", "Excessive Partying", "Academics", "Fighting", "Drugs", "DUI", "PED"};
 
@@ -1441,6 +1445,8 @@ public class Team {
         if (HC.get(0).age > retire && !userControlled) {
             retired = true;
             HC.get(0).retired = true;
+            if(HC.get(0).cumulativePrestige >= 25) teamPrestige = (int)(teamPrestige*knockdownRet);
+            else teamPrestige = (int)(teamPrestige*knockdownFired);
             league.coachFreeAgents.add(HC.get(0));
             String oldCoach = HC.get(0).name;
             fired = true;
@@ -1499,7 +1505,7 @@ public class Team {
                         proveIt = true;
                     } else {
                         fired = true;
-                        league.newsStories.get(league.currentWeek + 1).add("Polarizing Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
+                        league.newsStories.get(league.currentWeek + 1).add("Polarizing Coach Firing at " + name + ">" + strRankTeamRecord() + " has fired their head coach, " + HC.get(0).name +
                                 " despite finally getting the team on the right track. The team struggled during his first few seasons at the school, but had shown some promise this season." +
                                 " He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                         newCoachTeamChanges();
@@ -1510,14 +1516,14 @@ public class Team {
                     }
                 } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && rankTeamPrestige > 10 || !userControlled && rankTeamPrestige > 15 && totalPDiff < -1) {
                     fired = true;
-                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
+                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + strRankTeamRecord() + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     newCoachTeamChanges();
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
                 } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < -1) {
                     fired = true;
-                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + name + " has fired their head coach, " + HC.get(0).name +
+                    league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + strRankTeamRecord() + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
                     newCoachTeamChanges();
                     if (!userControlled) {
@@ -1568,7 +1574,7 @@ public class Team {
 
     private void newCoachTeamChanges() {
 
-        if(HC.get(0).contractLength != 1) teamPrestige -= (int) Math.random() * 8;
+        if(HC.get(0).contractLength != 1) teamPrestige = (int)(teamPrestige * knockdownFired);
 
         if(teamDisciplineScore < 60) {
             teamDisciplineScore = (60 + teamDisciplineScore)/2;
@@ -2860,6 +2866,25 @@ public class Team {
         }
     }
 
+    public String getTopRecruit() {
+        String topRecruit="";
+
+        ArrayList<Player> teamPlayers = getAllPlayers();
+        ArrayList<Player> teamRecruits = new ArrayList<>();
+
+        for (int p = 0; p < teamPlayers.size(); ++p) {
+            if (teamPlayers.get(p).year == 1 && !teamPlayers.get(p).wasRedshirt && !teamPlayers.get(p).position.equals("K")) {
+                teamRecruits.add(teamPlayers.get(p));
+            }
+        }
+        Collections.sort(teamRecruits, new CompPlayer());
+
+        if(teamRecruits.size() > 0) topRecruit = teamRecruits.get(0).position + " " + teamRecruits.get(0).name + " [" + teamRecruits.get(0).ratOvr + "]";
+        else topRecruit = "No Recruits";
+
+        return topRecruit;
+    }
+
 
     //Set Redshirts
     public void setRedshirts(ArrayList<Player> redshirts, ArrayList<Player> unredshirt, int position) {
@@ -3083,16 +3108,17 @@ public class Team {
      * @return team history
      */
     public String[] getTeamHistoryList() {
-        String[] hist = new String[teamHistory.size() + 7];
+        String[] hist = new String[teamHistory.size() + 8];
         hist[0] = "Location: " + league.getRegion(location);
         hist[1] = "Prestige: " + teamPrestige + " ("+ getRankStr(rankTeamPrestige) + ")";
         hist[2] = "Overall W-L: " + totalWins + "-" + totalLosses + " (" + df2.format(getWinPCT(totalWins, totalLosses)) + "%)";
         hist[3] = "Conf Champ Record: " + totalCCs + "-" + totalCCLosses + " (" + df2.format(getWinPCT(totalCCs, totalCCLosses)) + "%)";
         hist[4] = "Bowl Game Record: " + totalBowls + "-" + totalBowlLosses + " (" + df2.format(getWinPCT(totalBowls, totalBowlLosses)) + "%)";
         hist[5] = "National Champ Record: " + totalNCs + "-" + totalNCLosses + " (" + df2.format(getWinPCT(totalNCs, totalNCLosses)) + "%)";
-        hist[6] = " ";
+        hist[6] = "Hall of Famers: " + HoFCount;
+        hist[7] = " ";
         for (int i = 0; i < teamHistory.size(); ++i) {
-            hist[i + 7] = teamHistory.get(i);
+            hist[i + 8] = teamHistory.get(i);
         }
         return hist;
     }
@@ -3172,13 +3198,13 @@ public class Team {
         } else if(choice == 2) {
             HC.get(0).ratDiscipline -= penalty*1.25;
             disciplinePts --;
-            teamDisciplineScore -= penalty*1.5;
+            teamDisciplineScore -= penalty*1.45;
             teamBudget -= (penalty * 175);
         } else {
             player.troubledTimes++;
-            HC.get(0).ratDiscipline -= penalty*1.75;
+            HC.get(0).ratDiscipline -= penalty*1.55;
             disciplinePts --;
-            teamDisciplineScore -= penalty*1.75;
+            teamDisciplineScore -= penalty*1.65;
             teamBudget -= (penalty * 250);
         }
 
@@ -4411,6 +4437,7 @@ public class Team {
 
                 hallOfFame.add(sb.toString());
                 league.leagueHoF.add(sb.toString());
+                HoFCount++;
             }
         }
     }
