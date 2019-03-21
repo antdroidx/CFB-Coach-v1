@@ -406,13 +406,13 @@ public class PlayerRB extends Player {
 
     @Override
     public int getHeismanScore() {
-        return statsRushTD * 150 - statsFumbles * 75 + (int) (statsRushYards * 3.15) + 2 * statsReceptions + (int) (statsRecYards * 2.65) + statsRecTD * 150 + statsKickRetYards + statsKickRetTDs * 120 + statsPuntRetYards + statsPuntRetTDs * 120 + ratOvr * 10 + getConfPrestigeBonus();
+        return statsRushTD * 150 - statsFumbles * 100 + (int) (statsRushYards * 2.65) + 2 * statsReceptions + (int) (statsRecYards * 2.5) + statsRecTD * 150 + statsKickRetYards + statsKickRetTDs * 150 + statsPuntRetYards + statsPuntRetTDs * 150 + ratOvr * 10 + getConfPrestigeBonus();
     }
 
     @Override
     public int getCareerScore() {
-        return statsRushTD * 150 - statsFumbles * 75 + (int) (statsRushYards * 3.25) + 2 * statsReceptions + (int) (statsRecYards * 2.65) + statsRecTD * 150 + ratOvr * 10
-                + careerTDs * 150 - careerFumbles * 75 + (int) (careerRushYards * 3.25) + 2 * careerReceptions + (int) (careerRecYards * 2.65) + careerRecTD * 150 + statsKickRetYards + statsKickRetTDs * 150
+        return statsRushTD * 150 - statsFumbles * 75 + (int) (statsRushYards * 2.65) + 2 * statsReceptions + (int) (statsRecYards * 2.5) + statsRecTD * 150 + ratOvr * 10
+                + careerTDs * 150 - careerFumbles * 75 + (int) (careerRushYards * 2.65) + 2 * careerReceptions + (int) (careerRecYards * 2.5) + careerRecTD * 150 + statsKickRetYards + statsKickRetTDs * 150
                 + statsPuntRetYards + statsPuntRetTDs * 150 + careerKickRetYards + careerKickRetTDs * 150 + careerPuntRetYards + careerPuntRetTDs * 150 + ratOvr * 10 * year;
     }
 

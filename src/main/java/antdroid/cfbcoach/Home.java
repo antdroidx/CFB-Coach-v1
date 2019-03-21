@@ -319,7 +319,7 @@ public class Home extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int item) {
                 // Do something with the selection
                 if (!fileInfos[item].equals("EMPTY")) {
-                    if(!fileInfos[item].contains("INCOMPATIBLE")) {
+                    if(!fileInfos[item].contains("Old Save")) {
                         finish();
                         Intent myIntent = new Intent(Home.this, MainActivity.class);
                         myIntent.putExtra("SAVE_FILE", "saveFile" + item + ".cfb");
