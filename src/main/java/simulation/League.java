@@ -4511,10 +4511,11 @@ Then conferences can see if they want to add them to their list if the teams mee
             if(Math.random() < realignmentChance) {
                 Conference indy = conferences.get(indConf);
                 if(conferences.get(indConf).confTeams.size() < indy.minConfTeams-1) {
-                    String fcsName;
+                    String fcsName= "New Team";
                     Boolean named = false;
-                    int nameTest = 0;
+
                     while(!named) {
+                        int nameTest = 0;
                         fcsName = teamsFCS[(int) (teamsFCS.length * Math.random())];
                         for(int i = 0; i < teamList.size(); i++) {
                             if(teamList.get(i).name.equals(fcsName)) {
@@ -4527,7 +4528,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                     }
 
 
-                    Team FCS = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "Independent", 35, "A", (int)(Math.random()*6), this, true);
+                    Team FCS = new Team(fcsName, "FCS", "Independent", 35, "A", (int)(Math.random()*6), this, true);
                     FCS.abbr = FCS.name.substring(0,3);
                     FCS.rankTeamPollScore = teamList.size();
                     teamList.add(FCS);
