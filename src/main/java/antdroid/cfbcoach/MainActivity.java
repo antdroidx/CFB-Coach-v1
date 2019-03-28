@@ -3005,15 +3005,24 @@ public class MainActivity extends AppCompatActivity {
             selection = new String[1];
             selection[0] = "Offensive Player of the Year";
         } else {
-            selection = new String[6 + simLeague.conferences.size()];
+            int confNum = 0;
+            for (int i = 0; i < simLeague.conferences.size(); ++i) {
+                if(simLeague.conferences.get(i).confTeams.size() >= simLeague.conferences.get(i).minConfTeams) confNum++;
+            }
+            selection = new String[6 + confNum];
             selection[0] = "Offensive Player of the Year";
             selection[1] = "Defensive Player of the Year";
             selection[2] = "Coach of the Year";
             selection[3] = "Freshman of the Year";
             selection[4] = "All-American Team";
             selection[5] = "All-Freshman Team";
+
+            confNum = 0;
             for (int i = 0; i < simLeague.conferences.size(); ++i) {
-                selection[i + 6] = simLeague.conferences.get(i).confName + " All-Conf Team";
+                if(simLeague.conferences.get(i).confTeams.size() >= simLeague.conferences.get(i).minConfTeams) {
+                    selection[confNum + 6] = simLeague.conferences.get(i).confName + " All-Conf Team";
+                    confNum++;
+                }
             }
         }
 
@@ -3032,8 +3041,13 @@ public class MainActivity extends AppCompatActivity {
         final String[] allAmericans = simLeague.getAllAmericanStr().split(">");
         final String[] allFreshman = simLeague.getAllFreshmanStr().split(">");
         final String[][] allConference = new String[simLeague.conferences.size()][];
+
+        int confNum = 0;
         for (int i = 0; i < simLeague.conferences.size(); ++i) {
-            allConference[i] = simLeague.getAllConfStr(i).split(">");
+            if(simLeague.conferences.get(i).confTeams.size() >= simLeague.conferences.get(i).minConfTeams) {
+                allConference[confNum] = simLeague.getAllConfStr(i).split(">");
+                confNum++;
+            }
         }
 
 

@@ -324,7 +324,14 @@ public class Team {
         if(FCS) {
             ArrayList<Team> teams = league.teamList;
             Collections.sort(teams, new CompTeamPrestige());
-            teamPrestige = teams.get(teams.size()-1).teamPrestige-1;
+            int avg = 0;
+            for(int x = teams.size()-3; x < teams.size(); x++) {
+                avg += teams.get(x).teamPrestige;
+            }
+            avg = avg/3;
+
+
+            teamPrestige = avg;
             HC.get(0).contractYear = 0;
             HC.get(0).contractLength = 6;
             HC.get(0).baselinePrestige = teamPrestige;
@@ -2227,7 +2234,7 @@ public class Team {
         }
         float confBias = confPrestige - league.getAverageConfPrestige();
         if (level < 4 && confBias < 0) level = 4;
-        if (level > 7 && confBias < 0) level = 6;
+        if (level > 7 && confBias < 0) level = 5;
         if (level < 6 && confBias > 0) level = 6;
         return Math.round(level);
     }
