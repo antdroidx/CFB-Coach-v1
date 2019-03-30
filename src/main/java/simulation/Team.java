@@ -1279,7 +1279,9 @@ public class Team {
 
         //National Title Winner
         if (natChampWL.equals("NCW")) {
-            ncwPts += 3;
+            if(rankTeamPrestige == 1) ncwPts += 1;
+            if(rankTeamPrestige <= 5) ncwPts += 2;
+            else ncwPts += 3;
         }
 
         if (natChampWL.equals("NCL") || semiFinalWL.equals("SFL")) {
@@ -1521,14 +1523,14 @@ public class Team {
                         }
                         HC.remove(0);
                     }
-                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && rankTeamPrestige > 10 || !userControlled && rankTeamPrestige > 15 && totalPDiff < -1) {
+                } else if (totalPDiff < -2 && !league.isCareerMode() && !userControlled  && rankTeamPollScore > 15 || !userControlled && rankTeamPollScore > 25 && totalPDiff < -1) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + strRankTeamRecord() + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ". The team is now searching for a new head coach.");
                     newCoachTeamChanges();
                     league.coachList.add(HC.get(0));
                     HC.remove(0);
-                } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPrestige > 10 || rankTeamPrestige > 15 && totalPDiff < -1) {
+                } else if (totalPDiff < -2 && league.isCareerMode() && rankTeamPollScore > 15 || rankTeamPollScore > 25 && totalPDiff < -1) {
                     fired = true;
                     league.newsStories.get(league.currentWeek + 1).add("Coach Firing at " + name + ">" + strRankTeamRecord() + " has fired their head coach, " + HC.get(0).name +
                             " after a disappointing tenure. He has a career record of " + wins + "-" + losses + ".  The team is now searching for a new head coach.");
@@ -1828,7 +1830,7 @@ public class Team {
             if (teamQBs.get(i).year > (transferYear) && !teamQBs.get(i).isMedicalRS && teamQBs.get(i).ratOvr > ratTransfer && teamQBs.get(i) != teamQBs.get(0) && (int) (Math.random() * (transferChance - 2)) < chance && !teamQBs.get(i).isTransfer || teamQBs.get(i).troubledTimes > Math.random() * dismissalChance) {
                 teamQBs.get(i).isTransfer = true;
                 if (teamQBs.get(i).troubledTimes > 0) {
-                    league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed QB " + teamQBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                    league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed QB " + teamQBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamQBs.get(i).personality += (int) Math.random() * 20;
                 }
                 if (teamQBs.get(i).personality > gradTransferRat && teamQBs.get(i).year == 4) {
@@ -1857,7 +1859,7 @@ public class Team {
                 if (teamRBs.get(i) != teamRBs.get(0) && teamRBs.get(i) != teamRBs.get(1)) {
                     teamRBs.get(i).isTransfer = true;
                     if (teamRBs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed RB " + teamRBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed RB " + teamRBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamRBs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamRBs.get(i).personality > gradTransferRat && teamRBs.get(i).year == 4) {
@@ -1887,7 +1889,7 @@ public class Team {
                 if (teamWRs.get(i) != teamWRs.get(0) && teamWRs.get(i) != teamWRs.get(1) && teamWRs.get(i) != teamWRs.get(2)) {
                     teamWRs.get(i).isTransfer = true;
                     if (teamWRs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed WR " + teamWRs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed WR " + teamWRs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamWRs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamWRs.get(i).personality > gradTransferRat && teamWRs.get(i).year == 4) {
@@ -1916,7 +1918,7 @@ public class Team {
             if (teamTEs.get(i).year > transferYear && !teamTEs.get(i).isMedicalRS && teamTEs.get(i).ratOvr > ratTransfer && teamTEs.get(i) != teamTEs.get(0) && (int) (Math.random() * transferChance) < chance && !teamTEs.get(i).isTransfer || teamTEs.get(i).troubledTimes > Math.random() * dismissalChance) {
                 teamTEs.get(i).isTransfer = true;
                 if (teamTEs.get(i).troubledTimes > 0) {
-                    league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed TE " + teamTEs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                    league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed TE " + teamTEs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamTEs.get(i).personality += (int) Math.random() * 15;
                 }
                 if (teamTEs.get(i).personality > gradTransferRat && teamTEs.get(i).year == 4) {
@@ -1945,7 +1947,7 @@ public class Team {
                 if (teamOLs.get(i) != teamOLs.get(0) && teamOLs.get(i) != teamOLs.get(1) && teamOLs.get(i) != teamOLs.get(2) && teamOLs.get(i) != teamOLs.get(3) && teamOLs.get(i) != teamOLs.get(4)) {
                     teamOLs.get(i).isTransfer = true;
                     if (teamOLs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed OL " + teamOLs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed OL " + teamOLs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamOLs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamOLs.get(i).personality > gradTransferRat && teamOLs.get(i).year == 4) {
@@ -1974,7 +1976,7 @@ public class Team {
             if (teamKs.get(i).year > transferYear && !teamKs.get(i).isMedicalRS && teamKs.get(i).ratOvr > ratTransfer && teamKs.get(i) != teamKs.get(0) && (int) (Math.random() * (transferChance + 2)) < chance && !teamKs.get(i).isTransfer || teamKs.get(i).troubledTimes > Math.random() * dismissalChance) {
                 teamKs.get(i).isTransfer = true;
                 if (teamKs.get(i).troubledTimes > 0) {
-                    league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed K " + teamKs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                    league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed K " + teamKs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                     teamKs.get(i).personality += (int) Math.random() * 15;
                 }
                 if (teamKs.get(i).personality > gradTransferRat && teamKs.get(i).year == 4) {
@@ -2003,7 +2005,7 @@ public class Team {
                 if (teamDLs.get(i) != teamDLs.get(0) && teamDLs.get(i) != teamDLs.get(1) && teamDLs.get(i) != teamDLs.get(2) && teamDLs.get(i) != teamDLs.get(3)) {
                     teamDLs.get(i).isTransfer = true;
                     if (teamDLs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed DL " + teamDLs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed DL " + teamDLs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamDLs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamDLs.get(i).personality > gradTransferRat && teamDLs.get(i).year == 4) {
@@ -2033,7 +2035,7 @@ public class Team {
                 if (teamLBs.get(i) != teamLBs.get(0) && teamLBs.get(i) != teamLBs.get(1) && teamLBs.get(i) != teamLBs.get(2)) {
                     teamLBs.get(i).isTransfer = true;
                     if (teamLBs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed LB " + teamLBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed LB " + teamLBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamLBs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamLBs.get(i).personality > gradTransferRat && teamLBs.get(i).year == 4) {
@@ -2063,7 +2065,7 @@ public class Team {
                 if (teamCBs.get(i) != teamCBs.get(0) && teamCBs.get(i) != teamCBs.get(1) && teamCBs.get(i) != teamCBs.get(2) && teamCBs.get(i) != teamCBs.get(3)) {
                     teamCBs.get(i).isTransfer = true;
                     if (teamCBs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed CB " + teamCBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed CB " + teamCBs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamCBs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamCBs.get(i).personality > gradTransferRat && teamCBs.get(i).year == 4) {
@@ -2093,7 +2095,7 @@ public class Team {
                 if (teamSs.get(i) != teamSs.get(0) && teamSs.get(i) != teamSs.get(1)) {
                     teamSs.get(i).isTransfer = true;
                     if (teamSs.get(i).troubledTimes > 0) {
-                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dimissed S " + teamSs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
+                        league.newsStories.get(league.currentWeek + 1).add(name + " Player Dismissed>Following several incidents, " + name + " has dismissed S " + teamSs.get(i).name + ". The player will have to sit out a year if he chooses to transfer to a new program.");
                         teamSs.get(i).personality += (int) Math.random() * 15;
                     }
                     if (teamSs.get(i).personality > gradTransferRat && teamSs.get(i).year == 4) {
@@ -3247,7 +3249,7 @@ public class Team {
         checkSuspensionPosition(teamLBs, startersLB + subLB, minRating);
         checkSuspensionPosition(teamCBs, startersCB + subCB, minRating);
         checkSuspensionPosition(teamSs, startersS + subS, minRating);
-        if(playersDis.size() < 1) getLowDisciplinePlayers(75);
+        if(playersDis.size() < 1) getLowDisciplinePlayers(85);
     }
 
     private void checkSuspensionPosition(ArrayList<? extends Player> players, int numStarters, int minRating) {
