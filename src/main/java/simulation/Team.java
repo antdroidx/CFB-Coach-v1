@@ -503,6 +503,7 @@ public class Team {
         teamPrestigeStart = teamPrestige;
         rankTeamPrestigeStart = rankTeamPrestige;
         confPrestige = league.conferences.get(league.getConfNumber(conference)).confPrestige;
+        if(league.conferences.get(league.getConfNumber(conference)).confTeams.size() < league.conferences.get(league.getConfNumber(conference)).minConfTeams) confPrestige = (int)(teamPrestige *.85);
         teamStartOffTal = getOffTalent();
         teamStartDefTal = getDefTalent();
 

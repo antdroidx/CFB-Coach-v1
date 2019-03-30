@@ -1270,6 +1270,9 @@ public class League {
 
     //Set Up Season variables
     private void setupSeason() {
+        for(int c = 0; c < conferences.size(); c++) {
+            conferences.get(c).updateConfPrestige();
+        }
 
         int numOddConf = 0;
         int largeOddConf = 0;
