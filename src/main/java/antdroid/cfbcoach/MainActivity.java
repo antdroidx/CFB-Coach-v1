@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         examineConfSpinner = findViewById(R.id.examineConfSpinner);
         confList = new ArrayList<>();
         for (int i = 0; i < simLeague.conferences.size(); i++) {
-            confList.add(simLeague.conferences.get(i).confName);
+            if(simLeague.conferences.get(i).confTeams.size() > 0) confList.add(simLeague.conferences.get(i).confName);
         }
         dataAdapterConf = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, confList);
@@ -635,6 +635,25 @@ public class MainActivity extends AppCompatActivity {
         examineTeam(userTeam.name);
     }
 
+    public void updateSpinners() {
+        confList.clear();
+        for (int i = 0; i < simLeague.conferences.size(); i++) {
+            if(simLeague.conferences.get(i).confTeams.size() > 0) confList.add(simLeague.conferences.get(i).confName);
+        }
+
+        dataAdapterConf.notifyDataSetChanged();
+
+        teamList = new ArrayList<>();
+        dataAdapterTeam.clear();
+        for (int i = 0; i < currentConference.confTeams.size() ; i++) {
+            teamList.add(currentConference.confTeams.get(i).strRep());
+            dataAdapterTeam.add(teamList.get(i));
+        }
+        dataAdapterTeam.notifyDataSetChanged();
+
+        resetTeamUI();
+    }
+
     public void examineTeam(String teamName) {
         wantUpdateConf = false;
         // Find team
@@ -736,7 +755,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateCurrConference() {
         confList.clear();
         for (int i = 0; i < simLeague.conferences.size(); i++) {
-            confList.add(simLeague.conferences.get(i).confName);
+            if(simLeague.conferences.get(i).confTeams.size() > 0) confList.add(simLeague.conferences.get(i).confName);
         }
         dataAdapterConf.notifyDataSetChanged();
 
@@ -2644,13 +2663,12 @@ public class MainActivity extends AppCompatActivity {
                 .setView(getLayoutInflater().inflate(R.layout.graphview, null));
         AlertDialog dialog = builder.create();
         dialog.show();
-        DataPoint[] data = new DataPoint[simLeague.leagueHistory.size()];
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        String[] yearLabels = new String[simLeague.leagueHistory.size()];
-        for (int i = 0; i < simLeague.leagueHistory.size(); i++) {
-            series.appendData(new DataPoint((seasonStart + i), Integer.parseInt(currentTeam.teamHistory.get(i).split(":")[2].split(" ")[1])), true, i + 1, false);
-            yearLabels[i] = Integer.toString(i + seasonStart);
+        String[] yearLabels = new String[currentTeam.teamHistory.size()];
+        for (int i = 0; i < currentTeam.teamHistory.size(); i++) {
+            series.appendData(new DataPoint(Integer.parseInt(currentTeam.teamHistory.get(i).split(": ")[0]), Integer.parseInt(currentTeam.teamHistory.get(i).split("Prs: ")[1].split(" ")[0])), true, i + 1, false);
+            yearLabels[i] = currentTeam.teamHistory.get(i).split(":")[0];
         }
         graph.addSeries(series);
 
@@ -2658,7 +2676,8 @@ public class MainActivity extends AppCompatActivity {
             StaticLabelsFormatter years = new StaticLabelsFormatter(graph);
             years.setHorizontalLabels(yearLabels);
             graph.getGridLabelRenderer().setLabelFormatter(years);
-            graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(5);
+            graph.getGridLabelRenderer().setNumVerticalLabels(6);
         }
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
@@ -2683,12 +2702,12 @@ public class MainActivity extends AppCompatActivity {
                 .setView(getLayoutInflater().inflate(R.layout.graphview, null));
         AlertDialog dialog = builder.create();
         dialog.show();
-        DataPoint[] data = new DataPoint[simLeague.leagueHistory.size()];
         GraphView graph = dialog.findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
-        String[] yearLabels = new String[simLeague.leagueHistory.size()];
-        for (int i = 0; i < simLeague.leagueHistory.size(); i++) {
-            series.appendData(new DataPoint((seasonStart + i), simLeague.teamList.size() - Integer.parseInt(currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
+        String[] yearLabels = new String[currentTeam.teamHistory.size()];
+
+        for (int i = 0; i < currentTeam.teamHistory.size(); i++) {
+            series.appendData(new DataPoint(Integer.parseInt(currentTeam.teamHistory.get(i).split(": ")[0]), simLeague.teamList.size() - Integer.parseInt(currentTeam.teamHistory.get(i).split("#")[1].split(" ")[0])), true, i + 1, false);
             yearLabels[i] = Integer.toString(i + seasonStart);
         }
         graph.addSeries(series);
@@ -2703,7 +2722,7 @@ public class MainActivity extends AppCompatActivity {
             years.setHorizontalLabels(yearLabels);
             years.setVerticalLabels(rankLabels);
             graph.getGridLabelRenderer().setLabelFormatter(years);
-            graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(5);
             graph.getGridLabelRenderer().setNumVerticalLabels(6);
         }
         graph.getViewport().setScalable(true);
@@ -3637,7 +3656,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Contract Status Dialog
     private void contractDialog() {
-
         if (simLeague.isCareerMode()) {
             if (userHC.age > retireAge) {
                 userHC.retirement = true;
@@ -3932,7 +3950,7 @@ public class MainActivity extends AppCompatActivity {
     //Conference Realignment Update
     private void conferenceRealignment() {
         if (simLeague.confRealignment) {
-            simLeague.conferenceRealignmentV2();
+            simLeague.conferenceRealignmentV2(this);
             if (simLeague.countRealignment > 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(simLeague.newsRealignment)
@@ -4206,7 +4224,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reincarnation() {
-        userHC = userTeam.getHC(0);
         userTeam.teamPrestige = (int)(userTeam.teamPrestige*userTeam.knockdownRet);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Coach History: " + currentTeam.HC.get(0).name)
@@ -4770,7 +4787,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Disicpline Action Required");
-        builder.setMessage(player.position + " " + player.name + " (" + player.ratOvr + ") violated a team policy related to " + issue + ".\n\nHow do you want to proceed?");
+        builder.setMessage(player.position + " " + player.name + " (" + player.ratOvr + ") violated a team policy related to " + issue + ".\n\nThe team discipline rating is currently " + userTeam.teamDisciplineScore + "%\n\nHow do you want to proceed?");
         builder.setCancelable(false);
         builder.setPositiveButton("Suspend " + gamesA + " Games", new DialogInterface.OnClickListener() {
             @Override

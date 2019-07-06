@@ -935,9 +935,9 @@ public class Game implements Serializable {
         }
 
         if (offense.playbookOffNum == 4 || offense.playbookOffNum == 5)
-            offense.getQB(0 + x).gameSim = Math.pow(offense.getQB(0 + x).ratSpeed, 1.47) * Math.random();
+            offense.getQB(0 + x).gameSim = Math.pow(offense.getQB(0 + x).ratSpeed, 1.485) * Math.random();
         else
-            offense.getQB(0 + x).gameSim = 0.25 * Math.pow(offense.getQB(0 + x).ratSpeed, 1.47) * Math.random();
+            offense.getQB(0 + x).gameSim = 0.25 * Math.pow(offense.getQB(0 + x).ratSpeed, 1.485) * Math.random();
         rusher.add(offense.getQB(0 + x));
 
         int z = 0; //o-line counter
@@ -3468,7 +3468,7 @@ public class Game implements Serializable {
                         homeTeam.playbookOff.getStratName() + " offense, averaging " + (homeTeam.teamYards / homeTeam.numGames()) + " yards per game.");
             }
             if (awayTeam.league.currentWeek + 2 < awayTeam.league.regSeasonWeeks + 5)
-                awayTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 2).add(gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name);
+                awayTeam.league.weeklyScores.get(homeTeam.league.currentWeek + 2).add(gameName + ">" + awayTeam.strRankTeamRecord() + "\n" + homeTeam.strRankTeamRecord());;
         }
     }
 
@@ -3487,7 +3487,7 @@ public class Game implements Serializable {
                         homeTeam.playbookOff.getStratName() + " offense.");
             }
         }
-        awayTeam.league.weeklyScores.get(1).add(gameName + ">#" + awayTeam.rankTeamPollScore + " " + awayTeam.name + "\n" + "#" + homeTeam.rankTeamPollScore + " " + homeTeam.name);
+        awayTeam.league.weeklyScores.get(1).add(gameName + ">" + awayTeam.strRankTeamRecord() + "\n" + homeTeam.strRankTeamRecord());
 
     }
 

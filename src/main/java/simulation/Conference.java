@@ -531,7 +531,8 @@ public class Conference {
             for(int i = 0; i < confTeams.size(); i++) {
                 confTeams.get(i).confPrestige = (int)(confTeams.get(i).teamPrestige * .85);
             }
-            confPrestige = CP / (confTeams.size());
+            if(confTeams.size() <= 0) confPrestige = 0;
+            else confPrestige = CP / (confTeams.size());
             confPromoteMin = 0;
             confRelegateMin = 0;
         }
@@ -600,7 +601,7 @@ public class Conference {
             teams.get(0).gameSchedule.add(ccg);
             teams.get(1).gameSchedule.add(ccg);
             league.newsStories.get(league.currentWeek + 1).add("Upcoming: " + confName + " Championship Game>" + teams.get(0).strRankTeamRecord() + " will host " + teams.get(1).strRankTeamRecord() + " in the conference championship game next week.");
-            league.weeklyScores.get(league.currentWeek + 2).add(ccg.gameName + ">#" + ccg.awayTeam.rankTeamPollScore + " " + ccg.awayTeam.name + "\n" + "#" + ccg.homeTeam.rankTeamPollScore + " " + ccg.homeTeam.name);
+            league.weeklyScores.get(league.currentWeek + 2).add(ccg.gameName + ">" + ccg.awayTeam.strRankTeamRecord() + "\n" + ccg.homeTeam.strRankTeamRecord());
 
         }
     }

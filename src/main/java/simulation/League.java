@@ -211,6 +211,7 @@ public class League {
     private ArrayList<Player> defPOTYCandidates;
     private ArrayList<Player> freshmanCandidates;
     private ArrayList<Player> allAmericans;
+    private ArrayList<Player> allAmericans2;
     private ArrayList<Player> allFreshman;
     private String heismanWinnerStrFull;
     private String defPOTYWinnerStrFull;
@@ -218,16 +219,18 @@ public class League {
     private String coachWinnerStrFull;
     public boolean careerMode;
 
+    public ArrayList<String> teamsFCSList;
+
     private final String[] proTeams = {"New England", "Buffalo", "New Jersey", "Miami", "Pittsburgh", "Baltimore", "Cincinnati", "Cleveland", "Jacksonville", "Indianapolis", "Houston", "Tennessee", "Kansas City", "Oakland", "Anaheim", "Denver",
             "New York", "Philadelphia", "Dallas", "Washington", "Minnesota", "Chicago", "Green Bay", "Detroit", "New Orleans", "Carolina", "Tampa Bay", "Atlanta", "Seattle", "Los Angeles", "San Francisco", "Arizona"};
 
     public final String[] states = {"AS", "AZ", "CA", "HI", "ID", "MT", "NV", "OR", "UT", "WA", "CO", "KS", "MO", "NE", "NM", "ND", "OK", "SD", "TX", "WY", "IL", "IN", "IA", "KY", "MD", "MI", "MN", "OH", "TN", "WI", "CT", "DE", "ME", "MA", "NH", "NJ", "NY", "PA", "RI", "VT", "AL", "AK", "FL", "GA", "LA", "MS", "NC", "SC", "VA", "WV"};
 
-    public final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Nectatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Gator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl, Chick Bowl, Empire Bowl, Rainbow Bowl, Mushroom Bowl, Coffee Bowl, Cascade Bowl, Great Lakes Bowl, Cowboy Bowl, Alliance Bowl, Appalachian Bowl, Bayou Bowl";
+    public final String bowlNamesText = "Carnation Bowl, Mandarin Bowl, Honey Bowl, Fiesta Bowl, Nectatrine Bowl, Polyester Bowl, Lemon-Lime Bowl, Gator Bowl, Desert Bowl, Fort Bowl, Vacation Bowl, Star Bowl, Bell Bowl, Freedom Bowl, Casino Bowl, American Bowl, Island Bowl, Philantropy Bowl, Steak Bowl, Camping Bowl, Spud Bowl, Music Bowl, New Orleans Bowl, Cowboy Bowl, Santa Fe Bowl, Burrito Bowl, Mexico Bowl, Chick Bowl, Empire Bowl, Rainbow Bowl, Mushroom Bowl, Coffee Bowl, Cascade Bowl, Great Lakes Bowl, Cowboy Bowl, Alliance Bowl, Appalachian Bowl, Bayou Bowl, Nexus Bowl, Space Bowl, Everest Bowl, Cloud Bowl, Healthcare Bowl, More Chicken Bowl, Avocado Bowl, Realtors Bowl, Search Engine Bowl, Instant Photo Bowl, Social Faces Bowl, Grape Bowl, Tesla Bowl, Earthquake Bowl, Rainforest Bowl";
 
-    public String[] teamsFCS = {"Alabama State", "Albany", "Cal-Poly", "Central Arkansas", "Chattanooga", "Columbia", "Dayton", "Delaware", "Eastern Wash", "Eastern Tenn", "Eastern Ken", "Harvard", "Yale", "Princeton", "Grambling", "Georgetown", "Idaho", "Idaho State", "James Madison", "Maine", "Miss Valley", "Montana", "New Hampshire", "North Dakota", "North Dakota St", "South Dakota", "South Dakota St", "Northern Arizona", "Northern Colorado", "Portland", "Rhode Island", "Sacramento", "Southern", "Southern TX", "Western llinois", "Vanilla", "Youngstown"};
+    public String[] teamsFCS = {"Alabama State", "Albany", "Cal-Poly", "Central Arkansas", "Chattanooga", "Columbia", "Dayton", "Delaware", "Eastern Wash", "Eastern Tenn", "Spokane", "Harvard", "Yale", "Princeton", "Grambling", "Georgetown", "Idaho", "Idaho State", "James Madison", "Maine", "Miss Valley", "Montana", "Montana State", "New Hampshire", "North Dakota", "North Dakota St", "South Dakota", "South Dakota St", "Northern Arizona", "Northern Colorado", "Portland", "Rhode Island", "Sacramento", "Southern", "Southern TX", "Western llinois", "Youngstown"};
 
-    public String[] confNamesNew = {"Big 8", "National", "Constitution", "Colonial", "Continental"};
+    public String[] confNamesNew = {"Antdroid", "Big 8", "National", "Constitution", "Colonial", "Continental"};
 
 
     /**
@@ -315,6 +318,8 @@ public class League {
                 teamList.get(i).playbookDef = teamList.get(i).getPlaybookDef()[teamList.get(i).playbookDefNum];
             }
         }
+
+        checkIndyConfExists();
 
         setupSeason();
     }
@@ -485,6 +490,8 @@ public class League {
                 }
             }
         }
+
+        checkIndyConfExists();
 
         setupSeason();
     }
@@ -727,6 +734,8 @@ public class League {
         //Get longest active win streak
         updateLongestActiveWinStreak();
 
+        checkIndyConfExists();
+
 
         setupSeason();
     }
@@ -967,6 +976,8 @@ public class League {
                 }
             }
         }
+
+        checkIndyConfExists();
 
         setupSeason();
     }
@@ -1217,6 +1228,8 @@ public class League {
         //Get longest active win streak
         updateLongestActiveWinStreak();
 
+        checkIndyConfExists();
+
         setupSeason();
     }
 
@@ -1247,7 +1260,7 @@ public class League {
 
         allAmericans = new ArrayList<>();
         allFreshman = new ArrayList<>();
-
+        allAmericans2 = new ArrayList<>();
         transferQBs = new ArrayList<>();
         transferRBs = new ArrayList<>();
         transferWRs = new ArrayList<>();
@@ -1267,6 +1280,20 @@ public class League {
         yearStartLongestWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
         longestActiveWinStreak = new TeamStreak(getYear(), getYear(), 0, "XXX");
     }
+
+    private void checkIndyConfExists() {
+        boolean indyExists = false;
+
+        for(int c = 0; c < conferences.size(); c++) {
+            if(conferences.get(c).confName.equals("Independent")) {
+                indyExists = true;
+            }
+        }
+        if(!indyExists) {
+            conferences.add(new Conference("Independent", this, false, 0, 0));
+        }
+    }
+
 
     //Set Up Season variables
     private void setupSeason() {
@@ -1331,8 +1358,9 @@ public class League {
             leagueTeams.add(teamList.get(i).name);
         }
 
+        teamsFCSList = new ArrayList<>();
         for(int i = 0; i < teamsFCS.length; i++) {
-            if(leagueTeams.contains(teamsFCS[i])) teamsFCS[i] = "FCS Team";
+            if(!leagueTeams.contains(teamsFCS[i])) teamsFCSList.add(teamsFCS[i]);
         }
 
         //Setup OOC v3 Scheduling
@@ -1359,7 +1387,10 @@ public class League {
                     Team b;
 
                     if (availTeamsB.isEmpty()) {
-                        b = new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, false);
+                        if(teamsFCSList.isEmpty())
+                            b = new Team("Antdroid Tech", "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, false);
+                        else
+                            b = new Team(teamsFCSList.get((int) (teamsFCSList.size() * Math.random())), "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", 0, this, false);
                     } else {
                         int selTeamB = (int) (availTeamsB.size() * Math.random());
                         b = availTeamsB.get(selTeamB);
@@ -2767,31 +2798,18 @@ public class League {
             ArrayList<PlayerCB> cbs = new ArrayList<>();
             ArrayList<PlayerS> ss = new ArrayList<>();
 
-            for (Conference c : conferences) {
-                if(c.confTeams.size() >= c.minConfTeams) {
-                    c.getAllConfPlayers();
-                    qbs.add((PlayerQB) c.allConfPlayers.get(1));
-                    rbs.add((PlayerRB) c.allConfPlayers.get(2));
-                    rbs.add((PlayerRB) c.allConfPlayers.get(3));
-                    wrs.add((PlayerWR) c.allConfPlayers.get(4));
-                    wrs.add((PlayerWR) c.allConfPlayers.get(5));
-                    wrs.add((PlayerWR) c.allConfPlayers.get(6));
-                    tes.add((PlayerTE) c.allConfPlayers.get(7));
-                    for (int i = 8; i < 13; ++i) {
-                        ols.add((PlayerOL) c.allConfPlayers.get(i));
-                    }
-                    ks.add((PlayerK) c.allConfPlayers.get(13));
-                    for (int i = 14; i < 17; ++i) {
-                        dls.add((PlayerDL) c.allConfPlayers.get(i));
-                    }
-                    for (int i = 18; i < 21; ++i) {
-                        lbs.add((PlayerLB) c.allConfPlayers.get(i));
-                    }
-                    for (int i = 21; i < 24; ++i) {
-                        cbs.add((PlayerCB) c.allConfPlayers.get(i));
-                    }
-                    ss.add((PlayerS) c.allConfPlayers.get(24));
-                }
+            for (int t = 0; t < teamList.size(); t++) {
+                Team tm = teamList.get(t);
+                qbs.addAll(tm.teamQBs);
+                rbs.addAll(tm.teamRBs);
+                wrs.addAll(tm.teamWRs);
+                tes.addAll(tm.teamTEs);
+                ols.addAll(tm.teamOLs);
+                ks.addAll(tm.teamKs);
+                dls.addAll(tm.teamDLs);
+                lbs.addAll(tm.teamLBs);
+                cbs.addAll(tm.teamCBs);
+                ss.addAll(tm.teamSs);
             }
 
             Collections.sort(qbs, new CompPlayerHeisman());
@@ -2850,10 +2868,56 @@ public class League {
                 ss.get(i).wonAllAmerican = true;
                 ss.get(i).team.HC.get(0).allamericans++;
             }
-
+            
+            allAmericans2.add(qbs.get(1));
+            qbs.get(1).wonAllAmerican = true;
+            qbs.get(1).team.HC.get(0).allamericans++;
+            allAmericans2.add(rbs.get(2));
+            rbs.get(2).wonAllAmerican = true;
+            rbs.get(2).team.HC.get(0).allamericans++;
+            allAmericans2.add(rbs.get(3));
+            rbs.get(3).wonAllAmerican = true;
+            rbs.get(3).team.HC.get(0).allamericans++;
+            for (int i = 3; i < 6; ++i) {
+                allAmericans2.add(wrs.get(i));
+                wrs.get(i).wonAllAmerican = true;
+                wrs.get(i).team.HC.get(0).allamericans++;
+            }
+            allAmericans2.add(tes.get(1));
+            tes.get(1).wonAllAmerican = true;
+            tes.get(1).team.HC.get(0).allamericans++;
+            for (int i = 5; i < 10; ++i) {
+                allAmericans2.add(ols.get(i));
+                ols.get(i).wonAllAmerican = true;
+                ols.get(i).team.HC.get(0).allamericans++;
+            }
+            allAmericans2.add(ks.get(1));
+            ks.get(1).wonAllAmerican = true;
+            ks.get(1).team.HC.get(0).allamericans++;
+            for (int i = 4; i < 8; ++i) {
+                allAmericans2.add(dls.get(i));
+                dls.get(i).wonAllAmerican = true;
+                dls.get(i).team.HC.get(0).allamericans++;
+            }
+            for (int i = 3; i < 6; ++i) {
+                allAmericans2.add(lbs.get(i));
+                lbs.get(i).wonAllAmerican = true;
+                lbs.get(i).team.HC.get(0).allamericans++;
+            }
+            for (int i = 3; i < 6; ++i) {
+                allAmericans2.add(cbs.get(i));
+                cbs.get(i).wonAllAmerican = true;
+                cbs.get(i).team.HC.get(0).allamericans++;
+            }
+            for (int i = 2; i < 4; ++i) {
+                allAmericans2.add(ss.get(i));
+                ss.get(i).wonAllAmerican = true;
+                ss.get(i).team.HC.get(0).allamericans++;
+            }
         }
 
         StringBuilder allAmerican = new StringBuilder();
+        allAmerican.append("[FIRST TEAM ALL-AMERICANS]\n\n>");
         for (int i = 0; i < allAmericans.size(); ++i) {
             Player p = allAmericans.get(i);
             allAmerican.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
@@ -2897,13 +2961,58 @@ public class League {
                 PlayerS ps = (PlayerS) p;
                 allAmerican.append(" S " + ps.name + " [" + ps.getYrStr() + "]\n \t\t" +
                         ps.statsTackles + " Tkl, " + ps.statsSacks + " Sacks, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int\n");
-            } else {
-                allAmerican.append(" " + p.position + " " + p.name + " [" + p.getYrStr() + "]\n");
+            } 
+            allAmerican.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
+        }
+        allAmerican.append("[SECOND TEAM ALL-AMERICANS]\n\n>");
+        for (int i = 0; i < allAmericans2.size(); ++i) {
+            Player p = allAmericans2.get(i);
+            allAmerican.append(p.team.abbr + " (" + p.team.wins + "-" + p.team.losses + ")" + " - ");
+            if (p instanceof PlayerQB) {
+                PlayerQB pqb = (PlayerQB) p;
+                allAmerican.append(" QB " + pqb.name + " [" + pqb.getYrStr() + "]\n \t\t" +
+                        pqb.statsPassTD + " TDs, " + pqb.statsInt + " Int, " + pqb.statsPassYards + " Yds\n");
+            } else if (p instanceof PlayerRB) {
+                PlayerRB prb = (PlayerRB) p;
+                allAmerican.append(" RB " + prb.name + " [" + prb.getYrStr() + "]\n \t\t" +
+                        prb.statsRushTD + " TDs, " + prb.statsFumbles + " Fum, " + prb.statsRushYards + " Yds\n");
+            } else if (p instanceof PlayerWR) {
+                PlayerWR pwr = (PlayerWR) p;
+                allAmerican.append(" WR " + pwr.name + " [" + pwr.getYrStr() + "]\n \t\t" +
+                        pwr.statsRecTD + " TDs, " + pwr.statsReceptions + " Rec, " + pwr.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerTE) {
+                PlayerTE pte = (PlayerTE) p;
+                allAmerican.append(" TE " + pte.name + " [" + pte.getYrStr() + "]\n \t\t" +
+                        pte.statsRecTD + " TDs, " + pte.statsReceptions + " Rec, " + pte.statsRecYards + " Yds\n");
+            } else if (p instanceof PlayerOL) {
+                PlayerOL pol = (PlayerOL) p;
+                allAmerican.append(" OL " + pol.name + " [" + pol.getYrStr() + "]\n \t\t" +
+                        df2.format(pol.getYardsPerRush()) + " YPR, " + df2.format(pol.getYardsPerPass()) + " YPP, " + pol.statsSacksAllowed + " Sacks\n");
+            } else if (p instanceof PlayerK) {
+                PlayerK pk = (PlayerK) p;
+                allAmerican.append(" K " + pk.name + " [" + pk.getYrStr() + "]\n \t\t" +
+                        "FGs: " + pk.statsFGMade + "/" + pk.statsFGAtt + ", XPs: " + pk.statsXPMade + "/" + pk.statsXPAtt + "\n");
+            } else if (p instanceof PlayerDL) {
+                PlayerDL pdl = (PlayerDL) p;
+                allAmerican.append(" DL " + pdl.name + " [" + pdl.getYrStr() + "]\n \t\t" +
+                        pdl.statsTackles + " Tkl, " + pdl.statsSacks + " Sacks, " + pdl.statsFumbles + " Fum\n");
+            } else if (p instanceof PlayerLB) {
+                PlayerLB plb = (PlayerLB) p;
+                allAmerican.append(" LB " + plb.name + " [" + plb.getYrStr() + "]\n \t\t" +
+                        plb.statsTackles + " Tkl, " + plb.statsSacks + " Sacks, " + plb.statsFumbles + " Fum, " + plb.statsInts + " Int\n");
+            } else if (p instanceof PlayerCB) {
+                PlayerCB pcb = (PlayerCB) p;
+                allAmerican.append(" CB " + pcb.name + " [" + pcb.getYrStr() + "]\n \t\t" +
+                        pcb.statsTackles + " Tkl, " + pcb.statsSacks + " Sacks, " + pcb.statsDefended + " Def, " + pcb.statsInts + " Int\n");
+            } else if (p instanceof PlayerS) {
+                PlayerS ps = (PlayerS) p;
+                allAmerican.append(" S " + ps.name + " [" + ps.getYrStr() + "]\n \t\t" +
+                        ps.statsTackles + " Tkl, " + ps.statsSacks + " Sacks, " + ps.statsFumbles + " Fum, " + ps.statsInts + " Int\n");
             }
             allAmerican.append(" \t\tOverall: " + p.ratOvr + "\n\n>");
         }
-
-
+        
+        
         // Go through all the all conf players to get the all americans
         return allAmerican.toString();
     }
@@ -3137,7 +3246,7 @@ public class League {
             playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
             newsStories.get(currentWeek + 1).add("Upcoming Sweet 16 Playoff Games!>"  + "#" + playoffTeams.get(i).rankTeamPollScore + " " + playoffTeams.get(i).getStrAbbrWL() + " will battle with #" + playoffTeams.get(15-i).rankTeamPollScore + " " + playoffTeams.get(15 - i).getStrAbbrWL() +
                     " in the " + getYear() + " Sweet 16 round of the Playoffs!");
-            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">#" + cfpGames[i].awayTeam.rankTeamPollScore + " " + cfpGames[i].awayTeam.name + "\n" + "#" + cfpGames[i].homeTeam.rankTeamPollScore + " " + cfpGames[i].homeTeam.name);
+            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">" + cfpGames[i].awayTeam.strRankTeamRecord() + "\n" + cfpGames[i].homeTeam.strRankTeamRecord());
 
         }
 
@@ -3169,7 +3278,7 @@ public class League {
             playoffTeams.get(15 - i).gameSchedule.add(cfpGames[i]);
             newsStories.get(currentWeek + 1).add("Final Four Announced!>" + playoffTeams.get(i - 12).getStrAbbrWL() + " and " + playoffTeams.get(15 - i).getStrAbbrWL() +
                     " will play each other in the " + getYear() + " Final Four!");
-            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">#" + cfpGames[i].awayTeam.rankTeamPollScore + " " + cfpGames[i].awayTeam.name + "\n" + "#" + cfpGames[i].homeTeam.rankTeamPollScore + " " + cfpGames[i].homeTeam.name);
+            weeklyScores.get(currentWeek + 2).add(cfpGames[i].gameName + ">" + cfpGames[i].awayTeam.strRankTeamRecord() + "\n" + cfpGames[i].homeTeam.strRankTeamRecord());
         }
     }
 
@@ -3181,7 +3290,7 @@ public class League {
         playoffTeams.get(1).gameSchedule.add(ncg);
         newsStories.get(currentWeek + 1).add("The Upcoming National Title Game!>" + playoffTeams.get(0).getStrAbbrWL() + " and " + playoffTeams.get(1).getStrAbbrWL() +
                 " are the last two teams left in the " + getYear() + " College Football Playoffs. These teams will compete next weekend for the National Title!");
-        weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">#" + ncg.awayTeam.rankTeamPollScore + " " + ncg.awayTeam.name + "\n" + "#" + ncg.homeTeam.rankTeamPollScore + " " + ncg.homeTeam.name);
+        weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">" + ncg.awayTeam.strRankTeamRecord() + "\n" + ncg.homeTeam.strRankTeamRecord());
     }
 
     public void playExpPlayoffSweet16() {
@@ -3326,7 +3435,7 @@ public class League {
         Collections.sort(teamList, new CompTeamPoll());
 
         for (int i = 0; i < teamList.size(); ++i) {
-            if (!teamList.get(i).bowlBan && teamList.get(i).wins > 6)
+            if (!teamList.get(i).bowlBan && teamList.get(i).wins >= 6)
                 bowlTeams.add(teamList.get(i));
         }
 
@@ -3348,8 +3457,8 @@ public class League {
         newsStories.get(currentWeek + 1).add("Playoff Teams Announced!>"  + "#" + bowlTeams.get(0).rankTeamPollScore + bowlTeams.get(0).getStrAbbrWL() + " will play #" + bowlTeams.get(3).rankTeamPollScore + bowlTeams.get(3).getStrAbbrWL() +
                 " , while " + "#" + bowlTeams.get(1).rankTeamPollScore + bowlTeams.get(1).getStrAbbrWL() + " will play #" + bowlTeams.get(2).rankTeamPollScore + bowlTeams.get(2).getStrAbbrWL() + " in next week's College Football Playoff semi-final round. The winners will compete for this year's National Title!");
 
-        weeklyScores.get(currentWeek + 4).add(semiG14.gameName + ">#" + semiG14.awayTeam.rankTeamPollScore + " " + semiG14.awayTeam.name + "\n" + "#" + semiG14.homeTeam.rankTeamPollScore + " " + semiG14.homeTeam.name);
-        weeklyScores.get(currentWeek + 4).add(semiG23.gameName + ">#" + semiG23.awayTeam.rankTeamPollScore + " " + semiG23.awayTeam.name + "\n" + "#" + semiG23.homeTeam.rankTeamPollScore + " " + semiG23.homeTeam.name);
+        weeklyScores.get(currentWeek + 4).add(semiG14.gameName + ">" + semiG14.awayTeam.strRankTeamRecord() + "\n" + semiG14.homeTeam.strRankTeamRecord());
+        weeklyScores.get(currentWeek + 4).add(semiG23.gameName + ">" + semiG23.awayTeam.strRankTeamRecord() + "\n" + semiG23.homeTeam.strRankTeamRecord());
 
         for (int i = 0; i < 4; i++) {
             bowlTeams.get(i).postSeasonHealing(3);
@@ -3377,9 +3486,9 @@ public class League {
                 bowlTeams.get(i + 4).gameSchedule.add(bowlGames[g]);
                 newsStories.get(currentWeek + 1).add(bowlGames[g].gameName + " Announced!>" + "#" + bowlTeams.get(i).rankTeamPollScore + " " + bowlTeams.get(i).getStrAbbrWL() + " will compete with " + "#" + bowlTeams.get(i + 4).rankTeamPollScore + " " + bowlTeams.get(i + 4).getStrAbbrWL() +
                         " in the " + getYear() + " " + bowlGames[g].gameName + "!");
-                if(g < 6) weeklyScores.get(currentWeek + 4).add(bowlGames[g].gameName + ">#" + bowlGames[g].awayTeam.rankTeamPollScore + " " + bowlGames[g].awayTeam.name + "\n" + "#" + bowlGames[g].homeTeam.rankTeamPollScore + " " + bowlGames[g].homeTeam.name);
-                else if(g < 16) weeklyScores.get(currentWeek + 3).add(bowlGames[g].gameName + ">#" + bowlGames[g].awayTeam.rankTeamPollScore + " " + bowlGames[g].awayTeam.name + "\n" + "#" + bowlGames[g].homeTeam.rankTeamPollScore + " " + bowlGames[g].homeTeam.name );
-                else weeklyScores.get(currentWeek + 2).add(bowlGames[g].gameName + ">#" + bowlGames[g].awayTeam.rankTeamPollScore + " " + bowlGames[g].awayTeam.name + "\n" + "#" + bowlGames[g].homeTeam.rankTeamPollScore + " " + bowlGames[g].homeTeam.name);
+                if(g < 6) weeklyScores.get(currentWeek + 4).add(bowlGames[g].gameName + ">" + bowlGames[g].awayTeam.strRankTeamRecord() + "\n" + bowlGames[g].homeTeam.strRankTeamRecord());
+                else if(g < 16) weeklyScores.get(currentWeek + 3).add(bowlGames[g].gameName + ">" + bowlGames[g].awayTeam.strRankTeamRecord() + "\n" + bowlGames[g].homeTeam.strRankTeamRecord());
+                else weeklyScores.get(currentWeek + 2).add(bowlGames[g].gameName + ">" + bowlGames[g].awayTeam.strRankTeamRecord() + "\n" + bowlGames[g].homeTeam.strRankTeamRecord());
 
                 g++;
             }
@@ -3514,7 +3623,7 @@ public class League {
             semi23winner.gameSchedule.add(ncg);
             newsStories.get(currentWeek + 1).add("Upcoming National Title Game!>" + semi14winner.getStrAbbrWL() + " will compete with " + semi23winner.getStrAbbrWL() +
                     " for the " + getYear() + " College Football National Title!");
-            weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">#" + ncg.awayTeam.rankTeamPollScore + " " + ncg.awayTeam.name + "\n" + "#" + ncg.homeTeam.rankTeamPollScore + " " + ncg.homeTeam.name);
+            weeklyScores.get(currentWeek + 2).add(ncg.gameName + ">" + ncg.awayTeam.strRankTeamRecord() + "\n" + ncg.homeTeam.strRankTeamRecord());
         }
     }
 
@@ -4305,7 +4414,7 @@ Every conference creates a bucket of teams that are not meeting minimum prestige
 Then conferences can see if they want to add them to their list if the teams meet the new conference list... chosen at random.
 
 */
-    public void conferenceRealignmentV2() {
+    public void conferenceRealignmentV2(MainActivity main) {
         int minConfTeams = 12;
         int maxConfTeams = 16;
         ArrayList<Team> demoteTeamList = new ArrayList<>();
@@ -4516,9 +4625,9 @@ Then conferences can see if they want to add them to their list if the teams mee
         //Promote FCS School
         if (advancedRealignment && Math.random() < confRealignmentChance && Math.random() < realignmentChance) {
             int matches = 0;
-            for (int t = 0; t < teamsFCS.length; t++) {
+            for (int t = 0; t < teamsFCSList.size(); t++) {
                 for (int x = 0; x < teamList.size(); x++) {
-                    if (teamList.get(x).name.equals(teamsFCS[t])) {
+                    if (teamList.get(x).name.equals(teamsFCSList.get(t))) {
                         matches++;
                     }
                 }
@@ -4531,7 +4640,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                 }
             }
 
-            if (matches < teamsFCS.length) {
+            if (matches < teamsFCSList.size()) {
                 Conference indy = conferences.get(indConf);
                 if (conferences.get(indConf).confTeams.size() < indy.minConfTeams - 1) {
                     String fcsName = "New Team";
@@ -4539,7 +4648,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
                     while (!named) {
                         int nameTest = 0;
-                        fcsName = teamsFCS[(int) (teamsFCS.length * Math.random())];
+                        fcsName = teamsFCSList.get((int) (teamsFCSList.size() * Math.random()));
                         for (int i = 0; i < teamList.size(); i++) {
                             if (teamList.get(i).name.equals(fcsName)) {
                                 nameTest++;
@@ -4576,18 +4685,21 @@ Then conferences can see if they want to add them to their list if the teams mee
             }
             if (matches <= 0) {
                 matches = 0;
-                for (int t = 0; t < teamsFCS.length; t++) {
+                for (int t = 0; t < teamsFCSList.size(); t++) {
                     for (int x = 0; x < teamList.size(); x++) {
-                        if (teamList.get(x).name.equals(teamsFCS[t])) {
+                        if (teamList.get(x).name.equals(teamsFCSList.get(t))) {
                             matches++;
                         }
                     }
                 }
 
-                if (matches < teamsFCS.length - 12) {
+                if (matches < teamsFCSList.size() - 12) {
+
+                    //Create new Conference
                     Conference antdroid = new Conference("Antdroid", this, false, 0, 0);
                     conferences.add(antdroid);
 
+                    //Find Independent Conf
                     int indConf = 0;
                     for (Conference c : conferences) {
                         if (c.confName.equals("Independent") && c.confTeams.size() < c.minConfTeams) {
@@ -4596,6 +4708,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                     }
                     Conference indy = conferences.get(indConf);
 
+                    //Move Independent Teams to new Conf & remove from independents
                     for (int i = 0; i < indy.confTeams.size(); i++) {
                         indy.confTeams.get(i).conference = "Antdroid";
                         antdroid.confTeams.add(indy.confTeams.get(i));
@@ -4604,6 +4717,7 @@ Then conferences can see if they want to add them to their list if the teams mee
                         indy.confTeams.remove(antdroid.confTeams.get(i));
                     }
 
+                    //Make new Teams
                     int count = antdroid.confTeams.size();
                     while (count < 10) {
                         String fcsName = "New Team";
@@ -4611,7 +4725,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
                         while (!named) {
                             int nameTest = 0;
-                            fcsName = teamsFCS[(int) (teamsFCS.length * Math.random())];
+                            fcsName = teamsFCSList.get((int) (teamsFCSList.size() * Math.random()));
                             for (int i = 0; i < teamList.size(); i++) {
                                 if (teamList.get(i).name.equals(fcsName)) {
                                     nameTest++;
@@ -4621,7 +4735,6 @@ Then conferences can see if they want to add them to their list if the teams mee
                                 named = true;
                             }
                         }
-
 
                         Team FCS = new Team(fcsName, "FCS", "Antdroid", 35, "A", (int) (Math.random() * 6), this, true);
                         FCS.abbr = FCS.name.substring(0, 3);
@@ -4634,8 +4747,10 @@ Then conferences can see if they want to add them to their list if the teams mee
                     //break the news
                     newsStories.get(currentWeek + 2).add("NEW CONFERENCE ANNOUNCED!>Today, the League is excited to announce the formation of the Antdroid Conference! This conference will be a mix of Independent teams and newly promoted lower level teams!");
 
-                    newsRealignment += ("NEW CONFERENCES ANNOUNCED! Today, the League is excited to announce the formation of the Antdroid Conference! This conference will be a mix of Independent teams and newly promoted lower level teams!\n\n");
+                    newsRealignment += ("NEW CONFERENCE ANNOUNCED! Today, the League is excited to announce the formation of the Antdroid Conference! This conference will be a mix of Independent teams and newly promoted lower level teams!\n\n");
                     countRealignment++;
+
+                    main.updateSpinners();
 
                 }
             }
@@ -4755,9 +4870,10 @@ Then conferences can see if they want to add them to their list if the teams mee
         for (Conference c : conferences) {
             if (c.confTeams.size() < c.minConfTeams) {
                 c.confPrestige = 0;
+            } else {
+                c.updateConfPrestige();
             }
         }
-
         Collections.sort(conferences, new CompConfPrestige());
     }
 
@@ -4769,7 +4885,7 @@ Then conferences can see if they want to add them to their list if the teams mee
 
         //check if there is an even number of teams
         if(teamList.size() % 2 != 0) {
-            teamList.add(new Team(teamsFCS[(int) (teamsFCS.length * Math.random())], "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", (int)(Math.random()*6), this, false));
+            teamList.add(new Team(teamsFCSList.get((int) (teamsFCSList.size() * Math.random())), "FCS", "FCS Division", (int) (Math.random() * 40), "FCS1", (int)(Math.random()*6), this, false));
         }
 
         //Clear all Conferences

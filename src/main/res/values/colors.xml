@@ -7,7 +7,7 @@
     <color name="greenLight">#00ffcc</color>
     <color name="blueDark">#1d2c58</color>
     <color name="blueLight">#b2c1d9</color>
-    <color name="winColor">#5994de</color>
+    <color name="winColor">#5994DE</color>
     <color name="winColorPressed">#4a78ec</color>
     <color name="lossColor">#f14e4e</color>
     <color name="lossColorPressed">#940101</color>
