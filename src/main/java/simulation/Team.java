@@ -2243,7 +2243,7 @@ public class Team {
     }
 
     public int getUserRecruitBudget() {
-        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
+        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/11);
         for (int i = 0; i < league.conferences.size(); ++i) {
             league.conferences.get(i).updateConfPrestige();
         }
@@ -2256,7 +2256,7 @@ public class Team {
     }
 
     public int getUserRecruitStars() {
-        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/10.5);
+        float level = (league.teamList.size() - rankTeamPrestige) / (float)(league.teamList.size()/11);
         for (int i = 0; i < league.conferences.size(); ++i) {
             league.conferences.get(i).updateConfPrestige();
         }

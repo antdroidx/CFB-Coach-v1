@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean reincarnate;
 
     //Universe Settings
-    private final int seasonStart = 2018;
+    private final int seasonStart = 2019;
     private final int retireAge = 67;
 
     String saveLeagueFileStr;

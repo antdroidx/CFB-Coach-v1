@@ -451,8 +451,8 @@ public class PlayerRB extends Player {
         pStats.add("[B]SEASON STATS");
 
         pStats.add("TDs: " + statsRushTD + ">Fumbles: " + statsFumbles);
-        pStats.add("Rush Yards: " + statsRushYards + " yds>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
-        pStats.add("Yds/Game: " + df2.format((double) (statsRushYards / getGames())) + " yds/g>Rush Att: " + statsRushAtt);
+        pStats.add("Rush Yards: " + statsRushYards + " yds>Rush Att: " + statsRushAtt);
+        pStats.add("Yds/Game: " + df2.format((double) (statsRushYards / getGames())) + " yds/g>Yards/Att: " + df2.format(getYardsperCarry()) + " yds");
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions + " ");
         pStats.add("Rec TDs: " + statsRecTD + ">Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")");
         if (statsKickRets > 0) {
@@ -473,8 +473,8 @@ public class PlayerRB extends Player {
     public ArrayList<String> getCareerStatsList() {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("TDs: " + (statsRushTD + careerTDs) + ">Fumbles: " + (statsFumbles + careerFumbles));
-        pStats.add("Rush Yards: " + (statsRushYards + careerRushYards) + " yds>Yards/Att: " + df2.format(getCareerYardsperCarry()) + " yds");
-        pStats.add("Yds/Game: " + df2.format((double) ((statsRushYards + careerRushYards) / (getGames() + careerGames))) + " yds/g>Rush Att: " + (statsRushAtt + careerRushAtt));
+        pStats.add("Rush Yards: " + (statsRushYards + careerRushYards) + " yds>Rush Att: " + (statsRushAtt + careerRushAtt));
+        pStats.add("Yds/Game: " + df2.format((double) ((statsRushYards + careerRushYards) / (getGames() + careerGames))) + " yds/g>Yards/Att: " + df2.format(getCareerYardsperCarry()) + " yds");
         pStats.add("Rec Yards: " + (statsRecYards + careerRecYards) + " yds>Receptions: " + (statsReceptions + careerReceptions) + " ");
         pStats.add("Rec TDs: " + (statsRecTD + careerRecTD) + "> ");
         if (statsKickRets + careerKickRets > 0) {

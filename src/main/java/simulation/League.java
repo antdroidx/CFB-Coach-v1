@@ -196,12 +196,12 @@ public class League {
 
     private final DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
     private final DecimalFormat df2 = new DecimalFormat("#.##", symbols);
-    private final int seasonStart = 2018;
+    private final int seasonStart = 2019;
     int countTeam = 130; //default roster automatically calculates this number when using custom data or loaded saves
     private final int seasonWeeks = 30;
     public int regSeasonWeeks = 13; //original = 13 will change dynamically based on team/conference structure
     private final double confRealignmentChance = .25; //chance of event .25
-    private final double realignmentChance = .285; //chance of invite .33
+    private final double realignmentChance = .25; //chance of invite .33
     private boolean heismanDecided;
     private Player heisman;
     private Player defPOTY;

@@ -441,6 +441,23 @@ public class PlayerWR extends Player {
         }
     }
 
+    public float getWRPassRating() {
+        if (statsTargets < 1) {
+            return 0;
+        } else {
+            float rating = (float) (((8.4 * statsRecYards) + (300 * statsRecTD) + (100 * statsReceptions) - (200 * statsDrops)) / statsTargets);
+            return rating;
+        }
+    }
+
+        public float getWRPassRatingCareer() {
+            if (statsTargets+careerTargets < 1) {
+                return 0;
+            } else {
+                float rating = (float)(((8.4 * (statsRecYards+careerRecYards)) + (300 * (statsRecTD+careerTD)) + (100 * (statsReceptions+careerReceptions)) - (200 * (statsDrops+careerDrops))) / (statsTargets+careerTargets));
+                return rating;
+            }
+    }
     @Override
     public ArrayList<String> getDetailAllStatsList() {
         ArrayList<String> pStats = stringPlayerInfo();
@@ -458,8 +475,9 @@ public class PlayerWR extends Player {
 
         pStats.add("TDs: " + statsRecTD + ">Fumbles: " + statsFumbles);
         pStats.add("Rec Yards: " + statsRecYards + " yds>Receptions: " + statsReceptions);
+        pStats.add("Targets: " + statsTargets + ">Drops: " + statsDrops);
         pStats.add("Catch Percent: " + df2.format(getCatchPCT()) + "%>Yards/Tgt: " + df2.format(getYardsperTGT()) + " yds");
-        pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>Drops: " + statsDrops);
+        pStats.add("Yds/Game: " + (statsRecYards / getGames()) + " yds/g>WR/QB Rating: " + (df2.format(getWRPassRating())));
         pStats.add("Games: " + gamesPlayed + " (" + statsWins + "-" + (gamesStarted - statsWins) + ")" + "> ");
         if (statsKickRets > 0) {
             pStats.add("Kick Rets: " + statsKickRets + ">Kick Ret Yards: " + statsKickRetYards + " yrds");
@@ -480,8 +498,9 @@ public class PlayerWR extends Player {
         ArrayList<String> pStats = new ArrayList<>();
         pStats.add("TDs: " + (statsRecTD + careerTD) + ">Fumbles: " + (statsFumbles + careerFumbles));
         pStats.add("Rec Yards: " + (statsRecYards + careerRecYards) + " yds>Receptions: " + (statsReceptions + careerReceptions));
+        pStats.add("Targets: " + (statsTargets + careerTargets) + ">Drops: " + (statsDrops+careerDrops));
         pStats.add("Catch Percent: " + df2.format(getCareerCatchPCT()) + "%>Yards/Tgt: " + df2.format(getCareerYardsperTGT()) + " yds");
-        pStats.add("Yds/Game: " + ((statsRecYards + careerRecYards) / (getGames() + careerGames)) + " yds/g>Drops: " + (statsDrops + careerDrops));
+        pStats.add("Yds/Game: " + ((statsRecYards + careerRecYards) / (getGames() + careerGames)) + " yds/g>WR/QB Rating: " + (df2.format(getWRPassRatingCareer())));
         if (statsKickRets > 0) {
             pStats.add("Kick Rets: " + statsKickRets + ">Kick Ret Yards: " + statsKickRetYards + " yrds");
             pStats.add("Kick Ret TDs: " + statsKickRetTDs + ">Ret Avg: " + df2.format((float) (statsKickRetYards / statsKickRets)));
