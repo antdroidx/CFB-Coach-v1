@@ -2435,7 +2435,7 @@ public class MainActivity extends AppCompatActivity {
                         } else if (position == 2) {
                             showLeagueHistoryStats();
                         } else if (position == 3) {
-                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
+                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name, false);
                             leagueHistoryList.setAdapter(hofAdapter);
                         } else if (position == 4) {
                             showCoachDatabase();
@@ -2631,7 +2631,7 @@ public class MainActivity extends AppCompatActivity {
                                     new LeagueRecordsList(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---", "---");
                             teamHistoryList.setAdapter(leagueRecordsAdapter);
                         } else if (position == 2) {
-                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
+                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name, true);
                             teamHistoryList.setAdapter(hofAdapter);
                         } else if (position == 3) {
                             dialog.dismiss();
@@ -3897,7 +3897,7 @@ public class MainActivity extends AppCompatActivity {
                                     new LeagueRecordsList(MainActivity.this, currentTeam.teamRecords.getRecordsStr().split("\n"), "---", "---");
                             teamHistoryList.setAdapter(leagueRecordsAdapter);
                         } else if (position == 2) {
-                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name);
+                            HallofFameList hofAdapter = new HallofFameList(MainActivity.this, hofPlayers, userTeam.name, true);
                             teamHistoryList.setAdapter(hofAdapter);
                         } else if (position == 3) {
                             dialog.dismiss();
@@ -4847,5 +4847,4 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 }

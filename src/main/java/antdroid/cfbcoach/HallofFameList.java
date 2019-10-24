@@ -16,12 +16,14 @@ class HallofFameList extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final String userTeam;
+    private final boolean team;
 
-    public HallofFameList(Context context, String[] values, String userTeam) {
+    public HallofFameList(Context context, String[] values, String userTeam, boolean team) {
         super(context, R.layout.hall_fame_list_item, values);
         this.context = context;
         this.values = values;
         this.userTeam = userTeam;
+        this.team = team;
     }
 
     @Override
@@ -35,13 +37,16 @@ class HallofFameList extends ArrayAdapter<String> {
 
         String[] hof = values[position].split("&");
 
-/*        String[] HOFentry = values[position].split(":");
-        String[] HOFline = HOFentry[1].split(" ");
+        String[] HOFentry = hof[0].split(":");
+        String[] HOFline = hof[0].split(" ");
         String[] HOFyear= values[position].split("Yrs:");
-        String entry = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFentry[0] + ", " + HOFyear[1];
-        String entryTeam = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFyear[1];*/
+        String[] HOFyear2= HOFyear[1].split("&");
+        String[] HOFawards= values[position].split("Awards:");
+        String[] HOFawards2= HOFawards[1].split(">");
+        String entry = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFentry[0] + ", " + HOFyear2[0] + "\n" + HOFawards2[0];
+        String entryTeam = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFyear2[0] + "\n" + HOFawards2[0];
 
-        if (hof.length > 1) {
+/*        if (hof.length > 1) {
             textTop.setText(hof[0]);
             if (hof[0].split(":")[0].equals(userTeam)) {
                 textTop.setTextColor(Color.parseColor("#5994de"));
@@ -57,8 +62,19 @@ class HallofFameList extends ArrayAdapter<String> {
                     if (i != hof.length - 1) right.append("\n");
                 }
             }
-            //textLeft.setText(left.toString());
-            //textRight.setText(right.toString());
+            textLeft.setText(left.toString());
+            textRight.setText(right.toString());
+        }*/
+
+        if (hof.length > 1) {
+
+            if(team) textTop.setText(entryTeam);
+            else textTop.setText(entry);
+
+            if (hof[0].split(":")[0].equals(userTeam)) {
+                textTop.setTextColor(Color.parseColor("#5994de"));
+            }
+
         }
 
         return rowView;

@@ -642,20 +642,20 @@ public class League {
             }
 
             while ((line = bufferedReader.readLine()) != null && !line.equals("END_LEAGUE_HALL_OF_FAME")) {
-                //leagueHoF.add(line);
-                String[] HOFentry = line.split(":");
+                leagueHoF.add(line);
+/*                String[] HOFentry = line.split(":");
                 String[] HOFline = HOFentry[1].split(" ");
                 String[] HOFyear= line.split("Yrs:");
                 String entry = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFentry[0] + ", " + HOFyear[1];
                 String entryTeam = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFyear[1];
 
-                leagueHoF.add(entry);
+                leagueHoF.add(entry);*/
 
                 String[] fileSplit = line.split(":");
                 for (int i = 0; i < teamList.size(); ++i) {
                     if (teamList.get(i).name.equals(fileSplit[0])) {
-                        //teamList.get(i).hallOfFame.add(line);
-                        teamList.get(i).hallOfFame.add(entryTeam);
+                        teamList.get(i).hallOfFame.add(line);
+                        //teamList.get(i).hallOfFame.add(entryTeam);
 
                         teamList.get(i).HoFCount++;
                     }
