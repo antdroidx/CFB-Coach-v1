@@ -34,6 +34,13 @@ class HallofFameList extends ArrayAdapter<String> {
         TextView textRight = rowView.findViewById(R.id.textViewHallFameRight);
 
         String[] hof = values[position].split("&");
+
+/*        String[] HOFentry = values[position].split(":");
+        String[] HOFline = HOFentry[1].split(" ");
+        String[] HOFyear= values[position].split("Yrs:");
+        String entry = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFentry[0] + ", " + HOFyear[1];
+        String entryTeam = HOFline[1] + " " + HOFline[2] + " " + HOFline[3] + ", " + HOFyear[1];*/
+
         if (hof.length > 1) {
             textTop.setText(hof[0]);
             if (hof[0].split(":")[0].equals(userTeam)) {
@@ -50,8 +57,8 @@ class HallofFameList extends ArrayAdapter<String> {
                     if (i != hof.length - 1) right.append("\n");
                 }
             }
-            textLeft.setText(left.toString());
-            textRight.setText(right.toString());
+            //textLeft.setText(left.toString());
+            //textRight.setText(right.toString());
         }
 
         return rowView;

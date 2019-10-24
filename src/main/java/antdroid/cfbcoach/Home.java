@@ -201,7 +201,7 @@ public class Home extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://www.antdroid.net/p/college-football-coach-career-edition.html"));
+                intent.setData(Uri.parse("https://www.antdroid.dev/p/college-football-coach-career-edition.html"));
                 startActivity(intent);
             }
         });
@@ -255,7 +255,7 @@ public class Home extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("http://www.Antdroid.net"));
+                intent.setData(Uri.parse("http://www.Antdroid.dev"));
                 startActivity(intent);
             }
         });
